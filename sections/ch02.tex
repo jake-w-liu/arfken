@@ -1,0 +1,2090 @@
+% Problems, Chapter 2: Determinants and Matrices
+% Arfken, Weber & Harris, Mathematical Methods for Physicists, 7th ed.
+% Requires: amsmath, amssymb, tikz
+
+\section*{Problems}
+
+\Needspace{9\baselineskip}
+\subsection*{2.1 Determinants}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.1}\quad Evaluate the following determinants:
+\begin{enumerate}
+\item[(a)] $\begin{vmatrix}1&0&1\\0&1&0\\1&0&0\end{vmatrix}$,\quad
+\item[(b)] $\begin{vmatrix}1&2&0\\3&1&2\\0&3&1\end{vmatrix}$,\quad
+\item[(c)] $\dfrac{1}{\sqrt{2}}\begin{vmatrix}
+  0&\sqrt{3}&0&0\\ \sqrt{3}&0&2&0\\ 0&2&0&\sqrt{3}\\
+  0&0&\sqrt{3}&0\end{vmatrix}$.
+\end{enumerate}
+\solution
+Expand along a row or column containing as many zeros as possible.
+\begin{enumerate}
+\item[(a)] Only the middle entry of row 2 contributes:
+\[
+D_a=1(-1)^{2+2}
+\begin{vmatrix}1&1\\1&0\end{vmatrix}
+=1(1\cdot0-1\cdot1)=\boxed{-1}.
+\]
+\item[(b)] Expansion along row 1 gives
+\[
+D_b=1\begin{vmatrix}1&2\\3&1\end{vmatrix}
+-2\begin{vmatrix}3&2\\0&1\end{vmatrix}
+ =1(1-6)-2(3-0)=\boxed{-11}.
+\]
+\item[(c)] Write $s=\sqrt3$. The factor $1/\sqrt2$ in the question
+multiplies the determinant once; it is not a factor on each row.
+Expand row 1 and then column 1 of the resulting minor:
+\[
+\begin{aligned}
+D_c
+&=-\frac{s}{\sqrt2}
+\begin{vmatrix}s&2&0\\0&0&s\\0&s&0\end{vmatrix}
+ =-\frac{s^2}{\sqrt2}
+\begin{vmatrix}0&s\\s&0\end{vmatrix}\\
+&=-\frac{3}{\sqrt2}(0-3)=\boxed{\frac9{\sqrt2}}.
+\end{aligned}
+\]
+\end{enumerate}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.2}\quad Test the set of linear homogeneous equations
+\[
+x+3y+3z=0,\quad x-y+z=0,\quad 2x+y+3z=0
+\]
+to see if it possesses a nontrivial solution. In any case, find a solution to
+this equation set.
+\solution
+The coefficient determinant is
+\[
+\begin{aligned}
+D&=\begin{vmatrix}1&3&3\\1&-1&1\\2&1&3\end{vmatrix}\\
+ &=1(-3-1)-3(3-2)+3(1+2)=-4-3+9=2.
+\end{aligned}
+\]
+Since $D\ne0$, only the trivial solution is possible. Directly,
+the second equation gives $x=y-z$. The first and third then become
+\[
+(y-z)+3y+3z=4y+2z=0,\qquad
+2(y-z)+y+3z=3y+z=0.
+\]
+Thus $z=-2y$ and $z=-3y$, so $y=0$, $z=0$, and $x=0$:
+$\boxed{(x,y,z)=(0,0,0)}$.
+Substitution into each original equation gives zero.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.3}\quad Given the pair of equations
+\[
+x+2y=3,\quad 2x+4y=6,
+\]
+\begin{enumerate}
+\item[(a)] Show that the determinant of the coefficients vanishes.
+\item[(b)] Show that the numerator determinants, see Eq.~(2.18), also vanish.
+\item[(c)] Find at least two solutions.
+\end{enumerate}
+\solution
+The three determinants in Cramer's rule are
+\[
+D=\begin{vmatrix}1&2\\2&4\end{vmatrix}=4-4=0,\quad
+D_x=\begin{vmatrix}3&2\\6&4\end{vmatrix}=12-12=0,\quad
+D_y=\begin{vmatrix}1&3\\2&6\end{vmatrix}=6-6=0.
+\]
+The quotients $D_x/D,D_y/D$ are undefined and cannot determine a unique
+solution. The second equation is twice the first, so put $y=t$.
+Then $x=3-2t$, and every real solution is
+\[
+\boxed{(x,y)=(3-2t,t),\quad t\in\mathbb R}.
+\]
+(Complex $t$ is allowed if complex solutions are sought.)
+For example $t=0$ gives $(3,0)$, and $t=1$ gives $(1,1)$.
+Both satisfy $x+2y=3$ and hence $2x+4y=6$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.4}\quad If $C_{ij}$ is the cofactor of element $a_{ij}$,
+formed by striking out the $i$th row and $j$th column and including a sign
+$(-1)^{i+j}$, show that
+\begin{enumerate}
+\item[(a)] $\displaystyle\sum_{i}a_{ij}C_{ij}=\sum_{i}a_{ji}C_{ji}=|\mathsf{A}|$,
+  where $|\mathsf{A}|$ is the determinant with the elements $a_{ij}$,
+\item[(b)] $\displaystyle\sum_{i}a_{ij}C_{ik}=\sum_{i}a_{ji}C_{ki}=0$,
+  $j\neq k$.
+\end{enumerate}
+\solution
+For fixed $j$, Laplace expansion down column $j$ is
+$\det A=\sum_i a_{ij}(-1)^{i+j}\det A_{\widehat i,\widehat j}
+=\sum_i a_{ij}C_{ij}$.
+Expansion across row $j$ similarly gives
+$\det A=\sum_i a_{ji}C_{ji}$. This proves (a), without assuming
+invertibility.
+
+For (b), replace column $k$ of $A$ by its column $j$, with $j\ne k$,
+and call the result $B$. Columns $j$ and $k$ of $B$ are identical, so
+$\det B=0$. Expanding down column $k$, each minor is unchanged
+from $A$ because that column is deleted; its cofactor is $C_{ik}$.
+The entry being multiplied by that cofactor is now $a_{ij}$. Therefore
+\[
+0=\det B=\sum_i a_{ij}C_{ik}.
+\]
+Replacing row $k$ by row $j$ and expanding across row $k$ gives,
+by the same argument, $0=\sum_i a_{ji}C_{ki}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.5}\quad A determinant with all elements of order unity
+may be surprisingly small. The Hilbert determinant
+$H_{ij}=(i+j-1)^{-1}$, $i,j=1,2,\ldots,n$ is notorious for its small values.
+\begin{enumerate}
+\item[(a)] Calculate the value of the Hilbert determinants of order $n$ for
+  $n=1$, $2$, and $3$.
+\item[(b)] If an appropriate subroutine is available, find the Hilbert
+  determinants of order $n$ for $n=4$, $5$, and $6$.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\begin{array}{cr}
+n&\mathrm{Det}(H_{n})\\
+1&1.\\
+2&8.33333\times10^{-2}\\
+3&4.62963\times10^{-4}\\
+4&1.65344\times10^{-7}\\
+5&3.74930\times10^{-12}\\
+6&5.36730\times10^{-18}.
+\end{array}$
+\solution
+Use exact fractions so that small determinants are not lost by subtracting
+rounded numbers. The first three determinants are
+\[
+D_1=1,\qquad D_2=1\cdot\frac13-\frac12\cdot\frac12=\frac1{12},
+\]
+\[
+\begin{aligned}
+D_3
+&=\left(\frac1{15}-\frac1{16}\right)
+-\frac12\left(\frac1{10}-\frac1{12}\right)
++\frac13\left(\frac18-\frac19\right)\\
+&=\frac1{240}-\frac1{120}+\frac1{216}
+=\frac{9-18+10}{2160}=\frac1{2160}.
+\end{aligned}
+\]
+For the larger matrices, Gaussian elimination uses
+\[
+R_i\longleftarrow R_i-\frac{u_{ik}}{u_{kk}}R_k
+\quad(i=k+1,\ldots,n;\ k=1,\ldots,n-1).
+\]
+Each operation preserves the determinant. For example, the first
+step on $H_6$ changes an entry with $i,j\ge2$ into
+\[
+\frac1{i+j-1}-\frac1i\frac1j
+=\frac{(i-1)(j-1)}{ij(i+j-1)}.
+\]
+For completeness, the multipliers $u_{ik}/u_{kk}$ in the successive
+steps are listed below. At step $k$, subtract the indicated multiple
+of the current row $k$ from each listed row $i$:
+\[
+\begin{array}{c|c|c}
+k&i&u_{ik}/u_{kk}\ \text{in the same order}\\\hline
+1&2,3,4,5,6&1/2,\ 1/3,\ 1/4,\ 1/5,\ 1/6\\
+2&3,4,5,6&1,\ 9/10,\ 4/5,\ 5/7\\
+3&4,5,6&3/2,\ 12/7,\ 25/14\\
+4&5,6&2,\ 25/9\\
+5&6&5/2
+\end{array}
+\]
+For example, the second pivot is $1/12$ and the entry below it
+in row 4 is $3/40$, giving multiplier $(3/40)/(1/12)=9/10$.
+These operations produce
+\[
+U_6=\begin{pmatrix}
+1&1/2&1/3&1/4&1/5&1/6\\
+0&1/12&1/12&3/40&1/15&5/84\\
+0&0&1/180&1/120&1/105&5/504\\
+0&0&0&1/2800&1/1400&1/1008\\
+0&0&0&0&1/44100&1/17640\\
+0&0&0&0&0&1/698544
+\end{pmatrix}.
+\]
+Elimination on a leading $n\times n$ block uses the same leading
+pivots, so $D_n$ is the product of the first $n$ diagonal entries.
+In particular
+\[
+D_4=\frac{D_3}{2800},\qquad
+D_5=\frac{D_4}{44100},\qquad
+D_6=\frac{D_5}{698544}.
+\]
+The resulting exact values and six-significant-figure approximations are
+\[
+\boxed{\begin{array}{c|c|c}
+n&D_n&\text{decimal value}\\\hline
+1&1&1\\
+2&1/12&8.33333\,10^{-2}\\
+3&1/2160&4.62963\,10^{-4}\\
+4&1/6048000&1.65344\,10^{-7}\\
+5&1/266716800000&3.74930\,10^{-12}\\
+6&1/186313420339200000&5.36730\,10^{-18}
+\end{array}}
+\]
+The supplementary program reproduces the elimination and independently
+checks its products against exact determinant evaluation.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.6}\quad Prove that the determinant consisting of the
+coefficients from a set of linearly dependent forms has the value zero.
+\solution
+Write the $n$ forms as $L_i(x)=\sum_{j=1}^n a_{ij}x_j$.
+Linear dependence means that constants $c_i$, not all zero, satisfy
+$\sum_i c_iL_i(x)=0$ for every $x$.
+Equating coefficients gives $\sum_i c_i a_{ij}=0$ for each $j$.
+Choose $r$ with $c_r\ne0$. Then the row vectors obey
+\[
+R_r=-\sum_{i\ne r}\frac{c_i}{c_r}R_i.
+\]
+Replace $R_r$ by $R_r+\sum_{i\ne r}(c_i/c_r)R_i$.
+Adding multiples of other rows leaves the determinant unchanged, but
+the new row is zero. Expansion across it therefore gives
+$\boxed{\det A=0}$.
+The same proof applies if the forms are recorded as columns.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.7}\quad Solve the following set of linear simultaneous
+equations. Give the results to five decimal places.
+\[
+\begin{split}
+1.0x_{1}+0.9x_{2}+0.8x_{3}+0.4x_{4}+0.1x_{5}&=1.0\\
+0.9x_{1}+1.0x_{2}+0.8x_{3}+0.5x_{4}+0.2x_{5}+0.1x_{6}&=0.9\\
+0.8x_{1}+0.8x_{2}+1.0x_{3}+0.7x_{4}+0.4x_{5}+0.2x_{6}&=0.8\\
+0.4x_{1}+0.5x_{2}+0.7x_{3}+1.0x_{4}+0.6x_{5}+0.3x_{6}&=0.7\\
+0.1x_{1}+0.2x_{2}+0.4x_{3}+0.6x_{4}+1.0x_{5}+0.5x_{6}&=0.6\\
+0.1x_{2}+0.2x_{3}+0.3x_{4}+0.5x_{5}+1.0x_{6}&=0.5.
+\end{split}
+\]
+\emph{Note.}~These equations may also be solved by matrix inversion, as
+discussed in Section 2.2.
+\solution
+Multiply every equation by $10$ and put them in the order $5,6,3,4,1,2$:
+\[
+\left[\begin{array}{rrrrrr|r}
+1&2&4&6&10&5&6\\
+0&1&2&3&5&10&5\\
+8&8&10&7&4&2&8\\
+4&5&7&10&6&3&7\\
+10&9&8&4&1&0&10\\
+9&10&8&5&2&1&9
+\end{array}\right].
+\]
+Here $R_i$ refers to this new ordering. Apply
+$R_3-8R_1$, $R_4-4R_1$, $R_5-10R_1$, and $R_6-9R_1$ to
+rows $3,4,5,6$. The last four rows, omitting the zero first column, become
+\[
+\left[\begin{array}{rrrrr|r}
+-8&-22&-41&-76&-38&-40\\
+-3&-9&-14&-34&-17&-17\\
+-11&-32&-56&-99&-50&-50\\
+-8&-28&-49&-88&-44&-45
+\end{array}\right].
+\]
+Next add $8R_2,3R_2,11R_2,8R_2$ to those rows.
+In columns $x_3,x_4,x_5,x_6$ this gives
+\[
+\left[\begin{array}{rrrr|r}
+-6&-17&-36&42&0\\
+-3&-5&-19&13&-2\\
+-10&-23&-44&60&5\\
+-12&-25&-48&36&-5
+\end{array}\right].
+\]
+To eliminate $x_3$, replace
+\[
+R_4\leftarrow-2R_4+R_3,\quad
+R_5\leftarrow-3R_5+5R_3,\quad
+R_6\leftarrow-R_6+2R_3.
+\]
+Rows $4,5,6$, in columns $x_4,x_5,x_6$, are now
+\[
+\left[\begin{array}{rrr|r}
+-7&2&16&4\\
+-16&-48&30&-15\\
+-9&-24&48&5
+\end{array}\right].
+\]
+Eliminate $x_4$ by
+$R_5\leftarrow-7R_5+16R_4$ and
+$R_6\leftarrow-7R_6+9R_4$. The final two equations are
+\[
+368x_5+46x_6=169,\qquad186x_5-192x_6=1.
+\]
+Finally $R_6\leftarrow(368R_6-186R_5)/14$ gives
+$-5658x_6=-2219$. Back substitution gives every component:
+\[
+\begin{aligned}
+x_6&=\frac{2219}{5658},\\
+x_5&=\frac{169-46x_6}{368}=\frac{2321}{5658},\\
+x_4&=\frac{2x_5+16x_6-4}{7}=\frac{417}{943},\\
+x_3&=\frac{-17x_4-36x_5+42x_6}{6}=-\frac{2741}{2829},\\
+x_2&=5-2x_3-3x_4-5x_5-10x_6=-\frac{89}{246},\\
+x_1&=6-2x_2-4x_3-6x_4-10x_5-5x_6=\frac{3551}{1886}.
+\end{aligned}
+\]
+Thus, to five decimal places,
+\[
+\boxed{x=(1.88282,-0.36179,-0.96889,0.44221,0.41022,0.39219)^T}.
+\]
+For an exact check, let $B$ be ten times the original coefficient
+matrix. In a common denominator,
+\[
+x=\frac1{5658}(10653,-2047,-5482,2502,2321,2219)^T.
+\]
+Direct multiplication gives
+\[
+\begin{aligned}
+B(10653,-2047,-5482,2502,2321,2219)^T
+&=(56580,50922,45264,39606,33948,28290)^T\\
+&=5658(10,9,8,7,6,5)^T,
+\end{aligned}
+\]
+verifying all six equations without rounding.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.8}\quad Show that (in 3-D space)
+\begin{enumerate}
+\item[(a)] $\displaystyle\sum_{i}\delta_{ii}=3$,
+\item[(b)] $\displaystyle\sum_{ij}\delta_{ij}\varepsilon_{ijk}=0$,
+\item[(c)] $\displaystyle\sum_{pq}\varepsilon_{ipq}\varepsilon_{jpq}
+  =2\delta_{ij}$,
+\item[(d)] $\displaystyle\sum_{ijk}\varepsilon_{ijk}\varepsilon_{ijk}=6$.
+\end{enumerate}
+\emph{Note.}~The symbol $\delta_{ij}$ is the Kronecker delta, defined in
+Eq.~(1.164), and $\varepsilon_{ijk}$ is the Levi-Civita symbol, Eq.~(2.8).
+\solution
+\begin{enumerate}
+\item[(a)] Since $\delta_{11}=\delta_{22}=\delta_{33}=1$,
+$\sum_i\delta_{ii}=1+1+1=3$.
+\item[(b)] The factor $\delta_{ij}$ eliminates every term with $i\ne j$,
+so $\sum_{ij}\delta_{ij}\varepsilon_{ijk}=\sum_i\varepsilon_{iik}=0$.
+Every remaining Levi-Civita symbol has a repeated index.
+\item[(c)] If $i=j$, the only nonzero terms have $(p,q)$ equal to the
+two orderings of the other two indices. Their squares are both $1$, so
+the sum is $2$. If $i\ne j$, a nonzero $\varepsilon_{ipq}$ requires
+$\{i,p,q\}=\{1,2,3\}$. For the same $p,q$, $\varepsilon_{jpq}$
+then has a repeated index and vanishes. Thus the sum is $2$ for $i=j$
+and $0$ otherwise: $\sum_{pq}\varepsilon_{ipq}\varepsilon_{jpq}=2\delta_{ij}$.
+\item[(d)] There are $3!=6$ permutations of $(1,2,3)$.
+For each, $\varepsilon_{ijk}^2=1$, and every other term vanishes.
+Thus $\sum_{ijk}\varepsilon_{ijk}\varepsilon_{ijk}=6$.
+\end{enumerate}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.1.9}\quad Show that (in 3-D space)
+\[
+\sum_{k}\varepsilon_{ijk}\varepsilon_{pqk}
+=\delta_{ip}\delta_{jq}-\delta_{iq}\delta_{jp}.
+\]
+\emph{Note.}~See Exercise 2.1.8 for definitions of $\delta_{ij}$ and
+$\varepsilon_{ijk}$.
+\solution
+\erratum{The textbook identity is correct. The manual's final line has
+$\delta_{ip}\delta_{jp}$ in place of $\delta_{ip}\delta_{jq}$.
+For $i=p=1$, $j=q=2$, the left side is $1$, whereas that misprinted
+right side is $0$.}
+If $i=j$ or $p=q$, a Levi-Civita factor on the left vanishes for
+every $k$; the two delta products on the right are identical and cancel.
+Now take $i\ne j$ and $p\ne q$. A nonzero product requires a $k$
+different from both $i,j$ and from both $p,q$. In three dimensions
+this requires the unordered pairs $\{i,j\}$ and $\{p,q\}$ to agree.
+If they differ, both sides are zero. If $(p,q)=(i,j)$, the single
+allowed $k$ contributes $\varepsilon_{ijk}^2=1$, and the right side is
+$1-0$. If $(p,q)=(j,i)$, antisymmetry gives
+$\varepsilon_{ijk}\varepsilon_{jik}=-1$, and the right side is $0-1$.
+These cases exhaust all indices, proving
+\[
+\boxed{\sum_k\varepsilon_{ijk}\varepsilon_{pqk}
+=\delta_{ip}\delta_{jq}-\delta_{iq}\delta_{jp}}.
+\]
+
+\Needspace{9\baselineskip}
+\subsection*{2.2 Matrices}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.1}\quad Show that matrix multiplication is associative,
+$(\mathsf{AB})\mathsf{C}=\mathsf{A}(\mathsf{BC})$.
+\solution
+Let $A,B,C$ have sizes $m\times n$, $n\times p$, and $p\times q$.
+For every allowed $i,j$,
+\[
+\begin{aligned}
+((AB)C)_{ij}
+&=\sum_{k=1}^p(AB)_{ik}c_{kj}
+=\sum_{k=1}^p\sum_{\ell=1}^n a_{i\ell}b_{\ell k}c_{kj}\\
+&=\sum_{\ell=1}^n a_{i\ell}
+       \left(\sum_{k=1}^p b_{\ell k}c_{kj}\right)
+=\sum_{\ell=1}^n a_{i\ell}(BC)_{\ell j}
+=(A(BC))_{ij}.
+\end{aligned}
+\]
+The sums are finite, so their order can be interchanged. Equality of
+every entry proves $(AB)C=A(BC)$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.2}\quad Show that
+\[
+(\mathsf{A}+\mathsf{B})(\mathsf{A}-\mathsf{B})=\mathsf{A}^{2}-\mathsf{B}^{2}
+\]
+if and only if $\mathsf{A}$ and $\mathsf{B}$ commute,
+\[
+[\mathsf{A},\mathsf{B}]=0.
+\]
+\solution
+Distribute while preserving factor order:
+\[
+(A+B)(A-B)=A^2-AB+BA-B^2=A^2-B^2-[A,B].
+\]
+If $[A,B]=0$, the required equality follows. Conversely, if that
+equality holds, subtract $A^2-B^2$ from both sides to get
+$-[A,B]=0$. This proves both directions.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.3}\quad
+\begin{enumerate}
+\item[(a)] Complex numbers, $a+ib$, with $a$ and $b$ real, may be represented
+  by (or are isomorphic with) $2\times2$ matrices:
+  \[
+  a+ib\longleftrightarrow\begin{pmatrix}a&b\\-b&a\end{pmatrix}.
+  \]
+  Show that this matrix representation is valid for (i) addition and (ii)
+  multiplication.
+\item[(b)] Find the matrix corresponding to $(a+ib)^{-1}$,
+  \erratum{assuming $a+ib\ne0$}.
+\end{enumerate}
+\solution
+Define $F(a+ib)=\begin{pmatrix}a&b\\-b&a\end{pmatrix}$.
+For real $a,b,c,d$,
+\[
+F(a+ib)+F(c+id)=
+\begin{pmatrix}a+c&b+d\\-(b+d)&a+c\end{pmatrix}
+=F((a+c)+i(b+d)).
+\]
+Multiplication gives
+\[
+\begin{pmatrix}a&b\\-b&a\end{pmatrix}
+\begin{pmatrix}c&d\\-d&c\end{pmatrix}
+=\begin{pmatrix}ac-bd&ad+bc\\-(ad+bc)&ac-bd\end{pmatrix},
+\]
+which is $F((a+ib)(c+id))$ because
+$(a+ib)(c+id)=(ac-bd)+i(ad+bc)$.
+The representation is one-to-one, since its first row recovers $a,b$,
+and $F(1)=I_2$.
+
+For $a+ib\ne0$,
+\[
+\frac1{a+ib}=\frac{a-ib}{a^2+b^2},\qquad
+\boxed{F((a+ib)^{-1})=\frac1{a^2+b^2}
+\begin{pmatrix}a&-b\\b&a\end{pmatrix}}.
+\]
+Multiplication by $F(a+ib)$ gives
+$(a^2+b^2)I_2/(a^2+b^2)=I_2$; if $a=b=0$, neither inverse exists.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.4}\quad If $\mathsf{A}$ is an $n\times n$ matrix, show
+that
+\[
+\det(-\mathsf{A})=(-1)^{n}\det\mathsf{A}.
+\]
+\solution
+Changing $A$ into $-A$ multiplies each of its $n$ rows by $-1$.
+Linearity of the determinant in each row gives $n$ such factors:
+\[
+\det(-A)=\underbrace{(-1)(-1)\cdots(-1)}_{n\ \text{rows}}\det A
+=\boxed{(-1)^n\det A}.
+\]
+No nonsingularity assumption is needed.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.5}\quad
+\begin{enumerate}
+\item[(a)] The matrix equation $\mathsf{A}^{2}=0$ does not imply
+  $\mathsf{A}=0$. Show that the most general $2\times2$ matrix whose square is
+  zero may be written as
+  \[
+  \begin{pmatrix}ab&b^{2}\\-a^{2}&-ab\end{pmatrix},
+  \]
+  where $a$ and $b$ are real or complex numbers.
+  \erratum{Allow complex parameters for this complete parametrization,
+  including when $\mathsf A$ is real. A parametrization using only real
+  parameters needs the additional sign derived below.}
+\item[(b)] If $\mathsf{C}=\mathsf{A}+\mathsf{B}$, in general
+  \[
+  \det\mathsf{C}\neq\det\mathsf{A}+\det\mathsf{B}.
+  \]
+  Construct a specific numerical example to illustrate this inequality.
+\end{enumerate}
+\solution
+\erratum{In (a), complex parameters are needed to cover every matrix
+by the displayed formula. Restricting both parameters to real numbers
+does not cover every real square-zero matrix.}
+
+\textbf{(a)} Let $A=\begin{pmatrix}u&v\\w&t\end{pmatrix}$. Then
+\[
+A^2=\begin{pmatrix}u^2+vw&v(u+t)\\w(u+t)&t^2+vw\end{pmatrix}.
+\]
+If $v=w=0$, the equations $u^2=t^2=0$ force $A=0$,
+represented by $a=b=0$. Otherwise one of $v,w$ is nonzero,
+so the off-diagonal equations give $t=-u$. The remaining condition is
+$u^2+vw=0$.
+If $v\ne0$, choose a complex square root $b$ of $v$ and set
+$a=u/b$. Then $ab=u$, $b^2=v$, and $-a^2=-u^2/v=w$.
+If $v=0,w\ne0$, the condition gives $u=t=0$; choose $b=0$ and
+$a^2=-w$. These cases prove completeness over $\mathbb C$.
+Conversely,
+\[
+\begin{pmatrix}ab&b^2\\-a^2&-ab\end{pmatrix}^{\!2}
+=\begin{pmatrix}
+a^2b^2-a^2b^2&ab^3-ab^3\\
+-a^3b+a^3b&-a^2b^2+a^2b^2
+\end{pmatrix}=0.
+\]
+\erratum{For real matrices a complete real parametrization is
+$s\begin{pmatrix}ab&b^2\\-a^2&-ab\end{pmatrix}$, with
+$a,b\in\mathbb R$ and $s=\pm1$.}
+For $v\ne0$, take $s=\operatorname{sgn}v$, $b=\sqrt{|v|}$,
+$a=u/(sb)$; for $v=0,w\ne0$, take
+$s=-\operatorname{sgn}w$, $a=\sqrt{|w|}$, $b=0$.
+For example $\begin{pmatrix}0&-1\\0&0\end{pmatrix}$ would require
+$b^2=-1$ in the unmodified real formula.
+
+\textbf{(b)} Take $A=B=I_2$. Then $\det A+\det B=2$ but
+$\det(A+B)=\det(2I_2)=4$. Thus the determinant is not additive.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.6}\quad Given
+\[
+\mathsf{K}=\begin{pmatrix}0&0&i\\-i&0&0\\0&-1&0\end{pmatrix},
+\]
+show that
+\[
+\mathsf{K}^{n}=\mathsf{KKK}\cdots(n\text{ factors})=\mathbf{1}
+\]
+(with the proper choice of $n$, $n\neq0$).
+\solution
+Multiplication gives
+\[
+K^2=\begin{pmatrix}0&-i&0\\0&0&1\\i&0&0\end{pmatrix},
+\qquad K^3=\begin{pmatrix}-1&0&0\\0&-1&0\\0&0&-1\end{pmatrix}=-I_3.
+\]
+For example $(K^2)_{12}=K_{13}K_{32}=i(-1)=-i$; each row has
+only one nonzero product. Multiplying $K^2$ by $K$ gives diagonal
+entries $(-i)(-i)=-1$, $1(-1)=-1$, and $i(i)=-1$.
+Therefore $\boxed{K^6=(K^3)^2=I_3}$.
+This is the smallest positive exponent: $K,K^2,K^4=-K,K^5=-K^2$
+are off-diagonal, and $K^3=-I_3\ne I_3$.
+In general $K^n=I_3$ exactly when $n$ is a multiple of $6$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.7}\quad Verify the Jacobi identity,
+\[
+[\mathsf{A},[\mathsf{B},\mathsf{C}]]
+=[\mathsf{B},[\mathsf{A},\mathsf{C}]]-[\mathsf{C},[\mathsf{A},\mathsf{B}]].
+\]
+\solution
+Expand without reordering factors:
+\[
+\begin{aligned}
+{}[A,[B,C]]&=ABC-ACB-BCA+CBA,\\
+[B,[A,C]]&=BAC-BCA-ACB+CAB,\\
+[C,[A,B]]&=CAB-CBA-ABC+BAC.
+\end{aligned}
+\]
+Subtracting the third line from the second cancels $BAC$ and $CAB$,
+leaving the first line. This proves the identity for arbitrary square
+matrices of the same size.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.8}\quad Show that the matrices
+\[
+\mathsf{A}=\begin{pmatrix}0&1&0\\0&0&0\\0&0&0\end{pmatrix},\quad
+\mathsf{B}=\begin{pmatrix}0&0&0\\0&0&1\\0&0&0\end{pmatrix},\quad
+\mathsf{C}=\begin{pmatrix}0&0&1\\0&0&0\\0&0&0\end{pmatrix}
+\]
+satisfy the commutation relations
+\[
+[\mathsf{A},\mathsf{B}]=\mathsf{C},\quad[\mathsf{A},\mathsf{C}]=0,
+\quad\text{and }[\mathsf{B},\mathsf{C}]=0.
+\]
+\solution
+Let $E_{ij}$ have one $1$ at position $(i,j)$. Entrywise,
+\[
+(E_{ij}E_{kl})_{rs}
+=\sum_t\delta_{ri}\delta_{tj}\delta_{tk}\delta_{sl}
+=\delta_{jk}\delta_{ri}\delta_{sl},
+\quad E_{ij}E_{kl}=\delta_{jk}E_{il}.
+\]
+Here $A=E_{12}$, $B=E_{23}$, $C=E_{13}$. Therefore
+\[
+\begin{array}{lll}
+AB=E_{13}=C,&BA=0,&[A,B]=C,\\
+AC=0,&CA=0,&[A,C]=0,\\
+BC=0,&CB=0,&[B,C]=0.
+\end{array}
+\]
+For example $BA=E_{23}E_{12}=0$ because $3\ne1$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.9}\quad Let
+\[
+\mathsf{i}=\begin{pmatrix}0&1&0&0\\-1&0&0&0\\0&0&0&1\\0&0&-1&0\end{pmatrix},\quad
+\mathsf{j}=\begin{pmatrix}0&0&0&-1\\0&0&-1&0\\0&1&0&0\\1&0&0&0\end{pmatrix},
+\]
+and
+\[
+\mathsf{k}=\begin{pmatrix}0&0&-1&0\\0&0&0&1\\1&0&0&0\\0&-1&0&0\end{pmatrix}.
+\]
+Show that
+\begin{enumerate}
+\item[(a)] $\mathsf{i}^{2}=\mathsf{j}^{2}=\mathsf{k}^{2}=-\mathbf{1}$, where
+  $\mathbf{1}$ is the unit matrix.
+\item[(b)] $\mathsf{ij}=-\mathsf{ji}=\mathsf{k}$,\\
+  $\mathsf{jk}=-\mathsf{kj}=\mathsf{i}$,\\
+  $\mathsf{ki}=-\mathsf{ik}=\mathsf{j}$.
+\end{enumerate}
+These three matrices ($\mathsf{i}$, $\mathsf{j}$, and $\mathsf{k}$) plus the
+unit matrix $\mathbf{1}$ form a basis for \textbf{quaternions}. An alternate
+basis is provided by the four $2\times2$ matrices, $i\sigma_{1}$, $i\sigma_{2}$,
+$-i\sigma_{3}$, and $\mathbf{1}$, where the $\sigma_{i}$ are the Pauli spin
+matrices of Example 2.2.1.
+\solution
+Track the four standard basis columns. The given matrices act as
+\[
+\begin{array}{c|rrrr}
+&e_1&e_2&e_3&e_4\\\hline
+\mathsf i&-e_2&e_1&-e_4&e_3\\
+\mathsf j&e_4&e_3&-e_2&-e_1\\
+\mathsf k&e_3&-e_4&-e_1&e_2
+\end{array}
+\]
+Applying each row twice sends every $e_r$ to $-e_r$; hence
+$\mathsf i^2=\mathsf j^2=\mathsf k^2=-I_4$.
+For example $\mathsf i^2e_1=\mathsf i(-e_2)=-e_1$ and
+$\mathsf j^2e_1=\mathsf j(e_4)=-e_1$.
+For the cyclic products the successive images are
+\[
+\begin{array}{c|rrrr}
+&e_1&e_2&e_3&e_4\\\hline
+\mathsf i\mathsf j&e_3&-e_4&-e_1&e_2\\
+\mathsf j\mathsf k&-e_2&e_1&-e_4&e_3\\
+\mathsf k\mathsf i&e_4&e_3&-e_2&-e_1
+\end{array}
+\]
+Thus these products equal $\mathsf k,\mathsf i,\mathsf j$.
+For the reversed products, for example,
+$\mathsf j\mathsf i=(\mathsf k\mathsf i)\mathsf i
+=\mathsf k(-I_4)=-\mathsf k$.
+Likewise $\mathsf k\mathsf j=(\mathsf i\mathsf j)\mathsf j=-\mathsf i$
+and $\mathsf i\mathsf k=(\mathsf j\mathsf k)\mathsf k=-\mathsf j$.
+The complete multiplication table is
+\[
+\begin{array}{c|rrr}
+&\mathsf i&\mathsf j&\mathsf k\\\hline
+\mathsf i&-I_4&\mathsf k&-\mathsf j\\
+\mathsf j&-\mathsf k&-I_4&\mathsf i\\
+\mathsf k&\mathsf j&-\mathsf i&-I_4
+\end{array}.
+\]
+For the alternative basis, put $q_1=i\sigma_1$, $q_2=i\sigma_2$,
+$q_3=-i\sigma_3$. The Pauli products in 2.2.11 give
+$q_r^2=-I_2$ and
+\[
+q_1q_2=-\sigma_1\sigma_2=-i\sigma_3=q_3,\quad
+q_2q_3=\sigma_2\sigma_3=i\sigma_1=q_1,\quad
+q_3q_1=\sigma_3\sigma_1=i\sigma_2=q_2.
+\]
+The reversed products change sign. If
+$a_0I_2+a_1q_1+a_2q_2+a_3q_3=0$, its entries are
+\[
+\begin{pmatrix}a_0-ia_3&ia_1+a_2\\ia_1-a_2&a_0+ia_3\end{pmatrix}=0.
+\]
+Adding and subtracting the diagonal equations gives $a_0=a_3=0$;
+the off-diagonal equations give $a_1=a_2=0$. Thus these four
+matrices are linearly independent and realize the same quaternion algebra
+with real coefficients.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.10}\quad A matrix with elements $a_{ij}=0$ for $j<i$ may
+be called upper right triangular. The elements in the lower left (below and to
+the left of the main diagonal) vanish. Show that the product of two upper
+right triangular matrices is an upper right triangular matrix.
+\solution
+For $i>j$ the $(i,j)$ entry is $(AB)_{ij}=\sum_k a_{ik}b_{kj}$.
+If $k<i$, then $a_{ik}=0$ by upper triangularity of $A$.
+If $k\ge i$, then $k>j$ and $b_{kj}=0$ by upper triangularity
+of $B$. Thus every summand is zero, and $(AB)_{ij}=0$ whenever
+$i>j$. This is precisely upper triangularity of $AB$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.11}\quad The three Pauli spin matrices are
+\[
+\sigma_{1}=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+\sigma_{2}=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad\text{and}\quad
+\sigma_{3}=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\]
+Show that
+\begin{enumerate}
+\item[(a)] $(\sigma_{i})^{2}=\mathbf{1}_{2}$,
+\item[(b)] $\sigma_{i}\sigma_{j}=i\sigma_{k}$, $(i,j,k)=(1,2,3)$ or a cyclic
+  permutation thereof,
+\item[(c)] $\sigma_{i}\sigma_{j}+\sigma_{j}\sigma_{i}=2\delta_{ij}
+  \mathbf{1}_{2}$; $\mathbf{1}_{2}$ is the $2\times2$ unit matrix.
+\end{enumerate}
+\solution
+Direct multiplication gives
+\[
+\sigma_1^2=I_2,\qquad
+\sigma_2^2=\begin{pmatrix}(-i)i&0\\0&i(-i)\end{pmatrix}=I_2,\qquad
+\sigma_3^2=\begin{pmatrix}1&0\\0&(-1)^2\end{pmatrix}=I_2.
+\]
+The six products with distinct indices are
+\[
+\begin{array}{ll}
+\sigma_1\sigma_2=\begin{pmatrix}i&0\\0&-i\end{pmatrix}=i\sigma_3,
+&\sigma_2\sigma_1=-i\sigma_3,\\[3pt]
+\sigma_2\sigma_3=\begin{pmatrix}0&i\\i&0\end{pmatrix}=i\sigma_1,
+&\sigma_3\sigma_2=-i\sigma_1,\\[3pt]
+\sigma_3\sigma_1=\begin{pmatrix}0&1\\-1&0\end{pmatrix}=i\sigma_2,
+&\sigma_1\sigma_3=-i\sigma_2.
+\end{array}
+\]
+Hence the anticommutator is zero for distinct indices; for equal
+indices it is $2\sigma_i^2=2I_2$. Together,
+\[
+\boxed{\sigma_i\sigma_j+\sigma_j\sigma_i=2\delta_{ij}I_2},
+\qquad \sigma_i\sigma_j=\delta_{ij}I_2+
+i\sum_k\varepsilon_{ijk}\sigma_k.
+\]
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.12}\quad One description of spin-1 particles uses the
+matrices
+\[
+\mathsf{M}_{x}=\frac{1}{\sqrt{2}}\begin{pmatrix}0&1&0\\1&0&1\\0&1&0
+\end{pmatrix},\quad
+\mathsf{M}_{y}=\frac{1}{\sqrt{2}}\begin{pmatrix}0&-i&0\\i&0&-i\\0&i&0
+\end{pmatrix},
+\]
+and
+\[
+\mathsf{M}_{z}=\begin{pmatrix}1&0&0\\0&0&0\\0&0&-1\end{pmatrix}.
+\]
+Show that
+\begin{enumerate}
+\item[(a)] $[\mathsf{M}_{x},\mathsf{M}_{y}]=i\mathsf{M}_{z}$, and so on
+  (cyclic permutation of indices). Using the Levi-Civita symbol, we may write
+  \[
+  [\mathsf{M}_{i},\mathsf{M}_{j}]=i\sum_{k}\varepsilon_{ijk}\mathsf{M}_{k}.
+  \]
+\item[(b)] $\mathsf{M}^{2}\equiv\mathsf{M}_{x}^{2}+\mathsf{M}_{y}^{2}
+  +\mathsf{M}_{z}^{2}=2\,\mathbf{1}_{3}$, where $\mathbf{1}_{3}$ is the
+  $3\times3$ unit matrix.
+\item[(c)] $[\mathsf{M}^{2},\mathsf{M}_{i}]=0$,\\
+  $[\mathsf{M}_{z},\mathsf{L}^{+}]=\mathsf{L}^{+}$,\\
+  $[\mathsf{L}^{+},\mathsf{L}^{-}]=2\mathsf{M}_{z}$,\\
+  where $\mathsf{L}^{+}\equiv\mathsf{M}_{x}+i\mathsf{M}_{y}$ and
+  $\mathsf{L}^{-}\equiv\mathsf{M}_{x}-i\mathsf{M}_{y}$.
+\end{enumerate}
+\solution
+\textbf{(a)} The two products involving $x,y$ are
+\[
+M_xM_y=\frac i2\begin{pmatrix}1&0&-1\\0&0&0\\1&0&-1\end{pmatrix},
+\quad
+M_yM_x=\frac i2\begin{pmatrix}-1&0&-1\\0&0&0\\1&0&1\end{pmatrix}.
+\]
+Their difference is $i\operatorname{diag}(1,0,-1)=iM_z$.
+For the other cyclic pairs,
+\[
+\begin{aligned}
+M_yM_z&=\frac i{\sqrt2}\begin{pmatrix}0&0&0\\1&0&1\\0&0&0\end{pmatrix},
+&
+M_zM_y&=\frac i{\sqrt2}\begin{pmatrix}0&-1&0\\0&0&0\\0&-1&0\end{pmatrix},\\
+M_zM_x&=\frac1{\sqrt2}\begin{pmatrix}0&1&0\\0&0&0\\0&-1&0\end{pmatrix},
+&
+M_xM_z&=\frac1{\sqrt2}\begin{pmatrix}0&0&0\\1&0&-1\\0&0&0\end{pmatrix}.
+\end{aligned}
+\]
+Subtraction gives $[M_y,M_z]=iM_x$ and $[M_z,M_x]=iM_y$.
+Reversed commutators change sign and $[M_i,M_i]=0$, yielding the
+Levi-Civita expression for all indices.
+
+\textbf{(b)} The squares are
+\[
+M_x^2=\frac12\begin{pmatrix}1&0&1\\0&2&0\\1&0&1\end{pmatrix},
+\quad
+M_y^2=\frac12\begin{pmatrix}1&0&-1\\0&2&0\\-1&0&1\end{pmatrix},
+\quad M_z^2=\operatorname{diag}(1,0,1).
+\]
+Adding cancels the off-diagonal entries and gives $\boxed{M^2=2I_3}$.
+
+\textbf{(c)} Since $M^2=2I_3$, $[M^2,M_i]=2M_i-2M_i=0$.
+The raising and lowering matrices are
+\[
+L^+=\sqrt2\begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},
+\qquad L^-=\sqrt2\begin{pmatrix}0&0&0\\1&0&0\\0&1&0\end{pmatrix}.
+\]
+For a diagonal $D=\operatorname{diag}(d_1,d_2,d_3)$,
+$[D,L]_{ij}=(d_i-d_j)L_{ij}$. On the nonzero entries of $L^+$
+the difference for $M_z$ is $1$, so $[M_z,L^+]=L^+$.
+Finally
+\[
+L^+L^-=\operatorname{diag}(2,2,0),\qquad
+L^-L^+=\operatorname{diag}(0,2,2),
+\]
+whose difference is $\operatorname{diag}(2,0,-2)=2M_z$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.13}\quad Repeat Exercise 2.2.12, using the matrices for a
+spin of $3/2$,
+\[
+\mathsf{M}_{x}=\frac{1}{2}\begin{pmatrix}
+0&\sqrt{3}&0&0\\ \sqrt{3}&0&2&0\\ 0&2&0&\sqrt{3}\\ 0&0&\sqrt{3}&0
+\end{pmatrix},\quad
+\mathsf{M}_{y}=\frac{i}{2}\begin{pmatrix}
+0&-\sqrt{3}&0&0\\ \sqrt{3}&0&-2&0\\ 0&2&0&-\sqrt{3}\\ 0&0&\sqrt{3}&0
+\end{pmatrix},
+\]
+and
+\[
+\mathsf{M}_{z}=\frac{1}{2}\begin{pmatrix}
+3&0&0&0\\ 0&1&0&0\\ 0&0&-1&0\\ 0&0&0&-3\end{pmatrix}.
+\]
+\erratum{In repeating part (b), determine the new value of $M^2$:
+for these matrices the claim is $M^2=\tfrac{15}{4}I_4$.
+The numerical spin-1 value is not retained.}
+\solution
+\erratum{For spin $3/2$, the analogue of 2.2.12(b) is
+$M^2=\tfrac{15}{4}I_4$, not $2I_3$ (nor $2I_4$).
+The commutator identities are unchanged, with $4\times4$ matrices.}
+Form the sums and differences:
+\[
+L^+=M_x+iM_y=
+\begin{pmatrix}0&\sqrt3&0&0\\0&0&2&0\\0&0&0&\sqrt3\\0&0&0&0\end{pmatrix},
+\qquad L^-=(L^+)^T.
+\]
+The diagonal entries of $M_z$ are $3/2,1/2,-1/2,-3/2$.
+Each nonzero entry of $L^+$ connects adjacent entries whose
+difference is $1$. Thus
+$[M_z,L]_{ij}=((M_z)_{ii}-(M_z)_{jj})L_{ij}$ gives
+\[
+[M_z,L^+]=L^+,\qquad [M_z,L^-]=-L^-.
+\]
+Sparse multiplication gives
+\[
+L^+L^-=\operatorname{diag}(3,4,3,0),\qquad
+L^-L^+=\operatorname{diag}(0,3,4,3),
+\]
+so $[L^+,L^-]=\operatorname{diag}(3,1,-1,-3)=2M_z$.
+Now $M_x=(L^++L^-)/2$ and $M_y=(L^+-L^-)/(2i)$, giving
+\[
+\begin{aligned}
+{}[M_x,M_y]&=\frac1{4i}
+\bigl(-[L^+,L^-]+[L^-,L^+]\bigr)
+=-\frac{4M_z}{4i}=iM_z,\\
+[M_z,M_x]&=\tfrac12(L^+-L^-)=iM_y,\\
+[M_y,M_z]&=\tfrac1{2i}(-L^+-L^-)=iM_x.
+\end{aligned}
+\]
+Expand the squares:
+\[
+\begin{aligned}
+M_x^2+M_y^2
+&=\tfrac14\bigl((L^+)^2+L^+L^-+L^-L^++(L^-)^2\bigr)\\
+&\quad-\tfrac14\bigl((L^+)^2-L^+L^--L^-L^++(L^-)^2\bigr)\\
+&=\tfrac12(L^+L^-+L^-L^+)
+=\operatorname{diag}(3/2,7/2,7/2,3/2).
+\end{aligned}
+\]
+Adding $M_z^2=\operatorname{diag}(9/4,1/4,1/4,9/4)$ gives
+$\boxed{M^2=\tfrac{15}{4}I_4}$.
+This commutes with every $M_i$; the other identities in part (c)
+were established directly above.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.14}\quad If $\mathsf{A}$ is a diagonal matrix, with all
+diagonal elements different, and $\mathsf{A}$ and $\mathsf{B}$ commute, show
+that $\mathsf{B}$ is diagonal.
+\solution
+Write $A=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)$.
+Then $(AB)_{ij}=\lambda_i b_{ij}$ and $(BA)_{ij}=b_{ij}\lambda_j$,
+so $AB=BA$ implies
+\[
+(\lambda_i-\lambda_j)b_{ij}=0.
+\]
+For $i\ne j$ the hypothesis gives $\lambda_i-\lambda_j\ne0$,
+so $b_{ij}=0$. Diagonal entries $b_{ii}$ are unrestricted.
+Therefore $B$ is diagonal.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.15}\quad If $\mathsf{A}$ and $\mathsf{B}$ are diagonal,
+show that $\mathsf{A}$ and $\mathsf{B}$ commute.
+\solution
+For $A=\operatorname{diag}(a_1,\ldots,a_n)$ and
+$B=\operatorname{diag}(b_1,\ldots,b_n)$,
+\[
+(AB)_{ij}=\sum_k a_i\delta_{ik}b_k\delta_{kj}=a_ib_i\delta_{ij}.
+\]
+Similarly $(BA)_{ij}=b_ia_i\delta_{ij}$. Scalar multiplication
+commutes, so the entries agree and $AB=BA$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.16}\quad Show that
+$\mathrm{trace}(\mathsf{ABC})=\mathrm{trace}(\mathsf{CBA})$ if any two of the
+three matrices commute.
+\solution
+For square matrices of the same size,
+\[
+\operatorname{tr}(XY)=\sum_{i,j}x_{ij}y_{ji}
+=\sum_{j,i}y_{ji}x_{ij}=\operatorname{tr}(YX).
+\]
+Taking $X=AB,Y=C$, and then $X=A,Y=BC$, gives the cyclic rule
+$\operatorname{tr}(ABC)=\operatorname{tr}(BCA)=\operatorname{tr}(CAB)$.
+There are three possible commuting pairs:
+\[
+\begin{array}{ll}
+AB=BA:&\operatorname{tr}(ABC)=\operatorname{tr}(BAC)
+=\operatorname{tr}(CBA),\\
+BC=CB:&\operatorname{tr}(ABC)=\operatorname{tr}(ACB)
+=\operatorname{tr}(CBA),\\
+CA=AC:&\operatorname{tr}(ABC)=\operatorname{tr}(BCA)
+=\operatorname{tr}(BAC)=\operatorname{tr}(CBA).
+\end{array}
+\]
+Every possible hypothesis therefore gives the required equality.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.17}\quad Angular momentum matrices satisfy a commutation
+relation
+\[
+[\mathsf{M}_{j},\mathsf{M}_{k}]=i\mathsf{M}_{l},\quad j,k,l\text{ cyclic}.
+\]
+Show that the trace of each angular momentum matrix vanishes.
+\erratum{Use finite matrices, so all products and traces below exist.}
+\solution
+For finite square matrices, cyclicity gives
+$\operatorname{tr}[A,B]=\operatorname{tr}(AB)-\operatorname{tr}(BA)=0$.
+Apply this to each cyclic angular momentum relation:
+\[
+\begin{aligned}
+i\operatorname{tr}M_z&=\operatorname{tr}[M_x,M_y]=0,\\
+i\operatorname{tr}M_x&=\operatorname{tr}[M_y,M_z]=0,\\
+i\operatorname{tr}M_y&=\operatorname{tr}[M_z,M_x]=0.
+\end{aligned}
+\]
+Division by $i$ proves that every trace vanishes. This uses ordinary
+finite-dimensional traces, not undefined traces of infinite-dimensional
+operators.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.18}\quad $\mathsf{A}$ and $\mathsf{B}$ anticommute:
+$\mathsf{AB}=-\mathsf{BA}$. Also, $\mathsf{A}^{2}=\mathbf{1}$,
+$\mathsf{B}^{2}=\mathbf{1}$. Show that
+$\mathrm{trace}(\mathsf{A})=\mathrm{trace}(\mathsf{B})=0$.
+
+\emph{Note.}~The Pauli and Dirac matrices are specific examples.
+\solution
+From $AB=-BA$ and $B^2=I$, we obtain $BAB=-AB^2=-A$.
+Taking traces and cycling the first $B$ to the end,
+\[
+-\operatorname{tr}A=\operatorname{tr}(BAB)
+=\operatorname{tr}(ABB)=\operatorname{tr}A.
+\]
+Hence $2\operatorname{tr}A=0$.
+Similarly $ABA=-BA^2=-B$ and
+$\operatorname{tr}(ABA)=\operatorname{tr}(BAA)=\operatorname{tr}B$.
+Thus $\boxed{\operatorname{tr}A=\operatorname{tr}B=0}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.19}\quad
+\begin{enumerate}
+\item[(a)] If two nonsingular matrices anticommute, show that the trace of
+  each one is zero. (Nonsingular means that the determinant of the matrix is
+  nonzero.)
+\item[(b)] For the conditions of part (a) to hold, $\mathsf{A}$ and
+  $\mathsf{B}$ must be $n\times n$ matrices with $n$ \textbf{even}. Show that
+  if $n$ is \textbf{odd}, a contradiction results.
+\end{enumerate}
+\solution
+\erratum{The manual's left multiplication by $B^{-1}$ proves the
+vanishing of $\operatorname{tr}A$, not of $\operatorname{tr}B$ as printed.
+Interchanging the roles of $A$ and $B$ supplies the second trace.}
+\textbf{(a)} Invertibility of $B$ and $AB=-BA$ give $BAB^{-1}=-A$.
+Taking the trace,
+\[
+-\operatorname{tr}A=\operatorname{tr}(BAB^{-1})
+=\operatorname{tr}(AB^{-1}B)=\operatorname{tr}A,
+\]
+so $\operatorname{tr}A=0$. Likewise invertibility of $A$ gives
+$ABA^{-1}=-B$, and
+$-\operatorname{tr}B=\operatorname{tr}(ABA^{-1})
+=\operatorname{tr}(BA^{-1}A)=\operatorname{tr}B$.
+Hence $\operatorname{tr}B=0$.
+
+\textbf{(b)} Taking determinants gives
+\[
+\det A\det B=\det(AB)=\det(-BA)
+=(-1)^n\det B\det A.
+\]
+Both determinants are nonzero; division by their product yields
+$1=(-1)^n$. Odd $n$ would give $1=-1$, a contradiction over the
+real or complex numbers. Therefore $\boxed{n\text{ is even}}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.20}\quad If $\mathsf{A}^{-1}$ has elements
+\[
+(\mathsf{A}^{-1})_{ij}=a_{ij}^{(-1)}=\frac{C_{ji}}{|\mathsf{A}|},
+\]
+where $C_{ji}$ is the $ji$th cofactor of $|\mathsf{A}|$, show that
+\[
+\mathsf{A}^{-1}\mathsf{A}=\mathbf{1}.
+\]
+Hence $\mathsf{A}^{-1}$ is the inverse of $\mathsf{A}$ (if
+$|\mathsf{A}|\neq0$).
+\solution
+Let $B_{ij}=C_{ji}/\det A$, with $\det A\ne0$. Then
+\[
+(BA)_{ij}=\sum_k\frac{C_{ki}}{\det A}a_{kj}
+=\frac1{\det A}\sum_k a_{kj}C_{ki}.
+\]
+For $i=j$, the numerator is expansion down column $i$ and equals
+$\det A$. For $i\ne j$, it is the determinant with column $i$
+replaced by column $j$, so it is zero. Thus
+$(BA)_{ij}=\delta_{ij}$ and $BA=I$.
+The corresponding row-cofactor identity gives
+\[
+(AB)_{ij}=\frac1{\det A}\sum_k a_{ik}C_{jk}=\delta_{ij}.
+\]
+The formula therefore produces the two-sided inverse $B=A^{-1}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.21}\quad Find the matrices $\mathsf{M}_{L}$ such that the
+product $\mathsf{M}_{L}\mathsf{A}$ will be $\mathsf{A}$ but with:
+\begin{enumerate}
+\item[(a)] The $i$th row multiplied by a constant $k$ ($a_{ij}\to ka_{ij}$,
+  $j=1,2,3,\ldots$);
+\item[(b)] The $i$th row replaced by the original $i$th row minus a multiple
+  of the $m$th row ($a_{ij}\to a_{ij}-Ka_{mj}$, $\erratum{j}=1,2,3,\ldots$);
+\item[(c)] The $i$th and $m$th rows interchanged ($a_{ij}\to a_{mj}$,
+  $a_{mj}\to a_{ij}$, $j=1,2,3,\ldots$).
+\end{enumerate}
+\solution
+\erratum{In (b), the varying index in the parentheses must be $j$,
+not $i$: $i$ labels the one row being changed.
+For (c), the manual's $M_{mi}-M_{im}=1$ must read
+$M_{mi}=M_{im}=1$ when $i\ne m$. Both inserted entries are positive.}
+Let $E_{ab}$ have a single $1$ in position $(a,b)$. Its action is
+\[
+(E_{ab}A)_{rj}=\sum_s\delta_{ra}\delta_{sb}a_{sj}
+=\delta_{ra}a_{bj}.
+\]
+Thus $E_{ab}A$ has row $b$ of $A$ in row $a$ and all other rows
+zero. For distinct $i,m$, the requested matrices are
+\[
+\boxed{\begin{aligned}
+\text{(a)}\quad M_L&=I+(k-1)E_{ii},\\
+\text{(b)}\quad M_L&=I-KE_{im},\\
+\text{(c)}\quad M_L&=I-E_{ii}-E_{mm}+E_{im}+E_{mi}.
+\end{aligned}}
+\]
+In (a), row $i$ becomes $R_i+(k-1)R_i=kR_i$.
+In (b), it becomes $R_i-KR_m$.
+In (c), the two subtractions remove rows $i,m$; the last two
+terms insert $R_m,R_i$ in their places. Every other row retains
+only the identity contribution. If $i=m$, (b) reduces to scaling
+by $1-K$, and the formula in (c) reduces to $I$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.22}\quad Find the matrices $\mathsf{M}_{R}$ such that the
+product $\mathsf{AM}_{R}$ will be $\mathsf{A}$ but with:
+\begin{enumerate}
+\item[(a)] The $i$th column multiplied by a constant $k$ ($a_{ji}\to ka_{ji}$,
+  $j=1,2,3,\ldots$);
+\item[(b)] The $i$th column replaced by the original $i$th column minus a
+  multiple of the $m$th column ($a_{ji}\to a_{ji}-ka_{jm}$, $j=1,2,3,\ldots$);
+\item[(c)] The $i$th and $m$th columns interchanged ($a_{ji}\to a_{jm}$,
+  $a_{jm}\to a_{ji}$, $j=1,2,3,\ldots$).
+\end{enumerate}
+\solution
+For right multiplication,
+\[
+(AE_{ab})_{rj}=\sum_s a_{rs}\delta_{sa}\delta_{jb}
+=a_{ra}\delta_{jb}.
+\]
+Thus $AE_{ab}$ puts column $a$ of $A$ in column $b$, giving
+\[
+\boxed{\begin{aligned}
+\text{(a)}\quad M_R&=I+(k-1)E_{ii},\\
+\text{(b)}\quad M_R&=I-kE_{mi},\\
+\text{(c)}\quad M_R&=I-E_{ii}-E_{mm}+E_{im}+E_{mi}.
+\end{aligned}}
+\]
+Column $i$ in (a) is $C_i+(k-1)C_i=kC_i$; in (b), it is
+$C_i-kC_m$; in (c), the two columns are removed and reinserted
+in exchanged positions.
+\erratum{The off-diagonal entry in (b) is $(m,i)$, the transpose
+of the row-operation entry $(i,m)$; the manual's statement that the
+answers are the same requires this transpose.}
+For rectangular $A$, $M_L$ has order equal to the number of rows
+of $A$, whereas $M_R$ has order equal to the number of columns.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.23}\quad Find the inverse of
+\[
+\mathsf{A}=\begin{pmatrix}3&2&1\\2&2&1\\1&1&4\end{pmatrix}.
+\]
+\solution
+Expansion along row 1 gives
+\[
+\det A=3(8-1)-2(8-1)+(2-2)=21-14=7.
+\]
+The signed minors are
+\[
+\begin{array}{lll}
+C_{11}=8-1=7,&C_{12}=-(8-1)=-7,&C_{13}=2-2=0,\\
+C_{21}=-(8-1)=-7,&C_{22}=12-1=11,&C_{23}=-(3-2)=-1,\\
+C_{31}=2-2=0,&C_{32}=-(3-2)=-1,&C_{33}=6-4=2.
+\end{array}
+\]
+The cofactor matrix is symmetric, so its transpose is unchanged:
+\[
+\boxed{A^{-1}=\frac17
+\begin{pmatrix}7&-7&0\\-7&11&-1\\0&-1&2\end{pmatrix}}.
+\]
+An independent multiplication checks every entry:
+\[
+A\begin{pmatrix}7&-7&0\\-7&11&-1\\0&-1&2\end{pmatrix}
+=\begin{pmatrix}
+21-14&-21+22-1&-2+2\\
+14-14&-14+22-1&-2+2\\
+7-7&-7+11-4&-1+8
+\end{pmatrix}=7I_3.
+\]
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.24}\quad Matrices are far too useful to remain the
+exclusive property of physicists. They may appear wherever there are linear
+relations. For instance, in a study of population movement the initial
+fraction of a fixed population in each of $n$ areas (or industries or
+religions, etc.) is represented by an $n$-component column vector
+$\mathsf{P}$. The movement of people from one area to another in a given time
+is described by an $n\times n$ (stochastic) matrix $\mathsf{T}$. Here
+$T_{ij}$ is the fraction of the population in the $j$th area that moves to the
+$i$th area. (Those not moving are covered by $i=j$.) With $\mathsf{P}$
+describing the initial population distribution, the final population
+distribution is given by the matrix equation $\mathsf{TP}=\mathsf{Q}$. From
+its definition, $\sum_{i=1}^{n}P_{i}=1$.
+\begin{enumerate}
+\item[(a)] Show that conservation of people requires that
+  \[
+  \sum_{i=1}^{n}T_{ij}=1,\quad j=1,2,\ldots,n.
+  \]
+\item[(b)] Prove that
+  \[
+  \sum_{i=1}^{n}Q_{i}=1
+  \]
+  continues the conservation of people.
+\end{enumerate}
+\solution
+\textbf{(a)} A source area $j$ containing $N_j$ people contributes
+$T_{1j}N_j,\ldots,T_{nj}N_j$ to the destination areas.
+Conservation requires the sum to be $N_j$; for $N_j>0$, division
+gives $\sum_iT_{ij}=1$. This requirement holds for every source
+area, even one initially empty, because conservation must hold for
+every possible initial distribution. Equivalently, start with $P=e_j$;
+the final total $\sum_iT_{ij}$ must be $1$.
+
+\textbf{(b)} Since $Q_i=\sum_jT_{ij}P_j$,
+\[
+\sum_iQ_i=\sum_i\sum_jT_{ij}P_j
+=\sum_jP_j\left(\sum_iT_{ij}\right)=\sum_jP_j=1.
+\]
+Nonnegative fractions and $P_j\ge0$ also imply $Q_i\ge0$, so $Q$
+is again a valid population distribution.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.25}\quad Given a $6\times6$ matrix $\mathsf{A}$ with
+elements $a_{ij}=0.5^{|i-j|}$, $i,j=0,1,2,\ldots,5$, find $\mathsf{A}^{-1}$.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\mathsf{A}^{-1}=\dfrac{1}{3}\begin{pmatrix}
+4&-2&0&0&0&0\\-2&5&-2&0&0&0\\0&-2&5&-2&0&0\\
+0&0&-2&5&-2&0\\0&0&0&-2&5&-2\\0&0&0&0&-2&4
+\end{pmatrix}$.
+\solution
+First retain a parameter $r$ in $A_{ij}=r^{|i-j|}$ for
+$i,j=0,\ldots,5$. Subtract $r$ times original row $i-1$ from
+row $i$ for each $i=1,\ldots,5$. For $j<i$, the new entry is
+$r^{i-j}-r\,r^{i-1-j}=0$; for $j\ge i$, it is
+$r^{j-i}-r\,r^{j-i+1}=(1-r^2)r^{j-i}$.
+This suggests that a second difference can isolate a diagonal entry.
+
+Define tridiagonal $T$ with end diagonal entries $1$, interior
+diagonal entries $1+r^2$, and adjacent entries $-r$.
+For an interior column $j=1,\ldots,4$,
+\[
+(AT)_{ij}=-rA_{i,j-1}+(1+r^2)A_{ij}-rA_{i,j+1}.
+\]
+If $i<j$, put $d=j-i\ge1$ to obtain
+$-r r^{d-1}+(1+r^2)r^d-r r^{d+1}=0$.
+If $i>j$, put $d=i-j\ge1$ to obtain
+$-r r^{d+1}+(1+r^2)r^d-r r^{d-1}=0$.
+For $i=j$, the result is $-r^2+(1+r^2)-r^2=1-r^2$.
+At the first column,
+\[
+(AT)_{i0}=A_{i0}-rA_{i1}
+=\begin{cases}1-r^2,&i=0,\\r^i-r r^{i-1}=0,&i>0.\end{cases}
+\]
+Reversing the indices proves the same statement for the last column.
+Thus $AT=(1-r^2)I_6$. At $r=1/2$,
+\[
+\boxed{A^{-1}=\frac{T}{1-r^2}
+=\frac13\begin{pmatrix}
+4&-2&0&0&0&0\\
+-2&5&-2&0&0&0\\
+0&-2&5&-2&0&0\\
+0&0&-2&5&-2&0\\
+0&0&0&-2&5&-2\\
+0&0&0&0&-2&4
+\end{pmatrix}}.
+\]
+This product calculation both derives and verifies the inverse.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.26}\quad Show that the product of two orthogonal matrices
+is orthogonal.
+\solution
+Let $A^TA=I$ and $B^TB=I$. Since transposition reverses products,
+\[
+(AB)^T(AB)=B^TA^TAB=B^T(A^TA)B=B^TIB=B^TB=I.
+\]
+This is exactly the orthogonality condition for $AB$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.27}\quad If $\mathsf{A}$ is orthogonal, show that its
+determinant $=\pm1$.
+\solution
+Taking determinants of $A^TA=I$ and using $\det(A^T)=\det A$ gives
+\[
+1=\det(A^TA)=\det(A^T)\det A=(\det A)^2.
+\]
+The two roots of $d^2=1$ are $1,-1$, so $\boxed{\det A=\pm1}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.28}\quad Show that the trace of the product of a
+symmetric and an antisymmetric matrix is zero.
+\solution
+Let $S^T=S$ and $K^T=-K$. Transposition preserves the trace:
+\[
+\operatorname{tr}(SK)=\operatorname{tr}((SK)^T)
+=\operatorname{tr}(K^TS^T)
+=-\operatorname{tr}(KS)=-\operatorname{tr}(SK).
+\]
+Thus $2\operatorname{tr}(SK)=0$ and $\boxed{\operatorname{tr}(SK)=0}$.
+Entrywise, each pair with $i<j$ cancels:
+$s_{ij}k_{ji}+s_{ji}k_{ij}=s_{ij}(-k_{ij})+s_{ij}k_{ij}=0$,
+while all diagonal terms vanish because $k_{ii}=0$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.29}\quad $\mathsf{A}$ is $2\times2$ and orthogonal. Find
+the most general form of
+\[
+\mathsf{A}=\begin{pmatrix}a&b\\c&d\end{pmatrix}.
+\]
+\solution
+For real orthogonal $A$, its first row is a real unit vector,
+so write $(a,b)=(\cos\theta,\sin\theta)$.
+The second row is a unit vector perpendicular to the first.
+That one-dimensional subspace is spanned by the unit vector
+$(-\sin\theta,\cos\theta)$. Hence
+\[
+\boxed{A=\begin{pmatrix}
+\cos\theta&\sin\theta\\
+-s\sin\theta&s\cos\theta
+\end{pmatrix},\quad s=\pm1,\quad\theta\in\mathbb R}.
+\]
+The two row norms are $1$, their inner product is $0$, and
+$\det A=s(\cos^2\theta+\sin^2\theta)=s$.
+\erratum{Both signs are required. The manual assumes $\det A=1$
+and omits the $\det A=-1$ reflection family.}
+If orthogonality is extended to complex $A$ with $A^TA=I$, the
+algebraic form is
+$A=\begin{pmatrix}a&b\\-sb&sa\end{pmatrix}$ with
+$a^2+b^2=1$, $a,b\in\mathbb C$, and $s=\pm1$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.30}\quad Show that
+\[
+\det(\mathsf{A}^{*})=(\det\mathsf{A})^{*}=\det(\mathsf{A}^{\dagger}).
+\]
+\solution
+The permutation formula is
+\[
+\det A=\sum_{\pi\in S_n}\operatorname{sgn}(\pi)
+\prod_{r=1}^n a_{r,\pi(r)}.
+\]
+Because each permutation sign is real, conjugating the finite sum gives
+\[
+(\det A)^*=\sum_\pi\operatorname{sgn}(\pi)
+\prod_r a_{r,\pi(r)}^*=\det(A^*).
+\]
+Finally $A^\dagger=(A^*)^T$, and determinants are invariant under
+transposition. Thus $\det(A^\dagger)=\det(A^*)=(\det A)^*$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.31}\quad Three angular momentum matrices satisfy the
+basic commutation relation
+\[
+[\mathsf{J}_{x},\mathsf{J}_{y}]=i\mathsf{J}_{z}
+\]
+(and cyclic permutation of indices). If two of the matrices have real
+elements, show that the elements of the third must be pure imaginary.
+\solution
+Suppose the real matrices are $J_x,J_y$. Each entry
+\[
+R_{ab}:=([J_x,J_y])_{ab}
+=\sum_c\bigl((J_x)_{ac}(J_y)_{cb}-(J_y)_{ac}(J_x)_{cb}\bigr)
+\]
+is real. The commutation relation gives
+$(J_z)_{ab}=R_{ab}/i=-iR_{ab}$, which is pure imaginary
+(possibly zero). For either other real pair, use the corresponding
+cyclic commutation relation in the same calculation.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.32}\quad Show that
+$(\mathsf{AB})^{\dagger}=\mathsf{B}^{\dagger}\mathsf{A}^{\dagger}$.
+\solution
+For conformable matrices,
+\[
+\begin{aligned}
+((AB)^\dagger)_{ij}
+&=(AB)_{ji}^*
+=\left(\sum_k a_{jk}b_{ki}\right)^*
+=\sum_k a_{jk}^*b_{ki}^*\\
+&=\sum_k(B^\dagger)_{ik}(A^\dagger)_{kj}
+=(B^\dagger A^\dagger)_{ij}.
+\end{aligned}
+\]
+The scalar entries commute; no commutation of the matrices was
+assumed. Equality of all entries proves the reversed product rule.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.33}\quad A matrix
+$\mathsf{C}=\mathsf{S}^{\dagger}\mathsf{S}$. Show that the trace is positive
+definite unless $\mathsf{S}$ is the null matrix, in which case
+$\mathrm{trace}\,(\mathsf{C})=0$.
+\solution
+If $S$ has entries $s_{ki}$, the diagonal entries of $C=S^\dagger S$ are
+\[
+C_{ii}=\sum_k(S^\dagger)_{ik}S_{ki}
+=\sum_k s_{ki}^*s_{ki}=\sum_k|s_{ki}|^2.
+\]
+Therefore
+\[
+\boxed{\operatorname{tr}(S^\dagger S)=\sum_{i,k}|s_{ki}|^2}.
+\]
+Every summand is nonnegative. The sum is zero exactly when every
+entry is zero; otherwise it is strictly positive. The trace is thus
+a positive-definite quadratic form in the entries of $S$.
+This does not imply that $C$ itself is positive definite:
+$S=\operatorname{diag}(1,0)$ gives $C=\operatorname{diag}(1,0)$,
+which has a zero eigenvalue.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.34}\quad If $\mathsf{A}$ and $\mathsf{B}$ are Hermitian
+matrices, show that $(\mathsf{AB}+\mathsf{BA})$ and $i(\mathsf{AB}-\mathsf{BA})$
+are also Hermitian.
+\solution
+Using $A^\dagger=A$, $B^\dagger=B$, and reversing the product order,
+\[
+(AB+BA)^\dagger=B^\dagger A^\dagger+A^\dagger B^\dagger
+=BA+AB=AB+BA.
+\]
+For the second expression also conjugate the scalar $i$:
+\[
+\bigl(i(AB-BA)\bigr)^\dagger
+=-i(B^\dagger A^\dagger-A^\dagger B^\dagger)
+=-i(BA-AB)=i(AB-BA).
+\]
+Both expressions equal their adjoints and are therefore Hermitian.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.35}\quad The matrix $\mathsf{C}$ is not Hermitian. Show
+that then $\mathsf{C}+\mathsf{C}^{\dagger}$ and
+$i(\mathsf{C}-\mathsf{C}^{\dagger})$ are Hermitian. This means that a
+non-Hermitian matrix may be resolved into two Hermitian parts,
+\[
+\mathsf{C}=\frac{1}{2}(\mathsf{C}+\mathsf{C}^{\dagger})
++\frac{1}{2i}\erratum{i}(\mathsf{C}-\mathsf{C}^{\dagger}).
+\]
+This decomposition of a matrix into two Hermitian matrix parts parallels the
+decomposition of a complex number $z$ into $x+iy$, where $x=(z+z^{*})/2$ and
+$y=(z-z^{*})/2i$.
+\solution
+\erratum{The transcription omitted the extra factor $i$ in the
+second term of the displayed decomposition on textbook p.~119.
+The corrected expression above equals $H+iK$, with $H,K$
+Hermitian; the whole second summand $iK$ need not be Hermitian.}
+For any square $C$, whether or not it is Hermitian, set
+\[
+H=\frac{C+C^\dagger}{2},\qquad K=\frac{C-C^\dagger}{2i}.
+\]
+Taking adjoints,
+\[
+H^\dagger=\frac{C^\dagger+C}{2}=H,\qquad
+K^\dagger=\frac{C^\dagger-C}{-2i}
+=\frac{C-C^\dagger}{2i}=K.
+\]
+Also $C+C^\dagger=2H$ and $i(C-C^\dagger)=-2K$, so both
+matrices requested in the first sentence are Hermitian.
+Recombining,
+\[
+H+iK=\frac{C+C^\dagger}{2}+\frac{C-C^\dagger}{2}=C.
+\]
+This is the matrix analogue of $z=\operatorname{Re}z+i\operatorname{Im}z$.
+It is unique: if $C=H_1+iK_1$ with Hermitian $H_1,K_1$, then
+$C^\dagger=H_1-iK_1$; addition and subtraction recover the displayed
+formulas for $H,K$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.36}\quad $\mathsf{A}$ and $\mathsf{B}$ are two
+noncommuting Hermitian matrices:
+\[
+\mathsf{AB}-\mathsf{BA}=i\mathsf{C}.
+\]
+Prove that $\mathsf{C}$ is Hermitian.
+\solution
+Taking adjoints of $AB-BA=iC$ gives
+\[
+(AB-BA)^\dagger=B^\dagger A^\dagger-A^\dagger B^\dagger
+=BA-AB=-iC,
+\]
+whereas $(iC)^\dagger=-iC^\dagger$.
+Therefore $-iC^\dagger=-iC$, and division by $-i$ proves
+$\boxed{C^\dagger=C}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.37}\quad Two matrices $\mathsf{A}$ and $\mathsf{B}$ are
+each Hermitian. Find a necessary and sufficient condition for their product
+$\mathsf{AB}$ to be Hermitian.
+\par\nobreak\hfill\emph{ANS.}\enspace $[\mathsf{A},\mathsf{B}]=0$.
+\solution
+Hermiticity of $A,B$ gives $(AB)^\dagger=B^\dagger A^\dagger=BA$.
+Thus $AB$ is Hermitian precisely when $AB=(AB)^\dagger=BA$,
+or $\boxed{[A,B]=0}$. This proves necessity and sufficiency.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.38}\quad Show that the reciprocal (that is, inverse) of a
+unitary matrix is unitary.
+\solution
+Unitary $U$ satisfies $U^{-1}=U^\dagger$. Put $V=U^{-1}$.
+Then $V^\dagger=(U^\dagger)^\dagger=U$, so
+\[
+V^\dagger V=UU^{-1}=I,\qquad VV^\dagger=U^{-1}U=I.
+\]
+Hence $V$ is unitary.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.39}\quad Prove that the direct product of two unitary
+matrices is unitary.
+\solution
+\erratum{``Direct product'' here means the tensor product defined
+in the text. The manual instead displays the proof for the ordinary
+product $UV$; the double-index proof below supplies the requested result.}
+Let unitary $U,V$ have orders $m,n$. Their direct (Kronecker)
+product has entries $W_{(i,a),(j,b)}=U_{ij}V_{ab}$. Thus
+\[
+\begin{aligned}
+(W^\dagger W)_{(j,b),(k,c)}
+&=\sum_{i=1}^m\sum_{a=1}^n U_{ij}^*V_{ab}^*U_{ik}V_{ac}\\
+&=\left(\sum_iU_{ij}^*U_{ik}\right)
+\left(\sum_aV_{ab}^*V_{ac}\right)=\delta_{jk}\delta_{bc}.
+\end{aligned}
+\]
+Therefore $W^\dagger W=I_{mn}$. Equivalently,
+\[
+(U\otimes V)^\dagger(U\otimes V)
+=(U^\dagger U)\otimes(V^\dagger V)=I_m\otimes I_n=I_{mn}.
+\]
+The reverse product is the identity by the same calculation, proving
+unitarity of the direct product.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.40}\quad If $\boldsymbol{\sigma}$ is the vector with the
+$\sigma_{i}$ as components given in Eq.~(2.61), and $\mathbf{p}$ is an ordinary
+vector, show that
+\[
+(\boldsymbol{\sigma}\cdot\mathbf{p})^{2}=\mathbf{p}^{2}\mathbf{1}_{2},
+\]
+where $\mathbf{1}_{2}$ is a $2\times2$ unit matrix.
+\solution
+\erratum{In the manual's expansion, the term multiplying $p_yp_z$
+must contain $\sigma_2\sigma_3+\sigma_3\sigma_2$, not the repeated
+$\sigma_1\sigma_2+\sigma_2\sigma_1$. Both vanish, so the printed
+final result is unaffected.}
+The scalar components $p_i$ commute. Group the cross terms:
+\[
+\begin{aligned}
+(\boldsymbol{\sigma}\cdot\mathbf p)^2
+={}&p_1^2\sigma_1^2+p_2^2\sigma_2^2+p_3^2\sigma_3^2\\
+&+p_1p_2(\sigma_1\sigma_2+\sigma_2\sigma_1)
++p_1p_3(\sigma_1\sigma_3+\sigma_3\sigma_1)\\
+&+p_2p_3(\sigma_2\sigma_3+\sigma_3\sigma_2).
+\end{aligned}
+\]
+Each square is $I_2$ and each mixed anticommutator is zero:
+\[
+\boxed{(\boldsymbol{\sigma}\cdot\mathbf p)^2
+=(p_1^2+p_2^2+p_3^2)I_2}.
+\]
+The same reasoning applies to the mutually commuting free-particle
+momentum operators $-i\hbar\partial_i$ on functions for which the mixed
+derivatives commute.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.41}\quad Use the equations for the properties of direct
+products, Eqs.~(2.57) and (2.58), to show that the four matrices
+$\boldsymbol{\gamma}^{\mu}$, $\mu=0,1,2,3$, satisfy the conditions listed in
+Eqs.~(2.74) and (2.75).
+\solution
+Explicitly, the referenced definitions are
+\[
+J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}=i\sigma_2,\qquad
+\gamma^0=\sigma_3\otimes I_2,\qquad
+\gamma^i=J\otimes\sigma_i\quad(i=1,2,3).
+\]
+The direct-product rule is $(A\otimes B)(C\otimes D)=AC\otimes BD$.
+Since $J^2=-I_2$ and $\sigma_i^2=I_2$,
+\[
+(\gamma^0)^2=I_2\otimes I_2=I_4,\qquad
+(\gamma^i)^2=-I_2\otimes I_2=-I_4.
+\]
+Also $\sigma_3J=\sigma_1$ and $J\sigma_3=-\sigma_1$, giving
+\[
+\gamma^0\gamma^i+\gamma^i\gamma^0
+=(\sigma_3J+J\sigma_3)\otimes\sigma_i=0.
+\]
+For spatial indices,
+\[
+\gamma^i\gamma^j+\gamma^j\gamma^i
+=J^2\otimes(\sigma_i\sigma_j+\sigma_j\sigma_i)
+=-2\delta_{ij}I_4.
+\]
+These are the conditions (2.74)--(2.75), compactly
+\[
+\boxed{\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}I_4,\quad
+g=\operatorname{diag}(1,-1,-1,-1)}.
+\]
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.42}\quad Show that $\boldsymbol{\gamma}^{5}$, Eq.~(2.76),
+anticommutes with all four $\boldsymbol{\gamma}^{\mu}$.
+\solution
+By definition, $\gamma^5=i\gamma^0\gamma^1\gamma^2\gamma^3$.
+From 2.2.41 and $\sigma_1\sigma_2\sigma_3=iI_2$,
+\[
+\gamma^1\gamma^2\gamma^3
+=J^3\otimes(\sigma_1\sigma_2\sigma_3)
+=(-J)\otimes(iI_2)=-iJ\otimes I_2.
+\]
+Hence
+\[
+\gamma^5=(\sigma_3J)\otimes I_2=\sigma_1\otimes I_2
+=\begin{pmatrix}0&I_2\\I_2&0\end{pmatrix}.
+\]
+Since $\sigma_1\sigma_3=-\sigma_3\sigma_1$ and
+$\sigma_1J=-J\sigma_1$,
+\[
+\{\gamma^5,\gamma^0\}
+=(\sigma_1\sigma_3+\sigma_3\sigma_1)\otimes I_2=0,
+\]
+\[
+\{\gamma^5,\gamma^i\}
+=(\sigma_1J+J\sigma_1)\otimes\sigma_i=0\quad(i=1,2,3).
+\]
+Thus $\gamma^5$ anticommutes with all four $\gamma^\mu$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.43}\quad In this problem, the summations are over
+$\mu=0,1,2,3$. Define $g_{\mu\nu}=g^{\mu\nu}$ by the relations
+\[
+g_{00}=1;\quad g_{kk}=-1,\quad k=1,2,3;\quad g_{\mu\nu}=0,\quad\mu\neq\nu;
+\]
+and define $\gamma_{\mu}$ as
+$\erratum{\sum_{\nu=0}^{3}g_{\nu\mu}\gamma^{\nu}}$. Using these
+definitions, show that
+\begin{enumerate}
+\item[(a)] $\displaystyle\sum\gamma_{\mu}\gamma^{\alpha}\gamma^{\mu}
+  =-2\gamma^{\alpha}$,
+\item[(b)] $\displaystyle\sum\gamma_{\mu}\gamma^{\alpha}\gamma^{\beta}
+  \gamma^{\mu}=4g^{\alpha\beta}\erratum{\mathbf1_4}$,
+\item[(c)] $\displaystyle\sum\gamma_{\mu}\gamma^{\alpha}\gamma^{\beta}
+  \gamma^{\nu}\gamma^{\mu}=-2\gamma^{\nu}\gamma^{\beta}\gamma^{\alpha}$.
+\end{enumerate}
+\solution
+\erratum{The lowering definition uses the dummy index $\nu$ while
+$\mu$ is free. The textbook prints $\gamma^\mu$ inside an unindexed
+sum; the explicit contraction above removes that ambiguity.
+For this diagonal metric it also equals $g_{\mu\mu}\gamma^\mu$
+with no sum on $\mu$. In (b), a scalar denotes that scalar times
+$I_4$, made explicit in the statement.}
+The sums in (a)--(c) run over $\mu=0,1,2,3$.
+Lowering an index gives $\gamma_0=\gamma^0$, $\gamma_i=-\gamma^i$.
+The Clifford relation implies
+\[
+\{\gamma_\mu,\gamma^\alpha\}=2\delta_\mu^\alpha I_4,\qquad
+\sum_\mu\gamma_\mu\gamma^\mu=4I_4.
+\]
+For the second identity, the time term is $I_4$ and each spatial
+term is $-(\gamma^i)^2=I_4$.
+
+\textbf{(a)} Move $\gamma_\mu$ past the first factor:
+\[
+\begin{aligned}
+\sum_\mu\gamma_\mu\gamma^\alpha\gamma^\mu
+&=\sum_\mu(2\delta_\mu^\alpha I_4-\gamma^\alpha\gamma_\mu)\gamma^\mu\\
+&=2\gamma^\alpha-\gamma^\alpha(4I_4)
+=\boxed{-2\gamma^\alpha}.
+\end{aligned}
+\]
+\textbf{(b)} Use the same step and then (a):
+\[
+\begin{aligned}
+\sum_\mu\gamma_\mu\gamma^\alpha\gamma^\beta\gamma^\mu
+&=2\gamma^\beta\gamma^\alpha
+-\gamma^\alpha\sum_\mu\gamma_\mu\gamma^\beta\gamma^\mu\\
+&=2\gamma^\beta\gamma^\alpha+2\gamma^\alpha\gamma^\beta
+=\boxed{4g^{\alpha\beta}I_4}.
+\end{aligned}
+\]
+\textbf{(c)} Use (b) on the contracted part:
+\[
+\begin{aligned}
+\sum_\mu\gamma_\mu\gamma^\alpha\gamma^\beta\gamma^\nu\gamma^\mu
+&=2\gamma^\beta\gamma^\nu\gamma^\alpha
+-\gamma^\alpha\sum_\mu\gamma_\mu\gamma^\beta\gamma^\nu\gamma^\mu\\
+&=2\gamma^\beta\gamma^\nu\gamma^\alpha-4g^{\beta\nu}\gamma^\alpha\\
+&=2(\gamma^\beta\gamma^\nu-2g^{\beta\nu}I_4)\gamma^\alpha
+=\boxed{-2\gamma^\nu\gamma^\beta\gamma^\alpha}.
+\end{aligned}
+\]
+These derivations include coincident free indices; no distinctness
+assumption was made.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.44}\quad If
+$\mathsf{M}=\frac{1}{2}(1+\boldsymbol{\gamma}^{5})$, where
+$\boldsymbol{\gamma}^{5}$ is given in Eq.~(2.76), show that
+\[
+\mathsf{M}^{2}=\mathsf{M}.
+\]
+\erratum{This equation remains valid for a replacement matrix $\Gamma$ precisely when $\Gamma^2=\mathbf1_4$; it does not hold for every Dirac matrix listed in Eq.~(2.76).}
+\solution
+Since $\gamma^5=\sigma_1\otimes I_2$, $(\gamma^5)^2=I_4$. Therefore
+\[
+M^2=\tfrac14(I_4+2\gamma^5+(\gamma^5)^2)
+=\tfrac14(2I_4+2\gamma^5)=\tfrac12(I_4+\gamma^5)=M.
+\]
+\erratum{The printed note is too broad: the conclusion does not hold
+for every matrix of Eq.~(2.76). For $M_\Gamma=(I_4+\Gamma)/2$, the necessary and
+sufficient condition is $\Gamma^2=I_4$.}
+Indeed,
+\[
+M_\Gamma^2-M_\Gamma=\frac{\Gamma^2-I_4}{4}.
+\]
+The squares of the full basis are
+\[
+\begin{array}{c|c}
+\Gamma&\Gamma^2\\\hline
+I_4,\ \gamma^5,\ \gamma^0,\ \gamma^5\gamma^i,\
+\sigma^{ij}\ (1\le i<j\le3)&+I_4\\
+\gamma^i,\ \gamma^5\gamma^0,\ \sigma^{0i}\ (i=1,2,3)&-I_4
+\end{array}
+\]
+where $\sigma^{\mu\nu}=i\gamma^\mu\gamma^\nu$ for $\mu<\nu$.
+For example $(\gamma^5\gamma^\mu)^2=-(\gamma^\mu)^2$, and
+$(i\gamma^\mu\gamma^\nu)^2=(\gamma^\mu)^2(\gamma^\nu)^2$.
+For $\Gamma^2=-I_4$, the error is $M_\Gamma^2-M_\Gamma=-I_4/2$.
+Multiplying such a $\Gamma$ by $i$ makes its square $+I_4$ and
+restores the projector construction.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.45}\quad Prove that the 16 Dirac matrices form a linearly
+independent set.
+\solution
+Let $\sigma_0=I_2$. From the Pauli products,
+\[
+\operatorname{tr}(\sigma_a^\dagger\sigma_b)=2\delta_{ab},
+\qquad a,b=0,1,2,3.
+\]
+For $a=b$ the product is $I_2$; for distinct indices the product
+is a traceless Pauli matrix or $i$ times one. Also
+\[
+\operatorname{tr}(X\otimes Y)=\sum_{r,s}X_{rr}Y_{ss}
+=\operatorname{tr}X\,\operatorname{tr}Y.
+\]
+Therefore the 16 tensor products $T_{ab}=\sigma_a\otimes\sigma_b$ obey
+\[
+\operatorname{tr}(T_{ab}^\dagger T_{cd})=4\delta_{ac}\delta_{bd}.
+\]
+The explicit correspondence with Eq.~(2.76) is
+\[
+\begin{array}{c|c}
+\text{Dirac matrix}&\text{tensor form}\\\hline
+I_4&\sigma_0\otimes\sigma_0\\
+\gamma^5&\sigma_1\otimes\sigma_0\\
+\gamma^0&\sigma_3\otimes\sigma_0\\
+\gamma^5\gamma^0&-i\sigma_2\otimes\sigma_0\\
+\gamma^i\ (i=1,2,3)&i\sigma_2\otimes\sigma_i\\
+\gamma^5\gamma^i\ (i=1,2,3)&-\sigma_3\otimes\sigma_i\\
+\sigma^{0i}\ (i=1,2,3)&i\sigma_1\otimes\sigma_i\\
+\sigma^{12},\ \sigma^{13},\ \sigma^{23}
+&\sigma_0\otimes\sigma_3,\ -\sigma_0\otimes\sigma_2,\
+\sigma_0\otimes\sigma_1
+\end{array}
+\]
+For example $\gamma^5\gamma^i=\sigma_1(i\sigma_2)\otimes\sigma_i
+=-\sigma_3\otimes\sigma_i$, and
+$\sigma^{ij}=-iI_2\otimes\sigma_i\sigma_j
+=\varepsilon_{ijk}I_2\otimes\sigma_k$.
+The table uses each pair $(a,b)$ once with a phase of magnitude $1$,
+so $\operatorname{tr}(\Gamma_r^\dagger\Gamma_s)=4\delta_{rs}$.
+If $\sum_sc_s\Gamma_s=0$, multiply by $\Gamma_r^\dagger$ and
+take the trace: $4c_r=0$ for every $r$. This proves linear
+independence over $\mathbb C$, and hence over $\mathbb R$.
+The complex $4\times4$ matrix space has dimension $16$, so these
+matrices also span it.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.46}\quad If we assume that a given $4\times4$ matrix
+$\mathsf{A}$ (with constant elements) can be written as a linear combination
+of the 16 Dirac matrices (which we denote here as $\Gamma_{i}$)
+\[
+\mathsf{A}=\sum_{i=1}^{16}c_{i}\Gamma_{i},
+\]
+show that
+\[
+c_{i}\sim\mathrm{trace}(\mathsf{A}\Gamma_{i}).
+\]
+\solution
+Write $\Gamma_r^2=s_rI_4$, where $s_r=\pm1$ as in 2.2.44.
+The tensor forms in 2.2.45 give $\Gamma_r^\dagger=s_r\Gamma_r$
+and
+\[
+\operatorname{tr}(\Gamma_r\Gamma_j)=4s_r\delta_{rj}.
+\]
+Multiplying $A=\sum_jc_j\Gamma_j$ by $\Gamma_r$ and taking the trace,
+\[
+\operatorname{tr}(A\Gamma_r)=
+\sum_jc_j\operatorname{tr}(\Gamma_j\Gamma_r)=4s_rc_r.
+\]
+Thus the full proportionality, with its normalization and sign, is
+\[
+\boxed{c_r=\frac1{4s_r}\operatorname{tr}(A\Gamma_r)
+=\frac{s_r}{4}\operatorname{tr}(A\Gamma_r)
+=\frac14\operatorname{tr}(\Gamma_r^\dagger A)}.
+\]
+The sign matters for basis matrices squaring to $-I_4$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.47}\quad The matrix
+$\mathsf{C}=i\boldsymbol{\gamma}^{2}\boldsymbol{\gamma}^{0}$ is sometimes
+called the charge conjugation matrix. Show that
+$\mathsf{C}\boldsymbol{\gamma}^{\mu}\mathsf{C}^{-1}
+=-(\boldsymbol{\gamma}^{\mu})^{T}$.
+\solution
+Use the specified Dirac representation
+$\gamma^0=\sigma_3\otimes I_2$, $\gamma^i=i\sigma_2\otimes\sigma_i$.
+Then
+\[
+C=i\gamma^2\gamma^0=-\sigma_2\sigma_3\otimes\sigma_2
+=-i\sigma_1\otimes\sigma_2,\qquad
+C^2=-I_4,\quad C^{-1}=-C.
+\]
+The Pauli transposes are $\sigma_1^T=\sigma_1$,
+$\sigma_2^T=-\sigma_2$, $\sigma_3^T=\sigma_3$, giving
+\[
+(\gamma^0)^T=\gamma^0,\quad(\gamma^2)^T=\gamma^2,\quad
+(\gamma^1)^T=-\gamma^1,\quad(\gamma^3)^T=-\gamma^3.
+\]
+The product $\gamma^2\gamma^0$ anticommutes with $\gamma^0$
+and $\gamma^2$; for example $C\gamma^0=i\gamma^2$ but
+$\gamma^0C=-i\gamma^2$.
+It commutes with $\gamma^1,\gamma^3$, since moving either past its
+two factors gives two minus signs. Therefore
+\[
+C\gamma^\mu C^{-1}=
+\begin{cases}-\gamma^\mu,&\mu=0,2,\\+\gamma^\mu,&\mu=1,3.\end{cases}
+\]
+Comparison with the transposes proves
+$\boxed{C\gamma^\mu C^{-1}=-(\gamma^\mu)^T}$ for every $\mu$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.48}\quad
+\begin{enumerate}
+\item[(a)] Show that, by substitution of the definitions of the
+  $\boldsymbol{\gamma}^{\mu}$ matrices from Eqs.~(2.70) and (2.72), that the
+  Dirac equation, Eq.~(2.73), takes the following form when written as
+  $2\times2$ blocks (with $\psi_{L}$ and $\psi_{S}$ column vectors of
+  dimension 2). Here $L$ and $S$ stand, respectively, for ``large'' and
+  ``small'' because of their relative size in the nonrelativistic limit):
+  \[
+  \begin{pmatrix}
+  mc^{2}-E&c(\sigma_{1}p_{1}+\sigma_{2}p_{2}+\sigma_{3}p_{3})\\
+  \erratum{+}c(\sigma_{1}p_{1}+\sigma_{2}p_{2}+\sigma_{3}p_{3})&-mc^{2}-E
+  \end{pmatrix}
+  \begin{pmatrix}\psi_{L}\\\psi_{S}\end{pmatrix}=0.
+  \]
+\item[(b)] \erratum{Take $m>0$ and the positive-energy branch.}
+  To reach the nonrelativistic limit, make the substitution
+  $E=mc^{2}+\varepsilon$ and approximate $-2mc^{2}-\varepsilon$ by $-2mc^{2}$.
+  Then write the matrix equation as two simultaneous two-component equations
+  and show that they can be rearranged to yield
+  \[
+  \frac{1}{2m}\left(p_{1}^{2}+p_{2}^{2}+p_{3}^{2}\right)\psi_{L}
+  =\varepsilon\psi_{L},
+  \]
+  which is just the Schr\"odinger equation for a free particle.
+\item[(c)] Explain why is it reasonable to call $\psi_{L}$ and $\psi_{S}$
+  ``large'' and ``small.''
+\end{enumerate}
+\solution
+\erratum{The lower-left block in the printed question (textbook
+p.~121) has an incorrect minus sign. Equation (2.73) requires the
+positive sign shown in the corrected question above. The printed sign
+would give negative free-particle kinetic energy upon elimination of
+the small component: its second row would imply
+$\psi_S\simeq-P\psi_L/(2mc)$, and its first would then give
+$\varepsilon\psi_L=-\mathbf p^2\psi_L/(2m)$, where
+$P=\boldsymbol{\sigma}\cdot\mathbf p$.}
+
+\erratum{The manual's block Hamiltonian also omits $c$ from its
+momentum terms. Equation (2.73) has $c\alpha_i p_i$;
+all factors of $c$ are retained below.}
+
+\textbf{(a)} Put $P=\boldsymbol{\sigma}\cdot\mathbf p$. The definitions
+in Eqs.~(2.70)--(2.73) give
+\[
+\gamma^0=\begin{pmatrix}I_2&0\\0&-I_2\end{pmatrix},\quad
+\gamma^i=\begin{pmatrix}0&\sigma_i\\-\sigma_i&0\end{pmatrix},\quad
+\alpha_i=\gamma^0\gamma^i=
+\begin{pmatrix}0&\sigma_i\\\sigma_i&0\end{pmatrix}.
+\]
+Thus $(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$ is
+\[
+\boxed{\begin{pmatrix}
+(mc^2-E)I_2&cP\\cP&(-mc^2-E)I_2
+\end{pmatrix}\begin{pmatrix}\psi_L\\\psi_S\end{pmatrix}=0}.
+\]
+Both off-diagonal blocks are the same.
+
+\textbf{(b)} On the positive-energy branch set $E=mc^2+\varepsilon$
+with $|\varepsilon|\ll mc^2$. The two equations become
+\[
+-\varepsilon\psi_L+cP\psi_S=0,\qquad
+cP\psi_L-(2mc^2+\varepsilon)\psi_S=0.
+\]
+The second gives $\psi_S=cP\psi_L/(2mc^2+\varepsilon)$.
+Substitution into the first yields
+\[
+\varepsilon\psi_L=\frac{c^2P^2}{2mc^2+\varepsilon}\psi_L
+=\frac{c^2\mathbf p^2}{2mc^2+\varepsilon}\psi_L.
+\]
+At leading nonrelativistic order,
+$(2mc^2+\varepsilon)^{-1}\simeq(2mc^2)^{-1}$, giving
+\[
+\boxed{\frac{\mathbf p^2}{2m}\psi_L=\varepsilon\psi_L}.
+\]
+With $p_i=-i\hbar\partial_i$, this is
+$-\hbar^2\nabla^2\psi_L/(2m)=\varepsilon\psi_L$.
+As an exact check before approximation, for a nonzero momentum
+eigenstate multiply by $2mc^2+\varepsilon$ to obtain
+$\varepsilon(2mc^2+\varepsilon)=c^2\mathbf p^2$, or
+$E^2=m^2c^4+c^2\mathbf p^2$.
+
+\textbf{(c)} Since $P^\dagger P=\mathbf p^2I_2$, the exact
+eliminated expression gives, for such a state,
+\[
+\frac{\|\psi_S\|}{\|\psi_L\|}
+=\frac{c|\mathbf p|}{E+mc^2}
+\simeq\frac{|\mathbf p|}{2mc}\ll1
+\quad\text{when }|\mathbf p|\ll mc.
+\]
+This explains the names on the positive-energy, nonrelativistic
+branch. At rest the small component vanishes; the ratio need not be
+small in the relativistic regime.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.49}\quad Show that it is consistent with the requirements
+that they must satisfy to take the Dirac gamma matrices to be (in $2\times2$
+block form)
+\[
+\boldsymbol{\gamma}^{0}=\begin{pmatrix}0&\mathbf{1}_{2}\\
+\mathbf{1}_{2}&0\end{pmatrix},\quad
+\boldsymbol{\gamma}^{i}=\begin{pmatrix}0&\sigma_{i}\\
+-\sigma_{i}&0\end{pmatrix},\ (i=1,2,3).
+\]
+This choice for the gamma matrices is called the Weyl representation.
+\solution
+Write the proposed Weyl matrices as
+\[
+\gamma^0=\sigma_1\otimes I_2,\qquad
+\gamma^i=J\otimes\sigma_i,\quad J=i\sigma_2.
+\]
+Then $(\gamma^0)^2=I_4$ and
+$(\gamma^i)^2=J^2\otimes I_2=-I_4$.
+Since $\sigma_1J=-\sigma_3$ and $J\sigma_1=\sigma_3$,
+\[
+\{\gamma^0,\gamma^i\}=(\sigma_1J+J\sigma_1)\otimes\sigma_i=0.
+\]
+For spatial indices,
+$\{\gamma^i,\gamma^j\}=J^2\otimes\{\sigma_i,\sigma_j\}
+=-2\delta_{ij}I_4$. All the required Clifford relations hold.
+Also $(\gamma^0)^\dagger=\gamma^0$ and
+$(\gamma^i)^\dagger=-\gamma^i$, so
+$\alpha_i^\dagger=-\gamma^i\gamma^0=\gamma^0\gamma^i=\alpha_i$.
+The free Dirac Hamiltonian has the required Hermiticity as well.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.50}\quad Show that the Dirac equation separates into
+independent $2\times2$ blocks in the Weyl representation (see Exercise 2.2.49)
+in the limit that the mass $m$ approaches zero. This observation is important
+in the ultra relativistic regime where the rest mass is inconsequential, or
+for particles of negligible mass (e.g., neutrinos).
+\solution
+\erratum{The manual's momentum blocks again lack their factors of $c$.
+With the units of Eq.~(2.73), the decoupled equations contain
+$\pm c\boldsymbol{\sigma}\cdot\mathbf p$.}
+In the Weyl representation,
+\[
+\alpha_i=\gamma^0\gamma^i=
+\begin{pmatrix}0&I_2\\I_2&0\end{pmatrix}
+\begin{pmatrix}0&\sigma_i\\-\sigma_i&0\end{pmatrix}
+=\begin{pmatrix}-\sigma_i&0\\0&\sigma_i\end{pmatrix}.
+\]
+With $\Psi=(\psi_1,\psi_2)^T$, Eq.~(2.73) is
+\[
+\begin{pmatrix}
+-c\boldsymbol{\sigma}\cdot\mathbf p&mc^2I_2\\
+mc^2I_2&c\boldsymbol{\sigma}\cdot\mathbf p
+\end{pmatrix}
+\begin{pmatrix}\psi_1\\\psi_2\end{pmatrix}
+=E\begin{pmatrix}\psi_1\\\psi_2\end{pmatrix}.
+\]
+Equivalently,
+\[
+-c\boldsymbol{\sigma}\cdot\mathbf p\,\psi_1+mc^2\psi_2=E\psi_1,\qquad
+mc^2\psi_1+c\boldsymbol{\sigma}\cdot\mathbf p\,\psi_2=E\psi_2.
+\]
+At $m=0$ the coupling terms disappear:
+\[
+\boxed{-c\boldsymbol{\sigma}\cdot\mathbf p\,\psi_1=E\psi_1,\qquad
+c\boldsymbol{\sigma}\cdot\mathbf p\,\psi_2=E\psi_2}.
+\]
+Each two-component equation can be solved independently. Squaring
+either and using $(\boldsymbol{\sigma}\cdot\mathbf p)^2=\mathbf p^2I_2$
+gives the massless relation $E^2=c^2\mathbf p^2$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{2.2.51}\quad
+\begin{enumerate}
+\item[(a)] Given $\mathbf{r}'=\mathsf{U}\mathbf{r}$, with $\mathsf{U}$ a
+  unitary matrix and $\mathbf{r}$ a (column) vector with complex elements,
+  show that the magnitude of $\mathbf{r}$ is invariant under this operation.
+\item[(b)] The \erratum{square} matrix $\mathsf{U}$ transforms any column vector $\mathbf{r}$
+  with complex elements into $\mathbf{r}'$, leaving the magnitude invariant:
+  $\mathbf{r}^{\dagger}\mathbf{r}=\mathbf{r}'^{\dagger}\mathbf{r}'$. Show that
+  $\mathsf{U}$ is unitary.
+\end{enumerate}
+\solution
+\textbf{(a)} For a complex vector,
+$\|\mathbf r\|^2=\mathbf r^\dagger\mathbf r$.
+If $\mathbf r'=U\mathbf r$ with $U^\dagger U=I$, then
+\[
+\|\mathbf r'\|^2=(U\mathbf r)^\dagger U\mathbf r
+=\mathbf r^\dagger U^\dagger U\mathbf r
+=\mathbf r^\dagger\mathbf r.
+\]
+Taking nonnegative square roots proves invariance of the magnitude.
+
+\textbf{(b)} \erratum{The manual's $\mathbf r'^{\dagger}\mathbf r$
+must be $\mathbf r'^{\dagger}\mathbf r'$.
+Here $U$ is square and acts on vectors of the
+same dimension. For rectangular $U$, norm preservation implies only
+$U^\dagger U=I$, not two-sided unitarity.}
+Set $H=U^\dagger U-I$. The hypothesis is
+$\mathbf r^\dagger H\mathbf r=0$ for every complex $\mathbf r$;
+also $H^\dagger=H$.
+Choose $\mathbf r=e_i$ to get $H_{ii}=0$.
+For $i\ne j$, choose $\mathbf r=e_i+e_j$:
+\[
+0=H_{ii}+H_{ij}+H_{ji}+H_{jj}
+=H_{ij}+H_{ji}=2\operatorname{Re}H_{ij}.
+\]
+Next choose $\mathbf r=e_i+ie_j$:
+\[
+0=H_{ii}+iH_{ij}-iH_{ji}+H_{jj}
+=i(H_{ij}-H_{ji})=-2\operatorname{Im}H_{ij}.
+\]
+Every entry vanishes, so $H=0$ and $U^\dagger U=I$.
+Since $U$ is square, taking determinants yields $|\det U|^2=1$.
+It is invertible, and multiplication by $U^{-1}$ gives
+$U^\dagger=U^{-1}$ and also $UU^\dagger=I$.
+Thus $U$ is unitary.

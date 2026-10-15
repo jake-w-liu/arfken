@@ -1,0 +1,1927 @@
+% Problems, Chapter 21: Integral Equations
+% Arfken, Weber & Harris, Mathematical Methods for Physicists, 7th ed.
+% Requires: amsmath, amssymb, tikz
+
+\section*{Problems}
+
+\Needspace{8\baselineskip}
+\subsection*{21.1 Introduction}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.1.1}\quad Starting with the ODE, integrate
+twice and derive the Volterra integral equation corresponding to
+\begin{enumerate}
+\item[(a)] $y''(x)-y(x)=0$;\quad $y(0)=0$,\quad $y'(0)=1$.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$y=\displaystyle\int_{0}^{x}(x-t)y(t)\,dt+x$.
+\item[(b)] $y''(x)-y(x)=0$;\quad $y(0)=1$,\quad $y'(0)=-1$.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$y=\displaystyle\int_{0}^{x}(x-t)y(t)\,dt-x+1$.
+\end{enumerate}
+Check your results with Eq.~(21.11).
+\solution
+Since $y''=y$, one integration gives
+\[
+y'(u)=y'(0)+\int_0^u y(t)\,dt.
+\]
+A second integration gives
+\[
+y(x)=y(0)+xy'(0)+\int_0^xdu\int_0^u y(t)\,dt.
+\]
+For $x\ge0$ the triangular integration region is
+$0\le t\le u\le x$. Reverse the order:
+\[
+\int_0^x y(t)\left(\int_t^xdu\right)dt
+=\int_0^x(x-t)y(t)\,dt.
+\]
+Thus the general initial-value formula is
+\[
+y(x)=y(0)+xy'(0)+\int_0^x(x-t)y(t)\,dt.
+\]
+Inserting the two pairs of initial data yields, respectively,
+\[
+\boxed{y(x)=x+\int_0^x(x-t)y(t)\,dt},\qquad
+\boxed{y(x)=1-x+\int_0^x(x-t)y(t)\,dt}.
+\]
+To check Eq.~(21.11), its ODE coefficients are $A=0$, $B=-1$,
+$g=0$, $a=0$. Hence
+$K=(t-x)(B-A')-A=x-t$ and $f=y(0)+xy'(0)$,
+exactly as above. Oriented integrals give the same identities for $x<0$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.1.2}\quad Starting with the given answers of
+Exercise~21.1.1, differentiate and recover the original ODEs and
+the boundary conditions.
+\solution
+Write either answer as
+\[
+y(x)=a+bx+\int_0^x(x-t)y(t)\,dt,
+\]
+where $(a,b)=(0,1)$ or $(1,-1)$. Leibniz's rule includes an
+upper-endpoint term, which vanishes here:
+\[
+y'(x)=b+(x-x)y(x)+\int_0^x
+\frac{\partial}{\partial x}\bigl[(x-t)y(t)\bigr]dt
+=b+\int_0^x y(t)\,dt.
+\]
+Differentiate once more:
+\[
+\boxed{y''(x)=y(x)}.
+\]
+At $x=0$ both integrals have zero length, so
+\[
+y(0)=a,\qquad y'(0)=b.
+\]
+These are precisely the two original initial conditions. Continuity of
+$y$ in the integral equation gives the differentiability used here.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.1.3}\quad Given
+$\varphi(x)=x-\displaystyle\int_{0}^{x}(t-x)\varphi(t)\,dt$,
+
+solve this integral equation by converting it to an ODE (plus
+boundary conditions) and solving the ODE (by inspection).
+\solution
+First account for the sign:
+\[
+\varphi(x)=x+\int_0^x(x-t)\varphi(t)\,dt.
+\]
+Differentiating, the upper-endpoint term is zero:
+\[
+\varphi'(x)=1+\int_0^x\varphi(t)\,dt,\qquad
+\varphi''(x)=\varphi(x).
+\]
+The equation and its first derivative at zero give
+$\varphi(0)=0$, $\varphi'(0)=1$. The general solution is
+$Ae^x+Be^{-x}$, and therefore
+\[
+A+B=0,\qquad A-B=1,\qquad
+A=\frac12,\quad B=-\frac12.
+\]
+Hence $\boxed{\varphi(x)=\sinh x}$. Directly,
+\[
+\int_0^x(x-t)\sinh t\,dt
+=\left[(x-t)\cosh t\right]_0^x+\int_0^x\cosh t\,dt
+=-x+\sinh x,
+\]
+so substitution gives $x+(-x+\sinh x)=\sinh x$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.1.4}\quad Show that the homogeneous Volterra
+equation of the second kind
+\[
+\psi(x)=\lambda\int_{0}^{x}K(x,t)\psi(t)\,dt
+\]
+has no solution (apart from the trivial solution $\psi=0$).
+\erratum{Assume that $\psi$ is continuous and $K$ is continuous
+on every finite triangle $0\le t\le x\le L$.}
+\par\emph{Hint.}~\erratum{On a fixed triangle, set
+$M=\max|K|$, $C=\max|\psi|$, and iterate the integral bound
+to obtain $|\psi(x)|\le C(|\lambda|Mx)^n/n!$.}
+\solution
+Use the usual continuous-kernel setting on a finite triangle
+$0\le t\le x\le L$. Put
+\[
+M=\max_{0\le t\le x\le L}|K(x,t)|,\qquad
+C=\max_{0\le x\le L}|\psi(x)|.
+\]
+The equation first gives $|\psi(x)|\le C|\lambda|Mx$.
+Suppose $|\psi(t)|\le C(|\lambda|Mt)^n/n!$. Substituting this
+bound into the same equation gives
+\[
+|\psi(x)|\le|\lambda|M\int_0^x
+C\frac{(|\lambda|Mt)^n}{n!}\,dt
+=C\frac{(|\lambda|Mx)^{n+1}}{(n+1)!}.
+\]
+Starting with $n=0$, induction therefore proves this bound for every
+integer $n\ge0$. For fixed $x$, the ratio of successive bounds is
+$|\lambda|Mx/(n+1)\to0$, so the bound tends to zero. Thus
+\[
+\boxed{\psi(x)=0\quad(0\le x\le L)}
+\]
+for every finite $\lambda$. Taking arbitrary finite $L$ covers an
+unbounded interval whenever the kernel is locally bounded and continuous.
+
+For the original textbook's Maclaurin hint, $\psi(0)=0$ follows at once. Repeated
+differentiation gives only integrals involving $\psi$ and endpoint
+terms involving its lower derivatives; induction makes every
+$\psi^{(n)}(0)$ zero.
+\erratum{A vanishing Maclaurin series proves the conclusion only if
+$\psi$ is analytic, not merely indefinitely differentiable. For example,
+the smooth extension of $e^{-1/x^2}$ by zero at $x=0$ has all derivatives
+zero there but is not the zero function. The bounded-kernel estimate
+above supplies the missing uniqueness argument without assuming
+analyticity.}
+
+
+\Needspace{8\baselineskip}
+\subsection*{21.2 Some Special Methods}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.1}\quad The kernel of a Fredholm equation of
+the second kind,
+\[
+\varphi(x)=f(x)+\lambda\int_{-\infty}^{\infty}K(x,t)\varphi(t)\,dt,
+\]
+is of the form $k(x-t)$.\footnote{This kernel and a range
+$0\le x<\infty$ are the characteristics of integral equations of
+the Wiener--Hopf type. Details will be found in Chapter~8 of Morse
+and Feshbach (1953); see the Additional Readings.} Assuming that
+the required transforms exist, show that
+\[
+\varphi(x)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+\frac{F(t)e^{-ixt}}{1-\sqrt{2\pi}\,\lambda K(t)}\,dt.
+\]
+$F(t)$ and $K(t)$ are the Fourier transforms of $f(x)$ and $k(x)$,
+respectively.
+\erratum{Assume also that the denominator has no real zeros and
+that the quotient in the displayed formula admits Fourier inversion.}
+\solution
+Use the book's symmetric Fourier convention
+\[
+\widehat g(\omega)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
+g(x)e^{i\omega x}dx,\qquad
+g(x)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
+\widehat g(\omega)e^{-i\omega x}d\omega.
+\]
+Let $\Phi=\widehat\varphi$, $F=\widehat f$, $K=\widehat k$.
+To keep track of normalization, set $u=x-t$ in the transform
+of the convolution:
+\[
+\begin{aligned}
+\widehat{k*\varphi}(\omega)
+&=\frac1{\sqrt{2\pi}}\int_{\mathbb R}\!\!\int_{\mathbb R}
+k(x-t)\varphi(t)e^{i\omega x}\,dt\,dx\\
+&=\frac1{\sqrt{2\pi}}
+\left(\int_{\mathbb R}k(u)e^{i\omega u}du\right)
+\left(\int_{\mathbb R}\varphi(t)e^{i\omega t}dt\right)
+=\sqrt{2\pi}K(\omega)\Phi(\omega).
+\end{aligned}
+\]
+Consequently
+\[
+[1-\sqrt{2\pi}\lambda K(\omega)]\Phi(\omega)=F(\omega).
+\]
+Divide and invert to obtain
+\[
+\boxed{\varphi(x)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
+\frac{F(\omega)e^{-i\omega x}}
+{1-\sqrt{2\pi}\lambda K(\omega)}\,d\omega}.
+\]
+\erratum{Existence of the original transforms alone does not justify
+division: the quotient must belong to the intended inverse-transform
+class. Zeros of the denominator require compatibility with $F$ and may
+permit homogeneous components supported on those zeros in a
+distributional setting. The displayed formula applies when these
+obstructions are absent.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.2}
+\begin{enumerate}
+\item[(a)] The kernel of a Volterra equation of the first kind,
+\[
+f(x)=\int_{0}^{x}K(x,t)\varphi(t)\,dt,
+\]
+has the form $k(x-t)$. Assuming that the required transforms
+exist, show that
+\[
+\varphi(x)=\frac{1}{2\pi i}\int_{\gamma-i\infty}^{\gamma+i\infty}
+\frac{F(s)}{K(s)}\,e^{xs}\,ds,
+\]
+where $F(s)$ and $K(s)$ are, respectively, the Laplace
+transforms of $f(x)$ and $k(x)$.
+\item[(b)] In terms of the notation of part (a), show that the
+Volterra equation of the second kind,
+\[
+\varphi(x)=f(x)+\lambda\int_{0}^{x}K(x,t)\varphi(t)\,dt,
+\]
+has solution
+\[
+\varphi(x)=\frac{1}{2\pi i}\int_{\gamma-i\infty}^{\gamma+i\infty}
+\frac{F(s)}{1-\lambda K(s)}\,e^{xs}\,ds.
+\]
+\end{enumerate}
+\erratum{Assume each quotient is a Laplace transform for which the
+Bromwich inversion is valid. Choose $\gamma$ in its right half-plane
+of analyticity, to the right of its singularities.}
+\solution
+For $x\ge0$ use
+\[
+F(s)=\int_0^\infty e^{-sx}f(x)dx,\quad
+K(s)=\int_0^\infty e^{-sx}k(x)dx,\quad
+\Phi(s)=\int_0^\infty e^{-sx}\varphi(x)dx.
+\]
+In a right half-plane where the integrals can be interchanged,
+put $u=x-t$:
+\[
+\begin{aligned}
+\int_0^\infty e^{-sx}\int_0^xk(x-t)\varphi(t)dt\,dx
+&=\int_0^\infty\!\!\int_0^\infty
+e^{-s(u+t)}k(u)\varphi(t)\,du\,dt\\
+&=K(s)\Phi(s).
+\end{aligned}
+\]
+(a) The first-kind equation gives $F=K\Phi$, hence
+\[
+\Phi(s)=\frac{F(s)}{K(s)},\qquad
+\boxed{\varphi(x)=\frac1{2\pi i}
+\int_{\gamma-i\infty}^{\gamma+i\infty}
+\frac{F(s)}{K(s)}e^{sx}ds}.
+\]
+(b) The second-kind equation gives
+$\Phi=F+\lambda K\Phi$, so
+\[
+\Phi(s)=\frac{F(s)}{1-\lambda K(s)},\qquad
+\boxed{\varphi(x)=\frac1{2\pi i}
+\int_{\gamma-i\infty}^{\gamma+i\infty}
+\frac{F(s)}{1-\lambda K(s)}e^{sx}ds}.
+\]
+\erratum{In each case the quotient must be an admissible Laplace
+transform; its singularities determine the inversion line
+$\Re s=\gamma$. An uncancelled zero of a divisor cannot be ignored.
+When classical inversion hypotheses hold, choose $\gamma$ to the right
+of all quotient singularities and use the ordinary Bromwich inverse.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.3}\quad Using the Laplace transform solution
+(Exercise~21.2.2), solve
+\begin{enumerate}
+\item[(a)] $\varphi(x)=x+\displaystyle\int_{0}^{x}
+(t-x)\varphi(t)\,dt$.
+\par\nobreak\hfill\emph{ANS.}\enspace$\varphi(x)=\sin x$.
+\item[(b)] $\varphi(x)=x-\displaystyle\int_{0}^{x}
+(t-x)\varphi(t)\,dt$.
+\par\nobreak\hfill\emph{ANS.}\enspace$\varphi(x)=\sinh x$.
+\end{enumerate}
+Check your results by substituting back into the original
+integral equations.
+\solution
+Write $k(u)=-u$ in (a), and $k(u)=u$ in (b). Since
+$\mathcal L\{x\}=1/s^2$,
+\[
+\begin{array}{c|c|c}
+&\text{transformed equation}&\Phi(s)\\ \hline
+\text{(a)}&\Phi=s^{-2}-s^{-2}\Phi&(s^2+1)^{-1}\\
+\text{(b)}&\Phi=s^{-2}+s^{-2}\Phi&(s^2-1)^{-1}
+\end{array}
+\]
+The inverses are
+\[
+\boxed{\varphi_a(x)=\sin x,\qquad\varphi_b(x)=\sinh x}.
+\]
+For an explicit substitution check, integration by parts gives
+\[
+\int_0^x(x-t)\sin t\,dt
+=\left[-(x-t)\cos t\right]_0^x-\int_0^x\cos t\,dt
+=x-\sin x,
+\]
+and
+\[
+\int_0^x(x-t)\sinh t\,dt
+=\left[(x-t)\cosh t\right]_0^x+\int_0^x\cosh t\,dt
+=\sinh x-x.
+\]
+Equation (a) therefore reads $x-(x-\sin x)=\sin x$;
+(b) reads $x+(\sinh x-x)=\sinh x$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.4}\quad Reformulate the equations of
+Example~21.2.1 for integrals on the range $(0,\infty)$ using
+Fourier cosine transforms.
+\erratum{Take the unknown and convolution kernel to be even functions
+on the full line, and retain the reflected kernel in the half-line equation.}
+\solution
+Take $k$ and $\varphi$ even on the full line, so their convolution
+$f$ is even as well. Splitting the full-line equation of
+Example~21.2.1 into positive and negative $t$ gives, for $x\ge0$,
+\[
+\boxed{f(x)=\int_0^\infty
+[k(x-t)+k(x+t)]\varphi(t)\,dt}.
+\]
+Here the negative half-line was changed by $t\mapsto-t$.
+\erratum{A half-line cosine formulation requires these even extensions
+and the reflected kernel $k(x+t)$. Simply replacing the full-line limits
+by $0,\infty$ while keeping only $k(x-t)$ does not yield the same
+convolution theorem.}
+
+Define the self-inverse cosine transform
+\[
+G_c(\omega)=\sqrt{\frac2\pi}\int_0^\infty
+g(x)\cos(\omega x)dx.
+\]
+For even $g$, this equals its symmetric full-line Fourier transform.
+Thus the equations of the example become
+\[
+F_c(\omega)=\sqrt{2\pi}K_c(\omega)\Phi_c(\omega),\qquad
+\Phi_c(\omega)=\frac{F_c(\omega)}{\sqrt{2\pi}K_c(\omega)}.
+\]
+For completeness, inversion of the first relation gives
+\[
+f(x)=2\int_0^\infty K_c(\omega)\Phi_c(\omega)
+\cos(\omega x)d\omega.
+\]
+Inverting the second gives the desired half-line solution:
+\[
+\boxed{\varphi(x)=\frac1\pi\int_0^\infty
+\frac{F_c(\omega)}{K_c(\omega)}\cos(\omega x)d\omega}.
+\]
+The quotient and inversion need the same existence conditions as in
+Exercise~21.2.1. If a half-line kernel is instead defined as one half of
+the reflected sum, the corresponding convolution multiplier is one half
+as large; the normalization must be adjusted accordingly.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.5}\quad Given the Fredholm integral
+equation,
+\[
+e^{-x^{2}}=\int_{-\infty}^{\infty}e^{-(x-t)^{2}}\varphi(t)\,dt,
+\]
+apply the Fourier convolution technique of Example~21.2.1 to solve
+for $\varphi(t)$ \erratum{as a tempered distribution}.
+\solution
+The symmetric Fourier transform of $e^{-x^2}$ is
+\[
+\frac1{\sqrt{2\pi}}\int_{\mathbb R}
+e^{-x^2+i\omega x}dx=\frac1{\sqrt2}e^{-\omega^2/4}.
+\]
+The convolution theorem therefore gives
+\[
+\frac1{\sqrt2}e^{-\omega^2/4}
+=\sqrt{2\pi}\left(\frac1{\sqrt2}e^{-\omega^2/4}\right)
+\Phi(\omega).
+\]
+The Gaussian factor never vanishes, so
+$\Phi(\omega)=1/\sqrt{2\pi}$. But this is precisely the Fourier
+transform of the unit point mass at zero:
+\[
+\boxed{\varphi(t)=\delta(t)}.
+\]
+Indeed, the original equation is checked without transforms:
+\[
+\int_{\mathbb R}e^{-(x-t)^2}\delta(t)\,dt=e^{-x^2}.
+\]
+\erratum{The answer is a distribution. There is no $L^1(\mathbb R)$
+solution, since its Fourier transform would tend to zero at infinity;
+nor an $L^2(\mathbb R)$ solution, since a nonzero constant transform is
+not square integrable. In the tempered-distribution class the nonzero
+Gaussian multiplier makes the solution unique.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.6}\quad Solve Abel's equation,
+\[
+f(x)=\int_{0}^{x}\frac{\varphi(t)}{(x-t)^{\alpha}}\,dt,
+\qquad0<\alpha<1,
+\]
+by the following method:
+\begin{enumerate}
+\item[(a)] Multiply both sides by $(z-x)^{\alpha-1}$ and integrate
+with respect to $x$ over the range $0\le x\le z$.
+\item[(b)] Reverse the order of integration and evaluate the
+integral on the right-hand side (with respect to $x$) by
+recognizing it as a beta function.
+\end{enumerate}
+\par\emph{Note.}
+\[
+\int_{t}^{z}\frac{dx}{(z-x)^{1-\alpha}(x-t)^{\alpha}}
+=B(1-\alpha,\alpha)=\Gamma(\alpha)\Gamma(1-\alpha)
+=\frac{\pi}{\sin\pi\alpha}.
+\]
+\solution
+For locally integrable $\varphi$, the singular kernels are integrable
+when $0<\alpha<1$. Multiply the equation by $(z-x)^{\alpha-1}$
+and integrate:
+\[
+I(z):=\int_0^z(z-x)^{\alpha-1}f(x)dx
+=\int_0^zdx\int_0^x
+(z-x)^{\alpha-1}(x-t)^{-\alpha}\varphi(t)dt.
+\]
+Absolute integrability on this triangle follows from the beta integral
+below applied to $|\varphi|$. Reversing the order,
+\[
+I(z)=\int_0^z\varphi(t)\left[
+\int_t^z(z-x)^{\alpha-1}(x-t)^{-\alpha}dx\right]dt.
+\]
+Put $x=t+(z-t)u$. All powers of $z-t$ cancel:
+\[
+\begin{aligned}
+\int_t^z(z-x)^{\alpha-1}(x-t)^{-\alpha}dx
+&=\int_0^1(1-u)^{\alpha-1}u^{-\alpha}du\\
+&=B(1-\alpha,\alpha)
+=\Gamma(1-\alpha)\Gamma(\alpha)
+=\frac{\pi}{\sin\pi\alpha}.
+\end{aligned}
+\]
+Hence
+\[
+I(z)=\frac{\pi}{\sin\pi\alpha}\int_0^z\varphi(t)dt,
+\qquad
+\boxed{\varphi(z)=\frac{\sin\pi\alpha}{\pi}
+\frac{d}{dz}\int_0^z(z-x)^{\alpha-1}f(x)dx}.
+\]
+The derivative exists almost everywhere under the integral equation's
+local-integrability hypothesis.
+
+If $f$ is continuously differentiable up to zero, remove the apparent
+singular endpoint before differentiating. Integration by parts gives
+\[
+I(z)=\frac{f(0)z^\alpha}{\alpha}
++\frac1\alpha\int_0^z(z-x)^\alpha f'(x)dx,
+\]
+and thus
+\[
+\boxed{\varphi(z)=\frac{\sin\pi\alpha}{\pi}
+\left[f(0)z^{\alpha-1}+
+\int_0^z(z-x)^{\alpha-1}f'(x)dx\right]}.
+\]
+This also proves sufficiency for such $f$: convolving either term with
+$x^{-\alpha}$ and using the same beta integral yields respectively
+$f(0)$ and $\int_0^z f'(x)dx=f(z)-f(0)$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.7}\quad Given the generalized Abel equation
+with $f(x)=1$,
+\[
+1=\int_{0}^{x}\frac{\varphi(t)}{(x-t)^{\alpha}}\,dt,
+\qquad0<\alpha<1,\quad\erratum{x>0},
+\]
+solve for $\varphi(t)$ and verify that $\varphi(t)$ is a solution
+of the given equation.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\varphi(t)=\dfrac{\sin\pi\alpha}{\pi}\,t^{\alpha-1}$.
+\solution
+Set $f=1$ in the preceding inversion formula:
+\[
+\int_0^x(x-t)^{\alpha-1}dt=\frac{x^\alpha}{\alpha},
+\]
+so
+\[
+\boxed{\varphi(x)=\frac{\sin\pi\alpha}{\pi}x^{\alpha-1}},
+\qquad x>0.
+\]
+Direct substitution, with $t=xu$, yields
+\[
+\begin{aligned}
+\int_0^x\frac{\varphi(t)}{(x-t)^\alpha}dt
+&=\frac{\sin\pi\alpha}{\pi}
+x^{\alpha-1-\alpha+1}
+\int_0^1u^{\alpha-1}(1-u)^{-\alpha}du\\
+&=\frac{\sin\pi\alpha}{\pi}
+\Gamma(\alpha)\Gamma(1-\alpha)=1.
+\end{aligned}
+\]
+Both endpoint singularities in the $u$ integral are integrable.
+\erratum{The equation is valid for $x>0$, with right-hand limit one as
+$x\downarrow0$. It cannot also be imposed as an ordinary zero-length
+integral at $x=0$, which is zero; the solution itself is singular there.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.8}\quad A Fredholm equation of the first
+kind has a kernel $e^{-(x-t)^{2}}$:
+\[
+f(x)=\int_{-\infty}^{\infty}e^{-(x-t)^{2}}\varphi(t)\,dt.
+\]
+\erratum{Assume a solution exists in
+$L^2(\mathbb R,e^{-t^2}dt)$.} Show that the solution is
+\erratum{the following series, converging in that weighted norm}:
+\[
+\varphi(x)=\frac{1}{\sqrt{\pi}}\sum_{n=0}^{\infty}
+\frac{f^{(n)}(0)}{2^{n}n!}\,H_{n}(x),
+\]
+in which $H_{n}(x)$ is an $n$th-order Hermite polynomial.
+\solution
+Use the physicists' Hermite generating function:
+\[
+e^{-(x-t)^2}=e^{-t^2}e^{2tx-x^2}
+=e^{-t^2}\sum_{n=0}^\infty H_n(t)\frac{x^n}{n!}.
+\]
+Taking the $n$th derivative with respect to $x$ at zero in the
+integral equation gives
+\[
+f^{(n)}(0)=\int_{\mathbb R}e^{-t^2}H_n(t)\varphi(t)dt.
+\]
+Now write $\varphi=\sum_n a_nH_n$. Hermite orthogonality is
+\[
+\int_{\mathbb R}e^{-t^2}H_n(t)H_m(t)dt
+=\sqrt\pi\,2^nn!\,\delta_{nm}.
+\]
+Multiplying the expansion by $e^{-t^2}H_n$ and integrating therefore
+gives
+\[
+a_n=\frac{1}{\sqrt\pi\,2^nn!}
+\int_{\mathbb R}e^{-t^2}H_n(t)\varphi(t)dt
+=\frac{f^{(n)}(0)}{\sqrt\pi\,2^nn!}.
+\]
+Consequently
+\[
+\boxed{\varphi(x)=\frac1{\sqrt\pi}\sum_{n=0}^\infty
+\frac{f^{(n)}(0)}{2^nn!}H_n(x)}.
+\]
+
+\erratum{The original unrestricted statement needs a function-space and
+convergence qualification. If
+$\varphi\in L^2(\mathbb R,e^{-t^2}dt)$, the formula is its convergent
+weighted-$L^2$ Hermite expansion; it is not automatically a pointwise
+series for arbitrary $f$.}
+Here is the convergence justification. Write $z=a+ib$ and
+$\|\varphi\|_w^2=\int e^{-t^2}|\varphi(t)|^2dt$.
+Cauchy--Schwarz gives
+\begin{align*}
+\left|\int_{\mathbb R}e^{-(z-t)^2}\varphi(t)dt\right|
+&\le\|\varphi\|_w
+\left(\int_{\mathbb R}e^{-t^2+4at-2\Re(z^2)}dt\right)^{1/2}\\
+&=\pi^{1/4}e^{|z|^2}\|\varphi\|_w.
+\end{align*}
+Derivatives of the Gaussian add only polynomial factors in $t-z$.
+On a compact set of $z$, these are still dominated by an integrable
+Gaussian times a polynomial after the same Cauchy--Schwarz estimate.
+Differentiation under the integral is therefore valid to every order,
+locally uniformly, and the convolution is entire. Parseval's identity
+for the Hermite basis gives
+\[
+\|\varphi\|_w^2=\sum_{n=0}^\infty |a_n|^2\sqrt\pi\,2^nn!.
+\]
+Substituting the coefficients found above gives the necessary condition
+\[
+\sum_{n=0}^\infty
+\frac{|f^{(n)}(0)|^2}{\sqrt\pi\,2^nn!}<\infty.
+\]
+Conversely, if $f$ is entire and this condition holds, the orthogonal
+series defines a weighted-$L^2$ function. Its Gaussian convolution
+has the same Taylor coefficients as $f$, and hence equals $f$.
+
+The limitation is already visible in Exercise~21.2.5:
+$f(x)=e^{-x^2}$ has distributional solution $\delta$. At $x=0$,
+its proposed even terms are obtained from
+$f^{(2j)}(0)=(-1)^j(2j)!/j!$ and
+$H_{2j}(0)=(-1)^j(2j)!/j!$:
+\[
+\frac1{\sqrt\pi}
+\frac{f^{(2j)}(0)H_{2j}(0)}{2^{2j}(2j)!}
+=\frac1{\sqrt\pi}\frac{\binom{2j}{j}}{4^j}
+\sim\frac1{\pi\sqrt j}.
+\]
+The positive series diverges, so that example cannot be interpreted as
+an ordinary pointwise Hermite solution.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.9}\quad Solve the integral equation
+\[
+f(x)=\int_{-1}^{1}\frac{\varphi(t)}
+{(1-2xt+x^{2})^{1/2}}\,dt,\qquad-1\le x\le1,
+\]
+for the unknown function $\varphi(t)$, \erratum{with $s=0,1,2,\ldots$,} if
+\begin{enumerate}
+\item[(a)] $f(x)=x^{2s}$,
+\item[(b)] $f(x)=x^{2s+1}$.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $\varphi(t)=\dfrac{4s+1}{2}\,P_{2s}(t)$,\quad
+(b) $\varphi(t)=\dfrac{4s+3}{2}\,P_{2s+1}(t)$.
+\solution
+Let $N=2s$ in (a) and $N=2s+1$ in (b), with $s=0,1,\ldots$.
+For $|x|<1$, the generating function converges uniformly in
+$t\in[-1,1]$:
+\[
+(1-2xt+x^2)^{-1/2}=\sum_{n=0}^\infty P_n(t)x^n.
+\]
+The equation with $f(x)=x^N$ therefore requires
+\[
+\int_{-1}^1P_n(t)\varphi(t)dt=\delta_{nN}.
+\]
+If $\varphi=\sum_m a_mP_m$ in $L^2[-1,1]$, orthogonality gives
+\[
+\frac{2a_n}{2n+1}=\delta_{nN},
+\qquad a_n=\frac{2n+1}{2}\delta_{nN}.
+\]
+Thus
+\[
+\boxed{\varphi_a(t)=\frac{4s+1}{2}P_{2s}(t)},\qquad
+\boxed{\varphi_b(t)=\frac{4s+3}{2}P_{2s+1}(t)}.
+\]
+Substitution gives
+\[
+\frac{2N+1}{2}\sum_{n=0}^\infty x^n
+\int_{-1}^1P_n(t)P_N(t)dt=x^N,
+\]
+which checks both formulas. Completeness of the Legendre polynomials
+proves uniqueness in $L^2$.
+
+The endpoint values follow by a limit of these finite-polynomial
+solutions. For $1/2\le x<1$,
+\[
+1-2xt+x^2=(1-x)^2+2x(1-t)\ge1-t.
+\]
+The bounded numerator is consequently dominated by a constant times
+$(1-t)^{-1/2}$, which is integrable. Dominated convergence gives
+$f(1)=1$. Reflection gives $f(-1)=(-1)^N$, so the solutions hold
+at both stated endpoints as improper integrals.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.10}\quad Find the eigenvalues and
+eigenfunctions of
+\[
+\varphi(x)=\lambda\int_{-1}^{1}(t-x)\varphi(t)\,dt.
+\]
+\solution
+The image of the kernel is linear in $x$:
+\[
+\int_{-1}^1(t-x)\varphi(t)dt
+=\int_{-1}^1t\varphi(t)dt-x\int_{-1}^1\varphi(t)dt.
+\]
+Every nonzero solution must therefore have the form $A+Bx$.
+The two required moments are
+\[
+\int_{-1}^1(A+Bt)dt=2A,\qquad
+\int_{-1}^1t(A+Bt)dt=\frac{2B}{3}.
+\]
+Equating constant and linear coefficients gives
+\[
+A=\frac{2\lambda}{3}B,\qquad B=-2\lambda A.
+\]
+A nonzero solution has $A\ne0$; eliminating $B$ yields
+\[
+1=-\frac43\lambda^2,\qquad
+\boxed{\lambda_\pm=\pm\frac{i\sqrt3}{2}}.
+\]
+Choose $A=1$:
+\[
+\boxed{\varphi_+(x)=1-i\sqrt3\,x,\qquad
+\varphi_-(x)=1+i\sqrt3\,x}.
+\]
+Their nonzero scalar multiples give the respective one-dimensional
+eigenspaces. No real $\lambda$ permits a nontrivial solution.
+The imaginary characteristic values are consistent with the real
+antisymmetric kernel $K(x,t)=-K(t,x)$; the self-adjoint reality theorem
+does not apply.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.11}\quad Find the eigenvalues and
+eigenfunctions of
+\[
+\varphi(x)=\lambda\int_{0}^{2\pi}\cos(x-t)\varphi(t)\,dt.
+\]
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\lambda_{1}=\lambda_{2}=\dfrac{1}{\pi}$,\qquad
+$\varphi(x)=A\cos x+B\sin x$.
+\solution
+Use
+\[
+\cos(x-t)=\cos x\cos t+\sin x\sin t.
+\]
+Thus every nonzero solution is $\varphi(x)=A\cos x+B\sin x$.
+Over $[0,2\pi]$,
+\[
+\int_0^{2\pi}\cos^2t\,dt=\pi,\quad
+\int_0^{2\pi}\sin^2t\,dt=\pi,\quad
+\int_0^{2\pi}\sin t\cos t\,dt=0.
+\]
+The integral is consequently
+$\pi A\cos x+\pi B\sin x=\pi\varphi(x)$.
+The equation becomes $(1-\lambda\pi)\varphi=0$, so
+\[
+\boxed{\lambda=\frac1\pi,\qquad
+\varphi(x)=A\cos x+B\sin x,\quad(A,B)\ne(0,0)}.
+\]
+The characteristic value has a two-dimensional eigenspace.
+A function orthogonal to both sine and cosine is annihilated by the
+integral operator; it does not solve $\varphi=\lambda K\varphi$
+nontrivially for any finite $\lambda$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.12}\quad Find the eigenvalues and
+eigenfunctions of
+\[
+y(x)=\lambda\int_{-1}^{1}(x-t)^{2}y(t)\,dt.
+\]
+\par\emph{Hint.}~This problem may be treated by the
+separable-kernel method or by a Legendre expansion.
+\solution
+The kernel has degree two in $x$, so write
+$y(x)=A+Bx+Cx^2$. Its three moments are
+\[
+\int_{-1}^1y(t)dt=2A+\frac{2C}{3},\quad
+\int_{-1}^1ty(t)dt=\frac{2B}{3},\quad
+\int_{-1}^1t^2y(t)dt=\frac{2A}{3}+\frac{2C}{5}.
+\]
+Expanding $(x-t)^2=x^2-2xt+t^2$ gives
+\[
+\begin{pmatrix}A\\B\\C\end{pmatrix}
+=\lambda
+\begin{pmatrix}
+2/3&0&2/5\\
+0&-4/3&0\\
+2&0&2/3
+\end{pmatrix}
+\begin{pmatrix}A\\B\\C\end{pmatrix}.
+\]
+The odd equation is $B=-4\lambda B/3$, giving
+\[
+\boxed{\lambda_0=-\frac34,\qquad y_0(x)=x}.
+\]
+For the even sector, put $\mu=1/\lambda$. Its determinant is
+\[
+\begin{vmatrix}2/3-\mu&2/5\\2&2/3-\mu\end{vmatrix}
+=(2/3-\mu)^2-\frac45=0,
+\]
+hence $\mu_\pm=2/3\pm2/\sqrt5$. Taking $C=1$,
+the last row says $2A+2/3=\mu_\pm$, so
+$A=\pm1/\sqrt5$. Therefore
+\[
+\boxed{\begin{aligned}
+\lambda_+&=\frac{-15+9\sqrt5}{8},&
+y_+(x)&=x^2+\frac1{\sqrt5},\\
+\lambda_-&=\frac{-15-9\sqrt5}{8},&
+y_-(x)&=x^2-\frac1{\sqrt5}.
+\end{aligned}}
+\]
+For example, rationalizing
+$1/(2/3+2/\sqrt5)$ gives $(-15+9\sqrt5)/8$.
+The matrix substitution verifies all three eigenpairs.
+Since its image contains only quadratic polynomials, the calculation
+exhausts all nonzero finite-characteristic-value solutions.
+
+In the alternative Legendre normalization,
+$y_\pm$ are proportional to $P_0+(4\lambda_\pm/3)P_2$.
+Indeed the latter has constant term $1-2\lambda_\pm/3$ and
+$x^2$ coefficient $2\lambda_\pm$, whose ratio is
+$1/(2\lambda_\pm)-1/3=\pm1/\sqrt5$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.13}\quad Use the separable-kernel technique
+to show that
+\[
+\psi(x)=\lambda\int_{0}^{\pi}\cos x\sin t\,\psi(t)\,dt
+\]
+has no solution (apart from $\psi=0$). Explain this result in
+terms of separability and symmetry.
+\solution
+Put
+\[
+c=\int_0^\pi\sin t\,\psi(t)dt.
+\]
+Separability forces $\psi(x)=\lambda c\cos x$. Substituting this
+form into the definition of $c$,
+\[
+c=\lambda c\int_0^\pi\sin t\cos t\,dt
+=\frac{\lambda c}{2}\,[\sin^2t]_0^\pi=0.
+\]
+Thus $\boxed{\psi=0}$ for every finite $\lambda$.
+
+The cancellation also follows from reflection about $\pi/2$:
+$\sin(\pi-t)=\sin t$ and $\cos(\pi-t)=-\cos t$, so the product
+has zero integral. In operator language, $K$ has rank one but
+\[
+K^2f(x)=\cos x
+\left(\int_0^\pi\sin t\cos t\,dt\right)
+\left(\int_0^\pi\sin u\,f(u)du\right)=0.
+\]
+The operator itself is nonzero, since $K(\sin t)=(\pi/2)\cos x$.
+Its kernel is not symmetric under $x\leftrightarrow t$, so a nonzero
+nilpotent operator is allowed. A nonzero \erratum{real} symmetric rank-one kernel
+$c\,u(x)u(t)$ would instead have nonzero operator eigenvalue
+$c\int u^2$, and hence a nontrivial finite characteristic value.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.14}\quad Given
+$\varphi(x)=\lambda\displaystyle\int_{0}^{1}(1+xt)\varphi(t)\,dt$,
+
+solve for the eigenvalues and the eigenfunctions by the
+separable-kernel technique.
+\solution
+Introduce the two moments
+\[
+c_0=\int_0^1\varphi(t)dt,\qquad
+c_1=\int_0^1t\varphi(t)dt.
+\]
+The equation is $\varphi(x)=\lambda(c_0+xc_1)$. Inserting it
+into those moment definitions gives
+\[
+c_0=\lambda\left(c_0+\frac{c_1}{2}\right),\qquad
+c_1=\lambda\left(\frac{c_0}{2}+\frac{c_1}{3}\right).
+\]
+A nonzero moment vector requires
+\[
+0=\begin{vmatrix}1-\lambda&-\lambda/2\\
+-\lambda/2&1-\lambda/3\end{vmatrix}
+=(1-\lambda)(1-\lambda/3)-\lambda^2/4
+=1-\frac43\lambda+\frac1{12}\lambda^2.
+\]
+Thus $\lambda^2-16\lambda+12=0$, giving
+\[
+\boxed{\lambda_\pm=8\mp2\sqrt{13}}.
+\]
+The constant term of a nonzero eigenfunction cannot vanish: otherwise
+$\varphi=Bx$ would require $0=\lambda B/2$, forcing $B=0$.
+Normalize that term to one, writing $\varphi_\pm=1+b_\pm x$.
+The constant equation $1=\lambda(1+b/2)$ yields
+$b=2/\lambda-2$, hence
+\[
+\boxed{\varphi_\pm(x)=1+\frac{-2\pm\sqrt{13}}3x}.
+\]
+Numerically the pairs are
+$(0.7888974491,\ 1+0.5351837585x)$ and
+$(15.2111025509,\ 1-1.8685170918x)$.
+Both equations for the moments are satisfied, and the image of $K$
+is two-dimensional, so these are all the nontrivial eigenspaces.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.15}\quad Knowing the form of the solutions
+of an integral equation can be a great advantage. For
+\[
+\varphi(x)=\lambda\int_{0}^{1}(1+xt)\varphi(t)\,dt,
+\]
+assume $\varphi(x)$ to have the form $1+bx$. Substitute into the
+integral equation. Integrate and solve for $b$ and $\lambda$.
+\solution
+Substitute the proposed function before making any spectral
+assumption:
+\[
+\int_0^1(1+xt)(1+bt)dt
+=1+\frac b2+x\left(\frac12+\frac b3\right).
+\]
+Equating coefficients in
+$1+bx=\lambda[1+b/2+x(1/2+b/3)]$ gives
+\[
+1=\lambda(1+b/2),\qquad
+b=\lambda(1/2+b/3).
+\]
+The first equation rules out $b=-2$. Eliminating $\lambda$,
+\[
+b(1+b/2)=1/2+b/3,
+\quad \frac{b^2}{2}+\frac{2b}{3}-\frac12=0,
+\quad 3b^2+4b-3=0.
+\]
+The quadratic formula therefore gives
+\[
+b_\pm=\frac{-4\pm\sqrt{16+36}}6
+=\frac{-2\pm\sqrt{13}}3.
+\]
+Finally,
+\[
+\lambda_\pm=\frac1{1+b_\pm/2}
+=\frac6{4\pm\sqrt{13}}
+=\boxed{8\mp2\sqrt{13}}.
+\]
+Thus $\boxed{\varphi_\pm(x)=1+b_\pm x}$, with arbitrary
+nonzero overall scale. The ansatz loses no eigenfunctions:
+the integral's image is linear, and an eigenfunction with zero
+constant term must vanish, as the constant coefficient equation shows.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.16}\quad The equation
+\[
+f(x)=\int_{a}^{b}K(x,t)\varphi(t)\,dt
+\]
+has a degenerate kernel
+$K(x,t)=\displaystyle\sum_{i=1}^{n}M_{i}(x)N_{i}(t)$.
+\begin{enumerate}
+\item[(a)] Show that this integral equation has no solution unless
+$f(x)$ can be written as
+\[
+f(x)=\sum_{i=1}^{n}f_{i}M_{i}(x),
+\]
+where the $f_{i}$ are constants.
+\item[(b)] Show that to any solution $\varphi(x)$ we may add
+$\psi(x)$, provided that $\psi(x)$ has \erratum{zero bilinear
+moments against every $N_i(x)$}:
+\[
+\int_{a}^{b}N_{i}(x)\psi(x)\,dx=0\qquad\text{for all }i.
+\]
+\end{enumerate}
+\solution
+(a) The finite sum may be brought outside the integral:
+\[
+\int_a^bK(x,t)\varphi(t)dt
+=\sum_{i=1}^n M_i(x)
+\underbrace{\int_a^bN_i(t)\varphi(t)dt}_{c_i}.
+\]
+Each $c_i$ is independent of $x$. Hence the equation requires
+\[
+\boxed{f\in\operatorname{span}\{M_1,\ldots,M_n\}},
+\qquad f(x)=\sum_i c_iM_i(x).
+\]
+This is a necessary condition; the moment equations for the $c_i$
+must also be compatible to obtain a solution.
+
+(b) If every specified moment of $\psi$ is zero, then
+\[
+K(\varphi+\psi)(x)
+=K\varphi(x)+\sum_iM_i(x)\int_a^bN_i(t)\psi(t)dt
+=f(x)+0.
+\]
+Thus every such $\boxed{\varphi+\psi}$ is another solution.
+
+\erratum{The manual adds that $\psi$ must itself be a linear
+combination of the $M_i$. That extra restriction is false for this
+first-kind equation. Only the image $f$, not the unknown or its
+nullspace additions, is constrained to that span.}
+For a direct counterexample, take $K(x,t)=1$ on $[0,1]$,
+$f=1$, $\varphi=1$, and $\psi(t)=t-\tfrac12$. Then
+\[
+\int_0^1\psi(t)dt=0,\qquad
+\int_0^1[1+\psi(t)]dt=1,
+\]
+although $\psi$ is not in the span of the constant $M_1=1$.
+The displayed zero moments in the problem are the precise conditions
+used here; with complex functions they are bilinear moments as written.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.2.17}\quad A Kirchhoff diffraction theory
+analysis of a laser leads to the integral equation
+\[
+v(\mathbf{r}_{2})=\gamma\iint
+K(\mathbf{r}_{1},\mathbf{r}_{2})v(\mathbf{r}_{1})\,dA.
+\]
+The unknown, $v(\mathbf{r}_{1})$, gives the geometric distribution
+of the radiation field over one mirror surface; the range of
+integration is over the surface of that mirror. For square
+confocal spherical mirrors, the integral equation becomes
+\[
+v(x_{2},y_{2})=\frac{-i\gamma e^{ikb}}{\lambda b}
+\int_{-a}^{a}\!\!\int_{-a}^{a}
+e^{-(ik/b)(x_{1}x_{2}+y_{1}y_{2})}\,v(x_{1},y_{1})\,dx_{1}\,dy_{1},
+\]
+in which $b$ is the centerline distance between the laser mirrors.
+This can be put in a somewhat simpler form by the substitutions
+\[
+\frac{kx_{i}^{2}}{b}=\xi_{i}^{2},\qquad
+\frac{ky_{i}^{2}}{b}=\eta_{i}^{2},\qquad\text{and}\qquad
+\frac{ka^{2}}{b}=\frac{2\pi a^{2}}{\lambda b}=\alpha^{2}.
+\]
+\begin{enumerate}
+\item[(a)] Show that the variables separate and we get two
+integral equations.
+\item[(b)] Show that the new limits, $\pm\alpha$, may be
+approximated by $\pm\infty$ \erratum{for fixed low-order modes when
+$a^2\gg\lambda b$. Explain why $a\gg\lambda$ alone is insufficient.}
+\item[(c)] Solve the resulting integral equations.
+\end{enumerate}
+\solution
+(a) Choose signed scaled coordinates
+\[
+\xi=\sqrt{k/b}\,x,\qquad \eta=\sqrt{k/b}\,y,\qquad
+\alpha=a\sqrt{k/b}.
+\]
+This choice retains the signs that were suppressed by the squared
+relations. The Jacobian is $dx_1dy_1=(b/k)d\xi_1d\eta_1$,
+and $k\lambda=2\pi$. The equation becomes
+\[
+v(\xi_2,\eta_2)=\frac{-i\gamma e^{ikb}}{2\pi}
+\int_{-\alpha}^{\alpha}\!\!\int_{-\alpha}^{\alpha}
+e^{-i(\xi_1\xi_2+\eta_1\eta_2)}
+v(\xi_1,\eta_1)d\xi_1d\eta_1.
+\]
+Define
+\[
+(\mathcal F_\alpha h)(u)=\frac1{\sqrt{2\pi}}
+\int_{-\alpha}^{\alpha}e^{-ius}h(s)ds.
+\]
+For a separated mode $v(\xi,\eta)=X(\xi)Y(\eta)$ the equation
+is
+\[
+XY=-i\gamma e^{ikb}(\mathcal F_\alpha X)
+(\mathcal F_\alpha Y).
+\]
+The quotient in $\xi$ must be constant independently of the quotient
+in $\eta$. Thus the two one-dimensional equations and their consistency
+condition are
+\[
+\boxed{\mathcal F_\alpha X=\rho X,\qquad
+\mathcal F_\alpha Y=\sigma Y,\qquad
+1=-i\gamma e^{ikb}\rho\sigma}.
+\]
+These identities also make sense at isolated zeros of $X,Y$ by
+continuity, without dividing there.
+
+(b) \erratum{The original textbook condition $a\gg\lambda$ alone does not imply
+that $\alpha$ is large: the mirror spacing $b$ also enters. The needed
+large-aperture condition for fixed low-order modes is
+$a^2\gg\lambda b$, equivalently $\alpha^2=2\pi a^2/(\lambda b)\gg1$.}
+For example, $a=10^3\lambda$ and $b=10^9\lambda$ give
+$\alpha^2=2\pi/1000$, much less than one despite $a\gg\lambda$.
+
+The replacement by infinite limits is an approximation for modes
+concentrated well inside $(-\alpha,\alpha)$. Its pointwise error obeys
+\[
+|(\mathcal F-\mathcal F_\alpha)h(u)|
+\le\frac1{\sqrt{2\pi}}\int_{|s|>\alpha}|h(s)|ds.
+\]
+For a fixed Hermite--Gaussian mode the tail is a polynomial times
+$e^{-s^2/2}$ and becomes exponentially small as $\alpha\to\infty$.
+For the ground Gaussian $h_0(s)=\pi^{-1/4}e^{-s^2/2}$, the
+relative error at $u=0$ is exactly
+$\operatorname{erfc}(\alpha/\sqrt2)$. Higher orders require the aperture
+to exceed their characteristic width as well.
+
+(c) Now solve the infinite-limit equations. The normalized
+Hermite functions are
+\[
+h_n(u)=\frac{H_n(u)e^{-u^2/2}}
+{\pi^{1/4}\sqrt{2^nn!}}.
+\]
+The Gaussian transform gives $\mathcal Fh_0=h_0$. To obtain all
+higher orders, use $a^\dagger=(u-d/du)/\sqrt2$ and
+$h_n=(a^\dagger)^nh_0/\sqrt{n!}$. Integration by parts and
+differentiation under the integral give
+\[
+\mathcal F(sh)=i\frac{d}{du}\mathcal Fh,\qquad
+\mathcal F(h')=iu\,\mathcal Fh.
+\]
+Therefore
+\[
+\mathcal F(a^\dagger h)
+=\frac{i}{\sqrt2}\left(\frac{d}{du}-u\right)\mathcal Fh
+=-i\,a^\dagger\mathcal Fh,
+\]
+and induction yields
+\[
+\boxed{\mathcal Fh_n=(-i)^nh_n}.
+\]
+A separated two-dimensional mode is consequently
+\[
+\boxed{v_{nm}(\xi,\eta)=C\,h_n(\xi)h_m(\eta),\qquad
+\gamma_{nm}=i^{\,n+m+1}e^{-ikb}}.
+\]
+Indeed $-i\gamma_{nm}e^{ikb}(-i)^{n+m}=1$.
+In physical coordinates the shape is proportional to
+\[
+H_n\!\left(\sqrt{k/b}\,x\right)
+H_m\!\left(\sqrt{k/b}\,y\right)
+e^{-k(x^2+y^2)/(2b)}.
+\]
+Hermite functions form a complete $L^2(\mathbb R)$ basis.
+The full one-dimensional eigenspace for phase $(-i)^r$ consists of
+convergent combinations of $h_n$ with $n\equiv r\pmod4$.
+Likewise, two-dimensional combinations with fixed $n+m\bmod4$
+share the same $\gamma$. These are the infinite-aperture solutions;
+for finite $\alpha$ the truncated transform must be solved instead,
+and the tail bound quantifies the stated approximation for a chosen mode.
+
+
+\Needspace{8\baselineskip}
+\subsection*{21.3 Neumann Series}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.3.1}\quad Using the Neumann series, solve
+\begin{enumerate}
+\item[(a)] $\varphi(x)=1-2\displaystyle\int_{0}^{x}
+t\varphi(t)\,dt$,
+\par\nobreak\hfill\emph{ANS.}\enspace(a) $\varphi(x)=e^{-x^{2}}$.
+\item[(b)] $\varphi(x)=x+\displaystyle\int_{0}^{x}
+(t-x)\varphi(t)\,dt$,
+\item[(c)] $\varphi(x)=x-\displaystyle\int_{0}^{x}
+(t-x)\varphi(t)\,dt$.
+\end{enumerate}
+\solution
+(a) Define $(Tg)(x)=-2\int_0^x t\,g(t)dt$. The Neumann
+series is $\sum_{n\ge0}T^n1$. We prove the individual terms:
+if $T^n1=(-1)^nx^{2n}/n!$, then
+\[
+T^{n+1}1=-2\int_0^x t\,\frac{(-1)^nt^{2n}}{n!}dt
+=\frac{(-1)^{n+1}x^{2n+2}}{(n+1)!}.
+\]
+The initial case is $T^01=1$, so
+\[
+\boxed{\varphi_a(x)=\sum_{n=0}^\infty
+\frac{(-1)^nx^{2n}}{n!}=e^{-x^2}}.
+\]
+Substitution gives
+$1-2\int_0^xt e^{-t^2}dt=1+(e^{-x^2}-1)=e^{-x^2}$.
+
+(b) Put $(Jg)(x)=\int_0^x(x-t)g(t)dt$, so the equation is
+$\varphi=x-J\varphi$. The elementary monomial formula is
+\[
+J(t^p)(x)=x\frac{x^{p+1}}{p+1}
+-\frac{x^{p+2}}{p+2}
+=\frac{x^{p+2}}{(p+1)(p+2)},\qquad p>-1.
+\]
+Starting with $J^0x=x$, induction gives
+$J^nx=x^{2n+1}/(2n+1)!$. Hence
+\[
+\boxed{\varphi_b(x)=\sum_{n=0}^\infty
+\frac{(-1)^nx^{2n+1}}{(2n+1)!}=\sin x}.
+\]
+(c) The equation is $\varphi=x+J\varphi$, so all the same terms
+have positive signs:
+\[
+\boxed{\varphi_c(x)=\sum_{n=0}^\infty
+\frac{x^{2n+1}}{(2n+1)!}=\sinh x}.
+\]
+The factorials give uniform convergence on every bounded $x$ interval,
+justifying termwise integration. Direct substitutions for (b),(c) were
+evaluated explicitly in Exercise~21.2.3.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.3.2}\quad Solve
+\[
+\psi(x)=x+\int_{0}^{1}(1+xt)\psi(t)\,dt
+\]
+\erratum{Investigate the following methods:}
+\begin{enumerate}
+\item[(a)] \erratum{Show that the ordinary Neumann series diverges,
+so it cannot supply the solution here.}
+\item[(b)] \erratum{Solve by} the separable-kernel technique.
+\item[(c)] \erratum{Solve by} educated guessing.
+\end{enumerate}
+\solution
+Let $(Kg)(x)=\int_0^1(1+xt)g(t)dt$.
+
+(a) The ordinary Neumann series prescribed by $\psi=x+K\psi$ is
+\[
+x+Kx+K^2x+\cdots.
+\]
+For $g(x)=A+Bx$,
+\[
+Kg(x)=A+\frac B2+x\left(\frac A2+\frac B3\right),
+\]
+so
+\[
+Kx=\frac12+\frac x3,\qquad
+K^2x=\frac23+\frac{13x}{36}.
+\]
+Write $K^nx=A_n+B_nx$. Its coefficients obey
+\[
+A_{n+1}=A_n+\frac{B_n}{2},\qquad
+B_{n+1}=\frac{A_n}{2}+\frac{B_n}{3},
+\quad (A_0,B_0)=(0,1).
+\]
+All coefficients are nonnegative, and $A_n\ge A_1=1/2$
+for every $n\ge1$. Thus $K^nx\ge1/2$ on $[0,1]$ for $n\ge1$:
+the terms do not even tend to zero.
+
+\erratum{The original part (a) cannot produce an ordinary convergent Neumann
+series for the equation as printed. The solution exists, but this
+particular expansion diverges. The manual's answer $-2$ does not
+address this obstruction.}
+For clarity, introducing a parameter $z$ gives the convergent
+resolvent expansion near zero:
+\[
+\psi_z=x+zK\psi_z,\qquad
+\psi_z(x)=
+\frac{z/2+(1-z)x}{1-\frac43z+\frac1{12}z^2}.
+\]
+Indeed, this is the inverse of
+$I-z\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}$
+applied to $(0,1)^T$. Its Taylor series is the Neumann series and
+has nearest pole $z=8-2\sqrt{13}<1$. Evaluating the rational
+continuation at $z=1$ gives $-2$, but that continuation is not
+the sum of the divergent series at $z=1$.
+
+(b) Separability forces $\psi=A+Bx$. Comparing coefficients gives
+\[
+A=A+\frac B2,\qquad
+B=1+\frac A2+\frac B3.
+\]
+The first equation gives $B=0$ and the second then gives $A=-2$.
+Thus $\boxed{\psi(x)=-2}$.
+
+(c) Guess a constant $c$. Substitution produces
+\[
+c=x+c\int_0^1(1+xt)dt=c+x(1+c/2).
+\]
+The coefficient of $x$ vanishes exactly when $c=-2$.
+Finally, $x+\int_0^1(1+xt)(-2)dt=x-2-x=-2$,
+an explicit check of the solution of the original equation.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.3.3}\quad Solve
+\[
+\varphi(x)=1+\lambda^{2}\int_{0}^{x}(x-t)\varphi(t)\,dt
+\]
+by each of the following methods:
+\begin{enumerate}
+\item[(a)] Reduction to an ODE (find the boundary conditions),
+\item[(b)] The Neumann series,
+\item[(c)] The use of Laplace transforms.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace$\varphi(x)=\cosh\lambda x$.
+\solution
+(a) Differentiate the equation, including its zero endpoint term:
+\[
+\varphi'(x)=\lambda^2\int_0^x\varphi(t)dt,\qquad
+\varphi''(x)=\lambda^2\varphi(x).
+\]
+The initial data are $\varphi(0)=1$, $\varphi'(0)=0$.
+For $\lambda\ne0$, write $\varphi=Ae^{\lambda x}+Be^{-\lambda x}$.
+Then $A+B=1$ and $\lambda(A-B)=0$, so $A=B=1/2$.
+For $\lambda=0$ the original equation directly gives $\varphi=1$.
+In both cases
+\[
+\boxed{\varphi(x)=\cosh(\lambda x)}.
+\]
+
+(b) With $J$ from Exercise~21.3.1, the equation is
+$\varphi=1+\lambda^2J\varphi$. Starting with $J^01=1$,
+\[
+J\!\left(\frac{t^{2n}}{(2n)!}\right)
+=\frac{x^{2n+2}}{(2n+2)!},
+\]
+so its Neumann series is
+\[
+\sum_{n=0}^\infty\lambda^{2n}J^n1
+=\sum_{n=0}^\infty\frac{(\lambda x)^{2n}}{(2n)!}
+=\cosh(\lambda x).
+\]
+It converges uniformly on every finite $x$ interval for every fixed
+complex $\lambda$.
+
+(c) Since $\mathcal L\{1\}=1/s$ and $\mathcal L\{x\}=1/s^2$,
+\[
+\Phi(s)=\frac1s+\frac{\lambda^2}{s^2}\Phi(s),\qquad
+\Phi(s)=\frac{s}{s^2-\lambda^2}.
+\]
+For $\lambda\ne0$,
+\[
+\frac{s}{s^2-\lambda^2}
+=\frac12\left(\frac1{s-\lambda}+\frac1{s+\lambda}\right),
+\]
+whose inverse is the same hyperbolic cosine. At $\lambda=0$
+the transform is $1/s$.
+As a direct check, for $\lambda\ne0$,
+\[
+\int_0^x(x-t)\cosh(\lambda t)dt
+=\frac{\cosh(\lambda x)-1}{\lambda^2};
+\]
+the continuous limit is $x^2/2$, consistent with the zero-parameter case.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.3.4}
+\begin{enumerate}
+\item[(a)] In Eq.~(21.59), take $V=V_{0}$, independent of $t$.
+Without using Eq.~(21.60), show that Eq.~(21.59) leads directly
+to
+\[
+U(t-t_{0})=\exp\left[-\frac{i}{\hbar}(t-t_{0})V_{0}\right].
+\]
+\item[(b)] Repeat for Eq.~(21.60) without using Eq.~(21.59).
+\end{enumerate}
+\erratum{For the power-series derivations, take $V_0$ to be a scalar,
+matrix, or bounded operator. State the qualification for an unbounded
+self-adjoint operator.}
+\solution
+(a) With $V(t)=V_0$, Eq.~(21.59) is
+\[
+U(t,t_0)=I-\frac{i}{\hbar}\int_{t_0}^tV_0U(s,t_0)ds.
+\]
+Differentiating gives
+\[
+\partial_tU=-\frac{i}{\hbar}V_0U,\qquad U(t_0,t_0)=I.
+\]
+Put $\tau=t-t_0$ and $U=\sum_{n\ge0}C_n\tau^n$.
+Equating powers gives
+\[
+C_0=I,\qquad (n+1)C_{n+1}
+=-\frac{i}{\hbar}V_0C_n.
+\]
+Induction yields
+$C_n=(-iV_0/\hbar)^n/n!$, so
+\[
+\boxed{U(t,t_0)=
+\exp[-i(t-t_0)V_0/\hbar]}.
+\]
+It depends only on the time difference because the constant-coefficient
+initial-value solution just derived has that form.
+
+(b) Independently, Eq.~(21.60) is the ordered integral series
+\[
+U=I+\sum_{n=1}^\infty
+\left(-\frac{i}{\hbar}\right)^n
+\int_{t_0}^t ds_1\int_{t_0}^{s_1}ds_2\cdots
+\int_{t_0}^{s_{n-1}}ds_n\,
+V(s_1)V(s_2)\cdots V(s_n).
+\]
+For constant $V_0$ the product is $V_0^n$. The remaining scalar
+simplex integral is $J_n(\tau)=\tau^n/n!$: $J_0=1$, and
+\[
+J_{n+1}(\tau)=\int_0^\tau J_n(u)du
+=\int_0^\tau\frac{u^n}{n!}du
+=\frac{\tau^{n+1}}{(n+1)!}.
+\]
+Substitution sums to precisely the same exponential, without using
+Eq.~(21.59). Oriented integrals give the formula also for $\tau<0$.
+For a scalar, matrix, or bounded operator $V_0$ both series converge
+on finite time intervals.
+\erratum{For an unbounded self-adjoint quantum operator, the exponential
+is defined by its spectral calculus; an operator power series on every
+state cannot be assumed without domain and convergence conditions.}
+
+
+\Needspace{8\baselineskip}
+\subsection*{21.4 Hilbert--Schmidt Theory}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.1}\quad In the Fredholm equation
+\[
+\varphi(x)=\lambda\int_{a}^{b}K(x,t)\varphi(t)\,dt,
+\]
+assume that the kernel $K(x,t)$ is self-adjoint or Hermitian:
+\[
+K(x,t)=K^{*}(t,x).
+\]
+\erratum{Assume a Hilbert--Schmidt kernel,
+$\int_a^b\!\int_a^b|K(x,t)|^2\,dx\,dt<\infty$, and nonzero
+$L^2$ eigenfunctions.}
+Extend the analysis of the present section to show that
+\begin{enumerate}
+\item[(a)] the eigenfunctions are orthogonal, in the sense that
+\[
+\int_{a}^{b}\varphi_{m}^{*}(x)\varphi_{n}(x)\,dx=0,
+\qquad m\ne n\ (\lambda_{m}\ne\lambda_{n}).
+\]
+\item[(b)] the eigenvalues are real.
+\end{enumerate}
+\solution
+Let $\langle u,v\rangle=\int_a^b u(x)^*v(x)dx$ and assume the
+kernel defines a self-adjoint operator on this $L^2$ space (a Hermitian
+Hilbert--Schmidt kernel is sufficient). The double-integral identity is
+\[
+\begin{aligned}
+\langle\varphi_m,K\varphi_n\rangle
+&=\int_a^b\!\!\int_a^b
+\varphi_m(x)^*K(x,t)\varphi_n(t)\,dt\,dx\\
+&=\int_a^b\left[\int_a^bK(t,x)\varphi_m(x)dx\right]^*
+\varphi_n(t)dt
+=\langle K\varphi_m,\varphi_n\rangle.
+\end{aligned}
+\]
+A nonzero eigenfunction in the convention
+$\varphi_n=\lambda_nK\varphi_n$ has $\lambda_n\ne0$.
+Consequently
+\[
+\frac1{\lambda_n}\langle\varphi_m,\varphi_n\rangle
+=\frac1{\lambda_m^*}\langle\varphi_m,\varphi_n\rangle,
+\]
+or
+\[
+(\lambda_m^*-\lambda_n)
+\langle\varphi_m,\varphi_n\rangle=0.
+\]
+Take $m=n$. Since $\|\varphi_n\|^2>0$, this gives
+$\boxed{\lambda_n^*=\lambda_n}$, proving (b).
+Now for $\lambda_m\ne\lambda_n$ the factor is nonzero, so
+\[
+\boxed{\langle\varphi_m,\varphi_n\rangle=0},
+\]
+which proves (a). Within a degenerate eigenspace orthogonality need
+not hold automatically, but Gram--Schmidt produces an orthonormal
+basis without changing its eigenvalue.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.2}
+\begin{enumerate}
+\item[(a)] Show that the eigenfunctions of Exercise~21.2.12 are
+orthogonal.
+\item[(b)] Show that the eigenfunctions of Exercise~21.2.14 are
+orthogonal.
+\end{enumerate}
+\solution
+(a) Use the exact eigenfunctions found in Exercise~21.2.12:
+\[
+y_0=x,\qquad y_+=x^2+\frac1{\sqrt5},\qquad
+y_-=x^2-\frac1{\sqrt5}.
+\]
+Odd parity gives $\int_{-1}^1y_0y_\pm dx=0$. For the two
+even functions,
+\[
+\int_{-1}^1y_+y_-dx
+=\int_{-1}^1\left(x^4-\frac15\right)dx
+=\frac25-\frac25=0.
+\]
+All three distinct eigenfunctions are therefore mutually orthogonal.
+
+(b) Write $\varphi_\pm=1+b_\pm x$, where
+$b_\pm=(-2\pm\sqrt{13})/3$. Their sum and product are
+\[
+b_++b_-=-\frac43,\qquad b_+b_-=-1.
+\]
+It follows that
+\[
+\int_0^1\varphi_+\varphi_-dx
+=1+\frac{b_++b_-}{2}+\frac{b_+b_-}{3}
+=1-\frac23-\frac13=\boxed{0}.
+\]
+Using the exact coefficients is necessary to see exact zero;
+rounded decimal eigenfunctions only approximate this cancellation.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.3}\quad Use the Hilbert--Schmidt method to
+solve the inhomogeneous integral equation
+\[
+\varphi(x)=x+\frac{1}{2}\int_{-1}^{1}(t+x)\varphi(t)\,dt.
+\]
+The corresponding homogeneous integral equation was treated in
+Example~21.2.3.
+\par\emph{Note.}~The application of the Hilbert--Schmidt
+technique here is somewhat like using a shotgun to kill a
+mosquito, especially when the equation can be solved quickly by
+expanding in Legendre polynomials.
+\solution
+For $K(x,t)=t+x$, choose normalized eigenfunctions
+\[
+u_\pm(x)=\frac12(1\pm\sqrt3\,x).
+\]
+Their norms are one, because
+$\int_{-1}^1(1+3x^2)dx/4=1$, and their mutual inner product is
+$\int_{-1}^1(1-3x^2)dx/4=0$. Evaluate the kernel action:
+\[
+Ku_\pm(x)
+=\int_{-1}^1(t+x)\frac{1\pm\sqrt3\,t}{2}dt
+=x\pm\frac1{\sqrt3}
+=\pm\frac2{\sqrt3}u_\pm(x).
+\]
+Thus the characteristic values are
+$\lambda_\pm=\pm\sqrt3/2$.
+
+The inhomogeneous term $f(x)=x$ has coefficients
+\[
+b_\pm=\langle u_\pm,x\rangle
+=\pm\frac{\sqrt3}{2}\frac23
+=\pm\frac1{\sqrt3}.
+\]
+For the requested coupling $\lambda=1/2$, Hilbert--Schmidt
+projection gives
+\[
+a_\pm=\frac{b_\pm}{1-\lambda/\lambda_\pm}.
+\]
+Specifically,
+\[
+a_+=\frac1{\sqrt3-1}=\frac{\sqrt3+1}{2},\qquad
+a_-=-\frac1{\sqrt3+1}=\frac{1-\sqrt3}{2}.
+\]
+Reconstructing,
+\[
+\varphi=a_+u_++a_-u_-
+=\frac{a_++a_-}{2}
++\frac{\sqrt3(a_+-a_-)}2x
+=\boxed{\frac{1+3x}{2}}.
+\]
+Directly $\int_{-1}^1\varphi(t)dt=1$ and
+$\int_{-1}^1t\varphi(t)dt=1$, so the right side of the
+original equation is $x+(1+x)/2=(1+3x)/2$, as required.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.4}\quad The Fredholm integral equation
+\[
+\varphi(x)=\lambda\int_{0}^{\infty}e^{-xt}\varphi(t)\,dt,
+\qquad\erratum{x>0},
+\]
+has an infinite number of solutions, of which one is
+\[
+\varphi(x)=x^{-1/2},\qquad\lambda=\pi^{-1/2}.
+\]
+Verify that this is a solution and that it is not normalizable.
+\par\emph{Note.}~\erratum{These are improper-integral solutions,
+not normalizable Hilbert--Schmidt eigenfunctions. The kernel fails the
+Hilbert--Schmidt integrability condition; an infinite interval alone
+would not establish that failure. Its Taylor series cannot be integrated
+term by term against the displayed power solution.}
+\solution
+For $x>0$, set $u=xt$, so $dt=du/x$ and
+$t^{-1/2}=x^{1/2}u^{-1/2}$. Then
+\[
+\int_0^\infty e^{-xt}t^{-1/2}dt
+=x^{-1/2}\int_0^\infty e^{-u}u^{-1/2}du
+=\sqrt\pi\,x^{-1/2}.
+\]
+Multiplication by $\lambda=\pi^{-1/2}$ gives
+$\boxed{\varphi(x)=x^{-1/2}}$, verifying the equation.
+
+Its truncated squared norm is
+\[
+\int_\epsilon^R|\varphi(x)|^2dx
+=\int_\epsilon^R\frac{dx}{x}
+=\log R-\log\epsilon.
+\]
+It diverges as $R\to\infty$ and as $\epsilon\downarrow0$.
+No nonzero constant multiple is normalizable on $(0,\infty)$.
+
+\erratum{This is a pointwise improper-integral solution for $x>0$,
+not an $L^2$ eigenfunction to which the chapter's compact
+Hilbert--Schmidt conclusions automatically apply.}
+The obstruction to that particular hypothesis can be checked directly:
+\[
+\int_0^\infty\!\!\int_0^\infty|e^{-xt}|^2dx\,dt
+=\int_0^\infty\frac{dt}{2t}=\infty.
+\]
+Thus the kernel is not Hilbert--Schmidt; this calculation identifies
+the failed hypothesis more precisely than the infinite interval alone.
+Nor can its Taylor series be integrated term by term against $t^{-1/2}$:
+the coefficient of $(-x)^m/m!$ would contain
+$\int_0^\infty t^{m-1/2}dt$, which diverges for every integer $m\ge0$.
+
+The statement about infinitely many improper-integral solutions can also
+be verified explicitly. For $0<a<1$, the gamma integral gives
+\[
+K(t^{-a})(x)=\Gamma(1-a)x^{a-1},\qquad
+K(t^{a-1})(x)=\Gamma(a)x^{-a}.
+\]
+Put $A=\sqrt{\Gamma(a)}$, $B=\sqrt{\Gamma(1-a)}$, and
+$\mu=AB$. Since $\Gamma(a)=A^2$ and $\Gamma(1-a)=B^2$,
+\[
+K(A t^{-a}\pm B t^{a-1})(x)
+=AB^2x^{a-1}\pm BA^2x^{-a}
+=\pm\mu(Ax^{-a}\pm Bx^{a-1}).
+\]
+Therefore
+\[
+\varphi_{a,\pm}(x)=\sqrt{\Gamma(a)}x^{-a}
+\pm\sqrt{\Gamma(1-a)}x^{a-1},\qquad
+\lambda_{a,\pm}=\pm\sqrt{\frac{\sin\pi a}{\pi}},
+\]
+where the reflection formula gives $\mu^2=\pi/\sin\pi a$.
+The minus combination at $a=1/2$ is zero and must be excluded;
+the plus combination there is a nonzero multiple of the requested
+$x^{-1/2}$. These power combinations belong to the improper-integral
+solution class, not to the normalizable $L^2$ eigenfunctions.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.5}\quad Given
+\[
+y(x)=x+\lambda\int_{0}^{1}xt\,y(t)\,dt:
+\]
+\begin{enumerate}
+\item[(a)] Determine $y(x)$ as a Neumann series.
+\item[(b)] Find the range of $\lambda$ for which your Neumann
+series solution is convergent. Compare with the value obtained
+from
+\[
+|\lambda|\cdot|K|_{\max}<1.
+\]
+\item[(c)] Find the eigenvalue and the eigenfunction of the
+corresponding homogeneous integral equation.
+\item[(d)] By the separable-kernel method show that the solution
+is
+\[
+y(x)=\frac{3x}{3-\lambda},\qquad\erratum{\lambda\ne3}.
+\]
+\item[(e)] Find $y(x)$ by the Hilbert--Schmidt method.
+\erratum{Also decide whether a solution exists at $\lambda=3$.}
+\end{enumerate}
+\solution
+Let $(Kg)(x)=x\int_0^1t\,g(t)dt$. Its action on the
+inhomogeneous term is $Kx=x/3$, so induction gives $K^nx=x/3^n$.
+
+(a) The Neumann series is therefore
+\[
+\boxed{y(x)=x\sum_{n=0}^\infty(\lambda/3)^n}.
+\]
+(b) Apart from the identically zero value at $x=0$, this geometric
+series converges precisely when $\boxed{|\lambda|<3}$.
+For $|\lambda|=3$ its terms do not tend to zero, and for larger
+modulus they grow. On $[0,1]^2$, $|K|_{\max}=1$ and the
+interval length is one, so the stated sufficient bound only gives
+$|\lambda|<1$. It is sufficient, not necessary.
+
+(c) A nonzero homogeneous solution lies in the span of $x$.
+Putting $y=Cx$ gives $Cx=\lambda Cx/3$, hence
+\[
+\boxed{\lambda_1=3,\qquad y_1(x)=Cx,\quad C\ne0}.
+\]
+(d) For the inhomogeneous equation put
+$c=\int_0^1ty(t)dt$, so $y=x(1+\lambda c)$. Taking its moment,
+\[
+c=\frac{1+\lambda c}{3},\qquad
+(3-\lambda)c=1.
+\]
+For $\lambda\ne3$,
+\[
+\boxed{y(x)=x\left(1+\frac{\lambda}{3-\lambda}\right)
+=\frac{3x}{3-\lambda}}.
+\]
+\erratum{The formula excludes $\lambda=3$. At that value the moment
+equation becomes $0=1$, so the inhomogeneous equation has no solution.
+The rational solution at other $\lambda$ exists even when its original
+Neumann series diverges.}
+
+(e) Normalize the homogeneous eigenfunction:
+$u(x)=\sqrt3\,x$, since $\int_0^1u^2dx=1$.
+The coefficient of $f=x$ is
+$b=\int_0^1u(x)x\,dx=1/\sqrt3$.
+Hilbert--Schmidt projection gives
+\[
+y(x)=\frac{b\lambda_1}{\lambda_1-\lambda}u(x)
+=\frac{(1/\sqrt3)3}{3-\lambda}\sqrt3\,x
+=\frac{3x}{3-\lambda}.
+\]
+The pole is consistent with the nonzero overlap $b$ at resonance.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.6}\quad In Exercise~21.2.11 it was found
+that the integral equation
+\[
+\varphi(x)=\lambda\int_{0}^{2\pi}\cos(x-t)\varphi(t)\,dt
+\]
+had (unnormalized) eigenfunctions $\cos x$ and $\sin x$, both with
+eigenvalue $\lambda_{i}=1/\pi$. Show that the kernel of this
+integral equation has an expansion of the form
+\[
+K(x,t)=\sum_{n=1}^{2}\frac{\varphi_{n}(x)\varphi_{n}(t)}
+{\lambda_{n}},
+\]
+\erratum{where $\varphi_n$ in this expansion are the unit-norm
+versions of the stated eigenfunctions.}
+\solution
+The norms of the stated functions are
+\[
+\int_0^{2\pi}\cos^2x\,dx
+=\int_0^{2\pi}\sin^2x\,dx=\pi,
+\]
+and their mutual integral is zero. Therefore use
+\[
+u_1(x)=\frac{\cos x}{\sqrt\pi},\qquad
+u_2(x)=\frac{\sin x}{\sqrt\pi}.
+\]
+With $\lambda_1=\lambda_2=1/\pi$,
+\[
+\begin{aligned}
+\sum_{n=1}^2\frac{u_n(x)u_n(t)}{\lambda_n}
+&=\pi\left[\frac{\cos x\cos t}{\pi}
++\frac{\sin x\sin t}{\pi}\right]\\
+&=\cos x\cos t+\sin x\sin t
+=\boxed{\cos(x-t)=K(x,t)}.
+\end{aligned}
+\]
+\erratum{The functions used in the displayed kernel expansion must
+be normalized. Substituting the initially stated unnormalized
+$\cos x,\sin x$ would instead give $\pi K(x,t)$.}
+Equivalently, retain unnormalized functions but divide each term by
+its squared norm as well as by its characteristic value.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.7}\quad The integral equation
+$\varphi(x)=\lambda\displaystyle\int_{0}^{1}(1+xt)\varphi(t)\,dt$
+
+has eigenvalues \erratum{$\lambda_{1,2}=8\mp2\sqrt{13}$}
+(approximately $0.7889$ and $15.211$). The corresponding
+unnormalized eigenfunctions are
+\erratum{$\varphi_{1,2}(x)=1+(-2\pm\sqrt{13})x/3$},
+approximately $1+0.5352x$ and $1-1.8685x$.
+\begin{enumerate}
+\item[(a)] Show that these eigenfunctions are orthogonal over the
+interval $[0,1]$.
+\item[(b)] Normalize the eigenfunctions to unity.
+\item[(c)] \erratum{Using the normalized functions from part (b),} show that
+\[
+K(x,t)=\frac{\varphi_{1}(x)\varphi_{1}(t)}{\lambda_{1}}
++\frac{\varphi_{2}(x)\varphi_{2}(t)}{\lambda_{2}}.
+\]
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(b) $\varphi_{1}(x)=0.7831+0.4191x$,\par\nobreak\hfill
+$\varphi_{2}(x)=1.8403-3.4386x$.
+\solution
+Use the exact values behind the displayed decimals:
+\[
+b_\pm=\frac{-2\pm\sqrt{13}}3,\qquad
+\lambda_\pm=8\mp2\sqrt{13},\qquad
+v_\pm(x)=1+b_\pm x.
+\]
+\erratum{The supplied decimal eigenpairs are approximations, so
+exact orthogonality and exact kernel reconstruction use these radical
+values. After normalization, the eigenfunctions in part (c) are the
+unit-norm ones, not the original unnormalized linear functions.}
+
+(a) Since $b_++b_-=-4/3$ and $b_+b_-=-1$,
+\[
+\int_0^1v_+(x)v_-(x)dx
+=1+\frac{b_++b_-}{2}+\frac{b_+b_-}{3}=0.
+\]
+(b) Their squared norms are
+\[
+N_\pm^2=\int_0^1(1+b_\pm x)^2dx
+=1+b_\pm+\frac{b_\pm^2}{3}.
+\]
+The root equation $3b_\pm^2+4b_\pm-3=0$ reduces this to
+\[
+N_\pm^2=\frac43+\frac{5b_\pm}{9}
+=\frac{26\pm5\sqrt{13}}{27}.
+\]
+Thus the normalized functions are
+\[
+\boxed{u_\pm(x)=
+\sqrt{\frac{27}{26\pm5\sqrt{13}}}
+\left(1+\frac{-2\pm\sqrt{13}}3x\right)}.
+\]
+Their numerical forms are
+\[
+u_+(x)=0.7831024897+0.4191037337x,\qquad
+u_-(x)=1.8403126068-3.4386555600x.
+\]
+
+(c) Put $A_\pm=1/(\lambda_\pm N_\pm^2)$.
+Rationalizing the radicals gives
+\[
+A_\pm=\frac12\pm\frac1{\sqrt{13}}.
+\]
+In the sum of kernel terms, the constant, $x+t$, and $xt$
+coefficients are respectively
+$\sum A_\pm$, $\sum A_\pm b_\pm$, and
+$\sum A_\pm b_\pm^2$. Evaluate each:
+\[
+\sum A_\pm=1,\qquad
+\sum A_\pm b_\pm
+=\frac12\left(-\frac43\right)
++\frac1{\sqrt{13}}\frac{2\sqrt{13}}3=0,
+\]
+and, using $b_\pm^2=1-\tfrac43b_\pm$,
+\[
+\sum A_\pm b_\pm^2=1-\frac43(0)=1.
+\]
+Consequently
+\[
+\boxed{\frac{u_+(x)u_+(t)}{\lambda_+}
++\frac{u_-(x)u_-(t)}{\lambda_-}
+=1+xt}.
+\]
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{21.4.8}\quad An alternate form of the solution to
+the inhomogeneous integral equation, Eq.~(21.81), is
+\[
+\varphi(x)=\erratum{f_0(x)+}\sum_{i=1}^{\infty}\frac{b_{i}\lambda_{i}}
+{\lambda_{i}-\lambda}\,\varphi_{i}(x).
+\]
+\erratum{Here $\varphi_i$ are orthonormal eigenfunctions for the
+nonzero operator eigenvalues, $b_i=\langle\varphi_i,f\rangle$,
+$f_0$ is the projection of $f$ onto $\ker K$, and
+$\lambda\ne\lambda_i$. The original pure sum applies when $f_0=0$.}
+\begin{enumerate}
+\item[(a)] Derive this form without using Eq.~(21.89).
+\item[(b)] Show that this form and Eq.~(21.89) are equivalent.
+\end{enumerate}
+\solution
+Let $K$ be the self-adjoint compact integral operator in the
+chapter, and let its normalized nonzero-eigenvalue functions satisfy
+$K\varphi_i=\varphi_i/\lambda_i$.
+
+(a) Decompose both functions into their nullspace components and
+their components along the nonzero-eigenvalue eigenfunctions:
+\[
+f=f_0+\sum_i b_i\varphi_i,\qquad
+\varphi=\varphi_0+\sum_i a_i\varphi_i.
+\]
+The projection of $K\varphi$ onto $\ker K$ is zero, since
+$K$ is self-adjoint: for $h\in\ker K$,
+$\langle h,K\varphi\rangle=\langle Kh,\varphi\rangle=0$.
+Projecting the integral equation onto that nullspace gives
+$\varphi_0=f_0$.
+Project $\varphi=f+\lambda K\varphi$ onto $\varphi_i$:
+\[
+a_i=b_i+\frac{\lambda}{\lambda_i}a_i,\qquad
+(\lambda_i-\lambda)a_i=b_i\lambda_i.
+\]
+For $\lambda\ne\lambda_i$ this gives
+\[
+\boxed{\varphi(x)=f_0(x)+\sum_i
+\frac{b_i\lambda_i}{\lambda_i-\lambda}\varphi_i(x)},
+\]
+without using Eq.~(21.89).
+
+(b) Split the scalar factor:
+\[
+\frac{\lambda_i}{\lambda_i-\lambda}
+=1+\frac{\lambda}{\lambda_i-\lambda}.
+\]
+Summing the first terms gives $f-f_0$; adding the explicit
+nullspace term restores $f$, so
+\[
+\varphi(x)=f(x)+\lambda\sum_i
+\frac{\varphi_i(x)}{\lambda_i-\lambda}
+\underbrace{\int_a^b\varphi_i(t)^*f(t)dt}_{b_i}.
+\]
+This is Eq.~(21.89), with the conjugate included for a complex
+orthonormal basis.
+
+\erratum{The original textbook's pure eigenfunction sum assumes that $f$ has no component
+in the nullspace of $K$. Nonzero-eigenvalue eigenfunctions need not
+span the whole $L^2$ space, for example for the finite-rank kernels in
+this chapter. In general an additional unchanged nullspace component
+is required.}
+Thus Eq.~(21.89) already retains $f_0$ in its explicit $f$ term,
+while the original displayed pure sum required the extra condition
+$f_0=0$.
+
+For a concrete check, take $K(x,t)=xt$ on $[0,1]$,
+$f=1$, and $\lambda=1$. Here $u=\sqrt3x$, $\lambda_1=3$,
+$b=\sqrt3/2$, and $f_0=1-3x/2$. The corrected formula gives
+\[
+\varphi=f_0+\frac{3b}{3-1}u
+=1-\frac32x+\frac94x
+=\boxed{1+\frac34x}.
+\]
+Indeed $1+x\int_0^1t(1+3t/4)dt=1+3x/4$.
+The sum without $f_0$ would give $9x/4$, which fails the equation.
+
+For a compact self-adjoint operator the nonzero operator eigenvalues
+$\mu_i=1/\lambda_i$ can accumulate only at zero. For a fixed finite
+$\lambda$, all but finitely many satisfy $|\lambda\mu_i|<1/2$,
+so their multipliers obey $|1/(1-\lambda\mu_i)|\le2$.
+The finitely many remaining denominators are nonzero away from
+resonance and therefore have a positive minimum modulus. Hence all
+multipliers are bounded, and Parseval's identity proves convergence
+of the solution expansion in $L^2$ whenever $f\in L^2$.
+At $\lambda=\lambda_j$, the projected equation instead requires
+$b_j=0$ for every eigenfunction in that eigenspace; if so, its
+solution coefficients are free, and otherwise there is no solution.

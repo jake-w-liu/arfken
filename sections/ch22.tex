@@ -1,0 +1,2767 @@
+% Problems, Chapter 22: Calculus of Variations
+% Arfken, Weber & Harris, Mathematical Methods for Physicists, 7th ed.
+% Requires: amsmath, amssymb, tikz
+
+\section*{Problems}
+
+\Needspace{8\baselineskip}
+\subsection*{22.1 Euler Equation}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.1}\quad For $dy/dx\equiv y_{x}\ne0$, show
+the equivalence of the two forms of Euler's equation:
+\[
+\erratum{\frac{\partial f}{\partial y}}-\frac{d}{dx}\,
+\frac{\partial f}{\partial y_{x}}=0
+\]
+and
+\[
+\erratum{\frac{\partial f}{\partial x}}-\frac{d}{dx}
+\left(f-y_{x}\frac{\partial f}{\partial y_{x}}\right)=0.
+\]
+\solution
+\erratum{The two partial derivatives in the original textbook statements are
+interchanged. The correct equivalent forms are}
+\[
+\boxed{\frac{\partial f}{\partial y}
+-\frac{d}{dx}\frac{\partial f}{\partial y_x}=0},\qquad
+\boxed{\frac{\partial f}{\partial x}
+-\frac{d}{dx}\left(f-y_x\frac{\partial f}{\partial y_x}\right)=0}.
+\]
+To prove the equivalence, put $p=y_x$, so $p'=y_{xx}$. The chain rule
+gives
+\[
+\frac{df}{dx}=f_x+f_yp+f_p p'.
+\]
+Therefore
+\[
+\begin{aligned}
+\frac{d}{dx}(f-pf_p)
+&=f_x+f_yp+f_p p'-p'f_p-p\frac{df_p}{dx}\\
+&=f_x+p\left(f_y-\frac{df_p}{dx}\right),
+\end{aligned}
+\]
+and consequently
+\[
+f_x-\frac{d}{dx}(f-pf_p)
+=-p\left(f_y-\frac{df_p}{dx}\right).
+\]
+For $p\ne0$, either corrected expression vanishes exactly when the
+other does. At $p=0$ the second can vanish without implying the first.
+
+The printed versions are not generally equivalent. For $f=y$ and
+$y(x)=2x$, the first printed expression is $f_x-df_p/dx=0$,
+whereas the second is $f_y-d(f-pf_p)/dx=1-2=-1$.
+This also shows why the stated nonzero-slope condition does not repair
+the swapped derivatives.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.2}\quad Derive Euler's equation by expanding
+the integrand of
+\[
+J(\alpha)=\int_{x_{1}}^{x_{2}}
+f\big(y(x,\alpha),y_{x}(x,\alpha),x\big)\,dx
+\]
+in powers of $\alpha$.
+\erratum{Keep both endpoint values fixed and assume $f$ is $C^3$
+near the smooth trial curves, so the stated Taylor remainder is valid.}
+\par\emph{Note.}~The stationary condition is
+$\partial J(\alpha)/\partial\alpha=0$, evaluated at $\alpha=0$.
+The terms quadratic in $\alpha$ may be useful in establishing the
+nature of the stationary solution (maximum, minimum, or saddle
+point).
+\solution
+Choose $y(x,\alpha)=y(x)+\alpha\eta(x)$ with
+$\eta(x_1)=\eta(x_2)=0$, so
+$y_x(x,\alpha)=y'(x)+\alpha\eta'(x)$. Taylor expansion about
+$\alpha=0$ gives
+\[
+\begin{aligned}
+f(y+\alpha\eta,y'+\alpha\eta',x)
+={}&f+\alpha(f_y\eta+f_{y_x}\eta')\\
+&+\frac{\alpha^2}{2}
+\left(f_{yy}\eta^2+2f_{y y_x}\eta\eta'
++f_{y_xy_x}(\eta')^2\right)+O(\alpha^3).
+\end{aligned}
+\]
+All derivatives on the right are evaluated on the unperturbed curve.
+Integrating the linear term by parts,
+\[
+\begin{aligned}
+J'(0)&=\int_{x_1}^{x_2}(f_y\eta+f_{y_x}\eta')dx\\
+&=[f_{y_x}\eta]_{x_1}^{x_2}
++\int_{x_1}^{x_2}\left(f_y-\frac d{dx}f_{y_x}\right)\eta\,dx.
+\end{aligned}
+\]
+The boundary term is zero. Because the interior variation is arbitrary,
+stationarity gives
+\[
+\boxed{f_y-\frac d{dx}f_{y_x}=0}.
+\]
+The coefficient of $\alpha^2$ is one half of
+\[
+J''(0)=\int_{x_1}^{x_2}
+\left(f_{yy}\eta^2+2f_{y y_x}\eta\eta'
++f_{y_xy_x}(\eta')^2\right)dx.
+\]
+Its sign must be tested over all admissible variations; the vanishing
+first variation alone does not classify the extremum.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.3}\quad Find the Euler equation
+corresponding to Eq.~(22.14) if $f=f(y_{xx},y_{x},y,x)$, assuming
+that $y$ and $y_{x}$ have fixed values at the endpoints of their
+interval of definition.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\dfrac{d^{2}}{dx^{2}}\left(\dfrac{\partial f}{\partial y_{xx}}
+\right)-\dfrac{d}{dx}\left(\dfrac{\partial f}{\partial y_{x}}
+\right)+\dfrac{\partial f}{\partial y}=0$.
+\solution
+Write $y_\alpha=y+\alpha\eta$. Fixing both $y$ and $y'$ at each
+endpoint requires $\eta=\eta'=0$ there. The first variation is
+\[
+\delta J=\int_{x_1}^{x_2}
+(f_y\eta+f_{y_x}\eta'+f_{y_{xx}}\eta'')dx.
+\]
+The first derivative term gives
+\[
+\int f_{y_x}\eta'dx
+=[f_{y_x}\eta]-\int\frac d{dx}f_{y_x}\,\eta\,dx.
+\]
+For the second derivative term, integrate twice:
+\[
+\int f_{y_{xx}}\eta''dx
+=[f_{y_{xx}}\eta']-\int\frac d{dx}f_{y_{xx}}\eta'dx
+=[f_{y_{xx}}\eta'-(d f_{y_{xx}}/dx)\eta]
++\int\frac{d^2}{dx^2}f_{y_{xx}}\eta\,dx.
+\]
+Every displayed boundary term vanishes. Thus
+\[
+\delta J=\int_{x_1}^{x_2}
+\left[f_y-\frac d{dx}f_{y_x}
++\frac{d^2}{dx^2}f_{y_{xx}}\right]\eta\,dx.
+\]
+The fundamental lemma yields
+\[
+\boxed{\frac{d^2}{dx^2}\frac{\partial f}{\partial y_{xx}}
+-\frac d{dx}\frac{\partial f}{\partial y_x}
++\frac{\partial f}{\partial y}=0}.
+\]
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.4}\quad The integrand $f(y,y_{x},x)$ of
+Eq.~(22.2) has the form
+\[
+f(y,y_{x},x)=f_{1}(x,y)+f_{2}(x,y)y_{x}.
+\]
+\begin{enumerate}
+\item[(a)] Show that the Euler equation leads to
+\[
+\frac{\partial f_{1}}{\partial y}-\frac{\partial f_{2}}{\partial x}
+=0.
+\]
+\item[(b)] \erratum{For $C^1$ functions $f_1,f_2$, distinguish this
+equality along one stationary curve from an identity on a simply
+connected region. Under which condition is $J$ independent of the path?}
+\end{enumerate}
+\solution
+(a) For $f=f_1(x,y)+f_2(x,y)y'$,
+\[
+f_y=f_{1y}+f_{2y}y',\qquad
+f_{y'}=f_2,\qquad
+\frac d{dx}f_{y'}=f_{2x}+f_{2y}y'.
+\]
+The $y'$ terms cancel in Euler's equation, leaving
+\[
+\boxed{f_{1y}-f_{2x}=0\quad\hbox{along a stationary curve}}.
+\]
+
+(b) The integral can be written
+\[
+J=\int(f_1\,dx+f_2\,dy).
+\]
+If the equality $f_{1y}=f_{2x}$ holds identically on a simply
+connected region, this differential form is exact: there is a potential
+$F$ with $F_x=f_1$, $F_y=f_2$. Then
+\[
+\boxed{J=F(x_2,y_2)-F(x_1,y_1)}
+\]
+is independent of the path in that region.
+
+\erratum{An Euler equation satisfied only on one curve does not
+imply path independence throughout the region. The identity on the
+region, together with an appropriate topology, is needed for that
+conclusion.}
+For example, $f_1=y^2$, $f_2=0$ has stationary curve $y=0$,
+but $\int y^2dx$ changes when the interior path changes. This example
+also anticipates the correction required in the next exercise.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.5}\quad Show that the condition that
+$J=\displaystyle\int f(x,y)\,dx$ has a stationary value
+\begin{enumerate}
+\item[(a)] \erratum{leads to $f_y(x,y(x))=0$ along the stationary curve and}
+\item[(b)] \erratum{imposes no separate condition $f_x=0$.}
+\end{enumerate}
+\erratum{Dependence on derivatives of $y$ is not essential for a
+meaningful variational problem. Give a smooth minimizing solution
+for an integrand that depends on $y$.}
+\par\emph{Note.}~The situation will change when constraints are
+introduced (compare to Exercise~22.4.6).
+\solution
+There is no $y'$ dependence, so the first variation is simply
+\[
+\delta J=\int_{x_1}^{x_2}f_y(x,y(x))\eta(x)\,dx.
+\]
+Consequently the correct stationarity condition is the algebraic
+equation
+\[
+\boxed{f_y(x,y(x))=0\quad\hbox{for every interior }x}.
+\]
+\erratum{This is a condition along the selected curve. It does not
+force $f(x,y)$ to be independent of $y$, and absence of derivative
+dependence does not rule out meaningful, smooth minimizing solutions.
+The original textbook conclusion in part (a) and the following no-solution
+statement are false.}
+
+For an explicit smooth counterexample take
+\[
+f(x,y)=(y-\sin x)^2
+\]
+and fix the endpoint values to those of $\sin x$. Then
+$f_y=2(y-\sin x)$, so the stationary function is
+$\boxed{y(x)=\sin x}$. Moreover,
+\[
+J[y]=\int_{x_1}^{x_2}(y-\sin x)^2dx\ge0,\qquad
+J[\sin x]=0,
+\]
+which proves a global minimum despite explicit dependence on $y$.
+
+If $f$ is independent of $y$, every path has the same $J$.
+If $f_y$ never vanishes, no stationary path exists. Otherwise, smooth
+root branches of $f_y=0$ may furnish stationary paths, subject to the
+endpoint conditions. Regarding (b), there is no additional equation
+$f_x=0$: $x$ is the independent variable. But $x$ can affect the
+selected curve through $f_y(x,y)=0$, as the counterexample demonstrates.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.6}\quad A soap film stretched between two
+rings of unit radius centered at $\pm x_{0}$ will have its closest
+approach to the $x$-axis at $x=0$, with the distance from the
+axis given by $c_{1}$, with $x_{0}$ and $c_{1}$ related by
+Eq.~(22.26) or Eq.~(22.29).
+\begin{enumerate}
+\item[(a)] Show that $dc_{1}/dx_{0}$ becomes infinite when
+$x_{0}\sinh(x_{0}/c_{1})=1$, indicating that the soap film
+becomes unstable if $x_{0}$ is increased beyond the value
+satisfying this condition.
+\item[(b)] Show that the condition of part (a) is equivalent to
+\[
+\frac{x_{0}}{c_{1}}=\coth\frac{x_{0}}{c_{1}}.
+\]
+\item[(c)] Solve the transcendental equation of part (b) to
+obtain the critical value of $x_{0}/c_{1}$ and show that the
+separate values of $x_{0}$ and $c_{1}$ are then approximately
+$x_{0}\approx0.6627$ and $c_{1}\approx0.5524$.
+\end{enumerate}
+\solution
+Put $c=c_1>0$ and $u=x_0/c$. The boundary equation is
+$c\cosh u=1$.
+
+(a) Implicit differentiation with respect to $x_0$ gives
+\[
+c'\cosh u+c\sinh u
+\left(\frac1c-\frac{x_0c'}{c^2}\right)=0,
+\]
+hence
+\[
+c'(\cosh u-u\sinh u)=-\sinh u,\qquad
+\boxed{\frac{dc}{dx_0}=
+-\frac{c\sinh u}{1-x_0\sinh u}}.
+\]
+The numerator is nonzero for separated rings. Thus the derivative
+diverges at $x_0\sinh u=1$.
+
+(b) Divide that condition by $c\cosh u=1$:
+\[
+u\tanh u=1,\qquad \boxed{u=\coth u}.
+\]
+Equivalently, parametrize the two branches by
+\[
+c=\operatorname{sech}u,\qquad x_0=u\operatorname{sech}u.
+\]
+Then
+\[
+\frac{dx_0}{du}=\operatorname{sech}u(1-u\tanh u).
+\]
+Because $u\tanh u$ increases strictly from zero to infinity, there is
+one critical point, a maximum. Beyond it no positive-neck catenoid
+satisfies the two boundary conditions.
+
+(c) Newton iteration for $F(u)=u\tanh u-1$ is
+\[
+u_{j+1}=u_j-
+\frac{u_j\tanh u_j-1}{\tanh u_j+u_j\operatorname{sech}^2u_j}.
+\]
+Starting at $u_0=1.2$ gives
+\[
+\boxed{u_c=1.19967864025773,\quad
+c_c=0.552434124530883,\quad
+x_{0c}=0.662743419349182}.
+\]
+\erratum{The manual's $c_c=0.5523434$ transposes digits; substituting
+$c_c=\operatorname{sech}u_c$ gives the value above, which agrees
+with the textbook's rounded $0.5524$.}
+
+The stability threshold can also be seen in the second variation.
+For $f=y\sqrt{1+p^2}$, evaluated at $y=c\cosh(x/c)$ and
+$p=\sinh(x/c)$, the Hessian entries are
+\[
+ f_{yy}=0,\qquad f_{yp}=\frac p{\sqrt{1+p^2}}=\tanh(x/c),\qquad
+ f_{pp}=\frac y{(1+p^2)^{3/2}}=c\operatorname{sech}^2(x/c).
+\]
+Thus, for a fixed-endpoint variation,
+\[
+ \delta^2J=\int_{-x_0}^{x_0}
+ \left[2\tanh(x/c)\eta\eta_x
+       +c\operatorname{sech}^2(x/c)\eta_x^2\right]dx.
+\]
+The first term is $\tanh(x/c)(\eta^2)_x$. Integration by parts
+has zero endpoint term and leaves
+$-c^{-1}\int\operatorname{sech}^2(x/c)\eta^2dx$.
+Now $x=cu$, $dx=c\,du$, and $\eta_x=\eta_u/c$ give
+\[
+\delta^2J=\int_{-u_0}^{u_0}
+\operatorname{sech}^2u\,(\eta_u^2-\eta^2)du.
+\]
+The function $w=\cosh u-u\sinh u$ satisfies
+$(\operatorname{sech}^2u\,w')'+\operatorname{sech}^2u\,w=0$.
+For $u_0<u_c$, $w>0$. Put $p(u)=\operatorname{sech}^2u$ and
+$\eta=wv$. Expanding the square and using $(pw')'=-pw$ gives
+\[
+ p(\eta'^2-\eta^2)
+ =pw^2v'^2+(pww'v^2)'.
+\]
+The boundary term is zero because $\eta=0$ and $w>0$ there.
+Consequently
+\[
+\delta^2J=\int_{-u_0}^{u_0}
+\operatorname{sech}^2u\,w^2(v')^2du>0
+\]
+for a nonzero fixed-endpoint variation. At $u_0=u_c$, $w$ itself
+vanishes at the endpoints and gives a zero second variation.
+This identifies the loss of strict stability on the shallow branch.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.7}\quad A soap film is stretched across the
+space between two rings of unit radius centered at $\pm x_{0}$ on
+the $x$-axis and perpendicular to the $x$-axis. Using the
+solution developed in Example~22.1.3, set up the transcendental
+equations for the condition that $x_{0}$ is such that the area of
+the curved surface of rotation equals the area of the two rings
+(Goldschmidt discontinuous solution). Solve for $x_{0}$.
+\solution
+For $y=c\cosh(x/c)$ between $x=\pm x_0$, put $u=x_0/c$.
+The endpoint condition is $c\cosh u=1$.
+Since $y'=\sinh(x/c)$, the full surface area is
+\[
+\begin{aligned}
+A&=2\pi\int_{-x_0}^{x_0}
+y\sqrt{1+y'^2}dx
+=4\pi c^2\int_0^u\cosh^2v\,dv\\
+&=\pi c^2[\sinh(2u)+2u].
+\end{aligned}
+\]
+The two unit disks have area $2\pi$. Equating the areas and using
+$c^2=\operatorname{sech}^2u$ gives
+\[
+\sinh(2u)+2u=2\cosh^2u=1+\cosh(2u),
+\]
+or the simpler single equation
+\[
+\boxed{2u-1=e^{-2u}}.
+\]
+Its left-minus-right derivative is $2+2e^{-2u}>0$, so it has
+exactly one positive root. Newton iteration, or bisection on
+$(0.6,0.7)$, gives
+\[
+u=0.639232271380537,\qquad
+c=\operatorname{sech}u=0.825517453652511.
+\]
+Thus the required half-separation is
+\[
+\boxed{x_0=u\operatorname{sech}u=0.527697396962572}.
+\]
+The full ring separation is $2x_0=1.05539479392514$.
+The root is below $u_c$ from Exercise~22.1.6, so the equality occurs
+on the shallow catenoid branch.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.8}\quad In Example~22.1.1, expand
+$J[y(x,\alpha)]-J[y(x,0)]$ in powers of $\alpha$. The term
+linear in $\alpha$ leads to the Euler equation and to the
+straight-line solution, Eq.~(22.16). Investigate the $\alpha^{2}$
+term and show that the stationary value of $J$, the straight-line
+distance, is a minimum.
+\solution
+Let $y_*(x)=y_1+m(x-x_1)$, where
+$m=(y_2-y_1)/(x_2-x_1)$ and $x_2>x_1$.
+For $y_\alpha=y_*+\alpha\eta$, with $\eta(x_1)=\eta(x_2)=0$,
+\[
+J[y_\alpha]=\int_{x_1}^{x_2}
+\sqrt{1+(m+\alpha\eta')^2}\,dx.
+\]
+The first two derivatives of $g(p)=\sqrt{1+p^2}$ are
+$g'(p)=p/\sqrt{1+p^2}$ and $g''(p)=(1+p^2)^{-3/2}$.
+Therefore
+\[
+J[y_\alpha]-J[y_*]
+=\alpha\frac{m}{\sqrt{1+m^2}}\int_{x_1}^{x_2}\eta'dx
++\frac{\alpha^2}{2(1+m^2)^{3/2}}
+\int_{x_1}^{x_2}(\eta')^2dx+O(\alpha^3).
+\]
+The linear integral is $\eta(x_2)-\eta(x_1)=0$.
+The quadratic coefficient is strictly positive for any nonzero
+admissible $\eta$: zero would require $\eta'=0$, and the endpoints
+would then require $\eta=0$. Thus the straight line is a strict
+local minimum.
+
+It is also the global minimum, since strict convexity gives
+\[
+g(m+\eta')\ge g(m)+g'(m)\eta'.
+\]
+After integration the last term again vanishes, so
+$J[y_*+\eta]\ge J[y_*]$, with equality only for $\eta=0$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.9}\quad
+\erratum{Take $x_1<x_2$, real-valued paths, and fixed endpoint values.
+In (b), allow endpoint jumps, and compare with the continuous class.}
+\begin{enumerate}
+\item[(a)] Show that the integral
+\[
+J=\int_{x_{1}}^{x_{2}}f(y,y_{x},x)\,dx,
+\quad\text{with}\quad f=y(x),
+\]
+has no extreme values.
+\item[(b)] If $f(y,y_{x},x)=y^{2}(x)$, find a discontinuous
+solution similar to the Goldschmidt solution for the soap-film
+problem.
+\end{enumerate}
+\solution
+(a) Let $\eta$ be a smooth function of compact support in
+$(x_1,x_2)$ with $\int\eta\,dx\ne0$. For $f=y$,
+\[
+J[y+\alpha\eta]-J[y]=\alpha\int_{x_1}^{x_2}\eta(x)dx.
+\]
+Arbitrarily small positive and negative $\alpha$ change $J$ in
+opposite directions. Thus no admissible curve is even a local
+extremum. Taking $|\alpha|\to\infty$ also shows that $J$ is
+unbounded above and below.
+
+(b) For $f=y^2$, nonnegativity gives $J\ge0$.
+In a class allowing endpoint jumps, set
+\[
+y(x)=0\quad(x_1<x<x_2),
+\]
+while assigning the prescribed values at the two endpoints.
+Changing isolated points does not change the integral, so this
+discontinuous path has $\boxed{J_{\min}=0}$.
+
+\erratum{If continuity is required and either endpoint value is
+nonzero, this is an infimum, not an attained minimum. If both endpoint
+values are zero, the ordinary smooth function $y=0$ is already the
+minimum.}
+To see the infimum explicitly, let the endpoint values be $A,B$.
+Join $A$ to zero within a boundary layer of width $\epsilon$,
+keep zero in the interior, and join zero to $B$ in the last
+$\epsilon$. Smooth profiles bounded respectively by $|A|,|B|$
+give
+\[
+0\le J[y_\epsilon]\le\epsilon(A^2+B^2)\longrightarrow0.
+\]
+Any continuous function with a nonzero endpoint is nonzero on an
+interval of positive length, so its integral of $y^2$ is strictly
+positive.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.10}\quad Fermat's principle of optics states
+that a light ray in a medium for which $n$ is the
+(position-dependent) index of refraction will follow the path
+$y(x)$ for which
+\[
+\int_{x_{1},y_{1}}^{x_{2},y_{2}}n(y,x)\,ds
+\]
+is \erratum{stationary}. For $y_{2}=y_{1}=1$, $-x_{1}=x_{2}=1$, find the
+ray path \erratum{and determine whether the minimum is attained} if
+\begin{enumerate}
+\item[(a)] $n=e^{y}$,\qquad
+\item[(b)] $n=a(y-y_{0})$,\quad$y>y_{0}$,
+\erratum{with $a>0$ and $y_0<1$.}
+\end{enumerate}
+\solution
+Use $ds=\sqrt{1+y'^2}dx$. Since neither index depends explicitly
+on $x$, the Beltrami first integral is
+\[
+f-y'f_{y'}=\frac{n(y)}{\sqrt{1+y'^2}}=C.
+\]
+
+(a) For $n=e^y$, write $e^y=C\sec(x-b)$ on a branch where the
+cosine is positive. Indeed,
+\[
+y=\log C-\log\cos(x-b),\quad y'=\tan(x-b),
+\]
+so $e^y/\sqrt{1+y'^2}=C$. Equal endpoint values at $x=\pm1$
+give $b=0$ on the branch covering the entire interval. The condition
+$y(1)=1$ gives $C=e\cos1$. Thus
+\[
+\boxed{y(x)=1+\log\cos1-\log\cos x,\qquad -1\le x\le1}.
+\]
+This is a global minimum, not just a stationary path. Set
+\[
+U=e^y\cos x,\qquad V=e^y\sin x.
+\]
+Direct differentiation gives $dU^2+dV^2=e^{2y}(dx^2+dy^2)$.
+The optical length is therefore ordinary Euclidean length in the
+$(U,V)$ plane. The endpoints are $(e\cos1,\pm e\sin1)$, and
+their straight segment has $U=e\cos1$, precisely the curve above.
+Its length is $2e\sin1$, the lower bound for any joining path.
+
+\erratum{The manual's inverse formula uses $1+\pi^2/16$ where
+$\sec^2 1$ is required. At $y=1$ it gives
+$x=\arctan(\pi/4)$ instead of $x=1$, so it fails the stated
+endpoint condition.}
+
+(b) A positive index requires $a>0$ and the endpoints require
+$H:=1-y_0>0$. Put $u(x)=y(x)-y_0$. The first integral is
+\[
+\frac{u}{\sqrt{1+u'^2}}=c>0,\qquad
+u'^2=\frac{u^2}{c^2}-1.
+\]
+Separate variables:
+\[
+dx=\frac{c\,du}{\sqrt{u^2-c^2}},\qquad
+x-b=c\,\operatorname{arcosh}(u/c).
+\]
+The two symmetric halves give
+\[
+\boxed{y(x)=y_0+c\cosh(x/c),\qquad
+c\cosh(1/c)=H}.
+\]
+The horizontal shift $b$ is zero because the endpoint heights are equal.
+With $w=1/c$, its boundary equation is
+\[
+\frac1H=w\operatorname{sech}w.
+\]
+Exercise~22.1.6 shows that the maximum of the right side is
+$0.662743419349182$. Consequently regular stationary curves exist
+only for
+\[
+H\ge1.50887956153832
+\quad\hbox{or}\quad y_0\le-0.50887956153832.
+\]
+Above that threshold there are two branches; the smaller $w$,
+larger $c$ branch is the locally minimizing one.
+
+\erratum{Part (b) has no single smooth minimizing ray for arbitrary
+$y_0<1$. Also, Fermat's variational statement is generally stationarity;
+an available stationary ray need not be the absolute minimum.}
+The distinction can be quantified here. The catenary optical length is
+\[
+J_{\rm cat}=a c^2\left[w+\frac12\sinh(2w)\right],\qquad
+\frac{J_{\rm cat}}{aH^2}
+=w\operatorname{sech}^2w+\tanh w.
+\]
+To see the competing boundary cost, descend vertically from $H$
+to a small $\delta>0$, travel the horizontal distance $2$ at that
+height, and ascend to $H$. This piecewise path has
+\[
+ J_\delta=a\left(2\int_\delta^H u\,du+2\delta\right)
+ =a(H^2-\delta^2+2\delta)\longrightarrow aH^2.
+\]
+Steep smooth endpoint layers approximate its vertical portions,
+so the same limit is available within positive smooth graphs.
+Equality of the catenary cost with this limit occurs at the same root
+as Exercise~22.1.7:
+\[
+2w-1=e^{-2w},\qquad w=0.639232271380537.
+\]
+Thus the shallow catenary beats that boundary limit only for
+\[
+H>1.89502545541442.
+\]
+For a direct global proof, let $d=\min u>0$ on a competing
+path. Cauchy--Schwarz applied to the vectors
+$(d,\sqrt{u^2-d^2})$ and $(1,|u'|)$ gives
+\[
+ u\sqrt{1+u'^2}\ge d+\sqrt{u^2-d^2}\,|u'|.
+\]
+The path descends from $H$ to $d$ and returns to $H$, so integration
+over its horizontal span of length $2$ yields
+\[
+ \frac Ja\ge 2d+2\int_d^H\sqrt{u^2-d^2}\,du
+ =:B(d)
+ =2d+H\sqrt{H^2-d^2}-d^2\operatorname{arcosh}(H/d).
+\]
+For a path with additional rises and falls, the absolute-value
+integral is only larger. Differentiation gives
+\[
+ B'(d)=2-2d\operatorname{arcosh}(H/d),\qquad B(0^+)=H^2.
+\]
+The product $d\operatorname{arcosh}(H/d)$ vanishes at both ends
+$d=0,H$ and has a single maximum: putting
+$d=H\operatorname{sech}w$ reduces it to $Hw\operatorname{sech}w$.
+When two critical points exist, the smaller $d$ is a local maximum
+of $B$ and the larger $d$ is its local minimum. At that minimum
+$d\operatorname{arcosh}(H/d)=1$, exactly the shallow-catenary
+endpoint equation; equality in the preceding bound holds for that
+catenary. The endpoint $d=H$ cannot minimize $B$, since $B'(H^-)=2$.
+Thus the global lower bound is the smaller of the shallow-catenary
+cost and $H^2$. The former is attained precisely for
+$H\ge1.89502545541442\ldots$; at equality it ties the boundary limit.
+For smaller $H$, every $d>0$ gives a strictly larger cost than $H^2$,
+so no smooth positive-index global minimizer exists. The infimum
+$aH^2$ is approached by the endpoint-layer paths described above.
+This also agrees with the catenoid problem after scaling both
+coordinates by $H$, for which the unit-ring half-separation is $1/H$.
+
+\erratum{In particular, the manual's claim of a global catenary
+minimum at $y_0=-0.70$ is incorrect: $H=1.70$ lies below the
+cost-crossing value $1.8950254554$.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.11}\quad A particle moves, starting at rest,
+from point A on the surface of the Earth to point B (also on the
+surface) by sliding frictionlessly through a tunnel. Find the
+differential equation satisfied by the path if the transit time
+is to be a minimum. Assume the Earth to be a nonrotating sphere
+of uniform density.
+\erratum{First take distinct nonantipodal endpoints, so $0<r_0<R$;
+treat the antipodal diameter as a limit.}
+\par\emph{Hint.}~The \erratum{gain in kinetic energy} of a particle of mass $m$ a
+distance $r<R$ from the center of the Earth, with $R$ the Earth's
+radius, is $\tfrac{1}{2}mg(R^{2}-r^{2})/R$, where $g$ is the
+gravitational acceleration at the Earth's surface. It is
+convenient to describe the path of the particle (in the plane
+through A, B, and the center of the Earth) by plane polar
+coordinates $(r,\theta)$, with A at $(R,-\varphi)$ and B at
+$(R,\varphi)$.
+\par\nobreak\hfill\emph{ANS.}\enspace
+Letting $r_{0}$ be the minimum value of $r$ (reached at
+$\theta=0$), Eq.~(22.21) yields
+$r_{\theta}^{2}=\dfrac{r^{2}R^{2}(r^{2}-r_{0}^{2})}
+{r_{0}^{2}(R^{2}-r^{2})}$ (the constant in that equation has the
+value such that $r_{\theta}=0$ at $\theta=0$).
+\par The solution for the path is a hypocycloid, generated by a
+circle of radius $\tfrac{1}{2}(R-r_{0})$ rolling inside the
+circle of radius $R$. You might like to show that the transit
+time is
+\[
+t=\pi\frac{(R^{2}-r_{0}^{2})^{1/2}}{(Rg)^{1/2}}.
+\]
+For details see P.~W.~Cooper, \emph{Am.~J.~Phys.} \textbf{34}: 68
+(1966); G.~Veneziano, et al., \textbf{34}: 701 (1966).
+\solution
+Inside a uniform sphere the inward gravitational force is
+$F_r=-mgr/R$. Thus
+\[
+U(r)-U(R)=\frac{mg}{2R}(r^2-R^2).
+\]
+\erratum{The positive quantity in the printed hint is the
+\emph{decrease} in potential energy from the surface, and hence the
+kinetic energy gained. It is not the potential energy itself with
+surface value zero. Its opposite sign would give an outward force.}
+Energy conservation for release from rest gives
+\[
+\frac12mv^2=\frac{mg}{2R}(R^2-r^2),\qquad
+v=\sqrt{\frac gR}\sqrt{R^2-r^2}.
+\]
+Writing the path as $r(\theta)$, its travel time is
+\[
+T=\sqrt{\frac Rg}\int_{-\varphi}^{\varphi}
+\frac{\sqrt{r_\theta^2+r^2}}{\sqrt{R^2-r^2}}\,d\theta.
+\]
+The integrand has no explicit $\theta$ dependence. With
+$p=r_\theta$, the Beltrami constant, omitting the constant
+$\sqrt{R/g}$, is
+\[
+f-pf_p=\frac{r^2}
+{\sqrt{R^2-r^2}\sqrt{r^2+p^2}}.
+\]
+At the minimum radius $r=r_0>0$, symmetry gives $p=0$, so this
+constant is $r_0/\sqrt{R^2-r_0^2}$. Squaring and rearranging,
+\[
+r^4(R^2-r_0^2)=r_0^2(R^2-r^2)(r^2+p^2),
+\]
+\[
+\boxed{r_\theta^2=
+\frac{r^2R^2(r^2-r_0^2)}{r_0^2(R^2-r^2)}}.
+\]
+
+To verify the stated geometric identification, put
+$d=(R-r_0)/2$ and consider the hypocycloid
+\[
+z(u)=(R-d)e^{iu}+d\,e^{-i(R-d)u/d}.
+\]
+It is generated by a radius-$d$ circle rolling within the
+radius-$R$ circle. Set $\delta=Ru/d$. Direct products and
+derivatives give
+\[
+r^2=|z|^2=R^2-4d(R-d)\sin^2(\delta/2),
+\]
+\[
+\frac{dr}{du}=-\frac{R(R-d)\sin\delta}{r},\qquad
+\frac{d\theta}{du}
+=\frac{(R-d)r_0(1-\cos\delta)}{r^2}.
+\]
+Their squared ratio is
+\[
+\left(\frac{dr}{d\theta}\right)^2
+=\frac{R^2r^2}{r_0^2}\cot^2(\delta/2)
+=\frac{R^2r^2(r^2-r_0^2)}
+{r_0^2(R^2-r^2)},
+\]
+since $4d(R-d)=R^2-r_0^2$. Rotating this arc puts its minimum
+radius at $\theta=0$ and its two surface cusps at $\pm\varphi$.
+
+The transit time can be evaluated without integrating the path explicitly.
+On either half,
+\[
+\frac{d\theta}{dr}=
+\frac{r_0\sqrt{R^2-r^2}}{Rr\sqrt{r^2-r_0^2}},\qquad
+\frac{ds}{dr}=
+\frac{r\sqrt{R^2-r_0^2}}{R\sqrt{r^2-r_0^2}}.
+\]
+Consequently, with $\Delta=R^2-r_0^2$,
+\[
+T=2\sqrt{\frac Rg}\frac{\sqrt\Delta}{R}
+\int_{r_0}^R\frac{r\,dr}
+{\sqrt{r^2-r_0^2}\sqrt{R^2-r^2}}.
+\]
+Set $r^2=r_0^2+\Delta\sin^2v$; the integrand becomes $dv$
+and the limits become $0,\pi/2$. Hence
+\[
+\boxed{T=\pi\sqrt{\frac{R^2-r_0^2}{Rg}}}.
+\]
+The same substitution in the angular integral gives
+\[
+\varphi=\frac{r_0}{R}\left[
+R^2\int_0^{\pi/2}\frac{dv}
+{r_0^2\cos^2v+R^2\sin^2v}-\frac\pi2\right]
+=\frac\pi2\left(1-\frac{r_0}{R}\right).
+\]
+Here the integral equals $\pi/(2r_0R)$ after $\tan v$ substitution.
+The antipodal case is the limiting diameter $r_0=0$,
+with $T=\pi\sqrt{R/g}$; the displayed polar ODE assumes $r_0>0$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.12}\quad A ray of light follows a
+straight-line path in a first homogeneous medium, is refracted
+at an interface, and then follows a new straight-line path in the
+second medium. See Fig.~22.7. Use Fermat's principle of optics
+to derive Snell's law of refraction:
+\[
+n_{1}\sin\theta_{1}=n_{2}\sin\theta_{2}.
+\]
+\par\emph{Hint.}~Keep the points $(x_{1},y_{1})$ and
+$(x_{2},y_{2})$ fixed and vary $x_{0}$ to satisfy Fermat's
+principle.
+\par\emph{Note.}~This is not an Euler equation problem, because
+the light path is not differentiable at $x_{0}$.
+\solution
+Take the interface to be $y=0$, with fixed endpoints
+$(x_1,y_1)$ above it and $(x_2,y_2)$ below it. The crossing point
+is $(x_0,0)$. Up to the constant vacuum light speed, the optical
+travel time is
+\[
+J(x_0)=n_1\sqrt{(x_0-x_1)^2+y_1^2}
++n_2\sqrt{(x_2-x_0)^2+y_2^2}.
+\]
+Differentiate only the crossing position:
+\[
+J'(x_0)=
+n_1\frac{x_0-x_1}{\sqrt{(x_0-x_1)^2+y_1^2}}
+-n_2\frac{x_2-x_0}{\sqrt{(x_2-x_0)^2+y_2^2}}.
+\]
+The two ratios are the signed sines of the angles to the interface
+normal. Thus $J'(x_0)=0$ gives
+\[
+\boxed{n_1\sin\theta_1=n_2\sin\theta_2}.
+\]
+For positive indices and endpoints off the interface,
+\[
+J''(x_0)=
+\frac{n_1y_1^2}{[(x_0-x_1)^2+y_1^2]^{3/2}}
++\frac{n_2y_2^2}{[(x_2-x_0)^2+y_2^2]^{3/2}}>0.
+\]
+This proves the stationary crossing is the unique minimum for these
+fixed endpoints. No differentiability across the corner was assumed.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.13}\quad A second soap-film configuration
+for the unit-radius rings at $x=\pm x_{0}$ consists of a circular
+disk, radius $a$, in the $x=0$ plane and two catenoids of
+revolution, one joining the disk and each ring. One catenoid may
+be described by
+\[
+y=c_{1}\cosh\left(\frac{x}{c_{1}}+c_{3}\right).
+\]
+\begin{enumerate}
+\item[(a)] Impose boundary conditions at $x=0$ and $x=x_{0}$.
+\item[(b)] Require that the catenoids form an angle of $120^{\circ}$
+where they join the central disk. Express this third boundary
+condition mathematically. \erratum{For films of equal surface tension
+and a freely moving junction, this is the equilibrium condition.}
+\item[(c)] Show that the total area of catenoids plus central
+disk is then
+\[
+A=\erratum{\pi}c_{1}^{2}\left[\sinh\left(\frac{2x_{0}}{c_{1}}+2c_{3}\right)
++\frac{2x_{0}}{c_{1}}\right].
+\]
+\end{enumerate}
+\par\emph{Note.}~\erratum{Stability depends on the branch and the
+allowed variations; see Exercise~22.1.14. The area is larger than
+that of the \emph{shallow} simple catenoid whenever both exist.}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $\begin{cases}
+1=c_{1}\cosh\left(\dfrac{x_{0}}{c_{1}}+c_{3}\right)\\[8pt]
+a=c_{1}\cosh c_{3}
+\end{cases}$
+\quad(b) $\dfrac{dy}{dx}=\tan30^{\circ}=\sinh c_{3}$.
+\solution
+(a) For the right-hand catenoid
+$y=c\cosh(x/c+c_3)$, the boundary equations are
+\[
+\boxed{a=c\cosh c_3,\qquad
+1=c\cosh(x_0/c+c_3)}.
+\]
+
+(b) At the junction, the central disk points inward in the
+negative radial direction. The outward right-catenoid unit tangent
+is $(1,y')/\sqrt{1+y'^2}$. A $120^\circ$ angle therefore requires
+\[
+-\frac{y'}{\sqrt{1+y'^2}}=\cos120^\circ=-\frac12,
+\]
+which gives $y'=1/\sqrt3=\tan30^\circ$.
+Since $y'=\sinh(x/c+c_3)$,
+\[
+\boxed{\sinh c_3=\frac1{\sqrt3},\qquad
+c_3=\operatorname{arsinh}(1/\sqrt3)=\tfrac12\log3,\qquad
+a=\frac{2c}{\sqrt3}}.
+\]
+
+The same angle follows by varying the junction radius. In the
+reflection-symmetric class the area is
+$A=4\pi\int_0^{x_0}y\sqrt{1+y'^2}\,dx+\pi y(0)^2$.
+After imposing the interior Euler equation, its first variation is
+\[
+ \delta A=\left[-4\pi a\frac{y'(0)}{\sqrt{1+y'(0)^2}}
+                    +2\pi a\right]\delta a.
+\]
+Since $a>0$ and $\delta a$ is free, this again gives
+$y'(0)/\sqrt{1+y'(0)^2}=1/2$. Thus the angle is necessary for
+this free-junction equilibrium, although one can join mathematical
+surface pieces at other prescribed angles.
+
+(c) Put $v=x_0/c+c_3$. There are two catenoids and one disk.
+Their total area is
+\[
+\begin{aligned}
+A&=4\pi\int_0^{x_0}y\sqrt{1+y'^2}\,dx+\pi a^2\\
+&=4\pi c^2\int_{c_3}^{v}\cosh^2u\,du+\pi c^2\cosh^2c_3\\
+&=\pi c^2[2(v-c_3)+\sinh2v-\sinh2c_3+\cosh^2c_3].
+\end{aligned}
+\]
+The angle condition gives
+$\cosh c_3=2/\sqrt3$, so
+$\sinh2c_3=4/3=\cosh^2c_3$. These last terms cancel:
+\[
+\boxed{A=\pi c^2\left[
+\sinh\left(\frac{2x_0}{c}+2c_3\right)+\frac{2x_0}{c}
+\right]}.
+\]
+\erratum{The printed expression is missing the overall factor $\pi$.
+It equals $A/\pi$, not the total physical area. The surface-of-revolution
+factor $2\pi y\,ds$ and the disk area $\pi a^2$ fix the normalization.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.14}\quad For the soap film described in
+Exercise~22.1.13, find (numerically) the maximum value of
+$x_{0}$.
+\par\emph{Note.}~This calls for a calculator with hyperbolic
+functions or a table of hyperbolic cotangents.
+\par\nobreak\hfill\emph{ANS.}\enspace$x_{0\max}=0.4078$.
+\solution
+Retain the angle condition from Exercise~22.1.13:
+$c_3=\tfrac12\log3$. Write
+\[
+v=\frac{x_0}{c}+c_3,\qquad
+c=\operatorname{sech}v,\qquad
+x_0=(v-c_3)\operatorname{sech}v,\quad v>c_3.
+\]
+Differentiate:
+\[
+\frac{dx_0}{dv}
+=\operatorname{sech}v[1-(v-c_3)\tanh v].
+\]
+Thus the maximum satisfies
+\[
+\boxed{v-c_3=\coth v}.
+\]
+The function $v-c_3-\coth v$ has derivative
+$1+\operatorname{csch}^2v>0$, is negative at $v=c_3$,
+and tends to infinity. It has exactly one root. Moreover $x_0$
+tends to zero at both ends of the parameter range, so this root is
+the global maximum.
+
+Newton's update is
+\[
+v_{j+1}=v_j-\frac{v_j-c_3-\coth v_j}
+{1+\operatorname{csch}^2v_j}.
+\]
+Starting with $v_0=1.6$ yields
+\[
+v=1.62926936306647,\qquad
+c=0.377627833193942,
+\]
+and hence
+\[
+\boxed{x_{0\max}=(v-c_3)\operatorname{sech}v
+=0.407824170219077}.
+\]
+This rounds to the supplied $0.4078$.
+
+\erratum{The two branches must not both be called stable.}
+To check this, allow reflection-symmetric, axisymmetric variations
+of the two catenoids, with the junction remaining in $x=0$ and its
+radius free. Set $u=x/c+c_3$ and $p(u)=\operatorname{sech}^2u$.
+For the area in Exercise~22.1.13, the mixed term in the second
+variation gives the lower-end contribution
+$-\tanh(c_3)\eta(c_3)^2=-\eta(c_3)^2/2$ after division by $4\pi$.
+The disk's second variation contributes $+\eta(c_3)^2/2$, so
+\[
+ Q[\eta]=\frac{\delta^2A}{4\pi}
+ =\int_{c_3}^{v}p(u)(\eta'^2-\eta^2)\,du,
+ \qquad \eta(v)=0,\quad \eta(c_3)\text{ free}.
+\]
+The function
+\[
+ w(u)=\cosh u-(u-c_3)\sinh u
+\]
+satisfies $(pw')'+pw=0$ and $w'(c_3)=0$. Its first zero is
+$v_c=1.629269\ldots$, the root just found. For $v<v_c$, $w>0$;
+putting $\eta=wz$ gives the same square identity as in
+Exercise~22.1.6. Both boundary terms vanish, so
+\[
+Q[\eta]=\int_{c_3}^{v}pw^2z'^2\,du>0\qquad(\eta\ne0).
+\]
+To pass from this quadratic test to a local minimum, note that
+$z(v)=0$ implies $z(u)=-\int_u^v z'(s)ds$, so
+$\int z^2\le(v-c_3)^2\int z'^2$ by Cauchy--Schwarz.
+Because $p,w$ have positive lower bounds and $w,w'$ are bounded,
+$\eta=wz$ gives $Q[\eta]\ge\kappa\int(\eta^2+\eta'^2)du$
+for some $\kappa>0$. The Taylor remainder is smaller than this
+bound for sufficiently small $\|\eta\|_{C^1}$, by uniform continuity
+of the integrand's Hessian. This proves strict local minimality on
+the shallow branch in the stated class. At $v=v_c$, $\eta=w$ is a
+zero mode; the second variation alone does not classify higher orders.
+
+For $v>v_c$, extend $w$ by zero from $v_c$ to $v$, calling the
+result $\eta_0$. It is an admissible piecewise smooth variation
+with $Q[\eta_0]=0$. Choose a smooth $h$ with $h(v)=0$ and
+$h(v_c)>0$. Integration by parts on $[c_3,v_c]$ gives
+\[
+ Q[\eta_0,h]
+ :=\int_{c_3}^{v}p(\eta_0'h'-\eta_0h)\,du
+ =p(v_c)w'(v_c)h(v_c)<0.
+\]
+Therefore $Q[\eta_0+\epsilon h]
+=2\epsilon Q[\eta_0,h]+\epsilon^2Q[h]<0$ for small positive
+$\epsilon$. Smoothing the corner preserves this strict inequality.
+The deep branch is unstable even in this restricted class.
+
+The area comparison in Exercise~22.1.13 also needs its branch specified.
+Write the simple catenoid as $x_0=u\operatorname{sech}u$ and
+$A_s=2\pi(\tanh u+u\operatorname{sech}^2u)$, taking its shallow
+root $u<u_c$ from Exercise~22.1.6. Let $A_t$ denote the three-film
+area. Along either family, direct differentiation gives
+\[
+ \frac{dA_t}{dx_0}=4\pi\operatorname{sech}v,\qquad
+ \frac{dA_s}{dx_0}=4\pi\operatorname{sech}u.
+\]
+At a common separation, $u<v$: for $v\le u_c$, use the increasing
+function $u\operatorname{sech}u$ and
+$x_0=(v-c_3)\operatorname{sech}v<v\operatorname{sech}v$;
+for $v>u_c$ it is immediate. Thus $A_t-A_s$ decreases with $x_0$
+on the shallow three-film branch. At its fold,
+\[
+ A_t=2\pi\bigl[\tanh v_c+\coth v_c\operatorname{sech}^2v_c\bigr]
+     =2\pi\coth v_c>2\pi.
+\]
+Meanwhile $x_{0\max}<1/2<0.527697\ldots$, the area crossing in
+Exercise~22.1.7, so $A_s<2\pi$ throughout this range. The bound
+$x_0<1/2$ follows without rounding from
+\[
+ \tfrac12\cosh v-v+c_3
+ \ge\tfrac14(v-2)^2+c_3-\tfrac12>0.
+\]
+The shallow-branch difference is therefore positive even at its
+minimum, the fold. On the deep three-film branch,
+$v-c_3>\coth v$, so $A_t>2\pi\coth v>2\pi>A_s$ directly.
+This proves the stated comparison for both three-film branches.
+It is not a comparison with the deep simple catenoid.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.1.15}\quad Find the curve of quickest descent
+from $(0,0)$ to $(x_{0},y_{0})$ for a particle that, starting
+from rest, slides under gravity and without friction.
+\erratum{Assume $x_0,y_0>0$ with $y$ measured downward.} \erratum{For
+the special endpoint ratio $x_0/y_0=\pi/2$,} show that
+the ratio of times taken by the particle along a straight line
+joining the two points compared to along the curve of quickest
+descent is $(1+4/\pi^{2})^{1/2}$.
+\par\emph{Hint.}~Take $y$ to increase downwards. Apply
+Eq.~(22.21) to obtain $y_{x}^{2}=(1-c^{2}y)/c^{2}y$, where $c$ is
+an integration constant. It is helpful to make the substitution
+$c^{2}y=\sin^{2}(\varphi/2)$ and take
+$(x_{0},y_{0})=(\pi/2c^{2},\,1/c^{2})$.
+\solution
+Take $y$ positive downward. Conservation of energy gives
+$v=\sqrt{2gy}$, so
+\[
+T[y]=\frac1{\sqrt{2g}}\int
+\frac{\sqrt{1+y'^2}}{\sqrt y}\,dx.
+\]
+The Beltrami first integral, with its constant written $c>0$, is
+\[
+\frac1{\sqrt y\sqrt{1+y'^2}}=c,\qquad
+y'^2=\frac{1-c^2y}{c^2y}.
+\]
+Put $c^2y=\sin^2(\phi/2)$. Then
+\[
+y=\frac{1-\cos\phi}{2c^2},\qquad
+\frac{dy}{d\phi}=\frac{\sin\phi}{2c^2},\qquad
+\frac{dx}{d\phi}=\frac{1-\cos\phi}{2c^2}.
+\]
+Choosing $x=0$ at $\phi=0$ gives the cycloid
+\[
+\boxed{x=\frac{\phi-\sin\phi}{2c^2},\qquad
+y=\frac{1-\cos\phi}{2c^2}}.
+\]
+For arbitrary $x_0,y_0>0$, choose $0<\phi_0<2\pi$ from
+\[
+\frac{x_0}{y_0}
+=\frac{\phi_0-\sin\phi_0}{1-\cos\phi_0},
+\qquad
+\frac1{2c^2}=\frac{y_0}{1-\cos\phi_0}.
+\]
+The ratio increases from zero to infinity on this interval; its derivative
+has numerator $2(1-\cos\phi)-\phi\sin\phi>0$.
+For $0<\phi<\pi$, this follows from
+$2\tan(\phi/2)>\phi$; for $\pi\le\phi<2\pi$ the sign is immediate.
+
+With $A=1/(2c^2)$,
+\[
+ds=2A\sin(\phi/2)d\phi,\qquad
+v=2\sqrt{gA}\sin(\phi/2),
+\]
+so $dt=\sqrt{A/g}\,d\phi$ and
+\[
+T_{\rm cyc}=\phi_0\sqrt{A/g}.
+\]
+One can verify the minimizing character by a calibration.
+Regard $S(x,y)=\phi\sqrt{A/g}$ as a function defined by the
+first-arch endpoint equations. Their differentials are
+\[
+ dx=(\phi-\sin\phi)\,dA+A(1-\cos\phi)\,d\phi,\qquad
+ dy=(1-\cos\phi)\,dA+A\sin\phi\,d\phi,
+\]
+whereas
+$dS=\phi\,dA/(2\sqrt{gA})+\sqrt{A/g}\,d\phi$.
+Equating the coefficients of $dA,d\phi$ in $dS=S_xdx+S_ydy$ gives
+\[
+S_x=\frac1{2\sqrt{gA}},\qquad
+S_y=\frac{\cot(\phi/2)}{2\sqrt{gA}}.
+\]
+Indeed, use $(1-\cos\phi)\cot(\phi/2)=\sin\phi$ in the first
+coefficient and $\sin\phi\cot(\phi/2)=1+\cos\phi$ in the second.
+Consequently
+$|\nabla S|^2=\csc^2(\phi/2)/(4gA)=1/(2gy)$.
+For any joining path in $y>0$,
+$dS\le|\nabla S|\,ds=dt$; integrating from the initial limiting
+point, where $S=0$, proves $T\ge S(x_0,y_0)$. Equality holds along
+the cycloid, whose tangent is parallel to $\nabla S$.
+Reflection handles paths to negative $x$.
+
+\erratum{The fixed numerical time ratio in the question applies
+to the special endpoint in the hint, not to arbitrary $(x_0,y_0)$.}
+For that endpoint $\phi_0=\pi$, so
+$x_0=\pi/(2c^2)$, $y_0=1/c^2$, and
+$T_{\rm cyc}=\pi/(c\sqrt{2g})$.
+The straight segment has length
+\[
+L=\sqrt{x_0^2+y_0^2}
+=\frac1{c^2}\sqrt{1+\pi^2/4}
+\]
+and constant tangential acceleration $g y_0/L$. Starting from rest,
+\[
+T_{\rm line}=\sqrt{\frac{2L^2}{g y_0}}
+=\frac1c\sqrt{\frac2g}\sqrt{1+\frac{\pi^2}{4}}.
+\]
+Therefore
+\[
+\boxed{\frac{T_{\rm line}}{T_{\rm cyc}}
+=\frac2\pi\sqrt{1+\frac{\pi^2}{4}}
+=\sqrt{1+\frac4{\pi^2}}}.
+\]
+
+
+\Needspace{8\baselineskip}
+\subsection*{22.2 More General Variations}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.1}\quad
+\erratum{Take $m>0$ and fixed positions at fixed times $t_1<t_2$.}
+\begin{enumerate}
+\item[(a)] Develop the equations of motion corresponding to
+$L=\tfrac{1}{2}m(\dot{x}^{2}+\dot{y}^{2})$.
+\item[(b)] In what sense do your solutions minimize the integral
+$\displaystyle\int_{t_{1}}^{t_{2}}L\,dt$?
+\end{enumerate}
+Compare the result for your solution with $x=$ constant,
+$y=$ constant.
+\solution
+(a) Since $L$ is independent of $x,y$,
+\[
+\frac d{dt}\frac{\partial L}{\partial\dot x}
+-\frac{\partial L}{\partial x}=m\ddot x=0,\qquad
+m\ddot y=0.
+\]
+Thus $x=A+Bt$, $y=C+Dt$. For fixed endpoint positions
+$\mathbf r_1,\mathbf r_2$ and times $t_1<t_2$, the unique path is
+\[
+\boxed{\mathbf r_*(t)=\mathbf r_1+
+\frac{t-t_1}{t_2-t_1}(\mathbf r_2-\mathbf r_1)}.
+\]
+
+(b) Write another admissible path as
+$\mathbf r=\mathbf r_*+\boldsymbol\eta$, with
+$\boldsymbol\eta(t_1)=\boldsymbol\eta(t_2)=0$. Its action is
+\[
+S[\mathbf r]=S[\mathbf r_*]
++m\dot{\mathbf r}_*\cdot\int_{t_1}^{t_2}\dot{\boldsymbol\eta}\,dt
++\frac m2\int_{t_1}^{t_2}|\dot{\boldsymbol\eta}|^2dt.
+\]
+The middle term is zero because the velocity is constant and the
+endpoint variation is zero. Therefore
+\[
+\boxed{S[\mathbf r]-S[\mathbf r_*]
+=\frac m2\int_{t_1}^{t_2}|\dot{\boldsymbol\eta}|^2dt\ge0},
+\qquad
+S[\mathbf r_*]=\frac{m|\mathbf r_2-\mathbf r_1|^2}{2(t_2-t_1)}.
+\]
+Equality requires the same path. A constant path has zero action,
+but is an admissible competitor only if the prescribed endpoint
+positions coincide; in that case it is precisely the minimizing solution.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.2}\quad From the Lagrangian equations of
+motion, Eq.~(22.38), show that a system in stable equilibrium has
+a minimum potential energy.
+\erratum{Assume a natural mechanical Lagrangian with positive-definite
+kinetic energy and a nondegenerate equilibrium.}
+\solution
+For a natural mechanical system take
+$T=\tfrac12M_{ij}(q)\dot q_i\dot q_j$ with positive-definite
+mass matrix, and $L=T-V(q)$. At a rest equilibrium $q=q_0$,
+$\dot q=\ddot q=0$. The Lagrange equations reduce to
+\[
+\boxed{\frac{\partial V}{\partial q_i}(q_0)=0}.
+\]
+Write $q=q_0+\eta$ and
+$K_{ij}=\partial_i\partial_jV(q_0)$. To first order,
+\[
+M(q_0)\ddot\eta+K\eta=0.
+\]
+Choose normal coordinates by diagonalizing the real symmetric matrix
+$M^{-1/2}KM^{-1/2}$. Each coordinate satisfies
+\[
+\ddot Q_j+\omega_j^2Q_j=0.
+\]
+A negative $\omega_j^2=-\kappa^2$ yields
+$Q_j=Ae^{\kappa t}+Be^{-\kappa t}$ and hence instability under
+arbitrarily small perturbations. In the nondegenerate stable case,
+all $\omega_j^2>0$, so $K$ is positive definite. Taylor expansion gives
+\[
+V(q_0+\eta)=V(q_0)+\frac12\eta^TK\eta+O(|\eta|^3)>V(q_0)
+\]
+for sufficiently small nonzero $\eta$. Thus the equilibrium has a
+strict local minimum of potential energy.
+
+\erratum{The usual conclusion assumes a natural mechanical system
+with positive kinetic energy. Linear stability alone gives only a
+positive-semidefinite Hessian when zero modes occur; higher-order terms
+then decide the result. Lagrange's equations do not turn stationarity
+by itself into a minimum.}
+For example, $V(q)=q^4$ has a stable minimum despite $V''(0)=0$,
+whereas $V(q)=-q^4$ has the same zero Hessian and is unstable.
+Conversely, a strict potential well together with positive kinetic
+energy confines sufficiently small-energy motions: energy conservation
+prevents them from reaching a nearby boundary on which $V$ is higher.
+This is the energy reason for stable small oscillations about a minimum.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.3}\quad Write out the Lagrangian equations
+of motion of a particle in spherical coordinates for potential
+$V$ equal to a constant. Identify the terms corresponding to
+(a) centrifugal force and (b) Coriolis force.
+\erratum{Write the coordinate equations on $r>0$, $0<\theta<\pi$.}
+\solution
+In spherical coordinates, with $V=V_0$,
+\[
+L=\frac m2\left(\dot r^2+r^2\dot\theta^2+
+r^2\sin^2\theta\,\dot\varphi^2\right)-V_0.
+\]
+For $r$ the derivatives are
+$L_{\dot r}=m\dot r$ and
+$L_r=mr(\dot\theta^2+\sin^2\theta\dot\varphi^2)$.
+For $\theta$ they are
+$L_{\dot\theta}=mr^2\dot\theta$ and
+$L_\theta=mr^2\sin\theta\cos\theta\dot\varphi^2$.
+For $\varphi$, $L_\varphi=0$ and
+$L_{\dot\varphi}=mr^2\sin^2\theta\dot\varphi$.
+Differentiating the momenta and dividing by the appropriate scale
+factors gives
+\[
+\boxed{\begin{aligned}
+\ddot r&=r\dot\theta^2+r\sin^2\theta\,\dot\varphi^2,\\
+r\ddot\theta&=r\sin\theta\cos\theta\,\dot\varphi^2
+-2\dot r\dot\theta,\\
+r\sin\theta\,\ddot\varphi
+&=-2\dot r\sin\theta\,\dot\varphi
+-2r\cos\theta\,\dot\theta\dot\varphi.
+\end{aligned}}
+\]
+Equivalently, $mr^2\sin^2\theta\dot\varphi$ is conserved.
+
+The squared-angular-speed terms on the right in the first two
+equations are the centrifugal terms of the moving spherical frame.
+The products with the factor two are its Coriolis-type terms:
+$-2m\dot r\dot\theta$, $-2m\dot r\sin\theta\dot\varphi$,
+and $-2mr\cos\theta\dot\theta\dot\varphi$.
+There is no physical external force for constant $V$; these terms
+account for the changing coordinate basis. Moving them to the left
+recovers the three components of the zero Cartesian acceleration.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.4}\quad The spherical pendulum consists of a
+mass on a wire of length $l$, free to move in polar angle
+$\theta$ and azimuth angle $\varphi$ (Fig.~22.8).
+\erratum{Measure $\theta$ from the downward vertical.}
+\begin{enumerate}
+\item[(a)] Set up the Lagrangian for this physical system.
+\item[(b)] Develop the Lagrangian equations of motion.
+\end{enumerate}
+\solution
+As in Fig.~22.8, measure $\theta$ from the downward vertical.
+The height relative to the pivot is $z=-l\cos\theta$, and the
+speed squared is
+$l^2(\dot\theta^2+\sin^2\theta\dot\varphi^2)$.
+Thus, apart from an irrelevant constant,
+\[
+\boxed{L=\frac{ml^2}{2}
+(\dot\theta^2+\sin^2\theta\dot\varphi^2)+mgl\cos\theta}.
+\]
+The polar derivatives are
+\[
+L_{\dot\theta}=ml^2\dot\theta,\qquad
+L_\theta=ml^2\sin\theta\cos\theta\dot\varphi^2-mgl\sin\theta.
+\]
+Their Euler equation is
+\[
+\boxed{\ddot\theta-\sin\theta\cos\theta\,\dot\varphi^2
++\frac gl\sin\theta=0}.
+\]
+The azimuth is cyclic, so
+\[
+\boxed{\frac d{dt}(ml^2\sin^2\theta\,\dot\varphi)=0}.
+\]
+Where $\sin\theta\ne0$, the latter expands to
+\[
+\ddot\varphi+2\cot\theta\,\dot\theta\dot\varphi=0.
+\]
+The conserved momentum is the vertical angular momentum.
+At a polar coordinate singularity the conserved-momentum form is the
+appropriate one; division by $\sin\theta$ is unnecessary.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.5}\quad Show that the Lagrangian
+\[
+L=m_{0}c^{2}\left(1-\sqrt{1-\frac{v^{2}}{c^{2}}}\right)-V(r)
+\]
+leads to a relativistic form of Newton's second law of motion,
+\[
+\frac{d}{dt}\left(\frac{m_{0}v_{i}}{\sqrt{1-v^{2}/c^{2}}}\right)
+=F_{i},
+\]
+in which the force components are $F_{i}=-\partial V/\partial
+x_{i}$.
+\erratum{Assume $m_0>0$ and $v<c$.}
+\solution
+Let $v^2=\sum_j\dot x_j^2<c^2$. Since
+$\partial v^2/\partial\dot x_i=2\dot x_i$,
+\[
+\frac{\partial L}{\partial\dot x_i}
+=-m_0c^2\frac{1}{2\sqrt{1-v^2/c^2}}
+\left(-\frac{2\dot x_i}{c^2}\right)
+=\frac{m_0v_i}{\sqrt{1-v^2/c^2}}.
+\]
+The constant rest-energy term has zero derivative, and the spatial
+derivative is $\partial L/\partial x_i=-\partial_iV$.
+Consequently
+\[
+\boxed{\frac d{dt}
+\left(\frac{m_0v_i}{\sqrt{1-v^2/c^2}}\right)
+=-\partial_iV=F_i}.
+\]
+Writing $\gamma=(1-v^2/c^2)^{-1/2}$ gives
+$\dot\gamma=\gamma^3(\mathbf v\cdot\mathbf a)/c^2$, so the
+same equation is
+\[
+m_0\gamma a_i+
+\frac{m_0\gamma^3}{c^2}v_i(\mathbf v\cdot\mathbf a)=F_i.
+\]
+In the limit $v/c\to0$, this reduces to $m_0a_i=F_i$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.6}\quad The Lagrangian for a particle with
+charge $q$ in an electromagnetic field described by scalar
+potential $\varphi$ and vector potential $\mathbf{A}$ is
+\[
+L=\frac{1}{2}mv^{2}-q\varphi+q\mathbf{A}\cdot\mathbf{v}.
+\]
+Find the equation of motion of the charged particle.
+\par\emph{Hint.}~$(d/dt)A_{j}=\partial A_{j}/\partial t
++\displaystyle\sum_{i}(\partial A_{j}/\partial x_{i})\dot{x}_{i}$.
+The dependence of the force fields $\mathbf{E}$ and $\mathbf{B}$
+on the potentials $\varphi$ and $\mathbf{A}$ is developed in
+Section~3.9; see in particular Eq.~(3.108).
+\par\nobreak\hfill\emph{ANS.}\enspace
+$m\ddot{x}_{i}=q[\mathbf{E}+\mathbf{v}\times\mathbf{B}]_{i}$.
+\solution
+Treat the potentials as functions of both position and time. The
+canonical momentum and spatial derivative are
+\[
+\frac{\partial L}{\partial\dot x_i}=m\dot x_i+qA_i,\qquad
+\frac{\partial L}{\partial x_i}
+=-q\,\partial_i\varphi+q\sum_j\dot x_j\partial_iA_j.
+\]
+Along the trajectory,
+\[
+\frac{dA_i}{dt}=\partial_tA_i+\sum_j\dot x_j\partial_jA_i.
+\]
+The Lagrange equation therefore gives
+\[
+m\ddot x_i
+=q(-\partial_i\varphi-\partial_tA_i)
++q\sum_j\dot x_j(\partial_iA_j-\partial_jA_i).
+\]
+Define $\mathbf E=-\nabla\varphi-\partial_t\mathbf A$ and
+$\mathbf B=\nabla\times\mathbf A$.
+For example, the last sum at $i=x$ is
+\[
+v_y(\partial_xA_y-\partial_yA_x)
++v_z(\partial_xA_z-\partial_zA_x)
+=v_yB_z-v_zB_y.
+\]
+The other two components follow by cyclic permutation. Thus
+\[
+\boxed{m\ddot{\mathbf r}
+=q(\mathbf E+\mathbf v\times\mathbf B)}.
+\]
+The derivatives acting on the position-dependent vector potential are
+essential; omitting them would omit the magnetic force.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.7}\quad Consider a system in which the
+Lagrangian is given by
+\[
+L(q_{i},\dot{q}_{i})=T(q_{i},\dot{q}_{i})-V(q_{i}),
+\]
+where $q_{i}$ and $\dot{q}_{i}$ represent sets of variables. The
+potential energy $V$ is independent of velocity and neither $T$
+nor $V$ has any explicit time dependence.
+\begin{enumerate}
+\item[(a)] Show that
+\[
+\frac{d}{dt}\left(\sum_{j}\dot{q}_{j}\,
+\frac{\partial L}{\partial\dot{q}_{j}}-L\right)=0.
+\]
+\item[(b)] The constant quantity
+\[
+\sum_{j}\dot{q}_{j}\,\frac{\partial L}{\partial\dot{q}_{j}}-L
+\]
+defines the Hamiltonian $H$. Show that under the preceding
+assumed conditions, $H$ satisfies $H=T+V$, and is therefore the
+total energy.
+\end{enumerate}
+\par\emph{Note.}~The kinetic energy $T$ is a \erratum{homogeneous} quadratic function
+of the $\dot{q}_{i}$.
+\solution
+(a) Put $p_j=\partial L/\partial\dot q_j$ and
+$H=\sum_j\dot q_jp_j-L$. Its full derivative is
+\[
+\begin{aligned}
+\frac{dH}{dt}
+&=\sum_j(\ddot q_jp_j+\dot q_j\dot p_j)
+-\sum_j\left(L_{q_j}\dot q_j+L_{\dot q_j}\ddot q_j\right)
+-L_t\\
+&=\sum_j\dot q_j(\dot p_j-L_{q_j})-L_t.
+\end{aligned}
+\]
+The Lagrange equations make the sum zero, and the stated absence of
+explicit time dependence makes $L_t=0$. Hence
+\[
+\boxed{\frac{dH}{dt}=0}.
+\]
+
+(b) Use the note's homogeneous quadratic kinetic energy:
+\[
+T=\frac12\sum_{i,j}M_{ij}(q)\dot q_i\dot q_j,
+\qquad M_{ij}=M_{ji}.
+\]
+Then
+\[
+\sum_j\dot q_j\frac{\partial T}{\partial\dot q_j}
+=\sum_{i,j}M_{ij}\dot q_i\dot q_j=2T.
+\]
+Since $V$ has no velocity dependence, $L_{\dot q_j}=T_{\dot q_j}$,
+and therefore
+\[
+\boxed{H=2T-(T-V)=T+V}.
+\]
+The quadratic homogeneity is used specifically in (b); conservation
+of the Legendre-transform expression in (a) does not require it.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.8}\quad The Lagrangian for a vibrating
+string (small-amplitude vibrations) is
+\[
+L=\int\left(\frac{1}{2}\rho u_{t}^{2}
+-\frac{1}{2}\tau u_{x}^{2}\right)dx,
+\]
+where $\rho$ is the (constant) linear mass density and $\tau$ is
+the (constant) tension. The $x$-integration is over the length
+of the string. Show that application of Hamilton's principle to
+the Lagrangian density (the integrand), now with two independent
+variables, leads to the classical wave equation,
+\[
+\frac{\partial^{2}u}{\partial x^{2}}
+=\frac{\rho}{\tau}\,\frac{\partial^{2}u}{\partial t^{2}}.
+\]
+\erratum{Assume $\rho,\tau>0$ and variations vanishing on the
+spatial and temporal boundaries.}
+\solution
+Hamilton's principle applies to the action
+\[
+S[u]=\int_{t_1}^{t_2}dt\int_{x_1}^{x_2}dx\,
+\left(\frac12\rho u_t^2-\frac12\tau u_x^2\right).
+\]
+Let $\delta u=\eta$ vanish at the fixed spatial and temporal
+boundaries. Then
+\[
+\delta S=\iint(\rho u_t\eta_t-\tau u_x\eta_x)\,dx\,dt.
+\]
+Integrating the first term by parts in $t$ and the second in $x$,
+all boundary terms vanish and
+\[
+\delta S=\iint(-\rho u_{tt}+\tau u_{xx})\eta\,dx\,dt.
+\]
+Arbitrariness of the interior variation gives
+\[
+\boxed{u_{xx}=\frac{\rho}{\tau}u_{tt}},
+\]
+with wave speed $\sqrt{\tau/\rho}$ for positive tension and density.
+The constancy of $\rho,\tau$ permits moving them outside the derivatives.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.9}\quad Show that the stationary value of
+the total energy of the electrostatic field of Example~22.2.3 is
+a minimum.
+\erratum{The region is charge-free and connected, the boundary
+potential is fixed, and the permittivity is a positive constant.}
+\par\emph{Hint.}~Investigate the $\alpha^{2}$ terms of $J$.
+\solution
+Let $\varphi_*$ be the harmonic potential satisfying the fixed
+boundary values in the charge-free region $\Omega$:
+$\nabla^2\varphi_*=0$. For any admissible variation
+$\varphi=\varphi_*+\alpha\eta$ with $\eta=0$ on the boundary,
+the physical field energy is
+\[
+U[\varphi]=\frac\varepsilon2\int_\Omega|\nabla\varphi|^2dV.
+\]
+Expansion is exact because the functional is quadratic:
+\[
+U[\varphi_*+\alpha\eta]-U[\varphi_*]
+=\alpha\varepsilon\int_\Omega\nabla\varphi_*\cdot\nabla\eta\,dV
++\frac{\alpha^2\varepsilon}{2}\int_\Omega|\nabla\eta|^2dV.
+\]
+The cross integral is
+\[
+\int_{\partial\Omega}\eta\,\partial_n\varphi_*\,dS
+-\int_\Omega\eta\,\nabla^2\varphi_*\,dV=0.
+\]
+Thus
+\[
+\boxed{U[\varphi_*+\alpha\eta]-U[\varphi_*]
+=\frac{\alpha^2\varepsilon}{2}\int_\Omega|\nabla\eta|^2dV\ge0}.
+\]
+For $\varepsilon>0$ in a connected region with fixed boundary
+potential, equality requires $\nabla\eta=0$ and hence $\eta=0$.
+This proves a strict global minimum. The book's $J$ omits only the
+positive constant $\varepsilon/2$, so the conclusion is identical.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.2.10}\quad The Lagrangian (per unit volume) of
+an electromagnetic field with a charge density $\rho$ and current
+density $\mathbf{J}$ is given by
+\[
+L=\frac{1}{2}\left(\varepsilon_{0}E^{2}
+-\frac{1}{\mu_{0}}B^{2}\right)-\rho\varphi
++\mathbf{J}\cdot\mathbf{A}.
+\]
+Show that Lagrange's equations lead to two of Maxwell's
+equations. (The remaining two are a consequence of the definition
+of $\mathbf{E}$ and $\mathbf{B}$ in terms of $\mathbf{A}$ and
+$\varphi$.)
+\par\emph{Hint.}~Take $\varphi$ and the components of
+$\mathbf{A}$ as dependent variables; and $x$, $y$, $z$, and $t$
+as independent variables. $\mathbf{E}$ and $\mathbf{B}$ are given
+in terms of $\mathbf{A}$ and $\varphi$ by Eq.~(3.108).
+\erratum{Use prescribed sources satisfying
+$\partial_t\rho+\nabla\cdot\mathbf J=0$ and variations vanishing
+on the spacetime boundary.}
+\solution
+Use
+\[
+\mathbf E=-\nabla\varphi-\partial_t\mathbf A,\qquad
+\mathbf B=\nabla\times\mathbf A,
+\]
+with prescribed sources $\rho,\mathbf J$. The action is the spacetime
+integral of the given density. Its variation is
+\[
+\delta S=\int dt\,d^3x\left[
+\varepsilon_0\mathbf E\cdot\delta\mathbf E
+-\frac1{\mu_0}\mathbf B\cdot\delta\mathbf B
+-\rho\,\delta\varphi+\mathbf J\cdot\delta\mathbf A\right].
+\]
+
+First vary only $\varphi$. Then $\delta\mathbf E=-\nabla\delta\varphi$
+and $\delta\mathbf B=0$. Spatial integration by parts gives
+\[
+\delta_\varphi S=\int
+(\varepsilon_0\nabla\cdot\mathbf E-\rho)\delta\varphi\,dt\,d^3x.
+\]
+Boundary variations vanish. Hence
+\[
+\boxed{\nabla\cdot\mathbf E=\rho/\varepsilon_0}.
+\]
+In component Euler notation, this uses
+$L_\varphi=-\rho$ and $L_{\partial_i\varphi}=-\varepsilon_0E_i$.
+
+Next vary only $\mathbf A$. Now
+$\delta\mathbf E=-\partial_t\delta\mathbf A$ and
+$\delta\mathbf B=\nabla\times\delta\mathbf A$. The time term becomes
+\[
+-\int\varepsilon_0\mathbf E\cdot\partial_t\delta\mathbf A
+=\int\varepsilon_0\partial_t\mathbf E\cdot\delta\mathbf A.
+\]
+For the magnetic term, the identity
+\[
+\nabla\cdot(\delta\mathbf A\times\mathbf B)
+=\mathbf B\cdot(\nabla\times\delta\mathbf A)
+-\delta\mathbf A\cdot(\nabla\times\mathbf B)
+\]
+shows that its volume integral becomes
+$-\mu_0^{-1}\int(\nabla\times\mathbf B)\cdot\delta\mathbf A$.
+The three independent components therefore give
+\[
+\mathbf J+\varepsilon_0\partial_t\mathbf E
+-\mu_0^{-1}\nabla\times\mathbf B=0,
+\]
+or
+\[
+\boxed{\nabla\times\mathbf B
+=\mu_0\mathbf J+\mu_0\varepsilon_0\partial_t\mathbf E}.
+\]
+Finally the definitions themselves give
+$\nabla\cdot\mathbf B=\nabla\cdot(\nabla\times\mathbf A)=0$ and
+$\nabla\times\mathbf E=-\partial_t(\nabla\times\mathbf A)
+=-\partial_t\mathbf B$, the remaining two Maxwell equations.
+
+
+\Needspace{8\baselineskip}
+\subsection*{22.3 Constrained Minima/Maxima}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.0}\quad The following problems are to be
+solved by using Lagrangian multipliers.
+\solution
+This numbered entry is the source's instruction for the following
+problems. For an objective $F(q)$ constrained by $G(q)=C$,
+a permissible displacement satisfies $\nabla G\cdot\delta q=0$.
+At a constrained stationary point, $\nabla F\cdot\delta q=0$
+for every such tangent displacement. If $\nabla G\ne0$, the two
+normal vectors must therefore be proportional:
+\[
+\boxed{\nabla F-\lambda\nabla G=0,\qquad G=C}.
+\]
+For several independent constraints, $\nabla F$ is a linear combination
+of their gradients. The multiplier equations find stationary candidates;
+one must still examine boundary behavior or use an inequality to decide
+whether each candidate is a maximum, minimum, or neither. The following
+solutions include that classification.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.1}\quad The ground-state energy of a quantum
+particle of mass $m$ in a pillbox (right-circular cylinder) is
+given by
+\[
+E=\frac{\hbar^{2}}{2m}
+\left(\frac{(2.4048)^{2}}{R^{2}}+\frac{\pi^{2}}{H^{2}}\right),
+\]
+in which $R$ is the radius and $H$ is the height of the pillbox.
+Find the ratio of $R$ to $H$ that will minimize the energy for a
+fixed positive volume.
+\erratum{Here $2.4048$ is the stated rounded approximation to the
+first positive zero of $J_0$.}
+\solution
+Put $j=2.4048$, retain the positive constant $\hbar^2/(2m)$
+outside the minimization, and impose $\pi R^2H=V$.
+For
+\[
+\mathcal F=\frac{j^2}{R^2}+\frac{\pi^2}{H^2}
++\lambda(\pi R^2H-V),
+\]
+the two multiplier equations are
+\[
+-\frac{2j^2}{R^3}+2\lambda\pi RH=0,\qquad
+-\frac{2\pi^2}{H^3}+\lambda\pi R^2=0.
+\]
+Hence
+\[
+\lambda=\frac{j^2}{\pi R^4H}
+=\frac{2\pi}{R^2H^3},
+\qquad j^2H^2=2\pi^2R^2.
+\]
+The requested ratio is
+\[
+\boxed{\frac RH=\frac{2.4048}{\pi\sqrt2}
+=0.541270169274\ldots}.
+\]
+To classify it, eliminate $H=V/(\pi R^2)$:
+\[
+\frac{2mE}{\hbar^2}
+=\frac{j^2}{R^2}+\frac{\pi^4R^4}{V^2}.
+\]
+This diverges as $R\downarrow0$ or $R\to\infty$, and its derivative
+vanishes only at $R^6=j^2V^2/(2\pi^4)$.
+Thus the stationary ratio gives the unique global minimum.
+\erratum{The manual replaces the supplied $2.4048$ by $2.048$
+in both its derivative and final ratio. The coefficient in the
+original problem is $2.4048$, which is used throughout above.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.2}\quad \erratum{Under the textbook's stipulated postal rule,}
+the total length plus girth may not exceed 36 inches. Using Lagrange multipliers, find the dimensions of the
+rectangular parallelepiped of maximum volume subject to this
+constraint.
+\solution
+Use the stated 36-inch mathematical constraint. Let the length be
+$L$ and the two transverse widths be $w,h$. A maximum uses the
+whole allowance: otherwise increasing $L$ raises the volume while
+remaining admissible. Thus
+\[
+V=Lwh,\qquad L+2w+2h=36.
+\]
+For $\mathcal F=Lwh-\lambda(L+2w+2h-36)$,
+\[
+wh=\lambda,\qquad Lh=2\lambda,\qquad Lw=2\lambda.
+\]
+All dimensions are positive, so division by $wh$ gives
+$L=2w=2h$. The constraint becomes $L+L+L=36$, hence
+\[
+\boxed{L=12\ {\rm in},\qquad w=h=6\ {\rm in},\qquad
+V_{\max}=432\ {\rm in}^3}.
+\]
+For a global check, the three positive numbers $L,2w,2h$ have
+fixed sum 36, and their product is $4V$. The arithmetic--geometric
+mean inequality gives
+\[
+4V\le(36/3)^3=1728,
+\]
+with equality exactly at $L=2w=2h$. The identified length is also
+the longest side, consistently with the length-plus-girth convention.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.3}\quad A thermal nuclear reactor is subject
+to the constraint
+\[
+\varphi(a,b,c)=\left(\frac{\pi}{a}\right)^{2}
++\left(\frac{\pi}{b}\right)^{2}+\left(\frac{\pi}{c}\right)^{2}
+=B^{2},\quad\text{a constant},
+\]
+where the reactor is a rectangular parallelepiped of sides $a$,
+$b$, and $c$. \erratum{Take $a,b,c,B>0$.} Find the ratios of $a$, $b$, and $c$ that \erratum{minimize}
+the reactor volume. \erratum{Show also that no maximum exists.}
+\par\nobreak\hfill\emph{ANS.}\enspace$a=b=c$, cube.
+\solution
+For positive side lengths, extremizing $abc$ is equivalent to
+extremizing $\log(abc)$. Apply a multiplier to
+\[
+\mathcal F=\log a+\log b+\log c+
+\lambda\left[\pi^2(a^{-2}+b^{-2}+c^{-2})-B^2\right].
+\]
+The three equations are
+\[
+\frac1a-\frac{2\lambda\pi^2}{a^3}=0,\qquad
+\frac1b-\frac{2\lambda\pi^2}{b^3}=0,\qquad
+\frac1c-\frac{2\lambda\pi^2}{c^3}=0.
+\]
+Thus $a^2=b^2=c^2=2\lambda\pi^2$ and positivity yields
+$a=b=c$. The constraint gives
+\[
+a=b=c=\frac{\sqrt3\pi}{B}.
+\]
+
+\erratum{The cube is the \emph{minimum}-volume reactor under this
+constraint. The printed request for a maximum is false: the volume
+has no finite upper bound.}
+To prove both statements, set $u=a^{-2}$, $v=b^{-2}$,
+$w=c^{-2}$, so $u+v+w=B^2/\pi^2$. Then
+\[
+uvw\le\left(\frac{B^2}{3\pi^2}\right)^3,\qquad
+abc=(uvw)^{-1/2}\ge\boxed{\frac{3\sqrt3\pi^3}{B^3}}.
+\]
+Equality occurs only at $u=v=w$, i.e. the cube.
+
+For an explicit unbounded family, take
+\[
+a=b=L,\qquad
+c=\frac{\pi}{\sqrt{B^2-2\pi^2/L^2}},
+\qquad L>\frac{\sqrt2\pi}{B}.
+\]
+It satisfies the original constraint exactly, while
+$abc=\pi L^2/\sqrt{B^2-2\pi^2/L^2}\to\infty$.
+This resolves the original maximum question as well as identifying
+the correctly classified stationary cube.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.4}\quad For a lens of focal length $f$, the
+object distance $p$ and the image distance $q$ are related by
+$1/p+1/q=1/f$. Find the minimum object-image distance $(p+q)$
+for fixed $f$. Assume real object and image ($p$ and $q$ both
+positive).
+\solution
+The assumptions $p,q>0$ imply $f>0$. Use
+\[
+\mathcal F=p+q+\lambda\left(\frac1p+\frac1q-\frac1f\right).
+\]
+Differentiation gives $1-\lambda/p^2=0$ and
+$1-\lambda/q^2=0$. Thus $p^2=q^2$, so $p=q$.
+The lens equation then gives $p=q=2f$ and
+\[
+\boxed{(p+q)_{\min}=4f}.
+\]
+For a global proof, put $S=p+q$. The constraint implies $pq=fS$.
+Since $(p-q)^2\ge0$,
+\[
+S^2\ge4pq=4fS.
+\]
+Divide by the positive $S$ to obtain $S\ge4f$, with equality only
+for the multiplier solution.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.5}\quad You have an ellipse
+$(x/a)^{2}+(y/b)^{2}=1$. Find the inscribed rectangle of maximum
+area. Show that the ratio of the area of the maximum-area
+rectangle to the area of the ellipse is $2/\pi=0.6366$.
+\solution
+First take the rectangle's vertices to be $(\pm x,\pm y)$ with
+$x,y>0$. Its area is $A=4xy$ and its constraint is
+$x^2/a^2+y^2/b^2=1$. For
+\[
+\mathcal F=4xy-\lambda(x^2/a^2+y^2/b^2-1),
+\]
+the equations are
+\[
+4y=\frac{2\lambda x}{a^2},\qquad
+4x=\frac{2\lambda y}{b^2}.
+\]
+Multiplying respectively by $x,y$ gives
+$x^2/a^2=y^2/b^2$. Each is therefore $1/2$, so
+\[
+\boxed{x=\frac a{\sqrt2},\quad y=\frac b{\sqrt2},\quad
+A_{\max}=2ab}.
+\]
+The side lengths are $\sqrt2a,\sqrt2b$ and
+\[
+\boxed{\frac{A_{\max}}{A_{\rm ellipse}}
+=\frac{2ab}{\pi ab}=\frac2\pi=0.6366197724\ldots}.
+\]
+
+This is also the maximum if the rectangle's orientation is unrestricted.
+Let its center be $h$, its orthonormal directions be $e_1,e_2$,
+and its half-lengths be $u,v$. For the ellipse matrix
+$Q=\operatorname{diag}(a^{-2},b^{-2})$, averaging the four vertex
+inequalities gives
+\[
+h^TQh+u^2q_1+v^2q_2\le1,\qquad q_i=e_i^TQe_i.
+\]
+Thus $2uv\sqrt{q_1q_2}\le1$. In this rotated basis,
+$q_1q_2=\det Q+(e_1^TQe_2)^2\ge1/(a^2b^2)$,
+and hence $4uv\le2ab$. The aligned multiplier solution attains this
+bound, proving the global claim.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.6}\quad A rectangular parallelepiped is
+inscribed in an ellipsoid of semiaxes $a$, $b$, and $c$. Maximize
+the volume of the inscribed rectangular parallelepiped. Show
+that the ratio of the maximum volume to the volume of the
+ellipsoid is $\erratum{\dfrac{2}{\pi\sqrt{3}}}\approx0.367$.
+\solution
+For an aligned box let the positive half-lengths be $x,y,z$.
+Maximize $V=8xyz$ subject to
+$x^2/a^2+y^2/b^2+z^2/c^2=1$. The multiplier equations give
+\[
+8yz=\frac{2\lambda x}{a^2},\quad
+8xz=\frac{2\lambda y}{b^2},\quad
+8xy=\frac{2\lambda z}{c^2}.
+\]
+Multiplying by $x,y,z$ respectively makes all left sides equal.
+Thus $x^2/a^2=y^2/b^2=z^2/c^2=1/3$, giving
+\[
+\boxed{x=\frac a{\sqrt3},\quad y=\frac b{\sqrt3},\quad
+z=\frac c{\sqrt3},\qquad V_{\max}=\frac{8abc}{3\sqrt3}}.
+\]
+Dividing by the ellipsoid's $4\pi abc/3$ yields
+\[
+\boxed{\frac{V_{\max}}{V_{\rm ellipsoid}}
+=\frac{2}{\pi\sqrt3}=0.3675525969\ldots}.
+\]
+\erratum{The inline ratio must be read as $2/(\pi\sqrt3)$;
+$(2/\pi)\sqrt3$ would exceed one and would not match the stated
+decimal approximation.}
+
+For completeness, the same bound covers arbitrary orientations and
+centers. With $Q=\operatorname{diag}(a^{-2},b^{-2},c^{-2})$,
+orthonormal box directions $e_i$ and half-lengths $u_i$, the average
+of the eight vertex inequalities gives
+$\sum_iq_i u_i^2\le1$, where $q_i=e_i^TQe_i$; the nonnegative
+center term can be discarded. The arithmetic--geometric mean bound
+then gives $\prod_i(q_i u_i^2)\le1/27$.
+The Gram determinant inequality gives
+$\prod_iq_i\ge\det Q=1/(a^2b^2c^2)$: the squared volume of
+the vectors $Q^{1/2}e_i$ is at most the product of their squared
+lengths. Therefore
+\[
+8u_1u_2u_3\le\frac8{\sqrt{27}\sqrt{q_1q_2q_3}}
+\le\frac{8abc}{3\sqrt3}.
+\]
+The aligned box attains equality.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.3.7}\quad Find the maximum value of the
+directional derivative of $\varphi(x,y,z)$,
+\erratum{a real differentiable function at a fixed point,}
+\[
+\frac{d\varphi}{ds}=\frac{\partial\varphi}{\partial x}\cos\alpha
++\frac{\partial\varphi}{\partial y}\cos\beta
++\frac{\partial\varphi}{\partial z}\cos\gamma,
+\]
+subject to the constraint,
+\[
+\cos^{2}\alpha+\cos^{2}\beta+\cos^{2}\gamma=1.
+\]
+\solution
+At the point in question write $\mathbf g=\nabla\varphi$ and
+$\mathbf n=(\cos\alpha,\cos\beta,\cos\gamma)$.
+Maximize $D=\mathbf g\cdot\mathbf n$ subject to
+$\mathbf n\cdot\mathbf n=1$. The multiplier equations for
+$D-\lambda(\mathbf n\cdot\mathbf n-1)$ are
+\[
+g_i-2\lambda n_i=0.
+\]
+If $\mathbf g\ne0$, normalization gives
+$4\lambda^2=|\mathbf g|^2$, and hence
+\[
+\mathbf n_\pm=\pm\frac{\mathbf g}{|\mathbf g|},\qquad
+D_\pm=\pm|\mathbf g|.
+\]
+The maximum is therefore
+\[
+\boxed{\left(\frac{d\varphi}{ds}\right)_{\max}
+=|\nabla\varphi|,\qquad
+\mathbf n_{\max}=\frac{\nabla\varphi}{|\nabla\varphi|}}.
+\]
+Cauchy--Schwarz proves the global bound
+$\mathbf g\cdot\mathbf n\le|\mathbf g||\mathbf n|=|\mathbf g|$.
+If $\nabla\varphi=0$, every unit direction gives zero, so every
+direction is a maximizer and no preferred direction is defined.
+
+
+\Needspace{8\baselineskip}
+\subsection*{22.4 Variation with Constraints}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.1}\quad A particle of mass $m$ is on a
+frictionless horizontal surface. In terms of plane polar
+coordinates $(r,\theta)$, it is constrained to move so that
+$\theta=\omega t$ (accomplished by pushing it with a rotating
+radial arm against which it can slide frictionlessly). With the
+initial conditions
+\[
+t=0,\qquad r=r_{0},\qquad\dot{r}=0:
+\]
+\begin{enumerate}
+\item[(a)] Find the radial position as a function of time.
+\par\nobreak\hfill\emph{ANS.}\enspace$r(t)=r_{0}\cosh\omega t$.
+\item[(b)] Find the force exerted on the particle by the
+constraint.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$F^{(c)}=2m\dot{r}\omega=2mr_{0}\omega^{2}\sinh\omega t$.
+\end{enumerate}
+\solution
+Use polar coordinates with the positive tangential direction
+$\mathbf e_\theta$.  Before imposing the constraint,
+\[
+ L=\frac m2(\dot r^2+r^2\dot\theta^2),\qquad
+ \phi=\theta-\omega t=0.
+\]
+With the convention $L+\lambda\phi$, the two Lagrange equations are
+\[
+ \frac{d}{dt}(m\dot r)-mr\dot\theta^2=0,\qquad
+ \frac{d}{dt}(mr^2\dot\theta)=\lambda.
+\]
+The multiplier in the second equation is a torque, since its
+coordinate is an angle.
+
+(a) Substitute $\dot\theta=\omega$ into the first equation:
+\[
+ \ddot r-\omega^2r=0,\qquad
+ r=A\cosh(\omega t)+B\sinh(\omega t).
+\]
+The initial conditions give $A=r_0$, $B=0$, so
+\[
+ \boxed{r(t)=r_0\cosh(\omega t)},\qquad
+ \dot r=r_0\omega\sinh(\omega t).
+\]
+The $\omega=0$ limit is $r=r_0$.
+
+(b) The frictionless arm pushes perpendicular to itself, along
+$\mathbf e_\theta$.  Since $rF_\theta=\lambda$,
+\[
+ \lambda=\omega\frac{d}{dt}(mr^2)=2m\omega r\dot r,\qquad
+ \boxed{\mathbf F^{(c)}=2m\omega\dot r\,\mathbf e_\theta
+ =2mr_0\omega^2\sinh(\omega t)\,\mathbf e_\theta}.
+\]
+There is no radial applied force: the radial acceleration component
+$\ddot r-r\omega^2$ vanishes.  As an energy check,
+\[
+ \frac{d}{dt}\frac m2(\dot r^2+r^2\omega^2)
+ =m\dot r(\ddot r+r\omega^2)
+ =2m\omega^2r\dot r
+ =\mathbf F^{(c)}\cdot\mathbf v.
+\]
+Thus the motor turning the arm supplies the increasing kinetic energy.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.2}\quad A point mass $m$ is moving on a
+flat, horizontal, frictionless plane. The mass is constrained by
+a string to move radially inward at a constant rate. Using plane
+polar coordinates $(r,\theta)$, $r=r_{0}-kt$,
+\erratum{with $m,r_0,k>0$ and $0\le t<r_0/k$:}
+\begin{enumerate}
+\item[(a)] Set up the Lagrangian.
+\item[(b)] Obtain the constrained Lagrange equations.
+\item[(c)] Solve the $\theta$-dependent Lagrange equation to
+obtain $\omega(t)$, the angular velocity. What is the physical
+significance of the constant of integration that you get from
+your ``free'' integration?
+\item[(d)] Using the $\omega(t)$ from part \erratum{(c)}, solve the
+$r$-dependent (constrained) Lagrange equation to obtain
+$\lambda(t)$. In other words, explain what is happening to the
+force of constraint as $r\to0$.
+\end{enumerate}
+\solution
+(a) Take $r$ and $\theta$ as independent coordinates initially:
+\[
+ L=\frac m2(\dot r^2+r^2\dot\theta^2),\qquad
+ \phi(r,t)=r-r_0+kt=0.
+\]
+Here $k>0$, and the prescribed motion applies for $0\le t<r_0/k$.
+
+(b) Using $L+\lambda\phi$ gives
+\[
+ \boxed{m\ddot r-mr\dot\theta^2=\lambda},\qquad
+ \boxed{\frac{d}{dt}(mr^2\dot\theta)=0},\qquad r=r_0-kt.
+\]
+Because $\partial\phi/\partial r=1$, $\lambda$ is the signed radial
+force, positive outward.  The physical string tension is $-\lambda$.
+
+(c) Integrating the cyclic-coordinate equation once,
+\[
+ mr^2\dot\theta=\ell,\qquad
+ \boxed{\omega(t)=\dot\theta=\frac{\ell}{m(r_0-kt)^2}
+ =\omega_0\frac{r_0^2}{(r_0-kt)^2}}.
+\]
+The constant $\ell=mr_0^2\omega_0$ is the conserved angular momentum
+about the hole through which the string is drawn.
+\erratum{The manual prints the third power in the denominator of
+$\omega(t)$. It must be the second power: the printed expression
+would make $mr^2\omega=\ell/r$ vary with time.}
+The constraint
+force is radial and therefore has zero torque about that point.
+A second integration, if desired, gives
+\[
+ \theta(t)-\theta_0
+ =\frac{\ell}{m}\int_0^t\frac{d\tau}{(r_0-k\tau)^2}
+ =\frac{\ell}{mk}\left(\frac1{r_0-kt}-\frac1{r_0}\right).
+\]
+
+(d) Since $\ddot r=0$, the radial equation becomes
+\[
+ \boxed{\lambda(t)=-mr\omega^2
+       =-\frac{\ell^2}{m(r_0-kt)^3}},\qquad
+ T_{\rm string}=\frac{\ell^2}{mr^3}.
+\]
+For $\ell\ne0$, the tension tends to $+\infty$ as $r\to0^+$.
+Maintaining the specified radial speed therefore requires an
+unbounded pulling force in that limit.
+\erratum{The divergence requires nonzero angular momentum.
+If $\ell=0$, then $\omega=0$ and $\lambda=0$ throughout the prescribed
+inward motion; the endpoint $r=0$ itself is a polar-coordinate
+singularity.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.3}\quad A flexible cable is suspended from
+two fixed points. The length of the cable is fixed. Find the
+curve that will minimize the total gravitational potential
+energy of the cable.
+\erratum{Assume a uniform cable in uniform gravity, supports at
+different horizontal positions, and a cable length greater than
+the straight-line distance between the supports.}
+\par\nobreak\hfill\emph{ANS.}\enspace Hyperbolic cosine.
+\solution
+\erratum{The hyperbolic-cosine answer assumes a uniform cable in a
+uniform gravitational field.  A nonuniform mass per unit length
+generally produces a different curve.}
+Let the constant mass per unit length be $\rho$, let $y$ increase
+upward, and suppose the endpoints have $x_1<x_2$.  For a graph $y(x)$,
+\[
+ U=\rho g\int_{x_1}^{x_2}y\sqrt{1+y'^2}\,dx,\qquad
+ L_0=\int_{x_1}^{x_2}\sqrt{1+y'^2}\,dx.
+\]
+Introduce a constant multiplier $\lambda$ and vary
+\[
+ \int_{x_1}^{x_2}(\rho gy+\lambda)\sqrt{1+y'^2}\,dx.
+\]
+There is no explicit $x$ dependence.  Its Beltrami first integral is
+\[
+ (\rho gy+\lambda)\sqrt{1+y'^2}
+ -y'\frac{(\rho gy+\lambda)y'}{\sqrt{1+y'^2}}
+ =\frac{\rho gy+\lambda}{\sqrt{1+y'^2}}
+ =\rho gc.
+\]
+For the hanging solution $c>0$.  Put $Y=y+\lambda/(\rho g)$:
+\[
+ Y=c\sqrt{1+Y'^2},\qquad
+ \frac{dY}{\sqrt{Y^2-c^2}}=\pm\frac{dx}{c}.
+\]
+Since $\int dY/\sqrt{Y^2-c^2}=\operatorname{arcosh}(Y/c)$,
+joining the two sides of the lowest point gives
+\[
+ \boxed{y(x)=c\cosh\frac{x-b}{c}+d},\qquad
+ d=-\frac{\lambda}{\rho g}.
+\]
+The three constants are determined by the two endpoint values and
+\[
+ L_0=c\left[\sinh\frac{x_2-b}{c}
+                 -\sinh\frac{x_1-b}{c}\right].
+\]
+\erratum{The manual repeats $x_2$ in both terms of this length
+formula. The second evaluation is at $x_1$; otherwise the displayed
+length would be zero.}
+
+To verify that the hanging solution minimizes energy, rather than
+merely makes it stationary, parameterize it by arc length
+$s\in[0,L_0]$.  There is a constant $s_0$ such that
+\[
+ s-s_0=c\sinh\frac{x-b}{c},\qquad
+ \mathbf T(s)=\rho g\bigl(c,\ s-s_0\bigr),\qquad
+ \mathbf r_*'(s)=\frac{\mathbf T(s)}{|\mathbf T(s)|}.
+\]
+Thus $\mathbf T'=\rho g\,\mathbf e_y$.  Any other cable of the same
+length with the same endpoints has an arc-length parameterization
+$\mathbf r(s)$ with $|\mathbf r'|=1$.  Integration by parts gives
+\begin{align*}
+ U[\mathbf r]-U[\mathbf r_*]
+ &=\int_0^{L_0}\mathbf T'\cdot(\mathbf r-\mathbf r_*)\,ds\\
+ &=-\int_0^{L_0}\mathbf T\cdot(\mathbf r'-\mathbf r_*')\,ds\\
+ &=\int_0^{L_0}\bigl(|\mathbf T|-\mathbf T\cdot\mathbf r'\bigr)\,ds
+ \ge0,
+\end{align*}
+where the endpoint term vanishes and the last inequality is
+Cauchy--Schwarz.  Equality requires the same tangent everywhere,
+hence the same curve with the fixed endpoints.  A curved cable needs
+$L_0$ greater than the straight-line distance between the endpoints;
+equality gives the taut straight segment, and a shorter cable cannot
+join the endpoints.
+\erratum{For vertically aligned supports the smooth graph assumption
+fails. In the ideal zero-thickness model a slack cable has a limiting
+vertical fold.} If its endpoint heights are
+$y_1,y_2$ and $L_0>|y_2-y_1|$, its lowest point is
+\[
+ y_b=\frac{y_1+y_2-L_0}{2},
+\]
+since $(y_1-y_b)+(y_2-y_b)=L_0$. The same calibration proof applies
+with horizontal tension zero and
+$\mathbf T=\rho g(s-s_0)\mathbf e_y$: the cable goes downward for
+$s<s_0=y_1-y_b$ and upward for $s>s_0$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.4}\quad A fixed volume of water is rotating
+in a cylinder with constant angular velocity $\omega$. Find the
+curve of the water surface that will minimize the total
+potential energy of the water in the combined
+gravitational-centrifugal force field.
+\erratum{Assume constant density, uniform gravity, a flat-bottomed
+cylinder, no overflow, and negligible surface tension. Allow a dry
+central region if required by nonnegative water depth.}
+\par\nobreak\hfill\emph{ANS.}\enspace Parabola.
+\solution
+\erratum{In the manual's energy integral the centrifugal term is
+missing the square on $\omega$. Also, its equation
+$2gry-\omega^2r^3-2\lambda r=0$ gives
+$y=(\omega^2r^2+2\lambda)/(2g)$, with a plus sign for its stated
+multiplier convention. The derivation below uses $U+\lambda V$.}
+Work in the frame rotating with the water.  The potential per unit
+mass for gravity plus the centrifugal force is
+\[
+ \Phi(r,z)=gz-\frac12\omega^2r^2,
+\]
+since $-\nabla\Phi=-g\mathbf e_z+\omega^2r\mathbf e_r$.
+Let the cylinder have radius $R$, a flat bottom $z=0$, and water
+height $h(r)$.  The density $\rho$ is constant.  Integrating through
+the depth gives
+\[
+ U[h]=2\pi\rho\int_0^R
+       \left(\frac g2h^2-\frac{\omega^2r^2}{2}h\right)r\,dr,
+ \qquad
+ V=2\pi\int_0^R h(r)r\,dr.
+\]
+For $h>0$, stationarity of $U+\lambda V$ gives the pointwise equation
+\[
+ \rho\left(gh-\frac{\omega^2r^2}{2}\right)+\lambda=0.
+\]
+Consequently the free surface is
+\[
+ \boxed{z=h(r)=h_0+\frac{\omega^2r^2}{2g}},
+\]
+a paraboloid of revolution, whose section through the axis is a
+parabola.  When the bottom is completely wet, the volume fixes
+\[
+ V=\pi R^2h_0+\frac{\pi\omega^2R^4}{4g},\qquad
+ \boxed{h_0=\frac{V}{\pi R^2}-\frac{\omega^2R^2}{4g}}.
+\]
+
+For a volume-preserving perturbation $\eta$, the first-order energy
+change vanishes because $\rho(gh-\omega^2r^2/2)$ is constant, and
+\[
+ U[h+\eta]-U[h]=\frac{\rho g}{2}\int_{\text{bottom}}\eta^2\,dA\ge0.
+\]
+This proves the minimum.
+
+\erratum{The full-disk formula requires $h_0\ge0$ and no overflow.
+If it predicts a negative depth, a dry central region appears.
+The physical minimizer is
+$h(r)=\max\{0,C+\omega^2r^2/(2g)\}$, with $C$ chosen from the volume;
+the wetted free surface remains parabolic.}
+For example, if its inner wet radius is $r_d$, then
+$h=\omega^2(r^2-r_d^2)/(2g)$ on $r_d\le r\le R$, and direct integration
+gives $V=\pi\omega^2(R^2-r_d^2)^2/(4g)$.
+The same minimum follows from convexity of the quadratic integrand,
+with the inequality $h\ge0$ imposed.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.5}\quad
+\erratum{Consider simple closed regular plane curves enclosing
+positive area.}
+\begin{enumerate}
+\item[(a)] Show that for a fixed-length perimeter the plane
+figure with maximum area is a circle.
+\item[(b)] Show that for a fixed planar area the boundary with
+minimum perimeter is a circle.
+\end{enumerate}
+\par\emph{Hint.}~The \erratum{geometric} radius of curvature $R$ is given by
+\[
+R=\frac{(r^{2}+r_{\theta}^{2})^{3/2}}
+{\erratum{\left|rr_{\theta\theta}-2r_{\theta}^{2}-r^{2}\right|}}.
+\]
+\par\emph{Note.}~The problems of this section, variation subject
+to constraints, are often called \emph{isoperimetric}. The term
+arose from problems of maximizing area subject to a fixed
+perimeter, as in part (a) of this problem.
+\solution
+Let a regular simple closed curve be positively oriented and write
+$\mathbf r(u)=(x(u),y(u))$, $v=\sqrt{x'^2+y'^2}$.  Its area and length
+are
+\[
+ A=\frac12\oint(xy'-yx')\,du,\qquad L=\oint v\,du.
+\]
+Both parts lead to the same stationary curves: vary $A+\lambda L$
+in part (a), or $L+\mu A$ in part (b), with a constant multiplier.
+For $A+\lambda L$, the $x$ Euler equation is
+\[
+ \frac{y'}2-\frac d{du}\left(-\frac y2+\lambda\frac{x'}v\right)=0,
+ \quad\hbox{so}\quad
+ \lambda\frac d{du}\frac{x'}v=y'.
+\]
+The $y$ equation similarly gives
+\[
+ -\frac{x'}2-\frac d{du}\left(\frac x2+\lambda\frac{y'}v\right)=0,
+ \quad\hbox{so}\quad
+ \lambda\frac d{du}\frac{y'}v=-x'.
+\]
+Use arc length $s$, so $x_s^2+y_s^2=1$.  Integrating these equations,
+\[
+ x+\lambda y_s=C_1,\qquad y-\lambda x_s=C_2.
+\]
+Squaring and adding yields
+\[
+ (x-C_1)^2+(y-C_2)^2=\lambda^2.
+\]
+Thus every regular extremal is a circle.
+
+It remains to prove the requested global maximum and minimum.
+Translate the curve so $\int_0^L\mathbf r(s)\,ds=0$.  For a
+mean-zero $L$-periodic function $f$, its Fourier expansion gives
+\[
+ \int_0^L f'^2\,ds
+ =\frac L2\sum_{n\ge1}\left(\frac{2\pi n}{L}\right)^2(a_n^2+b_n^2)
+ \ge\left(\frac{2\pi}{L}\right)^2
+       \frac L2\sum_{n\ge1}(a_n^2+b_n^2)
+ =\left(\frac{2\pi}{L}\right)^2\int_0^L f^2\,ds.
+\]
+Apply this to both coordinates.  Because $|\mathbf r_s|=1$,
+\[
+ \int_0^L|\mathbf r|^2\,ds
+ \le\frac{L^2}{4\pi^2}\int_0^L|\mathbf r_s|^2\,ds
+ =\frac{L^3}{4\pi^2}.
+\]
+Cauchy--Schwarz now gives the isoperimetric inequality:
+\[
+ 2A=\int_0^L(xy_s-yx_s)\,ds
+ \le\left(\int_0^L|\mathbf r|^2\,ds\right)^{1/2}
+      \left(\int_0^L|\mathbf r_s|^2\,ds\right)^{1/2}
+ \le\frac{L^2}{2\pi}.
+\]
+Equality holds for a circle, for which $\mathbf r_s$ is a constant
+multiple of the $90^\circ$ rotation of $\mathbf r$.  Therefore
+\[
+ \boxed{A_{\max}=\frac{L^2}{4\pi}\quad\text{at fixed }L},
+ \qquad
+ \boxed{L_{\min}=2\sqrt{\pi A}\quad\text{at fixed }A}.
+\]
+\erratum{The original textbook hint's expression is a signed radius of curvature with
+the opposite sign to the usual counterclockwise convention: for
+$r=\text{constant}>0$ it gives $R=-r$.  A geometric radius requires
+the absolute value of its denominator.  Its sign does not affect
+the conclusion that constant curvature gives a circle.}
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.6}\quad Show that requiring $J$, given by
+\[
+J=\int_{a}^{b}\!\!\int_{a}^{b}
+K(x,t)\varphi(x)\varphi(t)\,dx\,dt,
+\]
+to have a stationary value subject to the normalizing condition
+\[
+\int_{a}^{b}\varphi^{2}(x)\,dx=1
+\]
+leads to a Hilbert--Schmidt integral equation of the form given
+in Eq.~\erratum{(21.64)}, \erratum{provided the corresponding integral-operator
+eigenvalue is nonzero. State separately what happens in the nullspace.}
+\par\emph{Note.}~The kernel $K(x,t)$ is symmetric.
+\erratum{Take real $\varphi\in L^2[a,b]$ and a real
+$K\in L^2([a,b]^2)$, so the quadratic functional is well defined.}
+\solution
+Assume real functions and a real symmetric kernel,
+$K(x,t)=K(t,x)$, on $[a,b]$, with integrals for which the following
+variations are valid.  Define
+\[
+ (T\phi)(x)=\int_a^bK(x,t)\phi(t)\,dt,\qquad
+ \mathcal A[\phi]=J[\phi]-\mu\left(\int_a^b\phi^2\,dx-1\right).
+\]
+Under $\phi\mapsto\phi+\epsilon\eta$,
+\begin{align*}
+ \left.\frac{dJ}{d\epsilon}\right|_0
+ &=\int_a^b\int_a^bK(x,t)
+       [\eta(x)\phi(t)+\phi(x)\eta(t)]\,dx\,dt\\
+ &=2\int_a^b\eta(x)(T\phi)(x)\,dx.
+\end{align*}
+In the second term, interchange $x,t$ and use the symmetry of $K$.
+The normalization contributes $2\int\phi\eta\,dx$.  Hence
+\[
+ \delta\mathcal A
+ =2\int_a^b\eta(x)\bigl[(T\phi)(x)-\mu\phi(x)\bigr]\,dx=0.
+\]
+Arbitrariness of $\eta$ gives
+\[
+ \boxed{\int_a^bK(x,t)\phi(t)\,dt=\mu\phi(x)}.
+\]
+Multiplying by $\phi(x)$ and integrating shows that
+$J=\mu\int\phi^2=\mu$.  For $\mu\ne0$, set $\lambda=1/\mu$:
+\[
+ \boxed{\phi(x)=\lambda\int_a^bK(x,t)\phi(t)\,dt}.
+\]
+\erratum{The textbook's reference to Eq.~(20.64) should be
+Eq.~(21.64), the homogeneous Hilbert--Schmidt equation.
+Moreover, the reciprocal form assumes $\mu\ne0$.  A normalized
+element of the kernel of $T$ is also stationary, with $J=\mu=0$,
+and cannot be represented by a finite reciprocal $\lambda$.}
+For instance, $K=1$ on $[0,1]^2$ and
+$\phi(x)=\sqrt{12}(x-\tfrac12)$ give
+$\int\phi^2=1$, $\int\phi=0$, and $T\phi=0$.  The undivided eigenvalue
+equation above includes this case.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.7}\quad An unknown function satisfies the
+differential equation
+\[
+y''+\left(\frac{\pi}{2}\right)^{2}y=0
+\]
+and the boundary conditions $\erratum{y'(0)=0}$, $y(1)=0$,
+\erratum{with $y(0)=1$ fixing the normalization.}
+\erratum{Regard this as the ground-state problem for
+$-y''=\lambda y$, whose exact eigenvalue is $(\pi/2)^2$.}
+\begin{enumerate}
+\item[(a)] Calculate the approximation $\lambda=F[y_{\text{trial}}]$
+for $y_{\text{trial}}=1-x^{2}$.
+\item[(b)] Compare with the exact eigenvalue.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $\lambda=2.5$.\quad(b) $\lambda/\lambda_{\text{exact}}=1.013$.
+\solution
+\erratum{The nonhomogeneous values $y(0)=1$, $y(1)=0$ alone do not
+define a Sturm--Liouville eigenvalue problem with variable $\lambda$.
+The intended Rayleigh problem has $y'(0)=0$, $y(1)=0$, with $y(0)=1$
+fixing the scale of the eigenfunction.  The given exact solution
+and both trial families in their optimum ranges obey that additional
+Neumann condition.}
+Indeed, the quotient to be used is
+\[
+ F[y]=\frac{\int_0^1y'^2\,dx}{\int_0^1y^2\,dx},\qquad y(1)=0.
+\]
+Varying its numerator minus $\lambda$ times its denominator gives
+\[
+ 2[y'\eta]_0^1-2\int_0^1(y''+\lambda y)\eta\,dx=0.
+\]
+The endpoint $1$ has $\eta(1)=0$, whereas the free endpoint $0$
+requires $y'(0)=0$.  The equation is $-y''=\lambda y$.
+
+(a) For $y_{\rm trial}=1-x^2$,
+\[
+ \int_0^1y'^2\,dx=4\int_0^1x^2\,dx=\frac43,
+\]
+and
+\[
+ \int_0^1y^2\,dx
+ =\int_0^1(1-2x^2+x^4)\,dx
+ =1-\frac23+\frac15=\frac8{15}.
+\]
+Consequently
+\[
+ \boxed{\lambda_{\rm trial}=\frac{4/3}{8/15}=\frac52=2.5}.
+\]
+
+(b) The conditions $y'(0)=0$, $y(1)=0$ give
+$y=C\cos(\sqrt\lambda x)$ and
+$\cos\sqrt\lambda=0$.  The lowest eigenvalue and its normalized-at-zero
+eigenfunction are
+\[
+ \lambda_{\rm exact}=\frac{\pi^2}{4},\qquad
+ y_{\rm exact}=\cos\frac{\pi x}{2}.
+\]
+Thus
+\[
+ \boxed{\frac{\lambda_{\rm trial}}{\lambda_{\rm exact}}
+       =\frac{10}{\pi^2}=1.013211836\ldots},
+\]
+an excess of approximately $1.32118\%$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.8}\quad In Exercise~22.4.7 use a trial
+function $y=1-x^{n}$, \erratum{with $n>1/2$ for finite energy}.
+\begin{enumerate}
+\item[(a)] Find the value of $n$ that will minimize
+$F[y_{\text{trial}}]$.
+\item[(b)] Show that the optimum value of $n$ drives the ratio
+$\lambda/\lambda_{\text{exact}}$ down to $1.003$.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace(a) $n=1.7247$.
+\solution
+Use the Rayleigh quotient and boundary interpretation established in
+Exercise~22.4.7.  The trial $y=1-x^n$ has finite derivative energy
+precisely for $n>\tfrac12$, because
+\[
+ N=\int_0^1y'^2\,dx
+   =n^2\int_0^1x^{2n-2}\,dx=\frac{n^2}{2n-1}.
+\]
+Its squared norm is
+\begin{align*}
+ D&=\int_0^1(1-2x^n+x^{2n})\,dx\\
+  &=1-\frac2{n+1}+\frac1{2n+1}\\
+  &=\frac{(n+1)(2n+1)-2(2n+1)+(n+1)}
+          {(n+1)(2n+1)}
+   =\frac{2n^2}{(n+1)(2n+1)}.
+\end{align*}
+Therefore
+\[
+ F(n)=\frac{(n+1)(2n+1)}{2(2n-1)}.
+\]
+Differentiating without dropping the denominator derivative,
+\[
+ F'(n)
+ =\frac{(4n+3)(4n-2)-4(2n^2+3n+1)}{(4n-2)^2}
+ =\frac{4n^2-4n-5}{2(2n-1)^2}.
+\]
+The critical points solve $4n^2-4n-5=0$, so the admissible one is
+\[
+ \boxed{n_{\rm opt}=\frac{1+\sqrt6}{2}
+       =1.724744871\ldots}.
+\]
+The other root is negative.  The derivative changes from negative to
+positive at $n_{\rm opt}$, and $F(n)\to\infty$ at both ends of
+$(\tfrac12,\infty)$, so this is the global minimum in the trial family.
+Substitution yields
+\[
+ F_{\min}=\frac{5+2\sqrt6}{4},\qquad
+ \boxed{\frac{F_{\min}}{\pi^2/4}
+ =\frac{5+2\sqrt6}{\pi^2}=1.002976318\ldots}.
+\]
+The energy error is therefore approximately $0.297632\%$.
+
+\erratum{The variational domain here is $n>\tfrac12$, not merely
+$n>0$: smaller positive $n$ satisfy the endpoint values but have
+infinite derivative energy.  The quadratic-form quotient
+$\int y'^2/\int y^2$ remains the appropriate expression throughout
+this domain; replacing it by $-\int yy''/\int y^2$ without checking
+the boundary term is invalid for some of these trials.}
+At the optimum $n>1$, $y'(0)=0$, so that boundary term vanishes.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.9}\quad A quantum mechanical particle in a
+sphere (Example~14.7.1) satisfies
+\[
+\nabla^{2}\psi+k^{2}\psi=0,
+\]
+with $k^{2}=2mE/\hbar^{2}$. The boundary condition is that
+$\psi=0$ at $r=a$, where $a$ is the radius of the sphere. For
+the ground state [where $\psi=\psi(r)$], try an approximate wave
+function,
+\[
+\psi_{a}(r)=1-\left(\frac{r}{a}\right)^{2},
+\]
+and calculate an approximate eigenvalue $k_{a}^{2}$.
+\erratum{Take $a>0$ and impose regularity at the origin.}
+\par\emph{Hint.}~To determine $p(r)$ and $w(r)$, put your
+equation in self-adjoint form (in spherical polar coordinates).
+\par\nobreak\hfill\emph{ANS.}\enspace
+$k_{a}^{2}=\dfrac{10.5}{a^{2}}$,\quad
+$k_{\text{exact}}^{2}=\dfrac{\pi^{2}}{a^{2}}$.
+\solution
+For a radial function, the differential equation is
+\[
+ \frac1{r^2}\frac d{dr}(r^2\psi')+k^2\psi=0,
+ \quad\hbox{or}\quad
+ (r^2\psi')'+k^2r^2\psi=0.
+\]
+Thus the self-adjoint coefficients are
+$p(r)=r^2$, $w(r)=r^2$, $q(r)=0$.  Multiplication by $\psi$ and
+integration by parts gives
+\[
+ k^2=\frac{\int_0^ar^2\psi'^2\,dr}
+           {\int_0^ar^2\psi^2\,dr}.
+\]
+The boundary term $[r^2\psi\psi']_0^a$ vanishes at $a$ because
+$\psi(a)=0$, and at the origin for the regular radial solution.
+
+For $\psi_{\rm trial}=1-r^2/a^2$,
+\[
+ N=\frac4{a^4}\int_0^ar^4\,dr=\frac{4a}{5},
+\]
+whereas
+\begin{align*}
+ D&=\int_0^a\left(r^2-\frac{2r^4}{a^2}+\frac{r^6}{a^4}\right)dr\\
+  &=a^3\left(\frac13-\frac25+\frac17\right)
+   =\frac{8a^3}{105}.
+\end{align*}
+Therefore
+\[
+ \boxed{k_{\rm trial}^2
+ =\frac{4a/5}{8a^3/105}=\frac{21}{2a^2}
+ =\frac{10.5}{a^2}}.
+\]
+The exact regular solution is proportional to
+$\sin(kr)/(kr)$.  The smallest positive zero at $r=a$ is $ka=\pi$,
+so
+\[
+ k_{\rm exact}^2=\frac{\pi^2}{a^2},\qquad
+ \frac{k_{\rm trial}^2}{k_{\rm exact}^2}
+ =\frac{21}{2\pi^2}=1.063872428\ldots.
+\]
+The resulting energy is approximately $6.38724\%$ above the exact
+ground-state value, since $E=\hbar^2k^2/(2m)$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.10}\quad The wave equation for a quantum
+mechanical oscillator may be written as
+\[
+\frac{d^{2}\psi(x)}{dx^{2}}+(\lambda-x^{2})\psi(x)=0,
+\]
+with $\lambda=1$ for the ground state; see Eq.~(18.17). Take
+\[
+\psi_{\text{trial}}=\begin{cases}
+1-\dfrac{x^{2}}{a^{2}}, & x^{2}\le a^{2}\\[8pt]
+0, & x^{2}>a^{2}
+\end{cases}
+\]
+for the ground-state wave function (with $a^{2}$ an adjustable
+parameter) and calculate the corresponding ground-state energy.
+How much error do you have?
+\erratum{Take $a>0$ and use the Rayleigh quotient with kinetic term
+$\int|\psi'|^2dx$; the trial has derivative jumps at its cutoffs.}
+\par\emph{Note.}~Your parabola is really not a very good
+approximation to a Gaussian exponential. What improvements can
+you suggest?
+\solution
+The dimensionless Hamiltonian is $H=-d^2/dx^2+x^2$, so its Rayleigh
+quotient is
+\[
+ \lambda[\psi]
+ =\frac{\int_{\mathbb R}(\psi'^2+x^2\psi^2)\,dx}
+        {\int_{\mathbb R}\psi^2\,dx}.
+\]
+\erratum{The stated trial is continuous, but its derivative jumps at
+$\pm a$.  It belongs to the quadratic-form domain, and the quotient
+above is valid.  Treating its second derivative as an ordinary
+function across those joins would omit delta-function terms.}
+All three integrals reduce to $[-a,a]$:
+\begin{align*}
+ D&=2\int_0^a\left(1-\frac{2x^2}{a^2}+\frac{x^4}{a^4}\right)dx
+   =2a\left(1-\frac23+\frac15\right)=\frac{16a}{15},\\
+ N_{\rm kin}&=2\int_0^a\frac{4x^2}{a^4}\,dx=\frac8{3a},\\
+ N_{\rm pot}&=2\int_0^a
+  \left(x^2-\frac{2x^4}{a^2}+\frac{x^6}{a^4}\right)dx
+  =2a^3\left(\frac13-\frac25+\frac17\right)=\frac{16a^3}{105}.
+\end{align*}
+Hence
+\[
+ \lambda(a)=\frac5{2a^2}+\frac{a^2}{7}.
+\]
+Put $A=a^2>0$.  Then
+\[
+ \frac{d\lambda}{dA}=-\frac5{2A^2}+\frac17=0
+ \quad\Longrightarrow\quad
+ A^2=\frac{35}{2},\qquad
+ \boxed{a=\left(\frac{35}{2}\right)^{1/4}}.
+\]
+The second derivative $5/A^3$ is positive.  At the minimum the two
+energy terms are equal:
+\[
+ \boxed{\lambda_{\min}=2\sqrt{\frac5{14}}
+       =\sqrt{\frac{10}{7}}=1.195228609\ldots}.
+\]
+Thus the relative error is
+\[
+ \boxed{100(\lambda_{\min}-1)\%=19.5228609\ldots\%}.
+\]
+In conventional oscillator units,
+$E_{\rm trial}=(\hbar\omega/2)\sqrt{10/7}$.
+\erratum{The solution manual's final value $2\sqrt{10/7}$ has an
+extra factor of two.  Substitution into its own expression
+$5/(2a^2)+a^2/7$ gives $\sqrt{10/7}$.}
+
+One improvement is to make both the value and slope vanish at the
+cutoff:
+\[
+ \psi=(1-x^2/a^2)^2\quad (|x|\le a),\qquad \psi=0\quad(|x|>a).
+\]
+Writing $t=x/a$, the needed polynomial integrals are
+\[
+ \int_{-1}^1(1-t^2)^4dt=\frac{256}{315},\quad
+ \int_{-1}^116t^2(1-t^2)^2dt=\frac{256}{105},\quad
+ \int_{-1}^1t^2(1-t^2)^4dt=\frac{256}{3465}.
+\]
+They give
+\[
+ \lambda(a)=\frac3{a^2}+\frac{a^2}{11},\qquad
+ a^4=33,\qquad
+ \lambda_{\min}=2\sqrt{\frac3{11}}=1.044465936\ldots,
+\]
+only $4.44659\%$ high.  A still better family is the Gaussian
+$\psi=e^{-\beta x^2/2}$, $\beta>0$.  Since
+$\langle x^2\rangle=1/(2\beta)$ and
+$\psi'=-\beta x\psi$,
+\[
+ \lambda(\beta)=\frac{\beta}{2}+\frac1{2\beta}\ge1,
+\]
+with equality at $\beta=1$, which recovers the exact ground state.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{22.4.11}\quad The Schr\"odinger equation for a
+central potential may be written as
+\[
+\mathcal{L}u(r)+\frac{\hbar^{2}l(l+1)}{2Mr^{2}}\,u(r)=Eu(r).
+\]
+The $l(l+1)$ term, the angular momentum barrier, comes from
+splitting off the angular dependence. Compare Eq.~(9.80) (divide
+that equation through by $-r^{2}$). Use the Rayleigh--Ritz
+technique to show that $E>E_{0}$ \erratum{for $l>0$ and normalizable
+bound states}, where $E_{0}$ is the \erratum{lowest} energy
+eigenvalue of $\mathcal{L}u_{0}=E_{0}u_{0}$ corresponding to
+$l=0$. This means that the ground state will have $l=0$, zero
+angular momentum.
+\erratum{Assume a self-adjoint radial Hamiltonian bounded below,
+with the usual common quadratic-form domain.}
+\par\emph{Hint.}~For a discrete orthonormal eigenbasis, expand
+$u(r)=\erratum{\sum_{i=0}^{\infty}c_i u_i(r)}$, where
+$\mathcal{L}u_i=E_i u_i$ and $E_i\ge E_0$.
+\erratum{Do not require $c_0=1$; a spectral integral handles any
+continuous part of the spectrum.}
+\solution
+\erratum{The strict inequality is for $l>0$ and a normalizable bound
+eigenstate, with $E_0$ the lowest eigenvalue of the $l=0$ radial
+operator.  For $l=0$ the ground state has equality.  A continuum
+threshold need not have a strict gap above $E_0$.}
+Normalize $u$ by $\int_0^\infty|u|^2dr=1$ and assume it belongs to the
+quadratic-form domain of the radial Hamiltonian, including the
+centrifugal term. For form-domain functions,
+$\langle u,Lu\rangle$ below denotes the associated quadratic form;
+it agrees with the operator inner product when $u$ is in the operator
+domain. The variational lower bound for $L$ is
+\[
+ \langle u,Lu\rangle\ge E_0\langle u,u\rangle=E_0.
+\]
+For the discrete expansion in the hint, this follows directly from
+$u=\sum_{i\ge0}c_i u_i$ in an orthonormal eigenbasis:
+\[
+ \sum_i|c_i|^2=1,\qquad
+ \langle u,Lu\rangle
+ =\sum_i|c_i|^2E_i
+ =E_0+\sum_{i\ge1}|c_i|^2(E_i-E_0)\ge E_0.
+\]
+There is no need to assume $c_0\ne0$ or to divide by it.  If there
+is continuous spectrum, the same argument uses its spectral
+integral; the defining lower bound of $L$ suffices.
+
+Multiply the radial equation by $u^*$ and integrate:
+\[
+ E=\langle u,Lu\rangle
+   +\frac{\hbar^2l(l+1)}{2M}
+      \int_0^\infty\frac{|u(r)|^2}{r^2}\,dr.
+\]
+For a nonzero normalizable state the last integral is strictly
+positive: its integrand is nonnegative, and $r^{-2}>0$ at every
+finite $r>0$.  For $l>0$ its coefficient is also positive.  Thus
+\[
+ \boxed{E>E_0\qquad(l>0)}.
+\]
+Every bound state with nonzero angular momentum lies above the
+$l=0$ ground state.  Consequently, if a bound ground state exists
+for the central-potential problem, it has $l=0$.

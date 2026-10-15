@@ -1,0 +1,936 @@
+% Problems, Chapter 8: Sturm-Liouville Theory
+% Arfken, Weber & Harris, Mathematical Methods for Physicists, 7th ed.
+% Requires: amsmath, amssymb, tikz
+
+\section*{Problems}
+
+\Needspace{9\baselineskip}
+\subsection*{8.2 Hermitian Operators}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.1}\quad Show that Laguerre's ODE, Table 7.1, may be put
+into self-adjoint form by multiplying by $e^{-x}$ and that $w(x)=e^{-x}$ is
+the weighting function.
+\solution
+Write the equation as $xy''+(1-x)y'+ny=0$.  Multiplication by
+$w=e^{-x}$ gives
+\[
+xe^{-x}y''+(1-x)e^{-x}y'+ne^{-x}y=0.
+\]
+The product rule gives $(xe^{-x})'=(1-x)e^{-x}$, so the first two
+terms combine without changing the eigenvalue:
+\[
+\boxed{(xe^{-x}y')'+ne^{-x}y=0},\qquad
+p(x)=xe^{-x},\quad w(x)=e^{-x}.
+\]
+Thus $A y=-w^{-1}(py')'=-xy''-(1-x)y'$ has eigenvalue $n$.
+For functions in a common domain, integrate once in each scalar product:
+\begin{align*}
+\langle u,Av\rangle_w
+&=-\int_a^b u^*(pv')'\,dx
+=-[u^*pv']_a^b+\int_a^b p\,u'^*v'\,dx,\\
+\langle Au,v\rangle_w
+&=-\int_a^b(pu'^*)'v\,dx
+=-[pu'^*v]_a^b+\int_a^b p\,u'^*v'\,dx.
+\end{align*}
+Subtracting cancels the identical integrals and gives
+\[
+\langle u,Av\rangle_w-\langle Au,v\rangle_w
+=-\bigl[p(u^*v'-u'^*v)\bigr]_a^b,\qquad
+\langle u,v\rangle_w=\int_a^b u^*v\,e^{-x}\,dx.
+\]
+This is the required weighted self-adjoint differential form; vanishing
+of the displayed boundary form makes the operator Hermitian on that domain.
+For polynomial solutions on $[0,\infty)$, both endpoint terms vanish,
+as checked in Exercise 8.2.4.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.2}\quad Show that the Hermite ODE, Table 7.1, may be put
+into self-adjoint form by multiplying by $e^{-x^{2}}$ and that this gives
+$w(x)=e^{-x^{2}}$ as the appropriate weighting function.
+\solution
+Hermite's equation is $y''-2xy'+2ny=0$.  Since
+\[
+\frac{d}{dx}e^{-x^2}=-2xe^{-x^2},
+\]
+multiplication by $e^{-x^2}$ gives
+\[
+e^{-x^2}y''-2xe^{-x^2}y'+2ne^{-x^2}y
+=(e^{-x^2}y')'+2ne^{-x^2}y=0.
+\]
+Therefore
+\[
+\boxed{p=w=e^{-x^2},\qquad A=-w^{-1}(p\,d/dx)'=-d^2/dx^2+2x\,d/dx},
+\]
+where $Ay=2ny$.  In the scalar product
+$\langle u,v\rangle_w=\int u^*v e^{-x^2}\,dx$, two integrations by
+parts leave only $-[e^{-x^2}(u^*v'-u'^*v)]_a^b$.
+It vanishes on $(-\infty,\infty)$ for polynomial solutions and their
+linear combinations, establishing the claimed weight and Hermiticity.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.3}\quad Show that the Chebyshev ODE, Table 7.1, may be
+put into self-adjoint form by multiplying by $(1-x^{2})^{-1/2}$ and that this
+gives $w(x)=(1-x^{2})^{-1/2}$ as the appropriate weighting function.
+\solution
+On $-1<x<1$, multiply $(1-x^2)y''-xy'+n^2y=0$ by
+$(1-x^2)^{-1/2}$.  Because
+\[
+\frac{d}{dx}\sqrt{1-x^2}=-\frac{x}{\sqrt{1-x^2}},
+\]
+the resulting equation is
+\[
+\boxed{\left(\sqrt{1-x^2}\,y'\right)'
+       +\frac{n^2}{\sqrt{1-x^2}}y=0}.
+\]
+Thus $p=\sqrt{1-x^2}$, $w=(1-x^2)^{-1/2}$ and
+$A=-w^{-1}(p\,d/dx)'$ has eigenvalue $n^2$.
+The scalar product is
+\[
+\boxed{\langle u,v\rangle_w=
+\int_{-1}^{1}\frac{u^*(x)v(x)}{\sqrt{1-x^2}}\,dx}.
+\]
+The singularities of this weight are integrable: near either endpoint
+they have the form a constant times $t^{-1/2}$, whose integral is
+$2\sqrt t$.  Polynomial solutions therefore have finite norm, and
+$p$ times any product of their values and first derivatives vanishes
+at either endpoint.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.4}\quad The Legendre, Chebyshev, Hermite, and Laguerre
+equations, given in Table 7.1, have solutions that are polynomials. Show that
+ranges of integration that guarantee that the Hermitian operator boundary
+conditions will be satisfied are
+\begin{enumerate}
+\item[(a)] Legendre $[-1,1]$,\quad(b) Chebyshev $[-1,1]$,
+\item[(c)] Hermite $(-\infty,\infty)$,\quad(d) Laguerre $[0,\infty)$.
+\end{enumerate}
+\solution
+For $(pu')'+\lambda wu=0$, the boundary condition needed in the
+orthogonality proof is
+\[
+\bigl[p(u^*v'-u'^*v)\bigr]_a^b=0.
+\]
+If $u,v$ are polynomials, then $u^*v'-u'^*v$ is another polynomial
+(on the real axis).  We can therefore check each endpoint explicitly.
+\begin{enumerate}
+\item[(a)] Legendre: $p=1-x^2$ and $w=1$.
+The polynomial factor is bounded at $x=\pm1$, while
+$1-x^2\to0$.  Each boundary term is zero, and the norm integral over
+$[-1,1]$ is finite.
+\item[(b)] Chebyshev: $p=\sqrt{1-x^2}\to0$ at $\pm1$.
+Bounded polynomial values and derivatives again make each boundary
+term zero.  The norm exists because $w=(1-x^2)^{-1/2}$ is integrable.
+\item[(c)] Hermite: $p=w=e^{-x^2}$.  Every polynomial is bounded in
+magnitude by $C(1+|x|^N)$ for suitable $C,N$, and
+$|x|^Ne^{-x^2}\to0$ as $x\to\pm\infty$.
+Thus both boundary terms vanish and the weighted norms converge.
+\item[(d)] Laguerre: $p=xe^{-x}$ and $w=e^{-x}$.
+At $0$, the factor $x$ multiplies a bounded polynomial; at $\infty$,
+$x^{N+1}e^{-x}\to0$.  Both boundary terms vanish, and the weighted
+norms on $[0,\infty)$ converge.
+\end{enumerate}
+These conclusions use the polynomial hypothesis.  The same intervals
+alone do not make arbitrary singular solutions satisfy the boundary
+conditions, as Exercises 8.2.6 and 8.2.7 demonstrate.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.5}\quad The functions $u_{1}(x)$ and $u_{2}(x)$ are
+eigenfunctions of the same Hermitian operator but for distinct eigenvalues
+$\lambda_{1}$ and $\lambda_{2}$. Prove that $u_{1}(x)$ and $u_{2}(x)$ are
+linearly independent.
+\solution
+Suppose $c_1u_1+c_2u_2=0$, where eigenfunctions are nonzero by
+definition.  Apply $A$ and then subtract $\lambda_2$ times the original
+relation:
+\[
+c_1\lambda_1u_1+c_2\lambda_2u_2=0,
+\qquad c_1(\lambda_1-\lambda_2)u_1=0.
+\]
+Since $\lambda_1\ne\lambda_2$ and $u_1\ne0$, we obtain $c_1=0$.
+The original relation then implies $c_2=0$.  Hence the functions are
+linearly independent.  Hermiticity is sufficient but is not needed
+for this particular conclusion; only linearity and distinct eigenvalues
+were used.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.6}\quad Given that
+\[
+P_{1}(x)=x\quad\text{and}\quad
+Q_{0}(x)=\frac{1}{2}\ln\left(\frac{1+x}{1-x}\right)
+\]
+are solutions of Legendre's differential equation (Table 7.1) corresponding to
+different eigenvalues:
+\begin{enumerate}
+\item[(a)] Evaluate their orthogonality integral
+  \[
+  \int_{-1}^{1}\frac{x}{2}\ln\left(\frac{1+x}{1-x}\right)\,dx.
+  \]
+\item[(b)] Explain why these two functions are not orthogonal, that is, why
+  the proof of orthogonality does not apply.
+\end{enumerate}
+\solution
+\textbf{(a)} Put $Q=Q_0=\tfrac12\log((1+x)/(1-x))$.
+Its derivative is
+\[
+Q'=\frac12\left(\frac1{1+x}+\frac1{1-x}\right)
+=\frac1{1-x^2}.
+\]
+Integrate by parts on a closed subinterval of $(-1,1)$, choosing the
+antiderivative $(x^2-1)/2$ of $x$:
+\[
+\int xQ\,dx=\frac{x^2-1}{2}Q
+-\frac12\int(x^2-1)\frac{dx}{1-x^2}
+=\frac{x^2-1}{2}Q+\frac{x}{2}.
+\]
+The endpoint products vanish because $t\log t\to0$ as $t\downarrow0$.
+Taking both improper limits therefore gives
+\[
+\boxed{\int_{-1}^{1}P_1Q_0\,dx=0+\frac12(1-(-1))=1}.
+\]
+\textbf{(b)} For $A=-[(1-x^2)d/dx]'$, the eigenvalues of $P_1=x$
+and $Q$ are $2$ and $0$.  Their boundary form is not zero:
+\[
+(1-x^2)(P_1Q'-P_1'Q)
+=x-(1-x^2)Q\longrightarrow
+\begin{cases}1,&x\to1,\\-1,&x\to-1.\end{cases}
+\]
+Its endpoint difference is $2$.  Indeed, subtracting their differential
+equations gives
+\[
+\bigl[(1-x^2)(P_1Q'-P_1'Q)\bigr]_{-1}^{1}
+=(2-0)\int_{-1}^{1}P_1Q\,dx=2.
+\]
+Although $Q$ is square integrable, it is singular at the endpoints and
+does not belong to the same boundary-condition domain as the Legendre
+polynomials.  The Hermitian orthogonality theorem thus does not apply
+to this pair.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.7}\quad $T_{0}(x)=1$ and $V_{1}(x)=(1-x^{2})^{1/2}$ are
+solutions of the Chebyshev differential equation corresponding to different
+eigenvalues. Explain, in terms of the boundary conditions, why these two
+functions are not orthogonal on the range $(-1,1)$ with the weighting function
+found in Exercise 8.2.3.
+\solution
+With $u=T_0=1$, $v=V_1=\sqrt{1-x^2}$, $p=\sqrt{1-x^2}$ and
+$w=1/p$, the weighted inner product is
+\[
+\boxed{\langle u,v\rangle_w=\int_{-1}^{1}1\,dx=2\ne0}.
+\]
+Here $u'=0$, $v'=-x/p$, so
+\[
+p(uv'-u'v)=-x,
+\qquad \bigl[p(uv'-u'v)\bigr]_{-1}^{1}=-2.
+\]
+The two eigenvalues are $0$ and $1$: explicitly,
+$(pu')'=0$ and $(pv')'=-1=-wv$.
+Consequently the boundary identity gives
+$-2=(0-1)\langle u,v\rangle_w$, consistently with the integral.
+The divergence of $v'$ cancels the zero of $p$; the boundary form
+does not vanish even though $v$ itself vanishes at both endpoints.
+They are therefore not eigenfunctions in a common Hermitian domain
+containing the Chebyshev polynomials.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.8}\quad A set of functions $u_{n}(x)$ satisfies the
+Sturm-Liouville equation
+\[
+\frac{d}{dx}\left[p(x)\frac{d}{dx}u_{n}(x)\right]+\lambda_{n}w(x)u_{n}(x)=0.
+\]
+The functions $u_{m}(x)$ and $u_{n}(x)$ satisfy boundary conditions that lead
+to orthogonality. The corresponding eigenvalues $\lambda_{m}$ and
+$\lambda_{n}$ are distinct. Prove that for appropriate boundary conditions,
+$u'_{m}(x)$ and $u'_{n}(x)$ are orthogonal with $p(x)$ as a weighting
+function.
+\solution
+Multiply the equation for $u_n$ by $u_m^*$ and integrate:
+\[
+0=\int_a^b u_m^*(pu_n')'\,dx
+ +\lambda_n\int_a^b wu_m^*u_n\,dx.
+\]
+One integration by parts gives the exact identity
+\[
+\boxed{\int_a^b p\,u_m'^*u_n'\,dx
+=\bigl[pu_m^*u_n'\bigr]_a^b
+ +\lambda_n\int_a^b wu_m^*u_n\,dx}.
+\]
+For distinct eigenvalues the last integral is zero by the assumed
+orthogonality.  Thus the additional sufficient boundary condition is
+\[
+\bigl[pu_m^*u_n'\bigr]_a^b=0,
+\]
+which yields $\int_a^b p\,u_m'^*u_n'\,dx=0$.
+This holds, for example, under common Dirichlet conditions, common
+Neumann conditions, or a common choice of Dirichlet or Neumann
+condition at each endpoint.  It also holds for periodic values of $u$
+and $pu'$, when the endpoint products cancel, or when $p\to0$ and
+the products $u_m^*u_n'$ remain bounded.
+
+The vanishing of the antisymmetrized boundary form alone need not
+suffice.  Under real Robin conditions $u'(a)=h_a u(a)$ and
+$u'(b)=h_bu(b)$ that form vanishes, but the boundary term here is
+\[
+p(b)h_bu_m^*(b)u_n(b)-p(a)h_au_m^*(a)u_n(a),
+\]
+which requires a separate check.  For normalized eigenfunctions and
+the stronger vanishing condition, the same calculation with $m=n$
+also gives $\int_a^b p|u_n'|^2\,dx=\lambda_n$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.9}\quad Linear operator $\mathcal{A}$ has $n$ distinct
+eigenvalues and $n$ corresponding eigenfunctions:
+$\mathcal{A}\psi_{i}=\lambda_{i}\psi_{i}$. Show that the $n$ eigenfunctions
+are linearly independent. Do not assume $\mathcal{A}$ to be Hermitian.
+
+\emph{Hint.}~Assume linear dependence, i.e., that
+$\psi_{n}=\sum_{i=1}^{n-1}a_{i}\psi_{i}$. Use this relation and the
+operator-eigenfunction equation first in one order and then in the reverse
+order. Show that a contradiction results.
+\solution
+We prove the statement by induction, so that comparison of coefficients
+will not presuppose the independence we are trying to establish.
+One nonzero eigenfunction is independent.  Suppose any $n-1$
+eigenfunctions with distinct eigenvalues are independent, and consider
+\[
+\sum_{i=1}^n c_i\psi_i=0.
+\]
+Apply $\mathcal A-\lambda_n I$ to this equality.  Linearity and the
+eigenfunction equations give
+\[
+\sum_{i=1}^{n-1}c_i(\lambda_i-\lambda_n)\psi_i=0.
+\]
+By the induction hypothesis every coefficient in this shorter sum is
+zero.  Since $\lambda_i-\lambda_n\ne0$, $c_i=0$ for $i<n$.
+The original equality becomes $c_n\psi_n=0$, hence $c_n=0$.
+This completes the induction without Hermiticity and without division
+by any individual eigenvalue (which may be zero).
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.2.10}\quad The ultraspherical polynomials
+$C_{n}^{(\alpha)}(x)$ are solutions of the differential equation
+\[
+\left\{(1-x^{2})\frac{d^{2}}{dx^{2}}-(2\alpha+1)x\frac{d}{dx}+n(n+2\alpha)
+\right\}C_{n}^{(\alpha)}(x)=0.
+\]
+\begin{enumerate}
+\item[(a)] Transform this differential equation into self-adjoint form.
+\item[(b)] Find an interval of integration and weighting factor that make
+  $C_{n}^{(\alpha)}(x)$ of the same $\alpha$ but different $n$ orthogonal.
+\end{enumerate}
+\emph{Note.}~Assume that your solutions are polynomials.
+\erratum{Take real $\alpha>-1/2$. At $\alpha=0$, use nonzero
+limiting normalizations for degrees $n\ge1$.}
+\solution
+\erratum{For a positive integrable weight supporting all degrees,
+assume real $\alpha>-\tfrac12$.  Eigenfunctions must be nonzero;
+at $\alpha=0$ use the nonzero Chebyshev limits rather than the
+identically zero standard $C_n^{(0)}$ for $n\ge1$.}
+
+\textbf{(a)} If $w$ is the multiplier and $p=(1-x^2)w$, the
+coefficient of $y'$ must be $p'=-(2\alpha+1)xw$.  Expanding this
+condition gives
+\[
+(1-x^2)w'-2xw=-(2\alpha+1)xw,
+\qquad \frac{w'}w=\frac{(1-2\alpha)x}{1-x^2}.
+\]
+Since $d\log(1-x^2)/dx=-2x/(1-x^2)$, integration yields
+\[
+w=(1-x^2)^{\alpha-1/2},\qquad p=(1-x^2)^{\alpha+1/2},
+\]
+where the irrelevant positive constant has been set to one.  Hence
+\[
+\boxed{\bigl[(1-x^2)^{\alpha+1/2}y'\bigr]'
++n(n+2\alpha)(1-x^2)^{\alpha-1/2}y=0}.
+\]
+\textbf{(b)} On $(-1,1)$ this weight is positive.  At either endpoint
+it behaves as a positive constant times $t^{\alpha-1/2}$, whose
+integral is finite exactly when $\alpha>-1/2$.  The same inequality
+makes $p\to0$, so the boundary form vanishes for polynomial solutions.
+For $m\ne n$ in $\{0,1,2,\ldots\}$,
+\[
+\lambda_n-\lambda_m=(n-m)(n+m+2\alpha)\ne0,
+\]
+because $n+m\ge1$ and $2\alpha>-1$.  Subtraction of the two
+self-adjoint equations therefore gives
+\[
+\boxed{\int_{-1}^{1}(1-x^2)^{\alpha-1/2}
+ C_m^{(\alpha)}(x)C_n^{(\alpha)}(x)\,dx=0\quad(m\ne n)}.
+\]
+To explain the qualification at zero, the generating function
+$(1-2xt+t^2)^{-\alpha}=\sum_{n\ge0}C_n^{(\alpha)}(x)t^n$
+is $1$ when $\alpha=0$.  For $n\ge1$ its nonzero limiting normalization
+is $\lim_{\alpha\to0}C_n^{(\alpha)}(x)/\alpha=2T_n(x)/n$.
+To see the coefficient explicitly, differentiate the generating function
+with respect to $\alpha$ at zero. Put $x=\cos\theta$ and factor
+$1-2xt+t^2=(1-e^{i\theta}t)(1-e^{-i\theta}t)$. For $|t|<1$,
+\begin{align*}
+-\log(1-2xt+t^2)
+&=\sum_{n\ge1}\frac{e^{in\theta}+e^{-in\theta}}n t^n\\
+&=2\sum_{n\ge1}\frac{\cos(n\theta)}n t^n
+=2\sum_{n\ge1}\frac{T_n(x)}n t^n.
+\end{align*}
+The resulting Chebyshev family has precisely the weight in
+Exercise 8.2.3.
+
+
+\Needspace{9\baselineskip}
+\subsection*{8.3 ODE Eigenvalue Problems}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.3.1}\quad Solve the Legendre equation
+\[
+(1-x^{2})y''-2xy'+n(n+1)y=0
+\]
+by direct series substitution.
+\begin{enumerate}
+\item[(a)] Verify that the indicial equation is
+  \[
+  s(s-1)=0.
+  \]
+\item[(b)] Using $s=0$ and setting the coefficient $a_{1}=0$, obtain a series
+  of even powers of $x$:
+  \[
+  y_{\mathrm{even}}=a_{0}\left[1-\frac{n(n+1)}{2!}x^{2}
+  +\frac{(n-2)n(n+1)(n+3)}{4!}x^{4}+\cdots\right],
+  \]
+  where
+  \[
+  a_{j+2}=\frac{j(j+1)-n(n+1)}{(j+1)(j+2)}a_{j}.
+  \]
+\item[(c)] Using $s=1$ and noting that the coefficient $a_{1}$ must be zero,
+  develop a series of odd powers of $x$:
+  \[
+  y_{\mathrm{odd}}=a_{0}\left[x-\frac{(n-1)(n+2)}{3!}x^{3}
+  +\frac{(n-3)(n-1)(n+2)(n+4)}{5!}x^{5}+\cdots\right],
+  \]
+  where
+  \[
+  a_{j+2}=\frac{(j+1)(j+2)-n(n+1)}{(j+2)(j+3)}a_{j}.
+  \]
+\item[(d)] Show that both solutions, $y_{\mathrm{even}}$ and
+  $y_{\mathrm{odd}}$, diverge for $x=\pm1$ if the series continue to infinity.
+  (Compare with Exercise 1.2.5.)
+\item[(e)] Finally, show that by an appropriate choice of $n$, one series at a
+  time may be converted into a polynomial, thereby avoiding the divergence
+  catastrophe. In quantum mechanics this restriction of $n$ to integral values
+  corresponds to quantization of angular momentum.
+\end{enumerate}
+\solution
+\textbf{(a)} Substitute $y=\sum_{j\ge0}a_jx^{j+s}$, with $a_0\ne0$.
+Before combining powers, the equation reads
+\[
+\sum_{j\ge0}(j+s)(j+s-1)a_jx^{j+s-2}
++\sum_{j\ge0}\{n(n+1)-(j+s)(j+s+1)\}a_jx^{j+s}=0.
+\]
+The coefficient of $x^{s-2}$ is $s(s-1)a_0$, and that of $x^{s-1}$
+is $s(s+1)a_1$.  Thus $s=0$ or $1$; $a_1$ is free for $s=0$
+and is zero for $s=1$.  Matching the remaining powers gives
+\[
+\boxed{a_{j+2}=\frac{(j+s-n)(j+s+n+1)}{(j+s+1)(j+s+2)}a_j}.
+\]
+The point $x=0$ is ordinary; the two values of $s$ simply select the
+even and odd Taylor solutions.
+
+\textbf{(b)} For $s=0$, set $a_1=0$.  Then
+\[
+a_2=-\frac{n(n+1)}{2}a_0,\qquad
+ a_4=\frac{(2-n)(n+3)}{3\cdot4}a_2
+=\frac{(n-2)n(n+1)(n+3)}{4!}a_0.
+\]
+In general, with an empty product equal to one,
+\[
+y_e=a_0\sum_{k=0}^{\infty}
+\frac{\prod_{r=0}^{k-1}(2r-n)(2r+n+1)}{(2k)!}x^{2k}.
+\]
+This gives the stated even series and its recurrence.
+
+\textbf{(c)} For $s=1$, $a_1=0$ is forced by $2a_1=0$.  Now
+\[
+a_2=-\frac{(n-1)(n+2)}{3!}a_0,
+\qquad
+ a_4=\frac{(3-n)(n+4)}{4\cdot5}a_2
+=\frac{(n-3)(n-1)(n+2)(n+4)}{5!}a_0.
+\]
+Thus the independent odd solution is
+\[
+y_o=a_0\sum_{k=0}^{\infty}
+\frac{\prod_{r=0}^{k-1}(2r+1-n)(2r+n+2)}{(2k+1)!}x^{2k+1}.
+\]
+The two occurrences of $a_0$ are independent arbitrary constants.
+
+\textbf{(d)} Let $c_k$ be the coefficient of $x^{2k+s}$ in either
+nonterminating branch, with $s=0$ or $1$.  The exact recurrence implies
+\[
+\frac{c_{k+1}}{c_k}
+=\frac{(2k+s)(2k+s+1)-n(n+1)}{(2k+s+1)(2k+s+2)}
+=1-\frac{2(2k+s+1)+n(n+1)}{(2k+s+1)(2k+s+2)}.
+\]
+The subtracted numerator is $4k+O(1)$ and the denominator is
+$4k^2+O(k)$, so the ratio is $1-1/k+O(k^{-2})$.
+Consequently
+\[
+\frac{(k+1)c_{k+1}}{kc_k}=1+O(k^{-2}).
+\]
+Starting beyond all possible zeros, let $b_k=kc_k$. The recurrence
+for $b_k$ is $b_{k+1}/b_k=1+O(k^{-2})$. The logarithms of these
+ratios have an absolutely convergent sum, so their product has a
+finite nonzero limit $C$. Its tail has logarithm
+$O(\sum_{j\ge k}j^{-2})=O(k^{-1})$; hence
+$b_k=C[1+O(k^{-1})]$ and
+\[
+c_k=\frac Ck+O(k^{-2}),\qquad C\ne0.
+\]
+At $x=1$, the $C/k$ terms have divergent partial sums, while the
+$O(k^{-2})$ remainder is absolutely summable. At $x=-1$, every
+term acquires the same factor $(-1)^s$,
+so it diverges there too.  The ratio test gives convergence for $|x|<1$.
+\erratum{The manual's observation that $c_{k+1}/c_k\to1$ is not by
+itself a divergence proof; the $1/k$ asymptotic above supplies the
+necessary endpoint argument.}
+
+\textbf{(e)} A branch terminates when an exponent $r=2k+s\ge0$
+satisfies $(r-n)(r+n+1)=0$.  With the conventional representative
+$n\ge0$, this means $n=r$: even nonnegative $n$ truncates the even
+branch, and odd positive $n$ truncates the odd branch.  The other
+branch remains nonterminating and singular at the endpoints.
+\erratum{If negative parameters are allowed, $n=-r-1$ produces the
+same eigenvalue $n(n+1)=r(r+1)$ and the same polynomial; restricting
+to $n\ge0$ removes this duplicate labeling.}
+Normalizing the surviving polynomial by $P_n(1)=1$ gives the Legendre
+polynomial, for example $1,x,(3x^2-1)/2,(5x^3-3x)/2$ for $n=0,1,2,3$.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.3.2}\quad Show that with the weight factor $\exp(-x^{2})$
+and the interval $-\infty<x<\infty$ for the scalar product, the Hermite ODE
+eigenvalue problem is Hermitian.
+\erratum{Use a common domain with vanishing boundary form at both
+infinities, such as the span of the polynomial eigenfunctions.}
+\solution
+\erratum{A common domain satisfying the endpoint condition is required
+in addition to the weight and interval.  The polynomial eigenfunctions
+satisfy it.}
+Write the eigenvalue problem as $Ay=2\alpha y$, where
+\[
+A=-\frac{d^2}{dx^2}+2x\frac{d}{dx}
+=-e^{x^2}\frac{d}{dx}\left(e^{-x^2}\frac{d}{dx}\right).
+\]
+For finite endpoints $a,b$, integration by parts yields
+\begin{align*}
+\langle u,Av\rangle_w
+&=-\int_a^b u^*(e^{-x^2}v')'\,dx\\
+&=-[u^*e^{-x^2}v']_a^b
+  +\int_a^b u'^*e^{-x^2}v'\,dx,\\
+\langle Au,v\rangle_w
+&=-[u'^*e^{-x^2}v]_a^b
+  +\int_a^b u'^*e^{-x^2}v'\,dx.
+\end{align*}
+Their difference is
+\[
+-\bigl[e^{-x^2}(u^*v'-u'^*v)\bigr]_a^b.
+\]
+For polynomials $u,v$, the Gaussian defeats every power of $|x|$,
+so both endpoint limits are zero as $a\to-\infty$, $b\to\infty$.
+All displayed integrals converge.  The identity
+$\langle u,Av\rangle_w=\langle Au,v\rangle_w$ follows on the
+invariant domain of finite linear combinations of these polynomials.
+More generally it holds on any common operator domain where the
+integrals exist and the same boundary form vanishes.
+
+\erratum{Weighted square integrability alone, as asserted in the
+manual, is insufficient to establish this boundary condition.}
+For example $u=1$ and $v=\sin(e^{x^2})$ are both in
+$L^2(\mathbb R,e^{-x^2}dx)$, since they are bounded, but
+\[
+e^{-x^2}(uv'-u'v)=2x\cos(e^{x^2})
+\]
+has no zero limit: at $x_k=\sqrt{\log(2\pi k)}$ it equals $2x_k$.
+Such a function is excluded from the domain used in the Hermitian
+problem; square integrability does not replace an operator-domain
+condition.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.3.3}\quad
+\begin{enumerate}
+\item[(a)] Develop series solutions for Hermite's differential equation
+  \[
+  y''-2xy'+2\alpha y=0.
+  \]
+  \par\nobreak\hfill\emph{ANS.}\enspace $s(s-1)=0$, indicial equation.\par
+  For $s=0$,
+  \[
+  a_{j+2}=2a_{j}\frac{j-\alpha}{(j+1)(j+2)}\quad(j\text{ even}),
+  \]
+  \[
+  y_{\mathrm{even}}=a_{0}\left[1+\frac{2(-\alpha)x^{2}}{2!}
+  +\frac{2^{2}(-\alpha)(2-\alpha)x^{4}}{4!}+\cdots\right].
+  \]
+  For $s=1$,
+  \[
+  a_{j+2}=2a_{j}\frac{j+1-\alpha}{(j+2)(j+3)}\quad(j\text{ even}),
+  \]
+  \[
+  y_{\mathrm{odd}}=a_{1}\left[x+\frac{2(1-\alpha)x^{3}}{3!}
+  +\frac{2^{2}(1-\alpha)(3-\alpha)x^{5}}{5!}+\cdots\right].
+  \]
+\item[(b)] Show that both series solutions are convergent for all $x$, the
+  ratio of successive coefficients behaving, for a large index, like the
+  corresponding ratio in the expansion of $\exp(x^{2})$.
+\item[(c)] Show that by appropriate choice of $\alpha$, the series solutions
+  may be cut off and converted to finite polynomials. (These polynomials,
+  properly normalized, become the Hermite polynomials in Section 18.1.)
+\end{enumerate}
+\solution
+\textbf{(a)} Substitution of $y=\sum_{j\ge0}a_jx^{j+s}$ gives
+\[
+\sum_{j\ge0}(j+s)(j+s-1)a_jx^{j+s-2}
++\sum_{j\ge0}2(\alpha-j-s)a_jx^{j+s}=0.
+\]
+Thus $s(s-1)=0$, $s(s+1)a_1=0$, and
+\[
+\boxed{a_{j+2}=\frac{2(j+s-\alpha)}{(j+s+1)(j+s+2)}a_j}.
+\]
+For the even solution take $s=0$, $a_1=0$, $a_0=A$.  Successive
+substitutions give
+\[
+a_2=-\alpha A,\qquad
+ a_4=\frac{2(2-\alpha)}{3\cdot4}(-\alpha A),
+\]
+and hence
+\[
+y_e=A\sum_{k\ge0}
+\frac{2^k\prod_{r=0}^{k-1}(2r-\alpha)}{(2k)!}x^{2k}
+=A\left[1-\alpha x^2+\frac{\alpha(\alpha-2)}6x^4+\cdots\right].
+\]
+For the odd solution take $s=1$.  Its Frobenius coefficient $a_1$
+is forced to zero; call its free $a_0$ coefficient $B$, which is the
+coefficient of $x$ (denoted $a_1$ in the printed answer).  Then
+\[
+a_2=\frac{2(1-\alpha)}{2\cdot3}B,\qquad
+ a_4=\frac{2(3-\alpha)}{4\cdot5}a_2,
+\]
+so
+\[
+y_o=B\sum_{k\ge0}
+\frac{2^k\prod_{r=0}^{k-1}(2r+1-\alpha)}{(2k+1)!}x^{2k+1}.
+\]
+Its first terms are exactly $B[x+2(1-\alpha)x^3/3!
++2^2(1-\alpha)(3-\alpha)x^5/5!+\cdots]$.
+
+\textbf{(b)} For a fixed $x$, the ratio of successive nonzero
+terms of either parity has magnitude
+\[
+|x|^2\left|\frac{2(j+s-\alpha)}{(j+s+1)(j+s+2)}\right|
+\sim\frac{2|x|^2}{j}\longrightarrow0.
+\]
+Both series therefore converge absolutely for every finite real or
+complex $x$.  With $j=2k$, the ratio is asymptotic to $x^2/k$,
+which is the large-$k$ behavior of the ratio $x^2/(k+1)$ for
+$e^{x^2}=\sum_{k\ge0}x^{2k}/k!$.
+
+\textbf{(c)} Termination requires $j+s=\alpha$ at a nonnegative
+integer exponent.  Thus $\alpha=N\in\{0,1,2,\ldots\}$ gives one
+polynomial: the even branch for even $N$ and the odd branch for odd
+$N$.  The other branch does not terminate, and its coefficient must
+be set to zero if a polynomial is required.  Choosing leading
+coefficient $2^N$ yields $H_N$, beginning with
+\[
+H_0=1,\quad H_1=2x,\quad H_2=4x^2-2,\quad H_3=8x^3-12x.
+\]
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.3.4}\quad Laguerre's ODE is
+\[
+xL''_{n}(x)+(1-x)L'_{n}(x)+nL_{n}(x)=0.
+\]
+Develop a series solution and select the parameter $n$ to make your series a
+polynomial.
+\solution
+Use $y=\sum_{j\ge0}a_jx^{j+s}$.  The $xy''+y'$ terms combine as
+\[
+xy''+y'=\sum_{j\ge0}(j+s)^2a_jx^{j+s-1},
+\]
+whereas $-xy'+ny=\sum_{j\ge0}(n-j-s)a_jx^{j+s}$.
+The lowest coefficient is $s^2a_0$, so the repeated indicial root
+is $s=0$.  Matching $x^{j+s}$ gives
+\[
+(j+s+1)^2a_{j+1}+(n-j-s)a_j=0,
+\qquad
+\boxed{a_{j+1}=\frac{j-n}{(j+1)^2}a_j\quad(s=0)}.
+\]
+\erratum{The recurrence advances by one index; the manual's
+$a_{j+2}$ on the left is a typographical error.}
+Iteration yields
+\[
+a_1=-na_0,\quad a_2=\frac{n(n-1)}{(2!)^2}a_0,
+\quad a_3=-\frac{n(n-1)(n-2)}{(3!)^2}a_0,
+\]
+and, in general,
+\[
+y=a_0\sum_{j=0}^{\infty}
+\frac{(-1)^j n(n-1)\cdots(n-j+1)}{(j!)^2}x^j.
+\]
+For a nonterminating solution the term ratio is asymptotic to $x/j$,
+so this regular solution is entire.  It becomes a polynomial precisely
+when $n=N$ is a nonnegative integer; then $a_{N+1}=0$ and all later
+coefficients vanish.  With $a_0=1$,
+\[
+\boxed{L_N(x)=\sum_{j=0}^{N}(-1)^j\binom Nj\frac{x^j}{j!}}.
+\]
+For example $L_0=1$, $L_1=1-x$, and $L_2=1-2x+x^2/2$.
+There is only one analytic solution near zero up to scale, since
+$a_0$ determines every coefficient.  Reduction of order supplies a
+second local solution
+\[
+y_2=y_1\int\frac{e^x}{x\,y_1(x)^2}\,dx,
+\]
+where $y_1(0)=1$.  Its integrand is $1/x+O(1)$, so it contains
+$\log x$ and cannot be a regular polynomial at zero.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.3.5}\quad Solve the Chebyshev equation
+\[
+(1-x^{2})T''_{n}-xT'_{n}+n^{2}T_{n}=0,
+\]
+by series substitution. What restrictions are imposed on $n$ if you demand
+that the series solution converge for $x=\pm1$?
+\par\nobreak\hfill\emph{ANS.}\enspace
+The infinite series does converge for $x=\pm1$ and no restriction on $n$
+exists (compare with Exercise 1.2.6).
+\solution
+Substitute $y=\sum_{j\ge0}a_jx^{j+s}$.  The coefficients of
+$x^{s-2}$ and $x^{s-1}$ give $s(s-1)=0$ and $s(s+1)a_1=0$.
+The other coefficients give
+\[
+(j+s+1)(j+s+2)a_{j+2}+[n^2-(j+s)^2]a_j=0,
+\]
+so
+\[
+\boxed{a_{j+2}=\frac{(j+s)^2-n^2}{(j+s+1)(j+s+2)}a_j}.
+\]
+The independent even and odd solutions, normalized to $y_e(0)=1$
+and $y_o'(0)=1$, are therefore
+\begin{align*}
+y_e&=\sum_{k\ge0}
+\frac{\prod_{r=0}^{k-1}[(2r)^2-n^2]}{(2k)!}x^{2k}
+=1-\frac{n^2x^2}{2!}+\frac{n^2(n^2-4)x^4}{4!}+\cdots,\\
+y_o&=\sum_{k\ge0}
+\frac{\prod_{r=0}^{k-1}[(2r+1)^2-n^2]}{(2k+1)!}x^{2k+1}
+=x+\frac{(1-n^2)x^3}{3!}
+ +\frac{(1-n^2)(9-n^2)x^5}{5!}+\cdots.
+\end{align*}
+For a nonterminating branch put $c_k=a_{2k}$ in its own Frobenius
+notation.  Its ratio is
+\[
+\frac{c_{k+1}}{c_k}
+=\frac{(2k+s)^2-n^2}{(2k+s+1)(2k+s+2)}
+=1-\frac{3(2k+s)+2+n^2}{(2k+s+1)(2k+s+2)}.
+\]
+The fraction subtracted from one is
+$(6k+O(1))/(4k^2+O(k))=3/(2k)+O(k^{-2})$.
+Multiplying $c_k$ by $k^{3/2}$ makes the new successive ratio
+$1+O(k^{-2})$, whose product converges to a nonzero constant.
+Thus $c_k\sim Ck^{-3/2}$.  Comparison with $\sum k^{-3/2}$ proves
+absolute convergence at both $x=1$ and $x=-1$.
+Terminating branches also converge there.  Hence
+\[
+\boxed{\text{endpoint convergence imposes no restriction on }n.}
+\]
+For an independent check, set $x=\sin t$ with $|t|<\pi/2$.
+Writing $Y(t)=y(\sin t)$, the chain rule gives
+\[
+Y'=y'\cos t,\qquad
+Y''=y''\cos^2t-y'\sin t=(1-x^2)y''-xy'.
+\]
+Thus $Y''+n^2Y=0$. The initial conditions at zero select
+\[
+y_e=\cos(n\arcsin x),\qquad
+y_o=\begin{cases}\sin(n\arcsin x)/n,&n\ne0,\\\arcsin x,&n=0.
+\end{cases}
+\]
+Their endpoint values are finite.  Polynomial solutions instead
+require $n^2=N^2$, $N$ a nonnegative integer, and selection of the
+branch of parity $N$.  Endpoint convergence and polynomial
+termination are therefore different requirements.
+
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.3.6}\quad Solve
+\[
+(1-x^{2})U''_{n}(x)-3xU'_{n}(x)+n(n+2)U_{n}(x)=0,
+\]
+choosing the root of the indicial equation to obtain a series of odd powers of
+$x$. Since the \erratum{nonterminating} series will diverge for $x=1$, choose $n$ to convert it into a
+polynomial.
+\solution
+Substitution of $y=\sum_{j\ge0}a_jx^{j+s}$ gives
+$s(s-1)=0$, $s(s+1)a_1=0$, and
+\[
+a_{j+2}
+=\frac{(j+s)(j+s+2)-n(n+2)}{(j+s+1)(j+s+2)}a_j.
+\]
+For the odd branch choose $s=1$, which forces $a_1=0$.  Factor the
+numerator to obtain
+\[
+\boxed{a_{j+2}=\frac{(j+1-n)(j+n+3)}{(j+2)(j+3)}a_j
+\quad(j=0,2,4,\ldots)}.
+\]
+In particular,
+\[
+a_2=-\frac{(n-1)(n+3)}{3!}a_0,\qquad
+ a_4=\frac{(n-3)(n-1)(n+3)(n+5)}{5!}a_0,
+\]
+so
+\[
+y=a_0\left[x-\frac{(n-1)(n+3)}{3!}x^3
++\frac{(n-3)(n-1)(n+3)(n+5)}{5!}x^5+\cdots\right].
+\]
+For the nonterminating odd series, $c_k=a_{2k}$ satisfies
+\[
+\frac{c_{k+1}}{c_k}
+=\frac{(2k+1)(2k+3)-n(n+2)}{(2k+2)(2k+3)}
+=1-\frac{2k+3+n(n+2)}{(2k+2)(2k+3)}.
+\]
+The subtracted fraction is $(2k+O(1))/(4k^2+O(k))
+=1/(2k)+O(k^{-2})$.
+As in Exercise 8.3.1, a convergent product shows
+$c_k\sim Ck^{-1/2}$, $C\ne0$; the terms have a fixed eventual sign
+for real $n$, so the series diverges at $x=1$ (and at $-1$).
+Termination occurs at an odd exponent $N=2k+1$ when
+\[
+(N-n)(N+n+2)=0.
+\]
+With the usual convention $n\ge0$, choose $n=N=1,3,5,\ldots$;
+then the degree is $N$.  \erratum{Allowing negative labels also gives
+$n=-N-2=-3,-5,\ldots$, which produce the same eigenvalue and
+polynomial.}
+The standard second-kind Chebyshev normalization is
+$a_0=(-1)^{(N-1)/2}(N+1)$.  The first three polynomials are
+\[
+U_1=2x,\qquad U_3=8x^3-4x,\qquad U_5=32x^5-32x^3+6x.
+\]
+This normalization can be checked from
+$U_N(\cos\theta)=\sin((N+1)\theta)/\sin\theta$. Since
+$d/dx=-(\sin\theta)^{-1}d/d\theta$, differentiation at
+$x=0$ ($\theta=\pi/2$) gives
+\[
+a_0=U_N'(0)=-(N+1)\cos\frac{(N+1)\pi}{2}
+=(-1)^{(N-1)/2}(N+1),
+\]
+where the last equality uses odd $N$.
+
+
+\Needspace{9\baselineskip}
+\subsection*{8.4 Variation Method}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{8.4.1}\quad A function that is normalized on the interval
+$0\le x<\infty$ with an unweighted scalar product is
+\[
+\psi=2\alpha^{3/2}xe^{-\alpha x},\qquad
+\erratum{\alpha>0\ \text{real}}.
+\]
+\begin{enumerate}
+\item[(a)] Verify the normalization.
+\item[(b)] Verify that for this $\psi$, $\langle x^{-1}\rangle=\alpha$.
+\item[(c)] Verify that for this $\psi$,
+  $\langle d^{2}/dx^{2}\rangle=-\alpha^{2}$.
+\item[(d)] Use the variation method to find the value of $\alpha$ that
+  minimizes
+  \[
+  \left\langle\psi\left|-\frac{1}{2}\frac{d^{2}}{dx^{2}}-\frac{1}{x}\right|
+  \psi\right\rangle,
+  \]
+  and find the minimum value of this expectation value.
+\end{enumerate}
+\solution
+\erratum{Take $\alpha>0$ real; this is necessary for the stated
+normalized trial function.}
+For $\beta>0$, define $I_k(\beta)=\int_0^\infty x^ke^{-\beta x}\,dx$.
+Direct integration gives $I_0=1/\beta$, and integration by parts gives
+\[
+I_k=\left[-\frac{x^ke^{-\beta x}}\beta\right]_0^\infty
++\frac{k}\beta I_{k-1}=\frac{k}\beta I_{k-1}\quad(k\ge1).
+\]
+Therefore $I_k=k!/\beta^{k+1}$.
+
+\textbf{(a)} The normalization integral is
+\[
+\int_0^\infty|\psi|^2\,dx
+=4\alpha^3 I_2(2\alpha)
+=4\alpha^3\frac{2!}{(2\alpha)^3}=1.
+\]
+\textbf{(b)} Multiplication by $x^{-1}$ removes one power of $x$:
+\[
+\boxed{\langle x^{-1}\rangle
+=4\alpha^3 I_1(2\alpha)
+=4\alpha^3\frac{1!}{(2\alpha)^2}=\alpha}.
+\]
+The apparent singularity at $0$ is harmless because the integrand is
+proportional to $x e^{-2\alpha x}$.
+
+\textbf{(c)} Differentiate with the exponential retained:
+\[
+\psi'=2\alpha^{3/2}(1-\alpha x)e^{-\alpha x},\qquad
+\psi''=2\alpha^{3/2}(\alpha^2x-2\alpha)e^{-\alpha x}.
+\]
+\erratum{The factor $e^{-\alpha x}$ is missing from the manual's
+displayed second derivative, although its following integral is correct.}
+Consequently
+\begin{align*}
+\langle d^2/dx^2\rangle
+&=4\alpha^3\int_0^\infty
+ (\alpha^2x^2-2\alpha x)e^{-2\alpha x}\,dx\\
+&=4\alpha^3\left[\alpha^2\frac{2!}{(2\alpha)^3}
+ -2\alpha\frac{1!}{(2\alpha)^2}\right]
+=\boxed{-\alpha^2}.
+\end{align*}
+The sign also follows by integration by parts:
+$\int\psi\psi''=[\psi\psi']_0^\infty-\int(\psi')^2
+=-\int(\psi')^2$, since $\psi(0)=0$ and the exponential removes
+the boundary term at infinity.
+
+\textbf{(d)} Combine the two expectation values:
+\[
+E(\alpha)=-\tfrac12(-\alpha^2)-\alpha
+=\frac{\alpha^2}{2}-\alpha
+=\frac{(\alpha-1)^2}{2}-\frac12.
+\]
+Thus the unique minimum for $\alpha>0$ is
+\[
+\boxed{\alpha_{\mathrm{opt}}=1,\qquad E_{\min}=-\tfrac12}.
+\]
+Equivalently $E'=\alpha-1=0$ and $E''=1>0$.
+As a direct check, at $\alpha=1$ the expression for $\psi''$ gives
+$(-\tfrac12d^2/dx^2-1/x)\psi=-\tfrac12\psi$; the optimized trial
+function is an exact eigenfunction in this case.

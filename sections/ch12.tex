@@ -1,0 +1,2222 @@
+% Problems, Chapter 12: Further Topics in Analysis
+% Arfken, Weber & Harris, Mathematical Methods for Physicists, 7th ed.
+% Requires: amsmath, amssymb, tikz
+
+\section*{Problems}
+
+\Needspace{8\baselineskip}
+\subsection*{12.1 Orthogonal Polynomials}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.1.1}\quad Starting from the Rodrigues formula in
+Table 12.1 for the Hermite polynomials $H_{n}$, derive the generating
+function for the $H_{n}$ given in that table.
+\solution
+The convention in Table 12.1 is
+\[
+H_n(x)=(-1)^ne^{x^2}\frac{d^n}{dx^n}e^{-x^2}.
+\]
+Taylor's theorem applied to the entire function $f(x)=e^{-x^2}$ gives
+\[
+f(x-t)=\sum_{n=0}^{\infty}\frac{(-t)^n}{n!}f^{(n)}(x).
+\]
+Multiply by $e^{x^2}$ and insert the Rodrigues expression term by term:
+\[
+\sum_{n=0}^{\infty}H_n(x)\frac{t^n}{n!}
+=e^{x^2}e^{-(x-t)^2}
+=\boxed{e^{2xt-t^2}}.
+\]
+The Taylor series converges for every finite complex $t$, so the generating
+function is an identity, not only a formal expansion. As a normalization
+check, its first three coefficients are $1,2x,2x^2-1$, corresponding to
+$H_0=1$, $H_1=2x$, $H_2=4x^2-2$ after multiplying by $n!$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.1.2}\quad
+\begin{enumerate}
+\item[(a)] Starting from the Laguerre ODE,
+  \[
+  xy''+(1-x)y'+\lambda y=0,
+  \]
+  obtain the Rodrigues formula for its polynomial solutions $L_{n}(x)$.
+\item[(b)] From the Rodrigues formula, scaled as in Table 12.1, derive the
+  generating function for the $L_{n}(x)$ given in that table.
+\end{enumerate}
+\solution
+(a) If $y$ is a polynomial of degree $n$ with leading coefficient $a_n\ne0$,
+the coefficient of $x^n$ in the ODE is $(\lambda-n)a_n$. Thus
+$\lambda=n$. The weight needed to put the equation in self-adjoint form
+satisfies
+\[
+(xw)'=(1-x)w,\quad xw'+w=w-xw,\quad w'=-w,
+\]
+so choose $w=e^{-x}$. The Rodrigues construction with $p=x$ gives
+\[
+\boxed{L_n(x)=\frac{e^x}{n!}\frac{d^n}{dx^n}(x^ne^{-x})}.
+\]
+We can verify this construction directly. Put $F=x^ne^{-x}$, so
+$xF'=(n-x)F$. Differentiate $n+1$ times. Since both $x$ and $n-x$ are
+linear, the product rule leaves
+\[
+xF^{(n+2)}+(n+1)F^{(n+1)}
+=(n-x)F^{(n+1)}-(n+1)F^{(n)}.
+\]
+With $G=F^{(n)}$ this becomes $xG''+(x+1)G'+(n+1)G=0$.
+Now $G=n!e^{-x}L_n$, so
+$G'=n!e^{-x}(L_n'-L_n)$ and
+$G''=n!e^{-x}(L_n''-2L_n'+L_n)$.
+Substitution cancels the common factor and gives
+$xL_n''+(1-x)L_n'+nL_n=0$, exactly the required ODE.
+
+Leibniz's rule also shows that the result is a polynomial:
+\[
+L_n(x)=\sum_{k=0}^n\binom nk\frac{(-x)^k}{k!}.
+\]
+Indeed, differentiating $x^n$ $n-k$ times gives $n!x^k/k!$, while the
+remaining $k$ derivatives of $e^{-x}$ give $(-1)^ke^{-x}$.
+This fixes the scale $L_n(0)=1$ and gives leading coefficient $(-1)^n/n!$.
+
+(b) Sum that explicit polynomial formula:
+\begin{align*}
+\sum_{n=0}^{\infty}L_n(x)t^n
+&=\sum_{k=0}^{\infty}\frac{(-x)^k}{k!}
+       \sum_{n=k}^{\infty}\binom nk t^n\\
+&=\sum_{k=0}^{\infty}\frac{(-x)^k}{k!}
+       \frac{t^k}{(1-t)^{k+1}}\\
+&=\boxed{\frac1{1-t}\exp\left(-\frac{xt}{1-t}\right)},\qquad |t|<1.
+\end{align*}
+The inner sum follows by differentiating $(1-t)^{-1}$ $k$ times and
+multiplying by $t^k/k!$. Interchanging the sums is justified because the
+corresponding absolute sum is at most
+$(1-|t|)^{-1}\exp[|x||t|/(1-|t|)]<\infty$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.1.3}\quad Carry out in detail the steps needed to confirm
+that the $(n+1)$-fold differentiation of Eq.~(12.10) leads to Eq.~(12.12).
+\solution
+Set $F=wp^n$ and $A=(n-1)p'+q$. Equation (12.10) is $pF'=AF$.
+Because $p$ has degree at most two, $p^{(j)}=0$ for $j\ge3$; because
+$A$ is at most linear, $A^{(j)}=0$ for $j\ge2$. Leibniz's formula
+therefore gives, with every surviving term displayed,
+\begin{align*}
+D^{n+1}(pF')
+ &=pF^{(n+2)}+(n+1)p'F^{(n+1)}
+      +\frac{n(n+1)}2p''F^{(n)},\\
+D^{n+1}(AF)
+ &=AF^{(n+1)}+(n+1)A'F^{(n)}.
+\end{align*}
+The last term in the first line has coefficient zero if $n=0$.
+Bring the right side to the left and divide by nonzero $w$.
+The coefficient of $F^{(n+1)}/w$ is
+\[
+(n+1)p'-[(n-1)p'+q]=2p'-q.
+\]
+The coefficient of $F^{(n)}/w=y_n$ is
+\begin{align*}
+\frac{n(n+1)}2p''-(n+1)[(n-1)p''+q']
+&=\frac{(n+1)(2-n)}2p''-(n+1)q'\\
+&=-\left[\frac{n^2-n-2}{2}p''+(n+1)q'\right].
+\end{align*}
+Hence
+\[
+\boxed{\frac p wF^{(n+2)}+\frac{2p'-q}{w}F^{(n+1)}
+-\left[\frac{n^2-n-2}{2}p''+(n+1)q'\right]y_n=0},
+\]
+which is Eq. (12.12).
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.1.4}\quad Confirm the algebraic steps that convert
+Eq.~(12.12) into Eq.~(12.16).
+\solution
+Write $G=D^n(wp^n)=wy_n$ and
+\[
+S=\frac{w'}w=\frac{q-p'}p.
+\]
+Two product differentiations give
+\[
+\frac{G'}w=y_n'+Sy_n,\qquad
+\frac{G''}w=y_n''+2Sy_n'+(S'+S^2)y_n.
+\]
+Put $A=(n^2-n-2)p''/2+(n+1)q'$. Substitution into Eq. (12.12) gives
+\[
+p y_n''+[2pS+2p'-q]y_n'
++[pS'+pS^2+(2p'-q)S-A]y_n=0.
+\]
+The first-derivative coefficient simplifies to
+$2(q-p')+2p'-q=q$. In the last coefficient,
+\[
+pS^2+(2p'-q)S=S[(q-p')+2p'-q]=p'S,
+\]
+so
+\[
+pS'+p'S-A=(pS)'-A=q'-p''-A
+=-\frac{n(n-1)}2p''-nq'.
+\]
+Thus
+\[
+\boxed{p y_n''+q y_n'-\left[\frac{n(n-1)}2p''+nq'\right]y_n=0},
+\]
+exactly Eq. (12.16), with eigenvalue
+$\lambda_n=-n(n-1)\alpha-n\mu$ when $p''=2\alpha$, $q'=\mu$.
+
+\erratum{The source's intermediate Eqs. (12.13)--(12.15), on textbook
+p.~553, contain algebraic errors. Equation (12.16) is correct. The
+consistent intermediate identities are the following:}
+\begin{align*}
+\erratum{\frac p wG''}
+&\erratum{=p y_n''+\frac{2(q-p')}{w}G'
+ -\left[p''-q'+\frac{q(q-p')}{p}\right]y_n,}\\
+\erratum{0}
+&\erratum{=p y_n''+\frac q wG'
+ -\left[\frac{n(n-1)}2p''+nq'+\frac{q(q-p')}{p}\right]y_n,}\\
+\erratum{\frac q wG'}
+&\erratum{=q y_n'+\frac{q(q-p')}{p}y_n.}
+\end{align*}
+For the first identity, eliminate $y_n'$ from $G''/w$ using
+$G'/w=y_n'+Sy_n$; then
+$p(S'-S^2)=q'-p''-q(q-p')/p$. The other two follow by substitution.
+The opposite signs printed in (12.14) and (12.15) would cancel each
+other, but neither intermediate identity is valid with those signs.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.1.5}\quad Given the following integral representations, in
+which \erratum{$n\in\mathbb Z$} and the contours \erratum{encircle the origin once counterclockwise} but no other singular points, derive
+the corresponding generating functions:
+\begin{enumerate}
+\item[(a)] Bessel functions:
+  \[
+  J_{n}(x)=\frac{1}{2\pi i}\oint e^{(x/2)(t-1/t)}t^{-n-1}\,dt.
+  \]
+\item[(b)] Modified Bessel functions:
+  \[
+  I_{n}(x)=\frac{1}{2\pi i}\oint e^{(x/2)(t+1/t)}t^{-n-1}\,dt.
+  \]
+\end{enumerate}
+\solution
+Both integrands are analytic in the punctured $t$-plane, so their
+Laurent coefficients on $0<|t|<\infty$ are extracted by the given
+positively oriented contour integrals. Uniqueness of the Laurent
+expansion therefore gives
+\[
+\boxed{e^{(x/2)(t-1/t)}=\sum_{n=-\infty}^{\infty}J_n(x)t^n},
+\qquad
+\boxed{e^{(x/2)(t+1/t)}=\sum_{n=-\infty}^{\infty}I_n(x)t^n}.
+\]
+For $x\ne0$, the essential singularity at zero requires the full integer
+range rather than a Taylor series. At $x=0$ both generating functions
+are one, so only the $n=0$ coefficient survives.
+To exhibit the coefficients directly, multiply the two exponential series:
+\[
+e^{xt/2}e^{\mp x/(2t)}
+=\sum_{j,k\ge0}\frac{(x/2)^{j+k}(\mp1)^k}{j!k!}t^{j-k}.
+\]
+For $n\ge0$, the terms with $j-k=n$ have $j=k+n$ and give
+\[
+J_n(x)=\sum_{k\ge0}\frac{(-1)^k(x/2)^{n+2k}}{k!(n+k)!},\quad
+I_n(x)=\sum_{k\ge0}\frac{(x/2)^{n+2k}}{k!(n+k)!}.
+\]
+The negative coefficients similarly give $J_{-n}=(-1)^nJ_n$ and
+$I_{-n}=I_n$. On any compact annulus in $t$, the product of exponential
+series converges absolutely and uniformly, justifying collection of
+coefficients and contour integration term by term.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.1.6}\quad Expand the generating function for the Legendre
+polynomials, $(1-2tz+t^{2})^{-1/2}$, in powers of $t$. Assume that $t$ is
+small. Collect the coefficients of $t^{0}$, $t^{1}$, and $t^{2}$.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$a_{0}=P_{0}(z)=1$,\quad$a_{1}=P_{1}(z)=z$,\quad
+$a_{2}=P_{2}(z)=\frac{1}{2}(3z^{2}-1)$.
+\solution
+Use $(1+u)^{-1/2}=1-u/2+3u^2/8+O(u^3)$ with
+$u=-2tz+t^2$. To retain only powers through $t^2$,
+\[
+-\frac u2=zt-\frac{t^2}2,\qquad
+\frac{3u^2}{8}=\frac38(4z^2t^2+O(t^3))
+=\frac32z^2t^2+O(t^3).
+\]
+Consequently
+\[
+(1-2tz+t^2)^{-1/2}
+=1+zt+\frac{3z^2-1}{2}t^2+O(t^3).
+\]
+Thus $\boxed{P_0=1,\ P_1=z,\ P_2=(3z^2-1)/2}$.
+Here $z$ is fixed and the branch is chosen to equal one at $t=0$;
+the expansion is valid in a sufficiently small disk about zero.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.1.7}\quad The set of Chebyshev polynomials usually denoted
+$U_{n}(x)$ has the generating-function formula
+\[
+\frac{1}{1-2xt+t^{2}}=\sum_{n=0}^{\infty}U_{n}(x)t^{n}.
+\]
+Derive a recurrence formula (for integer $n\ge0$) connecting three $U_{n}$ of
+consecutive $n$, \erratum{using $U_{-1}(x)=0$ at $n=0$}.
+\solution
+Multiply the generating-function identity by its denominator:
+\[
+(1-2xt+t^2)\sum_{n=0}^{\infty}U_n(x)t^n=1.
+\]
+The constant term gives $U_0=1$, and the coefficient of $t$ gives
+$U_1-2xU_0=0$, so $U_1=2x$. At power $t^{n+1}$ for $n\ge1$,
+\[
+U_{n+1}-2xU_n+U_{n-1}=0.
+\]
+Hence
+\[
+\boxed{U_{n+1}=2xU_n-U_{n-1}\quad(n\ge1)}.
+\]
+\erratum{To write this recurrence at $n=0$ as requested, define
+$U_{-1}=0$; otherwise the three-term formula starts at $n=1$ and the
+$n=0$ case is the separate initial equation $U_1=2xU_0$.}
+The recurrence gives $U_2=4x^2-1$ and $U_3=8x^3-4x$, which also
+follow by direct expansion of the rational generating function.
+
+\Needspace{8\baselineskip}
+\subsection*{12.2 Bernoulli Numbers}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.2.1}\quad Verify the identities, Eqs.~(12.32) and (12.46).
+\solution
+For Eq. (12.32), multiply the numerator and denominator involving
+$e^{-t}$ by $e^t$:
+\[
+\frac{-t}{e^{-t}-1}=\frac{te^t}{e^t-1}
+=\frac{t(e^t-1)+t}{e^t-1}=t+\frac{t}{e^t-1}.
+\]
+Subtracting $t$ gives
+\[
+\boxed{\frac{t}{e^t-1}=\frac{-t}{e^{-t}-1}-t}.
+\]
+The first equality already proves Eq. (12.46):
+\[
+\boxed{\frac{te^t}{e^t-1}=\frac{-t}{e^{-t}-1}}.
+\]
+These identities hold away from the denominator's zeros and extend
+through the removable point $t=0$ by continuity; both quotients there
+have limiting value one.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.2.2}\quad Show that the first Bernoulli polynomials are
+\begin{align*}
+B_{0}(s)&=1\\
+B_{1}(s)&=s-\tfrac{1}{2}\\
+B_{2}(s)&=s^{2}-s+\tfrac{1}{6}.
+\end{align*}
+Note that $B_{n}(0)=B_{n}$, the Bernoulli number.
+\solution
+The defining generating function is
+$te^{st}/(e^t-1)=\sum_{n\ge0}B_n(s)t^n/n!$.
+First invert the series $(e^t-1)/t=1+t/2+t^2/6+O(t^3)$.
+If its inverse is $1+at+bt^2+O(t^3)$, the product requires
+$a+1/2=0$ and $b+a/2+1/6=0$. Thus $a=-1/2$, $b=1/12$.
+Multiply by $e^{st}=1+st+s^2t^2/2+O(t^3)$:
+\[
+\frac{te^{st}}{e^t-1}
+=1+\left(s-\frac12\right)t
++\left(\frac{s^2}{2}-\frac s2+\frac1{12}\right)t^2+O(t^3).
+\]
+Comparing with $B_0+B_1t+B_2t^2/2!+\cdots$ yields
+\[
+\boxed{B_0(s)=1,\quad B_1(s)=s-\frac12,\quad
+ B_2(s)=s^2-s+\frac16}.
+\]
+At $s=0$ the generating function is the Bernoulli-number generating
+function itself, proving $B_n(0)=B_n$ for every $n$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.2.3}\quad Show that
+\[
+\tan x=\sum_{n=1}^{\infty}
+\frac{(-1)^{n-1}2^{2n}(2^{2n}-1)B_{2n}}{(2n)!}x^{2n-1},
+\quad-\frac{\pi}{2}<x<\frac{\pi}{2}.
+\]
+\emph{Hint.}~$\tan x=\cot x-2\cot2x$.
+\solution
+First verify the hinted identity:
+\[
+\cot x-2\cot2x
+=\frac{\cos x}{\sin x}
+ -\frac{\cos^2x-\sin^2x}{\sin x\cos x}
+=\frac{\sin x}{\cos x}=\tan x.
+\]
+The identity extends through zero by continuity after the poles cancel.
+From the Bernoulli generating function,
+\[
+\cot x=i+\frac{2i}{e^{2ix}-1}
+=\frac1x+\sum_{n=1}^{\infty}
+ \frac{(-1)^n2^{2n}B_{2n}}{(2n)!}x^{2n-1},\quad |x|<\pi.
+\]
+Here the $B_1=-1/2$ term cancels the initial $i$, and all odd Bernoulli
+numbers beyond $B_1$ vanish. Substitute this series at $x$ and at $2x$:
+\begin{align*}
+\cot x-2\cot2x
+&=\left(\frac1x-\frac2{2x}\right)
++\sum_{n\ge1}\frac{(-1)^n2^{2n}B_{2n}}{(2n)!}
+ [1-2^{2n}]x^{2n-1}\\
+&=\boxed{\sum_{n=1}^{\infty}
+\frac{(-1)^{n-1}2^{2n}(2^{2n}-1)B_{2n}}{(2n)!}x^{2n-1}}.
+\end{align*}
+Both cotangent expansions converge for $|x|<\pi/2$. The nearest poles
+of $\tan x$ are at $\pm\pi/2$, so this is also its exact Taylor radius.
+The first terms are $x+x^3/3+2x^5/15+\cdots$.
+
+\Needspace{8\baselineskip}
+\subsection*{12.3 Euler-Maclaurin Integration Formula}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.3.1}\quad The Euler-Maclaurin integration formula may be
+used for the evaluation of finite series:
+\[
+\sum_{m=1}^{n}f(m)=\int_{1}^{n}f(x)\,dx+\frac{1}{2}f(1)+\frac{1}{2}f(n)
++\frac{B_{2}}{2!}\left[f'(n)-f'(1)\right]+\cdots.
+\]
+Show that
+\begin{enumerate}
+\item[(a)] $\displaystyle\sum_{m=1}^{n}m=\tfrac{1}{2}n(n+1)$.
+\item[(b)] $\displaystyle\sum_{m=1}^{n}m^{2}=\tfrac{1}{6}n(n+1)(2n+1)$.
+\item[(c)] $\displaystyle\sum_{m=1}^{n}m^{3}=\tfrac{1}{4}n^{2}(n+1)^{2}$.
+\item[(d)] $\displaystyle\sum_{m=1}^{n}m^{4}
+  =\tfrac{1}{30}n(n+1)(2n+1)(3n^{2}+3n-1)$.
+\end{enumerate}
+\solution
+For each polynomial, the Euler--Maclaurin correction sequence terminates
+because sufficiently high derivatives vanish. Use $B_2=1/6$, $B_4=-1/30$.
+
+(a) For $f(x)=x$, the first-derivative difference is $1-1=0$, so
+\[
+\sum_{m=1}^nm=\frac{n^2-1}{2}+\frac{1+n}{2}
+=\boxed{\frac{n(n+1)}2}.
+\]
+(b) For $f(x)=x^2$, $f'=2x$ and higher odd derivatives vanish. Hence
+\begin{align*}
+\sum_{m=1}^nm^2
+&=\frac{n^3-1}{3}+\frac{1+n^2}{2}+\frac1{12}(2n-2)\\
+&=\frac{2n^3+3n^2+n}{6}
+=\boxed{\frac{n(n+1)(2n+1)}6}.
+\end{align*}
+(c) For $f(x)=x^3$, $f'=3x^2$ and $f^{(3)}=6$, whose endpoint
+difference is zero. Thus
+\begin{align*}
+\sum_{m=1}^nm^3
+&=\frac{n^4-1}{4}+\frac{1+n^3}{2}+\frac1{12}(3n^2-3)\\
+&=\frac{n^4+2n^3+n^2}{4}
+=\boxed{\frac{n^2(n+1)^2}{4}}.
+\end{align*}
+(d) For $f(x)=x^4$, $f'=4x^3$, $f^{(3)}=24x$, and $f^{(5)}=0$.
+Retain both nonzero endpoint corrections:
+\begin{align*}
+\sum_{m=1}^nm^4
+&=\frac{n^5-1}{5}+\frac{1+n^4}{2}
+ +\frac1{12}(4n^3-4)-\frac1{720}(24n-24)\\
+&=\frac{6n^5+15n^4+10n^3-n}{30}\\
+&=\boxed{\frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}}.
+\end{align*}
+The last factorization follows from
+$(n+1)(2n+1)(3n^2+3n-1)=6n^4+15n^3+10n^2-1$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.3.2}\quad The Euler-Maclaurin integration formula provides
+a way of calculating the Euler-Mascheroni constant $\gamma$ to high accuracy.
+Using $f(x)=1/x$ in Eq.~(12.57) (with interval $[1,n]$) and the definition of
+$\gamma$, Eq.~(1.13), we obtain
+\[
+\gamma=\sum_{s=1}^{n}s^{-1}-\ln n-\frac{1}{2n}
++\sum_{k=1}^{N}\frac{B_{2k}}{(2k)n^{2k}}\erratum{+R_{n,N}}.
+\]
+Using double-precision arithmetic, calculate the approximation for
+$N=1,2,\ldots$ \erratum{at $n=1000$}, as in the printed answer below.
+
+\emph{Note.}~See D.~E. Knuth, Euler's constant to 1271 places.
+\emph{Math.\ Comput.}~\textbf{16}: 275 (1962).
+\par\nobreak\hfill\emph{ANS.}\enspace
+For $n=1000$, $N=2$\quad$\gamma\erratum{\approx}0.5772\,1566\,4901$
+\erratum{(truncated, rather than rounded, to twelve decimal places)}.
+\solution
+\erratum{The printed finite-$N$ equality omits the remainder $R_{n,N}$; it is restored above.}
+Put $H_n=\sum_{s=1}^n1/s$ and define the computable approximation
+\[
+A_{n,N}=H_n-\ln n-\frac1{2n}
+ +\sum_{k=1}^N\frac{B_{2k}}{2k\,n^{2k}}.
+\]
+To see the signs, apply Euler--Maclaurin to the tail from $n$ to $M$.
+Since $f^{(2k-1)}(x)=-(2k-1)!/x^{2k}$, it gives
+\[
+H_M-H_n=\ln(M/n)+\frac1{2M}-\frac1{2n}
+ +\sum_{k=1}^N\frac{B_{2k}}{2k}
+ (n^{-2k}-M^{-2k})+\text{remainder}.
+\]
+Let $M\to\infty$ and use $H_M-\ln M\to\gamma$.
+This yields $\gamma=A_{n,N}+R_{n,N}$. A rigorous signed remainder
+bound, derived in Exercise 12.6.6, is
+\[
+0<(-1)^N R_{n,N}
+<\frac{|B_{2N+2}|}{(2N+2)n^{2N+2}}.
+\]
+
+Using IEEE double arithmetic, $n=1000$, an accurately summed harmonic
+sum, and then accurately summing the corrections, gives
+\begin{center}
+\begin{tabular}{rrr}\toprule
+$N$&$A_{1000,N}$&last correction\\\midrule
+1&$0.5772156649015416$&$8.3333333333\times10^{-8}$\\
+2&$0.5772156649015333$&$-8.3333333333\times10^{-15}$\\
+3&$0.5772156649015333$&$3.9682539683\times10^{-21}$\\
+4&$0.5772156649015333$&$-4.1666666667\times10^{-27}$\\
+5&$0.5772156649015333$&$7.5757575758\times10^{-33}$\\
+6&$0.5772156649015333$&$-2.1092796093\times10^{-38}$\\
+\bottomrule\end{tabular}\end{center}
+The exact truncation error at $N=2$ is below
+$1/(252\,1000^6)=3.9682539683\times10^{-21}$.
+The remaining roughly $4\times10^{-16}$ difference from
+$\gamma=0.5772156649015328606\ldots$ is double-arithmetic rounding
+in the harmonic sum and subtraction. More corrections cannot recover
+those already lost digits. To twelve decimal places the result is
+$\boxed{\gamma=0.577215664902}$, consistent with the textbook's
+truncated display $0.5772\,1566\,4901$.
+
+\Needspace{8\baselineskip}
+\subsection*{12.4 Dirichlet Series}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.4.1}\quad From
+$B_{2n}=(-1)^{n-1}\dfrac{2(2n)!}{(2\pi)^{2n}}\zeta(2n)$, show that
+\begin{enumerate}
+\item[(a)] $\zeta(2)=\dfrac{\pi^{2}}{6}$,\qquad
+(d) $\zeta(8)=\dfrac{\pi^{8}}{9450}$,
+\item[(b)] $\zeta(4)=\dfrac{\pi^{4}}{90}$,\qquad
+(e) $\zeta(10)=\dfrac{\pi^{10}}{93{,}555}$,
+\item[(c)] $\zeta(6)=\dfrac{\pi^{6}}{945}$,
+\end{enumerate}
+\solution
+Rearrange the stated identity before inserting numbers:
+\[
+\zeta(2n)=\frac{(-1)^{n-1}B_{2n}(2\pi)^{2n}}{2(2n)!}.
+\]
+With $B_2=1/6$, $B_4=-1/30$, $B_6=1/42$, $B_8=-1/30$,
+$B_{10}=5/66$, the five evaluations are
+\begin{align*}
+\zeta(2)&=\frac{(1/6)4\pi^2}{2\cdot2}=\boxed{\pi^2/6},\\
+\zeta(4)&=\frac{(1/30)16\pi^4}{2\cdot24}=\boxed{\pi^4/90},\\
+\zeta(6)&=\frac{(1/42)64\pi^6}{2\cdot720}=\boxed{\pi^6/945},\\
+\zeta(8)&=\frac{(1/30)256\pi^8}{2\cdot40320}=\boxed{\pi^8/9450},\\
+\zeta(10)&=\frac{(5/66)1024\pi^{10}}{2\cdot3628800}
+=\boxed{\pi^{10}/93555}.
+\end{align*}
+Each alternating sign cancels the sign of the corresponding Bernoulli
+number, leaving the positive values required by the defining zeta series.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.4.2}\quad The integral
+\[
+\int_{0}^{1}\frac{dx}{x}\,[\ln(1-x)]^{2}
+\]
+appears in the fourth-order correction to the magnetic moment of the
+electron. Show that it equals $2\zeta(3)$.
+
+\emph{Hint.}~Let $1-x=e^{-t}$.
+\solution
+Let $1-x=e^{-t}$, so $x=1-e^{-t}$, $dx=e^{-t}dt$, and
+$\ln(1-x)=-t$. The endpoints $x=0,1$ become $t=0,\infty$, giving
+\[
+I=\int_0^\infty\frac{t^2e^{-t}}{1-e^{-t}}dt.
+\]
+For $t>0$, $e^{-t}/(1-e^{-t})=\sum_{m=1}^\infty e^{-mt}$.
+All summands are nonnegative, so Tonelli's theorem permits interchange:
+\[
+I=\sum_{m=1}^\infty\int_0^\infty t^2e^{-mt}dt.
+\]
+Put $u=mt$ in each integral. Two integrations by parts give
+$\int_0^\infty u^2e^{-u}du=2\int_0^\infty ue^{-u}du=2$.
+Consequently
+\[
+\boxed{I=2\sum_{m=1}^\infty\frac1{m^3}=2\zeta(3)}.
+\]
+The finite value also proves convergence of the original improper
+integral, including its logarithmic endpoint singularity.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.4.3}\quad
+\begin{enumerate}
+\item[(a)] Show that
+  \[
+  \int_{0}^{\infty}\frac{(\ln z)^{2}}{1+z^{2}}\,dz
+  =4\left(1-\frac{1}{3^{3}}+\frac{1}{5^{3}}-\frac{1}{7^{3}}+\cdots\right).
+  \]
+\item[(b)] By contour integration show that \erratum{the integral, equivalently
+  four times the parenthesized series,} evaluates to $\pi^{3}/8$.
+\end{enumerate}
+\solution
+(a) In the part from $1$ to $\infty$, set $z=1/t$. Since
+$dz/(1+z^2)=-dt/(1+t^2)$ and $(\ln z)^2=(\ln t)^2$,
+\[
+I=2\int_0^1\frac{(\ln t)^2}{1+t^2}dt.
+\]
+Expand the denominator geometrically. The absolute sum of the integrals
+is finite, because
+\[
+\int_0^1t^{2k}(\ln t)^2dt
+=\int_0^\infty u^2e^{-(2k+1)u}du=\frac2{(2k+1)^3}.
+\]
+Here $t=e^{-u}$ was used. Thus termwise integration gives
+\[
+\boxed{I=4\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)^3}=4\beta(3)}.
+\]
+
+(b) Integrate $F(z)=(\operatorname{Log}z)^2/(1+z^2)$ round an upper
+semicircle, indenting the origin, using $0<\arg z<\pi$ inside the
+contour. The large arc is $O((\ln R)^2/R)$ and the small arc is
+$O(\epsilon|\ln\epsilon|^2)$; both vanish. The sole enclosed pole is
+$z=i$, where
+\[
+\operatorname{Res}_{z=i}F
+=\frac{(i\pi/2)^2}{2i}=\frac{i\pi^2}{8},\qquad
+\oint Fdz=-\frac{\pi^3}{4}.
+\]
+On the negative real edge, $z=-t$ and $\operatorname{Log}z=\ln t+i\pi$.
+The two real-axis contributions therefore add to
+\[
+2I+2i\pi J-\pi^2K,\qquad
+J=\int_0^\infty\frac{\ln t}{1+t^2}dt,\quad
+K=\int_0^\infty\frac{dt}{1+t^2}=\frac\pi2.
+\]
+The substitution $t=1/u$ gives $J=-J$, so $J=0$. Equating to the
+residue result yields $2I-\pi^3/2=-\pi^3/4$, hence
+\[
+\boxed{I=\pi^3/8},\qquad \boxed{\beta(3)=\pi^3/32}.
+\]
+\erratum{The value $\pi^3/8$ refers to the integral, or to four times
+the series in parentheses in (a). The unmultiplied alternating odd-cube
+series has value $\pi^3/32$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.4.4}\quad Show that Catalan's constant, $\beta(2)$, may be
+written as
+\[
+\beta(2)=2\sum_{k=1}^{\infty}(4k-3)^{-2}-\frac{\pi^{2}}{8}.
+\]
+\emph{Hint.}~$\pi^{2}=6\zeta(2)$.
+\solution
+Separate the positive odd integers into their two residue classes:
+\[
+A=\sum_{k\ge1}(4k-3)^{-2},\qquad
+B=\sum_{k\ge1}(4k-1)^{-2}.
+\]
+Absolute convergence permits grouping. By definition $\beta(2)=A-B$,
+while
+\[
+A+B=\sum_{j\ge0}(2j+1)^{-2}
+=\zeta(2)-\sum_{j\ge1}(2j)^{-2}
+=\frac34\zeta(2)=\frac{\pi^2}{8}.
+\]
+Eliminate $B=\pi^2/8-A$ to obtain
+\[
+\boxed{\beta(2)=2\sum_{k=1}^\infty(4k-3)^{-2}-\frac{\pi^2}{8}}.
+\]
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.4.5}\quad Show that
+\begin{enumerate}
+\item[(a)] $\displaystyle\int_{0}^{1}\frac{\ln(1+x)}{x}\,dx=\frac{1}{2}\zeta(2)$,\quad
+(b) $\displaystyle\lim_{a\to1^{-}}\int_{0}^{a}\frac{\ln(1-x)}{x}\,dx=\erratum{-}\zeta(2)$.
+\end{enumerate}
+Note that the integrand in part (b) diverges for $a=1$ but that the integral
+is convergent.
+\solution
+(a) For $0\le x<1$, expand
+$\ln(1+x)/x=\sum_{k\ge1}(-1)^{k+1}x^{k-1}/k$.
+The sum of the integrals of the absolute values is
+$\sum_{k\ge1}1/k^2<\infty$, which justifies termwise integration up
+to the endpoint. Therefore
+\[
+\int_0^1\frac{\ln(1+x)}x dx
+=\sum_{k\ge1}\frac{(-1)^{k+1}}{k^2}
+=\zeta(2)-2\sum_{j\ge1}\frac1{(2j)^2}
+=\boxed{\frac12\zeta(2)}.
+\]
+(b) For $a<1$, the logarithm series is uniformly convergent on
+$[0,a]$ after removing the harmless limit at zero, giving
+\[
+\int_0^a\frac{\ln(1-x)}x dx
+=-\sum_{k=1}^\infty\frac{a^k}{k^2}.
+\]
+Dominated convergence, with dominating summable sequence $1/k^2$,
+permits $a\uparrow1$, so
+\[
+\boxed{\lim_{a\to1^-}\int_0^a\frac{\ln(1-x)}x dx=-\zeta(2)}.
+\]
+\erratum{The printed right-hand side in (b) has the wrong sign.
+The integral is negative since $\ln(1-x)/x<0$ for $0<x<1$.}
+The integrand diverges logarithmically at one, but its absolute integral
+is $\zeta(2)$ and is finite.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.4.6}\quad
+\begin{enumerate}
+\item[(a)] Show that the equation
+  $\ln2=\sum_{s=1}^{\infty}(-1)^{s+1}s^{-1}$, Eq.~(1.53), may be rewritten as
+  \[
+  \ln2=\sum_{s=2}^{n}2^{-s}\zeta(s)
+  +\sum_{p=1}^{\infty}(2p)^{-n-1}\left[1-\frac{1}{2p}\right]^{-1}.
+  \]
+  \emph{Hint.}~Take the terms in pairs.
+\item[(b)] Calculate $\ln2$ to six significant figures.
+\end{enumerate}
+\solution
+(a) Pair neighboring terms of the convergent alternating harmonic series:
+\[
+\ln2=\sum_{p=1}^\infty\left(\frac1{2p-1}-\frac1{2p}\right)
+=\sum_{p=1}^\infty\frac{(2p)^{-2}}{1-(2p)^{-1}}.
+\]
+For $r=(2p)^{-1}$ the finite geometric identity is
+\[
+\frac{r^2}{1-r}=\sum_{s=2}^{n}r^s+\frac{r^{n+1}}{1-r}.
+\]
+Sum it over $p$. The first sum has finitely many $s$, and all terms
+are nonnegative, giving exactly
+\[
+\boxed{\ln2=\sum_{s=2}^{n}2^{-s}\zeta(s)
++\sum_{p=1}^\infty\frac{(2p)^{-n-1}}{1-(2p)^{-1}}}.
+\]
+The usual nonempty first sum takes $n\ge2$; the $n=1$ case also holds
+if that sum is interpreted as empty.
+
+(b) The remainder $R_n$ is positive and, since
+$1-(2p)^{-1}\ge1/2$, obeys
+\[
+0<R_n\le2\sum_{p\ge1}(2p)^{-n-1}=2^{-n}\zeta(n+1).
+\]
+Take $n=24$. Direct summation of the 23 zeta terms gives
+\[
+S_{24}=0.6931471209552993497\ldots,\qquad
+R_{24}<5.9604646552\times10^{-8}.
+\]
+Both ends of the interval $S_{24}<\ln2<S_{24}+R_{24}^{\rm bound}$
+round to the same six-significant-figure value:
+\[
+\boxed{\ln2=0.693147\quad\text{(six significant figures)}}.
+\]
+The error bound comes from the derived remainder, independently of any
+precomputed logarithm value.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.4.7}\quad
+\begin{enumerate}
+\item[(a)] Show that the equation
+  $\pi/4=\sum_{s=1}^{\infty}(-1)^{s+1}(2s-1)^{-1}$, Eq.~(12.72), may be
+  rewritten as
+  \[
+  \frac{\pi}{4}=1-2\sum_{s=1}^{n}4^{-2s}\zeta(2s)
+  -2\sum_{p=1}^{\infty}(4p)^{-2n-2}\left[1-\frac{1}{(4p)^{2}}\right]^{-1}.
+  \]
+\item[(b)] Calculate $\pi/4$ to six significant figures.
+\end{enumerate}
+\solution
+(a) Separate the first term of the arctangent series, then pair the rest:
+\[
+\frac\pi4=1+\sum_{p=1}^\infty
+\left(-\frac1{4p-1}+\frac1{4p+1}\right)
+=1-2\sum_{p=1}^\infty\frac1{(4p)^2-1}.
+\]
+With $r=(4p)^{-2}$,
+\[
+\frac1{(4p)^2-1}=\frac r{1-r}
+=\sum_{s=1}^nr^s+\frac{r^{n+1}}{1-r}.
+\]
+Summing over $p$ yields
+\[
+\boxed{\frac\pi4=1-2\sum_{s=1}^n4^{-2s}\zeta(2s)
+-2\sum_{p=1}^\infty
+\frac{(4p)^{-2n-2}}{1-(4p)^{-2}}}.
+\]
+(b) The omitted correction has negative sign. Its magnitude is bounded
+using $1-(4p)^{-2}\ge15/16$:
+\[
+0<R_n:=2\sum_{p\ge1}\frac{(4p)^{-2n-2}}{1-(4p)^{-2}}
+\le\frac{32}{15}\,4^{-2n-2}\zeta(2n+2).
+\]
+For $n=6$, the finite part and bound are
+\[
+S_6=0.7853981713451978431\ldots,\qquad
+R_6<7.9477727265\times10^{-9}.
+\]
+Thus $S_6-R_6^{\rm bound}<\pi/4<S_6$, whose endpoints both round to
+\[
+\boxed{\pi/4=0.785398\quad\text{(six significant figures)}}.
+\]
+
+\Needspace{8\baselineskip}
+\subsection*{12.5 Infinite Products}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.1}\quad \erratum{Assume $a_n\ge0$, no factor vanishes, and the factors
+are eventually positive. Product convergence means a finite nonzero
+limit.} Using
+\[
+\ln\prod_{n=1}^{\infty}(1\pm a_{n})=\sum_{n=1}^{\infty}\ln(1\pm a_{n})
+\]
+and the Maclaurin expansion of $\ln(1\pm a_{n})$, show that the infinite
+product $\prod_{n=1}^{\infty}(1\pm a_{n})$ converges or diverges with the
+infinite series $\sum_{n=1}^{\infty}a_{n}$.
+\solution
+\erratum{The unqualified statement is false for signed or complex $a_n$.
+It is valid in its usual comparison-test form when $a_n\ge0$ and the
+factors are eventually positive. A convergent infinite product here means
+a finite, nonzero limit, with no zero factor.}
+Discarding finitely many initial nonzero factors only multiplies all later
+partial products by a fixed nonzero constant. We therefore apply real
+logarithms to the eventually positive tail. For that tail, convergence
+of the product is equivalent to convergence of its logarithmic series. If $a_n\not\to0$, a nonzero product limit
+is already impossible, since the ratio of two successive partial products
+would not tend to one. Otherwise, eventually $0\le a_n\le1/2$.
+Integration of $1/(1+t)$ and $1/(1-t)$ on $[0,a_n]$ gives
+\[
+\frac{a_n}{2}\le\ln(1+a_n)\le a_n,\qquad
+ a_n\le-\ln(1-a_n)\le2a_n.
+\]
+The comparison test now proves the stated equivalence for both choices
+of sign. If $\sum a_n$ diverges, the plus-product grows without bound
+and the minus-product tends to zero.
+
+To see why the hypotheses matter, take
+$a_n=(-1)^n/\sqrt{n+1}$. Its series converges by the alternating test,
+and every $1+a_n$ is positive. But the logarithm expansion gives
+\[
+\ln(1+a_n)=a_n-\frac12a_n^2+O(|a_n|^3).
+\]
+Here $\sum a_n^2=\sum1/(n+1)=\infty$, while
+$\sum|a_n|^3<\infty$. Consequently the logarithmic partial sums tend
+to $-\infty$, and $\prod(1+a_n)$ tends to zero, not a nonzero limit.
+
+A useful corrected version for signed or complex terms is: if
+$a_n\to0$, $\sum|a_n|^2<\infty$, and no factor vanishes, then
+$\prod(1+a_n)$ converges to a nonzero limit exactly when $\sum a_n$
+converges. Indeed $\log(1+a_n)-a_n=O(|a_n|^2)$, using the logarithm
+branch near one; its error series is absolutely convergent. To justify
+necessity as well as sufficiency, suppose the partial products $P_n\to L\ne0$.
+Choose a disk about $L$ avoiding zero and one analytic logarithm $\ell$
+there. For large $n$, $\ell(P_n)-\ell(P_{n-1})=\log(1+a_n)$:
+both sides tend to zero, and their difference is an integer multiple
+of $2\pi i$. The logarithmic tail telescopes to a convergent limit.
+Conversely, a convergent logarithmic series exponentiates to a nonzero
+product. Subtracting the absolutely convergent error proves the claim
+about $\sum a_n$. The minus case follows by replacing $a_n$ by $-a_n$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.2}\quad An infinite product appears in the form
+\[
+\prod_{n=1}^{\infty}\left(\frac{1+a/n}{1+b/n}\right),
+\]
+where $a$ and $b$ are constants \erratum{not equal to negative integers,
+so all factors are defined and nonzero}. Show that this infinite product
+converges \erratum{to a finite nonzero limit} only if $a=b$.
+\solution
+\erratum{Use the standard finite, nonzero meaning of product convergence,
+and assume every denominator and numerator factor is nonzero. If a zero
+limit were counted as convergence, the asserted ``only if'' would fail.}
+For fixed real or complex $a,b$, the tail has a logarithm branch near one.
+Its expansion is
+\[
+\log\frac{1+a/n}{1+b/n}
+=\frac{a-b}{n}+O(n^{-2}).
+\]
+The error series converges absolutely, so for the partial product $P_N$,
+\[
+\log P_N=(a-b)H_N+C+o(1)
+=(a-b)\log N+C_1+o(1).
+\]
+The finitely many initial factors only alter the nonzero multiplicative
+constant. Thus $P_N=K N^{a-b}(1+o(1))$, $K\ne0$.
+If $\Re(a-b)>0$, its modulus tends to infinity; if $\Re(a-b)<0$,
+it tends to zero. If $a-b=i\beta$ with real $\beta\ne0$, its phase
+$\beta\ln N$ has no limit modulo $2\pi$: integers nearest
+$e^{2\pi k/|\beta|}$ and $e^{(2\pi k+\pi)/|\beta|}$ give opposite
+limiting phases. Hence no finite nonzero limit exists unless $a=b$.
+When $a=b$, every defined factor equals one, so
+\[
+\boxed{\text{the nonzero product converges exactly when }a=b.}
+\]
+For a concrete zero-limit exception, $a=0,b=1$ gives
+$P_N=\prod_{n=1}^N n/(n+1)=1/(N+1)\to0$.
+If $a$ is a negative integer a numerator factor is zero; if $b$ is a
+negative integer the written product is undefined at that factor.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.3}\quad Show that the infinite product representations
+of $\sin x$ and $\cos x$ are consistent with the identity
+$2\sin x\cos x=\sin2x$.
+\solution
+The product formulas are
+\[
+\sin x=x\prod_{n=1}^{\infty}\left(1-\frac{x^2}{n^2\pi^2}\right),\quad
+\cos x=\prod_{n=1}^{\infty}
+ \left(1-\frac{4x^2}{(2n-1)^2\pi^2}\right).
+\]
+In the sine product rewrite $x^2/(n^2\pi^2)=4x^2/[(2n)^2\pi^2]$.
+The two products then supply the even and odd positive integers:
+\begin{align*}
+2\sin x\cos x
+&=2x\prod_{n\ge1}\left(1-\frac{4x^2}{(2n)^2\pi^2}\right)
+       \prod_{n\ge1}\left(1-\frac{4x^2}{(2n-1)^2\pi^2}\right)\\
+&=2x\prod_{m=1}^{\infty}\left(1-\frac{(2x)^2}{m^2\pi^2}\right)
+=\boxed{\sin2x}.
+\end{align*}
+The deviations of the factors from one are bounded on compact $x$ sets
+by a constant times $1/n^2$. Their absolute summability justifies
+interleaving the factors. At zeros of a factor the equality extends
+by continuity, so it holds for all complex $x$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.4}\quad Determine the limit to which
+$\displaystyle\prod_{n=2}^{\infty}\left(1+\frac{(-1)^{n}}{n}\right)$
+converges.
+\solution
+Pair the factor with even index $2k$ with the following odd index:
+\[
+\left(1+\frac1{2k}\right)
+\left(1-\frac1{2k+1}\right)
+=\frac{2k+1}{2k}\frac{2k}{2k+1}=1.
+\]
+To ensure that pairing has not hidden a subsequence issue, let
+$P_N=\prod_{n=2}^N[1+(-1)^n/n]$. Then exactly
+\[
+P_{2M+1}=1,\qquad P_{2M}=\frac{2M+1}{2M}.
+\]
+Both subsequences tend to one. Therefore the complete sequence of
+partial products converges and
+\[
+\boxed{\prod_{n=2}^{\infty}\left(1+\frac{(-1)^n}{n}\right)=1}.
+\]
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.5}\quad Show that
+$\displaystyle\prod_{n=2}^{\infty}\left[1-\frac{2}{n(n+1)}\right]
+=\frac{1}{3}$.
+\solution
+Factor each term before taking any limit:
+\[
+1-\frac2{n(n+1)}
+=\frac{n^2+n-2}{n(n+1)}
+=\frac{(n-1)(n+2)}{n(n+1)}.
+\]
+The finite product telescopes in two separate pieces:
+\begin{align*}
+P_N&=\left(\prod_{n=2}^N\frac{n-1}{n}\right)
+     \left(\prod_{n=2}^N\frac{n+2}{n+1}\right)\\
+&=\left(\frac12\frac23\cdots\frac{N-1}{N}\right)
+  \left(\frac43\frac54\cdots\frac{N+2}{N+1}\right)\\
+&=\frac1N\frac{N+2}{3}.
+\end{align*}
+Taking $N\to\infty$ proves $\boxed{P_\infty=1/3}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.6}\quad Prove that
+$\displaystyle\prod_{n=2}^{\infty}\left(1-\frac{1}{n^{2}}\right)=\frac{1}{2}$.
+\solution
+Use $1-1/n^2=(n-1)(n+1)/n^2$. For a finite upper limit,
+\[
+P_N=\left(\prod_{n=2}^N\frac{n-1}{n}\right)
+    \left(\prod_{n=2}^N\frac{n+1}{n}\right)
+=\frac1N\frac{N+1}{2}=\frac{N+1}{2N}.
+\]
+Both telescoping factors are exact for every $N\ge2$.
+Thus $\boxed{\lim_{N\to\infty}P_N=1/2}$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.7}\quad Verify the Euler identity
+$\displaystyle\prod_{p=1}^{\infty}(1+z^{p})
+=\prod_{q=1}^{\infty}(1-z^{2q-1})^{-1}$, $|z| < 1$.
+\solution
+For $|z|<1$, all factors $1\pm z^n$ are nonzero and
+$\sum_{n\ge1}|z|^n<\infty$. The corresponding products and their
+logarithmic tails converge absolutely, permitting the following
+factorization and regrouping:
+\[
+\prod_{p=1}^{\infty}(1+z^p)
+=\frac{\prod_{p=1}^{\infty}(1-z^{2p})}
+       {\prod_{p=1}^{\infty}(1-z^p)}.
+\]
+Split the denominator into even and odd indices:
+\[
+\prod_{p\ge1}(1-z^p)
+=\prod_{q\ge1}(1-z^{2q})\prod_{q\ge1}(1-z^{2q-1}).
+\]
+The even-index product is nonzero, so it cancels legitimately, leaving
+\[
+\boxed{\prod_{p=1}^{\infty}(1+z^p)
+=\prod_{q=1}^{\infty}(1-z^{2q-1})^{-1}}.
+\]
+The same argument is uniform on $|z|\le r<1$. No boundary claim at
+$|z|=1$ follows from it.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.8}\quad Show that
+$\prod_{r=1}^{\infty}(1+x/r)e^{-x/r}$ converges for all finite $x$ (except for
+the zeros of $1+x/r$).
+
+\emph{Hint.}~Write the $n$th factor as $1+a_{n}$.
+\erratum{Here convergence means a nonzero product; at a negative integer
+$x$ the partial products instead have the zero limit.}
+\solution
+Write the $r$th factor as $1+a_r$ with $u=x/r$:
+\begin{align*}
+(1+u)e^{-u}
+&=(1+u)\left(1-u+\frac{u^2}{2}-\frac{u^3}{6}+\cdots\right)\\
+&=1-\frac{u^2}{2}+\frac{u^3}{3}+O(u^4).
+\end{align*}
+Hence $a_r=-x^2/(2r^2)+O(r^{-3})$ for fixed finite complex $x$,
+and $\sum|a_r|<\infty$. Once $|a_r|<1/2$, the convergent logarithm
+series has the bound
+\[
+|\log(1+a_r)|
+\le\sum_{k\ge1}\frac{|a_r|^k}{k}\le2|a_r|.
+\]
+The logarithmic tail therefore converges absolutely, proving a finite
+nonzero product whenever no factor vanishes. The exceptional points
+are exactly $x=-1,-2,\ldots$, since exponentials never vanish.
+
+The estimate is uniform for $|x|\le R$ after finitely many factors:
+$|a_r|\le C_R/r^2$. Thus the product even defines an entire function
+by locally uniform convergence.
+\erratum{At the excluded points it still converges as a sequence of
+partial products, with value zero; they are excluded only from the
+convention of a nonzero convergent infinite product.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.9}\quad Derive the formula, \erratum{for $0<x<\pi$ with real logarithms},
+\[
+\ln\sin x=\ln x+\sum a_{n}x^{n},
+\]
+giving the explicit form for the coefficients $a_{n}$.
+
+\emph{Hint.}~$d(\ln\sin x)/dx=\cot x$.
+\solution
+It is convenient to remove the known logarithmic singularity first:
+\[
+\frac d{dx}\ln\frac{\sin x}{x}=\cot x-\frac1x.
+\]
+The Bernoulli expansion of the right side is
+\[
+\cot x-\frac1x
+=\sum_{k=1}^{\infty}
+ \frac{(-1)^k2^{2k}B_{2k}}{(2k)!}x^{2k-1},\qquad |x|<\pi.
+\]
+Integrate term by term from zero, using
+$\sin x/x\to1$ to fix the integration constant to zero:
+\[
+\boxed{\ln\frac{\sin x}{x}
+=\sum_{k=1}^{\infty}
+\frac{(-1)^k2^{2k}B_{2k}}{2k(2k)!}x^{2k}}.
+\]
+Therefore
+\[
+\boxed{a_{2k}=\frac{(-1)^k2^{2k}B_{2k}}{2k(2k)!}
+=-\frac{\zeta(2k)}{k\pi^{2k}},\qquad a_{2k-1}=0\quad(k\ge1)}.
+\]
+The constant coefficient is $a_0=0$ by the normalization at zero.
+In particular,
+$\ln(\sin x/x)=-x^2/6-x^4/180-x^6/2835-\cdots$.
+\erratum{For real logarithms the question's form $\ln\sin x=\ln x+\cdots$
+uses $0<x<\pi$. For $-\pi<x<0$, write $\ln|\sin x|=\ln|x|+\cdots$.
+In complex form, the quotient has an analytic logarithm on $|x|<\pi$
+normalized to zero at the origin; any separate logarithms must use
+consistent branches.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.5.10}\quad Using the infinite product representations of
+$\sin z$, show that \erratum{for $|z|<\pi$}
+\[
+z\cot z=1-2\sum_{m,n=1}^{\infty}\left(\frac{z}{n\pi}\right)^{2m},
+\]
+and hence that the Bernoulli numbers are given by the formula
+\[
+B_{2n}=(-1)^{n-1}\frac{2(2n)!}{(2\pi)^{2n}}\zeta(2n).
+\]
+This is an alternate route to Eq.~(12.38).
+
+\emph{Hint.}~The result of Exercise 12.5.9 will be helpful.
+\solution
+Take the logarithmic derivative of the sine product on a compact subset
+avoiding its zeros. Local uniform convergence of the derivative series
+follows from its $O(n^{-2})$ terms. Thus
+\[
+\cot z=\frac1z+\sum_{n=1}^{\infty}
+ \frac{-2z}{n^2\pi^2-z^2},\qquad
+z\cot z=1-2\sum_{n=1}^{\infty}\frac{z^2}{n^2\pi^2-z^2}.
+\]
+\erratum{The requested double power series is restricted to $|z|<\pi$;
+it is not a representation for arbitrary $z$ away from the poles.}
+In that disk each denominator can be expanded geometrically:
+\[
+\frac{z^2}{n^2\pi^2-z^2}
+=\sum_{m=1}^{\infty}\left(\frac{z}{n\pi}\right)^{2m}.
+\]
+For $|z|\le r<\pi$ the double absolute sum is bounded by
+\[
+\sum_{n\ge1}\frac{r^2/(n\pi)^2}{1-r^2/(n\pi)^2}
+\le\frac{r^2\zeta(2)}{\pi^2[1-r^2/\pi^2]}<\infty,
+\]
+so the two summations may be interchanged. Hence
+\[
+\boxed{z\cot z=1-2\sum_{m,n\ge1}(z/(n\pi))^{2m}}
+=1-2\sum_{m\ge1}\frac{\zeta(2m)}{\pi^{2m}}z^{2m}.
+\]
+Independently, the Bernoulli generating function gives
+\[
+z\cot z=1+\sum_{m\ge1}
+ \frac{(-1)^m2^{2m}B_{2m}}{(2m)!}z^{2m}.
+\]
+Equate the coefficients of $z^{2m}$ and solve for $B_{2m}$:
+\[
+\boxed{B_{2m}=(-1)^{m-1}\frac{2(2m)!}{(2\pi)^{2m}}\zeta(2m)}.
+\]
+
+\Needspace{8\baselineskip}
+\subsection*{12.6 Asymptotic Series}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.6.1}\quad Integrating by parts, develop asymptotic
+expansions \erratum{as $x\to+\infty$} of the Fresnel integrals
+\begin{enumerate}
+\item[(a)] $\displaystyle C(x)=\int_{0}^{x}\cos\frac{\pi u^{2}}{2}\,du$,\quad
+(b) $\displaystyle s(x)=\int_{0}^{x}\sin\frac{\pi u^{2}}{2}\,du$.
+\end{enumerate}
+These integrals appear in the analysis of a knife-edge diffraction pattern.
+\solution
+Take $x\to+\infty$ and write $S(x)=s(x)$ for the sine integral in the
+question. Put $\theta=\pi x^2/2$. Rotating the Gaussian integration
+ray through $\pi/4$ gives
+\[
+\int_0^\infty e^{i\pi u^2/2}du
+=e^{i\pi/4}\int_0^\infty e^{-\pi t^2/2}dt
+=\frac{1+i}{2}.
+\]
+The rotation is justified by an arc estimate: on $u=Re^{i\phi}$,
+$|e^{i\pi u^2/2}|=e^{-\pi R^2\sin(2\phi)/2}$; its integral over
+$0\le\phi\le\pi/4$, including the small region next to $\phi=0$,
+is bounded using $\sin2\phi\ge4\phi/\pi$:
+\[
+R\int_0^{\pi/4}e^{-\pi R^2\sin(2\phi)/2}d\phi
+\le R\int_0^\infty e^{-2R^2\phi}d\phi=\frac1{2R}.
+\]
+Therefore
+\[
+C(x)+iS(x)=\frac{1+i}{2}-T_0(x),\qquad
+T_m(x)=\int_x^\infty u^{-2m}e^{i\pi u^2/2}du.
+\]
+Since $d(e^{i\pi u^2/2})=i\pi u e^{i\pi u^2/2}du$, integration by
+parts gives
+\begin{align*}
+T_m&=\left[\frac{e^{i\pi u^2/2}}{i\pi u^{2m+1}}\right]_x^\infty
+ +\frac{2m+1}{i\pi}\int_x^\infty u^{-2m-2}e^{i\pi u^2/2}du\\
+&=\frac{i e^{i\theta}}{\pi x^{2m+1}}
+ -\frac{i(2m+1)}\pi T_{m+1}.
+\end{align*}
+Repeated substitution therefore gives the finite identity
+\[
+T_0=\frac{i e^{i\theta}}{\pi x}
+\sum_{k=0}^{N-1}\frac{(-i)^k(2k-1)!!}{(\pi x^2)^k}
++\frac{(-i)^N(2N-1)!!}{\pi^N}T_N,
+\]
+where $(-1)!!=1$. The same integration-by-parts identity, followed by
+an absolute bound on $T_{N+1}$, gives
+\[
+|T_N|\le\frac1{\pi x^{2N+1}}
++\frac{2N+1}{\pi}\int_x^\infty u^{-2N-2}du
+=\frac2{\pi x^{2N+1}}.
+\]
+Thus the remainder is of the order of the next inverse power for every
+fixed $N$, proving asymptotic validity.
+
+Separate the even and odd $k$ contributions by defining
+\begin{align*}
+f(x)&\sim\frac1{\pi x}\left[1-\frac3{\pi^2x^4}
+ +\frac{105}{\pi^4x^8}-\cdots\right],\\
+g(x)&\sim\frac1{\pi^2x^3}\left[1-\frac{15}{\pi^2x^4}
+ +\frac{945}{\pi^4x^8}-\cdots\right].
+\end{align*}
+Then $T_0\sim e^{i\theta}(g+if)$, so the requested real expansions are
+\[
+\boxed{C(x)\sim\frac12+f(x)\sin\theta-g(x)\cos\theta},
+\qquad
+\boxed{S(x)\sim\frac12-f(x)\cos\theta-g(x)\sin\theta}.
+\]
+For example $C=1/2+\sin\theta/(\pi x)-\cos\theta/(\pi^2x^3)
++O(x^{-5})$, with the corresponding sine-integral formula obtained
+from the second box. For large negative $x$, use the oddness of both
+integrals rather than the positive-infinity constants $1/2$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.6.2}\quad Rederive the asymptotic expansions of
+$\mathrm{Ci}(x)$ and $\mathrm{si}(x)$ \erratum{as $x\to+\infty$} by repeated integration by parts.
+
+\emph{Hint.}~$\mathrm{Ci}(x)+i\,\mathrm{si}(x)
+=-\displaystyle\int_{x}^{\infty}\frac{e^{it}}{t}\,dt$.
+\solution
+Use the definitions in the hint, so $\mathrm{si}(x)=\mathrm{Si}(x)-\pi/2$,
+and take $x\to+\infty$. Set
+\[
+J_m(x)=\int_x^\infty\frac{e^{it}}{t^{m+1}}dt.
+\]
+Integration by parts with $dv=e^{it}dt$ gives
+\[
+J_m=\left[\frac{e^{it}}{it^{m+1}}\right]_x^\infty
+ +\frac{m+1}{i}J_{m+1}
+=\frac{i e^{ix}}{x^{m+1}}-i(m+1)J_{m+1}.
+\]
+Consequently
+\[
+\mathrm{Ci}(x)+i\,\mathrm{si}(x)=-J_0
+=-\frac{i e^{ix}}x\sum_{k=0}^{N-1}\frac{(-i)^kk!}{x^k}
+-(-i)^NN!J_N.
+\]
+A further integration by parts bounds the remainder integral by
+\[
+|J_N|\le x^{-N-1}+(N+1)\int_x^\infty t^{-N-2}dt
+=2x^{-N-1}.
+\]
+The residual after $N$ displayed terms is therefore $O(x^{-N-1})$.
+Collect the real even/odd subsequences:
+\[
+A(x)\sim1-\frac{2!}{x^2}+\frac{4!}{x^4}-\cdots,\qquad
+B(x)\sim1-\frac{3!}{x^2}+\frac{5!}{x^4}-\cdots.
+\]
+Since $-J_0\sim e^{ix}[-iA/x-B/x^2]$, multiplication by
+$\cos x+i\sin x$ yields
+\[
+\boxed{\mathrm{Ci}(x)\sim\frac{\sin x}{x}A(x)
+-\frac{\cos x}{x^2}B(x)},
+\]
+\[
+\boxed{\mathrm{si}(x)\sim-\frac{\cos x}{x}A(x)
+-\frac{\sin x}{x^2}B(x)}.
+\]
+These are fixed-order asymptotic truncations; the factorial coefficients
+do not define convergent infinite series at a fixed finite $x$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.6.3}\quad Derive the asymptotic expansion of the Gauss
+error function \erratum{as $x\to+\infty$}
+\begin{align*}
+\mathrm{erf}(x)&=\frac{2}{\sqrt{\pi}}\int_{0}^{x}e^{-t^{2}}\,dt\\
+&\approx1-\frac{e^{-x^{2}}}{\sqrt{\pi}\,x}\left(1-\frac{1}{2x^{2}}
++\frac{1\cdot3}{2^{2}x^{4}}-\frac{1\cdot3\cdot5}{2^{3}x^{6}}+\cdots
++(-1)^{n}\frac{(2n-1)!!}{2^{n}x^{2n}}\right).
+\end{align*}
+\emph{Hint.}~$\mathrm{erf}(x)=1-\mathrm{erfc}(x)
+=1-\dfrac{2}{\sqrt{\pi}}\displaystyle\int_{x}^{\infty}e^{-t^{2}}\,dt$.
+
+Normalized so that $\mathrm{erf}(\infty)=1$, this function plays an important
+role in probability theory. It may be expressed in terms of the Fresnel
+integrals (Exercise 12.6.1), the incomplete gamma functions (Section 13.6),
+or the confluent hypergeometric functions (Section 18.5).
+\solution
+For $x>0$, let
+\[
+I_m(x)=\int_x^\infty t^{-2m}e^{-t^2}dt,\qquad
+\mathrm{erfc}(x)=\frac2{\sqrt\pi}I_0(x).
+\]
+Use $d(e^{-t^2})=-2t e^{-t^2}dt$ in integration by parts:
+\[
+I_m=\left[-\frac{e^{-t^2}}{2t^{2m+1}}\right]_x^\infty
+-\frac{2m+1}{2}\int_x^\infty t^{-2m-2}e^{-t^2}dt
+=\frac{e^{-x^2}}{2x^{2m+1}}-\frac{2m+1}{2}I_{m+1}.
+\]
+After $N$ repetitions,
+\[
+I_0=\frac{e^{-x^2}}{2x}
+\sum_{k=0}^{N-1}\frac{(-1)^k(2k-1)!!}{2^kx^{2k}}
++\frac{(-1)^N(2N-1)!!}{2^N}I_N.
+\]
+All $I_m$ are positive, and the recurrence implies
+$0<I_N<e^{-x^2}/(2x^{2N+1})$. The remainder in $\mathrm{erfc}$
+has sign $(-1)^N$ and magnitude less than its first omitted term:
+\[
+|R_N|<\frac{e^{-x^2}}{\sqrt\pi x}
+\frac{(2N-1)!!}{2^Nx^{2N}}.
+\]
+Finally $\mathrm{erf}=1-\mathrm{erfc}$ gives
+\[
+\boxed{\mathrm{erf}(x)\sim1-\frac{e^{-x^2}}{\sqrt\pi x}
+\left[1-\frac1{2x^2}+\frac3{4x^4}-\frac{15}{8x^6}+\cdots\right]}.
+\]
+The term with index $k=n$ is
+$(-1)^n(2n-1)!!/(2^nx^{2n})$, as requested.
+The remainder bound proves the expansion for $x\to+\infty$.
+For $x\to-\infty$ use $\mathrm{erf}(-x)=-\mathrm{erf}(x)$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.6.4}\quad The asymptotic expressions for the various
+Bessel functions, Section 14.6, contain the series
+\begin{align*}
+P_{\nu}(z)&\sim1+\sum_{n=1}^{\infty}(-1)^{n}
+\frac{\prod_{s=1}^{2n}[4\nu^{2}-(2s-1)^{2}]}{(2n)!(8z)^{2n}},\\
+Q_{\nu}(z)&\sim\sum_{n=1}^{\infty}(-1)^{n+1}
+\frac{\prod_{s=1}^{2n-1}[4\nu^{2}-(2s-1)^{2}]}{(2n-1)!(8z)^{2n-1}}.
+\end{align*}
+Show that these are asymptotic expansions \erratum{for fixed $\nu$ as
+$z=x\to+\infty$; distinguish terminating half-integer orders from
+divergent cases. Then specify a complex sector of validity.}
+\solution
+\erratum{Divergence at fixed $z$ does not by itself prove that a series
+is asymptotic to a particular function. Also, for half-integer $\nu$ the
+products terminate, so the blanket divergence argument in the manual
+has exceptions. We first prove the asymptotic statement for fixed real
+$\nu$ and $z=x\to+\infty$, then give its complex extension on a specified
+sector.}
+Put
+\[
+\mu=\nu^2-\frac14,\qquad
+A_k=\frac{\prod_{s=1}^k[4\nu^2-(2s-1)^2]}{k!8^k},\quad A_0=1.
+\]
+The outgoing Bessel solution in Section 14.6 is written
+\[
+H_\nu^{(1)}(x)=\sqrt{\frac2{\pi x}}
+ e^{i(x-\nu\pi/2-\pi/4)}w(x),\qquad w=P_\nu+iQ_\nu.
+\]
+Substituting $H=x^{-1/2}e^{ix}$ times a constant times $w$ into
+$x^2H''+xH'+(x^2-\nu^2)H=0$ gives
+\[
+w''+2iw'-\frac\mu{x^2}w=0,\qquad w(x)\to1.
+\]
+Only the leading outgoing normalization $w\to1$ from Section 14.6
+is used here; the higher coefficients and their remainder will be proved.
+For $w\sim\sum_{k\ge0}c_kx^{-k}$, the coefficient of $x^{-k-2}$ is
+\[
+[k(k+1)-\mu]c_k-2i(k+1)c_{k+1}=0.
+\]
+Hence
+\[
+c_{k+1}=\frac{i[4\nu^2-(2k+1)^2]}{8(k+1)}c_k,\qquad
+c_k=i^kA_k.
+\]
+The real even powers and imaginary odd powers are exactly the two
+series in the question, including their signs.
+
+Here is a remainder argument. For an integrable forcing $f$, define
+\[
+(Kf)(x)=\frac1{2i}\int_x^\infty[e^{2i(t-x)}-1]f(t)\,dt.
+\]
+Differentiating under the integral (the boundary kernel is zero) gives
+\[
+(Kf)'=-\int_x^\infty e^{2i(t-x)}f(t)\,dt,\qquad
+(Kf)''=f(x)+2i\int_x^\infty e^{2i(t-x)}f(t)\,dt.
+\]
+Thus $(Kf)''+2i(Kf)'=f$, and $Kf\to0$ at infinity.
+Apply this to $f=\mu w/x^2$, which is integrable because $w\to1$.
+The difference $w-1-Kf$ solves $d''+2id'=0$, so $d=A+Be^{-2ix}$.
+Since $d\to0$ on the positive axis, $A=B=0$.
+This proves the Volterra equation
+\[
+w(x)=1+\frac\mu{2i}\int_x^\infty
+ [e^{2i(t-x)}-1]\frac{w(t)}{t^2}dt.
+\]
+Its kernel has absolute value at most $1$ after division by $2i$.
+On $x\ge R>|\mu|$, its operator $T$ has sup-norm at most
+$|\mu|/R<1$, so the bounded outgoing solution is uniquely obtained by
+successive substitution. Let $S_N=\sum_{k=0}^{N-1}c_kx^{-k}$.
+The recurrence cancels every lower power, leaving precisely
+\[
+r_N:=S_N''+2iS_N'-\mu S_N/x^2
+=[N(N-1)-\mu]c_{N-1}x^{-N-1}.
+\]
+Then $E_N=w-S_N$ satisfies
+\[
+E_N=T[E_N]-\frac1{2i}\int_x^\infty[e^{2i(t-x)}-1]r_N(t)dt.
+\]
+The explicit last integral is $O(x^{-N})$. In the weighted norm
+$\|E\|_N=\sup_{x\ge R}x^N|E(x)|$,
+\[
+x^N|T[E](x)|
+\le |\mu|\|E\|_Nx^N\int_x^\infty t^{-N-2}dt
+\le\frac{|\mu|}{(N+1)R}\|E\|_N.
+\]
+The same contraction argument constructs $E_N=O(x^{-N})$; uniqueness
+identifies $S_N+E_N$ with $w$. This is the required asymptotic remainder
+estimate for every fixed truncation. Taking real and imaginary parts
+proves the $P_\nu,Q_\nu$ expansions; retaining one extra term when
+necessary gives the next even or odd inverse-power remainder.
+
+For nonterminating cases the ratio of two consecutive $P$ terms is
+\[
+\left|\frac{[4\nu^2-(4n+1)^2][4\nu^2-(4n+3)^2]}
+{(2n+1)(2n+2)(8x)^2}\right|\sim\frac{n^2}{x^2},
+\]
+and the $Q$ ratio has the same growth. Thus they diverge for fixed $x$,
+while their finite truncations have the proved large-$x$ meaning.
+If $\nu=\pm(j+1/2)$, $j=0,1,\ldots$, a numerator factor vanishes at $s=j+1$ and
+all later coefficients are zero; the resulting finite expansions remain
+valid, and in fact solve the transformed equation exactly.
+\erratum{These terminating cases satisfy the usual fixed-order remainder
+definition. They are excluded only if one imposes the textbook's extra
+divergence convention, Eq. (12.98); see Exercise 12.6.5.}
+
+The proof also supplies a complex sector, rather than assuming that an
+expansion on the real axis automatically extends to all directions.
+For $\Re z\ge0$, integrate along $t=z+u$, $u\ge0$. Then
+\[
+|e^{2iu}-1|\le2,\qquad
+|z+u|\ge (|z|+u)/\sqrt2.
+\]
+Thus the unweighted operator norm on $|z|\ge R$ is at most
+$2|\mu|/R$. In the weighted norm its bound is
+\[
+\frac{|\mu|\,2^{(N+2)/2}}{(N+1)R},
+\]
+and the residual integral is bounded by
+$|[N(N-1)-\mu]c_{N-1}|\,2^{(N+1)/2}|z|^{-N}/N$.
+Taking $R$ sufficiently large gives the same contraction and
+$O(|z|^{-N})$ remainder, uniformly in this closed right half-plane.
+The incoming solution obeys $w_-''-2iw_-'-\mu w_-/z^2=0$; its kernel
+uses $e^{-2iu}-1$, with the same bound, and its coefficients are
+$(-i)^kA_k$. Therefore $P=(w+w_-)/2$ selects the even terms and
+$Q=(w-w_-)/(2i)$ selects the odd terms. These analytic solutions agree
+with the Hankel normalizations on the positive axis and hence throughout
+the sector. This argument also works for each fixed complex $\nu$,
+since only $|\mu|$ enters the bounds. Wider continuation sectors require
+the corresponding Hankel branches; no expansion across an unspecified
+branch or Stokes boundary is being asserted.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.6.5}\quad For $x>1$,
+\[
+\frac{1}{1+x}=\sum_{n=0}^{\infty}(-1)^{n}\frac{1}{x^{n+1}}.
+\]
+Test this series to see if it is an asymptotic series.
+\solution
+The answer depends on the stated convention. With the textbook's partial
+sum through $x^{-m}$, $m\ge1$, finite geometric summation gives
+\[
+s_m(x)=\sum_{k=1}^m(-1)^{k-1}x^{-k}
+=\frac{1-(-1/x)^m}{1+x},\qquad
+R_m(x)=\frac{(-1)^m}{x^m(1+x)}.
+\]
+Consequently
+\[
+x^mR_m(x)=\frac{(-1)^m}{1+x}.
+\]
+For each fixed $m$ this tends to zero as $x\to+\infty$, satisfying
+Eq. (12.97). For each fixed $x>1$, however, its absolute value is the
+constant $1/(1+x)$; it does not diverge as $m\to\infty$.
+Thus the extra requirement in Eq. (12.98) is not met:
+\[
+\boxed{\text{not an asymptotic series under the textbook's convention}.}
+\]
+This agrees with the manual. Its convergence follows independently from
+the geometric ratio $|-1/x|<1$.
+
+\erratum{Terminology qualification: the usual Poincar\'e definition uses
+the fixed-order condition (12.97) without the additional divergence
+requirement (12.98). The book itself acknowledges this alternative in
+footnote 5 on p.583. Under that definition the same series is both
+convergent and asymptotic; the manual's answer is correct under the
+book's explicitly stricter convention.}
+In that usual notation,
+\[
+\frac1{1+x}\sim\frac1x-\frac1{x^2}+\frac1{x^3}-\cdots,\qquad x\to+\infty.
+\]
+The exact remainder above proves the claim under either convention
+without inferring asymptotic behavior merely from convergence or divergence.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.6.6}\quad Derive the following Bernoulli-number asymptotic
+series for the Euler-Mascheroni constant, defined in Eq.~(1.13):
+\[
+\gamma\sim\sum_{s=1}^{n}s^{-1}-\ln n-\frac{1}{2n}
++\sum_{k=1}^{\infty}\frac{B_{2k}}{(2k)n^{2k}}.
+\]
+Here $n$ plays the role of $x$.
+
+\emph{Hint.}~Apply the Euler-Maclaurin integration formula to $f(x)=x^{-1}$
+over the interval $[1,n]$ for $N=1,2,\ldots$.
+\solution
+Write $H_n=\sum_{s=1}^n1/s$. Applying Euler--Maclaurin to the finite
+tail $\sum_{s=n+1}^M1/s$, with
+$f^{(2k-1)}(x)=-(2k-1)!x^{-2k}$, gives
+\[
+H_M-H_n=\ln(M/n)+\frac1{2M}-\frac1{2n}
++\sum_{k=1}^N\frac{B_{2k}}{2k}
+ (n^{-2k}-M^{-2k})+\text{remainder}.
+\]
+Let $M\to\infty$ and use the definition of $\gamma$. This produces
+\[
+\gamma=H_n-\ln n-\frac1{2n}
++\sum_{k=1}^N\frac{B_{2k}}{2k\,n^{2k}}+R_{n,N}.
+\]
+To prove the asymptotic nature, rather than merely write formal
+corrections, we now derive a signed bound for $R_{n,N}$.
+Define
+\[
+K(n)=\int_0^\infty e^{-nt}
+ \left[\frac1t-\frac1{e^t-1}\right]dt.
+\]
+This integral is finite: the bracket tends to $1/2$ at zero and is
+$O(1/t)$ at infinity. Its consecutive difference is
+\begin{align*}
+K(n)-K(n+1)
+&=\int_0^\infty\frac{e^{-nt}-e^{-(n+1)t}}t dt
+ -\int_0^\infty e^{-(n+1)t}dt\\
+&=\ln(1+1/n)-\frac1{n+1}.
+\end{align*}
+The first equality used $(1-e^{-t})/(e^t-1)=e^{-t}$;
+the logarithmic integral follows by integrating
+$\int_n^{n+1}e^{-at}da$ first in $t$. This is also the consecutive
+difference of $H_n-\ln n-\gamma$. The bracket in $K(n)$ is bounded,
+say by $C$, so $|K(n)|\le C\int_0^\infty e^{-nt}dt=C/n\to0$.
+Both sequences therefore tend to zero as $n\to\infty$,
+so they are equal. Thus, with
+$q(t)=1/(e^t-1)-1/t+1/2$,
+\[
+\gamma=H_n-\ln n-\frac1{2n}+\int_0^\infty e^{-nt}q(t)dt.
+\]
+The cotangent partial fractions, evaluated at $it/2$, give
+\[
+q(t)=\frac12\coth(t/2)-\frac1t
+=2t\sum_{j=1}^{\infty}\frac1{(2\pi j)^2+t^2}.
+\]
+Expand each denominator by a \emph{finite} geometric identity through
+$t^{2N-2}$. With $a_j=2\pi j$, this yields
+\[
+q(t)=\sum_{k=1}^N\frac{B_{2k}}{(2k)!}t^{2k-1}
++(-1)^N2t^{2N+1}\sum_{j=1}^{\infty}
+\frac1{a_j^{2N}(a_j^2+t^2)}.
+\]
+The coefficients follow from the zeta/Bernoulli identity, and the last
+sum is positive. Since $\int_0^\infty e^{-nt}t^m dt=m!/n^{m+1}$,
+integration gives the stated correction terms and the rigorous bound
+\[
+\boxed{0<(-1)^N R_{n,N}
+<\frac{|B_{2N+2}|}{(2N+2)n^{2N+2}}}.
+\]
+Indeed, replace $(a_j^2+t^2)^{-1}$ by $a_j^{-2}$ in the positive
+remainder and use
+$2(2N+1)!\zeta(2N+2)/(2\pi)^{2N+2}=|B_{2N+2}|/(2N+2)$.
+For each fixed $N$ this remainder is smaller by two powers of $n$
+than the last correction, proving the requested asymptotic series.
+The coefficients grow factorially, so taking infinitely many terms at
+fixed $n$ is not justified.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.6.7}\quad Develop an asymptotic series for
+\[
+\int_{0}^{\infty}\frac{e^{-xv}}{\erratum{1+v^{2}}}\,dv.
+\]
+Take $x$ to be real and positive.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\dfrac{1}{x}-\dfrac{2!}{x^{3}}+\dfrac{4!}{x^{5}}-\cdots
++\dfrac{(-1)^{n}(2n)!}{x^{2n+1}}$.
+\solution
+\erratum{The published errata (Instructor's Manual, 6 April 2012,
+textbook p.~585) replace the original denominator $(1+v^2)^2$ by
+$1+v^2$. The corrected integral in the question now matches its printed
+answer. We give both versions below to make the change explicit.}
+For the corrected integral $I(x)$, use the exact finite identity
+\[
+\frac1{1+v^2}=\sum_{k=0}^N(-1)^kv^{2k}
++\frac{(-1)^{N+1}v^{2N+2}}{1+v^2}.
+\]
+Multiply by $e^{-xv}$ and integrate for $x>0$. With $u=xv$,
+\[
+\int_0^\infty e^{-xv}v^{2k}dv
+=x^{-2k-1}\int_0^\infty e^{-u}u^{2k}du
+=\frac{(2k)!}{x^{2k+1}},
+\]
+where repeated integration by parts evaluates the last integral.
+Consequently
+\[
+\boxed{I(x)\sim\sum_{k=0}^{\infty}\frac{(-1)^k(2k)!}{x^{2k+1}}
+=\frac1x-\frac{2!}{x^3}+\frac{4!}{x^5}-\cdots}.
+\]
+The actual remainder after $k=N$ is
+\[
+R_N=(-1)^{N+1}\int_0^\infty
+ \frac{e^{-xv}v^{2N+2}}{1+v^2}dv,\qquad
+0<(-1)^{N+1}R_N<\frac{(2N+2)!}{x^{2N+3}}.
+\]
+This proves the asymptotic statement without interchanging an infinite
+geometric series outside its disk of convergence.
+
+For comparison, the \emph{original} squared-denominator integral has
+\[
+\int_0^\infty\frac{e^{-xv}}{(1+v^2)^2}dv
+\sim\boxed{\sum_{k=0}^{\infty}
+\frac{(-1)^k(k+1)(2k)!}{x^{2k+1}}}
+=\frac1x-\frac{4}{x^3}+\frac{72}{x^5}-\cdots.
+\]
+Its coefficients follow from $(1+w)^{-2}=\sum(-1)^k(k+1)w^k$.
+More precisely, the finite remainder is
+$(-1)^{N+1}w^{N+1}[(N+2)+(N+1)w]/(1+w)^2$.
+For $w=v^2\ge0$ its magnitude is at most $(N+2)v^{2N+2}$,
+so integration bounds the original integral's remainder by
+$(N+2)(2N+2)!/x^{2N+3}$. The factor $k+1$ shows exactly why the
+original problem and printed answer were inconsistent.
+
+\Needspace{8\baselineskip}
+\subsection*{12.7 Method of Steepest Descents}
+
+We present here a rather small number of exercises on the method of steepest
+descents. Several additional exercises appear elsewhere in this book, in
+particular in Section 14.6, where the technique is applied to the contour
+integral representations of Bessel functions.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.7.1}\quad \erratum{Let $F$ be nonconstant and analytic on a connected
+open region. Derive the correct circle mean of $|F|^2$ about $z_0$
+from the Taylor coefficients of $F$. Prove that $|F|$ has no interior
+local maximum and no positive interior local minimum. In particular,
+if $F$ never vanishes, it has no interior modulus extremum.}
+\solution
+\erratum{Both the asserted mean-value identity for $|F|^2$ and the
+unqualified absence of minima are false. For $F(z)=z$ at $z_0=0$,
+the circle average is $r^2$, whereas $|F(0)|^2=0$ is a minimum.
+The nonconstant, nonzero case used in the preceding text needs a
+corrected argument.}
+Expand in a disk about $z_0$ lying in the analytic region:
+\[
+F(z_0+re^{i\theta})=\sum_{n=0}^{\infty}a_nr^ne^{in\theta}.
+\]
+Uniform convergence on a smaller circle permits multiplication and
+integration term by term. Since
+$(2\pi)^{-1}\int_0^{2\pi}e^{i(n-m)\theta}d\theta=\delta_{nm}$,
+\begin{align*}
+\frac1{2\pi}\int_0^{2\pi}|F(z_0+re^{i\theta})|^2d\theta
+&=\sum_{n,m\ge0}a_n\overline{a_m}r^{n+m}\delta_{nm}\\
+&=\boxed{|F(z_0)|^2+\sum_{n=1}^{\infty}|a_n|^2r^{2n}}.
+\end{align*}
+At least one $a_n$, $n\ge1$, is nonzero: otherwise the Taylor series
+would make $F$ constant near $z_0$, and the identity theorem would make
+it constant throughout the connected region. Thus the mean strictly exceeds the center value on every
+sufficiently small circle. A local maximum would make every value on
+that circle no larger than the center, a contradiction. Therefore
+$|F|$ has no interior local maximum unless $F$ is constant.
+
+If $F(z_0)\ne0$, continuity gives a smaller disk where $F$ never
+vanishes. Apply the same maximum argument to the analytic function
+$1/F$. A local minimum of $|F|$ would be a local maximum of $|1/F|$,
+again impossible for nonconstant $F$. Thus a nonconstant analytic
+function has no positive interior local minimum; zeros are allowed
+minima. A constant function is the usual exception to both statements.
+
+For comparison, the true mean-value identities are
+$\langle F\rangle=F(z_0)$, and, on a zero-free disk,
+$\langle\log|F|\rangle=\log|F(z_0)|$. The latter follows by taking
+the real part of the mean-value formula for a local analytic logarithm.
+It directly proves the no-extremum assertion in the zero-free setting
+relevant to the saddle-point discussion.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.7.2}\quad Find the steepest path and leading asymptotic
+expansion \erratum{as $s\to+\infty$} for the Fresnel integrals
+$\displaystyle\int_{0}^{s}\cos x^{2}\,dx$,\quad
+$\displaystyle\int_{0}^{s}\sin x^{2}\,dx$.
+
+\emph{Hint.}~Use $\displaystyle\int_{0}^{1}e^{itz^{2}}\,dz$.
+\solution
+Put $t=s^2>0$ and scale $x=sz$:
+\[
+\int_0^s e^{ix^2}dx=sJ(t),\qquad J(t)=\int_0^1e^{itz^2}dz.
+\]
+For $f(z)=iz^2$, the saddle is $z=0$, with $f''(0)=2i$.
+Writing $z=re^{i\theta}$ gives
+$\Re(it z^2)=-tr^2\sin2\theta$ and
+$\Im(it z^2)=tr^2\cos2\theta$. The descending ray from zero is
+therefore $\theta=\pi/4$; on it the exponential becomes $e^{-tr^2}$.
+The endpoint $z=1$ has a descending constant-phase path
+\[
+z=\sqrt{1+iv},\quad 0\le v<\infty,\qquad
+it z^2=it-tv,\quad dz=\frac{i\,dv}{2\sqrt{1+iv}}.
+\]
+Both paths approach the same direction at infinity. Deforming the finite
+interval to their difference is legitimate because the integrand is
+entire and the joining segment at infinity has exponentially vanishing
+integral. Hence the exact contour decomposition is
+\[
+J(t)=e^{i\pi/4}\int_0^\infty e^{-tr^2}dr
+-\frac i2e^{it}\int_0^\infty\frac{e^{-tv}}{\sqrt{1+iv}}dv.
+\]
+The first integral is the endpoint half-Gaussian
+$\sqrt\pi/(2\sqrt t)$. For the second,
+$(1+iv)^{-1/2}=1-iv/2-3v^2/8+O(v^3)$ near zero.
+Termwise integration of any finite Taylor truncation gives
+\[
+J(t)=\frac{e^{i\pi/4}\sqrt\pi}{2\sqrt t}
+-\frac{ie^{it}}{2t}-\frac{e^{it}}{4t^2}+O(t^{-3}).
+\]
+To justify the error, split the Laplace integral at a fixed small
+$v=\delta$: its Taylor remainder contributes $O(\int_0^\infty
+v^2e^{-tv}dv)=O(t^{-3})$ at the order displayed, and its remote tail
+is exponentially small.
+Multiplying by $s$ and taking real and imaginary parts yields
+\begin{align*}
+\boxed{\int_0^s\cos x^2dx}
+&\boxed{=\sqrt{\frac\pi8}+\frac{\sin s^2}{2s}
+-\frac{\cos s^2}{4s^3}+O(s^{-5}),}\\
+\boxed{\int_0^s\sin x^2dx}
+&\boxed{=\sqrt{\frac\pi8}-\frac{\cos s^2}{2s}
+-\frac{\sin s^2}{4s^3}+O(s^{-5}).}
+\end{align*}
+\erratum{The saddle is an endpoint, so it contributes half of a full
+Gaussian integral. The manual's limiting value is twice the correct
+$\sqrt{\pi/8}$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.7.3}\quad Show that the formula
+\[
+\Gamma(1+s)\approx\sqrt{2\pi s}\,s^{s}e^{-s}
+\]
+holds for complex values of $s$ (with $\Re(s)$ large and positive).
+
+\emph{Hint.}~This involves assigning a phase to $s$ and then demanding that
+$\Im[sf(z)]$ be constant in the vicinity of the saddle point.
+\solution
+Use the principal $\operatorname{Log}s$ for $\Re s>0$.
+Starting with $\Gamma(1+s)=\int_0^\infty e^{-u}u^sdu$, set $u=sz$.
+The resulting ray can be rotated to the positive $z$ axis: the rotation
+stays inside $|\arg u|<\pi/2$, the exponential decays at infinity,
+and $u^s$ is integrable at zero since $\Re s>0$.
+Along the deformed rays $\operatorname{Log}u=\operatorname{Log}s+
+\operatorname{Log}z$, so $u^s=s^sz^s$ with consistent branches. Thus
+\[
+\Gamma(1+s)=s^{s+1}\int_0^\infty e^{s f(z)}dz,\qquad
+f(z)=\operatorname{Log}z-z.
+\]
+The saddle is $z_0=1$, because $f'=1/z-1$; there
+$f(1)=-1$ and $f''(1)=-1$. Write $s=\rho e^{i\phi}$.
+Near the saddle,
+\[
+sf(z)=-s-\frac s2(z-1)^2+\frac s3(z-1)^3+\cdots.
+\]
+To make the quadratic decrement real and negative, choose
+\[
+z-1=e^{-i\phi/2}\frac{v}{\sqrt\rho}=\frac v{\sqrt s},\qquad v\in\mathbb R.
+\]
+This is the local steepest path and keeps $\Im[sf(z)]$ constant to
+quadratic order. Since $dz=dv/\sqrt s$, its leading Gaussian
+contribution is
+\[
+\int e^{sf(z)}dz
+\sim\frac{e^{-s}}{\sqrt s}\int_{-\infty}^{\infty}e^{-v^2/2}dv
+=\frac{\sqrt{2\pi}e^{-s}}{\sqrt s}.
+\]
+Therefore, with the same branch for all powers,
+\[
+\boxed{\Gamma(1+s)\sim\sqrt{2\pi s}\,s^s e^{-s}}.
+\]
+The factor $e^{-i\phi/2}$ from the path is essential; replacing the
+Gaussian width by $1/\sqrt{|s|}$ would lose that phase.
+
+For completeness, the approximation remains valid throughout the
+stated limit $\Re s\to+\infty$, even if the phase changes with $s$.
+A useful uniform remainder follows from Euler--Maclaurin. The Euler
+limit for $\Gamma(s)$ gives
+\[
+\log\Gamma(s)=\lim_{M\to\infty}
+\left[\log M!+s\log M-\sum_{k=0}^M\operatorname{Log}(s+k)\right].
+\]
+Apply Euler--Maclaurin to $h(t)=\operatorname{Log}(s+t)$:
+\[
+\sum_{k=0}^Mh(k)=\int_0^Mh(t)dt+\frac{h(0)+h(M)}2
++\frac{h'(M)-h'(0)}{12}
+-\frac12\int_0^M\widetilde B_2(t)h''(t)dt,
+\]
+where $\widetilde B_2(t)=B_2(\{t\})$ is periodic. Using
+$h'=1/(s+t)$, $h''=-1/(s+t)^2$, and
+$\int h=(s+t)\operatorname{Log}(s+t)-(s+t)$, the finite sum is
+\begin{align*}
+\sum_{k=0}^M\operatorname{Log}(s+k)
+={}&(s+M+\tfrac12)\operatorname{Log}(s+M)-M\\
+&-(s-\tfrac12)\operatorname{Log}s
+ +\frac1{12(s+M)}-\frac1{12s}\\
+&+\frac12\int_0^M\frac{\widetilde B_2(t)}{(s+t)^2}dt.
+\end{align*}
+The real Gaussian calculation gives
+$\log M!=(M+\tfrac12)\log M-M+\tfrac12\log(2\pi)+o(1)$.
+After inserting both formulas in the Euler limit, the remaining
+$M$-dependent logarithms are
+\[
+(M+s+\tfrac12)\bigl[\log M-\operatorname{Log}(M+s)\bigr]
+=-(M+s+\tfrac12)\operatorname{Log}(1+s/M)\longrightarrow-s
+\]
+for each fixed $s$ with $\Re s>0$; also $1/(M+s)\to0$.
+Adding $\operatorname{Log}s$ to pass from $\Gamma(s)$ to $\Gamma(1+s)$
+therefore yields
+\[
+\log\Gamma(1+s)=(s+\tfrac12)\operatorname{Log}s-s
++\tfrac12\ln2\pi+R(s),\qquad
+R(s)=\frac1{12s}-\frac12\int_0^\infty
+\frac{\widetilde B_2(t)}{(s+t)^2}dt.
+\]
+Since $|\widetilde B_2|\le1/6$ and $|s+t|\ge\Re s+t$,
+\[
+|R(s)|\le\frac1{12|s|}+\frac1{12\Re s}
+\le\frac1{6\Re s}\longrightarrow0.
+\]
+Exponentiation proves that the ratio to the boxed expression tends to
+one for the entire requested right-half-plane limit.
+
+\Needspace{8\baselineskip}
+\subsection*{12.8 Dispersion Relations}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.1}\quad Assume that the function $f(z)$ satisfies the
+conditions for the dispersion relations. In addition, assume that
+$f(z)=f^{*}(z^{*})$, i.e., that it meets the conditions of the Schwarz
+reflection principle, Eq.~(11.127). Show that $f(z)$ is identically zero.
+\solution
+The dispersion assumptions are analyticity in the upper half-plane and
+across the real axis, with sufficient decay for the large arc to vanish.
+On the real axis the additional reflection condition gives
+$f(x)=f(x)^*$, so $v(x)=\Im f(x)=0$.
+The first Hilbert-transform equation is
+\[
+u(x_0)=\frac1\pi\operatorname{PV}\int_{-\infty}^{\infty}
+\frac{v(x)}{x-x_0}dx.
+\]
+Its integrand vanishes identically, hence $u(x_0)=0$ for every real
+$x_0$ too. Thus $f=0$ on the real axis. Because that axis lies in a
+region through which $f$ is analytic, the identity theorem implies
+\[
+\boxed{f(z)\equiv0}
+\]
+on the connected analytic upper-half-plane domain. Equivalently,
+Schwarz reflection would extend $f$ to an entire function with decay
+in both half-planes, and Liouville's theorem gives the same result.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.2}\quad For $f(z)$ such that we may replace the closed
+contour of the Cauchy integral formula by an integral over the real axis we
+have
+\[
+f(x_{0})=\frac{1}{2\pi i}\left\{
+\int_{-\infty}^{x_{0}-\delta}\frac{f(x)}{x-x_{0}}\,dx
++\int_{x_{0}+\delta}^{\infty}\frac{f(x)}{x-x_{0}}\,dx\right\}
++\frac{1}{2\pi i}\int_{C}\frac{f(x)}{x-x_{0}}\,dx.
+\]
+Here we take $C$ to be a small semicircle about $x_{0}$ in the lower
+half-plane. Show that \erratum{as $\delta\downarrow0$} the formula for $f(x_{0})$ reduces to
+\[
+f(x_{0})=\frac{1}{\pi i}\erratum{\operatorname{PV}}\int_{-\infty}^{\infty}\frac{f(x)}{x-x_{0}}\,dx,
+\]
+which is Eq.~(12.117).
+\solution
+Parameterize the lower semicircle from its left endpoint to its right
+endpoint as
+\[
+z=x_0+\delta e^{i\theta},\quad -\pi\le\theta\le0,\qquad
+dz=i\delta e^{i\theta}d\theta.
+\]
+Its orientation is counterclockwise around the lower half of the small
+circle, so
+\[
+\int_C\frac{f(z)}{z-x_0}dz
+=i\int_{-\pi}^0f(x_0+\delta e^{i\theta})d\theta
+\longrightarrow i\pi f(x_0).
+\]
+The two real integrals together tend to their Cauchy principal value.
+Taking $\delta\to0$ in the formula in the question therefore gives
+\[
+f(x_0)=\frac1{2\pi i}\operatorname{PV}\int_{-\infty}^{\infty}
+\frac{f(x)}{x-x_0}dx+\frac12f(x_0).
+\]
+Subtract the half contribution and multiply by two:
+\[
+\boxed{f(x_0)=\frac1{\pi i}\operatorname{PV}
+\int_{-\infty}^{\infty}\frac{f(x)}{x-x_0}dx}.
+\]
+\erratum{The real-axis integral in the requested formula must be read as
+a Cauchy principal value; an ordinary improper integral at the pole
+need not exist. The source uses a cut integral sign for this convention.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.3}\quad
+\begin{enumerate}
+\item[(a)] The function $f(z)=e^{iz}$ does not vanish at the endpoints of the
+  range of $\arg z$, \erratum{$0$} and $\pi$. Show, with the help of Jordan's lemma,
+  Eq.~(11.102), that Eq.~(12.116) still holds.
+\item[(b)] For $f(z)=e^{iz}$ verify by direct integration the dispersion
+  relations, Eq.~(12.117) or Eqs.~(12.118).
+\end{enumerate}
+\solution
+\erratum{The printed lower endpoint \texttt{a} is $0$: the contour is the
+upper semicircle $0\le\arg z\le\pi$.}
+(a) For $z_0$ fixed in the upper half-plane, put $z=Re^{i\theta}$ on
+the large semicircle, $0\le\theta\le\pi$. Then
+\[
+\left|\int_{\rm arc}\frac{e^{iz}}{z-z_0}dz\right|
+\le\frac R{R-|z_0|}\int_0^\pi e^{-R\sin\theta}d\theta.
+\]
+On $0\le\theta\le\pi/2$, $\sin\theta\ge2\theta/\pi$; symmetry
+therefore bounds the last integral by
+$2\int_0^{\pi/2}e^{-2R\theta/\pi}d\theta\le\pi/R$.
+The arc contribution is at most $\pi/(R-|z_0|)\to0$, despite the
+nonvanishing endpoint values. Cauchy's formula consequently gives
+\[
+\boxed{e^{iz_0}=\frac1{2\pi i}\int_{-\infty}^{\infty}
+\frac{e^{ix}}{x-z_0}dx},\qquad\Im z_0>0.
+\]
+
+(b) Set $t=x-x_0$. The symmetric principal value is
+\[
+\operatorname{PV}\int_{-\infty}^{\infty}\frac{e^{ix}}{x-x_0}dx
+=e^{ix_0}\left[\operatorname{PV}\int_{-\infty}^{\infty}
+\frac{\cos t}{t}dt+i\int_{-\infty}^{\infty}\frac{\sin t}{t}dt\right].
+\]
+The cosine integral is zero by oddness. To evaluate the sine integral,
+first insert $e^{-\epsilon t}$ on $t>0$. If
+$A(b)=\int_0^\infty e^{-\epsilon t}\sin(bt)dt/t$, then
+$A'(b)=\epsilon/(\epsilon^2+b^2)$ and $A(0)=0$, so
+$A(1)=\arctan(1/\epsilon)\to\pi/2$.
+The damping can be removed uniformly in the tail: integration by parts
+against a bounded primitive of $\sin t$ gives
+$|\int_A^\infty e^{-\epsilon t}\sin t\,dt/t|\le2/A$ for every
+$\epsilon\ge0$. On $[0,A]$, dominated convergence applies.
+Thus the whole-line sine integral is $\pi$, and
+\[
+\operatorname{PV}\int_{-\infty}^{\infty}\frac{e^{ix}}{x-x_0}dx
+=i\pi e^{ix_0}.
+\]
+Dividing by $i\pi$ verifies Eq. (12.117). Separating components also gives
+\[
+\frac1\pi\operatorname{PV}\int\frac{\sin x}{x-x_0}dx=\cos x_0,\qquad
+-\frac1\pi\operatorname{PV}\int\frac{\cos x}{x-x_0}dx=\sin x_0,
+\]
+with both integrals over the whole real line, verifying both equations
+in (12.118).
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.4}\quad With $f(x)=u(x)+iv(x)$ and $f(x)=f^{*}(-x)$,
+\erratum{assume the dispersion relations. For (a), require
+$v\in C^1$ and $v^{(j)}(x)=O(x^{-2-\epsilon-j})$; for (b), require
+$u\in C^1$ and $u^{(j)}(x)=O(x^{-1-\epsilon-j})$, $j=0,1$,
+with $0<\epsilon<1$.} Show that as $x_0\to+\infty$,
+\begin{enumerate}
+\item[(a)] $u(x_{0})\erratum{=}-\dfrac{2}{\pi x_{0}^{2}}
+  \displaystyle\int_{0}^{\infty}xv(x)\,dx\erratum{+o(x_0^{-2})}$,
+\item[(b)] $v(x_{0})\erratum{=}\dfrac{2}{\pi x_{0}}
+  \displaystyle\int_{0}^{\infty}u(x)\,dx\erratum{+o(x_0^{-1})}$.
+\end{enumerate}
+In quantum mechanics relations of this form are often called \emph{sum rules}.
+\solution
+The crossing condition implies $u(-x)=u(x)$ and $v(-x)=-v(x)$.
+Split the Hilbert integrals into positive and negative halves, substitute
+$x\mapsto-x$ on the latter, and combine denominators. With $a=x_0>0$,
+\[
+u(a)=\frac2\pi\operatorname{PV}\int_0^\infty
+\frac{xv(x)}{x^2-a^2}dx,\qquad
+v(a)=-\frac{2a}\pi\operatorname{PV}\int_0^\infty
+\frac{u(x)}{x^2-a^2}dx.
+\]
+\erratum{The displayed moments and the passage to large $a$ require
+additional decay/tail control. Crossing and the ordinary dispersion
+assumptions alone do not suffice. Also, a zero leading moment gives a
+little-$o$ conclusion, not an equivalence to zero.}
+For example $f(z)=1/(1-iz)$ is analytic above the real axis, decays,
+and satisfies crossing, but $v(x)=x/(1+x^2)$ makes
+$\int_0^\infty xv(x)dx$ divergent.
+
+Here are sufficient assumptions and a justified expansion. For (a),
+assume $v,v'$ are continuous and, for some $0<\epsilon<1$,
+$v^{(j)}(x)=O(x^{-2-\epsilon-j})$, $j=0,1$.
+For (b), assume instead
+$u^{(j)}(x)=O(x^{-1-\epsilon-j})$, $j=0,1$.
+Each condition is imposed on the function in its corresponding integral.
+The exact kernel decompositions give
+\begin{align*}
+u(a)&=-\frac2{\pi a^2}\int_0^\infty xv(x)dx
+ +\frac2{\pi a^2}\operatorname{PV}\int_0^\infty
+       \frac{x^3v(x)}{x^2-a^2}dx,\\
+v(a)&=\frac2{\pi a}\int_0^\infty u(x)dx
+ -\frac2{\pi a}\operatorname{PV}\int_0^\infty
+       \frac{x^2u(x)}{x^2-a^2}dx.
+\end{align*}
+Both final integrals tend to zero. To see the control near the moving
+pole, put $h=x^3v$ in (a) or $h=x^2u$ in (b), and split the range
+at $a/2,3a/2$. On the middle interval write
+$g(x)=h(x)/(x+a)$, so the principal value is
+\[
+\operatorname{PV}\int_{a/2}^{3a/2}\frac{g(x)}{x-a}dx
+=\int_{a/2}^{3a/2}\frac{g(x)-g(a)}{x-a}dx.
+\]
+The constant term cancels by symmetry; $g'=O(a^{-1-\epsilon})$
+bounds this integral by $O(a^{-\epsilon})$.
+On the lower interval, $|x^2-a^2|\ge3a^2/4$ and
+$h(x)=O(x^{1-\epsilon})$ at large $x$, so its contribution is
+$O(a^{-\epsilon})+O(a^{-2})$. On the upper interval the denominator
+is bounded below by a constant times $x^2$, giving
+$O(\int_{3a/2}^\infty x^{-1-\epsilon}dx)=O(a^{-\epsilon})$.
+It follows that
+\[
+\boxed{u(a)=-\frac2{\pi a^2}\int_0^\infty xv(x)dx+o(a^{-2})},
+\]
+\[
+\boxed{v(a)=\frac2{\pi a}\int_0^\infty u(x)dx+o(a^{-1})}.
+\]
+When the respective moment is nonzero, these imply exactly the two
+originally printed $\sim$ relations. When it vanishes, a further moment is
+needed to find the first nonzero term.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.5}\quad
+\begin{enumerate}
+\item[(a)] Given the integral equation (valid for all real $x_{0}$)
+  \[
+  \frac{1}{1+x_{0}^{2}}
+  =\frac{1}{\pi}\erratum{\operatorname{PV}}\int_{-\infty}^{\infty}\frac{u(x)}{x-x_{0}}\,dx,
+  \]
+  use Hilbert transforms to determine $u(x_{0})$.
+\item[(b)] Verify that the $u(x_{0})$ found as your answer to part (a)
+  actually satisfies the integral equation.
+\item[(c)] From $f(z)|_{y=0}=u(x)+iv(x)$, replace $x$ by $z$ and determine
+  $f(z)$. Verify that the conditions for the Hilbert transforms are
+  satisfied.
+\item[(d)] Are the crossing conditions satisfied?
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $u(x_{0})=\dfrac{x_{0}}{1+x_{0}^{2}}$,\quad
+(c) $f(z)=(z+i)^{-1}$.
+\solution
+\erratum{The principal-value symbol restores the cut integral sign
+in the source; it is necessary at $x=x_0$.} All integrals below have
+that meaning. Use the convention
+\[
+(Hg)(a)=\frac1\pi\operatorname{PV}\int_{-\infty}^{\infty}
+\frac{g(x)}{x-a}dx,\qquad u=Hv,\quad v=-Hu.
+\]
+(a) The given equation is $Hu=1/(1+a^2)$, so
+$v(a)=-1/(1+a^2)$ and $u=Hv$. To evaluate the latter transform, use
+\[
+\frac1{(1+x^2)(x-a)}
+=\frac1{1+a^2}\left[\frac1{x-a}-\frac{x+a}{1+x^2}\right].
+\]
+The principal value of $1/(x-a)$ on the whole real line is zero;
+$x/(1+x^2)$ contributes zero by symmetric odd integration; and
+$\int dx/(1+x^2)=\pi$. Therefore
+\[
+u(a)=-\frac1\pi\operatorname{PV}\int
+\frac{dx}{(1+x^2)(x-a)}=\boxed{\frac a{1+a^2}}.
+\]
+Within the decaying Hilbert-transform class, inversion $H^2=-1$
+fixes this solution uniquely.
+
+(b) Check the original transform directly with another decomposition:
+\[
+\frac{x}{(1+x^2)(x-a)}
+=\frac1{1+a^2}\left[\frac a{x-a}+\frac{1-ax}{1+x^2}\right].
+\]
+Its integral is $\pi/(1+a^2)$ by the same three evaluations. Division
+by $\pi$ reproduces the given equation, including its positive sign.
+
+(c) On the real axis,
+\[
+f(x)=u+iv=\frac{x-i}{x^2+1}=\frac1{x+i}.
+\]
+Thus $\boxed{f(z)=1/(z+i)}$. Its only pole is at $-i$, below the
+real axis, so it is analytic in and above the real axis. Also
+$f(z)=O(1/z)$ there. For the Cauchy kernel $f(z)/(z-z_0)$ the large
+arc is $O(1/R)$, verifying the needed dispersion condition.
+
+(d) The standard crossing conditions are not satisfied: $u$ is odd,
+whereas $v$ is even. In fact
+\[
+f(-x)=\frac1{-x+i}=-\frac1{x-i}=-f(x)^*,
+\]
+with a minus sign instead of the requested $f(-x)=f(x)^*$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.6}\quad
+\erratum{Assume the full-frequency dispersion hypotheses for
+$f(\omega)=n^2(\omega)-1$, including analyticity above the real axis
+and high-frequency decay. In (a), constancy means on the entire real
+frequency axis.}
+\begin{enumerate}
+\item[(a)] If the real part of the complex index of refraction (squared) is
+  constant (no optical dispersion), show that the imaginary part is zero (no
+  absorption).
+\item[(b)] Conversely, if there is absorption, show that there must be
+  dispersion. In other words, if the imaginary part of $n^{2}-1$ is not
+  zero, show that the real part of $n^{2}-1$ is not constant.
+\end{enumerate}
+\solution
+\erratum{The conclusion uses the dispersion hypotheses on
+$f(\omega)=n^2(\omega)-1$, including its decay at high frequency,
+and constancy over the entire frequency axis. Constancy over only a
+finite frequency interval is not enough for this argument.}
+Write $f=u+iv$. (a) If the real part of $n^2$ is constant, then
+$u=\Re(n^2-1)=K$ is constant. Since $f(\omega)\to0$ at high frequency,
+$K=0$. The second Hilbert-transform equation then gives
+\[
+v(\omega_0)=-\frac1\pi\operatorname{PV}\int_{-\infty}^{\infty}
+\frac{u(\omega)}{\omega-\omega_0}d\omega=0.
+\]
+Thus $\boxed{\Im n^2=0}$, meaning no absorption under the stated model.
+The constant real value of $n^2$ is in fact one because of the
+high-frequency normalization.
+
+(b) This is the contrapositive of (a). If $v$ is not identically zero
+and $u$ were constant, the preceding argument would force $v=0$, a
+contradiction. Hence
+\[
+\boxed{\Im(n^2-1)\not\equiv0\quad\Longrightarrow\quad
+\Re(n^2-1)\text{ is not constant}}.
+\]
+This asserts the existence of dispersion somewhere in the full spectrum;
+it does not demand that its size be appreciable at every frequency.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.7}\quad Given $u(x)=x/(x^{2}+1)$ and
+$v(x)=-1/(x^{2}+1)$, show by direct evaluation of each integral that
+\[
+\int_{-\infty}^{\infty}|u(x)|^{2}\,dx
+=\int_{-\infty}^{\infty}|v(x)|^{2}\,dx.
+\]
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\displaystyle\int_{-\infty}^{\infty}|u(x)|^{2}\,dx
+=\int_{-\infty}^{\infty}|v(x)|^{2}\,dx=\frac{\pi}{2}$.
+\solution
+Use $x=\tan\theta$, $dx=\sec^2\theta\,d\theta$, with
+$-\pi/2<\theta<\pi/2$. For the real functions in the question,
+\[
+\int_{-\infty}^{\infty}|u|^2dx
+=\int_{-\pi/2}^{\pi/2}
+ \frac{\tan^2\theta}{\sec^4\theta}\sec^2\theta\,d\theta
+=\int_{-\pi/2}^{\pi/2}\sin^2\theta\,d\theta,
+\]
+\[
+\int_{-\infty}^{\infty}|v|^2dx
+=\int_{-\pi/2}^{\pi/2}
+ \frac1{\sec^4\theta}\sec^2\theta\,d\theta
+=\int_{-\pi/2}^{\pi/2}\cos^2\theta\,d\theta.
+\]
+With $\sin^2\theta=(1-\cos2\theta)/2$ and
+$\cos^2\theta=(1+\cos2\theta)/2$, the oscillatory endpoint term
+$\sin2\theta/4$ vanishes at both limits. Each integral is therefore
+\[
+\boxed{\pi/2}.
+\]
+This directly checks the Parseval equality without assuming it.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{12.8.8}\quad Take $u(x)=\delta(x)$, a delta function, and
+assume that the Hilbert transform equations hold.
+\erratum{Interpret both displayed kernel integrals as distributions:
+replace each reciprocal $1/q$ by $q/(q^2+\epsilon^2)$, use the same
+$\epsilon>0$ for both factors, integrate, and then take
+$\epsilon\downarrow0$ against smooth compactly supported test functions.}
+\begin{enumerate}
+\item[(a)] Show that
+  \[
+  \delta(w)=\frac{1}{\pi^{2}}\int_{-\infty}^{\infty}\frac{dy}{y(y-w)}.
+  \]
+\item[(b)] With changes of variables $w=s-t$ and $x=s-y$, transform the
+  $\delta$ representation of part (a) into
+  \[
+  \delta(s-t)=\frac{1}{\pi^{2}}
+  \int_{-\infty}^{\infty}\frac{dx}{(x-s)(x-t)}.
+  \]
+\end{enumerate}
+\emph{Note.}~The $\delta$ function is discussed in Section 1.11.
+\solution
+\erratum{These formulas are distributional kernel identities. They are
+not ordinary improper integrals, nor does the pointwise principal value
+at coincident poles exist. A consistent regularization is essential.}
+With $u(x)=\delta(x)$, the second Hilbert relation gives
+\[
+v(y)=-\frac1\pi\operatorname{PV}\int\frac{\delta(x)}{x-y}dx
+=\frac1\pi\operatorname{PV}\frac1y.
+\]
+The first relation $u=Hv$ therefore formally gives the expression in
+(a). To specify and prove its meaning, regularize both kernels by the
+same positive $\epsilon$ and define
+\[
+D_\epsilon(w)=\frac1{\pi^2}\int_{-\infty}^{\infty}
+\frac{y(y-w)}{(y^2+\epsilon^2)((y-w)^2+\epsilon^2)}dy.
+\]
+For real $w\ne0$, close the rational integrand in the upper half-plane.
+The arc vanishes as $O(1/R)$, and the two residues before division by
+$\pi^2$ are
+\[
+\frac{-w+i\epsilon}{2w(w-2i\epsilon)},\qquad
+\frac{w+i\epsilon}{2w(w+2i\epsilon)}.
+\]
+Their sum is $-i\epsilon/(w^2+4\epsilon^2)$, so
+\[
+\boxed{D_\epsilon(w)=\frac{2\epsilon}{\pi(w^2+4\epsilon^2)}}.
+\]
+The formula extends to $w=0$ by continuity; directly the integral there
+is $1/(2\pi\epsilon)$, the same value. For every smooth compactly
+supported test function $\varphi$, substitute $w=2\epsilon t$:
+\[
+\int_{-\infty}^{\infty}D_\epsilon(w)\varphi(w)dw
+=\int_{-\infty}^{\infty}\frac{\varphi(2\epsilon t)}{\pi(1+t^2)}dt
+\longrightarrow\varphi(0).
+\]
+Dominated convergence applies because $\varphi$ is bounded and the
+Cauchy density has integral one. Therefore $D_\epsilon\to\delta$ in
+the distributional sense, establishing the precise meaning of
+\[
+\boxed{\delta(w)=\frac1{\pi^2}\int\frac{dy}{y(y-w)}}.
+\]
+For $w\ne0$ the separately interpreted principal values would give
+zero, while at $w=0$ the integral of $1/y^2$ diverges; this is why a
+pointwise calculation cannot replace the distributional limit.
+
+(b) Set $w=s-t$ and $x=s-y$. Then $y=s-x$, $y-w=t-x$, and
+$dy=-dx$. Reversing the limits removes the minus sign, while
+\[
+y(y-w)=(s-x)(t-x)=(x-s)(x-t).
+\]
+Thus
+\[
+\boxed{\delta(s-t)=\frac1{\pi^2}
+\int_{-\infty}^{\infty}\frac{dx}{(x-s)(x-t)}}
+\]
+with the same regularization: its finite-$\epsilon$ kernel is
+$2\epsilon/[\pi((s-t)^2+4\epsilon^2)]$. This also supplies the
+consistent kernel identity used in the Parseval calculation.

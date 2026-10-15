@@ -1,0 +1,4276 @@
+% Problems, Chapter 20: Integral Transforms
+% Arfken, Weber & Harris, Mathematical Methods for Physicists, 7th ed.
+% Requires: amsmath, amssymb, tikz
+
+\section*{Problems}
+
+\Needspace{9\baselineskip}
+\subsection*{20.2 Fourier Transform}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.1}
+\begin{enumerate}
+\item[(a)] Show that $g(-\omega)=g^{*}(\omega)$ is a necessary and
+sufficient condition for $f(x)$ to be real.
+\item[(b)] Show that $g(-\omega)=-g^{*}(\omega)$ is a necessary and
+sufficient condition for $f(x)$ to be pure imaginary.
+\end{enumerate}
+\par\emph{Note.}~The condition of part (a) is used in the
+development of the dispersion relations of Section~12.8.
+\par\erratum{Use Fourier inversion in the usual $L^1$ or $L^2$ setting, and interpret reality almost everywhere; continuous representatives give pointwise statements.}
+\solution
+Use the convention
+\[
+g(\omega)=\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+f(x)e^{i\omega x}dx,\qquad
+f(x)=\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+g(\omega)e^{-i\omega x}d\omega.
+\]
+Conjugating the first formula shows
+\[
+g^*(\omega)=\frac1{\sqrt{2\pi}}\int f^*(x)e^{-i\omega x}dx
+=\mathcal F[f^*](-\omega).
+\]
+(a) If $f=f^*$, this is $g(-\omega)$. Conversely, if
+$g(-\omega)=g^*(\omega)$, conjugate the inverse transform and
+put $u=-\omega$:
+\begin{align*}
+f^*(x)&=\frac1{\sqrt{2\pi}}\int g^*(\omega)e^{i\omega x}d\omega\\
+&=\frac1{\sqrt{2\pi}}\int g(-\omega)e^{i\omega x}d\omega
+=\frac1{\sqrt{2\pi}}\int g(u)e^{-iux}du=f(x).
+\end{align*}
+(b) Purely imaginary means $f^*=-f$. The conjugated forward
+formula then gives $g^*(\omega)=-g(-\omega)$. Conversely this
+last condition, inserted in the preceding inverse calculation,
+gives $f^*(x)=-f(x)$.
+\erratum{For $L^1$ or $L^2$ transforms the recovered function is
+determined almost everywhere; these reality assertions have that
+meaning. They hold at every point for continuous representatives.
+Changing a function at an isolated point cannot be detected by its
+Fourier transform.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.2}\quad The function
+\[
+f(x)=\begin{cases}
+1, & |x| < 1\\
+0, & |x| > 1
+\end{cases}
+\]
+is a symmetrical finite step function.
+\begin{enumerate}
+\item[(a)] Find $g_{c}(\omega)$, Fourier cosine transform of
+$f(x)$.
+\item[(b)] Taking the inverse cosine transform, show that
+\[
+f(x)=\frac{2}{\pi}\int_{0}^{\infty}
+\frac{\sin\omega\cos\omega x}{\omega}\,d\omega.
+\]
+\item[(c)] From part (b) show that
+\[
+\int_{0}^{\infty}\frac{\sin\omega\cos\omega x}{\omega}\,d\omega
+=\begin{cases}
+0, & |x| > 1,\\[3pt]
+\dfrac{\pi}{4}, & |x| = 1,\\[6pt]
+\dfrac{\pi}{2}, & |x| < 1.
+\end{cases}
+\]
+\end{enumerate}
+\solution
+(a) The unitary cosine transform is
+\[
+g_c(\omega)=\sqrt{\frac2\pi}\int_0^\infty f(x)\cos\omega x\,dx
+=\sqrt{\frac2\pi}\int_0^1\cos\omega x\,dx
+=\boxed{\sqrt{\frac2\pi}\frac{\sin\omega}{\omega}}.
+\]
+At zero its continuous value is $\sqrt{2/\pi}$.
+(b) Substitution in the inverse cosine transform gives
+\[
+f(x)=\sqrt{\frac2\pi}\int_0^\infty g_c(\omega)\cos\omega x\,d\omega
+=\frac2\pi\int_0^\infty\frac{\sin\omega\cos\omega x}{\omega}d\omega.
+\]
+At a jump, inversion gives the mean of the two one-sided limits,
+so its value at $x=\pm1$ is $1/2$.
+
+(c) To evaluate the integral directly, first note that
+\[
+D_\epsilon(b)=\int_0^\infty e^{-\epsilon u}\frac{\sin bu}{u}du,
+\qquad D_\epsilon'(b)=\int_0^\infty e^{-\epsilon u}\cos bu\,du
+=\frac{\epsilon}{\epsilon^2+b^2}.
+\]
+Since $D_\epsilon(0)=0$, integration in $b$ gives
+$D_\epsilon(b)=\arctan(b/\epsilon)$. Thus
+$D(b)=(\pi/2)\operatorname{sgn}b$ for $b\ne0$, while
+$D(0)=0$. Dirichlet convergence makes this Abel limit equal to
+the ordinary improper integral. Now use
+\[
+\sin\omega\cos\omega x
+=\tfrac12\{\sin[(1+x)\omega]+\sin[(1-x)\omega]\}.
+\]
+The answer is
+$\frac\pi4[\operatorname{sgn}(1+x)+\operatorname{sgn}(1-x)]$,
+with $\operatorname{sgn}0=0$. For $|x|<1$ both signs are
+positive; for $|x|>1$ they cancel; at $|x|=1$ just one is
+positive. These are exactly the three stated values.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.3}
+\begin{enumerate}
+\item[(a)] Show that the Fourier sine and cosine transforms of
+$e^{-at}$ are
+\[
+g_{s}(\omega)=\sqrt{\frac{2}{\pi}}\,\frac{\omega}{\omega^{2}+a^{2}},
+\qquad
+g_{c}(\omega)=\sqrt{\frac{2}{\pi}}\,\frac{a}{\omega^{2}+a^{2}}.
+\]
+\par\emph{Hint.}~Each of the transforms can be related to the
+other by integration by parts.
+\item[(b)] Show that
+\begin{align*}
+\int_{0}^{\infty}\frac{\omega\sin\omega x}{\omega^{2}+a^{2}}\,d\omega
+&=\frac{\pi}{2}\,e^{-ax},\qquad x>0,\\
+\int_{0}^{\infty}\frac{\cos\omega x}{\omega^{2}+a^{2}}\,d\omega
+&=\frac{\pi}{2a}\,e^{-ax},\qquad x>0.
+\end{align*}
+\end{enumerate}
+These results can also be obtained by contour integration
+(Exercise~11.8.12).
+\par\erratum{Assume $a>0$.}
+\solution
+\erratum{Take $a>0$ for the ordinary exponentially decaying
+transforms and the answers as printed.} Put
+\[
+C=\int_0^\infty e^{-at}\cos\omega t\,dt,\qquad
+S=\int_0^\infty e^{-at}\sin\omega t\,dt.
+\]
+Integrate by parts using an antiderivative $-e^{-at}/a$ of the
+exponential. The endpoint terms give
+\[
+C=\frac1a-\frac\omega aS,\qquad S=\frac\omega aC.
+\]
+Substitute the second into the first:
+$a^2C=a-\omega^2C$, hence
+\[
+C=\frac a{a^2+\omega^2},\qquad
+S=\frac\omega{a^2+\omega^2}.
+\]
+Multiplication by $\sqrt{2/\pi}$ gives $g_c$ and $g_s$.
+For $x>0$, the cosine and sine inversion formulas therefore read
+\[
+e^{-ax}=\frac{2a}{\pi}\int_0^\infty
+\frac{\cos\omega x}{a^2+\omega^2}d\omega,
+\qquad
+e^{-ax}=\frac2\pi\int_0^\infty
+\frac{\omega\sin\omega x}{a^2+\omega^2}d\omega.
+\]
+Solving these equations for the two integrals proves (b).
+The cosine integral is absolutely convergent. The sine integral
+converges conditionally for $x>0$; it follows from inversion of
+the odd extension of $e^{-at}$ on $t>0$. At $x=0$ that odd
+extension has a jump and its inversion value is zero, so the
+first formula in (b) must not be extended there by substitution.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.4}\quad Find the Fourier transform of the
+triangular pulse (Fig.~20.6),
+\[
+f(x)=\begin{cases}
+h(1-a|x|), & |x| < 1/a,\\
+0, & |x| > 1/a.
+\end{cases}
+\]
+\par\emph{Note.}~This function provides another delta sequence
+with $h=a$ and $a\to\infty$.
+\par\erratum{Assume $a>0$, so the pulse has positive width.}
+\solution
+\erratum{Take $a>0$, so that the pulse has the stated positive
+width.} Evenness eliminates the sine part:
+\[
+g(\omega)=\frac{2h}{\sqrt{2\pi}}
+\int_0^{1/a}(1-ax)\cos\omega x\,dx.
+\]
+For $\omega\ne0$, use
+\[
+\int x\cos\omega x\,dx
+=\frac{x\sin\omega x}{\omega}+\frac{\cos\omega x}{\omega^2}.
+\]
+The terms proportional to $\sin(\omega/a)$ cancel, giving
+\begin{align*}
+\int_0^{1/a}(1-ax)\cos\omega x\,dx
+&=\frac{a[1-\cos(\omega/a)]}{\omega^2}\\
+&=\frac1{2a}\left[\frac{\sin(\omega/2a)}{\omega/2a}\right]^2.
+\end{align*}
+Thus
+\[
+\boxed{g(\omega)=\frac{h}{a\sqrt{2\pi}}
+\left[\frac{\sin(\omega/2a)}{\omega/2a}\right]^2},
+\qquad g(0)=\frac{h}{a\sqrt{2\pi}}.
+\]
+The area of the pulse is $h/a$. With $h=a$, substitute $u=ax$
+in its action on a continuous test function $\eta$:
+\[
+\int f_a(x)\eta(x)dx=\int_{-1}^1(1-|u|)\eta(u/a)du
+\longrightarrow\eta(0)\int_{-1}^1(1-|u|)du=\eta(0).
+\]
+This proves the delta-sequence claim, not merely a pointwise
+concentration of the graph.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.5}\quad Consider the sequence
+\[
+\delta_{n}(x)=\begin{cases}
+n, & |x| < 1/2n,\\
+0, & |x| > 1/2n.
+\end{cases}
+\]
+This is Eq.~(1.152). Express $\delta_{n}(x)$ as a Fourier integral
+(via the Fourier integral theorem, inverse transform, etc.).
+Finally, show that we may write
+\[
+\delta(x)=\lim_{n\to\infty}\delta_{n}(x)
+=\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx}\,dk.
+\]
+\par\erratum{The limit and the final Fourier integral are distributional identities, tested against smooth rapidly decreasing functions.}
+\solution
+The forward transform is
+\begin{align*}
+g_n(k)&=\frac n{\sqrt{2\pi}}\int_{-1/(2n)}^{1/(2n)}e^{ikx}dx\\
+&=\frac1{\sqrt{2\pi}}\frac{\sin(k/2n)}{k/2n}.
+\end{align*}
+Fourier inversion consequently gives
+\[
+\boxed{\delta_n(x)=\frac1{2\pi}\int_{-\infty}^{\infty}
+\frac{\sin(k/2n)}{k/2n}e^{-ikx}dk},
+\]
+with the midpoint value $n/2$ at either edge of the rectangle.
+Those two point values do not affect any integral.
+For a smooth rapidly decreasing test function $\eta$,
+\[
+\int\delta_n(x)\eta(x)dx
+=n\int_{-1/(2n)}^{1/(2n)}\eta(x)dx\longrightarrow\eta(0).
+\]
+Also $|\sin u/u|\le1$ for real $u$, and the Fourier transform
+of $\eta$ is integrable. Hence dominated convergence permits the
+limit of the multiplier after pairing with $\eta$. Since this
+multiplier tends to one, the limiting identity is
+\[
+\boxed{\delta(x)=\frac1{2\pi}\int_{-\infty}^{\infty}e^{-ikx}dk}.
+\]
+\erratum{This last integral is a distributional Fourier identity,
+not a convergent ordinary integral or a pointwise limit of
+functions at $x=0$. The test-function argument supplies its
+precise meaning.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.6}\quad Using the sequence
+\[
+\delta_{n}(x)=\frac{n}{\sqrt{\pi}}\exp(-n^{2}x^{2}),
+\]
+show that
+\[
+\delta(x)=\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-ikx}\,dk.
+\]
+\par\emph{Hint.}~Remember that $\delta(x)$ is defined in terms of
+its behavior as part of an integrand.
+\par\erratum{Interpret the final Fourier integral as a distribution, rather than an ordinary convergent integral.}
+\solution
+The exponent completes to a square as
+\[
+-n^2x^2+ikx=-n^2\left(x-\frac{ik}{2n^2}\right)^2
+-\frac{k^2}{4n^2}.
+\]
+Set $z=x-ik/(2n^2)$. The horizontal integration line can be
+shifted back to the real axis: on its two vertical end segments
+$z=\pm R+iv$, the modulus is $e^{-n^2R^2+n^2v^2}$, with $v$
+in a fixed bounded interval, so those integrals tend to zero.
+Consequently the remaining Gaussian integral is
+$\int_{\mathbb R}e^{-n^2z^2}dz=\sqrt\pi/n$, and
+\begin{align*}
+g_n(k)&=\frac1{\sqrt{2\pi}}\frac n{\sqrt\pi}
+\int_{-\infty}^{\infty}e^{-n^2x^2+ikx}dx\\
+&=\frac1{\sqrt{2\pi}}e^{-k^2/(4n^2)}.
+\end{align*}
+The inverse is therefore the explicit regularized identity
+\[
+\frac n{\sqrt\pi}e^{-n^2x^2}
+=\frac1{2\pi}\int_{-\infty}^{\infty}
+e^{-k^2/(4n^2)}e^{-ikx}dk.
+\]
+For a bounded continuous test function $\eta$, put $u=nx$:
+\[
+\int\frac n{\sqrt\pi}e^{-n^2x^2}\eta(x)dx
+=\frac1{\sqrt\pi}\int e^{-u^2}\eta(u/n)du
+\longrightarrow\eta(0).
+\]
+The Gaussian is an integrable majorant. For a Schwartz test
+function one can likewise pass to the limit in the Fourier
+pairing because $0<e^{-k^2/(4n^2)}\le1$ and its transform is
+integrable. This gives the required delta identity with the
+factor $1/(2\pi)$.
+\erratum{The unregularized exponential integral is understood
+in this weak, distributional sense; removing the Gaussian does
+not make it an ordinary improper integral.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.7}\quad The formula
+\[
+\delta(t-x)=\frac{1}{2\pi}\int_{-\infty}^{\infty}
+e^{i\omega(t-x)}\,d\omega
+=\frac{1}{2\pi}\int_{-\infty}^{\infty}
+e^{i\omega t}e^{-i\omega x}\,d\omega
+\]
+can be identified as the continuum limit of an eigenfunction
+expansion. Derive sine and cosine representations of $\delta(t-x)$
+that are comparable to the exponential representation just given.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\displaystyle\frac{2}{\pi}\int_{0}^{\infty}
+\sin\omega t\sin\omega x\,d\omega$,\quad
+$\displaystyle\frac{2}{\pi}\int_{0}^{\infty}
+\cos\omega t\cos\omega x\,d\omega$.
+\par\erratum{The two half-line answers below mean distributions for $x,t>0$. On the full line they require reflected delta terms, as derived in the solution.}
+\solution
+On a finite interval $(0,L)$ the normalized Dirichlet
+and Neumann eigenfunctions give, for interior $x,t$,
+\[
+\delta(t-x)=\frac2L\sum_{n=1}^\infty
+\sin\frac{n\pi t}L\sin\frac{n\pi x}L,
+\]
+\[
+\delta(t-x)=\frac1L+\frac2L\sum_{n=1}^\infty
+\cos\frac{n\pi t}L\cos\frac{n\pi x}L.
+\]
+Set $\omega_n=n\pi/L$, so $\Delta\omega=\pi/L$.
+The factor $2/L=(2/\pi)\Delta\omega$ turns the sums into
+integrals as $L\to\infty$; the constant Neumann term $1/L$
+vanishes. In the weak sense this gives the two quoted kernels.
+
+Their domains can be checked directly from product-to-sum:
+\begin{align*}
+\frac2\pi\int_0^\infty\sin\omega t\sin\omega x\,d\omega
+&=\delta(t-x)-\delta(t+x),\\
+\frac2\pi\int_0^\infty\cos\omega t\cos\omega x\,d\omega
+&=\delta(t-x)+\delta(t+x).
+\end{align*}
+Here $\delta(u)=\pi^{-1}\int_0^\infty\cos\omega u\,d\omega$.
+\erratum{The stated sine and cosine answers represent
+$\delta(t-x)$ on the positive half-line, with $x,t>0$.
+On the whole real line they contain the reflected source
+$\mp\delta(t+x)$ shown above. Endpoint values at zero require
+the corresponding half-line boundary convention.}
+For a test function supported inside $(0,\infty)$ and fixed
+$x>0$, the reflected source has no support, which proves exactly
+the needed positive-half-line identities.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.8}\quad In a resonant cavity, an
+electromagnetic oscillation of frequency $\omega_{0}$ dies out as
+\[
+A(t)=\begin{cases}
+A_{0}e^{-\omega_{0}t/2Q}e^{-i\omega_{0}t}, & t>0,\\[3pt]
+0, & t<0.
+\end{cases}
+\]
+The parameter $Q$ is a measure of the ratio of stored energy to
+energy loss per cycle. Calculate the frequency distribution of the
+oscillation, $a^{*}(\omega)a(\omega)$, where $a(\omega)$ is the
+Fourier transform of $A(t)$.
+\par\emph{Note.}~The larger $Q$ is, the sharper your resonance
+line will be.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$a^{*}(\omega)a(\omega)=\dfrac{\erratum{|A_{0}|^{2}}}{2\pi}\,
+\dfrac{1}{(\omega-\omega_{0})^{2}+(\omega_{0}/2Q)^{2}}$.
+\par\erratum{Take $\omega_0>0$, $Q>0$. The amplitude $A_0$ may be complex, so its squared modulus is required in the answer.}
+\solution
+Put $\gamma=\omega_0/(2Q)>0$, the amplitude decay
+rate. Direct transformation of the causal signal gives
+\begin{align*}
+a(\omega)&=\frac{A_0}{\sqrt{2\pi}}\int_0^\infty
+ e^{-[\gamma-i(\omega-\omega_0)]t}dt\\
+&=\frac{A_0}{\sqrt{2\pi}}
+\frac1{\gamma-i(\omega-\omega_0)}.
+\end{align*}
+The conjugate denominator is $\gamma+i(\omega-\omega_0)$,
+so their product is $\gamma^2+(\omega-\omega_0)^2$. Hence
+\[
+\boxed{|a(\omega)|^2=\frac{|A_0|^2}{2\pi}
+\frac1{(\omega-\omega_0)^2+(\omega_0/2Q)^2}.}
+\]
+\erratum{The printed numerator $A_0^2$ presumes a real initial
+amplitude; for a complex amplitude it is $|A_0|^2$. Decay requires
+$\omega_0/Q>0$, conventionally $\omega_0>0$, $Q>0$.}
+The peak is at $\omega_0$. Half its height occurs at
+$|\omega-\omega_0|=\gamma$, so the full width at half maximum
+is $2\gamma=\omega_0/Q$. Increasing $Q$ narrows the line.
+As a normalization check,
+\[
+\int_{-\infty}^{\infty}|a(\omega)|^2d\omega
+=\frac{|A_0|^2}{2\gamma}
+=\int_0^\infty|A(t)|^2dt.
+\]
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.9}\quad Prove that
+\[
+\frac{\hbar}{2\pi i}\int_{-\infty}^{\infty}
+\frac{e^{-i\omega t}\,d\omega}{E_{0}-i\Gamma/2-\hbar\omega}
+=\begin{cases}
+\exp\left(-\dfrac{\Gamma t}{2\hbar}\right)
+\exp\left(-i\dfrac{E_{0}t}{\hbar}\right), & t>0,\\[12pt]
+0, & t<0.
+\end{cases}
+\]
+This Fourier integral appears in a variety of problems in quantum
+mechanics: barrier penetration, scattering, time-dependent
+perturbation theory, and so on.
+\par\erratum{(The formula as given assumes that $\Gamma>0$.)}
+\par\emph{Hint.}~Try contour integration.
+\solution
+Let
+\[
+\omega_p=\frac{E_0-i\Gamma/2}{\hbar},\qquad
+\hbar>0,\quad E_0\in\mathbb R,\quad\Gamma>0.
+\]
+Then the integral is
+\[
+I(t)=-\frac1{2\pi i}\int_{-\infty}^{\infty}
+\frac{e^{-i\omega t}}{\omega-\omega_p}d\omega.
+\]
+The pole lies below the real axis. If $t>0$, write
+$\omega=u+iv$; the modulus of the exponential is $e^{vt}$,
+so close the contour in the lower half-plane. The closure is
+clockwise, and Jordan's lemma makes its arc integral vanish.
+The residue of $e^{-i\omega t}/(\omega-\omega_p)$ is
+$e^{-i\omega_pt}$; consequently
+\[
+I(t)=-\frac1{2\pi i}(-2\pi i)e^{-i\omega_pt}
+=e^{-\Gamma t/(2\hbar)}e^{-iE_0t/\hbar}.
+\]
+If $t<0$, close above instead. There is no pole inside, so the
+integral is zero. This proves both cases, including the sign
+from the contour orientation.
+\erratum{The manual, p.~334, writes $e^{+i\omega_pt}$ in its
+residue and final step. The exponent must be negative, as the
+original integrand shows; the positive sign would produce
+growth for $t>0$. The published condition $\Gamma>0$ is
+necessary for the causal contour choice.}
+At $t=0$ the symmetric principal-value inversion gives $1/2$,
+the mean across the jump. The displayed problem deliberately
+states only $t\ne0$. For $\Gamma=0$, a pole prescription would
+have to be supplied before the real-axis integral is defined.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.10}\quad Verify that the following are
+Fourier integral transforms of one another:
+\begin{enumerate}
+\item[(a)] $\left\{\begin{aligned}
+&\sqrt{\frac{2}{\pi}}\cdot\frac{1}{\sqrt{a^{2}-x^{2}}},
+&&|x| < a,\\[6pt]
+&0, &&|x| > a,
+\end{aligned}\right\}$ and $J_{0}(ay)$,
+\item[(b)] $\left\{\begin{aligned}
+&0, &&|x| < a,\\[6pt]
+&-\sqrt{\frac{2}{\pi}}\,\frac{1}{\sqrt{\erratum{x^{2}-a^{2}}}},
+&&|x| > a,
+\end{aligned}\right\}$ and $Y_{0}(a|y|)$,
+\item[(c)] $\sqrt{\dfrac{\pi}{2}}\,\dfrac{1}{\sqrt{x^{2}+a^{2}}}$
+\quad and\quad $K_{0}(a|y|)$.
+\item[(d)] Can you suggest why $I_{0}(ay)$ is not included in
+this list?
+\end{enumerate}
+\par\erratum{(It is helpful to use the integral representation
+$J_{0}(x)=\dfrac{2}{\pi}\displaystyle\int_{0}^{1}
+\dfrac{\cos xt}{\sqrt{1-t^{2}}}\,dt$.)}
+\par\emph{Hint.}~$J_{0}$, $Y_{0}$, and $K_{0}$ may be transformed
+most easily by using an exponential representation, reversing the
+order of integration, and employing the Dirac delta function
+exponential representation, Eq.~(20.20). These cases can be
+treated equally well as Fourier cosine transforms.
+\par\erratum{Take $a>0$. In (b),(c), ordinary transform integrals are asserted for $y\ne0$; the identities also have a tempered-distribution interpretation.}
+\solution
+\erratum{Take $a>0$ for these transform pairs.} Since all the displayed functions are even,
+the full unitary transform is
+$\sqrt{2/\pi}\int_0^\infty f(x)\cos(xy)dx$.
+
+(a) The compactly supported member gives
+\begin{align*}
+\mathcal F f(y)&=\frac2\pi\int_0^a
+\frac{\cos(xy)}{\sqrt{a^2-x^2}}dx\\
+&=\frac2\pi\int_0^1\frac{\cos(ayu)}{\sqrt{1-u^2}}du
+=J_0(ay).
+\end{align*}
+The substitution $x=au$ canceled both factors of $a$.
+The last equality is the Poisson representation stated in the
+published erratum.
+
+(b) With the corrected square root, the transform is
+\[
+\mathcal F f(y)=-\frac2\pi\int_a^\infty
+\frac{\cos(xy)}{\sqrt{x^2-a^2}}dx
+=-\frac2\pi\int_1^\infty
+\frac{\cos(a|y|u)}{\sqrt{u^2-1}}du
+=Y_0(a|y|),\quad y\ne0.
+\]
+This is the real oscillatory representation derived in
+Exercise~14.4.8. Its endpoint singularity is integrable and its
+infinite tail is conditionally convergent for $y\ne0$.
+
+(c) The prefactors now multiply to one, giving
+\[
+\mathcal F f(y)=\int_0^\infty
+\frac{\cos(xy)}{\sqrt{x^2+a^2}}dx=K_0(a|y|),\quad y\ne0.
+\]
+For completeness, this follows by cosine inversion of
+Exercise~14.5.13:
+\[
+\frac1{\sqrt{x^2+a^2}}=\frac2\pi\int_0^\infty
+K_0(aq)\cos(xq)dq.
+\]
+With the unitary cosine normalization this says that the cosine
+transform of $1/\sqrt{x^2+a^2}$ is $\sqrt{2/\pi}K_0(a|y|)$,
+which is precisely the asserted full-transform relation.
+Applying the full transform twice reflects the original function:
+$\mathcal F^2f(x)=f(-x)$. All three members here are even,
+so this also verifies the reverse directions.
+\erratum{The logarithmic singularities in (b) and (c) at
+$y=0$ are not finite point values. Their transform identities
+hold as tempered distributions and as the indicated ordinary
+improper integrals away from zero; values at the support edges
+in (a),(b) are likewise singular.}
+
+(d) For $a>0$, $I_0(ay)\sim e^{a|y|}/\sqrt{2\pi a|y|}$.
+It therefore has neither an ordinary Fourier integral nor a
+Fourier transform as a tempered distribution represented by this
+function. This exponential growth is the obstruction to an
+analogous pair in the present Fourier setting. At $a=0$ the
+constant $I_0(0)=1$ instead has the distributional transform
+$\sqrt{2\pi}\delta$, a separate degenerate case.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.11}\quad \erratum{Show that the right-hand expression has the left-hand expression as its forward Fourier transform, and determine the reverse forward transform:}
+\[
+i^{n}J_{n}(t)\qquad\text{and}\qquad
+\begin{cases}
+\sqrt{\dfrac{2}{\pi}}\,T_{n}(x)(1-x^{2})^{-1/2},
+& |x| < 1,\\[10pt]
+0, & |x| > 1.
+\end{cases}
+\]
+$T_{n}(x)$ is the $n$th-order Chebyshev polynomial.
+\par\erratum{(The left-hand-side quantities are the transforms of
+their right-hand-side counterparts, but the right-hand-side
+quantities are $(-1)^{n}$ times the transforms of the
+left-hand-side expressions.)}
+\par\emph{Hint.}~With $T_{n}(\cos\theta)=\cos n\theta$, the
+transform of $T_{n}(x)(1-x^{2})^{-1/2}$ leads to an integral
+representation of $J_{n}(t)$.
+\solution
+Denote the compactly supported right-hand expression
+by $f_n(x)$. Its transform is
+\[
+\mathcal Ff_n(t)=\frac1\pi\int_{-1}^1
+\frac{T_n(x)e^{itx}}{\sqrt{1-x^2}}dx.
+\]
+Set $x=\cos\theta$, where $0\le\theta\le\pi$; reversing
+the limits removes the sign of $dx=-\sin\theta\,d\theta$:
+\[
+\mathcal Ff_n(t)=\frac1\pi\int_0^\pi
+ e^{it\cos\theta}\cos(n\theta)d\theta.
+\]
+For integer $n\ge0$ the integral is half the full-circle
+integral, because reflection $\theta\mapsto2\pi-\theta$ leaves
+both factors unchanged. The sine part of $e^{in\theta}$ integrates
+to zero under the same reflection. The integral representation
+of $J_n$ therefore gives
+\[
+\frac1\pi\int_0^\pi e^{it\cos\theta}\cos n\theta\,d\theta
+=\frac1{2\pi}\int_0^{2\pi}e^{it\cos\theta+in\theta}d\theta
+=\boxed{i^nJ_n(t)}.
+\]
+To check the direction of the transform, apply it again:
+\[
+\mathcal F[i^nJ_n](x)=f_n(-x)=(-1)^nf_n(x),
+\]
+since $T_n(-x)=(-1)^nT_n(x)$. Thus the inverse transform of
+$i^nJ_n$ is $f_n$, while its forward transform is $(-1)^nf_n$.
+This proves, and explains, the published sign correction. The
+square-root singularities are integrable; reverse inversion can
+be read in the tempered-distribution sense at the singular edges.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.12}\quad Show that the Fourier exponential
+transform of
+\[
+f(\mu)=\begin{cases}
+P_{n}(\mu), & |\mu| \le 1\\
+0, & |\mu| > 1
+\end{cases}
+\]
+is \erratum{$i^{n}\sqrt{2/\pi}\,j_{n}(\omega)$, where $\omega$ is
+the transform variable (the book prints
+$\left(2i^{n}/2\pi\right)j_{n}(kr)$)}. Here $P_{n}(\mu)$ is a
+Legendre polynomial and $j_{n}$ is a spherical Bessel function.
+\solution
+The forward transform, with variable $\omega$, is
+\[
+g(\omega)=\frac1{\sqrt{2\pi}}\int_{-1}^1
+P_n(\mu)e^{i\omega\mu}d\mu.
+\]
+Use Rodrigues' formula
+$P_n(\mu)=(2^nn!)^{-1}d^n(\mu^2-1)^n/d\mu^n$.
+Integrating by parts $n$ times has no endpoint terms: the
+polynomial $(\mu^2-1)^n$ and its first $n-1$ derivatives vanish
+at both endpoints. Hence
+\begin{align*}
+g(\omega)
+&=\frac{(-i\omega)^n}{2^nn!\sqrt{2\pi}}
+\int_{-1}^1(\mu^2-1)^ne^{i\omega\mu}d\mu\\
+&=\frac{i^n\omega^n}{2^nn!\sqrt{2\pi}}
+\int_{-1}^1(1-\mu^2)^ne^{i\omega\mu}d\mu.
+\end{align*}
+The spherical Poisson representation of Exercise~14.7.4 is
+\[
+j_n(\omega)=\frac{\omega^n}{2^{n+1}n!}
+\int_{-1}^1(1-\mu^2)^ne^{i\omega\mu}d\mu.
+\]
+Comparison gives
+\[
+\boxed{g(\omega)=\frac{2i^n}{\sqrt{2\pi}}j_n(\omega)
+=i^n\sqrt{\frac2\pi}\,j_n(\omega)}.
+\]
+The limit at $\omega=0$ is automatic. This derivation verifies
+both the scaling and the transform variable in the marked
+correction; $kr$ is only a possible later choice of $\omega$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.13}
+\begin{enumerate}
+\item[(a)] Show that $f(x)=x^{-1/2}$ is a \emph{self-reciprocal}
+under both Fourier cosine and sine transforms; that is,
+\begin{align*}
+\sqrt{\frac{2}{\pi}}\int_{0}^{\infty}
+x^{-1/2}\cos xt\,dx&=t^{-1/2},\\
+\sqrt{\frac{2}{\pi}}\int_{0}^{\infty}
+x^{-1/2}\sin xt\,d\erratum{x}&=t^{-1/2}.
+\end{align*}
+\item[(b)] Use the preceding results to evaluate the Fresnel
+integrals
+\[
+\int_{0}^{\infty}\cos\big(y^{2}\big)\,dy
+\quad\text{and}\quad
+\int_{0}^{\infty}\sin\big(y^{2}\big)\,dy.
+\]
+\end{enumerate}
+\par\erratum{In part (a), take $t>0$.}
+\solution
+\erratum{The differential in the second integral must be
+$dx$: the original textbook, p.~979, prints $ds$.
+Take $t>0$; both displayed integrals then converge conditionally.}
+Introduce positive damping before taking the square-root limit:
+\[
+I_\epsilon(t)=\int_0^\infty x^{-1/2}e^{-(\epsilon-it)x}dx
+=\Gamma(1/2)(\epsilon-it)^{-1/2}.
+\]
+The gamma integral applies because $\Re(\epsilon-it)>0$.
+On the principal branch, $\arg(\epsilon-it)\to-\pi/2$, so
+\[
+I(t)=\lim_{\epsilon\downarrow0}I_\epsilon(t)
+=\sqrt\pi\,t^{-1/2}e^{i\pi/4}
+=\sqrt{\frac\pi2}\,t^{-1/2}(1+i).
+\]
+The ordinary integrals converge at zero by the exponent $-1/2$
+and at infinity by Dirichlet's test, so Abel convergence identifies
+this limit with their values. Equating real and imaginary parts
+and multiplying by $\sqrt{2/\pi}$ proves both self-reciprocal
+identities.
+\erratum{The manual, p.~336, has two further slips: the change
+$u=-izt$ maps the positive $z$ axis to the negative imaginary
+axis, and its final factor $t^{1/2}$ must be $t^{-1/2}$.
+The damped gamma calculation above fixes both the phase and
+the scaling without an ambiguous contour rotation.}
+
+For the Fresnel integrals set $x=y^2$ at $t=1$. Then
+$x^{-1/2}dx=2dy$, giving
+\[
+2\int_0^\infty\cos(y^2)dy
+=2\int_0^\infty\sin(y^2)dy=\sqrt{\frac\pi2}.
+\]
+Thus each is $\boxed{\sqrt{\pi/8}}$. The substitution is first
+made at a finite upper limit, followed by the convergent improper
+limit; it does not require absolute convergence.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.14}\quad Show that
+$\left[\dfrac{1}{r^{2}}\right]^{T}\!\!(\mathbf{k})
+=\left(\dfrac{\pi}{2}\right)^{1/2}\dfrac{1}{k}$.
+\par\erratum{Here $k=|\mathbf k|>0$. The equality extends distributionally, with a singular zero-frequency value.}
+\solution
+Let $k=|\mathbf k|>0$ and use a polar axis parallel
+to $\mathbf k$. To make the large-radius integration explicit,
+first multiply $r^{-2}$ by $e^{-\epsilon r}$, $\epsilon>0$.
+Since $d^3r=r^2dr\,d\Omega$, the radial singularity cancels
+against the volume factor. The angular integration is
+\[
+\int d\Omega\,e^{ikr\cos\theta}
+=2\pi\int_{-1}^1e^{ikru}du=4\pi\frac{\sin kr}{kr}.
+\]
+Thus
+\begin{align*}
+\mathcal F\left[\frac{e^{-\epsilon r}}{r^2}\right](\mathbf k)
+&=\frac{4\pi}{(2\pi)^{3/2}k}
+\int_0^\infty e^{-\epsilon r}\frac{\sin kr}{r}dr\\
+&=\sqrt{\frac2\pi}\frac1k\arctan\frac{k}{\epsilon}.
+\end{align*}
+The last integral was evaluated in Exercise~20.2.2. Taking
+$\epsilon\downarrow0$ gives
+\[
+\boxed{\mathcal F[r^{-2}](\mathbf k)
+=\sqrt{\frac\pi2}\frac1k}.
+\]
+\erratum{Here $k$ is the nonnegative magnitude of the wave
+vector. The formula is for $k>0$, or is a tempered-distribution
+identity on all of three-dimensional momentum space. Its value
+at $k=0$ is singular, and the original spatial integral is not
+absolutely convergent at infinity.} Both $r^{-2}$ in three
+dimensions and $k^{-1}$ in three dimensions are locally
+integrable, so this distributional interpretation is well-defined.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.15}\quad The Fourier transform formulas for a
+function of two variables are
+\begin{align*}
+F(u,v)&=\frac{1}{2\pi}\iint
+f(x,y)e^{i(ux+vy)}\,dx\,dy,\\
+f(x,y)&=\frac{1}{2\pi}\iint
+F(u,v)e^{-i(ux+vy)}\,du\,dv,
+\end{align*}
+where the integrations are over the entire $xy$ or $uv$ plane. For
+$f(x,y)=f\big([x^{2}+y^{2}]^{1/2}\big)=f(r)$, show that the
+zero-order Hankel transforms
+\begin{align*}
+F(\rho)&=\int_{0}^{\infty}r f(r)J_{0}(\rho r)\,dr,\\
+f(r)&=\int_{0}^{\infty}\rho F(\rho)J_{0}(\rho r)\,d\rho,
+\end{align*}
+are a special case of the Fourier transforms.
+\par\emph{Note.}~This technique may be generalized to derive the
+Hankel transforms of order $\nu=0,\tfrac{1}{2},1,\tfrac{3}{2},
+\ldots$. See the two texts by Sneddon (Additional Readings). It
+might also be noted that the Hankel transforms of half-integral
+orders $\nu=\pm\tfrac{1}{2}$ reduce to Fourier sine and cosine
+transforms.
+\solution
+Put $x=r\cos\theta$, $y=r\sin\theta$, and write
+$u=\rho\cos\phi$, $v=\rho\sin\phi$. Then
+$ux+vy=\rho r\cos(\theta-\phi)$ and $dx\,dy=r\,dr\,d\theta$.
+The forward transform is consequently
+\begin{align*}
+F(u,v)&=\frac1{2\pi}\int_0^\infty rf(r)dr
+\int_0^{2\pi}e^{i\rho r\cos(\theta-\phi)}d\theta\\
+&=\int_0^\infty rf(r)J_0(\rho r)dr.
+\end{align*}
+The angular integral is $2\pi J_0(\rho r)$, independent of
+$\phi$, proving that the transform is radial: $F=F(\rho)$.
+For the inverse, use $du\,dv=\rho\,d\rho\,d\phi$:
+\begin{align*}
+f(x,y)&=\frac1{2\pi}\int_0^\infty\rho F(\rho)d\rho
+\int_0^{2\pi}e^{-i\rho r\cos(\theta-\phi)}d\phi\\
+&=\int_0^\infty\rho F(\rho)J_0(\rho r)d\rho,
+\end{align*}
+because $J_0$ is even. This is the claimed inverse Hankel
+transform. The factors $r$ and $\rho$ are the two polar Jacobians;
+the Fourier factors $1/(2\pi)$ cancel the angular integrals.
+For example, Schwartz radial functions justify the operations
+directly; the unitary extension acts in the radial spaces with
+measures $r\,dr$ and $\rho\,d\rho$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.2.16}\quad Show that the 3-D Fourier
+exponential transform of a radially symmetric function may be
+rewritten as a Fourier sine transform:
+\[
+\frac{1}{(2\pi)^{3/2}}
+\erratum{\int_{\mathbb R^3} f(r)e^{i\mathbf{k}\cdot\mathbf{r}}\,d^{3}r}
+=\frac{1}{k}\sqrt{\frac{2}{\pi}}\int_{0}^{\infty}
+r f(r)\sin kr\,dr.
+\]
+\par\erratum{Take $k=|\mathbf k|>0$, and use a continuous limit at $k=0$ when it exists.}
+\solution
+Choose the $z$ axis along $\mathbf k$, with
+$k=|\mathbf k|>0$. In spherical coordinates,
+\begin{align*}
+\mathcal Ff(\mathbf k)
+&=\frac1{(2\pi)^{3/2}}\int_0^\infty r^2f(r)dr
+\int_0^{2\pi}d\phi\int_0^\pi e^{ikr\cos\theta}\sin\theta\,d\theta\\
+&=\frac{2\pi}{(2\pi)^{3/2}}\int_0^\infty r^2f(r)dr
+\int_{-1}^1 e^{ikru}du\\
+&=\frac{4\pi}{(2\pi)^{3/2}}\int_0^\infty
+r^2f(r)\frac{\sin kr}{kr}dr\\
+&=\boxed{\frac1k\sqrt{\frac2\pi}\int_0^\infty rf(r)\sin kr\,dr}.
+\end{align*}
+Thus $k\mathcal Ff(k)$ is the unitary sine transform of $rf(r)$.
+The marked volume element must be $d^3r$ over all space, as in
+the published correction. If $\int_0^\infty r^2|f(r)|dr<\infty$,
+the zero-frequency limit follows from $\sin(kr)/(kr)\to1$:
+\[
+\mathcal Ff(0)=\sqrt{\frac2\pi}\int_0^\infty r^2f(r)dr.
+\]
+Consequently the displayed $1/k$ does not create a singularity
+when this finite limit exists.
+
+\Needspace{9\baselineskip}
+\subsection*{20.3 Properties of Fourier Transforms}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.3.1}\quad Write the 1-D equivalents of the
+equations for translation, scale change, sign change, and complex
+conjugation that were given for 3-D transforms in Eqs.~(20.48) to
+(20.51).
+\solution
+Write $g(\omega)=\mathcal Ff(\omega)$ with the positive
+forward exponential of Eq.~(20.10). The four one-dimensional
+identities are
+\begin{align*}
+\mathcal F[f(x-X)](\omega)&=e^{i\omega X}g(\omega),\\
+\mathcal F[f(\alpha x)](\omega)&=\frac1{|\alpha|}g(\omega/\alpha),
+\quad \alpha\in\mathbb R\setminus\{0\},\\
+\mathcal F[f(-x)](\omega)&=g(-\omega),\\
+\mathcal F[f^*(-x)](\omega)&=g^*(\omega).
+\end{align*}
+For translation set $u=x-X$, so $e^{i\omega x}=e^{i\omega X}e^{i\omega u}$.
+For scaling set $u=\alpha x$: when $\alpha<0$ the integration
+limits reverse, changing $1/\alpha$ into $1/|\alpha|$.
+The third identity is the second at $\alpha=-1$.
+For the fourth, set $u=-x$ and obtain
+\[
+\frac1{\sqrt{2\pi}}\int f^*(-x)e^{i\omega x}dx
+=\frac1{\sqrt{2\pi}}\int f^*(u)e^{-i\omega u}du=g^*(\omega).
+\]
+Equivalently, $\mathcal F[f^*](\omega)=g^*(-\omega)$.
+\erratum{A scale-change factor without an absolute value
+presumes a positive scale. The formula above covers either sign;
+$\alpha=0$ is not an invertible change of variables.}
+\erratum{The manual's one-dimensional translation line,
+p.~337, prints $e^{i\omega t}$ for a shift $f(t-a)$.
+The phase must contain the fixed displacement, $e^{i\omega a}$,
+not the integration variable.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.3.2}
+\begin{enumerate}
+\item[(a)] Show that by replacement of $\mathbf{r}$ by
+$\mathbf{r}-\mathbf{R}$ in the formula for the Fourier transform
+of $f(\mathbf{r})$, one can derive the translation formula,
+Eq.~(20.48).
+\item[(b)] Using methods similar to those for part (a), establish
+the formulas for scale change, sign change, and complex
+conjugation, Eqs.~(20.49) to (20.51).
+\end{enumerate}
+\solution
+Let
+$g(\mathbf k)=(2\pi)^{-3/2}\int f(\mathbf r)e^{i\mathbf k\cdot\mathbf r}d^3r$.
+(a) Put $\mathbf u=\mathbf r-\mathbf R$. Translation has unit
+Jacobian, and the exponential separates:
+\begin{align*}
+\mathcal F[f(\mathbf r-\mathbf R)](\mathbf k)
+&=\frac1{(2\pi)^{3/2}}\int f(\mathbf u)
+e^{i\mathbf k\cdot(\mathbf u+\mathbf R)}d^3u\\
+&=\boxed{e^{i\mathbf k\cdot\mathbf R}g(\mathbf k)}.
+\end{align*}
+(b) For real nonzero $\alpha$, set $\mathbf u=\alpha\mathbf r$.
+The volume element is $d^3r=|\alpha|^{-3}d^3u$, so
+\[
+\boxed{\mathcal F[f(\alpha\mathbf r)](\mathbf k)
+=|\alpha|^{-3}g(\mathbf k/\alpha)}.
+\]
+In particular, at $\alpha=-1$ this gives
+$\mathcal F[f(-\mathbf r)](\mathbf k)=g(-\mathbf k)$.
+Finally,
+\begin{align*}
+\mathcal F[f^*(-\mathbf r)](\mathbf k)
+&=\frac1{(2\pi)^{3/2}}\int f^*(\mathbf u)e^{-i\mathbf k\cdot\mathbf u}d^3u\\
+&=\left[\frac1{(2\pi)^{3/2}}\int f(\mathbf u)e^{i\mathbf k\cdot\mathbf u}d^3u\right]^*
+=\boxed{g^*(\mathbf k)}.
+\end{align*}
+\erratum{The printed $\alpha^{-3}$ in Eq.~(20.49) needs
+$\alpha>0$. For negative real scaling the correct Jacobian is
+$|\alpha|^{-3}$, as the sign-change case itself confirms.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.3.3}\quad Derive Eq.~(20.53), the formula for
+the Fourier transform of $\nabla^{2}f(\mathbf{r})$.
+\solution
+For a sufficiently decaying differentiable function,
+integrate by parts in $r_j$, holding the other coordinates fixed:
+\begin{align*}
+\mathcal F[\partial_j f](\mathbf k)
+&=\frac1{(2\pi)^{3/2}}\int d^2r_\perp
+\left([f e^{i\mathbf k\cdot\mathbf r}]_{r_j=-\infty}^{\infty}
+-\int f\,ik_j e^{i\mathbf k\cdot\mathbf r}dr_j\right)\\
+&=-ik_j g(\mathbf k).
+\end{align*}
+The boundary bracket vanishes. Applying the same calculation to
+$\partial_j f$ gives
+$\mathcal F[\partial_j^2 f]=(-ik_j)^2g=-k_j^2g$.
+Summing the three coordinate equations yields
+\[
+\boxed{\mathcal F[\nabla^2f](\mathbf k)
+=-(k_x^2+k_y^2+k_z^2)g(\mathbf k)=-k^2g(\mathbf k)}.
+\]
+Schwartz functions satisfy the required endpoint and interchange
+conditions. The same identity extends to tempered distributions
+by defining their derivatives through integration by parts, so
+singular sources can also be transformed consistently.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.3.4}\quad Verify Eqs.~(20.55) and (20.56), the
+formulas for the derivatives of 1-D Fourier transforms.
+\solution
+Starting from the one-dimensional definition,
+\begin{align*}
+\mathcal F[f'](\omega)
+&=\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}f'(t)e^{i\omega t}dt\\
+&=\frac1{\sqrt{2\pi}}[f(t)e^{i\omega t}]_{-\infty}^{\infty}
+-i\omega\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{i\omega t}dt\\
+&=-i\omega g(\omega).
+\end{align*}
+For $n$ derivatives repeat the operation. Each repetition moves
+one derivative to the exponential and contributes $-i\omega$:
+\[
+\boxed{\mathcal F[f^{(n)}](\omega)=(-i\omega)^n g(\omega)}.
+\]
+More explicitly, the finite-interval integration-by-parts identity
+has endpoint terms
+\[
+\sum_{j=0}^{n-1}(-i\omega)^j
+[f^{(n-1-j)}(t)e^{i\omega t}]_{-R}^{R};
+\]
+under the usual decaying-function assumptions each tends to zero
+as $R\to\infty$. This explains why no initial-value terms occur
+for this two-sided transform, unlike the one-sided Laplace
+transform. For distributional derivatives the identity remains
+valid without incorrectly discarding jump contributions.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.3.5}\quad Derive the inverse of Eq.~(20.56),
+namely that
+\[
+\left[t^{n}f(t)\right]^{T}\!\!(\omega)
+=i^{-n}\,\frac{d^{n}}{d\omega^{n}}\,g(\omega).
+\]
+\solution
+Differentiate the forward transform with respect to
+its frequency argument:
+\[
+g'(\omega)=\frac1{\sqrt{2\pi}}\int f(t)
+\frac\partial{\partial\omega}e^{i\omega t}dt
+=i\,\mathcal F[tf](\omega).
+\]
+After $n$ derivatives,
+\[
+g^{(n)}(\omega)=\frac1{\sqrt{2\pi}}\int (it)^nf(t)e^{i\omega t}dt
+=i^n\mathcal F[t^nf](\omega).
+\]
+Dividing by $i^n$ proves
+\[
+\boxed{\mathcal F[t^nf](\omega)=i^{-n}g^{(n)}(\omega)}.
+\]
+For example, $t^nf\in L^1$ justifies these differentiations
+by dominated convergence, with lower moments controlled by
+$f\in L^1$ and the highest moment. Schwartz functions satisfy
+all such conditions. This is the duality between multiplication
+in direct space and differentiation in frequency space.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.3.6}\quad The 1-D neutron diffusion equation
+with a (plane) source is
+\[
+-D\,\frac{d^{2}\varphi(x)}{dx^{2}}+K^{2}D\varphi(x)=Q\delta(x),
+\]
+where $\varphi(x)$ is the neutron flux, $Q\delta(x)$ is the
+(plane) source at $x=0$, and $D$ and $K^{2}$ are constants. Apply
+a Fourier transform. Solve the equation in transform space.
+Transform your solution back into $x$-space.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\varphi(x)=\dfrac{Q}{2KD}\,e^{-|Kx|}$.
+\par\erratum{For the displayed answer assume $D>0$, $K>0$, and seek the whole-line solution bounded at both infinities. These conditions select the decaying solution.}
+\solution
+\erratum{For the decaying whole-line solution take $D>0$
+and $K^2>0$, and put $\kappa=\sqrt{K^2}>0$. The printed
+coefficient $1/K$ presumes $K>0$. Decay, or boundedness at both
+infinities, must be part of the boundary specification.}
+The delta transform is $1/\sqrt{2\pi}$ and
+$\mathcal F[\varphi'']=-\omega^2\Phi$. Thus
+\[
+D(\omega^2+\kappa^2)\Phi(\omega)=\frac Q{\sqrt{2\pi}},
+\qquad \Phi(\omega)=\frac{Q}{D\sqrt{2\pi}(\omega^2+\kappa^2)}.
+\]
+Invert, use evenness, and apply Exercise~20.2.3:
+\begin{align*}
+\varphi(x)&=\frac{Q}{2\pi D}\int_{-\infty}^{\infty}
+\frac{e^{-i\omega x}}{\omega^2+\kappa^2}d\omega\\
+&=\frac{Q}{\pi D}\int_0^\infty
+\frac{\cos\omega x}{\omega^2+\kappa^2}d\omega
+=\boxed{\frac{Q}{2\kappa D}e^{-\kappa|x|}}.
+\end{align*}
+Away from zero, $\varphi''=\kappa^2\varphi$. The derivative
+jump is
+\[
+\varphi'(0^+)-\varphi'(0^-)
+=-\frac{Q}{2D}-\frac{Q}{2D}=-\frac QD,
+\]
+so $-D\varphi''$ has exactly the source $Q\delta$.
+A homogeneous addition is $A e^{\kappa x}+B e^{-\kappa x}$;
+boundedness at both infinities forces $A=B=0$.
+For $K=0$ and nonzero $Q$, the formal fundamental solution is
+$-Q|x|/(2D)$ plus an affine function, and no solution decays at
+both ends. Substituting $K=0$ in the printed formula is invalid.
+
+\Needspace{9\baselineskip}
+\subsection*{20.4 Fourier Convolution Theorem}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.1}\quad Work out the convolution equation
+corresponding to Eq.~(20.71) for
+\begin{enumerate}
+\item[(a)] Fourier sine transforms
+\[
+\frac{1}{2}\int_{0}^{\infty}g(y)\big[f(y+x)+f(y-x)\big]\,dy
+=\int_{0}^{\infty}F_{s}(s)G_{s}(s)\cos sx\,ds,
+\]
+where $f$ and $g$ are odd functions.
+\item[(b)] Fourier cosine transforms
+\[
+\frac{1}{2}\int_{0}^{\infty}g(y)\big[f(y+x)+f(x-y)\big]\,dy
+=\int_{0}^{\infty}F_{c}(s)G_{c}(s)\cos sx\,ds,
+\]
+where $f$ and $g$ are even functions.
+\end{enumerate}
+\solution
+Use the unitary half-line transforms, for example
+$F_s(s)=\sqrt{2/\pi}\int_0^\infty f(u)\sin(su)du$,
+with the identical normalization in the inverse.
+
+(a) Extend $f$ oddly. Its inverse sine representation and the
+identity $\sin(A+B)+\sin(A-B)=2\sin A\cos B$ give
+\[
+f(y+x)+f(y-x)=2\sqrt{\frac2\pi}\int_0^\infty
+F_s(s)\sin(sy)\cos(sx)ds.
+\]
+Multiply by $g(y)/2$ and integrate on $y>0$:
+\begin{align*}
+\frac12\int_0^\infty g(y)[f(y+x)+f(y-x)]dy
+&=\sqrt{\frac2\pi}\int_0^\infty F_s(s)\cos(sx)
+\left[\int_0^\infty g(y)\sin(sy)dy\right]ds\\
+&=\int_0^\infty F_s(s)G_s(s)\cos(sx)ds.
+\end{align*}
+The factors $\sqrt{2/\pi}$ and $\sqrt{\pi/2}$ cancel.
+
+(b) Extend $f$ evenly. Since $f(x-y)=f(y-x)$, the cosine
+addition identity similarly gives
+\[
+f(y+x)+f(x-y)=2\sqrt{\frac2\pi}\int_0^\infty
+F_c(s)\cos(sy)\cos(sx)ds.
+\]
+The same multiplication and integration replace the inner
+integral by $\sqrt{\pi/2}G_c(s)$, giving exactly the second
+formula. The calculation is justified first for sufficiently
+regular decaying transforms, and then by the $L^2$ pairing
+limit where appropriate; odd/even extensions are essential for
+arguments that become negative.
+\erratum{The manual's intermediate two-delta kernels on
+p.~339 omit reflected sources. For example, the sine kernel
+on the full range of its arguments is}
+\[
+\erratum{\begin{aligned}
+\int_0^\infty\sin(sy)\sin(st)\cos(sx)ds
+=\frac\pi4\big[&\delta(t-y-x)+\delta(t-y+x)\\
+&-\delta(t+y+x)-\delta(t+y-x)\big].
+\end{aligned}}
+\]
+\erratum{This follows by applying the product identity and
+the reflected-source formula in Exercise~20.2.7. The cosine
+kernel has the same four delta arguments with all plus signs.
+The reflected terms cannot all be discarded on $t,y>0$ when
+$x$ is arbitrary; the odd/even extensions above include them.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.2}\quad Show that for both Fourier sine and
+Fourier cosine transforms Parseval's relation has the form
+\[
+\int_{0}^{\infty}F(t)G(t)\,dt=\int_{0}^{\infty}f(y)g(y)\,dy.
+\]
+\solution
+Set $x=0$ in each of the two formulas just proved.
+For the sine version the bracket is $f(y)+f(y)=2f(y)$.
+For the cosine version it is $f(y)+f(-y)=2f(y)$ because the
+extension is even. On either right-hand side $\cos(sx)=1$.
+Thus in both cases
+\[
+\boxed{\int_0^\infty f(y)g(y)dy
+=\int_0^\infty F(s)G(s)ds}.
+\]
+The same result follows by inserting the inverse transform of
+$f$ into the left-hand side and identifying the transform of
+$g$; all normalization factors cancel. For $L^2$ functions,
+Cauchy--Schwarz controls both pairings and permits approximation
+by regular functions. This displayed version is bilinear and is
+valid also for complex functions. To obtain the norm form set
+$g=\overline f$: the sine and cosine kernels are real, so
+$G=\overline F$, and
+$\int|f|^2=\int|F|^2$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.3}
+\begin{enumerate}
+\item[(a)] A rectangular pulse is described by
+\[
+f(x)=\begin{cases}
+1, & |x| < a,\\
+0, & |x| > a.
+\end{cases}
+\]
+Show that the Fourier exponential transform is
+\[
+F(t)=\sqrt{\frac{2}{\pi}}\,\frac{\sin at}{t}.
+\]
+This is the single-slit diffraction problem of physical optics.
+The slit is described by $f(x)$. The diffraction pattern amplitude
+is given by the Fourier transform $F(t)$.
+\item[(b)] Use the Parseval relation to evaluate
+\[
+\int_{-\infty}^{\infty}\frac{\sin^{2}t}{t^{2}}\,dt.
+\]
+This integral may also be evaluated by using the calculus of
+residues (Exercise~11.8.9).
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace(b) $\pi$.
+\par\erratum{Take $a>0$.}
+\solution
+(a) For $a>0$, direct integration gives
+\begin{align*}
+F(t)&=\frac1{\sqrt{2\pi}}\int_{-a}^{a}e^{itx}dx\\
+&=\frac1{\sqrt{2\pi}}\frac{e^{iat}-e^{-iat}}{it}
+=\boxed{\sqrt{\frac2\pi}\frac{\sin at}{t}}.
+\end{align*}
+At $t=0$ take the limit $F(0)=a\sqrt{2/\pi}$.
+(b) Unitary Parseval gives
+\[
+2a=\int_{-a}^a1\,dx
+=\int_{-\infty}^{\infty}|F(t)|^2dt
+=\frac2\pi\int_{-\infty}^{\infty}\frac{\sin^2at}{t^2}dt.
+\]
+Set $u=at$, so $dt=du/a$ and $t^{-2}=a^2/u^2$:
+\[
+2a=\frac{2a}{\pi}\int_{-\infty}^{\infty}\frac{\sin^2u}{u^2}du.
+\]
+Canceling $2a$ gives the required value $\boxed{\pi}$.
+The apparent singularity at zero is removable and the tails are
+bounded by $u^{-2}$, so the final integral is absolutely convergent.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.4}\quad Solve Poisson's equation,
+$\nabla^{2}\psi(\mathbf{r})=-\rho(\mathbf{r})/\varepsilon_{0}$, by
+the following sequence of operations:
+\begin{enumerate}
+\item[(a)] Take the Fourier transform of both sides of this
+equation. Solve for the Fourier transform of $\psi(\mathbf{r})$.
+\item[(b)] Carry out the Fourier inverse transform.
+\end{enumerate}
+\par\erratum{Seek the free-space solution that vanishes at infinity, for sufficiently localized charge. Without this boundary condition, harmonic additions are possible.}
+\solution
+(a) Let $\widehat\psi$ and $\widehat\rho$ denote
+unitary three-dimensional transforms. The transformed equation is
+\[
+-k^2\widehat\psi(\mathbf k)=-\frac{\widehat\rho(\mathbf k)}{\varepsilon_0},
+\qquad
+\widehat\psi(\mathbf k)=\frac{\widehat\rho(\mathbf k)}{\varepsilon_0k^2}.
+\]
+(b) To invert the multiplier, first evaluate the absolutely
+convergent regulated radial transform, $\eta>0$:
+\begin{align*}
+\mathcal F\left[\frac{e^{-\eta r}}r\right](\mathbf k)
+&=\sqrt{\frac2\pi}\frac1k\int_0^\infty e^{-\eta r}\sin kr\,dr\\
+&=\sqrt{\frac2\pi}\frac1{k^2+\eta^2}.
+\end{align*}
+Letting $\eta\downarrow0$ in distributions shows that the
+inverse transform of $k^{-2}$ is $\sqrt{\pi/2}/r$.
+For our normalization,
+\[
+\mathcal F^{-1}[AB](\mathbf r)
+=(2\pi)^{-3/2}\int a(\mathbf u)b(\mathbf r-\mathbf u)d^3u.
+\]
+Use $a=\rho$ and $b=\sqrt{\pi/2}/r$. Since
+$\sqrt{\pi/2}/(2\pi)^{3/2}=1/(4\pi)$,
+\[
+\boxed{\psi(\mathbf r)=\frac1{4\pi\varepsilon_0}
+\int\frac{\rho(\mathbf u)}{|\mathbf r-\mathbf u|}d^3u}.
+\]
+\erratum{This is the free-space solution with vanishing
+potential at infinity for suitably localized charge. Without a
+boundary condition, one may add any harmonic function; division
+by $k^2$ does not establish uniqueness at the zero mode.}
+For smooth localized charge the Coulomb singularity is locally
+integrable, and $\nabla^2(1/r)=-4\pi\delta^{(3)}$ verifies the
+source normalization of the answer.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.5}
+\begin{enumerate}
+\item[(a)] Given $f(x)=1-|x/2|$ for $-2\le x\le2$, with $f(x)=0$
+elsewhere, show that the Fourier transform of $f(x)$ is
+\[
+F(t)=\sqrt{\frac{2}{\pi}}\left(\frac{\sin t}{t}\right)^{2}.
+\]
+\item[(b)] Using the Parseval relation, evaluate
+\[
+\int_{-\infty}^{\infty}\left(\frac{\sin t}{t}\right)^{4}dt.
+\]
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace(b) $\dfrac{2\pi}{3}$.
+\solution
+(a) Let $q(x)$ equal one on $[-1,1]$ and zero
+elsewhere. In this solution $*$ denotes the unnormalized
+convolution integral, so the Fourier convolution theorem includes
+its factor $\sqrt{2\pi}$. The overlap length of the two intervals in
+$(q*q)(x)=\int q(y)q(x-y)dy$ is $2-|x|$ for $|x|\le2$
+and zero outside. Thus $f=(q*q)/2$.
+From Exercise~20.4.3, $Q(t)=\sqrt{2/\pi}\sin t/t$.
+The unitary convolution theorem gives
+\[
+F(t)=\frac12\sqrt{2\pi}\,Q(t)^2
+=\boxed{\sqrt{\frac2\pi}\left(\frac{\sin t}{t}\right)^2}.
+\]
+(b) The direct-space squared norm is
+\[
+\int|f(x)|^2dx=2\int_0^2(1-x/2)^2dx
+=4\int_0^1u^2du=\frac43.
+\]
+In transform space it is
+\[
+\int|F(t)|^2dt=\frac2\pi\int_{-\infty}^{\infty}
+\left(\frac{\sin t}{t}\right)^4dt.
+\]
+Equating the norms yields the value
+$\boxed{(\pi/2)(4/3)=2\pi/3}$.
+\erratum{The manual's Parseval line on p.~341 prints
+$(\sin t/t)^2$ where it must print $(\sin t/t)^4$:
+the already squared amplitude $F(t)$ is squared again to
+form $|F(t)|^2$. The integration differential there is $dt$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.6}\quad With $F(t)$ and $G(t)$ the Fourier
+transforms of $f(x)$ and $g(x)$, respectively, show that
+\[
+\int_{-\infty}^{\infty}\big|f(x)-g(x)\big|^{2}dx
+=\int_{-\infty}^{\infty}\big|F(t)-G(t)\big|^{2}dt.
+\]
+If $g(x)$ is an approximation to $f(x)$, the preceding relation
+indicates that the mean square deviation in $t$-space is equal to
+the mean square deviation in $x$-space.
+\par\erratum{Assume $f,g\in L^2$, or more generally that the difference and its transform are defined in $L^2$.}
+\solution
+Let $h=f-g$. Linearity gives
+$\mathcal Fh=F-G$. Parseval's norm identity applied to $h$ is
+\[
+\int|h(x)|^2dx=\int|\mathcal Fh(t)|^2dt,
+\]
+which is exactly the claimed equation. To display the complex
+cross terms explicitly,
+\[
+|f-g|^2=|f|^2+|g|^2-f\overline g-\overline f g.
+\]
+The unitary inner-product identity sends each of these four
+integrals respectively to $|F|^2$, $|G|^2$, $F\overline G$,
+and $\overline F G$, whose sum is $|F-G|^2$.
+\erratum{The finite mean-square statement requires $f-g\in L^2$
+and its $L^2$ transform; for example $f,g\in L^2$ suffice.
+It is an equality of integrated squared errors, not pointwise
+errors at corresponding coordinates.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.7}\quad Use the Parseval relation to
+evaluate
+\[
+\text{(a)}\ \int_{-\infty}^{\infty}
+\frac{d\omega}{(\omega^{2}+a^{2})^{2}},
+\qquad
+\text{(b)}\ \int_{-\infty}^{\infty}
+\frac{\omega^{2}\,d\omega}{(\omega^{2}+a^{2})^{2}}.
+\]
+\par\emph{Hint.}~Compare Exercise~20.2.3.
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $\dfrac{\pi}{2a^{3}}$,\quad(b) $\dfrac{\pi}{2a}$.
+\par\erratum{The displayed answers use $a>0$; for nonzero real $a$ replace their $a$ by $|a|$.}
+\solution
+Take $a>0$ and apply the half-line Parseval identities
+to $f(x)=e^{-ax}$. Its direct squared norm is
+\[
+\int_0^\infty e^{-2ax}dx=\frac1{2a}.
+\]
+(a) From the cosine transform in Exercise~20.2.3,
+\[
+\frac1{2a}=\frac2\pi\int_0^\infty
+\frac{a^2}{(\omega^2+a^2)^2}d\omega.
+\]
+Divide by $2a^2/\pi$ and double the half-line integral:
+\[
+\boxed{\int_{-\infty}^{\infty}\frac{d\omega}{(\omega^2+a^2)^2}
+=\frac\pi{2a^3}}.
+\]
+(b) Using the sine transform instead,
+\[
+\frac1{2a}=\frac2\pi\int_0^\infty
+\frac{\omega^2}{(\omega^2+a^2)^2}d\omega,
+\]
+so the whole-line answer is $\boxed{\pi/(2a)}$.
+\erratum{If $a$ is allowed to be negative, the integrands are
+unchanged and the answers contain $|a|^3$ and $|a|$, respectively.
+At $a=0$ both integrals diverge. The printed forms use $a>0$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.8}\quad The nuclear form factor
+$F(\mathbf{k})$ and the charge distribution $\rho(\mathbf{r})$
+are 3-D Fourier transforms of each other:
+\[
+F(\mathbf{k})=\frac{1}{(2\pi)^{3/2}}\int
+\rho(\mathbf{r})e^{i\mathbf{k}\cdot\mathbf{r}}\,d^{3}r.
+\]
+If the measured form factor is
+\[
+F(\mathbf{k})=(2\pi)^{-3/2}\left(1+\frac{k^{2}}{a^{2}}\right)^{-1},
+\]
+find the corresponding charge distribution.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\rho(r)=\dfrac{a^{2}}{4\pi}\,\dfrac{e^{-ar}}{r}$.
+\par\erratum{The parameter $a$ in the displayed answer is the positive scale, $a>0$.}
+\solution
+Assume $a>0$ first. Rewrite the measured transform as
+\[
+F(\mathbf k)=\frac{a^2}{(2\pi)^{3/2}}\frac1{k^2+a^2}.
+\]
+The radial formula of Exercise~20.2.16 gives
+\[
+\mathcal F\left[\frac{e^{-ar}}r\right](\mathbf k)
+=\sqrt{\frac2\pi}\frac1k\int_0^\infty e^{-ar}\sin kr\,dr
+=\sqrt{\frac2\pi}\frac1{k^2+a^2}.
+\]
+Therefore multiplication by $a^2/(4\pi)$ produces the given
+$F$, because $(4\pi)^{-1}\sqrt{2/\pi}=(2\pi)^{-3/2}$.
+The charge distribution is
+\[
+\boxed{\rho(r)=\frac{a^2}{4\pi}\frac{e^{-ar}}r}.
+\]
+Its total charge is
+\[
+4\pi\int_0^\infty r^2\rho(r)dr
+=a^2\int_0^\infty re^{-ar}dr=1,
+\]
+in agreement with $(2\pi)^{3/2}F(0)=1$. The $1/r$ origin
+singularity is integrable with the volume element.
+\erratum{The scale in the printed decaying exponential is the
+positive root. For nonzero real $a$ of either sign use
+$e^{-|a|r}$; the form factor only determines $a^2$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.9}\quad Using convolution methods, find an
+integral whose value is the electrostatic interaction energy
+between a charge distribution $\rho(\mathbf{r}-\mathbf{A})$ and a
+unit point charge at $\mathbf{C}$.
+\solution
+Let $H(\mathbf r)=1/|\mathbf r|$, write
+$(\rho*H)(\mathbf v)=\int\rho(\mathbf u)H(\mathbf v-\mathbf u)d^3u$
+for the unnormalized convolution, and use SI normalization, so the potential of unit charge is
+$H/(4\pi\varepsilon_0)$. The potential at $\mathbf C$ of
+the translated distribution is its interaction energy with the
+unit point charge:
+\[
+U=\frac1{4\pi\varepsilon_0}\int
+\frac{\rho(\mathbf r-\mathbf A)}{|\mathbf C-\mathbf r|}d^3r.
+\]
+Putting $\mathbf u=\mathbf r-\mathbf A$ identifies a convolution:
+\[
+\boxed{U=\frac1{4\pi\varepsilon_0}(\rho*H)(\mathbf C-\mathbf A)
+=\frac1{4\pi\varepsilon_0}\int
+\frac{\rho(\mathbf u)}{|\mathbf C-\mathbf A-\mathbf u|}d^3u}.
+\]
+If $R(\mathbf k)=\mathcal F\rho(\mathbf k)$, then
+$\mathcal FH=\sqrt{2/\pi}/k^2$ and
+$\mathcal F(\rho*H)=(2\pi)^{3/2}R\mathcal FH=4\pi R/k^2$.
+Inverting yields the equivalent transform-space integral
+\[
+\boxed{U=\frac1{\varepsilon_0(2\pi)^{3/2}}
+\int\frac{R(\mathbf k)}{k^2}
+e^{-i\mathbf k\cdot(\mathbf C-\mathbf A)}d^3k}.
+\]
+Both formulas show that only the relative displacement enters.
+For real charge the frequency-domain integrand has conjugate
+symmetry, so $U$ is real. These formulas assume the potential
+integral exists; point-charge singularities are understood through
+the corresponding distributions. There is no factor $1/2$ in
+the mutual energy of these two specified charge distributions.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.10}\quad With $\psi(\mathbf{r})$ a wave
+function in ordinary space and $\varphi(\mathbf{p})$ the
+corresponding momentum function, show that
+\begin{enumerate}
+\item[(a)] $\displaystyle\frac{1}{(2\pi\hbar)^{3/2}}
+\int\mathbf{r}\psi(\mathbf{r})
+e^{-i\mathbf{r}\cdot\mathbf{p}/\hbar}\,d^{3}r
+=i\hbar\nabla_{p}\,\varphi(\mathbf{p})$,
+\item[(b)] $\displaystyle\frac{1}{(2\pi\hbar)^{3/2}}
+\int\mathbf{r}^{2}\psi(\mathbf{r})
+e^{\erratum{-i}\mathbf{r}\cdot\mathbf{p}/\hbar}\,d^{3}r
+=\big(i\hbar\nabla_{p}\big)^{2}\varphi(\mathbf{p})$.
+\end{enumerate}
+\par\erratum{(This exercise assumes that the units and scaling of
+the momentum wave function correspond to the formula
+$\varphi(\mathbf{p})=\dfrac{1}{(2\pi\hbar)^{3/2}}
+\displaystyle\int\psi(\mathbf{r})
+e^{-i\mathbf{r}\cdot\mathbf{p}/\hbar}\,d^{3}r$.)}
+\par\emph{Note.}~$\nabla_{p}$ is the gradient in momentum space:
+\[
+\hat{\mathbf{e}}_{x}\frac{\partial}{\partial p_{x}}
++\hat{\mathbf{e}}_{y}\frac{\partial}{\partial p_{y}}
++\hat{\mathbf{e}}_{z}\frac{\partial}{\partial p_{z}}.
+\]
+These results may be extended to any positive integer power of
+$\mathbf{r}$ \erratum{on the appropriate moment domain, and to an
+analytic function only when its Maclaurin series can be
+interchanged with the transform for the wave function in use}.
+\solution
+Use precisely the momentum-space convention stated
+in the erratum, whose forward exponential has a negative sign:
+\[
+\varphi(\mathbf p)=\frac1{(2\pi\hbar)^{3/2}}\int
+\psi(\mathbf r)e^{-i\mathbf r\cdot\mathbf p/\hbar}d^3r.
+\]
+(a) Differentiation of the exponential gives
+\[
+\nabla_p e^{-i\mathbf r\cdot\mathbf p/\hbar}
+=-\frac{i\mathbf r}{\hbar}e^{-i\mathbf r\cdot\mathbf p/\hbar}.
+\]
+Move the derivative under the integral and multiply by $i\hbar$:
+\[
+\boxed{i\hbar\nabla_p\varphi
+=\frac1{(2\pi\hbar)^{3/2}}\int
+\mathbf r\psi(\mathbf r)e^{-i\mathbf r\cdot\mathbf p/\hbar}d^3r}.
+\]
+(b) Apply another component derivative and sum over components:
+\[
+\nabla_p^2 e^{-i\mathbf r\cdot\mathbf p/\hbar}
+=-\frac{r_x^2+r_y^2+r_z^2}{\hbar^2}e^{-i\mathbf r\cdot\mathbf p/\hbar}.
+\]
+Since $(i\hbar\nabla_p)^2=-\hbar^2\nabla_p^2$, this proves
+\[
+\boxed{(i\hbar\nabla_p)^2\varphi
+=\frac1{(2\pi\hbar)^{3/2}}\int r^2\psi(\mathbf r)
+e^{-i\mathbf r\cdot\mathbf p/\hbar}d^3r}.
+\]
+\erratum{The exponent printed in part (b) omits the factor $i$:
+it reads $-\mathbf r\cdot\mathbf p/\hbar$. The Fourier kernel
+must be $e^{-i\mathbf r\cdot\mathbf p/\hbar}$ in both parts.}
+The same argument works for every polynomial in the coordinate
+components. Appropriate integrable moments of $\psi$ justify
+ordinary differentiation; otherwise operator domains or a
+well-defined distributional interpretation must be specified.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.4.11}\quad The ordinary space wave function
+$\psi(\mathbf{r},t)$ satisfies the time-dependent Schr\"odinger
+equation,
+\[
+i\hbar\,\frac{\partial\psi(\mathbf{r},t)}{\partial t}
+=-\frac{\hbar^{2}}{2m}\nabla^{2}\psi+V(\mathbf{r})\psi.
+\]
+Show that the corresponding time-dependent momentum wave function
+satisfies the analogous equation
+\[
+i\hbar\,\frac{\partial\varphi(\mathbf{p},t)}{\partial t}
+=\frac{p^{2}}{2m}\,\varphi+V(i\hbar\nabla_{p})\varphi.
+\]
+\par\emph{Note.}~Assume that $V(\mathbf{r})$ may be expressed by
+a Maclaurin series \erratum{whose termwise transformation is
+justified on the chosen wave function (a polynomial potential
+suffices)}, and use Exercise~20.4.10.
+$V(i\hbar\nabla_{p})$ is the same function of the variable
+$i\hbar\nabla_{p}$ that $V(\mathbf{r})$ is of the variable
+$\mathbf{r}$.
+\solution
+Transform with the negative-exponent momentum
+convention of Exercise~20.4.10. The time derivative commutes
+with the spatial transform, producing $i\hbar\partial_t\varphi$.
+Integrating the spatial Laplacian by parts twice gives
+\[
+\mathcal F_p[\nabla_r^2\psi]
+=-\frac{p^2}{\hbar^2}\varphi,
+\]
+so the kinetic term becomes $p^2\varphi/(2m)$.
+Write a convergent coordinate expansion with multi-index
+$\alpha=(\alpha_x,\alpha_y,\alpha_z)$:
+\[
+V(\mathbf r)=\sum_\alpha v_\alpha\mathbf r^\alpha.
+\]
+Exercise~20.4.10, applied component by component, gives
+\[
+\mathcal F_p[\mathbf r^\alpha\psi]
+=(i\hbar)^{|\alpha|}\partial_{p_x}^{\alpha_x}
+\partial_{p_y}^{\alpha_y}\partial_{p_z}^{\alpha_z}\varphi.
+\]
+Consequently
+\[
+\mathcal F_p[V\psi]=\sum_\alpha v_\alpha(i\hbar\nabla_p)^\alpha\varphi
+=V(i\hbar\nabla_p)\varphi.
+\]
+Combining the terms gives
+\[
+\boxed{i\hbar\frac{\partial\varphi}{\partial t}
+=\frac{p^2}{2m}\varphi+V(i\hbar\nabla_p)\varphi}.
+\]
+\erratum{For a nonpolynomial potential, a local Maclaurin series
+alone does not justify interchange with an integral over all
+space. Its action on the chosen wave function must converge
+and permit that interchange. Polynomial potentials satisfy the
+algebraic step without an infinite-series issue.}
+When a general potential is treated by its transform instead,
+the rigorous replacement is the momentum convolution
+\[
+\mathcal F_p[V\psi](\mathbf p)
+=\frac1{(2\pi\hbar)^{3/2}}\int
+\widetilde V(\mathbf p-\mathbf q)\varphi(\mathbf q)d^3q,
+\]
+whenever this convolution, possibly distributional, is defined.
+The differential expression is its polynomial or convergent-series
+form.
+
+\Needspace{9\baselineskip}
+\subsection*{20.5 Signal-Processing Applications}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.5.1}\quad Find the transfer function
+$\varphi(\omega)$ for the circuit shown in the left panel of
+Fig.~20.10. Is this a high-pass, a low-pass, or a more complicated
+filter?
+\solution
+The left circuit has a series resistor $R$ and a capacitor $C$
+across the output terminals. With the $e^{i\omega t}$ phasor
+convention used in Section~20.5, $Z_C=1/(i\omega C)$. The
+current is $I=V_{\rm in}/(R+Z_C)$, and $V_{\rm out}=IZ_C$.
+Therefore
+\[
+\boxed{\varphi(\omega)=\frac{V_{\rm out}}{V_{\rm in}}
+=\frac{Z_C}{R+Z_C}=\frac1{1+i\omega RC}}.
+\]
+For positive $R,C$,
+\[
+|\varphi|^2=\frac1{1+\omega^2R^2C^2},\qquad
+\arg\varphi=-\tan^{-1}(\omega RC)\quad(\omega\ge0).
+\]
+The gain decreases from $1$ at zero frequency to $0$ at high
+frequency: this is a low-pass filter. The power gain is $1/2$
+at $\omega_c=1/(RC)$. These expressions assume an unloaded
+output, as in the drawing. The sign of $i\omega$ follows the
+section's phasor convention; the opposite time convention
+conjugates the transfer function.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.5.2}\quad Find the transfer function
+$\varphi(\omega)$ for the circuit shown in the right panel of
+Fig.~\erratum{20.10}.
+\par\emph{Hint.}~The potential difference across an inductor is
+given by $L\,dI/dt$.
+\solution
+\erratum{The intended reference is the right panel of
+Fig.~20.10, which contains a series inductor $L$ and an output
+resistor $R$. Figure~20.11 has a single, different circuit.}
+For a current $I e^{i\omega t}$, the voltage across the
+inductor is $L\,dI/dt=i\omega LI$. Kirchhoff's voltage law and
+the output voltage are consequently
+\[
+V_{\rm in}=(R+i\omega L)I,\qquad V_{\rm out}=RI.
+\]
+Dividing gives
+\[
+\boxed{\varphi(\omega)=\frac{R}{R+i\omega L}
+=\frac1{1+i\omega L/R}}.
+\]
+Its power gain is $[1+(\omega L/R)^2]^{-1}$, so it is a
+low-pass filter with half-power frequency $R/L$, for positive
+$R,L$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.5.3}\quad Find the transfer function
+$\varphi(\omega)$ for the circuit shown in Fig.~20.11. This is a
+band-pass filter.
+\par\emph{Hint.}~Assume the currents in the various parts of the
+circuit to have the values shown in the figure.
+\solution
+Use the currents specified in Fig.~20.11: $I_1$ flows
+through $R_1$, $I_2$ through the series combination $R_2,C_2$,
+and $I_1+I_2$ through $C_1$. Put $p=i\omega$. The two node
+voltages satisfy
+\[
+V_1=R_1I_1=\left(R_2+\frac1{pC_2}\right)I_2,
+\quad V_{\rm out}=\frac{I_2}{pC_2},
+\quad V_{\rm in}=V_1+\frac{I_1+I_2}{pC_1}.
+\]
+The middle relation gives $I_2=pC_2V_{\rm out}$, and the
+first then gives
+\[
+V_1=(1+pR_2C_2)V_{\rm out},\qquad
+I_1=\frac{1+pR_2C_2}{R_1}V_{\rm out}.
+\]
+Substitute these currents into the input relation and multiply
+by $pR_1C_1$:
+\[
+pR_1C_1V_{\rm in}
+=\big[pR_1C_1(1+pR_2C_2)+1+pR_2C_2+pR_1C_2\big]V_{\rm out}.
+\]
+Thus
+\[
+\boxed{\varphi(\omega)=
+\frac{i\omega R_1C_1}
+{1+i\omega(R_1C_1+R_1C_2+R_2C_2)-\omega^2R_1R_2C_1C_2}}.
+\]
+To check the filter type, write $A=R_1C_1$,
+$B=R_1R_2C_1C_2$, and $D=R_1C_1+R_1C_2+R_2C_2$, all
+positive. Then
+\[
+|\varphi|^2=\frac{A^2\omega^2}{(1-B\omega^2)^2+D^2\omega^2}
+=\frac{A^2}{\omega^{-2}+B^2\omega^2+D^2-2B}.
+\]
+It vanishes as $\omega\to0$ and $\omega\to\infty$. Its
+maximum occurs when
+$-2\omega^{-3}+2B^2\omega=0$, namely
+$\omega=1/\sqrt B$, where $|\varphi|=A/D$.
+It therefore passes an intermediate band of frequencies.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.5.4}\quad The circuit elements for
+Exercise~20.5.3 correspond to the successive transfer functions
+shown in Fig.~20.12. Explain why the transfer function for this
+exercise \erratum{is uniformly approximated by the product of the
+individual unloaded transfer functions when $R_2\gg R_1$}.
+\erratum{Explain the loading correction; the original word
+``only'' does not give a necessary condition at each frequency.}
+\solution
+Taken separately with unloaded outputs, the high-pass
+and low-pass stages have transfer functions
+\[
+\varphi_1=\frac{pR_1C_1}{1+pR_1C_1},\qquad
+\varphi_2=\frac1{1+pR_2C_2},\qquad p=i\omega.
+\]
+Their product is
+\[
+\varphi_1\varphi_2=\frac{pR_1C_1}
+{1+p(R_1C_1+R_2C_2)+p^2R_1R_2C_1C_2}.
+\]
+The actual denominator found in Exercise~20.5.3 contains the
+additional term $pR_1C_2$. This appears because the second
+stage draws current from the first: the current through $C_1$
+is $I_1+I_2$, not $I_1$. Quantitatively,
+\[
+\frac{I_2}{I_1}=\frac{R_1}{R_2+1/(i\omega C_2)},\qquad
+\left|\frac{I_2}{I_1}\right|
+=\frac{R_1}{\sqrt{R_2^2+1/(\omega^2C_2^2)}}\le\frac{R_1}{R_2}.
+\]
+Hence $R_2\gg R_1$ makes the load current small at every real
+frequency. More explicitly, if
+$D_0=(1+pR_1C_1)(1+pR_2C_2)$, then
+\[
+\varphi=\frac{\varphi_1\varphi_2}{1+\eta},\qquad
+\eta=\frac{pR_1C_2}{D_0},\qquad |\eta|\le R_1/R_2.
+\]
+Indeed,
+\[
+|\eta|=\frac{\omega R_1C_2}
+{\sqrt{1+\omega^2R_1^2C_1^2}\sqrt{1+\omega^2R_2^2C_2^2}}
+\le\frac{R_1}{R_2}\quad(\omega\ge0),
+\]
+since the first square root is at least $1$ and the second
+at least $\omega R_2C_2$ (the case $\omega=0$ has $\eta=0$).
+For $\delta=R_1/R_2<1$, the relative discrepancy, wherever
+the product is nonzero, therefore satisfies
+\[
+\left|\frac{\varphi}{\varphi_1\varphi_2}-1\right|
+=\frac{|\eta|}{|1+\eta|}\le\frac{|\eta|}{1-|\eta|}
+\le\frac{\delta}{1-\delta}.
+\]
+\erratum{The quoted limit is a sufficient condition for a
+uniformly accurate product approximation, not a necessary
+condition at each frequency. At low frequency the loading may
+also be small; an ideal buffer between stages makes the product
+exact. For finite positive elements in the unbuffered circuit,
+the product is not an identity in frequency.}
+
+\Needspace{20\baselineskip}
+\subsection*{20.6 Discrete Fourier Transform}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.6.1}\quad Derive the trigonometric forms of
+discrete orthogonality corresponding to Eq.~(20.120):
+\begin{align*}
+\sum_{k=0}^{N-1}\cos(2\pi pk/N)\sin(2\pi qk/N)&=0\\
+\sum_{k=0}^{N-1}\cos(2\pi pk/N)\cos(2\pi qk/N)&=
+\erratum{\begin{cases}
+N, & p=q=(0\text{ or }N/2);\\[3pt]
+N/2, & (p+q=N)\text{ or }p=q\text{ but not both};\\[3pt]
+0, & \text{otherwise}.
+\end{cases}}\\
+\sum_{k=0}^{N-1}\sin(2\pi pk/N)\sin(2\pi qk/N)&=
+\erratum{\begin{cases}
+N/2, & p=q\text{ and }p+q\ne(0\text{ or }N);\\[3pt]
+-N/2, & p\ne q\text{ and }p+q=N;\\[3pt]
+0, & \text{otherwise}.
+\end{cases}}
+\end{align*}
+\par\emph{Note.}~If $N$ is odd, $p$ and $q$ will never have the
+value $N/2$.
+\par\emph{Hint.}~Consider the use of trigonometric identities
+such as
+\[
+\sin A\cos B=\frac{1}{2}\big[\sin(A+B)+\sin(A-B)\big].
+\]
+\par\erratum{Take integer indices $0\le p,q<N$ and a positive integer $N$ in these piecewise formulas.}
+\solution
+For integers $m$ define the discrete selector
+\[
+\Delta_N(m)=\begin{cases}1,&m\equiv0\pmod N,\\0,&\text{otherwise}.
+\end{cases}
+\]
+The geometric series, including its $e^{2\pi im/N}=1$ case,
+gives
+\[
+\sum_{k=0}^{N-1}e^{2\pi imk/N}=N\Delta_N(m).
+\]
+Its imaginary part is zero and its real part is
+$N\Delta_N(m)$. Applying the product identities gives, with
+$\theta_k=2\pi k/N$,
+\begin{align*}
+\sum_k\cos(p\theta_k)\sin(q\theta_k)
+&=\frac12\sum_k\{\sin[(q+p)\theta_k]+\sin[(q-p)\theta_k]\}=0,\\
+\sum_k\cos(p\theta_k)\cos(q\theta_k)
+&=\frac N2\{\Delta_N(p-q)+\Delta_N(p+q)\},\\
+\sum_k\sin(p\theta_k)\sin(q\theta_k)
+&=\frac N2\{\Delta_N(p-q)-\Delta_N(p+q)\}.
+\end{align*}
+These formulas hold for all integer $p,q$ and positive integer
+$N$. \erratum{The displayed piecewise formulas in the question
+use the representative range $0\le p,q<N$. Without that range,
+congruences modulo $N$ must replace the equalities.}
+In this range $\Delta_N(p-q)=1$ exactly when $p=q$.
+Also $\Delta_N(p+q)=1$ when $p+q=0$ or $N$.
+Both selectors equal $1$ for $p=q=0$, and also for
+$p=q=N/2$ when $N$ is even. The cosine sum is then $N$,
+whereas the sine sum is zero. When exactly one selector is
+$1$, the cosine sum is $N/2$; the sine sum is $N/2$ for
+$p=q$ and $-N/2$ for $p+q=N$ with $p\ne q$.
+When neither selector is $1$, both sums vanish. These cases
+prove the corrected formulas, including $N=1$ and $N=2$.
+\erratum{The final product-to-sum line in the manual's proof
+on p.~344 has a cosine--cosine product on its left. It must
+be a sine--sine product to agree with the difference of cosines
+on its right. The selector derivation above gives that identity
+directly.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.6.2}\quad Show in detail how to go from
+\[
+F_{p}=\frac{1}{N^{1/2}}\sum_{k=0}^{N-1}
+f_{k}e^{2\pi ipk\erratum{/N}}
+\qquad\text{to}\qquad
+f_{k}=\frac{1}{N^{1/2}}\sum_{p=0}^{N-1}
+F_{p}e^{-2\pi ipk\erratum{/N}}.
+\]
+\solution
+Insert the defining expression for $F_p$ into the proposed
+inverse, using a different dummy index $j$:
+\begin{align*}
+\frac1{\sqrt N}\sum_{p=0}^{N-1}F_pe^{-2\pi ipk/N}
+&=\frac1N\sum_{p=0}^{N-1}\sum_{j=0}^{N-1}
+f_je^{2\pi ipj/N}e^{-2\pi ipk/N}\\
+&=\frac1N\sum_{j=0}^{N-1}f_j
+\sum_{p=0}^{N-1}e^{2\pi ip(j-k)/N}.
+\end{align*}
+The inner sum is $N\Delta_N(j-k)$ by the finite geometric
+series. For $0\le j,k<N$, the only surviving index is $j=k$.
+Thus the expression is $f_k$, which proves
+\[
+\boxed{f_k=\frac1{\sqrt N}\sum_{p=0}^{N-1}F_pe^{-2\pi ipk/N}}.
+\]
+All sums are finite, so their interchange requires no
+convergence assumption. \erratum{The factors $1/N$ in both
+exponents are essential: without them every exponential is $1$
+for integer indices, and the transform cannot distinguish the
+input entries.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.6.3}\quad The $N$-membered point sets $f_{k}$
+and $F_{p}$ are discrete Fourier transforms of each other. Derive
+the following symmetry relations:
+\begin{enumerate}
+\item[(a)] If $f_{k}$ is real, $F_{p}$ is Hermitian symmetric;
+that is, $F_{p}=F_{N-p}^{*}$.
+\item[(b)] If $f_{k}$ is pure imaginary, then
+$F_{p}=-F_{N-p}^{*}$.
+\end{enumerate}
+\par\emph{Note.}~The symmetry of part (a) is an illustration of
+aliasing. If $F_{p}$ describes an amplitude at a frequency
+proportional to $p$, we necessarily predict an equal amplitude at
+the frequency proportional to $N-p$.
+\par\erratum{Indices are understood modulo $N$, in particular $F_N=F_0$. Equal paired amplitudes in the note mean equal magnitudes, with conjugate phases.}
+\solution
+Regard the frequency index modulo $N$, so $F_N=F_0$.
+Complex conjugation gives
+\begin{align*}
+F_{N-p}^{*}
+&=\frac1{\sqrt N}\sum_{k=0}^{N-1}f_k^*
+ e^{-2\pi i(N-p)k/N}\\
+&=\frac1{\sqrt N}\sum_{k=0}^{N-1}f_k^*
+ e^{-2\pi ik}e^{2\pi ipk/N}
+=\frac1{\sqrt N}\sum_{k=0}^{N-1}f_k^*e^{2\pi ipk/N}.
+\end{align*}
+If $f_k$ is real, $f_k^*=f_k$, so $F_{N-p}^*=F_p$.
+If $f_k$ is purely imaginary, $f_k^*=-f_k$, so
+$F_{N-p}^*=-F_p$. These are precisely (a) and (b).
+For a real input, the zero-frequency coefficient and, for even
+$N$, the coefficient at $p=N/2$ are real because they are their
+own conjugates. For a purely imaginary input those same
+coefficients are purely imaginary. In general the paired
+coefficients have equal magnitudes; their phases are related
+by conjugation (and by an extra minus sign in part (b)). The
+index $N-p$ represents the same sampled frequency as $-p$.
+
+\Needspace{9\baselineskip}
+\subsection*{20.7 Laplace Transforms}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.1}\quad Prove that
+\[
+\lim_{s\to\infty}s f(s)=\lim_{t\to+0}F(t).
+\]
+\par\emph{Hint.}~Assume that $F(t)$ can be expressed as
+$F(t)=\displaystyle\sum_{n=0}^{\infty}a_{n}t^{n}$.
+\par\erratum{Let $s\to+\infty$ along the real axis. Assume a finite $F(0+)$ and an exponential bound $|F(t)|\le Me^{ct}$; these hypotheses suffice without an unjustified termwise integration.}
+\solution
+\erratum{Take $s\to+\infty$ along the positive real axis.
+A sufficient hypothesis is that $F$ has the finite right limit
+$F(0+)$, is locally integrable, and has an exponential bound
+$|F(t)|\le M e^{ct}$ for $t\ge0$.}
+In the defining integral put $u=st$:
+\[
+sf(s)=s\int_0^\infty e^{-st}F(t)dt
+=\int_0^\infty e^{-u}F(u/s)du.
+\]
+For each fixed $u>0$, $F(u/s)\to F(0+)$. For sufficiently
+large $s$, $c/s\le1/2$, and
+$|e^{-u}F(u/s)|\le M e^{-u/2}$, which is integrable.
+Dominated convergence therefore gives
+\[
+\lim_{s\to+\infty}sf(s)
+=F(0+)\int_0^\infty e^{-u}du=\boxed{F(0+)}.
+\]
+The hint also describes the coefficients: if a Taylor expansion
+can be integrated termwise, then
+\[
+f(s)=\sum_{n\ge0}\frac{a_n\Gamma(n+1)}{s^{n+1}},\qquad
+sf(s)=a_0+\frac{a_1}{s}+\frac{2a_2}{s^2}+\cdots.
+\]
+Even when this infinite series is only asymptotic, the direct
+limit proof above remains valid and identifies $a_0=F(0+)$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.2}\quad \erratum{Prove the following precise replacement for the
+withdrawn exercise:}
+\[
+\erratum{\frac1\pi\lim_{s\downarrow0}L_t\{\cos xt\}(s)=\delta(x)
+\quad\text{as distributions in }x.}
+\]
+\par\erratum{The original formula left the transform variable,
+approach to zero, and meaning of convergence unspecified; the
+published errata therefore say to disregard it.}
+\solution
+\erratum{The published errata withdraw the statement as
+ill-defined. It has a useful, precise replacement: let $s$
+approach zero through positive real values, take the Laplace
+transform in $t$, and interpret convergence as convergence of
+distributions in $x$.}
+For $s>0$, direct integration of $e^{-(s-ix)t}$ gives
+\[
+L_t\{\cos xt\}(s)=\Re\frac1{s-ix}=\frac{s}{s^2+x^2}.
+\]
+The resulting functions do not converge to an ordinary
+function representing a delta: they approach zero at every
+$x\ne0$ and diverge at $x=0$. To prove the correct weak limit,
+take a smooth test function $\phi$ with compact support and
+substitute $x=su$:
+\[
+\int_{-\infty}^{\infty}\frac{s\phi(x)}{\pi(s^2+x^2)}dx
+=\frac1\pi\int_{-\infty}^{\infty}\frac{\phi(su)}{1+u^2}du.
+\]
+The integrand is bounded by
+$\|\phi\|_\infty/(1+u^2)$, and $\phi(su)\to\phi(0)$.
+Consequently the limit is
+\[
+\frac{\phi(0)}\pi[\tan^{-1}u]_{-\infty}^{\infty}=\phi(0).
+\]
+Thus the repaired assertion is
+\[
+\boxed{\lim_{s\downarrow0}\frac1\pi L_t\{\cos xt\}(s)
+=\delta(x)\quad\text{in the distributional sense}.}
+\]
+The one-sided real approach is part of the assertion; an
+unspecified complex limit is not the prescription proved here.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.3}\quad Verify that
+\[
+L\left\{\frac{\cos at-\cos bt}{b^{2}-a^{2}}\right\}
+=\frac{s}{(s^{2}+a^{2})(s^{2}+b^{2})},\qquad a^{2}\ne b^{2}.
+\]
+\solution
+For real $a,b$ and $\Re s>0$,
+\[
+L\{\cos at\}=\frac12\left(\frac1{s-ia}+\frac1{s+ia}\right)
+=\frac{s}{s^2+a^2}.
+\]
+Linearity and a common denominator now yield
+\begin{align*}
+L\left\{\frac{\cos at-\cos bt}{b^2-a^2}\right\}
+&=\frac{s}{b^2-a^2}\left(\frac1{s^2+a^2}-\frac1{s^2+b^2}\right)\\
+&=\frac{s}{b^2-a^2}
+\frac{(s^2+b^2)-(s^2+a^2)}{(s^2+a^2)(s^2+b^2)}\\
+&=\boxed{\frac{s}{(s^2+a^2)(s^2+b^2)}}.
+\end{align*}
+The stipulated $a^2\ne b^2$ permits the cancellation. For
+complex frequencies the same algebra applies in a common
+half-plane of convergence.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.4}\quad Using partial fraction expansions,
+show that
+\begin{enumerate}
+\item[(a)] $L^{-1}\left\{\dfrac{1}{(s+a)(s+b)}\right\}
+=\dfrac{e^{-at}-e^{-bt}}{b-a}$,\quad $a\ne b$.
+\item[(b)] $L^{-1}\left\{\dfrac{s}{(s+a)(s+b)}\right\}
+=\dfrac{ae^{-at}-be^{-bt}}{a-b}$,\quad $a\ne b$.
+\end{enumerate}
+\solution
+(a) Set $1/[(s+a)(s+b)]=A/(s+a)+B/(s+b)$.
+After multiplication by the denominator,
+$1=A(s+b)+B(s+a)$. Setting $s=-a$ and $s=-b$ gives
+$A=1/(b-a)$ and $B=1/(a-b)$. Since
+$L\{e^{-at}\}=1/(s+a)$,
+\[
+\boxed{L^{-1}\left\{\frac1{(s+a)(s+b)}\right\}
+=\frac{e^{-at}-e^{-bt}}{b-a}}.
+\]
+(b) Now $s=A(s+b)+B(s+a)$, so the same substitutions give
+$A=a/(a-b)$, $B=-b/(a-b)$. Hence
+\[
+\boxed{L^{-1}\left\{\frac{s}{(s+a)(s+b)}\right\}
+=\frac{ae^{-at}-be^{-bt}}{a-b}}.
+\]
+The defining transforms converge for
+$\Re s>\max(-\Re a,-\Re b)$. Although excluded in the
+question, the equal-parameter limits are regular:
+\[
+b\to a:\qquad t e^{-at},\qquad (1-at)e^{-at},
+\]
+respectively, obtained by differentiating the numerators with
+respect to $b$ and the denominators with respect to $b$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.5}\quad Using partial fraction expansions,
+show that for $a^{2}\ne b^{2}$,
+\begin{enumerate}
+\item[(a)] $L^{-1}\left\{\dfrac{1}{(s^{2}+a^{2})(s^{2}+b^{2})}
+\right\}=-\dfrac{1}{a^{2}-b^{2}}\left(\dfrac{\sin at}{a}
+-\dfrac{\sin bt}{b}\right)$.
+\item[(b)] $L^{-1}\left\{\dfrac{s^{2}}{(s^{2}+a^{2})(s^{2}+b^{2})}
+\right\}=\dfrac{1}{a^{2}-b^{2}}\{a\sin at-b\sin bt\}$.
+\end{enumerate}
+\par\erratum{For real $a,b$, use $\sin(at)/a\to t$ if $a=0$, and the corresponding limit if $b=0$.}
+\solution
+For real parameters use
+$L\{\sin at/a\}=1/(s^2+a^2)$ in $\Re s>0$.
+(a) Equating coefficients in
+\[
+1=A(s^2+b^2)+B(s^2+a^2)
+\]
+gives $A+B=0$, $Ab^2+Ba^2=1$. Thus
+$A=1/(b^2-a^2)$ and $B=-A$, and inversion gives
+\[
+\boxed{\frac1{b^2-a^2}\left(\frac{\sin at}{a}-\frac{\sin bt}{b}\right)}.
+\]
+(b) Equating coefficients in
+$s^2=A(s^2+b^2)+B(s^2+a^2)$ gives
+$A+B=1$, $Ab^2+Ba^2=0$. Solving,
+$A=a^2/(a^2-b^2)$, $B=-b^2/(a^2-b^2)$. Therefore
+\[
+\boxed{L^{-1}\left\{\frac{s^2}{(s^2+a^2)(s^2+b^2)}\right\}
+=\frac{a\sin at-b\sin bt}{a^2-b^2}}.
+\]
+\erratum{If either parameter is zero, the quotient
+$\sin(at)/a$ in part (a) means its continuous limit $t$.
+The condition $a^2\ne b^2$ alone does not exclude that case.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.6}\quad Show that
+\begin{enumerate}
+\item[(a)] $\displaystyle\int_{0}^{\infty}\frac{\cos s}{s^{\nu}}\,ds
+=\frac{\pi}{2\erratum{\Gamma(\nu)}\cos(\nu\pi/2)}$,
+\qquad$0<\nu<1$.
+\item[(b)] $\displaystyle\int_{0}^{\infty}\frac{\sin s}{s^{\nu}}\,ds
+=\frac{\pi}{2\erratum{\Gamma(\nu)}\sin(\nu\pi/2)}$,
+\qquad$0<\nu<2$.
+\end{enumerate}
+Why is $\nu$ restricted to $(0,1)$ for (a), to $(0,2)$ for (b)?
+These integrals may be interpreted as Fourier transforms of
+$s^{-\nu}$ and as Mellin transforms of $\sin s$ and $\cos s$.
+\par\emph{Hint.}~Replace $s^{-\nu}$ by a Laplace transform
+integral: $L\big\{t^{\nu-1}/\Gamma(\nu)\big\}$. Then integrate
+with respect to $s$. The resulting integral can be treated as a
+beta function (Section~13.3).
+\solution
+To avoid confusing the transform parameter with the
+integration variable, write the latter as $x$. For $\nu>0$,
+substitution $v=ux$ into the gamma integral gives
+\[
+x^{-\nu}=\frac1{\Gamma(\nu)}\int_0^\infty
+u^{\nu-1}e^{-ux}du.
+\]
+Insert a convergence factor $e^{-\epsilon x}$, $\epsilon>0$,
+before changing the order of integration. In the ranges stated
+in the question the resulting double integral is absolutely
+integrable: after integrating its absolute value in $u$, it is
+$\int_0^\infty e^{-\epsilon x}x^{-\nu}|\cos x|dx$ or its sine
+counterpart. Thus
+\begin{align*}
+C_\epsilon
+&=\frac1{\Gamma(\nu)}\int_0^\infty
+\frac{u^{\nu-1}(u+\epsilon)}{(u+\epsilon)^2+1}du,\\
+S_\epsilon
+&=\frac1{\Gamma(\nu)}\int_0^\infty
+\frac{u^{\nu-1}}{(u+\epsilon)^2+1}du.
+\end{align*}
+For $0<\epsilon\le1$, on $0<u<1$ both integrands are bounded
+by a constant times $u^{\nu-1}$; for $u\ge1$ the bounds are
+$2u^{\nu-2}$ and $u^{\nu-3}$, respectively. Dominated
+convergence gives
+\[
+C_0=\frac1{\Gamma(\nu)}\int_0^\infty\frac{u^\nu}{1+u^2}du,
+\qquad
+S_0=\frac1{\Gamma(\nu)}\int_0^\infty\frac{u^{\nu-1}}{1+u^2}du.
+\]
+For $0<q<2$, put $v=u^2$ and use the beta integral:
+\[
+\int_0^\infty\frac{u^{q-1}}{1+u^2}du
+=\frac12\int_0^\infty\frac{v^{q/2-1}}{1+v}dv
+=\frac12\Gamma(q/2)\Gamma(1-q/2)
+=\frac\pi{2\sin(\pi q/2)}.
+\]
+Take $q=\nu+1$ for the cosine and $q=\nu$ for the sine:
+\[
+\boxed{C_0=\frac\pi{2\Gamma(\nu)\cos(\pi\nu/2)}},\quad0<\nu<1;
+\qquad
+\boxed{S_0=\frac\pi{2\Gamma(\nu)\sin(\pi\nu/2)}},\quad0<\nu<2.
+\]
+At the origin the cosine integrand behaves as $x^{-\nu}$,
+requiring $\nu<1$, whereas the sine integrand behaves as
+$x^{1-\nu}$, requiring $\nu<2$. At infinity Dirichlet's test
+applies for $\nu>0$; for $\nu\le0$ the ordinary oscillatory
+improper integral fails to converge. Abel's limiting theorem
+therefore identifies the regulated limits above with the
+ordinary improper integrals in precisely the stated ranges.
+The gamma notation in the corrected statement accommodates
+noninteger $\nu$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.7}\quad A function $F(t)$ can be expanded in
+a Maclaurin series,
+\[
+F(t)=\sum_{n=0}^{\infty}a_{n}t^{n}.
+\]
+\erratum{If this series represents $F$ on the half-line and
+termwise Laplace integration is justified, then}
+\[
+L\{F(t)\}=\int_{0}^{\infty}e^{-st}\sum_{n=0}^{\infty}a_{n}t^{n}\,dt
+=\sum_{n=0}^{\infty}a_{n}\int_{0}^{\infty}e^{-st}t^{n}\,dt.
+\]
+Show that $f(s)$, the Laplace transform of $F(t)$, contains no
+powers of $s$ greater than $s^{-1}$. Check your result by
+calculating $L\{\delta(t)\}$, and comment on this fiasco.
+\par\erratum{For the impulse comparison use the causal convention in which a delta at $t=0$ has full unit mass.}
+\solution
+Whenever termwise integration is justified, $u=st$ gives
+\[
+\int_0^\infty e^{-st}t^n dt
+=\frac1{s^{n+1}}\int_0^\infty e^{-u}u^n du
+=\frac{n!}{s^{n+1}},\qquad s>0.
+\]
+Thus
+\[
+\boxed{f(s)=\sum_{n=0}^\infty\frac{a_n n!}{s^{n+1}}},
+\]
+which contains only $s^{-1},s^{-2},\ldots$.
+\erratum{Existence of a local Maclaurin series does not by
+itself justify the displayed interchange over the entire
+half-line. For example, $F(t)=1/(1+t)$ has a Maclaurin series
+near zero and a Laplace transform for $s>0$, but the resulting
+formal series $\sum_{n\ge0}(-1)^n n!/s^{n+1}$ diverges for
+every finite $s$. It is an asymptotic expansion at infinity,
+not a convergent identity.}
+With the causal Laplace convention in which a delta impulse
+at $0$ has unit mass, the distributional pairing gives
+\[
+L\{\delta(t)\}(s)=\langle\delta,e^{-st}\rangle=1.
+\]
+This constant is no contradiction: a delta distribution is
+not an ordinary function with a Maclaurin series. Its
+transform lies outside the hypotheses of the argument. The
+same distinction permits $L\{\delta^{(n)}\}=s^n$ for causal
+distributions. \erratum{The convention at the lower endpoint
+must be specified: integrating a symmetric regularization
+over $[0,\infty)$ assigns half the mass, whereas the causal
+$0^-$ convention used here assigns the full mass.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.7.8}\quad Show that the Laplace transform of
+the confluent hypergeometric function $M(a, c\erratum{,}\, x)$ is
+\[
+L\big\{M(a, c\erratum{,}\, x)\big\}
+=\frac{1}{s}\,{}_{2}F_{1}\left(a, 1; c; \frac{1}{s}\right).
+\]
+\par\erratum{For the ordinary series definitions take $c\notin\{0,-1,-2,\ldots\}$ and $\Re s>1$; exceptional terminating cases may admit larger domains.}
+\solution
+Use the defining confluent hypergeometric series
+\[
+M(a,c,t)=\sum_{n=0}^\infty\frac{(a)_n}{(c)_n}\frac{t^n}{n!}.
+\]
+For $\Re s>1$ the series may be integrated absolutely:
+the sum of the integrals of the absolute terms is
+\[
+\frac1{\Re s}\sum_{n=0}^\infty
+\left|\frac{(a)_n}{(c)_n}\right|(\Re s)^{-n},
+\]
+which converges by the ratio test (or terminates). Hence
+\begin{align*}
+L\{M(a,c,t)\}(s)
+&=\sum_{n=0}^\infty\frac{(a)_n}{(c)_n n!}
+\frac{n!}{s^{n+1}}\\
+&=\frac1s\sum_{n=0}^\infty
+\frac{(a)_n(1)_n}{(c)_n n!}\left(\frac1s\right)^n
+=\boxed{\frac1s\,{}_2F_1\left(a,1;c;\frac1s\right)},
+\end{align*}
+since $(1)_n=n!$.
+\erratum{The ordinary definitions require
+$c\notin\{0,-1,-2,\ldots\}$, unless a specified terminating
+or limiting case removes the singularity. The half-plane
+$\Re s>1$ is sufficient for the proof; continuation beyond it
+must stay within the transform's convergence domain and use
+consistent analytic branches. Terminating cases can have a
+larger domain.}
+
+\Needspace{9\baselineskip}
+\subsection*{20.8 Properties of Laplace Transforms}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.1}\quad Use the expression for the transform
+of a second derivative to obtain the transform of $\cos kt$.
+\solution
+Put $F(t)=\cos kt$ and $f(s)=L\{F\}(s)$. The differential
+identity $F''=-k^2F$ and initial values $F(0)=1$, $F'(0)=0$
+give
+\[
+L\{F''\}=s^2f(s)-sF(0)-F'(0)=s^2f(s)-s=-k^2f(s).
+\]
+Solving this algebraic equation,
+\[
+\boxed{L\{\cos kt\}(s)=\frac{s}{s^2+k^2}},\qquad \Re s>0
+\quad(k\in\mathbb R).
+\]
+For $k=0$ this reduces to $L\{1\}=1/s$, as required.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.2}\quad A mass $m$ is attached to one end of
+an unstretched spring, spring constant $k$ (Fig.~20.17). Starting
+at time $t=0$, the free end of the spring experiences a constant
+acceleration $a$, away from the mass. Using Laplace transforms,
+\begin{enumerate}
+\item[(a)] find the position $x$ of $m$ as a function of time.
+\item[(b)] determine the limiting form of $x(t)$ for small $t$.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $x=\dfrac{1}{2}at^{2}-\dfrac{a}{\omega^{2}}(1-\cos\omega t)$,
+$\omega^{2}=\dfrac{k}{m}$,\par\nobreak\hfill
+(b) $x=\dfrac{a\omega^{2}}{4!}\,t^{4}$, $\omega t\ll1$.
+\par\erratum{Use the initially resting preparation $x(0)=x'(0)=0$, with the driven end initially at rest and $m,k>0$.}
+\solution
+Measure $x$ from the initial mass position and subtract
+the unstretched spring length from the driven endpoint's
+position. The latter coordinate is $y(t)=at^2/2$, so the spring
+extension is $y-x$. Newton's law is
+\[
+m x''=k(y-x),\qquad
+x''+\omega^2x=\frac{a\omega^2t^2}{2},\qquad \omega^2=k/m.
+\]
+The mass is initially at rest at $x=0$. With
+$\widehat x=L\{x\}$, the transformed equation is
+\[
+(s^2+\omega^2)\widehat x=\frac{a\omega^2}{s^3},\qquad
+\widehat x=\frac{a\omega^2}{s^3(s^2+\omega^2)}
+=\frac a{s^3}-\frac a{s(s^2+\omega^2)}.
+\]
+Since
+$1/[s(s^2+\omega^2)]=\omega^{-2}[1/s-s/(s^2+\omega^2)]$,
+inversion yields
+\[
+\boxed{x(t)=\frac12at^2-\frac a{\omega^2}(1-\cos\omega t)}.
+\]
+Expanding the cosine shows explicitly the cancellation of the
+quadratic terms:
+\[
+x(t)=\frac12at^2-\frac a{\omega^2}
+\left(\frac{\omega^2t^2}{2}-\frac{\omega^4t^4}{24}
++\frac{\omega^6t^6}{720}-\cdots\right)
+=\boxed{\frac{a\omega^2t^4}{24}+O(t^6)}.
+\]
+The small-time condition is $|\omega t|\ll1$. Differentiating
+the exact answer gives $x''=a(1-\cos\omega t)$, which agrees
+with $\omega^2(y-x)$ and verifies the equation of motion.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.3}\quad Radioactive nuclei decay according
+to the law
+\[
+\frac{dN}{dt}=-\lambda N,
+\]
+with $N$ the concentration of a given nuclide and $\lambda$ its
+particular decay constant. This equation may be interpreted as
+stating that the rate of decay is proportional to the number of
+these radioactive nuclei present. They all decay independently.
+
+Consider now a radioactive series of $n$ different nuclides, with
+Nuclide 1 decaying into Nuclide 2, Nuclide 2 into Nuclide 3, etc.,
+until reaching Nuclide $n$, which is stable. The concentrations of
+the various nuclides satisfy the system of ODEs
+\[
+\frac{dN_{1}}{dt}=-\lambda_{1}N_{1},\qquad
+\frac{dN_{2}}{dt}=\lambda_{1}N_{1}-\lambda_{2}N_{2},\qquad
+\cdots,\qquad
+\frac{dN_{n}}{dt}=\lambda_{n-1}N_{n-1}.
+\]
+\begin{enumerate}
+\item[(a)] For the case $n=3$ find $N_{1}(t)$, $N_{2}(t)$, and
+$N_{3}(t)$, with $N_{1}(0)=N_{0}$ and $N_{2}(0)=N_{3}(0)=0$.
+\item[(b)] Find an approximate expression for $N_{2}$ and $N_{3}$,
+valid for small $t$ when $\lambda_{1}\approx\lambda_{2}$.
+\item[(c)] Find approximate expressions for $N_{2}$ and $N_{3}$,
+valid for large $t$, when (1) $\lambda_{1}\gg\lambda_{2}$,
+(2) $\lambda_{1}\ll\lambda_{2}$.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $N_{1}(t)=N_{0}e^{-\lambda_{1}t}$,\quad
+$N_{2}(t)=N_{0}\dfrac{\lambda_{1}}{\lambda_{2}-\lambda_{1}}
+\big(e^{-\lambda_{1}t}-e^{-\lambda_{2}t}\big)$,\par\nobreak\hfill
+$N_{3}(t)=N_{0}\left(1-\dfrac{\lambda_{2}}{\lambda_{2}-\lambda_{1}}
+e^{-\lambda_{1}t}+\dfrac{\lambda_{1}}{\lambda_{2}-\lambda_{1}}
+e^{-\lambda_{2}t}\right)$.\par\nobreak\hfill
+(b) $N_{2}\approx N_{0}\lambda_{1}t$,\quad
+$N_{3}\approx\dfrac{N_{0}}{2}\lambda_{1}\lambda_{2}t^{2}$.
+\par\nobreak\hfill
+(c) (1) $N_{2}\approx N_{0}e^{\erratum{-}\lambda_{2}t}$\par
+\nobreak\hfill$N_{3}\approx N_{0}\big(1-e^{-\lambda_{2}t}\big)$,
+\quad$\lambda_{1}t\gg1$.\par\nobreak\hfill
+(2) $N_{2}\approx N_{0}(\lambda_{1}/\lambda_{2})
+e^{-\lambda_{1}t}$,\par\nobreak\hfill
+$N_{3}\approx N_{0}\big(1-e^{-\lambda_{1}t}\big)$,
+\quad$\lambda_{2}t\gg1$.
+\par\erratum{The quotient answers in part (a) are written for distinct rates; at equal rates take the continuous limits derived below.}
+\solution
+(a) Denote Laplace transforms by hats. The initial values
+and the three rate equations give
+\[
+(s+\lambda_1)\widehat N_1=N_0,\quad
+(s+\lambda_2)\widehat N_2=\lambda_1\widehat N_1,\quad
+s\widehat N_3=\lambda_2\widehat N_2.
+\]
+The first two inversions are
+\begin{align*}
+N_1(t)&=N_0e^{-\lambda_1t},\\
+\widehat N_2&=\frac{N_0\lambda_1}{\lambda_2-\lambda_1}
+\left(\frac1{s+\lambda_1}-\frac1{s+\lambda_2}\right),\\
+N_2(t)&=\frac{N_0\lambda_1}{\lambda_2-\lambda_1}
+(e^{-\lambda_1t}-e^{-\lambda_2t}).
+\end{align*}
+Adding the three original equations gives
+$(N_1+N_2+N_3)'=0$, so their sum remains $N_0$. Subtraction
+therefore gives
+\[
+\boxed{N_3(t)=N_0\left[1-
+\frac{\lambda_2e^{-\lambda_1t}-\lambda_1e^{-\lambda_2t}}
+{\lambda_2-\lambda_1}\right]}.
+\]
+\erratum{The quotient formulas presume $\lambda_1\ne\lambda_2$.
+At the removable equal-rate case $\lambda_1=\lambda_2=\lambda$,
+$N_2=N_0\lambda t e^{-\lambda t}$ and
+$N_3=N_0[1-(1+\lambda t)e^{-\lambda t}]$.}
+They follow either from $\widehat N_2=N_0\lambda/(s+\lambda)^2$
+or from the limit of the exponential difference.
+
+(b) Expand each exponential and cancel its constant term:
+\begin{align*}
+N_2&=N_0\lambda_1\left[t-
+\frac{\lambda_1+\lambda_2}{2}t^2+O(t^3)\right],\\
+N_3&=N_0\lambda_1\lambda_2\left[
+\frac{t^2}{2}-\frac{\lambda_1+\lambda_2}{6}t^3+O(t^4)\right].
+\end{align*}
+The leading terms are those stated. They hold when
+$\max(\lambda_1,\lambda_2)t\ll1$, including equal or nearly
+equal rates; closeness of the rates is not needed for this
+small-time expansion.
+
+(c1) If $\lambda_1\gg\lambda_2$ and $\lambda_1t\gg1$,
+discard $e^{-\lambda_1t}$ in the exact formulas:
+\[
+N_2\simeq N_0\frac{\lambda_1}{\lambda_1-\lambda_2}e^{-\lambda_2t},
+\quad
+N_3\simeq N_0\left[1-
+\frac{\lambda_1}{\lambda_1-\lambda_2}e^{-\lambda_2t}\right].
+\]
+Since $\lambda_1/(\lambda_1-\lambda_2)=1+O(\lambda_2/\lambda_1)$,
+these become $N_0e^{-\lambda_2t}$ and
+$N_0(1-e^{-\lambda_2t})$.
+\erratum{The positive exponent printed for $N_2$ in this
+case must be negative. A positive exponent would violate both
+the rate equation and $0\le N_2\le N_0$.}
+
+(c2) If $\lambda_1\ll\lambda_2$ and $\lambda_2t\gg1$,
+discard $e^{-\lambda_2t}$ instead:
+\[
+N_2\simeq N_0\frac{\lambda_1}{\lambda_2-\lambda_1}e^{-\lambda_1t}
+\simeq N_0\frac{\lambda_1}{\lambda_2}e^{-\lambda_1t},
+\]
+\[
+N_3\simeq N_0\left[1-
+\frac{\lambda_2}{\lambda_2-\lambda_1}e^{-\lambda_1t}\right]
+\simeq N_0(1-e^{-\lambda_1t}).
+\]
+The last approximations retain the leading terms in the small
+rate ratio; they need not resolve a small transient correction
+to $N_3$ immediately after the fast decay.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.4}\quad The rate of formation of an isotope
+in a nuclear reactor is given by
+\[
+\frac{dN_{2}}{dt}=\varphi\big[\sigma_{1}N_{1}(0)
+-\sigma_{2}N_{2}(t)\big]-\lambda_{2}N_{2}(t).
+\]
+Here $N_{1}(0)$ is the concentration of the original isotope
+(assumed constant), and $N_{2}$ is that of the newly formed
+isotope. The first two terms on the right-hand side describe the
+production and destruction of the new isotope via neutron
+absorption; $\varphi$ is the neutron flux (units
+cm$^{-2}$\,s$^{-1}$); $\sigma_{1}$ and $\sigma_{2}$ (units
+cm$^{2}$) are neutron absorption cross sections. The final term
+describes the radioactive decay of the new isotope, with decay
+constant $\lambda_{2}$.
+\begin{enumerate}
+\item[(a)] Find the concentration $N_{2}$ of the new isotope as a
+function of time.
+\item[(b)] For original isotope $^{153}$Eu, $\sigma_{1}=400$
+barns $=400\times10^{-24}$ cm$^{2}$, $\sigma_{2}=1000$ barns
+$=1000\times10^{-24}$ cm$^{2}$, and
+$\lambda_{2}=1.4\times10^{-9}$ s$^{-1}$. If $N_{1}(0)=10^{20}$
+and $\varphi=10^{9}$ cm$^{-2}$\,s$^{-1}$, find $N_{2}$, the
+concentration of $^{154}$Eu, after 1 year of continuous
+irradiation. Is the assumption that $N_{1}$ is constant
+justified?
+\end{enumerate}
+\par\erratum{In (a), retain $N_2(0)=N_{20}$ as an initial datum; for the numerical irradiation in (b), take $N_{20}=0$.}
+\solution
+(a) Set $A=\varphi\sigma_1N_1(0)$ and
+$b=\varphi\sigma_2+\lambda_2$. The equation is
+$N_2'+bN_2=A$. With $N_2(0)=N_{20}$ its transform obeys
+\[
+(s+b)\widehat N_2=N_{20}+A/s,
+\quad
+\widehat N_2=\frac{N_{20}}{s+b}
++\frac A b\left(\frac1s-\frac1{s+b}\right).
+\]
+Therefore
+\[
+\boxed{N_2(t)=N_{20}e^{-bt}+\frac A b(1-e^{-bt})}.
+\]
+\erratum{An initial concentration is needed. For irradiation
+of the original isotope with none of the new isotope initially
+present, use $N_{20}=0$; the formula above also covers a
+nonzero initial inventory.} If $b=0$, the continuous limit is
+$N_{20}+At$.
+
+(b) For the stated data,
+\begin{align*}
+A&=(10^9)(400\times10^{-24})(10^{20})
+=4.00\times10^7\ \mathrm{s}^{-1},\\
+b&=(10^9)(1000\times10^{-24})+1.4\times10^{-9}
+=1.401\times10^{-9}\ \mathrm{s}^{-1}.
+\end{align*}
+Taking one year to mean $365$ days gives $T=31\,536\,000$ s.
+For $N_{20}=0$,
+\[
+N_2(T)=\frac{4.00\times10^7}{1.401\times10^{-9}}
+\left(1-e^{-(1.401\times10^{-9})(31\,536\,000)}\right)
+=\boxed{1.2340\times10^{15}}.
+\]
+This is $1.2\times10^{15}$ at the precision of the source data.
+The parent depletion rate is $\varphi\sigma_1=4.00\times10^{-13}$
+s$^{-1}$, so the fraction consumed is
+\[
+1-e^{-\varphi\sigma_1T}=1.26143\times10^{-5}
+=0.00126143\%.
+\]
+Thus treating $N_1$ as constant is accurate to about thirteen
+parts per million over this interval. The calculation uses
+the same number or concentration units as $N_1(0)$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.5}\quad In a nuclear reactor $^{135}$Xe is
+formed as both a direct fission product of $^{235}$U and by decay
+of $^{135}$I (another fission product), half-life 6.7 hours. The
+half-life of $^{135}$Xe is 9.2 hours. Because $^{135}$Xe strongly
+absorbs thermal neutrons, thereby ``poisoning'' the nuclear
+reactor, its concentration is a matter of great interest. The
+relevant equations are
+\begin{align*}
+\frac{dN_{\mathrm{I}}}{dt}
+&=\varphi\gamma_{\mathrm{I}}(\sigma_{f}N_{\mathrm{U}})
+-\lambda_{\mathrm{I}}N_{\mathrm{I}},\\
+\frac{dN_{\mathrm{Xe}}}{dt}
+&=\varphi\big[\gamma_{\mathrm{Xe}}(\sigma_{f}N_{\mathrm{U}})
+-\sigma_{\mathrm{Xe}}N_{\mathrm{Xe}}\big]
++\lambda_{\mathrm{I}}N_{\mathrm{I}}
+-\lambda_{\mathrm{Xe}}N_{\mathrm{Xe}}.
+\end{align*}
+Here $N_{\mathrm{I}}$, $N_{\mathrm{Xe}}$, $N_{\mathrm{U}}$ are the
+concentrations of $^{135}$I, $^{135}$Xe, $^{235}$U, with
+$N_{\mathrm{U}}$ assumed to be constant. The neutron flux
+$\varphi$ in the reactor causes fission of $^{235}$U with cross
+section $\sigma_{f}$ and removes $^{135}$Xe by neutron absorption
+with cross section $\sigma_{\mathrm{Xe}}=3.5\times10^{6}$ barns
+$=3.5\times10^{-18}$ cm$^{2}$. Neutron absorption by $^{135}$I is
+negligible. The yield of $^{135}$I and $^{135}$Xe per fission
+are, respectively, $\gamma_{\mathrm{I}}=0.060$ and
+$\gamma_{\mathrm{Xe}}=0.003$.
+\begin{enumerate}
+\item[(a)] Find $N_{\mathrm{Xe}}(t)$ in terms of neutron flux
+$\varphi$ and the product $\sigma_{f}N_{\mathrm{U}}$.
+\item[(b)] Find $N_{\mathrm{Xe}}(t\to\infty)$.
+\item[(c)] After $N_{\mathrm{Xe}}$ has reached equilibrium, the
+reactor is shut down: $\varphi=0$. Find $N_{\mathrm{Xe}}(t)$
+following shutdown. \erratum{Determine when $N_{\mathrm{Xe}}$
+increases immediately after shutdown; this depends on the
+pre-shutdown flux.} Such an increase may for a few hours interfere
+with starting the reactor up again.
+\end{enumerate}
+\par\emph{Hint.}~The half-life $t_{1/2}$ of a radioactive
+isotope is the time required for decay of half of the nuclides in
+a sample. For a decay rate $dN/dt=-\lambda N$, the half-life has
+the value $t_{1/2}=\ln 2/\lambda$, so $\lambda$ can be computed
+as $\lambda=\ln 2/t_{1/2}=0.693/t_{1/2}$.
+\par\erratum{In (a), retain initial inventories $N_{\rm I}(0)=I_0$ and $N_{\rm Xe}(0)=X_0$, then specialize to $I_0=X_0=0$.}
+\solution
+Keep the neutron flux and the uranium concentration
+constant during operation, and abbreviate
+\[
+P=\varphi\sigma_fN_{\rm U},\quad
+\alpha=\lambda_{\rm I},\quad\beta=\lambda_{\rm Xe},\quad
+\mu=\beta+\varphi\sigma_{\rm Xe},\quad
+I=N_{\rm I},\quad X=N_{\rm Xe}.
+\]
+The system becomes $I'+\alpha I=P\gamma_{\rm I}$ and
+$X'+\mu X=P\gamma_{\rm Xe}+\alpha I$.
+\erratum{The original part (a) did not specify initial inventories.
+We first keep $I(0)=I_0$, $X(0)=X_0$ arbitrary, and then give
+the usual initially clean case $I_0=X_0=0$.}
+The equilibrium values, obtained by setting both derivatives
+to zero, are
+\[
+I_e=\frac{P\gamma_{\rm I}}\alpha,\qquad
+X_e=\frac{P(\gamma_{\rm I}+\gamma_{\rm Xe})}{\mu}.
+\]
+(a) The first transformed equation gives
+\[
+\widehat I=\frac{I_e}s+\frac{I_0-I_e}{s+\alpha},\qquad
+I(t)=I_e+(I_0-I_e)e^{-\alpha t}.
+\]
+Subtract $X_e$ from the second equation. Then
+\[
+(s+\mu)L\{X-X_e\}=X_0-X_e+
+\frac{\alpha(I_0-I_e)}{s+\alpha}.
+\]
+Use
+$1/[(s+\alpha)(s+\mu)]
+=[1/(s+\alpha)-1/(s+\mu)]/(\mu-\alpha)$ to obtain
+\[
+\boxed{X(t)=X_e+(X_0-X_e)e^{-\mu t}
++\frac{\alpha(I_0-I_e)}{\mu-\alpha}
+(e^{-\alpha t}-e^{-\mu t})}.
+\]
+In particular, for zero initial inventories,
+\[
+\boxed{X(t)=\frac{P(\gamma_{\rm I}+\gamma_{\rm Xe})}{\mu}
+(1-e^{-\mu t})
+-\frac{P\gamma_{\rm I}}{\mu-\alpha}
+(e^{-\alpha t}-e^{-\mu t})}.
+\]
+\erratum{When $\mu=\alpha$, replace
+$(e^{-\alpha t}-e^{-\mu t})/(\mu-\alpha)$ by $t e^{-\alpha t}$.
+The populations remain finite at this coincident rate.}
+For example, in the initially clean case this gives
+$X=X_e(1-e^{-\alpha t})-P\gamma_{\rm I}t e^{-\alpha t}$.
+
+(b) Since the rates are positive, the transients vanish, leaving
+\[
+\boxed{N_{\rm Xe}(\infty)=
+\frac{\varphi(\gamma_{\rm I}+\gamma_{\rm Xe})\sigma_fN_{\rm U}}
+{\lambda_{\rm Xe}+\varphi\sigma_{\rm Xe}}}.
+\]
+(c) Reset $t=0$ at shutdown. The initial values are now
+$I_e,X_e$, but production and neutron absorption cease.
+Thus $I=I_e e^{-\alpha t}$ and
+\[
+(s+\beta)\widehat X=X_e+\frac{\alpha I_e}{s+\alpha}.
+\]
+Inverting gives
+\[
+\boxed{X(t)=X_e e^{-\beta t}
++\frac{\alpha I_e}{\alpha-\beta}
+(e^{-\beta t}-e^{-\alpha t})}.
+\]
+\erratum{In the manual's shutdown formula the coefficient of
+the exponential difference uses $N_{\rm Xe}(0)$; it must use
+$N_{\rm I}(0)=I_e$. The source of xenon after shutdown is
+$\alpha I$, as the differential equation directly shows.}
+The initial slope is
+\[
+X'(0)=P\gamma_{\rm I}-\beta X_e
+=\frac{P(\gamma_{\rm I}\varphi\sigma_{\rm Xe}
+-\beta\gamma_{\rm Xe})}{\mu}.
+\]
+\erratum{A short-term increase is conditional, not automatic:
+for a positive pre-shutdown flux it occurs exactly when
+$\varphi\sigma_{\rm Xe}>\beta\gamma_{\rm Xe}/\gamma_{\rm I}$.}
+Here $\alpha=\ln2/(6.7\cdot3600)=2.87374\times10^{-5}$ s$^{-1}$
+and $\beta=\ln2/(9.2\cdot3600)=2.09284\times10^{-5}$ s$^{-1}$.
+The threshold is consequently
+\[
+\varphi>\frac{\beta}{20\sigma_{\rm Xe}}
+=2.98977\times10^{11}\ \mathrm{cm}^{-2}\mathrm{s}^{-1}.
+\]
+For an explicit peak time put $A=\alpha I_e/(\alpha-\beta)>0$.
+Then $X=(X_e+A)e^{-\beta t}-Ae^{-\alpha t}$ and $X'=0$ gives
+\[
+t_{\rm peak}=\frac1{\alpha-\beta}
+\ln\frac{\alpha A}{\beta(X_e+A)}.
+\]
+This is positive exactly under the preceding increase condition;
+otherwise the maximum after shutdown is at $t=0$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.6}\quad Solve Eq.~(20.160), which describes
+a damped simple harmonic oscillator, for $X(0)=X_{0}$,
+$X'(0)=0$, and
+\begin{enumerate}
+\item[(a)] $b^{2}=4mk$ (critically damped),
+\item[(b)] $b^{2}>4mk$ (overdamped).
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $X(t)=X_{0}e^{-(b/2m)t}\left(1+\dfrac{b}{2m}t\right)$.
+\solution
+The equation is $mX''+bX'+kX=0$. Put
+$\alpha=b/(2m)$ and $\omega_0^2=k/m$. Using $X(0)=X_0$
+and $X'(0)=0$ gives
+\[
+(s^2+2\alpha s+\omega_0^2)\widehat X=(s+2\alpha)X_0,
+\quad
+\widehat X=X_0\frac{(s+\alpha)+\alpha}
+{(s+\alpha)^2+\omega_0^2-\alpha^2}.
+\]
+(a) Critical damping means $\omega_0^2=\alpha^2$, so
+\[
+\widehat X=X_0\left(\frac1{s+\alpha}
++\frac{\alpha}{(s+\alpha)^2}\right),\qquad
+\boxed{X=X_0e^{-\alpha t}(1+\alpha t)}.
+\]
+(b) In the overdamped case define
+$\kappa=\sqrt{\alpha^2-\omega_0^2}>0$. The elementary
+hyperbolic transform pairs, shifted by $s\mapsto s+\alpha$,
+give
+\[
+\boxed{X=X_0e^{-\alpha t}
+\left(\cosh\kappa t+\frac\alpha\kappa\sinh\kappa t\right)}.
+\]
+Indeed this is
+\[
+\frac{X_0}{2}\left[
+\left(1+\frac\alpha\kappa\right)e^{(-\alpha+\kappa)t}
++\left(1-\frac\alpha\kappa\right)e^{(-\alpha-\kappa)t}\right].
+\]
+Both exponents solve the characteristic equation; their
+coefficients sum to $X_0$, and their initial derivative is
+$0$. Taking $\kappa\to0$ gives the critical result because
+$\sinh\kappa t/\kappa\to t$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.7}\quad Again solve Eq.~(20.160), which
+describes a damped simple harmonic oscillator, but this time for
+$X(0)=0$, $X'(0)=v_{0}$, and
+\begin{enumerate}
+\item[(a)] $b^{2}<4mk$ (underdamped),
+\item[(b)] $b^{2}=4mk$ (critically damped),
+\item[(c)] $b^{2}>4mk$ (overdamped).
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+(a) $X(t)=\dfrac{v_{0}}{\omega_{1}}\,e^{-(b/2m)t}\sin\omega_{1}t$,
+\par\nobreak\hfill
+(b) $X(t)=v_{0}te^{-(b/2m)t}$.
+\solution
+With $\alpha=b/(2m)$, $\omega_0^2=k/m$, and initial data
+$X(0)=0$, $X'(0)=v_0$, transformation of the equation gives
+\[
+(s^2+2\alpha s+\omega_0^2)\widehat X=v_0,
+\qquad
+\widehat X=\frac{v_0}{(s+\alpha)^2+\omega_0^2-\alpha^2}.
+\]
+(a) If $\omega_1=\sqrt{\omega_0^2-\alpha^2}>0$, the shifted
+sine transform gives
+\[
+\boxed{X(t)=\frac{v_0}{\omega_1}e^{-\alpha t}\sin\omega_1t}.
+\]
+(b) At $\omega_0^2=\alpha^2$ the transform is
+$v_0/(s+\alpha)^2$, whose inverse is
+\[
+\boxed{X(t)=v_0t e^{-\alpha t}}.
+\]
+(c) If $\kappa=\sqrt{\alpha^2-\omega_0^2}>0$, then
+\[
+\widehat X=\frac{v_0}{2\kappa}
+\left(\frac1{s+\alpha-\kappa}-\frac1{s+\alpha+\kappa}\right),
+\]
+so
+\[
+\boxed{X(t)=\frac{v_0}{\kappa}e^{-\alpha t}\sinh\kappa t}.
+\]
+All three expressions have $X(0)=0$, $X'(0)=v_0$.
+The critical formula is the continuous limit of both others,
+using $\sin z/z\to1$ and $\sinh z/z\to1$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.8}\quad The motion of a body falling in a
+resisting medium may be described by
+\[
+m\,\frac{d^{2}X(t)}{dt^{2}}=mg-b\,\frac{dX(t)}{dt}
+\]
+when the retarding force is proportional to the velocity. Find
+$X(t)$ and $dX(t)/dt$ for the initial conditions
+\[
+X(0)=\left.\frac{dX}{dt}\right|_{t=0}=0.
+\]
+\solution
+Choose the downward direction positive and set
+$\Gamma=b/m>0$. The equation is $X''+\Gamma X'=g$.
+With both initial values zero,
+\[
+(s^2+\Gamma s)\widehat X=g/s,\qquad
+\widehat X=\frac g{s^2(s+\Gamma)}.
+\]
+The partial fractions are
+\[
+\frac1{s^2(s+\Gamma)}
+=\frac1{\Gamma s^2}-\frac1{\Gamma^2s}
++\frac1{\Gamma^2(s+\Gamma)}.
+\]
+Multiplication by $s^2(s+\Gamma)$ verifies the identity: its
+right numerator is $(s+\Gamma)/\Gamma-s(s+\Gamma)/\Gamma^2
++s^2/\Gamma^2=1$. Therefore
+\[
+\boxed{X(t)=\frac{mg}{b}t-\frac{m^2g}{b^2}(1-e^{-bt/m})},
+\qquad
+\boxed{X'(t)=\frac{mg}{b}(1-e^{-bt/m})}.
+\]
+The velocity approaches the terminal value $mg/b$. Expanding
+$e^{-\Gamma t}=1-\Gamma t+\Gamma^2t^2/2-\cdots$ gives the
+zero-drag limits $X\to gt^2/2$ and $X'\to gt$, and checks
+that the apparent singularities as $b\to0$ cancel.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.9}\quad Ringing circuit. In certain
+electronic devices, resistance, inductance, and capacitance are
+placed in a circuit as shown in Fig.~20.18. A constant voltage is
+maintained across the capacitance, keeping it charged. At time
+$t=0$ the circuit is disconnected from the voltage source. Find
+the voltages across each of the elements $R$, $L$, and $C$ as a
+function of time. Assume $R$ to be small.
+\par\emph{Hint.}~By Kirchhoff's laws
+\[
+I_{RL}+I_{C}=0\quad\text{and}\quad E_{R}+E_{L}=E_{C},
+\]
+where
+\[
+E_{R}=I_{RL}R,\qquad
+E_{L}=L\,\frac{dI_{RL}}{dt},\qquad
+E_{C}=\frac{q_{0}}{C}+\frac{1}{C}\int_{0}^{t}I_{C}\,dt,
+\]
+$q_{0}=$ initial charge of capacitor.
+\par\erratum{Take $R,L,C>0$ and $R^2<4L/C$. Keep the initial branch current $I_{RL}(0)=I_0$ explicit; if the source was connected long enough for DC steady state, use $I_0=q_0/(CR)$.}
+\solution
+The drawing has a series $R,L$ branch in parallel with
+$C$. Define $V_0=q_0/C$, $I(0)=I_0$ for the current through
+that branch, and use the voltage polarities in the hint.
+Kirchhoff's laws imply
+\[
+I_C=-I,\qquad E_C'=-I/C,\qquad LI'+RI=E_C.
+\]
+Eliminating $I$ gives
+\[
+LC E_C''+RC E_C'+E_C=0,\qquad
+E_C(0)=V_0,\quad E_C'(0)=-I_0/C.
+\]
+Put $\alpha=R/(2L)$ and
+$\omega=\sqrt{1/(LC)-\alpha^2}>0$; ``small $R$'' means
+$R^2<4L/C$. Transformation gives
+\[
+\widehat E_C(s)=
+\frac{(s+2\alpha)V_0-I_0/C}{(s+\alpha)^2+\omega^2}
+=V_0\frac{s+\alpha}{(s+\alpha)^2+\omega^2}
++\frac{\alpha V_0-I_0/C}{(s+\alpha)^2+\omega^2}.
+\]
+Consequently
+\[
+\boxed{E_C=e^{-\alpha t}\left[
+V_0\cos\omega t+\frac{\alpha V_0-I_0/C}{\omega}\sin\omega t
+\right]}.
+\]
+Differentiate this expression and use
+$\omega^2+\alpha^2=1/(LC)$. The cosine coefficient of
+$-C E_C'$ is $I_0$, while its sine coefficient is
+$(V_0/L-\alpha I_0)/\omega$. Thus
+\[
+I=e^{-\alpha t}\left[I_0\cos\omega t+
+\frac{V_0/L-\alpha I_0}{\omega}\sin\omega t\right],
+\]
+\[
+\boxed{E_R=Re^{-\alpha t}\left[I_0\cos\omega t+
+\frac{V_0/L-\alpha I_0}{\omega}\sin\omega t\right]},
+\]
+\[
+\boxed{E_L=e^{-\alpha t}\left[(V_0-RI_0)\cos\omega t+
+\frac{-\alpha V_0+(R\alpha-1/C)I_0}{\omega}\sin\omega t\right]}.
+\]
+The last expression is $E_C-E_R$, and also equals $LI'$.
+These formulas display both initial energy stores explicitly.
+
+For the circuit exactly as drawn, if the constant source has
+been connected long enough to establish a DC steady state,
+the inductor has zero DC voltage but the resistor does not:
+\[
+\boxed{I_0=V_0/R}.
+\]
+Substitution gives
+\begin{align*}
+E_C&=V_0e^{-\alpha t}\left[
+\cos\omega t+\frac{\alpha-1/(RC)}{\omega}\sin\omega t\right],\\
+E_R&=V_0e^{-\alpha t}\left[
+\cos\omega t+\frac\alpha\omega\sin\omega t\right],\\
+E_L&=-\frac{V_0}{RC\omega}e^{-\alpha t}\sin\omega t.
+\end{align*}
+These have $E_R(0)=E_C(0)=V_0$, $E_L(0)=0$, as a prior
+DC steady state requires.
+\erratum{The manual instead uses damping $1/(2RC)$ and
+$E_C(0)=q_0=0$. Those are not the equations or initial state
+of the charged-capacitor circuit in Fig.~20.18. Its damping
+is $R/(2L)$. An ideal inductor in series with $R$ does not
+short the capacitor.}
+\erratum{If a different switching preparation leaves the
+inductor initially unenergized, set $I_0=0$ in the general
+formulas; this is an additional initial condition, not the DC
+steady state of the displayed circuit.}
+In that case $E_C=V_0e^{-\alpha t}(\cos\omega t+
+\alpha\sin\omega t/\omega)$,
+$E_R=RV_0e^{-\alpha t}\sin\omega t/(L\omega)$, and
+$E_L=V_0e^{-\alpha t}(\cos\omega t-
+\alpha\sin\omega t/\omega)$.
+The $R=0$ idealization admits this separately specified initial
+state, but no finite steady DC current $V_0/R$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.10}\quad With $J_{0}(t)$ expressed as a
+contour integral, apply the Laplace transform operation, reverse
+the order of integration, and thus show that
+\[
+L\{J_{0}(t)\}=(s^{2}+1)^{-1/2},\quad\text{for }s>0.
+\]
+\solution
+Use the generating-function contour representation
+\[
+J_0(t)=\frac1{2\pi i}\oint_{|z|=1}
+\exp\left[\frac t2(z-z^{-1})\right]\frac{dz}{z},
+\]
+with counterclockwise orientation. On this contour
+$z-z^{-1}=2i\sin\theta$, so the exponential has modulus $1$.
+For real $s>0$, multiplication by $e^{-st}$ makes the double
+integral absolutely convergent, and interchange is valid:
+\begin{align*}
+L\{J_0\}(s)
+&=\frac1{2\pi i}\oint\frac{dz}{z}
+\int_0^\infty e^{-t[s-(z-z^{-1})/2]}dt\\
+&=\frac1{2\pi i}\oint\frac{2\,dz}{1+2sz-z^2}.
+\end{align*}
+Let $D=\sqrt{s^2+1}>0$. The denominator vanishes at
+$z_\pm=s\pm D$. Here $z_+>1$ and
+$|z_-|=D-s=1/(D+s)<1$, so just $z_-$ lies inside.
+Its residue is
+\[
+\frac{2}{2s-2z_-}=\frac1D.
+\]
+The residue theorem therefore gives
+\[
+\boxed{L\{J_0(t)\}(s)=\frac1{\sqrt{s^2+1}}},\qquad s>0.
+\]
+The transform extends analytically to $\Re s>0$ with the
+branch whose square root is positive on the positive real axis.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.11}\quad Develop the Laplace transform of
+$J_{n}(t)$ from $L\{J_{0}(t)\}$ by using the Bessel function
+recurrence relations.
+\par\emph{Hint.}~Here is a chance to use mathematical induction
+(Section~1.4).
+\par\erratum{The formula derived by the indicated induction is for integer $n\ge0$.}
+\solution
+Write $g_n(s)=L\{J_n(t)\}(s)$,
+$D=\sqrt{s^2+1}$, and $r=D-s$ for $s>0$.
+Exercise~20.8.10 gives $g_0=1/D$. Since $J_0'=-J_1$ and
+$J_0(0)=1$,
+\[
+g_1=-[sg_0-J_0(0)]=1-s/D=(D-s)/D=r/D.
+\]
+For integer $n\ge1$, $2J_n'=J_{n-1}-J_{n+1}$ and
+$J_n(0)=0$, hence
+\[
+2sg_n=g_{n-1}-g_{n+1},\qquad
+g_{n+1}=g_{n-1}-2sg_n.
+\]
+Assume $g_{n-1}=r^{n-1}/D$ and $g_n=r^n/D$. Then
+\[
+g_{n+1}=\frac{r^{n-1}}D(1-2sr).
+\]
+The identity
+\[
+r^2=(D-s)^2=D^2-2sD+s^2
+=1+2s^2-2sD=1-2s(D-s)=1-2sr
+\]
+makes this $r^{n+1}/D$. Induction establishes
+\[
+\boxed{L\{J_n(t)\}(s)=
+\frac{(\sqrt{s^2+1}-s)^n}{\sqrt{s^2+1}}},\qquad n=0,1,2,\ldots.
+\]
+For negative integer order use $J_{-n}=(-1)^nJ_n$;
+the displayed power formula is intended for nonnegative order.
+Analytic continuation to $\Re s>0$ uses the branch specified
+in Exercise~20.8.10.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.12}\quad A calculation of the magnetic field
+of a circular current loop in circular cylindrical coordinates
+leads to the integral
+\[
+\int_{0}^{\infty}e^{-kz}kJ_{1}(ka)\,dk,\qquad\erratum{a>0,\quad\Re z>0}.
+\]
+Show that this integral is equal to $a/(z^{2}+a^{2})^{3/2}$.
+\solution
+\erratum{For an ordinary improper integral the originally printed
+boundary $\Re z=0$ must be excluded when $a>0$: the stated
+integrand has oscillations with amplitude growing like
+$\sqrt{k}$. The formula holds ordinarily for $\Re z>0$ and
+has boundary values in an Abel or distributional sense.}
+Scale Exercise~20.8.10 to obtain, for $a>0$ and $\Re z>0$,
+\[
+\int_0^\infty e^{-kz}J_0(ka)dk=\frac1{\sqrt{z^2+a^2}}.
+\]
+Exponential decay permits differentiation with respect to $a$.
+Because $J_0'(ka)=-J_1(ka)$,
+\[
+-\int_0^\infty e^{-kz}kJ_1(ka)dk
+=\frac\partial{\partial a}(z^2+a^2)^{-1/2}
+=-a(z^2+a^2)^{-3/2}.
+\]
+Therefore
+\[
+\boxed{\int_0^\infty e^{-kz}kJ_1(ka)dk
+=\frac a{(z^2+a^2)^{3/2}}},\qquad \Re z>0.
+\]
+The square root is chosen positive for real $z>0$ and
+continued throughout the right half-plane. To see the
+boundary issue directly, at $z=0$,
+$kJ_1(ka)\sim\sqrt{2k/(\pi a)}\cos(ka-3\pi/4)$;
+its oscillatory primitive does not have a limit.
+Nevertheless inserting $e^{-\epsilon k}$ and letting
+$\epsilon\downarrow0$ gives the Abel value $1/a^2$.
+For $z=iy$, the analogous limiting formula is singular at
+$y=\pm a$; it is not a finite ordinary value there.
+\erratum{The manual, p.~351, also prints $K_1(ka)$ in its first
+intermediate integral where $J_1(ka)$ is required, and replaces
+the boundary term $[e^{-kz}J_0(ka)]_0^\infty=-1$ by $+1$.
+The latter constant disappears on differentiation, but the
+intermediate equality is incorrect.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.13}\quad Show that
+\[
+L\{I_{0}(at)\}=(s^{2}-a^{2})^{-1/2},\qquad\erratum{a\in\mathbb R,\quad s>|a|}.
+\]
+\solution
+For real $a$ use the angular representation
+\[
+I_0(at)=\frac1\pi\int_0^\pi e^{at\cos\theta}d\theta.
+\]
+\erratum{If $a$ is allowed to be negative, the sufficient
+real convergence condition is $s>|a|$, not merely $s>a$.
+For a positive scale $a$, the original condition $s>a$ is correct.}
+For $s>|a|$, the integrals are absolutely convergent, so
+\[
+L\{I_0(at)\}(s)=\frac1\pi\int_0^\pi
+\frac{d\theta}{s-a\cos\theta}.
+\]
+Set $u=\tan(\theta/2)$, so
+$\cos\theta=(1-u^2)/(1+u^2)$ and
+$d\theta=2du/(1+u^2)$. Then
+\begin{align*}
+L\{I_0(at)\}
+&=\frac2\pi\int_0^\infty
+\frac{du}{(s-a)+(s+a)u^2}\\
+&=\frac2{\pi\sqrt{(s-a)(s+a)}}
+\left[\tan^{-1}\left(u\sqrt{\frac{s+a}{s-a}}\right)\right]_0^\infty\\
+&=\boxed{\frac1{\sqrt{s^2-a^2}}}.
+\end{align*}
+For complex $s$ in $\Re s>|a|$, use the branch positive on
+$s>|a|$, equivalently the branch asymptotic to $s$ at positive
+infinity in the denominator.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.14}\quad Verify the following Laplace
+transforms:
+\begin{enumerate}
+\item[(a)] $L\{j_{0}(at)\}=L\left\{\dfrac{\sin at}{at}\right\}
+=\dfrac{1}{a}\cot^{-1}\left(\dfrac{s}{a}\right)$,
+\item[(b)] $L\{y_{0}(at)\}$ does not exist.
+\item[(c)] $L\{i_{0}(at)\}=L\left\{\dfrac{\sinh at}{at}\right\}
+=\dfrac{1}{2a}\ln\dfrac{s+a}{s-a}
+=\dfrac{1}{a}\coth^{-1}\left(\dfrac{s}{a}\right)$,
+\item[(d)] $L\{k_{0}(at)\}$ does not exist.
+\end{enumerate}
+\par\erratum{Use $a>0$, with real $s>0$ in (a) and $s>a$ in (c), and the real inverse-function branches there.}
+\solution
+Take $a>0$; use real $s>0$ for (a) and $s>a$ for (c).
+(a) Since $L\{\sin at\}(u)=a/(u^2+a^2)$, integrate the
+transform parameter from $s$ to infinity:
+\[
+\int_s^\infty\frac a{u^2+a^2}du
+=\int_0^\infty\sin(at)\left(\int_s^\infty e^{-ut}du\right)dt
+=\int_0^\infty e^{-st}\frac{\sin at}{t}dt.
+\]
+Absolute integrability after the factor $e^{-st}$ justifies
+the interchange. Dividing by $a$ and integrating yields
+\[
+\boxed{L\{j_0(at)\}=
+\frac1a\left[\frac\pi2-\tan^{-1}(s/a)\right]
+=\frac1a\cot^{-1}(s/a)}.
+\]
+(b) The spherical Neumann function is
+$y_0(at)=-\cos(at)/(at)=-1/(at)+O(t)$ near zero.
+Thus its Laplace integral contains a nonzero multiple of
+$\int_0^\epsilon dt/t$ and diverges for every $s$.
+
+(c) In the convergent half-plane,
+$L\{\sinh at\}(u)=a/(u^2-a^2)$. The same integration gives
+\begin{align*}
+L\{i_0(at)\}
+&=\int_s^\infty\frac{du}{u^2-a^2}\\
+&=\frac1{2a}\left[\ln(u-a)-\ln(u+a)\right]_s^\infty\\
+&=\boxed{\frac1{2a}\ln\frac{s+a}{s-a}
+=\frac1a\coth^{-1}(s/a)}.
+\end{align*}
+Keep the two logarithms together when taking the infinite
+endpoint; the individual logarithms do not have finite limits.
+\erratum{The manual's final logarithmic expression for (c),
+on p.~351, omits the factor $1/a$. Its coefficient must be
+$1/(2a)$, as in the textbook answer and the partial fractions
+shown here.}
+
+(d) In the book's spherical normalization
+$k_0(at)=e^{-at}/(at)$. It also has a nonintegrable $1/(at)$
+singularity at zero, so its ordinary Laplace transform does
+not exist.
+\erratum{The real inverse-trigonometric and inverse-hyperbolic
+forms presume the positive scale and the domains specified
+above. The $a=0$ limits of (a) and (c) are $1/s$; for negative
+$a$ it is safer to use $\tan^{-1}(a/s)/a$ in (a) and the
+continuous logarithmic form in (c), with $s>|a|$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.15}\quad Develop a Laplace transform
+solution of Laguerre's equation,
+\[
+tF''(t)+(1-t)F'(t)+nF(t)=0.
+\]
+Note that you need a derivative of a transform and a transform of
+derivatives. Go as far as you can with a general value of $n$;
+then (and only then) set $n=0$.
+\par\erratum{Find the solution regular at the origin, with finite $F(0)=C$ and $F'(0)$. A logarithmically singular second solution is outside these initial-value transform rules.}
+\solution
+Seek the solution regular at $t=0$, with finite
+$F(0)=C$ and $F'(0)$. Write $f=L\{F\}$. The needed transforms
+are
+\begin{align*}
+L\{F'\}&=sf-C, &L\{F''\}&=s^2f-sC-F'(0),\\
+L\{tF'\}&=-\frac d{ds}(sf-C)=-f-sf',
+&L\{tF''\}&=-\frac d{ds}(s^2f-sC-F'(0))=-2sf-s^2f'+C.
+\end{align*}
+Adding $L\{tF''\}+L\{F'\}-L\{tF'\}+nf$ gives
+\[
+s(1-s)f'+(n+1-s)f=0.
+\]
+For a nonzero solution, divide by $s(1-s)f$ and decompose:
+\[
+\frac{f'}f=-\frac{n+1-s}{s(1-s)}
+=-\frac{n+1}{s}+\frac n{s-1}.
+\]
+Integrating each logarithmic derivative gives
+\[
+\ln f=\ln A+n\ln(s-1)-(n+1)\ln s,
+\qquad f(s)=A\frac{(s-1)^n}{s^{n+1}}.
+\]
+For general $n$, choose the powers by continuation from real
+$s>1$. The initial-value theorem gives
+$A=\lim_{s\to\infty}sf(s)=F(0)=C$.
+For $|s|>1$ in this half-plane, expand the generalized binomial:
+\[
+f(s)=\frac C s\left(1-\frac1s\right)^n
+=C\sum_{j=0}^\infty\frac{(-n)_j}{j!s^{j+1}}.
+\]
+Since $L\{t^j\}=j!/s^{j+1}$, this identifies the regular solution
+\[
+\boxed{F(t)=C\sum_{j=0}^\infty\frac{(-n)_j}{(j!)^2}t^j
+=C\,{}_1F_1(-n;1;t)}.
+\]
+The transform calculation is justified, for example, in
+$\Re s>1$, as in Exercise~20.7.8. If $n$ is a nonnegative
+integer, the series terminates and $F=C L_n(t)$, with
+$f=C(s-1)^n/s^{n+1}$ already valid for $\Re s>0$.
+Only now set $n=0$: $f=C/s$, so
+\[
+\boxed{F(t)=C,\qquad L_0(t)=1\text{ when }C=1}.
+\]
+\erratum{This is the regular solution selected by the finite
+initial values used in transforming derivatives. The second
+local solution is logarithmically singular at $t=0$ and is
+not included by that derivation. At $n=0$, direct integration
+gives $F'=B e^t/t$; its integral is singular unless $B=0$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.16}\quad Show that the Laplace transform of
+the Laguerre polynomial $L_{n}(at)$ is given by
+\[
+L\{L_{n}(at)\}=\frac{(s-a)^{n}}{s^{n+1}},\qquad s>0.
+\]
+\solution
+For integer $n\ge0$, use the finite polynomial expansion
+\[
+L_n(x)=\sum_{j=0}^n(-1)^j\binom nj\frac{x^j}{j!}.
+\]
+There is no infinite-series interchange: transform its $n+1$
+terms directly in $\Re s>0$:
+\begin{align*}
+L\{L_n(at)\}(s)
+&=\sum_{j=0}^n(-1)^j\binom nj\frac{a^j}{j!}
+\frac{j!}{s^{j+1}}\\
+&=\frac1s\sum_{j=0}^n\binom nj\left(-\frac a s\right)^j
+=\frac1s\left(1-\frac a s\right)^n\\
+&=\boxed{\frac{(s-a)^n}{s^{n+1}}}.
+\end{align*}
+This also includes $n=0$ and $a=0$. Because the integrand is
+an exponential times a polynomial, no condition $s>a$ is
+needed here; any real $s>0$ suffices.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.17}\quad Show that
+\[
+L\{E_{1}(t)\}=\frac{1}{s}\ln(s+1),\qquad s>0,
+\]
+where
+\[
+E_{1}(t)=\int_{t}^{\infty}\frac{e^{-\tau}}{\tau}\,d\tau
+=\int_{1}^{\infty}\frac{e^{-xt}}{x}\,dx.
+\]
+$E_{1}(t)$ is the exponential integral function, first
+encountered in this book in Table~1.2.
+\solution
+For real $s>0$, the given representation has a
+nonnegative integrand, so Tonelli's theorem permits the
+interchange:
+\begin{align*}
+L\{E_1\}(s)
+&=\int_0^\infty e^{-st}\int_1^\infty\frac{e^{-xt}}x\,dx\,dt\\
+&=\int_1^\infty\frac{dx}{x}\int_0^\infty e^{-(s+x)t}dt
+=\int_1^\infty\frac{dx}{x(s+x)}.
+\end{align*}
+Use $1/[x(s+x)]=s^{-1}[1/x-1/(x+s)]$ and a common upper
+cutoff $R$:
+\[
+\int_1^R\frac{dx}{x(s+x)}
+=\frac1s\big[\ln R-\ln(R+s)+\ln(1+s)\big].
+\]
+The first two logarithms approach $0$ together. Therefore
+\[
+\boxed{L\{E_1(t)\}(s)=\frac{\ln(1+s)}s}.
+\]
+The apparent singularity at $s=0$ is removable: the limit is
+$1$, consistent with $\int_0^\infty E_1(t)dt=1$ obtained
+by reversing its defining integral.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.18}
+\begin{enumerate}
+\item[(a)] From Eq.~(20.184) show that
+\[
+\int_{0}^{\infty}f(x)\,dx=\int_{0}^{\infty}\frac{F(t)}{t}\,dt,
+\]
+provided the integrals exist.
+\item[(b)] From the preceding result show that
+\[
+\int_{0}^{\infty}\frac{\sin t}{t}\,dt=\frac{\pi}{2},
+\]
+in agreement with Eqs.~(20.146) and (11.107).
+\end{enumerate}
+\par\erratum{In (a), justify the interchange, for example by $\int_0^\infty|F(t)|\,dt/t<\infty$; in (b), use an Abel limiting argument for the conditionally convergent integral.}
+\solution
+(a) Let $f(x)=\int_0^\infty e^{-xt}F(t)dt$.
+\erratum{An interchange of improper integrals requires a
+convergence justification. A simple sufficient condition for
+the direct calculation is
+$\int_0^\infty |F(t)|\,dt/t<\infty$; conditionally convergent
+cases need a limiting argument, as in part (b).}
+Under this absolute condition, Fubini gives
+\begin{align*}
+\int_0^\infty f(x)dx
+&=\int_0^\infty F(t)\left(\int_0^\infty e^{-xt}dx\right)dt\\
+&=\boxed{\int_0^\infty\frac{F(t)}t\,dt},
+\end{align*}
+because the inner integral is $1/t$ for $t>0$.
+Equivalently, the transform identity
+$L\{F(t)/t\}(s)=\int_s^\infty f(x)dx$ yields the same
+relation at the justified limit $s\downarrow0$.
+
+(b) For $F(t)=\sin t$, $f(x)=1/(1+x^2)$. Insert a positive
+lower cutoff $s$ in the $x$ integration; absolute integrability
+then permits
+\[
+\int_0^\infty e^{-st}\frac{\sin t}{t}dt
+=\int_s^\infty\frac{dx}{1+x^2}
+=\frac\pi2-\tan^{-1}s.
+\]
+The original sine integral exists: it is regular at zero,
+and integration by parts bounds its tail from $R$ to infinity
+by $2/R$. Abel's theorem thus lets $s\downarrow0$ in the
+regulated integral without changing its improper value.
+Consequently
+\[
+\boxed{\int_0^\infty\frac{\sin t}{t}dt=\frac\pi2}.
+\]
+This proof uses a regulator precisely because the absolute
+condition of part (a) fails for $|\sin t|/t$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.19}
+\begin{enumerate}
+\item[(a)] Show that
+\[
+L\left\{\frac{\sin kt}{t}\right\}=\cot^{-1}\left(\frac{s}{k}\right).
+\]
+\item[(b)] Using this result (with $k=1$), prove that
+\[
+L\{\mathrm{si}(t)\}=-\frac{1}{s}\tan^{-1}s,
+\]
+where
+\[
+\mathrm{si}(t)=-\int_{t}^{\infty}\frac{\sin x}{x}\,dx,
+\qquad\text{the sine integral.}
+\]
+\end{enumerate}
+\par\erratum{The real inverse-cotangent expression in (a) assumes $k>0$, $s>0$, and values in $(0,\pi/2)$. Use $s>0$ also in (b).}
+\solution
+(a) For real $s>0$, integrate the sine transform in its
+transform parameter:
+\[
+L\left\{\frac{\sin kt}{t}\right\}(s)
+=\int_s^\infty\frac{k}{u^2+k^2}du
+=\boxed{\tan^{-1}(k/s)}.
+\]
+For $k>0$ this is $\cot^{-1}(s/k)$ with the usual value in
+$(0,\pi/2)$.
+\erratum{The printed inverse-cotangent form presumes $k>0$
+and this branch. The arctangent form extends continuously to
+$k=0$ and all real $k$.}
+
+(b) From the defining tail integral,
+$\mathrm{si}'(t)=\sin t/t$ and
+$\mathrm{si}(0+)=-\pi/2$. If $h(s)=L\{\mathrm{si}\}(s)$,
+the derivative transform gives
+\[
+s h(s)-\mathrm{si}(0+)
+=s h(s)+\pi/2=\tan^{-1}(1/s).
+\]
+For $s>0$, $\tan^{-1}(1/s)=\pi/2-\tan^{-1}s$, so
+\[
+\boxed{L\{\mathrm{si}(t)\}(s)=-\frac{\tan^{-1}s}{s}}.
+\]
+The finite value at the origin and the decaying oscillatory
+tail of $\mathrm{si}$ ensure convergence in $\Re s>0$;
+analytic continuation there uses the corresponding logarithmic
+branch of the arctangent.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.20}\quad If $F(t)$ is periodic
+(Fig.~20.19) with a period $a$ so that $F(t+a)=F(t)$ for all
+$t\ge0$, show that
+\[
+L\{F(t)\}=\frac{1}{1-e^{-as}}\int_{0}^{a}e^{-st}F(t)\,dt.
+\]
+Note that the integration is now over only the first period of
+$F(t)$.
+\par\erratum{Assume $a>0$, that $F$ is integrable over a period, and $\Re s>0$.}
+\solution
+Assume $a>0$ and $F$ integrable over one period.
+For $\Re s>0$ split the half-line into successive periods,
+putting $t=na+u$ in the $n$th interval:
+\begin{align*}
+L\{F\}(s)
+&=\sum_{n=0}^\infty\int_{na}^{(n+1)a}e^{-st}F(t)dt\\
+&=\sum_{n=0}^\infty e^{-nas}
+\int_0^a e^{-su}F(na+u)du\\
+&=\left(\sum_{n=0}^\infty e^{-nas}\right)
+\int_0^a e^{-su}F(u)du.
+\end{align*}
+The geometric series converges because $|e^{-as}|<1$.
+It also bounds the absolute integrals, justifying the splitting
+and summation. Hence
+\[
+\boxed{L\{F(t)\}(s)=\frac{\displaystyle\int_0^a e^{-st}F(t)dt}
+{1-e^{-as}}},\qquad\Re s>0.
+\]
+Values assigned at isolated period boundaries do not affect
+the transform.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.21}\quad Find the Laplace transform of the
+square wave (period $a$) defined by
+\[
+F(t)=\begin{cases}
+1, & 0<t<a/2,\\
+0, & a/2<t<a.
+\end{cases}
+\]
+\par\nobreak\hfill\emph{ANS.}\enspace
+$f(s)=\dfrac{1}{s}\,\dfrac{1-e^{-as/2}}{1-e^{-as}}$.
+\par\erratum{Take $a>0$ and $\Re s>0$.}
+\solution
+Apply Exercise~20.8.20. Only the first half of a period
+contributes to the numerator:
+\[
+\int_0^a e^{-st}F(t)dt
+=\int_0^{a/2}e^{-st}dt=\frac{1-e^{-as/2}}s.
+\]
+Therefore
+\[
+\boxed{f(s)=\frac{1-e^{-as/2}}{s(1-e^{-as})}
+=\frac1{s(1+e^{-as/2})}},\qquad\Re s>0.
+\]
+The simplification follows from
+$1-e^{-as}=(1-e^{-as/2})(1+e^{-as/2})$.
+For real $s\to\infty$, $sf(s)\to1$, which matches $F(0+)$.
+For $s\downarrow0$, $sf(s)\to1/2$, the average value over a
+period; this is not a pointwise final value of the oscillating
+square wave.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.22}\quad Show that
+\begin{enumerate}
+\item[(a)] $L\{\cosh at\cos at\}=\dfrac{s^{3}}{s^{4}+4a^{4}}$,
+\item[(b)] $L\{\cosh at\sin at\}=\dfrac{as^{2}+2a^{3}}{s^{4}+4a^{4}}$,
+\item[(c)] $L\{\sinh at\cos at\}=\dfrac{as^{2}-2a^{3}}{s^{4}+4a^{4}}$,
+\item[(d)] $L\{\sinh at\sin at\}=\dfrac{2a^{2}s}{s^{4}+4a^{4}}$.
+\end{enumerate}
+\par\erratum{Take $a\in\mathbb R$ and $\Re s>|a|$.}
+\solution
+Take real $a$ and $\Re s>|a|$. Define
+\[
+D_-=(s-a)^2+a^2=s^2-2as+2a^2,\qquad
+D_+=(s+a)^2+a^2=s^2+2as+2a^2.
+\]
+Frequency shifting of the elementary sine and cosine transforms
+gives
+\[
+L\{e^{\pm at}\cos at\}=\frac{s\mp a}{D_\mp},\qquad
+L\{e^{\pm at}\sin at\}=\frac a{D_\mp}.
+\]
+Also
+\[
+D_-D_+=(s^2+2a^2)^2-(2as)^2=s^4+4a^4.
+\]
+Using $\cosh at=(e^{at}+e^{-at})/2$ and
+$\sinh at=(e^{at}-e^{-at})/2$:
+\begin{align*}
+\text{(a)}\quad L\{\cosh at\cos at\}
+&=\frac{(s-a)D_++(s+a)D_-}{2D_-D_+}
+=\boxed{\frac{s^3}{s^4+4a^4}},\\
+\text{(b)}\quad L\{\cosh at\sin at\}
+&=\frac{a(D_++D_-)}{2D_-D_+}
+=\boxed{\frac{as^2+2a^3}{s^4+4a^4}},\\
+\text{(c)}\quad L\{\sinh at\cos at\}
+&=\frac{(s-a)D_+-(s+a)D_-}{2D_-D_+}
+=\boxed{\frac{as^2-2a^3}{s^4+4a^4}},\\
+\text{(d)}\quad L\{\sinh at\sin at\}
+&=\frac{a(D_+-D_-)}{2D_-D_+}
+=\boxed{\frac{2a^2s}{s^4+4a^4}}.
+\end{align*}
+For the two less immediate numerators, direct expansion gives
+$(s-a)D_+=s^3+as^2-2a^3$ and
+$(s+a)D_-=s^3-as^2+2a^3$; adding or subtracting proves the
+simplifications in (a) and (c).
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.23}\quad Show that
+\begin{enumerate}
+\item[(a)] $L^{-1}\left\{(s^{2}+a^{2})^{-2}\right\}
+=\dfrac{1}{2a^{3}}\sin at-\dfrac{t}{2a^{2}}\cos at$,
+\item[(b)] $L^{-1}\left\{s(s^{2}+a^{2})^{-2}\right\}
+=\dfrac{t}{2a}\sin at$,
+\item[(c)] $L^{-1}\left\{s^{2}(s^{2}+a^{2})^{-2}\right\}
+=\dfrac{1}{2a}\sin at+\dfrac{t}{2}\cos at$,
+\item[(d)] $L^{-1}\left\{s^{3}(s^{2}+a^{2})^{-2}\right\}
+=\cos at-\dfrac{at}{2}\sin at$.
+\end{enumerate}
+\par\erratum{Take real $a\ne0$ in the displayed quotients and use their continuous limits at $a=0$.}
+\solution
+Begin with
+$L\{\sin at/a\}=1/(s^2+a^2)$ and
+$L\{\cos at\}=s/(s^2+a^2)$ for real $a\ne0$, $\Re s>0$.
+(a) Differentiate the first pair with respect to $a$ and
+multiply by $-1/(2a)$:
+\[
+-\frac1{2a}\frac\partial{\partial a}\frac1{s^2+a^2}
+=\frac1{(s^2+a^2)^2},\quad
+-\frac1{2a}\frac\partial{\partial a}\frac{\sin at}{a}
+=\boxed{\frac{\sin at}{2a^3}-\frac{t\cos at}{2a^2}}.
+\]
+(b) Since $L\{tF\}=-dL\{F\}/ds$,
+\[
+-\frac12\frac d{ds}\frac1{s^2+a^2}
+=\frac{s}{(s^2+a^2)^2},
+\qquad
+\boxed{L^{-1}\left\{\frac{s}{(s^2+a^2)^2}\right\}
+=\frac t{2a}\sin at}.
+\]
+(c) Split the numerator as $s^2=(s^2+a^2)-a^2$ and use (a):
+\[
+\frac{s^2}{(s^2+a^2)^2}
+=\frac1{s^2+a^2}-\frac{a^2}{(s^2+a^2)^2}.
+\]
+Its inverse is
+$\sin at/a-a^2[\sin at/(2a^3)-t\cos at/(2a^2)]$, or
+\[
+\boxed{\frac{\sin at}{2a}+\frac t2\cos at}.
+\]
+(d) Similarly
+$s^3/(s^2+a^2)^2=s/(s^2+a^2)-a^2s/(s^2+a^2)^2$.
+Part (b) then gives
+\[
+\boxed{\cos at-\frac{at}{2}\sin at}.
+\]
+\erratum{At $a=0$, interpret all quotient formulas by their
+continuous limits. The four answers reduce to $t^3/6$,
+$t^2/2$, $t$, and $1$, the inverses of $s^{-4}$ through
+$s^{-1}$.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.8.24}\quad Show that
+\[
+L\big\{(t^{2}-k^{2})^{-1/2}u(t-k)\big\}=K_{0}(ks).
+\]
+\par\erratum{(Here $u(t-k)$ is the unit step function.)}
+\par\emph{Hint.}~Try transforming an integral representation of
+$K_{0}(ks)$ into the Laplace transform integral.
+\par\erratum{Take $k>0$ and $\Re s>0$; the step restricts the real square root to $t>k$.}
+\solution
+\erratum{Take $k>0$ and $\Re s>0$. The lower endpoint
+$t=k$ then has an integrable square-root singularity. At
+$k=0$ the kernel is $1/t$ and the ordinary transform diverges.}
+The step function restricts the transform to
+\[
+L\{(t^2-k^2)^{-1/2}u(t-k)\}
+=\int_k^\infty\frac{e^{-st}}{\sqrt{t^2-k^2}}dt.
+\]
+Set $t=k\cosh v$, $v\ge0$. Since
+$dt=k\sinh v\,dv$ and
+$\sqrt{t^2-k^2}=k\sinh v$, the Jacobian cancels the denominator:
+\[
+\int_0^\infty e^{-ks\cosh v}dv=\boxed{K_0(ks)}.
+\]
+The last expression is the standard hyperbolic integral for
+$K_0$ on $\Re(ks)>0$. The value assigned to $u(0)$ does not
+change this integrable transform.
+
+\Needspace{9\baselineskip}
+\subsection*{20.9 Laplace Convolution Theorem}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.9.1}\quad From the convolution theorem show
+that
+\[
+\frac{1}{s}\,f(s)=L\left\{\int_{0}^{t}F(x)\,dx\right\},
+\]
+where $f(s)=L\{F(t)\}$.
+\solution
+In the one-sided Laplace convolution, choose $G(t)=1$
+for $t\ge0$. Its transform is $g(s)=1/s$. By definition,
+\[
+(F*G)(t)=\int_0^tF(x)G(t-x)dx=\int_0^tF(x)dx.
+\]
+The convolution theorem therefore yields
+\[
+\boxed{L\left\{\int_0^tF(x)dx\right\}(s)
+=f(s)g(s)=\frac{f(s)}s}.
+\]
+For locally integrable functions of exponential order this
+holds in a common right half-plane. Direct differentiation
+also checks the initial term: the primitive has value zero
+at $t=0$, so its derivative transform is $s[f(s)/s]=f(s)$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.9.2}\quad If $F(t)=t^{a}$ and $G(t)=t^{b}$,
+$a>-1$, $b>-1$,
+\begin{enumerate}
+\item[(a)] Show that the convolution $F*G$ is given by
+\[
+F*G=t^{a+b+1}\int_{0}^{1}y^{a}(1-y)^{b}\,dy.
+\]
+\item[(b)] By using the convolution theorem, show that
+\[
+\int_{0}^{1}y^{a}(1-y)^{b}\,dy
+=\erratum{\frac{\Gamma(a+1)\Gamma(b+1)}{\Gamma(a+b+2)}}=B(a+1,b+1),
+\]
+where $B$ is the beta function.
+\end{enumerate}
+\solution
+(a) For $t>0$, substitute $x=ty$ into the convolution:
+\[
+(F*G)(t)=\int_0^t x^a(t-x)^b dx
+=t^{a+b+1}\int_0^1 y^a(1-y)^bdy.
+\]
+The endpoint conditions $a,b>-1$ make this integral finite.
+Call the remaining constant $B$. Then
+\[
+L\{F*G\}=B\frac{\Gamma(a+b+2)}{s^{a+b+2}},
+\]
+because $a+b+1>-1$.
+
+(b) The separate gamma integrals give
+\[
+f(s)=\frac{\Gamma(a+1)}{s^{a+1}},\qquad
+g(s)=\frac{\Gamma(b+1)}{s^{b+1}}.
+\]
+Equating $L\{F*G\}=fg$ and cancelling $s^{-(a+b+2)}$ yields
+\[
+\boxed{\int_0^1y^a(1-y)^bdy
+=\frac{\Gamma(a+1)\Gamma(b+1)}{\Gamma(a+b+2)}
+=B(a+1,b+1)}.
+\]
+\erratum{For arbitrary real $a,b>-1$, the factorial notation
+in the original question means gamma functions, $a!=\Gamma(a+1)$,
+not only integer factorials.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.9.3}\quad Using the convolution integral,
+calculate
+\[
+L^{-1}\left\{\frac{s}{(s^{2}+a^{2})(s^{2}+b^{2})}\right\},
+\qquad a^{2}\ne b^{2}.
+\]
+\solution
+Factor the transform into
+$[1/(s^2+a^2)]\,[s/(s^2+b^2)]$. The convolution theorem gives
+\[
+H(t)=\frac1a\int_0^t\sin(ax)\cos[b(t-x)]dx.
+\]
+Use $\sin u\cos v=[\sin(u+v)+\sin(u-v)]/2$:
+\begin{align*}
+H(t)&=\frac1{2a}\int_0^t
+\{\sin[(a-b)x+bt]+\sin[(a+b)x-bt]\}dx\\
+&=\frac1{2a}\left[
+\frac{\cos bt-\cos at}{a-b}
++\frac{\cos bt-\cos at}{a+b}\right]\\
+&=\frac{\cos bt-\cos at}{2a}\,
+\frac{(a+b)+(a-b)}{a^2-b^2}\\
+&=\boxed{\frac{\cos at-\cos bt}{b^2-a^2}}.
+\end{align*}
+The assumption $a^2\ne b^2$ makes $a\pm b$ nonzero.
+\erratum{If $a=0$, the initial factor $\sin(ax)/a$ means $x$;
+the final formula remains valid by continuity.}
+This agrees with the independently transformed result of
+Exercise~20.7.3.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.9.4}\quad An undamped oscillator is driven by
+a force $F_{0}\sin\omega t$. Find the displacement $X(t)$ as a
+function of time, subject to initial conditions $X(0)=X'(0)=0$.
+\erratum{For $\omega^2\ne\omega_0^2$}, the solution is a linear
+combination of two simple harmonic motions, one with the frequency
+of the driving force and one with the frequency $\omega_0>0$ of
+the free oscillator. \erratum{Find the resonant limit separately.}
+\par\nobreak\hfill\emph{ANS.}\enspace
+$X(t)=\dfrac{F_{0}/m}{\omega^{2}-\omega_{0}^{2}}
+\left(\dfrac{\omega}{\omega_{0}}\sin\omega_{0}t-\sin\omega t\right)$.
+\par\erratum{The displayed quotient answer applies for $\omega^2\ne\omega_0^2$.}
+\solution
+Let $\omega_0^2=k/m>0$. The equation and initial data are
+\[
+X''+\omega_0^2X=\frac{F_0}m\sin\omega t,\qquad X(0)=X'(0)=0.
+\]
+Transformation gives
+\[
+\widehat X(s)=\frac{F_0}m\,
+\frac\omega{(s^2+\omega^2)(s^2+\omega_0^2)}.
+\]
+Equivalently, the convolution response is
+\[
+X(t)=\frac{F_0}{m\omega_0}\int_0^t
+\sin[\omega_0(t-u)]\sin(\omega u)du.
+\]
+For $\omega^2\ne\omega_0^2$, decompose
+\[
+\widehat X=\frac{F_0\omega}{m(\omega_0^2-\omega^2)}
+\left(\frac1{s^2+\omega^2}-\frac1{s^2+\omega_0^2}\right).
+\]
+Inverting the two terms yields
+\[
+\boxed{X(t)=\frac{F_0/m}{\omega^2-\omega_0^2}
+\left(\frac\omega{\omega_0}\sin\omega_0t-\sin\omega t\right)}.
+\]
+Its value and derivative vanish at zero because the two sine
+slopes cancel.
+\erratum{The printed answer requires a separate resonant
+limit. At $\omega=\omega_0$ it is a removable $0/0$ form and
+cannot be used as written.}
+Apply l'H\^opital's rule to the ratio as $\omega\to\omega_0$.
+The numerator derivative is
+$\sin(\omega_0t)/\omega_0-t\cos(\omega t)$, and the denominator
+derivative is $2\omega$. Thus
+\[
+\boxed{X_{\rm res}(t)=\frac{F_0}{2m\omega_0^2}
+(\sin\omega_0t-\omega_0t\cos\omega_0t)}.
+\]
+The growing $t\cos\omega_0t$ term is the resonant response;
+it is no longer a sum of two bounded oscillations at distinct
+frequencies. For $\omega=0$ the driving force is identically
+zero and the solution is $X=0$.
+
+\Needspace{9\baselineskip}
+\subsection*{20.10 Inverse Laplace Transform}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.1}\quad Derive the Bromwich integral from
+Cauchy's integral formula.
+\par\emph{Hint.}~Apply the inverse transform $L^{-1}$ to
+\[
+f(s)=\frac{1}{2\pi i}\lim_{\alpha\to\infty}
+\int_{\beta-i\alpha}^{\beta+i\alpha}\frac{f(z)}{s-z}\,dz,
+\]
+where $f(z)$ is analytic for $\Re e\,z\ge\beta$.
+\par\erratum{Assume decay sufficient to make the right closing arc vanish and the usual Laplace inversion hypotheses; analyticity alone does not imply the identity in the hint. Take $\Re s>\beta$.}
+\solution
+Choose $\beta$ to the right of all singularities of the
+Laplace transform, and fix $\Re s>\beta$. Close the upward
+vertical segment $\beta-iR$ to $\beta+iR$ by a semicircle to
+its right. This closed contour is clockwise. The kernel
+$f(z)/(s-z)$ has residue $-f(s)$ at $z=s$, so Cauchy's formula
+with this orientation gives
+\[
+\int_{\beta-iR}^{\beta+iR}\frac{f(z)}{s-z}dz
++\int_{\text{right arc}}\frac{f(z)}{s-z}dz
+=-2\pi i[-f(s)]=2\pi i f(s).
+\]
+If, for example, $f(z)=O(|z|^{-\epsilon})$ on these arcs for
+some $\epsilon>0$, the arc integral is $O(R^{-\epsilon})$.
+Letting $R\to\infty$ then gives the identity in the hint.
+For each $z$ on the line $\Re z=\beta$,
+\[
+\frac1{s-z}=\int_0^\infty e^{-st}e^{zt}dt,
+\qquad L_s^{-1}\{(s-z)^{-1}\}(t)=e^{zt}.
+\]
+Apply this inverse operation to the Cauchy representation,
+with a convergent cutoff or regularization of the vertical
+integral. The result is
+\[
+\boxed{F(t)=\frac1{2\pi i}\lim_{R\to\infty}
+\int_{\beta-iR}^{\beta+iR}e^{zt}f(z)dz},\qquad t>0,
+\]
+which is the Bromwich inversion formula at a continuity point
+of $F$.
+\erratum{Analyticity alone is not enough to discard the arc
+or interchange a limiting inverse transform. Decay on the
+closing contours and inversion hypotheses are required. A
+standard sufficient setting is a causal, piecewise smooth
+function of exponential order, with the integral interpreted
+by symmetric truncation (or Abel regularization). At a jump
+it recovers the mean of the two one-sided limits.}
+For clarity, writing $z=\beta+i\omega$ turns this into the
+Fourier inversion of $e^{-\beta t}F(t)$ extended by zero to
+$t<0$; Exercise~20.10.2 supplies a regularized kernel proof
+of the limiting step.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.2}\quad Starting with
+\[
+\frac{1}{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
+e^{st}f(s)\,ds,
+\]
+show that by introducing
+\[
+f(s)=\int_{0}^{\infty}e^{-sz}F(z)\,dz
+\]
+we can convert our integral into the Fourier representation of a
+Dirac delta function. From this derive the inverse Laplace
+transform.
+\par\erratum{Use a Bromwich line to the right of the convergence abscissa, and recover $F(t)$ at positive continuity points; interpret the delta integral distributionally.}
+\solution
+Parameterize the line by $s=\beta+i\omega$, so
+$ds=i\,d\omega$. On inserting the Laplace integral, the
+proposed inverse becomes formally
+\begin{align*}
+\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}e^{st}f(s)ds
+&=\int_0^\infty F(z)e^{\beta(t-z)}
+\left[\frac1{2\pi}\int_{-\infty}^{\infty}
+e^{i\omega(t-z)}d\omega\right]dz\\
+&=\int_0^\infty F(z)e^{\beta(t-z)}\delta(t-z)dz.
+\end{align*}
+Here is a precise justification of the delta. Multiply the
+frequency integrand by $e^{-\epsilon\omega^2}$, with
+$\epsilon>0$. Its Fourier integral is
+\[
+K_\epsilon(u)=\frac1{2\pi}\int_{-\infty}^{\infty}
+e^{-\epsilon\omega^2+i\omega u}d\omega
+=\frac{e^{-u^2/(4\epsilon)}}{\sqrt{4\pi\epsilon}}.
+\]
+It has mass $1$, is nonnegative, and its mass outside any
+fixed neighborhood of zero tends to zero. If
+$H(z)=e^{-\beta z}F(z)$ for $z\ge0$ and $H(z)=0$ for $z<0$,
+with $H\in L^1$, the regularized inverse is
+\[
+e^{\beta t}\int_{-\infty}^{\infty}K_\epsilon(t-z)H(z)dz.
+\]
+Continuity of $H$ controls the integral near $z=t$; the
+vanishing Gaussian tails control the remainder. Hence its
+limit is $e^{\beta t}H(t)=F(t)$ at every positive continuity
+point. This proves
+\[
+\boxed{F(t)=\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
+e^{st}f(s)ds},\qquad t>0,
+\]
+with the justified inversion prescription.
+\erratum{The unsmoothed frequency integral is a distribution,
+not an absolutely convergent integral. At an interior jump
+symmetric inversion gives $[F(t-)+F(t+)]/2$; at $t=0$ it gives
+$F(0+)/2$ for the causal extension. For $t<0$ it gives zero.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.3}\quad Derive the Laplace transformation
+convolution theorem by use of the Bromwich integral.
+\solution
+Let $f=L\{F\}$ and $g=L\{G\}$, with both functions
+extended by zero for negative arguments. In a common
+half-plane of convergence choose a Bromwich line $\Re s=\beta$.
+Substitute the defining integral for $g$ into the inverse of
+the product:
+\begin{align*}
+L^{-1}\{fg\}(t)
+&=\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
+e^{st}f(s)\left[\int_0^\infty e^{-su}G(u)du\right]ds\\
+&=\int_0^\infty G(u)\left[
+\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
+e^{s(t-u)}f(s)ds\right]du.
+\end{align*}
+The bracket is the causal inverse $F(t-u)$. It vanishes for
+$u>t$, so for $t\ge0$ the result is
+\[
+\boxed{L^{-1}\{f(s)g(s)\}(t)=\int_0^tF(t-u)G(u)du}.
+\]
+Changing variables $x=t-u$ also gives
+$\int_0^tF(x)G(t-x)dx$, the Laplace convolution.
+For a direct rigorous interchange, it suffices that the
+vertical integral of $|f(\beta+i\omega)|$ and
+$\int_0^\infty e^{-\beta u}|G(u)|du$ are finite.
+For the usual broader class of locally integrable functions
+of exponential order, insert the Gaussian frequency regulator
+of Exercise~20.10.2, interchange the absolutely convergent
+integrals, and then take its approximate-identity limit at
+continuity points of the convolution. Values at isolated
+endpoints do not alter the convolution integral.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.4}\quad Find
+\[
+L^{-1}\left\{\frac{s}{s^{2}-k^{2}}\right\}
+\]
+\begin{enumerate}
+\item[(a)] by a partial fraction expansion.
+\item[(b)] Repeat, using the Bromwich integral.
+\end{enumerate}
+\solution
+(a) For $k\ne0$,
+\[
+\frac{s}{s^2-k^2}
+=\frac12\left(\frac1{s-k}+\frac1{s+k}\right).
+\]
+Thus
+\[
+\boxed{L^{-1}\left\{\frac{s}{s^2-k^2}\right\}
+=\frac{e^{kt}+e^{-kt}}2=\cosh kt}.
+\]
+(b) Take $\beta>|k|$ for real $k$. For $t>0$, close the
+Bromwich contour to the left, with positive orientation.
+The exponential suppresses the left arc, with the endpoint
+portions controlled by the usual Jordan estimate for the
+$O(1/s)$ rational factor. The enclosed residues are
+\[
+\mathop{\rm Res}_{s=k}\frac{se^{st}}{(s-k)(s+k)}
+=\frac{ke^{kt}}{2k}=\frac{e^{kt}}2,
+\]
+\[
+\mathop{\rm Res}_{s=-k}\frac{se^{st}}{(s-k)(s+k)}
+=\frac{-ke^{-kt}}{-2k}=\frac{e^{-kt}}2.
+\]
+Their sum reproduces $\cosh kt$. At $k=0$ the transform
+reduces directly to $1/s$, with inverse $1$, also the
+continuous limit of the answer. The formula gives the
+right-hand value at $t=0$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.5}\quad Find
+\[
+L^{-1}\left\{\frac{k^{2}}{s(s^{2}+k^{2})}\right\}
+\]
+\begin{enumerate}
+\item[(a)] by using a partial fraction expansion.
+\item[(b)] Repeat using the convolution theorem.
+\item[(c)] Repeat using the Bromwich integral.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace$F(t)=1-\cos kt$.
+\solution
+Assume real $k\ne0$ during the algebra.
+(a) The decomposition
+\[
+\frac{k^2}{s(s^2+k^2)}=\frac1s-\frac{s}{s^2+k^2}
+\]
+immediately gives $F(t)=1-\cos kt$.
+
+(b) Factor the transform as
+$[1/s]\,[k^2/(s^2+k^2)]$. The inverse factors are $1$ and
+$k\sin kt$, so convolution gives
+\[
+F(t)=\int_0^t k\sin(ku)du=[-\cos(ku)]_0^t=1-\cos kt.
+\]
+(c) For a Bromwich line to the right of $0$, close to the
+left for $t>0$. The rational factor is $O(s^{-3})$, and
+the closing arc vanishes. At the three simple poles,
+\begin{align*}
+\mathop{\rm Res}_{s=0}\frac{k^2e^{st}}{s(s-ik)(s+ik)}&=1,\\
+\mathop{\rm Res}_{s=ik}\frac{k^2e^{st}}{s(s-ik)(s+ik)}
+&=\frac{k^2e^{ikt}}{(ik)(2ik)}=-\frac12e^{ikt},\\
+\mathop{\rm Res}_{s=-ik}\frac{k^2e^{st}}{s(s-ik)(s+ik)}
+&=\frac{k^2e^{-ikt}}{(-ik)(-2ik)}=-\frac12e^{-ikt}.
+\end{align*}
+Summing gives
+\[
+\boxed{F(t)=1-\frac12(e^{ikt}+e^{-ikt})=1-\cos kt}.
+\]
+At $k=0$ the transform and its inverse are both zero, which
+agrees with the continuous limit. All three methods give
+$F(0)=0$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.6}\quad Use the Bromwich integral to find
+the function whose transform is $f(s)=s^{-1/2}$. Note that $f(s)$
+has a branch point at $s=0$. The negative $x$-axis may be taken
+as a cut line. See Fig.~20.23.
+\par\emph{Hint.}~A portion of the path needed to close the
+contour will yield nonzero contributions to the contour integral.
+These will need to be taken into account to get the proper value
+for the Bromwich integral.
+\par\nobreak\hfill\emph{ANS.}\enspace$F(t)=(\pi t)^{-1/2}$.
+\solution
+Choose the principal branch
+$s^{-1/2}=|s|^{-1/2}e^{-i\arg(s)/2}$ with
+$-\pi<\arg(s)<\pi$. Deform the Bromwich line to a
+counterclockwise contour hugging the negative real cut.
+The small circle around zero contributes $O(\sqrt\rho)$
+as its radius $\rho\to0$, and for $t>0$ the left outer arc
+vanishes by exponential decay and the Jordan estimate.
+There are no poles; the two banks supply the entire inverse.
+For $r>0$ their values are
+\[
+f(-r+i0)=-i r^{-1/2},\qquad
+f(-r-i0)=+i r^{-1/2}.
+\]
+On the counterclockwise cut contour the upper bank runs
+from $0$ toward $-\infty$, and the lower bank returns.
+With $s=-r$, their sum is therefore
+\[
+\int_0^\infty e^{-rt}
+\big[f(-r-i0)-f(-r+i0)\big]dr
+=2i\int_0^\infty e^{-rt}r^{-1/2}dr.
+\]
+Dividing by $2\pi i$ and substituting $u=rt$ gives
+\[
+F(t)=\frac1\pi\int_0^\infty e^{-rt}r^{-1/2}dr
+=\frac{\Gamma(1/2)}{\pi\sqrt t}
+=\boxed{\frac1{\sqrt{\pi t}}},\qquad t>0.
+\]
+Its integrable singularity at zero is compatible with a
+Laplace transform: direct substitution gives
+$\int_0^\infty e^{-st}(\pi t)^{-1/2}dt=s^{-1/2}$ for
+real $s>0$, fixing the branch and normalization independently.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.7}\quad Show that
+\[
+L^{-1}\big\{(s^{2}+1)^{-1/2}\big\}=J_{0}(t)
+\]
+by evaluation of the Bromwich integral.
+\par\emph{Hint.}~Convert your Bromwich integral into an integral
+representation of $J_{0}(t)$. Figure~20.24 shows a possible
+contour.
+\solution
+Take a cut along the segment from $-i$ to $i$ and choose
+$D(s)=\sqrt{s^2+1}$ analytic outside this segment with
+$D(s)\sim s$ at infinity and $D(s)>0$ for positive real $s$.
+The endpoint singularities are inverse square roots, so
+small circles of radius $\rho$ contribute $O(\sqrt\rho)$.
+For $t>0$, deformation of the Bromwich line around the cut
+is permitted by the large-arc estimate for $e^{st}/D(s)$.
+On the right bank $s=iy+0$, $-1<y<1$,
+\[
+D(iy+0)=+\sqrt{1-y^2};
+\]
+on the left bank its sign is reversed. A counterclockwise
+contour travels upward along the right bank and downward
+along the left bank, so
+\begin{align*}
+F(t)&=\frac1{2\pi i}
+\int_{-i}^{i}e^{st}\left[\frac1{D(s)_{\rm right}}
+-\frac1{D(s)_{\rm left}}\right]ds\\
+&=\frac1\pi\int_{-1}^1\frac{e^{iyt}}{\sqrt{1-y^2}}dy
+=\frac2\pi\int_0^1\frac{\cos(yt)}{\sqrt{1-y^2}}dy.
+\end{align*}
+The sine part cancels by oddness. Finally $y=\cos\theta$
+converts the symmetric integral to
+\[
+F(t)=\frac1\pi\int_0^\pi\cos(t\cos\theta)d\theta
+=\boxed{J_0(t)}.
+\]
+This also has the right-hand initial value $1$, as follows
+from $\lim_{s\to\infty}s/\sqrt{s^2+1}=1$. The branch must
+be continued through the exterior of the chosen cut; taking
+an unrelated square-root sign on the left would spoil the
+jump and the factor of two.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.8}\quad Evaluate the inverse Laplace
+transform
+\[
+L^{-1}\big\{(s^{2}-a^{2})^{-1/2}\big\}
+\]
+by each of the following methods:
+\begin{enumerate}
+\item[(a)] Expansion in a series and term-by-term inversion.
+\item[(b)] Direct evaluation of the Bromwich integral.
+\item[(c)] Change of variable in the Bromwich integral:
+$s=(a/2)(z+z^{-1})$.
+\end{enumerate}
+\solution
+Take $a>0$ and the branch of
+$\sqrt{s^2-a^2}$ asymptotic to $s$, with cut $[-a,a]$.
+The Bromwich line lies at $\Re s=\beta>a$.
+
+(a) For $|s|>a$ on this branch,
+\[
+(s^2-a^2)^{-1/2}
+=\frac1s\sum_{n=0}^\infty
+\frac{(2n)!}{4^n(n!)^2}\frac{a^{2n}}{s^{2n}}.
+\]
+The inverse of $s^{-2n-1}$ is $t^{2n}/(2n)!$. Thus
+\[
+F(t)=\sum_{n=0}^\infty
+\frac{(at/2)^{2n}}{(n!)^2}=\boxed{I_0(at)}.
+\]
+The resulting series converges for every finite $t$.
+Moreover, in $\Re s>a$ its absolute terms may be transformed
+and summed, reproducing the convergent binomial expansion.
+This verifies termwise inversion by uniqueness, without
+assuming uniform convergence on an arbitrary Bromwich line.
+
+(b) For $-a<x<a$, the upper and lower bank values are
+\[
+f(x+i0)=-\frac i{\sqrt{a^2-x^2}},\qquad
+f(x-i0)=+\frac i{\sqrt{a^2-x^2}}.
+\]
+The upper bank of a counterclockwise contour runs from $a$
+to $-a$, and the lower bank from $-a$ to $a$. Endpoint circles
+vanish as the square root of their radius. Hence
+\begin{align*}
+F(t)&=\frac1{2\pi i}\int_{-a}^a e^{xt}
+\big[f(x-i0)-f(x+i0)\big]dx\\
+&=\frac1\pi\int_{-a}^a\frac{e^{xt}}{\sqrt{a^2-x^2}}dx
+=\frac1\pi\int_0^\pi e^{at\cos\theta}d\theta
+=I_0(at).
+\end{align*}
+In the last substitution $x=a\cos\theta$, the reversed
+limits cancel the sign in $dx$.
+
+(c) Set $s=(a/2)(z+z^{-1})$, taking the exterior inverse
+$z=(s+\sqrt{s^2-a^2})/a$. Then
+\[
+\sqrt{s^2-a^2}=\frac a2(z-z^{-1}),\qquad
+\frac{ds}{\sqrt{s^2-a^2}}
+=\frac{(1-z^{-2})dz}{z-z^{-1}}=\frac{dz}{z}.
+\]
+Deform the $s$ contour around its cut as in (b). The upper
+bank maps to the upper unit semicircle from $1$ to $-1$,
+and the lower bank to the lower semicircle from $-1$ to $1$.
+Their union is one counterclockwise unit circle, giving
+\[
+F(t)=\frac1{2\pi i}\oint_{|z|=1}
+\exp\left[\frac{at}{2}(z+z^{-1})\right]\frac{dz}{z}.
+\]
+Expand the two exponentials on this fixed circle:
+\[
+\frac1z\sum_{n,m\ge0}
+\frac{(at/2)^{n+m}}{n!m!}z^{n-m}.
+\]
+Only $n=m$ contributes to the coefficient of $z^{-1}$, so
+the residue is $\sum_{n\ge0}(at/2)^{2n}/(n!)^2=I_0(at)$.
+\erratum{For $at\ne0$, the singularity at $z=0$ is essential,
+not the simple pole called for in the manual; the residue
+calculation still applies. Also the image of the original
+vertical Bromwich line is a curve, not exactly a vertical
+line in $z$. Mapping the already deformed cut contour avoids
+that unwarranted replacement.}
+The answer is even in $a$, so real negative $a$ gives the
+same result with $|a|$. At $a=0$ the transform is $1/s$ and
+its inverse is $1$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.9}\quad Show that
+\[
+L^{-1}\left\{\frac{\ln s}{s}\right\}=-\ln t-\gamma,
+\]
+where $\gamma=0.5772\ldots$ is the Euler--Mascheroni constant.
+\solution
+For real $q>0$ and $s>0$, the gamma substitution gives
+\[
+L\left\{\frac{t^{q-1}}{\Gamma(q)}\right\}(s)=s^{-q}.
+\]
+Differentiate with respect to $q$ near $q=1$. Exponential
+decay at infinity and local integrability of
+$t^{q-1}|\ln t|$ near zero justify differentiation inside
+the transform:
+\[
+L\left\{\frac{t^{q-1}}{\Gamma(q)}
+[\ln t-\psi(q)]\right\}(s)=-(\ln s)s^{-q},
+\qquad\psi(q)=\frac{\Gamma'(q)}{\Gamma(q)}.
+\]
+Since $\Gamma(1)=1$ and $\psi(1)=-\gamma$, setting $q=1$
+and multiplying by $-1$ yields
+\[
+\boxed{L^{-1}\left\{\frac{\ln s}{s}\right\}(t)
+=-\ln t-\gamma},\qquad t>0.
+\]
+For complex $s$ in $\Re s>0$, take the branch of $\ln s$
+that is real on $s>0$. The logarithmic singularity of the
+answer at $t=0$ is integrable, so it causes no failure of the
+ordinary Laplace transform.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.10}\quad Evaluate the Bromwich integral
+for
+\[
+f(s)=\frac{s}{(s^{2}+a^{2})^{2}}.
+\]
+\solution
+For real $a\ne0$, close the Bromwich line to the left
+when $t>0$. The integrand
+\[
+\frac{se^{st}}{(s-ia)^2(s+ia)^2}
+\]
+has double poles at $s=\pm ia$ and a rational factor
+$O(s^{-3})$. The closing arc vanishes. At $s=ia$, the residue
+is the derivative of the remaining analytic factor:
+\begin{align*}
+R_+&=\left.\frac d{ds}\frac{se^{st}}{(s+ia)^2}\right|_{s=ia}\\
+&=e^{iat}\left[\frac{1+iat}{(2ia)^2}
+-\frac{2ia}{(2ia)^3}\right]
+=e^{iat}\left[-\frac{1+iat}{4a^2}+\frac1{4a^2}\right]
+=-\frac{it}{4a}e^{iat}.
+\end{align*}
+Similarly,
+\[
+R_-=\left.\frac d{ds}\frac{se^{st}}{(s-ia)^2}\right|_{s=-ia}
+=\frac{it}{4a}e^{-iat}.
+\]
+Summing,
+\[
+F(t)=R_++R_-=
+\frac{it}{4a}(e^{-iat}-e^{iat})
+=\boxed{\frac t{2a}\sin at}.
+\]
+\erratum{At $a=0$ the two double poles merge and the reduced
+transform is $s^{-3}$; its inverse is $t^2/2$, the continuous
+limit of the formula above.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.11}\quad Heaviside expansion theorem. If
+the transform $f(s)$ may be written as a ratio
+\[
+f(s)=\frac{g(s)}{h(s)},
+\]
+where $g(s)$ and $h(s)$ are analytic functions, with $h(s)$
+having simple, isolated zeros at $s=s_i$,
+\erratum{and with a vanishing left closing-contour contribution
+and a convergent residue sum}, show that
+\[
+F(t)=L^{-1}\left\{\frac{g(s)}{h(s)}\right\}
+=\sum_{i}\frac{g(s_{i})}{h'(s_{i})}\,e^{s_{i}t}.
+\]
+\par\emph{Hint.}~See Exercise~11.6.3.
+\par\erratum{A sufficient elementary setting is a strictly proper rational transform with finitely many simple poles, for $t>0$. The unqualified analytic-function assertion in the book is false, as the counterexample below shows.}
+\solution
+At a simple zero $s_i$ of $h$,
+\[
+h(s)=h'(s_i)(s-s_i)+O((s-s_i)^2),\qquad h'(s_i)\ne0.
+\]
+The residue of the inverse-transform integrand is therefore
+\[
+\mathop{\rm Res}_{s=s_i}\frac{e^{st}g(s)}{h(s)}
+=\lim_{s\to s_i}\frac{(s-s_i)e^{st}g(s)}{h(s)}
+=\frac{g(s_i)}{h'(s_i)}e^{s_it}.
+\]
+If a left closing contour has vanishing contribution and the
+sum of residues converges to the contour limit, the residue
+theorem gives
+\[
+\boxed{F(t)=\sum_i\frac{g(s_i)}{h'(s_i)}e^{s_it}},\qquad t>0.
+\]
+A particularly simple sufficient case is a strictly proper
+rational function $g/h$ with finitely many simple poles.
+Zeros cancelled by $g$ have zero residue and contribute
+nothing.
+\erratum{Analytic $g,h$ and simple zeros of $h$ alone do not
+imply the stated expansion: one must also control the closing
+contour, and an infinite residue sum needs its own convergence
+prescription.}
+For a concrete counterexample satisfying the printed analytic
+conditions, choose $g(s)=e^{-s}$, $h(s)=s+1$. Its only pole
+is $-1$, so the proposed unrestricted sum would be $e^{1-t}$.
+But direct transformation gives
+\[
+\int_1^\infty e^{-st}e^{-(t-1)}dt=\frac{e^{-s}}{s+1},
+\]
+whose causal inverse is $e^{-(t-1)}u(t-1)$, zero for $0<t<1$.
+For these times the factor $e^{s(t-1)}$ grows on a left
+closing arc, explaining exactly why the omitted hypothesis
+fails. A polynomial part of a rational transform likewise
+requires impulses at zero rather than this ordinary
+exponential sum.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.12}\quad Using the Bromwich integral,
+invert $f(s)=s^{-2}e^{-ks}$, \erratum{$k\ge0$}. Express $F(t)=L^{-1}\{f(s)\}$ in
+terms of the (shifted) unit step function $u(t-k)$.
+\par\nobreak\hfill\emph{ANS.}\enspace$F(t)=(t-k)u(t-k)$.
+\solution
+\erratum{For the stated causal Laplace shift take $k\ge0$.}
+The inversion integral is
+\[
+F(t)=\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
+\frac{e^{s(t-k)}}{s^2}ds,\qquad\beta>0.
+\]
+If $t<k$, close to the right, where the exponential decays.
+No poles are enclosed, so $F(t)=0$. If $t>k$, close to the
+left and enclose the double pole at $s=0$. Its residue is
+\[
+\left.\frac d{ds}e^{s(t-k)}\right|_{s=0}=t-k.
+\]
+Both contours have vanishing arcs because of exponential
+decay and the $s^{-2}$ factor. At $t=k$ the value is zero,
+either by continuity or by the zero residue of $s^{-2}$.
+Thus
+\[
+\boxed{F(t)=(t-k)u(t-k)}.
+\]
+A forward check with $v=t-k$ gives
+\[
+\int_k^\infty e^{-st}(t-k)dt
+=e^{-ks}\int_0^\infty e^{-sv}v\,dv=\frac{e^{-ks}}{s^2}.
+\]
+If $k<0$, integrating the proposed ramp only over $t\ge0$
+instead gives $s^{-2}-k/s$; this confirms the need for the
+nonnegative delay in the one-sided formula.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{20.10.13}\quad You have a Laplace transform:
+\[
+f(s)=\frac{1}{(s+a)(s+b)},\qquad a\ne b.
+\]
+Invert this transform by each of three methods:
+\begin{enumerate}
+\item[(a)] Partial fractions and use of tables,
+\item[(b)] Convolution theorem,
+\item[(c)] Bromwich integral.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+$F(t)=\dfrac{e^{-bt}-e^{-at}}{a-b}$,\quad$a\ne b$.
+\solution
+(a) Write
+\[
+\frac1{(s+a)(s+b)}
+=\frac1{a-b}\left(\frac1{s+b}-\frac1{s+a}\right).
+\]
+The exponential transform pair gives
+\[
+F(t)=\frac{e^{-bt}-e^{-at}}{a-b}.
+\]
+(b) The inverse factors are $e^{-at}$ and $e^{-bt}$.
+Their convolution is
+\begin{align*}
+F(t)&=\int_0^t e^{-au}e^{-b(t-u)}du
+=e^{-bt}\int_0^t e^{-(a-b)u}du\\
+&=e^{-bt}\frac{1-e^{-(a-b)t}}{a-b}
+=\frac{e^{-bt}-e^{-at}}{a-b}.
+\end{align*}
+(c) Choose $\beta>\max(-\Re a,-\Re b)$ and close the
+Bromwich line to the left for $t>0$. The rational factor
+is $O(s^{-2})$, so the arc vanishes. The simple residues are
+\[
+\mathop{\rm Res}_{s=-a}\frac{e^{st}}{(s+a)(s+b)}
+=\frac{e^{-at}}{b-a},\qquad
+\mathop{\rm Res}_{s=-b}\frac{e^{st}}{(s+a)(s+b)}
+=\frac{e^{-bt}}{a-b}.
+\]
+Their sum gives the same result:
+\[
+\boxed{F(t)=\frac{e^{-bt}-e^{-at}}{a-b}}.
+\]
+Its initial value is zero and its initial slope is $1$.
+The excluded coincident case has the regular limit
+$t e^{-at}$, also obtained from the double pole
+$1/(s+a)^2$.

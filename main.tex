@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage{needspace}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\emergencystretch=1.5em
+
+% Dark red marks published errata and corrections established in the solutions.
+\definecolor{erratadarkred}{RGB}{139,0,0}
+\newcommand{\erratum}[1]{\textcolor{erratadarkred}{#1}}
+
+% Principal-value integral (integral sign with horizontal bar, as in the text).
+\newcommand{\PVint}{\mathop{\ooalign{$\int$\cr\hfil$-$\hfil}}\nolimits}
+
+% A solution follows its problem immediately.
+\newcommand{\solution}{%
+  \par\medskip
+  \noindent\textbf{Solution.}\par\nobreak
+  \smallskip\nobreak
+}
+
+\title{\textbf{Mathematical Methods for Physicists}\\[4pt]
+\large Problems and Worked Solutions --- Arfken, Weber \& Harris, 7th ed.}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\noindent\small Dark red text marks published errata (from the Instructor's
+Manual, \emph{Errata and Revision Status}, 6 April 2012) and additional
+corrections or necessary qualifications explained in the corresponding
+solutions.\normalsize\par\medskip
+\tableofcontents
+\clearpage
+
+\section{Chapter 1. Mathematical Preliminaries}
+\input{sections/ch01.tex}
+\clearpage
+\section{Chapter 2. Determinants and Matrices}
+\input{sections/ch02.tex}
+\clearpage
+\section{Chapter 3. Vector Analysis}
+\input{sections/ch03.tex}
+\clearpage
+\section{Chapter 4. Tensors and Differential Forms}
+\input{sections/ch04.tex}
+\clearpage
+\section{Chapter 5. Vector Spaces}
+\input{sections/ch05.tex}
+\clearpage
+\section{Chapter 6. Eigenvalue Problems}
+\input{sections/ch06.tex}
+\clearpage
+\section{Chapter 7. Ordinary Differential Equations}
+\input{sections/ch07.tex}
+\clearpage
+\section{Chapter 8. Sturm-Liouville Theory}
+\input{sections/ch08.tex}
+\clearpage
+\section{Chapter 9. Partial Differential Equations}
+\input{sections/ch09.tex}
+\clearpage
+\section{Chapter 10. Green's Functions}
+\input{sections/ch10.tex}
+\clearpage
+\section{Chapter 11. Complex Variable Theory}
+\input{sections/ch11.tex}
+\clearpage
+\section{Chapter 12. Further Topics in Analysis}
+\input{sections/ch12.tex}
+\clearpage
+\section{Chapter 13. Gamma Function}
+\input{sections/ch13.tex}
+\clearpage
+\section{Chapter 14. Bessel Functions}
+\input{sections/ch14.tex}
+\clearpage
+\section{Chapter 15. Legendre Functions}
+\input{sections/ch15.tex}
+\clearpage
+\section{Chapter 16. Angular Momentum}
+\input{sections/ch16.tex}
+\clearpage
+\section{Chapter 17. Group Theory}
+\input{sections/ch17.tex}
+\clearpage
+\section{Chapter 18. More Special Functions}
+\input{sections/ch18.tex}
+\clearpage
+\section{Chapter 19. Fourier Series}
+\input{sections/ch19.tex}
+\clearpage
+\section{Chapter 20. Integral Transforms}
+\input{sections/ch20.tex}
+\clearpage
+\section{Chapter 21. Integral Equations}
+\input{sections/ch21.tex}
+\clearpage
+\section{Chapter 22. Calculus of Variations}
+\input{sections/ch22.tex}
+\clearpage
+\section{Chapter 23. Probability and Statistics}
+\input{sections/ch23.tex}
+
+\end{document}

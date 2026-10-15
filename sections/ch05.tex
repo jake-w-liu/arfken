@@ -1,0 +1,2241 @@
+% Problems, Chapter 5: Vector Spaces
+% Arfken, Weber & Harris, Mathematical Methods for Physicists, 7th ed.
+% Requires: amsmath, amssymb, tikz
+
+\section*{Problems}
+
+\Needspace{9\baselineskip}
+\subsection*{5.1 Vectors in Function Spaces}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.1}\quad A function $f(x)$ is expanded in a series of
+orthonormal functions, \erratum{with convergence in the Hilbert-space norm},
+\[
+f(x)=\sum_{n=0}^{\infty}a_{n}\varphi_{n}(x).
+\]
+Show that the series expansion is unique for a given set of $\varphi_{n}(x)$.
+The functions $\varphi_{n}(x)$ are being taken here as the basis vectors in an
+infinite-dimensional Hilbert space.
+\solution
+Write $S_N=\sum_{n=0}^N a_n\varphi_n$ and interpret the expansion as
+$S_N\to f$ in the Hilbert-space norm. For a fixed $k$ and $N\ge k$,
+\[
+\langle\varphi_k|S_N\rangle
+=\sum_{n=0}^N a_n\langle\varphi_k|\varphi_n\rangle
+=\sum_{n=0}^N a_n\delta_{kn}=a_k.
+\]
+The scalar product is continuous: Schwarz's inequality gives
+\[
+|\langle\varphi_k|f-S_N\rangle|
+\le\|\varphi_k\|\,\|f-S_N\|=\|f-S_N\|\longrightarrow0.
+\]
+Taking the limit therefore determines each coefficient uniquely:
+\[
+\boxed{a_k=\langle\varphi_k|f\rangle.}
+\]
+Any other convergent expansion in the same orthonormal set has the same
+scalar products and hence the same coefficients. Equality of functions in
+this Hilbert space means equality almost everywhere; changes at isolated
+points do not produce a different Hilbert-space vector.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.2}\quad A function $f(x)$ is represented by a finite set
+of basis functions $\varphi_{i}(x)$,
+\[
+f(x)=\sum_{i=1}^{N}c_{i}\varphi_{i}(x).
+\]
+Show that the components $c_{i}$ are unique, that no different set $c'_{i}$
+exists.
+
+\emph{Note.}~Your basis functions are automatically linearly independent. They
+are not necessarily orthogonal.
+\solution
+Suppose also $f=\sum_{i=1}^N c'_i\varphi_i$. Subtract the two finite sums:
+\[
+0=\sum_{i=1}^N(c_i-c'_i)\varphi_i.
+\]
+Linear independence means precisely that a zero linear combination of the
+$\varphi_i$ has every coefficient zero. Consequently $c_i-c'_i=0$ for
+$i=1,\ldots,N$, proving uniqueness without any orthogonality assumption.
+
+As a scalar-product check, let $G_{ij}=\langle\varphi_i|\varphi_j\rangle$.
+For any nonzero column $d$,
+\[
+d^\dagger Gd=\left\|\sum_i d_i\varphi_i\right\|^2>0.
+\]
+Thus $G$ is invertible, and the equations
+$\sum_jG_{ij}c_j=\langle\varphi_i|f\rangle$ also have exactly one solution.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.3}\quad A \erratum{square-integrable} function $f(x)$ is approximated by a power
+series $\sum_{i=0}^{n-1}c_{i}x^{i}$ over the interval $[0,1]$. Show that
+minimizing the mean square error leads to a set of linear equations
+\[
+\mathsf{A}\mathbf{c}=\mathbf{b},
+\]
+where
+\[
+A_{ij}=\int_{0}^{1}x^{i+j}\,dx=\frac{1}{i+j+1},\quad i,j=0,1,2,\ldots,n-1
+\]
+and
+\[
+b_{i}=\int_{0}^{1}x^{i}f(x)\,dx,\quad i=0,1,2,\ldots,n-1.
+\]
+\emph{Note.}~The $A_{ij}$ are the elements of the Hilbert matrix of order $n$.
+The determinant of this Hilbert matrix is a rapidly decreasing function of
+$n$. For $n=5$, $\det\mathsf{A}=3.7\times10^{-12}$ and the set of equations
+$\mathsf{A}\mathbf{c}=\mathbf{b}$ is becoming ill-conditioned and unstable.
+\erratum{The determinant alone does not establish ill-conditioning; here
+$\kappa_2(\mathsf A)\approx4.7661\times10^5$ provides the relevant test.}
+\solution
+For real $f$ and real coefficients, put $p(x)=\sum_{j=0}^{n-1}c_jx^j$.
+Expanding the error before differentiating gives
+\begin{align*}
+E(c)&=\int_0^1(f-p)^2\,dx\\
+&=\int_0^1 f^2\,dx
+ -2\sum_jc_j\int_0^1x^jf\,dx
+ +\sum_{j,k}c_jc_k\int_0^1x^{j+k}\,dx.
+\end{align*}
+Since the last matrix is symmetric,
+\[
+\frac{\partial E}{\partial c_i}
+=-2b_i+2\sum_{j=0}^{n-1}A_{ij}c_j=0,
+\qquad
+A_{ij}=\left[\frac{x^{i+j+1}}{i+j+1}\right]_0^1
+=\frac1{i+j+1}.
+\]
+Hence the normal equations are $\boxed{Ac=b}$. They determine the global
+minimum, not merely a stationary point: for any nonzero vector $v$,
+\[
+v^TAv=\int_0^1\left(\sum_{j=0}^{n-1}v_jx^j\right)^2dx>0.
+\]
+A nonzero polynomial cannot vanish on an interval, so the Hessian $2A$ is
+positive definite. If $c_*$ solves the normal equations, direct completion
+of the square gives
+\[
+E(c)=E(c_*)+(c-c_*)^TA(c-c_*),
+\]
+which proves uniqueness. For complex $f$, minimize $\int|f-p|^2dx$;
+variation of real and imaginary parts gives the same equations, with
+$c,b$ complex and $v^T$ replaced by $v^\dagger$.
+
+For $n=5$, exact rational elimination gives
+\[
+\det A=\frac1{266716800000}=3.7492951325\ldots\times10^{-12}.
+\]
+\erratum{A small determinant alone is not a condition-number test (rescaling
+any well-conditioned matrix can make its determinant small). For this
+particular matrix, the supplementary singular-value calculation gives
+$\kappa_2(A)\simeq4.7661\times10^5$, confirming sensitivity of the equations.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.4}\quad \erratum{Let $F$ and $\varphi_n$ be real, square-integrable functions,
+with the $\varphi_n$ orthonormal for a nonnegative weight $w$.}
+In place of the expansion of $F(x)$ given by
+\[
+F(x)=\sum_{n=0}^{\infty}a_{n}\varphi_{n}(x),
+\]
+with
+\[
+a_{n}=\int_{a}^{b}F(x)\varphi_{n}(x)w(x)\,dx,
+\]
+take the finite series approximation
+\[
+F(x)\approx\sum_{n=0}^{m}c_{n}\varphi_{n}(x).
+\]
+Show that the mean square error
+\[
+\int_{a}^{b}\left[F(x)-\sum_{n=0}^{m}c_{n}\varphi_{n}(x)\right]^{2}w(x)\,dx
+\]
+is minimized by taking $c_{n}=a_{n}$.
+
+\emph{Note.}~The values of the coefficients are independent of the number of
+terms in the finite series. This independence is a consequence of
+orthogonality and would not hold for a least-squares fit using powers of $x$.
+\solution
+Use the real orthonormal functions and nonnegative weight implicit in the
+stated coefficient formula:
+$\int_a^b\varphi_j\varphi_k w\,dx=\delta_{jk}$. Expanding the finite error,
+\begin{align*}
+E(c)&=\int_a^bF^2w\,dx
+ -2\sum_{n=0}^m c_n\int_a^bF\varphi_nw\,dx
+ +\sum_{n,k=0}^m c_nc_k\delta_{nk}\\
+&=\|F\|^2-2\sum_{n=0}^m c_na_n+\sum_{n=0}^m c_n^2\\
+&=\|F\|^2-\sum_{n=0}^m a_n^2+\sum_{n=0}^m(c_n-a_n)^2.
+\end{align*}
+Only the last sum depends on the trial coefficients. It is nonnegative
+and vanishes exactly when
+\[
+\boxed{c_n=a_n\quad(0\le n\le m)},\qquad
+E_{\min}=\|F\|^2-\sum_{n=0}^m a_n^2.
+\]
+Adding another orthonormal function only adds its own square to this
+calculation; it does not alter the earlier coefficients. If the full
+expansion converges in norm, $E_{\min}=\sum_{n>m}a_n^2$.
+For complex functions the corresponding formula uses
+$a_n=\int\varphi_n^*Fw\,dx$ and $E=\int|F-\sum c_n\varphi_n|^2w\,dx$;
+the last sum is then $\sum|c_n-a_n|^2$, with the same conclusion.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.5}\quad From Example 5.1.6,
+\[
+f(x)=\begin{cases}
+\phantom{-}\dfrac{h}{2},&0<x<\pi\\[2ex]
+-\dfrac{h}{2},&-\pi<x<0
+\end{cases}
+=\frac{2h}{\pi}\sum_{n=0}^{\infty}\frac{\sin(2n+1)x}{2n+1}.
+\]
+\begin{enumerate}
+\item[(a)] Show that
+  \[
+  \int_{-\pi}^{\pi}[f(x)]^{2}\,dx=\frac{\pi}{2}h^{2}
+  =\frac{4h^{2}}{\pi}\sum_{n=0}^{\infty}(2n+1)^{-2}.
+  \]
+  For a finite upper limit this would be Bessel's inequality. For the upper
+  limit $\infty$, this is Parseval's identity.
+\item[(b)] Verify that
+  \[
+  \frac{\pi}{2}h^{2}=\frac{4h^{2}}{\pi}\sum_{n=0}^{\infty}(2n+1)^{-2}
+  \]
+  by evaluating the series.
+\end{enumerate}
+\emph{Hint.}~The series can be expressed in terms of the Riemann zeta function
+$\zeta(2)=\pi^{2}/6$.
+\solution
+(a) Except at the irrelevant endpoints and jump, $f^2=h^2/4$. Thus
+\[
+\int_{-\pi}^{\pi} f^2\,dx=2\pi\frac{h^2}{4}=\frac{\pi h^2}{2}.
+\]
+For positive integers $k,\ell$, the product-to-sum identity gives
+\[
+\int_{-\pi}^{\pi}\sin kx\sin\ell x\,dx
+=\frac12\int_{-\pi}^{\pi}
+[\cos(k-\ell)x-\cos(k+\ell)x]dx=\pi\delta_{k\ell}.
+\]
+The norm squared of the partial sum through $n=N$ is therefore
+\begin{align*}
+\int_{-\pi}^{\pi}f_N^2\,dx
+&=\frac{4h^2}{\pi^2}
+ \sum_{n,m=0}^N\frac{\pi\delta_{nm}}{(2n+1)(2m+1)}\\
+&=\frac{4h^2}{\pi}\sum_{n=0}^N\frac1{(2n+1)^2}.
+\end{align*}
+The residual is orthogonal to this partial sum, so
+$\|f\|^2=\|f_N\|^2+\|f-f_N\|^2\ge\|f_N\|^2$.
+The Fourier expansion converges in $L^2$; letting $N\to\infty$ makes the
+residual norm zero and proves the stated Parseval equality.
+
+(b) Split the positive integers into odd and even ones:
+\[
+\sum_{n=0}^\infty\frac1{(2n+1)^2}
+=\sum_{k=1}^\infty\frac1{k^2}
+ -\sum_{k=1}^\infty\frac1{(2k)^2}
+=\left(1-\frac14\right)\zeta(2)=\frac{\pi^2}{8}.
+\]
+Substitution yields
+$(4h^2/\pi)(\pi^2/8)=\pi h^2/2$, an independent check of the equality.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.6}\quad Derive the Schwarz inequality \erratum{for real square-integrable functions} from the identity
+\[
+\left[\int_{a}^{b}f(x)g(x)\,dx\right]^{2}
+=\int_{a}^{b}f^{2}(x)\,dx\int_{a}^{b}g^{2}(x)\,dx
+-\frac{1}{2}\int_{a}^{b}dx\int_{a}^{b}dy\,
+[f(x)g(y)-f(y)g(x)]^{2}.
+\]
+\solution
+The displayed identity is for real square-integrable functions. To check
+it, expand its double integral. Fubini's theorem applies since
+$f,g\in L^2$ and $fg\in L^1$. The latter fact follows from
+$2|fg|\le f^2+g^2$, so it does not assume the Schwarz inequality we
+are proving:
+\begin{align*}
+D&=\int_a^b\!\int_a^b
+ \{f(x)^2g(y)^2+f(y)^2g(x)^2
+          -2f(x)g(x)f(y)g(y)\}\,dx\,dy\\
+&=2\left(\int_a^bf^2dx\right)\left(\int_a^bg^2dx\right)
+ -2\left(\int_a^bfg\,dx\right)^2.
+\end{align*}
+Since the original integrand in $D$ is a square, $D\ge0$. Rearranging and
+taking nonnegative square roots proves
+\[
+\boxed{\left|\int_a^bfg\,dx\right|
+\le\left(\int_a^bf^2dx\right)^{1/2}
+   \left(\int_a^bg^2dx\right)^{1/2}.}
+\]
+If $g\ne0$, set $\lambda=(\int fg)/(\int g^2)$. Then
+\[
+\int_a^b(f-\lambda g)^2dx
+=\int f^2dx-\frac{(\int fg\,dx)^2}{\int g^2dx}.
+\]
+Thus equality holds exactly when $f=\lambda g$ almost everywhere; the
+zero-function cases also give equality. For complex functions the
+Schwarz inequality is $|\int f^*g|^2\le\int|f|^2\int|g|^2$;
+ordinary squares in the displayed real identity must be replaced by
+appropriate modulus squares.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.7}\quad Starting from
+\[
+I=\left\langle f-\sum_{i}a_{i}\varphi_{i}\,\middle|\,
+f-\sum_{j}a_{j}\varphi_{j}\right\rangle\ge0,
+\]
+derive Bessel's inequality,
+$\langle f|f\rangle\ge\sum_{n}|a_{n}|^{2}$.
+\erratum{Here the $\varphi_n$ are orthonormal and
+$a_n=\langle\varphi_n|f\rangle$; begin with finite partial sums.}
+\solution
+Take a finite set of orthonormal functions first, and use the projection
+coefficients $a_j=\langle\varphi_j|f\rangle$. The scalar product is
+conjugate-linear in its first argument, so
+\begin{align*}
+I_N&=\left\langle f-\sum_{i=0}^Na_i\varphi_i\,\middle|\,
+ f-\sum_{j=0}^Na_j\varphi_j\right\rangle\\
+&=\langle f|f\rangle
+ -\sum_j a_j\langle f|\varphi_j\rangle
+ -\sum_i a_i^*\langle\varphi_i|f\rangle
+ +\sum_{i,j}a_i^*a_j\delta_{ij}\\
+&=\|f\|^2-\sum_j|a_j|^2-\sum_i|a_i|^2
+ +\sum_i|a_i|^2
+=\|f\|^2-\sum_{i=0}^N|a_i|^2\ge0.
+\end{align*}
+The partial sums of the nonnegative series $\sum|a_i|^2$ increase and
+are bounded by $\|f\|^2$. Taking their limit gives
+\[
+\boxed{\sum_{i=0}^\infty|a_i|^2\le\langle f|f\rangle.}
+\]
+No completeness assumption on the orthonormal set is needed for this
+inequality. To check the equality case, let $S_N=\sum_{i=0}^Na_i\varphi_i$.
+For $M>N$, orthonormality gives
+$\|S_M-S_N\|^2=\sum_{i=N+1}^M|a_i|^2\to0$, so completeness of the
+Hilbert space supplies a limit $S$ in the closed span. Taking limits in
+the residual identity gives
+\[
+\|f-S\|^2=\|f\|^2-\sum_{i=0}^\infty|a_i|^2.
+\]
+Thus equality implies $f=S$ in that closed span. Conversely, if $f$ is in
+the closed span, the residual $f-S$ belongs to it and is orthogonal to
+every $\varphi_i$, hence to the entire closed span. Its squared norm is
+therefore zero, proving equality.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.8}\quad Expand the function $\sin\pi x$ in a series of
+functions $\varphi_{i}$ that are orthogonal (but not normalized) on the range
+$0\le x\le1$ when the scalar product has definition
+\[
+\langle f|g\rangle=\int_{0}^{1}f^{*}(x)g(x)\,dx.
+\]
+Keep the first four terms of the expansion. The first four $\varphi_{i}$ are:
+\[
+\varphi_{0}=1,\quad\varphi_{1}=2x-1,\quad\varphi_{2}=6x^{2}-6x+1,\quad
+\varphi_{3}=20x^{3}-30x^{2}+12x-1.
+\]
+\emph{Note.}~The integrals that are needed are the subject of Example 1.10.5.
+\solution
+For an orthogonal but unnormalized family,
+$c_n=\langle\varphi_n|f\rangle/\langle\varphi_n|\varphi_n\rangle$.
+Direct polynomial integration gives the four norms
+\[
+\int_0^1\varphi_n^2dx=1,\ \frac13,\ \frac15,\ \frac17
+\qquad(n=0,1,2,3).
+\]
+The nonconstant norm calculations are, explicitly,
+\begin{align*}
+\|\varphi_1\|^2&=\frac43-\frac42+1=\frac13,\\
+\|\varphi_2\|^2&=\frac{36}5-\frac{72}4+\frac{48}3-\frac{12}2+1=\frac15,\\
+\|\varphi_3\|^2&=\frac{400}7-\frac{1200}6+\frac{1380}5
+ -\frac{760}4+\frac{204}3-\frac{24}2+1=\frac17.
+\end{align*}
+To compute all numerators, put $I_j=\int_0^1x^j\sin\pi x\,dx$.
+The first two integrals are
+\[
+I_0=\frac2\pi,\qquad
+I_1=\left[-\frac{x\cos\pi x}{\pi}
+ +\frac{\sin\pi x}{\pi^2}\right]_0^1=\frac1\pi.
+\]
+Two integrations by parts, for $j\ge2$, give
+\begin{align*}
+I_j&=\frac1\pi+\frac{j}{\pi}\int_0^1x^{j-1}\cos\pi x\,dx\\
+&=\frac1\pi-\frac{j(j-1)}{\pi^2}I_{j-2}.
+\end{align*}
+Hence $I_2=1/\pi-4/\pi^3$ and $I_3=1/\pi-6/\pi^3$. Substituting,
+\begin{align*}
+\langle\varphi_0|f\rangle&=I_0=2/\pi,\\
+\langle\varphi_1|f\rangle&=2I_1-I_0=0,\\
+\langle\varphi_2|f\rangle&=6I_2-6I_1+I_0
+=2/\pi-24/\pi^3,\\
+\langle\varphi_3|f\rangle&=20I_3-30I_2+12I_1-I_0=0.
+\end{align*}
+The requested four-term projection is therefore
+\[
+\boxed{\sin\pi x\ \approx\ \frac2\pi\varphi_0
+ +0\varphi_1+\frac{10(\pi^2-12)}{\pi^3}\varphi_2+0\varphi_3.}
+\]
+The two zero coefficients can also be checked by reflection:
+$\sin\pi(1-x)=\sin\pi x$, whereas
+$\varphi_1(1-x)=-\varphi_1(x)$ and
+$\varphi_3(1-x)=-\varphi_3(x)$. Orthogonality verifies that the residual
+has zero scalar product with each of the four retained functions.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.9}\quad Expand the function $e^{-x}$ in Laguerre
+polynomials $L_{n}(x)$, which are orthonormal on the range $0\le x<\infty$
+with scalar product
+\[
+\langle f|g\rangle=\int_{0}^{\infty}f^{*}(x)g(x)e^{-x}\,dx.
+\]
+Keep the first four terms of the expansion. The first four $L_{n}(x)$ are
+\[
+L_{0}=1,\quad L_{1}=1-x,\quad L_{2}=\frac{2-4x+x^{2}}{2},\quad
+L_{3}=\frac{6-18x+9x^{2}-x^{3}}{6}.
+\]
+\solution
+The weight contributes an additional factor $e^{-x}$, so
+$a_n=\int_0^\infty L_n(x)e^{-2x}dx$.
+Set $J_k=\int_0^\infty x^ke^{-2x}dx$. Integration by parts gives
+$J_0=1/2$ and $J_k=(k/2)J_{k-1}$, hence
+$J_k=k!/2^{k+1}$. The four coefficients are
+\begin{align*}
+a_0&=J_0=\frac12,\\
+a_1&=J_0-J_1=\frac12-\frac14=\frac14,\\
+a_2&=J_0-2J_1+\frac12J_2
+=\frac12-\frac12+\frac18=\frac18,\\
+a_3&=J_0-3J_1+\frac32J_2-\frac16J_3
+=\frac12-\frac34+\frac38-\frac1{16}=\frac1{16}.
+\end{align*}
+Consequently
+\[
+\boxed{e^{-x}\approx\frac12L_0+\frac14L_1+\frac18L_2+\frac1{16}L_3
+=\frac{15}{16}-\frac{11x}{16}+\frac{5x^2}{32}-\frac{x^3}{96}.}
+\]
+As a check of both the weight and the normalization, the error norm is
+\begin{align*}
+\|e^{-x}-f_3\|^2
+&=\int_0^\infty e^{-3x}dx-\sum_{n=0}^3|a_n|^2\\
+&=\frac13-\left(\frac14+\frac1{16}+\frac1{64}+\frac1{256}\right)
+=\frac1{768}.
+\end{align*}
+Direct integration of the squared residual with weight $e^{-x}$ gives
+the same value.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.10}\quad The explicit form of a function $f$ is not
+known, but the coefficients $a_{n}$ of its expansion in the orthonormal set
+$\varphi_{n}$ are available. Assuming that the $\varphi_{n}$ and the members
+of another orthonormal set, $\chi_{n}$, are available, use Dirac notation to
+obtain a formula for the coefficients for the expansion of $f$ in the
+$\chi_{n}$ set.
+\solution
+Write $|f\rangle=\sum_n a_n|\varphi_n\rangle$. Taking the scalar product
+with the $m$th new basis vector gives
+\[
+\boxed{b_m=\langle\chi_m|f\rangle
+=\sum_n\langle\chi_m|\varphi_n\rangle a_n.}
+\]
+Thus only overlaps between known basis functions are required. In matrix
+notation $b=Ua$, where $U_{mn}=\langle\chi_m|\varphi_n\rangle$.
+For an infinite expansion the interchange follows by taking scalar
+products with its norm-convergent partial sums, as in 5.1.1.
+
+If both sets are complete in the same space, inserting their resolutions
+of the identity gives
+\[
+(U^\dagger U)_{jk}
+=\sum_m\langle\varphi_j|\chi_m\rangle
+           \langle\chi_m|\varphi_k\rangle
+=\langle\varphi_j|\varphi_k\rangle=\delta_{jk},
+\]
+and similarly $UU^\dagger=I$. If the $\chi_m$ do not span $f$, the same
+formula instead gives the coefficients of its orthogonal projection;
+it cannot reconstruct a component outside their closed span.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.11}\quad Using conventional vector notation, evaluate
+$\sum_{j}|\hat{\mathbf{e}}_{j}\rangle\langle\hat{\mathbf{e}}_{j}|
+\mathbf{a}\rangle$, where $\mathbf{a}$ is an arbitrary vector in the space
+spanned by the \erratum{orthonormal} $\hat{\mathbf{e}}_{j}$.
+\solution
+For the usual orthonormal unit vectors,
+$\langle\hat{\mathbf e}_j|\mathbf a\rangle
+=\hat{\mathbf e}_j\cdot\mathbf a=a_j$. Therefore
+\[
+\boxed{\sum_j|\hat{\mathbf e}_j\rangle
+ \langle\hat{\mathbf e}_j|\mathbf a\rangle
+=\sum_j\hat{\mathbf e}_j(\hat{\mathbf e}_j\cdot\mathbf a)
+=\sum_j a_j\hat{\mathbf e}_j=\mathbf a.}
+\]
+In ordinary dyadic notation this is
+$(\sum_j\hat{\mathbf e}_j\hat{\mathbf e}_j^{\mathsf T})\mathbf a=I\mathbf a$.
+\erratum{Orthonormality is needed here; unit length and spanning alone are
+insufficient.} For example, the unit vectors $(1,0)$ and
+$(1,1)/\sqrt2$ span $\mathbb R^2$, but the displayed sum applied to
+$(1,0)$ is $(3/2,1/2)$, not $(1,0)$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.1.12}\quad Letting
+$\mathbf{a}=a_{1}\hat{\mathbf{e}}_{1}+a_{2}\hat{\mathbf{e}}_{2}$ and
+$\mathbf{b}=b_{1}\hat{\mathbf{e}}_{1}+b_{2}\hat{\mathbf{e}}_{2}$ be vectors in
+$\mathbb{R}^{2}$, for what values of $k$, if any, is
+\[
+\langle\mathbf{a}|\mathbf{b}\rangle
+=a_{1}b_{1}-a_{1}b_{2}-a_{2}b_{1}+ka_{2}b_{2}
+\]
+a valid definition of a scalar product?
+\solution
+The proposed form is bilinear and symmetric for every real $k$, because
+its matrix is
+\[
+G=\begin{pmatrix}1&-1\\-1&k\end{pmatrix}=G^T.
+\]
+It remains to test positive definiteness. Completing the square,
+\[
+\langle\mathbf a|\mathbf a\rangle
+=a_1^2-2a_1a_2+ka_2^2=(a_1-a_2)^2+(k-1)a_2^2.
+\]
+If $k>1$, both terms are nonnegative and their sum can vanish only if
+$a_2=0$ and then $a_1=0$. If $k=1$, the nonzero vector $(1,1)$ has
+zero norm. If $k<1$, this same vector has squared norm $k-1<0$.
+Thus all scalar-product axioms hold exactly for
+\[
+\boxed{k>1.}
+\]
+The determinant check $\det G=k-1>0$, together with $G_{11}=1>0$,
+agrees with the direct square-completion argument.
+
+\Needspace{9\baselineskip}
+\subsection*{5.2 Gram-Schmidt Orthogonalization}
+
+For the Gram-Schmidt constructions in Exercises 5.2.1 through 5.2.6, use a
+scalar product of the form given in Eq.~(5.7) with the specified interval and
+weight.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.1}\quad Following the Gram-Schmidt procedure, construct a
+set of polynomials $P_{n}^{*}(x)$ orthogonal (unit weighting factor) over the
+range $[0,1]$ from the set $[1,x,x^{2},\ldots]$. Scale so that
+$P_{n}^{*}(1)=1$.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\begin{aligned}
+\erratum{P_{0}^{*}(x)}&=1,\\
+P_{1}^{*}(x)&=2x-1,\\
+P_{2}^{*}(x)&=6x^{2}-6x+1,\\
+P_{3}^{*}(x)&=20x^{3}-30x^{2}+12x-1.
+\end{aligned}$\par
+These are the first four shifted Legendre polynomials.
+
+\emph{Note.}~The ``*'' is the standard notation for ``shifted'': $[0,1]$
+instead of $[-1,1]$. It does not mean complex conjugate.
+\solution
+\erratum{The first answer on textbook p.~273 is printed $P_n^*(x)=1$;
+its subscript must be $0$, since the subsequent higher-degree
+polynomials are not constant.}
+It is convenient first to construct monic orthogonal polynomials $q_n$:
+\[
+q_n=x^n-\sum_{j=0}^{n-1}
+ \frac{\int_0^1q_jx^n\,dx}{\int_0^1q_j^2\,dx}\,q_j,
+\qquad P_n^*=\frac{q_n}{q_n(1)}.
+\]
+All the required integrals reduce to $\int_0^1x^kdx=1/(k+1)$.
+Start with $q_0=1$, $\|q_0\|^2=1$. Then
+\[
+q_1=x-\frac12,\qquad
+\|q_1\|^2=\frac13-\frac12+\frac14=\frac1{12}.
+\]
+For the next polynomial,
+\[
+\langle q_0|x^2\rangle=\frac13,\qquad
+\langle q_1|x^2\rangle=\frac14-\frac16=\frac1{12}.
+\]
+Thus
+\[
+q_2=x^2-\frac13-q_1=x^2-x+\frac16,
+\]
+\[
+\|q_2\|^2
+=\frac15-\frac12+\frac49-\frac16+\frac1{36}=\frac1{180}.
+\]
+For $x^3$ the three projection numerators are
+\[
+\frac14,\qquad \frac15-\frac18=\frac3{40},\qquad
+\frac16-\frac15+\frac1{24}=\frac1{120}.
+\]
+Dividing by $1,1/12,1/180$, respectively, gives
+\begin{align*}
+q_3&=x^3-\frac14-\frac9{10}\left(x-\frac12\right)
+ -\frac32\left(x^2-x+\frac16\right)\\
+&=x^3-\frac32x^2+\frac35x-\frac1{20}.
+\end{align*}
+The endpoint values are $q_0(1)=1$, $q_1(1)=1/2$,
+$q_2(1)=1/6$, and $q_3(1)=1/20$. Hence
+\[
+\boxed{P_0^*=1,\quad P_1^*=2x-1,\quad
+P_2^*=6x^2-6x+1,\quad P_3^*=20x^3-30x^2+12x-1.}
+\]
+The construction extends to the complete set. A formula with the same
+orthogonality and endpoint normalization is
+\[
+\boxed{P_n^*(x)=\frac1{n!}\frac{d^n}{dx^n}[x^n(x-1)^n]
+=\sum_{k=0}^n(-1)^{n-k}\binom nk\binom{n+k}k x^k.}
+\]
+The finite sum follows by first expanding and then differentiating:
+\[
+x^n(x-1)^n=\sum_{k=0}^n(-1)^{n-k}\binom nk x^{n+k},\qquad
+\frac1{n!}\frac{d^n x^{n+k}}{dx^n}
+=\frac{(n+k)!}{n!k!}x^k=\binom{n+k}k x^k.
+\]
+To verify orthogonality, multiply the derivative formula by $x^j$, $j<n$, and
+integrate by parts $n$ times. All boundary terms vanish because
+$x^n(x-1)^n$ and its first $n-1$ derivatives vanish at both endpoints;
+the remaining integral vanishes because $d^nx^j/dx^n=0$.
+At $x=1$ only the term differentiating $(x-1)^n$ all $n$ times survives,
+and it equals $n!$, so $P_n^*(1)=1$. Uniqueness of Gram--Schmidt with
+this normalization identifies these as its output.
+
+A useful check is the norm formula. The leading coefficient is
+$\binom{2n}n$ and lower powers are orthogonal to $P_n^*$, so
+\begin{align*}
+\int_0^1(P_n^*)^2dx
+&=\binom{2n}n\int_0^1x^nP_n^*(x)dx\\
+&=\binom{2n}n\int_0^1x^n(1-x)^n dx
+=\frac{(2n)!}{(n!)^2}\frac{(n!)^2}{(2n+1)!}
+=\frac1{2n+1}.
+\end{align*}
+The middle equality again uses $n$ integrations by parts. To evaluate the
+last integral without a table, set $J_{a,b}=\int_0^1x^a(1-x)^b dx$.
+For integers $a\ge0$, $b\ge1$, integration by parts gives
+\[
+J_{a,b}=\left[\frac{x^{a+1}(1-x)^b}{a+1}\right]_0^1
+ +\frac b{a+1}J_{a+1,b-1}=\frac b{a+1}J_{a+1,b-1}.
+\]
+Repeating $b$ times and using $J_{a+b,0}=1/(a+b+1)$ yields
+$J_{a,b}=a!b!/(a+b+1)!$; take $a=b=n$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.2}\quad Apply the Gram-Schmidt procedure to form the
+first three Laguerre polynomials:
+\[
+u_{n}(x)=x^{n},\quad n=0,1,2,\ldots,\quad0\le x<\infty,\quad w(x)=e^{-x}.
+\]
+The conventional normalization is
+\[
+\int_{0}^{\infty}L_{m}(x)L_{n}(x)e^{-x}\,dx=\delta_{mn}.
+\]
+\par\nobreak\hfill\emph{ANS.}\enspace
+$L_{0}=1$,\quad$L_{1}=(1-x)$,\quad$L_{2}=\dfrac{2-4x+x^{2}}{2}$.
+\solution
+For $k\ge1$, integration by parts gives
+\[
+M_k=[-x^ke^{-x}]_0^\infty+kM_{k-1}=kM_{k-1},\qquad M_0=1.
+\]
+The boundary term is zero, so repeated application gives the moments
+\[
+M_k=\int_0^\infty x^ke^{-x}dx=k!,\qquad
+M_0=1,\ M_1=1,\ M_2=2,\ M_3=6,\ M_4=24.
+\]
+Begin with $q_0=1$ and subtract its projection from $x$:
+\[
+q_1=x-\frac{M_1}{M_0}=x-1,\qquad
+\|q_1\|^2=M_2-2M_1+M_0=1.
+\]
+For $x^2$, the projections onto $q_0$ and $q_1$ have coefficients
+\[
+\frac{\langle q_0|x^2\rangle}{\|q_0\|^2}=2,
+\qquad
+\frac{\langle q_1|x^2\rangle}{\|q_1\|^2}=M_3-M_2=4.
+\]
+Therefore
+\[
+q_2=x^2-2-4(x-1)=x^2-4x+2,
+\]
+\[
+\|q_2\|^2=M_4-8M_3+20M_2-16M_1+4M_0
+=24-48+40-16+4=4.
+\]
+Choose the conventional signs $L_n(0)>0$. Dividing by the norms gives
+\[
+\boxed{L_0=1,\qquad L_1=-q_1=1-x,\qquad
+L_2=q_2/2=1-2x+\frac{x^2}{2}.}
+\]
+Gram--Schmidt makes the cross integrals zero, and the displayed norm
+calculations make all three diagonal integrals one. Normalization alone
+leaves each polynomial's overall sign free.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.3}\quad You are given
+\begin{enumerate}
+\item[(a)] a set of functions $u_{n}(x)=x^{n}$, $n=0,1,2,\ldots$,
+\item[(b)] an interval $(0,\infty)$,
+\item[(c)] a weighting function $w(x)=xe^{-x}$. Use the Gram-Schmidt procedure
+  to construct the first three orthonormal functions from the set $u_{n}(x)$
+  for this interval and this weighting function.
+\end{enumerate}
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\varphi_{0}(x)=1$,\quad$\varphi_{1}(x)=(x-2)/\sqrt{2}$,\quad
+$\varphi_{2}(x)=\erratum{\dfrac{x^{2}-6x+6}{2\sqrt{3}}}$.
+\solution
+With the extra factor $x$ in the weight, the moments are
+\[
+M_k=\int_0^\infty x^kxe^{-x}dx=(k+1)!,
+\quad (M_0,M_1,M_2,M_3,M_4)=(1,2,6,24,120).
+\]
+The first function is $q_0=\varphi_0=1$. For the second,
+\[
+q_1=x-\frac{M_1}{M_0}=x-2,\qquad
+\|q_1\|^2=6-4(2)+4(1)=2,
+\quad \varphi_1=\frac{x-2}{\sqrt2}.
+\]
+For the third polynomial,
+\[
+\langle q_0|x^2\rangle=M_2=6,\qquad
+\frac{\langle q_1|x^2\rangle}{\|q_1\|^2}
+=\frac{M_3-2M_2}{2}=\frac{24-12}{2}=6.
+\]
+Consequently
+\[
+q_2=x^2-6-6(x-2)=x^2-6x+6.
+\]
+Its square is $x^4-12x^3+48x^2-72x+36$, so
+\[
+\|q_2\|^2=120-12(24)+48(6)-72(2)+36=12.
+\]
+Thus
+\[
+\boxed{\varphi_0=1,\qquad\varphi_1=\frac{x-2}{\sqrt2},\qquad
+\varphi_2=\frac{x^2-6x+6}{2\sqrt3}.}
+\]
+\erratum{The printed slash notation for $\varphi_2$ means division by the
+entire quantity $2\sqrt3$; writing a fraction removes the ambiguity.}
+As a direct orthogonality check,
+$\langle1|q_2\rangle=6-12+6=0$ and
+$\langle q_1|q_2\rangle=24-8(6)+18(2)-12=0$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.4}\quad Using the Gram-Schmidt orthogonalization
+procedure, construct the lowest three Hermite polynomials:
+\[
+u_{n}(x)=x^{n},\quad n=0,1,2,\ldots,\quad-\infty<x<\infty,\quad
+w(x)=e^{-x^{2}}.
+\]
+For this set of polynomials the usual normalization is
+\[
+\int_{-\infty}^{\infty}H_{m}(x)H_{n}(x)w(x)\,dx
+=\delta_{mn}2^{m}m!\,\pi^{1/2}.
+\]
+\par\nobreak\hfill\emph{ANS.}\enspace
+$H_{0}=1$,\quad$H_{1}=2x$,\quad$H_{2}=4x^{2}-2$.
+\solution
+Odd moments vanish by parity. For $j\ge1$, use
+$x e^{-x^2}dx=-\tfrac12d(e^{-x^2})$ in integration by parts:
+\[
+M_{2j}=-\frac12[x^{2j-1}e^{-x^2}]_{-\infty}^{\infty}
+ +\frac{2j-1}{2}\int_{-\infty}^{\infty}x^{2j-2}e^{-x^2}dx.
+\]
+The boundary term vanishes. The even-moment recurrence is therefore
+\[
+M_{2j}=\int_{-\infty}^{\infty}x^{2j}e^{-x^2}dx
+=\frac{2j-1}{2}M_{2j-2},\qquad M_0=\sqrt\pi.
+\]
+Thus $M_2=\sqrt\pi/2$ and $M_4=3\sqrt\pi/4$.
+Start with $q_0=1$. The projection of $x$ onto $1$ vanishes, so $q_1=x$.
+For $x^2$ the projection onto $x$ vanishes, and
+\[
+q_2=x^2-\frac{M_2}{M_0}=x^2-\frac12.
+\]
+Their squared norms are
+\[
+\|q_0\|^2=\sqrt\pi,\qquad
+\|q_1\|^2=\frac{\sqrt\pi}{2},\qquad
+\|q_2\|^2=M_4-M_2+\frac14M_0=\frac{\sqrt\pi}{2}.
+\]
+The required norms for degrees $0,1,2$ are respectively
+$\sqrt\pi,2\sqrt\pi,8\sqrt\pi$.
+The needed positive scale factors are therefore
+$1$, $\sqrt{2/(1/2)}=2$, and $\sqrt{8/(1/2)}=4$. Hence
+\[
+\boxed{H_0=1,\qquad H_1=2x,\qquad H_2=4x^2-2.}
+\]
+Parity verifies the odd cross integrals, while
+$\langle H_0|H_2\rangle=4M_2-2M_0=0$ checks the remaining pair.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.5}\quad Use the Gram-Schmidt orthogonalization scheme to
+construct the first three Chebyshev polynomials (type I):
+\[
+u_{n}(x)=x^{n},\quad n=0,1,2,\ldots,\quad-1\le x\le1,\quad
+w(x)=(1-x^{2})^{-1/2}.
+\]
+Take the normalization
+\[
+\int_{-1}^{1}T_{m}(x)T_{n}(x)w(x)\,dx
+=\erratum{\begin{cases}\pi,&m=n=0,\\[1ex]
+\dfrac{\pi}{2},&m=n\ge1,\\[1ex]0,&m\ne n.
+\end{cases}}
+\]
+\emph{Hint.}~The needed integrals are given in Exercise 13.3.2.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$T_{0}=1$,\quad$T_{1}=x$,\quad$T_{2}=2x^{2}-1$,\quad$(T_{3}=4x^{3}-3x)$.
+\solution
+\erratum{The source gives only the two diagonal cases, multiplied by
+$\delta_{mn}$; the completed piecewise formula also explicitly defines
+the value for $m\ne n$.}
+Substitute $x=\cos t$. Since $dx=-\sin t\,dt$ and
+$\sqrt{1-x^2}=\sin t$ on $0\le t\le\pi$,
+\[
+M_{2j}=\int_{-1}^1\frac{x^{2j}}{\sqrt{1-x^2}}dx
+=\int_0^\pi\cos^{2j}t\,dt,
+\quad M_{2j}=\frac{2j-1}{2j}M_{2j-2}.
+\]
+To see every term of the reduction, integrate
+$\cos^{2j-1}t\,d(\sin t)$ by parts:
+\[
+M_{2j}=[\cos^{2j-1}t\sin t]_0^\pi
+ +(2j-1)\int_0^\pi\sin^2t\cos^{2j-2}t\,dt
+ =(2j-1)(M_{2j-2}-M_{2j}).
+\]
+Moving the last term to the left gives the stated recurrence. It yields
+$M_0=\pi$, $M_2=\pi/2$, $M_4=3\pi/8$, and $M_6=5\pi/16$;
+all odd moments vanish. Gram--Schmidt therefore gives
+\[
+q_0=1,\qquad q_1=x,\qquad
+q_2=x^2-\frac{M_2}{M_0}=x^2-\frac12.
+\]
+Their squared norms are
+\[
+\|q_0\|^2=\pi,\quad \|q_1\|^2=\frac\pi2,\quad
+\|q_2\|^2=M_4-M_2+\frac14M_0=\frac\pi8.
+\]
+Thus $q_0$ and $q_1$ already have the requested normalization, and $q_2$
+needs multiplication by $2$:
+\[
+\boxed{T_0=1,\qquad T_1=x,\qquad T_2=2x^2-1.}
+\]
+To check the additional answer $T_3$, only the projection of $x^3$ onto
+$x$ survives parity:
+\[
+q_3=x^3-\frac{M_4}{M_2}x=x^3-\frac34x,
+\]
+\[
+\|q_3\|^2=M_6-\frac32M_4+\frac9{16}M_2
+=\frac{5\pi}{16}-\frac{9\pi}{16}+\frac{9\pi}{32}
+=\frac\pi{32}.
+\]
+Multiplying $q_3$ by $4$ gives $T_3=4x^3-3x$ and norm squared $\pi/2$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.6}\quad Use the Gram-Schmidt orthogonalization scheme to
+construct the first three Chebyshev polynomials (type II):
+\[
+u_{n}(x)=x^{n},\quad n=0,1,2,\ldots,\quad-1\le x\le1,\quad
+w(x)=(1-x^{2})^{+1/2}.
+\]
+Take the normalization to be
+\[
+\int_{-1}^{1}U_{m}(x)U_{n}(x)w(x)\,dx=\delta_{mn}\frac{\pi}{2}.
+\]
+\emph{Hint.}
+\[
+\int_{-1}^{1}(1-x^{2})^{1/2}x^{2n}\,dx
+=\frac{\pi}{2}\times\frac{1\cdot3\cdot5\cdots(2n-1)}
+{4\cdot6\cdot8\cdots(2n+2)},\quad n=1,2,3,\ldots
+\]
+\[
+=\frac{\pi}{2},\quad n=0.
+\]
+\par\nobreak\hfill\emph{ANS.}\enspace
+$U_{0}=1$,\quad$U_{1}=2x$,\quad$U_{2}=4x^{2}-1$.
+\solution
+The hint gives the even moments
+\[
+M_0=\frac\pi2,\qquad M_2=\frac\pi8,\qquad M_4=\frac\pi{16},
+\]
+and symmetry makes the odd moments zero. The monic Gram--Schmidt
+polynomials are
+\[
+q_0=1,\qquad q_1=x,\qquad
+q_2=x^2-\frac{\langle1|x^2\rangle}{\langle1|1\rangle}
+=x^2-\frac14.
+\]
+There is no projection onto $x$ in the last line because
+$\langle x|x^2\rangle=M_3=0$. The squared norms are
+\[
+\|q_0\|^2=\frac\pi2,\qquad \|q_1\|^2=\frac\pi8,
+\]
+\[
+\|q_2\|^2=M_4-\frac12M_2+\frac1{16}M_0
+=\frac\pi{16}-\frac\pi{16}+\frac\pi{32}=\frac\pi{32}.
+\]
+Scale these by $1$, $2$, and $4$ so that every squared norm is $\pi/2$:
+\[
+\boxed{U_0=1,\qquad U_1=2x,\qquad U_2=4x^2-1.}
+\]
+The remaining even cross integral is
+$\langle U_0|U_2\rangle=4M_2-M_0=0$; the other cross integrals are odd.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.7}\quad As a modification of \erratum{Exercise 5.2.4}, apply the
+Gram-Schmidt orthogonalization procedure to the set $u_{n}(x)=x^{n}$,
+$n=0,1,2,\ldots$, $0\le x<\infty$. Take $w(x)$ to be $\exp(-x^{2})$. Find the
+first two nonvanishing polynomials. Normalize so that the coefficient of the
+highest power of $x$ is unity. In \erratum{Exercise 5.2.4}, the interval $(-\infty,
+\infty)$ led to the Hermite polynomials. The functions found here are
+certainly not the Hermite polynomials.
+\par\nobreak\hfill\emph{ANS.}\enspace
+$\varphi_{0}=1$,\quad$\varphi_{1}=x-\pi^{-1/2}$.
+\solution
+\erratum{Both references to Exercise 5.2.5 in the original question should be to
+Exercise 5.2.4, which uses the Gaussian weight and gives Hermite
+polynomials. The reference error is present in the textbook (p.~275).}
+
+On the half-line the moments required for the first two polynomials are
+\[
+M_0=\int_0^\infty e^{-x^2}dx=\frac{\sqrt\pi}{2},\qquad
+M_1=\int_0^\infty xe^{-x^2}dx
+=\left[-\frac12e^{-x^2}\right]_0^\infty=\frac12.
+\]
+The monic constant is $\varphi_0=1$, and subtraction of its projection
+from $x$ gives
+\[
+\boxed{\varphi_1=x-\frac{\langle1|x\rangle}{\langle1|1\rangle}
+=x-\frac1{\sqrt\pi}.}
+\]
+Indeed, $\langle\varphi_0|\varphi_1\rangle
+=1/2-(1/\sqrt\pi)(\sqrt\pi/2)=0$.
+For an independent norm check, $M_2=\sqrt\pi/4$, so
+\[
+\|\varphi_1\|^2=M_2-\frac2{\sqrt\pi}M_1+\frac1\pi M_0
+=\frac{\pi-2}{4\sqrt\pi}>0.
+\]
+On the full line the first moment is zero; on the half-line it is $1/2$.
+This explicitly explains the constant term absent from the odd Hermite
+polynomial.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.2.8}\quad Form a set of three orthonormal vectors by the
+Gram-Schmidt process using these input vectors in the order given:
+\[
+\mathbf{c}_{1}=\begin{pmatrix}1\\1\\1\end{pmatrix},\quad
+\mathbf{c}_{2}=\begin{pmatrix}1\\1\\2\end{pmatrix},\quad
+\mathbf{c}_{3}=\begin{pmatrix}1\\0\\2\end{pmatrix}.
+\]
+\solution
+Normalize the first vector:
+\[
+\mathbf e_1=\frac{\mathbf c_1}{\|\mathbf c_1\|}
+=\frac1{\sqrt3}(1,1,1)^T.
+\]
+The projection coefficient of $\mathbf c_2$ onto it is
+$\mathbf e_1\cdot\mathbf c_2=4/\sqrt3$. Subtract and normalize:
+\[
+\mathbf q_2=(1,1,2)^T-\frac43(1,1,1)^T
+=\frac13(-1,-1,2)^T,\qquad \|\mathbf q_2\|^2=\frac23,
+\]
+\[
+\mathbf e_2=\frac1{\sqrt6}(-1,-1,2)^T.
+\]
+For the third vector,
+\[
+\mathbf e_1\cdot\mathbf c_3=\frac3{\sqrt3}=\sqrt3,
+\qquad
+\mathbf e_2\cdot\mathbf c_3=\frac{-1+4}{\sqrt6}=\frac3{\sqrt6}.
+\]
+Thus
+\begin{align*}
+\mathbf q_3&=(1,0,2)^T-(1,1,1)^T
+ -\frac12(-1,-1,2)^T\\
+&=(1/2,-1/2,0)^T,\qquad \|\mathbf q_3\|^2=\frac12,
+\end{align*}
+so the requested set is
+\[
+\boxed{\mathbf e_1=\frac{(1,1,1)^T}{\sqrt3},\quad
+\mathbf e_2=\frac{(-1,-1,2)^T}{\sqrt6},\quad
+\mathbf e_3=\frac{(1,-1,0)^T}{\sqrt2}.}
+\]
+The three cross-dot-product numerators are $-1-1+2=0$, $1-1=0$,
+and $-1+1=0$; their squared lengths are respectively $3/3$, $6/6$,
+and $2/2$, independently verifying orthonormality.
+
+\Needspace{9\baselineskip}
+\subsection*{5.3 Operators}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.3.1}\quad Show (without introducing matrix representations)
+that the adjoint of the adjoint of a \erratum{bounded, everywhere-defined} operator restores the original operator,
+i.e., that $(\mathcal{A}^{\dagger})^{\dagger}=\mathcal{A}$.
+\solution
+\erratum{For the identity as an equality of operators, assume the operators
+are bounded and everywhere defined, as they automatically are in finite
+dimension. For a densely defined unbounded operator, the double adjoint
+is its closure when the operator is closable; equality then additionally
+requires that it be closed.}
+
+Let $f,g$ be arbitrary vectors. The adjoint definition and conjugate
+symmetry of the scalar product give, step by step,
+\begin{align*}
+\langle f|Ag\rangle
+&=\langle A^\dagger f|g\rangle
+=\langle g|A^\dagger f\rangle^*\\
+&=\langle(A^\dagger)^\dagger g|f\rangle^*
+=\langle f|(A^\dagger)^\dagger g\rangle.
+\end{align*}
+Hence $\langle f|[A-(A^\dagger)^\dagger]g\rangle=0$ for every $f$.
+For fixed $g$, choose $f=[A-(A^\dagger)^\dagger]g$. Its squared norm is
+zero, so it is the zero vector. Since $g$ was arbitrary,
+\[
+\boxed{(A^\dagger)^\dagger=A.}
+\]
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.3.2}\quad $\mathcal{U}$ and $\mathcal{V}$ are two arbitrary
+\erratum{bounded, everywhere-defined} operators. Without introducing matrix representations of these operators, show
+that
+\[
+(\mathcal{U}\mathcal{V})^{\dagger}
+=\mathcal{V}^{\dagger}\mathcal{U}^{\dagger}.
+\]
+Note the resemblance to adjoint matrices.
+\solution
+\erratum{The unrestricted equality is valid for bounded, everywhere-defined
+operators, including all finite matrices. For general unbounded
+operators their domains matter; the formal algebra alone does not prove
+equality of the adjoint domains.}
+For arbitrary $f,g$ in the bounded setting, apply the adjoint definition
+twice, in the order the operators act:
+\[
+\langle f|UVg\rangle
+=\langle U^\dagger f|Vg\rangle
+=\langle V^\dagger U^\dagger f|g\rangle.
+\]
+The operator multiplying $f$ in the first slot is thus the adjoint of
+$UV$, proving
+\[
+\boxed{(UV)^\dagger=V^\dagger U^\dagger.}
+\]
+The order reverses because $U$ is moved across the scalar product
+before $V$. Uniqueness follows from nondegeneracy of the scalar product,
+as in the previous exercise.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.3.3}\quad Consider a Hilbert space spanned by the three
+functions $\varphi_{1}=x_{1}$, $\varphi_{2}=x_{2}$, $\varphi_{3}=x_{3}$, and a
+scalar product defined by $\langle x_{\nu}|x_{\mu}\rangle=\delta_{\nu\mu}$.
+\begin{enumerate}
+\item[(a)] Form the $3\times3$ matrix of each of the following operators:
+  \[
+  \mathcal{A}_{1}=\sum_{i=1}^{3}x_{i}\left(\frac{\partial}{\partial x_{i}}
+  \right),\quad
+  \mathcal{A}_{2}=x_{1}\left(\frac{\partial}{\partial x_{2}}\right)
+  -x_{2}\left(\frac{\partial}{\partial x_{1}}\right).
+  \]
+\item[(b)] Form the column vector representing $\psi=x_{1}-2x_{2}+3x_{3}$.
+\item[(c)] Form the matrix equation corresponding to
+  $\chi=(\mathcal{A}_{1}-\mathcal{A}_{2})\psi$ and verify that the matrix
+  equation reproduces the result obtained by direct application of
+  $\mathcal{A}_{1}-\mathcal{A}_{2}$ to $\psi$.
+\end{enumerate}
+\solution
+(a) The $j$th matrix column is the expansion of $A\varphi_j$ in the
+ordered basis $(x_1,x_2,x_3)$. Since
+$\partial x_j/\partial x_i=\delta_{ij}$,
+\[
+A_1x_j=\sum_i x_i\delta_{ij}=x_j.
+\]
+For the second operator,
+\[
+A_2x_1=-x_2,\qquad A_2x_2=x_1,\qquad A_2x_3=0.
+\]
+Reading off the columns gives
+\[
+\boxed{A_1=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\qquad
+A_2=\begin{pmatrix}0&1&0\\-1&0&0\\0&0&0\end{pmatrix}.}
+\]
+(b) The coefficient column of $\psi$ is $c=(1,-2,3)^T$.
+
+(c) Subtraction and multiplication give
+\[
+(A_1-A_2)c
+=\begin{pmatrix}1&-1&0\\1&1&0\\0&0&1\end{pmatrix}
+ \begin{pmatrix}1\\-2\\3\end{pmatrix}
+=\begin{pmatrix}1+2\\1-2\\3\end{pmatrix}
+=\begin{pmatrix}3\\-1\\3\end{pmatrix}.
+\]
+Independently, differentiating the function itself yields
+\[
+A_1\psi=x_1-2x_2+3x_3,\qquad
+A_2\psi=x_1(-2)-x_2(1)=-2x_1-x_2.
+\]
+Thus $\chi=3x_1-x_2+3x_3$, exactly the function represented by the
+matrix result.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.3.4}\quad
+\begin{enumerate}
+\item[(a)] Obtain the matrix representation of $\mathcal{A}=x(d/dx)$ in a
+  basis of Legendre polynomials, keeping terms through $P_{3}$. Use the
+  orthonormal forms of these polynomials as given in \erratum{Example 5.2.1} and the scalar
+  product defined there.
+\item[(b)] Expand $x^{3}$ in the orthonormal Legendre polynomial basis.
+\item[(c)] Verify that $\mathcal{A}x^{3}$ is given correctly by its matrix
+  representation.
+\end{enumerate}
+\solution
+\erratum{The source says only ``5.2.1.'' The intended reference is
+\emph{Example} 5.2.1 (textbook pp.~270--271), which uses $[-1,1]$.
+Exercise 5.2.1 instead uses shifted polynomials on $[0,1]$.}
+Write the orthonormal basis without confusing it with the conventionally
+normalized $P_n$:
+\[
+p_0=\frac1{\sqrt2},\quad p_1=\sqrt{\frac32}x,\quad
+p_2=\sqrt{\frac52}\frac{3x^2-1}{2},\quad
+p_3=\sqrt{\frac72}\frac{5x^3-3x}{2}.
+\]
+(a) Differentiate each polynomial and then re-expand:
+\begin{align*}
+Ap_0&=0,\qquad Ap_1=\sqrt{\frac32}x=p_1,\\
+Ap_2&=\sqrt{\frac52}3x^2
+=2p_2+\sqrt{\frac52}=2p_2+\sqrt5\,p_0,\\
+Ap_3&=\sqrt{\frac72}\frac{15x^3-3x}{2}\\
+&=3\sqrt{\frac72}\frac{5x^3-3x}{2}
+ +3\sqrt{\frac72}x
+=3p_3+\sqrt{21}\,p_1.
+\end{align*}
+All outputs remain in this four-dimensional span. With row and column
+order $0,1,2,3$, the matrix is
+\[
+\boxed{A=\begin{pmatrix}
+0&0&\sqrt5&0\\0&1&0&\sqrt{21}\\0&0&2&0\\0&0&0&3
+\end{pmatrix}.}
+\]
+(b) The coefficients of the even polynomials vanish by parity. The two
+odd coefficients are
+\begin{align*}
+\langle p_1|x^3\rangle
+&=\sqrt{\frac32}\int_{-1}^1x^4dx
+=\sqrt{\frac32}\frac25=\frac{\sqrt6}{5},\\
+\langle p_3|x^3\rangle
+&=\frac12\sqrt{\frac72}\left(5\frac27-3\frac25\right)
+=\frac{2\sqrt{14}}{35}.
+\end{align*}
+Therefore
+\[
+\boxed{x^3=\frac{\sqrt6}{5}p_1+\frac{2\sqrt{14}}{35}p_3},
+\qquad c=\begin{pmatrix}0\\\sqrt6/5\\0\\2\sqrt{14}/35\end{pmatrix}.
+\]
+Substitution of the polynomials checks the expansion directly:
+$(3/5)x+(1/5)(5x^3-3x)=x^3$.
+
+(c) Matrix multiplication gives
+\[
+Ac=\begin{pmatrix}
+0\\ \sqrt6/5+\sqrt{21}(2\sqrt{14}/35)\\0\\6\sqrt{14}/35
+\end{pmatrix}
+=\begin{pmatrix}0\\3\sqrt6/5\\0\\6\sqrt{14}/35\end{pmatrix}=3c.
+\]
+This represents $3x^3$, agreeing with the direct derivative
+$x(d/dx)x^3=3x^3$.
+
+\Needspace{9\baselineskip}
+\subsection*{5.4 Self-Adjoint Operators}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.4.1}\quad
+\erratum{Work with bounded, everywhere-defined operators.}
+\begin{enumerate}
+\item[(a)] $\mathcal{A}$ is a non-Hermitian operator. Show that the operators
+  $\mathcal{A}+\mathcal{A}^{\dagger}$ and $i(\mathcal{A}
+  -\mathcal{A}^{\dagger})$ are Hermitian.
+\item[(b)] Using the preceding result, show that every non-Hermitian operator
+  may be written as a linear combination of two Hermitian operators.
+\end{enumerate}
+\solution
+Use the adjoint identities $(\lambda A)^\dagger=\lambda^*A^\dagger$,
+$(A+B)^\dagger=A^\dagger+B^\dagger$, and
+$(A^\dagger)^\dagger=A$ \erratum{for bounded, everywhere-defined operators. General unbounded
+operators require additional domain assumptions, as noted in 5.3.1--5.3.2}.
+
+(a) If $B=A+A^\dagger$, then
+\[
+B^\dagger=A^\dagger+(A^\dagger)^\dagger=A^\dagger+A=B.
+\]
+If $C=i(A-A^\dagger)$, conjugating the scalar $i$ is essential:
+\[
+C^\dagger=-i\{A^\dagger-(A^\dagger)^\dagger\}
+=-i(A^\dagger-A)=i(A-A^\dagger)=C.
+\]
+Thus both operators are Hermitian.
+
+(b) Solving these two definitions for $A$ gives
+\[
+\boxed{A=\frac12B-\frac i2C.}
+\]
+Equivalently, define the Hermitian real and imaginary parts
+\[
+H=\frac{A+A^\dagger}{2},\qquad
+K=\frac{A-A^\dagger}{2i};\qquad \boxed{A=H+iK}.
+\]
+Substitution verifies the reconstruction because the $A^\dagger$ terms
+cancel and the two $A/2$ terms add. This decomposition works also if
+$A$ happens already to be Hermitian, in which case $K=0$.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.4.2}\quad Prove that the product of two
+\erratum{bounded, everywhere-defined} Hermitian operators is Hermitian
+if and only if the two operators commute.
+\solution
+For Hermitian $A$ and $B$, the product-adjoint identity gives
+\[
+(AB)^\dagger=B^\dagger A^\dagger=BA.
+\]
+If $AB$ is Hermitian, then $AB=(AB)^\dagger=BA$, so the operators
+commute. Conversely, if $AB=BA$, then
+$(AB)^\dagger=BA=AB$, so the product is Hermitian. Thus
+\[
+\boxed{AB\text{ is Hermitian}\ \Longleftrightarrow\ [A,B]=0.}
+\]
+\erratum{This statement has its usual finite-dimensional or bounded-operator
+meaning. For unbounded operators one must also establish the domains of
+the product and its adjoint; formal commutation on a subdomain alone is
+not a proof of self-adjointness.}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.4.3}\quad $\mathcal{A}$ and $\mathcal{B}$ are noncommuting
+\erratum{Hermitian, bounded, everywhere-defined} quantum mechanical operators,
+and $\mathcal{C}$ is given by the formula
+\[
+\mathcal{A}\mathcal{B}-\mathcal{B}\mathcal{A}=i\mathcal{C}.
+\]
+Show that $\mathcal{C}$ is Hermitian.
+\erratum{For an unbounded realization, equality of all adjoint domains used
+in the argument must also be established; a formal boundary-condition
+assertion alone is insufficient.}
+\solution
+\erratum{The conclusion requires $A$ and $B$ themselves to be Hermitian,
+as when they represent quantum observables. Being merely ``quantum
+mechanical operators'' or merely noncommuting does not imply this.}
+With that assumption and the indicated adjoint/domain conditions,
+\begin{align*}
+(AB-BA)^\dagger
+&=B^\dagger A^\dagger-A^\dagger B^\dagger\\
+&=BA-AB=-(AB-BA)=-iC.
+\end{align*}
+But the adjoint of the right side of $AB-BA=iC$ is $-iC^\dagger$.
+Thus $-iC^\dagger=-iC$, and
+\[
+\boxed{C^\dagger=C.}
+\]
+Equivalently $C=-i[A,B]$ is Hermitian because $[A,B]$ is
+anti-Hermitian. Noncommutation only ensures $C\ne0$; it is not needed
+for Hermiticity. To check why the added hypothesis matters, take
+\[
+A=\begin{pmatrix}0&1\\0&0\end{pmatrix},\quad
+B=\begin{pmatrix}1&0\\0&0\end{pmatrix}.
+\]
+Then $[A,B]=-A$, and $C=iA$ is not Hermitian. This counterexample
+rules out the unqualified statement.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.4.4}\quad The operator $\mathcal{L}$ is Hermitian. Show
+that $\langle L^{2}\rangle\ge0$, meaning that for all
+\erratum{$\psi\in D(L^2)$},
+$\langle\psi|L^{2}|\psi\rangle\ge0$.
+\solution
+\erratum{For an unbounded $L$, the expression in the question requires
+$\psi\in D(L^2)=\{\psi\in D(L):L\psi\in D(L)\}$, not merely
+$\psi\in D(L)$.}
+Move the left factor of $L$ across the scalar product and use
+$L^\dagger=L$:
+\[
+\boxed{\langle\psi|L^2|\psi\rangle
+=\langle L^\dagger\psi|L\psi\rangle
+=\langle L\psi|L\psi\rangle=\|L\psi\|^2\ge0.}
+\]
+Equality occurs exactly when $L\psi=0$. For a normalized state this is
+the stated expectation value. For an unnormalized nonzero state, dividing
+by $\langle\psi|\psi\rangle>0$ preserves the inequality.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.4.5}\quad Consider a Hilbert space whose members are
+functions defined on the surface of the unit sphere, with a scalar product of
+the form
+\[
+\langle f|g\rangle=\int d\Omega\,f^{*}g,
+\]
+where $d\Omega$ is the element of solid angle. Note that the total solid angle
+of the sphere is $4\pi$. We work here with the three functions
+$\varphi_{1}=Cx/r$, $\varphi_{2}=Cy/r$, $\varphi_{3}=Cz/r$, with $C$ assigned
+a value that makes the $\varphi_{i}$ normalized.
+\begin{enumerate}
+\item[(a)] Find $C$, and show that the $\varphi_{i}$ are also mutually
+  orthogonal.
+\item[(b)] Form the $3\times3$ matrices of the angular momentum operators
+  \[
+  L_{x}=-i\left(y\frac{\partial}{\partial z}-z\frac{\partial}{\partial y}
+  \right),\quad
+  L_{y}=-i\left(z\frac{\partial}{\partial x}-x\frac{\partial}{\partial z}
+  \right),\quad
+  L_{z}=-i\left(x\frac{\partial}{\partial y}-y\frac{\partial}{\partial x}
+  \right).
+  \]
+\item[(c)] Verify that the matrix representations of the components of
+  $\mathbf{L}$ satisfy the angular momentum commutator
+  $[L_{x},L_{y}]=iL_{z}$.
+\end{enumerate}
+\solution
+(a) Put $n_x=x/r=\sin\theta\cos\phi$,
+$n_y=\sin\theta\sin\phi$, $n_z=\cos\theta$, and
+$d\Omega=\sin\theta\,d\theta\,d\phi$. Then
+\begin{align*}
+\int n_x^2d\Omega
+&=\left(\int_0^{2\pi}\cos^2\phi\,d\phi\right)
+  \left(\int_0^\pi\sin^3\theta\,d\theta\right)\\
+&=\pi\int_{-1}^1(1-u^2)du=\frac{4\pi}{3},\\
+\int n_y^2d\Omega&=\frac{4\pi}{3},\qquad
+\int n_z^2d\Omega=2\pi\int_{-1}^1u^2du=\frac{4\pi}{3}.
+\end{align*}
+The mixed $xy$ integral contains
+$\int_0^{2\pi}\sin\phi\cos\phi\,d\phi=0$; the $xz$ and $yz$
+integrals contain respectively the zero integrals of $\cos\phi$ and
+$\sin\phi$. Choosing the common normalization real and positive gives
+\[
+\boxed{C=\sqrt{\frac3{4\pi}}},\qquad
+\langle\varphi_i|\varphi_j\rangle=\delta_{ij}.
+\]
+(b) Rotational derivatives annihilate the radial factor. For example,
+\[
+\left(y\partial_z-z\partial_y\right)\frac1r
+=y\frac{-z}{r^3}-z\frac{-y}{r^3}=0.
+\]
+The product rule therefore leaves only differentiation of $x,y,z$.
+The nine actions are
+\[
+\begin{array}{c|ccc}
+ &\varphi_1&\varphi_2&\varphi_3\\\hline
+L_x&0&i\varphi_3&-i\varphi_2\\
+L_y&-i\varphi_3&0&i\varphi_1\\
+L_z&i\varphi_2&-i\varphi_1&0
+\end{array}
+\]
+and each matrix column is the corresponding action:
+\[
+\boxed{L_x=\begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix},\quad
+L_y=\begin{pmatrix}0&0&i\\0&0&0\\-i&0&0\end{pmatrix},\quad
+L_z=\begin{pmatrix}0&-i&0\\i&0&0\\0&0&0\end{pmatrix}.}
+\]
+Conjugate transposition checks that each is Hermitian.
+
+(c) Multiplication gives
+\[
+L_xL_y=\begin{pmatrix}0&0&0\\-1&0&0\\0&0&0\end{pmatrix},\qquad
+L_yL_x=\begin{pmatrix}0&-1&0\\0&0&0\\0&0&0\end{pmatrix}.
+\]
+Therefore
+\[
+[L_x,L_y]=\begin{pmatrix}0&1&0\\-1&0&0\\0&0&0\end{pmatrix}
+=i\begin{pmatrix}0&-i&0\\i&0&0\\0&0&0\end{pmatrix}=\boxed{iL_z}.
+\]
+
+\Needspace{9\baselineskip}
+\subsection*{5.5 Unitary Operators}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.5.1}\quad Show that the \erratum{corrected matrix for Example 5.5.1},
+\[
+\mathsf U=\frac1{\sqrt2}\begin{pmatrix}
+-1&\erratum{i}&0&0&0\\1&\erratum{i}&0&0&0\\
+0&0&\erratum{-i}&1&0\\0&0&\erratum{i}&1&0\\
+0&0&0&0&\sqrt2
+\end{pmatrix},
+\]
+correctly transforms the vector
+$f(\theta,\varphi)=3\chi_{1}+2i\chi_{2}-\chi_{3}+\chi_{5}$ to the
+$\{\chi'_{i}\}$ basis by
+\begin{enumerate}
+\item[(a)] (1) Making a column vector $\mathbf{c}$ that represents
+  $f(\theta,\varphi)$ in the $\{\chi_{i}\}$ basis, (2) forming
+  $\mathbf{c}'=\mathsf{U}\mathbf{c}$, and (3) comparing the expansion
+  $\sum_{i}c'_{i}\chi'_{i}(\theta,\varphi)$ with $f(\theta,\varphi)$;
+\item[(b)] Verifying that $\mathsf{U}$ is unitary.
+\end{enumerate}
+\solution
+\erratum{The matrix displayed in Example 5.5.1 (p.~290) has four incorrect
+imaginary signs for the basis functions defined on p.~289. In fact its
+worked integral gives $u_{22}=+i/\sqrt2$, while the displayed matrix has
+$-i/\sqrt2$. The matrix must be corrected before part (a) is true.}
+We derive the correction directly from those functions, without relying
+on the displayed matrix. Euler's identities give
+\begin{align*}
+\chi'_1&=-\frac{\chi_1+i\chi_2}{\sqrt2},&
+\chi'_2&=\frac{\chi_1-i\chi_2}{\sqrt2},\\
+\chi'_3&=\frac{\chi_4+i\chi_3}{\sqrt2},&
+\chi'_4&=\frac{\chi_4-i\chi_3}{\sqrt2},&
+\chi'_5&=\chi_5.
+\end{align*}
+For example, $e^{2i\phi}=\cos2\phi+i\sin2\phi$ and
+$\sin2\phi=2\sin\phi\cos\phi$ yield the third identity with exactly
+the normalizing constants in the example. Since
+$U_{ij}=\langle\chi'_i|\chi_j\rangle$, the coefficients in these
+identities must be conjugated to obtain the rows of $U$. Thus
+\[
+U=\frac1{\sqrt2}\begin{pmatrix}
+-1&\erratum{i}&0&0&0\\
+1&\erratum{i}&0&0&0\\
+0&0&\erratum{-i}&1&0\\
+0&0&\erratum{i}&1&0\\
+0&0&0&0&\sqrt2
+\end{pmatrix}.
+\]
+(a) The original and transformed coefficient columns are
+\[
+c=\begin{pmatrix}3\\2i\\-1\\0\\1\end{pmatrix},\qquad
+c'=Uc=\frac1{\sqrt2}
+\begin{pmatrix}-3+i(2i)\\3+i(2i)\\(-i)(-1)\\i(-1)\\\sqrt2\end{pmatrix}
+=\boxed{\begin{pmatrix}-5/\sqrt2\\1/\sqrt2\\i/\sqrt2\\-i/\sqrt2\\1\end{pmatrix}}.
+\]
+Substituting the basis relations back into the expansion checks it:
+\begin{align*}
+\sum_jc'_j\chi'_j
+&=\frac52(\chi_1+i\chi_2)+\frac12(\chi_1-i\chi_2)\\
+&\quad+\frac i2(\chi_4+i\chi_3)-\frac i2(\chi_4-i\chi_3)+\chi_5\\
+&=3\chi_1+2i\chi_2-\chi_3+\chi_5=f.
+\end{align*}
+For comparison, using the matrix as printed gives
+$\widetilde c'=(-1,5,-i,i,\sqrt2)^T/\sqrt2$ and reconstructs
+$3\chi_1-2i\chi_2+\chi_3+\chi_5$, which is not the requested $f$.
+This explicitly verifies the need for the correction.
+
+(b) The corrected $U$ has two $2\times2$ blocks and a final $1$.
+Their products with their adjoints are
+\[
+\frac12\begin{pmatrix}-1&i\\1&i\end{pmatrix}
+\begin{pmatrix}-1&1\\-i&-i\end{pmatrix}
+=\frac12\begin{pmatrix}2&-1+1\\-1+1&2\end{pmatrix}=I_2,
+\]
+\[
+\frac12\begin{pmatrix}-i&1\\i&1\end{pmatrix}
+\begin{pmatrix}i&-i\\1&1\end{pmatrix}
+=\frac12\begin{pmatrix}2&-1+1\\-1+1&2\end{pmatrix}=I_2.
+\]
+The blocks have disjoint support, so $UU^\dagger=U^\dagger U=I_5$.
+The printed matrix is also unitary; that test by itself cannot detect a
+matrix that represents the wrong basis transformation.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.5.2}\quad
+\begin{enumerate}
+\item[(a)] Given (in $\mathbb{R}^{3}$) the basis $\varphi_{1}=x$,
+  $\varphi_{2}=y$, $\varphi_{3}=z$, consider the basis transformation
+  \erratum{$x=z'$, $y=y'$, $z=-x'$ (old coordinate functions written in new
+coordinates)}. Find the $3\times3$ matrix $\mathsf{U}$ for
+  this transformation.
+\item[(b)] This transformation corresponds to a rotation of the coordinate
+  axes. Identify the rotation and reconcile your transformation matrix with an
+  appropriate matrix $\mathsf{S}(\alpha,\beta,\gamma)$ of the form given in
+  Eq.~(3.37).
+\item[(c)] Form the column vector $\mathbf{c}$ representing (in the original
+  basis) $f=2x-3y+z$, find the result of applying $\mathsf{U}$ to
+  $\mathbf{c}$, and show that this is consistent with the basis transformation
+  of part (a).
+\end{enumerate}
+\emph{Note.}~You do not need to be able to form scalar products to handle this
+exercise; a knowledge of the linear relationship between the original and
+transformed functions is sufficient.
+\solution
+\erratum{The arrows require a convention: here, consistent with the
+coefficient transformation in Section 5.5, they express the old
+coordinate functions in new coordinates, $x=z'$, $y=y'$, $z=-x'$.
+Equivalently the new functions are $x'=-z$, $y'=y$, $z'=x$.}
+
+(a) Each column of $U$ contains the coefficients of an old basis function
+in the new basis $(x',y',z')$. The identities
+\[
+x=0x'+0y'+1z',\qquad y=0x'+1y'+0z',\qquad
+z=-1x'+0y'+0z'
+\]
+therefore give
+\[
+\boxed{U=\begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix}.}
+\]
+(b) The new coordinate axes are
+$\hat e'_x=-\hat e_z$, $\hat e'_y=\hat e_y$,
+$\hat e'_z=\hat e_x$. They result from a right-handed rotation of the
+axes by $\pi/2$ about $+y$. For the Euler convention of Eq.~(3.37),
+\[
+S(0,\beta,0)=\begin{pmatrix}
+\cos\beta&0&-\sin\beta\\0&1&0\\\sin\beta&0&\cos\beta
+\end{pmatrix}.
+\]
+Putting $\beta=\pi/2$ gives $S(0,\pi/2,0)=U$, as required.
+
+(c) The original coefficient column and its transform are
+\[
+c=\begin{pmatrix}2\\-3\\1\end{pmatrix},\qquad
+c'=Uc=\begin{pmatrix}-1\\-3\\2\end{pmatrix}.
+\]
+The function itself satisfies
+\[
+f=2x-3y+z=2z'-3y'-x'=-x'-3y'+2z',
+\]
+which verifies the coefficient column without scalar products.
+
+If instead the arrows are used to \emph{define} the new ordered basis
+as $(z,y,-x)$ in the old coordinates, the coefficient transformation for
+the same fixed $f$ is $U^{-1}$ and gives $(1,-3,-2)^T$.
+Likewise, active substitution $x\mapsto z$, $z\mapsto-x$ in $f$ produces
+$-x-3y+2z$ in the old labels. Keeping the primes explicit distinguishes
+these interpretations and their opposite rotation senses.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.5.3}\quad Construct the matrix representing the inverse of
+the transformation in Exercise 5.5.2, and show that this matrix and the
+transformation matrix of that exercise are matrix inverses of each other.
+\solution
+Using the convention established in 5.5.2, solve the transformation
+$x=z'$, $y=y'$, $z=-x'$ for the primed variables:
+$x'=-z$, $y'=y$, $z'=x$. To express a primed expansion in the old basis,
+read the coefficients of these three functions as columns:
+\[
+\boxed{V=\begin{pmatrix}0&0&1\\0&1&0\\-1&0&0\end{pmatrix}=U^T=U^\dagger.}
+\]
+Both orders of multiplication give the identity:
+\[
+UV=\begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix}
+\begin{pmatrix}0&0&1\\0&1&0\\-1&0&0\end{pmatrix}
+=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},
+\]
+\[
+VU=\begin{pmatrix}0&0&1\\0&1&0\\-1&0&0\end{pmatrix}
+\begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix}=I_3.
+\]
+As a vector check, $V(-1,-3,2)^T=(2,-3,1)^T$, recovering the original
+coefficients from 5.5.2.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.5.4}\quad \erratum{Consider two successive changes of coefficient columns,
+first from a basis $\{\varphi_i\}$ to $\{\varphi'_i\}$ by $\mathsf U$,
+then to $\{\chi_i\}$ by $\mathsf V$. The bases need not be orthonormal.
+Take real $\theta$ with
+$\sin\theta\cos\theta(\cos^2\theta-\sin^2\theta)\ne0$ so both maps are
+invertible.} Their matrix representations are
+\[
+\mathsf{U}=\begin{pmatrix}i\sin\theta&\cos\theta&0\\
+-\cos\theta&i\sin\theta&0\\0&0&1\end{pmatrix},\quad
+\mathsf{V}=\begin{pmatrix}1&0&0\\0&\cos\theta&i\sin\theta\\
+0&\cos\theta&-i\sin\theta\end{pmatrix}.
+\]
+Given the function $f(x)=3\varphi_{1}(x)-\varphi_{2}(x)-2\varphi_{3}(x)$,
+\begin{enumerate}
+\item[(a)] By applying $\mathsf{U}$, form the vector representing $f(x)$ in
+  the $\{\varphi'_{i}\}$ basis and then by applying $\mathsf{V}$ form the
+  vector representing $f(x)$ in the $\{\chi_{i}\}$ basis. Use this result to
+  write $f(x)$ as a linear combination of the $\chi_{i}$.
+\item[(b)] Form the matrix products $\mathsf{UV}$ and $\mathsf{VU}$ and then
+  apply each to the vector representing $f(x)$ in the $\{\varphi_{i}\}$ basis.
+  Verify that the results of these applications differ and that only one of
+  them gives the result corresponding to part (a).
+\end{enumerate}
+\solution
+Put $s=\sin\theta$, $c=\cos\theta$, and $a=(3,-1,-2)^T$.
+First retain the matrices exactly as printed and evaluate the requested
+products.
+
+(a) Row-by-column multiplication gives
+\[
+Ua=\begin{pmatrix}3is-c\\-3c-is\\-2\end{pmatrix}.
+\]
+Applying $V$ to this column gives
+\begin{align*}
+b=V(Ua)
+&=\begin{pmatrix}
+3is-c\\c(-3c-is)+is(-2)\\c(-3c-is)-is(-2)
+\end{pmatrix}\\
+&=\boxed{\begin{pmatrix}
+-c+3is\\-3c^2-is(c+2)\\-3c^2+is(2-c)
+\end{pmatrix}}.
+\end{align*}
+Where these matrices are invertible and interpreted as successive
+coefficient changes, the formal expansion is
+\[
+f=(-c+3is)\chi_1+[-3c^2-is(c+2)]\chi_2
+                 +[-3c^2+is(2-c)]\chi_3.
+\]
+\erratum{These signs also correct the manual's multiplication: the second
+entry of the initial vector is $-1$, so the first two entries of $Ua$
+are $3is-c$ and $-3c-is$.}
+
+(b) Form both matrix products before acting on $a$:
+\[
+UV=\begin{pmatrix}
+is&c^2&ics\\-c&ics&-s^2\\0&c&-is
+\end{pmatrix},\qquad
+VU=\begin{pmatrix}
+is&c&0\\-c^2&ics&is\\-c^2&ics&-is
+\end{pmatrix}.
+\]
+Consequently
+\[
+(UV)a=\begin{pmatrix}
+-c^2+is(3-2c)\\-3c-ics+2s^2\\-c+2is
+\end{pmatrix},\qquad
+(VU)a=\begin{pmatrix}
+-c+3is\\-3c^2-is(c+2)\\-3c^2+is(2-c)
+\end{pmatrix}=b.
+\]
+Only $VU$ corresponds to applying $U$ first and $V$ second. In fact,
+the two resulting columns differ for every real $\theta$: equality of
+their first entries would require $c(c-1)+2isc=0$, so $c=0$ or $c=1$.
+For $c=0$, their second entries are $2$ and $-2is$ and differ; for
+$c=1$, $s=0$ and their third entries are $-1$ and $-3$ and differ.
+
+\erratum{The original premise that both printed matrices are unitary is false; this is why the corrected question permits general bases and excludes singular angles.}
+An explicit check gives
+\[
+U^\dagger U=\begin{pmatrix}1&-2isc&0\\2isc&1&0\\0&0&1\end{pmatrix},
+\qquad V^\dagger V=\begin{pmatrix}1&0&0\\0&2c^2&0\\0&0&2s^2\end{pmatrix}.
+\]
+Thus $U$ is unitary only when $sc=0$, whereas $V$ is unitary only when
+$c^2=s^2=1/2$. These conditions never hold simultaneously. Moreover,
+\[
+\det U=c^2-s^2,\qquad \det V=-2isc.
+\]
+At their zeros even an invertible change of basis is impossible. Away
+from those zeros the calculations above describe general changes of
+coefficients, but not successive changes between orthonormal bases.
+
+\erratum{One consistent repair, not uniquely determined by the printed
+problem, is to use the following unitary families instead:}
+\[
+\widehat U=\begin{pmatrix}is&c&0\\\erratum{c}&is&0\\0&0&1\end{pmatrix},\qquad
+\widehat V=\begin{pmatrix}1&0&0\\0&c&is\\0&\erratum{is}&\erratum{c}\end{pmatrix}.
+\]
+Their nontrivial blocks are $isI+c\sigma_1$ and $cI+is\sigma_1$;
+multiplication by their adjoints cancels the cross terms and leaves
+$(s^2+c^2)I=I$. With these repaired data, the full calculation becomes
+\[
+\widehat Ua=\begin{pmatrix}-c+3is\\3c-is\\-2\end{pmatrix},\qquad
+\widehat V\widehat Ua=\begin{pmatrix}
+-c+3is\\3c^2-is(c+2)\\s^2-2c+3ics
+\end{pmatrix},
+\]
+\[
+\widehat U\widehat V=\begin{pmatrix}is&c^2&ics\\c&ics&-s^2\\0&is&c\end{pmatrix},
+\qquad
+\widehat V\widehat U=\begin{pmatrix}is&c&0\\c^2&ics&is\\ics&-s^2&c\end{pmatrix},
+\]
+\[
+\widehat U\widehat Va=\begin{pmatrix}
+-c^2+is(3-2c)\\3c-ics+2s^2\\-2c-is
+\end{pmatrix}.
+\]
+The coefficients of the repaired expansion in its final basis are the
+entries of $\widehat V\widehat Ua$. These repaired matrices fail to
+commute in general; for example $c=0$, $s=1$ makes the second entries
+of the two results $-2i$ and $2$. At special angles they may commute
+(e.g. $\theta=0$), so an assertion of different products for every angle
+would require its own qualification.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.5.5}\quad Three functions which are orthogonal with unit
+weight on the range $-1\le x\le1$ are $P_{0}=1$, $P_{1}=x$, and
+$P_{2}=\frac{3}{2}x^{2}-\frac{1}{2}$. Another set of functions that are
+orthogonal and span the same space are $F_{0}=x^{2}$, $F_{1}=x$,
+$F_{2}=5x^{2}-3$. Although much of this exercise can be done by inspection,
+write down and evaluate all the integrals that lead to the results when they
+are obtained in terms of scalar products.
+\begin{enumerate}
+\item[(a)] Normalize each of the $P_{i}$ and $F_{i}$.
+\item[(b)] Find the unitary matrix $\mathsf{U}$ that transforms from the
+  normalized $P_{i}$ basis to the normalized $F_{i}$ basis.
+\item[(c)] Find the unitary matrix $\mathsf{V}$ that transforms from the
+  normalized $F_{i}$ basis to the normalized $P_{i}$ basis.
+\item[(d)] Show that $\mathsf{U}$ and $\mathsf{V}$ are unitary, and that
+  $\mathsf{V}=\mathsf{U}^{-1}$.
+\item[(e)] Expand $f(x)=5x^{2}-3x+1$ in terms of the normalized versions of
+  both bases, and verify that the transformation matrix $\mathsf{U}$ converts
+  the $P$-basis expansion of $f(x)$ into its $F$-basis expansion.
+\end{enumerate}
+\solution
+Use $M_k=\int_{-1}^1x^kdx$, so $M_k=0$ for odd $k$ and
+$M_k=2/(k+1)$ for even $k$.
+
+(a) The normalization integrals are
+\begin{align*}
+\|P_0\|^2&=M_0=2,&\|P_1\|^2&=M_2=\frac23,\\
+\|P_2\|^2&=\frac14(9M_4-6M_2+M_0)
+=\frac14\left(\frac{18}5-4+2\right)=\frac25,\\
+\|F_0\|^2&=M_4=\frac25,&\|F_1\|^2&=M_2=\frac23,\\
+\|F_2\|^2&=25M_4-30M_2+9M_0=10-20+18=8.
+\end{align*}
+The normalized functions are therefore
+\[
+p_0=\frac1{\sqrt2},\quad p_1=\sqrt{\frac32}x,\quad
+p_2=\sqrt{\frac52}\frac{3x^2-1}{2},
+\]
+\[
+g_0=\sqrt{\frac52}x^2,\quad g_1=\sqrt{\frac32}x,\quad
+g_2=\frac{5x^2-3}{2\sqrt2}.
+\]
+For completeness, the original off-diagonal integrals are
+\[
+\langle P_0|P_1\rangle=M_1=0,\quad
+\langle P_0|P_2\rangle=(3M_2-M_0)/2=0,\quad
+\langle P_1|P_2\rangle=(3M_3-M_1)/2=0,
+\]
+\[
+\langle F_0|F_1\rangle=M_3=0,\quad
+\langle F_0|F_2\rangle=5M_4-3M_2=0,\quad
+\langle F_1|F_2\rangle=5M_3-3M_1=0.
+\]
+(b) Evaluate all nine overlaps $U_{ij}=\int_{-1}^1g_ip_jdx$:
+\begin{align*}
+U_{00}&=\frac{\sqrt5}{2}M_2=\frac{\sqrt5}{3},&
+U_{01}&=\frac{\sqrt{15}}2M_3=0,\\
+U_{02}&=\frac54(3M_4-M_2)=\frac23,&
+U_{10}&=\frac{\sqrt3}{2}M_1=0,\\
+U_{11}&=\frac32M_2=1,&
+U_{12}&=\frac{\sqrt{15}}4(3M_3-M_1)=0,\\
+U_{20}&=\frac14(5M_2-3M_0)=-\frac23,&
+U_{21}&=\frac{\sqrt3}{4}(5M_3-3M_1)=0,\\
+U_{22}&=\frac{\sqrt5}{8}(15M_4-14M_2+3M_0)
+=\frac{\sqrt5}{3}.&&
+\end{align*}
+Thus
+\[
+\boxed{U=\begin{pmatrix}\sqrt5/3&0&2/3\\0&1&0\\-2/3&0&\sqrt5/3\end{pmatrix}.}
+\]
+(c) Reversing the real integrands gives
+$V_{ij}=\int p_ig_jdx=U_{ji}$; these are the same nine evaluated
+integrals with their indices interchanged. Therefore
+\[
+\boxed{V=U^T=\begin{pmatrix}\sqrt5/3&0&-2/3\\0&1&0\\2/3&0&\sqrt5/3\end{pmatrix}.}
+\]
+(d) Let $a=\sqrt5/3$, $b=2/3$, so $a^2+b^2=5/9+4/9=1$.
+The $0,2$ block of $UV$ is
+\[
+\begin{pmatrix}a&b\\-b&a\end{pmatrix}
+\begin{pmatrix}a&-b\\b&a\end{pmatrix}
+=\begin{pmatrix}a^2+b^2&-ab+ab\\-ab+ab&a^2+b^2\end{pmatrix}=I_2.
+\]
+The middle entry is $1$ and other entries vanish, so $UV=VU=I_3$.
+Since $V=U^\dagger$, both matrices are unitary and $V=U^{-1}$.
+
+(e) Evaluate the six coefficient integrals, retaining their moment
+expressions to check every term:
+\begin{align*}
+a_0&=\int p_0f\,dx=\frac{5M_2-3M_1+M_0}{\sqrt2}
+=\frac{8\sqrt2}{3},\\
+a_1&=\int p_1f\,dx=\sqrt{\frac32}(5M_3-3M_2+M_1)=-\sqrt6,\\
+a_2&=\int p_2f\,dx
+=\frac12\sqrt{\frac52}(15M_4-9M_3-2M_2+3M_1-M_0)
+=\frac{2\sqrt{10}}3,\\
+b_0&=\int g_0f\,dx=\sqrt{\frac52}(5M_4-3M_3+M_2)
+=\frac{4\sqrt{10}}3,\\
+b_1&=\int g_1f\,dx=-\sqrt6,\\
+b_2&=\int g_2f\,dx
+=\frac{25M_4-15M_3-10M_2+9M_1-3M_0}{2\sqrt2}
+=-\frac{2\sqrt2}{3}.
+\end{align*}
+(All integrals in this part have limits $-1,1$.) Thus
+\[
+\boxed{f=\frac{8\sqrt2}{3}p_0-\sqrt6\,p_1+\frac{2\sqrt{10}}3p_2
+=\frac{4\sqrt{10}}3g_0-\sqrt6\,g_1-\frac{2\sqrt2}{3}g_2.}
+\]
+Direct substitution yields, respectively,
+$8/3-3x+(5/3)(3x^2-1)$ and
+$(20/3)x^2-3x-(5x^2-3)/3$, both equal to $f$.
+Finally,
+\[
+Ua=\begin{pmatrix}
+(\sqrt5/3)(8\sqrt2/3)+(2/3)(2\sqrt{10}/3)\\
+-\sqrt6\\
+(-2/3)(8\sqrt2/3)+(\sqrt5/3)(2\sqrt{10}/3)
+\end{pmatrix}
+=\begin{pmatrix}4\sqrt{10}/3\\-\sqrt6\\-2\sqrt2/3\end{pmatrix}=b,
+\]
+checking the coefficient transformation independently of reconstruction.
+
+\Needspace{9\baselineskip}
+\subsection*{5.6 Transformations of Operators}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.6.1}\quad
+\begin{enumerate}
+\item[(a)] Using the two spin functions $\varphi_{1}=\alpha$ and
+  $\varphi_{2}=\beta$ as an orthonormal basis (so
+  $\langle\alpha|\alpha\rangle=\langle\beta|\beta\rangle=1$,
+  $\langle\alpha|\beta\rangle=0$), and the relations
+  \[
+  S_{x}\alpha=\frac{1}{2}\beta,\quad S_{x}\beta=\frac{1}{2}\alpha,\quad
+  S_{y}\alpha=\frac{i}{2}\beta,\quad S_{y}\beta=-\frac{i}{2}\alpha,\quad
+  S_{z}\alpha=\frac{1}{2}\alpha,\quad S_{z}\beta=-\frac{1}{2}\beta,
+  \]
+  construct the $2\times2$ matrices of $S_{x}$, $S_{y}$, and $S_{z}$.
+\item[(b)] Taking now the basis $\varphi'_{1}=C(\alpha+\beta)$,
+  $\varphi'_{2}=C(\alpha-\beta)$:
+  \begin{enumerate}
+  \item[(i)] Verify that $\varphi'_{1}$ and $\varphi'_{2}$ are orthogonal,
+  \item[(ii)] Assign $C$ a value that makes $\varphi'_{1}$ and $\varphi'_{2}$
+    normalized,
+  \item[(iii)] Find the unitary matrix for the transformation
+    $\{\varphi_{i}\}\to\{\varphi'_{i}\}$.
+  \end{enumerate}
+\item[(c)] Find the matrices of $S_{x}$, $S_{y}$, and $S_{z}$ in the
+  $\{\varphi'_{i}\}$ basis.
+\end{enumerate}
+\solution
+(a) In the order $(\alpha,\beta)$, an operator's first column gives its
+action on $\alpha$ and its second gives its action on $\beta$.
+The supplied six relations therefore give
+\[
+\boxed{S_x=\frac12\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+S_y=\frac12\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+S_z=\frac12\begin{pmatrix}1&0\\0&-1\end{pmatrix}.}
+\]
+For example, $S_y\alpha=(i/2)\beta$ supplies the column $(0,i/2)^T$;
+this fixes the imaginary signs without an appeal to a memorized matrix.
+
+(b) Expand the scalar products using orthonormality:
+\[
+\langle\alpha+\beta|\alpha-\beta\rangle=1-0+0-1=0,
+\]
+\[
+\|\alpha\pm\beta\|^2=1\pm0\pm0+1=2.
+\]
+Hence $C=1/\sqrt2$ is a real positive normalizing choice. The overlap
+matrix $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$ is
+\[
+\boxed{U=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}},
+\qquad U^\dagger=U,\quad U^2=\frac12\begin{pmatrix}2&0\\0&2\end{pmatrix}=I.
+\]
+(c) Put $H=\sqrt2U$. The transformed operator is $S'_j=US_jU^\dagger$.
+The three unscaled products are
+\begin{align*}
+H\begin{pmatrix}0&1\\1&0\end{pmatrix}H
+&=\begin{pmatrix}1&1\\-1&1\end{pmatrix}
+  \begin{pmatrix}1&1\\1&-1\end{pmatrix}
+=\begin{pmatrix}2&0\\0&-2\end{pmatrix},\\
+H\begin{pmatrix}0&-i\\i&0\end{pmatrix}H
+&=\begin{pmatrix}i&-i\\-i&-i\end{pmatrix}
+  \begin{pmatrix}1&1\\1&-1\end{pmatrix}
+=\begin{pmatrix}0&2i\\-2i&0\end{pmatrix},\\
+H\begin{pmatrix}1&0\\0&-1\end{pmatrix}H
+&=\begin{pmatrix}1&-1\\1&1\end{pmatrix}
+  \begin{pmatrix}1&1\\1&-1\end{pmatrix}
+=\begin{pmatrix}0&2\\2&0\end{pmatrix}.
+\end{align*}
+Each must be multiplied by $1/4$ (two factors $1/\sqrt2$ and the
+operator's $1/2$), giving
+\[
+\boxed{S'_x=\frac12\begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
+S'_y=\frac12\begin{pmatrix}0&i\\-i&0\end{pmatrix},\quad
+S'_z=\frac12\begin{pmatrix}0&1\\1&0\end{pmatrix}.}
+\]
+A direct action check is $S_x(\alpha\pm\beta)=\pm(\alpha\pm\beta)/2$,
+which confirms the diagonal $S'_x$ and the order of its eigenvalues.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.6.2}\quad For the basis $\varphi_{1}=Cxe^{-r^{2}}$,
+$\varphi_{2}=Cye^{-r^{2}}$, $\varphi_{3}=Cze^{-r^{2}}$, where
+$r^{2}=x^{2}+y^{2}+z^{2}$, with the scalar product defined as an unweighted
+integral over $\mathbb{R}^{3}$ and with $C$ chosen to make the $\varphi_{i}$
+normalized:
+\begin{enumerate}
+\item[(a)] Find the $3\times3$ matrix of
+  $L_{x}=-i\left(y\dfrac{\partial}{\partial z}-z\dfrac{\partial}{\partial y}
+  \right)$;
+\item[(b)] Using the transformation matrix
+  $\mathsf{U}=\begin{pmatrix}1&0&0\\0&1/\sqrt{2}&-i/\sqrt{2}\\
+  0&1/\sqrt{2}&i/\sqrt{2}\end{pmatrix}$, find the transformed matrix of
+  $L_{x}$;
+\item[(c)] Find the new basis functions $\varphi'_{i}$ defined by the
+  transformation $\mathsf{U}$, and write explicitly (in terms of $x$, $y$, and
+  $z$) the functional forms of $L_{x}\varphi'_{i}$, $i=1,2,3$.
+\end{enumerate}
+\emph{Hint.}~Use $\int e^{-r^{2}}d^{3}r=\pi^{3/2}$,
+$\int x^{2}e^{-r^{2}}d^{3}r=\frac{1}{2}\pi^{3/2}$; the integrals are over
+$\mathbb{R}^{3}$.
+\solution
+First determine the common normalization, choosing $C$ real and positive. Scaling the Gaussian integral
+in the hint gives
+\[
+\int_{\mathbb R^3}e^{-ar^2}d^3r=\pi^{3/2}a^{-3/2},\qquad
+\int_{\mathbb R^3}x^2e^{-ar^2}d^3r=\frac{\pi^{3/2}}{2a^{5/2}}.
+\]
+For the second formula substitute $(X,Y,Z)=\sqrt a(x,y,z)$ in the
+hint: $x^2d^3r=X^2d^3R/a^{5/2}$. The squared wavefunctions involve
+$a=2$, not $a=1$, so
+\[
+1=C^2\frac{\pi^{3/2}}{2^{7/2}},\qquad
+\boxed{C=\frac{2^{7/4}}{\pi^{3/4}}}.
+\]
+The mixed integrals vanish by odd parity, so the basis is orthonormal.
+
+(a) Write $E=e^{-r^2}$. Its rotational derivative is zero:
+\[
+(y\partial_z-z\partial_y)E=y(-2zE)-z(-2yE)=0.
+\]
+The product rule then gives
+\[
+L_x(xE)=0,\qquad L_x(yE)=-i(0-z)E=izE,\qquad
+L_x(zE)=-i(y-0)E=-iyE.
+\]
+The common factor $C$ does not change the coefficients, so
+\[
+\boxed{L_x=\begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix}.}
+\]
+(b) The nontrivial block of $U$ has rows $(1,-i)/\sqrt2$ and
+$(1,i)/\sqrt2$, whose norms are one and whose mutual Hermitian scalar
+product is $(1+(-i)(-i))/2=0$. Thus $U^{-1}=U^\dagger$. Explicitly,
+\[
+UL_x=\begin{pmatrix}0&0&0\\0&1/\sqrt2&-i/\sqrt2\\
+0&-1/\sqrt2&-i/\sqrt2\end{pmatrix},\qquad
+U^\dagger=\begin{pmatrix}1&0&0\\0&1/\sqrt2&1/\sqrt2\\
+0&i/\sqrt2&-i/\sqrt2\end{pmatrix}.
+\]
+Multiplication gives
+\[
+\boxed{L'_x=UL_xU^\dagger=\begin{pmatrix}0&0&0\\0&1&0\\0&0&-1\end{pmatrix}.}
+\]
+(c) Because $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$, the new ket
+functions use the \emph{conjugates} of the rows of $U$:
+\[
+\boxed{\varphi'_1=CxE,\quad
+\varphi'_2=\frac{C}{\sqrt2}(y+iz)E,\quad
+\varphi'_3=\frac{C}{\sqrt2}(y-iz)E.}
+\]
+Applying the differential operator, using the actions in (a), gives
+\begin{align*}
+L_x\varphi'_1&=0,\\
+L_x\varphi'_2&=\frac C{\sqrt2}[iz+i(-iy)]E
+=\frac C{\sqrt2}(y+iz)E=\varphi'_2,\\
+L_x\varphi'_3&=\frac C{\sqrt2}[iz-i(-iy)]E
+=-\frac C{\sqrt2}(y-iz)E=-\varphi'_3.
+\end{align*}
+These are exactly the three columns of the diagonal matrix in (b).
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.6.3}\quad The Gram-Schmidt process for converting an
+arbitrary basis $\chi_{\nu}$ into an orthonormal set $\varphi_{\nu}$ is
+described in Section 5.2 in a way that introduces coefficients of the form
+$-\langle\varphi_{\mu}|\chi_{\nu}\rangle$. For bases consisting of three
+functions, convert the formulation so that $\varphi_{\nu}$ is expressed
+entirely in terms of the $\chi_{\mu}$, thereby obtaining an expression for the
+upper-triangular matrix $\mathsf{T}$ appearing in Eq.~(5.81).
+\solution
+Use the complex scalar-product convention of the chapter and define
+\[
+S_{ij}=\langle\chi_i|\chi_j\rangle,\quad S_{ji}=S_{ij}^*,\qquad
+D_1=S_{11},\quad D_2=S_{11}S_{22}-S_{12}S_{21},\quad D_3=\det S.
+\]
+Since the $\chi_i$ form a basis, their Gram matrix is positive definite,
+so $D_1,D_2,D_3>0$ and all square roots below are well defined and
+positive. Gram--Schmidt begins with
+\[
+\varphi_1=\frac{\chi_1}{\sqrt{D_1}},\qquad
+\psi_2=\chi_2-\frac{S_{12}}{D_1}\chi_1.
+\]
+Expanding the norm, including complex conjugation, gives
+\begin{align*}
+\|\psi_2\|^2
+&=S_{22}-\frac{S_{12}S_{21}}{D_1}
+ -\frac{S_{21}S_{12}}{D_1}
+ +\frac{S_{21}S_{12}S_{11}}{D_1^2}
+=\frac{D_2}{D_1}.
+\end{align*}
+Consequently
+\[
+\varphi_2=\frac{D_1\chi_2-S_{12}\chi_1}{\sqrt{D_1D_2}}.
+\]
+For the third step define $K=D_1S_{23}-S_{21}S_{13}$. The two projection
+coefficients, with the conjugation on the first argument accounted for,
+are
+\[
+\langle\varphi_1|\chi_3\rangle=\frac{S_{13}}{\sqrt{D_1}},\qquad
+\langle\varphi_2|\chi_3\rangle
+=\frac{D_1S_{23}-S_{21}S_{13}}{\sqrt{D_1D_2}}
+=\frac K{\sqrt{D_1D_2}}.
+\]
+Substitute the already-expanded $\varphi_1,\varphi_2$:
+\begin{align*}
+\psi_3
+&=\chi_3-\frac{S_{13}}{D_1}\chi_1
+ -\frac K{D_1D_2}(D_1\chi_2-S_{12}\chi_1)\\
+&=\chi_3-\frac K{D_2}\chi_2
+ +\frac{-D_2S_{13}+S_{12}K}{D_1D_2}\chi_1.
+\end{align*}
+The last numerator simplifies without any reality assumption:
+\begin{align*}
+-D_2S_{13}+S_{12}K
+&=-(D_1S_{22}-S_{12}S_{21})S_{13}
+  +S_{12}(D_1S_{23}-S_{21}S_{13})\\
+&=D_1(S_{12}S_{23}-S_{22}S_{13}).
+\end{align*}
+Thus the unnormalized third vector is
+\[
+\psi_3=\chi_3
+ +\frac{S_{21}S_{13}-D_1S_{23}}{D_2}\chi_2
+ +\frac{S_{12}S_{23}-S_{22}S_{13}}{D_2}\chi_1.
+\]
+Its norm can be evaluated by subtracting the squared orthogonal
+projection lengths:
+\[
+\|\psi_3\|^2
+=S_{33}-\frac{S_{31}S_{13}}{D_1}-\frac{K^*K}{D_1D_2}
+=\frac{D_3}{D_2}.
+\]
+To verify the determinant simplification explicitly, multiply by $D_1D_2$:
+\begin{align*}
+D_1D_2\|\psi_3\|^2
+&=D_1(D_1S_{22}-S_{12}S_{21})S_{33}
+ -(D_1S_{22}-S_{12}S_{21})S_{31}S_{13}\\
+&\quad-(D_1S_{32}-S_{12}S_{31})(D_1S_{23}-S_{21}S_{13})\\
+&=D_1\{D_1S_{22}S_{33}-S_{12}S_{21}S_{33}-S_{22}S_{31}S_{13}\\
+&\hspace{34mm}-D_1S_{32}S_{23}+S_{32}S_{21}S_{13}
+                          +S_{12}S_{31}S_{23}\}\\
+&=D_1\det S.
+\end{align*}
+Dividing $\psi_3$ by $\sqrt{D_3/D_2}$ now expresses all three
+$\varphi_j$ in the original $\chi_i$. Since the coefficients of
+$\varphi_j=\sum_iT_{ij}\chi_i$ form column $j$, the answer is
+\[
+\boxed{T=\begin{pmatrix}
+\dfrac1{\sqrt{D_1}}&-\dfrac{S_{12}}{\sqrt{D_1D_2}}&
+\dfrac{S_{12}S_{23}-S_{22}S_{13}}{\sqrt{D_2D_3}}\\[2ex]
+0&\sqrt{\dfrac{D_1}{D_2}}&
+\dfrac{S_{21}S_{13}-D_1S_{23}}{\sqrt{D_2D_3}}\\[2ex]
+0&0&\sqrt{\dfrac{D_2}{D_3}}
+\end{pmatrix}.}
+\]
+Every column has unit $S$-norm and is $S$-orthogonal to the others, so
+$T^\dagger ST=I$. Finally, if $A_{ij}=\langle\chi_i|\mathcal A\chi_j\rangle$,
+expanding both arguments gives
+\[
+\langle\varphi_\mu|\mathcal A\varphi_\nu\rangle
+=\sum_{i,j}T_{i\mu}^*A_{ij}T_{j\nu}=(T^\dagger AT)_{\mu\nu},
+\]
+which also verifies the orientation of $T$ in Eq.~(5.81).
+
+\Needspace{9\baselineskip}
+\subsection*{5.7 Invariants}
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.7.1}\quad Using the formal properties of unitary
+transformations, show that the \erratum{operator commutator $[x,p]=iI$,
+on a common domain of the products, is invariant under unitary conjugation
+when the domain is carried along by the same unitary map}.
+\solution
+Let $x'=UxU^\dagger$, $p'=UpU^\dagger$, with
+$U^\dagger U=UU^\dagger=I$. Multiply before simplifying:
+\begin{align*}
+[x',p']
+&=(UxU^\dagger)(UpU^\dagger)-(UpU^\dagger)(UxU^\dagger)\\
+&=Ux(U^\dagger U)pU^\dagger-Up(U^\dagger U)xU^\dagger\\
+&=U(xp-px)U^\dagger=U(iI)U^\dagger
+=iUU^\dagger=\boxed{iI}.
+\end{align*}
+\erratum{The canonical relation $[x,p]=iI$ cannot hold for finite square
+matrices: $\operatorname{tr}(xp-px)=0$, whereas
+$\operatorname{tr}(iI_N)=iN\ne0$. It is an operator relation in an
+infinite-dimensional space. For unbounded position and momentum the
+calculation holds on a common domain of the products, carried to the
+new domain by $U$; it is not a claim that those products are defined on
+every Hilbert-space vector.}
+For example, the usual relation holds for
+$x\psi=x\psi(x)$ and $p\psi=-i\psi'(x)$ on smooth rapidly decreasing
+functions, since
+\[
+x(-i\psi')-[-i(x\psi)']=-ix\psi'+i(\psi+x\psi')=i\psi.
+\]
+This explicitly supplies a domain and realization for the formal relation.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.7.2}\quad The Pauli matrices
+\[
+\sigma_{1}=\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+\sigma_{2}=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
+\sigma_{3}=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+have commutator $[\sigma_{1},\sigma_{2}]=2i\sigma_{3}$. Show that this
+relationship continues to be valid if these matrices are transformed by
+\[
+\mathsf{U}=\begin{pmatrix}\cos\theta&\sin\theta\\
+-\sin\theta&\cos\theta\end{pmatrix}.
+\]
+\solution
+Let $c=\cos\theta$, $s=\sin\theta$. The columns of $U$ are real
+orthonormal vectors, so $U^\dagger=U^T=U^{-1}$. Direct multiplication
+gives
+\begin{align*}
+\sigma'_1=U\sigma_1U^T
+&=\begin{pmatrix}s&c\\c&-s\end{pmatrix}
+  \begin{pmatrix}c&-s\\s&c\end{pmatrix}
+=\begin{pmatrix}2sc&c^2-s^2\\c^2-s^2&-2sc\end{pmatrix},\\
+\sigma'_2=U\sigma_2U^T
+&=\begin{pmatrix}is&-ic\\ic&is\end{pmatrix}
+  \begin{pmatrix}c&-s\\s&c\end{pmatrix}
+=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\\
+\sigma'_3=U\sigma_3U^T
+&=\begin{pmatrix}c&-s\\-s&-c\end{pmatrix}
+  \begin{pmatrix}c&-s\\s&c\end{pmatrix}
+=\begin{pmatrix}c^2-s^2&-2sc\\-2sc&-(c^2-s^2)\end{pmatrix}.
+\end{align*}
+Write $C=\cos2\theta=c^2-s^2$ and $S=\sin2\theta=2sc$. Then
+\[
+\sigma'_1\sigma'_2
+=\begin{pmatrix}S&C\\C&-S\end{pmatrix}
+ \begin{pmatrix}0&-i\\i&0\end{pmatrix}
+=\begin{pmatrix}iC&-iS\\-iS&-iC\end{pmatrix}=i\sigma'_3,
+\]
+\[
+\sigma'_2\sigma'_1
+=\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+ \begin{pmatrix}S&C\\C&-S\end{pmatrix}
+=\begin{pmatrix}-iC&iS\\iS&iC\end{pmatrix}=-i\sigma'_3.
+\]
+Subtracting proves
+\[
+\boxed{[\sigma'_1,\sigma'_2]=2i\sigma'_3.}
+\]
+This also follows from $[UAU^\dagger,UBU^\dagger]=U[A,B]U^\dagger$,
+but the displayed products check the signs and factors directly.
+
+\Needspace{5\baselineskip}
+\par\bigskip
+\noindent\textbf{5.7.3}\quad
+\begin{enumerate}
+\item[(a)] The operator $L_{x}$ is defined as
+  \[
+  L_{x}=-i\left(y\frac{\partial}{\partial z}-z\frac{\partial}{\partial y}
+  \right).
+  \]
+  Verify that the basis $\varphi_{1}=Cxe^{-r^{2}}$,
+  $\varphi_{2}=Cye^{-r^{2}}$, $\varphi_{3}=Cze^{-r^{2}}$, where
+  $r^{2}=x^{2}+y^{2}+z^{2}$, forms a closed set under the operation of
+  $L_{x}$, meaning that when $L_{x}$ is applied to any member of this basis
+  the result is a function within the basis space, and construct the
+  $3\times3$ matrix of $L_{x}$ in this basis from the result of the
+  application of $L_{x}$ to each basis function.
+\item[(b)] Verify that $L_{x}(x+iy)e^{-r^{2}}=-ze^{-r^{2}}$, and note that
+  this result, using the $\{\varphi_{i}\}$ basis, can be written
+  $L_{x}(\varphi_{1}+i\varphi_{2})=-\varphi_{3}$.
+\item[(c)] Express the equation of part (b) in matrix form, and write the
+  matrix equation that results when each of the quantities is transformed
+  using the transformation matrix
+  \[
+  \mathsf{U}=\begin{pmatrix}1&0&0\\0&1/\sqrt{2}&-i/\sqrt{2}\\
+  0&1/\sqrt{2}&i/\sqrt{2}\end{pmatrix}.
+  \]
+\item[(d)] Regarding the transformation $\mathsf{U}$ as producing a new basis
+  $\{\varphi'_{i}\}$, find the explicit form (in $x,y,z$) of the
+  $\varphi'_{i}$.
+\item[(e)] Using the operator form of $L_{x}$ and the explicit forms of the
+  $\varphi'_{i}$, verify the validity of the transformed equation found in
+  part (c).
+\end{enumerate}
+\emph{Hint.}~The results of Exercise 5.6.2 may be useful.
+\solution
+Put $E=e^{-r^2}$ and use the same positive normalization
+$C=2^{7/4}/\pi^{3/4}$ as in 5.6.2.
+
+(a) Since $(y\partial_z-z\partial_y)E=0$, the product rule gives
+\[
+L_x\varphi_1=0,\qquad L_x\varphi_2=i\varphi_3,\qquad
+L_x\varphi_3=-i\varphi_2.
+\]
+Every result belongs to the span, so the set is closed under $L_x$ and
+\[
+L=\begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix}.
+\]
+(b) Applying the same actions without the factor $C$ gives
+\[
+L_x[(x+iy)E]=L_x(xE)+iL_x(yE)=0+i(izE)=-zE.
+\]
+Multiplying by $C$ produces
+$L_x(\varphi_1+i\varphi_2)=-\varphi_3$.
+
+(c) The input and output coefficient columns are $a=(1,i,0)^T$ and
+$b=(0,0,-1)^T$, so the original equation is
+\[
+La=\begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix}
+\begin{pmatrix}1\\i\\0\end{pmatrix}
+=\begin{pmatrix}0\\0\\i^2\end{pmatrix}=b.
+\]
+Transform both vectors and the operator, not just the vectors:
+\[
+a'=Ua=\begin{pmatrix}1\\i/\sqrt2\\i/\sqrt2\end{pmatrix},\quad
+b'=Ub=\begin{pmatrix}0\\i/\sqrt2\\-i/\sqrt2\end{pmatrix},\quad
+L'=ULU^\dagger=\begin{pmatrix}0&0&0\\0&1&0\\0&0&-1\end{pmatrix}.
+\]
+The transformed equation is therefore
+\[
+\boxed{\begin{pmatrix}0&0&0\\0&1&0\\0&0&-1\end{pmatrix}
+\begin{pmatrix}1\\i/\sqrt2\\i/\sqrt2\end{pmatrix}
+=\begin{pmatrix}0\\i/\sqrt2\\-i/\sqrt2\end{pmatrix}.}
+\]
+(d) Conjugating the rows of $U$ to form the new ket functions yields
+\[
+\varphi'_1=CxE,\qquad
+\varphi'_2=\frac C{\sqrt2}(y+iz)E,\qquad
+\varphi'_3=\frac C{\sqrt2}(y-iz)E.
+\]
+(e) Direct differentiation, including the cancellation of the radial
+terms as in (a), gives
+\[
+L_x\varphi'_1=0,\qquad
+L_x\varphi'_2=\frac C{\sqrt2}[iz+i(-iy)]E=\varphi'_2,
+\]
+\[
+L_x\varphi'_3=\frac C{\sqrt2}[iz-i(-iy)]E=-\varphi'_3.
+\]
+The transformed matrix equation thus means exactly
+\[
+L_x\left(\varphi'_1+\frac i{\sqrt2}\varphi'_2
+                    +\frac i{\sqrt2}\varphi'_3\right)
+=\frac i{\sqrt2}\varphi'_2-\frac i{\sqrt2}\varphi'_3.
+\]
+Substitute their explicit forms. The input is
+\[
+CxE+\frac{iC}{2}[(y+iz)+(y-iz)]E=C(x+iy)E,
+\]
+and the output is
+\[
+\frac{iC}{2}[(y+iz)-(y-iz)]E=-CzE.
+\]
+This is precisely the functional equation from (b), verifying the
+invariance using both matrices and differential operators.
