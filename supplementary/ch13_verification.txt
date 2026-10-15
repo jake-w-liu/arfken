@@ -1,0 +1,199 @@
+CHAPTER 13 INITIAL-COMPLETION VERIFICATION RECORD — HISTORICAL, 2026-10-04
+
+Verified scope: all 89 exercises in Sections 13.1--13.6.
+Deliverables: sections/ch13.tex and supplementary/ch13_check.py.
+
+Sources actually read
+- All Chapter13 problem statements, surrounding definitions and finished solutions.
+- Local textbook PDF, Chapter13, work/book-layout.txt approximately 30587--32650.
+- Local solution manual PDF, Chapter13, work/solman.txt approximately 17370--20335.
+- The manual's 6 April 2012 errata list, Chapter13 entries, lines232--265.
+- Visually inspected book PDF pp.604,609,633,634 (printed605,610,634,635)
+  and manual PDF pp.190,191 (printed187,188). These establish the actual
+  branch convention, published contour erratum, derivative typo, reverse-ratio
+  typo and Eq.13.82 evaluation-subscript typo, beyond text extraction.
+
+The written derivations were checked against the requested results and
+independently by exact algebra, recurrence, limits, remainder estimates,
+endpoint analysis and direct quadrature. Computational samples do not prove
+all-order identities; the general proofs and their assumptions are in the TeX.
+
+Per-exercise executable scope, Section13.1
+13.1.1: Integration-by-parts derivative and three regular real/complex recurrence values.
+13.1.2: Three factorial/Pochhammer forms compared with the original finite products
+         at 30 (n,s) pairs. The general cancellation is written in the solution.
+13.1.3: Both transformed Euler integrals numerically integrated for real/complex z.
+13.1.4: Five Maxwell moments from independent velocity quadrature, including normalization.
+13.1.5: Four exact logarithmic integrals, including a fractional exponent.
+13.1.6: Quartic integral by high-precision quadrature and exact gamma recurrence.
+13.1.7: Three symbolic gamma-ratio limits for positive/negative a.
+13.1.8: Seven symbolic residues of the actual gamma function.
+13.1.9: Exact half-integer values/signs and finite brackets for three nonzero levels;
+         infinite root existence is the interval/IVT proof, not these samples.
+13.1.10: Exact odd/even Gaussian integrals for s=0..6 with a symbolic positive scale.
+13.1.11: Thirteen binomial coefficients compared with both factorial forms.
+13.1.12: Fifteen binomial coefficients including n=0 compared with both forms.
+13.1.13: Both coefficient forms and complete Chebyshev/Legendre polynomial
+          reconstruction through odd degree 17.
+13.1.14: Exact gamma products at n=-8..8 and individual half-integer values n=0..8.
+13.1.15: Three conjugation checks, including a negative nonintegral real part.
+13.1.16: Nine finite-product values compared with rigorous infinite-tail enclosures,
+          including negative nonintegral alpha. No finite product is called exact.
+13.1.17: Eighteen complex gamma moduli including b=0 and negative b.
+13.1.18: Nine modulus inequalities; strictness follows from the general product proof.
+13.1.19: Three exact-form numerical half-line gamma moduli.
+13.1.20: Exact normalization and first two standard Gaussian moments.
+13.1.21: Three symbolic general gamma-distribution moments and variance cancellation.
+13.1.22: Three direct wavefunction modulus values compared with the derived expression.
+13.1.23: Fourteen independent full-contour quadratures, two circle radii and seven
+          real/complex orders including negative nonintegers and negative integers.
+          Continuous argument is used explicitly on the circle; it is retained
+          when its separate shrinking limit does not exist.
+
+Section13.1 corrections in dark red
+- 13.1.4: positive physical parameters and Re n>-3 for the Maxwell moment.
+- 13.1.7: a is fixed and nonzero.
+- 13.1.9: the level k must be a nonzero real number for the assertion about real roots.
+- 13.1.10: convergent real Gaussian integrals use a>0 and nonnegative integer s.
+- 13.1.16,18: exclude undefined gamma poles in the displayed literal expressions.
+- 13.1.17: removable b=0 quotient handled by its limit.
+- 13.1.20,21: positive probability scales/shapes.
+- 13.1.23: published replacement of (-t)^nu by exp(-pi i nu)t^nu; explicit branch,
+  orientation, analytic continuation and negative-integer residues. The actual book's
+  assertion that every integer order makes the integrand entire needs restriction
+  to nonnegative integers; at nu=-m the integral is -2 pi i/(m-1)!.
+
+Additional per-exercise executable scope
+13.2.1--2: zeta-series values, separated logarithms, accelerated radius-two
+  series and its removable value at x=1; endpoint domains are proved in TeX.
+13.2.3--8: finite harmonic telescoping, digamma series, accelerated logarithm
+  series, reflection identity, Weierstrass expansion and polygamma recurrence.
+13.2.9: finite products, polynomial derivatives including zeros, and concatenation.
+13.2.10--15: special polygamma values, independent logarithmic integrals,
+  composed gamma Taylor coefficients, complex phase, exact finite telescoping,
+  and digamma sums including the coalescent limit and an improper-integral pole.
+13.3.1--6: exact beta identities, polynomial moments, endpoint quadratures,
+  affine Jacobian cancellation and all 25 triangular monomials p,q=0..4.
+13.3.7: oblique quadratic/Jacobian identities and six independent Cartesian
+  Gaussian integrals, including theta=0, negative theta and 3*pi/2.
+13.3.8--10: exact trigonometric moments, nonsingular lemniscatic quadrature
+  and decimal rounding, general-order Bessel coefficients and three integrals.
+13.3.11--12: exact associated-Legendre norms and polynomial beta moments.
+13.3.13--14: four regularized energy quadratures for oscillator periods,
+  harmonic specialization, exact gamma limit and domination samples.
+13.3.15--17: three hyperbolic quadratures, beta-distribution moments and
+  twelve exact finite Wallis-product identities with the squeeze bounds.
+13.4.1--3: exact cubic exponential expansion; 52! compared with Python's
+  exact integer factorial, decimal/error checks; recurrence/duplication limits.
+13.4.4--7: 23 strict logarithmic integral bounds, exact double-factorial
+  summand identities, asymptotic comparisons for real and complex parameters.
+13.4.8: exact entropy Hessian, exhaustive three-state multinomial maxima
+  at N=12,13,14, and finite Stirling-correction bounds at N=30,300,3000.
+13.5.1--4: functional-equation factors and complex values; transport
+  quadrature, low-temperature remainder bound, high-temperature expansion,
+  and exact Debye coefficients plus independent quadrature.
+13.5.5--9: blackbody and Fermi integrals, angular flux, neutrino constant,
+  Bose Mellin integrals, and polygamma Laplace integrals.
+13.5.10: direct fixed-radius contour quadrature at eight real/complex orders,
+  including -2,0,1,2,3 and 1+2*pi*i/log(2); pole/zero and residue identities.
+13.6.1--3: both lower-gamma series, differential formulas including parameter
+  limits, and integration-by-parts recurrence identities.
+13.6.4: 30 exact finite remainder evaluations, six terminating formulas and
+  nine pole-free coefficient identities.
+13.6.5: ten consecutive coefficient identities, three exact endpoint tails,
+  and nine beta-series/integral comparisons including x=1.
+13.6.6: nine E1/si/Ci identities on the principal branch.
+13.6.7--8: exact original incomplete-gamma potentials, finite expressions,
+  origin series/limits and asymptotic monopole/quadrupole coefficients.
+13.6.9--10: three independent E1 quadratures and the parameter limit;
+  two right-half-plane integrals and oscillatory quadrature on the imaginary axis.
+13.6.11--14: twelve independently integrated En recurrences, six zero-argument
+  integrals, si/Ci series, antenna quadrature for both signs and the Ci derivative.
+13.6.15: forty numerical derivatives, including negative/zero/integer/complex
+  parameters, checking both scaled upper-gamma derivative identities.
+13.6.16: eight Bose-tail quadratures and two elementary n=0 limits.
+Structure: all 89 exercises occur exactly once, have completed solutions,
+  and have named executable checks. No placeholder remains.
+
+Additional corrections and qualifications in dark red
+- 13.2.2,4,5: distinguish series convergence from real-logarithm domains;
+  handle all boundary points and removable singularities explicitly.
+- 13.2.6: apply the published hint correction to Eq.13.44.
+- 13.2.9: nonnegative integer finite-product indices and polynomial values at zeros.
+- 13.2.15: the comparison improper integral needs stronger conditions than
+  the series; a=-3/2,b=0 gives an interior pole despite admissible series terms.
+- 13.3.4--6,8,12,13,16: endpoint convergence, ordering, integer and physical
+  positivity assumptions needed by the displayed integrals/formulas.
+- 13.3.7: -pi<theta<pi is the unreduced formula's principal range, with a
+  removable point at zero. The actual integral is periodic and converges at
+  all real theta except odd multiples of pi; reduce with acos(cos(theta)).
+- 13.3.14: fix a length L when comparing dimensionful powers of the potential.
+- 13.4.1: Stirling's expansion is asymptotic, not a convergent infinite sum.
+- 13.4.3: published correction requires recurrence for C1 and duplication for C2.
+- 13.4.8: extensivity is a leading large-N statement for fixed state count
+  and fractions; M much less than N alone does not suffice.
+- 13.5.5: the supplied blackbody expression is energy density; outgoing
+  radiative flux is c*u/4, giving the conventional Stefan--Boltzmann constant.
+- 13.5.8: energy-density units require c^(-3), or the convention c=1.
+- 13.5.9: integer derivative order n>=1 is necessary; n=0 diverges.
+- 13.5.10: the manual's alternating quotient alone leaves additional possible
+  singularities at 1+2*pi*i*k/log(2). The full contour proof cancels these.
+- 13.6.1,2,4,15: state integral domains, continue entire products rather than
+  undefined gamma quotients, and retain terminating/pole-free coefficients.
+- 13.6.2: remove the manual's extra exp(-x) in the intermediate derivative.
+- 13.6.5: the manual's reverse consecutive-term ratio has 1/x, not x.
+- 13.6.6: x>0, the principal E1 branch and si=Si-pi/2 are explicit.
+- 13.6.9: the textbook Eq.13.82 evaluation subscript is a=0, not a=1.
+- 13.6.10: exclude z=0; the imaginary-axis integral is conditional.
+- 13.6.16: the terminating bracket requires a nonnegative integer n.
+
+Historical initial-completion commands and results
+python3 -u supplementary/ch13_check.py
+  PASS: 1213 checks for all 89 exercises; exit status 0.
+  Python 3.14.7, SymPy 1.14.0, mpmath 1.3.0.
+  Normally 70 decimal digits, comparison tolerance 1e-55; contour-zeta checks
+  use 100 digits; the imaginary-axis oscillatory E1 check uses 60 digits
+  and tolerance 1e-50. Inequality checks use their written mathematical bounds.
+  Finite checks supplement the general algebra, convergence and continuation
+  proofs written in sections/ch13.tex; they are not interval-certified proofs.
+
+Checked numerical-tool issues
+- SymPy's default Meijer-G integration left sqrt(x)*log(x) unevaluated;
+  meijerg=False independently returned the exact integral -4/9.
+- The beta affine cancellation was checked with u=x/(1+x), x>0, to encode
+  the actual positive power bases; no unrestricted power simplification used.
+- At s=1+2*pi*i/log(2), the default mpmath 1.3.0 zeta evaluation disagreed
+  with direct contour quadrature. At 100 digits, forced Euler--Maclaurin
+  zeta and the shifted Hurwitz evaluation 1+zeta(s,2) both agreed with that
+  contour to within 2e-97. The mpmath implementation was read, confirming
+  method='euler-maclaurin' bypasses its native zeta shortcut. The final
+  contour checks explicitly use that verified evaluation path. No failed
+  identity was skipped and no library was modified.
+
+Historical initial-completion layout verification
+Two passes:
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch13-only.tex
+  Final PDF: 56 pages. Final log has no warnings, errors, overfull or underfull boxes.
+  An undefined Log macro discovered in the first Section13.6 build was replaced
+  by the standard operatorname{Log} in the canonical TeX and rebuilt successfully.
+Rendered:
+  pdftoppm -scale-to 1000 -png work/ch13-only.pdf work/ch13-final-page
+  All 56 final pages visually inspected in work/ch13-final-contact-01.png
+  through -14.png. Formulas fit, dark-red corrections are visible, and the
+  branch-contour and oblique-coordinate figures have clear labels.
+  Earlier section-by-section renders supplied a second layout check for Sections1--5.
+The completed integrated main.pdf build and layout review are recorded in
+supplementary/PROGRESS.txt.
+
+Historical handoff SHA256 sections/ch13.tex: a864ee2b8036a75c53e9751f0788cccf1c978e93ee150d403dd1b7a13327632c
+Historical handoff SHA256 supplementary/ch13_check.py: b8a3765c2e601f5963e30e7137975c87b408ded5292761f8f325e0c2227f7d49
+
+CURRENT FRESH AUDIT,2026-10-04
+All89 statements/solutions freshly reviewed against source and derivations.
+See supplementary/ch13_final_audit.txt for per-entry current TeX/book/manual
+locations, exact new scope, changes and full1221-check result. Current build is
+work/ch13-final-audit.pdf (58pages,379321bytes), clean log; all58pages reviewed.
+The1130 exercise checks and91 structural checks include8 new exact regressions.
+Current hashes:
+161c86308d167b87a4b19db8a314f0f3f2c391a16bb737834eb403ea5ad6b1a8  sections/ch13.tex
+c10a6635c96618fd18ed9d363ad1f617f0d6199f4ac41124a78f9c4cc359c7ec  supplementary/ch13_check.py

@@ -1,0 +1,127 @@
+CHAPTER 21 — FINAL CORRECTNESS AND STUDENT-READABILITY AUDIT
+
+Status: complete for all33 entries, 2026-10-04.
+Freshly read: every current statement and full worked solution; all chapter
+exercise statements in work/book-layout.txt, actual Eqs21.11/59/60/81/89,
+and manual work/solman.txt lines38945-39968. Line references below count
+literal newlines, matching rg/sed; they do not count PDF form feeds.
+Every argument was traced independently of the executable samples.
+
+21.1.1 | sections/ch21.tex:12 | book-layout.txt:54506
+Compared both ODEs and initial data and actual Eq21.11. Traced both integrations, triangular order reversal, both answers and the kernel sign; the signed-integral extension to negative x is explicit. Executable scope: 4 assertions; see the named transcript items.
+
+21.1.2 | sections/ch21.tex:55 | book-layout.txt:54519
+Compared both referenced equations. Traced both Leibniz derivatives including the zero endpoint factor, and recovered the four initial data without assuming the answer. Executable scope: 6 assertions; see the named transcript items.
+
+21.1.3 | sections/ch21.tex:84 | book-layout.txt:54522
+Compared the t-x sign. Traced the recovered ODE, both constants of its solution and the explicit integration-by-parts substitution of sinh. Executable scope: 1 assertions; see the named transcript items.
+
+21.1.4 | sections/ch21.tex:117 | book-layout.txt:54527
+The original smooth-Maclaurin hint does not establish uniqueness. Moved the continuous-kernel/solution hypotheses and the factorial-iteration hint into the problem; checked the full induction, n-limit and flat-function counterexample. Executable scope: 16 assertions; see the named transcript items.
+
+21.2.1 | sections/ch21.tex:169 | book-layout.txt:54879
+Compared Fourier signs and normalizations with the book/manual. Traced the convolution change of variables and division; added admissible quotient and nonzero-denominator conditions directly to the problem. Executable scope: 8 assertions; see the named transcript items.
+
+21.2.2 | sections/ch21.tex:229 | book-layout.txt:54892
+Compared both first/second-kind formulas. Traced triangular convolution, quotients and Bromwich inversions; added admissibility and the right-half-plane placement of gamma to the statement. Executable scope: 2 assertions; see the named transcript items.
+
+21.2.3 | sections/ch21.tex:298 | book-layout.txt:54922
+Compared both signs and printed answers. Traced both Laplace rational equations and the two explicit original-integral substitution checks. Executable scope: 4 assertions; see the named transcript items.
+
+21.2.4 | sections/ch21.tex:342 | book-layout.txt:54936
+Compared the book request and manual cosine normalization. The reflected kernel is essential; made even extensions and retention of k(x+t) explicit in the problem. Traced splitting, transform factors and inverse factors. Executable scope: 8 assertions; see the named transcript items.
+
+21.2.5 | sections/ch21.tex:390 | book-layout.txt:54938
+Compared both Gaussian exponents. Traced transform division, delta normalization and uniqueness as a tempered distribution, plus the L1/L2 obstructions. The statement now specifies the distributional solution class. Executable scope: 4 assertions; see the named transcript items.
+
+21.2.6 | sections/ch21.tex:428 | book-layout.txt:54945
+Compared the Abel powers and beta identity. Traced the triangular interchange, substitution, gamma reflection, derivative and the regular-data boundary term; sufficiency and almost-everywhere qualifications remain explicit. Executable scope: 18 assertions; see the named transcript items.
+
+21.2.7 | sections/ch21.tex:501 | book-layout.txt:54966
+Compared the printed coefficient. Traced the derivative and direct beta-integral substitution; added x>0 to the problem because its zero-length ordinary integral cannot equal1 at zero. Executable scope: 12 assertions; see the named transcript items.
+
+21.2.8 | sections/ch21.tex:540 | book-layout.txt:54978
+Compared the Hermite coefficient with the manual. Corrected the statement to weighted-L2 existence/convergence. Expanded the exact complex Cauchy-Schwarz bound, derivative domination, Parseval coefficient criterion and central-binomial divergence counterexample. Executable scope: 25 assertions; see the named transcript items.
+
+21.2.9 | sections/ch21.tex:631 | book-layout.txt:54992
+Compared both powers and constants. Added integer s>=0 explicitly. Traced generating-function coefficients, uniqueness and the dominated-convergence endpoint argument at both signs. Executable scope: 104 assertions; see the named transcript items.
+
+21.2.10 | sections/ch21.tex:686 | book-layout.txt:55005
+Compared the antisymmetric kernel. Traced its two moments, imaginary characteristic values, respective eigenvectors and exhaustion of its finite-dimensional image. Executable scope: 2 assertions; see the named transcript items.
+
+21.2.11 | sections/ch21.tex:726 | book-layout.txt:55010
+Compared the cosine kernel and multiplicity. Traced the three trigonometric integrals, repeated characteristic value, full eigenspace and absence of finite characteristic values in the nullspace. Executable scope: 2 assertions; see the named transcript items.
+
+21.2.12 | sections/ch21.tex:761 | book-layout.txt:55020
+Compared interval, quadratic kernel and hint. Traced all three moments, the odd eigenpair, the even determinant, radical reciprocals and alternative Legendre normalization. Executable scope: 3 assertions; see the named transcript items.
+
+21.2.13 | sections/ch21.tex:822 | book-layout.txt:55026
+Compared rank-one kernel. Traced the zero moment, nonzero action, K-squared identity and symmetry comparison. Added real to the comparison with a nonzero real symmetric rank-one kernel; complex symmetry alone is insufficient. Executable scope: 3 assertions; see the named transcript items.
+
+21.2.14 | sections/ch21.tex:859 | book-layout.txt:55033
+Compared the linear kernel and interval. Traced both moment equations, determinant, characteristic roots, eigenvector normalization and decimal values. Executable scope: 2 assertions; see the named transcript items.
+
+21.2.15 | sections/ch21.tex:904 | book-layout.txt:55037
+Compared the ansatz request. Traced direct substitution, exclusion of b=-2, quadratic elimination, characteristic roots and why the ansatz loses no nonzero eigenfunction. Executable scope: 4 assertions; see the named transcript items.
+
+21.2.16 | sections/ch21.tex:949 | book-layout.txt:55043
+Compared both subparts and the manual restriction. The manual really adds a false span(M_i) restriction on nullspace additions. Checked the constant-kernel counterexample. Replaced ambiguous orthogonality wording by the displayed zero bilinear moments. Executable scope: 6 assertions; see the named transcript items.
+
+21.2.17 | sections/ch21.tex:1009 | book-layout.txt:55063
+Compared every physical/scaled factor. Traced Jacobian, signed coordinates, separation constants, Fourier-Hermite phase and two-dimensional gamma. Corrected the problem to fixed-low-mode a^2 much greater than wavelength times spacing; checked tail bound and the explicit counterexample to a much greater than wavelength alone. Executable scope: 57 assertions; see the named transcript items.
+
+21.3.1 | sections/ch21.tex:1146 | book-layout.txt:55274
+Compared all three signed equations. Traced the monomial induction for Gaussian, sine and sinh series, factorial convergence and original-equation checks. Executable scope: 19 assertions; see the named transcript items.
+
+21.3.2 | sections/ch21.tex:1198 | book-layout.txt:55290
+Compared the original demand and short manual answer. Traced positive nondecaying Neumann coefficients, resolvent pole, moment solution and direct substitution. The problem now asks to prove divergence of method(a), and solve with methods(b,c); analytic continuation is distinguished from a series sum. Executable scope: 12 assertions; see the named transcript items.
+
+21.3.3 | sections/ch21.tex:1272 | book-layout.txt:55299
+Compared parameter squared and all three methods. Traced ODE constants including lambda0, monomial Neumann induction, Laplace partial fractions and direct convolution check. Executable scope: 13 assertions; see the named transcript items.
+
+21.3.4 | sections/ch21.tex:1335 | book-layout.txt:55310
+Compared actual Eqs21.59/60 and signs. Traced operator power coefficients and ordered-simplex induction independently. Added bounded/scalar/matrix hypotheses to the requested power-series proof and retained the unbounded self-adjoint spectral/domain qualification. Executable scope: 13 assertions; see the named transcript items.
+
+21.4.1 | sections/ch21.tex:1401 | book-layout.txt:55765
+Compared conjugation and eigenvalue convention. Added Hilbert-Schmidt and nonzero-L2 hypotheses to the question. Traced the double-integral adjoint identity, conjugate characteristic value equality, orthogonality and degeneracy qualification. Executable scope: 4 assertions; see the named transcript items.
+
+21.4.2 | sections/ch21.tex:1460 | book-layout.txt:55778
+Compared both referenced eigenspaces. Traced odd parity, the even fourth-moment cancellation, and the exact sum/product cancellation for the linear pair; rounded decimals cannot establish exact orthogonality. Executable scope: 4 assertions; see the named transcript items.
+
+21.4.3 | sections/ch21.tex:1499 | book-layout.txt:55780
+Compared the coupling and kernel. Traced normalized eigenpairs, source projections, denominator signs, reconstruction and direct original-equation substitution. Executable scope: 6 assertions; see the named transcript items.
+
+21.4.4 | sections/ch21.tex:1557 | book-layout.txt:55789
+Compared the improper Laplace problem and manual power family. Added x>0 and corrected the misleading note. Traced original substitution, both norm divergences and failed termwise Taylor integrals. Expanded the full gamma-power eigenfamily and explicitly excluded its zero minus branch at a=1/2; independently checked original improper integrals. Executable scope: 23 assertions; see the named transcript items.
+
+21.4.5 | sections/ch21.tex:1634 | book-layout.txt:55803
+Compared all five subparts. Traced the rank-one iteration, exact convergence disk versus sufficient bound, normalized projection and moment solution. Added lambda!=3 to the formula and the resonance question; the incompatible equation0=1 is explicit. Executable scope: 13 assertions; see the named transcript items.
+
+21.4.6 | sections/ch21.tex:1707 | book-layout.txt:55821
+Compared the source kernel reconstruction. Added unit-norm wording to the question. Traced the two norms and exact reconstruction, explaining the extraneous pi factor produced by unnormalized functions. Executable scope: 3 assertions; see the named transcript items.
+
+21.4.7 | sections/ch21.tex:1751 | book-layout.txt:55835
+Compared every decimal pair. Added exact radical values and unit-norm wording. Traced exact orthogonality, norm simplification, all three kernel coefficients and rounded normalized values. Executable scope: 5 assertions; see the named transcript items.
+
+21.4.8 | sections/ch21.tex:1840 | book-layout.txt:55851
+Compared the original pure sum and actual Eq21.89. Added the nullspace projection and nonresonance hypotheses to the question. Rewrote the derivation from the full orthogonal decomposition, explained its nullspace projection, expanded bounded-multiplier convergence and retained an original-equation counterexample to the incomplete sum. Executable scope: 5 assertions; see the named transcript items.
+
+Verification actually completed
+  python3 supplementary/ch21_check.py > work/ch21-final-check.txt
+  Exit0;411 assertions in33/33 groups. SymPy exact identities and mpmath
+ 90-digit quadrature; default tolerance1e-60, Abel integrals1e-35.
+ Finite numerical samples supplement the analytic proofs, not replace them.
+ Added1 exact complex-Gaussian bound,3 gamma-reflection checks,15 original
+ power-family integrals, and1 zero-branch exclusion. Numeric comparisons
+ now reject nonfinite actual or expected values.
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch21-only.tex
+  Exit0;28pages,303757bytes;zero warnings, errors, overfull/underfull boxes.
+ All28 pages rendered at1150-pixel height and visually reviewed in
+ work/ch21-final-review/contact-01.png through contact-10.png.
+ No clipped formula, overlap, orphan heading or unreadable red text found.
+ Final integrated rebuilding/review is pending the complete-book audit.
+
+Current SHA-256
+91d63319f7de779dbec4b8cc498c7809407ef7b4721a6d33d21eec779f4afa37  sections/ch21.tex
+3e6ead1cadefa0ffdd9aebb08de0a0d92a2c1a0e39ef1b0f6e1b7aff4413ddde  supplementary/ch21_check.py
+5b5a00ff8d3b87b9d5019437155468e76dfb68863f862bf45d077ea799b53647  work/ch21-only.pdf

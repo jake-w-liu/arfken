@@ -1,0 +1,684 @@
+CHAPTER 14 FRESH FINAL AUDIT — 2026-10-04
+Current canonical source: sections/ch14.tex
+Current source SHA256: 2b2876ee9df3274c24bac1e11e60fec2708cb7c0e92173dd77bcc2790fab89ef
+Current checker SHA256: 3bfb21db3abcb51701d42eaade459a6504acf2050b947f2a610b8acae2a66994
+Current standalone PDF SHA256: 6503470b0c7a16727e0f091c4266d5ac3c48b4ce7c98d43a94b40ea7f5de27bd
+Scope: all 102 complete statements and solutions were freshly read, compared
+with actual textbook/manual sources, and traced independently. Earlier passing
+tests were not used as substitutes for this fresh audit.
+Final executable total: 102/102 groups, 432 exact assertions (428 exercise
+assertions plus 4 structural requirements), 3769 numerical checks; 4201 total.
+Python 3.14.7; SymPy 1.14.0; mpmath 1.3.0; default 50 decimal digits.
+
+Final commands and artifacts:
+  python3 -u supplementary/ch14_check.py > work/ch14-final-check-final.txt 2>&1
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch14-final-audit.tex
+  (Final consecutive successful runs: work/ch14-final-build3.txt and -build4.txt.)
+  pdftotext -layout work/ch14-final-audit.pdf work/ch14-final-rendered.txt
+  pdftoppm -r 70 -png work/ch14-final-audit.pdf work/ch14-audit-page
+  pdftoppm -f 30 -l 31 -r 105 -png work/ch14-final-audit.pdf work/ch14-final-layout
+
+The standalone wrapper uses the actual main preamble and includes only ch14.
+Final PDF: 77 pages, 565665 bytes.
+All 77 pages were visually inspected on 20 contact sheets. After the final
+table-introduction Needspace change, text comparison found only pages30-31
+changed; both were rendered again and visually inspected. Final log contains
+no Overfull/Underfull boxes, warnings, errors or undefined references. All
+seven subsection headings retain Needspace guards. Root main was not built.
+No process was signaled or terminated.
+
+Fresh mathematical/pedagogical changes:
+- Corrected statement symbols, signs, domains, source conventions and limiting
+  cases directly in dark red; retained explanations of original misprints.
+- Added the missing derivative-root constant/negative-eigenvalue modes to
+  14.2.5's statement, derived their modified-Lommel norm step by step.
+- Qualified energy uniqueness and supplied a harmonic-ring-barrier proof for
+  bounded cylinder solutions with incompatible rim data.
+- Derived the annular Liouville operator and min-max bands to establish the
+  first-three eigenvalue ordering; distinguished undefined x=0 from its limit.
+- Expanded three recurrence-to-Wronskian reductions, specified complex
+  asymptotic sectors and preserved contour orientations and Abel limits.
+- Corrected Fresnel arguments and reparametrized coordinates in the statement.
+- Fresh actual PDF views confirmed the reported manual missing i,z,prime,c,
+  modified-ODE coefficient, Y/J letters, Wronskian sign, invalid boundary
+  step, saddle and half-integer denominator errors; confirmed textbook
+  contour, diffraction, source-weight, descent-sign and Fresnel errors.
+  The enlarged manual205 crop explicitly confirms the missing oscillatory i.
+  Published manual errata (printed3-4) were checked separately.
+
+Executable scope and limits:
+General statements are proved in the manuscript; finite examples are not
+general proofs. The checker verifies actual TeX table cells and coordinate
+strings, not copies of expected table values. This includes all36 cylinder
+entries, all30 triangular-wall entries, all101 annular grid abscissas with
+100 defined ordinates and an undefined origin, all210 asymptotic partial
+sums, 21 error values and14 minimizers, all181 Airy plot coordinates,
+all926 annular plot vertices and all six mode polylines' vertices.
+The annular plot tests also exclude segments crossing actual ratio poles.
+Rounded-abscissa sensitivity allowances use derivatives at interval endpoints;
+these are numerical consistency checks, not interval certificates for every
+interpolated segment. The written determinant/min-max argument proves root
+ordering. Mode comparisons enforce 80/120 stability <1e-20 for14.2.9 and
+100/160 stability <1e-14 for14.5.16; such comparisons are not universal
+truncation bounds. All executable tolerances and sampled orders are explicit.
+The K0 transform uses30digits, a proved omitted-tail bound<1e-18 and2e-17
+tolerance; other checks use50digits unless the code states otherwise.
+No unresolved exercise or unfilled required table remains.
+
+Source-line convention: all cited line numbers count newline characters only,
+matching rg/sed (form feeds are page breaks, not extra source lines).
+Textbook physical PDF page -> printed page: add2 in Chapter14.
+Manual physical PDF page -> printed page: subtract3.
+Per-entry records follow; executable counts are the actual final run.
+
+14.1.1 — sections/ch14.tex:12
+  Statement: work/book-layout.txt:33300; textbook PDF652/printed654.
+  Manual: work/solman.txt:20338; PDF195/printed192.
+  Fresh source/derivation evidence: Source square identity and bounds match; Laurent negative-order relation and t0 coefficient pairing traced. The statement now requires real x for the inequalities.
+  Executed: 2 exact assertions; 21 numerical checks.
+
+14.1.2 — sections/ch14.tex:49
+  Statement: work/book-layout.txt:33305; textbook PDF652/printed654.
+  Manual: work/solman.txt:20365; PDF195/printed192.
+  Fresh source/derivation evidence: Both source addition identities match; exponential multiplication, Laurent coefficient convolution, negative-order pairing and absolute convergence traced.
+  Executed: 1 exact assertions; 15 numerical checks.
+
+14.1.3 — sections/ch14.tex:89
+  Statement: work/book-layout.txt:33317; textbook PDF653/printed655.
+  Manual: work/solman.txt:20403; PDF195/printed192.
+  Fresh source/derivation evidence: Source parity task restriction to generating function obeyed; simultaneous x,t sign change and integer Laurent coefficient uniqueness traced.
+  Executed: 1 exact assertions; 26 numerical checks.
+
+14.1.4 — sections/ch14.tex:120
+  Statement: work/book-layout.txt:33329; textbook PDF653/printed655.
+  Manual: work/solman.txt:20430; PDF195/printed192.
+  Fresh source/derivation evidence: All three source derivative recurrences match; added/subtracted basic recurrences, product rule and shifted index traced; x0 only removable limits.
+  Executed: 21 exact assertions; 0 numerical checks.
+
+14.1.5 — sections/ch14.tex:159
+  Statement: work/book-layout.txt:33341; textbook PDF653/printed655.
+  Manual: work/solman.txt:20481; PDF196/printed193.
+  Fresh source/derivation evidence: Source Jacobi-Anger coefficients match; t=i exp(i phi) inverse/sign and harmonic powers traced.
+  Executed: 1 exact assertions; 6 numerical checks.
+
+14.1.6 — sections/ch14.tex:181
+  Statement: work/book-layout.txt:33349; textbook PDF653/printed655.
+  Manual: work/solman.txt:20504; PDF196/printed193.
+  Fresh source/derivation evidence: Both source trigonometric series match; positive/negative order pairing, even/odd i powers, real/imaginary separation and entire continuation traced.
+  Executed: 0 exact assertions; 8 numerical checks.
+
+14.1.7 — sections/ch14.tex:210
+  Statement: work/book-layout.txt:33358; textbook PDF653/printed655.
+  Manual: work/solman.txt:20532; PDF196/printed193.
+  Fresh source/derivation evidence: All four source hint steps matched. Summation shifts give t-ODE, exponent integration, t0 coefficient from r=s and isolated J0-zero normalization caveat traced.
+  Executed: 2 exact assertions; 3 numerical checks.
+
+14.1.8 — sections/ch14.tex:266
+  Statement: work/book-layout.txt:33378; textbook PDF654/printed656.
+  Manual: work/solman.txt:20620; PDF197/printed194.
+  Fresh source/derivation evidence: Source defining series, two recurrences and ODE match. Both derivative coefficients/reindexings and4s(s+nu) recurrence cancellation traced; exceptional reciprocal-gamma zeros continued without division.
+  Executed: 3 exact assertions; 18 numerical checks.
+
+14.1.9 — sections/ch14.tex:332
+  Statement: work/book-layout.txt:33395; textbook PDF654/printed656.
+  Manual: work/solman.txt:20672; PDF197/printed194.
+  Fresh source/derivation evidence: Both source integral transforms and hint match; cosine factorial integral cancels each Bessel coefficient to sine/cosine series; uniform integration and x0 values1,0 traced.
+  Executed: 4 exact assertions; 6 numerical checks.
+
+14.1.10 — sections/ch14.tex:373
+  Statement: work/book-layout.txt:33411; textbook PDF654/printed656.
+  Manual: work/solman.txt:20756; PDF198/printed195.
+  Fresh source/derivation evidence: Source differential-operator identity matches; The statement now requires integer n>=0. Induction n0, weighted derivative recurrence and x multiplication prove all n, with removable origin.
+  Executed: 7 exact assertions; 0 numerical checks.
+
+14.1.11 — sections/ch14.tex:404
+  Statement: work/book-layout.txt:33417; textbook PDF654/printed656.
+  Manual: work/solman.txt:20803; PDF198/printed195.
+  Fresh source/derivation evidence: Source all-zeros wording overbroad; The statement now specifies consecutive strictly positive roots. Two weighted Rolle arguments prove existence/uniqueness; ordinary-point ODE uniqueness excludes shared/multiple positive zeros.
+  Executed: 0 exact assertions; 41 numerical checks.
+
+14.1.12 — sections/ch14.tex:438
+  Statement: work/book-layout.txt:33420; textbook PDF654/printed656.
+  Manual: work/solman.txt:20817; PDF199/printed196.
+  Fresh source/derivation evidence: Source aperture integral matches. u scaling, first integration-by-parts boundary cancellation, derivative(x²J2), and u0 directvalue1/4 traced.
+  Executed: 3 exact assertions; 4 numerical checks.
+
+14.1.13 — sections/ch14.tex:469
+  Statement: work/book-layout.txt:33433; textbook PDF655/printed657.
+  Manual: work/solman.txt:20863; PDF199/printed196.
+  Fresh source/derivation evidence: Source scattering prefactor and cross section match; angularJ0 integral, radial antiderivative, pure-imaginary phase modulus and axial removable limitk²R⁴/4 traced.
+  Executed: 1 exact assertions; 8 numerical checks.
+
+14.1.14 — sections/ch14.tex:516
+  Statement: work/book-layout.txt:33448; textbook PDF655/printed657.
+  Manual: work/solman.txt:20908; PDF199/printed196.
+  Fresh source/derivation evidence: Source recurrences differ by modified sign correctly. Eliminating adjacent C gives x²C''+xC'-(x²+n²)C; z=ix derivatives traced. Manual printed197 extra x on first derivative was confirmed against the original PDF.
+  Executed: 7 exact assertions; 10 numerical checks.
+
+14.1.15 — sections/ch14.tex:569
+  Statement: work/book-layout.txt:33459; textbook PDF655/printed657.
+  Manual: work/solman.txt:20960; PDF200/printed197.
+  Fresh source/derivation evidence: Both source integrals are ordinary contour integrals, the closed-symbol transcription was restored directly to the open integral and the branch/x>0 specified. Full operator integrand equals explicit t derivative; both tail primitives vanish; dilation and reciprocal-gamma coefficient normalization traced. Integer contour closes and both angular phases correct.
+  Executed: 2 exact assertions; 8 numerical checks.
+
+14.1.16 — sections/ch14.tex:667
+  Statement: work/book-layout.txt:33482; textbook PDF655/printed657.
+  Manual: work/solman.txt:21118; PDF201/printed198.
+  Fresh source/derivation evidence: Source hint prints exp(+-ix), was corrected directly to exp(+-i pi). Lower/upper ray orientations and phases, odd-circle sine cancellation and integer-order zero ray factor traced; The statement now specifies the initial domain x>0.
+  Executed: 1 exact assertions; 6 numerical checks.
+
+14.1.17 — sections/ch14.tex:713
+  Statement: work/book-layout.txt:33495; textbook PDF656/printed658.
+  Manual: work/solman.txt:21263; PDF202/printed199.
+  Fresh source/derivation evidence: All four source integral representations/prefactors match. Beta coefficient cancellation, theta reflection doubling, odd sine disappearance and p=cos theta Jacobian traced; Re nu>-1/2 and x-power branch explicit in solution.
+  Executed: 1 exact assertions; 9 numerical checks.
+
+14.1.18 — sections/ch14.tex:783
+  Statement: work/book-layout.txt:33524; textbook PDF656/printed658.
+  Manual: work/solman.txt:21310; PDF202/printed199.
+  Fresh source/derivation evidence: The source ordinary integrals had been mistyped oint; the symbols and open-contour domain are corrected in the statement. Prefactor derivative and exponential derivative yield adjacent orders with all2/x factors traced.
+  Executed: 2 exact assertions; 0 numerical checks.
+
+14.1.19 — sections/ch14.tex:836
+  Statement: work/book-layout.txt:33552; textbook PDF657/printed659.
+  Manual: work/solman.txt:21337; PDF203/printed200.
+  Fresh source/derivation evidence: Source finite angular integral/recurrence match; The statement now specifies integer n. Derivative sign and cosine(A-theta)-cosine(A+theta) subtraction traced.
+  Executed: 1 exact assertions; 0 numerical checks.
+
+14.1.20 — sections/ch14.tex:866
+  Statement: work/book-layout.txt:33565; textbook PDF657/printed659.
+  Manual: work/solman.txt:21348; PDF203/printed200.
+  Fresh source/derivation evidence: Source extension includes divergent(a,b)=(0,0); the excluded pair and conditional a=0 boundary are now explicit in the statement. Fubini bound, Laplace cosine, tan substitution and arctan endpoints traced; oscillatory asymptotic remainder proves ordinary Abel boundary.
+  Executed: 2 exact assertions; 4 numerical checks.
+
+14.1.21 — sections/ch14.tex:907
+  Statement: work/book-layout.txt:33572; textbook PDF657/printed659.
+  Manual: work/solman.txt:21422; PDF203/printed200.
+  Fresh source/derivation evidence: Source integer n identity matches; reflection2pi-theta gives equal halves with integer phase cancellation.
+  Executed: 1 exact assertions; 0 numerical checks.
+
+14.1.22 — sections/ch14.tex:931
+  Statement: work/book-layout.txt:33579; textbook PDF657/printed659.
+  Manual: work/solman.txt:21437; PDF204/printed201.
+  Fresh source/derivation evidence: Source Eq14.25/problem matched; normalized Airy profile, first2J1 zeros, scaled positions and angular accessibility traced. Derivative(J0²+J1²) gives full and central energy fractions; the statement now includes the paraxial large-aperture qualification; the source/manual reversed-small assertions were freshly checked in the actual PDFs.
+  Executed: 2 exact assertions; 190 numerical checks.
+
+14.1.23 — sections/ch14.tex:1044
+  Statement: work/book-layout.txt:33585; textbook PDF657/printed659.
+  Manual: work/solman.txt:21480; PDF204/printed201.
+  Fresh source/derivation evidence: Source transmitted-light integral and both requested forms match. Weighted derivative boundary1/2, J2 integral cancellation and finite telescoping with factorial uniform remainder bound traced; ka0 limit0.
+  Executed: 2 exact assertions; 6 numerical checks.
+
+14.1.24 — sections/ch14.tex:1091
+  Statement: work/book-layout.txt:33599; textbook PDF657/printed659.
+  Manual: work/solman.txt:21545; PDF205/printed202.
+  Fresh source/derivation evidence: Source wave PDE/product and edge condition match. Separation enforces omega=vk, integer angular index, regular center and positiveJ roots; m0 duplicate and k0 harmonic nullmode excluded. The statement now includes the dispersion constraint.
+  Executed: 3 exact assertions; 6 numerical checks.
+
+14.1.25 — sections/ch14.tex:1150
+  Statement: work/book-layout.txt:33613; textbook PDF658/printed660.
+  Manual: work/solman.txt:21574; PDF205/printed202.
+  Fresh source/derivation evidence: Published alpha/height erratum matched. TE derivative roots, axial sine and dispersion traced; manual missingprime,z,i source-read. Scalar q0 branch exists but Maxwell divergence/side flux/endcaps forcezero; the statement now includes these physical constraints; a fresh manual PDF crop confirms the missing i.
+  Executed: 4 exact assertions; 12 numerical checks.
+
+14.1.26 — sections/ch14.tex:1215
+  Statement: work/book-layout.txt:33629; textbook PDF658/printed660.
+  Manual: work/solman.txt:21607; PDF205/printed202.
+  Fresh source/derivation evidence: Source cutoff task matched. Transverse eigenvalue gives kz²=omega²/c²-alpha²/a², evanescent/propagating split, frequency c factor and zero group velocity at cutoff traced; manual missingc source-read.
+  Executed: 3 exact assertions; 0 numerical checks.
+
+14.1.27 — sections/ch14.tex:1254
+  Statement: work/book-layout.txt:33636; textbook PDF658/printed660.
+  Manual: no separately numbered solution located in the complete chapter extract.
+  Fresh source/derivation evidence: Source graph task/hint match. Candidate sorting, all six crossover equations, mode-family ordering tables and plot segments traced; root monotonicity/Rayleigh bound excludes all other branches. The statement now includes degeneracy counting and the r=0 limiting convention.
+  Executed: 3 exact assertions; 434 numerical checks.
+
+14.1.28 — sections/ch14.tex:1376
+  Statement: work/book-layout.txt:33639; textbook PDF658/printed660.
+  Manual: work/solman.txt:21624; PDF206/printed203.
+  Fresh source/derivation evidence: Source parity reduction task matches; The statement now includes integer m,n assumptions. Integration-by-parts recurrence with invariant m+n, terminating odd coefficient and even-order derivative telescoping traced including all zero endpoints.
+  Executed: 28 exact assertions; 28 numerical checks.
+
+14.1.29 — sections/ch14.tex:1430
+  Statement: work/book-layout.txt:33649; textbook PDF658/printed660.
+  Manual: work/solman.txt:21675; PDF206/printed203.
+  Fresh source/derivation evidence: Source root-dependent identity matches. Two integrations by parts and distinct boundary reasons yield residual integratedJ0; no cancellation terms omitted.
+  Executed: 2 exact assertions; 4 numerical checks.
+
+14.2.1 — sections/ch14.tex:1467
+  Statement: work/book-layout.txt:33889; textbook PDF663/printed665.
+  Manual: work/solman.txt:21736; PDF207/printed204.
+  Fresh source/derivation evidence: Source first Lommel originally multiplied form; the statement now restricts the divided form to distinct k², positive k,k', and real nu>-1. Self-adjoint bracket sign, leading origin cancellation and lHopital equal-wave-number normalization traced.
+  Executed: 3 exact assertions; 6 numerical checks.
+
+14.2.2 — sections/ch14.tex:1538
+  Statement: work/book-layout.txt:33906; textbook PDF663/printed665.
+  Manual: work/solman.txt:21930; PDF208/printed205.
+  Fresh source/derivation evidence: The ambiguous source derivative-root wording is corrected to a positive argument root at rho=a, and the statement includes the constant nu=0 mode. Both numerator derivatives vanish, norm and beta>|nu| positivity traced.
+  Executed: 1 exact assertions; 30 numerical checks.
+
+14.2.3 — sections/ch14.tex:1586
+  Statement: work/book-layout.txt:33918; textbook PDF663/printed665.
+  Manual: work/solman.txt:21946; PDF208/printed205.
+  Fresh source/derivation evidence: Source referenced equations read via solutions' full display; origin Frobenius leading term cancellation, x^(2nu+2) boundary and adjacent derivative at Dirichlet zero give orthogonality and normalization fornu>-1.
+  Executed: 1 exact assertions; 5 numerical checks.
+
+14.2.4 — sections/ch14.tex:1629
+  Statement: work/book-layout.txt:33921; textbook PDF663/printed665.
+  Manual: work/solman.txt:21952; PDF209/printed206.
+  Fresh source/derivation evidence: Published Eq14.44 reference correction matched. Entire normalized evenF has positive imaginary-axis series; conjugate nonreal roots with distinctsquares imply impossible positive integral0; branch conjugacy explained.
+  Executed: 1 exact assertions; 13 numerical checks.
+
+14.2.5 — sections/ch14.tex:1674
+  Statement: work/book-layout.txt:33926; textbook PDF663/printed665.
+  Manual: work/solman.txt:21959; PDF209/printed206.
+  Fresh source/derivation evidence: Source coefficients match weighted projection for positive modes. The statement now specifies weighted L2 and includes the missing constant/negative-eigenvalue mode for the complete expansion. Unique I_nu' root proof via positive derivative at every logarithmic-slope zero traced; The modified-Lommel norm is now derived by a complete product differentiation and explicit origin boundary cancellation.
+  Executed: 2 exact assertions; 9 numerical checks.
+
+14.2.6 — sections/ch14.tex:1779
+  Statement: work/book-layout.txt:33957; textbook PDF664/printed666.
+  Manual: work/solman.txt:21972; PDF209/printed206.
+  Fresh source/derivation evidence: Source identical end data/grounded cylinder matched; regular J_|m|, normalized cosh factor and disk projection norm pi*a²*J_|m|+1² traced. Fourier conjugacy checked. Energy uniqueness is now restricted to finite energy; bounded rim-discontinuous uniqueness has a separate positive harmonic ring-barrier/max-principle proof with its logarithmic divergence explained.
+  Executed: 12 exact assertions; 0 numerical checks.
+
+14.2.7 — sections/ch14.tex:1845
+  Statement: work/book-layout.txt:33962; textbook PDF664/printed666.
+  Manual: work/solman.txt:22018; PDF210/printed207.
+  Fresh source/derivation evidence: Source bilinear Parseval matched. Finite orthogonality sum followed by weighted L2/Cauchy-Schwarz passage to limit traced; complex modulus version distinguished. The statement now includes the L2/order/root assumptions.
+  Executed: 0 exact assertions; 4 numerical checks.
+
+14.2.8 — sections/ch14.tex:1888
+  Statement: work/book-layout.txt:33978; textbook PDF664/printed666.
+  Manual: work/solman.txt:22056; PDF210/printed207.
+  Fresh source/derivation evidence: Source reciprocal zero sum matched. Coefficient from derivative x^(m+1)J_m+1, vanishing x^(2m+2) origin term, and Parseval yield 1/[4(m+1)]; The statement now includes m>-1.
+  Executed: 4 exact assertions; 12 numerical checks.
+
+14.2.9 — sections/ch14.tex:1934
+  Statement: work/book-layout.txt:33986; textbook PDF664/printed666.
+  Manual: no separately numbered solution located in the complete chapter extract.
+  Fresh source/derivation evidence: All source grid/end data/aspect ratio matched. Projection coefficient and cosh transfer factor traced; 36 entries read. Printed 24.558 is corrected directly to 24.559; converged value 24.5585639709. All actual TeX grid entries and 80/120-mode interior stability below 1e-20 were independently rerun.
+  Executed: 1 exact assertions; 74 numerical checks.
+
+14.3.1 — sections/ch14.tex:2016
+  Statement: work/book-layout.txt:34306; textbook PDF670/printed672.
+  Manual: work/solman.txt:22158; PDF211/printed208.
+  Fresh source/derivation evidence: Source integer Y recurrences matched; noninteger definition, sine/cosine sign changes at shifted orders and order limits traced.
+  Executed: 2 exact assertions; 28 numerical checks.
+
+14.3.2 — sections/ch14.tex:2056
+  Statement: work/book-layout.txt:34315; textbook PDF671/printed673.
+  Manual: work/solman.txt:22201; PDF211/printed208.
+  Fresh source/derivation evidence: Source Y negative integer parity matched; Y_-nu=sin(pi nu)J_nu+cos(pi nu)Y_nu derived before integer limit.
+  Executed: 1 exact assertions; 6 numerical checks.
+
+14.3.3 — sections/ch14.tex:2082
+  Statement: work/book-layout.txt:34317; textbook PDF671/printed673.
+  Manual: work/solman.txt:22235; PDF212/printed209.
+  Fresh source/derivation evidence: Source Y0'=-Y1 matched; n0 derivative recurrence and Y_-1 parity prove it. Manual J in final line was freshly confirmed in the original PDF.
+  Executed: 1 exact assertions; 0 numerical checks.
+
+14.3.4 — sections/ch14.tex:2101
+  Statement: work/book-layout.txt:34319; textbook PDF671/printed673.
+  Manual: work/solman.txt:22238; PDF212/printed209.
+  Fresh source/derivation evidence: Source arbitrary-solution W=A/x matched; derivative mixed terms cancel, ODE substitution yields W'=-W/x on interval excluding zero, dependent case allowed.
+  Executed: 1 exact assertions; 0 numerical checks.
+
+14.3.5 — sections/ch14.tex:2132
+  Statement: work/book-layout.txt:34326; textbook PDF671/printed673.
+  Manual: work/solman.txt:22254; PDF212/printed209.
+  Fresh source/derivation evidence: Both source Wronskians matched. Origin coefficients plus gamma reflection determine -2sin(pi nu)/pi; Y definition gives +2/pi; integer limits traced. Manual second-product minus was freshly confirmed in the original PDF.
+  Executed: 1 exact assertions; 16 numerical checks.
+
+14.3.6 — sections/ch14.tex:2182
+  Statement: work/book-layout.txt:34333; textbook PDF671/printed673.
+  Manual: work/solman.txt:22320; PDF213/printed210.
+  Fresh source/derivation evidence: Source request for x0 and x1 coefficients matched; exponents 2r-1 exclude x0 and first two series factors cancel x1 exactly; integer zero Wronskian included.
+  Executed: 3 exact assertions; 0 numerical checks.
+
+14.3.7 — sections/ch14.tex:2226
+  Statement: work/book-layout.txt:34339; textbook PDF671/printed673.
+  Manual: work/solman.txt:22392; PDF214/printed211.
+  Fresh source/derivation evidence: Source improper cosine integral/ODE task matched. Upper-half-plane regularization permits differentiation and endpoint cancellation; Abel boundary equals ordinary Dirichlet integral. Small-x subtraction from -Ci supplies ln2 and excludes added J0. The statement now specifies x>0 and regularized differentiation.
+  Executed: 1 exact assertions; 3 numerical checks.
+
+14.3.8 — sections/ch14.tex:2305
+  Statement: work/book-layout.txt:34347; textbook PDF671/printed673.
+  Manual: work/solman.txt:22451; PDF214/printed211.
+  Fresh source/derivation evidence: Source Eq14.60/61 task matched; reciprocal-gamma derivative at poles (including zero), r<n finite sum and reindexed infinite series traced. Referenced Eqs.14.60/61 were directly read, including their signs and logarithm branch.
+  Executed: 5 exact assertions; 20 numerical checks.
+
+14.3.9 — sections/ch14.tex:2374
+  Statement: work/book-layout.txt:34353; textbook PDF671/printed673.
+  Manual: work/solman.txt:22601; PDF215/printed212.
+  Fresh source/derivation evidence: Source differentiated-order ODE task matched; both plus/minus-order functions have same operator nu² and inhomogeneous 2nu J term, canceled by integer parity in order limit including n0.
+  Executed: 4 exact assertions; 1 numerical checks.
+
+14.3.10 — sections/ch14.tex:2410
+  Statement: work/book-layout.txt:34361; textbook PDF671/printed673.
+  Manual: no separately numbered solution located in the complete chapter extract.
+  Fresh source/derivation evidence: Source grid and annular eigenvalues matched; all 101 table entries read (x0 undefined). Determinant avoids quotient poles and correct eigenfunction endpoints traced. Added the full Liouville transform and min-max eigenvalue bands to prove first-three ordering; all actual table/plot coordinates were independently checked.
+  Executed: 4 exact assertions; 2060 numerical checks.
+
+14.4.1 — sections/ch14.tex:2552
+  Statement: work/book-layout.txt:34594; textbook PDF676/printed678.
+  Manual: work/solman.txt:22644; PDF216/printed213.
+  Fresh source/derivation evidence: All seven source Wronskians matched; bilinearity checks a-e and adjacent-order recurrences cancel nu/x terms in f,g with displayed signs.
+  Executed: 0 exact assertions; 28 numerical checks.
+
+14.4.2 — sections/ch14.tex:2607
+  Statement: work/book-layout.txt:34611; textbook PDF676/printed678.
+  Manual: work/solman.txt:22669; PDF216/printed213.
+  Fresh source/derivation evidence: Source upper/lower open Hankel contours matched; Bessel residual is total derivative, endpoint exponential decay for x>0, compact derivative bounds. The statement now specifies the branch and endpoint limits.
+  Executed: 1 exact assertions; 4 numerical checks.
+
+14.4.3 — sections/ch14.tex:2653
+  Statement: work/book-layout.txt:34628; textbook PDF676/printed678.
+  Manual: work/solman.txt:22671; PDF216/printed213.
+  Fresh source/derivation evidence: Source says contour identical; inversion actually reverses orientation while preserving its geometric class. Log(t)=i*pi-log(s), differential phase and orientation combine to H_nu1=e^-i*pi*nu H_-nu1. The orientation wording is corrected directly.
+  Executed: 1 exact assertions; 5 numerical checks.
+
+14.4.4 — sections/ch14.tex:2692
+  Statement: work/book-layout.txt:34632; textbook PDF676/printed678.
+  Manual: no separately numbered solution located in the complete chapter extract.
+  Fresh source/derivation evidence: Source H difference/Y identity matched; combining contours gives 2J=A+B, inverted upper/lower phases give second linear relation, solve then take integer limits without assuming normalization.
+  Executed: 1 exact assertions; 2 numerical checks.
+
+14.4.5 — sections/ch14.tex:2731
+  Statement: work/book-layout.txt:34658; textbook PDF677/printed679.
+  Manual: work/solman.txt:22699; PDF216/printed213.
+  Fresh source/derivation evidence: Source exponential contours matched; t=e^gamma Jacobian, phases and oriented C3/C4 endpoints traced with x>0 decay.
+  Executed: 4 exact assertions; 0 numerical checks.
+
+14.4.6 — sections/ch14.tex:2779
+  Statement: work/book-layout.txt:34669; textbook PDF677/printed679.
+  Manual: work/solman.txt:22712; PDF217/printed214.
+  Fresh source/derivation evidence: All three source integral representations matched; t=i*e^s deformation at positive imaginary argument, cosh evenness, eta->0 Abel limit prove formula and ODE. The statement now specifies positive x and regularized differentiation.
+  Executed: 2 exact assertions; 2 numerical checks.
+
+14.4.7 — sections/ch14.tex:2841
+  Statement: work/book-layout.txt:34690; textbook PDF677/printed679.
+  Manual: work/solman.txt:22730; PDF217/printed214.
+  Fresh source/derivation evidence: Source sine integrals matched; 1/i prefactor and cosh substitution give both forms. x=0 cannot be inserted before integration; the statement now specifies x>0.
+  Executed: 1 exact assertions; 2 numerical checks.
+
+14.4.8 — sections/ch14.tex:2884
+  Statement: work/book-layout.txt:34707; textbook PDF678/printed680.
+  Manual: work/solman.txt:22738; PDF217/printed214.
+  Fresh source/derivation evidence: Source cosine integrals matched; imaginary part gives -2/pi and cosh Jacobian gives second form. Conditional Dirichlet tail and x>0 qualification traced.
+  Executed: 1 exact assertions; 2 numerical checks.
+
+14.5.1 — sections/ch14.tex:2924
+  Statement: work/book-layout.txt:35001; textbook PDF683/printed685.
+  Manual: work/solman.txt:22758; PDF217/printed214.
+  Fresh source/derivation evidence: Source generating identity matched. X=ix,T=-it gives exponent and i^-n factor for all integers; compact-annulus absolute Laurent convergence justifies.
+  Executed: 1 exact assertions; 2 numerical checks.
+
+14.5.2 — sections/ch14.tex:2946
+  Statement: work/book-layout.txt:35004; textbook PDF683/printed685.
+  Manual: work/solman.txt:22783; PDF217/printed214.
+  Fresh source/derivation evidence: All five source identities matched; t=i,1,-1 followed by even/odd pairing, adding and subtracting, yield constants/cosh/sinh with all factors checked.
+  Executed: 0 exact assertions; 15 numerical checks.
+
+14.5.3 — sections/ch14.tex:2995
+  Statement: work/book-layout.txt:35016; textbook PDF683/printed685.
+  Manual: work/solman.txt:22845; PDF218/printed215.
+  Fresh source/derivation evidence: Book uses open integral in noninteger part, the closed transcription symbol has been restored to the source open integral. Integer Laurent extraction valid for essential singularity; fixed-radius Hankel substitution s=xt/2 and reciprocal-gamma coefficients justify complete I series with branches.
+  Executed: 0 exact assertions; 5 numerical checks.
+
+14.5.4 — sections/ch14.tex:3048
+  Statement: work/book-layout.txt:35032; textbook PDF684/printed686.
+  Manual: work/solman.txt:22851; PDF218/printed215.
+  Fresh source/derivation evidence: All three source representations matched. Odd powers cancel, beta moment and half-integer gamma factorial cancel exact (2r)! factors; p=cos(theta) Jacobian and reflection yield remaining forms. Consistent z^nu branch stated.
+  Executed: 1 exact assertions; 6 numerical checks.
+
+14.5.5 — sections/ch14.tex:3099
+  Statement: work/book-layout.txt:35050; textbook PDF684/printed686.
+  Manual: work/solman.txt:22900; PDF219/printed216.
+  Fresh source/derivation evidence: Source cavity data and published l->h erratum matched. Separation signs, regular I radial solution, axial h/2/angular pi or2pi norms traced. The statement now sets a_0n=0 by convention since sine0 does not determine a coefficient.
+  Executed: 10 exact assertions; 0 numerical checks.
+
+14.5.6 — sections/ch14.tex:3168
+  Statement: work/book-layout.txt:35071; textbook PDF684/printed686.
+  Manual: work/solman.txt:22932; PDF219/printed216.
+  Fresh source/derivation evidence: Source K difference/order symmetry matched. Hankel definition and i powers traced, numerator/denominator sign reversal and removable integer limits correct.
+  Executed: 0 exact assertions; 18 numerical checks.
+
+14.5.7 — sections/ch14.tex:3205
+  Statement: work/book-layout.txt:35079; textbook PDF685/printed687.
+  Manual: work/solman.txt:22970; PDF220/printed217.
+  Fresh source/derivation evidence: Source both K recurrences matched. Neighbor sine sign reversal and I recurrences at +/-nu yield correct signs; integer limits carried through.
+  Executed: 0 exact assertions; 8 numerical checks.
+
+14.5.8 — sections/ch14.tex:3243
+  Statement: work/book-layout.txt:35085; textbook PDF685/printed687.
+  Manual: work/solman.txt:22972; PDF220/printed217.
+  Fresh source/derivation evidence: Source phased K recurrences matched. Both neighboring e^i*pi*(nu+-1) factors equal negative central phase; derivative phase independent of x.
+  Executed: 0 exact assertions; 4 numerical checks.
+
+14.5.9 — sections/ch14.tex:3267
+  Statement: work/book-layout.txt:35086; textbook PDF685/printed687.
+  Manual: work/solman.txt:22976; PDF220/printed217.
+  Fresh source/derivation evidence: Source branch task matched. Small Hankel expansion at ix cancels imaginary constant only arg(ix)=pi/2; full branch shift -2pi*i*k*I0 distinguished from leading constant.
+  Executed: 1 exact assertions; 2 numerical checks.
+
+14.5.10 — sections/ch14.tex:3298
+  Statement: work/book-layout.txt:35088; textbook PDF685/printed687.
+  Manual: work/solman.txt:22998; PDF220/printed217.
+  Fresh source/derivation evidence: Both source K integrals and sector matched. Differentiated product becomes endpoint derivative, p1 exponent condition, p=1+u/z normalization and dominated limit traced; Wronskian shows decaying solutions proportional and Hankel asymptotic fixes scale.
+  Executed: 1 exact assertions; 3 numerical checks.
+
+14.5.11 — sections/ch14.tex:3363
+  Statement: work/book-layout.txt:35100; textbook PDF685/printed687.
+  Manual: work/solman.txt:23003; PDF220/printed217.
+  Fresh source/derivation evidence: Source Wronskian matched. x derivatives each introduce i at w=ix; prefactors multiply -pi/2 and yield -1/x.
+  Executed: 0 exact assertions; 8 numerical checks.
+
+14.5.12 — sections/ch14.tex:3389
+  Statement: work/book-layout.txt:35104; textbook PDF685/printed687.
+  Manual: work/solman.txt:23034; PDF221/printed218.
+  Fresh source/derivation evidence: Source coefficient -1 matched only with weighted cylindrical delta. Actual Eqs.14.114/116 were freshly inspected in the rendered textbook; volume element and derivative jump show respective coefficients -1,-b,-1/b. k0 nonzero-order limit and m0 divergent exception traced.
+  Executed: 6 exact assertions; 14 numerical checks.
+
+14.5.13 — sections/ch14.tex:3436
+  Statement: work/book-layout.txt:35105; textbook PDF685/printed687.
+  Manual: work/solman.txt:23071; PDF221/printed218.
+  Fresh source/derivation evidence: Source Fourier cosine transform matched with y>0 and real x now qualified directly. Absolute double integral bound pi/(2y), Laplace cosine, v=sinh substitution and arctan endpoints prove result including x0; y0 only limit.
+  Executed: 1 exact assertions; 6 numerical checks.
+
+14.5.14 — sections/ch14.tex:3474
+  Statement: work/book-layout.txt:35113; textbook PDF685/printed687.
+  Manual: work/solman.txt:23122; PDF221/printed218.
+  Fresh source/derivation evidence: Published integer-order correction matched; unit-circle coefficient and even/odd symmetry prove formula for positive/negative integer n; noninteger cut term explains restriction.
+  Executed: 0 exact assertions; 5 numerical checks.
+
+14.5.15 — sections/ch14.tex:3508
+  Statement: work/book-layout.txt:35122; textbook PDF685/printed687.
+  Manual: work/solman.txt:23183; PDF222/printed219.
+  Fresh source/derivation evidence: Source modified ODE/independence task matched. Total derivative endpoints for Re z>0 and lower bound on arbitrary finite interval show divergence as z0+, excluding any multiple of I0.
+  Executed: 1 exact assertions; 3 numerical checks.
+
+14.5.16 — sections/ch14.tex:3543
+  Statement: work/book-layout.txt:35131; textbook PDF686/printed688.
+  Manual: no separately numbered solution located in the complete chapter extract.
+  Fresh source/derivation evidence: All source triangular boundary/grid/check value matched; reflection removes even modes, explicit integration by parts gives 400sin(npi/2)/(n²pi²). Thirty entries read; wall data exact, the interior mode-count comparison and value26.3955684295 were verified in the completed independent executable rerun.
+  Executed: 1 exact assertions; 70 numerical checks.
+
+14.6.1 — sections/ch14.tex:3610
+  Statement: work/book-layout.txt:35541; textbook PDF693/printed695.
+  Manual: work/solman.txt:23209; PDF222/printed219.
+  Fresh source/derivation evidence: Source uses open integral, the closed transcription symbol is now corrected. w' gives saddles +/-1, upward Gaussian width x^-1/2 and phase yield e^x/sqrt(2pi*x); The statement now makes fixed order and x->+infinity explicit. Manual +/-x typo source-read.
+  Executed: 4 exact assertions; 3 numerical checks.
+
+14.6.2 — sections/ch14.tex:3650
+  Statement: work/book-layout.txt:35551; textbook PDF693/printed695.
+  Manual: work/solman.txt:23231; PDF222/printed219.
+  Fresh source/derivation evidence: Source K integral matched; real positive saddle1 maximizes exponent, two endpoints suppressed, Gaussian with prefactor1/2 yields sqrt(pi/2x)e^-x for fixed order.
+  Executed: 3 exact assertions; 6 numerical checks.
+
+14.6.3 — sections/ch14.tex:3685
+  Statement: work/book-layout.txt:35559; textbook PDF693/printed695.
+  Manual: work/solman.txt:23253; PDF223/printed220.
+  Fresh source/derivation evidence: Both source integrals plus published integer-index qualification matched. Two integrations by parts represented by explicit Wronskian boundary; endpoint zeros and damping traced; first Fourier coefficient/large-z half-Gaussian fix normalization.
+  Executed: 7 exact assertions; 3 numerical checks.
+
+14.6.4 — sections/ch14.tex:3743
+  Statement: work/book-layout.txt:35571; textbook PDF693/printed695.
+  Manual: work/solman.txt:23353; PDF224/printed221.
+  Fresh source/derivation evidence: Source derivative and small-z task matched; integration by parts gives K0'=-K1, u=zp dominated limit gives leading1/z. Correct full normalization additionally requires constant ln2-gamma, obtained by subtracting E1 with integrable difference.
+  Executed: 1 exact assertions; 5 numerical checks.
+
+14.6.5 — sections/ch14.tex:3804
+  Statement: work/book-layout.txt:35593; textbook PDF694/printed696.
+  Manual: work/solman.txt:23385; PDF224/printed221.
+  Fresh source/derivation evidence: Source Eq14.132->133 task matched; 2r gamma factors paired aroundnu give product[4nu²-(2j-1)²]/4^r and denominator(8z)^r; empty/terminating cases and asymptotic sense stated.
+  Executed: 14 exact assertions; 0 numerical checks.
+
+14.6.6 — sections/ch14.tex:3838
+  Statement: work/book-layout.txt:35594; textbook PDF694/printed696.
+  Manual: work/solman.txt:23412; PDF224/printed221.
+  Fresh source/derivation evidence: Source endpoint-contour criterion matched; complete product differentiation and total derivative residual traced. Fig14.14 was freshly inspected; the statement now includes Re nu>-1/2 and, for the unbounded contour, Re z>0.
+  Executed: 1 exact assertions; 3 numerical checks.
+
+14.6.7 — sections/ch14.tex:3893
+  Statement: work/book-layout.txt:35605; textbook PDF694/printed696.
+  Manual: work/solman.txt:23469; PDF225/printed222.
+  Fresh source/derivation evidence: All five source Wronskians/published N->Y correction matched; phase-shifted leading terms and exact Abel constancy fix all constants. Parts a-c now display the full adjacent-recurrence-to-Wronskian reductions.
+  Executed: 3 exact assertions; 15 numerical checks.
+
+14.6.8 — sections/ch14.tex:3971
+  Statement: work/book-layout.txt:35614; textbook PDF694/printed696.
+  Manual: work/solman.txt:23565; PDF225/printed222.
+  Fresh source/derivation evidence: Source +i/4 has negative delta source; explicit small-disk flux4iC requires -i/4 for book positive-source convention. The sign and source convention are now corrected directly in the statement; logarithmic remainder and outgoing time convention traced.
+  Executed: 4 exact assertions; 2 numerical checks.
+
+14.6.9 — sections/ch14.tex:4019
+  Statement: work/book-layout.txt:35622; textbook PDF694/printed696.
+  Manual: work/solman.txt:23619; PDF226/printed223.
+  Fresh source/derivation evidence: Source phase task matched; clockwise -iz branch and rotated square root supply +pi/4, giving -(nu+1/2)pi/2 total phase. The fixed-order complex asymptotic domain is specified as closed subsectors of -pi<arg z<2pi.
+  Executed: 1 exact assertions; 6 numerical checks.
+
+14.6.10 — sections/ch14.tex:4054
+  Statement: work/book-layout.txt:35625; textbook PDF694/printed696.
+  Manual: work/solman.txt:23631; PDF226/printed223.
+  Fresh source/derivation evidence: Source inverse-power ansatz intended asymptotically; direct x^-1/2 derivatives and coefficient x^-n-2 yield recurrence i[4nu²-(2n+1)²]/[8(n+1)], even/odd matching and normalization correct.
+  Executed: 10 exact assertions; 0 numerical checks.
+
+14.6.11 — sections/ch14.tex:4121
+  Statement: work/book-layout.txt:35646; textbook PDF695/printed697.
+  Manual: work/solman.txt:23651; PDF226/printed223.
+  Fresh source/derivation evidence: Source incoming asymptotic answer matched; lower saddle -i, descent pi/4 and lower branch phase combine with1/i correctly for fixed order/positive large t.
+  Executed: 5 exact assertions; 3 numerical checks.
+
+14.6.12 — sections/ch14.tex:4160
+  Statement: work/book-layout.txt:35659; textbook PDF695/printed697.
+  Manual: no separately numbered solution located in the complete chapter extract.
+  Fresh source/derivation evidence: Source has two sign errors; lower angular endpoint fixed but the exterior positive sign is now also corrected directly. Explicit r=tan(theta/2) gives unique upper saddle max; constant-Im steepest path cannot visit both saddles whereas arbitrary analytic detours can. The statement now restricts the claim to descending representatives.
+  Executed: 3 exact assertions; 14 numerical checks.
+
+14.6.13 — sections/ch14.tex:4239
+  Statement: work/book-layout.txt:35678; textbook PDF695/printed697.
+  Manual: work/solman.txt:23652; PDF226/printed223.
+  Fresh source/derivation evidence: Source 15 partial sums/seven integer arguments matched. All 210 partial-sum entries and35 optimum/error entries read; recurrence and exact amplitude inversion traced. The statement now specifies absolute error and the integer grid; relative-Q threshold8 distinguished.
+  Executed: 17 exact assertions; 231 numerical checks.
+
+14.7.1 — sections/ch14.tex:4360
+  Statement: work/book-layout.txt:36336; textbook PDF707/printed709.
+  Manual: work/solman.txt:23658; PDF226/printed223.
+  Fresh source/derivation evidence: Source Eq14.161->162 task matched; half-integer product factors4(n+j)(n-j+1), termination and factorial/double-factorial conversion traced; finite ODE/outgoing normalization establishes exactness.
+  Executed: 35 exact assertions; 14 numerical checks.
+
+14.7.2 — sections/ch14.tex:4401
+  Statement: work/book-layout.txt:36337; textbook PDF707/printed709.
+  Manual: work/solman.txt:23676; PDF227/printed224.
+  Fresh source/derivation evidence: Source relation matched; sin(pi(n+1/2))=(-1)^n and cos0 remove Jpositive term, negative sign and common square-root branch traced.
+  Executed: 14 exact assertions; 14 numerical checks.
+
+14.7.3 — sections/ch14.tex:4427
+  Statement: work/book-layout.txt:36349; textbook PDF707/printed709.
+  Manual: work/solman.txt:23695; PDF227/printed224.
+  Fresh source/derivation evidence: Published odd-j power correction and additional y-second-sum sign checked algebraically via h=j+iy. P/Q phase decomposition, empty n0 sum, n1 counterexample and analytic continuation traced; the textbook printed710 sign was freshly confirmed in the actual PDF.
+  Executed: 19 exact assertions; 0 numerical checks.
+
+14.7.4 — sections/ch14.tex:4489
+  Statement: work/book-layout.txt:36377; textbook PDF708/printed710.
+  Manual: work/solman.txt:23783; PDF228/printed225.
+  Fresh source/derivation evidence: Source Poisson integral/examples matched; polynomial expansion with S=2sin(x)/x and even derivatives cancels both (-1)^r factors; n0/n1 calculated fully, apparent origin singularities removable.
+  Executed: 6 exact assertions; 4 numerical checks.
+
+14.7.5 — sections/ch14.tex:4541
+  Statement: work/book-layout.txt:36388; textbook PDF708/printed710.
+  Manual: work/solman.txt:23793; PDF228/printed225.
+  Fresh source/derivation evidence: Both source recurrences and ODE matched. Differentiated x^-1/2 prefactor essential, solve adjacent derivative relations then eliminate f_n+1 to obtain n(n+1) coefficient.
+  Executed: 24 exact assertions; 2 numerical checks.
+
+14.7.6 — sections/ch14.tex:4599
+  Statement: work/book-layout.txt:36400; textbook PDF708/printed710.
+  Manual: work/solman.txt:23841; PDF229/printed226.
+  Fresh source/derivation evidence: Source Rayleigh formula/nonnegative integer n matched. Base j0, derivative recurrence and exact -x^n d(x^-n jn)/dx yield induction; origin interpreted by continuous extension.
+  Executed: 7 exact assertions; 0 numerical checks.
+
+14.7.7 — sections/ch14.tex:4628
+  Statement: work/book-layout.txt:36406; textbook PDF708/printed710.
+  Manual: work/solman.txt:23882; PDF229/printed226.
+  Fresh source/derivation evidence: Published n_n->y_n matched; self-adjoint spherical ODE gives x²W constant, origin coefficients add (2n+1) factor with (-1)!!=1. n0 subleading derivative has no effect on constant.
+  Executed: 12 exact assertions; 0 numerical checks.
+
+14.7.8 — sections/ch14.tex:4665
+  Statement: work/book-layout.txt:36411; textbook PDF708/printed710.
+  Manual: work/solman.txt:23934; PDF229/printed226.
+  Fresh source/derivation evidence: Source spherical Hankel Wronskian matched; explicit bilinear expansion yields -2i times W[j,y] including sign.
+  Executed: 5 exact assertions; 0 numerical checks.
+
+14.7.9 — sections/ch14.tex:4684
+  Statement: work/book-layout.txt:36416; textbook PDF708/printed710.
+  Manual: work/solman.txt:23952; PDF230/printed227.
+  Fresh source/derivation evidence: Source Poisson representation matched; p=cos(theta),u=p² beta moment and gamma half-integer coefficients reproduce defining spherical series, including complex z and origin values.
+  Executed: 1 exact assertions; 10 numerical checks.
+
+14.7.10 — sections/ch14.tex:4717
+  Statement: work/book-layout.txt:36424; textbook PDF709/printed711.
+  Manual: work/solman.txt:23996; PDF230/printed227.
+  Fresh source/derivation evidence: Source formulas/book k normalization matched; one integration by parts boundary term zero, sin(xt)=xt j0 gives factor2(n+1). The statement now includes x>0, nonnegative n, and the starting K-integral convergence range.
+  Executed: 2 exact assertions; 3 numerical checks.
+
+14.7.11 — sections/ch14.tex:4761
+  Statement: work/book-layout.txt:36441; textbook PDF709/printed711.
+  Manual: work/solman.txt:24013; PDF230/printed227.
+  Fresh source/derivation evidence: Source weighted J-product integral matched; self-adjoint subtraction gives boundary bracket, sum-order origin condition and large-x phase difference yield sine coefficient. The equal-positive-order continuity value1/(2nu) is now explicit in the statement.
+  Executed: 2 exact assertions; 6 numerical checks.
+
+14.7.12 — sections/ch14.tex:4813
+  Statement: work/book-layout.txt:36447; textbook PDF709/printed711.
+  Manual: work/solman.txt:24136; PDF231/printed228.
+  Fresh source/derivation evidence: Source distinct-order whole-line orthogonality matched for nonnegative integer m,n. Odd parity case and even-case half-line identity use denominator(m-n)(m+n+1); manual m²-n² faulty intermediate was freshly confirmed in the actual manual PDF.
+  Executed: 13 exact assertions; 0 numerical checks.
+
+14.7.13 — sections/ch14.tex:4842
+  Statement: work/book-layout.txt:36453; textbook PDF709/printed711.
+  Manual: work/solman.txt:24151; PDF231/printed228.
+  Fresh source/derivation evidence: Source whole-line norm matched for nonnegative integer n; equal cylindrical order nu=n+1/2 supplies half-line factor, even square doubles to pi/(2n+1).
+  Executed: 1 exact assertions; 4 numerical checks.
+
+14.7.14 — sections/ch14.tex:4863
+  Statement: work/book-layout.txt:36457; textbook PDF709/printed711.
+  Manual: work/solman.txt:24189; PDF232/printed229.
+  Fresh source/derivation evidence: The source Fresnel scale/variable errors are now corrected directly in the statement. Standard C,S scaling requires sqrt(2/pi)t, s=t² changes x(s) to x(sqrt(s)); strayx absent in current. Finite telescoping residuals and factorial uniform bound justify integrated series and negative t extension.
+  Executed: 10 exact assertions; 13 numerical checks.
+
+14.7.15 — sections/ch14.tex:4947
+  Statement: work/book-layout.txt:36513; textbook PDF710/printed712.
+  Manual: work/solman.txt:24242; PDF232/printed229.
+  Fresh source/derivation evidence: Source frequency/wavelength matched for lowest positive mode only. F'=x²cosx proves unique l1 root, l0 exclusion belowpi and l>=2 Rayleigh>=6/a² establish global minimum; The statement now asks for the lowest positive frequency, with the constant zero mode explained.
+  Executed: 4 exact assertions; 4 numerical checks.
+
+14.7.16 — sections/ch14.tex:5015
+  Statement: work/book-layout.txt:36527; textbook PDF710/printed712.
+  Manual: work/solman.txt:24268; PDF232/printed229.
+  Fresh source/derivation evidence: Source parity/no-parity tasks matched. Entire even series times x^n resolves i branch parity; finite book-normalized k continuation ratio~-e^2x excludes both parities for every n>=0.
+  Executed: 6 exact assertions; 18 numerical checks.
+
+14.7.17 — sections/ch14.tex:5052
+  Statement: work/book-layout.txt:36529; textbook PDF710/printed712.
+  Manual: work/solman.txt:24279; PDF233/printed230.
+  Fresh source/derivation evidence: Source Wronskian matched with unequal spherical I/K prefactors. Cross-derivative coefficients cancel and ab=1/x multiplies cylindrical -1/x to give -1/x².
+  Executed: 2 exact assertions; 12 numerical checks.

@@ -1,0 +1,290 @@
+CHAPTER 3 VERIFICATION RECORD — CURRENT FINAL AUDIT STATE (2026-10-04)
+
+123/123 complete source/statement and derivation/pedagogy audits are recorded in
+supplementary/ch03_final_audit.txt with specific entry evidence and coverage limits.
+The current source contains123 unique problems,123 solutions,0 placeholders,
+9 Needspace-protected subsections and2 coordinate diagrams.
+
+FINAL CURRENT SHA256
+sections/ch03.tex  9147bb101868f8a493d936f4e6d5a6a22a3711f0cad1b5c59e681c948556c8c4
+supplementary/ch03_check.py  354a9540b23f5c36e71cb3d113b913038c3d1e369f32b0d559fc77876c022b27
+supplementary/ch03_final_audit.txt  1e6280e81c7fd5a114472a97c1f4ac179ee541d0a93ca56589192a6e381acc7b
+work/ch03-final-review.pdf  25bc7fb0ef0c7821c5dae52b904344e007b30c7e74457e69639cff8249e9f294
+
+Current executable result:992 scalar assertions (983 exact+9 rounded-matrix
+comparisons) in123 groups, plus uncounted structural guards. The historical
+pre-audit handoff had971 scalar assertions; that count is superseded here.
+Historical source hash caa2d75548d0efd0c24949cfb475043032cb58d963e1ce1a6c56acd394201188
+Historical checker hash 3dfa7bc4cc2a21f9e1c349026e49528e19571020cf25ac43764b699e1ffe505f
+These two hashes describe the historical handoff, not the current files.
+
+The textbook/manual provenance,12 new manual-error notes, corrected problem
+hypotheses and inverse-Jacobian expansion are documented entry by entry in the
+final audit. In particular, 3.10.9's textbook operator is correct; the manual's
+criticism is false. In3.10.33 the textbook's bold vector is correct; the defect
+was in transcription. No contradictory old erratum claim is carried forward.
+The textbook's wrong3.10.31 commutator is independently reconfirmed by PDF and
+arbitrary-function symbolic commutators. Samples are not general proofs: see
+final audit for analytical integral-theorem/topology/arbitrary-chart coverage.
+
+Commands completed successfully
+python3 supplementary/ch03_check.py > work/ch03-final-check.txt
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch03-final-review.tex (twice)
+pdftoppm -r70 -png work/ch03-final-review.pdf work/ch03-final-page
+52pages, clean final TeX log, all52 rendered pages inspected in13 contact sheets.
+No main document build or process termination was performed.
+
+CURRENT SOURCE MAP (literal newline numbering, refreshed after all edits)
+3.2.1: sections/ch03.tex:12; work/book-layout.txt:6856; work/solman.txt:3459
+3.2.2: sections/ch03.tex:32; work/book-layout.txt:6858; work/solman.txt:3460
+3.2.3: sections/ch03.tex:52; work/book-layout.txt:6859; work/solman.txt:3462
+3.2.4: sections/ch03.tex:90; work/book-layout.txt:6870; work/solman.txt:3467
+3.2.5: sections/ch03.tex:119; work/book-layout.txt:6877; work/solman.txt:3468
+3.2.6: sections/ch03.tex:135; work/book-layout.txt:6882; work/solman.txt:3471
+3.2.7: sections/ch03.tex:156; work/book-layout.txt:6887; work/solman.txt:3473
+3.2.8: sections/ch03.tex:190; work/book-layout.txt:6913; work/solman.txt:3474
+3.2.9: sections/ch03.tex:226; work/book-layout.txt:6921; work/solman.txt:3480
+3.2.10: sections/ch03.tex:249; work/book-layout.txt:6923; work/solman.txt:3482
+3.2.11: sections/ch03.tex:278; work/book-layout.txt:6929; work/solman.txt:3487
+3.2.12: sections/ch03.tex:298; work/book-layout.txt:6932; work/solman.txt:3488
+3.2.13: sections/ch03.tex:340; work/book-layout.txt:6937; work/solman.txt:3492
+3.2.14: sections/ch03.tex:364; work/book-layout.txt:6939; work/solman.txt:3499
+3.2.15: sections/ch03.tex:384; work/book-layout.txt:6943; work/solman.txt:3501
+3.3.1: sections/ch03.tex:454; work/book-layout.txt:7196; work/solman.txt:3507
+3.3.2: sections/ch03.tex:486; work/book-layout.txt:7201; work/solman.txt:3545
+3.3.3: sections/ch03.tex:510; work/book-layout.txt:7206; work/solman.txt:3551
+3.3.4: sections/ch03.tex:529; work/book-layout.txt:7209; work/solman.txt:3554
+3.3.5: sections/ch03.tex:580; work/book-layout.txt:7219; work/solman.txt:3602
+3.4.1: sections/ch03.tex:638; work/book-layout.txt:7395; work/solman.txt:3728
+3.4.2: sections/ch03.tex:694; work/book-layout.txt:7408; work/solman.txt:3736
+3.4.3: sections/ch03.tex:753; work/book-layout.txt:7418; work/solman.txt:3738
+3.4.4: sections/ch03.tex:775; work/book-layout.txt:7423; work/solman.txt:3741
+3.4.5: sections/ch03.tex:802; work/book-layout.txt:7428; work/solman.txt:3746
+3.5.1: sections/ch03.tex:847; work/book-layout.txt:7916; work/solman.txt:3779
+3.5.2: sections/ch03.tex:872; work/book-layout.txt:7922; work/solman.txt:3786
+3.5.3: sections/ch03.tex:901; work/book-layout.txt:7929; work/solman.txt:3788
+3.5.4: sections/ch03.tex:926; work/book-layout.txt:7932; work/solman.txt:3795
+3.5.5: sections/ch03.tex:946; work/book-layout.txt:7937; work/solman.txt:3802
+3.5.6: sections/ch03.tex:962; work/book-layout.txt:7939; work/solman.txt:3833
+3.5.7: sections/ch03.tex:993; work/book-layout.txt:7946; work/solman.txt:3841
+3.5.8: sections/ch03.tex:1012; work/book-layout.txt:7948; work/solman.txt:3842
+3.5.9: sections/ch03.tex:1041; work/book-layout.txt:7960; work/solman.txt:3843
+3.5.10: sections/ch03.tex:1066; work/book-layout.txt:7962; work/solman.txt:3846
+3.5.11: sections/ch03.tex:1097; work/book-layout.txt:7978; work/solman.txt:3856
+3.5.12: sections/ch03.tex:1134; work/book-layout.txt:7985; work/solman.txt:3933
+3.5.13: sections/ch03.tex:1158; work/book-layout.txt:7988; work/solman.txt:3934
+3.6.1: sections/ch03.tex:1180; work/book-layout.txt:8157; work/solman.txt:3960
+3.6.2: sections/ch03.tex:1194; work/book-layout.txt:8158; work/solman.txt:3966
+3.6.3: sections/ch03.tex:1209; work/book-layout.txt:8159; work/solman.txt:3967
+3.6.4: sections/ch03.tex:1226; work/book-layout.txt:8161; work/solman.txt:3968
+3.6.5: sections/ch03.tex:1252; work/book-layout.txt:8164; work/solman.txt:3971
+3.6.6: sections/ch03.tex:1279; work/book-layout.txt:8166; work/solman.txt:3976
+3.6.7: sections/ch03.tex:1310; work/book-layout.txt:8168; work/solman.txt:4039
+3.6.8: sections/ch03.tex:1331; work/book-layout.txt:8172; work/solman.txt:4047
+3.6.9: sections/ch03.tex:1348; work/book-layout.txt:8176; work/solman.txt:4049
+3.6.10: sections/ch03.tex:1377; work/book-layout.txt:8179; work/solman.txt:4095
+3.6.11: sections/ch03.tex:1388; work/book-layout.txt:8180; work/solman.txt:4096
+3.6.12: sections/ch03.tex:1411; work/book-layout.txt:8182; work/solman.txt:4100
+3.6.13: sections/ch03.tex:1433; work/book-layout.txt:8184; work/solman.txt:4103
+3.6.14: sections/ch03.tex:1449; work/book-layout.txt:8185; work/solman.txt:4105
+3.6.15: sections/ch03.tex:1465; work/book-layout.txt:8187; work/solman.txt:4106
+3.6.16: sections/ch03.tex:1497; work/book-layout.txt:8194; work/solman.txt:4107
+3.6.17: sections/ch03.tex:1522; work/book-layout.txt:8198; work/solman.txt:4122
+3.6.18: sections/ch03.tex:1579; work/book-layout.txt:8218; work/solman.txt:4210
+3.7.1: sections/ch03.tex:1614; work/book-layout.txt:8459; work/solman.txt:4216
+3.7.2: sections/ch03.tex:1642; work/book-layout.txt:8463; work/solman.txt:4228
+3.7.3: sections/ch03.tex:1677; work/book-layout.txt:8475; work/solman.txt:4293
+3.7.4: sections/ch03.tex:1700; work/book-layout.txt:8480; work/solman.txt:4323
+3.7.5: sections/ch03.tex:1716; work/book-layout.txt:8481; work/solman.txt:4332
+3.8.1: sections/ch03.tex:1740; work/book-layout.txt:8704; work/solman.txt:4360
+3.8.2: sections/ch03.tex:1758; work/book-layout.txt:8710; work/solman.txt:4379
+3.8.3: sections/ch03.tex:1777; work/book-layout.txt:8719; work/solman.txt:4393
+3.8.4: sections/ch03.tex:1797; work/book-layout.txt:8725; work/solman.txt:4413
+3.8.5: sections/ch03.tex:1832; work/book-layout.txt:8733; work/solman.txt:4417
+3.8.6: sections/ch03.tex:1857; work/book-layout.txt:8741; work/solman.txt:4423
+3.8.7: sections/ch03.tex:1886; work/book-layout.txt:8750; work/solman.txt:4426
+3.8.8: sections/ch03.tex:1919; work/book-layout.txt:8759; work/solman.txt:4432
+3.8.9: sections/ch03.tex:1944; work/book-layout.txt:8765; work/solman.txt:4464
+3.8.10: sections/ch03.tex:1963; work/book-layout.txt:8769; work/solman.txt:4466
+3.8.11: sections/ch03.tex:1985; work/book-layout.txt:8774; work/solman.txt:4481
+3.8.12: sections/ch03.tex:2006; work/book-layout.txt:8779; work/solman.txt:4522
+3.8.13: sections/ch03.tex:2027; work/book-layout.txt:8784; work/solman.txt:4552
+3.9.1: sections/ch03.tex:2056; work/book-layout.txt:9278; work/solman.txt:4591
+3.9.2: sections/ch03.tex:2107; work/book-layout.txt:9290; work/solman.txt:4604
+3.9.3: sections/ch03.tex:2147; work/book-layout.txt:9292; work/solman.txt:4606
+3.9.4: sections/ch03.tex:2176; work/book-layout.txt:9303; work/solman.txt:4669
+3.9.5: sections/ch03.tex:2205; work/book-layout.txt:9311; work/solman.txt:4670
+3.9.6: sections/ch03.tex:2246; work/book-layout.txt:9323; work/solman.txt:4676
+3.9.7: sections/ch03.tex:2266; work/book-layout.txt:9329; work/solman.txt:4694
+3.9.8: sections/ch03.tex:2304; work/book-layout.txt:9345; work/solman.txt:4696
+3.9.9: sections/ch03.tex:2331; work/book-layout.txt:9353; work/solman.txt:4710
+3.9.10: sections/ch03.tex:2367; work/book-layout.txt:9358; work/solman.txt:4738
+3.9.11: sections/ch03.tex:2390; work/book-layout.txt:9364; work/solman.txt:4750
+3.9.12: sections/ch03.tex:2417; work/book-layout.txt:9372; work/solman.txt:4792
+3.10.1: sections/ch03.tex:2460; work/book-layout.txt:10117; work/solman.txt:4883
+3.10.2: sections/ch03.tex:2551; work/book-layout.txt:10129; work/solman.txt:5004
+3.10.3: sections/ch03.tex:2621; work/book-layout.txt:10141; work/solman.txt:5046
+3.10.4: sections/ch03.tex:2653; work/book-layout.txt:10144; work/solman.txt:5062
+3.10.5: sections/ch03.tex:2694; work/book-layout.txt:10156; work/solman.txt:5085
+3.10.6: sections/ch03.tex:2769; work/book-layout.txt:10172; work/solman.txt:5168
+3.10.7: sections/ch03.tex:2799; work/book-layout.txt:10177; work/solman.txt:5169
+3.10.8: sections/ch03.tex:2825; work/book-layout.txt:10182; work/solman.txt:5170
+3.10.9: sections/ch03.tex:2850; work/book-layout.txt:10190; work/solman.txt:5175
+3.10.10: sections/ch03.tex:2887; work/book-layout.txt:10196; work/solman.txt:5177
+3.10.11: sections/ch03.tex:2918; work/book-layout.txt:10199; work/solman.txt:5191
+3.10.12: sections/ch03.tex:2948; work/book-layout.txt:10205; work/solman.txt:5197
+3.10.13: sections/ch03.tex:2979; work/book-layout.txt:10214; work/solman.txt:5198
+3.10.14: sections/ch03.tex:3027; work/book-layout.txt:10223; work/solman.txt:5204
+3.10.15: sections/ch03.tex:3063; work/book-layout.txt:10230; work/solman.txt:5228
+3.10.16: sections/ch03.tex:3086; work/book-layout.txt:10240; work/solman.txt:5229
+3.10.17: sections/ch03.tex:3121; work/book-layout.txt:10251; work/solman.txt:5241
+3.10.18: sections/ch03.tex:3146; work/book-layout.txt:10254; work/solman.txt:5242
+3.10.19: sections/ch03.tex:3177; work/book-layout.txt:10258; work/solman.txt:5243
+3.10.20: sections/ch03.tex:3211; work/book-layout.txt:10262; work/solman.txt:5254
+3.10.21: sections/ch03.tex:3248; work/book-layout.txt:10268; work/solman.txt:5286
+3.10.22: sections/ch03.tex:3278; work/book-layout.txt:10271; work/solman.txt:5346
+3.10.23: sections/ch03.tex:3346; work/book-layout.txt:10283; work/solman.txt:5442
+3.10.24: sections/ch03.tex:3380; work/book-layout.txt:10292; work/solman.txt:5443
+3.10.25: sections/ch03.tex:3402; work/book-layout.txt:10294; work/solman.txt:5445
+3.10.26: sections/ch03.tex:3437; work/book-layout.txt:10304; work/solman.txt:5464
+3.10.27: sections/ch03.tex:3468; work/book-layout.txt:10310; work/solman.txt:5503
+3.10.28: sections/ch03.tex:3538; work/book-layout.txt:10322; work/solman.txt:5504
+3.10.29: sections/ch03.tex:3577; work/book-layout.txt:10333; work/solman.txt:5505
+3.10.30: sections/ch03.tex:3598; work/book-layout.txt:10341; work/solman.txt:5513
+3.10.31: sections/ch03.tex:3633; work/book-layout.txt:10352; work/solman.txt:5514
+3.10.32: sections/ch03.tex:3688; work/book-layout.txt:10368; work/solman.txt:5637
+3.10.33: sections/ch03.tex:3755; work/book-layout.txt:10385; work/solman.txt:5688
+3.10.34: sections/ch03.tex:3801; work/book-layout.txt:10395; work/solman.txt:5791
+3.10.35: sections/ch03.tex:3828; work/book-layout.txt:10405; work/solman.txt:5821
+3.10.36: sections/ch03.tex:3876; work/book-layout.txt:10415; work/solman.txt:5830
+3.10.37: sections/ch03.tex:3931; work/book-layout.txt:10430; work/solman.txt:5831
+
+ACTUAL FINAL CHECK OUTPUT
+SymPy 1.14.0; 123 exercise groups; 992 scalar assertions PASS.
+3.2.1: PASS (3 scalar assertions) — General planar vectors: exact cross-product components.
+3.2.2: PASS (1 scalar assertions) — General real vectors: polynomial Lagrange identity.
+3.2.3: PASS (4 scalar assertions) — Exact directed dot/cross products and angle-addition identities.
+3.2.4: PASS (7 scalar assertions) — Both unit perpendiculars and nullspace dimension.
+3.2.5: PASS (3 scalar assertions) — Arbitrary coplanar linear combinations: exact double cross.
+3.2.6: PASS (2 scalar assertions) — General two-dimensional triangle: cross-product area equalities.
+3.2.7: PASS (9 scalar assertions) — All three measured Lorentz forces.
+3.2.8: PASS (7 scalar assertions) — Given vectors: cross product, scalar triple product, nested product.
+3.2.9: PASS (3 scalar assertions) — General polynomial Jacobi identity.
+3.2.10: PASS (4 scalar assertions) — General vector and general angular unit normal: orthogonal projection.
+3.2.11: PASS (2 scalar assertions) — General determinant/triple-product identity; rank-zero criterion is analytical.
+3.2.12: PASS (16 scalar assertions) — All specified numerical triple products and Jacobi sum.
+3.2.13: PASS (1 scalar assertions) — General four-vector scalar double-cross identity.
+3.2.14: PASS (3 scalar assertions) — General four-vector double-cross vector identity.
+3.2.15: PASS (18 scalar assertions) — General magnetic forces; perpendicular specialization and unequal-force example.
+3.3.1: PASS (9 scalar assertions) — Exact composition of two passive rotations.
+3.3.2: PASS (9 scalar assertions) — Product of three Cartesian plane reflections.
+3.3.3: PASS (10 scalar assertions) — Generic Euler-orthogonal dot invariance; general matrix proof in text.
+3.3.4: PASS (23 scalar assertions) — Exact rational orthogonality, determinant, transformed vectors and cross.
+3.3.5: PASS (38 scalar assertions) — Exact improper transformation; vectors, pseudoscalar, double cross; manual wrong-sign countercheck.
+3.4.1: PASS (18 scalar assertions) — Generic equivalence of z-x-z and z-y-z Euler conventions.
+3.4.2: PASS (16 scalar assertions) — Earth Euler matrix to printed rounding; north-pole and due-south geometry.
+3.4.3: PASS (9 scalar assertions) — Euler angle redundancy for arbitrary angles.
+3.4.4: PASS (18 scalar assertions) — Euler inverse/transpose exact identities.
+3.4.5: PASS (4 scalar assertions) — Rodrigues norm invariance for arbitrary axis and z-axis specialization.
+3.5.1: PASS (7 scalar assertions) — Gradient, norm and direction at the stated point.
+3.5.2: PASS (4 scalar assertions) — Unit surface normal and tangent-plane linearization.
+3.5.3: PASS (4 scalar assertions) — General relative-position gradient and its unit norm off coincidence.
+3.5.4: PASS (3 scalar assertions) — Multivariable total differential for arbitrary smooth vector fields.
+3.5.5: PASS (3 scalar assertions) — Product rule for arbitrary scalar functions.
+3.5.6: PASS (6 scalar assertions) — Exact circular-orbit velocity, angular momentum and acceleration.
+3.5.7: PASS (6 scalar assertions) — Time-independent matrix commutes with derivative; rotating-frame extra term.
+3.5.8: PASS (4 scalar assertions) — Dot and cross product time derivatives for arbitrary time functions.
+3.5.9: PASS (1 scalar assertions) — General smooth-field divergence-of-cross identity.
+3.5.10: PASS (3 scalar assertions) — Cartesian angular momentum components acting on arbitrary scalar.
+3.5.11: PASS (5 scalar assertions) — All three commutators on an arbitrary smooth scalar; expanded intermediate terms.
+3.5.12: PASS (1 scalar assertions) — Arbitrary commuting constant-vector contraction of operator commutators.
+3.5.13: PASS (7 scalar assertions) — Circular streamline solves the full ODE; invariant radius and stationary axis.
+3.6.1: PASS (1 scalar assertions) — Irrotational gradient fields; general divergence identity checked in 3.5.9.
+3.6.2: PASS (4 scalar assertions) — Position curl and general product identity.
+3.6.3: PASS (4 scalar assertions) — Arbitrary constant angular velocity: solenoidality and curl.
+3.6.4: PASS (5 scalar assertions) — General integrating-factor helicity identity and missing-nonzero-factor counterexample.
+3.6.5: PASS (3 scalar assertions) — Full arbitrary smooth-vector curl-of-cross identity.
+3.6.6: PASS (6 scalar assertions) — General operator-cross contraction and gradient-of-dot identity.
+3.6.7: PASS (3 scalar assertions) — General convective-derivative identity.
+3.6.8: PASS (3 scalar assertions) — Gradient of scalar triple product with arbitrary constant vectors.
+3.6.9: PASS (3 scalar assertions) — Three components of the double-curl identity for arbitrary functions.
+3.6.10: PASS (3 scalar assertions) — Curl of scalar times its gradient, arbitrary smooth scalar.
+3.6.11: PASS (6 scalar assertions) — Constant and gradient additions preserve curl; topology example.
+3.6.12: PASS (7 scalar assertions) — Curl of nonlinear term for arbitrary velocity; missing-half countercheck before the curl.
+3.6.13: PASS (1 scalar assertions) — Solenoidal cross product of arbitrary smooth gradients.
+3.6.14: PASS (5 scalar assertions) — Gradient divergence/curl for arbitrary scalar and harmonic example.
+3.6.15: PASS (11 scalar assertions) — Divergence and double-curl reduction; explicit k=0 counterexample.
+3.6.16: PASS (1 scalar assertions) — General scalar-square Laplacian identity before harmonic substitution.
+3.6.17: PASS (12 scalar assertions) — Matrix curl operator, Maxwell real/imaginary decomposition and divergence counterexample.
+3.6.18: PASS (40 scalar assertions) — General Pauli product and all nine multiplication-table entries.
+3.7.1: PASS (4 scalar assertions) — General tetrahedron oriented vector-area sum; unit-tetrahedron scalar-area contrast.
+3.7.2: PASS (3 scalar assertions) — Both exact semicircle integrals, with external-work sign.
+3.7.3: PASS (5 scalar assertions) — Two exact path integrals and nonzero curl.
+3.7.4: PASS (4 scalar assertions) — General exact differential and a closed-square integration check.
+3.7.5: PASS (1 scalar assertions) — Six unit-cube faces integrated separately.
+3.8.1: PASS (4 scalar assertions) — General constant-vector divergence and six oriented cube faces.
+3.8.2: PASS (2 scalar assertions) — Divergence theorem integrand and exact unit-cube surface example.
+3.8.3: PASS (2 scalar assertions) — Arbitrary smooth potential: divergence of curl; polynomial cube-flux example.
+3.8.4: PASS (3 scalar assertions) — General integration-by-parts integrand and uniform-sphere finite energy example.
+3.8.5: PASS (3 scalar assertions) — Three general current-conservation product identities.
+3.8.6: PASS (4 scalar assertions) — Area-integrand curl and exact counterclockwise ellipse example.
+3.8.7: PASS (3 scalar assertions) — All vector components of exact ellipse line integral.
+3.8.8: PASS (6 scalar assertions) — General normal operator contraction and square-loop Stokes example.
+3.8.9: PASS (5 scalar assertions) — General product identity and nonzero opposite square line integrals.
+3.8.10: PASS (4 scalar assertions) — General curl-of-scalar-gradient identity plus exact square example.
+3.8.11: PASS (4 scalar assertions) — General test-vector integrand and polynomial unit-cube boundary integral.
+3.8.12: PASS (6 scalar assertions) — General scalar-gradient curl identity and exact square vector integral.
+3.8.13: PASS (4 scalar assertions) — General alternate-Stokes contraction and polynomial square boundary integral.
+3.9.1: PASS (9 scalar assertions) — General exponent divergence/curl; power/log potentials; monopole sphere flux.
+3.9.2: PASS (7 scalar assertions) — Uniform-sphere potential: derivatives, Poisson equation, matching and infinity.
+3.9.3: PASS (6 scalar assertions) — All tidal-force potential derivatives and manual opposite-sign residual.
+3.9.4: PASS (6 scalar assertions) — Cartesian curl of wire vector potential and gauge freedom.
+3.9.5: PASS (4 scalar assertions) — Monopole potential curl away from axis and nonzero closed-sphere flux.
+3.9.6: PASS (3 scalar assertions) — Constant-field vector potential for arbitrary constant components.
+3.9.7: PASS (4 scalar assertions) — Both potential/curl and divergence identities for arbitrary smooth u,v.
+3.9.8: PASS (4 scalar assertions) — Gauge-invariant curl generally and exact closed-loop polynomial gradient example.
+3.9.9: PASS (16 scalar assertions) — Mean-value theorem: harmonic polynomial sphere averages; general proof is analytical.
+3.9.10: PASS (7 scalar assertions) — General magnetostatic Poisson residual and an arbitrary curl-gauge field.
+3.9.11: PASS (3 scalar assertions) — Full arbitrary-field Ampere residual splits into wave and Lorenz-gauge terms.
+3.9.12: PASS (4 scalar assertions) — Coordinate-box vector-potential construction for a general polynomial solenoidal field.
+3.10.1: PASS (14 scalar assertions) — Hyperbolic chart orthogonality, unit vectors, handedness, forward and inverse Jacobians.
+3.10.2: PASS (5 scalar assertions) — Exact elliptic-chart surface equations, tangent orthogonality and scale factors.
+3.10.3: PASS (7 scalar assertions) — General vector dot/cross in spherical orthonormal frame and left-handed sign.
+3.10.4: PASS (24 scalar assertions) — Unit-vector divergence/curl formulas checked for every cylindrical/spherical basis vector.
+3.10.5: PASS (72 scalar assertions) — All nine basis-derivative identities in both cylindrical and spherical charts.
+3.10.6: PASS (21 scalar assertions) — Cylindrical coordinate tangents, orthonormality and orientation.
+3.10.7: PASS (15 scalar assertions) — Inverse cylindrical basis combinations.
+3.10.8: PASS (27 scalar assertions) — Every first cylindrical basis partial derivative.
+3.10.9: PASS (3 scalar assertions) — Arbitrary cylindrical divergence; explicit radial-field basis-derivative countercheck.
+3.10.10: PASS (7 scalar assertions) — Cylindrical position, divergence and curl.
+3.10.11: PASS (12 scalar assertions) — Cylindrical parity transformation of position and all basis vectors.
+3.10.12: PASS (6 scalar assertions) — Rigid rotation velocity and curl in cylindrical chart.
+3.10.13: PASS (6 scalar assertions) — Arbitrary time-dependent cylindrical trajectory differentiated twice in Cartesian space.
+3.10.14: PASS (5 scalar assertions) — Arbitrary planar cylindrical curl; general transverse components expose manual typos.
+3.10.15: PASS (3 scalar assertions) — Exact cylindrical curl of logarithmic wire potential.
+3.10.16: PASS (7 scalar assertions) — Cylindrical field transformation, zero local curl, exact circulation.
+3.10.17: PASS (3 scalar assertions) — Basis differentiation of arbitrary azimuthal B(rho).
+3.10.18: PASS (21 scalar assertions) — All spherical tangents and orthonormality/orientation.
+3.10.19: PASS (9 scalar assertions) — Three Cartesian basis reconstructions in spherical frame.
+3.10.20: PASS (14 scalar assertions) — Radial coordinate violates oddness of a linear map; physical-component transform is orthogonal.
+3.10.21: PASS (27 scalar assertions) — Exact spherical-to-cylindrical component matrix and inverse.
+3.10.22: PASS (30 scalar assertions) — All spherical basis derivatives and arbitrary-scalar Laplacian; z-field rejects manual tan coefficient.
+3.10.23: PASS (6 scalar assertions) — Rigid rotation in spherical coordinates, including both nonzero curl components.
+3.10.24: PASS (4 scalar assertions) — General tangent-field curl equations and 1/r radial dependence.
+3.10.25: PASS (12 scalar assertions) — Exact parity of spherical position and all three unit vectors.
+3.10.26: PASS (6 scalar assertions) — Arbitrary vector directional derivative of position in both charts.
+3.10.27: PASS (6 scalar assertions) — Arbitrary time-dependent spherical trajectory differentiated twice in Cartesian space.
+3.10.28: PASS (21 scalar assertions) — Spherical inverse coordinate Jacobian and Cartesian differential operators.
+3.10.29: PASS (1 scalar assertions) — Lz chain rule on arbitrary scalar function.
+3.10.30: PASS (5 scalar assertions) — Spherical Cartesian angular operators and both ladder combinations.
+3.10.31: PASS (3 scalar assertions) — All corrected spherical angular momentum commutators on arbitrary scalar.
+3.10.32: PASS (8 scalar assertions) — Angular momentum vector, all expanded squares and sum/Laplacian identity.
+3.10.33: PASS (6 scalar assertions) — Both Cartesian operator identities on an arbitrary scalar, retaining vector r.
+3.10.34: PASS (2 scalar assertions) — All three radial Laplacian forms for arbitrary radial function.
+3.10.35: PASS (7 scalar assertions) — Dipole-force curl, potential gradient and equatorial circulation.
+3.10.36: PASS (12 scalar assertions) — Both local monopole potentials, Cartesian equivalence and multivalued gauge jump.
+3.10.37: PASS (6 scalar assertions) — General dipole Cartesian gradient and spherical axis-aligned specialization.
+Coverage check: 123 unique problem IDs, 123 solution markers, zero placeholders.
+Limits: symbolic differential identities assume the smoothness stated in the text.
+Finite examples of integral theorems and frame identities supplement their general analytical proofs.
+No sample-based claim of a general theorem is made; coordinate singularities are excluded.

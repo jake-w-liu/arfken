@@ -1,0 +1,437 @@
+CHAPTER 7 FRESH FINAL AUDIT -- 75/75 ENTRIES
+Current source SHA256: eb1bffa414eae51006719dc0db4e70e0416bba8bb2f4df35b5ec5eda1285cb0b
+Current checker SHA256: 8267a9c1ab88946ee04ab535b644cfa2cc090a5ae932e52b80e468aca16fda81
+All 75 complete statements and solutions freshly read, source-compared and
+mathematically traced. All Chapter7 manual solutions read; manual contains
+no numbered answers7.5.12/13, so those computations were independently done.
+Literal-newline source line numbering below matches rg/sed (not splitlines).
+Textbook exercise pages339--380; manual printed87--105. Referenced example,
+integrating-factor equations, Table7.1, Frobenius analysis, Exercises8.3.1/3,
+and Section18.4 definition read as required by the individual entries.
+Published errata/revision pages3--6 have no Chapter7 entry.
+
+Content changes in 35 entries: 7.2.2, 7.2.3, 7.2.5, 7.2.7, 7.2.8, 7.2.10, 7.2.16, 7.4.1, 7.4.3, 7.4.5, 7.5.1, 7.5.5, 7.5.6, 7.5.7, 7.5.8, 7.5.9, 7.5.11, 7.5.13, 7.6.4, 7.6.5, 7.6.7, 7.6.10, 7.6.11, 7.6.12, 7.6.14, 7.6.15, 7.6.16, 7.6.18, 7.6.22, 7.6.24, 7.6.25, 7.6.26, 7.7.1, 7.7.5, 7.8.4.
+New/expanded work: real parachutist algebra and equilibrium; resonant
+hypergeometric reduction and all unit-circle boundaries; complex branch
+qualifications; direct regularity/domain/exceptional-parameter statements;
+C2 matching through singular x=0; C1 Clairaut joins; upward tabular bound.
+New verified manual correction:7.4.3 normalized Chebyshev y' coefficient
+has the wrong sign, confirmed in source PDF98. Existing sign/factor repairs
+were rederived and freshly inspected in the original PDF pages.
+Withdrawn overclaims:7.5.8's optional even branch is not a missing requested
+answer;7.6.7 is an intentional trap;7.6.22 follows the explicit n!=0 source
+convention. Canonical text and current ledger now say this consistently.
+
+Entire checker read. Added14 algebra/boolean assertions plus157 checks of
+canonical printed tables/inventory; corrected the nonconstant-P comment
+(the actual lower-limit test uses nonzero constant P=1). Full rerun:
+  python3 -u supplementary/ch07_check.py > work/ch07-final-check-rerun.txt
+Exit0,611 counted assertions total:322 algebra-section checks (318 exact/
+boolean,4 numerical),132 independent numerical table checks,157 canonical
+TeX checks (28 inventory/index/shape,129 numeric cells/enclosures).
+Thus346 exact/structural assertions and265 numerical assertions. Counted
+matrix/identity conditions are one assertion each, not their element count.
+Finite coefficients and sampled parameter cases supplement analytic proofs;
+they do not establish global uniqueness, analytic continuation, all-integer
+resonance formulas, smoothness, or convergence by sampling.
+
+Original source images freshly inspected: textbook physical347/Table7.1,
+372/Wronskians and901/Section18.4; manual physical96,98,106,107,108.
+Fresh Section18.4 image:work/ch07-final-source-vn-0901.png; earlier source
+renders were reopened for a fresh visual read, without relying on old QA.
+
+7.2.1 -- current sections/ch07.tex:12
+  Source: book-layout.txt:16969 (PDF341); solman.txt:9032 (PDF93).
+  Statement: RC equation, resistance/capacitance/current data and both requested outputs match.
+  Derivation/pedagogy: Traced separation, zero solution, RC units, current at100s and improper charge integral; all algebra and numerical digits checked. No change needed.
+
+7.2.2 -- current sections/ch07.tex:51
+  Source: book-layout.txt:16980 (PDF341); solman.txt:9036 (PDF93).
+  Statement: Bessel-transform ODE and solve-for-f request match.
+  Derivation/pedagogy: Separation and normalization give A/sqrt(1+s^2), including zero; added complex branch and right-half-plane convention because Laplace s may be complex. Exact residual and large-real-s limit checked.
+
+7.2.3 -- current sections/ch07.tex:80
+  Source: book-layout.txt:16983 (PDF341); solman.txt:9050 (PDF93).
+  Statement: Collision law, initial population and tau match; replaced literal infinite value at the pole by backward-limit statement and stated positive k,N0.
+  Derivation/pedagogy: Integrated reciprocal with limits, solved IVP, checked domain and k=0/N0=0 cases. Undefined endpoint is distinguished from divergence approaching it.
+
+7.2.4 -- current sections/ch07.tex:113
+  Source: book-layout.txt:17007 (PDF342); solman.txt:9079 (PDF93).
+  Statement: A+B reaction, zero initial product and rate proportional to remaining concentrations match.
+  Derivation/pedagogy: Partial fractions with unequal A,B and exponential ratio were traced; equal concentrations solved separately. Exact residuals, initial values and coalescing limit verify both branches; zero reactant/rate cases are retained. No change.
+
+7.2.5 -- current sections/ch07.tex:167
+  Source: book-layout.txt:17016 (PDF342); solman.txt:9142 (PDF94).
+  Statement: Power drag law and both time/distance requests match; positive parameters, real exponent and forward-speed branch now direct.
+  Derivation/pedagogy: Traced separation and dx/dt=v, general exponents, n=1/n=2 logarithmic exceptions, stopping-time and stopping-distance inequalities. General implicit identities plus representative explicit branches checked; no continuation through an undefined drag law assumed.
+
+7.2.6 -- current sections/ch07.tex:221
+  Source: book-layout.txt:17024 (PDF342); solman.txt:9204 (PDF94).
+  Statement: Homogeneous y/x substitution request matches.
+  Derivation/pedagogy: Product derivative y'=u+xu' gives separated integral on x!=0. Every constant-slope root g(u)=u is restored after division. Generic substitution checked; no change.
+
+7.2.7 -- current sections/ch07.tex:245
+  Source: book-layout.txt:17030 (PDF342); solman.txt:9211 (PDF94).
+  Statement: Exact differential and rectangular potential agree; dummy integration variables and admissible C1 path assumptions now direct.
+  Derivation/pedagogy: Verified both partial derivatives by FTC and exactness, and both implications for differentiable level curves. Added independent polynomial path-integration checks rather than relying only on a preexisting symbolic potential.
+
+7.2.8 -- current sections/ch07.tex:283
+  Source: book-layout.txt:17037 (PDF342); solman.txt:9291 (PDF95).
+  Statement: Both requested potential derivatives and level-curve conclusion match; direct C1/path and dummy-variable qualifications added.
+  Derivation/pedagogy: Traced differentiation under the first integral and cancellation of Q(x0,y). Independent integrated polynomial potential verifies x/y derivatives; no missing term.
+
+7.2.9 -- current sections/ch07.tex:321
+  Source: book-layout.txt:17049 (PDF342); solman.txt:9292 (PDF95).
+  Statement: Equations7.12 and7.14 freshly read: alpha y'+alpha p y=alpha q and alpha'=alpha p.
+  Derivation/pedagogy: Both cross partials and explicit potential match; explains why the zero integrating factor is inadmissible for equivalence. Generic differentiated potential checked. No change.
+
+7.2.10 -- current sections/ch07.tex:347
+  Source: book-layout.txt:17053 (PDF343); solman.txt:9300 (PDF95).
+  Statement: Separated coefficient form and nonzero-function assumptions match; connected product/C1 hypothesis now direct.
+  Derivation/pedagogy: Evaluating h at one nonzero point forces g'=0 throughout x interval; converse potential explicit. Global connectedness is necessary for one constant, not inferred from local exactness alone.
+
+7.2.11 -- current sections/ch07.tex:376
+  Source: book-layout.txt:17057 (PDF343); solman.txt:9312 (PDF95).
+  Statement: General first-order integrating-factor expression and verification request match.
+  Derivation/pedagogy: Traced basepoint primitive, chain/product derivatives, cancellation and arbitrary constant. Symbolic generic residual checks the formula. No change.
+
+7.2.12 -- current sections/ch07.tex:405
+  Source: book-layout.txt:17070 (PDF343); solman.txt:9332 (PDF95).
+  Statement: Linear resistance, gravity and zero initial speed match.
+  Derivation/pedagogy: Integrating factor gives mg/b times1-exp(-bt/m); exact ODE/IC and b->0 limit gt checked. No change.
+
+7.2.13 -- current sections/ch07.tex:429
+  Source: book-layout.txt:17076 (PDF343); solman.txt:9361 (PDF95).
+  Statement: Parent/daughter decay law, initial states and requested daughter population match.
+  Derivation/pedagogy: Both integrating factors traced; distinct-rate formula and equal-rate lambda N0 t exp(-lambda t) agree in the limit. Vanishing rates cause no lost solution. No change.
+
+7.2.14 -- current sections/ch07.tex:466
+  Source: book-layout.txt:17090 (PDF343); solman.txt:9392 (PDF96).
+  Statement: Uniform density, surface-proportional evaporation and spherical drop match.
+  Derivation/pedagogy: Mass differentiation and surface flux cancel r^2 on r>0; linear radius holds until exhaustion, then physical radius zero. Exact law and exhaustion time checked. No change.
+
+7.2.15 -- current sections/ch07.tex:489
+  Source: book-layout.txt:17093 (PDF343); solman.txt:9394 (PDF96).
+  Statement: Three specified methods for v'=-av and initial value match.
+  Derivation/pedagogy: Separation, exact differential and general linear formula each yield exponential; zero branch restored separately. Exact residual, IC and potential derivative checked. No change.
+
+7.2.16 -- current sections/ch07.tex:527
+  Source: book-layout.txt:17107 (PDF344); solman.txt:9405 (PDF96).
+  Statement: Example7.2.1 actually uses m70,b700,g9.8; source initial60mi/h and free-fall b0.25,m70 match.
+  Derivation/pedagogy: Expanded exponentiation, sign preservation and linear solve for v, explicitly restoring v_i=v_T. Rational/tanh form works above terminal speed; PDF96 confirms manual real arctanh ambiguity. Exact residual/IC/limit and all quoted numeric values checked.
+
+7.2.17 -- current sections/ch07.tex:594
+  Source: book-layout.txt:17111 (PDF344); solman.txt:9416 (PDF96).
+  Statement: Undivided differential form (xy^2-y)dx+xdy=0 matches.
+  Derivation/pedagogy: Reciprocal integrating factor gives2x/(x^2+K), plus lost zero branch. Original undivided residual and smooth origin for K!=0 checked; poles excluded. No change.
+
+7.2.18 -- current sections/ch07.tex:624
+  Source: book-layout.txt:17113 (PDF344); solman.txt:9463 (PDF97).
+  Statement: Both exponential differential-form coefficients match.
+  Derivation/pedagogy: Traced u=y/x, product derivative u exp(u), potential x+y exp(y/x), and original-form partials. x!=0 and real implicit-level admissibility retained; no constant-ratio branch lost. No change.
+
+7.3.1 -- current sections/ch07.tex:662
+  Source: book-layout.txt:17170 (PDF345); solman.txt:9486 (PDF97).
+  Statement: Third-order coefficients -2,-1,+2 and real-solution instruction match.
+  Derivation/pedagogy: Factored characteristic cubic into roots2,1,-1; all three residuals and W=-6exp(2x) confirm complete real basis. No change.
+
+7.3.2 -- current sections/ch07.tex:679
+  Source: book-layout.txt:17171 (PDF345); solman.txt:9489 (PDF97).
+  Statement: Third-order coefficients -2,+1,-2 match.
+  Derivation/pedagogy: Roots2,+i,-i produce exp(2x),cosx,sinx; full W=5exp(2x) and all residuals checked. No change.
+
+7.3.3 -- current sections/ch07.tex:699
+  Source: book-layout.txt:17172 (PDF345); solman.txt:9493 (PDF97).
+  Statement: ODE y'''-3y'+2y=0 matches.
+  Derivation/pedagogy: Repeated root1 handled via y=exp(x)u and third root-2; product derivatives and W=9 confirm independence. No change.
+
+7.3.4 -- current sections/ch07.tex:720
+  Source: book-layout.txt:17173 (PDF345); solman.txt:9496 (PDF97).
+  Statement: Damped oscillator coefficients2,2 match.
+  Derivation/pedagogy: Substitution exp(-x)u explicitly cancels first derivative; cos/sin basis has W=exp(-2x) and vanishing residuals. No change.
+
+7.4.1 -- current sections/ch07.tex:741
+  Source: book-layout.txt:17298 (PDF348); solman.txt:9505 (PDF97).
+  Statement: Legendre equation from Table7.1 matches; direct question now excepts l(l+1)=0 at infinity.
+  Derivation/pedagogy: Finite pole factors and inversion chain rule traced. Infinity is ordinary at l=0,-1 and regular singular otherwise. Symbolic transforms/limits confirm existing correction.
+
+7.4.2 -- current sections/ch07.tex:776
+  Source: book-layout.txt:17299 (PDF348); solman.txt:9522 (PDF97).
+  Statement: Laguerre/Bessel zero/infinity classifications match.
+  Derivation/pedagogy: Normalized coefficients, inversion formula and nonremovable higher-order infinity poles were recomputed for both equations, including n=0. Generic transforms checked. No change.
+
+7.4.3 -- current sections/ch07.tex:811
+  Source: book-layout.txt:17301 (PDF348); solman.txt:9557 (PDF98).
+  Statement: Chebyshev equation/classification match; Legendre comparison qualified. PDF98 confirms manual incorrectly prints positive first-derivative coefficient.
+  Derivation/pedagogy: Finite and infinite transformed poles remain regular; added dark-red manual sign explanation. Exact transform and n=1 solution residual expose wrong sign without changing classification.
+
+7.4.4 -- current sections/ch07.tex:841
+  Source: book-layout.txt:17303 (PDF348); solman.txt:9590 (PDF98).
+  Statement: Hermite finite/infinity request matches Table7.1.
+  Derivation/pedagogy: Polynomial finite coefficients and inversion coefficient2/z+2/z^3 give irregular infinity for every alpha, including zero. Symbolic transform checked. No change.
+
+7.4.5 -- current sections/ch07.tex:858
+  Source: book-layout.txt:17305 (PDF348); solman.txt:9601 (PDF98).
+  Statement: Substitution t=(1-x)/2 and parameters -l,l+1,1 match; corrected hypergeometric -c convention now direct.
+  Derivation/pedagogy: Both derivative factors and all parameter products traced. Actual PDF347 table has +c; residual shows extra -4y' from it. Correct equation yields Legendre exactly.
+
+7.5.1 -- current sections/ch07.tex:893
+  Source: book-layout.txt:17798 (PDF358); solman.txt:9665 (PDF98).
+  Statement: Uniqueness problem/hint match; ordinary connected interval and continuity/analyticity hypotheses now direct.
+  Derivation/pedagogy: Derivative induction establishes Taylor coefficients, while integral estimate handles continuous coefficients. Explicit xy''-y'=0, y=Cx^2 invalidates manual regular-singular extension; PDF98 confirms wording and exact counterexample checked.
+
+7.5.2 -- current sections/ch07.tex:942
+  Source: book-layout.txt:17805 (PDF358); solman.txt:9668 (PDF98).
+  Statement: Ordinary-point expansion about x0 and roots0,1 match.
+  Derivation/pedagogy: Shifted t powers traced; only y'' contributes lowest power, and next coefficient correctly permits nonzero a1 in s=1 when P(0)!=0. Exact derivative coefficients checked. No change.
+
+7.5.3 -- current sections/ch07.tex:967
+  Source: book-layout.txt:17807 (PDF358); solman.txt:9677 (PDF99).
+  Statement: SHO two a1 cases and second-indicial request match.
+  Derivation/pedagogy: Lowest two powers, parity recurrence, sine/cosine reconstruction and omega=0 limit traced. s=0 arbitrary a1 and s=1 forced zero both checked. No change.
+
+7.5.4 -- current sections/ch07.tex:1006
+  Source: book-layout.txt:17816 (PDF358); solman.txt:9680 (PDF99).
+  Statement: All four equations, printed a1 statements and Bessel exception match.
+  Derivation/pedagogy: Derived each parity recurrence and Bessel(2s+1)a1=0. s=-1/2,n^2=1/4 is exact exception; later integer resonance distinguished from a1. General monomial checks pass. No change.
+
+7.5.5 -- current sections/ch07.tex:1057
+  Source: book-layout.txt:17825 (PDF358); solman.txt:9684 (PDF99).
+  Statement: Hypergeometric -c source sign and convergence request match.
+  Derivation/pedagogy: Both Frobenius recurrences, denominators, independence and gamma asymptotic were traced. Added explicit partial fractions/Abel reduction integral for integer resonance, full unit-circle criterion away from1, and distinction between a terminating factor and its fractional prefactor. General identities plus finite residuals checked.
+
+7.5.6 -- current sections/ch07.tex:1148
+  Source: book-layout.txt:17828 (PDF358); solman.txt:9686 (PDF99).
+  Statement: Confluent hypergeometric ODE/request match; question now permits logarithmic generalized series at integer c.
+  Derivation/pedagogy: Both generic branches, entire series factors, integer larger-root recurrence, reciprocal convolution, integrated logarithm and Wronskian traced. Tests at c=-2,0,1,2,3 support the analytical all-integer construction; no zero denominator silently used.
+
+7.5.7 -- current sections/ch07.tex:1219
+  Source: book-layout.txt:17831 (PDF358); solman.txt:9688 (PDF99).
+  Statement: All Stark parameters and source coefficients match for m>=0; printed answer now uses M=abs(m).
+  Derivation/pedagogy: Expanded derivative, full three-term recurrence and a1,a2,a3 calculations traced, including first F occurrence. Generic coefficient identities and a negative-m root check confirm the qualification.
+
+7.5.8 -- current sections/ch07.tex:1282
+  Source: book-layout.txt:17853 (PDF359); solman.txt:9699 (PDF99).
+  Statement: Molecular-ion ODE, odd printed series and first-coefficient request match; direct wording now allows parameter-dependent zero coefficients.
+  Derivation/pedagogy: Both even/odd coefficient triples, recurrence and independence checked. Withdrew misleading erratum: question asks for one series, so its correct odd answer is sufficient; even branch remains optional completeness, not a source error.
+
+7.5.9 -- current sections/ch07.tex:1339
+  Source: book-layout.txt:17866 (PDF359); solman.txt:9723 (PDF99).
+  Statement: Yukawa potential, Schrodinger prefactor and primed-parameter definition match; question now asks terms throughx^3 without promising all nonzero.
+  Derivation/pedagogy: Convolution with exp(-ax), s=1 recurrence and first two equations traced; independent expansion checks constant/linear residual. Other logarithmic branch is not claimed to be represented.
+
+7.5.10 -- current sections/ch07.tex:1389
+  Source: book-layout.txt:17884 (PDF359); solman.txt:9757 (PDF100).
+  Statement: Irregular ODE 1/x^2 first-derivative coefficient and polynomial target match.
+  Derivation/pedagogy: Lowest x^(s-1) term gives s=0; recurrence terminates at a3. Direct original-operator residual zero, with normalized domain excluding0. No change.
+
+7.5.11 -- current sections/ch07.tex:1421
+  Source: book-layout.txt:17893 (PDF360); solman.txt:9790 (PDF100).
+  Statement: Modified-Bessel ODE, prefactor and1/8,9/128 answers match; x->+infinity now explicit.
+  Derivation/pedagogy: Both prefactor derivatives, transformed equation and inverse-power recurrence traced. Residual checks controlled orders; eventual ratio j/(2x) establishes asymptotic rather than convergent interpretation. No change beyond domain.
+
+7.5.12 -- current sections/ch07.tex:1470
+  Source: book-layout.txt:17909 (PDF360); no numbered manual answer; independent calculation.
+  Statement: All requested powers200..2000, six x values and non-proof warning match; referenced8.3.1 read.
+  Derivation/pedagogy: Recurrence and Pochhammer ratio agree; all60 sums/all60 last terms independently recalculated and checked against canonical printed cells. Gamma ratios and negative harmonic coefficients prove divergence at1; samples are not the proof.
+
+7.5.13 -- current sections/ch07.tex:1559
+  Source: book-layout.txt:17916 (PDF360); no numbered manual answer; independent calculation.
+  Statement: Hermite odd branch, alpha0, x1,2,3, cutoff10^-6 and integral requests match; dummy variable now direct.
+  Derivation/pedagogy: Recurrence, exact factorial coefficients, first cutoffs9,17,28, geometric whole-tail bound and termwise integral traced. One displayed bound raised to7.349021e-7 for upward rounding; every table cell/upper enclosure checked against independent quadrature and erfi.
+
+7.6.1 -- current sections/ch07.tex:1638
+  Source: book-layout.txt:18523 (PDF372); solman.txt:9813 (PDF100).
+  Statement: Three orthogonal coordinate unit vectors and linear-relation request match.
+  Derivation/pedagogy: Three dot products force each coefficient zero; identity Gram determinant checks algebra. No change.
+
+7.6.2 -- current sections/ch07.tex:1658
+  Source: book-layout.txt:18526 (PDF372); solman.txt:9815 (PDF100).
+  Statement: Component determinant and scalar triple-product criterion match.
+  Derivation/pedagogy: Homogeneous matrix system, expansion signs and invertibility equivalence traced; generic symbolic determinant equals A dot(B cross C). No change.
+
+7.6.3 -- current sections/ch07.tex:1695
+  Source: book-layout.txt:18533 (PDF372); solman.txt:9817 (PDF100).
+  Statement: Original PDF372 confirms initial constant1, so existing red restoration is a transcription repair, not a textbook error.
+  Derivation/pedagogy: All derivative matrix entries give upper-triangular diagonal1. Alternative omitted-constant set has x^N/N! via Vandermonde; symbolic N1..7 examples supplement both general proofs. No change.
+
+7.6.4 -- current sections/ch07.tex:1739
+  Source: book-layout.txt:18539 (PDF372); solman.txt:9859 (PDF101).
+  Statement: Original assumes at least one nowhere-zero function; question now permits relabeling so denominator y2 is nowhere zero.
+  Derivation/pedagogy: Quotient derivative/integration valid on connected interval; y2=0,y1!=0 disproves literal unqualified orientation. Exact quotient and counterexample checked.
+
+7.6.5 -- current sections/ch07.tex:1772
+  Source: book-layout.txt:18545 (PDF372); solman.txt:9870 (PDF101).
+  Statement: Source asserts local W=0 implies global dependence without hypotheses; analytic/common-ODE repair now direct.
+  Derivation/pedagogy: Smooth flat-function counterexample and all-derivative decay proof traced. Analytic identity theorem or Abel+IVP uniqueness supplies repaired global result. Finite joining checks are not used as proof of smoothness.
+
+7.6.6 -- current sections/ch07.tex:1820
+  Source: book-layout.txt:18548 (PDF372); solman.txt:9871 (PDF101).
+  Statement: sinx,exp(x),exp(-x) ordering and4sinx printed W match.
+  Derivation/pedagogy: Determinant expansion signs and zeros kpi checked; W nonzero at pi/2 proves independence. Distinguishes arbitrary functions from one common regular ODE. No change.
+
+7.6.7 -- current sections/ch07.tex:1848
+  Source: book-layout.txt:18553 (PDF372); solman.txt:9872 (PDF101).
+  Statement: PDF372 confirms this is intentionally a faulty-argument question asking what is wrong.
+  Derivation/pedagogy: Half-line W zero, mismatched derivatives at0 and full-interval independence proof checked. Removed erratum styling from the intended trap; its conclusion is correctly explained, not alleged to be accidental source error.
+
+7.6.8 -- current sections/ch07.tex:1873
+  Source: book-layout.txt:18557 (PDF372); solman.txt:9873 (PDF101).
+  Statement: coshx/exp(x) example and nonlinear-dependence request match.
+  Derivation/pedagogy: Constant-coefficient relation forces both coefficients zero; W=1 and2coshx-exp(x)-exp(-x)=0 checked exactly. No change.
+
+7.6.9 -- current sections/ch07.tex:1899
+  Source: book-layout.txt:18559 (PDF372); solman.txt:9875 (PDF101).
+  Statement: Legendre Pn,Qn and target An/(1-x^2) match.
+  Derivation/pedagogy: Differentiated W and substituted ODE, then integrated ((1-x^2)W)'=0 without dividing by W. Interval excludes endpoints; normalization constant correctly left arbitrary. No change.
+
+7.6.10 -- current sections/ch07.tex:1931
+  Source: book-layout.txt:18569 (PDF373); solman.txt:9898 (PDF101).
+  Statement: Common second-order equation and Wronskian hint match; continuity/connected interval now direct.
+  Derivation/pedagogy: Third row dependence gives W3=0, then two initial constraints produce nonzero constant coefficients and uniqueness proves global dependence. This fills the invalid arbitrary-function converse in the terse manual.
+
+7.6.11 -- current sections/ch07.tex:1966
+  Source: book-layout.txt:18574 (PDF373); solman.txt:9904 (PDF101).
+  Statement: Self-adjoint W=C/p and reduction integral match; post-conversion q=p' and denominator domains now explicit.
+  Derivation/pedagogy: Subtraction yields(pW)'=0; quotient integration includes both constants, and C!=0 gives independence. General symbolic identities checked.
+
+7.6.12 -- current sections/ch07.tex:2013
+  Source: book-layout.txt:18587 (PDF373); solman.txt:9936 (PDF101).
+  Statement: Exponential substitution and Q-P'/2-P^2/4 target match; C1 regularity of P now direct.
+  Derivation/pedagogy: Both derivatives of the exponential/product and cancellation of z' traced. Generic symbolic conjugation identity verifies every coefficient.
+
+7.6.13 -- current sections/ch07.tex:2058
+  Source: book-layout.txt:18603 (PDF373); solman.txt:9980 (PDF101).
+  Statement: Radial substitution and reference3.10.34 match.
+  Derivation/pedagogy: u=r phi gives explicit first/second derivatives and u''/r cancellation; angular term retained with r^-3 and origin treated separately. Generic radial identity checked. No change.
+
+7.6.14 -- current sections/ch07.tex:2088
+  Source: book-layout.txt:18608 (PDF374); solman.txt:10008 (PDF102).
+  Statement: Double integral and all three Leibniz terms match; local nonzero-y1/continuous-coefficient domain now direct.
+  Derivation/pedagogy: Every derivative of h,J,y2 displayed; substituted residual cancels and W=e^-integralP proves independence. Symbolic generic checks agree.
+
+7.6.15 -- current sections/ch07.tex:2133
+  Source: book-layout.txt:18627 (PDF374); solman.txt:10042 (PDF102).
+  Statement: Lower-limit freedom request matches; all limits now explicitly within valid interval.
+  Derivation/pedagogy: Inner-limit exponential scale and outer-limit additive first-solution constant traced, including signs. Independent P=1,y1=exp(-x) integration checks example; corrected checker comment that had called P nonconstant.
+
+7.6.16 -- current sections/ch07.tex:2175
+  Source: book-layout.txt:18641 (PDF374); solman.txt:10069 (PDF102).
+  Statement: Power equation and r^m known solution match; direct answer includes m=0 logarithm on r>0.
+  Derivation/pedagogy: Integral r^m integral s^(-2m-1) produces opposite power for m!=0 and log for0. Both exact residuals checked.
+
+7.6.17 -- current sections/ch07.tex:2201
+  Source: book-layout.txt:18646 (PDF374); solman.txt:10081 (PDF102).
+  Statement: Sine series and logarithm-coefficient request match sourceEq7.81.
+  Derivation/pedagogy: Reciprocal even series has powers2j-2, never-1; antiderivative -cotx and -cosx companion independently checked. No logarithm, with sign freedom explained. No change.
+
+7.6.18 -- current sections/ch07.tex:2232
+  Source: book-layout.txt:18656 (PDF374); solman.txt:10183 (PDF103).
+  Statement: Noninteger Bessel order and reduction-of-order request match.
+  Derivation/pedagogy: Parity forbids resonance k=nu, including half-integer orders. Added complex-order/branch interpretation; nonzero leading opposite exponent establishes independence. General antiderivative identity plus finite resonance tests support analytic proof.
+
+7.6.19 -- current sections/ch07.tex:2266
+  Source: book-layout.txt:18660 (PDF375); solman.txt:10231 (PDF103).
+  Statement: Hermite alpha0/1 known solutions and references8.3.3 match.
+  Derivation/pedagogy: Odd integral and even exp(x^2)-2x integral normalization traced; every reindexed coefficient and direct residual shown. Both symbolic residuals and normalized value checked. No change.
+
+7.6.20 -- current sections/ch07.tex:2322
+  Source: book-layout.txt:18666 (PDF375); solman.txt:10316 (PDF104).
+  Statement: Laguerre n0, known1 and explicit-log request match.
+  Derivation/pedagogy: P=1/x-1 yields exp(x)/x, then ln|x| plus entire factorial series; W nonzero on each half-line. Exact integral and finite-series remainder checked. No change.
+
+7.6.21 -- current sections/ch07.tex:2349
+  Source: book-layout.txt:18670 (PDF375); solman.txt:10338 (PDF104).
+  Statement: Three separate integral/series verification tasks match.
+  Derivation/pedagogy: Pole separated before integration, local uniform convergence justifies derivatives, and all shifted sums cancel explicitly. Independent integral and truncation residuals checked. No change.
+
+7.6.22 -- current sections/ch07.tex:2394
+  Source: book-layout.txt:18683 (PDF375); solman.txt:10418 (PDF104).
+  Statement: PDF901/book46593 explicitly defines Vn only for n!=0. Printed 'not defined' follows that convention; prior erratum claim withdrawn.
+  Derivation/pedagogy: Two methods yield arcsinx on(-1,1); sine expression extends to zero function and Vn/n tends arccosx. Direct statement now clarifies convention/domain without falsely correcting source. Exact residual and limit checked.
+
+7.6.23 -- current sections/ch07.tex:2443
+  Source: book-layout.txt:18694 (PDF375); solman.txt:10452 (PDF105).
+  Statement: Chebyshev n1, known x and negative square-root printed answer match.
+  Derivation/pedagogy: Double integral, product-rule antiderivative, two derivatives and W all traced. Final function extends through0 although intermediate integrand does not. Exact residual/W checked. No change.
+
+7.6.24 -- current sections/ch07.tex:2478
+  Source: book-layout.txt:18701 (PDF376); solman.txt:10460 (PDF105).
+  Statement: Schrodinger centrifugal term/potential expansion match; physical l>=0,r>0 and l0 finite companion now in question.
+  Derivation/pedagogy: Indicial roots, recurrence denominator and b convolution traced. Reduction integral gives exact leading coefficient r^-l; l0 possible rlogr still tends0. Generic algebra and exceptional limit checked.
+
+7.6.25 -- current sections/ch07.tex:2541
+  Source: book-layout.txt:18715 (PDF376); solman.txt:10482 (PDF105).
+  Statement: y2=y1 f and target double integral match; valid local interval now direct.
+  Derivation/pedagogy: Two product derivatives give first-order equation for f'; both integration constants retained and lost f'=0 branch restored. Generic substitution identity checked.
+
+7.6.26 -- current sections/ch07.tex:2584
+  Source: book-layout.txt:18727 (PDF376); solman.txt:10501 (PDF105).
+  Statement: All Euler powers, repeated-root logarithm and limit tasks match; x>0,a0!=0 and primed-label convention now direct.
+  Derivation/pedagogy: Both roots/residuals, W=-alpha a0^2, logarithmic derivatives and cancellation in coalescing limit traced. PDF106 confirms manual lost a0/extra1/2; exact checks retain normalization.
+
+7.7.1 -- current sections/ch07.tex:2659
+  Source: book-layout.txt:18844 (PDF379); solman.txt:10581 (PDF106).
+  Statement: Variation-of-parameters formula and W orientation match; existing arbitrary constants and new regular-interval qualification direct.
+  Derivation/pedagogy: Auxiliary condition, second derivative, Cramer signs, integration constants and completeness proof traced. Generic source/auxiliary identities checked.
+
+7.7.2 -- current sections/ch07.tex:2713
+  Source: book-layout.txt:18862 (PDF379); solman.txt:10673 (PDF107).
+  Statement: Forced oscillator equation matches.
+  Derivation/pedagogy: Constant trial and independent variation-of-parameters calculation both give1. SourcePDF107 confirms duplicate u1' label; correct u2'=cosx retained. Both basis/particular residuals and W checked. No change.
+
+7.7.3 -- current sections/ch07.tex:2731
+  Source: book-layout.txt:18863 (PDF379); solman.txt:10685 (PDF107).
+  Statement: Frequency2/exponential source match.
+  Derivation/pedagogy: Characteristic roots and exponential trial give exp(x)/5; sourcePDF107 confirms wrong sin instead of cos in u2'. Differentiated manual antiderivative agrees with correction; all residuals/W checked. No change.
+
+7.7.4 -- current sections/ch07.tex:2750
+  Source: book-layout.txt:18864 (PDF379); solman.txt:10691 (PDF107).
+  Statement: Coefficients-3,+2 and forcing sinx match.
+  Derivation/pedagogy: Sine/cosine matching gives A1/10,B3/10; both homogeneous residuals, particular residual and W exp(3x) checked. No change.
+
+7.7.5 -- current sections/ch07.tex:2772
+  Source: book-layout.txt:18865 (PDF379); solman.txt:10701 (PDF108).
+  Statement: Undivided x-leading equation and sourcex^2 match.
+  Derivation/pedagogy: Both basis solutions, W=x exp(x), normalized sourcex and antiderivatives traced. Added proof that matching y and y'' across0 fixes both constants, excluding additional C2 joins. Exact symbolic matching and residuals checked.
+
+7.8.1 -- current sections/ch07.tex:2812
+  Source: book-layout.txt:18969 (PDF381); solman.txt:10715 (PDF108).
+  Statement: Riccati equation and known constant2 match.
+  Derivation/pedagogy: Shift, reciprocal linearization and integrating factor traced; y2 restored, y-1 included, poles excluded. PDF108 confirms wrong intermediate+1/3; exact family/equilibria corrected residuals checked. No change.
+
+7.8.2 -- current sections/ch07.tex:2841
+  Source: book-layout.txt:18971 (PDF381); solman.txt:10720 (PDF108).
+  Statement: Riccati x^-3 equation and particularx^2 match.
+  Derivation/pedagogy: Expanded shift, v'+v/x=-1/x^3 and rational reconstruction traced; separate original branch retained. PDF108 confirms missing1/x in manual; original rational/lost-branch residuals checked. No change.
+
+7.8.3 -- current sections/ch07.tex:2870
+  Source: book-layout.txt:18972 (PDF381); solman.txt:10734 (PDF108).
+  Statement: Bernoulli equation matches.
+  Derivation/pedagogy: Reciprocal-square derivative and integrating factor give both fixed signs plus zero. Positive radicand/connected interval and constant+/-1 cases retained; exact residuals checked. No change.
+
+7.8.4 -- current sections/ch07.tex:2896
+  Source: book-layout.txt:18973 (PDF381); solman.txt:10745 (PDF108).
+  Statement: Clairaut quadratic f, two tasks and envelope note match; differentiation now explicitly assumes twice differentiable y.
+  Derivation/pedagogy: Line intercept and singular integration constant forced by original equation; envelope value/slope checked. Added C1 tangent-join example, including zero contact and unequal second derivatives, so stated smooth branches are not falsely exhaustive for C1 solutions.
+
+
+FINAL STANDALONE BUILD AND RENDER QA
+Wrapper:work/ch07-final-review.tex, copied actual main.tex preamble and
+inputs only ch07. Last successful build:
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch07-final-review.tex
+Final log:work/ch07-final-build-03.txt (and ch07-final-review.log).
+No errors, warnings, overfull or underfull boxes;46pages.
+PDF SHA256:3770302d973754ac065b5451c6e63c826c4c970d3b6d2a8697809c38a5dd8509
+Rendered all46pages at1150px and inspected sheets01--12. A one-letter
+paragraph opening at the end of p18 was repaired with Needspace; final
+p18/19 were individually inspected. All other44rendered pages were
+byte-identical to the inspected images. All changed pages thus reviewed.
+Tables, equations, dark-red corrections and subsection headings fit clearly.
+A buffered redirected checker rerun exited120 with empty output; no cause
+is asserted. The subsequent unbuffered full rerun exited0 with611passes
+(work/ch07-final-check-rerun.txt); that verified output is also copied to
+work/ch07-final-check.txt. No mathematical assertion failed in the log.
+No main build and no preexisting process signaled or terminated.
+No unresolved mathematical or layout finding identified in this audit.
+Analytical proof limits and finite-test scope are stated per exercise above.

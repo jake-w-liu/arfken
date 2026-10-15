@@ -1,0 +1,74 @@
+CHAPTER 9 VERIFICATION RECORD
+Date: 2026-10-04
+
+VERIFIED scope: all 25 Chapter 9 exercises have worked solutions; no placeholders remain.
+Command: python3 supplementary/ch09_check.py
+Historical initial-completion result: PASS:134 checks; all 25 exercises have named checks.
+Output: work/ch09-check-output.txt; Python 3.14.7, SymPy 1.14.0, mpmath 1.3.0.
+Numerical heat comparisons use 70 decimal digits and explicit tolerances; other identities are exact.
+
+General proofs and limits are written in TeX. Finite derivative samples and numerical comparisons
+supplement them, rather than establish uniqueness, global smoothness or distributional convergence.
+
+Sources actually inspected:
+- Local textbook PDF and work/book-layout.txt, Chapter 9 statements, equations 9.18–9.21,
+  9.74,9.77,9.78,9.88,9.89 and the surrounding boundary/domain assumptions.
+- Local Instructor Manual PDF and work/solman.txt, Chapter 9 solutions pp.111–117.
+- Published Errata and Revision Status, 06 April 2012: no Chapter 9 entries.
+- Textbook PDF pp.415,433,435 (printed pp.414,432,434) rendered and visually inspected.
+- Manual PDF p.118 (printed p.115) rendered and visually inspected; repeated delta argument confirmed.
+
+Dark-red corrections/qualifications:
+- 9.2.5–6: local characteristic forms need separate branch data for the most general global solution.
+- 9.3.1: restored the unscaled eta second derivative in the transcribed statement; c/domain assumptions.
+- 9.4.4: restored textbook bracket placement so the Laplacian acts once on psi.
+- 9.5.1: logarithmic function excludes the whole z-axis.
+- 9.5.3: bounded-region/condition-at-infinity context retained.
+- 9.6.2: corrected the manual second traveling delta to x+ct.
+- 9.7.1: alpha=0 requires the independent basis 1,1/r.
+- 9.7.3: absolute value of a in the Gaussian normalization; zero diffusivity handled separately.
+
+Per-exercise evidence:
+9.2.1 (sections/ch09.tex:14): Invertible characteristic coordinates and arbitrary-function residual checked; integrating factor includes zero solutions.
+9.2.2 (sections/ch09.tex:37): Characteristic integration and absorption of invariant-only term derived; final arbitrary-function residual checked.
+9.2.3 (sections/ch09.tex:64): Invertible three-variable characteristic coordinates; arbitrary two-argument function checked.
+9.2.4 (sections/ch09.tex:88): Characteristic integration and arbitrary-function residual checked.
+9.2.5 (sections/ch09.tex:109): Jacobian, characteristic flow and local general solution checked; smooth global branch counterexample derived, with exact flat-seam derivative samples.
+9.2.6 (sections/ch09.tex:187): Jacobian inherited from 9.2.5; flow/invariant and local solution checked; independent branch counterexample shows the global qualification is needed.
+9.3.1 (sections/ch09.tex:241): Every transformed second-derivative coefficient checked by the quadratic symbol; corrected expression visually matched to textbook p.414.
+9.4.1 (sections/ch09.tex:287): Arbitrary-function linearity identity checked.
+9.4.2 (sections/ch09.tex:316): Three general separated ODEs independently substituted into the full cylindrical PDE; constants and zeros of factors handled.
+9.4.3 (sections/ch09.tex:360): Radial-first separation derived, source equation numbers read; general separated ODEs recombine exactly.
+9.4.4 (sections/ch09.tex:409): Corrected linear equation visually matched to textbook p.432; three arbitrary-coefficient ODEs recombine exactly.
+9.4.5 (sections/ch09.tex:455): All six boundary faces, norm factors, exact energy/PDE and Poincare identity checked; lower bound applies beyond a separated trial state.
+9.4.6 (sections/ch09.tex:524): Arbitrary-function Cartesian angular-momentum contraction checked including coordinate derivatives; cosine substitution independently checked.
+9.4.7 (sections/ch09.tex:591): Both scale identities and the full Gaussian substitution checked exactly.
+9.5.1 (sections/ch09.tex:654): Cartesian inverse-radius and angular logarithmic Laplacians checked; complete excluded-axis domain stated.
+9.5.2 (sections/ch09.tex:704): Mixed-derivative commutator checked for an arbitrary function; classical and distributional meanings separated.
+9.5.3 (sections/ch09.tex:727): General Green product identity checked; nonnegative energy proof traced and unbounded-half-space counterexample checked.
+9.6.1 (sections/ch09.tex:774): dAlembert formula derived from both initial equations; PDE, initial displacement and velocity checked.
+9.6.2 (sections/ch09.tex:806): Distributional solution checked both symbolically and by an arbitrary test function; duplicated manual pulse sign corrected.
+9.6.3 (sections/ch09.tex:834): Heaviside weak PDE, both initial conditions and ten values of the plotted pulse profiles checked; endpoint convention stated.
+9.6.4 (sections/ch09.tex:887): PDE and both initial conditions checked.
+9.7.1 (sections/ch09.tex:907): Both radial solutions and heat PDE checked; center limit and both zero-separation modes checked.
+9.7.2 (sections/ch09.tex:965): Both Bessel solutions and both zero-separation solutions checked; regular-axis selection and unspecified boundary spectrum made explicit.
+9.7.3 (sections/ch09.tex:996): Gaussian PDE, total heat and Gaussian-test-function integral checked; general delta limit proved by dominated convergence; a=0 treated separately.
+9.7.4 (sections/ch09.tex:1053): General Fourier coefficient, mode PDE, endpoint values, image-term PDE and telescoping boundary identity checked. Nine 70-digit spectral/image comparisons and eighteen tail-bound checks pass. Interior initial convergence justified by a uniform summation-by-parts tail; corner discontinuity retained.
+
+Historical initial-completion typesetting and visual verification:
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch09-only.tex:
+  15 pages; final log has no warnings, errors, overfull or underfull boxes.
+- All 15 rendered pages reviewed in work/ch09-contact-1.png through -4.png.
+- Detailed 1300-pixel pages 12 (TikZ pulse diagram) and 15 (heat solution) inspected separately.
+- Root main build deferred while other chapter edits proceed; integrated status is in PROGRESS.txt.
+
+Historical initial-completion source SHA256: ce8eea007848ee03a161bb21a071b60e96f2804df03c32f40e47490ddb15c374
+Historical initial-completion checker SHA256: 2c101710a51abade16205c4a64d15f30e0fe9feb9d35d199e36abeb2918bb0c2
+
+FRESH FINAL AUDIT (current):140 checks,16 pages,238072bytes, zero build warnings.
+All25 entries independently source-compared and derivations traced; see ch09_final_audit.txt.
+Added manual9.4.6 sign erratum, direct statement domain/parameter qualifications,
+whole-plane characteristic matching and complex energy-bound/epsilon-contraction steps.
+All line references above refreshed to current source. Current hashes:
+afb007e0ff20877135491c0093120ddd7b316ef649f6253b8e30caa1b52a2cfb  sections/ch09.tex
+73e01960da6e2f2a530aa824a6bad34530d60590db34efa0c431fc07ea54ce0b  supplementary/ch09_check.py

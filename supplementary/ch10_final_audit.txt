@@ -1,0 +1,135 @@
+CHAPTER 10 FRESH INDEPENDENT FINAL AUDIT
+Date:2026-10-04
+Scope: all20 complete current problem statements and solutions individually read,
+compared with original textbook/manual and traced mathematically, including every
+displayed solution and all edge cases. Existing green results were not substituted
+for the fresh source/derivation review.
+
+Sources: work/book-layout.txt all Chapter10 exercises, Eq10.24/26/28,
+Example10.1.1 and10.2.1, Table10.1 and operator/source context; work/solman.txt
+full printed118-121. Published6-April-2012 errata has no Chapter10 entries.
+Freshly reopened original PDF images:
+work/ch10-book-outgoing-0454.png; work/ch10-book-singular-0466.png;
+work/ch10-manual-123.png and -124.png (printed120-121).
+Textbook physical and printed page numbers coincide in this chapter.
+
+10.1.1 -- current sections/ch10.tex:12; textbook printed/physical p.456.
+  Source min(x,t), minus-second-derivative operator and mixed endpoints match. Traced continuity, derivative jump -1 and resulting positive delta; split convolution includes cancellation of both moving-endpoint terms. Affine homogeneous difference proves uniqueness; exact branch, boundary and source checks pass.
+
+10.1.2 -- current sections/ch10.tex:55; textbook printed/physical p.456.
+  Both source ODEs and endpoint data match. Traced sin(x),cos(1-x) Wronskian -cos1 and +1 derivative jump; absence of zero mode explicit. Part(b) now states bounded at infinities directly, retaining why pointwise finiteness is insufficient. Exponential matching, kernel L1 bound and uniqueness traced; manufactured full-line inversions supplement exact checks.
+
+10.1.3 -- current sections/ch10.tex:116; textbook printed/physical p.457.
+  Actual Eq10.24 and10.26 printed453-454 reread. Traced both Leibniz endpoint terms and initial values with arbitrary continuous source. Clarified that causal kernel with t>=0 represents forward x>=0 evolution; oriented Volterra integral itself also solves negative-x IVP. Exact arbitrary-source derivatives and causal jump pass.
+
+10.1.4 -- current sections/ch10.tex:150; textbook printed/physical p.457.
+  Source operator -d²-1/4, endpoints0,pi and printed positive kernel agree. Traced half-angle homogeneous branches, jump -C/2, C=2, and split source differentiation to y''=-y/4-f. Homogeneous endpoint test proves uniqueness.
+
+10.1.5 -- current sections/ch10.tex:207; textbook printed/physical p.457.
+  Source printed operator D and manual printed119 divided operator D/x compared. Put ordinary-dt normalization, nonresonance and k=0 task directly into statement. Traced Bessel branches, small-x selection, Abel Wronskian law, exact W=2/(pi*x), both source jumps and factor1/t. Fixed mistyped multiplication tC,2 to t*C*2. Expanded all alpha>0 endpoint source estimates, including alpha=1 logarithm. Traced resonance compatibility and distinct nonresonant k=0 case; exact identities and independently manufactured numerical inversions pass.
+
+10.1.6 -- current sections/ch10.tex:332; textbook printed/physical p.457.
+  Source finite endpoint condition and Legendre operator preserved. Traced two integrations, logarithmic endpoint divergence, piecewise-constant consequence and incompatible unit flux jump. Constant zero mode gives integral compatibility and additive nonuniqueness; impossibility is proved, not inferred from sampled checks.
+
+10.1.7 -- current sections/ch10.tex:385; textbook printed/physical p.457.
+  Source damping IVP and exp(-t) forcing preserved. Traced causal matching and unit jump for direct-source kernel, conversion to manual's integrating-factor kernel/source weight, full convolution algebra and initial derivatives. Both k=0 and1 computed by direct integrals; negative real damping remains allowed.
+
+10.1.8 -- current sections/ch10.tex:448; textbook printed/physical p.457.
+  Source exercise has correct k in exponential; freshly reopened original p454 confirms Eq10.28 omits it. Added positive k/time convention directly to statement. Traced both derivative branches, delta coefficient, arbitrary-source split convolution and outward phase velocities. Exact missing-k residual at k=2 confirms source correction.
+
+10.1.9 -- current sections/ch10.tex:506; textbook printed/physical p.457.
+  Source modified Helmholtz and two-sided decay checked. Put positive-root assumption of printed answer directly in statement; solution includes negative real k via |k|. Traced decaying branches, jump, split convolution and uniqueness. Affine branches prove no decaying inverse at k=0; divergent constant and finite Laplace part distinguished.
+
+10.1.10 -- current sections/ch10.tex:558; textbook printed/physical p.458.
+  Both source series, n starting values and piecewise kernels match. Traced energy positivity, spectral quantization, normalizations and direct kernels. Expanded twice-integrated boundary terms showing continuous-value cancellation and derivative-jump coefficient. Exact all-index Fourier coefficients plus completeness/uniform convergence establish identities;16 finite sums with analytic tail bounds only supplement.
+
+10.1.11 -- current sections/ch10.tex:666; textbook printed/physical p.458.
+  Source nonhomogeneous equal endpoint data and printed integral sign/kernel match. Traced double integration, triangular order change, elimination of initial slope and both piecewise coefficients. Independent homogenized Green construction gives same equation; converse and exact cosh solution/kernel integral checked.
+
+10.1.12 -- current sections/ch10.tex:744; textbook printed/physical p.458.
+  Source coefficients and both kernel branches preserved. Added real-coefficient/unit-weight scope to self-adjoint discussion in statement. Traced two integrations, elimination, moving-split reverse differentiation including discontinuity, boundary values, adjoint sign, integrating factor and gauge transform. Nonzero solution resonance condition derived; six resonant examples supplement general proof.
+
+10.1.13 -- current sections/ch10.tex:857; textbook printed/physical p.458.
+  Source negative kernel and negative external coupling both confirmed; freshly reopened manual physical123/printed120 actually contradicts its own displayed correct kernel in final minus-sign sentence. Put Re(k)>0/regular-origin assumptions in statement. Traced W=-k, +1 jump, image formula, convolution/source sign, regular series coefficient and absence of omitted homogeneous term; nondecaying k=0 limit handled.
+
+10.2.1 -- current sections/ch10.tex:948; textbook printed/physical p.466.
+  Source asks consistency of +d² fundamental kernel with Example10.1.1's -d² kernel. Reread actual source example. Traced affine boundary correction, both signs and branches, continuity and +1 jump; dark-red sign distinction justified by operator definitions.
+
+10.2.2 -- current sections/ch10.tex:992; textbook printed/physical p.466.
+  Source real p,q and unit weight retained. Moved common homogeneous Dirichlet/regularity/infinity-form qualifications into statement. Traced both complex integration-by-parts formulas and matching volume integrals; distinguished symmetric operator property from full self-adjoint domain assertion. Arbitrary-coefficient divergence and complex cube examples pass.
+
+10.2.3 -- current sections/ch10.tex:1057; textbook printed/physical p.466.
+  Fresh original p466 shows unspecified local integral with wrong -1; current dark-red statement specifies shrinking ball and corrected0. Actual manual p121 instead formally obtains +1/k² for whole-space Helmholtz Fourier integral, now stated precisely. Traced shared singularity, local O(epsilon²) estimate, both exact radial integrals, flux source and distinct global modified value -1.
+
+10.2.4 -- current sections/ch10.tex:1127; textbook printed/physical p.466.
+  Source outgoing3D kernel preserved. Added positive k/time convention directly to statement. Traced radial F/r derivatives, outgoing branch, flux normalization, Sommerfeld remainder and arbitrary-test-function Green identity with inward normal of punctured region. Exact and Gaussian distribution checks agree; finite tests do not replace the general distribution proof.
+
+10.2.5 -- current sections/ch10.tex:1202; textbook printed/physical p.467.
+  Source standing-wave request does not fix homogeneous phase. Corrected statement asks customary average and remaining freedom. Traced average's unit rather than doubled source, real standing wave/zero flux, radial equation and C*sin(kr)/r smooth homogeneous addition. Its even Taylor series and vanishing point-source flux verify nonuniqueness.
+
+10.2.6 -- current sections/ch10.tex:1252; textbook printed/physical p.467.
+  Source Table10.1 entry and decay condition reread. Added positive decay-root and k=0 limit instruction directly to statement. Traced radial modified equation, exact finite-radius flux and volume term canceling to1, distributional source and maximum-principle uniqueness for regular decaying difference.
+
+10.2.7 -- current sections/ch10.tex:1313; textbook printed/physical p.467.
+  Source potential/printed charge answer agree after explicit a>0 assumption now in statement. Traced radial derivatives and small-sphere delta sign, Poisson factor, integrable cloud, integration by parts giving cloud charge -Z, finite-radius charge and independent Gauss-law field. a=0 Coulomb exception retained.
+
+Actual verification:
+  python3 supplementary/ch10_check.py > work/ch10-final-check.log
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch10-final-review.tex
+  (two final passes, work/ch10-final-build1.stdout/-build2.stdout)
+  pdftotext -layout work/ch10-final-review.pdf work/ch10-final-rendered.txt
+  pdftoppm -r 70 -png work/ch10-final-review.pdf work/ch10-final-page
+  pdftoppm -f 3 -l 3 -r 110 -png work/ch10-final-review.pdf work/ch10-final-detail
+Final full checker:256 exact assertions and76 numerical checks, Python3.14.7,
+SymPy1.14.0,mpmath1.3.0. Seven new exact checks cover general source-bound
+primitives, alpha=1 limit and vanishing log bound, and Fourier boundary/jump
+cancellation. Numerical calculations use70 digits, default scaled1e-48;
+the small-k Bessel sample uses1e-22, and Fourier sums use proved absolute tail
+bounds. Full precise numerical sampling scope is retained in ch10_verification.txt.
+Arbitrary-source identities, analytic existence/uniqueness/domain/distribution
+proofs are not replaced by numerical samples.
+
+Standalone22 pages,256503bytes. Final log has zero warnings/errors or
+overfull/underfull boxes. All22 rendered pages inspected in contact1-6. A final
+pronoun clarification changed only page3: all pages rerendered and byte hashes
+compared, work/ch10-final-page-diff.txt; changed page3 reopened at110dpi.
+All displayed kernels, jump signs, qualifications and page breaks are readable.
+Needspace precedes both subsection headings. No main.tex/main.pdf build/edit.
+
+Current final SHA256:
+a933caab8c86ba179a335b214995f3d5876fed30ae4694fabc0c60c9d916b2b6  sections/ch10.tex
+071f03c09faeb18f9668dd05775458d089e51a8d4bccdc243cffaedf1f3f451a  supplementary/ch10_check.py
+
+Exact final full-checker output:
+Python 3.14.7; SymPy 1.14.0; mpmath 1.3.0
+Numerical precision: 70 decimal digits; default scaled tolerance 1e-48.
+Chapter SHA256: a933caab8c86ba179a335b214995f3d5876fed30ae4694fabc0c60c9d916b2b6
+PASS structure: 5 exact, 0 numerical
+PASS fresh final audit endpoint and jump algebra: 7 exact, 0 numerical
+PASS 10.1.1 mixed Laplace: 10 exact, 0 numerical
+PASS 10.1.2 trigonometric and bounded inverse: 19 exact, 3 numerical
+PASS 10.1.3 arbitrary-source initial-value identity: 8 exact, 0 numerical
+PASS 10.1.4 shifted Dirichlet inverse: 10 exact, 0 numerical
+PASS 10.1.5 Bessel normalization, endpoints, resonance and zero limit: 24 exact, 39 numerical
+PASS 10.1.6 Legendre zero mode: 6 exact, 0 numerical
+PASS 10.1.7 causal damping and exceptional parameters: 27 exact, 0 numerical
+PASS 10.1.8 outgoing 1D source and radiation: 10 exact, 0 numerical
+PASS 10.1.9 decaying 1D kernel: 8 exact, 0 numerical
+PASS 10.1.10 all-index Fourier coefficients and bounded-tail sums: 18 exact, 16 numerical
+PASS 10.1.11 double integration and exact solution: 13 exact, 0 numerical
+PASS 10.1.12 general integral identity and resonant examples: 16 exact, 0 numerical
+PASS 10.1.13 half-line source, images and origin: 13 exact, 0 numerical
+PASS 10.2.1 fundamental-solution sign: 9 exact, 0 numerical
+PASS 10.2.2 3D Green identity and complex Dirichlet example: 14 exact, 0 numerical
+PASS 10.2.3 corrected local limits: 9 exact, 0 numerical
+PASS 10.2.4 outgoing 3D kernel: 6 exact, 0 numerical
+PASS 10.2.5 standing 3D kernel and nonuniqueness: 8 exact, 0 numerical
+PASS 10.2.6 decaying 3D kernel: 7 exact, 0 numerical
+PASS 10.2.7 screened charge and Gauss law: 9 exact, 0 numerical
+PASS independent Gaussian distribution tests: 0 exact, 18 numerical
+ALL PASS: 256 exact assertions and 76 high-precision numerical checks.
+Scope: exact concrete identities and all-index Fourier coefficients; numerical Bessel,
+convolution, series and distribution examples supplement the written general proofs.
+Numerical examples are not proofs of all parameters, all sources, or operator-domain claims.
+
+Unresolved gaps: none identified within the20-entry stated-domain audit scope.

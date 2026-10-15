@@ -1,0 +1,142 @@
+CHAPTER 9 FRESH INDEPENDENT FINAL AUDIT
+Date:2026-10-04
+Scope: all25 complete current statements and solutions independently reread,
+compared with original textbook/manual and traced mathematically. Existing checker
+results were not used as a substitute for the fresh review.
+
+Sources: work/book-layout.txt Chapter9 exercises and actual Eq9.18-21,
+9.74/77/78,9.88/89 with context; work/solman.txt printed111-117 in full.
+Published6-April-2012 errata reread: no Chapter9 entries.
+New original manual renders at130dpi: work/ch09-final-source-manual-117.png
+(actual wrong sign in9.4.6) and -118.png (duplicated delta argument in9.6.2).
+Source page references below are physical PDF and printed, not output pages.
+
+9.2.1 -- current sections/ch09.tex:14; textbook printed p.408, physical PDF409.
+  All coefficients match source. Traced invertible (s,u)=(x,y-2x), derivative operators, integrating factor and arbitrary differentiable F; zero solution preserved. Exact arbitrary-function residual independently recomputes original PDE.
+
+9.2.2 -- current sections/ch09.tex:37; textbook printed p.408, physical PDF409.
+  Inhomogeneous x+y source term preserved without multiplying psi. Traced integration at fixed y+2x, algebra absorbing (y+2x)^2/2 into F, and both derivatives of final expression; manual's alternate coordinates give equivalent invariant.
+
+9.2.3 -- current sections/ch09.tex:64; textbook printed p.409, physical PDF410.
+  Source derivative sign on z preserved. Traced complete invertible three-coordinate map and two characteristic invariants; arbitrary two-argument F residual checked. Different manual invariants are invertible linear combinations of ours.
+
+9.2.4 -- current sections/ch09.tex:88; textbook printed p.409, physical PDF410.
+  Source RHS x-y preserved. Traced s=z,u=x-z,v=y-z, integration of u-v and directional derivative of particular solution; manual's invariant pair spans the same pair.
+
+9.2.5 -- current sections/ch09.tex:109; textbook printed p.409, physical PDF410.
+  Source u=xy,v=x^2-y^2 confirmed. Put local-away-origin/global-branch distinction into statement. Traced Jacobian, both derivative coefficients, exact hyperbolic flow and stationary origin. Expanded complete whole-plane C1 branch description, necessity/sufficiency of common value/derivative, all-jet smooth matching and all-orders flat-exponential argument; finite derivative samples only supplement this proof.
+
+9.2.6 -- current sections/ch09.tex:187; textbook printed p.409, physical PDF410.
+  Source x psi_x-y psi_y preserved. Put local/global distinction into statement. Traced same Jacobian and invariant xy, four quadrant families and axis rays. Expanded necessity/sufficiency of matching for whole-plane C1 solutions using gradient F'(xy)(y,x); explicit smooth counterexample disproves a single global F.
+
+9.3.1 -- current sections/ch09.tex:241; textbook printed p.414, physical PDF415.
+  Source Eq9.18 and printed414 exercise have coefficient ac-b^2 only on xi derivative; current corrected statement agrees. Added real constant c>0 hypothesis directly to statement. Traced every second derivative, cancellation of cross terms, determinant1 and optional extra rescaling; exact transformed symbol verifies all coefficients.
+
+9.4.1 -- current sections/ch09.tex:287; textbook printed p.432, physical PDF433.
+  Source operator and constant linear combination match. Traced each second-derivative distribution and multiplication by k^2; arbitrary-function symbolic identity verifies linearity, also valid for a prescribed variable coefficient.
+
+9.4.2 -- current sections/ch09.tex:316; textbook printed p.432, physical PDF433.
+  All generalized cylindrical potential terms match source. Traced z separation, multiplication by rho^2, angular constant and radial ODE; signs recombine exactly for arbitrary R,Phi,Z and coefficient functions. Explained zeros of factors and absence of presumed positive separation constant.
+
+9.4.3 -- current sections/ch09.tex:360; textbook printed p.432, physical PDF433.
+  Source asks radius first and Eq9.74,9.77,9.78; all three actual source equations were reread. Traced radial isolation before angular product and both angular ODEs; regular full-sphere/periodic restrictions separated from formal local separation. Symbolic recombination is exact.
+
+9.4.4 -- current sections/ch09.tex:409; textbook printed p.432, physical PDF433.
+  Original textbook printed432 has Laplacian outside bracket; corrected current statement matches. Traced all coefficient divisions, radial lambda and angular mu signs; arbitrary f,g,h ODEs recombine. Unperturbed eigenvalue quantization not imposed on general coefficients.
+
+9.4.5 -- current sections/ch09.tex:455; textbook printed p.432, physical PDF433.
+  Source box sides, Dirichlet data, PDE and printed minimum agree. Traced positive separation constants by integration by parts, sine boundary quantization, all three positive integers, normalization and lowest energy. Expanded complex-valued Poincare cross-term/product identities, including boundary term, to establish lower bound for nonseparable states. New complex symbolic identity passes alongside six face values and norm/PDE checks.
+
+9.4.6 -- current sections/ch09.tex:524; textbook printed p.433, physical PDF434.
+  Source L=-i(r cross grad) and l(l+1) preserved. Fresh manual PDF117/printed114 actually has erroneous plus angular Laplacian; added dark-red sign correction and cos(theta) counterexample. Expanded epsilon contractions into both indexed product derivatives, retaining coordinate differentiation; traced radial cancellation and u=cos(theta) chain rule. New exact Cartesian/operator and angular counterexample checks confirm sign.
+
+9.4.7 -- current sections/ch09.tex:591; textbook printed p.433, physical PDF434.
+  Source scale a and lambda checked term by term. Traced derivative and coordinate rescaling, both coefficient simplifications, Gaussian first/second derivatives and cancellation to Hermite ODE. Positive oscillator parameter assumptions explicit; energy formula follows lambda=2n+1.
+
+9.5.1 -- current sections/ch09.tex:654; textbook printed p.434, physical PDF435.
+  Source inverse-radius and logarithm preserved. Added whole-axis exclusion directly to part(b). Traced radial derivative, nonzero flux, logarithm half-angle identity, angular derivative and exact cancellation. Manual's r!=0 condition alone misses both nonzero-axis singularities; source p434 read.
+
+9.5.2 -- current sections/ch09.tex:704; textbook printed p.434, physical PDF435.
+  Source derivative-of-harmonic assertion matches. Traced each commuting derivative with stated classical regularity, also distributional derivative argument; distinguished PDE from differentiated boundary data.
+
+9.5.3 -- current sections/ch09.tex:727; textbook printed p.434, physical PDF435.
+  Source Eq9.88 and surrounding bounded-region uniqueness text reread. Added bounded region/regularity directly to statement. Traced difference equation, complex Green product identity, vanishing boundary/interior terms, nonnegative energy and constant on each component. Explicit half-space z versus0 proves need for infinity data on unbounded regions.
+
+9.6.1 -- current sections/ch09.tex:774; textbook printed p.437, physical PDF438.
+  Source sin(x) displacement and cos(x) velocity match Eq9.89. Traced both F/G initial equations, derivative solve, d'Alembert integral and trig reductions. Exact wave-PDE and both initial residuals pass; speed c>0 explicit.
+
+9.6.2 -- current sections/ch09.tex:806; textbook printed p.437, physical PDF438.
+  Source delta displacement and zero velocity match. Fresh manual PDF118/printed115 confirms duplicated delta(x-ct); retained dark-red correction to opposite-traveling pulse. Traced arbitrary-test-function action, first and second time derivatives, weak PDE and both initial data; symbolic distributional residuals supplement proof.
+
+9.6.3 -- current sections/ch09.tex:834; textbook printed p.437, physical PDF438.
+  Source square pulse width a,height1/a preserved. Traced two translated half-height pulses, support intervals, mass, overlap and disjoint times, endpoint convention and zero initial velocity. Exact weak PDE and initial data plus ten diagram profile values pass; rendered plot checked against labels.
+
+9.6.4 -- current sections/ch09.tex:887; textbook printed p.437, physical PDF438.
+  Source zero displacement and sin(x) velocity preserved. Traced definite integral, cosine difference identity and 1/c factor; exact PDE and both initial conditions checked.
+
+9.7.1 -- current sections/ch09.tex:907; textbook printed p.444, physical PDF445.
+  Source spherical symmetry and radial equation match. Added independent-pair alpha!=0/zero-case instruction to statement. Traced separated time factor, u=rR substitution with both derivatives, alpha=0 basis1,1/r and central regularity; exact radial/time PDE and limiting checks pass.
+
+9.7.2 -- current sections/ch09.tex:965; textbook printed p.444, physical PDF445.
+  Source radial-only cylindrical assumption preserved. Traced product separation, Bessel scaling, both J0/Y0 branches, regular-axis selection and integrated zero-separation modes1,log(rho). Surface boundary spectrum remains unspecified as in problem.
+
+9.7.3 -- current sections/ch09.tex:996; textbook printed p.444, physical PDF445.
+  Source whole-line delta heat input preserved. Traced Fourier ODE, Gaussian Fourier integral via differentiation and integration by parts, absolute a normalization, direct PDE, total mass and arbitrary-test-function dominated-convergence delta limit. a=0 treated separately; numerical test is not substituted for general weak-limit proof.
+
+9.7.4 -- current sections/ch09.tex:1053; textbook printed p.444, physical PDF445.
+  Source endpoints1,0 and initially-zero interior preserved; manual reverses coordinates/endpoints, so its expression was compared after reflection, not copied. Positive diffusivity/length added to statement. Traced steady subtraction, sine modes, integration by parts for -2/(n*pi), differentiated series, Abel/log sine identity and uniform summation-by-parts initial tail. Corner discontinuity explicit. Exact mode/boundary identities, independent images, nine70-digit comparisons and18 analytic-tail checks all pass.
+
+Actual verification:
+  python3 supplementary/ch09_check.py > work/ch09-final-check.log
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch09-final-review.tex
+  (two passes, preserved work/ch09-final-build1.stdout/-build2.stdout)
+  pdftotext -layout work/ch09-final-review.pdf work/ch09-final-rendered.txt
+  pdftoppm -r 80 -png work/ch09-final-review.pdf work/ch09-final-page
+Result:140 checks pass; every one of25 entries has named executable coverage.
+Six new assertions cover complex Poincare algebra, both epsilon contractions,
+angular/Cartesian verification of the manual sign counterexample, and the second
+characteristic Jacobian. General topology, smoothness, uniqueness and convergence
+proofs are in the text; sampled derivative limits/numerical values do not prove them.
+
+Standalone16 pages,238072bytes; final log has zero warnings/errors or
+overfull/underfull boxes. All16 newly rendered pages were opened in
+work/ch09-final-contact-1.png through -4.png, including new branch matching,
+expanded algebra, all dark-red statements and pulse schematic. No clipped
+displays, orphan subsection headings or figure-label collisions found.
+No root main build/edit performed.
+
+Current final SHA256:
+afb007e0ff20877135491c0093120ddd7b316ef649f6253b8e30caa1b52a2cfb  sections/ch09.tex
+73e01960da6e2f2a530aa824a6bad34530d60590db34efa0c431fc07ea54ce0b  supplementary/ch09_check.py
+
+Exact executable output:
+9.2.1: 1 checks passed
+9.2.2: 1 checks passed
+9.2.3: 1 checks passed
+9.2.4: 1 checks passed
+9.2.5: 12 checks passed
+9.2.6: 7 checks passed
+9.3.1: 2 checks passed
+9.4.1: 1 checks passed
+9.4.2: 1 checks passed
+9.4.3: 1 checks passed
+9.4.4: 1 checks passed
+9.4.5: 12 checks passed
+9.4.6: 6 checks passed
+9.4.7: 3 checks passed
+9.5.1: 4 checks passed
+9.5.2: 1 checks passed
+9.5.3: 2 checks passed
+9.6.1: 3 checks passed
+9.6.2: 3 checks passed
+9.6.3: 13 checks passed
+9.6.4: 3 checks passed
+9.7.1: 7 checks passed
+9.7.2: 4 checks passed
+9.7.3: 3 checks passed
+9.7.4: 43 checks passed
+structure: 4 checks passed
+PASS: 140 checks; all 25 exercises have named checks.
+General proof and numerical-scope details: ch09_verification.txt.
+
+Unresolved gaps: none identified in the25-entry audit scope.

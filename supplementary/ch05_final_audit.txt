@@ -1,0 +1,247 @@
+CHAPTER 5 FRESH FINAL AUDIT -- 40/40 ENTRIES
+Current source SHA256: 41fa02d8df7eab9fd86d564dfab32ab85541eaaea1ea825a6974e97f19419334
+Current checker SHA256: 885b6d456a26434d796b598c02c1de5377c6af40e00d73c63e1c08f440c47956
+Every complete current question and solution read and mathematically traced;
+all statements compared to textbook, all Chapter5 manual material read.
+Source line numbers below count literal newlines (split('\n')), matching rg/sed.
+Book exercise pp266--296; manual pp66--80; relevant source examples and
+Eq3.37 additionally read. Published errata pp3--6 has no Chapter5 entry.
+Fresh original images viewed: textbook physical276--277,292--294 and manual
+physical78--79, confirming subscript/denominator and transformation issues.
+Content edits in 24 entries: 5.1.1, 5.1.3, 5.1.4, 5.1.6, 5.1.7, 5.1.8, 5.1.11, 5.2.1, 5.2.2, 5.2.4, 5.2.5, 5.2.7, 5.3.1, 5.3.2, 5.3.4, 5.4.1, 5.4.2, 5.4.3, 5.4.4, 5.5.1, 5.5.2, 5.5.4, 5.6.2, 5.7.1.
+All seven subsection headings now have Needspace guards.
+
+Substantial derivation additions: noncircular Fubini justification, Bessel
+closed-span equality proof, all sine-projection polynomial norms, binomial
+Rodrigues expansion, factorial and Gaussian moment reductions. Corrected
+statement hypotheses are given before students start each affected exercise.
+New source finding: textbook P_n*=1 in5.2.1 must say P_0*=1; the canonical
+answer was already numerically correct but its correction was unmarked.
+5.2.3's slash denominator and5.3.4's unlabeled reference are recorded as
+clarifications, not assertions of erroneous intended numerical answers.
+
+Full checker code read, including strict exact residual handling, real/complex
+inner products, independently integrated moments, generic complex Gram
+identity, and limitations of finite examples. Added 3 inventory/heading
+assertions and 4 algebra/counterexample checks: joint invertibility,
+induced-basis reconstruction, P0 constant and higher-degree counterexample.
+Run: python3 supplementary/ch05_check.py > work/ch05-final-check.txt
+Exit0: 148 counted checks = 147 exact assertions (including3 structural)
+and1 numerical Hilbert-matrix condition-number assertion. Matrix assertions
+are counted once each, not once per entry. No finite numerical sample is
+used as a proof of a general Hilbert-space/operator-domain statement.
+
+5.1.1 -- current sections/ch05.tex:12
+  Source: work/book-layout.txt:13444 (PDF 269, printed 266); work/solman.txt:6535 (PDF 69, printed 66).
+  Statement/source check: Orthonormal series and Hilbert-space basis match; norm convergence is now stated directly.
+  Derivation/pedagogy check: Read coefficient extraction from finite sums and Schwarz continuity limit; uniqueness concerns Hilbert vectors, so almost-everywhere equality is handled. General proof is not replaced by the finite projection check.
+
+5.1.2 -- current sections/ch05.tex:44
+  Source: work/book-layout.txt:13452 (PDF 269, printed 266); work/solman.txt:6544 (PDF 69, printed 66).
+  Statement/source check: Finite basis, unique coefficients, and lack of orthogonality requirement match.
+  Derivation/pedagogy check: Subtracting representations directly invokes linear independence. The positive Gram form independently proves invertibility. All steps are sufficient; no change.
+
+5.1.3 -- current sections/ch05.tex:73
+  Source: work/book-layout.txt:13463 (PDF 270, printed 267); work/solman.txt:6566 (PDF 69, printed 66).
+  Statement/source check: Hilbert matrix entries, integrals and n=5 determinant match; added L2 hypothesis and direct condition-number qualification.
+  Derivation/pedagogy check: Expanded error gradient, positive Hessian and completed square prove a unique minimum. Checked exact determinant and independently computed numerical 2-norm condition; determinant size alone is correctly distinguished from conditioning.
+
+5.1.4 -- current sections/ch05.tex:136
+  Source: work/book-layout.txt:13479 (PDF 270, printed 267); work/solman.txt:6617 (PDF 69, printed 66).
+  Statement/source check: Coefficient and weighted-error formulas match; now explicitly state real functions, orthonormality and nonnegative weight.
+  Derivation/pedagogy check: Traced both cross sums, delta contraction and completion of squares. Complex conjugation/modulus variant and norm-convergent tail interpretation are correct; finite residual identity checked.
+
+5.1.5 -- current sections/ch05.tex:185
+  Source: work/book-layout.txt:13504 (PDF 270, printed 267); work/solman.txt:6657 (PDF 70, printed 67).
+  Statement/source check: Square-wave height, intervals, sine series, Parseval equality and zeta hint match.
+  Derivation/pedagogy check: Computed piecewise norm, sine-product integrals, partial-sum residual and norm limit; independent odd/even zeta split yields pi^2/8. No division by h, so h=0 is included. No change.
+
+5.1.6 -- current sections/ch05.tex:244
+  Source: work/book-layout.txt:13539 (PDF 271, printed 268); work/solman.txt:6710 (PDF 70, printed 67).
+  Statement/source check: The source's ordinary-square identity is real-valued; placed real L2 hypothesis directly in question.
+  Derivation/pedagogy check: Expanded all three double-integral terms, nonnegativity and proportionality equality condition. Added 2|fg|<=f^2+g^2 to justify Fubini without assuming the Schwarz inequality being proved; zero-vector cases retained.
+
+5.1.7 -- current sections/ch05.tex:284
+  Source: work/book-layout.txt:13554 (PDF 271, printed 268); work/solman.txt:6723 (PDF 70, printed 67).
+  Statement/source check: Retained residual expression and inequality; now explicitly identify orthonormal functions and projection coefficients.
+  Derivation/pedagogy check: Traced conjugate-linear expansion and monotone bounded sum. Expanded equality iff closed-span argument via Cauchy partial sums, Hilbert completeness, and residual orthogonality. Finite complex check supports algebra only.
+
+5.1.8 -- current sections/ch05.tex:329
+  Source: work/book-layout.txt:13560 (PDF 271, printed 268); work/solman.txt:6756 (PDF 70, printed 67).
+  Statement/source check: All four unnormalized shifted polynomials, interval, target sine and reference match.
+  Derivation/pedagogy check: Each numerator uses two integrations by parts; added every nonconstant polynomial norm expansion, including degree six. Four coefficients and residual orthogonality checked; parity explains vanishing odd terms.
+
+5.1.9 -- current sections/ch05.tex:389
+  Source: work/book-layout.txt:13568 (PDF 271, printed 268); work/solman.txt:6852 (PDF 71, printed 68).
+  Statement/source check: All Laguerre polynomials, weight e^-x and four-term request match.
+  Derivation/pedagogy check: Extra exponential in the coefficient integral is included; factorial moments yield 1/2,1/4,1/8,1/16. Cubic expansion and directly integrated residual 1/768 checked. No change.
+
+5.1.10 -- current sections/ch05.tex:431
+  Source: work/book-layout.txt:13579 (PDF 272, printed 269); work/solman.txt:6879 (PDF 71, printed 68).
+  Statement/source check: Given coefficients and second orthonormal set match; solution distinguishes completeness from projection.
+  Derivation/pedagogy check: Overlap orientation is conjugate-linear in the new ket; norm-continuity justifies the sum, and two identity resolutions prove unitarity only when both sets are complete. Complex finite reconstruction checked. No change.
+
+5.1.11 -- current sections/ch05.tex:463
+  Source: work/book-layout.txt:13584 (PDF 272, printed 269); work/solman.txt:6899 (PDF 71, printed 68).
+  Statement/source check: Source/manual assume orthogonal unit vectors; placed orthonormality in statement.
+  Derivation/pedagogy check: Dyadic resolution gives a, with explicit nonorthogonal unit-vector counterexample. Removed a stray comma in the transpose superscript; checked counterexample components (3/2,1/2).
+
+5.1.12 -- current sections/ch05.tex:486
+  Source: work/book-layout.txt:13587 (PDF 272, printed 269); work/solman.txt:6933 (PDF 72, printed 69).
+  Statement/source check: All four bilinear terms and real two-dimensional space match.
+  Derivation/pedagogy check: Completed square proves iff k>1; k=1 and k<1 both fail on (1,1). Symmetry, bilinearity and positive determinant are separately identified. No change.
+
+5.2.1 -- current sections/ch05.tex:525
+  Source: work/book-layout.txt:13815 (PDF 276, printed 273); work/solman.txt:6941 (PDF 72, printed 69).
+  Statement/source check: Original PDF276 confirms printed answer P_n*=1; marked corrected subscript 0 directly. Remaining polynomials and endpoint normalization match.
+  Derivation/pedagogy check: Traced every GS projection/norm through degree three and general Rodrigues proof; expanded binomial differentiation leading to the finite sum. Boundary terms, endpoint value, and beta-integral norm reduction are explicit. Finite degree checks support general proof.
+
+5.2.2 -- current sections/ch05.tex:627
+  Source: work/book-layout.txt:13825 (PDF 276, printed 273); work/solman.txt:6943 (PDF 72, printed 69).
+  Statement/source check: Monomial input, half-line, exponential weight, normalization and three Laguerre answers match.
+  Derivation/pedagogy check: Added the factorial-moment integration-by-parts recurrence with zero boundary term; all three projections and norms are explicit. Conventional signs are distinguished from the sign freedom left by normalization.
+
+5.2.3 -- current sections/ch05.tex:678
+  Source: work/book-layout.txt:13837 (PDF 277, printed 274); work/solman.txt:6944 (PDF 72, printed 69).
+  Statement/source check: Original PDF277 confirms ambiguous inline '/2 sqrt3'; fraction specifies the intended denominator, not a changed numerical solution.
+  Derivation/pedagogy check: Shifted-factorial moments yield q2=x^2-6x+6 with squared norm 12; direct cross-products and complete Gram matrix confirm division by 2sqrt3. Retained as a notation qualification, not a claim of a proven wrong printed value.
+
+5.2.4 -- current sections/ch05.tex:728
+  Source: work/book-layout.txt:13845 (PDF 277, printed 274); work/solman.txt:6946 (PDF 72, printed 69).
+  Statement/source check: Gaussian weight on whole line, 2^m m! sqrt(pi) normalization and three Hermite answers match.
+  Derivation/pedagogy check: Expanded the Gaussian moment recurrence by integration by parts, including vanishing boundary term; parity removes odd projections and each positive scaling factor follows from displayed norms.
+
+5.2.5 -- current sections/ch05.tex:777
+  Source: work/book-layout.txt:13855 (PDF 277, printed 274); work/solman.txt:6947 (PDF 72, printed 69).
+  Statement/source check: Source's piecewise norm listed only m=n cases after delta_mn. Completed statement with explicit zero case m!=n; weights, hint and four listed polynomials match.
+  Derivation/pedagogy check: Cosine substitution and integration-by-parts moment recurrence are derived; all projections and scaling through optional T3 checked. Complete Gram matrix independently verifies the added off-diagonal case.
+
+5.2.6 -- current sections/ch05.tex:842
+  Source: work/book-layout.txt:13866 (PDF 277, printed 274); work/solman.txt:7041 (PDF 73, printed 70).
+  Statement/source check: Weight sqrt(1-x^2), all hint factors, n=0 case and three type-II polynomials match.
+  Derivation/pedagogy check: Hint moments feed every projection and norm; scales 1,2,4 give pi/2 diagonal norms and all cross terms vanish. Independent cosine/sine-squared moment checks confirm. No change.
+
+5.2.7 -- current sections/ch05.tex:893
+  Source: work/book-layout.txt:13887 (PDF 278, printed 275); work/solman.txt:7107 (PDF 74, printed 71).
+  Statement/source check: Both wrong source references on p275 are 5.2.5; retained direct correction to Gaussian/Hermite Exercise5.2.4.
+  Derivation/pedagogy check: Half-line moments give the nonzero constant subtraction and positive norm; contrasted full-line odd moment correctly. Changed explanation to refer explicitly to the ORIGINAL question, avoiding contradiction with edited statement.
+
+5.2.8 -- current sections/ch05.tex:932
+  Source: work/book-layout.txt:13893 (PDF 278, printed 275); work/solman.txt:7108 (PDF 74, printed 71).
+  Statement/source check: All three input columns and their order match.
+  Derivation/pedagogy check: Every projection coefficient, residual and normalization is shown; independent QR and all pairwise dot products check the resulting set. No change.
+
+5.3.1 -- current sections/ch05.tex:981
+  Source: work/book-layout.txt:14284 (PDF 285, printed 282); work/solman.txt:7168 (PDF 74, printed 71).
+  Statement/source check: Bare adjoint identity matches source; now states bounded, everywhere-defined hypothesis in question.
+  Derivation/pedagogy check: Conjugate symmetry and adjoint definition lead to a zero scalar product against every vector, then a zero norm. Unbounded closure caveat is retained; finite generic-matrix check is explicitly limited.
+
+5.3.2 -- current sections/ch05.tex:1009
+  Source: work/book-layout.txt:14288 (PDF 286, printed 283); work/solman.txt:7176 (PDF 74, printed 71).
+  Statement/source check: Product order and adjoint reversal match; bounded/everywhere-defined qualification is now direct.
+  Derivation/pedagogy check: Moved U then V across the scalar product, so reversed order follows without matrices. Domain limitation and uniqueness are explicit. Arbitrary finite complex matrices check algebra.
+
+5.3.3 -- current sections/ch05.tex:1040
+  Source: work/book-layout.txt:14294 (PDF 286, printed 283); work/solman.txt:7186 (PDF 75, printed 72).
+  Statement/source check: All three basis functions, delta inner product, both differential operators and target function match.
+  Derivation/pedagogy check: Constructed columns from each action, read vector (1,-2,3), and checked (A1-A2)c against direct derivatives. No skipped operator-to-column step. No change.
+
+5.3.4 -- current sections/ch05.tex:1093
+  Source: work/book-layout.txt:14308 (PDF 286, printed 283); work/solman.txt:7217 (PDF 75, printed 72).
+  Statement/source check: Source literally says '5.2.1'; clarified that this means Example5.2.1 on [-1,1], without alleging the source explicitly said Exercise.
+  Derivation/pedagogy check: All normalized polynomials, derivative re-expansions, cubic coefficient integrals and final Ac=3c verified. Independent projection integrals reproduce every matrix entry. Reference clarification only.
+
+5.4.1 -- current sections/ch05.tex:1164
+  Source: work/book-layout.txt:14456 (PDF 289, printed 286); work/solman.txt:7353 (PDF 76, printed 73).
+  Statement/source check: Both requested Hermitian combinations and decomposition match; bounded hypothesis now appears before parts.
+  Derivation/pedagogy check: Conjugation of i, double adjoint and reconstruction are shown term by term. Generic complex matrices independently verify both adjoints and cancellation.
+
+5.4.2 -- current sections/ch05.tex:1205
+  Source: work/book-layout.txt:14460 (PDF 289, printed 286); work/solman.txt:7355 (PDF 76, printed 73).
+  Statement/source check: The iff commutation statement matches, now restricted directly to bounded everywhere-defined Hermitian operators.
+  Derivation/pedagogy check: Both directions follow from product-adjoint equality; unbounded formal-domain warning remains precise. Generic Hermitian product obstruction checked.
+
+5.4.3 -- current sections/ch05.tex:1226
+  Source: work/book-layout.txt:14462 (PDF 289, printed 286); work/solman.txt:7356 (PDF 76, printed 73).
+  Statement/source check: Source omitted Hermitian hypothesis for A,B. Corrected question explicitly assumes Hermitian bounded operators, with separate unbounded-domain qualification.
+  Derivation/pedagogy check: Anti-Hermitian commutator and -i factor give Hermitian C; noncommutation is only needed for C nonzero. Explicit 2x2 failed-hypothesis example is checked.
+
+5.4.4 -- current sections/ch05.tex:1263
+  Source: work/book-layout.txt:14466 (PDF 289, printed 286); work/solman.txt:7361 (PDF 76, printed 73).
+  Statement/source check: Positive L squared expectation matches; changed domain directly to D(L^2).
+  Derivation/pedagogy check: Adjoint transfer yields norm squared, with equality Lpsi=0 and normalized/unnormalized expectations distinguished. Symbolic finite norm identity checks algebra; domain conclusion is analytical.
+
+5.4.5 -- current sections/ch05.tex:1284
+  Source: work/book-layout.txt:14468 (PDF 289, printed 286); work/solman.txt:7365 (PDF 76, printed 73).
+  Statement/source check: Sphere measure, three coordinate/r functions, differential operators and commutator match.
+  Derivation/pedagogy check: All normalization/mixed integrals, radial derivative cancellation, nine actions, three matrices and both products are explicit. Independent sphere integrals and Cartesian differential actions verify. No change.
+
+5.5.1 -- current sections/ch05.tex:1369
+  Source: work/book-layout.txt:14683 (PDF 293, printed 290); work/solman.txt:7499 (PDF 77, printed 74).
+  Statement/source check: Original PDF292--293 confirms four wrong imaginary signs; now places corrected U directly in question. Source basis functions and input coefficients were checked.
+  Derivation/pedagogy check: Euler identities give each primed function; conjugating row coefficients determines U, which reconstructs f. Printed unitary U reconstructs a different vector, demonstrating why unitarity alone is insufficient. Both blocks and five identities checked.
+
+5.5.2 -- current sections/ch05.tex:1452
+  Source: work/book-layout.txt:14693 (PDF 293, printed 290); work/solman.txt:7635 (PDF 78, printed 75).
+  Statement/source check: Source arrows were ambiguous; replaced them directly by x=z',y=y',z=-x' consistent with manual's coefficient matrix and Eq3.37.
+  Derivation/pedagogy check: Columns express old functions in new basis; right-handed y-axis rotation, Euler beta=pi/2, and coefficient substitution agree. Alternative new-basis/active conventions are explicitly distinguished.
+
+5.5.3 -- current sections/ch05.tex:1518
+  Source: work/book-layout.txt:14706 (PDF 294, printed 291); work/solman.txt:7667 (PDF 78, printed 75).
+  Statement/source check: Inverse of Exercise5.5.2 is requested and matched to its now-explicit convention.
+  Derivation/pedagogy check: Read inverse-basis coefficients as columns, multiplied both UV and VU, and recovered original vector. No change.
+
+5.5.4 -- current sections/ch05.tex:1544
+  Source: work/book-layout.txt:14709 (PDF 294, printed 291); work/solman.txt:7682 (PDF 78, printed 75).
+  Statement/source check: PDF294 and manual78--79 confirm original matrices and manual sign errors. Corrected statement permits general coefficient bases and excludes sin(theta)cos(theta)(cos^2-sin^2)=0; does not falsely call both maps unitary.
+  Derivation/pedagogy check: All raw products, sequential/reverse columns, all-angle non-equality proof, adjoint products and determinants traced. Added symbolic joint determinant and induced-basis reconstruction tests. Optional unitary repair remains explicitly nonunique; its exceptional commuting angles are qualified.
+
+5.5.5 -- current sections/ch05.tex:1669
+  Source: work/book-layout.txt:14724 (PDF 294, printed 291); work/solman.txt:7759 (PDF 79, printed 76).
+  Statement/source check: Both polynomial triples, common interval and all five requested tasks match.
+  Derivation/pedagogy check: Every norm, all cross terms, nine overlaps in each orientation, six coefficient integrals, both reconstructions and transformed vector are shown. Independent integrations confirm complete Gram and transformation matrices. No change.
+
+5.6.1 -- current sections/ch05.tex:1793
+  Source: work/book-layout.txt:14841 (PDF 297, printed 294); work/solman.txt:7883 (PDF 80, printed 77).
+  Statement/source check: All six spin actions and primed plus/minus functions match.
+  Derivation/pedagogy check: Constructed columns, expanded orthogonality/norm, determined real C, and multiplied all three transformed matrices with the 1/4 factor accounted for. Independent eigenaction checks ordering. No change.
+
+5.6.2 -- current sections/ch05.tex:1870
+  Source: work/book-layout.txt:14853 (PDF 297, printed 294); work/solman.txt:7997 (PDF 80, printed 77).
+  Statement/source check: Source Gaussian exponent is r squared (confirmed from superscript line), all U entries and Gaussian hints match.
+  Derivation/pedagogy check: Explicitly chose C real positive; squared wavefunctions use exponent -2r^2, yielding 2^(7/4)/pi^(3/4). Radial cancellation, direct actions, diagonalization and conjugated-row ket functions all checked.
+
+5.6.3 -- current sections/ch05.tex:1951
+  Source: work/book-layout.txt:14875 (PDF 297, printed 294); work/solman.txt:8075 (PDF 81, printed 78).
+  Statement/source check: Upper-triangular T convention agrees with Eq5.81 and source columns, including complex overlaps.
+  Derivation/pedagogy check: All three GS vectors expressed in original basis; second norm and third determinant simplification expanded with conjugates. Generic Hermitian rational identity, exact complex QR, normalized Gram and operator congruence independently checked. No change.
+
+5.7.1 -- current sections/ch05.tex:2057
+  Source: work/book-layout.txt:14940 (PDF 299, printed 296); work/solman.txt:8166 (PDF 82, printed 79).
+  Statement/source check: Replaced finite-matrix reading directly with operator/domain commutator [x,p]=iI; source otherwise has impossible finite trace condition.
+  Derivation/pedagogy check: Expanded unitary covariance before cancellation, proved trace obstruction, and gave a differential realization on smooth rapidly decreasing functions. Finite generic covariance check does not pretend to realize finite CCR.
+
+5.7.2 -- current sections/ch05.tex:2088
+  Source: work/book-layout.txt:14942 (PDF 299, printed 296); work/solman.txt:8174 (PDF 82, printed 79).
+  Statement/source check: All Pauli matrices, 2i factor and rotation entries match.
+  Derivation/pedagogy check: Multiplied all three transformed matrices, then both products of first two; double-angle signs and final commutator checked exactly for symbolic angle. No change.
+
+5.7.3 -- current sections/ch05.tex:2140
+  Source: work/book-layout.txt:14953 (PDF 299, printed 296); work/solman.txt:8246 (PDF 82, printed 79).
+  Statement/source check: Gaussian basis, closure request, input x+iy, output -z, U and all five parts match.
+  Derivation/pedagogy check: Traced radial cancellation, three actions, original and transformed vector/operator equations, conjugated-row basis functions and direct input/output reconstructions. Independent Cartesian differentiation confirms all. No change.
+
+
+Final standalone rendering review:
+  work/ch05-final-review.pdf:35 pages, SHA256 dba76aa8cb6d305686a6a5a060e679946ff8b764391ad4807a069c4694e61fcb.
+  work/ch05-final-review.log SHA256 a3ac7cd3c67cc64c96d999969c68be1cb58a091b8e7dbf9ea0ec322a7385a8e7.
+  Final build exit0; no warning, error, overfull or underfull box found.
+  All35 final rendered pages visually inspected in ch05-final-sheet-01.png
+  through09.png, including every changed page and surrounding pagination.
+  No clipping, overlaps, missing math glyphs or orphan subsection headings
+  found. All7 subsection Needspace guards remain in the canonical source.
+  Environment checked: Python 3.14.7, SymPy 1.14.0, NumPy 2.4.6.
+Residual limitations: operator-domain, norm-convergence and arbitrary-degree
+claims use the written analytic proofs; finite symbolic examples are explicitly
+supplemental. No unresolved Chapter5 statement/answer/step gap was identified.
+Integrated main.pdf review remains with root; no root build was run here.

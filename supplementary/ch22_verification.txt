@@ -1,0 +1,15 @@
+CHAPTER22 — CURRENT VERIFICATION
+
+Fresh final review complete for44/44 entries; see ch22_final_audit.txt for
+individual current source lines, original-source comparisons, full derivation
+review, changes and executable scope. Previous detailed verification is
+preserved in work/final-review-baseline/supplementary/ch22_verification.txt.
+
+Current checker:381 assertions passed;all44 labels covered.
+Current standalone:39 pages,343791 bytes;clean build;all39 pages inspected.
+The full-book integration and final manifest remain pending separately.
+
+Source SHA256:dd939193bfa710690ef51c3a05163bec035e3ceea6657839e55b11059760ea0d
+Checker SHA256:f9c30ad4a20600708f6d8db13e5ddede831bc5cdb9d979d32e93700eaecff738
+Audit SHA256:06aabb8ac1c5cf3cbe13206c8d3463dc5136434e9b916a18839fba6a71ee7f26
+PDF SHA256:8b57cdb5fba47eeed6e90b2c6b4d728cab4c0cd74a78e4c89805183cacc26287

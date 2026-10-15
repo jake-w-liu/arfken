@@ -1,0 +1,416 @@
+CHAPTER 16 — FRESH FINAL AUDIT (2026-10-04)
+
+Scope and final state
+All 31 current problem statements and complete solutions were freshly read,
+compared with all 31 textbook entries and29 available manual entries, and
+traced through derivations, normalization, phase conventions, indices,
+coordinate endpoints, charge signs, integral measures and domain restrictions.
+The manual omits16.3.1 and16.4.4; both textbook statements and their independent
+matrix/operator proofs were read directly. This was not inferred from the
+preexisting green checker. There are31 unique statements,31 solution blocks,
+zero unfinished markers,46 dark-red erratum macros (including qualifications,
+not46 distinct textbook errors) and4 Needspace-protected subsection headings.
+
+FINAL CURRENT SHA256
+sections/ch16.tex  b8001f9fb205705da23ab67e2d648979a8d81d1d8941834e5dab83a745220b36
+supplementary/ch16_check.py  cb2cbc22ff34b40ecfd9fa4bbfd6c0a9e87ce2e0b048153df95be62f8bc98aba
+work/ch16-final-review.pdf  d809829ee358c9e9de7851e1a90a41266d435df53170d4a188452e00e70ff7f1
+work/ch16-final-review.log  9a81cd97abdbc999a218d66d92b93613da8ffb69e7f5ba470cb2a406801db262
+
+Source evidence actually checked
+Textbook: Mathematical Methods for Physi - Arfken, George B. & Weber, Han_4469.pdf
+Manual: Solution mathematical method for physics-7.pdf
+Complete exercise extracts read in work/book-layout.txt:40119-40203,
+40827-40875,41443-41660,41853-41910 and work/solman.txt:27145-28328.
+Supporting textbook definitions read:7295-7370 Euler matrices;38090-38155
+Legendre recurrences;38844-38892 normalization;39670-39727 hbar=1/angular
+momentum;40312-40361 dimensions;40425-40465 phase Eq 16.42;40885-40965
+D-matrix convention;41658-41770 spin-one basis and vector coupling.
+All numeric anchors below use literal newline split('\n'), matching rg/sed;
+form feeds are not counted as extra source lines. Anchors identify entry starts,
+not claims that one line contains the full source entry.
+Fresh original-image checks: textbook physical PDF 146,781,803,804,807,810,811
+(printed 141,784,806,807,810,813,814 respectively); manual physical
+259,260,261,263,264,265,266,268,269,270 (printed 256,257,258,260,261,262,263,
+265,266,267 respectively). These17 images are work/ch16-final-book-* and
+work/ch16-final-manual-*. They verify Euler signs/index conventions, powers,
+source wording, gamma coefficients, missing conjugation, and each new manual
+typo. The published 2012-04-06 errata list in work/solman.txt:204-352 was freshly
+read; it contains no Chapter 16 entry. No erratum is attributed to that list.
+
+Corrections and pedagogical changes
+Necessary normalization, phases, admissible indices, derivative coordinates,
+distributional measure, total/orbital labels and argument-parity convention
+are now explicit in the relevant problem statements, using the dark-red macro.
+The Coulomb expansion instruction now says1/r12; the electron/proton quantity
+with-e² is called potential energy. The missing zero cases are in both
+Legendre-integral case lists. The vector orthonormality statement explicitly
+uses a Hermitian product; the interference integral's first vector is directly
+conjugated, while its original bilinear identity is separately proved.
+The formal vector Y000 is identified as unnormalized zero; L≥1 is specified
+where its normalization or addition formula otherwise divides by zero/fails.
+
+New PDF-confirmed manual corrections:16.1.4 half-sum versus half-difference;
+16.1.7 Y_L^0 rather than Y_0^0 as ladder seed;16.2.4 two intermediate p_- labels
+instead of p_0;16.3.8 missing overall-e in the field potential;16.3.9 arbitrary
+function reconstruction f(Omega1), not a single harmonic. Prior phase and spin
+label corrections were freshly checked. A state-dependent sign is called a
+mismatch only with the book's coherent positive-lowering convention; an
+individual eigenstate's phase or a common multiplet phase is not invalid.
+The 16.3.7 gamma coefficient repair is an earlier LOCAL TRANSCRIPTION repair:
+the actual textbook answer is correct, and the text/ledger distinguish it.
+
+Withdrawn claim: the old 16.3.8 record said that potential energy always requires
+another charge. That is false because a classical density defines self-energy
+(1/2) integral rho V. The current statement instead specifies the intended
+hydrogen electron–nucleus interaction and separately derives the field
+potential. The corrected ledger supersedes that old claim. Our own prose's
+extra R divisions in the descriptions of I0/I2 were removed; small-radius
+integral estimates now show the powers directly. Additional teaching steps
+show the generic ladder product rule, exponential-moment integration by parts,
+incomplete-gamma reductions and explicit L=M=1 interference integrand.
+
+Executable verification and limits
+Command actually run:
+  python3 supplementary/ch16_check.py > work/ch16-final-check-output.txt
+Final exit 0: 6591 mathematical assertions=6584 exact+7 numerical in 31 nonempty
+exercise groups; 34 separately counted structural guards (31 nonempty-group
+checks and3 source/group inventory checks). Matrix scalar entries each count
+as one mathematical assertion. Matrix-shape and unique-highest-kernel internal
+error guards are not included in those mathematical totals.
+The earlier 6612 total included34 structural assertions:6578 mathematical
+checks plus13 newly added exact assertions now give 6591. This is a counting
+clarification and added coverage, not removal of old mathematical tests.
+
+The new 13 exact assertions check3 generic operator/commutator identities,
+3 ladder-seed counterchecks,3 incomplete-gamma antiderivative derivatives,
+3 full-sign Poisson/small-radius checks, and1 explicit Hermitian integrand.
+Independent methods include associated-Legendre differentiation, exact
+polynomial integration, highest-weight nullspaces followed by normalized
+lowering, finite spin matrix eigenvalues, all explicit coupling rows and
+additional SymPy Clebsch–Gordan/Gaunt evaluations. The Gaunt method is SymPy's
+exact Wigner-based evaluation, independent of the recurrence derivation;
+no separate custom Wigner implementation is claimed.
+The 7 numerical comparisons comprise4 Coulomb-series/direct-distance values
+and3 independent radial quadratures. mpmath uses 45 decimal digits and tolerance
+1e-30*(1+abs(expected)); nonfinite values are rejected. The Coulomb sums have
+180 terms and radius ratio≤0.4; their geometric remainder is below 1e-70.
+Finite degree ranges and sample values do not prove arbitrary-degree formulas,
+Hilbert-space domains, completeness, representation theory or distributional
+convergence. Those claims rely on the separately traced analytical proofs.
+The helium integral is for the stated uncorrelated hydrogenic orbitals.
+No formal proof-assistant claim is made; no entry was skipped and no unresolved
+mathematical/source defect remains from this audit.
+
+Rendered-page verification actually performed
+The chapter-only wrapper work/ch16-final-review.tex copies the actual main.tex
+preamble and inputs only sections/ch16.tex. Commands:
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch16-final-review.tex
+  pdftoppm -r 80 -png work/ch16-final-review.pdf work/ch16-final-page
+  magick montage -font /System/Library/Fonts/Helvetica.ttc [four page PNGs] -tile 2x2 -geometry +8+8 [sheet]
+The final 31-page PDF builds cleanly with no Warning/Overfull/Underfull/undefined
+reference/error lines. All 31 pages were inspected in 8 contact sheets. After a
+final wording correction on p19, that page was separately rendered and
+re-inspected; re-rendering all 31 pages with work/ch16-final-current confirmed
+only p19 changed, with all other page hashes unchanged. Equations, coupling
+tables, dark-red statement corrections and subsection boundaries show no
+clipping, overlap or stranded subsection headings. No root main build, no
+process termination and no edits outside the assigned chapter files/artifacts.
+
+Versions actually used
+Python 3.14.7; SymPy 1.14.0; mpmath 1.3.0.
+
+PER-ENTRY STATEMENT/SOURCE, DERIVATION/PEDAGOGY AND EXECUTABLE EVIDENCE
+16.1.1 — sections/ch16.tex:19; work/book-layout.txt:40119; work/solman.txt:27153
+Matched both differential operators and positive ladder factors against the textbook; normalized
+Condon–Shortley and hbar=1 conventions are stated at chapter start. Added/subtracted the two
+associated-Legendre recurrences, differentiated the azimuthal exponential, and canceled
+factorial ratios. Both extremal states are directly annihilated, so no out-of-range harmonic is
+assumed.
+Executable: supplementary/ch16_check.py:157; 72 mathematical assertions (72 exact, 0 numerical):
+direct differential L+ and L- actions, every l=0..5 and every m, including annihilated
+endpoints.
+
+16.1.2 — sections/ch16.tex:94; work/book-layout.txt:40137; work/solman.txt:27154
+Matched both extreme-state factorial formulas. Traced each product (2l-j)(j+1), its two separate
+factorial cancellations, k=l-m/l+m, and the empty k=0 product. The proof uses the differential
+ladder result of 16.1.1 rather than assuming the requested result; all permitted m and both ends
+are covered.
+Executable: supplementary/ch16_check.py:164; 162 mathematical assertions (162 exact, 0
+numerical): all factorial-product normalizations for l=0..8 and both extreme-state paths.
+
+16.1.3 — sections/ch16.tex:144; work/book-layout.txt:40152; work/solman.txt:27245
+Matched the full-sphere adjoint identity, both conjugations, and solid-angle measure. Read the
+two integrations by parts with pole/periodic boundary terms and explicit cancellation of
+cotangent contributions; setting v=L+u gives the required norm. Smooth, single-valued harmonics
+ensure the stated boundary conditions; upper endpoint gives0.
+Executable: supplementary/ch16_check.py:171; 50 mathematical assertions (50 exact, 0 numerical):
+exact polynomial angular norms of raised harmonics for l=0..4, every m.
+
+16.1.4 — sections/ch16.tex:195; work/book-layout.txt:40159; work/solman.txt:27251
+Matched the anticommutator identity and all five l=2 states. Preserved noncommutative order,
+traced both generic differential products, and the three derivative-table rows covering
+m=0,±1,±2. Added the actual product-rule terms. PDF-confirmed manual p257 uses half-difference
+where half-sum is required; generic symbolic operators show that half-difference is Lz instead.
+Executable: supplementary/ch16_check.py:179; 14 mathematical assertions (14 exact, 0 numerical):
+noncommutative expansion; generic differential product formulas and manual half-commutator
+countercheck; all five l=2 eigenvalue equations.
+
+16.1.5 — sections/ch16.tex:271; work/book-layout.txt:40164; work/solman.txt:27351
+Original claim required nothing beyond eigenfunction status; directly corrected it to normalized
+states in one irreducible multiplet with coherent positive ladder phases and Hermitian
+generators. Traced commutators, adjoints, both squared norm factors, repeated products and half-
+integral index admissibility. Arbitrary scaling/phases or mixed degeneracy labels would
+invalidate the numerical coefficients.
+Executable: supplementary/ch16_check.py:198; 420 mathematical assertions (420 exact, 0
+numerical): exact finite spin matrices j=0,1/2,...,3: commutators, norm identities and repeated
+ladders.
+
+16.1.6 — sections/ch16.tex:334; work/book-layout.txt:40176; work/solman.txt:27356
+Matched signs, exponential/sine powers and nth derivatives with the printed PDF. Directly stated
+integer n≥0, interior angular coordinates and fixed phi derivatives. Traced both weighted first-
+derivative identities and both induction steps, including shifted magnetic index and n=0;
+regular harmonics extend to poles despite coordinate factors.
+Executable: supplementary/ch16_check.py:208; 128 mathematical assertions (128 exact, 0
+numerical): direct repeated differential operators against closed nth-derivative forms: l=0..3,
+all m, n=0..3.
+
+16.1.7 — sections/ch16.tex:397; work/book-layout.txt:40185; work/solman.txt:27437
+Matched conjugation phase (-1)^M and traced the equal raising/lowering factorial product from
+Y_L^0, conjugated operator sign, and negative-M continuation. PDF-confirmed manual p258
+incorrectly starts from Y_0^0; added the correction and annihilation counterexample showing that
+a constant cannot generate higher-degree harmonics.
+Executable: supplementary/ch16_check.py:217; 53 mathematical assertions (53 exact, 0 numerical):
+conjugation for l=0..6; conjugated ladder sign; explicit failure of manual Y00 starting state.
+
+16.1.8 — sections/ch16.tex:436; work/book-layout.txt:40189; work/solman.txt:27456
+Matched both given signs, sqrt2 factors, and Condon–Shortley explanation. Read explicit
+normalized Y_1^0,Y_1^±1 and differentiated cos(theta) in each ladder, with the second ladder's
+leading minus retained; both requested equalities follow without phase assumptions beyond the
+stated convention.
+Executable: supplementary/ch16_check.py:228; 2 mathematical assertions (2 exact, 0 numerical):
+explicit l=1,m=0 raising and lowering with both stated signs.
+
+16.2.1 — sections/ch16.tex:475; work/book-layout.txt:40827; work/solman.txt:27505
+Matched request for CG recursions and every j1=j2=1 coefficient. Traced total raising/lowering
+on the product basis, coefficient matching at fixed M, normalization, highest-weight phase, and
+orthogonal J=2,1,0 multiplets. All 9 states are written with intermediate lowering/orthogonality
+algebra; dimensions5+3+1=9 and fixed positive lowering phases cover completeness.
+Executable: supplementary/ch16_check.py:232; 486 mathematical assertions (486 exact, 0
+numerical): complete 1 tensor 1 coupling from independent highest-weight kernels; Jz, J², all
+ladders, CG and explicit nine rows.
+
+16.2.2 — sections/ch16.tex:584; work/book-layout.txt:40830; work/solman.txt:27535
+Matched the stated spinor coupling expansion. At fixed M only two product states exist; traced
+the 2×2 J² problem, eigenvalues j=l±1/2, normalized coefficients and highest-state positive
+phase. The l=0 lower branch is excluded and extreme-M upper states reduce to one component.
+General symbolic formulas are supplemented by independently generated l=0..5 multiplets.
+Executable: supplementary/ch16_check.py:244; 1144 mathematical assertions (1144 exact, 0
+numerical): both spinor branches for every l=0..5 and allowed M against independently coupled
+matrices and CG coefficients.
+
+16.2.3 — sections/ch16.tex:653; work/book-layout.txt:40839; work/solman.txt:27537
+Matched p-electron l=1,s=1/2 request and spectroscopic labels. Traced all four quartet and two
+doublet states, their lowering factors, normalization and orthogonality. Retained the PDF-
+confirmed manual relative doublet sign mismatch specifically against the source's coherent
+positive-lowering convention; individual rephased states remain eigenstates and a common
+multiplet phase is harmless.
+Executable: supplementary/ch16_check.py:255; 223 mathematical assertions (223 exact, 0
+numerical): all six p-electron states, positive lowering phases and explicit countercheck of the
+manual's doublet phase.
+
+16.2.4 — sections/ch16.tex:725; work/book-layout.txt:40845; work/solman.txt:27612
+Matched l=1,s=3/2 repetition and labels, reconstructed all 12 entries through highest states and
+explicit lowering/orthogonal vectors. PDF-confirmed invalid manual p_+ spin label must be -3/2
+by m_l+m_s=M; additionally corrected two intermediate p_0 labels to p_- on p261. Our full J=3/2
+multiplet has a harmless common opposite phase to the manual; exact complete-state comparison
+covers every row.
+Executable: supplementary/ch16_check.py:268; 865 mathematical assertions (865 exact, 0
+numerical): all twelve l=1,s=3/2 coefficient rows, independent highest kernels, eigenvalues,
+ladders and full orthonormality.
+
+16.2.5 — sections/ch16.tex:862; work/book-layout.txt:40847; work/solman.txt:27780
+Matched all three-particle parts, both specified coupling orders and no orbital momentum. Traced
+one quartet plus two doublets, product expansions, total lowering and the same real 2×2
+recoupling matrix at M=±1/2. The symmetric quartet is common to both bases. Manual repeats the
+doublet relative-phase mismatch; both eight-state bases here retain coherent phases and are
+orthonormal.
+Executable: supplementary/ch16_check.py:286; 216 mathematical assertions (216 exact, 0
+numerical): both complete eight-state coupling bases, all ladder phases and the exact two-by-two
+recoupling matrix at both M.
+
+16.3.1 — sections/ch16.tex:1009; work/book-layout.txt:41443; manual entry absent
+Matched textbook summation indices and Eq 16.52; manual omits this exercise. Read original Euler
+matrix Eq 3.37 and rotation conventions. Traced Cartesian harmonics, unitary Q, D transpose from
+its index order, elementary z/y transformations, and both displayed matrix products recovering
+the passive Euler matrix. No silent active/passive or transpose substitution.
+Executable: supplementary/ch16_check.py:307; 45 mathematical assertions (45 exact, 0 numerical):
+symbolic Cartesian/spherical conversion, elementary rotations, full Euler product and unitarity.
+
+16.3.2 — sections/ch16.tex:1094; work/book-layout.txt:41452; work/solman.txt:27966
+Matched fixed-degree rotation question; corrected the hint's missing azimuthal factor and made
+homogeneous harmonic polynomials explicit. Rotation commutes with L²; projecting the eigenvalue
+expansion eliminates all k≠l. Independently traced the solid-harmonic degree/Laplacian argument
+and explained why homogeneity alone admits lower-degree traces. Finite rotated polynomial tests
+are examples, not the general representation proof.
+Executable: supplementary/ch16_check.py:323; 8 mathematical assertions (8 exact, 0 numerical):
+rotation preserves harmonicity and homogeneous degree: explicit degree 1..4 solid harmonics
+under a nontrivial rational 3D rotation.
+
+16.3.3 — sections/ch16.tex:1146; work/book-layout.txt:41460; work/solman.txt:27969
+Matched common radial factor and complete-shell density sum. Traced modulus factorization,
+addition theorem at coincident directions, and (2l+1)|f(r)|²/(4pi), independent of theta/phi.
+Completeness of all m with the same radial factor is essential and present in the question; no
+claim is made for unequal occupations.
+Executable: supplementary/ch16_check.py:332; 8 mathematical assertions (8 exact, 0 numerical):
+pointwise complete-shell scalar sums for every l=0..7.
+
+16.3.4 — sections/ch16.tex:1179; work/book-layout.txt:41465; work/solman.txt:27972
+Matched all proton positions, exterior ratio and harmonic order/conjugation. Corrected the word
+potential to potential energy because the coefficient is the charge product -e². Traced the
+generating function, addition theorem, interior expansion and mixed-radius min/max expression.
+Strict unequal radii give geometric convergence; coincident singular sources are not claimed to
+be convergent examples.
+Executable: supplementary/ch16_check.py:336; 4 mathematical assertions (0 exact, 4 numerical):
+Coulomb generating expansion for inside/outside and mixed radii, high-precision direct distances
+versus 180 terms.
+
+16.3.5 — sections/ch16.tex:1238; work/book-layout.txt:41481; work/solman.txt:27973
+Matched uniform sphere, single-proton density, separation and answer6e²/(5R). Traced full
+angular integration to 1/max(r1,r2), both radial triangles, r1^4 integral and density
+normalization. Mutual energy of two labeled charge distributions has no self-energy factor1/2.
+Stated Coulomb constant1 and how to restore SI; no unsupported assertion of an invalid unit
+system.
+Executable: supplementary/ch16_check.py:343; 2 mathematical assertions (2 exact, 0 numerical):
+exact uniform-ball double radial integral, normalization and Coulomb energy coefficient.
+
+16.3.6 — sections/ch16.tex:1293; work/book-layout.txt:41500; work/solman.txt:28042
+Matched normalized hydrogenic orbital, Z=2, double integral and5e²Z/(8a0). Traced lambda/N
+substitutions, normalization, equal radial triangles and reversed integral order. Expanded
+integration by parts for the inner integral and I_k=k I_(k-1)/2 down to I0=1/2, yielding3/8+1/4;
+prefactor is reduced explicitly. Result is for the stated uncorrelated orbitals, not exact
+interacting helium.
+Executable: supplementary/ch16_check.py:349; 2 mathematical assertions (2 exact, 0 numerical):
+exact hydrogenic normalization and independent ordered radial integrations with arbitrary
+positive Z,a.
+
+16.3.7 — sections/ch16.tex:1361; work/book-layout.txt:41515; work/solman.txt:28076
+Matched original PDF probability density, arbitrary field direction and actual answer
+gamma(3,q)/(2R)+Gamma(2,q)/a. Retained the earlier local-transcription repair distinctly from
+the book; directly corrected source instruction r12 to 1/r12. Traced angular projection without
+choosing the polar axis, radial split and gamma substitutions; added each integration-by-parts
+step, elementary reduction and both limits. Generic Poisson equation and3 quadratures
+independently check the potential.
+Executable: supplementary/ch16_check.py:357; 10 mathematical assertions (7 exact, 3 numerical):
+exact incomplete-gamma reduction, both potential limits and Poisson equation; direct radial
+quadrature at three radii.
+
+16.3.8 — sections/ch16.tex:1443; work/book-layout.txt:41533; work/solman.txt:28129
+Matched anisotropic2p charge density and original energy wording; directly clarified
+electron–nucleus interaction with point charge+e and supplied the manual's field potential as
+well. Traced charge normalization, monopole/quadrupole projection, both interior/exterior gamma
+factors, explicit small-R powers and direct nuclear integral giving-e²/(16pi eps0 a). Withdrew
+the old false claim that every energy needs a second charge: classical self-energy is another
+defined quantity. PDF-confirmed manual potential lacks overall-e; full signed Poisson check now
+tests that correction. Fixed our own prose's extra divisions by R in I0/I2 descriptions.
+Executable: supplementary/ch16_check.py:371; 11 mathematical assertions (11 exact, 0 numerical):
+charge normalization, multipole radial factors, electron-nucleus energy and limits; Poisson
+equation including full sign/charge factor omitted by manual.
+
+16.3.9 — sections/ch16.tex:1542; work/book-layout.txt:41542; work/solman.txt:28173
+Matched both delta expansions, gamma angle and request to justify degree-by-degree equality.
+Directly stated sphere measure/distributional meaning. Traced action on arbitrary smooth f,
+rotation-invariant finite-degree kernel, north-pole evaluation and uniqueness via orthogonal
+projection, avoiding illicit comparison of arbitrary series. PDF-confirmed manual p266
+reconstruction should yield f(Omega1), not one Y_l^m. Finite basis inner products supplement,
+not prove, distributional completeness.
+Executable: supplementary/ch16_check.py:390; 102 mathematical assertions (102 exact, 0
+numerical): finite projection-kernel reproducing action on arbitrary degree <=4 coefficients via
+exact spherical inner products; general distribution proof remains analytical.
+
+16.3.10 — sections/ch16.tex:1624; work/book-layout.txt:41561; work/solman.txt:28208
+Matched all four Gaunt formulas, conjugated third harmonics and the negative sign in(d). Put
+admissible L,M and lower-degree restriction directly in statement. Traced scalar normalization,
+cosine and sin(theta)e^(i phi) recurrences, each factorial ratio and selected orthogonality
+coefficient; zero endpoints omit nonexistent harmonics. Exact SymPy Gaunt values independently
+compare every admissible l≤6 case.
+Executable: supplementary/ch16_check.py:399; 183 mathematical assertions (183 exact, 0
+numerical): all four Gaunt formulas for every admissible l=0..6,m using SymPy exact Gaunt/Wigner
+evaluation, independent of the recurrence derivation.
+
+16.3.11 — sections/ch16.tex:1734; work/book-layout.txt:41588; work/solman.txt:28214
+Matched both polynomial integrals and five printed nonzero cases. Directly added missing zero
+cases and nonnegative indices. Traced recurrence once/twice, all A/B/C coefficients including
+common-denominator simplification, and orthogonality factors. The L=0,1 derivation removes
+negative-degree terms; tests include all zero cases and those endpoints.
+Executable: supplementary/ch16_check.py:409; 162 mathematical assertions (162 exact, 0
+numerical): direct polynomial integration for all l,n=0..8, both x and x², including all zero
+cases and low-degree endpoints.
+
+16.3.12 — sections/ch16.tex:1808; work/book-layout.txt:41628; work/solman.txt:28219
+Matched Legendre expansion, vanishing ranges and three-term-recurrence note. Directly restricted
+a_(n-1) request to n≥1 and requested n=0 separately. Traced degree-based elimination, swapped
+multiplication inside inner product, parity, Rodrigues leading-coefficient ratio, endpoint
+P_n(1)=1 and n=0. General-weight argument explains why three terms remain but middle coefficient
+need not vanish.
+Executable: supplementary/ch16_check.py:423; 81 mathematical assertions (81 exact, 0 numerical):
+Rodrigues leading coefficients and all three recurrence coefficients via direct integration for
+n=0..8.
+
+16.4.1 — sections/ch16.tex:1882; work/book-layout.txt:41853; work/solman.txt:28227
+Matched all five printed expressions against original PDF; clarified total J versus orbital L in
+statement and marked Y000 formal zero directly. Traced spin-one Cartesian basis, singlet
+coefficients, radial/tangential conversion, J=1,L=0/1/2 coefficients and normalization. Triangle
+rule excludes a normalized J=L=0 state; no negative orbital degree is used.
+Executable: supplementary/ch16_check.py:448; 16 mathematical assertions (16 exact, 0 numerical):
+all five explicit vector expressions against exact CG coefficients and Cartesian components.
+
+16.4.2 — sections/ch16.tex:2007; work/book-layout.txt:41861; work/solman.txt:28228
+Matched three parity exponents and moving-basis hint. Directly specified argument inversion in a
+fixed Cartesian basis and only allowed triples. Traced Legendre (-1)^(l+m) and azimuthal (-1)^m
+factors, cancellation of m dependence, and orbital degree in each coupled term. Distinguished
+the extra intrinsic minus for a physical polar-vector parity operator; tests cover all allowed
+orbital degrees0..4.
+Executable: supplementary/ch16_check.py:460; 225 mathematical assertions (225 exact, 0
+numerical): orbital parity of every allowed vector harmonic with L=0..4, checked on explicit
+scalar amplitudes and all spin components.
+
+16.4.3 — sections/ch16.tex:2064; work/book-layout.txt:41864; work/solman.txt:28232
+Matched orthonormality request and Eq 16.89 against source PDF. Directly specified Hermitian
+product and allowed indices; original equation omits conjugation. Expanded both vector
+harmonics, scalar integral, vector basis delta, then unitary CG sum. e_+ dot e_+=0 supplies the
+bilinear counterexample while its Hermitian norm is1; excluded formal zero does not receive unit
+norm.
+Executable: supplementary/ch16_check.py:468; 1495 mathematical assertions (1495 exact, 0
+numerical): Hermitian spherical-vector basis and all coupled-state Gram matrices for orbital
+L=0..4; bilinear counterexample.
+
+16.4.4 — sections/ch16.tex:2104; work/book-layout.txt:41865; manual entry absent
+Matched Jackson operator definition and source coupling Eq 16.88; manual omits this exercise.
+Directly required L≥1. Traced Cartesian-to-spherical L components, three ladder coefficients,
+normalized highest state annihilated by total raising and coherent lowering. Explicit epsilon-
+tensor commutator/spin-generator cancellation proves the vector transformation law rather than
+assuming the desired CG identity.
+Executable: supplementary/ch16_check.py:476; 321 mathematical assertions (321 exact, 0
+numerical): all three generic coefficient formulas against exact CG for L=1..8 and every M;
+explicit vector differential form for L<=3.
+
+16.4.5 — sections/ch16.tex:2179; work/book-layout.txt:41875; work/solman.txt:28270
+Matched conjugated vector addition sum and hint. Directly required L≥1; formal zero at L=0
+contradicts stated nonzero RHS. Traced conversion of Cartesian squares to ladder squares,
+relabeling M=k±1, exact collected coefficient L(L+1), endpoint zero factors and scalar addition
+theorem. Generic weight identity plus finite exact vector sums provide executable support.
+Executable: supplementary/ch16_check.py:497; 8 mathematical assertions (8 exact, 0 numerical):
+generic symbolic weight collection and pointwise scalar/vector addition sums for L=1..6; L=0
+counterexample.
+
+16.4.6 — sections/ch16.tex:2227; work/book-layout.txt:41888; work/solman.txt:28308
+Original PDF and manual have unconjugated first vector and a pointwise-zero scalar triple
+product. Directly corrected it to the Hermitian version for L≥1 so the angular-interference
+prose applies, while preserving proof of the original assertion. Traced tangential components,
+cross-product signs, derivative of |Y|², pole boundary values and M=0. Expanded L=M=1 integrand
+to-3i cos(theta)/(8pi), nonzero pointwise but integrating to 0; generic bilinear identity and all
+Hermitian l≤5 integrals are checked.
+Executable: supplementary/ch16_check.py:510; 73 mathematical assertions (73 exact, 0 numerical):
+generic antisymmetric triple-product zero; Hermitian differential integrand and exact integral
+for L=1..5, all M.

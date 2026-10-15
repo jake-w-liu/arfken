@@ -1,0 +1,231 @@
+CHAPTER 4 VERIFICATION RECORD
+
+VERIFIED scope: all 41 exercises in sections/ch04.tex (4.1.1--4.7.3).
+Each placeholder has been replaced by an algebraic derivation. No chapter
+solution remains as a placeholder. This record covers Chapter 4 only.
+
+Fresh final audit completed for all 41 entries; see ch04_final_audit.txt for
+individual source and pedagogy findings. Required qualifications now appear
+in the problem statements. Curvature-sign and metric-polarization steps were
+expanded. Current executable total: 1493 exact assertions (4 new).
+
+Method: the written general proofs were reviewed against tensor, connection,
+Jacobian, and exterior-calculus definitions. Independent exact symbolic
+calculations below supplement the proofs. A finite coordinate example is
+identified as such; it is not represented as a proof of a general theorem.
+No numerical approximation or tolerance is used by the supplementary script.
+
+Reproduce algebra checks:
+  python3 supplementary/ch04_check.py
+Dependency: SymPy (the successful run used SymPy 1.14.0, Python 3.14.7).
+
+Source checks:
+- Local textbook: Mathematical Methods for Physi - Arfken, George B. & Weber,
+  Han_4469.pdf; Chapter 4 exercise statements and surrounding definitions read
+  via work/book-layout.txt. Visually inspected printed pp.218,231,236,237,248
+  (PDF pp.222,235,240,241,252) for the disputed rotation/Jacobian/Hodge/form text.
+- Local Instructor's Manual: Solution mathematical method for physics-7.pdf;
+  Chapter 4 solutions in work/solman.txt, printed pp.58--65. Printed p.65
+  (PDF p.68) rendered and inspected to verify the tan(y/x) primitive error and
+  the unqualified claims of global exactness.
+- Manual Errata and Revision Status, 6 April 2012, printed pp.3--6, read in
+  full from the extracted local PDF. It contains no Chapter 4 entries. The
+  Chapter 4 corrections below are therefore independently established
+  corrections/qualifications, not represented as published errata entries.
+
+Corrections/qualifications marked with the existing dark-red erratum macro:
+- 4.1.7: missing grammatical "of" in the original note.
+- 4.1.9: the complex-coordinate Lorentz representation is complex orthogonal.
+- 4.1.10: the line-element argument needs symmetric metric coefficients;
+  polarization determines only the symmetric part of a quadratic form.
+- 4.2.1: numerical epsilon symbols use orthonormal Cartesian coordinates.
+- 4.2.2: uniqueness is for the full antisymmetric tensor/vector correspondence.
+- 4.2.3 and 4.3.12: continuous second derivatives justify commuting partials.
+- 4.2.6: proper orthogonal rotations only; reflections reverse the ordinary
+  epsilon matrix, as verified by the explicit reflection counterexample.
+- 4.4.1: regular local functional-dependence hypotheses; singular critical
+  points and a vacuous zero relation cannot support the unqualified argument.
+- 4.4.2: |J|=h1*h2 generally; J=h1*h2 requires positive orientation.
+- 4.4.3: y>0, since x/y is undefined at y=0.
+- 4.5.1: textbook p.236 must count negative metric factors in the INPUT form,
+  not the complementary form. All of Eq.(4.82)'s results are then correct.
+- 4.7.1: invertibility is required for an actual change of coordinates.
+- 4.7.3: local angular potential is arctan(y/x), not the manual's tan(y/x);
+  the angular form is not globally exact on the punctured plane. The complex
+  form needs holomorphic f for closedness and a primitive/vanishing periods
+  for global exactness; simply connected domain is a sufficient condition.
+
+Per-problem evidence (all listed lines refreshed to the current source):
+
+4.1.1  sections/ch04.tex:12
+  General (p,q)-tensor Jacobian product proof: every summand vanishes; includes rank zero. Symbolic rank-two zero-array check supplements the general proof.
+
+4.1.2  sections/ch04.tex:42
+  Subtract tensors and apply the general zero-tensor result; symbolic matrix difference check.
+
+4.1.3  sections/ch04.tex:64
+  A nonzero time-to-space Jacobian entry multiplies V^0 and forces V^0=0; four-momentum difference interpretation. Independent exact boost example gives a rank-four constraint matrix.
+
+4.1.4  sections/ch04.tex:96
+  All six off-diagonal entries eliminated by two half-turns; quarter-turns equate diagonals. Exact linear nullspace for the four rotations has sole basis I_3.
+
+4.1.5  sections/ch04.tex:136
+  Pair antisymmetry gives 36 entries; pair-exchange linear constraint rank is 15, leaving 21. All 256 cyclic identities checked after pair symmetries; repeated-index identities vanish and remaining constraint rank is 1, leaving 20.
+
+4.1.6  sections/ch04.tex:208
+  Pigeonhole plus antisymmetry proof; enumeration confirms each of the 81 four-index tuples in three dimensions has a repeated entry.
+
+4.1.7  sections/ch04.tex:224
+  General rank-n chain-rule proof with constant Cartesian rotation; independently differentiated nontrivial rank-two polynomial tensor after a rational rotation (all 27 derivatives).
+
+4.1.8  sections/ch04.tex:260
+  General contraction proof uses orthogonality explicitly; polynomial-tensor divergence transformation verified independently.
+
+4.1.9  sections/ch04.tex:284
+  Chain rule in x4=ict and orthogonal contraction derive Lorentz-invariant operator. Symbolic arbitrary-velocity boost preserves the real Minkowski metric and becomes complex orthogonal after coordinate conversion.
+
+4.1.10  sections/ch04.tex:324
+  Independent test vectors isolate every bilinear coefficient, proving the converse tensor law. Symbolic bilinear invariance and polarization checked for arbitrary matrix/vector components. Metric symmetry qualification is explicit.
+
+4.1.11  sections/ch04.tex:380
+  General matrix quotient proof chooses arbitrary A'=I, without requiring each tested A to be invertible. Symbolic K,A product transformation checked.
+
+4.2.1  sections/ch04.tex:411
+  Explicit inverse using epsilon contraction and both determinant factors in transformation. All 81 epsilon contraction identities plus symbolic dual inversion and proper/improper examples checked.
+
+4.2.2  sections/ch04.tex:460
+  Full antisymmetric-component dimension count and constructive inverse in n=3. Equation n(n-1)/2=n solved exactly; positive root is 3. Scope of uniqueness qualified.
+
+4.2.3  sections/ch04.tex:491
+  Antisymmetry contracted with commuting second derivatives proves both zero identities. Symbolic smooth arbitrary component functions independently yield zero.
+
+4.2.4  sections/ch04.tex:531
+  Four-factor transformation proof for each delta product; all 81 components of three basic fourth-rank invariants checked under a nontrivial rotation and a reflection, giving the listed sums/differences.
+
+4.2.5  sections/ch04.tex:571
+  General symbolic 2x2 multiplication proves Q E Q^T=(det Q)E; additional pseudotensor factor checked. Explanation distinguishes dimensions and proper/improper transformations.
+
+4.2.6  sections/ch04.tex:606
+  Arbitrary-angle sine/cosine matrix multiplication checked; explicit reflected-axis counterexample gives -E. Statement corrected to proper orthogonal similarity transformations.
+
+4.2.7  sections/ch04.tex:638
+  Full epsilon-contraction inversion includes antisymmetry and factor 1/2; contraction identity exhaustively checked.
+
+4.3.1  sections/ch04.tex:661
+  Reciprocal cross-product formula checked against all defining scalar products; uniqueness proof included. Independent nonorthogonal right-handed exact basis checks all nine products.
+
+4.3.2  sections/ch04.tex:708
+  Orthogonality, diagonal inversion, reciprocal lengths derived. Arbitrary positive lengths in a rotated orthogonal frame verified symbolically.
+
+4.3.3  sections/ch04.tex:742
+  Dual-basis expansion proves inverse-metric identity; nonorthogonal exact example verifies full matrix product.
+
+4.3.4  sections/ch04.tex:769
+  Mixed derivatives of a smooth coordinate map imply symmetric Christoffels. Every cylindrical coefficient independently calculated both from basis derivatives and metric formula.
+
+4.3.5  sections/ch04.tex:794
+  Coordinate basis explicitly differentiated from Cartesian position; all scalar products and inverse metric shown and checked.
+
+4.3.6  sections/ch04.tex:824
+  Differentiate reciprocal orthogonality, then V_i epsilon^i; every lower derivative checked against direct Cartesian-vector differentiation in cylindrical coordinates.
+
+4.3.7  sections/ch04.tex:869
+  Product-rule metric derivative cancellation written in full; all nine lowering-versus-differentiation identities checked for arbitrary symbolic cylindrical vector components.
+
+4.3.8  sections/ch04.tex:907
+  Only derivative partial_rho g_phi_phi=2rho identified. All 27 Christoffels computed; exactly the three reported entries are nonzero. Also compared with coordinate-basis derivatives.
+
+4.3.9  sections/ch04.tex:946
+  All nine entries displayed with physical/coordinate component distinction; each compared with direct differentiation of the Cartesian vector.
+
+4.3.10  sections/ch04.tex:986
+  General proof for metric and inverse metric, with every cancellation shown. All 54 covariant/contravariant metric derivatives checked in each of cylindrical and spherical coordinates.
+
+4.3.11  sections/ch04.tex:1024
+  Contracted connection and determinant derivative yield divergence; physical spherical components substituted explicitly. Independently checked by Cartesian chain rule and by Christoffel trace for arbitrary symbolic components.
+
+4.3.12  sections/ch04.tex:1076
+  Difference of scalar second derivatives and symmetric connection explicitly cancels; generic scalar cylindrical Hessian checked symmetric.
+
+4.4.1  sections/ch04.tex:1101
+  Regular local equivalence proved constructively using inverse function theorem and coordinates (u,y,z). Necessity and critical cusp counterexample analyzed separately. Code checks dependent example, coordinate construction, and cusp gradients; it does not purport to prove the general local theorem.
+
+4.4.2  sections/ch04.tex:1188
+  General Gram-determinant identity expanded and checked symbolically; reflected orthogonal chart proves the missing sign. Correct result |J|=h1*h2 with positive-orientation qualification.
+
+4.4.3  sections/ch04.tex:1228
+  Inverse coordinates and every derivative shown; direct and reciprocal determinant calculations agree. Full forward/inverse derivative matrix product checked. Undefined boundary y=0 excluded.
+
+4.5.1  sections/ch04.tex:1279
+  All 16 basis forms tabulated with permutation parity and number of spatial input indices. Each table entry, all same-degree defining Hodge inner products, and every star-square sign checked exactly.
+
+4.5.2  sections/ch04.tex:1363
+  Three displacement dot products solve force components; all three works and derivative of work potential checked.
+
+4.6.1  sections/ch04.tex:1390
+  Both exterior derivatives expanded; second derivative zero verified by exterior-algebra implementation.
+
+4.6.2  sections/ch04.tex:1430
+  All six coefficient terms retained before cancellation; first and second exterior derivatives independently computed.
+
+4.6.3  sections/ch04.tex:1462
+  All six wedge-product terms shown; direct differentiation and graded Leibniz rule independently implemented and both give 4xy dx wedge dy wedge dz.
+
+4.7.1  sections/ch04.tex:1517
+  All six surviving terms of a generic linear volume pullback displayed; arbitrary symbolic 3x3 determinant agrees with independently formed exterior product. Invertibility and orientation qualifications included.
+
+4.7.2  sections/ch04.tex:1568
+  All curl coefficients independently recovered by exterior differentiation; orientations and unspecified unit constant retained. Nontrivial disk example verifies boundary circulation equals surface flux.
+
+4.7.3  sections/ch04.tex:1608
+  All five cases classified with natural domains. Both partial derivatives of every stated elementary primitive checked. Nonclosed rational-form obstruction verified, angular full-circle period is 2pi, general complex closedness is 2i*dbar(f), nonholomorphic example fails, and dz/z has period 2pi*i. Constructive local primitive and global path-independence argument included.
+
+
+Current full executable check output (fresh final audit):
+
+Python 3.14.7; SymPy 1.14.0
+Chapter SHA256: b6b480b5ec211662b0e114c585f99d784f78a9fd3ac51b1755428991c017a2bf
+PASS structure and exact test rotation: 13 exact assertions
+PASS 4.1.1-2,4.1.4,4.1.10-11 tensor algebra: 31 exact assertions
+PASS 4.1.10 general coordinate metric and polarization: 4 exact assertions
+PASS 4.1.5-6 curvature and antisymmetry counts: 237 exact assertions
+PASS 4.1.7-8 Cartesian derivative examples: 30 exact assertions
+PASS 4.1.3,4.1.9 Lorentz transformations: 33 exact assertions
+PASS 4.2.1-3,4.2.7 duals and differential identities: 107 exact assertions
+PASS 4.2.4 isotropic fourth-rank tensors: 486 exact assertions
+PASS 4.2.5-6 planar epsilon including reflection: 16 exact assertions
+PASS 4.3.1-3 reciprocal bases and inverse metrics: 40 exact assertions
+PASS 4.3.4-10,4.3.12 cylindrical coordinate calculus: 163 exact assertions
+PASS 4.3.10-11 spherical metric and divergence: 65 exact assertions
+PASS 4.4.1-3 functional-dependence examples and Jacobians: 16 exact assertions
+PASS 4.5.1 all 16 Minkowski Hodge-star entries: 204 exact assertions
+PASS 4.5.2,4.6.1-3 work and exterior derivatives: 21 exact assertions
+PASS 4.7.1-2 volume transformation and Stokes: 7 exact assertions
+PASS 4.7.3 all five forms, primitives and periods: 20 exact assertions
+ALL PASS: 1493 exact assertions; no numerical tolerances.
+Scope: symbolic identities and the stated examples; the general proofs,
+regularity hypotheses, and domain arguments are in sections/ch04.tex.
+
+Current source SHA256: b6b480b5ec211662b0e114c585f99d784f78a9fd3ac51b1755428991c017a2bf
+Current checker SHA256: e89d80751bc9dde6deb8ad029846246579541efc2a067d378986efd4e5d8d025
+
+The pre-final-audit ledger is preserved only as explicitly historical evidence in
+work/ch04-final-historical-verification.txt; its hashes/builds are not current.
+
+Standalone final build and visual QA:
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch04-final-review.tex
+  Final pass stdout: work/ch04-final-build-02.txt; exit0.
+  Final log: work/ch04-final-review.log; no warnings, errors, overfull or underfull boxes.
+  PDF: work/ch04-final-review.pdf; 25 pages, SHA256 2d8b717778abb0baa326e23a19c6d59c558c8c8971d01557c6e4a8a603f8d4d4.
+  Log SHA256: 1445735779284e0414fdcd6e685f54a12d21aaff4b56ece44c8fef8803a7f632.
+  pdftoppm -r 80 -png work/ch04-final-review.pdf work/ch04-final-page
+  All 25 pages viewed in work/ch04-final-sheet-01.png through -07.png.
+  Final clean-pass page renders are byte-identical to the inspected images.
+  No clipping, overlapping formula/table content, missing glyphs or orphan
+  subsection heading was found. Nine changed entries and all surrounding
+  pagination were inspected; no chapter-source layout adjustment was needed.
+  All seven subsection headings retain Needspace guards.
+Residual limits: symbolic checks supplement, rather than replace, the written
+arbitrary-rank/local-existence/topological proofs. No unresolved Chapter4
+statement, answer or substantial intermediate-step gap found in this audit.
+The integrated main PDF is owned and checked by root, outside this chapter build.

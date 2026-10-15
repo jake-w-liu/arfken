@@ -1,0 +1,20 @@
+CHAPTER19 VERIFICATION RECORD — CURRENT FINAL REVIEW
+
+All40 statements and complete worked solutions were freshly source-compared
+and analytically traced. Specific per-entry findings, current source lines,
+source evidence and pedagogical changes: supplementary/ch19_final_audit.txt.
+The prior detailed record is preserved in work/final-review-baseline/.
+
+Command: python3 supplementary/ch19_check.py
+Result: exit0;867 assertions across40/40 groups, including structural guards.
+Transcript: work/ch19-final-check.txt. Exact algebra and independent numerical
+checks supplement general convergence/distribution/regularity proofs.
+
+Current standalone: work/ch19_review.pdf;32pages,278005bytes.
+Build log: work/ch19-final-build.txt and work/ch19_review.log.
+Zero warnings/errors/overfull/underfull boxes;all32 pages visually reviewed.
+
+Current SHA-256
+9c09eaf6ea94049bf169816875962dd0192dec358c6b2550b368fb4620a41d2d  sections/ch19.tex
+9c7304a467f87f7cdd31f1cec8767dcbb675aa8b83b97455bd30dc4ecf98b9bd  supplementary/ch19_check.py
+b43a42d7b6efbd6b96bd948022ac85ed75730f0412644aa773319c5cf69b8d89  work/ch19_review.pdf

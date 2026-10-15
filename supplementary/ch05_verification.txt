@@ -1,0 +1,342 @@
+CHAPTER 5 CURRENT VERIFICATION RECORD -- FRESH FINAL AUDIT
+All 40 problems and40 solutions audited against textbook/manual and traced
+mathematically; detailed per-entry source and pedagogy findings are in
+supplementary/ch05_final_audit.txt. This supersedes the earlier construction
+ledger preserved as historical in work/ch05-final-historical-verification.txt.
+Current source SHA256: 41fa02d8df7eab9fd86d564dfab32ab85541eaaea1ea825a6974e97f19419334
+Current checker SHA256: 885b6d456a26434d796b598c02c1de5377c6af40e00d73c63e1c08f440c47956
+
+Commands actually completed:
+  python3 supplementary/ch05_check.py > work/ch05-final-check.txt
+  Result: 148 counted checks;147 exact (3 structural),1 numerical.
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch05-final-review.tex
+  Final pass: work/ch05-final-build-02.txt, exit0,35 pages.
+  pdftotext -layout work/ch05-final-review.pdf work/ch05-final-layout.txt
+  pdftoppm -r 80 -png work/ch05-final-review.pdf work/ch05-final-page
+
+Current source/derivation findings (line numbers are problem starts):
+5.1.1 sections/ch05.tex:12
+  Orthonormal series and Hilbert-space basis match; norm convergence is now stated directly.
+  Read coefficient extraction from finite sums and Schwarz continuity limit; uniqueness concerns Hilbert vectors, so almost-everywhere equality is handled. General proof is not replaced by the finite projection check.
+
+5.1.2 sections/ch05.tex:44
+  Finite basis, unique coefficients, and lack of orthogonality requirement match.
+  Subtracting representations directly invokes linear independence. The positive Gram form independently proves invertibility. All steps are sufficient; no change.
+
+5.1.3 sections/ch05.tex:73
+  Hilbert matrix entries, integrals and n=5 determinant match; added L2 hypothesis and direct condition-number qualification.
+  Expanded error gradient, positive Hessian and completed square prove a unique minimum. Checked exact determinant and independently computed numerical 2-norm condition; determinant size alone is correctly distinguished from conditioning.
+
+5.1.4 sections/ch05.tex:136
+  Coefficient and weighted-error formulas match; now explicitly state real functions, orthonormality and nonnegative weight.
+  Traced both cross sums, delta contraction and completion of squares. Complex conjugation/modulus variant and norm-convergent tail interpretation are correct; finite residual identity checked.
+
+5.1.5 sections/ch05.tex:185
+  Square-wave height, intervals, sine series, Parseval equality and zeta hint match.
+  Computed piecewise norm, sine-product integrals, partial-sum residual and norm limit; independent odd/even zeta split yields pi^2/8. No division by h, so h=0 is included. No change.
+
+5.1.6 sections/ch05.tex:244
+  The source's ordinary-square identity is real-valued; placed real L2 hypothesis directly in question.
+  Expanded all three double-integral terms, nonnegativity and proportionality equality condition. Added 2|fg|<=f^2+g^2 to justify Fubini without assuming the Schwarz inequality being proved; zero-vector cases retained.
+
+5.1.7 sections/ch05.tex:284
+  Retained residual expression and inequality; now explicitly identify orthonormal functions and projection coefficients.
+  Traced conjugate-linear expansion and monotone bounded sum. Expanded equality iff closed-span argument via Cauchy partial sums, Hilbert completeness, and residual orthogonality. Finite complex check supports algebra only.
+
+5.1.8 sections/ch05.tex:329
+  All four unnormalized shifted polynomials, interval, target sine and reference match.
+  Each numerator uses two integrations by parts; added every nonconstant polynomial norm expansion, including degree six. Four coefficients and residual orthogonality checked; parity explains vanishing odd terms.
+
+5.1.9 sections/ch05.tex:389
+  All Laguerre polynomials, weight e^-x and four-term request match.
+  Extra exponential in the coefficient integral is included; factorial moments yield 1/2,1/4,1/8,1/16. Cubic expansion and directly integrated residual 1/768 checked. No change.
+
+5.1.10 sections/ch05.tex:431
+  Given coefficients and second orthonormal set match; solution distinguishes completeness from projection.
+  Overlap orientation is conjugate-linear in the new ket; norm-continuity justifies the sum, and two identity resolutions prove unitarity only when both sets are complete. Complex finite reconstruction checked. No change.
+
+5.1.11 sections/ch05.tex:463
+  Source/manual assume orthogonal unit vectors; placed orthonormality in statement.
+  Dyadic resolution gives a, with explicit nonorthogonal unit-vector counterexample. Removed a stray comma in the transpose superscript; checked counterexample components (3/2,1/2).
+
+5.1.12 sections/ch05.tex:486
+  All four bilinear terms and real two-dimensional space match.
+  Completed square proves iff k>1; k=1 and k<1 both fail on (1,1). Symmetry, bilinearity and positive determinant are separately identified. No change.
+
+5.2.1 sections/ch05.tex:525
+  Original PDF276 confirms printed answer P_n*=1; marked corrected subscript 0 directly. Remaining polynomials and endpoint normalization match.
+  Traced every GS projection/norm through degree three and general Rodrigues proof; expanded binomial differentiation leading to the finite sum. Boundary terms, endpoint value, and beta-integral norm reduction are explicit. Finite degree checks support general proof.
+
+5.2.2 sections/ch05.tex:627
+  Monomial input, half-line, exponential weight, normalization and three Laguerre answers match.
+  Added the factorial-moment integration-by-parts recurrence with zero boundary term; all three projections and norms are explicit. Conventional signs are distinguished from the sign freedom left by normalization.
+
+5.2.3 sections/ch05.tex:678
+  Original PDF277 confirms ambiguous inline '/2 sqrt3'; fraction specifies the intended denominator, not a changed numerical solution.
+  Shifted-factorial moments yield q2=x^2-6x+6 with squared norm 12; direct cross-products and complete Gram matrix confirm division by 2sqrt3. Retained as a notation qualification, not a claim of a proven wrong printed value.
+
+5.2.4 sections/ch05.tex:728
+  Gaussian weight on whole line, 2^m m! sqrt(pi) normalization and three Hermite answers match.
+  Expanded the Gaussian moment recurrence by integration by parts, including vanishing boundary term; parity removes odd projections and each positive scaling factor follows from displayed norms.
+
+5.2.5 sections/ch05.tex:777
+  Source's piecewise norm listed only m=n cases after delta_mn. Completed statement with explicit zero case m!=n; weights, hint and four listed polynomials match.
+  Cosine substitution and integration-by-parts moment recurrence are derived; all projections and scaling through optional T3 checked. Complete Gram matrix independently verifies the added off-diagonal case.
+
+5.2.6 sections/ch05.tex:842
+  Weight sqrt(1-x^2), all hint factors, n=0 case and three type-II polynomials match.
+  Hint moments feed every projection and norm; scales 1,2,4 give pi/2 diagonal norms and all cross terms vanish. Independent cosine/sine-squared moment checks confirm. No change.
+
+5.2.7 sections/ch05.tex:893
+  Both wrong source references on p275 are 5.2.5; retained direct correction to Gaussian/Hermite Exercise5.2.4.
+  Half-line moments give the nonzero constant subtraction and positive norm; contrasted full-line odd moment correctly. Changed explanation to refer explicitly to the ORIGINAL question, avoiding contradiction with edited statement.
+
+5.2.8 sections/ch05.tex:932
+  All three input columns and their order match.
+  Every projection coefficient, residual and normalization is shown; independent QR and all pairwise dot products check the resulting set. No change.
+
+5.3.1 sections/ch05.tex:981
+  Bare adjoint identity matches source; now states bounded, everywhere-defined hypothesis in question.
+  Conjugate symmetry and adjoint definition lead to a zero scalar product against every vector, then a zero norm. Unbounded closure caveat is retained; finite generic-matrix check is explicitly limited.
+
+5.3.2 sections/ch05.tex:1009
+  Product order and adjoint reversal match; bounded/everywhere-defined qualification is now direct.
+  Moved U then V across the scalar product, so reversed order follows without matrices. Domain limitation and uniqueness are explicit. Arbitrary finite complex matrices check algebra.
+
+5.3.3 sections/ch05.tex:1040
+  All three basis functions, delta inner product, both differential operators and target function match.
+  Constructed columns from each action, read vector (1,-2,3), and checked (A1-A2)c against direct derivatives. No skipped operator-to-column step. No change.
+
+5.3.4 sections/ch05.tex:1093
+  Source literally says '5.2.1'; clarified that this means Example5.2.1 on [-1,1], without alleging the source explicitly said Exercise.
+  All normalized polynomials, derivative re-expansions, cubic coefficient integrals and final Ac=3c verified. Independent projection integrals reproduce every matrix entry. Reference clarification only.
+
+5.4.1 sections/ch05.tex:1164
+  Both requested Hermitian combinations and decomposition match; bounded hypothesis now appears before parts.
+  Conjugation of i, double adjoint and reconstruction are shown term by term. Generic complex matrices independently verify both adjoints and cancellation.
+
+5.4.2 sections/ch05.tex:1205
+  The iff commutation statement matches, now restricted directly to bounded everywhere-defined Hermitian operators.
+  Both directions follow from product-adjoint equality; unbounded formal-domain warning remains precise. Generic Hermitian product obstruction checked.
+
+5.4.3 sections/ch05.tex:1226
+  Source omitted Hermitian hypothesis for A,B. Corrected question explicitly assumes Hermitian bounded operators, with separate unbounded-domain qualification.
+  Anti-Hermitian commutator and -i factor give Hermitian C; noncommutation is only needed for C nonzero. Explicit 2x2 failed-hypothesis example is checked.
+
+5.4.4 sections/ch05.tex:1263
+  Positive L squared expectation matches; changed domain directly to D(L^2).
+  Adjoint transfer yields norm squared, with equality Lpsi=0 and normalized/unnormalized expectations distinguished. Symbolic finite norm identity checks algebra; domain conclusion is analytical.
+
+5.4.5 sections/ch05.tex:1284
+  Sphere measure, three coordinate/r functions, differential operators and commutator match.
+  All normalization/mixed integrals, radial derivative cancellation, nine actions, three matrices and both products are explicit. Independent sphere integrals and Cartesian differential actions verify. No change.
+
+5.5.1 sections/ch05.tex:1369
+  Original PDF292--293 confirms four wrong imaginary signs; now places corrected U directly in question. Source basis functions and input coefficients were checked.
+  Euler identities give each primed function; conjugating row coefficients determines U, which reconstructs f. Printed unitary U reconstructs a different vector, demonstrating why unitarity alone is insufficient. Both blocks and five identities checked.
+
+5.5.2 sections/ch05.tex:1452
+  Source arrows were ambiguous; replaced them directly by x=z',y=y',z=-x' consistent with manual's coefficient matrix and Eq3.37.
+  Columns express old functions in new basis; right-handed y-axis rotation, Euler beta=pi/2, and coefficient substitution agree. Alternative new-basis/active conventions are explicitly distinguished.
+
+5.5.3 sections/ch05.tex:1518
+  Inverse of Exercise5.5.2 is requested and matched to its now-explicit convention.
+  Read inverse-basis coefficients as columns, multiplied both UV and VU, and recovered original vector. No change.
+
+5.5.4 sections/ch05.tex:1544
+  PDF294 and manual78--79 confirm original matrices and manual sign errors. Corrected statement permits general coefficient bases and excludes sin(theta)cos(theta)(cos^2-sin^2)=0; does not falsely call both maps unitary.
+  All raw products, sequential/reverse columns, all-angle non-equality proof, adjoint products and determinants traced. Added symbolic joint determinant and induced-basis reconstruction tests. Optional unitary repair remains explicitly nonunique; its exceptional commuting angles are qualified.
+
+5.5.5 sections/ch05.tex:1669
+  Both polynomial triples, common interval and all five requested tasks match.
+  Every norm, all cross terms, nine overlaps in each orientation, six coefficient integrals, both reconstructions and transformed vector are shown. Independent integrations confirm complete Gram and transformation matrices. No change.
+
+5.6.1 sections/ch05.tex:1793
+  All six spin actions and primed plus/minus functions match.
+  Constructed columns, expanded orthogonality/norm, determined real C, and multiplied all three transformed matrices with the 1/4 factor accounted for. Independent eigenaction checks ordering. No change.
+
+5.6.2 sections/ch05.tex:1870
+  Source Gaussian exponent is r squared (confirmed from superscript line), all U entries and Gaussian hints match.
+  Explicitly chose C real positive; squared wavefunctions use exponent -2r^2, yielding 2^(7/4)/pi^(3/4). Radial cancellation, direct actions, diagonalization and conjugated-row ket functions all checked.
+
+5.6.3 sections/ch05.tex:1951
+  Upper-triangular T convention agrees with Eq5.81 and source columns, including complex overlaps.
+  All three GS vectors expressed in original basis; second norm and third determinant simplification expanded with conjugates. Generic Hermitian rational identity, exact complex QR, normalized Gram and operator congruence independently checked. No change.
+
+5.7.1 sections/ch05.tex:2057
+  Replaced finite-matrix reading directly with operator/domain commutator [x,p]=iI; source otherwise has impossible finite trace condition.
+  Expanded unitary covariance before cancellation, proved trace obstruction, and gave a differential realization on smooth rapidly decreasing functions. Finite generic covariance check does not pretend to realize finite CCR.
+
+5.7.2 sections/ch05.tex:2088
+  All Pauli matrices, 2i factor and rotation entries match.
+  Multiplied all three transformed matrices, then both products of first two; double-angle signs and final commutator checked exactly for symbolic angle. No change.
+
+5.7.3 sections/ch05.tex:2140
+  Gaussian basis, closure request, input x+iy, output -z, U and all five parts match.
+  Traced radial cancellation, three actions, original and transformed vector/operator equations, conjugated-row basis functions and direct input/output reconstructions. Independent Cartesian differentiation confirms all. No change.
+
+Full current checker output:
+
+PASS 3 structural inventory/heading assertions
+Current chapter SHA256: 41fa02d8df7eab9fd86d564dfab32ab85541eaaea1ea825a6974e97f19419334
+Chapter 5: exact identities unless explicitly marked numerical
+PASS 5.1.1 projection extracts every generic coefficient
+PASS 5.1.2 nonorthogonal polynomial Gram determinant
+PASS 5.1.3 Hilbert determinant
+PASS 5.1.3 NUMERICAL kappa_2(H5) = 476607.250241
+PASS 5.1.3 normal-equation gradient
+PASS 5.1.3 Hessian
+PASS 5.1.4 orthogonal residual identity
+PASS 5.1.5 odd reciprocal-square sum
+PASS 5.1.5 sine Gram factors
+PASS 5.1.6 double-integral identity
+PASS 5.1.6 nonnegative Gram determinant
+PASS 5.1.7 complex Bessel residual expansion
+PASS 5.1.8 all four sine coefficients
+PASS 5.1.8 projection residual orthogonality
+PASS 5.1.9 Laguerre Gram matrix
+PASS 5.1.9 all four Laguerre coefficients
+PASS 5.1.9 explicit cubic
+PASS 5.1.9 directly integrated residual norm
+PASS 5.1.10 complex overlap orientation
+PASS 5.1.10 coefficient reconstruction
+PASS 5.1.11 nonorthogonal unit-vector counterexample
+PASS 5.1.12 completed square
+PASS 5.2.1 first four Gram-Schmidt polynomials
+PASS 5.2.1 complete four-polynomial Gram matrix
+PASS 5.2.1 Rodrigues expansion n=0
+PASS 5.2.1 norm and endpoint n=0
+PASS 5.2.1 Rodrigues expansion n=1
+PASS 5.2.1 norm and endpoint n=1
+PASS 5.2.1 Rodrigues expansion n=2
+PASS 5.2.1 norm and endpoint n=2
+PASS 5.2.1 Rodrigues expansion n=3
+PASS 5.2.1 norm and endpoint n=3
+PASS 5.2.1 Rodrigues expansion n=4
+PASS 5.2.1 norm and endpoint n=4
+PASS 5.2.1 Rodrigues expansion n=5
+PASS 5.2.1 norm and endpoint n=5
+PASS 5.2.1 Rodrigues expansion n=6
+PASS 5.2.1 norm and endpoint n=6
+PASS 5.2.2 independent GS
+PASS 5.2.3 independent GS
+PASS 5.2.3 Gram with unambiguous denominator
+PASS 5.2.4 monic Hermite GS
+PASS 5.2.4 Hermite Gram
+PASS 5.2.5 independent Chebyshev-I GS
+PASS 5.2.5 full Chebyshev-I Gram
+PASS 5.2.6 independent Chebyshev-II GS
+PASS 5.2.6 full Chebyshev-II Gram
+PASS 5.2.7 half-line GS
+PASS 5.2.7 half-line Gram
+PASS 5.2.8 independent exact QR
+PASS 5.2.8 orthonormal vectors
+PASS 5.3.1 double adjoint finite algebra
+PASS 5.3.2 product adjoint finite algebra
+PASS 5.3.3 direct differential operator matrices
+PASS 5.3.3 rotation matrix
+PASS 5.3.3 operator on function
+PASS 5.3.4 integral-defined matrix
+PASS 5.3.4 cubic expansion
+PASS 5.3.4 matrix equals direct derivative
+PASS 5.4.1 Hermitian real part
+PASS 5.4.1 Hermitian imaginary part
+PASS 5.4.1 reconstruction
+PASS 5.4.2 exact product obstruction
+PASS 5.4.3 commutator Hermiticity
+PASS 5.4.3 missing-Hermitian-hypothesis example
+PASS 5.4.4 norm identity
+PASS 5.4.5 sphere normalization and all overlaps
+PASS 5.4.5 angular matrix x
+PASS 5.4.5 angular matrix y
+PASS 5.4.5 angular matrix z
+PASS 5.4.5 radial derivative cancellation
+PASS 5.4.5 commutator
+PASS 5.5.1 textbook functions to coefficient relation 1
+PASS 5.5.1 textbook functions to coefficient relation 2
+PASS 5.5.1 textbook functions to coefficient relation 3
+PASS 5.5.1 textbook functions to coefficient relation 4
+PASS 5.5.1 textbook functions to coefficient relation 5
+PASS 5.5.1 corrected transformed vector
+PASS 5.5.1 reconstruction in stated functions
+PASS 5.5.1 printed matrix reconstructs wrong function
+PASS 5.5.1 corrected matrix unitary
+PASS 5.5.1 printed matrix also unitary
+PASS 5.5.2 coefficient transformation
+PASS 5.5.2 coordinate substitution
+PASS 5.5.3 inverse both orders
+PASS 5.5.4 original U adjoint product
+PASS 5.5.4 original V adjoint product
+PASS 5.5.4 original determinants
+PASS 5.5.4 joint invertibility obstruction
+PASS 5.5.4 general-basis reconstruction
+PASS 5.2.1 constant-polynomial index
+PASS 5.2.1 printed generic constant subscript counterexample
+PASS 5.5.4 incompatible unitarity conditions (exact solve)
+PASS 5.5.4 original Ua
+PASS 5.5.4 original VUa
+PASS 5.5.4 original UV
+PASS 5.5.4 original VU
+PASS 5.5.4 original UVa
+PASS 5.5.4 proposed U repair unitary condition
+PASS 5.5.4 proposed V repair unitary condition
+PASS 5.5.4 repaired sequential vector
+PASS 5.5.4 repaired UV
+PASS 5.5.4 repaired VU
+PASS 5.5.4 repaired reverse vector
+PASS 5.5.5 normalized P Gram
+PASS 5.5.5 normalized F Gram
+PASS 5.5.5 all nine overlap integrals
+PASS 5.5.5 reverse overlap integrals
+PASS 5.5.5 unitarity
+PASS 5.5.5 P expansion integrals
+PASS 5.5.5 F expansion integrals
+PASS 5.5.5 coefficient transformation
+PASS 5.5.5 both function reconstructions
+PASS 5.6.1 spin basis unitary
+PASS 5.6.1 spin transform 0
+PASS 5.6.1 spin transform 1
+PASS 5.6.1 spin transform 2
+PASS 5.6.2 Gaussian normalization
+PASS 5.6.2 direct Gaussian derivative column 0
+PASS 5.6.2 direct Gaussian derivative column 1
+PASS 5.6.2 direct Gaussian derivative column 2
+PASS 5.6.2 unitary matrix
+PASS 5.6.2 transformed matrix
+PASS 5.6.2 new functions conjugate convention
+PASS 5.6.2 direct eigenfunction 0
+PASS 5.6.2 direct eigenfunction 1
+PASS 5.6.2 direct eigenfunction 2
+PASS 5.6.3 general complex unnormalized Gram identity
+PASS 5.6.3 exact complex normalized T
+PASS 5.6.3 independent QR comparison
+PASS 5.6.3 operator congruence
+PASS 5.7.1 general finite commutator covariance
+PASS 5.7.1 differential canonical commutator
+PASS 5.7.1 finite commutator trace obstruction
+PASS 5.7.2 transformed Pauli matrix 0
+PASS 5.7.2 transformed Pauli matrix 1
+PASS 5.7.2 transformed Pauli matrix 2
+PASS 5.7.2 transformed commutator
+PASS 5.7.3 direct functional equation
+PASS 5.7.3 original matrix equation
+PASS 5.7.3 transformed input
+PASS 5.7.3 transformed output
+PASS 5.7.3 transformed matrix equation
+PASS 5.7.3 transformed function input
+PASS 5.7.3 transformed function output
+PASS: 148 checks completed; all 40 exercise IDs covered by the TeX and scope ledger.
+
+Final standalone rendering review:
+  work/ch05-final-review.pdf:35 pages, SHA256 dba76aa8cb6d305686a6a5a060e679946ff8b764391ad4807a069c4694e61fcb.
+  work/ch05-final-review.log SHA256 a3ac7cd3c67cc64c96d999969c68be1cb58a091b8e7dbf9ea0ec322a7385a8e7.
+  Final build exit0; no warning, error, overfull or underfull box found.
+  All35 final rendered pages visually inspected in ch05-final-sheet-01.png
+  through09.png, including every changed page and surrounding pagination.
+  No clipping, overlaps, missing math glyphs or orphan subsection headings
+  found. All7 subsection Needspace guards remain in the canonical source.
+  Environment checked: Python 3.14.7, SymPy 1.14.0, NumPy 2.4.6.
+Residual limitations: operator-domain, norm-convergence and arbitrary-degree
+claims use the written analytic proofs; finite symbolic examples are explicitly
+supplemental. No unresolved Chapter5 statement/answer/step gap was identified.
+Integrated main.pdf review remains with root; no root build was run here.

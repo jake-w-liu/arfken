@@ -1,0 +1,108 @@
+Chapter 12 verification ledger — refreshed current final state
+Source SHA-256: a56c15f72271b6c799c5d8ada301c7dd246b01d4c89010e968f0937b890c82ba
+Checker SHA-256: 6a8bfa50bd40ad0b9a9b16d8808afe9b631b2b947c0bceb7a343a002dc194069
+47 complete exercises;712 counted executable assertions, plus5 uncounted global
+inventory/source guards. All47 complete statements and solutions received a
+fresh independent audit; see ch12_final_audit.txt for per-entry source comparison,
+derivation trace, changes and limits. Check output:work/ch12-final-check.txt.
+This current record supersedes the earlier649-assertion ledger.
+
+Confirmed source corrections/qualifications:
+12.1.4 Eqs12.13--15 factors/signs, final12.16 remains correct.
+12.1.5 integer indices, winding/orientation and x=0 special case.
+12.1.7 U_-1=0 for requested recurrence at n=0.
+12.3.2 finite EM remainder and truncation-versus-rounding convention.
+12.4.3 factor-four ambiguity clarified;12.4.5 printed sign corrected directly.
+12.5.1 positive/nonzero-product comparison hypotheses and signed counterexample;
+12.5.2 no zero factors and finite nonzero limit;12.5.8 negative integer zero
+limits;12.5.9 logarithm domain/branches;12.5.10 power-series disk.
+12.6.1--4 positive limit/fixed order/complex sector and half-integer termination.
+12.6.5 WITHDRAWAL: old claim against the manual was false. Book Eq12.98 excludes
+convergent series explicitly; footnote5 acknowledges a different convention.
+Current exact remainder satisfies12.97 and fails12.98. Manual is correct under
+the book's convention. No contradictory current erratum claim is retained.
+12.6.7 published denominator correction; both original/corrected integrals solved.
+12.7.1 false squared-modulus mean and positive-minimum claim corrected; connected,
+nonconstant hypotheses explicit.12.7.2 manual endpoint factor2 corrected.
+12.8.2 and12.8.5 PV symbols restore source cut-integral notation (transcription
+clarifications).12.8.3 source letter a corrected to0 and explicitly marked.
+12.8.4 moment/tail hypotheses and zero-moment little-o;12.8.6 full-frequency
+dispersion assumptions;12.8.8 consistent distributional kernel regularization.
+
+Per-exercise current locations and executable counts:
+12.1.1: sections/ch12.tex:12; 18 checks.
+12.1.2: sections/ch12.tex:37; 24 checks.
+12.1.3: sections/ch12.tex:97; 7 checks.
+12.1.4: sections/ch12.tex:132; 5 checks.
+12.1.5: sections/ch12.tex:187; 34 checks.
+12.1.6: sections/ch12.tex:230; 3 checks.
+12.1.7: sections/ch12.tex:255; 12 checks.
+12.2.1: sections/ch12.tex:287; 2 checks.
+12.2.2: sections/ch12.tex:309; 3 checks.
+12.2.3: sections/ch12.tex:338; 8 checks.
+12.3.1: sections/ch12.tex:379; 8 checks.
+12.3.2: sections/ch12.tex:431; 43 checks.
+12.4.1: sections/ch12.tex:495; 5 checks.
+12.4.2: sections/ch12.tex:524; 1 checks.
+12.4.3: sections/ch12.tex:554; 3 checks.
+12.4.4: sections/ch12.tex:609; 2 checks.
+12.4.5: sections/ch12.tex:635; 3 checks.
+12.4.6: sections/ch12.tex:672; 9 checks.
+12.4.7: sections/ch12.tex:722; 9 checks.
+12.5.1: sections/ch12.tex:772; 4 checks.
+12.5.2: sections/ch12.tex:827; 2 checks.
+12.5.3: sections/ch12.tex:867; 4 checks.
+12.5.4: sections/ch12.tex:893; 30 checks.
+12.5.5: sections/ch12.tex:916; 15 checks.
+12.5.6: sections/ch12.tex:938; 15 checks.
+12.5.7: sections/ch12.tex:952; 3 checks.
+12.5.8: sections/ch12.tex:980; 4 checks.
+12.5.9: sections/ch12.tex:1014; 6 checks.
+12.5.10: sections/ch12.tex:1055; 6 checks.
+12.6.1: sections/ch12.tex:1108; 24 checks.
+12.6.2: sections/ch12.tex:1181; 24 checks.
+12.6.3: sections/ch12.tex:1230; 18 checks.
+12.6.4: sections/ch12.tex:1282; 185 checks.
+12.6.5: sections/ch12.tex:1415; 28 checks.
+12.6.6: sections/ch12.tex:1457; 27 checks.
+12.6.7: sections/ch12.tex:1536; 56 checks.
+12.7.1: sections/ch12.tex:1600; 2 checks.
+12.7.2: sections/ch12.tex:1646; 8 checks.
+12.7.3: sections/ch12.tex:1702; 7 checks.
+12.8.1: sections/ch12.tex:1801; 2 checks.
+12.8.2: sections/ch12.tex:1827; 3 checks.
+12.8.3: sections/ch12.tex:1873; 7 checks.
+12.8.4: sections/ch12.tex:1930; 9 checks.
+12.8.5: sections/ch12.tex:2003; 5 checks.
+12.8.6: sections/ch12.tex:2071; 2 checks.
+12.8.7: sections/ch12.tex:2112; 2 checks.
+12.8.8: sections/ch12.tex:2146; 15 checks.
+
+
+Rendered-page QA and build
+Standalone wrapper work/ch12-final-review.tex uses the current main.tex preamble
+and only sections/ch12.tex. Command:
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work
+  work/ch12-final-review.tex > work/ch12-final-build03.txt
+Current final log work/ch12-final-review.log:36 pages, no LaTeX warning/error,
+overfull or underfull box. First build caught a misplaced prose line inside a
+display; it was corrected before the clean build. No root/main PDF was built.
+An intermediate checker rerun completed its assertions but failed at the first
+report print with TimeoutError errno60. A subsequent fresh-log full rerun passed
+with exit0; the successful output is retained. No unmeasured filesystem cause
+is asserted.
+Rendered at100dpi with pdftoppm; all36 pages reviewed on9 four-page sheets
+work/ch12-final-contact-01.png through09.png, with additional final revised page
+inspection: the last prose edit changed only page14, which was re-rendered and
+viewed individually; the other35 PNGs were byte-identical. Checked formula/correction visibility, margins,
+page continuations and all8 subsection heading placements. Needspace precedes
+every subsection. No unresolved clipping, overlap or orphan subsection found.
+
+Verification limits: analytic arguments in the source establish the general
+results. Symbolic samples and85-digit numerical checks do not establish
+all-order identities, uniform sectors or distributional limits by themselves.
+No arbitrary-function claim is based only on samples; no interval-certified
+quadrature is claimed. Exact check labels and parameters are retained in output.
+Numerical sum12.4.6 uses23 terms(s=2..24), not24 as the historical ledger stated.
+Full source anchors, proof-specific scrutiny and source/PDF evidence are in
+ch12_final_audit.txt. No exercise remains skipped or mathematically unresolved.

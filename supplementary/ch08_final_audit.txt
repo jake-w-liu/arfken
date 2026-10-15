@@ -1,0 +1,77 @@
+CHAPTER 8 — FINAL CORRECTNESS AND STUDENT-READABILITY AUDIT
+
+Status: complete for all 17 entries, 2026-10-04.
+
+Freshly read: all current statements and full solutions; textbook extract
+work/book-layout.txt lines19320-19406,19630-19738,19825-19866; manual
+work/solman.txt lines10768-11132 and the original per-exercise source record.
+Every statement was compared, and every derivation was traced independently
+of the numerical results. No incorrect final value remained in this review;
+necessary hypotheses and omitted explanatory algebra were added as below.
+
+8.2.1 | sections/ch08.tex:12
+Book exercise starts at work/book-layout.txt:19330: multiplier and weight agree. Traced p prime and both weighted scalar products. Expanded the two integration-by-parts calculations so the boundary-form cancellation is visible.
+
+8.2.2 | sections/ch08.tex:51
+Book exercise starts at work/book-layout.txt:19332: Gaussian multiplier and weight agree. Product rule gives the eigenvalue 2n, and Gaussian times a polynomial makes both boundary terms vanish. The preceding expanded boundary identity supplies the intermediate operator argument.
+
+8.2.3 | sections/ch08.tex:77
+Book exercise starts at work/book-layout.txt:19335: square-root multiplier agrees. Checked its derivative, positive weight, integrable endpoint singularities, finite polynomial norms, and zero polynomial flux. No change needed.
+
+8.2.4 | sections/ch08.tex:107
+Book exercise starts at work/book-layout.txt:19338: all four intervals agree. Traced each endpoint separately, including polynomial growth at infinity and the polynomial hypothesis; arbitrary singular solutions are explicitly excluded. No change needed.
+
+8.2.5 | sections/ch08.tex:147
+Book exercise starts at work/book-layout.txt:19346: distinct-eigenvalue claim agrees. Applying A minus lambda2 to the dependence equation gives the two zero coefficients without dividing by an eigenvalue. No change needed.
+
+8.2.6 | sections/ch08.tex:168
+Book exercise starts at work/book-layout.txt:19348: both functions and the overlap integral agree. Recomputed Q prime, the primitive and both improper endpoint limits: overlap1 and boundary jump2. The common-domain obstruction is explicitly derived. No change needed.
+
+8.2.7 | sections/ch08.tex:223
+Book exercise starts at work/book-layout.txt:19366: functions, interval and weighting reference agree. Traced weighted overlap2, flux -x, eigenvalues0/1 and endpoint jump-2. The divergent derivative explains why vanishing function values are insufficient. No change needed.
+
+8.2.8 | sections/ch08.tex:251
+Book exercise starts at work/book-layout.txt:19370: derivative-orthogonality problem agrees. Checked the integration-by-parts sign and the stronger endpoint product condition; the Robin limitation and normalization case are retained. No change needed.
+
+8.2.9 | sections/ch08.tex:298
+Book exercise starts at work/book-layout.txt:19378: linear independence without Hermiticity agrees. The induction avoids circular coefficient comparison and includes a possible zero eigenvalue. No change needed.
+
+8.2.10 | sections/ch08.tex:329
+Book exercise starts at work/book-layout.txt:19385: ODE and polynomial note agree. Checked integrating factor, endpoint power, distinct eigenvalues and alpha0 normalization. Added the necessary real alpha>-1/2 and limiting-normalization assumptions to the statement in red. Expanded the generating-function derivative, quadratic factorization and logarithm-series coefficient argument.
+
+8.3.1 | sections/ch08.tex:401
+Book exercise starts at work/book-layout.txt:19639: every requested series, recurrence and subpart agrees. Traced both Frobenius branches and parity termination. Expanded exact ratio subtraction, numerator/denominator asymptotics, convergent-product tail and c_k=C/k+O(k^-2), making endpoint divergence explicit even for complex coefficients. Added two exact decomposition checks.
+
+8.3.2 | sections/ch08.tex:526
+Book exercise starts at work/book-layout.txt:19677 and manual lines11021 onward: formal Hermiticity requires an operator domain. Moved the endpoint/domain condition into the statement in red. Both integrations by parts and the bounded weighted-L2 counterexample were traced; the manual really does claim scalar-product existence forces the boundary terms to vanish.
+
+8.3.3 | sections/ch08.tex:577
+Book exercise starts at work/book-layout.txt:19679: ODE, recurrences and printed coefficients agree. Traced the indicial equation, forced coefficient, distinct Taylor/Frobenius notation, absolute convergence for every finite x and parity termination. No change needed.
+
+8.3.4 | sections/ch08.tex:668
+Book exercise starts at work/book-layout.txt:19708: Laguerre ODE and polynomial request agree. Traced repeated root, one-step recurrence, factorial denominator, entire regular solution and logarithmic second solution. The manual extract at11055 onward confirms its j+2 typo. No change needed.
+
+8.3.5 | sections/ch08.tex:719
+Book exercise starts at work/book-layout.txt:19711: unrestricted endpoint convergence is correct. Expanded exact ratio subtraction and the x=sin(t) first/second derivative chain rule. The k^-3/2 coefficient bound proves absolute endpoint convergence; polynomial termination remains a different condition. Added two exact decomposition checks.
+
+8.3.6 | sections/ch08.tex:787
+Book exercise starts at work/book-layout.txt:19717: second-kind ODE and odd-branch request agree. Clarified that divergence refers to the nonterminating series. Expanded ratio subtraction and the trigonometric derivative fixing the standard leading-x normalization. Both positive and equivalent negative parameter labels remain. Added one exact decomposition check.
+
+8.4.1 | sections/ch08.tex:857
+Book exercise starts at work/book-layout.txt:19834: trial function and all four requests agree. Added alpha>0 real directly in the statement. Recomputed normalization, inverse-x expectation, second derivative, integration-by-parts sign and completed square. The manual really omits the exponential in its displayed second derivative. No further expansion needed.
+
+Verification actually completed
+  python3 supplementary/ch08_check.py > work/ch08-final-check.txt
+  PASS: 247 checks, 17/17 named exercise groups, exit0. Five new exact
+  identities check the expanded endpoint-ratio decompositions. Existing
+  polynomial samples supplement the general analytic endpoint arguments.
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch08-only.tex
+  Exit0; 14 pages; zero warnings/errors/overfull/underfull boxes.
+  All 14 pages rendered at1150-pixel height and inspected in
+  work/ch08-final-review/contact-01.png through contact-05.png.
+  No clipping, formula overlap, detached heading or unreadable red text found.
+  Integrated rebuilding/review remains part of the full review.
+
+Current SHA-256
+770d61c83d3fac4342dc3ab7e96e5b6df495949655a52f986649395133b22b3f  sections/ch08.tex
+7992035607f286582f64f014e5101b856c58c6033cfb293f9999ce3b1297aade  supplementary/ch08_check.py

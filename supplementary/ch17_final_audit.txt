@@ -1,0 +1,334 @@
+CHAPTER 17 FRESH FINAL AUDIT — 2026-10-04
+Current canonical source: sections/ch17.tex
+Current source SHA256: 0362de49c6e5cd54d9de4556456d5ea958b05ae3892703e137562a0a066918cd
+Current checker SHA256: a51c75e0cedf337cad9dfc29e5b5e9a65066670a1831fcc9c7218cc0d61f0f7d
+Current standalone PDF SHA256: 7e96c66e7c9f6ee13b357d7286b9c26dc02363d575f63e169305bb1bbc380777
+
+All33 complete current statements and solutions were freshly read, compared
+against the textbook and manual, and mathematically traced, including every
+subpart, matrix/table, convention, qualification and exceptional case.
+Existing passing tests were evidence, not a substitute for the fresh read.
+The per-entry source and derivation evidence below records this pass.
+
+Final executable run: all33 groups; 18123 assertions =17738 exact+385 numerical.
+The exact total includes33 nonempty-group checks and4 final structural/accounting
+checks; the other17701 are exercise mathematical or table-structure assertions.
+A whole matrix equality counts as one assertion, not one per scalar entry.
+Default numerical precision45 digits; scaled tolerance1e-30. Numerical
+comparisons now reject nonfinite inputs. The four final requirements enforce
+unique33 source IDs, source/test coverage, absence of placeholders and exact/
+numerical accounting. Log source SHA256 equals the final canonical source.
+Python3.14.7; SymPy1.14.0; mpmath1.3.0.
+
+Commands actually executed:
+  python3 -u supplementary/ch17_check.py > work/ch17-final-check-final2.txt 2>&1
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch17-final-audit.tex
+  (Final source build log: work/ch17-final-build3.txt.)
+  pdftotext -layout work/ch17-final-audit.pdf work/ch17-final-rendered.txt
+  pdftoppm -r 78 -png work/ch17-final-audit.pdf work/ch17-final-page
+  magick montage ... work/ch17-final-contact-01.png through -08.png
+
+Standalone wrapper uses the actual current main.tex preamble, includes only
+ch17.tex, and produces31 pages/321556 bytes.
+All31 rendered pages were visually inspected on8 contact sheets, including
+the hexagon, full group/character tables, block matrices, every quark table,
+commutator expansion and both electromagnetic formulas. All fit the margins,
+with no overlapping/clipped content or orphan subsection headings.
+A first-pass amsmath leading-bracket warning in the added aligned commutators
+was fixed by an empty leading math group. The final log has no Overfull,
+Underfull, Warning, Error or undefined-reference lines.
+All9 subsection headings retain Needspace guards. No root main build,
+process signal or termination was performed.
+
+Fresh changes and source decisions:
+- Corrected/qualified directly in statements: generator image vs faithful
+  generator17.2.5; reversed vertex-motion description to match the retained
+  label-column matrix17.4.2; actual function span vs formal labels17.4.4;
+  wrong subpart reference17.4.5(c); both literal inputs and embedding choice
+  17.6.1(c); P4/S4 notation17.6.2; flavor root convention17.7.4;
+  passive boost/metric17.8.1; nonzero real rapidities17.8.3; real subluminal
+  velocities and zero-limit interpretation17.9.1/2.
+- Retained dark-red explanations of original errors. The textbook already
+  prints3/2 for uuu: only the supplied local transcription had2/3.
+- Expanded the general SU2 matrix form, all three Lie commutators, remaining
+  first-octet slot replacements, highest-state existence argument and general
+  first-order time-row coefficient comparison. Positive gamma is explicit.
+- Read all original source matrices and source/manual solutions, not just
+  final answers. Fresh PDF inspection confirms the previously identified
+  manual E-block -I2, signed-function dimensional confusion and changed-input
+  parity mismatch; confirms textbook Gell-Mann factors and swapped U/V labels.
+- The published 6April2012 errata, work/solman.txt:204--350, contains no
+  Chapter17 entry. Chapter17 corrections are independently established,
+  not attributed to that errata list.
+
+Fresh original PDF views (existing page renders read anew):
+  work/ch17_src_818.png: textbookPDF818/printed821, hexagons and Eq17.2.
+  work/ch17_src_833.png: PDF833/836, inverse label convention and cubic task.
+  work/ch17_src_841.png: PDF841/844, both literal inputs and P4 notation.
+  work/ch17_src_851.png: PDF851/854, missing1/2 in Eqs17.62/63.
+  work/ch17_src_853.png: PDF853/856, Eq17.67 U/V matrix label conflict.
+  work/ch17_src_854.png: PDF854/857, consistent quark/root diagrams.
+  work/ch17_src_858.png: PDF858/861, original3/2 and every quark subpart.
+  work/ch17_src_862.png: PDF862/865, Lorentz generator and full boost matrix.
+  work/ch17_src_864.png: PDF864/867, all electromagnetic component signs.
+  work/ch17_manual_276.png: manualPDF276/printed273, erroneous E flip -I2.
+  work/ch17_manual_278.png: manualPDF278/275, formal eight-label calculation.
+  work/ch17_manual_281.png: manualPDF281/278, even answer to changed input.
+Additional referenced equations read directly: textbook3.35--37,17.54--57,
+17.60--68 and17.79--84; their source-line context is available in the extracts.
+
+Checker scope and limits:
+- Finite permutations are exhaustive for n<=4; abstract group proofs and
+  arbitrary-n claims are established analytically in the chapter.
+- Actual TeX product tables are parsed in17.1.2,17.2.2 and17.2.6:116 cells.
+  Actual character tables are parsed in17.4.1,17.4.3,17.4.5 and17.6.3:91 cells.
+  Their207 cells are checked against independently constructed matrix/permutation
+  actions and character orthogonality; header/row order and dimensions are checked.
+- All48 cubic point operations, honeycomb center-lattice transformations, S4
+  conjugacy classes, D3/D4 products and orbital basis transformations are exact.
+- Cyclic orders/kernels are checked for n1..20; character orthogonality is
+  sampled for n1..10 numerically, alongside the general analytic proof.
+- Full27-dimensional flavor tensor construction exhaustively verifies all
+  six root operators, displayed state paths, weights, norms, zero-weight ranks,
+  invariant subspaces, common raising kernels, normalized singlet and rank27.
+- Lorentz/exponential/field-tensor algebra uses generic symbolic variables,
+  with exact reductions by C²-H²=1 and nx²+ny²+nz²=1. No finite sample is
+  substituted for arbitrary-direction field identities.
+- Orbital coefficient normalization does not assert Hilbert-space normalization
+  when spatial overlaps are present. Lorentz boosts are real and subluminal.
+No unresolved exercise, missing solution or unverified claimed correction remains.
+
+Line numbering uses newline counts, matching rg/sed, never Python splitlines
+(form feeds are page boundaries). Textbook Chapter17 printed=PDF+3;
+manual printed=PDF-3. Each entry below records current TeX and source lines.
+
+17.1.1 — sections/ch17.tex:12
+  Statement: work/book-layout.txt:42164; textbookPDF817/printed820.
+  Manual: work/solman.txt:28323; manualPDF271/printed268.
+  Fresh source/derivation evidence: Source Table17.2 and both questions match. All diagonal squares, every distinct commuting pair, failure of any element to generate four elements and explicit C2xC2 identification traced; no exception at identity.
+  Executed: 38 assertions (38 exact, 0 numerical).
+  Executable scope: all 16 V4 products, element orders and commutativity from the XOR model.
+
+17.1.2 — sections/ch17.tex:40
+  Statement: work/book-layout.txt:42167; textbookPDF817/printed820.
+  Manual: work/solman.txt:28327; manualPDF271/printed268.
+  Fresh source/derivation evidence: All three source parts matched, including original Fig17.1 vertex positions and Table17.1 row-times-column order. Bijection composition proves the four axioms for arbitrary n; r=(123),s=(23), all36 table products, sr/sr² identifications and all six isomorphism choices traced. Checker now parses the actual TeX table.
+  Executed: 14742 assertions (14742 exact, 0 numerical).
+  Executable scope: all permutations n=1..4: closure, inverse and associativity; every entry of the six-element printed table.
+
+17.1.3 — sections/ch17.tex:106
+  Statement: work/book-layout.txt:42173; textbookPDF817/printed820.
+  Manual: work/solman.txt:28417; manualPDF272/printed269.
+  Fresh source/derivation evidence: Source rearrangement list matches. Left cancellation proves injectivity; explicit preimage a^-1 h proves surjectivity without relying on finiteness; inverse map identified.
+  Executed: 25 assertions (25 exact, 0 numerical).
+  Executable scope: left-translation bijectivity for every element of S4.
+
+17.1.4 — sections/ch17.tex:129
+  Statement: work/book-layout.txt:42176; textbookPDF817/printed820.
+  Manual: work/solman.txt:28422; manualPDF272/printed269.
+  Fresh source/derivation evidence: Source conjugate subgroup task matches. Full cancellation gives closure, associativity, identity and inverse; conjugation homomorphism and inverse map establish isomorphism. x outside H is correctly identified as unnecessary, without asserting the conjugate must differ.
+  Executed: 829 assertions (829 exact, 0 numerical).
+  Executable scope: conjugation of all six S3 subgroups by every element; closure, identity, inverse and homomorphism.
+
+17.1.5 — sections/ch17.tex:167
+  Statement: work/book-layout.txt:42181; textbookPDF817/printed820.
+  Manual: work/solman.txt:28434; manualPDF272/printed269.
+  Fresh source/derivation evidence: Source abelian hypothesis and inversion-map note match. Both inverse-of-product cancellations, commutation of inverses, bijective involution and abelian image traced; general nonabelian order reversal distinguished.
+  Executed: 704 assertions (704 exact, 0 numerical).
+  Executable scope: inversion homomorphisms for C1..C12 and V4; nonabelian S3 reverses order.
+
+17.1.6 — sections/ch17.tex:205
+  Statement: work/book-layout.txt:42185; textbookPDF817/printed820.
+  Manual: work/solman.txt:28441; manualPDF272/printed269.
+  Fresh source/derivation evidence: Source full simple-cubic lattice and origin-fixing point operations match. Explicit quarter-turn and nearest-neighbor exclusion prove exactly fourfold axes; orthogonal image choices6*4*2 and signed permutation construction prove completeness of48, split24/24 by determinant.
+  Executed: 53 assertions (53 exact, 0 numerical).
+  Executable scope: enumeration of all 48 signed permutation matrices, determinant split and the exact coordinate quarter-turn.
+
+17.1.7 — sections/ch17.tex:252
+  Statement: work/book-layout.txt:42193; textbookPDF817/printed820.
+  Manual: work/solman.txt:28460; manualPDF273/printed270.
+  Fresh source/derivation evidence: Source Fig17.3 freshly inspected: vertexA and centerB are as used. Incident rays/nearest vertices prove C3 and C6; edge continuation proves sufficiency. Reflection equivalence, triangular center lattice, shortest-vector directions and allowed horizontal/vertical offsets prove both axis families and exhaust them. Diagram matches the coordinates.
+  Executed: 13 assertions (13 exact, 0 numerical).
+  Executable scope: exact affine preservation of the triangular center lattice by vertex C3, center C6 and both translated mirror families.
+
+17.2.1 — sections/ch17.tex:331
+  Statement: work/book-layout.txt:42449; textbookPDF822/printed825.
+  Manual: work/solman.txt:28487; manualPDF273/printed270.
+  Fresh source/derivation evidence: Source inverse representation formula matches. Both product orders reduce to represented identity; no faithfulness or unitarity assumption introduced.
+  Executed: 17 assertions (17 exact, 0 numerical).
+  Executable scope: inverse representation identity for all eight D4 matrices.
+
+17.2.2 — sections/ch17.tex:355
+  Statement: work/book-layout.txt:42453; textbookPDF822/printed825.
+  Manual: work/solman.txt:28492; manualPDF273/printed270.
+  Fresh source/derivation evidence: All four actual source matrices and Table17.2 matched. B²=I, A=-I, C=-B yield every diagonal and mixed product; actual TeX16-cell table is now read and checked, including identity products and faithfulness.
+  Executed: 38 assertions (38 exact, 0 numerical).
+  Executable scope: all sixteen actual TeX Vierergruppe table entries and matrix products.
+
+17.2.3 — sections/ch17.tex:392
+  Statement: work/book-layout.txt:42461; textbookPDF822/printed825.
+  Manual: work/solman.txt:28501; manualPDF273/printed270.
+  Fresh source/derivation evidence: Source simultaneous-unitary-reduction note obeyed. Both B eigenvectors, column normalization, conjugations of B,C and unchanged scalar matrices give the two distinct one-dimensional characters; invariant lines establish reduction.
+  Executed: 6 assertions (6 exact, 0 numerical).
+  Executable scope: unitary simultaneous diagonalization of all four matrices with both scalar character rows.
+
+17.2.4 — sections/ch17.tex:421
+  Statement: work/book-layout.txt:42464; textbookPDF822/printed825.
+  Manual: work/solman.txt:28537; manualPDF273/printed270.
+  Fresh source/derivation evidence: Both source parts and Eq17.2 actual PDF matrices matched. Determinant multiplication/invertibility give a genuine nonzero scalar representation; all six determinants distinguish rotations+1 and flips-1, identifying A2.
+  Executed: 43 assertions (43 exact, 0 numerical).
+  Executable scope: all six D3 determinant characters and all 36 determinant product relations.
+
+17.2.5 — sections/ch17.tex:460
+  Statement: work/book-layout.txt:42469; textbookPDF822/printed825.
+  Manual: work/solman.txt:28630; manualPDF274/printed271.
+  Fresh source/derivation evidence: Source scalar-generator wording is now corrected directly to image of an abstract generator, with n>=1 and complex field explicit. Mod-n well-definedness, product law, scalar equivalence, invariant eigenline classification and order n/gcd(s,n) traced; trivial and nonfaithful cases retained.
+  Executed: 806 assertions (421 exact, 385 numerical).
+  Executable scope: orders and kernels for every cyclic character n=1..20; 45-digit character orthogonality for n<=10.
+
+17.2.6 — sections/ch17.tex:503
+  Statement: work/book-layout.txt:42476; textbookPDF822/printed825.
+  Manual: work/solman.txt:28636; manualPDF274/printed271.
+  Fresh source/derivation evidence: Source includes turns flipping the square. All eight matrices, normal form r^i s^e and sign in exponent i+(-1)^e j traced; all64 actual TeX products now parsed. Distinct complex rotation eigenlines are exchanged by reflection, proving irreducibility over C.
+  Executed: 138 assertions (138 exact, 0 numerical).
+  Executable scope: all 64 D4 products against printed table and matrix multiplication; reflection exchanges rotation eigenlines.
+
+17.3.1 — sections/ch17.tex:574
+  Statement: work/book-layout.txt:42695; textbookPDF827/printed830.
+  Manual: work/solman.txt:28831; manualPDF275/printed272.
+  Fresh source/derivation evidence: Source pz shape and D3 geometry matched. Each flip changes local z sign as well as swapping centers; symmetric sum gives A2 and the two explicit zero-sum combinations give E. Direct generator action confirms rotation signs and flip trace0. Original manual PDF273 really prints erroneous -I2; coefficient normalization is correctly separated from orbital overlaps.
+  Executed: 6 assertions (6 exact, 0 numerical).
+  Executable scope: pz sign reversal and full A2+E block reduction; manual flip -I2 trace counterexample.
+
+17.4.1 — sections/ch17.tex:644
+  Statement: work/book-layout.txt:42966; textbookPDF832/printed835.
+  Manual: work/solman.txt:28921; manualPDF276/printed273.
+  Fresh source/derivation evidence: Source three tasks and Vierergruppe table matched. Abelian conjugation gives four singleton classes, squared dimensions force four scalar irreps, and independent choices of A,B signs determine C=AB. Every actual16 character cell and weighted orthogonality checked.
+  Executed: 86 assertions (86 exact, 0 numerical).
+  Executable scope: all V4 conjugacy classes and all scalar homomorphisms; full character Gram matrix.
+
+17.4.2 — sections/ch17.tex:688
+  Statement: work/book-layout.txt:42974; textbookPDF833/printed836.
+  Manual: work/solman.txt:28965; manualPDF276/printed273.
+  Fresh source/derivation evidence: Original PDF836 confirms contradictory active vertex prose and displayed inverse label-column matrix. Corrected vertex destinations directly to agree with the retained matrix, explicitly preserving its convention. All six matrices and their products, invariant all-ones line, orthogonal complement and complete Q block transformations traced; A1+E conclusion unchanged.
+  Executed: 27 assertions (27 exact, 0 numerical).
+  Executable scope: all six given-convention matrices and their complete simultaneous A1+E reduction.
+
+17.4.3 — sections/ch17.tex:777
+  Statement: work/book-layout.txt:42993; textbookPDF833/printed836.
+  Manual: work/solman.txt:29126; manualPDF277/printed274.
+  Fresh source/derivation evidence: Source class sizes and scalar-sign hint matched. Five dimensions with squared sum8 force1,1,1,1,2; scalar relations and column orthogonality determine every E character. Actual25-cell table, explicit conjugacy classes and weighted row orthogonality checked.
+  Executed: 14 assertions (14 exact, 0 numerical).
+  Executable scope: exact D4 conjugacy classes, character orthogonality and squared dimensions.
+
+17.4.4 — sections/ch17.tex:844
+  Statement: work/book-layout.txt:43003; textbookPDF833/printed836.
+  Manual: work/solman.txt:29199; manualPDF278/printed275.
+  Fresh source/derivation evidence: Original PDF836 and manual275 freshly confirm eight signed functions being treated as independent. Statement now correctly asks for their four-dimensional span and separately names the formal eight-label interpretation. Substitution signs give actual characters(4,0,-4,0,0)=2E; fixed-label counts give formal(8,0,0,4,0)=2A1+2B1+2E. Kernel of the intertwiner is explicitly four-dimensional; the two cubic pairs are irreducible.
+  Executed: 11 assertions (11 exact, 0 numerical).
+  Executable scope: actual four-dimensional cubic action and distinct eight-label permutation action; exact intertwiner, characters and decompositions.
+
+17.4.5 — sections/ch17.tex:924
+  Statement: work/book-layout.txt:43009; textbookPDF833/printed836.
+  Manual: work/solman.txt:29210; manualPDF278/printed275.
+  Fresh source/derivation evidence: Source class table, four site positions and all parts matched. Corrected(c)'s reference from(a) to(b), retaining the original-error explanation. Center permutations with unchanged local z determine all class matrices, characters and A1+B1+E multiplicities. Four explicit basis combinations and generator actions traced; actual25 character cells checked.
+  Executed: 10 assertions (10 exact, 0 numerical).
+  Executable scope: site matrices constructed from geometric coordinates; all character multiplicities and stated SALC generator blocks.
+
+17.4.6 — sections/ch17.tex:1019
+  Statement: work/book-layout.txt:43057; textbookPDF834/printed837.
+  Manual: work/solman.txt:29276; manualPDF279/printed276.
+  Fresh source/derivation evidence: Source eight px/py orbitals matched. Column convention and local orientation signs yield P tensor O, including every block in the five requested8x8 matrices. Character(8,0,0,0,0), scalar-product construction, all four scalar signs and both E generator pairs traced. Eight coefficient vectors form a complete orthonormal set; physical overlap normalization not presumed.
+  Executed: 70 assertions (70 exact, 0 numerical).
+  Executable scope: all eight site-orientation matrices, complete eight SALCs, both E copies and all class characters.
+
+17.5.1 — sections/ch17.tex:1125
+  Statement: work/book-layout.txt:43182; textbookPDF837/printed840.
+  Manual: work/solman.txt:29592; manualPDF281/printed278.
+  Fresh source/derivation evidence: Source independent variable sets and E tensor E request matched. Trace product and class-weight sum give all four scalar irreps once; explicit factor replacements show all quarter-turn and reflection eigenvalues of the four displayed combinations. Independent variables prevent losing the antisymmetric combination.
+  Executed: 11 assertions (11 exact, 0 numerical).
+  Executable scope: direct-product matrices and all four normalized scalar product combinations for all eight group elements.
+
+17.6.1 — sections/ch17.tex:1202
+  Statement: work/book-layout.txt:43416; textbookPDF841/printed844.
+  Manual: work/solman.txt:29615; manualPDF281/printed278.
+  Fresh source/derivation evidence: Original PDF844 confirms different inputs abcd and abdc; manual278's even applies only to(a). Matrices select4,1,3,2 and3,1,4,2 respectively; position cycles have orders3/4, signs+/- and literal(b) is odd. Statement now asks both readings of(c), preserving both inputs. Standard cyclic square excludes both; relabeled order1,2,4,3 realizes(b) as quarter-turn.
+  Executed: 10 assertions (10 exact, 0 numerical).
+  Executable scope: both distinct literal permutations: matrix action, sign, order and fixed/relabelled square membership.
+
+17.6.2 — sections/ch17.tex:1261
+  Statement: work/book-layout.txt:43422; textbookPDF841/printed844.
+  Manual: work/solman.txt:29637; manualPDF281/printed278.
+  Fresh source/derivation evidence: Source four-permutation task matched; undefined P4 naming made consistent with S4 directly, with original notation explained. All four shifts, R4=I, fixed invariant line and full discrete-Fourier eigenvectors traced; geometric-series orthogonality gives unitary diagonalization including k0.
+  Executed: 7 assertions (7 exact, 0 numerical).
+  Executable scope: all four cyclic permutation matrices and exact Fourier diagonalization.
+
+17.6.3 — sections/ch17.tex:1317
+  Statement: work/book-layout.txt:43428; textbookPDF842/printed845.
+  Manual: work/solman.txt:29706; manualPDF281/printed278.
+  Fresh source/derivation evidence: Source five-class task and even-permutation E hint matched. All cycle counts and partition classes derived; sign character and squared dimensions yield1,1,2,3,3. Fixed letters minus invariant line give T2, sign twist gives T1, fixed pair partitions minus invariant line give E. Actual25-cell table independently checked against these actions and weighted orthogonality; naming convention is explicit.
+  Executed: 32 assertions (32 exact, 0 numerical).
+  Executable scope: all 24 S4 permutations and five conjugacy classes; independent fixed-letter/fixed-pairing characters, signs and complete table orthogonality.
+
+17.7.1 — sections/ch17.tex:1421
+  Statement: work/book-layout.txt:44278; textbookPDF858/printed861.
+  Manual: work/solman.txt:29838; manualPDF283/printed280.
+  Fresh source/derivation evidence: Three coordinate-pair embeddings match source/manual. Expanded necessity of SU2 matrix form: orthogonal second row carries a phase fixed to1 by determinant. Product/adjoint closure and injection traced. Expanded all three matrix-unit commutators. Original PDF854 confirms missing1/2 in Eqs17.62/63; corrected Gell-Mann triples verified exactly.
+  Executed: 49 assertions (49 exact, 0 numerical).
+  Executable scope: all three embedded SU2 blocks: generic product/adjoint/determinant, all Lie commutators and corrected Gell-Mann factors.
+
+17.7.2 — sections/ch17.tex:1492
+  Statement: work/book-layout.txt:44279; textbookPDF858/printed861.
+  Manual: work/solman.txt:29849; manualPDF283/printed280.
+  Fresh source/derivation evidence: Source U(n)/SU(n) task matched. Both product adjoint orders, identity, adjoint inverse and inherited associativity prove U(n); determinant product/inverse prove SU(n), including n1. Unit-modulus determinant versus determinant1 distinguished.
+  Executed: 55 assertions (55 exact, 0 numerical).
+  Executable scope: explicit noncommuting unitary/SU examples in dimensions 1..6; generic all-n proof remains in the text.
+
+17.7.3 — sections/ch17.tex:1524
+  Statement: work/book-layout.txt:44281; textbookPDF858/printed861.
+  Manual: work/solman.txt:29873; manualPDF284/printed281.
+  Fresh source/derivation evidence: Read actual Section3.4 Eq3.36 and Eq17.56: passive z-y-z product has gamma factor leftmost. Even/odd exponential powers, explicit two successive2x2 products, determinant and column orthogonality traced; single-angle2pi sign change is the SU2 lift, not an SO3 uniqueness claim.
+  Executed: 5 assertions (5 exact, 0 numerical).
+  Executable scope: generic Euler-angle matrix product, unitarity, determinant and sign after 2pi.
+
+17.7.4 — sections/ch17.tex:1576
+  Statement: work/book-layout.txt:44284; textbookPDF858/printed861.
+  Manual: work/solman.txt:29908; manualPDF284/printed281.
+  Fresh source/derivation evidence: All six source subparts compared; original PDF861 has correct I3=3/2, confirming only local transcription fault. Original PDF856 swaps U/V matrices against Eq17.64/root diagramPDF857; convention now stated directly. Every decuplet occupation normalization, all first/second octet root paths, both zero-weight Gram matrices, slot-exchange orthogonality, singlet coefficients and full10+8+8+1 dimensions traced. Added missing simple slot replacements and explicit joint-weight highest-state proof; checker exhausts the27-dimensional tensor space and all six root operators.
+  Executed: 210 assertions (210 exact, 0 numerical).
+  Executable scope: complete 27-state quark space: every displayed state/path, weights, both zero-weight ranks, all root invariances, irreducibility kernels and normalized singlet.
+
+17.8.1 — sections/ch17.tex:1896
+  Statement: work/book-layout.txt:44491; textbookPDF862/printed865.
+  Manual: work/solman.txt:30040; manualPDF286/printed283.
+  Fresh source/derivation evidence: Actual PDF865 generator and coordinate ordering match. Passive first-order spatial changes and invariant Minkowski norm fix the time row. Expanded genuinely general time ansatz to include z and x0 terms; coefficient comparison forces both to zero. Metric, x0=ct and exponential convention now in statement; generic coefficient solution independently checked.
+  Executed: 20 assertions (20 exact, 0 numerical).
+  Executable scope: infinitesimal generator, full Lorentz Lie condition and metric preservation through first order.
+
+17.8.2 — sections/ch17.tex:1953
+  Statement: work/book-layout.txt:44501; textbookPDF862/printed865.
+  Manual: work/solman.txt:30086; manualPDF286/printed283.
+  Fresh source/derivation evidence: Every displayed source matrix entry and both requested constructions matched. B² and B³=B split the exponential into hyperbolic odd/even sums; time/parallel2x2 block proves metric and determinant. Explicit rotate-boost-unrotate products show the two middle rows, including cross-term signs.
+  Executed: 10 assertions (10 exact, 0 numerical).
+  Executable scope: generic-angle boost matrix; exponential ODE and initial value, metric, symmetry, determinant and rotated x-boost.
+
+17.8.3 — sections/ch17.tex:2047
+  Statement: work/book-layout.txt:44523; textbookPDF863/printed866.
+  Manual: work/solman.txt:30188; manualPDF287/printed284.
+  Fresh source/derivation evidence: Source overbroad no-single-boost claim qualified directly to real nonzero rapidities, consistent with manual's explicit exception. Ordered Uy Ux multiplication and asymmetric xy/yx entries prove impossibility; both one-zero cases and identity case explicitly retained and checked.
+  Executed: 6 assertions (6 exact, 0 numerical).
+  Executable scope: generic ordered perpendicular-boost product, nonsymmetric entry and both zero-rapidity exceptions.
+
+17.9.1 — sections/ch17.tex:2091
+  Statement: work/book-layout.txt:44679; textbookPDF866/printed869.
+  Manual: work/solman.txt:30246; manualPDF287/printed284.
+  Fresh source/derivation evidence: Actual Eqs17.79--83 and PDF867 freshly checked for epsilon0, factors of c and all signs. Both multiplications, all six independent components, antisymmetry and gamma²(1-beta²)=1 reproduce all16 entries; positive Lorentz factor and real subluminal domain explicit.
+  Executed: 18 assertions (18 exact, 0 numerical).
+  Executable scope: all sixteen exact field-tensor entries under the z boost, with generic six field components.
+
+17.9.2 — sections/ch17.tex:2164
+  Statement: work/book-layout.txt:44682; textbookPDF866/printed869.
+  Manual: work/solman.txt:30286; manualPDF288/printed285.
+  Fresh source/derivation evidence: Actual Eq17.84, its projection definitions and manual arbitrary-direction boost read. Parallel/perpendicular split, proper-rotation invariance of cross products and reconstruction prove both vector formulas; rationalizing(gamma-1)/v² yields the regular velocity-vector form. Statement now requires |v|<c and continuous interpretation at zero; fully symbolic unit-direction constrained tensor check confirms the result.
+  Executed: 10 assertions (10 exact, 0 numerical).
+  Executable scope: fully symbolic arbitrary-direction Lorentz tensor versus both vector field formulas, unit-direction constraints and zero-velocity limit.

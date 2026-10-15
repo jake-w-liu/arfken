@@ -1,0 +1,137 @@
+CHAPTER16 VERIFICATION RECORD — CURRENT FINAL AUDIT (2026-10-04)
+
+This record supersedes the earlier Chapter 16 handoff. Its old claim that every
+potential energy requires a second charge is WITHDRAWN: a classical charge
+density also defines self-energy. The present16.3.8 question specifies hydrogen
+electron–nucleus interaction and separately derives electric potential.
+Current definitions, corrections, all 31 individual evidence records, limits
+and rendered-page evidence are in supplementary/ch16_final_audit.txt.
+All 31 complete statements/solutions and31 textbook entries were freshly read;
+29 manual entries were read, with 16.3.1/16.4.4 absent from that manual.
+No placeholder, skipped entry or unresolved confirmed defect remains.
+
+FINAL CURRENT SHA256
+sections/ch16.tex  b8001f9fb205705da23ab67e2d648979a8d81d1d8941834e5dab83a745220b36
+supplementary/ch16_check.py  cb2cbc22ff34b40ecfd9fa4bbfd6c0a9e87ce2e0b048153df95be62f8bc98aba
+work/ch16-final-review.pdf  d809829ee358c9e9de7851e1a90a41266d435df53170d4a188452e00e70ff7f1
+work/ch16-final-review.log  9a81cd97abdbc999a218d66d92b93613da8ffb69e7f5ba470cb2a406801db262
+
+HISTORICAL HANDOFF HASHES — superseded, retained only for provenance
+sections/ch16.tex  98c469bdc19b15e7ff71c2a4e8e39944ef8acdc32981c8d95026d4425e9cc640
+supplementary/ch16_check.py  29c93d47f11b7e4111c7cfc6715bce91cf40f6120eaa1099bc2883f80c1f1fe1
+The old 6612 assertion total included34 structural guards. The current mathematical
+total is6591=6578 retained+13 added, comprising 6584 exact+7 numerical comparisons;
+34 structural guards are reported separately. All 31 groups are nonempty.
+
+CURRENT SOURCE/CHECKER LINE MAP (literal newline numbering, compatible with rg/sed)
+ID       ch16.tex  ch16_check.py  book-layout.txt  solman.txt
+16.1.1         19            157            40119       27153
+16.1.2         94            164            40137       27154
+16.1.3        144            171            40152       27245
+16.1.4        195            179            40159       27251
+16.1.5        271            198            40164       27351
+16.1.6        334            208            40176       27356
+16.1.7        397            217            40185       27437
+16.1.8        436            228            40189       27456
+16.2.1        475            232            40827       27505
+16.2.2        584            244            40830       27535
+16.2.3        653            255            40839       27537
+16.2.4        725            268            40845       27612
+16.2.5        862            286            40847       27780
+16.3.1       1009            307            41443      absent
+16.3.2       1094            323            41452       27966
+16.3.3       1146            332            41460       27969
+16.3.4       1179            336            41465       27972
+16.3.5       1238            343            41481       27973
+16.3.6       1293            349            41500       28042
+16.3.7       1361            357            41515       28076
+16.3.8       1443            371            41533       28129
+16.3.9       1542            390            41542       28173
+16.3.10      1624            399            41561       28208
+16.3.11      1734            409            41588       28214
+16.3.12      1808            423            41628       28219
+16.4.1       1882            448            41853       28227
+16.4.2       2007            460            41861       28228
+16.4.3       2064            468            41864       28232
+16.4.4       2104            476            41865      absent
+16.4.5       2179            497            41875       28270
+16.4.6       2227            510            41888       28308
+
+CURRENT CORRECTION PROVENANCE
+16.1.4 Manual half-difference must be half-sum; differential countercheck.
+16.1.5 Statement now includes normalized single multiplet/positive ladder phases.
+16.1.6 Derivative domain and n≥0 explicit.
+16.1.7 Manual seed must be Y_L^0, not annihilated constant Y_0^0.
+16.2.3/16.2.5 Manual relative phases disagree with coherent positive lowering;
+       individual eigenstates and a common multiplet sign remain valid.
+16.2.4 Invalid final spin label and two intermediate p_0 labels corrected.
+16.3.2 Hint needs azimuthal factor and harmonicity beyond homogeneous degree.
+16.3.4 -e² coefficient is electron–proton potential energy.
+16.3.7 Local gamma-answer transcription fixed to match correct textbook;
+       original instruction corrected from r12 to 1/r12.
+16.3.8 Old second-charge-only energy claim withdrawn; explicit interaction
+       interpretation, corrected manual overall-e, precise small-R estimates.
+16.3.9 Distributional measure explicit; manual reconstruction yields f, not Y.
+16.3.10 Admissible degree/order conditions now in question.
+16.3.11 Both displayed case lists now include 0 otherwise, nonnegative indices.
+16.3.12 a_(n-1) requested only for n≥1; n=0 separate.
+16.4.1 Total/orbital indices distinguished; Y000 is a formal unnormalized zero.
+16.4.2 Argument parity/fixed basis/allowed triples explicit.
+16.4.3 Textbook Eq 16.89 missing conjugation; Hermitian norm now explicit.
+16.4.4/16.4.5 L≥1 required directly in statements.
+16.4.6 Conjugated first vector restores interference interpretation; original
+       pointwise-zero bilinear identity retained and proved separately.
+All qualifications/source faults are distinguished in the chapter's dark-red
+notes; published errata list204-352 has no Chapter 16 correction.
+
+EXECUTABLE OUTPUT FROM COMPLETED FULL RUN
+PASS 16.1.1: 72 assertions; direct differential L+ and L- actions, every l=0..5 and every m, including annihilated endpoints
+PASS 16.1.2: 162 assertions; all factorial-product normalizations for l=0..8 and both extreme-state paths
+PASS 16.1.3: 50 assertions; exact polynomial angular norms of raised harmonics for l=0..4, every m
+PASS 16.1.4: 14 assertions; noncommutative expansion; generic differential product formulas and manual half-commutator countercheck; all five l=2 eigenvalue equations
+PASS 16.1.5: 420 assertions; exact finite spin matrices j=0,1/2,...,3: commutators, norm identities and repeated ladders
+PASS 16.1.6: 128 assertions; direct repeated differential operators against closed nth-derivative forms: l=0..3, all m, n=0..3
+PASS 16.1.7: 53 assertions; conjugation for l=0..6; conjugated ladder sign; explicit failure of manual Y00 starting state
+PASS 16.1.8: 2 assertions; explicit l=1,m=0 raising and lowering with both stated signs
+PASS 16.2.1: 486 assertions; complete 1 tensor 1 coupling from independent highest-weight kernels; Jz, J², all ladders, CG and explicit nine rows
+PASS 16.2.2: 1144 assertions; both spinor branches for every l=0..5 and allowed M against independently coupled matrices and CG coefficients
+PASS 16.2.3: 223 assertions; all six p-electron states, positive lowering phases and explicit countercheck of the manual's doublet phase
+PASS 16.2.4: 865 assertions; all twelve l=1,s=3/2 coefficient rows, independent highest kernels, eigenvalues, ladders and full orthonormality
+PASS 16.2.5: 216 assertions; both complete eight-state coupling bases, all ladder phases and the exact two-by-two recoupling matrix at both M
+PASS 16.3.1: 45 assertions; symbolic Cartesian/spherical conversion, elementary rotations, full Euler product and unitarity
+PASS 16.3.2: 8 assertions; rotation preserves harmonicity and homogeneous degree: explicit degree 1..4 solid harmonics under a nontrivial rational 3D rotation
+PASS 16.3.3: 8 assertions; pointwise complete-shell scalar sums for every l=0..7
+PASS 16.3.4: 4 assertions; Coulomb generating expansion for inside/outside and mixed radii, high-precision direct distances versus 180 terms
+PASS 16.3.5: 2 assertions; exact uniform-ball double radial integral, normalization and Coulomb energy coefficient
+PASS 16.3.6: 2 assertions; exact hydrogenic normalization and independent ordered radial integrations with arbitrary positive Z,a
+PASS 16.3.7: 10 assertions; exact incomplete-gamma reduction, both potential limits and Poisson equation; direct radial quadrature at three radii
+PASS 16.3.8: 11 assertions; charge normalization, multipole radial factors, electron-nucleus energy and limits; Poisson equation including full sign/charge factor omitted by manual
+PASS 16.3.9: 102 assertions; finite projection-kernel reproducing action on arbitrary degree <=4 coefficients via exact spherical inner products; general distribution proof remains analytical
+PASS 16.3.10: 183 assertions; all four Gaunt formulas for every admissible l=0..6,m using SymPy exact Gaunt/Wigner evaluation, independent of the recurrence derivation
+PASS 16.3.11: 162 assertions; direct polynomial integration for all l,n=0..8, both x and x², including all zero cases and low-degree endpoints
+PASS 16.3.12: 81 assertions; Rodrigues leading coefficients and all three recurrence coefficients via direct integration for n=0..8
+PASS 16.4.1: 16 assertions; all five explicit vector expressions against exact CG coefficients and Cartesian components
+PASS 16.4.2: 225 assertions; orbital parity of every allowed vector harmonic with L=0..4, checked on explicit scalar amplitudes and all spin components
+PASS 16.4.3: 1495 assertions; Hermitian spherical-vector basis and all coupled-state Gram matrices for orbital L=0..4; bilinear counterexample
+PASS 16.4.4: 321 assertions; all three generic coefficient formulas against exact CG for L=1..8 and every M; explicit vector differential form for L<=3
+PASS 16.4.5: 8 assertions; generic symbolic weight collection and pointwise scalar/vector addition sums for L=1..6; L=0 counterexample
+PASS 16.4.6: 73 assertions; generic antisymmetric triple-product zero; Hermitian differential integrand and exact integral for L=1..5, all M
+PASS TOTAL: 6591 mathematical assertions = 6584 exact + 7 numerical; 31/31 exercise groups; 34 structural guards separately.
+Scope limits: examples do not replace analytical proofs of adjoints, representation completeness, distributional convergence, or arbitrary-degree identities.
+
+VERIFICATION LIMITS AND QA
+Finite examples supplement the full analytical proofs. In particular they do
+not establish arbitrary-degree completeness or distributional convergence.
+The 7 numerical tests use45-digit mpmath and1e-30 scaled tolerance, with analytic
+series-tail bounds for truncated Coulomb sums. Nonfinite comparisons fail.
+All explicit1×1,1×1/2,1×3/2 coupling rows and both complete three-spin bases are
+checked; general finite-degree samples are labeled by their actual ranges.
+The independent Gaunt comparison uses SymPy exact Wigner-based evaluation.
+The signed2p potential is checked against the full Poisson equation with
+symbolic charge, permittivity, positive radius/scale and arbitrary polar angle.
+
+Standalone work/ch16-final-review.pdf:31 pages, clean final TeX log; all 31 pages
+visually inspected in 8 sheets, final p19 separately re-inspected, other30
+render hashes unchanged after the wording edit. Four Needspace-protected
+subsections; no clipping/overlap/orphan subsection found. Main.tex/main.pdf
+were not modified or built, and no process was terminated.

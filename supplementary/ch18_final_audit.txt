@@ -1,0 +1,516 @@
+CHAPTER 18 FRESH FINAL AUDIT — COMPLETE, 2026-10-04
+Scope: every current problem statement and full worked solution,94/94 entries.
+All were freshly read against the local textbook/manual, all derivations traced,
+and the complete checker read. Prior passing checks were not the fresh audit.
+
+Current SHA256:
+  sections/ch18.tex b73c9fe612f8ad731ff3d14f22b72f5c2e3f99ff637b60bdbff9787d897bf92b
+  supplementary/ch18_check.py b87003ab1efd8d0a24fbff357a6e873392ef313224ffde0ccc18fff4334bbd2a
+  work/ch18-only.pdf 5a63929e1b54fcdce83a1c47898addb9ad00b5ad7dca1103ac692fcbd7cb95ba
+
+Final executable command:
+  python3 -u supplementary/ch18_check.py > work/ch18-fresh-check.txt 2>&1
+Exit0:3701 counted checks =3602 exercise checks +99 structural/finite guards.
+All94 exercise groups represented. Python3.14.7, SymPy1.14.0, mpmath1.3.0;
+70 decimal digits, default scaled tolerance1e-55. Explicit truncation/rounding
+bounds are used where stated. Numerical quadrature is not interval certification;
+finite examples do not prove arbitrary-degree identities, completeness or branches.
+
+Fresh changes:56 entries edited, plus a chapter-wide integer-index convention.
+Direct statement domains/branches/zero-order meanings; full fixed-k Laguerre
+generator derivation; reduction-of-order zero avoidance; terminating U explanation;
+new source-manual correction notes and restored two missing reference footnotes.
+Checker repairs: actual seven TeX table rows replace a copied expected array;
+the previously overwritten n is restored as a symbolic degree for all nine
+contiguous coefficients; finite expected values are enforced. Added five checks
+for a negative integer Laguerre power, three symbol-preservation guards, one
+table inventory guard and three nonfinite rejection checks:12 extra assertions.
+
+Sources: B=work/book-layout.txt; M=work/solman.txt. All94 exercise statements,
+all94 manual entries and relevant surrounding definitions were freshly read.
+Line numbers below count literal newlines, not form-feed page separators.
+Published manual errata lines315–460 checked. Freshly viewed original manual
+PDF289,292,294,297,301,303,304,307,308,309,315,320,321; textbook PDF916,919,928.
+No defect alleged for the correct manual18.4.26 factors or the book's deliberate
+positive-order V convention. DLMF14.3.E3/E7/E10,14.12.E6 and13.7.E3 read for
+normalization, regularization and outgoing-sector support (links in the TeX).
+
+Layout: pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work
+work/ch18-only.tex, two successful passes; work/ch18-fresh-build1.txt and2.txt.
+Final work/ch18-only.log has no warnings, box errors or undefined references.
+Final standalone PDF:71 pages,497527 bytes.
+All71 pages rendered at1150px and visually reviewed in24 contact sheets,
+work/ch18-fresh-review/contact-01.png through24.png. No clipping/overlap found.
+Final integrated main.pdf remains a separate pending build.
+
+Per-entry evidence (new edits versus preserved baseline are indicated):
+
+18.1.1 — sections/ch18.tex:17
+  Statement B:45081; manual M:30413.
+  Fresh derivation/source review: ODE commutator applied to the three-term recurrence yields Hn'=2nHn-1 without assuming that derivative formula; generator PDE, formal coefficient comparison and entire convergence traced. Manual's swapped g(x,0) arguments corrected from original PDF289.
+  Executed: 20 checks. Edited in this review.
+
+18.1.2 — sections/ch18.tex:80
+  Statement B:45100; manual M:30462.
+  Fresh derivation/source review: ODE-to-Rodrigues, Rodrigues-to-generator, Cauchy contour converse, generator-to-ODE and both Gram--Schmidt directions traced, including leading scale and completeness by entire Gaussian transform. Degree and leading coefficient added to the question.
+  Executed: 36 checks. Edited in this review.
+
+18.1.3 — sections/ch18.tex:185
+  Statement B:45111; manual M:30480.
+  Fresh derivation/source review: Alternating finite coefficients become common-phase coefficients at ix for real x; triangle inequality and x0 handled. H2 at x=i gives the explicit6-versus2 counterexample; real-x qualification added.
+  Executed: 52 checks. Edited in this review.
+
+18.1.4 — sections/ch18.tex:214
+  Statement B:45112; manual M:30506.
+  Fresh derivation/source review: Both even/odd descending-to-ascending reindexings traced; even sign is (-1)^s rather than (-1)^(2s), as confirmed by H2=4x²-2. No new defect in the corrected formula.
+  Executed: 18 checks. No new edit needed after tracing the current derivation.
+
+18.1.5 — sections/ch18.tex:245
+  Statement B:45124; manual M:30507.
+  Fresh derivation/source review: Hermite projection coefficients derived by Rodrigues, boundary terms and Gaussian even moments; parity and n0 checked. Both inverse finite expansions include their factorials and scale.
+  Executed: 18 checks. No new edit needed after tracing the current derivation.
+
+18.1.6 — sections/ch18.tex:298
+  Statement B:45137; manual M:30508.
+  Fresh derivation/source review: Completed the square in the half-rate Gaussian generator; differentiated its first moment, tracked parity zeros and sqrt(2*pi) factor. Entire-generator interchange and n0 normalization checked.
+  Executed: 20 checks. No new edit needed after tracing the current derivation.
+
+18.1.7 — sections/ch18.tex:357
+  Statement B:45156; manual M:30668.
+  Fresh derivation/source review: Cauchy coefficient contour translated by z=w-x; the fixed w contour justifies x derivatives, and the residual is a single-valued total derivative. The contour orientation and n0 case are explicit.
+  Executed: 9 checks. No new edit needed after tracing the current derivation.
+
+18.2.1 — sections/ch18.tex:411
+  Statement B:45656; manual M:30745.
+  Fresh derivation/source review: Noncommuting operator induction uses Hn+1=(2x-D)Hn, starts from1, and never treats x and D as commuting factors. n0 and n1 both checked.
+  Executed: 11 checks. No new edit needed after tracing the current derivation.
+
+18.2.2 — sections/ch18.tex:432
+  Statement B:45662; manual M:30758.
+  Fresh derivation/source review: Rodrigues integration by parts n times kills x^m for0<=m<n; every Gaussian boundary term vanishes. Manual's missing H0 in its basis and missing final zero confirmed on PDF292 and noted.
+  Executed: 36 checks. Edited in this review.
+
+18.2.3 — sections/ch18.tex:454
+  Statement B:45664; manual M:30775.
+  Fresh derivation/source review: One multiplication recurrence gives both off-diagonal Gaussian norms with their unequal factorials; n0 omits the negative-index term and the final Kronecker form remains valid. Selection rule interpreted with normalized wavefunctions.
+  Executed: 64 checks. No new edit needed after tracing the current derivation.
+
+18.2.4 — sections/ch18.tex:491
+  Statement B:45679; manual M:30814.
+  Fresh derivation/source review: Squared xHn recurrence, discarded orthogonal mixed term, and reduced the two factorial norms to n+1/2; n0 lower term handled separately.
+  Executed: 9 checks. No new edit needed after tracing the current derivation.
+
+18.2.5 — sections/ch18.tex:519
+  Statement B:45684; manual M:30863.
+  Fresh derivation/source review: Applied the multiplication recurrence twice, retaining all Hn+2,Hn,Hn-2 coefficients and converting each norm. Negative indices omitted before factorial simplification; diagonal reduces to18.2.4.
+  Executed: 64 checks. No new edit needed after tracing the current derivation.
+
+18.2.6 — sections/ch18.tex:556
+  Statement B:45696; manual M:30902.
+  Fresh derivation/source review: Degree/orthogonality proves p>r case; unique all-raising path supplies2^-r when p=r, including r0. Hint now explicitly uses r multiplication steps.
+  Executed: 75 checks. Edited in this review.
+
+18.2.7 — sections/ch18.tex:596
+  Statement B:45702; manual M:30958.
+  Fresh derivation/source review: Product rule on the Gaussian, adjacent normalization ratios and vacuum action traced. Dimensionless momentum added; manual PDF294 confirms its incorrect doubled Gaussian exponent and missing n-1 index.
+  Executed: 18 checks. Edited in this review.
+
+18.2.8 — sections/ch18.tex:648
+  Statement B:45716; manual M:30987.
+  Fresh derivation/source review: Operator identity applied to arbitrary f; conjugation powers cancel successively and Rodrigues gives the normalized nth state. Dimensionless momentum specified; n0 reduces to the identity operator.
+  Executed: 10 checks. Edited in this review.
+
+18.3.1 — sections/ch18.tex:709
+  Statement B:46230; manual M:31031.
+  Fresh derivation/source review: Leibniz expansion assigns derivatives separately to x^n and exp(-x), then reverses the finite sum. Both ascending and descending factorial patterns and L0 are accounted for.
+  Executed: 20 checks. No new edit needed after tracing the current derivation.
+
+18.3.2 — sections/ch18.tex:744
+  Statement B:46232; manual M:31074.
+  Fresh derivation/source review: First two coefficients give derivatives at zero; independent alternative uses the ODE and its first derivative, with n0,1 absence of higher terms explicit.
+  Executed: 20 checks. No new edit needed after tracing the current derivation.
+
+18.3.3 — sections/ch18.tex:782
+  Statement B:46237; manual M:31091.
+  Fresh derivation/source review: Associated Rodrigues formula and n integrations by parts establish norm and orthogonality; zero-endpoint order k+j+1 and infinity decay checked. Real k>-1 extension is stated with gamma factors.
+  Executed: 108 checks. No new edit needed after tracing the current derivation.
+
+18.3.4 — sections/ch18.tex:817
+  Statement B:46244; manual M:31208.
+  Fresh derivation/source review: Finite coefficients, generalized falling products and all boundary powers traced. Positive-power locally uniform convergence follows from a proved Gaussian/Laguerre bound and completeness; negative powers, including integers, use the beta-integral Abel limit. Question now distinguishes finite, Abel and weighted-L2 cases; new integer-power Abel checks pass.
+  Executed: 131 checks. Edited in this review.
+
+18.3.5 — sections/ch18.tex:951
+  Statement B:46253; manual M:31209.
+  Fresh derivation/source review: Rodrigues projection gives a^n/(1+a)^(n+k+1); expanded the missing fixed-k generating-function double sum and justified absolute rearrangement. Re a>-1/2 is now in the question; x0 boundary terms rule out equality.
+  Executed: 69 checks. Edited in this review.
+
+18.3.6 — sections/ch18.tex:1022
+  Statement B:46266; manual M:31210.
+  Fresh derivation/source review: Recurrence multiplication and orthogonality leave (2n+k+1)(n+k)!/n!; n0 term handled. Manual's k! denominator correction is retained and supported by direct moments.
+  Executed: 18 checks. No new edit needed after tracing the current derivation.
+
+18.3.7 — sections/ch18.tex:1050
+  Statement B:46269; manual M:31218.
+  Fresh derivation/source review: Exponential decay and indicial roots determine the regular prefactor; substitution gives Laguerre's ODE and its full coefficient recurrence. Regular/log-free branch now specified at the question, particularly k0.
+  Executed: 19 checks. Edited in this review.
+
+18.3.8 — sections/ch18.tex:1119
+  Statement B:46286; manual M:31229.
+  Fresh derivation/source review: Read actual normalized hydrogen definition and traced radial measure, normalization, reciprocal moment and recurrence-squared first moment. Exponent, scale denominator, radial argument and Z dependence corrected; physical n,L,Z,a0 domains added.
+  Executed: 91 checks. Edited in this review.
+
+18.3.9 — sections/ch18.tex:1202
+  Statement B:46308; manual M:31230.
+  Fresh derivation/source review: Independent hypervirial integrations identify c=-(s+2)/2, all boundary orders and coefficient algebra; normalized moments reproduce the full recurrence and s=-1,0 checks. Question now explicitly uses hydrogen Z1.
+  Executed: 72 checks. Edited in this review.
+
+18.3.10 — sections/ch18.tex:1291
+  Statement B:46322; manual M:31231.
+  Fresh derivation/source review: Finite Hermite expansion integrated against Gaussian moments and matched term-by-term to independent Legendre Rodrigues expansion; y0 and complex-y continuation do not require division. Manual PDF297's missing integration factor, Gaussian and incorrect differential noted.
+  Executed: 11 checks. Edited in this review.
+
+18.4.1 — sections/ch18.tex:1339
+  Statement B:46768; manual M:31330.
+  Fresh derivation/source review: Specializing the book's factor-two T generator at1,-1,0 produces three elementary geometric series and all requested endpoint/parity values.
+  Executed: 39 checks. No new edit needed after tracing the current derivation.
+
+18.4.2 — sections/ch18.tex:1371
+  Statement B:46770; manual M:31402.
+  Fresh derivation/source review: Specializing the U generator and differentiating a geometric series yields n+1 at both endpoints and the alternating zero-argument values; coefficient scales checked.
+  Executed: 39 checks. No new edit needed after tracing the current derivation.
+
+18.4.3 — sections/ch18.tex:1397
+  Statement B:46772; manual M:31480.
+  Fresh derivation/source review: Two decompositions identify Xn=Tn=Un-xUn-1 and handle n0 separately. Stated |t|<1 now requires real |x|<=1; other x use the nearest uncancelled pole.
+  Executed: 26 checks. Edited in this review.
+
+18.4.4 — sections/ch18.tex:1427
+  Statement B:46780; manual M:31481.
+  Fresh derivation/source review: Twice differentiating h*Un-1 with h=sqrt(1-x²) reduces the residual to the U equation at n-1. Positive n and open real interval stated explicitly.
+  Executed: 1 checks. Edited in this review.
+
+18.4.5 — sections/ch18.tex:1458
+  Statement B:46787; manual M:31527.
+  Fresh derivation/source review: Trigonometric derivatives give W=-n/sqrt(1-x²); n0 sine family collapses, but arccos(x) supplies the missing independent ODE solution. Question now distinguishes these conventions directly.
+  Executed: 9 checks. Edited in this review.
+
+18.4.6 — sections/ch18.tex:1495
+  Statement B:46794; manual M:31577.
+  Fresh derivation/source review: Differentiating Tn+1/h twice gives the type-II equation and fixes every h power; endpoint singularities excluded from the differential statement.
+  Executed: 1 checks. Edited in this review.
+
+18.4.7 — sections/ch18.tex:1524
+  Statement B:46798; manual M:31633.
+  Fresh derivation/source review: Trigonometric derivatives and cancellation of cotangent terms give W=(n+1)/(1-x²)^(3/2); independence includes n0 on the open interval.
+  Executed: 9 checks. Edited in this review.
+
+18.4.8 — sections/ch18.tex:1549
+  Statement B:46799; manual M:31663.
+  Fresh derivation/source review: Integrated the zero-order equation for y' and exhibited independent arccos/arcsin with Wronskian. Book Eq18.106 explicitly excludes n0: no false source-error allegation is made about that convention.
+  Executed: 2 checks. No new edit needed after tracing the current derivation.
+
+18.4.9 — sections/ch18.tex:1578
+  Statement B:46802; manual M:31672.
+  Fresh derivation/source review: Sine addition yields the recurrence, including the necessary V0=0 for n1; independent arccos V0 instead permits n>=2. These alternatives now appear in the question.
+  Executed: 9 checks. Edited in this review.
+
+18.4.10 — sections/ch18.tex:1600
+  Statement B:46803; manual M:31675.
+  Fresh derivation/source review: Generator coefficient extraction gives U finite series; T=Un-xUn-1 fixes coefficient n/2 and separately T0. Manual PDF301 confirms its ODE coefficient, shifted factorial and missing origin prefactor errors.
+  Executed: 31 checks. Edited in this review.
+
+18.4.11 — sections/ch18.tex:1640
+  Statement B:46804; manual M:31729.
+  Fresh derivation/source review: Even and odd substitutions j=n-m reverse the T series with correct alternating signs, leading factor and endpoints; T0 kept outside the factorial formula.
+  Executed: 17 checks. No new edit needed after tracing the current derivation.
+
+18.4.12 — sections/ch18.tex:1669
+  Statement B:46816; manual M:31735.
+  Fresh derivation/source review: Both U ascending series obtained by the same explicit reindexing; U0=1,U1=2x and signs checked with independent polynomials.
+  Executed: 18 checks. No new edit needed after tracing the current derivation.
+
+18.4.13 — sections/ch18.tex:1698
+  Statement B:46828; manual M:31736.
+  Fresh derivation/source review: Self-adjoint Wronskian boundary term gives weighted orthogonality; integration by parts moves the derivative, then Tn'=nUn-1 independently confirms it. Constant-index cases vanish.
+  Executed: 90 checks. No new edit needed after tracing the current derivation.
+
+18.4.14 — sections/ch18.tex:1747
+  Statement B:46840; manual M:31798.
+  Fresh derivation/source review: Recomputed all seven shifted polynomials with recurrence and all integration Jacobian/weight factors. Actual TeX table rows now parsed by the checker;1120 coefficient, stars and primed variables all verified.
+  Executed: 44 checks. No new edit needed after tracing the current derivation.
+
+18.4.15 — sections/ch18.tex:1808
+  Statement B:46863; manual M:31818.
+  Fresh derivation/source review: Distinct-degree polynomial basis proves m<n orthogonality; parity proves odd m+n vanishing. Integrable endpoint weight and nonnegative integer convention stated.
+  Executed: 61 checks. No new edit needed after tracing the current derivation.
+
+18.4.16 — sections/ch18.tex:1838
+  Statement B:46875; manual M:31825.
+  Fresh derivation/source review: Both n-fold Rodrigues integration and finite exponential cosine expansion give the same factorial moment, including n0 and m=n. Manual PDF303's two exponent errors and wrong gamma-quotient denominator confirmed.
+  Executed: 29 checks. Edited in this review.
+
+18.4.17 — sections/ch18.tex:1902
+  Statement B:46890; manual M:31893.
+  Fresh derivation/source review: Finite unit-circle geometric sum bounds U by n+1; differentiation identity bounds T' by n². Continuity supplies endpoints and n0 is separate.
+  Executed: 143 checks. No new edit needed after tracing the current derivation.
+
+18.4.18 — sections/ch18.tex:1933
+  Statement B:46894; manual M:31928.
+  Fresh derivation/source review: Sine representation bounds positive-order V; explicit leading endpoint coefficients show W divergence. Question now excludes independent arccos V0 from the claimed unit bound.
+  Executed: 79 checks. Edited in this review.
+
+18.4.19 — sections/ch18.tex:1961
+  Statement B:46898; manual M:31932.
+  Fresh derivation/source review: All four changes x=cos(theta), weights and frequency integrals traced; the optional V0=0 norm is distinguished from arccos. Manual PDF304's repeated m frequency in part(d) corrected.
+  Executed: 196 checks. Edited in this review.
+
+18.4.20 — sections/ch18.tex:2010
+  Statement B:46904; manual M:31988.
+  Fresh derivation/source review: Product-to-sum and integer sine integrals yield both mixed overlaps with correct signs; parity eliminates singular diagonal denominators. Vn positive index now explicit, with counterexamples to full-family orthogonality.
+  Executed: 128 checks. Edited in this review.
+
+18.4.21 — sections/ch18.tex:2057
+  Statement B:46911; manual M:32006.
+  Fresh derivation/source review: Cosine addition identities yield both recurrence and product formula; negative index interpreted as T-|j|=T|j| and polynomial continuation extends beyond the real interval.
+  Executed: 91 checks. No new edit needed after tracing the current derivation.
+
+18.4.22 — sections/ch18.tex:2085
+  Statement B:46916; manual M:32015.
+  Fresh derivation/source review: Sine subtraction gives Un-xUn-1=Tn; cosine subtraction gives the second identity. Different allowable n ranges now stated; U-1 optional zero extension handled in the proof.
+  Executed: 26 checks. Edited in this review.
+
+18.4.23 — sections/ch18.tex:2118
+  Statement B:46925; manual M:32051.
+  Fresh derivation/source review: Both trigonometric differentiation and Rodrigues coefficient comparison give -nTn/sqrt(1-x²). Positive n and open interval added; the independent zero-order solution is excluded.
+  Executed: 16 checks. Edited in this review.
+
+18.4.24 — sections/ch18.tex:2155
+  Statement B:46934; manual M:32083.
+  Fresh derivation/source review: Binomial exponential pairing produces all powers and the unpaired even constant half-weight, including k0 empty sum. Printed correction verified rather than hidden in the solution.
+  Executed: 17 checks. No new edit needed after tracing the current derivation.
+
+18.4.25 — sections/ch18.tex:2193
+  Statement B:46947; manual M:32135.
+  Fresh derivation/source review: Direct cosine coefficients establish sqrt(1-x²) and the sign function; absolute convergence for the first, pointwise Fourier convergence for the second, midpoint0 and nonuniformity at the jump are distinguished.
+  Executed: 36 checks. No new edit needed after tracing the current derivation.
+
+18.4.26 — sections/ch18.tex:2250
+  Statement B:46963; manual M:32195.
+  Fresh derivation/source review: Legendre ODE integration supplies JN and its endpoint constants; independent cosine integration supplies Chebyshev coefficients. Gamma quotient fixes ratio exponent -1/2. Fresh PDF308 confirms manual's factors4/pi and2/pi are correct, so no new false correction was added.
+  Executed: 19 checks. No new edit needed after tracing the current derivation.
+
+18.4.27 — sections/ch18.tex:2344
+  Statement B:46982; manual M:32390.
+  Fresh derivation/source review: Parseval applied to the uniformly convergent absolute-value expansion; all normalizations reduce exactly to pi²/8. No exchange of divergent squared series is used.
+  Executed: 2 checks. No new edit needed after tracing the current derivation.
+
+18.4.28 — sections/ch18.tex:2371
+  Statement B:46991; manual M:32456.
+  Fresh derivation/source review: Two integrations by parts give constant pi/2 and odd inverse-square coefficients; arcsin follows by subtraction and endpoints by absolute convergence. Principal interval stated; manual PDF309's intermediate pi²/2 constant corrected.
+  Executed: 26 checks. Edited in this review.
+
+18.5.1 — sections/ch18.tex:2422
+  Statement B:47173; manual M:32524.
+  Fresh derivation/source review: Frobenius coefficient recurrence classifies integer c and generic nonintegral a,b without declaring the ODE one-dimensional. Reduction of order now starts where y1 has no zeros and extends by uniqueness. Special a=-1,c=-2 retains two independent solutions with arbitrary b.
+  Executed: 23 checks. Edited in this review.
+
+18.5.2 — sections/ch18.tex:2498
+  Statement B:47177; manual M:32540.
+  Fresh derivation/source review: Substituted all three parameter families into the exact contiguous relation, retained U normalization ratios and n0 exceptions. Fixed checker variable shadowing so all nine coefficient identities genuinely retain symbolic degree; finite recurrence tests are separate.
+  Executed: 39 checks. No new edit needed after tracing the current derivation.
+
+18.5.3 — sections/ch18.tex:2560
+  Statement B:47179; manual M:32541.
+  Fresh derivation/source review: Even and odd x² chain-rule transformations give all four Gauss equations, origin coefficients and removable quotients at0; finite termination and arbitrary complex x covered.
+  Executed: 40 checks. Edited in this review.
+
+18.5.4 — sections/ch18.tex:2635
+  Statement B:47196; manual M:32590.
+  Fresh derivation/source review: Endpoint values Tn(1),Un(1) and Vn/h determine prefactors; origin values/derivatives independently determine the four x² normalizations. Positive-order V convention maintained.
+  Executed: 69 checks. No new edit needed after tracing the current derivation.
+
+18.5.5 — sections/ch18.tex:2672
+  Statement B:47198; manual M:32602.
+  Fresh derivation/source review: Legendre-to-Gauss ODE and exterior-Q integral normalization traced, including reciprocal-gamma regularization for negative half-integers and excluded negative integer degrees. DLMF14.3.3/7/10 and14.12.6 read; regularized meaning now explicit in question.
+  Executed: 22 checks. Edited in this review.
+
+18.5.6 — sections/ch18.tex:2762
+  Statement B:47206; manual M:32662.
+  Fresh derivation/source review: Binomial expansion integrated on0<=x<1, telescoping (p)j/(p+1)j ratio and endpoint q restriction traced. Complex continuation distinguished from the original convergent integral; direct domain added.
+  Executed: 15 checks. Edited in this review.
+
+18.5.7 — sections/ch18.tex:2805
+  Statement B:47212; manual M:32710.
+  Fresh derivation/source review: Euler integral expanded uniformly into beta integrals; endpoint conditions and cut-plane analyticity proved. Statement now restricts general z to a specified principal branch and gives the complex real-part conditions.
+  Executed: 3 checks. Edited in this review.
+
+18.5.8 — sections/ch18.tex:2859
+  Statement B:47228; manual M:32764.
+  Fresh derivation/source review: Gauss evaluation follows from the beta integral and parameter continuation; convergence uses Re(c-a-b)>0 and excluded lower parameters. Gamma denominator zeros interpreted by reciprocal gamma; question now uses the correct complex condition.
+  Executed: 6 checks. Edited in this review.
+
+18.5.9 — sections/ch18.tex:2898
+  Statement B:47233; manual M:32783.
+  Fresh derivation/source review: Substitution t=1-u factors (1-x)^-a with unchanged beta normalization; continuation paths and branch matching, x1 singularity and nonsingular c all explicit.
+  Executed: 3 checks. Edited in this review.
+
+18.5.10 — sections/ch18.tex:2937
+  Statement B:47243; manual M:32813.
+  Fresh derivation/source review: Differentiated first-order equation n+1 times, transformed type-II to type-I ODE and proved polynomial degree/endpoint normalization. Gamma coefficient and separate endpoint limits included in statement.
+  Executed: 11 checks. Edited in this review.
+
+18.5.11 — sections/ch18.tex:3014
+  Statement B:47256; manual M:32861.
+  Fresh derivation/source review: Identified terminating Gauss parameters and proved lower denominator cannot vanish before termination, including odd m+n. Degenerate a²1 values belong to the original product's separate limit, not the isolated undefined sum; question now specifies this.
+  Executed: 447 checks. Edited in this review.
+
+18.5.12 — sections/ch18.tex:3060
+  Statement B:47268; manual M:32881.
+  Fresh derivation/source review: Beta integral gives finite Vandermonde identity, then cleared-denominator polynomial continuation covers admissible singular c after termination. Nonnegative n and nonzero(c)n now replace the incomplete integer qualification.
+  Executed: 24 checks. Edited in this review.
+
+18.6.1 — sections/ch18.tex:3110
+  Statement B:47442; manual M:32895.
+  Fresh derivation/source review: Integrated entire exponential series and canceled Pochhammer ratios to obtain erf normalization; x0 and complex path independence included.
+  Executed: 19 checks. No new edit needed after tracing the current derivation.
+
+18.6.2 — sections/ch18.tex:3143
+  Statement B:47447; manual M:32923.
+  Fresh derivation/source review: Combined the two Fresnel integrands before integration; exact i*pi*x²/2 scaling and odd entire factor x checked against Exercise12.6.1 conventions.
+  Executed: 4 checks. No new edit needed after tracing the current derivation.
+
+18.6.3 — sections/ch18.tex:3173
+  Statement B:47453; manual M:32984.
+  Fresh derivation/source review: Two actual derivatives of a*x^-a*gamma(a,x) cancel in the ODE; defining integral requires Re a>0,x>0, while a0 is analytic continuation. Domain now appears in question.
+  Executed: 7 checks. Edited in this review.
+
+18.6.4 — sections/ch18.tex:3219
+  Statement B:47461; manual M:33034.
+  Fresh derivation/source review: Bessel integral substituted with s=1+2t, tracking all powers2, gamma and exp(-x), then continued in degree. Manual PDF315 confirms spurious interior exp(z); initial domain added.
+  Executed: 8 checks. Edited in this review.
+
+18.6.5 — sections/ch18.tex:3263
+  Statement B:47463; manual M:33070.
+  Fresh derivation/source review: Laplace U integral taken to imaginary boundary by Abel convergence and uniform tail integration by parts; change v=t/x gives lower-case si and the correct sign. Three literal comma differentials repaired; domain/convention explicit.
+  Executed: 4 checks. Edited in this review.
+
+18.6.6 — sections/ch18.tex:3309
+  Statement B:47467; manual M:33103.
+  Fresh derivation/source review: Odd Hermite substitution x*f(x²) gives c3/2 and a=-n; independent origin derivative fixes scale, including n0. Removable quotient justified.
+  Executed: 22 checks. No new edit needed after tracing the current derivation.
+
+18.6.7 — sections/ch18.tex:3356
+  Statement B:47476; manual M:33214.
+  Fresh derivation/source review: Finite M-to-Laguerre normalization ratios turn the contiguous relation into the requested recurrence; the missing n0 lower term is handled before division.
+  Executed: 33 checks. No new edit needed after tracing the current derivation.
+
+18.6.8 — sections/ch18.tex:3393
+  Statement B:47481; manual M:33240.
+  Fresh derivation/source review: Kummer M transformation proved by ODE and analytic initial value; U transformation uses the corrected gamma connection formula and matching powers. Integer c limits and principal cut now stated in question.
+  Executed: 6 checks. Edited in this review.
+
+18.6.9 — sections/ch18.tex:3449
+  Statement B:47486; manual M:33282.
+  Fresh derivation/source review: Termwise M derivatives and differentiated U Laplace integrals give shifted parameters and signs; termination beyond degree gives zero and branches are fixed. Lower-parameter restrictions now explicit.
+  Executed: 24 checks. Edited in this review.
+
+18.6.10 — sections/ch18.tex:3498
+  Statement B:47495; manual M:33295.
+  Fresh derivation/source review: Euler-series derivation of M and integrated total derivative for U traced; both U local coefficients and infinity normalization established. Boundary x0 and nonzero imaginary x have distinct absolute/conditional/Abel cases; notation Re x repaired.
+  Executed: 8 checks. Edited in this review.
+
+18.6.11 — sections/ch18.tex:3598
+  Statement B:47506; manual M:33343.
+  Fresh derivation/source review: Finite-interval substitution reverses limits and exchanges a,c-a while releasing exp(x); initial integral domain and subsequent parameter continuation stated.
+  Executed: 2 checks. Edited in this review.
+
+18.6.12 — sections/ch18.tex:3626
+  Statement B:47512; manual M:33344.
+  Fresh derivation/source review: Substitution t=x(1+s) in E1 fixes outside exp(-x) and U(1,1,x); principal cut, logarithmic zero singularity and positive initial domain stated.
+  Executed: 3 checks. Edited in this review.
+
+18.6.13 — sections/ch18.tex:3656
+  Statement B:47518; manual M:33345.
+  Fresh derivation/source review: Fixed-order Laplace/Taylor remainder estimates justify both positive-axis asymptotic expansions. Added explicit terminating-polynomial derivation from the connection formula, instead of applying an integral outside its domain; sector and parameter conditions now in question.
+  Executed: 19 checks. Edited in this review.
+
+18.6.14 — sections/ch18.tex:3748
+  Statement B:47534; manual M:33414.
+  Fresh derivation/source review: Abel Wronskian equation gives constant times exp(x)x^-c; differentiated Laplace estimates determine its exact gamma ratio. Manual PDF320's claim that M fails to exist at a=-m is refuted by the finite proportional polynomials.
+  Executed: 18 checks. Edited in this review.
+
+18.6.15 — sections/ch18.tex:3799
+  Statement B:47543; manual M:33445.
+  Fresh derivation/source review: Two derivatives of r^(L+1)exp(-ir)f(2ir) produce the exact Kummer equation; real eta and integer L regular origin behavior, scale freedom and physical domain stated.
+  Executed: 1 checks. Edited in this review.
+
+18.6.16 — sections/ch18.tex:3842
+  Statement B:47556; manual M:33453.
+  Fresh derivation/source review: Bound-state factorial conversion and direct positive-energy Coulomb scaling traced. Regular M has zero radial current; outgoing U has the displayed phase on DLMF13.7.3 sector. Original textbook PDF919 explicitly labels regular M outgoing; correction retained with physical domains.
+  Executed: 60 checks. Edited in this review.
+
+18.6.17 — sections/ch18.tex:3937
+  Statement B:47575; manual M:33458.
+  Fresh derivation/source review: Actual Whittaker definition PDF916 versus exercise PDF919 fixes missing norm factor. General real moment derived through finite Laguerre parameter connection and weighted orthogonality; endpoint exponent, N0, a0/1/2 and explicit source counterexamples independently checked.
+  Executed: 283 checks. No new edit needed after tracing the current derivation.
+
+18.7.1 — sections/ch18.tex:4045
+  Statement B:47764; manual M:33468.
+  Fresh derivation/source review: Uniform M-test on the closed unit disk and explicit tail<=1/N prove boundary convergence; continuity at1 is distinguished from analytic differentiability there.
+  Executed: 4 checks. No new edit needed after tracing the current derivation.
+
+18.7.2 — sections/ch18.tex:4069
+  Statement B:47766; manual M:33472.
+  Fresh derivation/source review: Reflection formula at1/2 gives pi²/12-log²2/2; inversion identity with Li2(-1) gives an independent consistency check.
+  Executed: 2 checks. No new edit needed after tracing the current derivation.
+
+18.7.3 — sections/ch18.tex:4095
+  Statement B:47768; manual M:33482.
+  Fresh derivation/source review: Continued differential around both generators gives the two-integer monodromy lattice; commutator supplies4pi² and repetitions realize every lattice pair. Manual PDF321's one-parameter quadratic expression fails for a single loop about1; independent loop quadratures support the derivation.
+  Executed: 28 checks. No new edit needed after tracing the current derivation.
+
+18.7.4 — sections/ch18.tex:4162
+  Statement B:47769; manual M:33496.
+  Fresh derivation/source review: Principal logarithm product limit is controlled by r(|log r|+pi), not substitution into log0. Li2 endpoint continuity and branch-dependent caveat traced.
+  Executed: 7 checks. No new edit needed after tracing the current derivation.
+
+18.7.5 — sections/ch18.tex:4189
+  Statement B:47771; manual M:33504.
+  Fresh derivation/source review: Fractional-linear substitution in the inversion identity traced exactly; matching cut-side continuation and z=1/3 counterexample reject independently chosen principal boundary values. Question now specifies allowed branches.
+  Executed: 6 checks. Edited in this review.
+
+18.7.6 — sections/ch18.tex:4232
+  Statement B:47778; manual M:33559.
+  Fresh derivation/source review: Reflection at each positive zeta cancels three pi²/6 constants and all log(1-zeta) terms, leaving real arguments below1; zeta1 finite limit covered. Matching continuation stated and dangling citation restored. Scope is the requested rearrangement, not an independent nine-dimensional quadrature.
+  Executed: 13 checks. Edited in this review.
+
+18.8.1 — sections/ch18.tex:4313
+  Statement B:48022; manual M:33582.
+  Fresh derivation/source review: Arc derivative gives a*sqrt(1-m*sin²theta), parameter orientation covers the first quadrant and circle/degenerate limits agree. Positive semiaxes and limiting m1 now stated.
+  Executed: 4 checks. Edited in this review.
+
+18.8.2 — sections/ch18.tex:4347
+  Statement B:48029; manual M:33643.
+  Fresh derivation/source review: Binomial coefficients times beta sine moments give the full E series; coefficient O(n^-2) establishes uniform closed-disk convergence including m1. Explicit range added to statement.
+  Executed: 44 checks. Edited in this review.
+
+18.8.3 — sections/ch18.tex:4393
+  Statement B:48036; manual M:33685.
+  Fresh derivation/source review: Difference of K and E integrands factors m and dominated convergence gives pi/4; fresh original textbook PDF928 confirms it has no extra numerator pi, avoiding a false book erratum.
+  Executed: 4 checks. No new edit needed after tracing the current derivation.
+
+18.8.4 — sections/ch18.tex:4426
+  Statement B:48041; manual M:33724.
+  Fresh derivation/source review: Half-angle substitution and K-E integral reduction track all factors2, m and sqrt(D); direct quadrature supports the expression. Added geometry, off-wire/axis conditions and restored Smythe footnote; axis zero and actual wire divergence distinguished.
+  Executed: 6 checks. Edited in this review.
+
+18.8.5 — sections/ch18.tex:4498
+  Statement B:48085; manual M:33791.
+  Fresh derivation/source review: Kept quadratic elliptic terms before dividing by m, so cancellation yields pi*m/16 and next coefficient3*pi*m²/64; far-field dipole reduction and alternative small-m axis limit traced. Radius r defined in question.
+  Executed: 4 checks. Edited in this review.
+
+18.8.6 — sections/ch18.tex:4547
+  Statement B:48095; manual M:33831.
+  Fresh derivation/source review: Differentiation with respect to modulus k uses the chain rule; requested hint proved from coefficient recurrence and identifies J=E/(1-m). Correct k² arguments, open interval and removable k0 derivatives explicit.
+  Executed: 34 checks. Edited in this review.

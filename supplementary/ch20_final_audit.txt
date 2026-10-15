@@ -1,0 +1,576 @@
+CHAPTER 20 FRESH FINAL AUDIT — 2026-10-04
+All 89 complete problem/solution blocks were read afresh, compared against the actual
+textbook/manual extracts, and traced algebraically. Each record below gives the
+specific statement/source check and derivation/pedagogy check. Existing test passes
+were not used as a substitute for that reading. 54 entries were edited: 52 received
+statement corrections/qualifications, with additional derivation/convention clarity.
+Published errata at manual printed pp.5-6 were rechecked. Actual original PDF renders
+were freshly viewed for textbook printed pp.1002,1031,1032 (circuits and domain).
+Other retained original-error claims were checked against the complete manual/text
+extracts, including pp.334,336,337,339,341,344,349,351,360-362 of the manual.
+
+Current executable result: FULL, 89 groups, 338 exact assertions, 2369 numerical
+checks; six exact assertions concern inventory, 332 concern mathematics. Added five
+exact checks: completed Gaussian square, arbitrary complex amplitude modulus,
+direct triangle Fourier normalization, and algebra/positivity for uniform loading.
+Default numerical tolerance 1e-28*max(1,|expected|), mp.dps=45; explicit wider
+sample tolerances remain in the checker. Samples do not prove general convergence,
+distributional limits, contour deformations, arbitrary-order or continuous-parameter
+claims: these were traced analytically in the complete solutions.
+
+Current section SHA256: ec893542c5eb36b0873b11b6d2961aaf7fa26aca276070ddb01c100eb252d462
+Current checker SHA256: c411b34b4f5f97963d63bd02b578d7349530408b66ae77da8d973b0c70b19d8c
+
+20.2.1 — current sections/ch20.tex:12
+  Sources: textbook printed p.975 (PDF 971; book-layout line 50417); manual printed p.332 (PDF 335).
+  Statement/source: Both conjugate-symmetry iff assertions match p.975; added the a.e./continuous-representative meaning directly.
+  Derivation/pedagogy: Traced conjugated forward and inverse integrals, change u=-omega, and both converse signs; no missing algebra after the domain qualification.
+  Executable supplement: 0 exact, 6 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.2 — current sections/ch20.tex:55
+  Sources: textbook printed p.976 (PDF 972; book-layout line 50425); manual printed p.332 (PDF 335).
+  Statement/source: Box, cosine normalization and all three endpoint cases match p.976.
+  Derivation/pedagogy: Checked regulated Dirichlet integral from its b derivative, product-to-sum, and half-height at x=+-1; all cases already explicit, no change.
+  Executable supplement: 1 exact, 7 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.3 — current sections/ch20.tex:120
+  Sources: textbook printed p.976 (PDF 972; book-layout line 50456); manual printed p.332 (PDF 335).
+  Statement/source: Both transforms and inverse integrals match p.976; added a>0 to the question.
+  Derivation/pedagogy: Checked coupled integration-by-parts equations and their solution, ordinary/conditional inversion and sine endpoint distinction; no further algebra needed.
+  Executable supplement: 2 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.4 — current sections/ch20.tex:178
+  Sources: textbook printed p.976 (PDF 972; book-layout line 50477); manual printed p.333 (PDF 336).
+  Statement/source: Pulse h(1-aabs(x)), width 1/a and h=a delta limit match p.976; added positive width.
+  Derivation/pedagogy: Checked endpoint antiderivative, zero-frequency limit, area and test-function substitution proving weak convergence.
+  Executable supplement: 4 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.5 — current sections/ch20.tex:224
+  Sources: textbook printed p.976 (PDF 972; book-layout line 50483); manual printed p.333 (PDF 336).
+  Statement/source: Rectangular sequence and inverse Fourier normalization match pp.976-977; stated the weak meaning in the question.
+  Derivation/pedagogy: Traced finite-n sinc multiplier and test-function dominated limit; distributional integral is not passed off as an ordinary integral.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.6 — current sections/ch20.tex:271
+  Sources: textbook printed p.977 (PDF 973; book-layout line 50511); manual printed p.333 (PDF 336).
+  Statement/source: Gaussian sequence and hint match p.977; made the distributional reading explicit.
+  Derivation/pedagogy: Expanded completed square and horizontal contour shift, including vanishing vertical-end bound; traced normalization and dominated test-function limit.
+  Executable supplement: 3 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.7 — current sections/ch20.tex:322
+  Sources: textbook printed p.977 (PDF 973; book-layout line 50523); manual printed p.333 (PDF 336).
+  Statement/source: Printed sine/cosine answers on p.977 omit the half-line domain; added x,t>0 directly.
+  Derivation/pedagogy: Checked finite-interval completeness, continuum normalization and reflected delta(t+x) signs; these explain why the unrestricted full-line claim is false.
+  Executable supplement: 2 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.8 — current sections/ch20.tex:373
+  Sources: textbook printed p.977 (PDF 973; book-layout line 50538); manual printed p.333 (PDF 336).
+  Statement/source: p.978 prints A0^2 in the intensity; replaced by abs(A0)^2 and stated positive omega0,Q.
+  Derivation/pedagogy: Integrated causal exponential, multiplied complex conjugates, found both half-maximum frequencies and integrated spectral intensity; extended checker to complex A0.
+  Executable supplement: 4 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.9 — current sections/ch20.tex:421
+  Sources: textbook printed p.978 (PDF 974; book-layout line 50555); manual printed p.334 (PDF 337).
+  Statement/source: Statement's negative phase agrees with p.978 and Gamma>0 published erratum; manual p.334 has wrong positive phase.
+  Derivation/pedagogy: Checked pole/residue, clockwise orientation for t>0, upper contour for t<0, and PV half at t=0; no change needed.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.10 — current sections/ch20.tex:472
+  Sources: textbook printed p.978 (PDF 974; book-layout line 50572); manual printed p.334 (PDF 337).
+  Statement/source: Compared all four Bessel pairs with p.978 and published corrected x^2-a^2; added a>0 and nonzero y where required.
+  Derivation/pedagogy: Traced all scale factors, Poisson/cosine integral representations, reverse parity for even functions, endpoint singularities and I0 exponential obstruction; no new result correction.
+  Executable supplement: 0 exact, 7 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.11 — current sections/ch20.tex:560
+  Sources: textbook printed p.978 (PDF 974; book-layout line 50602); manual printed p.335 (PDF 338).
+  Statement/source: Original 'transforms of each other' contradicts forward-square reflection; corrected question direction per published erratum.
+  Derivation/pedagogy: Checked x=cos(theta), reflected full-circle representation, i^n factor and Tn(-x)=(-1)^n Tn(x); reverse transform sign follows explicitly.
+  Executable supplement: 7 exact, 14 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.12 — current sections/ch20.tex:612
+  Sources: textbook printed p.979 (PDF 975; book-layout line 50620); manual printed p.335 (PDF 338).
+  Statement/source: Corrected i^n sqrt(2/pi) jn(omega) matches published errata, versus printed p.979 normalization.
+  Derivation/pedagogy: Traced n integrations by parts, vanishing endpoint derivatives, Rodrigues sign and spherical Poisson factor; zero-frequency continuation included, no change.
+  Executable supplement: 42 exact, 14 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.13 — current sections/ch20.tex:658
+  Sources: textbook printed p.979 (PDF 975; book-layout line 50627); manual printed p.335 (PDF 338).
+  Statement/source: Actual p.979 has ds; manual p.336 has wrong rotated ray and final t power. Existing red fixes retained; added t>0 in question.
+  Derivation/pedagogy: Checked damped gamma branch arg->-pi/2, real/imaginary parts and x=y^2 Jacobian; both Fresnel values sqrt(pi/8) follow.
+  Executable supplement: 0 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.14 — current sections/ch20.tex:716
+  Sources: textbook printed p.979 (PDF 975; book-layout line 50648); manual printed p.336 (PDF 339).
+  Statement/source: p.979 uses 3D radial transform; made k=abs(k)>0 explicit.
+  Derivation/pedagogy: Checked angular Jacobian cancellation, regulated arctangent integral and epsilon->0 normalization; local integrability supports the distributional extension.
+  Executable supplement: 1 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.15 — current sections/ch20.tex:753
+  Sources: textbook printed p.979 (PDF 975; book-layout line 50650); manual printed p.336 (PDF 339).
+  Statement/source: Both 2D Fourier and Hankel formulas, measures and note match p.979.
+  Derivation/pedagogy: Traced polar direct/inverse Jacobians and angular 2pi J0 cancellation, with regular-function/L2 interpretation; no change.
+  Executable supplement: 1 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.2.16 — current sections/ch20.tex:802
+  Sources: textbook printed p.980 (PDF 976; book-layout line 50676); manual printed p.337 (PDF 340).
+  Statement/source: Published p.980 correction requires d^3r and all-space integration; now the statement explicitly writes R^3 and k>0.
+  Derivation/pedagogy: Checked angular u=cos(theta) integral, unitary constants and zero-frequency dominated limit; no omitted radial factor.
+  Executable supplement: 1 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.3.1 — current sections/ch20.tex:840
+  Sources: textbook printed p.985 (PDF 981; book-layout line 50967); manual printed p.337 (PDF 340).
+  Statement/source: Question references pp.980,985 formulas accurately; manual p.337 shifts f(t-a) with wrong variable in phase, already explained.
+  Derivation/pedagogy: Traced translation displacement, absolute signed Jacobian, reflection and conjugation independently; all four formulas and alpha!=0 already explicit, no change.
+  Executable supplement: 2 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.3.2 — current sections/ch20.tex:875
+  Sources: textbook printed p.985 (PDF 981; book-layout line 50969); manual printed p.337 (PDF 340).
+  Statement/source: Question's references agree with p.985; printed alpha^-3 needs positive scale, retained explanation.
+  Derivation/pedagogy: Checked 3D translation Jacobian, abs(alpha)^-3 volume and conjugation changes of variables; correct for both signs, no change.
+  Executable supplement: 4 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.3.3 — current sections/ch20.tex:917
+  Sources: textbook printed p.985 (PDF 981; book-layout line 50973); manual printed p.338 (PDF 341).
+  Statement/source: Laplacian-transform task matches p.985 and Eq.20.53.
+  Derivation/pedagogy: Traced componentwise integrations by parts twice, boundary disappearance and sum -k^2; distributional extension does not discard source jumps, no change.
+  Executable supplement: 2 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.3.4 — current sections/ch20.tex:944
+  Sources: textbook printed p.985 (PDF 981; book-layout line 50974); manual printed p.338 (PDF 341).
+  Statement/source: Derivative tasks match p.985, Eqs.20.55-56.
+  Derivation/pedagogy: Checked repeated -i omega factors and explicit finite-interval endpoint sum; distinction from initial-value Laplace derivatives is clear, no change.
+  Executable supplement: 14 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.3.5 — current sections/ch20.tex:974
+  Sources: textbook printed p.985 (PDF 981; book-layout line 50976); manual printed p.338 (PDF 341).
+  Statement/source: Moment/omega-derivative formula i^-n matches p.985.
+  Derivation/pedagogy: Checked n differentiations of positive-phase kernel and moment domination; no change because all factors and interchange conditions are explicit.
+  Executable supplement: 10 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.3.6 — current sections/ch20.tex:1005
+  Sources: textbook printed p.985 (PDF 981; book-layout line 50981); manual printed p.338 (PDF 341).
+  Statement/source: Diffusion equation and printed answer match p.985; now specified D>0,K>0 and boundedness at both infinities.
+  Derivation/pedagogy: Checked transformed algebra, cosine inversion, derivative jump -Q/D, uniqueness and K=0 obstruction; positive-root coefficient now agrees with the question.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.1 — current sections/ch20.tex:1054
+  Sources: textbook printed p.995 (PDF 991; book-layout line 51503); manual printed p.339 (PDF 342).
+  Statement/source: Both odd/even half-line convolution equations match p.995; manual p.339 misses two reflected sources.
+  Derivation/pedagogy: Traced addition formulas, inverse-transform factors and all four delta arguments; correct for negative intermediate arguments, no change.
+  Executable supplement: 4 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.2 — current sections/ch20.tex:1120
+  Sources: textbook printed p.995 (PDF 991; book-layout line 51521); manual printed p.339 (PDF 342).
+  Statement/source: Bilinear Parseval identity matches p.995, without an unprinted complex conjugate.
+  Derivation/pedagogy: Checked x=0 reduction for both parity extensions and conversion to Hermitian norm by choosing g=conj(f); no change.
+  Executable supplement: 0 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.3 — current sections/ch20.tex:1147
+  Sources: textbook printed p.995 (PDF 991; book-layout line 51527); manual printed p.340 (PDF 343).
+  Statement/source: Rectangle transform and pi integral agree with p.995; added a>0 to question.
+  Derivation/pedagogy: Traced direct integral, zero-frequency limit, norm equality and u=at scaling, including absolute sinc-square convergence.
+  Executable supplement: 1 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.4 — current sections/ch20.tex:1196
+  Sources: textbook printed p.996 (PDF 992; book-layout line 51552); manual printed p.340 (PDF 343).
+  Statement/source: Poisson source sign matches p.996; added localized charge and vanishing free-space boundary condition.
+  Derivation/pedagogy: Checked Yukawa regulator transform, inverse convolution normalization 1/(4pi epsilon0), origin delta and harmonic ambiguity; general solution distinction is explicit.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.5 — current sections/ch20.tex:1243
+  Sources: textbook printed p.996 (PDF 992; book-layout line 51558); manual printed p.341 (PDF 344).
+  Statement/source: Triangle, sinc-square transform and 2pi/3 answer match p.996; manual p.341 incorrectly squares to sinc^2.
+  Derivation/pedagogy: Explicitly declared unnormalized convolution to distinguish textbook convention; checked overlap length, sqrt(2pi) factor and 4/3 spatial squared norm.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.6 — current sections/ch20.tex:1288
+  Sources: textbook printed p.996 (PDF 992; book-layout line 51573); manual printed p.341 (PDF 344).
+  Statement/source: Integrated squared-error identity matches p.996; added L2 assumption directly.
+  Derivation/pedagogy: Checked linearity and all four complex cross terms under Parseval; finite mean-square meaning now appears before the solution.
+  Executable supplement: 1 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.7 — current sections/ch20.tex:1319
+  Sources: textbook printed p.996 (PDF 992; book-layout line 51580); manual printed p.341 (PDF 344).
+  Statement/source: p.996 answers pi/(2a^3),pi/(2a) use positive a; made this condition explicit.
+  Derivation/pedagogy: Checked cosine and sine Parseval factors separately, doubled half-line integrals, and retained abs(a)/zero-divergence discussion.
+  Executable supplement: 2 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.8 — current sections/ch20.tex:1360
+  Sources: textbook printed p.996 (PDF 992; book-layout line 51591); manual printed p.342 (PDF 345).
+  Statement/source: Measured form factor and Yukawa answer match p.996; made a>0 scale explicit.
+  Derivation/pedagogy: Checked radial forward transform, 4pi constant, unit total charge and integrable 1/r origin; signed-scale alternative retained.
+  Executable supplement: 2 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.9 — current sections/ch20.tex:1405
+  Sources: textbook printed p.997 (PDF 993; book-layout line 51609); manual printed p.342 (PDF 345).
+  Statement/source: Mutual-energy task and source displacement agree with p.997.
+  Derivation/pedagogy: Defined unnormalized convolution before use; checked shifted direct integral, 4pi multiplier, relative C-A phase and absence of self-energy factor 1/2.
+  Executable supplement: 0 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.10 — current sections/ch20.tex:1444
+  Sources: textbook printed p.997 (PDF 993; book-layout line 51611); manual printed p.342 (PDF 345).
+  Statement/source: Actual p.997 part(b) omits i; existing red fix and published momentum convention confirmed. Qualified analytic-series extension in question.
+  Derivation/pedagogy: Checked each i hbar derivative and summed Laplacian, with integrable moment/operator domain; polynomial extension is explicit.
+  Executable supplement: 4 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.4.11 — current sections/ch20.tex:1511
+  Sources: textbook printed p.997 (PDF 993; book-layout line 51628); manual printed p.342 (PDF 345).
+  Statement/source: Schrodinger kinetic/potential terms match p.997; strengthened Maclaurin premise to justified termwise action.
+  Derivation/pedagogy: Traced negative-phase Laplacian sign, multi-index polynomial factors and general momentum convolution alternative; local analyticity alone is correctly insufficient.
+  Executable supplement: 7 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.5.1 — current sections/ch20.tex:1583
+  Sources: textbook printed p.1001 (PDF 997; book-layout line 51856); manual printed p.342 (PDF 345).
+  Statement/source: Inspected actual Fig.20.10 left, p.1002: series R with shunt output C.
+  Derivation/pedagogy: Checked e^(i omega t) impedances, divider, modulus, phase, half-power cutoff and unloaded assumption; no change.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.5.2 — current sections/ch20.tex:1611
+  Sources: textbook printed p.1001 (PDF 997; book-layout line 51858); manual printed p.343 (PDF 346).
+  Statement/source: p.1001 incorrectly names Fig.20.11; actual Fig.20.10 right is the RL network. Corrected figure directly.
+  Derivation/pedagogy: Checked series inductive drop and output R current, low/high limits and R/L cutoff; retained source-error explanation.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.5.3 — current sections/ch20.tex:1637
+  Sources: textbook printed p.1002 (PDF 998; book-layout line 51895); manual printed p.343 (PDF 346).
+  Statement/source: Actual Fig.20.11 p.1002 shows C1 then shunt R1 loaded by series R2,C2; currents match question.
+  Derivation/pedagogy: Traced both node equations, substitution and full denominator with loading term; peak derivative confirms band-pass classification, no change.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.5.4 — current sections/ch20.tex:1685
+  Sources: textbook printed p.1002 (PDF 998; book-layout line 51900); manual printed p.343 (PDF 346).
+  Statement/source: p.1002 says product 'only' when R2>>R1; replaced with sufficient uniform approximation statement.
+  Derivation/pedagogy: Expanded absolute eta bound and relative-error inequality step by step; exact denominator remainder proves bound, frequency-specific and buffered alternatives remain distinct.
+  Executable supplement: 3 exact, 8 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.6.1 — current sections/ch20.tex:1747
+  Sources: textbook printed p.1007 (PDF 1003; book-layout line 52129); manual printed p.343 (PDF 346).
+  Statement/source: Compared all corrected cases with published errata and p.1007; added missing representative integer range.
+  Derivation/pedagogy: Traced geometric selector, product-to-sum signs, p+q=N, DC/Nyquist and N=1,2 degeneracies; manual sine-product label error retained.
+  Executable supplement: 0 exact, 1950 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.6.2 — current sections/ch20.tex:1815
+  Sources: textbook printed p.1007 (PDF 1003; book-layout line 52157); manual printed p.345 (PDF 348).
+  Statement/source: Original p.1007 lacks /N twice; both published exponent corrections are present.
+  Derivation/pedagogy: Checked double-sum substitution, finite geometric orthogonality and j=k selection; no convergence issue, no change.
+  Executable supplement: 0 exact, 78 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.6.3 — current sections/ch20.tex:1847
+  Sources: textbook printed p.1007 (PDF 1003; book-layout line 52165); manual printed p.345 (PDF 348).
+  Statement/source: Conjugate and negative-conjugate symmetries match p.1007; clarified modulo-N indexing and equal magnitudes.
+  Derivation/pedagogy: Traced e^-2piik cancellation, both input reality types and self-paired coefficients; no missing index edge case.
+  Executable supplement: 0 exact, 156 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.1 — current sections/ch20.tex:1888
+  Sources: textbook printed p.1014 (PDF 1010; book-layout line 52545); manual printed p.345 (PDF 348).
+  Statement/source: Initial-value equation/hint match p.1014; explicit positive-real limit and sufficient bounds now in statement.
+  Derivation/pedagogy: Checked u=st approximate identity and integrable exponential majorant; avoids relying on potentially divergent transformed Taylor series.
+  Executable supplement: 5 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.2 — current sections/ch20.tex:1924
+  Sources: textbook printed p.1014 (PDF 1010; book-layout line 52552); manual printed p.345 (PDF 348).
+  Statement/source: Published errata withdraw p.1014's unspecified limit; replaced the question with its precise positive-real distributional version.
+  Derivation/pedagogy: Checked cosine Laplace kernel, x=su substitution, unit Cauchy mass and dominated test-function limit; original withdrawal is still documented.
+  Executable supplement: 2 exact, 3 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.3 — current sections/ch20.tex:1968
+  Sources: textbook printed p.1014 (PDF 1010; book-layout line 52557); manual printed p.345 (PDF 348).
+  Statement/source: Cosine difference, denominator sign and a^2!=b^2 match p.1014.
+  Derivation/pedagogy: Checked exponential cosine transform and displayed common-denominator subtraction; stated half-plane covers real frequencies, no change.
+  Executable supplement: 1 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.4 — current sections/ch20.tex:1993
+  Sources: textbook printed p.1015 (PDF 1011; book-layout line 52564); manual printed p.346 (PDF 349).
+  Statement/source: Both partial-fraction answers match p.1015; manual p.346 has correct sign after checking actual expression.
+  Derivation/pedagogy: Traced coefficients by s=-a,-b, forward pairs and both equal-rate limits; no correction warranted.
+  Executable supplement: 4 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.5 — current sections/ch20.tex:2028
+  Sources: textbook printed p.1015 (PDF 1011; book-layout line 52578); manual printed p.346 (PDF 349).
+  Statement/source: Both quadratic partial fractions match p.1015; added continuous sin(at)/a reading when a=0.
+  Derivation/pedagogy: Checked coefficient systems A+B and Ab^2+Ba^2 and separate inversions; zero allowed by a^2!=b^2 is covered.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.6 — current sections/ch20.tex:2064
+  Sources: textbook printed p.1015 (PDF 1011; book-layout line 52591); manual printed p.346 (PDF 349).
+  Statement/source: Gamma(nu) notation agrees with published errata; p.1015 ranges (0,1),(0,2) are correct.
+  Derivation/pedagogy: Traced regulated Fubini, dominating u bounds, beta substitution q=nu+1 or nu and origin/infinity convergence; no change.
+  Executable supplement: 0 exact, 7 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.7 — current sections/ch20.tex:2136
+  Sources: textbook printed p.1015 (PDF 1011; book-layout line 52611); manual printed p.348 (PDF 351).
+  Statement/source: p.1015 asserts unsupported infinite interchange; qualified it directly and fixed full-mass causal impulse convention in question.
+  Derivation/pedagogy: Checked monomial gamma factors, factorial-series counterexample and distributional delta exception; does not confuse an asymptotic series with a convergent identity.
+  Executable supplement: 10 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.7.8 — current sections/ch20.tex:2186
+  Sources: textbook printed p.1015 (PDF 1011; book-layout line 52625); manual printed p.348 (PDF 351).
+  Statement/source: Kummer notation and 2F1(a,1;c;1/s)/s match corrected p.1015; added parameter and half-plane restrictions.
+  Derivation/pedagogy: Checked termwise absolute-integral sum, cancellation n!=(1)n and ratio-test convergence; exceptional terminating cases are identified.
+  Executable supplement: 0 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.1 — current sections/ch20.tex:2227
+  Sources: textbook printed p.1028 (PDF 1024; book-layout line 53307); manual printed p.348 (PDF 351).
+  Statement/source: Second-derivative method for cos(kt) matches p.1028.
+  Derivation/pedagogy: Checked F''=-k^2F with both initial terms, solved transformed algebra and k=0 case; no change.
+  Executable supplement: 2 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.2 — current sections/ch20.tex:2245
+  Sources: textbook printed p.1028 (PDF 1024; book-layout line 53309); manual printed p.348 (PDF 351).
+  Statement/source: Driven spring and both printed answers match pp.1028-1029; made initial rest preparation explicit.
+  Derivation/pedagogy: Traced extension y-x, Newton equation, partial fractions and cancellation of t^2 terms, confirming leading a omega^2 t^4/24.
+  Executable supplement: 5 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.3 — current sections/ch20.tex:2294
+  Sources: textbook printed p.1029 (PDF 1025; book-layout line 53338); manual printed p.348 (PDF 351).
+  Statement/source: All three decay equations and asymptotic cases match p.1029; original growing daughter exponent already corrected. Marked equal-rate convention in question.
+  Derivation/pedagogy: Checked transform recursion, conservation, coincident-rate limits, both small-time series and separated-rate regimes; each discarded transient and rate-ratio factor is explained.
+  Executable supplement: 10 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.4 — current sections/ch20.tex:2416
+  Sources: textbook printed p.1030 (PDF 1026; book-layout line 53376); manual printed p.348 (PDF 351).
+  Statement/source: Numerical cross sections, flux, lambda and concentration match p.1030; specified otherwise missing N20 and clean numerical start.
+  Derivation/pedagogy: Checked arbitrary-inventory solution, b=0 limit, 365-day conversion, inventory 1.233979e15 and parent fractional loss 1.261432e-5.
+  Executable supplement: 3 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.5 — current sections/ch20.tex:2491
+  Sources: textbook printed p.1030 (PDF 1026; book-layout line 53392); manual printed p.349 (PDF 352).
+  Statement/source: All source rates/yields match p.1030; question now specifies initial inventories and conditional shutdown increase.
+  Derivation/pedagogy: Traced operational and shutdown transforms, coincident mu=alpha case, corrected iodine coefficient, slope threshold and positive peak-time criterion.
+  Executable supplement: 6 exact, 3 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.6 — current sections/ch20.tex:2635
+  Sources: textbook printed p.1030 (PDF 1026; book-layout line 53417); manual printed p.349 (PDF 352).
+  Statement/source: Initial displacement/zero velocity and damping regimes match p.1030, Eq.20.160.
+  Derivation/pedagogy: Checked complete-square transform, critical inverse and two real exponential coefficients in overdamping; continuous critical limit explicit, no change.
+  Executable supplement: 7 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.7 — current sections/ch20.tex:2681
+  Sources: textbook printed p.1031 (PDF 1027; book-layout line 53427); manual printed p.349 (PDF 352).
+  Statement/source: All three regimes and initial kick match p.1031.
+  Derivation/pedagogy: Checked shifted sine, double-pole and hyperbolic inverses with initial data; both critical limits and overdamped partial fractions explicit, no change.
+  Executable supplement: 11 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.8 — current sections/ch20.tex:2726
+  Sources: textbook printed p.1031 (PDF 1027; book-layout line 53436); manual printed p.349 (PDF 352).
+  Statement/source: Gravity/linear drag signs and initial data match p.1031.
+  Derivation/pedagogy: Traced transform and each partial-fraction numerator, displacement derivative, terminal speed and zero-drag cancellations; no change.
+  Executable supplement: 5 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.9 — current sections/ch20.tex:2765
+  Sources: textbook printed p.1031 (PDF 1027; book-layout line 53447); manual printed p.349 (PDF 352).
+  Statement/source: Inspected actual p.1031 Fig.20.18 and hint: series RL in parallel with C, not the manual's topology. Added initial-current preparation to question.
+  Derivation/pedagogy: Checked both Kirchhoff equations, damping R/(2L), all three voltages, DC I0=V0/R and separate I0=0 case. No unstated shorted-capacitor assumption remains.
+  Executable supplement: 9 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.10 — current sections/ch20.tex:2866
+  Sources: textbook printed p.1031 (PDF 1027; book-layout line 53462); manual printed p.350 (PDF 353).
+  Statement/source: Contour-transform request and s>0 match p.1031.
+  Derivation/pedagogy: Checked unit-circle generating representation, absolute interchange, roots s+-sqrt(s^2+1), interior residue and branch continuation; no change.
+  Executable supplement: 1 exact, 3 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.11 — current sections/ch20.tex:2904
+  Sources: textbook printed p.1032 (PDF 1028; book-layout line 53479); manual printed p.350 (PDF 353).
+  Statement/source: Recurrence/induction request matches p.1032; added n>=0 integer convention.
+  Derivation/pedagogy: Checked base J0,J1 transforms, derivative initial term, r^2=1-2sr induction and negative-order parity note.
+  Executable supplement: 1 exact, 14 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.12 — current sections/ch20.tex:2945
+  Sources: textbook printed p.1032 (PDF 1028; book-layout line 53482); manual printed p.351 (PDF 354).
+  Statement/source: Actual p.1032 prints Re z>=0; directly changed to Re z>0 with a>0. Manual p.351 J/K and boundary-sign slips confirmed.
+  Derivation/pedagogy: Traced a-derivative of J0 transform, branch choice and growing boundary primitive; ordinary result and Abel boundary values remain separate.
+  Executable supplement: 1 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.13 — current sections/ch20.tex:2991
+  Sources: textbook printed p.1032 (PDF 1028; book-layout line 53489); manual printed p.351 (PDF 354).
+  Statement/source: p.1032 s>a assumes a positive; question now permits real a with s>abs(a).
+  Derivation/pedagogy: Checked angular I0 representation, half-angle substitution, arctangent endpoint and positive square-root branch; covers negative scale correctly.
+  Executable supplement: 1 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.14 — current sections/ch20.tex:3025
+  Sources: textbook printed p.1032 (PDF 1028; book-layout line 53493); manual printed p.351 (PDF 354).
+  Statement/source: All four spherical statements match p.1032; made real branches and a>0 domains explicit.
+  Derivation/pedagogy: Traced integrated sine/sinh transforms and common logarithmic cutoff; y0,k0 nonintegrable 1/t origins and manual missing 1/a coefficient are explained.
+  Executable supplement: 2 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.15 — current sections/ch20.tex:3086
+  Sources: textbook printed p.1032 (PDF 1028; book-layout line 53505); manual printed p.352 (PDF 355).
+  Statement/source: Laguerre ODE and instruction to postpone n=0 match p.1032; specified regular origin solution.
+  Derivation/pedagogy: Checked each derivative transform and cancellation, separated ODE and expanded logarithm integration, generalized binomial/hypergeometric inversion and excluded singular solution.
+  Executable supplement: 15 exact, 1 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.16 — current sections/ch20.tex:3147
+  Sources: textbook printed p.1032 (PDF 1028; book-layout line 53511); manual printed p.352 (PDF 355).
+  Statement/source: Scaled Laguerre polynomial transform and s>0 match p.1032.
+  Derivation/pedagogy: Checked finite polynomial coefficients, j! cancellation and binomial sum; no unnecessary s>a restriction, n=0,a=0 included, no change.
+  Executable supplement: 9 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.17 — current sections/ch20.tex:3173
+  Sources: textbook printed p.1032 (PDF 1028; book-layout line 53515); manual printed p.353 (PDF 356).
+  Statement/source: Both E1 definitions and log(1+s)/s agree with p.1032.
+  Derivation/pedagogy: Traced nonnegative Tonelli interchange, rational partial fractions and common-cutoff logs; removable s=0 limit explicit, no change.
+  Executable supplement: 1 exact, 6 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.18 — current sections/ch20.tex:3210
+  Sources: textbook printed p.1033 (PDF 1029; book-layout line 53529); manual printed p.353 (PDF 356).
+  Statement/source: Integral identity and Dirichlet example match p.1033; added justified absolute/Abel procedures to question.
+  Derivation/pedagogy: Checked Fubini kernel 1/t in (a), positive cutoff and 2/R tail bound in (b); conditional sine integral is not justified by false absolute convergence.
+  Executable supplement: 1 exact, 3 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.19 — current sections/ch20.tex:3263
+  Sources: textbook printed p.1033 (PDF 1029; book-layout line 53545); manual printed p.353 (PDF 356).
+  Statement/source: Sine-tail definition and transform signs match p.1033; qualified k>0 cotangent branch.
+  Derivation/pedagogy: Checked integral over transform parameter, general atan(k/s), si(0+)=-pi/2 derivative term and complementary-angle identity.
+  Executable supplement: 0 exact, 5 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.20 — current sections/ch20.tex:3313
+  Sources: textbook printed p.1033 (PDF 1029; book-layout line 53562); manual printed p.354 (PDF 357).
+  Statement/source: Periodic formula matches p.1033; made integrable period and Re s>0 assumptions explicit.
+  Derivation/pedagogy: Traced each interval substitution and geometric absolute convergence; isolated boundary values irrelevant.
+  Executable supplement: 1 exact, 1 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.21 — current sections/ch20.tex:3346
+  Sources: textbook printed p.1034 (PDF 1030; book-layout line 53584); manual printed p.354 (PDF 357).
+  Statement/source: Square wave values, half period and answer match p.1034; stated a>0 and convergence half-plane.
+  Derivation/pedagogy: Checked first-half-period integral, factor cancellation, initial limit and average rather than false final value.
+  Executable supplement: 3 exact, 1 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.22 — current sections/ch20.tex:3378
+  Sources: textbook printed p.1034 (PDF 1030; book-layout line 53592); manual printed p.354 (PDF 357).
+  Statement/source: All four rational numerators and denominator match p.1034; added real-a convergence domain.
+  Derivation/pedagogy: Checked both frequency-shift denominators, sum/difference numerators and explicit less-obvious cubic cancellations.
+  Executable supplement: 4 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.23 — current sections/ch20.tex:3425
+  Sources: textbook printed p.1034 (PDF 1030; book-layout line 53606); manual printed p.354 (PDF 357).
+  Statement/source: All four repeated-quadratic inverse formulas match p.1034; made zero-frequency limits part of question.
+  Derivation/pedagogy: Checked a/s derivatives, numerator splits and t^3/6,t^2/2,t,1 limits; no missing powers.
+  Executable supplement: 8 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.8.24 — current sections/ch20.tex:3480
+  Sources: textbook printed p.1034 (PDF 1030; book-layout line 53619); manual printed p.355 (PDF 358).
+  Statement/source: Published unit-step clarification is misnumbered 20.8.34; actual p.1034 exercise is 20.8.24. Added k>0,Re s>0.
+  Derivation/pedagogy: Checked causal support, t=k cosh(v) Jacobian cancellation and K0 representation; k=0 logarithmic divergence remains explicit.
+  Executable supplement: 1 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.9.1 — current sections/ch20.tex:3512
+  Sources: textbook printed p.1037 (PDF 1033; book-layout line 53785); manual printed p.355 (PDF 358).
+  Statement/source: Convolution primitive formula matches p.1037.
+  Derivation/pedagogy: Checked G=1,g=1/s, finite causal integral and zero initial term under differentiation; no change.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.9.2 — current sections/ch20.tex:3536
+  Sources: textbook printed p.1038 (PDF 1034; book-layout line 53795); manual printed p.355 (PDF 358).
+  Statement/source: p.1038 uses factorials for real a,b>-1; replaced those symbols by Gamma values directly.
+  Derivation/pedagogy: Checked x=ty scale, endpoint conditions and comparison of two gamma transforms to obtain beta identity; t>0 avoids ambiguous endpoint powers.
+  Executable supplement: 0 exact, 4 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.9.3 — current sections/ch20.tex:3580
+  Sources: textbook printed p.1038 (PDF 1034; book-layout line 53810); manual printed p.356 (PDF 359).
+  Statement/source: Inverse product and distinct squared frequencies match p.1038.
+  Derivation/pedagogy: Traced product-to-sum, both antiderivative denominators and endpoints, final sign and removable a=0; no change.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.9.4 — current sections/ch20.tex:3611
+  Sources: textbook printed p.1038 (PDF 1034; book-layout line 53816); manual printed p.356 (PDF 359).
+  Statement/source: Printed p.1038 answer excludes resonance implicitly; question and quoted answer now state nonresonant scope and request resonant limit.
+  Derivation/pedagogy: Checked forced ODE, partial fractions and initial slope cancellation; expanded l'Hopital numerator/denominator derivatives to obtain secular resonant term.
+  Executable supplement: 5 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.1 — current sections/ch20.tex:3670
+  Sources: textbook printed p.1042 (PDF 1038; book-layout line 54019); manual printed p.356 (PDF 359).
+  Statement/source: p.1042 hint assumes only analyticity; question now includes required decay/inversion conditions and Re s>beta.
+  Derivation/pedagogy: Checked clockwise right closure, residue minus sign, arc bound and inverse exponential kernel; Fourier-regulated justification is linked explicitly.
+  Executable supplement: 2 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.2 — current sections/ch20.tex:3722
+  Sources: textbook printed p.1042 (PDF 1038; book-layout line 54029); manual printed p.356 (PDF 359).
+  Statement/source: Bromwich insertion and delta objective match pp.1042-1043; clarified positive continuity points and distributional meaning.
+  Derivation/pedagogy: Traced ds=i d omega, weighted causal extension, Gaussian approximate identity and endpoint/jump means; no unjustified raw Fubini.
+  Executable supplement: 2 exact, 3 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.3 — current sections/ch20.tex:3777
+  Sources: textbook printed p.1043 (PDF 1039; book-layout line 54045); manual printed p.357 (PDF 360).
+  Statement/source: Bromwich convolution task matches p.1043.
+  Derivation/pedagogy: Checked product inversion, causal reduction of u range and regulator/absolute sufficient hypotheses; endpoints do not create extraneous factors, no change.
+  Executable supplement: 0 exact, 2 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.4 — current sections/ch20.tex:3812
+  Sources: textbook printed p.1043 (PDF 1039; book-layout line 54047); manual printed p.357 (PDF 360).
+  Statement/source: s/(s^2-k^2) and two methods match p.1043.
+  Derivation/pedagogy: Checked both 1/2 coefficients, simple residues, left closure and k=0; no change.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.5 — current sections/ch20.tex:3851
+  Sources: textbook printed p.1043 (PDF 1039; book-layout line 54056); manual printed p.358 (PDF 361).
+  Statement/source: Three-method k^2/[s(s^2+k^2)] task and 1-cos kt answer match p.1043.
+  Derivation/pedagogy: Checked partial fractions, causal integral and all three residue signs, including k=0 and initial value; no change.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.6 — current sections/ch20.tex:3895
+  Sources: textbook printed p.1043 (PDF 1039; book-layout line 54070); manual printed p.358 (PDF 361).
+  Statement/source: Negative-real branch cut and inverse (pi t)^-1/2 match pp.1043-1044.
+  Derivation/pedagogy: Checked upper/lower phases, contour direction, jump sign, small-circle bound and gamma substitution; forward transform independently fixes normalization, no change.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.7 — current sections/ch20.tex:3939
+  Sources: textbook printed p.1044 (PDF 1040; book-layout line 54084); manual printed p.359 (PDF 362).
+  Statement/source: J0 inverse and finite imaginary cut match p.1044.
+  Derivation/pedagogy: Checked exterior sqrt branch, opposite bank signs, upward right-bank direction, factor two and angular representation; no change.
+  Executable supplement: 0 exact, 6 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.8 — current sections/ch20.tex:3983
+  Sources: textbook printed p.1044 (PDF 1040; book-layout line 54091); manual printed p.359 (PDF 362).
+  Statement/source: All three I0 inversion methods match p.1044; manual pp.360-361 wrongly calls mapped origin a simple pole and mapped line vertical.
+  Derivation/pedagogy: Traced binomial coefficients, finite real cut and Joukowski ds/D=dz/z, circle orientation and Laurent coefficient; a=0/negative-a cases retained, no change.
+  Executable supplement: 11 exact, 6 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.9 — current sections/ch20.tex:4069
+  Sources: textbook printed p.1044 (PDF 1040; book-layout line 54100); manual printed p.361 (PDF 364).
+  Statement/source: log(s)/s inverse and Euler constant agree with p.1044.
+  Derivation/pedagogy: Checked differentiated gamma pair and psi(1)=-gamma, sign of both terms, integrable logarithmic origin and complex branch; no change.
+  Executable supplement: 1 exact, 3 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.10 — current sections/ch20.tex:4101
+  Sources: textbook printed p.1045 (PDF 1041; book-layout line 54123); manual printed p.362 (PDF 365).
+  Statement/source: Double-pole transform matches p.1045.
+  Derivation/pedagogy: Checked differentiated residues at both +-ia, cancellation and summed sine, plus merged a=0 pole; no change.
+  Executable supplement: 4 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.11 — current sections/ch20.tex:4139
+  Sources: textbook printed p.1045 (PDF 1041; book-layout line 54127); manual printed p.362 (PDF 365).
+  Statement/source: p.1045 analytic/simple-zero assumptions insufficient; now corrected directly with arc/sum hypotheses and rational sufficient case.
+  Derivation/pedagogy: Checked simple-zero residue formula and explicit delayed-exponential counterexample, whose left arc grows before the delay; no unqualified expansion survives.
+  Executable supplement: 4 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.12 — current sections/ch20.tex:4195
+  Sources: textbook printed p.1045 (PDF 1041; book-layout line 54139); manual printed p.362 (PDF 365).
+  Statement/source: Delayed ramp and unit-step answer match p.1045; added k>=0 directly.
+  Derivation/pedagogy: Checked closure according to t-k, double-pole residue, value at delay, forward transform and counterexample for negative delay.
+  Executable supplement: 3 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+20.10.13 — current sections/ch20.tex:4230
+  Sources: textbook printed p.1045 (PDF 1041; book-layout line 54142); manual printed p.362 (PDF 365).
+  Statement/source: Distinct-rate transform and three-method request match p.1045 and manual pp.362-363.
+  Derivation/pedagogy: Checked partial fractions, explicit convolution primitive/endpoints, both residues, initial slope and repeated-rate limit; no change.
+  Executable supplement: 5 exact, 0 numerical checks. Coverage is the named group in ch20_check.py; scope limits above apply.
+
+
+FINAL RENDERED-PAGE QA
+Standalone final PDF: work/ch20-final-review.pdf, 65 pages, 440152 bytes.
+Built with the current main.tex preamble through the chapter-only wrapper; no main
+PDF was built. Final log work/ch20-final-review.log has no LaTeX warnings,
+overfull/underfull boxes, or errors. All pages 1–65 were visually inspected in
+work/ch20-final-sheet-01.png through -17.png. The initial 64-page review found an
+orphan 20.6 subsection heading; its Needspace guard was increased to 20 baselines,
+and the changed final pages 26–65 were rerendered and visually reviewed. All
+remaining subsection headings have following content; math boxes, red changes,
+page breaks and margins were checked. No unresolved layout issue was found.
+
+Residual verification limits: no formal proof-assistant verification; executable
+samples cover the stated finite cases, not every parameter. General domains,
+branch choices, convergence and distributional claims were audited analytically.
+No known unresolved statement, mathematical or missing-step defect remains in
+the 89 entries under their now-explicit hypotheses.
+Final standalone PDF SHA256: 855ff86ffbc93091966e980e4644dcd892ce307e349eae9a5447faa8f6819b57
+Final clean log SHA256: 01aeff7e9c7f8f8606e0807e37136dfceeb87f4139b7ed43268cbf603f58e063

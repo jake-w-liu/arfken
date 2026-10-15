@@ -1,0 +1,244 @@
+CHAPTER 6 VERIFICATION RECORD
+Date: 2026-10-04
+
+Scope: all 45 exercises in sections/ch06.tex: 6.2.1-15, 6.4.1-9, 6.5.1-21.
+Every solution placeholder was replaced. General assertions have written
+algebraic proofs; executable checks are independent exact identities,
+complete concrete eigensystem checks, or explicitly identified examples.
+Finite examples do not establish arbitrary-dimension theorems.
+
+Sources actually consulted:
+- Mathematical Methods for Physi - Arfken, George B. & Weber, Han_4469.pdf,
+  with work/book-layout.txt: all Chapter 6 problems, printed pp.308-310,
+  317-318 and 324-328; earlier Eq.(3.37), printed p.141, and Exercise 2.2.12,
+  printed p.116. Disputed pages were visually checked against PDF images:
+  work/ch06-book-diagonal-0320.png (printed p.318),
+  work/ch06-book-svd-0328.png through -0330.png (printed pp.326-328),
+  work/ch06-book-euler-0146.png (printed p.141),
+  work/ch06-book-spin-0122.png (printed p.116).
+- Solution mathematical method for physics-7.pdf, with work/solman.txt:
+  Chapter 6 solutions; visual checks work/ch06-manual-quadric-085.png
+  (printed p.82) and work/ch06-manual-svd-089.png (printed p.86).
+- The manual's Errata and Revision Status dated 6 April 2012 was read.
+  It has no Chapter 6 entry. The corrections below are independently
+  established corrections/qualifications, not claimed published errata.
+
+Corrections/qualifications are explained and marked with dark-red erratum:
+- FINAL AUDIT CORRECTION: the former 6.2.9 allegation about manual p.82 was
+  false. Fresh visual inspection shows that the manual correctly prints -1,-1;
+  the false erratum has been removed from the solution.
+- 6.2.6: actual manual p.81 has final coordinate zero in the eigenvector for
+  eigenvalue 2. It must be 1/sqrt(3); direct residual and normalization prove it.
+- 6.2.15: manual calls the form positive definite and the surface an
+  ellipsoid/ellipse. It has eigenvalues 0,1,3 and is an elliptic cylinder.
+- 6.4.2: the orthonormal eigenvectors must be a complete n-vector basis.
+- 6.4.3: nonsymmetry forbids real orthogonal diagonalization. It does not
+  forbid complex unitary diagonalization unless real eigenvalues are added.
+- 6.4.6: determinant wording is finite dimensional; the kernel/inverse
+  implication still makes sense without an infinite-dimensional determinant.
+- 6.4.7: equal spectra must include multiplicities.
+- 6.4.9: zero denominator/zero off-diagonal cases of tan(2 theta) are handled.
+- 6.5.4: the conjugate eigenvalues are real for integer multiples of pi.
+- 6.5.10: the adjoint spectrum is conjugated; matched labels require
+  lambda_i != lambda_j for cross-eigenvalue biorthogonality.
+- 6.5.11-12: repeated singular-value vectors require an orthonormal choice;
+  completeness and orthogonality, not just unit norms, justify reconstruction.
+- 6.5.13: original TeX reversed first-column entries. Source p.326 has (2,1)
+  divided by sqrt(5). Source part(c) has g_n instead of f_n on its RHS.
+- 6.5.14: +1,-1 are paired-equation factors, not ordinary eigenvalues.
+  This correction makes the problem coherent despite the manual's dismissal.
+- 6.5.15: converses require the property for all a in a neighborhood of zero
+  with H fixed. A verified non-Hermitian fixed-a counterexample is included.
+- 6.5.16: every eigenvector survives exponentiation, but extra ones may appear.
+- 6.5.17: eigenvalues belong to {0,1}; either value may be absent.
+- 6.5.19(b): the secular equation determines eigenvalues, not eigenvectors.
+- 6.5.21: Eq.(3.37) is passive. U actively rotates +120 degrees about
+  (sqrt(2),0,1), while its coordinate axes rotate -120 degrees about that axis.
+
+Historical initial-completion commands (fresh audit commands/totals follow):
+  python3 supplementary/ch06_check.py > work/ch06-check-output.txt
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch06-review.tex > work/ch06-build-output.txt
+  pdftoppm -r 85 -png work/ch06-review.pdf work/ch06-review
+Historical initial-completion result: Python 3.14.7; SymPy 1.14.0; 1400 exact assertions passed,
+with no numerical tolerances. The final standalone PDF has 31 pages.
+The second LaTeX pass has no errors, warnings, overfull or underfull boxes.
+All 31 rendered pages were opened and visually inspected, including the
+spring TikZ schematic, displayed matrices, dark-red corrections, margins,
+page breaks and subsection headings. Needspace precedes all subsections.
+The wrapper uses the main.tex preamble and includes only this chapter;
+no root main.pdf build was run by this agent for Chapter 6.
+
+Per-exercise coverage (line references locate the current statement):
+6.2.1 -- sections/ch06.tex:21
+  Characteristic determinant, every eigenpair, unit norms, all pairwise inner products, reconstruction, nullity, trace and determinant checked exactly.
+
+6.2.2 -- sections/ch06.tex:53
+  Same complete eigenproblem checks as 6.2.1, including the square-root entries.
+
+6.2.3 -- sections/ch06.tex:89
+  Same complete eigenproblem checks as 6.2.1.
+
+6.2.4 -- sections/ch06.tex:124
+  Same complete eigenproblem checks as 6.2.1.
+
+6.2.5 -- sections/ch06.tex:158
+  Same complete eigenproblem checks as 6.2.1.
+
+6.2.6 -- sections/ch06.tex:188
+  Same complete eigenproblem checks as 6.2.1.
+
+6.2.7 -- sections/ch06.tex:229
+  Same complete eigenproblem checks as 6.2.1.
+
+6.2.8 -- sections/ch06.tex:260
+  Complete checks plus the repeated eigenvalue has nullity two and the displayed orthonormal basis spans it.
+
+6.2.9 -- sections/ch06.tex:293
+  Complete checks plus exact Gram-Schmidt projection; both plane eigenvalues are -1, agreeing with the actual manual entries.
+  The initial source-error allegation was removed during the fresh final audit.
+
+6.2.10 -- sections/ch06.tex:335
+  Complete checks plus exact Gram-Schmidt projection in the repeated eigenspace.
+
+6.2.11 -- sections/ch06.tex:369
+  Complete checks plus exact Gram-Schmidt projection in the two-dimensional kernel.
+
+6.2.12 -- sections/ch06.tex:403
+  Complete checks including the two-dimensional eigenvalue-one eigenspace.
+
+6.2.13 -- sections/ch06.tex:434
+  Complete checks including the two-dimensional kernel.
+
+6.2.14 -- sections/ch06.tex:460
+  Same complete eigenproblem checks as 6.2.1.
+
+6.2.15 -- sections/ch06.tex:494
+  Full diagonalization, sum-of-squares expression, coordinate substitution, null axis, and cylinder parametrization checked symbolically.
+
+6.4.1 -- sections/ch06.tex:557
+  General proof covers arbitrary dimension and defective matrices. Checker uses an arbitrary symbolic 3x3 matrix and an exact invertible similarity to check determinant polynomial and trace identities; this finite-dimensional instance supplements the proof.
+
+6.4.2 -- sections/ch06.tex:610
+  Complete-basis argument proved in text; exact complete Hermitian example and incomplete Jordan-block counterexample checked.
+
+6.4.3 -- sections/ch06.tex:645
+  Transpose/adjoint proofs in text; explicit real nonsymmetric rotation and its complex unitary diagonalization checked exactly.
+
+6.4.4 -- sections/ch06.tex:691
+  General norm-square proof in text; arbitrary symbolic Hermitian 2x2 matrix and complex vector verify the norm identity; spin-one sum of squares also checked.
+
+6.4.5 -- sections/ch06.tex:721
+  General multiplication proof in text; reciprocal eigenpairs of an invertible exact matrix checked.
+
+6.4.6 -- sections/ch06.tex:740
+  Finite-matrix equivalence proved with columns; exact singular defective example verifies the nontrivial kernel. No claim that arbitrary infinite-dimensional operators possess determinants.
+
+6.4.7 -- sections/ch06.tex:784
+  General spectral-basis construction proved; repeated-spectrum unitary intertwiner checked exactly. Multiplicity counterexample checked by its traces/spectra.
+
+6.4.8 -- sections/ch06.tex:818
+  All three actual source matrices, all nine normalized eigenvectors, characteristic polynomials, degeneracies, reconstruction and mutual orthogonality checked exactly.
+
+6.4.9 -- sections/ch06.tex:877
+  General row/column proof in text. Symbolic 4x4 Jacobi transform checks every displayed block formula and total off-diagonal square reduction, using exact reduction modulo c^2+s^2-1. Concrete unequal/equal diagonal and zero-off-diagonal cases checked.
+
+6.5.1 -- sections/ch06.tex:971
+  Both eigenpairs, normalizations, similarity reconstruction and overlap 3/5 checked; exact commutator confirms nonnormality.
+
+6.5.2 -- sections/ch06.tex:1005
+  General symbolic 2x2 determinant polynomial checked.
+
+6.5.3 -- sections/ch06.tex:1025
+  Arbitrary-dimension norm proof in text; exact unitary examples checked in spectral and Euler groups.
+
+6.5.4 -- sections/ch06.tex:1047
+  General axis/block proof in text; symbolic rotation trace, determinant and eigenvalues checked, including real-eigenvalue exceptional angles.
+
+6.5.5 -- sections/ch06.tex:1093
+  General convex-weight proof and equality characterization in text; exact weighted Rayleigh identities checked.
+
+6.5.6 -- sections/ch06.tex:1128
+  General Hermitian/unitary argument in text; Pauli examples and their squares checked exactly; either sign may be absent.
+
+6.5.7 -- sections/ch06.tex:1147
+  Dimension parity and 2x2 impossibility proved in text. Checker verifies the general 2x2 anticommutator obstruction and all four explicit 4x4 matrices: Hermiticity, unitarity, squares, and all six pair anticommutators.
+
+6.5.8 -- sections/ch06.tex:1223
+  Arbitrary-vector completeness proof in text; exact normal spectral reconstruction checked, including repeated eigenvalues.
+
+6.5.9 -- sections/ch06.tex:1262
+  Coordinate-column and outer-product constructions both checked exactly.
+
+6.5.10 -- sections/ch06.tex:1284
+  General left/right eigenvalue subtraction proof in text; complex nonnormal diagonalizable example checks conjugate adjoint spectra, duality and cross-eigenvalue orthogonality. Completeness is not assumed for the general implication.
+
+6.5.11 -- sections/ch06.tex:1335
+  General squared-product, positivity and degeneracy proof in text. Exact repeated positive and zero singular-value examples check both paired equations, orthogonality and products; nonorthogonal repeated-value counterexample checked.
+
+6.5.12 -- sections/ch06.tex:1420
+  Arbitrary-vector reconstruction proof in text; exact full decompositions, including zero and signed factors, checked. Sum of the two nonorthogonal unit-vector projectors checked to differ from identity.
+
+6.5.13 -- sections/ch06.tex:1476
+  Corrected source matrix, both products, all paired equations, two singular values, all vectors, orthogonality and reconstruction checked exactly.
+
+6.5.14 -- sections/ch06.tex:1563
+  Signed-pair reconstruction, both paired equations for each index, true complex eigenvalues, and standard singular values checked exactly.
+
+6.5.15 -- sections/ch06.tex:1622
+  General power-series/derivative/determinant proofs in text. Exact nontrivial Hermitian exponential checks defining differential equation, initial value, unitarity and determinant; arbitrary symbolic H checks the derivative at zero; fixed-parameter non-Hermitian counterexample and nilpotent trace-zero example checked. Finite examples are not substitutes for the all-parameter proof.
+
+6.5.16 -- sections/ch06.tex:1726
+  Power-series proof applies even without a full eigenbasis. Checker verifies defective Jordan example and explicit exponential eigenvalue collision with extra eigendirections.
+
+6.5.17 -- sections/ch06.tex:1761
+  General polynomial and range/kernel decomposition proved; exact nonorthogonal projection, zero and identity cases checked.
+
+6.5.18 -- sections/ch06.tex:1796
+  General arbitrary-norm error identity proved in text; symbolic three-component quotient checks exact error and leading quadratic/fourth-order remainder.
+
+6.5.19 -- sections/ch06.tex:1857
+  Newton equations derived with source figure. Exact stiffness eigensystem, independent potential-energy gradient, and complete two-mode time-dependent ODE residual checked symbolically.
+
+6.5.20 -- sections/ch06.tex:1956
+  General normal-matrix kernel-norm proof in text; exact normal complex example checks adjoint and both Hermitian-part eigenpairs.
+
+6.5.21 -- sections/ch06.tex:1994
+  Actual Eq. (3.37) Euler product, orthogonality, determinant, full eigenbasis, characteristic polynomial and Rodrigues rotation matrix checked exactly for both active and passive orientation.
+
+Historical initial-completion SHA256 (superseded by current hashes below):
+8e27f7131ee00a65e5d99ea2a4a0c2d2e3d8fcc63ce1c0570db5a41624d30b78  sections/ch06.tex
+e232791ea1f4c45edbebaa3e7ec6ce36f5643113a344cf24cc43bb3453a5fa72  supplementary/ch06_check.py
+
+Historical initial-completion checker output:
+Python 3.14.7; SymPy 1.14.0
+Chapter SHA256: 8e27f7131ee00a65e5d99ea2a4a0c2d2e3d8fcc63ce1c0570db5a41624d30b78
+PASS structure: 4 exact assertions
+PASS 6.2.1-14 all eigenpairs, degeneracies, and normalizations: 474 exact assertions
+PASS 6.2.15 elliptic-cylinder classification: 40 exact assertions
+PASS 6.4.1-3 similarity, completeness, and counterexample: 45 exact assertions
+PASS 6.4.4-6 norm squares, inverse, and singularity: 18 exact assertions
+PASS 6.4.7 equal-spectrum unitary similarity: 19 exact assertions
+PASS 6.4.8 spin-one eigenbases: 120 exact assertions
+PASS 6.4.9 full Jacobi step and exceptional cases: 21 exact assertions
+PASS 6.5.1-6 elementary normal-matrix properties: 46 exact assertions
+PASS 6.5.7 explicit Dirac construction and 2x2 obstruction: 232 exact assertions
+PASS 6.5.8-10 spectral and biorthogonal identities: 50 exact assertions
+PASS 6.5.11-14 paired decompositions incl. degeneracy/zero/sign: 135 exact assertions
+PASS 6.5.15-16 exponentials and converse counterexamples: 49 exact assertions
+PASS 6.5.17-18 projection and Rayleigh error: 18 exact assertions
+PASS 6.5.19 spring normal modes and differential equations: 22 exact assertions
+PASS 6.5.20 adjoint and Hermitian parts: 36 exact assertions
+PASS 6.5.21 source Euler convention, eigenpairs, and orientation: 71 exact assertions
+ALL PASS: 1400 exact assertions; no numerical tolerances.
+Scope: complete checks of listed concrete eigenproblems plus symbolic
+identities and explicitly labeled examples; general proofs are in ch06.tex.
+
+Remaining Chapter 6 gaps: none identified within this scope.
+
+Fresh independent final audit (supersedes initial counts/layout where changed):
+  See supplementary/ch06_final_audit.txt for current per-entry source and
+  derivation review, actual new checks, final build, visual QA and hashes.
+
+CURRENT FINAL AUDIT: 1417 exact assertions passed; standalone31 pages,295008 bytes; zero build warnings.
+d4263d2b6144bed3cb50c1e571d3d081a3348762d762d0368003bc7a437e1e1b  sections/ch06.tex
+c47e9e5f0f2222cb796f680e5b3592ff614d30b6985e0cfce77560dbb8ba7915  supplementary/ch06_check.py

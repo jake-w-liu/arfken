@@ -1,0 +1,148 @@
+CHAPTER19 — FINAL CORRECTNESS AND STUDENT-READABILITY AUDIT
+
+Status: complete for all40 entries,2026-10-04.
+Freshly read every current statement and full solution, all original textbook
+exercise statements (work/book-layout.txt:48696-49700), referenced Example19.1.1,
+Eqs19.26/33/38/40/41 and Eq5.27, and manual lines34054-35330. The new manual
+misprints were confirmed visually on PDF331/printed328. Every analytic
+argument was traced independently of the executable samples. All source
+line references count literal newlines, matching rg/sed.
+
+19.1.1 | sections/ch19.tex:12 | book-layout.txt:48696
+Traced all normal equations including the constant mode, integrability, unique minimum and coefficient independence; made real versus modulus-square conventions explicit in the question. Executable group: 35 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.2 | sections/ch19.tex:73 | book-layout.txt:48713
+Traced sine/cosine matching and the rotation matrix; the question now specifies real coefficients, amplitude sign, quadrant and zero-amplitude qualifications. Executable group: 21 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.3 | sections/ch19.tex:125 | book-layout.txt:48729
+Traced conjugation of the actual coefficient integral and both pointwise/L2 converse statements; no change needed. Executable group: 8 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.4 | sections/ch19.tex:151 | book-layout.txt:48737
+Traced the finite Bessel residual, coefficient limits and L1-not-L2 example; added the real-data assumption used in the displayed squares. Executable group: 15 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.5 | sections/ch19.tex:197 | book-layout.txt:48766
+Traced principal-log branch, Dirichlet convergence, Abel passage, periodicity and all endpoints; no change needed. Executable group: 19 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.6 | sections/ch19.tex:236 | book-layout.txt:48777
+Traced the logarithm branch and every periodic endpoint; added the essential interval directly to the question. Executable group: 18 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.7 | sections/ch19.tex:261 | book-layout.txt:48779
+Traced the odd/even filter with convergent subseries and all midpoint values; no change needed. Executable group: 17 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.8 | sections/ch19.tex:294 | book-layout.txt:48787
+Compared the manual sign error and traced the exact angle shift and both convergence intervals; no change needed. Executable group: 21 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.9 | sections/ch19.tex:347 | book-layout.txt:48805
+Compared the book odd-only answer and traced both direct coefficient integrals, nonzero even modes and every line/jump in the two sketches; the existing correction is valid. Executable group: 43 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.10 | sections/ch19.tex:435 | book-layout.txt:48822
+Traced both integrations by parts, even-mode cancellation, fundamental/third ratio and uniform convergence; no change needed. Executable group: 15 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.11 | sections/ch19.tex:479 | book-layout.txt:48837
+Traced finite-kernel action on smooth periodic tests and index reversal; placed the distribution, periodicity and symmetric-limit conditions in the question. Executable group: 36 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.12 | sections/ch19.tex:521 | book-layout.txt:48846
+Checked actual Example19.1.1, the integrated coefficients and the mean integral; the source periodic-range explanation is correct. Executable group: 11 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.13 | sections/ch19.tex:563 | book-layout.txt:48871
+Traced finite orthogonality, both convergence arguments, zeta4 algebra and the square-wave counterexample to uniform convergence; made the real norm convention explicit. Executable group: 8 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.14 | sections/ch19.tex:639 | book-layout.txt:48899
+Traced the integration constant from the zero mean and both branches; expanded the L2 integration justification. Executable group: 15 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.15 | sections/ch19.tex:684 | book-layout.txt:48928
+Traced all termwise integrations and the logarithmic dominating bound; fixed dummy-variable notation and added positive-integer/improper-integral hypotheses to the statement. Executable group: 44 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.1.16 | sections/ch19.tex:744 | book-layout.txt:48953
+Traced exact partial fractions, Dirichlet convergence and the uniform1/(2N^2) bound; excluded divergent points in the question. Executable group: 6 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.1 | sections/ch19.tex:787 | book-layout.txt:49153
+Traced finite-N linear/cubic coefficients and their divergence; changed the instruction to a formal expansion of a nonzero-height wave. Executable group: 14 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.2 | sections/ch19.tex:834 | book-layout.txt:49158
+Checked the actual printed angle error and Eq5.27. Traced finite geometric sum, normalized mass, closure and distribution limit; stated removable-value/distribution conventions. Executable group: 27 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.3 | sections/ch19.tex:903 | book-layout.txt:49171
+Traced translated coefficients and the bilinear closure formula; made its source interval and periodic distribution interpretation explicit. Executable group: 39 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.4 | sections/ch19.tex:937 | book-layout.txt:49185
+Compared the manual wrong negative branch. Traced the retained linear primitive, odd filter and boundary downward jump; no change needed. Executable group: 22 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.5 | sections/ch19.tex:981 | book-layout.txt:49189
+Traced logarithmic subtraction and endpoint divergences. Original manual PDF331/printed328 visibly has denominator x instead of n in its first sum; added the red correction and exact counterexample checks. The question now excludes pi-multiples. Executable group: 13 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.6 | sections/ch19.tex:1020 | book-layout.txt:49197
+Traced every parity case including the exceptional first harmonic and continuous endpoints; no change needed. Executable group: 27 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.7 | sections/ch19.tex:1073 | book-layout.txt:49210
+Traced direct sine/cosine coefficients and periodic endpoints; no change needed. Executable group: 31 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.8 | sections/ch19.tex:1101 | book-layout.txt:49219
+Traced both piecewise integrals. Manual PDF331/printed328 visibly drops n in its last x*sin(nx) integral; added the correction and an exact n=2 counterexample. Executable group: 23 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.9 | sections/ch19.tex:1132 | book-layout.txt:49229
+Traced the constant term, odd cosine coefficients and uniform convergence at cusps; no change needed. Executable group: 14 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.10 | sections/ch19.tex:1167 | book-layout.txt:49242
+Traced signed-width reduction, zero/full-width cases and jump midpoints; requested these cases explicitly in the question. Executable group: 32 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.11 | sections/ch19.tex:1206 | book-layout.txt:49250
+Traced separated modes, exclusion at the axis, boundary coefficients, logarithm/arctangent branch and bounded harmonic uniqueness; added the infinite-tube and slit assumptions to the statement. Executable group: 16 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.12 | sections/ch19.tex:1273 | book-layout.txt:49255
+Traced exterior Laplace solution, normal/tangential fields, charge neutrality and optional monopole; the problem now specifies a neutral infinite cylinder in vacuum. Executable group: 9 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.13 | sections/ch19.tex:1332 | book-layout.txt:49260
+Traced all three coefficient integrals, independent ramp decomposition and odd-square identity; no change needed. Executable group: 27 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.14 | sections/ch19.tex:1383 | book-layout.txt:49298
+Traced L2 integration, the constant sum and conversion of the linear term back to a periodic sawtooth; no change needed. Executable group: 15 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.15 | sections/ch19.tex:1421 | book-layout.txt:49306
+Traced finite-width area/coefficients and the independent continuity-modulus proof; the question now explicitly asks for a distributional limit. Executable group: 6 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.16 | sections/ch19.tex:1472 | book-layout.txt:49313
+Traced the L2 partial-sum pairing and shrinking-pulse epsilon proof. Replaced pointwise finiteness by bounded measurability and replaced the ambiguous infinite delta notation by the actual ordered limits. Executable group: 14 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.17 | sections/ch19.tex:1518 | book-layout.txt:49318
+Traced half-interval norms, odd delta images, integration and the mean; added the distribution and midpoint conventions to the question. Executable group: 50 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.18 | sections/ch19.tex:1600 | book-layout.txt:49349
+Traced half-interval constant and cosine norms and all endpoint values; no change needed. Executable group: 12 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.19 | sections/ch19.tex:1629 | book-layout.txt:49351
+Traced modal ODE, impulse coefficients, distributional derivative and reflected dAlembert propagation; stated positive parameters, interior impulse and distribution convention. Executable group: 12 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.20 | sections/ch19.tex:1713 | book-layout.txt:49377
+Traced modal projections, both initial conditions and conserved energy; stated finite-energy data and explained H0^1 in ordinary terms. Executable group: 21 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.2.21 | sections/ch19.tex:1782 | book-layout.txt:49408
+Checked original missing frequency square. Traced all damping regimes, initial data and critical limits; corrected the question mode by mode, marked the restored square red and expanded the PDE energy integration by parts. Executable group: 16 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.3.1 | sections/ch19.tex:1893 | book-layout.txt:49665
+Traced the full bounded-variation proof, uniformly bounded kernel primitive and oscillatory outer limit; corrected the question left side and hypotheses, and expanded the local-variation argument. Executable group: 16 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.3.2 | sections/ch19.tex:1975 | book-layout.txt:49672
+Compared actual Eqs19.33/38/40/41. Traced telescoping, exact finite integral, first maximum, scaled limit and overshoot fractions; fixed the question cross-reference. Executable group: 23 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+19.3.3 | sections/ch19.tex:2031 | book-layout.txt:49679
+Traced the entire integrand expansion, term integration, numerical digits and truncation table; expanded the positive rational difference proving decreasing remainder terms. Executable group: 12 reported assertions (including its nonempty-group guard); exact scope is in the transcript.
+
+Verification actually completed
+  python3 supplementary/ch19_check.py > work/ch19-final-check.txt
+  Exit0;867 assertions total across40/40 groups, including inventory/group
+ checks. Six added exact assertions cover newly confirmed manual errors and
+ the expanded Gibbs ratio identity. SymPy exact algebra; mpmath55 digits,
+ Gibbs65 digits; tolerance normally1e-35, Gibbs cross-checks1e-60.
+ Finite coefficient/mode checks supplement the general analytic proofs.
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch19_review.tex
+  Exit0;32pages,278005bytes;zero warnings/errors/overfull/underfull boxes.
+ All32 pages rendered at1150-pixel height and visually reviewed in
+ work/ch19-final-review/contact-01.png through contact-11.png.
+ No clipping, formula overlap, detached heading or unreadable correction found.
+ Integrated book rebuilding and review remain pending.
+
+Current SHA-256
+9c09eaf6ea94049bf169816875962dd0192dec358c6b2550b368fb4620a41d2d  sections/ch19.tex
+9c7304a467f87f7cdd31f1cec8767dcbb675aa8b83b97455bd30dc4ecf98b9bd  supplementary/ch19_check.py
+b43a42d7b6efbd6b96bd948022ac85ed75730f0412644aa773319c5cf69b8d89  work/ch19_review.pdf

@@ -1,0 +1,23 @@
+Chapter21 verification record — current final review
+
+All33 entries were freshly source-compared and every full derivation traced.
+The per-entry source locations, mathematical reasoning, corrections and
+student-facing expansions are in supplementary/ch21_final_audit.txt.
+The previous detailed ledger is preserved in work/final-review-baseline/.
+
+Executed: python3 supplementary/ch21_check.py
+PASS:411 assertions across33/33 exercises; exit0.
+Transcript: work/ch21-final-check.txt.
+Exact symbolic checks and90-digit numerical samples complement the general
+analytic, distributional, convergence and operator arguments in the TeX.
+Default tolerance1e-60; Abel integrals1e-35. No numerical sample is claimed
+to establish an infinite-dimensional theorem.
+
+Standalone build: work/ch21-only.pdf,28pages,303757bytes.
+Build log: work/ch21-final-review-build.txt and work/ch21-only.log.
+All28 current pages visually reviewed;zero TeX warnings/errors/box warnings.
+
+Current SHA-256
+91d63319f7de779dbec4b8cc498c7809407ef7b4721a6d33d21eec779f4afa37  sections/ch21.tex
+3e6ead1cadefa0ffdd9aebb08de0a0d92a2c1a0e39ef1b0f6e1b7aff4413ddde  supplementary/ch21_check.py
+5b5a00ff8d3b87b9d5019437155468e76dfb68863f862bf45d077ea799b53647  work/ch21-only.pdf

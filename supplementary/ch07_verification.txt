@@ -1,0 +1,307 @@
+Chapter 7 CURRENT verification record after fresh final audit
+============================================================
+Current source SHA256: eb1bffa414eae51006719dc0db4e70e0416bba8bb2f4df35b5ec5eda1285cb0b
+Current checker SHA256: 8267a9c1ab88946ee04ab535b644cfa2cc090a5ae932e52b80e468aca16fda81
+75 unique exercise IDs and75 solution markers; all seven subsections have
+Needspace guards. Detailed current source and derivation review for every
+entry is supplementary/ch07_final_audit.txt. Earlier handoff is preserved
+only as explicitly historical work/ch07-final-historical-verification.txt.
+This current record supersedes its counts, source hashes and erratum labels.
+
+SOURCE AND ERRATUM STATUS
+Every statement compared to actual book/manual extracts with literal-newline
+line numbering, and disputed PDF glyphs/claims visually checked. No published
+Chapter7 erratum appears in manual's Errata and Revision Status(6April2012).
+Proved source repairs remain dark red:Table7.1 -c; singular IVP uniqueness;
+Legendre infinity exception; nonzero-m second power; reduced radial l0 limit;
+manual Chebyshev sign, repeated-root normalization, VP derivative labels/
+trigonometric factor and Riccati intermediate equations. Necessary local
+assumptions and branch/denominator conditions are now directly in statements.
+7.6.3 repairs this document's original transcription, not the textbook.
+WITHDRAWN:7.5.8's printed odd series is a sufficient requested answer;
+7.6.7 intentionally asks about a flawed argument;7.6.22's source restricts
+its named Vn companion to n!=0. The sine formula's extension to zero is
+explained without asserting that the source's convention is false.
+
+EXECUTABLE SCOPE AND CURRENT COUNTS
+Run:python3 -u supplementary/ch07_check.py > work/ch07-final-check-rerun.txt
+Exit0:611 assertions=322 algebra-section+132 independent numerical table+
+157 canonical-table/inventory assertions;346 exact/structural,265 numerical.
+All75 IDs represented. Independent Legendre Pochhammer sums verify all120
+values, quadrature/erfi checks Hermite tails, and canonical text is parsed to
+verify actual printed cells, cutoffs and upward bounds. Samples do not prove
+the general analytic statements; displayed mathematical arguments do so.
+
+CURRENT PER-EXERCISE EXECUTABLE/ANALYTIC SCOPE
+7.2.1 (current sections/ch07.tex:12): Separation, units and total charge; symbolic ODE, initial value and
+        improper integral; the current at 100 s checked numerically.
+7.2.2 (current sections/ch07.tex:51): Separation and J0 normalization; symbolic ODE and large-s limit.
+  Fresh audit: Separation and normalization give A/sqrt(1+s^2), including zero; added complex branch and right-half-plane convention because Laplace s may be complex. Exact residual and large-real-s limit checked.
+7.2.3 (current sections/ch07.tex:80): Integrated IVP, pole/domain and zero cases; exact ODE and initial value.
+  Fresh audit: Integrated reciprocal with limits, solved IVP, checked domain and k=0/N0=0 cases. Undefined endpoint is distinguished from divergence approaching it.
+7.2.4 (current sections/ch07.tex:113): Independent partial fractions for unequal concentrations and separation
+        for equal ones; exact residuals, initial condition and equal-A/B limit.
+7.2.5 (current sections/ch07.tex:167): Differentiate the general implicit time/distance identities; symbolic
+        explicit checks at n=0,1/2,1,2,3 on the positive-bracket domain. The
+        stopping-time/distance criteria follow from the analytic formulas.
+  Fresh audit: Traced separation and dx/dt=v, general exponents, n=1/n=2 logarithmic exceptions, stopping-time and stopping-distance inequalities. General implicit identities plus representative explicit branches checked; no continuation through an undefined drag law assumed.
+7.2.6 (current sections/ch07.tex:221): Exact substitution y=xu; roots g(u)=u are restored analytically.
+7.2.7 (current sections/ch07.tex:245): Fundamental-theorem and path/potential proof; both formal potential
+        derivatives and mixed-derivative identity checked symbolically.
+  Fresh audit: Verified both partial derivatives by FTC and exactness, and both implications for differentiable level curves. Added independent polynomial path-integration checks rather than relying only on a preexisting symbolic potential.
+7.2.8 (current sections/ch07.tex:283): Independent explicit partial differentiation; same formal identities
+        checked, with the admissible-path condition stated.
+  Fresh audit: Traced differentiation under the first integral and cancellation of Q(x0,y). Independent integrated polynomial potential verifies x/y derivatives; no missing term.
+7.2.9 (current sections/ch07.tex:321): Cross partials and explicit potential; generic integrating-factor
+        potential differentiated symbolically with alpha'=alpha p.
+7.2.10 (current sections/ch07.tex:347): Necessity evaluated at h(y*)!=0 and sufficiency by potential;
+         symbolic cross partial and constant-g primitive checks.
+  Fresh audit: Evaluating h at one nonzero point forces g'=0 throughout x interval; converse potential explicit. Global connectedness is necessary for one constant, not inferred from local exactness alone.
+7.2.11 (current sections/ch07.tex:376): Product/chain-rule proof; general solution differentiated symbolically.
+7.2.12 (current sections/ch07.tex:405): Integrating factor and IVP; exact ODE, IC, and b->0 limit.
+7.2.13 (current sections/ch07.tex:429): Two successive integrating factors; exact residual, zero daughter IC,
+         and coincident-rate limit.
+7.2.14 (current sections/ch07.tex:466): Differentiate spherical mass; exact mass-loss law and exhaustion time.
+7.2.15 (current sections/ch07.tex:489): Three requested methods separately; exact ODE, IC and separated
+         potential derivative, with v=0 restored analytically.
+7.2.16 (current sections/ch07.tex:527): Real partial-fraction solution; dimensionless exact quadratic-drag
+         ODE, IC and terminal limit; all displayed terminal/time values checked.
+  Fresh audit: Expanded exponentiation, sign preservation and linear solve for v, explicitly restoring v_i=v_T. Rational/tanh form works above terminal speed; PDF96 confirms manual real arctanh ambiguity. Exact residual/IC/limit and all quoted numeric values checked.
+7.2.17 (current sections/ch07.tex:594): Reciprocal substitution plus zero solution; exact undivided ODE and
+         the smooth origin value for nonzero denominator constant.
+7.2.18 (current sections/ch07.tex:624): Homogeneous substitution and exact potential; both original
+         differential-form coefficients reproduced by partial differentiation.
+7.3.1 (current sections/ch07.tex:662): Characteristic factorization; all three basis residuals and Wronskian.
+7.3.2 (current sections/ch07.tex:679): Real characteristic basis; all residuals and full Wronskian.
+7.3.3 (current sections/ch07.tex:699): Repeated-root construction by y=e^x u; all residuals and Wronskian.
+7.3.4 (current sections/ch07.tex:720): Exponential substitution; both residuals and Wronskian.
+7.4.1 (current sections/ch07.tex:741): Explicit transformed rational coefficients and pole classification;
+        symbolic infinity transform, finite singular factors and l=0 exception.
+  Fresh audit: Finite pole factors and inversion chain rule traced. Infinity is ordinary at l=0,-1 and regular singular otherwise. Symbolic transforms/limits confirm existing correction.
+7.4.2 (current sections/ch07.tex:776): Explicit Laguerre/Bessel rational coefficients at zero/infinity;
+        symbolic infinity transforms for both equations.
+7.4.3 (current sections/ch07.tex:811): Explicit finite/infinite rational coefficients and nonremovable P pole;
+        symbolic transforms and finite regular-singular factors.
+  Fresh audit: Finite and infinite transformed poles remain regular; added dark-red manual sign explanation. Exact transform and n=1 solution residual expose wrong sign without changing classification.
+7.4.4 (current sections/ch07.tex:841): Polynomial finite coefficients and nonremovable cubic infinity pole;
+        symbolic infinity transform.
+7.4.5 (current sections/ch07.tex:858): Full change of variable, derivatives and parameter substitution;
+        exact Legendre residual and the extra derivative term caused by +c.
+  Fresh audit: Both derivative factors and all parameter products traced. Actual PDF347 table has +c; residual shows extra -4y' from it. Correct equation yields Legendre exactly.
+7.5.1 (current sections/ch07.tex:893): Analytic derivative induction and continuous-coefficient integral
+        uniqueness proof; exact counterexample residual and identical ICs.
+  Fresh audit: Derivative induction establishes Taylor coefficients, while integral estimate handles continuous coefficients. Explicit xy''-y'=0, y=Cx^2 invalidates manual regular-singular extension; PDF98 confirms wording and exact counterexample checked.
+7.5.2 (current sections/ch07.tex:942): Lowest two Frobenius powers; both derivative coefficients checked.
+7.5.3 (current sections/ch07.tex:967): Lowest two coefficients and parity recurrences; exact monomial action
+        and s=0/1 next coefficient.
+7.5.4 (current sections/ch07.tex:1006): Explicit recurrences for all four equations; general monomial action
+        and Bessel a1 resonance identity checked symbolically.
+7.5.5 (current sections/ch07.tex:1057): General monomial action, indicial roots and recurrence; first five
+        residual coefficients of both generic branches. Radius/boundary
+        convergence established analytically, not by finite coefficients.
+  Fresh audit: Both Frobenius recurrences, denominators, independence and gamma asymptotic were traced. Added explicit partial fractions/Abel reduction integral for integer resonance, full unit-circle criterion away from1, and distinction between a terminating factor and its fractional prefactor. General identities plus finite residuals checked.
+7.5.6 (current sections/ch07.tex:1148): General monomial action and generic two-branch residuals; exact
+        logarithmic a=c=1 solution and Wronskian. Integer-c convolution and
+        generalized-series residuals tested at c=-2,0,1,2,3 with a=2/3.
+        The general resonant construction is proved by reduction of order;
+        these finite tests do not establish it for all integers by sampling.
+  Fresh audit: Both generic branches, entire series factors, integer larger-root recurrence, reciprocal convolution, integrated logarithm and Wronskian traced. Tests at c=-2,0,1,2,3 support the analytical all-integer construction; no zero denominator silently used.
+7.5.7 (current sections/ch07.tex:1219): Exact indicial root and first three Stark coefficient equations,
+        including the first occurrence of F.
+  Fresh audit: Expanded derivative, full three-term recurrence and a1,a2,a3 calculations traced, including first F occurrence. Generic coefficient identities and a negative-m root check confirm the qualification.
+7.5.8 (current sections/ch07.tex:1282): Both even/odd first three allowed coefficients; substitution checks
+        every controlled residual coefficient. Initial data prove independence.
+  Fresh audit: Both even/odd coefficient triples, recurrence and independence checked. Withdrew misleading erratum: question asks for one series, so its correct odd answer is sufficient; even branch remains optional completeness, not a source error.
+7.5.9 (current sections/ch07.tex:1339): Yukawa series substituted with independently expanded exponential;
+        residual vanishes through its controlled constant and linear terms.
+  Fresh audit: Convolution with exp(-ax), s=1 recurrence and first two equations traced; independent expansion checks constant/linear residual. Other logarithmic branch is not claimed to be represented.
+7.5.10 (current sections/ch07.tex:1389): Recurrence terminates; exact polynomial substitution in original ODE.
+7.5.11 (current sections/ch07.tex:1421): Prefactor derivatives and transformed I0 equation checked exactly;
+         exact residual of the b1,b2 truncation. Divergence is proved by the
+         general term ratio, not inferred from two coefficients.
+  Fresh audit: Both prefactor derivatives, transformed equation and inverse-power recurrence traced. Residual checks controlled orders; eventual ratio j/(2x) establishes asymptotic rather than convergent interpretation. No change beyond domain.
+7.5.12 (current sections/ch07.tex:1470): Coefficient recurrence independently compared with Pochhammer ratio.
+         All 60 partial sums and all 60 last terms computed at 70 digits
+         and checked against direct 90-digit Pochhammer sums (relative/absolute
+         tolerances in the script). Gamma asymptotics provide the convergence
+         proof; tables alone are explicitly described as insufficient.
+7.5.13 (current sections/ch07.tex:1559): Exact coefficient recurrence; first cutoff indices at x=1,2,3 checked,
+         quadrature vs erfi to 65 digits, and actual tails below the proven
+         geometric bounds. The proof bounds the entire tail.
+  Fresh audit: Recurrence, exact factorial coefficients, first cutoffs9,17,28, geometric whole-tail bound and termwise integral traced. One displayed bound raised to7.349021e-7 for upward rounding; every table cell/upper enclosure checked against independent quadrature and erfi.
+7.6.1 (current sections/ch07.tex:1638): Dot-product proof for arbitrary relation; identity Gram determinant.
+7.6.2 (current sections/ch07.tex:1658): General symbolic determinant equals scalar triple product; matrix
+        invertibility gives both directions of the independence criterion.
+7.6.3 (current sections/ch07.tex:1695): General triangular/Vandermonde proofs; exact Wronskians for N=1..7
+        for both corrected and transcribed sets (samples supplement proofs).
+7.6.4 (current sections/ch07.tex:1739): Exact general quotient identity and zero-function counterexample.
+  Fresh audit: Quotient derivative/integration valid on connected interval; y2=0,y1!=0 disproves literal unqualified orientation. Exact quotient and counterexample checked.
+7.6.5 (current sections/ch07.tex:1772): Smoothness proof by polynomial times exp(-u^2), and analytic/ODE repairs;
+        symbolic right derivative, first five joining limits and nonzero W
+        at x=2. The finite joining tests are not the proof of C-infinity.
+  Fresh audit: Smooth flat-function counterexample and all-derivative decay proof traced. Analytic identity theorem or Abel+IVP uniqueness supplies repaired global result. Finite joining checks are not used as proof of smoothness.
+7.6.6 (current sections/ch07.tex:1820): Exact 3-function Wronskian, with its zeros/independence read analytically.
+7.6.7 (current sections/ch07.tex:1848): Exact W on each half-line and disagreeing one-sided derivatives;
+        elementary two-equation independence proof across zero.
+  Fresh audit: Half-line W zero, mismatched derivatives at0 and full-interval independence proof checked. Removed erratum styling from the intended trap; its conclusion is correctly explained, not alleged to be accidental source error.
+7.6.8 (current sections/ch07.tex:1873): Exact W and explicit nonlinear relation, plus constant-coefficient proof.
+7.6.9 (current sections/ch07.tex:1899): Generic symbolic Abel identity and exact Legendre W profile.
+7.6.10 (current sections/ch07.tex:1931): Generic 3-by-3 W determinant checked; initial-data null vector and
+         uniqueness supply the required dependence argument.
+  Fresh audit: Third row dependence gives W3=0, then two initial constraints produce nonzero constant coefficients and uniqueness proves global dependence. This fills the invalid arbitrary-function converse in the terse manual.
+7.6.11 (current sections/ch07.tex:1966): Generic self-adjoint Abel and quotient identities; integration gives
+         both W=C/p and reduction of order including constants/domains.
+  Fresh audit: Subtraction yields(pW)'=0; quotient integration includes both constants, and C!=0 gives independence. General symbolic identities checked.
+7.6.12 (current sections/ch07.tex:2013): Generic symbolic derivative-removal identity.
+  Fresh audit: Both derivatives of the exponential/product and cancellation of z' traced. Generic symbolic conjugation identity verifies every coefficient.
+7.6.13 (current sections/ch07.tex:2058): Generic symbolic radial derivative cancellation and correction term.
+7.6.14 (current sections/ch07.tex:2088): Generic symbolic reduction-of-order residual and nonzero W.
+  Fresh audit: Every derivative of h,J,y2 displayed; substituted residual cancels and W=e^-integralP proves independence. Symbolic generic checks agree.
+7.6.15 (current sections/ch07.tex:2133): General lower-limit identities derived explicitly; a nonconstant-y1,
+         nonzero-P example checks both changed limits and the signs.
+  Fresh audit: Inner-limit exponential scale and outer-limit additive first-solution constant traced, including signs. Independent P=1,y1=exp(-x) integration checks example; corrected checker comment that had called P nonconstant.
+7.6.16 (current sections/ch07.tex:2175): Exact generic power residual and m=0 logarithmic residual.
+  Fresh audit: Integral r^m integral s^(-2m-1) produces opposite power for m!=0 and log for0. Both exact residuals checked.
+7.6.17 (current sections/ch07.tex:2201): General parity argument excludes an x^-1 term; exact antiderivative
+         and second oscillator residual.
+7.6.18 (current sections/ch07.tex:2232): General exponent/parity proof and antiderivative identity; sample
+         resonance exclusions at three noninteger orders supplement the proof.
+  Fresh audit: Parity forbids resonance k=nu, including half-integer orders. Added complex-order/branch interpretation; nonzero leading opposite exponent establishes independence. General antiderivative identity plus finite resonance tests support analytic proof.
+7.6.19 (current sections/ch07.tex:2266): Both Hermite residuals and even normalization checked, with explicit
+         power-series coefficient comparison in the solution.
+7.6.20 (current sections/ch07.tex:2322): Integral derivative residual and truncated logarithmic-series
+         residual; convergence and independence established analytically.
+7.6.21 (current sections/ch07.tex:2349): Separate integral and termwise series proofs; independent symbolic
+         integral residual and exact finite-series remainder.
+7.6.22 (current sections/ch07.tex:2394): Exact arcsin residual and V_n/n limit; direct first-order integration.
+  Fresh audit: Two methods yield arcsinx on(-1,1); sine expression extends to zero function and Vn/n tends arccosx. Direct statement now clarifies convention/domain without falsely correcting source. Exact residual and limit checked.
+7.6.23 (current sections/ch07.tex:2443): Exact second-solution residual and Wronskian; antiderivative displayed.
+7.6.24 (current sections/ch07.tex:2478): Symbolic indicial factor, recurrence denominator and leading second
+         power; explicit l=0 limit. General asymptotic proof in solution.
+  Fresh audit: Indicial roots, recurrence denominator and b convolution traced. Reduction integral gives exact leading coefficient r^-l; l0 possible rlogr still tends0. Generic algebra and exceptional limit checked.
+7.6.25 (current sections/ch07.tex:2541): Generic exact substitution identity for y2=y1 f; two integrations,
+         lost constant branch and Wronskian explained.
+  Fresh audit: Two product derivatives give first-order equation for f'; both integration constants retained and lost f'=0 branch restored. Generic substitution identity checked.
+7.6.26 (current sections/ch07.tex:2584): Both general power residuals, Wronskian, logarithmic residual and
+         exact coalescing-root limit.
+  Fresh audit: Both roots/residuals, W=-alpha a0^2, logarithmic derivatives and cancellation in coalescing limit traced. PDF106 confirms manual lost a0/extra1/2; exact checks retain normalization.
+7.7.1 (current sections/ch07.tex:2659): General symbolic variation-of-parameters auxiliary/source equations;
+        full derivative derivation and completeness argument in solution.
+  Fresh audit: Auxiliary condition, second derivative, Cramer signs, integration constants and completeness proof traced. Generic source/auxiliary identities checked.
+7.7.2 (current sections/ch07.tex:2713): Both homogeneous residuals, particular residual and nonzero W.
+7.7.3 (current sections/ch07.tex:2731): Same checks; corrected manual antiderivative independently differentiated.
+7.7.4 (current sections/ch07.tex:2750): Same checks plus displayed sine/cosine coefficient matching.
+7.7.5 (current sections/ch07.tex:2772): Same checks in the original undivided ODE; interval/extension stated.
+  Fresh audit: Both basis solutions, W=x exp(x), normalized sourcex and antiderivatives traced. Added proof that matching y and y'' across0 fixes both constants, excluding additional C2 joins. Exact symbolic matching and residuals checked.
+7.8.1 (current sections/ch07.tex:2812): Exact Riccati family, both equilibria and corrected linear v equation.
+7.8.2 (current sections/ch07.tex:2841): Exact rational Riccati family, lost branch and corrected linear v equation.
+7.8.3 (current sections/ch07.tex:2870): Exact positive/negative branches and all constant solutions 0,+1,-1;
+        real domain specified.
+7.8.4 (current sections/ch07.tex:2896): Exact general lines and singular parabola; contact value and slope
+        checks for arbitrary tangent parameter.
+  Fresh audit: Line intercept and singular integration constant forced by original equation; envelope value/slope checked. Added C1 tangent-join example, including zero contact and unequal second derivatives, so stated smooth branches are not falsely exhaustive for C1 solutions.
+
+CURRENT FULL CHECKER OUTPUT
+PASS 7.2.1: 4 exact/numerical assertions
+PASS 7.2.2: 2 exact/numerical assertions
+PASS 7.2.3: 2 exact/numerical assertions
+PASS 7.2.4: 4 exact/numerical assertions
+PASS 7.2.5: 12 exact/numerical assertions
+PASS 7.2.6: 1 exact/numerical assertions
+PASS 7.2.7: 5 exact/numerical assertions
+PASS 7.2.8: 5 exact/numerical assertions
+PASS 7.2.9: 1 exact/numerical assertions
+PASS 7.2.10: 2 exact/numerical assertions
+PASS 7.2.11: 1 exact/numerical assertions
+PASS 7.2.12: 3 exact/numerical assertions
+PASS 7.2.13: 3 exact/numerical assertions
+PASS 7.2.14: 2 exact/numerical assertions
+PASS 7.2.15: 3 exact/numerical assertions
+PASS 7.2.16: 7 exact/numerical assertions
+PASS 7.2.17: 2 exact/numerical assertions
+PASS 7.2.18: 2 exact/numerical assertions
+PASS 7.3.1: 4 exact/numerical assertions
+PASS 7.3.2: 4 exact/numerical assertions
+PASS 7.3.3: 4 exact/numerical assertions
+PASS 7.3.4: 3 exact/numerical assertions
+PASS 7.4.1: 5 exact/numerical assertions
+PASS 7.4.2: 4 exact/numerical assertions
+PASS 7.4.3: 5 exact/numerical assertions
+PASS 7.4.4: 2 exact/numerical assertions
+PASS 7.4.5: 2 exact/numerical assertions
+PASS 7.5.1: 3 exact/numerical assertions
+PASS 7.5.2: 2 exact/numerical assertions
+PASS 7.5.3: 3 exact/numerical assertions
+PASS 7.5.4: 5 exact/numerical assertions
+PASS 7.5.5: 13 exact/numerical assertions
+PASS 7.5.6: 57 exact/numerical assertions
+PASS 7.5.7: 5 exact/numerical assertions
+PASS 7.5.8: 8 exact/numerical assertions
+PASS 7.5.9: 1 exact/numerical assertions
+PASS 7.5.10: 1 exact/numerical assertions
+PASS 7.5.11: 2 exact/numerical assertions
+PASS 7.5.12: 1 exact/numerical assertions
+PASS 7.5.13: 1 exact/numerical assertions
+PASS 7.6.1: 1 exact/numerical assertions
+PASS 7.6.2: 1 exact/numerical assertions
+PASS 7.6.3: 14 exact/numerical assertions
+PASS 7.6.4: 2 exact/numerical assertions
+PASS 7.6.5: 7 exact/numerical assertions
+PASS 7.6.6: 1 exact/numerical assertions
+PASS 7.6.7: 3 exact/numerical assertions
+PASS 7.6.8: 2 exact/numerical assertions
+PASS 7.6.9: 2 exact/numerical assertions
+PASS 7.6.10: 1 exact/numerical assertions
+PASS 7.6.11: 2 exact/numerical assertions
+PASS 7.6.12: 1 exact/numerical assertions
+PASS 7.6.13: 1 exact/numerical assertions
+PASS 7.6.14: 2 exact/numerical assertions
+PASS 7.6.15: 1 exact/numerical assertions
+PASS 7.6.16: 2 exact/numerical assertions
+PASS 7.6.17: 2 exact/numerical assertions
+PASS 7.6.18: 19 exact/numerical assertions
+PASS 7.6.19: 3 exact/numerical assertions
+PASS 7.6.20: 2 exact/numerical assertions
+PASS 7.6.21: 2 exact/numerical assertions
+PASS 7.6.22: 3 exact/numerical assertions
+PASS 7.6.23: 2 exact/numerical assertions
+PASS 7.6.24: 4 exact/numerical assertions
+PASS 7.6.25: 1 exact/numerical assertions
+PASS 7.6.26: 5 exact/numerical assertions
+PASS 7.7.1: 2 exact/numerical assertions
+PASS 7.7.2: 4 exact/numerical assertions
+PASS 7.7.3: 5 exact/numerical assertions
+PASS 7.7.4: 4 exact/numerical assertions
+PASS 7.7.5: 5 exact/numerical assertions
+PASS 7.8.1: 4 exact/numerical assertions
+PASS 7.8.2: 3 exact/numerical assertions
+PASS 7.8.3: 5 exact/numerical assertions
+PASS 7.8.4: 7 exact/numerical assertions
+PASS coverage: 1 exact/numerical assertions
+PASS algebra: 322 assertions; all 75 exercises represented
+PASS 7.5.12: all 60 sums and 60 last terms, recurrence vs independent Pochhammer sums
+PASS 7.5.13 x= 1 last n= 9 sum= 1.46265173160554998 error= 1.43016e-8 bound= 1.44348e-8 integral= 1.46265174590718161
+PASS 7.5.13 x= 2 last n= 17 sum= 16.4526270425581467 error= 7.22949e-7 bound= 7.34902e-7 integral= 16.4526277655072302
+PASS 7.5.13 x= 3 last n= 28 sum= 1444.54508492036777 error= 3.79723e-5 bound= 3.86959e-5 integral= 1444.54512289271415
+PASS Chapter 7 numerical tables: 120 Legendre values and 12 Hermite assertions
+PASS canonical TeX tables and inventory: 157 assertions
+
+FINAL STANDALONE BUILD AND RENDER QA
+Wrapper:work/ch07-final-review.tex, copied actual main.tex preamble and
+inputs only ch07. Last successful build:
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch07-final-review.tex
+Final log:work/ch07-final-build-03.txt (and ch07-final-review.log).
+No errors, warnings, overfull or underfull boxes;46pages.
+PDF SHA256:3770302d973754ac065b5451c6e63c826c4c970d3b6d2a8697809c38a5dd8509
+Rendered all46pages at1150px and inspected sheets01--12. A one-letter
+paragraph opening at the end of p18 was repaired with Needspace; final
+p18/19 were individually inspected. All other44rendered pages were
+byte-identical to the inspected images. All changed pages thus reviewed.
+Tables, equations, dark-red corrections and subsection headings fit clearly.
+A buffered redirected checker rerun exited120 with empty output; no cause
+is asserted. The subsequent unbuffered full rerun exited0 with611passes
+(work/ch07-final-check-rerun.txt); that verified output is also copied to
+work/ch07-final-check.txt. No mathematical assertion failed in the log.
+No main build and no preexisting process signaled or terminated.
+No unresolved mathematical or layout finding identified in this audit.
+Analytical proof limits and finite-test scope are stated per exercise above.

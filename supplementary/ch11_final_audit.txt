@@ -1,0 +1,774 @@
+CHAPTER 11 — FRESH FINAL AUDIT (2026-10-04)
+
+Scope and final state
+All 102 complete current problem statements and solutions were freshly read,
+compared with all 102 textbook entries and the 101 available manual entries,
+and traced through the derivation, assumptions, branches, contour orientation,
+convergence and exceptional parameters. The manual omits 11.4.5; its textbook
+statement and both independent modulus-principle proofs were audited directly.
+This audit was not inferred from the preexisting checker. There are 102 unique
+problems, 102 solution blocks, zero unfinished markers, nine Needspace-protected
+subsections and one retained path diagram.
+
+FINAL CURRENT SHA256
+sections/ch11.tex  ef1fc688959688a45e5fa51808be83877ec96e9807bd2eec0c1cbb7649536bc5
+supplementary/ch11_check.py  f4eb8d37ba581fe9aca0426c1c54037297fa4a045ebb95e1e58b8ecc929dcec3
+work/ch11-final-review.pdf  5ea8e8e622b4ce904dd28e35b604b5f665ba9e22f13d9c3c972c29a18a927a7e
+work/ch11-final-review.log  cddb1e9668eb504849e6903d3912c80932cf98cc7574d232504cb55f16e8dc2a
+
+Sources actually consulted
+Textbook: Mathematical Methods for Physi - Arfken, George B. & Weber, Han_4469.pdf
+Manual: Solution mathematical method for physics-7.pdf
+All exercise extracts read in work/book-layout.txt:23558-27615 and
+work/solman.txt:12383-15925; referenced Example11.6.4, pole/product formulas,
+contour equations11.112-116 and I_N definition also read in full where used.
+All numeric source anchors below count literal newlines using split('\n'),
+matching rg/sed; form feeds are not counted as extra lines.
+Fresh original-image checks: textbook physical PDF476,485,490,506,519,520,521,
+534,538,542,544 (printed numbers one greater on these particular pages).
+The files are work/ch11-final-book-* and the freshly reopened existing
+work/ch11-source-485-0485.png, -506-0506.png, -521-0521.png,
+work/ch11_fig1126_source-0534.png. The distinct figure paths, fractional-power
+numerator, contradictory modulus exercise, entire-product formula, infinity
+hint, sinc limits, cosh hint and tangent-residue sign were checked visually.
+Fresh manual images: physical125,133,134,135,136,137,141,148,156,157, corresponding
+to printed122,130,131,132,133,134,138,145,153,154. Published errata physical6,
+printed3, was freshly reopened as work/ch11_manual_errata-006.png. It confirms
+PV removal and arrow corrections but itself misstates the full-line sinc value.
+
+Changes and correction provenance
+Necessary assumptions and verified statement corrections are now in the
+questions in dark red, rather than being left solely to their solutions.
+These include real differentiability, local branch domains, connectedness,
+contour position/orientation, strict inequality excluding zero, common Laurent
+annulus, tail convergence, shrinking semicircles, real/allowed parameters,
+removable parameter values, reflection domain and inversion's line exception.
+The false 11.2.12 claim is replaced by the exact critical-point criterion and
+the Wirtinger distinction. The incompatible 11.4.5 is corrected to the minimum
+principle while retaining a proof/explanation of the original upper-bound claim.
+The sine product now has a locally uniform logarithmic-derivative proof;
+e^(z²) refutes the source's unrestricted general entire-product assertion.
+The CR counterexample, all four square-edge integrals and the two integrations
+by parts for the logarithmic moment are displayed explicitly.
+New PDF-confirmed source/manual notes cover 11.2.11,11.6.1,11.6.2,11.6.4,
+11.6.10,11.6.11,11.7.1(d-g),11.7.7,11.8.22,11.8.25,11.9.6,11.10.2,11.10.6.
+Existing actual textbook corrections and earlier transcription fixes are kept
+and distinguished. In particular 11.6.5's fractional numerator and11.7.6's
+monomial were correct in the textbook and damaged only in transcription.
+The old ledger's claim that the worked manual assigns pi/2 to11.8.9 is withdrawn:
+its p138 explicitly gives pi for the full line, correctly. The textbook and
+separate published errata list give the incorrect half-line value pi/2.
+
+Executable verification and limits
+python3 supplementary/ch11_check.py > work/ch11-final-check-output.txt
+Final completed result: 893 assertions in102 nonempty groups =550 exact symbolic/
+rational assertions +343 numerical comparisons/bounds, plus2 uncounted guards
+for source/group inventory and unfinished markers. Thirty-two exact assertions
+were added in this audit. The old861-assertion handoff is historical, superseded.
+Python3.14.7, SymPy1.14.0, mpmath1.3.0 with45-digit working precision. Numerical
+relative/absolute scaled tolerances are normally1e-30; oscillatory tests use
+1e-26 or1e-27 as explicitly selected. Finite sine/product checks use analytic
+tail bounds, not equality to truncated sums. Numeric root counts/distances and
+sample pole-neighborhood bounds are labeled numerical in the exact totals.
+Tests independently differentiate, integrate, expand, extract residues and
+perform ordinary/oscillatory quadrature. Samples of theorem hypotheses or
+branch values do not prove general theorems or global topology. Such claims,
+contour limits and all convergence interchanges rest on the separately traced
+analytical proofs. No formal proof-assistant claim is made. No entry was skipped
+and no unresolved mathematical defect remains from this pass.
+
+Render/layout verification actually performed
+Standalone wrapper work/ch11-final-review.tex copies the actual main preamble
+and inputs only this chapter. Repeated pdflatex -interaction=nonstopmode
+-halt-on-error -output-directory=work work/ch11-final-review.tex builds pass;
+the final52-page log has no warnings, undefined references or box warnings.
+pdftoppm -r70 -png rendered all pages. All original51 pages were inspected in
+13 contact sheets; after the final square-edge expansion, hashes identified
+changed pages7-52, all46 re-inspected in12 work/ch11-final-changed-* sheets.
+Pages1-6 remained byte-identical renderings already inspected. Formula tables,
+dark-red corrections, diagram and subsection boundaries have no clipping,
+overlap or orphan subsection headings. No root main build or process termination.
+
+PER-ENTRY STATEMENT/SOURCE, DERIVATION/PEDAGOGY AND EXECUTABLE EVIDENCE
+Current source line numbers point to each problem start. B/M denote literal-
+newline anchors in book-layout.txt/solman.txt. These are entry anchors, not
+claims that one line contains the entire source. Every complete entry was read.
+
+11.2.1 — sections/ch11.tex:12; work/book-layout.txt:23558; work/solman.txt:12383
+Matched Re(z)=x. Real and imaginary directional quotients are 1 and 0; CR fails at every point,
+hence no analytic neighborhood.
+Executable: supplementary/ch11_check.py:81; 3 assertions (3 exact, 0 numerical): exact
+real/imaginary directional quotients and failed CR equation.
+
+11.2.2 — sections/ch11.tex:23; work/book-layout.txt:23559; work/solman.txt:12392
+Matched harmonic-component question; corrected constant exception and stationary-point wording
+in statement. Leading Taylor term has opposite signs on selected rays for each component;
+identity theorem handles the all-zero-coefficient case.
+Executable: supplementary/ch11_check.py:86; 19 assertions (19 exact, 0 numerical): generic
+leading Taylor term signs; harmonic polynomial families and constant exception.
+
+11.2.3 — sections/ch11.tex:51; work/book-layout.txt:23563; work/solman.txt:12393
+Matched both prescribed components. Integrated CR gives v=3x²y−y³+C and u=e^(−y)cos x+C, then
+reconstructs z³+iC and e^(iz)+C with correct real constants.
+Executable: supplementary/ch11_check.py:99; 6 assertions (6 exact, 0 numerical): exact CR
+equations and reconstruction of both analytic functions.
+
+11.2.4 — sections/ch11.tex:78; work/book-layout.txt:23568; work/solman.txt:12395
+Matched conjugate pair; connectedness now explicit. Four CR equations force all four first
+partials to vanish. Manual equality w1=w2 is refuted by 1±i; constancy is componentwise without
+connectedness.
+Executable: supplementary/ch11_check.py:105; 5 assertions (5 exact, 0 numerical): exact
+simultaneous CR linear system.
+
+11.2.5 — sections/ch11.tex:95; work/book-layout.txt:23570; work/solman.txt:12414
+Matched 1/(x+iy) and finite-plane exclusion. Rationalized components and all CR partials yield
+−1/z²; continuous partials justify sufficiency off zero.
+Executable: supplementary/ch11_check.py:111; 3 assertions (3 exact, 0 numerical): exact rational
+CR equations and complex derivative.
+
+11.2.6 — sections/ch11.tex:118; work/book-layout.txt:23573; work/solman.txt:12462
+Matched oblique-increment exercise; real differentiability made explicit. Factored full
+differential with o(|h|) remainder. Added CR-at-zero counterexample xy/sqrt(x²+y²), with zero
+axis quotients and nonzero diagonal quotient.
+Executable: supplementary/ch11_check.py:116; 4 assertions (4 exact, 0 numerical): generic CR
+differential; exact axis and diagonal quotients refute pointwise-CR sufficiency.
+
+11.2.7 — sections/ch11.tex:152; work/book-layout.txt:23575; work/solman.txt:12526
+Matched both polar CR equations and radial/tangential hint. Computed derivatives using
+dz=e^(iθ)dr and dz=ir e^(iθ)dθ, then equated components. Regular nonzero local polar patch now
+explicit.
+Executable: supplementary/ch11_check.py:126; 2 assertions (2 exact, 0 numerical): symbolic polar
+radial and angular derivatives with abstract amplitude/phase.
+
+11.2.8 — sections/ch11.tex:187; work/book-layout.txt:23584; work/solman.txt:12589
+Matched polar Laplacian. With L=ln R, mixed derivatives of L_r=Θ_θ/r and L_θ=−rΘ_r yield every
+Laplacian term; nonzero analytic patch and r>0 required explicitly.
+Executable: supplementary/ch11_check.py:132; 1 assertions (1 exact, 0 numerical): exact mixed-
+derivative elimination for arbitrary phase.
+
+11.2.9 — sections/ch11.tex:212; work/book-layout.txt:23591; work/solman.txt:12636
+Matched all seven functions and exclusions. Quotient/chain rules, exponential equations for trig
+poles, and sin(z)/z Taylor series verify domains and f'(0)=0 for its removable extension;
+literal quotient still excludes zero.
+Executable: supplementary/ch11_check.py:137; 23 assertions (23 exact, 0 numerical): exact
+derivatives of all seven functions and removable limits.
+
+11.2.10 — sections/ch11.tex:247; work/book-layout.txt:23606; work/solman.txt:12685
+Matched four multivalued expressions; branches requested explicitly. Local power/log
+differentiation gives all derivatives; modulus |f(h)/h|=|h|^(1/2) proves pointwise derivative
+zero for extended z^(3/2), correcting manual without claiming neighborhood analyticity.
+Executable: supplementary/ch11_check.py:146; 5 assertions (5 exact, 0 numerical): exact local
+power/log derivatives and zero-derivative modulus limit.
+
+11.2.11 — sections/ch11.tex:294; work/book-layout.txt:23613; work/solman.txt:12716
+Rendered textbook p477 confirms initial u(x,v) typo; statement now marks u(x,y). CR gives
+f'=Vx−iVy, harmonicity gives zero divergence, and equal mixed partials give zero curl.
+Executable: supplementary/ch11_check.py:153; 21 assertions (21 exact, 0 numerical): exact flow
+potential, divergence and curl on analytic monomial family.
+
+11.2.12 — sections/ch11.tex:319; work/book-layout.txt:23621; work/solman.txt:12760
+Rendered source false pointwise claim and chain-rule hint. Statement now separates ordinary
+conjugate-variable derivative from Wirtinger partial: opposite axial limits imply f'(z0)=0,
+sufficient by remainder estimate; z² at zero refutes original; global existence forces
+constancy.
+Executable: supplementary/ch11_check.py:160; 6 assertions (6 exact, 0 numerical): generic
+CR/Wirtinger identity and nonconstant critical-point counterexample.
+
+11.3.1 — sections/ch11.tex:362; work/book-layout.txt:24035; work/solman.txt:12790
+Matched reversal identity; same geometric path now explicit. Substitution s=1−t in reversed
+parametrization accounts for derivative sign and reversed limits; no analyticity needed.
+Executable: supplementary/ch11_check.py:168; 2 assertions (2 exact, 0 numerical): explicit
+nonanalytic path integral reversal on two polynomial paths.
+
+11.3.2 — sections/ch11.tex:380; work/book-layout.txt:24038; work/solman.txt:12803
+Matched ML inequality; continuity and piecewise smooth finite-length contour explicit. Integral
+triangle inequality followed by sup bound proves result; sharp and nonconstant examples only
+supplement proof.
+Executable: supplementary/ch11_check.py:175; 3 assertions (1 exact, 2 numerical): sharp equality
+case and nonconstant contour ML numerical inequality.
+
+11.3.3 — sections/ch11.tex:401; work/book-layout.txt:24042; work/solman.txt:12809
+Matched endpoints 3+4i and 4−3i and both requested paths. Primitive 4z³/3−3iz²/2, displayed
+endpoint powers and subtraction give (76−707i)/3; chain rule ensures path independence.
+Executable: supplementary/ch11_check.py:180; 3 assertions (2 exact, 1 numerical): exact
+straight-path integration, endpoint primitive, numerical circular arc.
+
+11.3.4 — sections/ch11.tex:433; work/book-layout.txt:24050; work/solman.txt:12950
+Matched cos(2z) rectangle/path data. Primitive sin(2z)/2 and endpoint periodicity give
+cancellation exactly; no pole or cut issue.
+Executable: supplementary/ch11_check.py:192; 2 assertions (2 exact, 0 numerical): exact
+primitive and endpoint periodicity.
+
+11.3.5 — sections/ch11.tex:449; work/book-layout.txt:24056; work/solman.txt:12956
+Matched nonanalytic x²−iy² integrand and circle/square paths. Circle parametrization with stated
+clockwise sign and all four displayed square-edge values both give zero; solution does not infer
+analyticity from these zeros.
+Executable: supplementary/ch11_check.py:196; 6 assertions (6 exact, 0 numerical): direct
+parameter integration around clockwise circle and all square edges.
+
+11.3.6 — sections/ch11.tex:482; work/book-layout.txt:24059; work/solman.txt:12977
+Checked actual Figure 11.7 paths, not just endpoint labels. Segment substitutions give 1+i and
+1−i; second path requires dz=i dy. Manual loses that factor. Diagram reproduces the two paths
+and orientations.
+Executable: supplementary/ch11_check.py:211; 2 assertions (2 exact, 0 numerical): exact direct
+integration of both source-figure paths.
+
+11.3.7 — sections/ch11.tex:524; work/book-layout.txt:24066; work/solman.txt:13002
+Matched denominator z²+z, radius and hint; positive orientation and 0<R<1 explicit. Partial
+fractions yield opposite residues for R>1, only residue 1 for R<1; R=1 is undefined due to
+boundary pole.
+Executable: supplementary/ch11_check.py:217; 5 assertions (3 exact, 2 numerical): exact
+residues/partial fractions and numerical circles on both sides of R=1.
+
+11.4.1 — sections/ch11.tex:553; work/book-layout.txt:24355; work/solman.txt:13030
+Matched integer exponents and one encirclement. Parametrization of a positive circle gives
+Fourier orthogonality δmn including negative exponents; 81 executable pairs supplement general
+calculation.
+Executable: supplementary/ch11_check.py:224; 81 assertions (81 exact, 0 numerical): exact
+Laurent residue selection for all integer pairs from -4 through 4.
+
+11.4.2 — sections/ch11.tex:574; work/book-layout.txt:24361; work/solman.txt:13036
+Rendered circle |z−1|=1 encloses only +1. Residue 1/2 gives πi; manual zero incorrectly treats
+both poles as enclosed. Independent contour quadrature agrees.
+Executable: supplementary/ch11_check.py:229; 2 assertions (1 exact, 1 numerical): exact selected
+pole residue and numerical source-contour integral.
+
+11.4.3 — sections/ch11.tex:593; work/book-layout.txt:24368; work/solman.txt:13054
+Matched f'/(z−z0) and f/(z−z0)² equality. Total derivative of f/(z−z0) integrates to zero;
+equivalently both sides are 2πif'(z0).
+Executable: supplementary/ch11_check.py:233; 1 assertions (1 exact, 0 numerical): generic
+symbolic total-derivative identity.
+
+11.4.4 — sections/ch11.tex:611; work/book-layout.txt:24376; work/solman.txt:13073
+Matched nth Cauchy formula; z0 interior and n≥0 explicit. Positive distance to contour justifies
+differentiation; kernel derivative sign and factorial recurrence are written out for induction.
+Executable: supplementary/ch11_check.py:237; 2 assertions (2 exact, 0 numerical): generic
+induction derivative and factorial recurrence.
+
+11.4.5 — sections/ch11.tex:642; work/book-layout.txt:24384; manual: no entry (jumps11.4.4 to11.4.6)
+Rendered textbook p491 confirms incompatible upper-bound part(a), reciprocal hint and part(b).
+Manual has no 11.4.5 entry. Corrected statement to zero-free minimum principle; independently
+proves original upper bound, applies it to 1/f, and uses f=z to refute positive lower bound with
+zeros.
+Executable: supplementary/ch11_check.py:241; 5 assertions (5 exact, 0 numerical): exact
+counterexample to intended lower bound, consistent maximum bound.
+
+11.4.6 — sections/ch11.tex:684; work/book-layout.txt:24393; work/solman.txt:13086
+Matched e^(iz)/z³ and centered square. Second derivative −e^(iz), divided by 2!, gives residue
+−1/2 and integral −πi. Any positive side length works; source a>1 is sufficient.
+Executable: supplementary/ch11_check.py:248; 1 assertions (1 exact, 0 numerical): independent
+Laurent residue extraction.
+
+11.4.7 — sections/ch11.tex:700; work/book-layout.txt:24402; work/solman.txt:13095
+Matched sin²z−z² over (z−a)³. Two explicit derivatives give 2cos(2a)−2, so Cauchy formula yields
+2πi(cos2a−1), including apparent-pole cancellation cases.
+Executable: supplementary/ch11_check.py:251; 2 assertions (2 exact, 0 numerical): exact
+numerator second derivative and shifted residue.
+
+11.4.8 — sections/ch11.tex:719; work/book-layout.txt:24410; work/solman.txt:13098
+Matched z(2z+1) on unit circle. Partial fractions 1/z−1/(z+1/2) and both enclosed residues give
+zero.
+Executable: supplementary/ch11_check.py:256; 3 assertions (3 exact, 0 numerical): exact partial
+fractions, both residues.
+
+11.4.9 — sections/ch11.tex:735; work/book-layout.txt:24418; work/solman.txt:13116
+Matched generic numerator; necessary analyticity on closed-disk neighborhood explicit. Rational
+decomposition coefficients 1,−2,−2 lead to 2πif(0)−2πif(−1/2)−πif'(−1/2), with double-pole
+derivative factor checked.
+Executable: supplementary/ch11_check.py:261; 4 assertions (4 exact, 0 numerical): generic
+rational decomposition plus residues for independent polynomial numerators.
+
+11.5.1 — sections/ch11.tex:767; work/book-layout.txt:24694; work/solman.txt:13162
+Matched log(1+z) expansion. Integrated uniformly convergent geometric series from 0 to z; disk
+|z|<1 avoids the nearest singularity −1 and fixes log branch.
+Executable: supplementary/ch11_check.py:267; 11 assertions (10 exact, 1 numerical): first ten
+exact Taylor coefficients and independent numerical log series.
+
+11.5.2 — sections/ch11.tex:785; work/book-layout.txt:24702; work/solman.txt:13163
+Matched generalized binomial coefficients. Repeated derivative gives falling factorial/n!; ratio
+test gives radius one unless nonnegative integer exponent terminates, when expansion is entire.
+Executable: supplementary/ch11_check.py:273; 10 assertions (9 exact, 1 numerical): generic
+binomial derivative coefficients, integer termination, noninteger numerical branch.
+
+11.5.3 — sections/ch11.tex:812; work/book-layout.txt:24710; work/solman.txt:13221
+Source strict inequality falsely included zero; corrected 0<|z|≤1. Analytic extension g=f/z and
+boundary maximum M<1, followed by Cauchy on g^n and nth-root limit, give strict bound with
+explicit zero equality.
+Executable: supplementary/ch11_check.py:281; 4 assertions (2 exact, 2 numerical): exact nth-root
+bound limit and excluded zero in strict inequality.
+
+11.5.4 — sections/ch11.tex:839; work/book-layout.txt:24715; work/solman.txt:13239
+Matched finite principal part and reality assumption; real-axis restriction and punctured disk
+explicit. Multiplication by z^N removes singularity; real-axis derivatives at zero establish
+reality of each coefficient.
+Executable: supplementary/ch11_check.py:288; 12 assertions (12 exact, 0 numerical): finite-
+principal-part removal and coefficient reality for arbitrary real coefficients.
+
+11.5.5 — sections/ch11.tex:863; work/book-layout.txt:24720; work/solman.txt:13247
+Matched uniqueness claim; common convergence annulus now explicit. Uniform termwise contour
+integration isolates each Laurent coefficient by δnk; proof covers infinite principal part as
+well.
+Executable: supplementary/ch11_check.py:296; 8 assertions (8 exact, 0 numerical): exact contour
+coefficient selection for general finite Laurent polynomial.
+
+11.5.6 — sections/ch11.tex:889; work/book-layout.txt:24730; work/solman.txt:13248
+Matched exp(z)/z². Dividing the full exponential series gives z^(−2)+z^(−1)+1/2+z/6+…, valid on
+punctured plane, with order-two pole and residue 1.
+Executable: supplementary/ch11_check.py:302; 10 assertions (10 exact, 0 numerical): independent
+series coefficients of exp(z)/z².
+
+11.5.7 — sections/ch11.tex:902; work/book-layout.txt:24731; work/solman.txt:13263
+Matched shifted Laurent exercise. With w=z−1, e(1+1/w)e^w gives residue e and regular
+coefficient e(m+2)/(m+1)!; series valid for every nonzero w.
+Executable: supplementary/ch11_check.py:306; 8 assertions (8 exact, 0 numerical): shifted series
+coefficients including residue.
+
+11.5.8 — sections/ch11.tex:922; work/book-layout.txt:24732; work/solman.txt:13282
+Matched (z−1)e^(1/z). Multiplication and index shift give z−sum[k/(k+1)! z^(−k)], with canceled
+constant term and essential principal part.
+Executable: supplementary/ch11_check.py:312; 10 assertions (10 exact, 0 numerical): inverse-
+variable power series for essential principal part.
+
+11.6.1 — sections/ch11.tex:947; work/book-layout.txt:25250; work/solman.txt:13310
+Matched target z0≠0. Explicit logarithmic preimages invert every lnρ+i(α+2πn), omitting at most
+one zero denominator; distinctness and accumulation at zero are proved. Manual polynomial-
+truncation limit does not supply those facts.
+Executable: supplementary/ch11_check.py:318; 65 assertions (0 exact, 65 numerical): numerical
+substitution of 21 logarithmic preimages for three nonzero targets.
+
+11.6.2 — sections/ch11.tex:972; work/book-layout.txt:25254; work/solman.txt:13326
+Matched outward rays; endpoints now excluded explicitly. Principal i sqrt(1−z²) squares
+correctly and avoids square-root cut on stated domain. Rendered manual instead describes segment
+cut, a different domain.
+Executable: supplementary/ch11_check.py:328; 5 assertions (0 exact, 5 numerical): explicit
+outward-cut branch squares to z²−1 at interior samples.
+
+11.6.3 — sections/ch11.tex:996; work/book-layout.txt:25257; work/solman.txt:13329
+Matched nonzero numerator and simple denominator zero. Local Taylor factorization with
+nonvanishing analytic reciprocal extracts residue f1(z0)/f2'(z0), also proving the pole is
+simple.
+Executable: supplementary/ch11_check.py:333; 1 assertions (1 exact, 0 numerical): generic Taylor
+quotient residue with arbitrary nonzero denominator derivative.
+
+11.6.4 — sections/ch11.tex:1024; work/book-layout.txt:25267; work/solman.txt:13333
+Matched Example11.6.4 positive real reference and outward-cut exercise. Modulus/argument
+calculation gives i sqrt2; quotient of branches is locally constant ±1, equal above and opposite
+below. Rendered manual 2i fails squaring test.
+Executable: supplementary/ch11_check.py:337; 9 assertions (2 exact, 7 numerical):
+segment/outward branch values on both half-planes; exact refutation of manual 2i.
+
+11.6.5 — sections/ch11.tex:1056; work/book-layout.txt:25273; work/solman.txt:13351
+Textbook numerator z^(−1/4), not z−1/4, retained with transcription note. Distinct fractional
+powers require lcm(3,4)=12 at zero; transformed powers at infinity require lcm(3,4,2)=12; pole3
+has order3 and branch2 has order2.
+Executable: supplementary/ch11_check.py:347; 16 assertions (16 exact, 0 numerical): exact
+monodromy periods, local nonzero pole coefficient, infinity powers.
+
+11.6.6 — sections/ch11.tex:1093; work/book-layout.txt:25281; work/solman.txt:13368
+Matched two directed cuts and F(0)=−2πi. Explicit argument intervals fix branch; at −2+i moduli
+2 and 2sqrt2 plus arguments −π and 3π/4 give ln(4sqrt2)−9πi/4; exponentiation independently
+checks value.
+Executable: supplementary/ch11_check.py:357; 2 assertions (0 exact, 2 numerical): branch value
+and exponentiation checked independently.
+
+11.6.7 — sections/ch11.tex:1118; work/book-layout.txt:25300; work/solman.txt:13377
+Matched negative logarithms; answer now labeled principal value. exp(w)=−r gives all ln
+r+i(2n+1)π, so iπ is one value, not the whole multivalued set.
+Executable: supplementary/ch11_check.py:363; 11 assertions (11 exact, 0 numerical): exact
+logarithm exponentiation for multiple branches.
+
+11.6.8 — sections/ch11.tex:1133; work/book-layout.txt:25303; work/solman.txt:13378
+Matched binomial branch question. Principal log cut (−∞,−1] and reference value 1 fix branch,
+genuine noninteger monodromy at −1 fixes Taylor radius one.
+Executable: supplementary/ch11_check.py:367; 2 assertions (1 exact, 1 numerical): numerical
+principal binomial branch and exact nontrivial rational monodromy.
+
+11.6.9 — sections/ch11.tex:1150; work/book-layout.txt:25307; work/solman.txt:13383
+Matched other branches. Replacing log by log+2πik multiplies every binomial coefficient by
+e^(2πimk); rational reduced exponent has finitely many branches, irrational real exponent
+infinitely many.
+Executable: supplementary/ch11_check.py:373; 8 assertions (1 exact, 7 numerical): numerical
+shifted-log branches and exact q-period for rational exponent.
+
+11.6.10 — sections/ch11.tex:1176; work/book-layout.txt:25313; work/solman.txt:13384
+Matched both annuli about 1. Geometric expansions in w and 1/w give 1/w−1+w−… for |w|<1 and
+sum(−1)^n w^(−n−2) for |w|>1. Rendered manual outer lower index −2 must be +2 in its indexing.
+Executable: supplementary/ch11_check.py:380; 11 assertions (9 exact, 2 numerical): both Laurent
+series: exact finite coefficients and independent numerical sums.
+
+11.6.11 — sections/ch11.tex:1207; work/book-layout.txt:25320; work/solman.txt:13405
+Matched Laplace domain, continuation and requested center −i. Finite integral (1−e^(−zT))/z
+proves convergence iff Re z>0. Continuation only pole0; w=z+i yields i sum(−i)^n w^n, radius1.
+Manual negative-integer poles and +i center corrected.
+Executable: supplementary/ch11_check.py:389; 10 assertions (9 exact, 1 numerical): exact finite
+Laplace integral, shifted Taylor coefficients; numerical right-half-plane integral.
+
+11.7.1 — sections/ch11.tex:1253; work/book-layout.txt:25980; work/solman.txt:13441
+Matched all eight functions, a>0, 0<k<1 and erroneous infinity hint. Traced simple/double
+residues, essential residue sinh(1/a)/a, transformed differential −f(1/w)/w², and branch-
+dependent residue at −1. Manual residue signs/poles in d–g corrected from rendered p132.
+Executable: supplementary/ch11_check.py:398; 39 assertions (31 exact, 8 numerical): exact all
+finite meromorphic residues, infinity residues and branch monodromy; essential residue series.
+
+11.7.2 — sections/ch11.tex:1379; work/book-layout.txt:25998; work/solman.txt:13481
+Matched πcot(πz)/[z(z+1)] at 0 and −1. Expansion of cot and partial fractions give double poles
+with residue −1 at both; independently extracted Laurent residues agree.
+Executable: supplementary/ch11_check.py:427; 2 assertions (2 exact, 0 numerical): independent
+Laurent residues at both double poles.
+
+11.7.3 — sections/ch11.tex:1403; work/book-layout.txt:25999; work/solman.txt:13512
+Matched Ei principal value; source cut-variable typo x=0 corrected to t=0. Symmetric splitting
+produces (e^u−e^(−u))/u→2 and exponentially convergent negative tail, proving existence for x>0.
+Executable: supplementary/ch11_check.py:431; 4 assertions (1 exact, 3 numerical): regularized
+integrand limit and independent exponential-integral numerical values.
+
+11.7.4 — sections/ch11.tex:1437; work/book-layout.txt:26009; work/solman.txt:13545
+Rendered source denominator x−1 and wrong negative answer; manual uses 1−x. Two keyhole banks
+and clockwise indentations give (1−q)I=iπ(1+q), hence +πcotπp; endpoint powers require 0<p<1.
+Executable: supplementary/ch11_check.py:437; 6 assertions (1 exact, 5 numerical): independent
+regularized real quadrature at five p values confirms corrected sign; exact phase
+simplification.
+
+11.7.5 — sections/ch11.tex:1484; work/book-layout.txt:26017; work/solman.txt:13611
+Matched product question and source Eq11.87–89. Expanded proof integrates locally uniform
+cotangent logarithmic derivative and extends entire paired product by identity theorem.
+Counterexample e^(z²) proves source general entire-product assertion needs restrictions; finite-
+product check uses analytic tail bound.
+Executable: supplementary/ch11_check.py:444; 9 assertions (8 exact, 1 numerical): exact
+normalization, paired factors, logarithmic derivatives and entire-function counterexample;
+finite product tail bound.
+
+11.7.6 — sections/ch11.tex:1539; work/book-layout.txt:26019; work/solman.txt:13615
+Matched source monomial a_n z^n, restored earlier from transcription. Nonzero leading
+coefficient and multiplicity explicit; uniform bound S R^(n−1)<|a_n|R^n on every sufficiently
+large circle proves exactly n roots, not merely for one sample point.
+Executable: supplementary/ch11_check.py:460; 14 assertions (0 exact, 14 numerical): explicit
+root counts for three polynomials within derived Rouche radii; general theorem proved
+analytically.
+
+11.7.7 — sections/ch11.tex:1572; work/book-layout.txt:26028; work/solman.txt:13619
+Matched sextic and radii1,2. Comparisons 5<10 and 42<64 give zero and six enclosed roots; z³=2±i
+sqrt6 confirms radius10^(1/6). Manual all-interior inequality fails when z³=i sqrt10, now
+demonstrated.
+Executable: supplementary/ch11_check.py:468; 9 assertions (9 exact, 0 numerical): exact boundary
+comparisons and root moduli; counterexample to manual all-interior inequality.
+
+11.7.8 — sections/ch11.tex:1595; work/book-layout.txt:26030; work/solman.txt:13624
+Matched sec/csc expansions against Eq11.82–83. Explicit pole residues and expanding-rectangle
+side bounds justify sums; paired sec leading alternating 1/n tail and O(n^(−3)) remainder
+handled, csc pairs absolutely convergent.
+Executable: supplementary/ch11_check.py:480; 22 assertions (18 exact, 4 numerical): exact
+sec/csc pole residues and independent paired numerical infinite sums.
+
+11.7.9 — sections/ch11.tex:1649; work/book-layout.txt:26032; work/solman.txt:13728
+Matched rational logarithmic derivative. Partial fractions 1/(z−1)+1/(z−2)−1/z give zeros-minus-
+poles; simple positive contour avoiding all three now explicit and general winding-number form
+explained.
+Executable: supplementary/ch11_check.py:489; 4 assertions (4 exact, 0 numerical): exact
+logarithmic derivative and residues at all zeros/poles.
+
+11.7.10 — sections/ch11.tex:1676; work/book-layout.txt:26035; work/solman.txt:13750
+Matched z^(−2) hint; simple-pole comparison qualified as shrinking limit. Upper semicircle
+direct integral 2/R and full-circle zero refute higher-pole rule; no finite-radius analytic-part
+equality presumed.
+Executable: supplementary/ch11_check.py:494; 2 assertions (2 exact, 0 numerical): exact
+half/full circular parameter integrals.
+
+11.7.11 — sections/ch11.tex:1702; work/book-layout.txt:26048; work/solman.txt:13801
+Matched third-order Laurent form without quadratic term. Statement adds convergent tails and
+shrinking limit. Odd t^(−3),t^(−1) terms cancel in symmetric real PV; cubic arc zero, simple
+term ±iπa−1 and analytic remainder O(δ); finite-radius counterexample included.
+Executable: supplementary/ch11_check.py:498; 5 assertions (5 exact, 0 numerical): exact local PV
+cancellations and finite/limiting semicircle distinction.
+
+11.7.12 — sections/ch11.tex:1758; work/book-layout.txt:26065; work/solman.txt:13895
+Matched step-function conventions and published PV removal. For s≠0 off-axis pole closure gives
+upper e^(−εs) or lower zero; indented 1/x Fourier integral gives ±iπ. At zero separate tails
+diverge, symmetric convention yields half only.
+Executable: supplementary/ch11_check.py:506; 3 assertions (0 exact, 3 numerical): ordinary off-
+axis Fourier integral for s positive/negative and delta-kernel mass.
+
+11.8.1 — sections/ch11.tex:1822; work/book-layout.txt:26984; work/solman.txt:13938
+Matched four sin/cos sign choices; real parameters explicit. Unit-circle quadratic has one
+interior root for a>|b|; residue gives 2π/sqrt(a²−b²). For |b|>|a| simple real-path poles
+prevent ordinary improper convergence.
+Executable: supplementary/ch11_check.py:514; 8 assertions (0 exact, 8 numerical): four
+sign/sine/cosine ordinary quadratures at two admissible parameter pairs.
+
+11.8.2 — sections/ch11.tex:1866; work/book-layout.txt:26995; work/solman.txt:13965
+Matched a>1 squared denominator. Differentiate π/sqrt(a²−1) under finite interval with uniform
+positive denominator; negative derivative gives πa/(a²−1)^(3/2).
+Executable: supplementary/ch11_check.py:521; 3 assertions (1 exact, 2 numerical): exact
+parameter derivative and independent real quadrature.
+
+11.8.3 — sections/ch11.tex:1893; work/book-layout.txt:27002; work/solman.txt:13987
+Matched |t| cases. Poles t and1/t exchange inside status, giving ±2π/(1−t²); t0 direct. Unit-
+modulus ±1 have quadratic divergence and other unit-modulus complex values have path poles.
+Executable: supplementary/ch11_check.py:527; 6 assertions (1 exact, 5 numerical): independent
+real and complex t quadratures inside/outside unit circle.
+
+11.8.4 — sections/ch11.tex:1932; work/book-layout.txt:27010; work/solman.txt:13992
+Matched cos3θ and denominator5−4cosθ. Odd sine part vanishes; z=e^(iθ) leaves pole1/2 with
+residue1/24, giving π/12.
+Executable: supplementary/ch11_check.py:533; 2 assertions (1 exact, 1 numerical): direct
+trigonometric quadrature and rational residue.
+
+11.8.5 — sections/ch11.tex:1959; work/book-layout.txt:27015; work/solman.txt:14086
+Matched both factorial forms and n=0. Even symmetry reduces full contour, central binomial
+coefficient supplies residue and π(2n)!/[4^n(n!)²]; empty double factorial convention handles
+zero.
+Executable: supplementary/ch11_check.py:537; 18 assertions (18 exact, 0 numerical): exact
+residue and direct trig integration for n=0 through 8.
+
+11.8.6 — sections/ch11.tex:1993; work/book-layout.txt:27025; work/solman.txt:14169
+Checked actual Eq11.112–113, including cube-root phase. Replacing q by −1/2+i sqrt3/2 and
+simplifying phase products gives −2π²/27; direct logarithmic integral independently agrees.
+Executable: supplementary/ch11_check.py:543; 2 assertions (1 exact, 1 numerical): exact cited
+equation algebra and independent logarithmic quadrature.
+
+11.8.7 — sections/ch11.tex:2026; work/book-layout.txt:27028; work/solman.txt:14171
+Checked Eq11.115–116 and Figure11.26 orientations/published correction. Branch 0<arg z<2π,
+residues at ±i, small arc O(ε^(p+1)), large arc O(R^(p−1)) yield π/[2cos(πp/2)] and range
+−1<p<1.
+Executable: supplementary/ch11_check.py:548; 3 assertions (0 exact, 3 numerical): real
+quadrature for three exponents, including extended negative range.
+
+11.8.8 — sections/ch11.tex:2074; work/book-layout.txt:27034; work/solman.txt:14201
+Matched a>b>0 difference over x². Analytic numerator removes real origin singularity;
+exponential contour has simple coefficient i(b−a), clockwise small arc and vanishing upper arc
+give π(a−b).
+Executable: supplementary/ch11_check.py:560; 2 assertions (1 exact, 1 numerical): direct split
+oscillatory quadrature of difference, not a stored formula.
+
+11.8.9 — sections/ch11.tex:2105; work/book-layout.txt:27042; work/solman.txt:14245
+Rendered full-line source and manual p138; source/errata π/2 wrong, worked manual π correct.
+(1−cos2x)/(2x²), parity and ordinary convergence give π. Withdrawn old ledger attribution of π/2
+to worked manual.
+Executable: supplementary/ch11_check.py:564; 2 assertions (0 exact, 2 numerical): independent
+sinc-squared half/full line quadrature with tail decomposition.
+
+11.8.10 — sections/ch11.tex:2128; work/book-layout.txt:27050; work/solman.txt:14278
+Matched half-line x sin x/(x²+1). Upper exponential residue at i is e^(−1)/2; Jordan bound and
+parity give π/(2e), with Dirichlet convergence of separate real tails.
+Executable: supplementary/ch11_check.py:570; 2 assertions (1 exact, 1 numerical): independent
+oscillatory half-line quadrature and exact residue.
+
+11.8.11 — sections/ch11.tex:2156; work/book-layout.txt:27056; work/solman.txt:14381
+Matched transition integrand; general real statement corrected to2π|t|. Scaling positive
+frequency integral by |t| and including t=0 proves absolute-value dependence; removable ω0 limit
+is t².
+Executable: supplementary/ch11_check.py:574; 3 assertions (1 exact, 2 numerical): independent
+integral for positive/negative t and exact origin limit.
+
+11.8.12 — sections/ch11.tex:2181; work/book-layout.txt:27061; work/solman.txt:14393
+Matched both base integrals and frequency variants; real k explicit. Pole closure gives
+πe^(−a|k|)/a and πsgn(k)e^(−a|k|) for k≠0; k0 second integral is exactly0 and cannot be obtained
+by invalid differentiation at cusp.
+Executable: supplementary/ch11_check.py:579; 6 assertions (1 exact, 5 numerical): ordinary
+oscillatory quadrature for positive/negative frequencies and exact k=0.
+
+11.8.13 — sections/ch11.tex:2229; work/book-layout.txt:27076; work/solman.txt:14466
+Matched required rectangular contour Figure11.28. Vertical and top side estimates vanish; origin
+clockwise indentation is −iπ. Imaginary part gives ordinary sinc integral π, with separate tail
+convergence justified.
+Executable: supplementary/ch11_check.py:589; 2 assertions (1 exact, 1 numerical): independent
+sinc quadrature and exact small-arc residue coefficient.
+
+11.8.14 — sections/ch11.tex:2265; work/book-layout.txt:27083; work/solman.txt:14521
+Matched sinc transform and endpoint question. Decompose frequencies p±1 and use sign results: π
+inside,0 outside. At p=±1 imaginary tails diverge logarithmically, whereas symmetric PV/Abel
+value is π/2.
+Executable: supplementary/ch11_check.py:593; 6 assertions (1 exact, 5 numerical): direct real
+Fourier quadrature inside/outside interval; endpoint PV real part and divergent imaginary term.
+
+11.8.15 — sections/ch11.tex:2316; work/book-layout.txt:27113; work/solman.txt:14531
+Matched a>0 and half-line squared Lorentzian. Double residue1/(4ia³), vanishing O(R^(−3)) arc
+and evenness give π/(4a³).
+Executable: supplementary/ch11_check.py:601; 3 assertions (1 exact, 2 numerical): exact double-
+pole residue and independent positive-half-line quadrature.
+
+11.8.16 — sections/ch11.tex:2340; work/book-layout.txt:27119; work/solman.txt:14574
+Matched x²/(1+x⁴). Two upper roots have residue sum−i/(2sqrt2); O(R^(−1)) arc integral vanishes
+and full integral is π/sqrt2.
+Executable: supplementary/ch11_check.py:606; 2 assertions (1 exact, 1 numerical): independent
+full-line quadrature and exact upper-pole sum.
+
+11.8.17 — sections/ch11.tex:2364; work/book-layout.txt:27127; work/solman.txt:14597
+Matched logarithmic power integral and0<p<1. Parameter derivative of J(p), with explicit
+endpoint dominators x^(p−η)|ln x| and x^(p+η−2)ln x, yields π²sin(πp/2)/(4cos²(πp/2)).
+Executable: supplementary/ch11_check.py:610; 4 assertions (1 exact, 3 numerical): exact
+derivative and independent power-log integral quadrature.
+
+11.8.18 — sections/ch11.tex:2395; work/book-layout.txt:27136; work/solman.txt:14714
+Matched both series and contour requests and strip figure. Reciprocal substitution doubles
+[0,1]; absolute integrated series justifies exchange. Added both integrations by parts for
+coefficient2/(2n+1)³. Strip z²/(2cosh z) and residue give π³/8.
+Executable: supplementary/ch11_check.py:618; 9 assertions (7 exact, 2 numerical): direct
+integral, beta series, strip residue and independent exact twice-integrated exponential moment.
+
+11.8.19 — sections/ch11.tex:2482; work/book-layout.txt:27167; work/solman.txt:14823
+Matched log(1+x²)/(1+x²). Separate Log(z±i) branches in respective half-planes; residues produce
+conjugate log values and sum2πln2 on whole line, then halve by evenness.
+Executable: supplementary/ch11_check.py:628; 2 assertions (1 exact, 1 numerical): independent
+original real quadrature and exact logarithm phase cancellation.
+
+11.8.20 — sections/ch11.tex:2517; work/book-layout.txt:27170; work/solman.txt:14877
+Matched −1<a<1; zero parameter quotient limit explicit. Keyhole z^a/(1+z)² has double residue−a
+e^(iπa), bank factor1−e^(2πia), giving πa/sinπa; a0 ordinary integral1.
+Executable: supplementary/ch11_check.py:632; 6 assertions (1 exact, 5 numerical): ordinary
+endpoint-regularized quadrature for negative/zero/positive a.
+
+11.8.21 — sections/ch11.tex:2554; work/book-layout.txt:27181; work/solman.txt:14899
+Source lacked sign/domain qualification; statement now |sinθ| and sinθ≠0. Quartic residues
+for0<θ<π give π/(2sinθ); π/2 coalescence handled directly, symmetry extends to real θ with
+absolute value; zeros of sin cause divergence.
+Executable: supplementary/ch11_check.py:638; 5 assertions (1 exact, 4 numerical): independent
+quartic quadrature including coalesced poles and negative sine.
+
+11.8.22 — sections/ch11.tex:2611; work/book-layout.txt:27189; work/solman.txt:14940
+Matched sector hint; n>1 explicit, proof permits real n via sector log. Sole root e^(iπ/n) has
+residue−e^(iπ/n)/n, not manual positive value. Radial factor and O(R^(1−n)) arc give π/[n
+sin(π/n)]; remaining n diverge.
+Executable: supplementary/ch11_check.py:644; 8 assertions (4 exact, 4 numerical): ordinary
+integral for integer/noninteger n>1 and exact sector residue sign.
+
+11.8.23 — sections/ch11.tex:2651; work/book-layout.txt:27198; work/solman.txt:15003
+Matched four quartic roots and n4 reference. Factorization includes repeated cases. Reciprocal
+substitution exchanges numerator1 and x² on positive half-line; parity gives result11.8.21 with
+corrected |sinθ| and domain.
+Executable: supplementary/ch11_check.py:651; 4 assertions (1 exact, 3 numerical): exact quartic
+factorization and independent reciprocal-numerator quadrature.
+
+11.8.24 — sections/ch11.tex:2705; work/book-layout.txt:27222; work/solman.txt:15018
+Matched0<a<1 and positive-axis keyhole. Residue e^(−iπa), bank factor1−e^(−2πia), endpoint
+estimates ε^(1−a),R^(−a) give π/sinπa.
+Executable: supplementary/ch11_check.py:658; 3 assertions (0 exact, 3 numerical): ordinary
+quadrature after x=u^6 for three branch exponents.
+
+11.8.25 — sections/ch11.tex:2737; work/book-layout.txt:27233; work/solman.txt:15033
+Rendered hint incorrectly calls cosh pole; now zero of cosh/pole of reciprocal. Strip
+e^(bz)/cosh z, top factor−e^(iπb), residue−ie^(iπb/2), side decay for real |b|<1 and evenness
+give half-lineπ/[2cos(πb/2)].
+Executable: supplementary/ch11_check.py:663; 6 assertions (3 exact, 3 numerical): independent
+hyperbolic integral; exact simple zero of cosh and reciprocal residue.
+
+11.8.26 — sections/ch11.tex:2777; work/book-layout.txt:27237; work/solman.txt:15114
+Matched both Fresnel integrals and sectorπ/4. Bound sin2θ≥4θ/π makes arc O(1/R); ray rotation
+gives Gaussian factor e^(iπ/4), and squared Gaussian polar integral yields equal real/imag
+values sqrtπ/(2sqrt2).
+Executable: supplementary/ch11_check.py:672; 1 assertions (0 exact, 1 numerical): independent
+oscillatory Fresnel quadrature with square-root phase zeros.
+
+11.8.27 — sections/ch11.tex:2828; work/book-layout.txt:27249; work/solman.txt:15165
+Matched endpoint integrable powers and dogbone contour. Branch factor
+e^(iπ/3)z^(−1)(1−1/z)^(−1/3), bank phases1,e^(2πi/3), endpoint bounds and outer residue
+give2π/sqrt3; independent rational substitution confirms.
+Executable: supplementary/ch11_check.py:677; 3 assertions (2 exact, 1 numerical): exact
+endpoint-removing substitution and independent rational quadrature.
+
+11.8.28 — sections/ch11.tex:2875; work/book-layout.txt:27255; work/solman.txt:15222
+Matched a,b>0,ab<1 and slit Figure11.32. Arctan logarithmic jumpπ on slit, poleib below branch
+point and oriented bank integral combine to πln(1+ab)/b²; origin limit a/b² is explicit.
+Executable: supplementary/ch11_check.py:685; 5 assertions (3 exact, 2 numerical): original
+arctan integral quadrature, removable origin, independent parameter derivative.
+
+11.9.1 — sections/ch11.tex:2949; work/book-layout.txt:27430; work/solman.txt:15309
+Matched product residue claim; corrected at most simple pole. Taylor times Laurent yields
+f(z0)b0; when f(z0)=0 product is removable, shown by explicit cancellation.
+Executable: supplementary/ch11_check.py:694; 2 assertions (2 exact, 0 numerical): generic
+product residue and explicit cancellation counterexample.
+
+11.9.2 — sections/ch11.tex:2974; work/book-layout.txt:27432; work/solman.txt:15318
+Read I_N definition and actual C_N radiiN+1/2. Statement clarifies uniform O(1) away from poles
+and uniform decay. Cot modulus identity plus compact strip bound, fixed distance≥1/2 from
+integers and ML prove I_N→0.
+Executable: supplementary/ch11_check.py:699; 122 assertions (2 exact, 120 numerical): exact cot
+modulus identity and numerical bounds on actual CN circles.
+
+11.9.3 — sections/ch11.tex:3024; work/book-layout.txt:27436; work/solman.txt:15338
+Matched odd alternating cubic sum. Previously proved11.8.18 integral equals four times sum,
+givingπ³/32 with convergence; independent converged numerical series supplements.
+Executable: supplementary/ch11_check.py:711; 1 assertions (0 exact, 1 numerical): independent
+converged alternating series.
+
+11.9.4 — sections/ch11.tex:3044; work/book-layout.txt:27440; work/solman.txt:15374
+Matched n(n+2) denominator. Partial fractions telescope finite sum to3/4−1/[2(N+1)]−1/[2(N+2)],
+then limit3/4; no divergent harmonic sums separated.
+Executable: supplementary/ch11_check.py:714; 5 assertions (5 exact, 0 numerical): exact partial
+fractions and finite telescoping sums.
+
+11.9.5 — sections/ch11.tex:3065; work/book-layout.txt:27444; work/solman.txt:15470
+Matched alternating two-sided square sum and noninteger shift. πcscπz/(z+a)² has integer
+alternating residues and double-pole derivative−π²cscπa cotπa; rectangle bounds vanish and
+absolute summability justifies ordering.
+Executable: supplementary/ch11_check.py:721; 3 assertions (0 exact, 3 numerical): independent
+two-sided converged sums at three noninteger shifts.
+
+11.9.6 — sections/ch11.tex:3103; work/book-layout.txt:27448; work/solman.txt:15486
+Matched contour and zeta checks. πtanπz/z² residueπ² at0 and−1/p² at half-integers giveπ²/8 for
+odds; (3/4)ζ2 matches. Rendered textbook preceding prose sign+1 corrected to−1.
+Executable: supplementary/ch11_check.py:727; 4 assertions (3 exact, 1 numerical): independent
+odd-square sum and exact origin/half-integer residues including corrected tangent sign.
+
+11.9.7 — sections/ch11.tex:3153; work/book-layout.txt:27452; work/solman.txt:15552
+Matched exponentially weighted alternating odd sum. Square atNπ gives vanishing bound for1/(z
+cos z cosh z); origin residue1 and four equal residues per n implyπ/8. All pole signs and
+convergence traced.
+Executable: supplementary/ch11_check.py:734; 8 assertions (7 exact, 1 numerical): independent
+exponentially convergent series and four-pole residues.
+
+11.9.8 — sections/ch11.tex:3207; work/book-layout.txt:27456; work/solman.txt:15633
+Matched cubic Fourier polynomial and endpoints. Abel regularization makes twice differentiation
+valid; ImLog(1+r e^(iφ))→φ/2 boundedly, two integrations and endpoint values giveφ(φ²−π²)/12.
+Finite sine tests have explicit tail bound1/(2N²).
+Executable: supplementary/ch11_check.py:743; 10 assertions (3 exact, 7 numerical): direct finite
+sine sums with explicit absolute tail bounds at seven points; polynomial differential
+conditions.
+
+11.10.1 — sections/ch11.tex:3266; work/book-layout.txt:27562; work/solman.txt:15683
+Matched real-axis reflection. f(conj z)=conj f(z) equates components
+u(x,−y)=u(x,y),v(x,−y)=−v(x,y), giving requested parity within reflected domain.
+Executable: supplementary/ch11_check.py:752; 10 assertions (10 exact, 0 numerical): exact
+reflection parity of five independent real-coefficient analytic polynomials.
+
+11.10.2 — sections/ch11.tex:3289; work/book-layout.txt:27567; work/solman.txt:15693
+Matched real Laurent coefficients, powers, sine and iz counterexample. Termwise conjugation
+valid in common annulus; direct Cartesian sine verifies reflection. Rendered manual wrong sine
+powers/signs corrected; seven derivative coefficients checked exactly.
+Executable: supplementary/ch11_check.py:757; 21 assertions (21 exact, 0 numerical): exact
+Laurent/power reflection, Cartesian sine, nonreal counterexample and first seven sine
+coefficients.
+
+11.10.3 — sections/ch11.tex:3333; work/book-layout.txt:27577; work/solman.txt:15740
+Matched imaginary-axis values; symmetric connected domain now explicit. g=−if is real on real
+interval, reflection then gives f(conj z)=−conj f(z); independent Cartesian iz expressions
+confirm sign.
+Executable: supplementary/ch11_check.py:768; 8 assertions (8 exact, 0 numerical): exact
+imaginary-axis-value reflection family and all Cartesian expressions.
+
+11.10.4 — sections/ch11.tex:3373; work/book-layout.txt:27585; work/solman.txt:15746
+Matched circle maps z±1/z. Parametrization yields ellipse semiaxes r±r^(−1); r1 degenerates to
+double-traced real or imaginary segment, r<1 reverses appropriate orientation.
+Executable: supplementary/ch11_check.py:776; 6 assertions (6 exact, 0 numerical): generic exact
+circle images, ellipse equations and degenerate unit-circle limits.
+
+11.10.5 — sections/ch11.tex:3416; work/book-layout.txt:27592; work/solman.txt:15842
+Matched two Möbius maps and disk images. Squared distance differences−4x and−4y identify right
+and upper half-planes; explicit inverse shows onto and handles omitted boundary pole.
+Executable: supplementary/ch11_check.py:785; 4 assertions (4 exact, 0 numerical): exact squared-
+distance half-plane inequalities and inverse-map compositions.
+
+11.10.6 — sections/ch11.tex:3448; work/book-layout.txt:27598; work/solman.txt:15844
+Matched circle inversion; statement now excludes zero and requests line exception. Clearing
+denominator gives D(u²+v²)−2au+2bv+1=0; completing squares gives center(a/D,−b/D),radius
+r/|D|,D0 line. Manual signed R only correct after squaring; centers generally do not map to
+centers.
+Executable: supplementary/ch11_check.py:792; 7 assertions (7 exact, 0 numerical): generic
+inversion equation, center/radius and line case; exact positive-radius example.
+
+11.10.7 — sections/ch11.tex:3498; work/book-layout.txt:27602; work/solman.txt:15902
+Matched conformality assumption f'(z0)≠0. Multiplication of each tangent byρe^(iα) scales byρ
+and rotates by sameα; ratio cancels derivative, preserving oriented angle. Nonzero hypothesis is
+essential.
+Executable: supplementary/ch11_check.py:810; 2 assertions (2 exact, 0 numerical): generic
+nonzero complex derivative cancels from tangent ratio.

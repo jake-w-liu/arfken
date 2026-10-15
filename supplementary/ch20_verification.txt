@@ -1,0 +1,420 @@
+CHAPTER 20 CURRENT VERIFICATION — 2026-10-04
+This supersedes the original handoff ledger. Historical handoff metadata is preserved
+only in work/ch20-final-historical-verification.txt and labeled historical there.
+The current independent per-exercise source/derivation audit is
+supplementary/ch20_final_audit.txt, with refreshed canonical source line numbers.
+
+CHAPTER 20 FRESH FINAL AUDIT — 2026-10-04
+All 89 complete problem/solution blocks were read afresh, compared against the actual
+textbook/manual extracts, and traced algebraically. Each record below gives the
+specific statement/source check and derivation/pedagogy check. Existing test passes
+were not used as a substitute for that reading. 54 entries were edited: 52 received
+statement corrections/qualifications, with additional derivation/convention clarity.
+Published errata at manual printed pp.5-6 were rechecked. Actual original PDF renders
+were freshly viewed for textbook printed pp.1002,1031,1032 (circuits and domain).
+Other retained original-error claims were checked against the complete manual/text
+extracts, including pp.334,336,337,339,341,344,349,351,360-362 of the manual.
+
+Current executable result: FULL, 89 groups, 338 exact assertions, 2369 numerical
+checks; six exact assertions concern inventory, 332 concern mathematics. Added five
+exact checks: completed Gaussian square, arbitrary complex amplitude modulus,
+direct triangle Fourier normalization, and algebra/positivity for uniform loading.
+Default numerical tolerance 1e-28*max(1,|expected|), mp.dps=45; explicit wider
+sample tolerances remain in the checker. Samples do not prove general convergence,
+distributional limits, contour deformations, arbitrary-order or continuous-parameter
+claims: these were traced analytically in the complete solutions.
+
+Current section SHA256: ec893542c5eb36b0873b11b6d2961aaf7fa26aca276070ddb01c100eb252d462
+Current checker SHA256: c411b34b4f5f97963d63bd02b578d7349530408b66ae77da8d973b0c70b19d8c
+
+Commands actually run:
+  python3 -u supplementary/ch20_check.py > work/ch20-final-check.txt 2>&1
+  pdflatex -interaction=nonstopmode -halt-on-error -output-directory=work work/ch20-final-review.tex > work/ch20-final-build-04.txt 2>&1
+  pdftotext -layout work/ch20-final-review.pdf work/ch20-final-layout.txt
+  pdftoppm -r 80 -png work/ch20-final-review.pdf work/ch20-final-page
+
+Full accepted executable transcript:
+Chapter20 verification: FULL
+Python 3.14.7 SymPy 1.14.0 mpmath 1.3.0
+TeX SHA256 ec893542c5eb36b0873b11b6d2961aaf7fa26aca276070ddb01c100eb252d462
+PASS 20.2.1: 0 exact, 6 numerical checks
+  numeric: 20.2.1 real transform conjugation
+  numeric: 20.2.1 imaginary transform conjugation
+PASS 20.2.2: 1 exact, 7 numerical checks
+  exact: 20.2.2 cosine transform
+  numeric: 20.2.2 Dirichlet sign cases
+  numeric: 20.2.2 independent damped Dirichlet quadrature
+PASS 20.2.3: 2 exact, 4 numerical checks
+  exact: 20.2.3 cosine integral
+  exact: 20.2.3 sine integral
+  numeric: 20.2.3 inverse sine quadrature
+  numeric: 20.2.3 inverse cosine quadrature
+PASS 20.2.4: 4 exact, 0 numerical checks
+  exact: 20.2.4 direct triangular transform
+  exact: 20.2.4 zero frequency
+  exact: 20.2.4 delta mass
+  exact: 20.2.4 second moment convergence
+PASS 20.2.5: 3 exact, 0 numerical checks
+  exact: 20.2.5 box Fourier multiplier
+  exact: 20.2.5 box second moment
+  exact: 20.2.5 multiplier limit
+PASS 20.2.6: 3 exact, 2 numerical checks
+  exact: 20.2.6 completed Gaussian square
+  exact: 20.2.6 Gaussian mass
+  exact: 20.2.6 Gaussian second moment
+  numeric: 20.2.6 direct Gaussian Fourier quadrature
+PASS 20.2.7: 2 exact, 4 numerical checks
+  exact: 20.2.7 sine image-source identity
+  exact: 20.2.7 cosine image-source identity
+  numeric: 20.2.7 interior regularized kernel sample
+PASS 20.2.8: 4 exact, 0 numerical checks
+  exact: 20.2.8 arbitrary complex initial-amplitude modulus
+  exact: 20.2.8 modulus square
+  exact: 20.2.8 half maximum
+  exact: 20.2.8 Plancherel normalization
+PASS 20.2.9: 3 exact, 0 numerical checks
+  exact: 20.2.9 clockwise residue and negative phase
+  exact: 20.2.9 lower pole location
+  exact: 20.2.9 decaying corrected sign
+PASS 20.2.10: 0 exact, 7 numerical checks
+  numeric: 20.2.10 compact J0 transform
+  numeric: 20.2.10 exterior Y0 transform
+  numeric: 20.2.10 K0 transform
+  numeric: 20.2.10 exponential-growth example; not a proof of non-temperedness
+PASS 20.2.11: 7 exact, 14 numerical checks
+  numeric: 20.2.11 Chebyshev angular transform
+  exact: 20.2.11 reverse-transform parity
+PASS 20.2.12: 42 exact, 14 numerical checks
+  numeric: 20.2.12 Legendre direct transform and spherical normalization
+  exact: 20.2.12 endpoint derivative +1
+  exact: 20.2.12 endpoint derivative -1
+PASS 20.2.13: 0 exact, 4 numerical checks
+  numeric: 20.2.13 half-power oscillatory integral
+  numeric: 20.2.13 Fresnel normalization
+PASS 20.2.14: 1 exact, 2 numerical checks
+  numeric: 20.2.14 damped radial sine integral
+  exact: 20.2.14 3D Fourier normalization
+PASS 20.2.15: 1 exact, 4 numerical checks
+  numeric: 20.2.15 direct Gaussian Hankel transform
+  numeric: 20.2.15 inverse Gaussian Hankel transform
+  exact: 20.2.15 polar Jacobian
+PASS 20.2.16: 1 exact, 2 numerical checks
+  exact: 20.2.16 angular integration
+  numeric: 20.2.16 Gaussian radial Fourier versus Cartesian product
+PASS 20.3.1: 2 exact, 4 numerical checks
+  exact: 20.3.1 translation conjugation phase
+  exact: 20.3.1 translation kernel with displacement phase
+  numeric: 20.3.1 signed scale Jacobian and asymmetric Gaussian transform
+PASS 20.3.2: 4 exact, 0 numerical checks
+  exact: 20.3.2 absolute cubic scale
+  exact: 20.3.2 translation and conjugation in three components
+  exact: 20.3.2 translated three-dimensional kernel
+PASS 20.3.3: 2 exact, 0 numerical checks
+  exact: 20.3.3 Laplacian eigenvalue and sign
+  exact: 20.3.3 Gaussian second-derivative zero-frequency integral
+PASS 20.3.4: 14 exact, 0 numerical checks
+  exact: 20.3.4 kernel nth derivative
+  exact: 20.3.4 repeated integration-by-parts sign
+PASS 20.3.5: 10 exact, 0 numerical checks
+  exact: 20.3.5 nth moment operator
+  exact: 20.3.5 Gaussian moment check
+PASS 20.3.6: 3 exact, 0 numerical checks
+  exact: 20.3.6 source-free equation
+  exact: 20.3.6 delta derivative jump
+  exact: 20.3.6 direct Fourier transform of Green function
+PASS 20.4.1: 4 exact, 2 numerical checks
+  exact: 20.4.1 mixed product identity
+  exact: 20.4.1 cosine product identity
+  exact: 20.4.1 full four-term sine kernel and reflected signs
+  exact: 20.4.1 full four-term cosine kernel
+  numeric: 20.4.1 Gaussian cosine convolution normalization
+PASS 20.4.2: 0 exact, 4 numerical checks
+  numeric: 20.4.2 cosine bilinear Parseval
+  numeric: 20.4.2 sine bilinear Parseval
+PASS 20.4.3: 1 exact, 0 numerical checks
+  exact: 20.4.3 independent exact sinc-square integral
+PASS 20.4.4: 3 exact, 0 numerical checks
+  exact: 20.4.4 Yukawa kernel off-source equation
+  exact: 20.4.4 origin flux normalization
+  exact: 20.4.4 Yukawa Fourier regulator
+PASS 20.4.5: 3 exact, 0 numerical checks
+  exact: 20.4.5 direct triangle transform checks unnormalized-convolution prefactor
+  exact: 20.4.5 independent exact sinc-fourth integral
+  exact: 20.4.5 convolution triangle norm
+PASS 20.4.6: 1 exact, 0 numerical checks
+  exact: 20.4.6 independent integrated squared-error example
+PASS 20.4.7: 2 exact, 0 numerical checks
+  exact: 20.4.7 squared-denominator integral
+  exact: 20.4.7 weighted squared-denominator integral
+PASS 20.4.8: 2 exact, 0 numerical checks
+  exact: 20.4.8 unit total charge
+  exact: 20.4.8 specified form-factor normalization
+PASS 20.4.9: 0 exact, 4 numerical checks
+  numeric: 20.4.9 Coulomb energy Fourier versus shell integration
+  numeric: 20.4.9 Gaussian potential closed form
+PASS 20.4.10: 4 exact, 0 numerical checks
+  exact: 20.4.10 position derivative including missing i
+  exact: 20.4.10 squared position operator
+PASS 20.4.11: 7 exact, 0 numerical checks
+  exact: 20.4.11 kinetic transform sign
+  exact: 20.4.11 polynomial potential operator
+PASS 20.5.1: 3 exact, 0 numerical checks
+  exact: 20.5.1 impedance divider
+  exact: 20.5.1 power gain
+  exact: 20.5.1 half-power cutoff
+PASS 20.5.2: 3 exact, 0 numerical checks
+  exact: 20.5.2 RL low-pass gain
+  exact: 20.5.2 low-frequency limit
+  exact: 20.5.2 high-frequency limit
+PASS 20.5.3: 3 exact, 0 numerical checks
+  exact: 20.5.3 independent nodal solution
+  exact: 20.5.3 peak stationary frequency
+  exact: 20.5.3 peak magnitude
+PASS 20.5.4: 3 exact, 8 numerical checks
+  exact: 20.5.4 loading correction identity
+  exact: 20.5.4 exact positive bound remainder
+  exact: 20.5.4 bound remainder positive for positive components
+  numeric: 20.5.4 uniform loading bound samples
+  numeric: 20.5.4 relative-error bound samples
+PASS 20.6.1: 0 exact, 1950 numerical checks
+  numeric: 20.6.1 exhaustive cosine orthogonality N<=12
+  numeric: 20.6.1 exhaustive sine orthogonality N<=12
+  numeric: 20.6.1 exhaustive mixed orthogonality N<=12
+PASS 20.6.2: 0 exact, 78 numerical checks
+  numeric: 20.6.2 direct DFT roundtrip complex vector N<=12
+PASS 20.6.3: 0 exact, 156 numerical checks
+  numeric: 20.6.3 real-input conjugation including self-pairs
+  numeric: 20.6.3 imaginary-input conjugation
+PASS 20.7.1: 5 exact, 0 numerical checks
+  exact: 20.7.1 initial-value exact examples
+  exact: 20.7.1 approximate-identity mass
+PASS 20.7.2: 2 exact, 3 numerical checks
+  exact: 20.7.2 Laplace cosine kernel
+  exact: 20.7.2 Cauchy kernel mass
+  numeric: 20.7.2 weak-limit nonconstant test function
+PASS 20.7.3: 1 exact, 0 numerical checks
+  exact: 20.7.3 direct Laplace pair
+PASS 20.7.4: 4 exact, 0 numerical checks
+  exact: 20.7.4a direct forward transform
+  exact: 20.7.4b direct forward transform
+  exact: 20.7.4a equal-rate limit
+  exact: 20.7.4b equal-rate limit
+PASS 20.7.5: 3 exact, 0 numerical checks
+  exact: 20.7.5a forward transform
+  exact: 20.7.5b forward transform
+  exact: 20.7.5 zero-frequency removable quotient
+PASS 20.7.6: 0 exact, 7 numerical checks
+  numeric: 20.7.6a oscillatory quadrature
+  numeric: 20.7.6b oscillatory quadrature
+PASS 20.7.7: 10 exact, 0 numerical checks
+  exact: 20.7.7 monomial transform
+  exact: 20.7.7 divergent factorial-series ratio
+  exact: 20.7.7 divergence for every finite positive s
+  exact: 20.7.7 causal impulse transform convention in SymPy
+PASS 20.7.8: 0 exact, 2 numerical checks
+  numeric: 20.7.8 Kummer transform independent quadrature
+PASS 20.8.1: 2 exact, 0 numerical checks
+  exact: 20.8.1 transformed second-derivative equation
+  exact: 20.8.1 direct forward transform
+PASS 20.8.2: 5 exact, 0 numerical checks
+  exact: 20.8.2 Newton equation residual
+  exact: 20.8.2 initial displacement
+  exact: 20.8.2 initial velocity
+  exact: 20.8.2 leading small-time coefficient
+  exact: 20.8.2 transform
+PASS 20.8.3: 10 exact, 2 numerical checks
+  exact: 20.8.3 first equation
+  exact: 20.8.3 second equation
+  exact: 20.8.3 stable equation
+  exact: 20.8.3 conservation equation
+  exact: 20.8.3 daughter initial value
+  exact: 20.8.3 stable initial value
+  exact: 20.8.3 coincident daughter rate
+  exact: 20.8.3 coincident stable rate
+  exact: 20.8.3 daughter short-time term
+  exact: 20.8.3 stable short-time term
+  numeric: 20.8.3 separated-rate asymptotic sample
+PASS 20.8.4: 3 exact, 2 numerical checks
+  exact: 20.8.4 arbitrary initial-inventory ODE
+  exact: 20.8.4 initial value
+  exact: 20.8.4 zero removal-rate limit
+  numeric: 20.8.4 numerical inventory
+  numeric: 20.8.4 parent depletion fraction
+PASS 20.8.5: 6 exact, 3 numerical checks
+  exact: 20.8.5 iodine operational ODE
+  exact: 20.8.5 xenon operational ODE
+  exact: 20.8.5 arbitrary initial xenon
+  exact: 20.8.5 coincident removal rate
+  exact: 20.8.5 shutdown ODE with correct iodine coefficient
+  exact: 20.8.5 shutdown initial slope
+  numeric: 20.8.5 flux threshold
+  numeric: 20.8.5 counterexample and positive-growth sample
+PASS 20.8.6: 7 exact, 0 numerical checks
+  exact: 20.8.6 damping ODE
+  exact: 20.8.6 displacement initial value
+  exact: 20.8.6 zero initial velocity
+  exact: 20.8.6 overdamped to critical limit
+PASS 20.8.7: 11 exact, 0 numerical checks
+  exact: 20.8.7 damping ODE
+  exact: 20.8.7 zero initial displacement
+  exact: 20.8.7 initial velocity
+  exact: 20.8.7 underdamped critical limit
+  exact: 20.8.7 overdamped critical limit
+PASS 20.8.8: 5 exact, 0 numerical checks
+  exact: 20.8.8 falling ODE
+  exact: 20.8.8 position initial value
+  exact: 20.8.8 velocity initial value
+  exact: 20.8.8 zero-drag position
+  exact: 20.8.8 zero-drag velocity
+PASS 20.8.9: 9 exact, 0 numerical checks
+  exact: 20.8.9 capacitor current equation
+  exact: 20.8.9 series RL voltage equation
+  exact: 20.8.9 initial capacitor voltage
+  exact: 20.8.9 initial inductor current
+  exact: 20.8.9 explicit general inductor-voltage formula
+  exact: 20.8.9 prior DC steady-state inductor voltage
+  exact: 20.8.9 actual DC preparation capacitor formula
+  exact: 20.8.9 actual DC preparation inductor formula
+  exact: 20.8.9 manual waveform fails actual RL-C ODE example
+PASS 20.8.10: 1 exact, 3 numerical checks
+  exact: 20.8.10 interior contour residue
+  numeric: 20.8.10 direct J0 Laplace quadrature
+PASS 20.8.11: 1 exact, 14 numerical checks
+  exact: 20.8.11 recurrence multiplier identity
+  numeric: 20.8.11 direct Jn Laplace quadrature
+PASS 20.8.12: 1 exact, 2 numerical checks
+  exact: 20.8.12 differentiated transform
+  numeric: 20.8.12 complex right-half-plane direct quadrature
+PASS 20.8.13: 1 exact, 2 numerical checks
+  numeric: 20.8.13 direct I0 Laplace quadrature including negative a
+  exact: 20.8.13 half-angle rational integral with s=a+b>a
+PASS 20.8.14: 2 exact, 4 numerical checks
+  numeric: 20.8.14 spherical j0 Laplace
+  numeric: 20.8.14 spherical i0 Laplace
+  exact: 20.8.14 y0 nonintegrable endpoint coefficient
+  exact: 20.8.14 k0 nonintegrable endpoint coefficient
+PASS 20.8.15: 15 exact, 1 numerical checks
+  exact: 20.8.15 general-index transformed ODE
+  exact: 20.8.15 regular polynomial ODE
+  exact: 20.8.15 polynomial Laplace solution
+  numeric: 20.8.15 noninteger regular solution transform
+PASS 20.8.16: 9 exact, 0 numerical checks
+  exact: 20.8.16 scaled Laguerre direct transform n<=8
+PASS 20.8.17: 1 exact, 6 numerical checks
+  numeric: 20.8.17 E1 Laplace quadrature
+  numeric: 20.8.17 reversed-order rational integral
+  exact: 20.8.17 removable zero-transform-parameter limit
+PASS 20.8.18: 1 exact, 3 numerical checks
+  exact: 20.8.18 absolute example F=t exp(-at)
+  numeric: 20.8.18 direct Dirichlet integral
+  numeric: 20.8.18 regulated sine integral with oscillatory quadrature
+PASS 20.8.19: 0 exact, 5 numerical checks
+  numeric: 20.8.19 sine-over-t transform including negative k
+  numeric: 20.8.19 sine-integral direct Laplace quadrature
+PASS 20.8.20: 1 exact, 1 numerical checks
+  numeric: 20.8.20 direct 100-period integration of ramp
+  exact: 20.8.20 constant periodic transform exact check
+PASS 20.8.21: 3 exact, 1 numerical checks
+  exact: 20.8.21 algebraic cancellation
+  exact: 20.8.21 average value
+  exact: 20.8.21 initial value
+  numeric: 20.8.21 direct positive-pulse integration
+PASS 20.8.22: 4 exact, 4 numerical checks
+  exact: 20.8.22 exponential-shift rational identity
+  numeric: 20.8.22 direct Laplace quadrature
+PASS 20.8.23: 8 exact, 0 numerical checks
+  exact: 20.8.23 direct forward transform
+  exact: 20.8.23 zero-frequency limit
+PASS 20.8.24: 1 exact, 2 numerical checks
+  numeric: 20.8.24 direct endpoint-regularized Laplace quadrature
+  exact: 20.8.24 hyperbolic-substitution Jacobian
+PASS 20.9.1: 3 exact, 0 numerical checks
+  exact: 20.9.1 integrated-function transform examples
+PASS 20.9.2: 0 exact, 4 numerical checks
+  numeric: 20.9.2 noninteger beta integral
+  numeric: 20.9.2 convolution power scaling
+PASS 20.9.3: 3 exact, 0 numerical checks
+  exact: 20.9.3 convolution antiderivative
+  exact: 20.9.3 convolution endpoints
+  exact: 20.9.3 zero-frequency case
+PASS 20.9.4: 5 exact, 0 numerical checks
+  exact: 20.9.4 nonresonant forced ODE
+  exact: 20.9.4 initial displacement
+  exact: 20.9.4 initial velocity
+  exact: 20.9.4 resonant limit
+  exact: 20.9.4 resonant forced ODE
+PASS 20.10.1: 2 exact, 2 numerical checks
+  exact: 20.10.1 Cauchy kernel residue and clockwise sign
+  exact: 20.10.1 exponential inverse kernel
+  numeric: 20.10.1 numerical Bromwich inversion sample
+PASS 20.10.2: 2 exact, 3 numerical checks
+  exact: 20.10.2 regularized delta mass
+  exact: 20.10.2 causal endpoint half mass
+  numeric: 20.10.2 Gaussian test-function pairing
+PASS 20.10.3: 0 exact, 2 numerical checks
+  numeric: 20.10.3 product Bromwich versus direct convolution
+PASS 20.10.4: 3 exact, 0 numerical checks
+  exact: 20.10.4 positive pole
+  exact: 20.10.4 negative pole
+  exact: 20.10.4 direct forward transform
+PASS 20.10.5: 3 exact, 0 numerical checks
+  exact: 20.10.5 three residues
+  exact: 20.10.5 explicit convolution
+  exact: 20.10.5 forward transform
+PASS 20.10.6: 3 exact, 0 numerical checks
+  exact: 20.10.6 cut jump orientation
+  exact: 20.10.6 gamma cut integral
+  exact: 20.10.6 independent forward normalization
+PASS 20.10.7: 0 exact, 6 numerical checks
+  numeric: 20.10.7 branch-cut angular integral
+  numeric: 20.10.7 independent numerical Bromwich inversion
+PASS 20.10.8: 11 exact, 6 numerical checks
+  exact: 20.10.8 Joukowski Jacobian
+  exact: 20.10.8 binomial-to-Bessel coefficient
+  numeric: 20.10.8 cut inversion
+  numeric: 20.10.8 mapped unit-circle residue integral
+  numeric: 20.10.8 independent numerical Bromwich inversion
+PASS 20.10.9: 1 exact, 3 numerical checks
+  exact: 20.10.9 parameter derivative including Euler constant
+  numeric: 20.10.9 direct logarithmic Laplace quadrature
+PASS 20.10.10: 4 exact, 0 numerical checks
+  exact: 20.10.10 positive double-pole residue
+  exact: 20.10.10 negative double-pole residue
+  exact: 20.10.10 direct transform
+  exact: 20.10.10 merged-pole limit
+PASS 20.10.11: 4 exact, 0 numerical checks
+  exact: 20.10.11 strictly proper rational expansion
+  exact: 20.10.11 analytic counterexample delayed transform
+  exact: 20.10.11 residue-only value for counterexample
+  exact: 20.10.11 residue-only value is nonzero before delay
+PASS 20.10.12: 3 exact, 0 numerical checks
+  exact: 20.10.12 delayed double-pole residue
+  exact: 20.10.12 direct delayed-ramp transform
+  exact: 20.10.12 negative-delay counterexample transform
+PASS 20.10.13: 5 exact, 0 numerical checks
+  exact: 20.10.13 partial-fraction inverse forward check
+  exact: 20.10.13 convolution primitive
+  exact: 20.10.13 convolution endpoints
+  exact: 20.10.13 independent residue sum
+  exact: 20.10.13 repeated-rate limit
+ALL PASS: 89 groups; 338 exact; 2369 numerical.
+Scope: executable checks supplement the written analytical proofs; finite samples do not prove universal or distributional claims.
+
+FINAL RENDERED-PAGE QA
+Standalone final PDF: work/ch20-final-review.pdf, 65 pages, 440152 bytes.
+Built with the current main.tex preamble through the chapter-only wrapper; no main
+PDF was built. Final log work/ch20-final-review.log has no LaTeX warnings,
+overfull/underfull boxes, or errors. All pages 1–65 were visually inspected in
+work/ch20-final-sheet-01.png through -17.png. The initial 64-page review found an
+orphan 20.6 subsection heading; its Needspace guard was increased to 20 baselines,
+and the changed final pages 26–65 were rerendered and visually reviewed. All
+remaining subsection headings have following content; math boxes, red changes,
+page breaks and margins were checked. No unresolved layout issue was found.
+
+Residual verification limits: no formal proof-assistant verification; executable
+samples cover the stated finite cases, not every parameter. General domains,
+branch choices, convergence and distributional claims were audited analytically.
+No known unresolved statement, mathematical or missing-step defect remains in
+the 89 entries under their now-explicit hypotheses.
+Final standalone PDF SHA256: 855ff86ffbc93091966e980e4644dcd892ce307e349eae9a5447faa8f6819b57
+Final clean log SHA256: 01aeff7e9c7f8f8606e0807e37136dfceeb87f4139b7ed43268cbf603f58e063
