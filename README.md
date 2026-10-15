@@ -4,4 +4,3 @@ Worked solutions to *Mathematical Methods for Physicists* (Arfken & Weber), prod
 
 - `main.tex` / `main.pdf` — compiled solutions document
 - `sections/` — per-chapter LaTeX source
-- `supplementary/` — verification materials
