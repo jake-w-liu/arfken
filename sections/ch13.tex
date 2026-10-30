@@ -1816,8 +1816,8 @@ Start where the beta integrals converge; in part (c) take
 $\Re b>1$ as well as $\Re a>0$.  The results then extend as
 meromorphic identities wherever the displayed values are defined.
 Parts (b)--(d) use the gamma form
-$B(a,b)=\Gamma(a)\Gamma(b)/\Gamma(a+b)$ and the recurrence
-$\Gamma(s+1)=s\Gamma(s)$.
+$B(a,b)=\Gamma(a)\Gamma(b)/\Gamma(a+b)$; parts (b) and (c) also
+use the recurrence $\Gamma(s+1)=s\Gamma(s)$.
 
 \textbf{(a)} Insert $1=t+(1-t)$ into the defining integral and
 split it:
@@ -1841,9 +1841,16 @@ B(a+1,b-1)=\frac{a\Gamma(a)\Gamma(b)}{(b-1)\Gamma(a+b)}
 =\frac a{b-1}B(a,b).
 \]
 Multiplying by $(b-1)/a$ gives
-$\boxed{B(a,b)=\dfrac{b-1}{a}B(a+1,b-1)}$.  When one of the
-separated factors has a pole, an equivalent continued identity
-must be interpreted by a limit, not by multiplying undefined values.
+$\boxed{B(a,b)=\dfrac{b-1}{a}B(a+1,b-1)}$.  Where a factor on the
+right has a pole, the identity holds as a limit, not as a product
+of undefined values.  For example, at $b=1$ the factor
+$B(a+1,b-1)$ has a pole while $(b-1)/a$ vanishes; since
+$(b-1)\Gamma(b-1)=\Gamma(b)$,
+\[
+\frac{b-1}{a}B(a+1,b-1)=\frac{\Gamma(a+1)\Gamma(b)}{a\,\Gamma(a+b)}
+\longrightarrow\frac{\Gamma(a+1)}{a\,\Gamma(a+1)}=\frac1a=B(a,1)
+\qquad(b\to1).
+\]
 
 \textbf{(d)} Multiplication cancels the intermediate gamma factor:
 \begin{align*}
@@ -1864,7 +1871,7 @@ B(a,b)B(a+b,c)
 \item[(a)] Show that
   \[
   \int_{-1}^{1}(1-x^{2})^{1/2}x^{2n}\,dx=\begin{cases}
-  \pi/2, & n=0\\[4pt]
+  \pi/2, & n=0,\\[4pt]
   \pi\dfrac{(2n-1)!!}{(2n+2)!!}, & n=1,2,3,\ldots.
   \end{cases}
   \]
@@ -1921,7 +1928,10 @@ $\pm1/2$ are greater than $-1$, so both improper integrals exist.
 \par\bigskip
 \noindent\textbf{13.3.3}\quad Show that
 \[
-\int_{-1}^{1}(1-x^{2})^{n}\,dx=\frac{2(2n)!!}{(2n+1)!!},\quad n=0,1,2,\ldots.
+\int_{-1}^{1}(1-x^{2})^{n}\,dx=\begin{cases}
+2^{2n+1}\dfrac{n!\,n!}{(2n+1)!}, & n>-1,\\[8pt]
+2\dfrac{(2n)!!}{(2n+1)!!}, & n=0,1,2,\ldots.
+\end{cases}
 \]
 \solution
 Evenness followed by $u=x^2$ yields
@@ -1931,7 +1941,22 @@ Evenness followed by $u=x^2$ yields
 =\int_0^1u^{-1/2}(1-u)^n du
 =B\left(\frac12,n+1\right).
 \]
-Now $\Gamma(1/2)=\sqrt\pi$, $\Gamma(n+1)=n!$, and the
+This converges exactly for $n>-1$, the condition for $(1-u)^n$ to
+be integrable at $u=1$.  For such $n$,
+$B(\frac12,n+1)=\Gamma(\frac12)\Gamma(n+1)/\Gamma(n+\frac32)$, and
+the Legendre duplication formula
+$\Gamma(z)\Gamma(z+\frac12)=2^{1-2z}\sqrt\pi\,\Gamma(2z)$ at
+$z=n+1$ gives
+$\Gamma(n+\frac32)=2^{-2n-1}\sqrt\pi\,\Gamma(2n+2)/\Gamma(n+1)$;
+hence
+\[
+B\left(\frac12,n+1\right)
+=\frac{\sqrt\pi\,[\Gamma(n+1)]^2}{2^{-2n-1}\sqrt\pi\,\Gamma(2n+2)}
+=\boxed{2^{2n+1}\frac{n!\,n!}{(2n+1)!}},
+\]
+where $n!=\Gamma(n+1)$ and $(2n+1)!=\Gamma(2n+2)$ for nonintegral
+$n$.  For $n=0,1,2,\ldots$ the double-factorial form follows
+directly: $\Gamma(1/2)=\sqrt\pi$, $\Gamma(n+1)=n!$, and the
 half-integer formula of Exercise 13.3.2 with $n+1$ in place of
 $n$ gives $\Gamma(n+3/2)=(2n+1)!!\sqrt\pi/2^{n+1}$, so
 \[
@@ -1940,9 +1965,11 @@ B\left(\frac12,n+1\right)
 =\frac{2\cdot2^nn!}{(2n+1)!!}
 =\boxed{\frac{2(2n)!!}{(2n+1)!!}},
 \]
-by $(2n)!!=2^nn!$.
-At $n=0$ this is two, the length of the interval, checking the
-empty-product convention.
+by $(2n)!!=2^nn!$.  The two boxed forms agree for integer $n$:
+splitting $(2n+1)!=(2n)!!\,(2n+1)!!$ into its even and odd factors
+and using $2^nn!=(2n)!!$ turns the first into
+$2[(2n)!!]^2/[(2n)!!\,(2n+1)!!]$.  At $n=0$ the value is two, the
+length of the interval, checking the empty-product convention.
 
 
 \Needspace{5\baselineskip}
@@ -2058,9 +2085,10 @@ What are the limits on $\theta$?
 
 \emph{Hint.}~Consider oblique $xy$-coordinates.
 \par\nobreak\hfill\emph{ANS.}\enspace
-$-\pi<\theta<\pi$ \erratum{for the unreduced formula, with value $1/2$ at $\theta=0$ by continuity. The integral itself converges for every real $\theta$ except odd multiples of $\pi$.}
+$-\pi<\theta<\pi$ \erratum{for the formula $\theta/(2\sin\theta)$ as written, with value $1/2$ at $\theta=0$ by continuity. The integral itself converges for every real $\theta$ except odd multiples of $\pi$.}
 \solution
-First take $0<\theta<\pi$.  Introduce Cartesian variables
+Denote the double integral by $I(\theta)$, and first take
+$0<\theta<\pi$.  Introduce Cartesian variables
 \[
 X=x+y\cos\theta,\qquad Y=y\sin\theta.
 \]
@@ -2090,8 +2118,8 @@ angle $\theta$ ($x=0$).
 \draw[thick,blue,->] (0,0)--(55:3.5) node[above right] {$x=0$};
 \node[below] at (2.6,0) {$y=0$};
 \draw[->] (0.85,0) arc (0:55:0.85);
-\node at (27.5:1.12) {$\theta$};
 \draw[dashed] (0,0)--(27.5:2.5) node[above right] {$R$};
+\node[fill=blue!8,inner sep=1pt] at (27.5:1.12) {$\theta$};
 \end{tikzpicture}
 \end{center}
 In polar coordinates $X=R\cos\phi$, $Y=R\sin\phi$, the sector
@@ -2239,8 +2267,12 @@ $x=\sin\phi$: then $1-x^4=(1-x^2)(1+x^2)=\cos^2\phi\,(1+\sin^2\phi)$
 and $dx=\cos\phi\,d\phi$, and cancellation of $\cos\phi$ gives the
 nonsingular integral $\int_0^{\pi/2}(1+\sin^2\phi)^{-1/2}d\phi$.
 Its integrand is smooth, has period $\pi$ and is even about both
-endpoints, so the trapezoidal rule converges very fast: eight
-equal subintervals already give
+endpoints, so the trapezoidal rule converges very fast: in the
+Euler--Maclaurin formula (Section 12.3) every correction term
+contains an odd-order derivative of the integrand at $\phi=0$ and
+$\phi=\pi/2$, and all of these vanish for a function even about
+both points, so the error falls faster than any power of the
+step.  Eight equal subintervals already give
 $1.311028777146$ (error $2\times10^{-13}$).
 
 
@@ -2514,8 +2546,12 @@ $u^n\le u$, so
 \qquad\int_0^1(1-u)^{-1/2}du=2.
 \]
 Dominated convergence gives an integral limit of one, and
-$x_{\max}=L(E/A)^{1/n}\to L$.  This proves the same limit
-without ignoring the endpoint singularity.
+$x_{\max}=L(E/A)^{1/n}\to L$, so
+\[
+\boxed{\lim_{n\to\infty}\tau_n=2L\sqrt{\frac{2m}E}},
+\]
+the limit found in (a) (where $L=1$), now obtained without
+ignoring the endpoint singularity.
 
 \textbf{(c)} For $|x|<L$, $V_n(x)\to0$; for $|x|>L$,
 $V_n(x)\to\infty$.  The limiting motion is free flight between
@@ -2604,7 +2640,9 @@ with $x$ restricted to the interval $(0,1)$. Show that
 \erratum{Assume real $\alpha,\beta>0$.}
 \solution
 \erratum{A beta probability density requires real
-$\alpha,\beta>0$.}
+$\alpha,\beta>0$: a density must be real and nonnegative, and
+$x^{\alpha-1}(1-x)^{\beta-1}$ is integrable at $x=0$ only for
+$\alpha>0$ and at $x=1$ only for $\beta>0$.}
 Its prefactor is
 $\Gamma(\alpha+\beta)/[\Gamma(\alpha)\Gamma(\beta)]=1/B(\alpha,\beta)$.
 Consequently, for $\Re q>-\alpha$,
@@ -2713,7 +2751,7 @@ This proves convergence of the infinite product as well as its value.
 \noindent\textbf{13.4.1}\quad Rewrite Stirling's series to give $\Gamma(z+1)$
 instead of $\ln\Gamma(z+1)$.
 \par\nobreak\hfill\emph{ANS.}\enspace
-$\Gamma(z+1)\erratum{\sim}\sqrt{2\pi}\,z^{z+1/2}e^{-z}
+$\Gamma(z+1)\mathrel{\erratum{\sim}}\sqrt{2\pi}\,z^{z+1/2}e^{-z}
 \left(1+\dfrac{1}{12z}+\dfrac{1}{288z^{2}}-\dfrac{139}{51{,}840z^{3}}
 +\cdots\right)$.
 \par\smallskip
@@ -2865,9 +2903,25 @@ $2C_2=C_2+\frac12\ln\pi+\frac12\ln2$, that is,
 \[
 \boxed{C_2=\frac12\ln(2\pi)}.
 \]
-The recurrence added to the instruction is needed: with $C_1$ left
-free, the same comparison of the duplication formula gives only
-the single relation $C_2=\frac12\ln(2\pi)+\frac12C_1$.
+The recurrence added to the instruction is needed.  With $C_1$
+left free, the linear term of $F(z-\frac12)$ is
+$(C_1-1)(z-\frac12)$ instead of $-(z-\frac12)$, which adds
+$C_1z-\frac12C_1$ to the shifted expansion above:
+\[
+F\left(z-\frac12\right)=C_2+z\ln z+(C_1-1)z-\frac{C_1}2+O(z^{-1}).
+\]
+Since $F(z)$ and $F(2z)$ likewise gain $C_1z$ and $2C_1z$, the
+left and right sides of the logarithmic duplication formula become
+\begin{align*}
+\text{left:}\quad&2C_2+\left(2z+\frac12\right)\ln z+2(C_1-1)z
+-\frac{C_1}2+O(z^{-1}),\\
+\text{right:}\quad&C_2+\left(2z+\frac12\right)\ln z+2(C_1-1)z
++\frac12\ln(2\pi)+O(z^{-1}).
+\end{align*}
+All terms that grow with $z$ agree for every value of $C_1$, so
+the comparison gives only the single relation
+$2C_2-\frac12C_1=C_2+\frac12\ln(2\pi)$, that is,
+$C_2=\frac12\ln(2\pi)+\frac12C_1$.
 
 
 \Needspace{5\baselineskip}
@@ -3091,8 +3145,8 @@ unoccupied state contributes $\ln0!=0=0\ln0-0$), give
 \end{align*}
 From the second to the third line, $-N+\sum_in_i=0$ and
 $\ln n_i=\ln N+\ln p_i$; in the last line, $\sum_ip_i=1$ cancels
-$N\ln N$.  The error terms, one for each of the fixed number $M$
-of states, are each $O(\ln N)$.
+$N\ln N$.  The error terms, one from $\ln N!$ and one from each of
+the fixed number $M$ of states, are each $O(\ln N)$.
 Thus
 \[
 \boxed{S\sim-Nk\sum_{i=1}^M p_i\ln p_i}
@@ -3118,7 +3172,8 @@ Here every occupied $n_i$ tends to infinity; zero fractions were
 omitted before applying Stirling's formula.
 \erratum{Extensivity is the leading large-$N$ statement for
 fixed state fractions and a fixed number of states.  The exact
-finite-$N$ entropy has smaller corrections.  The condition
+finite-$N$ entropy differs from this extensive leading term by the
+$O(\ln N)$ corrections displayed above.  The condition
 $M\ll N$ alone does not ensure extensivity if $M$ also grows:
 for example $M=\sqrt N$, $p_i=1/M$ gives a leading
 $(k/2)N\ln N$.}
@@ -3140,8 +3195,10 @@ $H=-M\cdot\frac1M\ln\frac1M=\ln M$, so
 \]
 The Hessian of $H$ is
 $\partial^2H/\partial p_i\partial p_j=-\delta_{ij}/p_i$, so for
-every nonzero tangent displacement $\delta$ ($\sum_i\delta_i=0$)
-the quadratic form $-\sum_i\delta_i^2/p_i$ is strictly negative.
+every nonzero tangent vector $v=(v_1,\ldots,v_M)$ ($\sum_iv_i=0$)
+the quadratic form
+$\sum_{i,j}v_iv_j\,\partial^2H/\partial p_i\partial p_j=-\sum_iv_i^2/p_i$
+is strictly negative.
 Thus $H$ is strictly concave on the simplex, and this critical
 point is the unique maximum.  A boundary with only $q<M$ occupied
 states has, by the same argument, maximum $\ln q<\ln M$ and cannot
