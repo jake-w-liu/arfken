@@ -50,15 +50,16 @@ Show that tensor $\mathsf{A}$ is equal to tensor $\mathsf{B}$,
 $A_{ij}=B_{ij}$, in all coordinate systems.
 \solution
 The difference $C_{ij}=A_{ij}-B_{ij}$ is a tensor because the
-transformation law is linear. In the specified system,
-$C^0_{ab}=A^0_{ab}-B^0_{ab}=0$. In any other system,
+transformation law is linear. Denote the coordinates of the specified
+system by $x_0^a$; the label $0$ (a superscript on components, a
+subscript on coordinates) names that system and is not a tensor index.
+There $C^0_{ab}=A^0_{ab}-B^0_{ab}=0$. In any other system,
 \[
 C_{ij}
 =\frac{\partial x_0^a}{\partial x^i}
  \frac{\partial x_0^b}{\partial x^j}C^0_{ab}=0.
 \]
-Consequently $A_{ij}-B_{ij}=0$ in every system. Here the superscript $0$
-labels the original coordinate system; it is not a tensor index.
+Consequently $A_{ij}-B_{ij}=0$ in every system.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -89,8 +90,12 @@ between total final and initial four-momenta,
 \]
 Conservation of three-momentum in the two frames supplies the two sets of
 three zero components. Two frames in relative motion satisfy the
-hypothesis on the coefficients: for a boost with velocity $\beta c$
-along $x^1$, $x'^1=\gamma(x^1-\beta x^0)$, so
+hypothesis on the coefficients. Indeed, $\partial x'^i/\partial x^0$,
+taken at fixed $x^1,x^2,x^3$, is the rate at which the primed spatial
+coordinates of a point at rest in the first frame change with $x^0$; if
+all three vanished, every point at rest in the first frame would also be
+at rest in the second. For example, for a boost with velocity $\beta c$ along
+$x^1$, $x'^1=\gamma(x^1-\beta x^0)$ with $\gamma=(1-\beta^2)^{-1/2}$, so
 $\partial x'^1/\partial x^0=-\gamma\beta\ne0$. The argument above then
 forces $\Delta E=0$, and hence conservation of all four components in
 every Lorentz frame.
@@ -104,7 +109,7 @@ be a multiple of $\delta_{j}^{i}$.
 \solution
 In orthonormal Cartesian coordinates, write the components as a
 $3\times3$ matrix $T$. A rotation $Q$ gives
-$T'_{ij}=Q_{ia}Q_{jb}T_{ab}$, that is, $T'=QTQ^{\mathsf T}$;
+$T'_{ij}=Q_{ik}Q_{jl}T_{kl}$, that is, $T'=QTQ^{\mathsf T}$;
 isotropy means $QTQ^{\mathsf T}=T$ for every proper rotation.
 
 First use the $180^\circ$ rotations
@@ -138,7 +143,7 @@ Q_1TQ_1^{\mathsf T}=\operatorname{diag}(a,c,b).
 \]
 Equality with $T$ requires $a=b$ and $b=c$. Therefore
 \[
-\boxed{T^i{}_j=\lambda\delta^i_j.}
+\boxed{T^i{}_j=\lambda\delta^i_j}.
 \]
 Conversely $Q(\lambda I)Q^{\mathsf T}=\lambda QQ^{\mathsf T}=\lambda I$,
 so every tensor of this form is isotropic.
@@ -177,12 +182,15 @@ Pair exchange, $R_{iklm}=R_{lmik}$, says that $C$ is symmetric. Its six
 diagonal entries and $6\cdot5/2=15$ entries above the diagonal determine
 all the others. The number is now $6+15=21$.
 
-Consider the cyclic identity. If two of $k,l,m$ coincide, cyclically
-relabel them so that $k=l$. Its left side then has the form
+Consider the cyclic identity. Its left side is unchanged by the cyclic
+permutation $(k,l,m)\to(l,m,k)$, which merely permutes its three terms.
+So if two of $k,l,m$ coincide, we may take them to be $k=l$. The left
+side then has the form
 \[
 R_{ikkm}+R_{ikmk}+R_{imkk}=R_{ikkm}-R_{ikkm}+0=0.
 \]
-If $i$ coincides with one of $k,l,m$, cyclically arrange $i=k$. Then
+If $i$ coincides with one of $k,l,m$, the same cyclic freedom lets us
+take $i=k$. Then
 \[
 R_{iilm}+R_{ilmi}+R_{imil}
 =0-R_{ilim}+R_{ilim}=0,
@@ -194,7 +202,7 @@ For the four available indices it is
 \[
 R_{0123}+R_{0231}+R_{0312}=0,
 \quad\hbox{or}\quad
-\boxed{C_{01,23}-C_{02,13}+C_{03,12}=0.}
+\boxed{C_{01,23}-C_{02,13}+C_{03,12}=0}.
 \]
 All other orderings give this same equation, possibly with the opposite
 sign. To see why, set
@@ -204,6 +212,11 @@ three terms' signs, by antisymmetry in the last pair:
 B_{ilkm}=R_{ilkm}+R_{ikml}+R_{imlk}
 =-R_{ilmk}-R_{iklm}-R_{imkl}=-B_{iklm}.
 \]
+Interchanging $l,m$ likewise reverses all three signs:
+\[
+B_{ikml}=R_{ikml}+R_{imlk}+R_{ilkm}
+=-R_{iklm}-R_{imkl}-R_{ilmk}=-B_{iklm}.
+\]
 Interchanging $i,k$ gives
 \[
 B_{kilm}=R_{kilm}+R_{klmi}+R_{kmil}
@@ -211,15 +224,14 @@ B_{kilm}=R_{kilm}+R_{klmi}+R_{kmil}
 \]
 Here $R_{kilm}=-R_{iklm}$, while pair exchange followed by antisymmetry
 gives $R_{klmi}=R_{mikl}=-R_{imkl}$ and $R_{kmil}=R_{ilkm}=-R_{ilmk}$.
-A cyclic permutation of $k,l,m$ merely permutes the three terms of $B$,
-so $B$ is unchanged by it. Together with this cyclic symmetry, the two
-interchanges make $B$ completely antisymmetric. Its only independent
-entry in four dimensions is $B_{0123}$. The displayed relation is
+Every permutation of the four slots is a product of interchanges of
+neighboring slots, so $B$ is completely antisymmetric. Its only
+independent entry in four dimensions is $B_{0123}$. The displayed relation is
 nontrivial: it links three different entries above the diagonal of the
 symmetric array $C$, which are independent among the 21 parameters. It
 therefore removes exactly one of them. The final number is
 \[
-\boxed{21-1=20.}
+\boxed{21-1=20}.
 \]
 
 \Needspace{5\baselineskip}
@@ -233,7 +245,7 @@ value leaves a component unchanged. Complete antisymmetry says that the
 same interchange changes its sign. Therefore each component obeys
 $T_{iklm}=-T_{iklm}$ and is zero. The number of independent components is
 \[
-\boxed{0.}
+\boxed{0}.
 \]
 Equivalently, the space of completely antisymmetric rank-four tensors
 in three dimensions has dimension $\binom34=0$.
@@ -287,6 +299,9 @@ instance,
 \]
 and the last term spoils the tensor law. A scalar has no such factors,
 so its ordinary first derivative remains a covector in general coordinates.
+\erratum{The word ``of'' in the Note is supplied: the printed sentence
+lacks it (``the derivatives the components''), but it is the
+derivatives \emph{of} the components that fail to form a tensor.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -341,11 +356,19 @@ Thus $\sum_{a=1}^4\partial_a^2$ is the stated operator. In these complex
 coordinates a Lorentz transformation $x'=Qx$ is represented by a
 constant complex orthogonal matrix $Q$: it preserves
 $x_1^2+x_2^2+x_3^2+x_4^2=\mathbf{x}^2-c^2t^2$, that is,
-$x^{\mathsf T}(Q^{\mathsf T}Q-I)x=0$ for every event $x$. The matrix in
-parentheses is symmetric, and a symmetric matrix whose quadratic form
-vanishes identically is zero (polarization, as in Exercise 4.1.10);
-hence $Q^{\mathsf T}Q=I$. For example, the boost $x_1'=\gamma(x_1-\beta ct)$,
-$t'=\gamma(t-\beta x_1/c)$ reads
+$x^{\mathsf T}Mx=0$ for every event $x$, where $M=Q^{\mathsf T}Q-I$ is
+symmetric. Sums of events are events, so polarization, as in
+Exercise 4.1.10, gives
+\[
+u^{\mathsf T}Mv=\tfrac12\{(u+v)^{\mathsf T}M(u+v)-u^{\mathsf T}Mu
+-v^{\mathsf T}Mv\}=0
+\]
+for any two events $u,v$. Events have real $x_1,x_2,x_3$ and imaginary
+$x_4$, so $u,v$ may be taken among the unit columns $e_1,e_2,e_3$ and
+$ie_4$; this gives $M_{bd}=0$, $iM_{b4}=0$ ($b,d\le3$) and $-M_{44}=0$.
+Hence $M=0$, that is, $Q^{\mathsf T}Q=I$. For example, the boost
+$x_1'=\gamma(x_1-\beta ct)$, $t'=\gamma(t-\beta x_1/c)$, with
+$\gamma=(1-\beta^2)^{-1/2}$, reads
 \[
 x_1'=\gamma(x_1+i\beta x_4),\quad x_4'=\gamma(x_4-i\beta x_1),
 \qquad
@@ -451,7 +474,7 @@ new coordinates: $K'A'=B'$. Subtracting gives
 This must hold for every second-rank $A'$. In particular, set $A'=I$;
 then $K'-QKQ^{\mathsf T}=0$. Hence
 \[
-\boxed{K'=QKQ^{\mathsf T},}
+\boxed{K'=QKQ^{\mathsf T}},
 \]
 which is the required tensor law. The word ``arbitrary'' is essential:
 if the equation were supplied only for one singular $A$, it would not
@@ -495,9 +518,13 @@ $C_{jk}=\epsilon_{jki}C_i$, in every orthonormal Cartesian system.
 
 For an orthogonal change of Cartesian axes $Q$, put $d=\det Q=\pm1$.
 A pseudovector obeys $C'_i=dQ_{ia}C_a$. For the numerical Levi-Civita
-symbols, the expansion of a determinant gives
-$Q_{jb}Q_{kc}Q_{i\ell}\epsilon_{bc\ell}=(\det Q)\epsilon_{jki}$;
-multiplying by $d$ and using $d^2=1$ yields
+symbols,
+$Q_{jb}Q_{kc}Q_{i\ell}\epsilon_{bc\ell}=(\det Q)\epsilon_{jki}$.
+Indeed, by the expansion $\det A=\epsilon_{bc\ell}A_{1b}A_{2c}A_{3\ell}$,
+the left side is the determinant of the matrix whose rows are rows
+$j,k,i$ of $Q$: for $(j,k,i)=(1,2,3)$ it is $\det Q$, an interchange of
+two rows reverses its sign, and a repeated row gives zero, exactly as
+for $(\det Q)\epsilon_{jki}$. Multiplying by $d$ and using $d^2=1$ yields
 \[
 \epsilon_{jki}=dQ_{jb}Q_{kc}Q_{i\ell}\epsilon_{bc\ell}.
 \]
@@ -516,17 +543,17 @@ This is the ordinary second-rank tensor law, including reflections.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{4.2.2}\quad Show that \erratum{a linear one-to-one
-correspondence between the full space of antisymmetric second-rank tensors
-and the space of vectors exists only in three dimensions}.
-This is the sense of uniqueness of the vector product intended here.
+\noindent\textbf{4.2.2}\quad Show that the vector product is unique to 3-D
+space, that is, only in three dimensions can we establish a
+\erratum{linear} one-to-one correspondence between the components of an
+antisymmetric tensor (second-rank) and the components of a vector.
 \solution
 In $n$ dimensions, an antisymmetric tensor has zero diagonal
 entries, and each entry below the diagonal is minus the corresponding
 entry above it. Its independent components are therefore indexed by
-unordered pairs of distinct indices, giving
+unordered pairs of distinct indices, whose number is
 \[
-\dim\Lambda^2\mathbb R^n=\binom n2=\frac{n(n-1)}2.
+\binom n2=\frac{n(n-1)}2.
 \]
 A vector has $n$ independent components. A linear one-to-one
 correspondence between the full component spaces requires equal
@@ -537,13 +564,23 @@ dimensions:
 \]
 For a positive space dimension this forces $n=3$. In three dimensions
 the correspondence actually exists: $C_i=\tfrac12\epsilon_{ijk}C_{jk}$
-and $C_{jk}=\epsilon_{jki}C_i$ are inverse maps, as verified in
-Exercise 4.2.1. The associated vector is a pseudovector when orientation
-reversals are included.
+and $C_{jk}=\epsilon_{jki}C_i$ are inverse maps. Exercise 4.2.1 showed
+that the second undoes the first. In the other order, start from $C_j$
+and form $C_{mi}=\epsilon_{mij}C_j=\epsilon_{ijm}C_j$. Setting $k=m$ in
+the contraction identity of Exercise 4.2.1 and summing gives
+$\epsilon_{\ell mi}\epsilon_{ijm}=3\delta_{\ell j}-\delta_{\ell j}
+=2\delta_{\ell j}$, since $\delta_{mm}=3$; hence
+$\tfrac12\epsilon_{\ell mi}C_{mi}
+=\tfrac12\epsilon_{\ell mi}\epsilon_{ijm}C_j=C_\ell$.
+The associated vector is a pseudovector when orientation reversals are
+included.
 
-\erratum{The uniqueness claim concerns this one-to-one correspondence
-with all antisymmetric second-rank tensors. The dimension count does not
-exclude other, differently defined products bearing the name cross product.}
+\erratum{The word ``linear'' is added to the statement because, as mere
+sets, $\mathbb R^{n(n-1)/2}$ and $\mathbb R^n$ can be put in one-to-one
+correspondence for every $n\ge2$. The uniqueness of the vector product
+is meant in the sense of this linear correspondence with all
+antisymmetric second-rank tensors; the dimension count does not exclude
+other, differently defined products bearing the name cross product.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -720,9 +757,10 @@ Multiply the given equation by $\epsilon^{mnk}$ and sum $k$:
 &=\frac12(B^{mn}-B^{nm})\\
 &=\frac12(B^{mn}+B^{mn})=B^{mn}.
 \end{align*}
-The second line is the contraction identity of Exercise 4.2.1 (in
-Cartesian coordinates upper and lower indices are equivalent), and the
-last line uses $B^{nm}=-B^{mn}$.
+The second line is the contraction identity of Exercise 4.2.1, applied
+to $\epsilon^{mnk}\epsilon_{kij}$ after the cyclic rearrangement
+$\epsilon_{ijk}=\epsilon_{kij}$ (in Cartesian coordinates upper and
+lower indices are equivalent), and the last line uses $B^{nm}=-B^{mn}$.
 This is the stated inverse relation. It also checks the factor $1/2$:
 without it the two antisymmetric terms would produce $2B^{mn}$.
 
@@ -869,9 +907,15 @@ Linear independence of the basis forces equality of each coefficient:
 $\boxed{\Gamma^m_{jk}=\Gamma^m_{kj}}$. Equivalently, take the scalar
 product of both sides with $\boldsymbol\varepsilon^n$ and use
 $\boldsymbol\varepsilon_m\cdot\boldsymbol\varepsilon^n=\delta^n_m$ to
-obtain $\Gamma^n_{jk}=\Gamma^n_{kj}$. This is the symmetry of the coordinate
-Christoffel connection used here; it is not a claim that every possible
-connection has zero torsion.
+obtain $\Gamma^n_{jk}=\Gamma^n_{kj}$. The symmetry rests on the basis
+vectors $\boldsymbol\varepsilon_j=\partial\mathbf r/\partial q^j$ being
+derivatives of a single position vector $\mathbf r$. Coefficients
+defined in the same way for a basis not of this form need not be
+symmetric: for the cylindrical unit vectors,
+$\partial_\phi\hat{\mathbf e}_\rho=\hat{\mathbf e}_\phi$ but
+$\partial_\rho\hat{\mathbf e}_\phi=0$, so the analogue of
+$\Gamma^\phi_{\rho\phi}$ is $1$ while that of $\Gamma^\phi_{\phi\rho}$
+is $0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -900,7 +944,7 @@ contravariant metric has the reciprocal diagonal entries. Therefore
 \[
 \boxed{(g_{ij})=\begin{pmatrix}1&0&0\\0&\rho^2&0\\0&0&1\end{pmatrix},
 \qquad
-(g^{ij})=\begin{pmatrix}1&0&0\\0&\rho^{-2}&0\\0&0&1\end{pmatrix}.}
+(g^{ij})=\begin{pmatrix}1&0&0\\0&\rho^{-2}&0\\0&0&1\end{pmatrix}}.
 \]
 As checks, their product is the identity and
 $ds^2=g_{ij}\,dq^i dq^j=d\rho^2+\rho^2d\phi^2+dz^2$.
@@ -954,7 +998,7 @@ $i\leftrightarrow k$.
 The coefficients of the reciprocal basis are the covariant components
 of the derivative, hence
 \[
-\boxed{V_{i;j}=\partial_jV_i-V_k\Gamma^k_{ij}.}
+\boxed{V_{i;j}=\partial_jV_i-V_k\Gamma^k_{ij}}.
 \]
 
 \Needspace{5\baselineskip}
@@ -1038,7 +1082,7 @@ entry or differentiates with respect to $z$, so every term is zero.
 There are no other nonzero possibilities. Thus the complete list is
 \[
 \boxed{\Gamma^\rho_{\phi\phi}=-\rho,\qquad
-\Gamma^\phi_{\rho\phi}=\Gamma^\phi_{\phi\rho}=\rho^{-1}.}
+\Gamma^\phi_{\rho\phi}=\Gamma^\phi_{\phi\rho}=\rho^{-1}}.
 \]
 As a check against the definition
 $\partial_j\boldsymbol\varepsilon_i=\Gamma^k_{ij}\boldsymbol\varepsilon_k$,
@@ -1072,7 +1116,7 @@ There are no connection terms for $i=z$. Thus all nine derivatives are
 \partial_\rho V^\phi+V^\phi/\rho&
 \partial_\phi V^\phi+V^\rho/\rho&\partial_z V^\phi\\[2pt]
 \partial_\rho V^z&\partial_\phi V^z&\partial_z V^z
-\end{pmatrix}.}
+\end{pmatrix}}.
 \]
 Rows are labeled by $i=(\rho,\phi,z)$ and columns by
 $j=(\rho,\phi,z)$. These are components in the coordinate basis, whose
@@ -1085,10 +1129,25 @@ V^\rho=V_{\hat\rho},\qquad V^\phi=V_{\hat\phi}/\rho,
 \qquad V^z=V_{\hat z}.
 \]
 For example, the first row's angular entry becomes
-$\partial_\phi V_{\hat\rho}-V_{\hat\phi}$, agreeing with direct
-differentiation of the unit vectors
-$\partial_\phi\hat{\mathbf e}_\rho=\hat{\mathbf e}_\phi$ and
-$\partial_\phi\hat{\mathbf e}_\phi=-\hat{\mathbf e}_\rho$.
+$\partial_\phi V^\rho-\rho V^\phi=\partial_\phi V_{\hat\rho}-V_{\hat\phi}$.
+Since $\partial_j\mathbf V=V^i{}_{;j}\boldsymbol\varepsilon_i$ (the
+relation that defines $V^i{}_{;j}$) and
+$\boldsymbol\varepsilon_\rho=\hat{\mathbf e}_\rho$, this entry is the
+$\hat{\mathbf e}_\rho$ component of $\partial_\phi\mathbf V$. Direct
+differentiation of the unit-vector expansion, with
+$\partial_\phi\hat{\mathbf e}_\rho=\hat{\mathbf e}_\phi$,
+$\partial_\phi\hat{\mathbf e}_\phi=-\hat{\mathbf e}_\rho$ and
+$\partial_\phi\hat{\mathbf e}_z=0$, agrees:
+\[
+\partial_\phi\mathbf V
+=(\partial_\phi V_{\hat\rho}-V_{\hat\phi})\hat{\mathbf e}_\rho
+ +(\partial_\phi V_{\hat\phi}+V_{\hat\rho})\hat{\mathbf e}_\phi
+ +(\partial_\phi V_{\hat z})\hat{\mathbf e}_z.
+\]
+Likewise, because $\boldsymbol\varepsilon_\phi=\rho\,\hat{\mathbf e}_\phi$,
+the $\hat{\mathbf e}_\phi$ component is
+$\rho V^\phi{}_{;\phi}=\rho\,\partial_\phi(V_{\hat\phi}/\rho)+V_{\hat\rho}
+=\partial_\phi V_{\hat\phi}+V_{\hat\rho}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1101,6 +1160,27 @@ minus connection term:
 g_{ij;k}=\partial_kg_{ij}
  -\Gamma^m_{ik}g_{mj}-\Gamma^m_{jk}g_{im}.
 \]
+This rule follows as in Exercise 4.3.6. Write a second-rank tensor as
+$T_{ij}\boldsymbol\varepsilon^i\boldsymbol\varepsilon^j$, a sum of
+direct products of reciprocal basis vectors, and differentiate by the
+product rule, using
+$\partial_k\boldsymbol\varepsilon^i=-\Gamma^i_{mk}\boldsymbol\varepsilon^m$
+for each basis vector:
+\begin{align*}
+\partial_k(T_{ij}\boldsymbol\varepsilon^i\boldsymbol\varepsilon^j)
+&=(\partial_kT_{ij})\boldsymbol\varepsilon^i\boldsymbol\varepsilon^j
+ -T_{ij}\Gamma^i_{mk}\boldsymbol\varepsilon^m\boldsymbol\varepsilon^j
+ -T_{ij}\Gamma^j_{mk}\boldsymbol\varepsilon^i\boldsymbol\varepsilon^m\\
+&=(\partial_kT_{ij}-\Gamma^m_{ik}T_{mj}-\Gamma^m_{jk}T_{im})
+ \boldsymbol\varepsilon^i\boldsymbol\varepsilon^j,
+\end{align*}
+after relabeling $i\leftrightarrow m$ in the second term and
+$j\leftrightarrow m$ in the third; the coefficient is $T_{ij;k}$. With
+contravariant components, $T^{ij}\boldsymbol\varepsilon_i
+\boldsymbol\varepsilon_j$, and
+$\partial_k\boldsymbol\varepsilon_i=\Gamma^m_{ik}\boldsymbol\varepsilon_m$
+instead, each upper index gives a plus term.
+
 Differentiate $g_{ij}=\boldsymbol\varepsilon_i\cdot
 \boldsymbol\varepsilon_j$ as in Exercise 4.3.7 to obtain
 \[
@@ -1121,8 +1201,9 @@ first term becomes $\partial_kg^{ij}$, which is thereby isolated:
 &=-g^{ia}\Gamma^j_{ak}-\Gamma^i_{bk}g^{bj}.
 \end{align*}
 The last line uses $g_{mb}g^{bj}=\delta^j_m$ and
-$g^{ia}g_{am}=\delta^i_m$. The contravariant derivative has a plus
-connection term for each upper index. Renaming the dummies $a,b$ as $m$,
+$g^{ia}g_{am}=\delta^i_m$. As shown above, the contravariant derivative
+has a plus connection term for each upper index. Renaming the dummies
+$a,b$ as $m$,
 \begin{align*}
 g^{ij}{}_{;k}
 &=\partial_kg^{ij}+\Gamma^i_{mk}g^{mj}+\Gamma^j_{mk}g^{im}\\
@@ -1149,7 +1230,7 @@ For completeness, the contraction in the middle expression satisfies
 \Gamma^i_{mi}=\frac12g^{i\ell}
  (\partial_mg_{\ell i}+\partial_i g_{\ell m}-\partial_\ell g_{mi})
 =\frac12g^{i\ell}\partial_mg_{i\ell}
-=\partial_m\log\sqrt g.
+=\partial_m\ln\sqrt g.
 \]
 The last two derivatives in parentheses cancel after interchanging the
 dummy indices $i,\ell$ in one of them and using the symmetry of
@@ -1162,17 +1243,30 @@ equals $g\,g^{i\ell}$ by the cofactor formula for the inverse matrix.
 The product rule then gives the first displayed formula:
 \[
 \frac1{\sqrt g}\partial_i(\sqrt g\,V^i)
-=\partial_iV^i+V^m\partial_m\log\sqrt g
+=\partial_iV^i+V^m\partial_m\ln\sqrt g
 =\partial_iV^i+\Gamma^i_{mi}V^m.
 \]
 
-In spherical polar coordinates $q^i=(r,\theta,\phi)$,
+In spherical polar coordinates $q^i=(r,\theta,\phi)$, differentiating
+$\mathbf r=(r\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)$ gives
+the coordinate basis
+\begin{align*}
+\boldsymbol\varepsilon_r
+&=(\sin\theta\cos\phi,\sin\theta\sin\phi,\cos\theta),\\
+\boldsymbol\varepsilon_\theta
+&=r(\cos\theta\cos\phi,\cos\theta\sin\phi,-\sin\theta),\\
+\boldsymbol\varepsilon_\phi
+&=r\sin\theta(-\sin\phi,\cos\phi,0).
+\end{align*}
+Their pairwise scalar products vanish, and their squared lengths are
+$1$, $r^2$, $r^2\sin^2\theta$. Hence
 \[
 g_{ij}=\operatorname{diag}(1,r^2,r^2\sin^2\theta),\qquad
+g=r^4\sin^2\theta,\qquad
 \sqrt g=r^2\sin\theta
 \]
-on the usual regular chart $r>0$, $0<\theta<\pi$. Let
-$V_r,V_\theta,V_\phi$ denote components along the \emph{unit} vectors.
+on the usual regular chart $r>0$, $0<\theta<\pi$, where $\sin\theta>0$.
+Let $V_r,V_\theta,V_\phi$ denote components along the \emph{unit} vectors.
 The coordinate basis vectors have lengths $\sqrt{g_{ii}}=1,r,r\sin\theta$,
 so comparing $\mathbf V=V^i\boldsymbol\varepsilon_i$ with the unit-vector
 expansion gives
@@ -1192,10 +1286,9 @@ and $\sqrt g\,V^\phi=rV_\phi$. Insert these quantities before differentiating:
  +\frac1{r\sin\theta}\frac{\partial(\sin\theta V_\theta)}{\partial\theta}
  +\frac1{r\sin\theta}\frac{\partial V_\phi}{\partial\phi}}.
 \end{align*}
-For example, expansion of the products gives
+Expanding the products gives the equivalent form
 $\partial_rV_r+2V_r/r+(\partial_\theta V_\theta)/r+
-(\cot\theta)V_\theta/r+(\partial_\phi V_\phi)/(r\sin\theta)$,
-confirming the individual radial and angular terms.
+(\cot\theta)V_\theta/r+(\partial_\phi V_\phi)/(r\sin\theta)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
