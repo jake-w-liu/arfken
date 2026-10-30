@@ -10,7 +10,7 @@ replacement. Dice rolls and coin tosses are independent, and a fair
 die has six equally likely faces.}
 
 \Needspace{12\baselineskip}
-\subsection*{23.1 Probability: Definitions, Simple}
+\subsection*{23.1 Probability: Definitions, Simple Properties}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -22,9 +22,9 @@ Use the standard 52-card deck, with four suits of 13 cards and no jokers.
 Every card has probability $1/52$. There are 26 black cards, two red
 nines (hearts and diamonds), and one queen of spades. Thus
 \[
-\boxed{P(\text{black})=\frac{26}{52}=\frac12,\quad
-P(\text{red nine})=\frac2{52}=\frac1{26},\quad
-P(Q_{\spadesuit})=\frac1{52}.}
+\boxed{\text{(a) }P(\text{black})=\frac{26}{52}=\frac12,\quad
+\text{(b) }P(\text{red nine})=\frac2{52}=\frac1{26},\quad
+\text{(c) }P(Q_{\spadesuit})=\frac1{52}.}
 \]
 These are three separate questions; their events need not be disjoint.
 
@@ -46,7 +46,7 @@ $P(K_1\cap K_2)=P(K_1)P(K_2\mid K_1)$.
 \[
 \boxed{P=\frac4{52}\frac3{51}=\frac1{221}.}
 \]
-Equivalently, the unordered count is $\binom42/\binom{52}2=1/221$.
+Equivalently, the unordered count is $\binom42/\binom{52}2=6/1326=1/221$.
 
 
 \Needspace{5\baselineskip}
@@ -55,8 +55,9 @@ Equivalently, the unordered count is $\binom42/\binom{52}2=1/221$.
 is the probability that \erratum{their sum is} (a) less than 4,
 or (b) greater than or equal to 4 but less than 6?
 \solution
-Interpret the observed number as the \emph{sum} $S=D_1+D_2$, as in
-Example 23.2.1. The 36 ordered pairs $(D_1,D_2)$ are equiprobable.
+Interpret the textbook's ``observed number'' as the \emph{sum}
+$S=D_1+D_2$, as in Example 23.2.1; this is the reading marked in the
+statement. The 36 ordered pairs $(D_1,D_2)$ are equiprobable.
 (a) $S<4$ consists of $(1,1),(1,2),(2,1)$, hence
 \[
 \boxed{P(S<4)=3/36=1/12.}
@@ -81,7 +82,8 @@ $3!/2!=3$, $3!=6$ and 1 distinct orderings. Consequently
 \boxed{P(D_1+D_2+D_3=6)=\frac{3+6+1}{216}=\frac5{108}.}
 \]
 Alternatively, subtract 1 from each die; the nonnegative triples summing
-to 3 number $\binom{3+2}{2}=10$, and none violates the upper bound 5.
+to 3 number $\binom{3+2}{2}=10$ (the separator count of
+Exercise~23.1.6 with $N=k=3$), and none violates the upper bound 5.
 
 
 \Needspace{5\baselineskip}
@@ -90,8 +92,14 @@ to 3 number $\binom{3+2}{2}=10$, and none violates the upper bound 5.
 $P(A\cap B\cap C)$ in terms of $P(A)$, $P(B)$, $P(C)$,
 $P(A\cup B)$, $P(A\cup C)$, $P(B\cup C)$, and $P(A\cup B\cup C)$.
 \solution
-For two events, $P(A\cap B)=P(A)+P(B)-P(A\cup B)$.
-Substitute this identity for each pair in inclusion--exclusion:
+For two events, $P(A\cap B)=P(A)+P(B)-P(A\cup B)$, and likewise for
+the pairs $A,C$ and $B,C$. Adding the three identities,
+\[
+P(A\cap B)+P(A\cap C)+P(B\cap C)
+=2[P(A)+P(B)+P(C)]-P(A\cup B)-P(A\cup C)-P(B\cup C).
+\]
+Substitute this sum into the three-event inclusion--exclusion formula
+of Exercise~23.1.7:
 \begin{align*}
 P(A\cup B\cup C)
  &=P(A)+P(B)+P(C)\\
@@ -99,16 +107,19 @@ P(A\cup B\cup C)
  &\qquad\quad-P(A\cup B)-P(A\cup C)-P(B\cup C)]
  +P(A\cap B\cap C).
 \end{align*}
-Solving gives
+Solving for $P(A\cap B\cap C)$ gives
+$P(A\cup B\cup C)-[P(A)+P(B)+P(C)]$ plus the bracketed expression; the
+single-event terms combine as $-P(A)+2P(A)=P(A)$, and likewise for $B$
+and $C$, so
 \[
 \boxed{\begin{aligned}
 P(A\cap B\cap C)={}&P(A\cup B\cup C)+P(A)+P(B)+P(C)\\
  &-P(A\cup B)-P(A\cup C)-P(B\cup C).
 \end{aligned}}
 \]
-\erratum{The manual's conditional-probability product is valid when
-its conditional probabilities are defined, but does not express the
-answer in terms of the seven probabilities requested here.}
+\erratum{The Instructor's Manual's conditional-probability product is
+valid when its conditional probabilities are defined, but does not
+express the answer in terms of the seven probabilities requested here.}
 
 
 \Needspace{5\baselineskip}
@@ -128,18 +139,23 @@ explain why these parameters do not define a normalized ensemble.}
 \erratum{A probability requires a specified ensemble and its weights.
 For this exercise, use independent uniform box choices for classical
 particles, and uniformly weighted allowed occupation states for
-identical particles. The manual lists incorrect counts instead of
-normalized probabilities. With $N>k$, the specified Fermi ensemble
-has no allowed state at all.}
+identical particles. The Instructor's Manual lists incorrect counts
+instead of normalized probabilities. With $N>k$, the specified Fermi
+ensemble has no allowed state at all.}
 
 For Maxwell--Boltzmann particles label the particles $1,\ldots,N$.
-There are $k^N$ assignments. To obtain the stated occupation vector,
-choose its labels successively:
+Each particle can go into any of the $k$ boxes, so there are $k^N$
+assignments. To obtain the stated occupation vector, choose the $N_1$
+labels in Box 1, then $N_2$ of the remaining $N-N_1$ labels for Box 2,
+and so on:
 \[
 \binom N{N_1}\binom{N-N_1}{N_2}\cdots
 \binom{N-N_1-\cdots-N_{k-1}}{N_k}
 =\frac{N!}{N_1!\cdots N_k!}.
 \]
+Written with factorials, the factor $(N-N_1)!$ in the first denominator
+cancels the numerator of the second binomial, and so on; the last
+denominator contains $(N-N_1-\cdots-N_k)!=0!=1$.
 Every assignment has probability $k^{-N}$, so
 \[
 \boxed{P_{\rm MB}(N_1,\ldots,N_k)=
@@ -154,24 +170,32 @@ S_{N,k}=\sum_{r=0}^k(-1)^r\binom kr(k-r)^N,
 \qquad P_{\rm MB}(\boldsymbol N\mid\text{nonempty})
 =\frac{N!}{S_{N,k}\prod_jN_j!}.
 \]
-The sum follows by excluding assignments missing at least one box.
+Here $(k-r)^N$ assignments leave a given set of $r$ boxes empty, and
+inclusion--exclusion over the $\binom kr$ such sets removes every
+assignment with an empty box. The conditional probability is
+$P_{\rm MB}(\boldsymbol N)/P(\text{nonempty})$ with
+$P(\text{nonempty})=S_{N,k}/k^N$.
 
 For Bose--Einstein particles each occupation vector is one state.
-Place $k-1$ separators among $N$ indistinguishable particles: the
-number of nonnegative occupation vectors is $\binom{N+k-1}{k-1}$.
+Write an occupation vector as a row of $N$ indistinguishable particles
+and $k-1$ separators between consecutive boxes. Choosing which $k-1$ of
+the $N+k-1$ positions hold separators shows that the number of
+nonnegative occupation vectors is $\binom{N+k-1}{k-1}$.
 Thus, under the stated uniform-state convention,
 \[
 \boxed{P_{\rm BE}(\boldsymbol N)=\binom{N+k-1}{k-1}^{-1}.}
 \]
 If nonempty boxes are an imposed condition, first put one particle in
-each box and distribute $N-k$ more; there are
-$\binom{N-1}{k-1}$ states, giving its reciprocal instead.
+each box and distribute the remaining $N-k$ freely; the same count with
+$N\to N-k$ gives $\binom{N-k+k-1}{k-1}=\binom{N-1}{k-1}$ states, and
+the probability is its reciprocal instead.
 
 For Fermi--Dirac particles a single box can contain only 0 or 1 particle.
 For $0\le N\le k$ there are $\binom kN$ states, each with probability
 $\binom kN^{-1}$ under uniform weighting. Here $N>k$, so at least one
-$N_j>1$: its multiplicity is zero and the entire allowed sample space
-is empty. There is \emph{no normalized FD probability distribution}
+$N_j>1$ (pigeonhole principle): its multiplicity is zero and the
+entire allowed sample space is empty. There is \emph{no normalized FD
+probability distribution}
 for these parameters. If positivity is retained but $N=k$ is allowed,
 the sole state is $(1,\ldots,1)$ with probability 1.
 Physical energy-dependent ensembles would require additional weights.
@@ -183,14 +207,19 @@ Physical energy-dependent ensembles would require additional weights.
 $P(A\cup B\cup C)=P(A)+P(B)+P(C)-P(A\cap B)-P(A\cap C)
 -P(B\cap C)+P(A\cap B\cap C)$.
 \solution
-For any outcome, put $a=1_A$, $b=1_B$, $c=1_C$, each 0 or 1.
-The indicator of membership in at least one event is
+For any outcome, put $a=1_A$, $b=1_B$, $c=1_C$, where the indicator
+$1_E$ is 1 if the outcome lies in $E$ and 0 otherwise. The product
+$(1-a)(1-b)(1-c)$ is 1 exactly when the outcome lies in none of the
+three events, so the indicator of membership in at least one event is
 \[
 1_{A\cup B\cup C}=1-(1-a)(1-b)(1-c)
-=a+b+c-ab-ac-bc+abc.
+=a+b+c-ab-ac-bc+abc,
 \]
-Take expectations and use $\langle1_E\rangle=P(E)$ and
-$1_A1_B=1_{A\cap B}$. This gives
+where $(1-a)(1-b)(1-c)=1-a-b-c+ab+ac+bc-abc$ was multiplied out.
+Take expectations and use
+$\langle1_E\rangle=1\cdot P(E)+0\cdot[1-P(E)]=P(E)$, together with
+$1_A1_B=1_{A\cap B}$ (a product of indicators is 1 only when every
+factor is 1) and likewise $1_A1_B1_C=1_{A\cap B\cap C}$. This gives
 \[
 \boxed{\begin{aligned}
 P(A\cup B\cup C)={}&P(A)+P(B)+P(C)-P(A\cap B)\\
@@ -213,14 +242,19 @@ therefore
 \[
 \boxed{P(p\mid n)=\frac{\lfloor100/p\rfloor}{100}.}
 \]
-For $p=3,5,7$ the answers are respectively $33/100$, $20/100$,
-and $14/100$. The approximation $1/p$ has error
+For $p=3,5,7$ the lists of multiples end at $99=3\cdot33$,
+$100=5\cdot20$ and $98=7\cdot14$ (the next multiples, $102$, $105$
+and $105$, exceed 100), so the answers are respectively $33/100$,
+$20/100$, and $14/100$. Since
+$100/p-1<\lfloor100/p\rfloor\le100/p$, the approximation $1/p$ has
+error
 \[
 0\le\frac1p-P(p\mid n)<\frac1{100}.
 \]
 Here the notation $p\mid n$ means divisibility, not conditional probability.
 If ``a prime'' meant \emph{some} prime rather than a fixed $p$, every
-$n=2,\ldots,100$ qualifies, and the different question has answer $99/100$.
+$n=2,\ldots,100$ qualifies (it has a prime factor $p\le n\le100$), and
+the different question has answer $99/100$.
 
 
 \Needspace{5\baselineskip}
@@ -272,7 +306,8 @@ Direct summation gives
 \langle X\rangle=\frac{3+4+5+5+6+7}{6}=5,
 \qquad \langle X^2\rangle=\frac{9+16+25+25+36+49}{6}=\frac{80}{3}.
 \]
-Either subtract $25$ or evaluate the centered squares directly:
+Either subtract $\langle X\rangle^2=25$, which gives $80/3-25=5/3$, or
+evaluate the centered squares $(X-5)^2$ directly:
 \[
 \boxed{\operatorname{Var}X=
 \frac{(-2)^2+(-1)^2+0^2+0^2+1^2+2^2}{6}=\frac53.}
@@ -291,19 +326,19 @@ variable $X-\langle X\rangle$ has mean value zero.
 \solution
 \erratum{Multiplication by a real constant $c$ multiplies the mean
 by $c$, the variance by $c^2$, and the standard deviation by $|c|$.
-The original statement's claim of a factor $c$ for the variance is false.}
+The textbook's claim of a factor $c$ for the variance is false.}
 Write $\mu=\langle X\rangle$ and assume a finite second moment.
 Linearity of expectation and $\langle1\rangle=1$ give
 \[
 \langle X+c\rangle=\mu+c,\qquad
 \operatorname{Var}(X+c)=\langle(X+c-\mu-c)^2\rangle
-=\operatorname{Var}X.
+=\langle(X-\mu)^2\rangle=\operatorname{Var}X.
 \]
 Likewise
 \[
 \langle cX\rangle=c\mu,\qquad
 \operatorname{Var}(cX)=\langle(cX-c\mu)^2\rangle
-=c^2\operatorname{Var}X.
+=c^2\langle(X-\mu)^2\rangle=c^2\operatorname{Var}X.
 \]
 These formulas also include $c=0$ and negative $c$.
 Finally $\boxed{\langle X-\langle X\rangle\rangle=\mu-\mu=0}$.
@@ -346,25 +381,39 @@ $|t_{j}-\bar{t}|\ll|\bar{t}|$.
 of the individual velocities, with $\bar x,\bar t\ne0$.}
 \solution
 Let there be $N$ measurements, $\bar v=N^{-1}\sum_jx_j/t_j$, and
-write $x_j=\bar x(1+a_j)$, $t_j=\bar t(1+b_j)$.
+write $x_j=\bar x(1+a_j)$, $t_j=\bar t(1+b_j)$, i.e.,
+$a_j=(x_j-\bar x)/\bar x$ and $b_j=(t_j-\bar t)/\bar t$.
 The stated relative-error hypotheses require $\bar x\ne0$, $\bar t\ne0$;
-also $\sum a_j=\sum b_j=0$. An exact algebraic identity is
+also $\sum a_j=\sum b_j=0$, because $\sum_jx_j=N\bar x$ and
+$\sum_jt_j=N\bar t$. An exact algebraic identity is
 \[
 \frac{1+a_j}{1+b_j}=1+a_j-b_j+
-\frac{b_j^2-a_jb_j}{1+b_j}.
+\frac{b_j^2-a_jb_j}{1+b_j};
 \]
-Average it. The two linear terms cancel, leaving
+to check it, multiply by $1+b_j$: the right side becomes
+$(1+a_j-b_j)(1+b_j)+b_j^2-a_jb_j=1+a_j$.
+Since $v_j=(\bar x/\bar t)(1+a_j)/(1+b_j)$, multiply the identity by
+$\bar x/\bar t$ and average over $j$. The two linear terms average to
+zero, leaving
 \[
 \boxed{\bar v=\frac{\bar x}{\bar t}
 \left[1+\frac1N\sum_j\frac{b_j^2-a_jb_j}{1+b_j}\right].}
 \]
-If $|a_j|\le\epsilon_x$ and $|b_j|\le\epsilon_t<1$, then
+If $|a_j|\le\epsilon_x$ and $|b_j|\le\epsilon_t<1$, then each
+numerator obeys $|b_j^2-a_jb_j|\le|b_j|(|b_j|+|a_j|)\le
+\epsilon_t(\epsilon_t+\epsilon_x)$ and each denominator
+$|1+b_j|\ge1-\epsilon_t$, so
 \[
 \left|\frac{\bar v}{\bar x/\bar t}-1\right|
 \le\frac{\epsilon_t^2+\epsilon_x\epsilon_t}{1-\epsilon_t}.
 \]
 Thus the relative difference is second order in the small relative
-errors. In dimensional form its leading term is
+errors. For its leading term replace $1/(1+b_j)$ by 1; this changes
+each summand by $(b_j^2-a_jb_j)b_j/(1+b_j)=O(\epsilon^3)$, where
+$\epsilon=\max(\epsilon_x,\epsilon_t)$. Then insert
+$b_j^2=(t_j-\bar t)^2/\bar t^2$ and
+$a_jb_j=(x_j-\bar x)(t_j-\bar t)/(\bar x\bar t)$; with overbars
+denoting averages over $j$, the dimensional form is
 \[
 \bar v=\frac{\bar x}{\bar t}
 +\frac{\bar x}{\bar t^3}\overline{(t-\bar t)^2}
@@ -382,12 +431,15 @@ for the drawing of two cards (with replacement, as in the
 example).
 \solution
 In one draw, the disjoint categories are honors (10,J,Q,K,A),
-fours through nines, and twos or threes. Their probabilities are
-$p=5/13$, $q=6/13$, $r=2/13$. For two independent draws,
+fours through nines, and twos or threes, comprising 5, 6 and 2 of the
+13 ranks. Their probabilities are $p=5/13$, $q=6/13$, $r=2/13$. For
+two independent draws,
 \[
 P(X=x,Y=y)=\frac{2!}{x!y!(2-x-y)!}p^xq^yr^{2-x-y},
 \quad x,y\ge0,\ x+y\le2.
 \]
+The multinomial coefficient counts the orders of the two draws; for
+example $169P(1,1)=2\cdot5\cdot6=60$ and $169P(0,0)=2^2=4$.
 The complete joint table is
 \[
 \begin{array}{c|rrr}
@@ -405,12 +457,15 @@ It sums to 169. Directly from its rows and columns,
 \langle Y^2\rangle&=(24+60+4\cdot36)/169=228/169.
 \end{align*}
 Only $(x,y)=(1,1)$ contributes to $XY$, so $\langle XY\rangle=60/169$.
-Consequently
+Consequently, from $\operatorname{Var}X=\langle X^2\rangle-\langle X\rangle^2$
+and $\operatorname{cov}(X,Y)=\langle XY\rangle-\langle X\rangle\langle Y\rangle$,
 \[
-\operatorname{Var}X=\frac{80}{169},\quad
-\operatorname{Var}Y=\frac{84}{169},\quad
-\operatorname{cov}(X,Y)=\frac{60-120}{169}=-\frac{60}{169},
+\operatorname{Var}X=\frac{180-100}{169}=\frac{80}{169},\quad
+\operatorname{Var}Y=\frac{228-144}{169}=\frac{84}{169},\quad
+\operatorname{cov}(X,Y)=\frac{60-120}{169}=-\frac{60}{169}.
 \]
+In $\rho_{XY}=\operatorname{cov}(X,Y)/(\sigma_X\sigma_Y)$ the factors
+$1/169$ cancel, and $60^2/(80\cdot84)=3600/6720=15/28$, so
 \[
 \boxed{\rho_{XY}=\frac{-60}{\sqrt{80\cdot84}}
 =-\sqrt{\frac{15}{28}}\simeq-0.731925.}
@@ -428,22 +483,29 @@ free path. Verify that $f$ is the average distance between
 collisions, and determine the probability of a free path of
 length $l\ge3f$. \erratum{Take $f>0$ and distances $x\ge0$.}
 \solution
-Distances satisfy $x\ge0$ and $f>0$. Normalize $p(x)=Ce^{-x/f}$:
+Distances satisfy $x\ge0$ and $f>0$. Normalize $p(x)=Ce^{-x/f}$, using
+$\int_0^\infty e^{-x/f}\,dx=[-fe^{-x/f}]_0^\infty=f$:
 \[
 1=C\int_0^\infty e^{-x/f}\,dx=Cf,
 \qquad p(x)=f^{-1}e^{-x/f}.
 \]
-With $u=x/f$, integration by parts gives
-\[
-\langle X\rangle=f\int_0^\infty ue^{-u}\,du
-=f\left([-ue^{-u}]_0^\infty+\int_0^\infty e^{-u}\,du\right)=\boxed f.
-\]
-\erratum{The manual drops the factor $f$ in its middle integral
-after rescaling. The dimensionless integral is $\int_0^\infty ue^{-u}du=1$;
-the physical mean is $f$ times that integral.}
-The requested tail, including an endpoint of zero point probability, is
+Substitute $x=fu$, $dx=f\,du$ (the limits $0,\infty$ are unchanged), so
+that $xp(x)\,dx=fue^{-u}\,du$. Integration by parts, with
+$ue^{-u}\to0$ as $u\to\infty$, gives
+\begin{align*}
+\langle X\rangle&=\int_0^\infty xp(x)\,dx=f\int_0^\infty ue^{-u}\,du\\
+&=f\left([-ue^{-u}]_0^\infty+\int_0^\infty e^{-u}\,du\right)
+=f(0+1)=\boxed f.
+\end{align*}
+\erratum{The Instructor's Manual drops the factor $f$ in its middle
+integral after rescaling. The dimensionless integral is
+$\int_0^\infty ue^{-u}du=1$; the physical mean is $f$ times that
+integral.}
+Since the endpoint $x=3f$ itself has probability zero, $\ge$ and $>$
+give the same requested tail:
 \[
 \boxed{P(X\ge3f)=\int_{3f}^\infty\frac{e^{-x/f}}f\,dx
+=\bigl[-e^{-x/f}\bigr]_{3f}^\infty
 =e^{-3}\simeq0.0497871.}
 \]
 
@@ -460,13 +522,16 @@ $x$ and $x+dx$ is proportional to the time it takes to travel
 across the interval.
 \solution
 Assume observation at a uniformly random time in a full period, with
-$A>0$ and $\omega>0$. For $x=A\cos\omega t$,
+$A>0$ and $\omega>0$. For $x=A\cos\omega t$ (a phase constant does not
+matter), $dx/dt=-A\omega\sin\omega t$ and
+$A^2\sin^2\omega t=A^2-x^2$, so
 \[
 \left|\frac{dx}{dt}\right|=\omega\sqrt{A^2-x^2},
 \qquad T=\frac{2\pi}{\omega}.
 \]
-Each interior interval is crossed twice per period. Therefore its
-fraction of the total time is
+Each interior interval $[x,x+dx]$ is crossed twice per period, once in
+each direction, each time in $dt=dx/|dx/dt|$. Therefore its fraction
+of the total time is, with $2/(T\omega)=1/\pi$,
 \[
 p(x)\,dx=\frac2T\frac{dx}{\omega\sqrt{A^2-x^2}},
 \qquad
@@ -474,7 +539,8 @@ p(x)\,dx=\frac2T\frac{dx}{\omega\sqrt{A^2-x^2}},
 \]
 and $p=0$ outside. The endpoint divergences are integrable:
 \[
-\int_{-A}^Ap(x)\,dx=\frac1\pi[\arcsin(x/A)]_{-A}^A=1.
+\int_{-A}^Ap(x)\,dx=\frac1\pi[\arcsin(x/A)]_{-A}^A
+=\frac1\pi\Bigl[\frac\pi2-\Bigl(-\frac\pi2\Bigr)\Bigr]=1.
 \]
 There are no point masses at the turning points. For $A=0$ the
 distribution degenerates to a unit point mass at $x=0$.
@@ -502,9 +568,13 @@ Choosing the $x$ head positions gives exactly $\binom nx$ strings, hence
 \boxed{P(X=x)=\binom nx2^{-n},\quad 0\le x\le n.}
 \]
 The sum of these probabilities is $2^{-n}(1+1)^n=1$.
-For each indicator $I_j$, $\langle I_j\rangle=1/2$ and
-$\operatorname{Var}I_j=\langle I_j^2\rangle-1/4=1/4$.
-Independence makes the cross covariances zero, so
+For each indicator $I_j=1_{\{\omega_j=H\}}$,
+$\langle I_j\rangle=1\cdot\frac12+0\cdot\frac12=\frac12$ and, since
+$I_j^2=I_j$, $\operatorname{Var}I_j=\langle I_j^2\rangle-\langle
+I_j\rangle^2=\frac12-\frac14=\frac14$. Linearity gives
+$\langle X\rangle=\sum_j\langle I_j\rangle$, and independence makes the
+cross covariances $\operatorname{cov}(I_i,I_j)$, $i\ne j$, zero, so
+$\operatorname{Var}X=\sum_j\operatorname{Var}I_j$. Hence
 \[
 \boxed{\langle X\rangle=n/2,\qquad\operatorname{Var}X=n/4,
 \qquad\sigma_X=\sqrt n/2.}
@@ -634,8 +704,9 @@ x&0&1&2&3&4&5&6\\\hline
 46656P(x)&15625&18750&9375&2500&375&30&1
 \end{array}
 \]
-The numerator sum is 46656. The mean is $6/6=1$ and the largest
-mass is at $x=1$.
+The numerator sum is 46656. The mean is $np=6\cdot\frac16=1$, and the
+largest mass is at $x=1$, the mode
+$\lfloor(n+1)p\rfloor=\lfloor7/6\rfloor=1$ of Exercise~23.3.5.
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=7cm]
 \draw[->](-.5,0)--(6.8,0) node[right]{$x$};
@@ -661,13 +732,17 @@ each nail.}
 \solution
 Assume nail defects are independent, with common probability $0.03$.
 Then $X$, the number of defective nails, is binomial with $n=100$.
-Use the complement of $X=0,1,2$:
+Use the complement of $X=0,1,2$, with $\binom{100}2=100\cdot99/2=4950$:
 \begin{align*}
 P(X>2)&=1-\sum_{j=0}^2\binom{100}j(0.03)^j(0.97)^{100-j}\\
 &=1-(0.97)^{100}-100(0.03)(0.97)^{99}
  -4950(0.03)^2(0.97)^{98}\\
+&=1-0.0475525-0.1470696-0.2251530\\
 &=\boxed{0.5802249170\simeq58.02\%.}
 \end{align*}
+The three subtracted terms are $P(X=0)$, $P(X=1)$, $P(X=2)$, rounded to
+seven decimals; the boxed value uses their unrounded sum
+$0.4197750830$.
 The independence assumption matters: a defect rate alone would not
 determine the box probability if production defects were correlated.
 
@@ -681,26 +756,31 @@ probabilities when each card is put back at a random place
 before drawing the next card, with the probabilities when the
 cards are not replaced in the deck.
 \solution
-There are 26 red cards,13 hearts and 20 honors (10,J,Q,K,A).
+There are 26 red cards, 13 hearts and 20 honors (10, J, Q, K, A in
+each suit).
 If a category contains $K$ cards, replacement gives four independent
 successes with probability $(K/52)^4$. Without replacement the
 conditional success probabilities successively decrease:
 \[
 P_K=\frac K{52}\frac{K-1}{51}\frac{K-2}{50}\frac{K-3}{49}
+=\frac{K(K-1)(K-2)(K-3)/4!}{52\cdot51\cdot50\cdot49/4!}
 =\frac{\binom K4}{\binom{52}4}.
 \]
-Consequently
+With $\binom{52}4=270725$, $\binom{26}4=14950$, $\binom{13}4=715$ and
+$\binom{20}4=4845$, the results are
 \[
 \begin{array}{c|c|c}
 \text{category}&\text{with replacement}&\text{without replacement}\\\hline
-\text{red}&1/16&\binom{26}4/\binom{52}4\\
-\text{hearts}&1/256&\binom{13}4/\binom{52}4\\
-\text{honors}&(5/13)^4&\binom{20}4/\binom{52}4
+\text{red}&(1/2)^4=1/16=0.0625&14950/270725=46/833\approx0.0552\\
+\text{hearts}&(1/4)^4=1/256\approx0.00391&715/270725=11/4165\approx0.00264\\
+\text{honors}&(5/13)^4=625/28561\approx0.0219&4845/270725=57/3185\approx0.0179
 \end{array}
 \]
 For $0<K<52$ and $j=1,2,3$, $(K-j)/(52-j)<K/52$,
-since $52(K-j)<K(52-j)$ is equivalent to $K<52$.
-Thus all three probabilities are strictly smaller without replacement.
+since $52(K-j)<K(52-j)$ reduces to $jK<52j$, i.e., to $K<52$.
+Thus every factor of $P_K$ after the first is smaller than the
+corresponding factor $K/52$ with replacement, and all three
+probabilities are strictly smaller without replacement.
 
 
 \Needspace{5\baselineskip}
@@ -710,15 +790,19 @@ distribution of Eq.~(23.42), \erratum{the mean value of $x$ is $np$;
 find the exact integer mode or modes}.
 \solution
 \erratum{The mean is $np$, but the exact most probable integer need
-not be $np$. The manual differentiates the moment-generating function,
-which computes the mean and does not prove the printed mode claim.}
+not be $np$. The Instructor's Manual differentiates the
+moment-generating function, which computes the mean and does not prove
+the printed mode claim.}
 To establish the mean, write $X=I_1+\cdots+I_n$, where each success
 indicator has $P(I_j=1)=p$ and $P(I_j=0)=1-p$. Then
 \[
  \langle I_j\rangle=1\cdot p+0\cdot(1-p)=p,\qquad
  \boxed{\langle X\rangle=\sum_{j=1}^n\langle I_j\rangle=np}.
 \]
-To find the mode for $0<p<1$, write $q=1-p$ and compare consecutive positive masses:
+To find the mode for $0<p<1$, write $q=1-p$ and compare consecutive
+positive masses $P(x)=\binom nxp^xq^{n-x}$, $x=0,\ldots,n-1$. Since
+$\binom n{x+1}\big/\binom nx=\frac{x!\,(n-x)!}{(x+1)!\,(n-x-1)!}
+=\frac{n-x}{x+1}$,
 \[
 \frac{P(x+1)}{P(x)}
 =\frac{n-x}{x+1}\frac pq.
@@ -726,21 +810,30 @@ To find the mode for $0<p<1$, write $q=1-p$ and compare consecutive positive mas
 It exceeds 1 exactly when
 \[
 (n-x)p>(x+1)(1-p)
-\quad\Longleftrightarrow\quad x+1<(n+1)p.
+\quad\Longleftrightarrow\quad np-xp>x+1-xp-p
+\quad\Longleftrightarrow\quad x+1<(n+1)p,
 \]
-If $(n+1)p$ is not an integer, the sequence increases up to
-$\lfloor(n+1)p\rfloor$ and decreases thereafter. If $(n+1)p=k$
-is an integer, $P(k)=P(k-1)$ and these are the two maxima. Hence
+and it equals 1 exactly when $x+1=(n+1)p$.
+If $(n+1)p$ is not an integer, put $m=\lfloor(n+1)p\rfloor$: then
+$P(x+1)>P(x)$ for $x+1\le m$ and $P(x+1)<P(x)$ for $x+1\ge m+1$, so the
+sequence increases up to $x=m$ and decreases thereafter. If
+$(n+1)p=k$ is an integer, then $1\le k\le n$ because
+$0<(n+1)p<n+1$; the sequence increases up to $x=k-1$, $P(k)=P(k-1)$,
+and it decreases after $x=k$, so these are the two maxima. Hence
 \[
 \boxed{\begin{cases}
 \text{unique mode }\lfloor(n+1)p\rfloor,&(n+1)p\notin\mathbb Z,\\
 \text{modes }k-1,k,&(n+1)p=k\in\{1,\ldots,n\}.
 \end{cases}}
 \]
-The endpoint cases $p=0,1$ have sole modes $0,n$, respectively;
-$n=0$ is the point mass at 0. For example,$n=3,p=1/2$ has mean $1.5$
-but modes 1 and 2. For large $n$, a continuous central approximation
-places the peak near $np$; it is not the exact integer-mode statement.
+In both cases every mode $m$ obeys $(n+1)p-1\le m\le(n+1)p$, i.e.,
+$np-q\le m\le np+p$: the most probable value lies within distance
+$\max(p,q)<1$ of the mean $np$, which is the sense in which the printed
+claim holds. The endpoint cases $p=0,1$ have sole modes $0,n$,
+respectively; $n=0$ is the point mass at 0. For example, $n=3$,
+$p=1/2$ has $(n+1)p=2$, mean $1.5$, but modes 1 and 2. For large $n$, a
+continuous central approximation places the peak near $np$; it is not
+the exact integer-mode statement.
 
 
 \Needspace{12\baselineskip}
@@ -767,17 +860,20 @@ $n_{i}$ & 57 & 203 & 383 & 525 & 532 & 408 & 273 & 139 & 45 & 27
 \end{tabular}
 \end{center}
 \solution
-The total number of recorded intervals and total particle count are
+The total number $N$ of recorded intervals (the $n$ of the statement)
+and the total particle count $S$ are
 \begin{align*}
-N&=57+203+383+525+532+408+273+139+45+27+16=2608,\\
-S&=203+766+1575+2128+2040+1638+973+360+243+160=10086.
+N&=\sum_in_i=57+203+383+525+532+408+273+139+45+27+16=2608,\\
+S&=\sum_i i\,n_i=203+766+1575+2128+2040+1638+973+360+243+160=10086.
 \end{align*}
-Thus the fitted mean per7.5-second interval is
+Thus the fitted mean per 7.5-second interval is
 \[
 \boxed{\widehat\lambda=S/N=10086/2608=3.8673312883.}
 \]
-Use $E_0=Ne^{-\widehat\lambda}$, followed by the exact recurrence
-$E_{i+1}=\widehat\lambda E_i/(i+1)$, to compute $E_i=Np_i$.
+Use $E_0=Ne^{-\widehat\lambda}=2608\times0.0209141=54.544$, followed by
+the exact recurrence $E_{i+1}=\widehat\lambda E_i/(i+1)$, which follows
+from $p_{i+1}/p_i=\widehat\lambda/(i+1)$ for
+$p_i=e^{-\widehat\lambda}\widehat\lambda^i/i!$, to compute $E_i=Np_i$.
 \begin{center}
 \begin{tabular}{r|r|r}
 $i$&observed $n_i$&Poisson expected $Np_i$\\\hline
@@ -789,9 +885,16 @@ $i$&observed $n_i$&Poisson expected $Np_i$\\\hline
 \end{center}
 The final expected tail is $2608-\sum_{i=0}^{10}E_i$; it is required
 because the Poisson model has unbounded support. Observed values
-fluctuate around their expectations rather than agreeing termwise.
-\erratum{The manual's entry 55.7 at $i=0$ is inconsistent with the
-stated data and fitted mean; the direct value is 54.544.
+fluctuate around their expectations rather than agreeing termwise; the
+natural scale is the standard deviation, approximately $\sqrt{Np_i}$,
+of a count with expectation $Np_i$ (Exercise~23.4.2). For $i\le10$ the
+differences $n_i-Np_i$ stay within $1.5\sqrt{Np_i}$ except at $i=8$,
+where $45-67.689=-22.7\approx-2.8\sqrt{67.689}$. If, as in the
+original Rutherford--Geiger data, the last column counts all intervals
+with $i\ge10$, then $S$ is slightly underestimated and the last two
+rows combine to 16 observed against $11.249+5.749=16.997$ expected.
+\erratum{The Instructor's Manual's entry 55.7 at $i=0$ is inconsistent
+with the stated data and fitted mean; the direct value is 54.544.
 Its displayed formula for $np_i$ also omits the factor $n$ on the
 right: $p_i=e^{-\lambda}\lambda^i/i!$, whereas the expected count
 is $np_i$. No renormalization to $i\le10$ has been made.}
@@ -803,7 +906,10 @@ is $np_i$. No renormalization to $i\le10$ has been made.}
 Poisson distribution of mean value $\mu$.
 \solution
 For $\mu>0$, the Poisson mass is $p_n=e^{-\mu}\mu^n/n!$,
-$n=0,1,\ldots$. Shift the factorial sums:
+$n=0,1,\ldots$. In the two sums below the terms $n=0$ (respectively
+$n=0,1$) vanish. Use $n/n!=1/(n-1)!$ and $n(n-1)/n!=1/(n-2)!$, shift
+the summation index to $m=n-1$ (respectively $m=n-2$), and use
+$\sum_{m\ge0}\mu^m/m!=e^{\mu}$:
 \begin{align*}
 \langle X\rangle&=e^{-\mu}\sum_{n=1}^{\infty}
 \frac{n\mu^n}{n!}
@@ -812,7 +918,9 @@ $n=0,1,\ldots$. Shift the factorial sums:
 \frac{n(n-1)\mu^n}{n!}
 =\mu^2e^{-\mu}\sum_{m=0}^{\infty}\frac{\mu^m}{m!}=\mu^2.
 \end{align*}
-Since $X^2=X(X-1)+X$, $\langle X^2\rangle=\mu^2+\mu$ and
+Since $X^2=X(X-1)+X$, $\langle X^2\rangle=\mu^2+\mu$, and
+$\operatorname{Var}X=\langle X^2\rangle-\langle X\rangle^2
+=\mu^2+\mu-\mu^2$; that is,
 \[
 \boxed{\operatorname{Var}X=\mu,\qquad\sigma_X=\sqrt\mu.}
 \]
@@ -834,14 +942,17 @@ intervals containing exactly $k$ decays is
 \[
 E_k=2400P(X=k)=2400e^{-25/12}\frac{(25/12)^k}{k!}.
 \]
-In particular,
+With $e^{-25/12}=0.1245145$, the single-interval probabilities are
+$P(X=2)=e^{-25/12}(25/12)^2/2!=0.2702137$ and
+$P(X=5)=e^{-25/12}(25/12)^5/5!=0.0407223$. Multiplying by 2400,
 \[
 \boxed{E_2=648.5128721\simeq649,\qquad
 E_5=97.73354192\simeq98\text{ intervals}.}
 \]
 These are expectations under the fitted Poisson model, not guaranteed
-integer observations. \erratum{The manual calls the 2400 intervals
-seconds rather than minutes and stops at single-interval probabilities.
+integer observations. \erratum{The Instructor's Manual calls the 2400
+intervals seconds rather than minutes and stops at single-interval
+probabilities.
 The question asks for the corresponding expected numbers of intervals.}
 
 
@@ -863,12 +974,12 @@ The time rescaling changes the mean, not the factorial in the mass formula.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{23.4.5}\quad $^{238}$ U has a half-life of
+\noindent\textbf{23.4.5}\quad $^{238}$U has a half-life of
 $4.51\times10^{9}$ years. Its decay series ends with the stable
-lead isotope $^{206}$ Pb. The ratio of the number of $^{206}$ Pb to
-$^{238}$ U atoms in a rock sample is measured as 0.0058. Estimate
+lead isotope $^{206}$Pb. The ratio of the number of $^{206}$Pb to
+$^{238}$U atoms in a rock sample is measured as 0.0058. Estimate
 the age of the rock assuming that all the lead in the rock is
-from the initial decay of the $^{238}$ U, which determines the
+from the initial decay of the $^{238}$U, which determines the
 rate of the entire decay process, because the subsequent steps
 take place far more rapidly.
 \erratum{Assume a closed sample, with no uranium or lead gained or
@@ -886,7 +997,9 @@ Thus the measured ratio is
 \[
 R=\frac{L(t)}{U(t)}=\frac{U_0}{U(t)}-1=e^{\lambda t}-1.
 \]
-Solving, and using the \emph{given} half-life $T$,
+Solve $e^{\lambda t}=1+R$ for $t$, and use the \emph{given} half-life
+$T$ through $1/\lambda=T/\ln2=6.506555\times10^9$ years; with
+$\ln(1.0058)=0.00578324$,
 \[
 \boxed{t=\frac{\ln(1+R)}\lambda
 =\frac{4.51\times10^9}{\ln2}\ln(1.0058)
@@ -926,10 +1039,16 @@ For $\sigma>0$, write the density explicitly:
 f(x)=\frac1{\sigma\sqrt{2\pi}}
  e^{-(x-\mu)^2/(2\sigma^2)}.
 \]
-With $z=(x-\mu)/\sigma$, normalization is
-$(2\pi)^{-1/2}\int_{-\infty}^{\infty}e^{-z^2/2}\,dz=1$.
-Oddness gives $\langle X-\mu\rangle=0$, so the mean really is $\mu$.
-For the variance, integrate by parts using
+Substitute $z=(x-\mu)/\sigma$, i.e., $x=\mu+\sigma z$, $dx=\sigma\,dz$,
+with the limits $-\infty,\infty$ unchanged since $\sigma>0$; then
+$f(x)\,dx=(2\pi)^{-1/2}e^{-z^2/2}\,dz$, and the Gaussian integral
+$\int_{-\infty}^{\infty}e^{-z^2/2}\,dz=\sqrt{2\pi}$ gives the
+normalization $(2\pi)^{-1/2}\int_{-\infty}^{\infty}e^{-z^2/2}\,dz=1$.
+Since $ze^{-z^2/2}$ is odd and integrable,
+$\langle X-\mu\rangle=\sigma(2\pi)^{-1/2}\int_{-\infty}^{\infty}
+ze^{-z^2/2}\,dz=0$, so the mean really is $\mu$.
+For the variance, $(x-\mu)^2=\sigma^2z^2$; integrate by parts with
+$u=z$ and $dv=ze^{-z^2/2}\,dz$, so that $v=-e^{-z^2/2}$ because
 $d(e^{-z^2/2})=-ze^{-z^2/2}\,dz$:
 \begin{align*}
 \operatorname{Var}X
@@ -937,10 +1056,12 @@ $d(e^{-z^2/2})=-ze^{-z^2/2}\,dz$:
  \int_{-\infty}^{\infty}z^2e^{-z^2/2}\,dz\\
 &=\frac{\sigma^2}{\sqrt{2\pi}}
  \left([-ze^{-z^2/2}]_{-\infty}^{\infty}
- +\int_{-\infty}^{\infty}e^{-z^2/2}\,dz\right)
+ +\int_{-\infty}^{\infty}e^{-z^2/2}\,dz\right)\\
+&=\frac{\sigma^2}{\sqrt{2\pi}}\bigl(0+\sqrt{2\pi}\bigr)
 =\boxed{\sigma^2}.
 \end{align*}
-The boundary term is zero because the Gaussian dominates the linear factor.
+The boundary term is zero because the Gaussian dominates the linear
+factor: $ze^{-z^2/2}\to0$ as $z\to\pm\infty$.
 
 
 \Needspace{5\baselineskip}
@@ -950,26 +1071,32 @@ obtained by manipulation of the formula Eq.~(23.61) for $W(v)$.
 \erratum{Use $0<p<1$, $q=1-p$, $n>0$, and $-pn<v<qn$;
 both formulas represent the same Stirling approximation.}
 \solution
-Let $0<p<1$, $q=1-p$, $s=pn+v$, and $n-s=qn-v$.
-The Stirling approximation in Eq.(23.61) is
+Let $0<p<1$, $q=1-p$, and $s=pn+v$, so that $n-s=n-pn-v=qn-v$.
+The Stirling approximation in Eq.~(23.61), obtained from
+$m!\approx\sqrt{2\pi}\,m^{m+1/2}e^{-m}$ for $m=n,s,n-s$ in
+$\binom nsp^sq^{n-s}$, is
 \[
 W(v)=\frac{p^sq^{n-s}n^{n+1/2}e^{-n+s+(n-s)}}
  {\sqrt{2\pi}(pn+v)^{s+1/2}(qn-v)^{n-s+1/2}}.
 \]
-The exponential is $e^0=1$. Factor the two denominator powers:
+The exponential is $e^0=1$. Factor $pn$ and $qn$ out of the two
+denominator powers:
 \[
 (pn+v)^{s+1/2}=(pn)^{s+1/2}(1+v/(pn))^{s+1/2},
 \]
 \[
 (qn-v)^{n-s+1/2}=(qn)^{n-s+1/2}(1-v/(qn))^{n-s+1/2}.
 \]
-The remaining constant quotient is
+The remaining constant quotient, with $(s+\tfrac12)+(n-s+\tfrac12)=n+1$,
+is
 \[
 \frac{p^sq^{n-s}n^{n+1/2}}
  {p^{s+1/2}q^{n-s+1/2}n^{(s+1/2)+(n-s+1/2)}}
+=\frac{n^{n+1/2}}{p^{1/2}q^{1/2}n^{n+1}}
 =p^{-1/2}q^{-1/2}n^{-1/2}.
 \]
-Therefore
+Therefore, writing the exponents as $s+\frac12=pn+v+\frac12$ and
+$n-s+\frac12=qn-v+\frac12$,
 \[
 \boxed{W(v)=\frac{(1+v/(pn))^{-(pn+v+1/2)}
  (1-v/(qn))^{-(qn-v+1/2)}}{\sqrt{2\pi pqn}}.}
@@ -987,21 +1114,33 @@ $v$ leads to Eq.~(23.63).
 \erratum{Take $p,q>0$ fixed, $p+q=1$, and $|v|<\min(pn,qn)$.
 For the Gaussian limit use the central scaling $v=O(\sqrt n)$.}
 \solution
-Take the logarithm of the preceding result:
+Take the logarithm of Eq.~(23.62), the result of Exercise~23.5.2:
 \begin{align*}
 \ln W(v)={}&-\tfrac12\ln(2\pi pqn)
  -(pn+v+\tfrac12)\ln(1+v/(pn))\\
  &-(qn-v+\tfrac12)\ln(1-v/(qn)).
 \end{align*}
-For $|v|<\min(pn,qn)$ use $\ln(1+u)=u-u^2/2+O(u^3)$.
-Keeping all terms through $v^2$, including the half-power factors,
+For $|v|<\min(pn,qn)$ use $\ln(1+u)=u-u^2/2+O(u^3)$ with
+$u=v/(pn)$, $|u|<1$. Multiplying out,
+\[
+\Bigl(pn+v+\frac12\Bigr)\Bigl(u-\frac{u^2}2\Bigr)
+=v-\frac{v^2}{2pn}+\frac{v^2}{pn}+\frac v{2pn}-\frac{v^2}{4p^2n^2}
+-\frac{v^3}{2p^2n^2},
+\]
+the terms coming from $pnu$, $-pnu^2/2$, $vu$, $u/2$, $-u^2/4$ and
+$-vu^2/2$; the remainder contributes $(pn+v+\frac12)O(u^3)=O(v^3)$.
+Since $-v^2/(2pn)+v^2/(pn)=v^2/(2pn)$, the negative of this product
+gives the first line below. The second line follows from the first by
+$p\to q$, $v\to-v$, which maps $pn+v+\frac12$ to $qn-v+\frac12$ and
+$1+v/(pn)$ to $1-v/(qn)$. Keeping all terms through $v^2$, including
+those from the half-power factors,
 \begin{align*}
 -(pn+v+\tfrac12)\ln(1+v/(pn))
 &=-v-\frac{v}{2pn}-\frac{v^2}{2pn}+\frac{v^2}{4p^2n^2}+O(v^3),\\
 -(qn-v+\tfrac12)\ln(1-v/(qn))
 &=v+\frac{v}{2qn}-\frac{v^2}{2qn}+\frac{v^2}{4q^2n^2}+O(v^3).
 \end{align*}
-The $-v$ and $v$ cancel. Collecting the rest yields Eq.(23.63):
+The $-v$ and $v$ cancel. Collecting the rest yields Eq.~(23.63):
 \[
 \boxed{\begin{aligned}
 \ln W(v)={}&-\tfrac12\ln(2\pi pqn)
@@ -1013,8 +1152,9 @@ The $-v$ and $v$ cancel. Collecting the rest yields Eq.(23.63):
 Here $O(v^3)$ first denotes a Taylor remainder for fixed $n,p,q$.
 For the limiting argument hold $p,q>0$ fixed and take $v=O(\sqrt n)$.
 The remainder is then $O(|v|^3/n^2+|v|^3/n^3)=O(n^{-1/2})$,
-while the displayed linear and last quadratic corrections also vanish.
-Since $1/p+1/q=1/(pq)$, the surviving form is
+while the displayed linear term, $O(|v|/n)=O(n^{-1/2})$, and the last
+quadratic term, $O(v^2/n^2)=O(n^{-1})$, also vanish as $n\to\infty$.
+Since $1/p+1/q=(q+p)/(pq)=1/(pq)$, the surviving form is
 \[
 W(v)\sim\frac1{\sqrt{2\pi npq}}e^{-v^2/(2npq)}.
 \]
@@ -1030,24 +1170,31 @@ $4\sigma$ from its mean value? Compare your result with the
 corresponding one from Chebyshev's inequality. Explain the
 difference in your own words. \erratum{Assume $\sigma>0$.}
 \solution
-Standardize $Z=(X-\mu)/\sigma$, for $\sigma>0$.
-Symmetry and $u=z/\sqrt2$ give
-\[
-P(|X-\mu|>4\sigma)=\frac2{\sqrt{2\pi}}\int_4^\infty e^{-z^2/2}\,dz
-=\operatorname{erfc}(2\sqrt2)
+Standardize $Z=(X-\mu)/\sigma$, for $\sigma>0$; then
+$|X-\mu|>4\sigma$ means $|Z|>4$, and by the symmetry of the standard
+normal density the tails $Z>4$ and $Z<-4$ have equal probability.
+Substitute $z=\sqrt2\,u$, $dz=\sqrt2\,du$, with new lower limit
+$4/\sqrt2=2\sqrt2$, and use
+$\operatorname{erfc}x=(2/\sqrt\pi)\int_x^\infty e^{-u^2}\,du$:
+\begin{align*}
+P(|X-\mu|>4\sigma)&=\frac2{\sqrt{2\pi}}\int_4^\infty e^{-z^2/2}\,dz
+=\frac2{\sqrt\pi}\int_{2\sqrt2}^\infty e^{-u^2}\,du\\
+&=\operatorname{erfc}(2\sqrt2)
 =\boxed{6.33424837\times10^{-5}}.
-\]
-This is about $0.00633425\%$. Chebyshev's inequality gives only
+\end{align*}
+This is about $0.00633425\%$. Chebyshev's inequality,
+$P(|X-\mu|\ge k\sigma)\le1/k^2$, with $k=4$ gives only
 \[
 P(|X-\mu|>4\sigma)\le\frac1{4^2}=0.0625=6.25\%.
 \]
-The bound is about 987 times the exact Gaussian tail. Chebyshev uses
-only the variance and applies to every distribution with that variance;
+The bound is $0.0625/(6.33425\times10^{-5})\approx987$ times the exact
+Gaussian tail. Chebyshev uses only the variance and applies to every
+distribution with that variance;
 the Gaussian computation uses its entire density, including its rapidly
 decaying tails. A general upper bound need not be attained by this
 particular density.
-\erratum{The manual's trailing approximation $6.3\times10^{-5}\approx
-10^{-3}$ is numerically incorrect.}
+\erratum{The Instructor's Manual's trailing approximation
+$6.3\times10^{-5}\approx10^{-3}$ is numerically incorrect.}
 
 
 \Needspace{5\baselineskip}
@@ -1069,7 +1216,11 @@ and $Z=(M-m)/\sigma$ has standard normal CDF
 \Phi(z)=\frac1{\sqrt{2\pi}}\int_{-\infty}^{z}e^{-u^2/2}\,du
 =\tfrac12[1+\operatorname{erf}(z/\sqrt2)].
 \]
-The original cutoffs give
+The original cutoffs $m\pm\sigma/2$, $m\pm3\sigma/2$ correspond to
+$Z=\pm0.5$, $\pm1.5$. By the symmetry $\Phi(-z)=1-\Phi(z)$,
+$P(F)=\Phi(-1.5)=1-\Phi(1.5)$, $P(D)=\Phi(-0.5)-\Phi(-1.5)
+=\Phi(1.5)-\Phi(0.5)$ and $\Phi(0.5)-\Phi(-0.5)=2\Phi(0.5)-1$. With
+$\Phi(1.5)=0.9331927987$ and $\Phi(0.5)=0.6914624613$ the cutoffs give
 \begin{align*}
 P(A)=P(F)&=1-\Phi(1.5)=0.0668072013,\\
 P(B)=P(D)&=\Phi(1.5)-\Phi(0.5)=0.2417303375,\\
@@ -1079,10 +1230,13 @@ Thus the percentages are $\boxed{6.68072\%,\ 24.17303\%,\ 38.29249\%}$
 for each extreme grade, each adjacent grade, and C, respectively.
 They sum as $2(6.68072)+2(24.17303)+38.29249=100\%$, up to rounding.
 
-For the redesign let the positive thresholds be $a>b>0$.
-The outer 5\% requires $\Phi(a)=0.95$, and the next 25\% requires
-$\Phi(a)-\Phi(b)=0.25$, hence $\Phi(b)=0.70$.
-Therefore
+For the redesign let the positive thresholds be $a>b>0$, with the
+boundaries at $Z=\pm a$, $\pm b$ (symmetric, so that A and F, and B and
+D, get equal shares). The outer 5\% requires $P(A)=1-\Phi(a)=0.05$,
+i.e., $\Phi(a)=0.95$, and the next 25\% requires
+$P(B)=\Phi(a)-\Phi(b)=0.25$, hence $\Phi(b)=0.70$.
+Solving these numerically (from a table of $\Phi$, or by Newton's
+method with $\Phi'(z)=e^{-z^2/2}/\sqrt{2\pi}$) gives
 \[
 a=\Phi^{-1}(0.95)=1.644853627,\qquad
 b=\Phi^{-1}(0.70)=0.524400513.
@@ -1092,7 +1246,8 @@ The new four score boundaries, in order, are
 \boxed{m-1.644853627\sigma,\quad m-0.524400513\sigma,
 \quad m+0.524400513\sigma,\quad m+1.644853627\sigma.}
 \]
-They yield 5\%,25\%,40\%,25\%,5\%. Any assignment of an exact
+They yield 5\%, 25\%, 40\%, 25\%, 5\%, since
+$P(C)=\Phi(b)-\Phi(-b)=2\Phi(b)-1=0.40$. Any assignment of an exact
 boundary to one adjacent grade gives the same probabilities because
 a continuous normal variable has no point masses.
 
