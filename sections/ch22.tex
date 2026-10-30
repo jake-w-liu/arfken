@@ -29,12 +29,14 @@ interchanged. The correct equivalent forms are}
 \boxed{\frac{\partial f}{\partial x}
 -\frac{d}{dx}\left(f-y_x\frac{\partial f}{\partial y_x}\right)=0}.
 \]
-To prove the equivalence, put $p=y_x$, so $p'=y_{xx}$. The chain rule
-gives
+To prove the equivalence, put $p=y_x$, so $p'=y_{xx}$, and regard
+$f=f(y,p,x)$. Subscripts denote its partial derivatives, evaluated on
+the curve $y(x)$; $d/dx$ is the total derivative along the curve.
+The chain rule gives
 \[
 \frac{df}{dx}=f_x+f_yp+f_p p'.
 \]
-Therefore
+By the product rule, $d(pf_p)/dx=p'f_p+p\,df_p/dx$. Therefore
 \[
 \begin{aligned}
 \frac{d}{dx}(f-pf_p)
@@ -47,11 +49,14 @@ and consequently
 f_x-\frac{d}{dx}(f-pf_p)
 =-p\left(f_y-\frac{df_p}{dx}\right).
 \]
-For $p\ne0$, either corrected expression vanishes exactly when the
-other does. At $p=0$ the second can vanish without implying the first.
+The second corrected expression is $-p$ times the first. For $p\ne0$,
+either one vanishes exactly when the other does. At $p=0$ the second
+can vanish without implying the first: for $f=y^2$ and $y\equiv1$,
+$f_x-d(f-pf_p)/dx=-d(1)/dx=0$, whereas $f_y-df_p/dx=2$.
 
 The printed versions are not generally equivalent. For $f=y$ and
-$y(x)=2x$, the first printed expression is $f_x-df_p/dx=0$,
+$y(x)=2x$ we have $f_x=f_p=0$, $f_y=1$ and $f-pf_p=y=2x$, so the first
+printed expression is $f_x-df_p/dx=0$,
 whereas the second is $f_y-d(f-pf_p)/dx=1-2=-1$.
 This also shows why the stated nonzero-slope condition does not repair
 the swapped derivatives.
@@ -88,7 +93,14 @@ f(y+\alpha\eta,y'+\alpha\eta',x)
 \end{aligned}
 \]
 All derivatives on the right are evaluated on the unperturbed curve.
-Integrating the linear term by parts,
+Integrating over $[x_1,x_2]$ (the remainder is $O(\alpha^3)$ uniformly
+in $x$ because $f$ is $C^3$ and $\eta,\eta'$ are bounded) gives
+\[
+J(\alpha)=J(0)+\alpha J'(0)+\frac{\alpha^2}{2}J''(0)+O(\alpha^3),
+\]
+where $J'(0)$ and $J''(0)$ are the integrals of the coefficients of
+$\alpha$ and $\alpha^2/2$ above. Integrating the linear term by parts,
+$\int f_{y_x}\eta'dx=[f_{y_x}\eta]-\int(df_{y_x}/dx)\eta\,dx$, so
 \[
 \begin{aligned}
 J'(0)&=\int_{x_1}^{x_2}(f_y\eta+f_{y_x}\eta')dx\\
@@ -96,8 +108,12 @@ J'(0)&=\int_{x_1}^{x_2}(f_y\eta+f_{y_x}\eta')dx\\
 +\int_{x_1}^{x_2}\left(f_y-\frac d{dx}f_{y_x}\right)\eta\,dx.
 \end{aligned}
 \]
-The boundary term is zero. Because the interior variation is arbitrary,
-stationarity gives
+The boundary term is zero because $\eta(x_1)=\eta(x_2)=0$.
+Stationarity, $J'(0)=0$, must hold for every such $\eta$. The bracket
+is continuous; if it were nonzero at an interior point, it would keep
+one sign on a small interval there, and a nonnegative $\eta\ne0$
+vanishing outside that interval would give $J'(0)\ne0$. This
+fundamental lemma of the calculus of variations gives
 \[
 \boxed{f_y-\frac d{dx}f_{y_x}=0}.
 \]
@@ -107,8 +123,12 @@ J''(0)=\int_{x_1}^{x_2}
 \left(f_{yy}\eta^2+2f_{y y_x}\eta\eta'
 +f_{y_xy_x}(\eta')^2\right)dx.
 \]
-Its sign must be tested over all admissible variations; the vanishing
-first variation alone does not classify the extremum.
+If $J''(0)>0$ for every admissible $\eta\ne0$, then $J(\alpha)>J(0)$
+for all small $\alpha\ne0$ in every such family (a minimum along each
+family); $J''(0)<0$ for every $\eta\ne0$ gives a maximum in the same
+sense, and values of both signs give a saddle point. Thus the sign must
+be tested over all admissible variations; the vanishing first variation
+alone does not classify the extremum.
 
 
 \Needspace{5\baselineskip}
@@ -122,8 +142,12 @@ $\dfrac{d^{2}}{dx^{2}}\left(\dfrac{\partial f}{\partial y_{xx}}
 \right)-\dfrac{d}{dx}\left(\dfrac{\partial f}{\partial y_{x}}
 \right)+\dfrac{\partial f}{\partial y}=0$.
 \solution
-Write $y_\alpha=y+\alpha\eta$. Fixing both $y$ and $y'$ at each
-endpoint requires $\eta=\eta'=0$ there. The first variation is
+Write $y_\alpha=y+\alpha\eta$, so $y_\alpha'=y'+\alpha\eta'$ and
+$y_\alpha''=y''+\alpha\eta''$. Fixing both $y$ and $y'$ at each
+endpoint requires $\eta=\eta'=0$ there. Differentiating
+$J(\alpha)=\int f(y_\alpha'',y_\alpha',y_\alpha,x)\,dx$ under the
+integral sign by the chain rule, the first variation
+$\delta J=J'(0)$ is
 \[
 \delta J=\int_{x_1}^{x_2}
 (f_y\eta+f_{y_x}\eta'+f_{y_{xx}}\eta'')dx.
@@ -140,13 +164,15 @@ For the second derivative term, integrate twice:
 =[f_{y_{xx}}\eta'-(d f_{y_{xx}}/dx)\eta]
 +\int\frac{d^2}{dx^2}f_{y_{xx}}\eta\,dx.
 \]
-Every displayed boundary term vanishes. Thus
+Every displayed boundary term vanishes, since each contains $\eta$ or
+$\eta'$ at $x_1$ or $x_2$. Thus
 \[
 \delta J=\int_{x_1}^{x_2}
 \left[f_y-\frac d{dx}f_{y_x}
 +\frac{d^2}{dx^2}f_{y_{xx}}\right]\eta\,dx.
 \]
-The fundamental lemma yields
+This vanishes for every such $\eta$, so the fundamental lemma
+(Exercise~22.1.2) yields
 \[
 \boxed{\frac{d^2}{dx^2}\frac{\partial f}{\partial y_{xx}}
 -\frac d{dx}\frac{\partial f}{\partial y_x}
@@ -183,24 +209,35 @@ The $y'$ terms cancel in Euler's equation, leaving
 \boxed{f_{1y}-f_{2x}=0\quad\hbox{along a stationary curve}}.
 \]
 
-(b) The integral can be written
+(b) Since $dy=y'dx$ along the path, the integral is the line integral
 \[
 J=\int(f_1\,dx+f_2\,dy).
 \]
 If the equality $f_{1y}=f_{2x}$ holds identically on a simply
-connected region, this differential form is exact: there is a potential
-$F$ with $F_x=f_1$, $F_y=f_2$. Then
+connected region, this differential form is exact. Indeed, by Green's
+theorem
+$\oint(f_1\,dx+f_2\,dy)=\iint(f_{2x}-f_{1y})\,dx\,dy=0$ around every
+simple closed curve in the region (its interior lies in the region),
+so $F(x,y)=\int_{(x_1,y_1)}^{(x,y)}(f_1\,dx+f_2\,dy)$ does not depend
+on the path of integration, and $F_x=f_1$, $F_y=f_2$. Along any path
+$y(x)$, $dF(x,y(x))/dx=F_x+F_yy'=f_1+f_2y'=f$. Then
 \[
 \boxed{J=F(x_2,y_2)-F(x_1,y_1)}
 \]
-is independent of the path in that region.
+is independent of the path in that region. Conversely, if $J$ has the
+same value on all paths joining any two points of the region, every
+path is stationary, and (a) gives $f_{1y}=f_{2x}$ along every curve,
+hence identically. So $J$ is path-independent exactly when
+$f_{1y}=f_{2x}$ holds throughout the (simply connected) region.
 
 \erratum{An Euler equation satisfied only on one curve does not
 imply path independence throughout the region. The identity on the
 region, together with an appropriate topology, is needed for that
 conclusion.}
-For example, $f_1=y^2$, $f_2=0$ has stationary curve $y=0$,
-but $\int y^2dx$ changes when the interior path changes. This example
+For example, $f_1=y^2$, $f_2=0$ gives $f_{1y}-f_{2x}=2y$, which
+vanishes only on the stationary curve $y=0$. With both endpoints on the
+axis, $\int y^2dx$ is $0$ on $y=0$ but positive on every other path,
+so it changes when the interior path changes. This example
 also anticipates the correction required in the next exercise.
 
 
@@ -218,12 +255,14 @@ for an integrand that depends on $y$.}
 \par\emph{Note.}~The situation will change when constraints are
 introduced (compare to Exercise~22.4.6).
 \solution
-There is no $y'$ dependence, so the first variation is simply
+There is no $y'$ dependence, so for $y+\alpha\eta$ with
+$\eta(x_1)=\eta(x_2)=0$ the first variation is simply
 \[
 \delta J=\int_{x_1}^{x_2}f_y(x,y(x))\eta(x)\,dx.
 \]
-Consequently the correct stationarity condition is the algebraic
-equation
+It must vanish for every such $\eta$, so by the fundamental lemma
+(Exercise~22.1.2), or by Euler's equation with $f_{y'}=0$, the correct
+stationarity condition is the algebraic equation
 \[
 \boxed{f_y(x,y(x))=0\quad\hbox{for every interior }x}.
 \]
@@ -238,7 +277,8 @@ For an explicit smooth counterexample take
 f(x,y)=(y-\sin x)^2
 \]
 and fix the endpoint values to those of $\sin x$. Then
-$f_y=2(y-\sin x)$, so the stationary function is
+$f_y=2(y-\sin x)$ vanishes only for $y=\sin x$, which also meets the
+endpoint values, so the stationary function is
 $\boxed{y(x)=\sin x}$. Moreover,
 \[
 J[y]=\int_{x_1}^{x_2}(y-\sin x)^2dx\ge0,\qquad
@@ -250,7 +290,13 @@ If $f$ is independent of $y$, every path has the same $J$.
 If $f_y$ never vanishes, no stationary path exists. Otherwise, smooth
 root branches of $f_y=0$ may furnish stationary paths, subject to the
 endpoint conditions. Regarding (b), there is no additional equation
-$f_x=0$: $x$ is the independent variable. But $x$ can affect the
+$f_x=0$: $x$ is the independent variable and only $y$ is varied. The
+second form of Euler's equation (Exercise~22.1.1) adds nothing either:
+with $f_{y'}=0$ it reads
+\[
+f_x-\frac{df}{dx}=f_x-(f_x+f_yy')=-f_yy'=0,
+\]
+which already follows from $f_y=0$. But $x$ can affect the
 selected curve through $f_y(x,y)=0$, as the counterexample demonstrates.
 
 
@@ -276,91 +322,138 @@ separate values of $x_{0}$ and $c_{1}$ are then approximately
 $x_{0}\approx0.6627$ and $c_{1}\approx0.5524$.
 \end{enumerate}
 \solution
-Put $c=c_1>0$ and $u=x_0/c$. The boundary equation is
+Put $c=c_1>0$ and $u=x_0/c$. The catenoid $y=c\cosh(x/c)$ must have
+radius $1$ at $x=\pm x_0$, so the boundary equation is
 $c\cosh u=1$.
 
-(a) Implicit differentiation with respect to $x_0$ gives
+(a) Write $c'=dc/dx_0$. Since $u=x_0/c$, the quotient rule gives
+$du/dx_0=1/c-x_0c'/c^2$. Implicit differentiation of $c\cosh u=1$
+with respect to $x_0$ therefore gives
 \[
 c'\cosh u+c\sinh u
 \left(\frac1c-\frac{x_0c'}{c^2}\right)=0,
 \]
-hence
+that is, $c'\cosh u+\sinh u-uc'\sinh u=0$; hence
 \[
-c'(\cosh u-u\sinh u)=-\sinh u,\qquad
+c'(\cosh u-u\sinh u)=-\sinh u.
+\]
+Multiply the numerator and denominator of
+$c'=-\sinh u/(\cosh u-u\sinh u)$ by $c$ and use $c\cosh u=1$,
+$cu=x_0$:
+\[
 \boxed{\frac{dc}{dx_0}=
 -\frac{c\sinh u}{1-x_0\sinh u}}.
 \]
-The numerator is nonzero for separated rings. Thus the derivative
-diverges at $x_0\sinh u=1$.
+The numerator is nonzero for separated rings ($x_0>0$, so $u>0$).
+Thus the derivative diverges at $x_0\sinh u=1$.
 
-(b) Divide that condition by $c\cosh u=1$:
+(b) Divide that condition by $c\cosh u=1$; since $x_0/c=u$,
 \[
-u\tanh u=1,\qquad \boxed{u=\coth u}.
+\frac{x_0\sinh u}{c\cosh u}=u\tanh u=1,\qquad \boxed{u=\coth u}.
 \]
-Equivalently, parametrize the two branches by
+Equivalently, the boundary equation parametrizes all solutions by
+$u>0$:
 \[
-c=\operatorname{sech}u,\qquad x_0=u\operatorname{sech}u.
+c=\operatorname{sech}u,\qquad x_0=cu=u\operatorname{sech}u.
 \]
-Then
+By the product rule,
 \[
-\frac{dx_0}{du}=\operatorname{sech}u(1-u\tanh u).
+\frac{dx_0}{du}=\operatorname{sech}u-u\operatorname{sech}u\tanh u
+=\operatorname{sech}u\,(1-u\tanh u).
 \]
-Because $u\tanh u$ increases strictly from zero to infinity, there is
-one critical point, a maximum. Beyond it no positive-neck catenoid
-satisfies the two boundary conditions.
+Because $d(u\tanh u)/du=\tanh u+u\operatorname{sech}^2u>0$, the
+product $u\tanh u$ increases strictly from zero to infinity. So $x_0(u)$
+increases while $u\tanh u<1$ and decreases afterwards: there is one
+critical point, a maximum, at the root $u_c$ of $u=\coth u$. There
+$dc/dx_0=(dc/du)/(dx_0/du)$ is infinite, since
+$dc/du=-\operatorname{sech}u\tanh u\ne0$, in agreement with (a).
+Each $x_0$ below the maximum is reached twice: on the shallow branch
+($u<u_c$, larger neck radius $c$) and on the deep branch ($u>u_c$).
+Beyond the maximum no positive-neck catenoid satisfies the two boundary
+conditions.
 
-(c) Newton iteration for $F(u)=u\tanh u-1$ is
+(c) Newton iteration for $F(u)=u\tanh u-1$, with
+$F'(u)=\tanh u+u\operatorname{sech}^2u$, is
 \[
 u_{j+1}=u_j-
 \frac{u_j\tanh u_j-1}{\tanh u_j+u_j\operatorname{sech}^2u_j}.
 \]
-Starting at $u_0=1.2$ gives
+Starting from the guess $1.2$, two steps already give all the digits
+shown below; then $c_c=\operatorname{sech}u_c$ (from $c\cosh u=1$) and
+$x_{0c}=u_cc_c$:
 \[
 \boxed{u_c=1.19967864025773,\quad
 c_c=0.552434124530883,\quad
 x_{0c}=0.662743419349182}.
 \]
-\erratum{The manual's $c_c=0.5523434$ transposes digits; substituting
-$c_c=\operatorname{sech}u_c$ gives the value above, which agrees
-with the textbook's rounded $0.5524$.}
+\erratum{The Instructor's Manual's $c_c=0.5523434$ transposes digits;
+substituting $c_c=\operatorname{sech}u_c$ gives the value above, which
+agrees with the textbook's rounded $0.5524$.}
 
-The stability threshold can also be seen in the second variation.
-For $f=y\sqrt{1+p^2}$, evaluated at $y=c\cosh(x/c)$ and
-$p=\sinh(x/c)$, the Hessian entries are
+The stability threshold can also be seen in the second variation
+$J''(0)$ of Exercise~22.1.2, written $\delta^2J$, for the area integrand
+without its factor $2\pi$, $f=y\sqrt{1+y'^2}$. Its second partial
+derivatives with respect to $y$ and $y'$ are
 \[
- f_{yy}=0,\qquad f_{yp}=\frac p{\sqrt{1+p^2}}=\tanh(x/c),\qquad
- f_{pp}=\frac y{(1+p^2)^{3/2}}=c\operatorname{sech}^2(x/c).
+ f_{yy}=0,\qquad f_{yy'}=\frac{y'}{\sqrt{1+y'^2}},\qquad
+ f_{y'y'}=\frac y{(1+y'^2)^{3/2}}.
 \]
-Thus, for a fixed-endpoint variation,
+On the catenoid, $y=c\cosh(x/c)$, $y'=\sinh(x/c)$ and
+$\sqrt{1+y'^2}=\cosh(x/c)$, so $f_{yy'}=\tanh(x/c)$ and
+$f_{y'y'}=c\operatorname{sech}^2(x/c)$.
+Thus, for a fixed-endpoint variation $\eta$,
 \[
  \delta^2J=\int_{-x_0}^{x_0}
  \left[2\tanh(x/c)\eta\eta_x
        +c\operatorname{sech}^2(x/c)\eta_x^2\right]dx.
 \]
 The first term is $\tanh(x/c)(\eta^2)_x$. Integration by parts
-has zero endpoint term and leaves
-$-c^{-1}\int\operatorname{sech}^2(x/c)\eta^2dx$.
-Now $x=cu$, $dx=c\,du$, and $\eta_x=\eta_u/c$ give
+has zero endpoint term, because $\eta(\pm x_0)=0$, and leaves
+$-\int[d\tanh(x/c)/dx]\eta^2dx
+=-c^{-1}\int\operatorname{sech}^2(x/c)\eta^2dx$.
+Now let $u=x/c$ run over $[-u_0,u_0]$, where $u_0=x_0/c$ is the
+endpoint value called $u$ above. Then $dx=c\,du$ and
+$\eta_x=\eta_u/c$ turn
+$c\operatorname{sech}^2(x/c)\eta_x^2dx$ into
+$\operatorname{sech}^2u\,\eta_u^2du$ and
+$c^{-1}\operatorname{sech}^2(x/c)\eta^2dx$ into
+$\operatorname{sech}^2u\,\eta^2du$, so
 \[
 \delta^2J=\int_{-u_0}^{u_0}
 \operatorname{sech}^2u\,(\eta_u^2-\eta^2)du.
 \]
-The function $w=\cosh u-u\sinh u$ satisfies
-$(\operatorname{sech}^2u\,w')'+\operatorname{sech}^2u\,w=0$.
-For $u_0<u_c$, $w>0$. Put $p(u)=\operatorname{sech}^2u$ and
-$\eta=wv$. Expanding the square and using $(pw')'=-pw$ gives
+Put $p(u)=\operatorname{sech}^2u$ and
+\[
+w(u)=\cosh u-u\sinh u=\cosh u\,(1-u\tanh u),
+\]
+which is $\partial y/\partial c=\cosh(x/c)-(x/c)\sinh(x/c)$ for the
+family $y=c\cosh(x/c)$ at fixed $x$, written in terms of $u=x/c$.
+Since $w'=-u\cosh u$, we have $pw'=-u\operatorname{sech}u$ and
+\[
+(pw')'=-\operatorname{sech}u+u\operatorname{sech}u\tanh u=-pw,
+\]
+that is, $(pw')'+pw=0$. For $u_0<u_c$ (the shallow branch),
+$|u|\tanh|u|<1$ on $[-u_0,u_0]$, so $w>0$ there. Write $\eta=wv$;
+then $v=\eta/w$ is smooth, $v(\pm u_0)=0$, and $\eta'=w'v+wv'$.
+Expanding the square,
 \[
  p(\eta'^2-\eta^2)
- =pw^2v'^2+(pww'v^2)'.
+ =pw^2v'^2+2pww'vv'+(pw'^2-pw^2)v^2
+ =pw^2v'^2+(pww'v^2)',
 \]
-The boundary term is zero because $\eta=0$ and $w>0$ there.
-Consequently
+because $(pww'v^2)'=(pw')'wv^2+pw'^2v^2+2pww'vv'$ and
+$(pw')'w=-pw^2$. The boundary term $[pww'v^2]_{-u_0}^{u_0}$ is zero
+because $v(\pm u_0)=0$. Consequently
 \[
 \delta^2J=\int_{-u_0}^{u_0}
 \operatorname{sech}^2u\,w^2(v')^2du>0
 \]
-for a nonzero fixed-endpoint variation. At $u_0=u_c$, $w$ itself
-vanishes at the endpoints and gives a zero second variation.
+for a nonzero fixed-endpoint variation: $v'\equiv0$ together with
+$v(\pm u_0)=0$ would give $v\equiv0$, hence $\eta\equiv0$. At
+$u_0=u_c$, $w(\pm u_c)=\cosh u_c(1-u_c\tanh u_c)=0$, so $\eta=w$ is
+itself an admissible variation, and integration by parts with
+$(pw')'=-pw$ gives
+$\delta^2J[w]=[pww']_{-u_c}^{u_c}-\int w[(pw')'+pw]\,du=0$.
 This identifies the loss of strict stability on the shallow branch.
 
 
@@ -376,38 +469,50 @@ the curved surface of rotation equals the area of the two rings
 \solution
 For $y=c\cosh(x/c)$ between $x=\pm x_0$, put $u=x_0/c$.
 The endpoint condition is $c\cosh u=1$.
-Since $y'=\sinh(x/c)$, the full surface area is
+Since $y'=\sinh(x/c)$, $\sqrt{1+y'^2}=\cosh(x/c)$ and
+$y\sqrt{1+y'^2}=c\cosh^2(x/c)$. The integrand is even; with $v=x/c$,
+$dx=c\,dv$, and $\cosh^2v=(1+\cosh2v)/2$, the full surface area is
 \[
 \begin{aligned}
 A&=2\pi\int_{-x_0}^{x_0}
 y\sqrt{1+y'^2}dx
 =4\pi c^2\int_0^u\cosh^2v\,dv\\
-&=\pi c^2[\sinh(2u)+2u].
+&=2\pi c^2\left[v+\tfrac12\sinh2v\right]_0^u
+=\pi c^2[\sinh(2u)+2u].
 \end{aligned}
 \]
-The two unit disks have area $2\pi$. Equating the areas and using
-$c^2=\operatorname{sech}^2u$ gives
+The two unit disks have area $2\pi$. Equating the areas, dividing by
+$\pi$, and using $c^2=\operatorname{sech}^2u$ gives
 \[
-\sinh(2u)+2u=2\cosh^2u=1+\cosh(2u),
+\sinh(2u)+2u=2\cosh^2u=1+\cosh(2u).
 \]
-or the simpler single equation
+Since $\sinh2u-\cosh2u=-e^{-2u}$, this is the simpler single equation
 \[
 \boxed{2u-1=e^{-2u}}.
 \]
-Its left-minus-right derivative is $2+2e^{-2u}>0$, so it has
-exactly one positive root. Newton iteration, or bisection on
-$(0.6,0.7)$, gives
+Its left-minus-right side $g(u)=2u-1-e^{-2u}$ has $g(0)=-2$,
+$g(u)\to\infty$ as $u\to\infty$, and $g'(u)=2+2e^{-2u}>0$, so it has
+exactly one positive root. Since $g(0.6)=-0.101<0<g(0.7)=0.153$,
+bisection on $(0.6,0.7)$, or Newton iteration
+$u_{j+1}=u_j-g(u_j)/g'(u_j)$ from $u_0=0.6$, gives
 \[
 u=0.639232271380537,\qquad
-c=\operatorname{sech}u=0.825517453652511.
+c=\operatorname{sech}u=0.825517453652511
 \]
+(both sides of the boxed equation then equal $0.278464542761$).
 Thus the required half-separation is
 \[
-\boxed{x_0=u\operatorname{sech}u=0.527697396962572}.
+\boxed{x_0=cu=u\operatorname{sech}u=0.527697396962572}.
 \]
 The full ring separation is $2x_0=1.05539479392514$.
-The root is below $u_c$ from Exercise~22.1.6, so the equality occurs
-on the shallow catenoid branch.
+The root is below $u_c=1.19967\ldots$ from Exercise~22.1.6, so the
+equality occurs on the shallow catenoid branch. With
+$c=\operatorname{sech}u$ the area
+is $A=2\pi(\tanh u+u\operatorname{sech}^2u)$, and
+$dA/du=4\pi\operatorname{sech}^2u\,(1-u\tanh u)>0$ on that branch, as
+is $dx_0/du$. Hence the shallow catenoid has less area than the two
+disks for $x_0<0.527697\ldots$ and more for
+$0.527697\ldots<x_0\le x_{0c}$, where the Goldschmidt solution has less.
 
 
 \Needspace{5\baselineskip}
@@ -428,7 +533,14 @@ J[y_\alpha]=\int_{x_1}^{x_2}
 \]
 The first two derivatives of $g(p)=\sqrt{1+p^2}$ are
 $g'(p)=p/\sqrt{1+p^2}$ and $g''(p)=(1+p^2)^{-3/2}$.
-Therefore
+Taylor's theorem at $p=m$ gives, at each $x$,
+\[
+g(m+\alpha\eta')=g(m)+g'(m)\,\alpha\eta'
++\tfrac12g''(m)\,\alpha^2(\eta')^2+O(\alpha^3),
+\]
+with a remainder uniform in $x$, because
+$g'''(p)=-3p(1+p^2)^{-5/2}$ and $\eta'$ are bounded. Integrating over
+$[x_1,x_2]$,
 \[
 J[y_\alpha]-J[y_*]
 =\alpha\frac{m}{\sqrt{1+m^2}}\int_{x_1}^{x_2}\eta'dx
@@ -441,12 +553,15 @@ admissible $\eta$: zero would require $\eta'=0$, and the endpoints
 would then require $\eta=0$. Thus the straight line is a strict
 local minimum.
 
-It is also the global minimum, since strict convexity gives
+It is also the global minimum. Since $g''>0$, $g$ is strictly convex,
+so its graph lies above each tangent line: $g(m+t)\ge g(m)+g'(m)t$,
+with equality only for $t=0$. With $t=\eta'(x)$,
 \[
 g(m+\eta')\ge g(m)+g'(m)\eta'.
 \]
 After integration the last term again vanishes, so
-$J[y_*+\eta]\ge J[y_*]$, with equality only for $\eta=0$.
+$J[y_*+\eta]\ge J[y_*]$, with equality only if $\eta'\equiv0$, that is,
+only for $\eta=0$.
 
 
 \Needspace{5\baselineskip}
@@ -466,8 +581,9 @@ solution similar to the Goldschmidt solution for the soap-film
 problem.
 \end{enumerate}
 \solution
-(a) Let $\eta$ be a smooth function of compact support in
-$(x_1,x_2)$ with $\int\eta\,dx\ne0$. For $f=y$,
+(a) For $f=y$, Euler's equation $f_y-d(f_{y_x})/dx=0$ reads $1=0$,
+so no curve is stationary. Directly: let $\eta$ be a smooth function of
+compact support in $(x_1,x_2)$ with $\int\eta\,dx\ne0$. Then
 \[
 J[y+\alpha\eta]-J[y]=\alpha\int_{x_1}^{x_2}\eta(x)dx.
 \]
@@ -476,8 +592,11 @@ opposite directions. Thus no admissible curve is even a local
 extremum. Taking $|\alpha|\to\infty$ also shows that $J$ is
 unbounded above and below.
 
-(b) For $f=y^2$, nonnegativity gives $J\ge0$.
-In a class allowing endpoint jumps, set
+(b) For $f=y^2$, nonnegativity gives $J\ge0$. Euler's equation is
+$f_y=2y=0$ (compare Exercise~22.1.5), which forces $y=0$ at every
+interior point; nonzero endpoint values can then be met only by jumps
+at the ends, just as the Goldschmidt solution joins the two disks by the
+axis. In a class allowing endpoint jumps, set
 \[
 y(x)=0\quad(x_1<x<x_2),
 \]
@@ -489,17 +608,20 @@ discontinuous path has $\boxed{J_{\min}=0}$.
 nonzero, this is an infimum, not an attained minimum. If both endpoint
 values are zero, the ordinary smooth function $y=0$ is already the
 minimum.}
-To see the infimum explicitly, let the endpoint values be $A,B$.
-Join $A$ to zero within a boundary layer of width $\epsilon$,
-keep zero in the interior, and join zero to $B$ in the last
-$\epsilon$. Smooth profiles bounded respectively by $|A|,|B|$
-give
+To see the infimum explicitly, let the endpoint values be $A,B$, and
+let $0<\epsilon<(x_2-x_1)/2$. Let $y_\epsilon$ fall linearly from $A$
+to zero on $[x_1,x_1+\epsilon]$, vanish on
+$[x_1+\epsilon,x_2-\epsilon]$, and rise linearly from zero to $B$ on
+$[x_2-\epsilon,x_2]$ (round off the corners if a smooth path is
+wanted). Since $|y_\epsilon|\le|A|$ on the first layer and
+$|y_\epsilon|\le|B|$ on the last,
 \[
 0\le J[y_\epsilon]\le\epsilon(A^2+B^2)\longrightarrow0.
 \]
-Any continuous function with a nonzero endpoint is nonzero on an
-interval of positive length, so its integral of $y^2$ is strictly
-positive.
+On the other hand, a continuous function with $y(x_1)=A\ne0$ satisfies
+$|y|>|A|/2$ on some interval $[x_1,x_1+\delta]$, so
+$J\ge\delta A^2/4>0$; likewise at $x_2$. Hence no continuous path
+attains the value $0$.
 
 
 \Needspace{5\baselineskip}
@@ -519,104 +641,163 @@ ray path \erratum{and determine whether the minimum is attained} if
 \erratum{with $a>0$ and $y_0<1$.}
 \end{enumerate}
 \solution
-Use $ds=\sqrt{1+y'^2}dx$. Since neither index depends explicitly
-on $x$, the Beltrami first integral is
+Use $ds=\sqrt{1+y'^2}dx$, so $f=n(y)\sqrt{1+y'^2}$ and
+$f_{y'}=n(y)y'/\sqrt{1+y'^2}$. Since neither index depends explicitly
+on $x$, the Beltrami first integral $f-y'f_{y'}=C$ (the second form of
+Euler's equation in Exercise~22.1.1 with $f_x=0$) holds:
 \[
-f-y'f_{y'}=\frac{n(y)}{\sqrt{1+y'^2}}=C.
+f-y'f_{y'}=n(y)\,\frac{(1+y'^2)-y'^2}{\sqrt{1+y'^2}}
+=\frac{n(y)}{\sqrt{1+y'^2}}=C.
 \]
 
-(a) For $n=e^y$, write $e^y=C\sec(x-b)$ on a branch where the
-cosine is positive. Indeed,
+(a) For $n=e^y$ this gives $y'^2=e^{2y}/C^2-1$, with $C>0$. Separate
+variables and put $t=Ce^{-y}\in(0,1]$, so that
+$\sqrt{e^{2y}/C^2-1}=\sqrt{1-t^2}/t$ and $dt=-t\,dy$:
 \[
-y=\log C-\log\cos(x-b),\quad y'=\tan(x-b),
+\pm dx=\frac{dy}{\sqrt{e^{2y}/C^2-1}}
+=\frac{t\,dy}{\sqrt{1-t^2}}
+=-\frac{dt}{\sqrt{1-t^2}}=d(\arccos t).
 \]
-so $e^y/\sqrt{1+y'^2}=C$. Equal endpoint values at $x=\pm1$
-give $b=0$ on the branch covering the entire interval. The condition
-$y(1)=1$ gives $C=e\cos1$. Thus
+Hence $\arccos(Ce^{-y})=\pm(x-b)$, that is, $e^y=C\sec(x-b)$ on a
+branch where the cosine is positive. Indeed,
 \[
-\boxed{y(x)=1+\log\cos1-\log\cos x,\qquad -1\le x\le1}.
+y=\ln C-\ln\cos(x-b),\quad y'=\tan(x-b),
+\]
+so $\sqrt{1+y'^2}=\sec(x-b)$ and $e^y/\sqrt{1+y'^2}=C$. Equal endpoint
+values at $x=\pm1$ require $\cos(1-b)=\cos(1+b)$, i.e.,
+$2\sin1\sin b=0$, so $b=k\pi$; since
+$\cos(x-k\pi)=(-1)^k\cos x$ must be positive on all of $[-1,1]$, the
+branch covering the entire interval has $\cos(x-b)=\cos x$, i.e.,
+$b=0$. The condition $y(1)=1$, i.e. $e=C\sec1$, gives $C=e\cos1$. Thus
+\[
+\boxed{y(x)=1+\ln\cos1-\ln\cos x,\qquad -1\le x\le1}.
+\]
+On it $e^y=e\cos1\sec x$ and $\sqrt{1+y'^2}=\sec x$, so the optical
+length is
+\[
+J=e\cos1\int_{-1}^1\sec^2x\,dx=2e\cos1\tan1=2e\sin1.
 \]
 This is a global minimum, not just a stationary path. Set
 \[
-U=e^y\cos x,\qquad V=e^y\sin x.
+U=e^y\cos x,\qquad V=e^y\sin x,
 \]
-Direct differentiation gives $dU^2+dV^2=e^{2y}(dx^2+dy^2)$.
-The optical length is therefore ordinary Euclidean length in the
-$(U,V)$ plane. The endpoints are $(e\cos1,\pm e\sin1)$, and
-their straight segment has $U=e\cos1$, precisely the curve above.
-Its length is $2e\sin1$, the lower bound for any joining path.
+polar coordinates with radius $e^y$ and angle $x\in[-1,1]$, so the
+map $(x,y)\mapsto(U,V)$ is one-to-one. Since
+$dU=e^y(\cos x\,dy-\sin x\,dx)$ and $dV=e^y(\sin x\,dy+\cos x\,dx)$,
+the cross terms cancel and $dU^2+dV^2=e^{2y}(dx^2+dy^2)$.
+The optical length $\int e^y\,ds$ is therefore ordinary Euclidean
+length in the $(U,V)$ plane. The endpoints are $(e\cos1,\pm e\sin1)$,
+and their straight segment has $U=e\cos1$, precisely the curve above
+(on it $e^y\cos x=C=e\cos1$). Its length is $2e\sin1$, the lower bound
+for any joining path; every other path has a different image, which is
+strictly longer than the segment.
 
-\erratum{The manual's inverse formula uses $1+\pi^2/16$ where
-$\sec^2 1$ is required. At $y=1$ it gives
+\erratum{The Instructor's Manual's inverse formula uses $1+\pi^2/16$
+where $\sec^2 1$ is required. At $y=1$ it gives
 $x=\arctan(\pi/4)$ instead of $x=1$, so it fails the stated
 endpoint condition.}
 
 (b) A positive index requires $a>0$ and the endpoints require
-$H:=1-y_0>0$. Put $u(x)=y(x)-y_0$. The first integral is
+$H:=1-y_0>0$. Put $u(x)=y(x)-y_0$, so $n=au$ and $u'=y'$. The first
+integral, divided by $a$, is
 \[
 \frac{u}{\sqrt{1+u'^2}}=c>0,\qquad
 u'^2=\frac{u^2}{c^2}-1.
 \]
-Separate variables:
+Separate variables on a rising part ($u'>0$), using
+$\int du/\sqrt{u^2-c^2}=\operatorname{arcosh}(u/c)$:
 \[
 dx=\frac{c\,du}{\sqrt{u^2-c^2}},\qquad
 x-b=c\,\operatorname{arcosh}(u/c).
 \]
-The two symmetric halves give
+A falling part gives $x-b=-c\operatorname{arcosh}(u/c)$; both halves
+are $u=c\cosh[(x-b)/c]$. Equal endpoint heights require
+$\cosh[(1-b)/c]=\cosh[(1+b)/c]$, i.e. $|1-b|=|1+b|$, so the horizontal
+shift is $b=0$:
 \[
 \boxed{y(x)=y_0+c\cosh(x/c),\qquad
 c\cosh(1/c)=H}.
 \]
-The horizontal shift $b$ is zero because the endpoint heights are equal.
-With $w=1/c$, its boundary equation is
+With $w=1/c$, the boundary equation reads $\cosh w/w=H$, or
 \[
 \frac1H=w\operatorname{sech}w.
 \]
 Exercise~22.1.6 shows that the maximum of the right side is
-$0.662743419349182$. Consequently regular stationary curves exist
-only for
+$0.662743419349182$, at $w=u_c$. Consequently regular stationary curves
+exist only for
 \[
-H\ge1.50887956153832
+H\ge\frac1{0.662743419349182}=1.50887956153832
 \quad\hbox{or}\quad y_0\le-0.50887956153832.
 \]
-Above that threshold there are two branches; the smaller $w$,
-larger $c$ branch is the locally minimizing one.
+Above that threshold there are two branches. Scaling both coordinates
+by $H$, $X=x/H$ and $Y=u/H$ (so $dY/dX=u'$), gives
+\[
+\int_{-1}^1u\sqrt{1+u'^2}\,dx=H^2\int_{-1/H}^{1/H}Y\sqrt{1+Y'^2}\,dX,
+\qquad Y(\pm1/H)=1:
+\]
+the catenoid problem of Exercise~22.1.6 with unit-ring half-separation
+$1/H$. The scaled catenary $Y=(c/H)\cosh[X/(c/H)]$ has neck $c/H$, so
+its $u_0$ is $(1/H)/(c/H)=w$. Hence the smaller-$w$, larger-$c$ branch
+($w<u_c$) has positive second variation and is the locally minimizing
+one.
 
 \erratum{Part (b) has no single smooth minimizing ray for arbitrary
 $y_0<1$. Also, Fermat's variational statement is generally stationarity;
 an available stationary ray need not be the absolute minimum.}
-The distinction can be quantified here. The catenary optical length is
+The distinction can be quantified here. On the catenary
+$u\sqrt{1+u'^2}=c\cosh^2(x/c)$, so, with $s=x/c$ and
+$\int_0^w\cosh^2s\,ds=\tfrac12w+\tfrac14\sinh2w$, its optical length
+is
 \[
-J_{\rm cat}=a c^2\left[w+\frac12\sinh(2w)\right],\qquad
+J_{\rm cat}=2ac^2\int_0^w\cosh^2s\,ds
+=ac^2\left[w+\frac12\sinh(2w)\right],
+\]
+and since $c^2/H^2=\operatorname{sech}^2w$,
+\[
 \frac{J_{\rm cat}}{aH^2}
+=\operatorname{sech}^2w\,(w+\sinh w\cosh w)
 =w\operatorname{sech}^2w+\tanh w.
 \]
 To see the competing boundary cost, descend vertically from $H$
 to a small $\delta>0$, travel the horizontal distance $2$ at that
-height, and ascend to $H$. This piecewise path has
+height, and ascend to $H$. On the vertical segments $ds=du$. This
+piecewise path has
 \[
  J_\delta=a\left(2\int_\delta^H u\,du+2\delta\right)
  =a(H^2-\delta^2+2\delta)\longrightarrow aH^2.
 \]
 Steep smooth endpoint layers approximate its vertical portions,
 so the same limit is available within positive smooth graphs.
-Equality of the catenary cost with this limit occurs at the same root
-as Exercise~22.1.7:
+Equality of the catenary cost with this limit,
+$w\operatorname{sech}^2w+\tanh w=1$, becomes after multiplication by
+$2\cosh^2w$ the equation $2w+\sinh2w=2\cosh^2w$ of Exercise~22.1.7,
+with the same root:
 \[
 2w-1=e^{-2w},\qquad w=0.639232271380537.
 \]
-Thus the shallow catenary beats that boundary limit only for
+On the shallow branch the ratio
+$w\operatorname{sech}^2w+\tanh w$ has derivative
+$2\operatorname{sech}^2w\,(1-w\tanh w)>0$, while
+$H=\cosh w/w$ decreases as $w$ increases. So the ratio is below $1$
+exactly when $w<0.639232\ldots$, i.e., when $H$ exceeds
+$1/0.527697396962572$: the shallow catenary beats that boundary limit
+only for
 \[
 H>1.89502545541442.
 \]
 For a direct global proof, let $d=\min u>0$ on a competing
 path. Cauchy--Schwarz applied to the vectors
-$(d,\sqrt{u^2-d^2})$ and $(1,|u'|)$ gives
+$(d,\sqrt{u^2-d^2})$ and $(1,|u'|)$, of lengths $u$ and
+$\sqrt{1+u'^2}$, gives
 \[
  u\sqrt{1+u'^2}\ge d+\sqrt{u^2-d^2}\,|u'|.
 \]
-The path descends from $H$ to $d$ and returns to $H$, so integration
-over its horizontal span of length $2$ yields
+The path descends from $H$ to $d$ and returns to $H$. On a descending
+or ascending stretch $|u'|\,dx=|du|$, so each of the two stretches
+contributes at least $\int_d^H\sqrt{u^2-d^2}\,du$. With the
+antiderivative
+$\tfrac12u\sqrt{u^2-d^2}-\tfrac12d^2\operatorname{arcosh}(u/d)$,
+integration over the horizontal span of length $2$ yields
 \[
  \frac Ja\ge 2d+2\int_d^H\sqrt{u^2-d^2}\,du
  =:B(d)
@@ -625,27 +806,38 @@ over its horizontal span of length $2$ yields
 For a path with additional rises and falls, the absolute-value
 integral is only larger. Differentiation gives
 \[
- B'(d)=2-2d\operatorname{arcosh}(H/d),\qquad B(0^+)=H^2.
+ B'(d)=2-2d\operatorname{arcosh}(H/d),\qquad B(0^+)=H^2:
 \]
+the $d$-derivative $-Hd/\sqrt{H^2-d^2}$ of $H\sqrt{H^2-d^2}$ cancels
+the term $+Hd/\sqrt{H^2-d^2}$ that comes from differentiating
+$\operatorname{arcosh}(H/d)$ in $-d^2\operatorname{arcosh}(H/d)$, and
+$d^2\operatorname{arcosh}(H/d)\to0$ as $d\to0^+$ because
+$\operatorname{arcosh}(H/d)\approx\ln(2H/d)$.
+
 The product $d\operatorname{arcosh}(H/d)$ vanishes at both ends
 $d=0,H$ and has a single maximum: putting
-$d=H\operatorname{sech}w$ reduces it to $Hw\operatorname{sech}w$.
-When two critical points exist, the smaller $d$ is a local maximum
-of $B$ and the larger $d$ is its local minimum. At that minimum
-$d\operatorname{arcosh}(H/d)=1$, exactly the shallow-catenary
-endpoint equation; equality in the preceding bound holds for that
-catenary. The endpoint $d=H$ cannot minimize $B$, since $B'(H^-)=2$.
-Thus the global lower bound is the smaller of the shallow-catenary
-cost and $H^2$. The former is attained precisely for
-$H\ge1.89502545541442\ldots$; at equality it ties the boundary limit.
+$d=H\operatorname{sech}w$ reduces it to $Hw\operatorname{sech}w$,
+whose maximum is $0.662743\ldots H$. If $H\le1.50887956\ldots$, then
+$B'\ge0$ on $(0,H)$, with at most one zero, so $B$ increases and
+$B>H^2$ throughout. For larger $H$ there are two critical points:
+$B'>0$ near $d=0$, $B'<0$ between them (where
+$d\operatorname{arcosh}(H/d)>1$), and $B'>0$ beyond. So the smaller $d$
+is a local maximum of $B$ and the larger $d$ is its local minimum. At
+that minimum $d\operatorname{arcosh}(H/d)=1$, exactly the
+shallow-catenary endpoint equation $c\cosh(1/c)=H$ with $d=c$; equality
+in the preceding bound holds for that catenary, since there
+$c+c\sinh^2(x/c)=c\cosh^2(x/c)=u\sqrt{1+u'^2}$. The endpoint $d=H$
+cannot minimize $B$, since $B'(H^-)=2$. Thus, for
+$H>1.50887956\ldots$, the global lower bound is
+the smaller of the shallow-catenary cost and $H^2$. The former is at
+most $H^2$, and is then attained by the catenary, precisely for
+$H\ge1.8950254554144\ldots$; at equality it ties the boundary limit.
 For smaller $H$, every $d>0$ gives a strictly larger cost than $H^2$,
 so no smooth positive-index global minimizer exists. The infimum
 $aH^2$ is approached by the endpoint-layer paths described above.
-This also agrees with the catenoid problem after scaling both
-coordinates by $H$, for which the unit-ring half-separation is $1/H$.
 
-\erratum{In particular, the manual's claim of a global catenary
-minimum at $y_0=-0.70$ is incorrect: $H=1.70$ lies below the
+\erratum{In particular, the Instructor's Manual's claim of a global
+catenary minimum at $y_0=-0.70$ is incorrect: $H=1.70$ lies below the
 cost-crossing value $1.8950254554$.}
 
 
@@ -683,10 +875,13 @@ t=\pi\frac{(R^{2}-r_{0}^{2})^{1/2}}{(Rg)^{1/2}}.
 For details see P.~W.~Cooper, \emph{Am.~J.~Phys.} \textbf{34}: 68
 (1966); G.~Veneziano, et al., \textbf{34}: 701 (1966).
 \solution
-Inside a uniform sphere the inward gravitational force is
-$F_r=-mgr/R$. Thus
+Inside a uniform sphere only the mass within radius $r$, the fraction
+$r^3/R^3$ of the total, attracts the particle, so the surface force
+$mg$ is multiplied by $(r^3/R^3)(R^2/r^2)=r/R$: the inward
+gravitational force is $F_r=-mgr/R$. Thus
 \[
-U(r)-U(R)=\frac{mg}{2R}(r^2-R^2).
+U(r)-U(R)=-\int_R^rF_r\,dr'=\frac{mg}{R}\int_R^rr'\,dr'
+=\frac{mg}{2R}(r^2-R^2).
 \]
 \erratum{The positive quantity in the printed hint is the
 \emph{decrease} in potential energy from the surface, and hence the
@@ -694,25 +889,41 @@ kinetic energy gained. It is not the potential energy itself with
 surface value zero. Its opposite sign would give an outward force.}
 Energy conservation for release from rest gives
 \[
-\frac12mv^2=\frac{mg}{2R}(R^2-r^2),\qquad
+\frac12mv^2=U(R)-U(r)=\frac{mg}{2R}(R^2-r^2),\qquad
 v=\sqrt{\frac gR}\sqrt{R^2-r^2}.
 \]
-Writing the path as $r(\theta)$, its travel time is
+Writing the path as $r(\theta)$, the arc length is
+$ds=\sqrt{dr^2+r^2d\theta^2}=\sqrt{r_\theta^2+r^2}\,d\theta$, and its
+travel time $T=\int ds/v$ is
 \[
 T=\sqrt{\frac Rg}\int_{-\varphi}^{\varphi}
 \frac{\sqrt{r_\theta^2+r^2}}{\sqrt{R^2-r^2}}\,d\theta.
 \]
 The integrand has no explicit $\theta$ dependence. With
-$p=r_\theta$, the Beltrami constant, omitting the constant
-$\sqrt{R/g}$, is
+$p=r_\theta$, omit the constant $\sqrt{R/g}$ and write
 \[
-f-pf_p=\frac{r^2}
-{\sqrt{R^2-r^2}\sqrt{r^2+p^2}}.
+f=\frac{\sqrt{r^2+p^2}}{\sqrt{R^2-r^2}},\qquad
+f_p=\frac{p}{\sqrt{R^2-r^2}\sqrt{r^2+p^2}}.
 \]
-At the minimum radius $r=r_0>0$, symmetry gives $p=0$, so this
-constant is $r_0/\sqrt{R^2-r_0^2}$. Squaring and rearranging,
+The Beltrami first integral
+(Exercise~22.1.1 with $\theta$ in place of $x$) says that
+\[
+f-pf_p=\frac{(r^2+p^2)-p^2}
+{\sqrt{R^2-r^2}\sqrt{r^2+p^2}}
+=\frac{r^2}
+{\sqrt{R^2-r^2}\sqrt{r^2+p^2}}
+\]
+is constant. At the minimum radius $r=r_0>0$, reached at $\theta=0$ by
+symmetry, $r(\theta)$ is stationary, so $p=0$ there, and this
+constant is $r_0^2/(r_0\sqrt{R^2-r_0^2})=r_0/\sqrt{R^2-r_0^2}$.
+Squaring and rearranging,
 \[
 r^4(R^2-r_0^2)=r_0^2(R^2-r^2)(r^2+p^2),
+\]
+so that
+\[
+p^2=\frac{r^4(R^2-r_0^2)}{r_0^2(R^2-r^2)}-r^2
+=\frac{r^2[r^2R^2-r^2r_0^2-r_0^2R^2+r_0^2r^2]}{r_0^2(R^2-r^2)},
 \]
 \[
 \boxed{r_\theta^2=
@@ -720,58 +931,88 @@ r^4(R^2-r_0^2)=r_0^2(R^2-r^2)(r^2+p^2),
 \]
 
 To verify the stated geometric identification, put
-$d=(R-r_0)/2$ and consider the hypocycloid
+$\rho=(R-r_0)/2$ and consider the hypocycloid
 \[
-z(u)=(R-d)e^{iu}+d\,e^{-i(R-d)u/d}.
+z(u)=(R-\rho)e^{iu}+\rho\,e^{-i(R-\rho)u/\rho}.
 \]
-It is generated by a radius-$d$ circle rolling within the
-radius-$R$ circle. Set $\delta=Ru/d$. Direct products and
-derivatives give
+It is generated by a radius-$\rho$ circle rolling within the
+radius-$R$ circle: its center $(R-\rho)e^{iu}$ turns through the angle $u$,
+and rolling without slipping turns the tracing point through
+$-(R-\rho)u/\rho$ relative to the center. Set $\delta=Ru/\rho$, and note
+$u+(R-\rho)u/\rho=\delta$. Then
 \[
-r^2=|z|^2=R^2-4d(R-d)\sin^2(\delta/2),
+\begin{aligned}
+r^2=|z|^2&=(R-\rho)^2+\rho^2+2\rho(R-\rho)\cos\delta\\
+&=R^2-2\rho(R-\rho)(1-\cos\delta)=R^2-4\rho(R-\rho)\sin^2(\delta/2),
+\end{aligned}
 \]
+and differentiating, $2r\,dr/du=-2\rho(R-\rho)\sin\delta\,(R/\rho)$. For the
+polar angle $\theta=\arg z$, $d\theta/du=\operatorname{Im}(\bar z\,z')/|z|^2$,
+where $z'=dz/du=i(R-\rho)(e^{iu}-e^{-i(R-\rho)u/\rho})$. Multiplying out,
 \[
-\frac{dr}{du}=-\frac{R(R-d)\sin\delta}{r},\qquad
+\bar z\,z'=i(R-\rho)\left[(R-\rho)(1-e^{-i\delta})+\rho(e^{i\delta}-1)\right],
+\]
+so $\operatorname{Im}(\bar z\,z')=(R-\rho)(R-2\rho)(1-\cos\delta)$, and
+$R-2\rho=r_0$. Hence
+\[
+\frac{dr}{du}=-\frac{R(R-\rho)\sin\delta}{r},\qquad
 \frac{d\theta}{du}
-=\frac{(R-d)r_0(1-\cos\delta)}{r^2}.
+=\frac{(R-\rho)r_0(1-\cos\delta)}{r^2}.
 \]
-Their squared ratio is
+Their ratio is
+$dr/d\theta=-(Rr/r_0)\sin\delta/(1-\cos\delta)=-(Rr/r_0)\cot(\delta/2)$.
+Since $4\rho(R-\rho)=(R-r_0)(R+r_0)=R^2-r_0^2$, the expression for $r^2$
+gives $\sin^2(\delta/2)=(R^2-r^2)/(R^2-r_0^2)$ and
+$\cos^2(\delta/2)=(r^2-r_0^2)/(R^2-r_0^2)$. Therefore
 \[
 \left(\frac{dr}{d\theta}\right)^2
 =\frac{R^2r^2}{r_0^2}\cot^2(\delta/2)
 =\frac{R^2r^2(r^2-r_0^2)}
 {r_0^2(R^2-r^2)},
 \]
-since $4d(R-d)=R^2-r_0^2$. Rotating this arc puts its minimum
+the boxed equation. The radius is $r_0$ at $\delta=\pi$ and $R$ at the
+cusps $\delta=0,2\pi$. Rotating this arc puts its minimum
 radius at $\theta=0$ and its two surface cusps at $\pm\varphi$.
 
 The transit time can be evaluated without integrating the path explicitly.
-On either half,
+On either half the boxed equation gives $|d\theta/dr|$, and
+$ds/dr=\sqrt{1+r^2(d\theta/dr)^2}$, where
+$R^2(r^2-r_0^2)+r_0^2(R^2-r^2)=r^2(R^2-r_0^2)$:
 \[
-\frac{d\theta}{dr}=
+\left|\frac{d\theta}{dr}\right|=
 \frac{r_0\sqrt{R^2-r^2}}{Rr\sqrt{r^2-r_0^2}},\qquad
 \frac{ds}{dr}=
 \frac{r\sqrt{R^2-r_0^2}}{R\sqrt{r^2-r_0^2}}.
 \]
-Consequently, with $\Delta=R^2-r_0^2$,
+Dividing $ds$ by $v=\sqrt{g/R}\sqrt{R^2-r^2}$ and doubling for the
+two halves, with $\Delta=R^2-r_0^2$,
 \[
 T=2\sqrt{\frac Rg}\frac{\sqrt\Delta}{R}
 \int_{r_0}^R\frac{r\,dr}
 {\sqrt{r^2-r_0^2}\sqrt{R^2-r^2}}.
 \]
-Set $r^2=r_0^2+\Delta\sin^2v$; the integrand becomes $dv$
-and the limits become $0,\pi/2$. Hence
+Set $r^2=r_0^2+\Delta\sin^2\psi$. Then $r\,dr=\Delta\sin\psi\cos\psi\,d\psi$,
+$r^2-r_0^2=\Delta\sin^2\psi$ and $R^2-r^2=\Delta\cos^2\psi$, so the
+integrand becomes $d\psi$, and the limits $r_0,R$ become $0,\pi/2$.
+Hence $T=2\sqrt{R/g}\,(\sqrt\Delta/R)(\pi/2)$, that is,
 \[
 \boxed{T=\pi\sqrt{\frac{R^2-r_0^2}{Rg}}}.
 \]
-The same substitution in the angular integral gives
+The same substitution in the angular integral
+$\varphi=\int_{r_0}^R|d\theta/dr|\,dr$ turns the integrand into
+$(r_0/R)\Delta\cos^2\psi\,d\psi/r^2$, where
+$r^2=r_0^2\cos^2\psi+R^2\sin^2\psi$ and
+$\Delta\cos^2\psi=R^2-r^2$. Hence
 \[
 \varphi=\frac{r_0}{R}\left[
-R^2\int_0^{\pi/2}\frac{dv}
-{r_0^2\cos^2v+R^2\sin^2v}-\frac\pi2\right]
+R^2\int_0^{\pi/2}\frac{d\psi}
+{r_0^2\cos^2\psi+R^2\sin^2\psi}-\frac\pi2\right]
 =\frac\pi2\left(1-\frac{r_0}{R}\right).
 \]
-Here the integral equals $\pi/(2r_0R)$ after $\tan v$ substitution.
+Here the substitution $t=\tan\psi$ turns the integral into
+$\int_0^\infty dt/(r_0^2+R^2t^2)=\pi/(2r_0R)$. As a check, one arch
+of the hypocycloid spans the arc $2\pi\rho$ of the large circle, i.e.,
+the angle $2\varphi=2\pi\rho/R=\pi(1-r_0/R)$.
 The antipodal case is the limiting diameter $r_0=0$,
 with $T=\pi\sqrt{R/g}$; the displayed polar ODE assumes $r_0>0$.
 
@@ -794,8 +1035,10 @@ the light path is not differentiable at $x_{0}$.
 \solution
 Take the interface to be $y=0$, with fixed endpoints
 $(x_1,y_1)$ above it and $(x_2,y_2)$ below it. The crossing point
-is $(x_0,0)$. Up to the constant vacuum light speed, the optical
-travel time is
+is $(x_0,0)$. In a medium of index $n$ light travels at $c/n$, with
+$c$ the vacuum light speed, so each straight segment of length $L$ takes
+the time $nL/c$, and the travel time is $J(x_0)/c$ with the optical
+path length
 \[
 J(x_0)=n_1\sqrt{(x_0-x_1)^2+y_1^2}
 +n_2\sqrt{(x_2-x_0)^2+y_2^2}.
@@ -806,19 +1049,27 @@ J'(x_0)=
 n_1\frac{x_0-x_1}{\sqrt{(x_0-x_1)^2+y_1^2}}
 -n_2\frac{x_2-x_0}{\sqrt{(x_2-x_0)^2+y_2^2}}.
 \]
-The two ratios are the signed sines of the angles to the interface
-normal. Thus $J'(x_0)=0$ gives
+The interface normal is the $y$ direction. The incident segment has
+horizontal extent $x_0-x_1$ and length $\sqrt{(x_0-x_1)^2+y_1^2}$, so
+the first ratio is $\sin\theta_1$, with $\theta_1$ the angle between
+the incident ray and the normal; likewise the second ratio is
+$\sin\theta_2$ for the refracted ray (both sines signed, positive when
+the ray advances toward $+x$). Thus $J'(x_0)=0$ gives
 \[
 \boxed{n_1\sin\theta_1=n_2\sin\theta_2}.
 \]
 For positive indices and endpoints off the interface,
+differentiating $s/\sqrt{s^2+y^2}$ gives $y^2/(s^2+y^2)^{3/2}$, so
 \[
 J''(x_0)=
 \frac{n_1y_1^2}{[(x_0-x_1)^2+y_1^2]^{3/2}}
 +\frac{n_2y_2^2}{[(x_2-x_0)^2+y_2^2]^{3/2}}>0.
 \]
-This proves the stationary crossing is the unique minimum for these
-fixed endpoints. No differentiability across the corner was assumed.
+Hence $J'$ increases strictly from $-(n_1+n_2)$ as $x_0\to-\infty$ to
+$n_1+n_2$ as $x_0\to+\infty$; it has exactly one zero, where the
+strictly convex $J$ has its minimum. This proves the stationary
+crossing is the unique minimum for these fixed endpoints. No
+differentiability across the corner was assumed.
 
 
 \Needspace{5\baselineskip}
@@ -854,31 +1105,53 @@ a=c_{1}\cosh c_{3}
 \end{cases}$
 \quad(b) $\dfrac{dy}{dx}=\tan30^{\circ}=\sinh c_{3}$.
 \solution
-(a) For the right-hand catenoid
-$y=c\cosh(x/c+c_3)$, the boundary equations are
+(a) Write $c=c_1$. The right-hand catenoid
+$y=c\cosh(x/c+c_3)$, $0\le x\le x_0$, has radius $a$ where it meets
+the disk ($x=0$) and radius $1$ at the ring ($x=x_0$), so the boundary
+equations are
 \[
 \boxed{a=c\cosh c_3,\qquad
 1=c\cosh(x_0/c+c_3)}.
 \]
 
-(b) At the junction, the central disk points inward in the
-negative radial direction. The outward right-catenoid unit tangent
+(b) Work in a meridian plane through the axis, where the three films
+appear as curves meeting at $(0,a)$. At the junction, the central disk
+points inward in the negative radial direction, with unit tangent
+$(0,-1)$. The outward right-catenoid unit tangent
 is $(1,y')/\sqrt{1+y'^2}$. A $120^\circ$ angle therefore requires
 \[
 -\frac{y'}{\sqrt{1+y'^2}}=\cos120^\circ=-\frac12,
 \]
-which gives $y'=1/\sqrt3=\tan30^\circ$.
-Since $y'=\sinh(x/c+c_3)$,
+that is, $4y'^2=1+y'^2$, which gives $y'=1/\sqrt3=\tan30^\circ$.
+By reflection the left catenoid has unit tangent
+$(-1,y')/\sqrt{1+y'^2}$; its angle with the right one has cosine
+$(y'^2-1)/(y'^2+1)=-1/2$, so all three angles are then $120^\circ$.
+Since $y'=\sinh(x/c+c_3)$, at $x=0$ this is $\sinh c_3=1/\sqrt3$.
+Then $\cosh c_3=\sqrt{1+1/3}=2/\sqrt3$, and
+$\operatorname{arsinh}s=\ln(s+\sqrt{1+s^2})$ gives
+$c_3=\ln(1/\sqrt3+2/\sqrt3)=\ln\sqrt3$:
 \[
 \boxed{\sinh c_3=\frac1{\sqrt3},\qquad
-c_3=\operatorname{arsinh}(1/\sqrt3)=\tfrac12\log3,\qquad
-a=\frac{2c}{\sqrt3}}.
+c_3=\operatorname{arsinh}(1/\sqrt3)=\tfrac12\ln3,\qquad
+a=c\cosh c_3=\frac{2c}{\sqrt3}}.
 \]
 
 The same angle follows by varying the junction radius. In the
 reflection-symmetric class the area is
 $A=4\pi\int_0^{x_0}y\sqrt{1+y'^2}\,dx+\pi y(0)^2$.
-After imposing the interior Euler equation, its first variation is
+Vary $y\to y+\alpha\eta$ with $\eta(x_0)=0$ and $\eta(0)$ free, so
+that the junction radius changes by $\delta a=\alpha\eta(0)$. For
+$f=y\sqrt{1+y'^2}$, $f_{y'}=yy'/\sqrt{1+y'^2}$, and the integration by
+parts of Exercise~22.1.2 gives, to first order in $\alpha$,
+\[
+\delta\int_0^{x_0}f\,dx=\alpha\bigl[f_{y'}\eta\bigr]_0^{x_0}
++\alpha\int_0^{x_0}\left(f_y-\frac{d}{dx}f_{y'}\right)\eta\,dx.
+\]
+The integral vanishes by the interior Euler equation, the upper
+boundary term vanishes because $\eta(x_0)=0$, and the lower one is
+$-\alpha f_{y'}(0)\eta(0)=-a\,y'(0)\,\delta a/\sqrt{1+y'(0)^2}$,
+which enters $A$ with the factor $4\pi$. The disk contributes
+$\delta(\pi a^2)=2\pi a\,\delta a$. So the first variation is
 \[
  \delta A=\left[-4\pi a\frac{y'(0)}{\sqrt{1+y'(0)^2}}
                     +2\pi a\right]\delta a.
@@ -888,7 +1161,11 @@ $y'(0)/\sqrt{1+y'(0)^2}=1/2$. Thus the angle is necessary for
 this free-junction equilibrium, although one can join mathematical
 surface pieces at other prescribed angles.
 
-(c) Put $v=x_0/c+c_3$. There are two catenoids and one disk.
+(c) Put $v=x_0/c+c_3$. There are two catenoids and one disk. On each
+catenoid $\sqrt{1+y'^2}=\cosh(x/c+c_3)$, so
+$y\sqrt{1+y'^2}=c\cosh^2(x/c+c_3)$. Substitute $u=x/c+c_3$,
+$dx=c\,du$ (limits $c_3$ and $v$), and use
+$\int\cosh^2u\,du=\tfrac12u+\tfrac14\sinh2u$ and $a=c\cosh c_3$.
 Their total area is
 \[
 \begin{aligned}
@@ -899,7 +1176,9 @@ A&=4\pi\int_0^{x_0}y\sqrt{1+y'^2}\,dx+\pi a^2\\
 \]
 The angle condition gives
 $\cosh c_3=2/\sqrt3$, so
-$\sinh2c_3=4/3=\cosh^2c_3$. These last terms cancel:
+$\sinh2c_3=2\sinh c_3\cosh c_3=2\cdot\frac1{\sqrt3}\cdot\frac2{\sqrt3}
+=\frac43=\cosh^2c_3$. These last terms cancel, and
+$2(v-c_3)=2x_0/c$, $2v=2x_0/c+2c_3$:
 \[
 \boxed{A=\pi c^2\left[
 \sinh\left(\frac{2x_0}{c}+2c_3\right)+\frac{2x_0}{c}
@@ -920,13 +1199,16 @@ functions or a table of hyperbolic cotangents.
 \par\nobreak\hfill\emph{ANS.}\enspace$x_{0\max}=0.4078$.
 \solution
 Retain the angle condition from Exercise~22.1.13:
-$c_3=\tfrac12\log3$. Write
+$c_3=\tfrac12\ln3$. Write $v=x_0/c+c_3$. The ring condition
+$1=c\cosh v$ of Exercise~22.1.13(a) gives $c=\operatorname{sech}v$, and
+then $x_0=c(v-c_3)$:
 \[
 v=\frac{x_0}{c}+c_3,\qquad
 c=\operatorname{sech}v,\qquad
 x_0=(v-c_3)\operatorname{sech}v,\quad v>c_3.
 \]
-Differentiate:
+Differentiate by the product rule, using
+$(\operatorname{sech}v)'=-\operatorname{sech}v\tanh v$:
 \[
 \frac{dx_0}{dv}
 =\operatorname{sech}v[1-(v-c_3)\tanh v].
@@ -936,10 +1218,14 @@ Thus the maximum satisfies
 \boxed{v-c_3=\coth v}.
 \]
 The function $v-c_3-\coth v$ has derivative
-$1+\operatorname{csch}^2v>0$, is negative at $v=c_3$,
-and tends to infinity. It has exactly one root. Moreover $x_0$
-tends to zero at both ends of the parameter range, so this root is
-the global maximum.
+$1+\operatorname{csch}^2v>0$, equals $-\coth c_3=-2$ at $v=c_3$
+(because $\tanh c_3=\sinh c_3/\cosh c_3=1/2$),
+and tends to infinity. It has exactly one root. Since
+$1-(v-c_3)\tanh v=\tanh v\,[\coth v-(v-c_3)]$, $x_0$ increases before
+the root and decreases after it. Moreover $x_0$ tends to zero at both
+ends of the parameter range ($x_0=0$ at $v=c_3$, and
+$x_0<v\operatorname{sech}v\to0$ as $v\to\infty$), so this root is the
+global maximum.
 
 Newton's update is
 \[
@@ -949,23 +1235,38 @@ v_{j+1}=v_j-\frac{v_j-c_3-\coth v_j}
 Starting with $v_0=1.6$ yields
 \[
 v=1.62926936306647,\qquad
-c=0.377627833193942,
+c=\operatorname{sech}v=0.377627833193942,
 \]
 and hence
 \[
 \boxed{x_{0\max}=(v-c_3)\operatorname{sech}v
 =0.407824170219077}.
 \]
-This rounds to the supplied $0.4078$.
+This rounds to the quoted answer $0.4078$.
 
 \erratum{The two branches must not both be called stable.}
 To check this, allow reflection-symmetric, axisymmetric variations
 of the two catenoids, with the junction remaining in $x=0$ and its
 radius free. Set $u=x/c+c_3$ and $p(u)=\operatorname{sech}^2u$.
-For the area in Exercise~22.1.13, the mixed term in the second
-variation gives the lower-end contribution
-$-\tanh(c_3)\eta(c_3)^2=-\eta(c_3)^2/2$ after division by $4\pi$.
-The disk's second variation contributes $+\eta(c_3)^2/2$, so
+For $y\to y+\alpha\eta$ on the right catenoid (the left one is its
+mirror image), the second variation of $4\pi\int_0^{x_0}y\sqrt{1+y'^2}\,dx$
+is, with the second derivatives of $f=y\sqrt{1+y'^2}$ from
+Exercise~22.1.6 (now $f_{yy'}=\tanh u$, $f_{y'y'}=c\operatorname{sech}^2u$),
+\[
+4\pi\int_0^{x_0}\left[2\tanh u\,\eta\eta_x
++c\operatorname{sech}^2u\,\eta_x^2\right]dx.
+\]
+With $dx=c\,du$ and $\eta_x=\eta_u/c$, the mixed term becomes
+$4\pi\int_{c_3}^v\tanh u\,(\eta^2)_u\,du$ and the last term
+$4\pi\int_{c_3}^vp\,\eta_u^2\,du$. Integrating the former by parts,
+with $(\tanh u)'=p$ and $\eta(v)=0$, the catenoids contribute
+\[
+4\pi\left[\int_{c_3}^vp\,(\eta_u^2-\eta^2)\,du
+-\tanh(c_3)\,\eta(c_3)^2\right],\qquad \tanh c_3=\tfrac12.
+\]
+The disk area $\pi(a+\alpha\eta(c_3))^2$ has second $\alpha$-derivative
+$2\pi\eta(c_3)^2=4\pi\cdot\tfrac12\eta(c_3)^2$. The boundary terms
+cancel, so
 \[
  Q[\eta]=\frac{\delta^2A}{4\pi}
  =\int_{c_3}^{v}p(u)(\eta'^2-\eta^2)\,du,
@@ -973,64 +1274,106 @@ The disk's second variation contributes $+\eta(c_3)^2/2$, so
 \]
 The function
 \[
- w(u)=\cosh u-(u-c_3)\sinh u
+ w(u)=\cosh u-(u-c_3)\sinh u,
 \]
-satisfies $(pw')'+pw=0$ and $w'(c_3)=0$. Its first zero is
-$v_c=1.629269\ldots$, the root just found. For $v<v_c$, $w>0$;
-putting $\eta=wz$ gives the same square identity as in
-Exercise~22.1.6. Both boundary terms vanish, so
+which is $\partial y/\partial c$ for the family $y=c\cosh(x/c+c_3)$ at
+fixed $x$ and $c_3$, has $w'=-(u-c_3)\cosh u$. Hence $w'(c_3)=0$,
+$pw'=-(u-c_3)\operatorname{sech}u$, and
+$(pw')'=-\operatorname{sech}u+(u-c_3)\operatorname{sech}u\tanh u=-pw$,
+so $(pw')'+pw=0$. Since $w=\sinh u\,[\coth u-(u-c_3)]$ and the bracket
+decreases strictly from $\coth c_3=2$, the first zero of $w$ is
+$v_c=1.629269\ldots$, the root just found. For $v<v_c$, $w>0$ on
+$[c_3,v]$; putting $\eta=wz$ gives the same square identity as in
+Exercise~22.1.6,
+$p(\eta'^2-\eta^2)=pw^2z'^2+(pww'z^2)'$. The boundary term
+$[pww'z^2]_{c_3}^v$ vanishes at $u=v$ because $z(v)=\eta(v)/w(v)=0$,
+and at $u=c_3$ because $w'(c_3)=0$. So
 \[
-Q[\eta]=\int_{c_3}^{v}pw^2z'^2\,du>0\qquad(\eta\ne0).
+Q[\eta]=\int_{c_3}^{v}pw^2z'^2\,du>0\qquad(\eta\ne0),
 \]
+since $z'\equiv0$ and $z(v)=0$ would force $\eta\equiv0$.
 To pass from this quadratic test to a local minimum, note that
 $z(v)=0$ implies $z(u)=-\int_u^v z'(s)ds$, so
-$\int z^2\le(v-c_3)^2\int z'^2$ by Cauchy--Schwarz.
-Because $p,w$ have positive lower bounds and $w,w'$ are bounded,
-$\eta=wz$ gives $Q[\eta]\ge\kappa\int(\eta^2+\eta'^2)du$
-for some $\kappa>0$. The Taylor remainder is smaller than this
-bound for sufficiently small $\|\eta\|_{C^1}$, by uniform continuity
-of the integrand's Hessian. This proves strict local minimality on
+$z(u)^2\le(v-c_3)\int_{c_3}^vz'^2ds$ by Cauchy--Schwarz, and
+$\int z^2\le(v-c_3)^2\int z'^2$.
+On $[c_3,v]$ put $m=\min pw^2>0$ and $M=\max(w^2+2w'^2,2w^2)$. Since
+$\eta^2+\eta'^2=w^2z^2+(w'z+wz')^2\le M(z^2+z'^2)$,
+\[
+\int(\eta^2+\eta'^2)du\le M[1+(v-c_3)^2]\int z'^2du
+\le\frac{M[1+(v-c_3)^2]}{m}\,Q[\eta],
+\]
+that is, $Q[\eta]\ge\kappa\int(\eta^2+\eta'^2)du$
+with $\kappa=m/\{M[1+(v-c_3)^2]\}>0$. The Taylor remainder is smaller
+than this bound for sufficiently small $\|\eta\|_{C^1}$, by uniform
+continuity of the integrand's Hessian (the disk term is exactly
+quadratic). This proves strict local minimality on
 the shallow branch in the stated class. At $v=v_c$, $\eta=w$ is a
 zero mode; the second variation alone does not classify higher orders.
 
 For $v>v_c$, extend $w$ by zero from $v_c$ to $v$, calling the
 result $\eta_0$. It is an admissible piecewise smooth variation
-with $Q[\eta_0]=0$. Choose a smooth $h$ with $h(v)=0$ and
+($\eta_0(v)=0$), and integration by parts on $[c_3,v_c]$ gives
+$Q[\eta_0]=[pww']_{c_3}^{v_c}-\int_{c_3}^{v_c}w[(pw')'+pw]\,du=0$,
+because $w(v_c)=0=w'(c_3)$. Choose a smooth $h$ with $h(v)=0$ and
 $h(v_c)>0$. Integration by parts on $[c_3,v_c]$ gives
 \[
  Q[\eta_0,h]
  :=\int_{c_3}^{v}p(\eta_0'h'-\eta_0h)\,du
- =p(v_c)w'(v_c)h(v_c)<0.
+ =\bigl[pw'h\bigr]_{c_3}^{v_c}-\int_{c_3}^{v_c}[(pw')'+pw]h\,du
+ =p(v_c)w'(v_c)h(v_c)<0,
 \]
-Therefore $Q[\eta_0+\epsilon h]
-=2\epsilon Q[\eta_0,h]+\epsilon^2Q[h]<0$ for small positive
-$\epsilon$. Smoothing the corner preserves this strict inequality.
-The deep branch is unstable even in this restricted class.
+since $w'(c_3)=0$ and $w'(v_c)=-(v_c-c_3)\cosh v_c<0$.
+Therefore $Q[\eta_0+\epsilon h]=Q[\eta_0]
++2\epsilon Q[\eta_0,h]+\epsilon^2Q[h]<0$ for small positive
+$\epsilon$. Smoothing the corner preserves this strict inequality,
+because $Q$ changes little when $\eta$ and $\eta'$ change little in
+mean square. The deep branch is unstable even in this restricted class.
 
 The area comparison in Exercise~22.1.13 also needs its branch specified.
-Write the simple catenoid as $x_0=u\operatorname{sech}u$ and
-$A_s=2\pi(\tanh u+u\operatorname{sech}^2u)$, taking its shallow
-root $u<u_c$ from Exercise~22.1.6. Let $A_t$ denote the three-film
-area. Along either family, direct differentiation gives
+Write the simple catenoid of Exercise~22.1.6, with its parameter
+renamed $\mu=x_0/c$, as $x_0=\mu\operatorname{sech}\mu$; by
+Exercise~22.1.7 its area is
+$A_s=\pi\operatorname{sech}^2\mu\,(2\sinh\mu\cosh\mu+2\mu)
+=2\pi(\tanh\mu+\mu\operatorname{sech}^2\mu)$. Take its shallow
+root $\mu<u_c$ from Exercise~22.1.6. Let $A_t$ denote the three-film
+area; Exercise~22.1.13(c) with $c=\operatorname{sech}v$ and
+$2x_0/c=2(v-c_3)$ gives
+$A_t=2\pi[\tanh v+(v-c_3)\operatorname{sech}^2v]$. Differentiating,
+\[
+\frac{dA_s}{d\mu}=4\pi\operatorname{sech}^2\mu\,(1-\mu\tanh\mu),\qquad
+\frac{dA_t}{dv}=4\pi\operatorname{sech}^2v\,[1-(v-c_3)\tanh v],
+\]
+and dividing by $dx_0/d\mu$ (Exercise~22.1.6(b)) and by $dx_0/dv$
+(above) gives, along either family,
 \[
  \frac{dA_t}{dx_0}=4\pi\operatorname{sech}v,\qquad
- \frac{dA_s}{dx_0}=4\pi\operatorname{sech}u.
+ \frac{dA_s}{dx_0}=4\pi\operatorname{sech}\mu.
 \]
-At a common separation, $u<v$: for $v\le u_c$, use the increasing
-function $u\operatorname{sech}u$ and
-$x_0=(v-c_3)\operatorname{sech}v<v\operatorname{sech}v$;
-for $v>u_c$ it is immediate. Thus $A_t-A_s$ decreases with $x_0$
-on the shallow three-film branch. At its fold,
+At a common separation, $\mu<v$: for $v\le u_c$, use the increasing
+function $\mu\operatorname{sech}\mu$ on $(0,u_c]$ and
+$\mu\operatorname{sech}\mu=x_0=(v-c_3)\operatorname{sech}v
+<v\operatorname{sech}v$;
+for $v>u_c$ it is immediate, since $\mu<u_c$. As $\operatorname{sech}$
+decreases, $d(A_t-A_s)/dx_0=4\pi(\operatorname{sech}v
+-\operatorname{sech}\mu)<0$: $A_t-A_s$ decreases with $x_0$
+on the shallow three-film branch. At its fold, where
+$v_c-c_3=\coth v_c$ and
+$\tanh v+\coth v\operatorname{sech}^2v=(\sinh^2v+1)/(\sinh v\cosh v)
+=\coth v$,
 \[
  A_t=2\pi\bigl[\tanh v_c+\coth v_c\operatorname{sech}^2v_c\bigr]
      =2\pi\coth v_c>2\pi.
 \]
 Meanwhile $x_{0\max}<1/2<0.527697\ldots$, the area crossing in
-Exercise~22.1.7, so $A_s<2\pi$ throughout this range. The bound
-$x_0<1/2$ follows without rounding from
+Exercise~22.1.7; since $A_s$ increases with $x_0$ on the shallow branch
+and equals $2\pi$ at the crossing, $A_s<2\pi$ throughout this range.
+The bound $x_0<1/2$, i.e. $\tfrac12\cosh v-v+c_3>0$, follows without
+rounding from $\cosh v\ge1+v^2/2$ and $c_3=\tfrac12\ln3>\tfrac12$
+(as $3>e$):
 \[
  \tfrac12\cosh v-v+c_3
- \ge\tfrac14(v-2)^2+c_3-\tfrac12>0.
+ \ge\tfrac12+\tfrac14v^2-v+c_3
+ =\tfrac14(v-2)^2+c_3-\tfrac12>0.
 \]
 The shallow-branch difference is therefore positive even at its
 minimum, the fold. On the deep three-film branch,
@@ -1055,93 +1398,145 @@ an integration constant. It is helpful to make the substitution
 $c^{2}y=\sin^{2}(\varphi/2)$ and take
 $(x_{0},y_{0})=(\pi/2c^{2},\,1/c^{2})$.
 \solution
-Take $y$ positive downward. Conservation of energy gives
-$v=\sqrt{2gy}$, so
+Take $y$ positive downward. Conservation of energy,
+$\tfrac12mv^2=mgy$ for a start from rest at $y=0$, gives
+$v=\sqrt{2gy}$, so $T=\int ds/v$ with $ds=\sqrt{1+y'^2}\,dx$ is
 \[
 T[y]=\frac1{\sqrt{2g}}\int
 \frac{\sqrt{1+y'^2}}{\sqrt y}\,dx.
 \]
-The Beltrami first integral, with its constant written $c>0$, is
+For $f=\sqrt{1+y'^2}/\sqrt y$, $f_{y'}=y'/(\sqrt y\sqrt{1+y'^2})$ and
+$f-y'f_{y'}=[(1+y'^2)-y'^2]/(\sqrt y\sqrt{1+y'^2})$. Since $f$ does not
+depend on $x$, this is constant (Eq.~(22.21); Exercise~22.1.1 with
+$f_x=0$). The Beltrami first integral, with its constant written
+$c>0$, is therefore
 \[
 \frac1{\sqrt y\sqrt{1+y'^2}}=c,\qquad
-y'^2=\frac{1-c^2y}{c^2y}.
+y'^2=\frac{1-c^2y}{c^2y},
 \]
-Put $c^2y=\sin^2(\phi/2)$. Then
+the second form following from $y(1+y'^2)=1/c^2$.
+Put $c^2y=\sin^2(\varphi/2)$. Then $1-c^2y=\cos^2(\varphi/2)$, so
+$y'^2=\cot^2(\varphi/2)$ and $y'=\cot(\varphi/2)$: positive while the
+particle descends ($0<\varphi<\pi$) and negative beyond the lowest
+point. Also
 \[
-y=\frac{1-\cos\phi}{2c^2},\qquad
-\frac{dy}{d\phi}=\frac{\sin\phi}{2c^2},\qquad
-\frac{dx}{d\phi}=\frac{1-\cos\phi}{2c^2}.
+y=\frac{1-\cos\varphi}{2c^2},\qquad
+\frac{dy}{d\varphi}=\frac{\sin\varphi}{2c^2},\qquad
+\frac{dx}{d\varphi}=\frac{dy/d\varphi}{y'}
+=\frac{\sin\varphi\tan(\varphi/2)}{2c^2}
+=\frac{1-\cos\varphi}{2c^2},
 \]
-Choosing $x=0$ at $\phi=0$ gives the cycloid
+using $\sin\varphi\tan(\varphi/2)=2\sin^2(\varphi/2)=1-\cos\varphi$.
+The start $(0,0)$ has $y=0$, i.e. $\varphi=0$. Choosing $x=0$ at
+$\varphi=0$ and integrating gives the cycloid
 \[
-\boxed{x=\frac{\phi-\sin\phi}{2c^2},\qquad
-y=\frac{1-\cos\phi}{2c^2}}.
+\boxed{x=\frac{\varphi-\sin\varphi}{2c^2},\qquad
+y=\frac{1-\cos\varphi}{2c^2}}.
 \]
-For arbitrary $x_0,y_0>0$, choose $0<\phi_0<2\pi$ from
+For arbitrary $x_0,y_0>0$, choose $0<\varphi_0<2\pi$ from
 \[
 \frac{x_0}{y_0}
-=\frac{\phi_0-\sin\phi_0}{1-\cos\phi_0},
+=\frac{\varphi_0-\sin\varphi_0}{1-\cos\varphi_0},
 \qquad
-\frac1{2c^2}=\frac{y_0}{1-\cos\phi_0}.
+\frac1{2c^2}=\frac{y_0}{1-\cos\varphi_0}.
 \]
-The ratio increases from zero to infinity on this interval; its derivative
-has numerator $2(1-\cos\phi)-\phi\sin\phi>0$.
-For $0<\phi<\pi$, this follows from
-$2\tan(\phi/2)>\phi$; for $\pi\le\phi<2\pi$ the sign is immediate.
+The ratio increases from zero to infinity on this interval. Near
+$\varphi=0$ it behaves like $(\varphi^3/6)/(\varphi^2/2)=\varphi/3$, and
+as $\varphi\to2\pi$ its denominator tends to zero while its numerator
+tends to $2\pi$. By the quotient rule, with
+$(1-\cos\varphi)^2+\sin^2\varphi=2(1-\cos\varphi)$, its derivative
+is $[2(1-\cos\varphi)-\varphi\sin\varphi]/(1-\cos\varphi)^2$, and the
+numerator is positive. For $0<\varphi<\pi$ it equals
+\[
+4\sin^2\frac\varphi2-2\varphi\sin\frac\varphi2\cos\frac\varphi2
+=2\sin\frac\varphi2\cos\frac\varphi2
+\left(2\tan\frac\varphi2-\varphi\right)>0,
+\]
+because $\tan t>t$ for $0<t<\pi/2$; for $\pi\le\varphi<2\pi$,
+$\sin\varphi\le0$ and the sign is immediate. Hence $\varphi_0$ is
+unique, and then $c$ follows from the second equation.
 
-With $A=1/(2c^2)$,
+With $A=1/(2c^2)$, $x=A(\varphi-\sin\varphi)$ and
+$y=A(1-\cos\varphi)$, so
+$(dx/d\varphi)^2+(dy/d\varphi)^2
+=A^2[(1-\cos\varphi)^2+\sin^2\varphi]=4A^2\sin^2(\varphi/2)$
+and $2gy=4gA\sin^2(\varphi/2)$:
 \[
-ds=2A\sin(\phi/2)d\phi,\qquad
-v=2\sqrt{gA}\sin(\phi/2),
+ds=2A\sin(\varphi/2)d\varphi,\qquad
+v=2\sqrt{gA}\sin(\varphi/2),
 \]
-so $dt=\sqrt{A/g}\,d\phi$ and
+so $dt=ds/v=\sqrt{A/g}\,d\varphi$ and
 \[
-T_{\rm cyc}=\phi_0\sqrt{A/g}.
+T_{\rm cyc}=\varphi_0\sqrt{A/g}.
 \]
 One can verify the minimizing character by a calibration.
-Regard $S(x,y)=\phi\sqrt{A/g}$ as a function defined by the
-first-arch endpoint equations. Their differentials are
+Regard $S(x,y)=\varphi\sqrt{A/g}$ as a function defined by the
+first-arch endpoint equations $x=A(\varphi-\sin\varphi)$,
+$y=A(1-\cos\varphi)$, $A>0$, $0<\varphi<2\pi$. By the monotonicity
+just shown, each point with $x,y>0$ has exactly one such
+$(A,\varphi)$, and the Jacobian
+$\partial(x,y)/\partial(A,\varphi)
+=-A[2(1-\cos\varphi)-\varphi\sin\varphi]$ is nonzero, so $S$ is smooth
+there. The differentials of the endpoint equations are
 \[
- dx=(\phi-\sin\phi)\,dA+A(1-\cos\phi)\,d\phi,\qquad
- dy=(1-\cos\phi)\,dA+A\sin\phi\,d\phi,
+ dx=(\varphi-\sin\varphi)\,dA+A(1-\cos\varphi)\,d\varphi,\qquad
+ dy=(1-\cos\varphi)\,dA+A\sin\varphi\,d\varphi,
 \]
 whereas
-$dS=\phi\,dA/(2\sqrt{gA})+\sqrt{A/g}\,d\phi$.
-Equating the coefficients of $dA,d\phi$ in $dS=S_xdx+S_ydy$ gives
+\[
+dS=\frac{\varphi\,dA}{2\sqrt{gA}}+\sqrt{\frac Ag}\,d\varphi.
+\]
+Equating the coefficients of $dA,d\varphi$ in $dS=S_xdx+S_ydy$ gives
+two linear equations for $S_x,S_y$, solved by
 \[
 S_x=\frac1{2\sqrt{gA}},\qquad
-S_y=\frac{\cot(\phi/2)}{2\sqrt{gA}}.
+S_y=\frac{\cot(\varphi/2)}{2\sqrt{gA}}.
 \]
-Indeed, use $(1-\cos\phi)\cot(\phi/2)=\sin\phi$ in the first
-coefficient and $\sin\phi\cot(\phi/2)=1+\cos\phi$ in the second.
-Consequently
-$|\nabla S|^2=\csc^2(\phi/2)/(4gA)=1/(2gy)$.
-For any joining path in $y>0$,
-$dS\le|\nabla S|\,ds=dt$; integrating from the initial limiting
-point, where $S=0$, proves $T\ge S(x_0,y_0)$. Equality holds along
-the cycloid, whose tangent is parallel to $\nabla S$.
-Reflection handles paths to negative $x$.
+Indeed, use $(1-\cos\varphi)\cot(\varphi/2)=\sin\varphi$ in the first
+coefficient and $\sin\varphi\cot(\varphi/2)=1+\cos\varphi$ in the
+second. Consequently, since $2gy=4gA\sin^2(\varphi/2)$,
+\[
+|\nabla S|^2=\frac{1+\cot^2(\varphi/2)}{4gA}
+=\frac{\csc^2(\varphi/2)}{4gA}=\frac1{2gy}.
+\]
+Also $S\to0$ as $(x,y)\to(0,0)$: eliminating $A$ with
+$y=2A\sin^2(\varphi/2)$ gives $S\le\pi\sqrt{y/(2g)}$ when
+$\varphi\le\pi$, and eliminating it with
+$x=A(\varphi-\sin\varphi)\ge\pi A$ gives $S\le2\sqrt{\pi x/g}$ when
+$\varphi\ge\pi$.
+
+For any joining path in $y>0$, Cauchy--Schwarz gives
+$dS=\nabla S\cdot d\mathbf r\le|\nabla S|\,ds=ds/\sqrt{2gy}=dt$;
+integrating from the initial limiting point, where $S=0$, proves
+$T\ge S(x_0,y_0)=T_{\rm cyc}$. Equality holds along the cycloid, whose
+tangent $(dx,dy)\propto(1-\cos\varphi,\sin\varphi)
+\propto(1,\cot(\varphi/2))$ is parallel to $\nabla S$.
+Reflection handles paths to negative $x$: replacing $x$ by $|x|$
+changes neither the arc length nor the speed.
 
 \erratum{The fixed numerical time ratio in the question applies
 to the special endpoint in the hint, not to arbitrary $(x_0,y_0)$.}
-For that endpoint $\phi_0=\pi$, so
+For that endpoint, $x_0/y_0=\pi/2$ is the value of the ratio at
+$\varphi_0=\pi$, so $\varphi_0=\pi$ and $A=y_0/2$: indeed
 $x_0=\pi/(2c^2)$, $y_0=1/c^2$, and
-$T_{\rm cyc}=\pi/(c\sqrt{2g})$.
+$T_{\rm cyc}=\pi\sqrt{A/g}=\pi/(c\sqrt{2g})$.
 The straight segment has length
 \[
 L=\sqrt{x_0^2+y_0^2}
 =\frac1{c^2}\sqrt{1+\pi^2/4}
 \]
-and constant tangential acceleration $g y_0/L$. Starting from rest,
+and constant tangential acceleration $g y_0/L$ ($g$ times the sine of
+its inclination). Starting from rest, $L=\tfrac12(gy_0/L)T_{\rm line}^2$,
+so, with $\sqrt{2/(gy_0)}=c\sqrt{2/g}$,
 \[
 T_{\rm line}=\sqrt{\frac{2L^2}{g y_0}}
 =\frac1c\sqrt{\frac2g}\sqrt{1+\frac{\pi^2}{4}}.
 \]
-Therefore
+Therefore, since $\sqrt{2/g}\,\sqrt{2g}=2$,
 \[
 \boxed{\frac{T_{\rm line}}{T_{\rm cyc}}
 =\frac2\pi\sqrt{1+\frac{\pi^2}{4}}
-=\sqrt{1+\frac4{\pi^2}}}.
+=\sqrt{1+\frac4{\pi^2}}}\approx1.185447.
 \]
 
 
