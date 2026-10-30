@@ -99,8 +99,10 @@ Therefore $C(-\cos1)=1$, and
 Both branches solve $G_{xx}+G=0$ away from the source, are continuous
 at the source, have derivative jump $1$, and satisfy the specified
 endpoint conditions. These facts prove $(\partial_x^2+1)G=\delta(x-t)$.
-There is no zero mode: $h(0)=0$ gives $h=A\sin x$, and $h'(1)=A\cos1=0$
-gives $A=0$ since $\cos1\ne0$.
+There is no zero mode, that is, no nonzero solution $h$ of $h''+h=0$
+satisfying both endpoint conditions: $h(0)=0$ gives $h=A\sin x$, and
+$h'(1)=A\cos1=0$ gives $A=0$ since $\cos1\ne0$. Hence the Green's
+function is unique: the difference of two of them would be such an $h$.
 
 (b) \erratum{``Finite for $-\infty<x<\infty$'' must here mean bounded
 as $x\to\pm\infty$. Finiteness only at each finite point would allow
@@ -119,8 +121,8 @@ $-C-C=-2C$. As in (a), it must equal $1$, and $-2C=1$ gives
 It decays at both infinities, solves $G_{xx}-G=0$ for $x\ne t$, and
 has derivative jump $1$. Thus $y(x)=\int_{\mathbb R}G(x,t)f(t)\,dt$
 solves $y''-y=f$ whenever the integral is defined, for example for
-bounded continuous $f$. In that example, since
-$\int_{\mathbb R}e^{-|s|}\,ds=2$,
+bounded continuous $f$. In that example, with
+$\|f\|_\infty=\sup_t|f(t)|$ and since $\int_{\mathbb R}e^{-|s|}\,ds=2$,
 $|y(x)|\le\|f\|_\infty\int_{\mathbb R}e^{-|x-t|}/2\,dt
 =\|f\|_\infty$.
 No nonzero combination $Ae^x+Be^{-x}$ is bounded at both infinities,
@@ -156,7 +158,9 @@ This proves $y''+y=f$. At $x=0$, both displayed integrals have zero
 length, so $y(0)=y'(0)=0$.
 
 For forward evolution $x\ge0$ with source times $t\ge0$, the equivalent
-causal kernel is $G(x,t)=\Theta(x-t)\sin(x-t)$.
+causal kernel is $G(x,t)=\Theta(x-t)\sin(x-t)$, where $\Theta$ is the
+Heaviside unit step function ($\Theta(s)=0$ for $s<0$, $\Theta(s)=1$ for
+$s>0$; it is the $u(s)$ of Exercise 1.11.9).
 The displayed Volterra integral itself also solves the initial-value
 problem for negative $x$ when its integral is given the usual
 orientation, since the Leibniz rule above holds for $x<0$ as well.
@@ -242,10 +246,10 @@ subject to the boundary conditions $y(0)=0$, $y(1)=0$.
 integration. Construct its inverse for nonresonant real $k$, treat $k=0$
 separately, and explain the obstruction at a positive zero of $J_1(k)$.}
 \solution
-\erratum{The normalization of the operator matters at this singular
-endpoint. The Instructor's Manual, p.~119, first divides the printed
-ODE by $x$. Its symmetric kernel is the Green's function of that divided
-operator. For the operator exactly as printed, with an ordinary $dt$
+\erratum{The normalization of the operator matters: dividing it by $x$
+multiplies its Green's function by $t$. The Instructor's Manual,
+p.~119, first divides the printed ODE by $x$. Its symmetric kernel is
+the Green's function of that divided operator. For the operator exactly as printed, with an ordinary $dt$
 source integral, the kernel has an additional factor $1/t$. An ordinary
 inverse also requires a nonresonant parameter. Both conventions are
 specified below.}
@@ -296,7 +300,7 @@ $t[G_{L,x}]_{t^-}^{t^+}=1$. Set
 $G_L=C u(x_<)v(x_>)$, where $x_<=\min(x,t)$ and
 $x_>=\max(x,t)$. By the jump formula of Exercise 10.1.2(a), its
 jump is $CW(t)$, giving
-$t\,C\,2/(\pi t)=1$, or $C=\pi/2$. Consequently
+$t\,C\,W(t)=tC\cdot2/(\pi t)=2C/\pi=1$, or $C=\pi/2$. Consequently
 \[
 \boxed{G_L(x,t)=\frac\pi2J_1(kx_<)
 \left[Y_1(kx_>)-\frac{Y_1(k)}{J_1(k)}J_1(kx_>)\right].}
@@ -384,7 +388,10 @@ gives $C=1/2$, and the kernels are
 These are also the $k\downarrow0$ limits of the previous expressions.
 Indeed, as $k\to0$, $J_1(kx)\approx kx/2$, $Y_1(kx)\approx-2/(\pi kx)$
 and $Y_1(k)/J_1(k)\approx-4/(\pi k^2)$; the neglected terms are smaller
-by factors $O(k^2\ln k)$. Hence
+by factors $O(k^2\ln k)$, since as $z\to0$,
+$J_1(z)=(z/2)[1+O(z^2)]$ and, from the series of $Y_1$ with its
+logarithmic term (Eq.~(14.61) with $n=1$),
+$Y_1(z)=-2/(\pi z)+(z/\pi)\ln(z/2)+O(z)$. Hence
 \[
 G_L(x,t)\approx\frac\pi2\,\frac{kx_<}{2}
 \left[-\frac2{\pi kx_>}+\frac4{\pi k^2}\,\frac{kx_>}2\right]
@@ -420,15 +427,19 @@ y(x)=D+\frac C2\bigl[\ln(1+x)-\ln(1-x)\bigr]
 \]
 The logarithm diverges at either endpoint. Thus a homogeneous solution
 finite at $-1$ is a constant, and a homogeneous solution finite at $+1$
-is also a constant.
+is also a constant. These two solutions are therefore linearly
+dependent, as the Note says: their Wronskian vanishes, so no continuous
+combination of them can have the jump that the source requires, as
+shown next.
 
 For an interior source $-1<t<1$, the proposed Green's function would
 therefore have to be
 \[
 G(x,t)=\begin{cases}A(t),&x<t,\\B(t),&x>t.\end{cases}
 \]
-It must be continuous at $t$, because a discontinuity in $G$ would produce
-a delta derivative in $LG$, which is absent from the required source.
+It must be continuous at $t$: a jump in $G$ would put a delta function
+into $G_x$, and hence its derivative $\delta'(x-t)$ into $LG$, which is
+absent from the required source.
 So $A(t)=B(t)$. Both ordinary derivatives are zero, and hence
 \[
 \left[(1-x^2)G_x(x,t)\right]_{t^-}^{t^+}=0.
@@ -711,7 +722,11 @@ solutions are $x$ and $1-x$, and continuity suggests
 $C x_<(1-x_>)$. Its derivative is $C(1-t)$ for $x<t$ and $-Ct$ for
 $x>t$, so its jump is $-Ct-C(1-t)=-C$. Requiring $-G_{xx}=\delta$,
 i.e., a jump of $-1$ as in Exercise 10.1.1, gives $C=1$.
-Thus
+Since $\lambda=0$ is not an eigenvalue (shown above), the homogeneous
+problem has only the zero solution, so the Green's function is unique,
+and the eigenfunction series and the closed form are the same kernel
+(the final paragraph of this solution also verifies this directly
+through the Fourier coefficients). Thus
 \[
 \boxed{\frac2{\pi^2}\sum_{n=1}^\infty
 \frac{\sin(n\pi x)\sin(n\pi t)}{n^2}
@@ -741,8 +756,8 @@ conditions, $G_M(x,t)=\min(x,t)$. It follows that
 =\begin{cases}x,&x\le t,\\t,&t\le x.\end{cases}}
 \]
 
-For completeness, the identification does not require differentiating
-either series twice term by term. For each fixed interior $t$, integrate
+The identification can also be checked without differentiating either
+series twice term by term. For each fixed interior $t$, integrate
 by parts on $(0,t)$ and $(t,1)$, using $-G_{xx}=\delta(x-t)$ and
 the matching endpoint conditions.  Because each closed kernel is affine
 on either side of $t$ ($G_{xx}=0$ there, so no integral remains),
@@ -763,10 +778,13 @@ Since $-\phi_n''=\lambda_n\phi_n$, this gives
 =\int_0^1G(x,t)(-\phi_n''(x))\,dx=\phi_n(t).
 \]
 Thus the closed kernels have exactly the stated Fourier coefficients.
-Completeness gives equality in $L^2$. Both series converge absolutely
-and uniformly by comparison with $\sum n^{-2}$ or
-$\sum(n+1/2)^{-2}$, so their sums are continuous. Equality therefore
-holds everywhere, including $x=t$ and the endpoints by continuity.
+By the completeness of the eigenfunctions, two square-integrable
+functions with the same expansion coefficients are equal in the
+mean-square sense. Both series converge absolutely and uniformly by the
+Weierstrass M test, because their terms are bounded by $2/(\pi^2n^2)$
+and $2/[\pi^2(n+\frac12)^2]$, so their sums are continuous. Equality
+therefore holds everywhere, including $x=t$ and the endpoints by
+continuity.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1112,7 +1130,8 @@ $\sinh(kr_<)/k\to r_<$ and $e^{-kr_>}\to1$), which approaches
 $-t$, not zero, as $r\to\infty$. Accordingly there is no inverse of
 $d^2/dr^2$ satisfying these same two zero boundary values for an arbitrary
 source: its right homogeneous branch would have to be identically zero.
-This explains why the decay assumption on the free parameter is needed.
+This explains why the assumption $k>0$ (more generally $\Re k>0$),
+which makes the right branch $e^{-kr}$ decay, is needed.
 
 \Needspace{9\baselineskip}
 \subsection*{10.2 Problems in Two and Three Dimensions}
@@ -1130,7 +1149,8 @@ is $1$, so (as in Exercise 10.1.1)
 \[
 \partial_x^2G_0(x,t)=\delta(x-t).
 \]
-To impose zero Dirichlet values at $x=0,1$, add a homogeneous solution
+Example 10.1.1 solves $-y''=f$ with $y(0)=y(1)=0$. To impose these zero
+Dirichlet values at $x=0,1$, add a homogeneous solution
 in $x$, $h(x,t)=a(t)x+b(t)$. The endpoint equations are
 \[
 0=G_0(0,t)+b(t)=t/2+b(t),
@@ -1172,16 +1192,17 @@ L\psi(\mathbf{r})\equiv
 +q(\mathbf{r})\psi(\mathbf{r}),
 \]
 then $L$ is Hermitian for $p(\mathbf{r})$ and $q(\mathbf{r})$ real, assuming
-\erratum{common homogeneous Dirichlet boundary conditions, sufficient
-regularity for Green's identity, and a vanishing boundary form at infinity
-if the region is unbounded}, and that the scalar product is an integral
-over that region with unit weight.
+Dirichlet boundary conditions on the boundary of a region
+\erratum{(homogeneous and common to both functions, with sufficient
+regularity for Green's identity and, if the region is unbounded, a
+vanishing boundary form at infinity)} and that the scalar product is an
+integral over that region with unit weight.
 \solution
 \erratum{For an operator domain, the Dirichlet conditions used here
 are homogeneous: both test functions vanish at the boundary.
-Nonzero prescribed boundary data must first be subtracted using a fixed
-extension. On an unbounded region the corresponding boundary form at
-infinity must also vanish.}
+Nonzero prescribed boundary data must first be subtracted, using a fixed
+function that takes those boundary values. On an unbounded region the
+corresponding boundary form at infinity must also vanish.}
 Let $\Omega$ have a smooth boundary, with sufficiently regular
 $p,q,\phi,\psi$ for the integrations below, and take $p,q$ real.
 The unit-weight scalar product is
@@ -1214,7 +1235,8 @@ integration by parts with $\psi$ outside the divergence yields
 &=-\int_\Omega p\nabla\psi\cdot\nabla\phi^*\,dV
 +\int_\Omega q\phi^*\psi\,dV.
 \end{align*}
-The remaining volume integrals agree term by term, so
+because $\psi=0$ on $\partial\Omega$. The remaining volume integrals
+agree term by term, so
 \[
 \boxed{\langle\phi,L\psi\rangle=\langle L\phi,\psi\rangle.}
 \]
@@ -1225,8 +1247,9 @@ Equivalently, their difference is the boundary form
 \]
 This proves the Hermitian (symmetric) property on the stated common
 domain. \erratum{If ``self-adjoint'' is used in its stronger operator-theoretic
-sense, a domain realization must also be specified; the usual smooth,
-bounded, uniformly elliptic Dirichlet realization is one such setting.}
+sense, a domain realization must also be specified; the usual Dirichlet
+realization on a smooth bounded region, with smooth real coefficients and
+$p\ge p_0>0$ (uniform ellipticity), is one such setting.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1244,9 +1267,10 @@ k^{2}G(\mathbf{r}_{1},\mathbf{r}_{2})\,d^{3}r_{2}=0.}
 for a shrinking neighborhood of the source (textbook p.~466). The
 integration region must be specified as a ball of radius $\varepsilon$,
 and the local limit is $0$. The Instructor's Manual, p.~121, computes
-a different, whole-space Fourier integral, formally giving $+1/k^2$ for
-its Helmholtz denominator $k^2-p^2$.  It does not establish the printed
-local claim.}
+a different, whole-space Fourier integral, formally giving
+$\int G\,d^3r_2=+1/k^2$, the value at $p=0$ of the Helmholtz transform
+$1/(k^2-p^2)$, so that $\int k^2G\,d^3r_2=+1$. It does not establish the
+printed local claim.}
 Fix $\mathbf r_1$ and put $s=|\mathbf r_2-\mathbf r_1|$.
 The three-dimensional outgoing and modified kernels are respectively
 \[
@@ -1367,11 +1391,15 @@ giving
 \]
 It solves the homogeneous Helmholtz equation away from the source, is
 smooth there, and has a locally integrable $1/s$ singularity.
-Its outgoing Sommerfeld condition is explicit: with $A=-1/(4\pi)$,
+It also satisfies the outgoing (Sommerfeld) radiation condition
+$s(\partial_s-ik)G\to0$ as $s\to\infty$: with $A=-1/(4\pi)$,
 $\partial_sG-ikG=Ae^{iks}(ik/s-1/s^2)-ikAe^{iks}/s=-Ae^{iks}/s^2$, so
 \[
-s(\partial_s-ik)G=\frac{e^{iks}}{4\pi s}\longrightarrow0.
+s(\partial_s-ik)G=\frac{e^{iks}}{4\pi s}\longrightarrow0
+\qquad(s\to\infty).
 \]
+For the incoming kernel $-e^{-iks}/(4\pi s)$ the same combination is
+$(2iks+1)e^{-iks}/(4\pi s)$, which does not tend to zero.
 
 To verify the delta identity against an arbitrary smooth compactly
 supported test function $\eta$, apply Green's second identity,
@@ -1398,8 +1426,15 @@ The first surface term is $O(\varepsilon)$, because $G=O(1/\varepsilon)$
 and the sphere has area $O(\varepsilon^2)$. In the second term,
 $\eta=\eta(\mathbf r_2)+O(\varepsilon)$ and the flux
 $\int_{s=\varepsilon}\partial_sG\,dS=4\pi\varepsilon^2G'(\varepsilon)$
-tends to one, so its limit is $\eta(\mathbf r_2)$. This proves, with
-its sign and normalization,
+tends to one, so its limit is $\eta(\mathbf r_2)$. Hence
+\[
+\int G(\mathbf r_1,\mathbf r_2)\,(\nabla_1^2+k^2)\eta(\mathbf r_1)\,dV_1
+=\eta(\mathbf r_2)
+\]
+for every such $\eta$. For the singular function $G$ this is what the
+delta identity means: the operator is moved from $G$ onto the test
+function, as in the integration by parts that defines $\delta'$. This
+proves, with its sign and normalization,
 \[
 (\nabla_1^2+k^2)G(\mathbf r_1,\mathbf r_2)
 =\delta^{(3)}(\mathbf r_1-\mathbf r_2).
@@ -1438,8 +1473,17 @@ G_{\rm st}&=\frac12(G_{\rm out}+G_{\rm in})\\
 Multiplying by $e^{-i\omega\tau}$ and taking the real part gives
 $-\cos(ks)\cos(\omega\tau)/(4\pi s)$, a standing radial wave.
 Equivalently, the outgoing and incoming amplitudes are equal, so their
-opposite radial fluxes cancel. Directly, $\operatorname{Im}(G_{\rm st}^*
-\partial_sG_{\rm st})=0$ because $G_{\rm st}$ is real.
+opposite radial fluxes cancel. Directly, for a wave
+$u=\operatorname{Re}(\psi e^{-i\omega\tau})$ the radial energy flux is
+proportional to $-\partial_\tau u\,\partial_su$, whose time average is
+$\frac\omega2\operatorname{Im}(\psi^*\partial_s\psi)$ (write
+$u=\frac12(\psi e^{-i\omega\tau}+\psi^*e^{i\omega\tau})$; the terms with
+$e^{\mp2i\omega\tau}$ average to zero). With $G_{\rm out}'$ from
+Exercise 10.2.4, $G_{\rm out}^*G_{\rm out}'=(ik/s-1/s^2)/(16\pi^2s)$, so
+$\operatorname{Im}(G_{\rm out}^*G_{\rm out}')=+k/(16\pi^2s^2)$, an
+outward flux; for the conjugate $G_{\rm in}$ it is $-k/(16\pi^2s^2)$.
+But $\operatorname{Im}(G_{\rm st}^*G_{\rm st}')=0$ because
+$G_{\rm st}$ is real.
 
 Its derivative and source flux are
 \[
