@@ -1887,7 +1887,7 @@ g=\operatorname{diag}(1,-1,-1,-1)}.
 anticommutes with all four $\boldsymbol{\gamma}^{\mu}$.
 \solution
 By definition, $\gamma^5=i\gamma^0\gamma^1\gamma^2\gamma^3$.
-Use the tensor forms of 2.2.41 and the direct-product rule twice,
+Use the tensor forms of Exercise 2.2.41 and the direct-product rule twice,
 with $J^3=J^2J=-J$ and $\sigma_1\sigma_2\sigma_3=(i\sigma_3)\sigma_3=iI_2$
 (Exercise 2.2.11):
 \[
@@ -1895,7 +1895,7 @@ with $J^3=J^2J=-J$ and $\sigma_1\sigma_2\sigma_3=(i\sigma_3)\sigma_3=iI_2$
 =J^3\otimes(\sigma_1\sigma_2\sigma_3)
 =(-J)\otimes(iI_2)=-iJ\otimes I_2.
 \]
-Hence, since $i(-i)=1$ and $\sigma_3J=\sigma_1$ (2.2.41),
+Hence, since $i(-i)=1$ and $\sigma_3J=\sigma_1$ (Exercise 2.2.41),
 \[
 \gamma^5=i(\sigma_3\otimes I_2)(-iJ\otimes I_2)
 =(\sigma_3J)\otimes I_2=\sigma_1\otimes I_2
@@ -1943,7 +1943,7 @@ statement.}
 The sums in (a)--(c) run over $\mu=0,1,2,3$.
 Lowering an index gives $\gamma_0=\gamma^0$, $\gamma_i=-\gamma^i$.
 The Clifford relation $\{\gamma^\mu,\gamma^\alpha\}=2g^{\mu\alpha}I_4$
-of 2.2.41 implies
+of Exercise 2.2.41 implies
 \[
 \{\gamma_\mu,\gamma^\alpha\}=g_{\mu\mu}\{\gamma^\mu,\gamma^\alpha\}
 =2g_{\mu\mu}g^{\mu\alpha}I_4=2\delta_\mu^\alpha I_4,\qquad
@@ -2004,11 +2004,14 @@ $\boldsymbol{\gamma}^{5}$ is given in Eq.~(2.76), show that
 \[
 \mathsf{M}^{2}=\mathsf{M}.
 \]
-\erratum{The textbook adds that this equation still holds when
-$\boldsymbol{\gamma}^5$ is replaced by any other Dirac matrix listed in
-Eq.~(2.76). That is true precisely for the replacements $\Gamma$ with
-$\Gamma^2=\mathbf1_4$, not for every Dirac matrix (see the solution).}
+Note that this equation is still satisfied if $\boldsymbol{\gamma}^{5}$
+is replaced by any other Dirac matrix listed in Eq.~(2.76)
+\erratum{whose square is $\mathbf1_4$}.
 \solution
+\erratum{The printed note lacks the qualification ``whose square is
+$\mathbf1_4$'': as shown below, $M_\Gamma=(I_4+\Gamma)/2$ satisfies
+$M_\Gamma^2-M_\Gamma=(\Gamma^2-I_4)/4$, which is $-I_4/2$ for the
+seven Dirac matrices with $\Gamma^2=-I_4$.}
 Since $\gamma^5=\sigma_1\otimes I_2$ (Exercise 2.2.42),
 $(\gamma^5)^2=\sigma_1^2\otimes I_2=I_4$. Expanding the square, in
 which $I_4$ commutes with $\gamma^5$,
@@ -2037,12 +2040,21 @@ I_4,\ \gamma^5,\ \gamma^0,\ \gamma^5\gamma^i,\
 where $\sigma^{\mu\nu}=i\gamma^\mu\gamma^\nu$ for $\mu<\nu$.
 The entries follow from $(\gamma^0)^2=(\gamma^5)^2=I_4$,
 $(\gamma^i)^2=-I_4$, and the anticommutation relations of
-Exercises 2.2.41 and 2.2.42. For example, moving the second
-$\gamma^5$ to the left past $\gamma^\mu$,
-$(\gamma^5\gamma^\mu)^2=\gamma^5\gamma^\mu\gamma^5\gamma^\mu
-=-(\gamma^5)^2(\gamma^\mu)^2=-(\gamma^\mu)^2$, and, for $\mu\ne\nu$,
-$(i\gamma^\mu\gamma^\nu)^2=-\gamma^\mu\gamma^\nu\gamma^\mu\gamma^\nu
-=\gamma^\mu\gamma^\mu\gamma^\nu\gamma^\nu=(\gamma^\mu)^2(\gamma^\nu)^2$.
+Exercises 2.2.41 and 2.2.42: moving the second $\gamma^5$ to the left
+past $\gamma^\mu$, and the second $\gamma^\mu$ to the left past
+$\gamma^\nu$,
+\[
+\begin{aligned}
+(\gamma^5\gamma^\mu)^2&=\gamma^5\gamma^\mu\gamma^5\gamma^\mu
+=-(\gamma^5)^2(\gamma^\mu)^2=-(\gamma^\mu)^2,\\
+(i\gamma^\mu\gamma^\nu)^2&=-\gamma^\mu\gamma^\nu\gamma^\mu\gamma^\nu
+=\gamma^\mu\gamma^\mu\gamma^\nu\gamma^\nu=(\gamma^\mu)^2(\gamma^\nu)^2
+\quad(\mu\ne\nu).
+\end{aligned}
+\]
+Hence $(\gamma^5\gamma^0)^2=-I_4$, $(\gamma^5\gamma^i)^2=+I_4$,
+$(\sigma^{0i})^2=(\gamma^0)^2(\gamma^i)^2=-I_4$, and
+$(\sigma^{ij})^2=(\gamma^i)^2(\gamma^j)^2=+I_4$.
 Thus the replacement works for the matrices in the first row of the
 table and fails for the seven in the second row, for which
 $M_\Gamma^2-M_\Gamma=-I_4/2$.
@@ -2096,8 +2108,8 @@ I_4&\sigma_0\otimes\sigma_0\\
 \sigma_0\otimes\sigma_1
 \end{array}
 \]
-The first three rows are $I_4$ and the forms of $\gamma^5$ and
-$\gamma^0$ found in Exercises 2.2.41 and 2.2.42, and the row of
+The first three rows are $I_4$ and the forms of $\gamma^5$
+(Exercise 2.2.42) and $\gamma^0$ (Exercise 2.2.41), and the row of
 $\gamma^i$ is $\gamma^i=J\otimes\sigma_i$ with $J=i\sigma_2$. The
 others follow from the direct-product rule and the Pauli products of
 Exercise 2.2.11:
@@ -2147,10 +2159,13 @@ c_{i}\sim\mathrm{trace}(\mathsf{A}\Gamma_{i}).
 \solution
 To avoid confusion with the imaginary unit, label the Dirac matrices
 $\Gamma_r$, $r=1,\ldots,16$, and the coefficients $c_r$.
-Write $\Gamma_r^2=s_rI_4$, where $s_r=\pm1$ as in the table of 2.2.44.
-In 2.2.45 each $\Gamma_r=\eta_rT_r$, where $T_r$ is one of the
-products $\sigma_a\otimes\sigma_b$ and $\eta_r\in\{\pm1,\pm i\}$.
-Each $T_r$ is Hermitian, and $T_r^2=\sigma_a^2\otimes\sigma_b^2=I_4$;
+Write $\Gamma_r^2=s_rI_4$, where $s_r=\pm1$ as in the table of
+Exercise 2.2.44. In Exercise 2.2.45 each $\Gamma_r=\eta_rT_r$, where
+$T_r$ is one of the products $\sigma_a\otimes\sigma_b$ and
+$\eta_r\in\{\pm1,\pm i\}$. Each $T_r$ is Hermitian, since
+$(\sigma_a\otimes\sigma_b)^\dagger=\sigma_a^\dagger\otimes\sigma_b^\dagger
+=\sigma_a\otimes\sigma_b$ (Exercise 2.2.39), and, by the
+direct-product rule, $T_r^2=\sigma_a^2\otimes\sigma_b^2=I_4$;
 hence $\Gamma_r^2=\eta_r^2I_4$, so $s_r=\eta_r^2$, and
 \[
 \Gamma_r^\dagger=\eta_r^*T_r=\frac{\eta_r^*}{\eta_r}\Gamma_r
@@ -2158,7 +2173,8 @@ hence $\Gamma_r^2=\eta_r^2I_4$, so $s_r=\eta_r^2$, and
 \]
 because $\eta_r^*/\eta_r=(\eta_r^*)^2/|\eta_r|^2$, $|\eta_r|=1$, and
 $(\eta_r^*)^2=(\eta_r^2)^*=s_r$ is real. Since $s_r^2=1$, also
-$\Gamma_r=s_r\Gamma_r^\dagger$, and the trace relation of 2.2.45 gives
+$\Gamma_r=s_r\Gamma_r^\dagger$, and the trace relation of
+Exercise 2.2.45 gives
 \[
 \operatorname{tr}(\Gamma_r\Gamma_j)
 =s_r\operatorname{tr}(\Gamma_r^\dagger\Gamma_j)=4s_r\delta_{rj}.
@@ -2199,7 +2215,7 @@ C=i\gamma^2\gamma^0=i\,(i\sigma_2\sigma_3\otimes\sigma_2)
 \]
 so $C^2=(-i)^2\sigma_1^2\otimes\sigma_2^2=-I_4$ and $C^{-1}=-C$.
 The transpose of a direct product is $(A\otimes B)^T=A^T\otimes B^T$,
-since in the notation of 2.2.39
+since in the notation of Exercise 2.2.39
 $((A\otimes B)^T)_{(k,a),(l,b)}=A_{lk}B_{ba}=(A^T)_{kl}(B^T)_{ab}$.
 The Pauli transposes are
 $\sigma_1^T=\sigma_1$, $\sigma_2^T=-\sigma_2$, $\sigma_3^T=\sigma_3$,
@@ -2234,13 +2250,23 @@ C\gamma^\mu C^{-1}=
 \]
 Comparison with the transposes proves
 $\boxed{C\gamma^\mu C^{-1}=-(\gamma^\mu)^T}$ for every $\mu$.
-The cases display used only the relations (2.74)--(2.75), so the
-representation enters through the transposes alone: the identity holds
-exactly when $\gamma^0,\gamma^2$ are symmetric and $\gamma^1,\gamma^3$
+The formula for $C\gamma^\mu C^{-1}$ above used only the relations
+(2.74)--(2.75), which also give
+$C^2=-\gamma^2\gamma^0\gamma^2\gamma^0=(\gamma^2)^2(\gamma^0)^2=-I_4$
+in any representation. The representation therefore enters through
+the transposes alone: the identity holds exactly when
+$\gamma^0,\gamma^2$ are symmetric and $\gamma^1,\gamma^3$
 antisymmetric, as also in the Weyl representation of
 Exercise 2.2.49. It fails, for example, for the matrices
-$S\gamma^\mu S^{-1}$ with $S=\operatorname{diag}(1,2,1,1)$, which
-also obey (2.74)--(2.75) but have $S\gamma^1S^{-1}$ not antisymmetric.
+$S\gamma^\mu S^{-1}$ with $S=\operatorname{diag}(1,2,1,1)$. These
+also obey (2.74)--(2.75), because
+$(S\gamma^\mu S^{-1})(S\gamma^\nu S^{-1})=S\gamma^\mu\gamma^\nu S^{-1}$
+turns each anticommutator into
+$S\{\gamma^\mu,\gamma^\nu\}S^{-1}=2g^{\mu\nu}I_4$, but
+$S\gamma^1S^{-1}$ is not antisymmetric: for diagonal $S$ its $(k,l)$
+entry is $S_{kk}(\gamma^1)_{kl}/S_{ll}$, so the entries
+$(\gamma^1)_{23}=1$ and $(\gamma^1)_{32}=-1$ become $2$ and
+$-\tfrac12$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2283,12 +2309,23 @@ $\varepsilon\psi_L=-\mathbf p^2\psi_L/(2m)$, where
 $P=\boldsymbol{\sigma}\cdot\mathbf p$.}
 
 \erratum{In the Instructor's Manual, the block Hamiltonian also omits
-$c$ from its momentum terms. Equation (2.73) has $c\alpha_i p_i$;
-all factors of $c$ are retained below.}
+$c$ from its momentum terms. Every momentum term of Eq.~(2.73), like
+those of the question above, carries the factor $c$; all factors of
+$c$ are retained below.}
 
 \textbf{(a)} Put $P=\boldsymbol{\sigma}\cdot\mathbf p
-=\sigma_1p_1+\sigma_2p_2+\sigma_3p_3$. The definitions
-in Eqs.~(2.70)--(2.73) give
+=\sigma_1p_1+\sigma_2p_2+\sigma_3p_3$ and $\alpha_i=\gamma^0\gamma^i$.
+Since $(\gamma^0)^2=I_4$ (Exercise 2.2.41), multiplying on the left by
+the invertible matrix $\gamma^0$ turns $\gamma^0E-c\sum_i\gamma^ip_i$
+into $E-c\sum_i\alpha_ip_i$ and $mc^2$ into $mc^2\gamma^0$. The Dirac
+equation written with the $\gamma^\mu$ is therefore equivalent to the
+form used below:
+\[
+\Bigl(\gamma^0E-c\sum_i\gamma^ip_i\Bigr)\Psi=mc^2\Psi
+\quad\Longleftrightarrow\quad
+\Bigl(mc^2\gamma^0+c\sum_i\alpha_ip_i\Bigr)\Psi=E\Psi.
+\]
+The definitions in Eqs.~(2.70) and (2.72) give
 \[
 \gamma^0=\begin{pmatrix}I_2&0\\0&-I_2\end{pmatrix},\quad
 \gamma^i=\begin{pmatrix}0&\sigma_i\\-\sigma_i&0\end{pmatrix},\quad
@@ -2388,7 +2425,8 @@ Write the proposed Weyl matrices as
 \gamma^i=J\otimes\sigma_i,\quad
 J=i\sigma_2=\begin{pmatrix}0&1\\-1&0\end{pmatrix};
 \]
-the $\gamma^i$ are the same as in the Dirac representation of 2.2.41.
+the $\gamma^i$ are the same as in the Dirac representation of
+Exercise 2.2.41.
 Then $(\gamma^0)^2=\sigma_1^2\otimes I_2=I_4$ and
 $(\gamma^i)^2=J^2\otimes\sigma_i^2=-I_4$.
 By the direct-product rule $\gamma^0\gamma^i=\sigma_1J\otimes\sigma_i$
@@ -2403,11 +2441,13 @@ Hence
 \[
 \{\gamma^0,\gamma^i\}=(\sigma_1J+J\sigma_1)\otimes\sigma_i=0.
 \]
-For spatial indices, as in 2.2.41,
+For spatial indices, as in Exercise 2.2.41,
 $\{\gamma^i,\gamma^j\}=J^2\otimes\{\sigma_i,\sigma_j\}
 =-2\delta_{ij}I_4$. All the required relations (2.74)--(2.75) hold.
-Also $(\gamma^0)^\dagger=\sigma_1^\dagger\otimes I_2=\gamma^0$ and,
-since $J^\dagger=J^T=-J$ and $\sigma_i^\dagger=\sigma_i$,
+Also, by $(A\otimes B)^\dagger=A^\dagger\otimes B^\dagger$
+(Exercise 2.2.39), $(\gamma^0)^\dagger=\sigma_1^\dagger\otimes I_2=\gamma^0$
+and, since $J^\dagger=J^T=-J$ ($J$ is real) and
+$\sigma_i^\dagger=\sigma_i$,
 $(\gamma^i)^\dagger=J^\dagger\otimes\sigma_i^\dagger=-\gamma^i$. With
 the anticommutation just proved,
 \[
@@ -2441,8 +2481,10 @@ mc^2\gamma^0=\begin{pmatrix}0&mc^2I_2\\mc^2I_2&0\end{pmatrix},
 so $c\sum_i\alpha_ip_i$ is block diagonal with diagonal blocks
 $-c\boldsymbol{\sigma}\cdot\mathbf p$ and
 $c\boldsymbol{\sigma}\cdot\mathbf p$.
-With $\Psi=(\psi_1,\psi_2)^T$, Eq.~(2.73),
-$(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$, is
+With $\Psi=(\psi_1,\psi_2)^T$, the Dirac equation in the form
+$(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$ of Exercise 2.2.48(a),
+whose derivation used only $(\gamma^0)^2=I_4$, true here too
+(Exercise 2.2.49), is
 \[
 \begin{pmatrix}
 -c\boldsymbol{\sigma}\cdot\mathbf p&mc^2I_2\\
@@ -2523,7 +2565,9 @@ $\mathbf r^\dagger=e_i^\dagger-ie_j^\dagger$ and $(-i)(i)=1$:
 =-2\operatorname{Im}H_{ij}.
 \]
 Every entry vanishes, so $H=0$ and $U^\dagger U=I$.
-Since $U$ is square, taking determinants yields
+Since $U$ is square, taking determinants of $U^\dagger U=I$, with
+the product rule $\det(AB)=\det A\,\det B$ and
+$\det U^\dagger=(\det U)^*$ (Exercise 2.2.30), yields
 $\det U^\dagger\det U=(\det U)^*\det U=|\det U|^2=1$.
 Hence $\det U\ne0$ and $U$ is invertible; multiplying $U^\dagger U=I$
 on the right by $U^{-1}$ gives $U^\dagger=U^{-1}$, and then
