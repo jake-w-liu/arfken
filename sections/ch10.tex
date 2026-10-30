@@ -22,8 +22,10 @@ conditions $y(0)=0$, $y'(1)=0$.
 For fixed $0<t<1$, write the proposed kernel as $G(x,t)=\min(x,t)$.
 It is continuous at $x=t$, and its two derivatives there are
 \[
-G_x(t^-,t)=1,\qquad G_x(t^+,t)=0.
+G_x(t^-,t)=1,\qquad G_x(t^+,t)=0,
 \]
+because the branch $x$ has slope $1$, while the branch $t$ does not
+depend on $x$.
 Thus $[G_x]_{t^-}^{t^+}=-1$. A continuous, piecewise smooth function
 has a delta function in its second derivative with coefficient equal to
 this derivative jump. Consequently
@@ -35,20 +37,23 @@ of $-G_{xx}$. The endpoint conditions also hold:
 $G(0,t)=0$ and $G_x(1,t)=0$.
 
 To check the resulting solution directly, let $f$ be continuous and split
-the integral at $t=x$:
+the integral at $t=x$ ($G=t$ for $t<x$ and $G=x$ for $t>x$):
 \[
 y(x)=\int_0^1G(x,t)f(t)\,dt
 =\int_0^x t f(t)\,dt+x\int_x^1f(t)\,dt.
 \]
-Differentiation gives
+The product rule and the fundamental theorem of calculus give
 \begin{align*}
 y'(x)&=xf(x)+\int_x^1f(t)\,dt-xf(x)
       =\int_x^1f(t)\,dt,\\
 y''(x)&=-f(x).
 \end{align*}
-Hence $-y''=f$, $y(0)=0$, and $y'(1)=0$. Finally, the difference of
-two solutions would be $ax+b$; its endpoint conditions force $b=0$
-and $a=0$. Thus this kernel gives the unique solution.
+Hence $-y''=f$. At $x=0$ the first integral has zero length and the
+second term has the factor $x=0$, so $y(0)=0$; also
+$y'(1)=\int_1^1f(t)\,dt=0$. Finally, the difference of two solutions
+satisfies $-y''=0$, so it is $ax+b$; the condition at $x=0$ forces
+$b=0$, and the one at $x=1$ forces $a=0$. Thus this kernel gives the
+unique solution.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -69,8 +74,15 @@ is built into the form
 \[
 G(x,t)=C\begin{cases}u(x)v(t),&x<t,\\u(t)v(x),&x>t.\end{cases}
 \]
-The derivative jump must be $+1$ because the coefficient of $y''$ is $1$.
-The needed Wronskian is
+For $x<t$, $G_x=Cu'(x)v(t)$, and for $x>t$, $G_x=Cu(t)v'(x)$; hence
+the derivative jump at $x=t$ is
+\[
+G_x(t^+,t)-G_x(t^-,t)=C\bigl[u(t)v'(t)-u'(t)v(t)\bigr].
+\]
+Integrating $G_{xx}+G=\delta(x-t)$ over $(t-\varepsilon,t+\varepsilon)$
+and letting $\varepsilon\to0$ (the bounded term $G$ contributes nothing)
+shows that this jump must be $+1$, the reciprocal of the coefficient
+$1$ of $y''$. Since $v'(x)=\sin(1-x)$, the needed Wronskian is
 \begin{align*}
 u(t)v'(t)-u'(t)v(t)
 &=\sin t\sin(1-t)-\cos t\cos(1-t)\\
@@ -98,14 +110,17 @@ on the right it is proportional to $e^{-x}$. Impose continuity by writing
 \[
 G(x,t)=C\begin{cases}e^{x-t},&x<t,\\e^{t-x},&x>t.\end{cases}
 \]
-Its derivative jump is $-C-C=-2C$, so $-2C=1$ gives
+Its $x$-derivative tends to $C$ as $x\uparrow t$ (from $Ce^{x-t}$) and
+to $-C$ as $x\downarrow t$ (from $Ce^{t-x}$), so the derivative jump is
+$-C-C=-2C$. As in (a), it must equal $1$, and $-2C=1$ gives
 \[
 \boxed{G(x,t)=-\frac12e^{-|x-t|}.}
 \]
 It decays at both infinities, solves $G_{xx}-G=0$ for $x\ne t$, and
 has derivative jump $1$. Thus $y(x)=\int_{\mathbb R}G(x,t)f(t)\,dt$
 solves $y''-y=f$ whenever the integral is defined, for example for
-bounded continuous $f$. In that example
+bounded continuous $f$. In that example, since
+$\int_{\mathbb R}e^{-|s|}\,ds=2$,
 $|y(x)|\le\|f\|_\infty\int_{\mathbb R}e^{-|x-t|}/2\,dt
 =\|f\|_\infty$.
 No nonzero combination $Ae^x+Be^{-x}$ is bounded at both infinities,
@@ -122,13 +137,17 @@ pp.~453--454, are
 \[
 y''+y=f(x),\qquad y(x)=\int_0^x\sin(x-t)f(t)\,dt.
 \]
-For continuous $f$, the Leibniz rule includes both an endpoint term and
-a derivative of the integrand. Applying it once gives
+For continuous $f$, the Leibniz rule
+\[
+\frac{d}{dx}\int_0^xg(x,t)\,dt=g(x,x)+\int_0^x\partial_xg(x,t)\,dt
+\]
+includes both an endpoint term and a derivative of the integrand.
+Applying it once, with $g=\sin(x-t)f(t)$, gives
 \begin{align*}
 y'(x)&=\sin(x-x)f(x)+\int_0^x\cos(x-t)f(t)\,dt\\
 &=\int_0^x\cos(x-t)f(t)\,dt.
 \end{align*}
-Apply the rule a second time:
+Apply the rule a second time, now with $g=\cos(x-t)f(t)$:
 \begin{align*}
 y''(x)&=\cos(x-x)f(x)-\int_0^x\sin(x-t)f(t)\,dt\\
 &=f(x)-y(x).
@@ -139,9 +158,11 @@ length, so $y(0)=y'(0)=0$.
 For forward evolution $x\ge0$ with source times $t\ge0$, the equivalent
 causal kernel is $G(x,t)=\Theta(x-t)\sin(x-t)$.
 The displayed Volterra integral itself also solves the initial-value
-problem for negative $x$ when its integral is given the usual orientation. The kernel vanishes for $x<t$, is continuous
-with value zero at $x=t$, and its first derivative jumps from $0$ to
-$1$. Thus $(\partial_x^2+1)G=\delta(x-t)$. The difference of any two
+problem for negative $x$ when its integral is given the usual
+orientation, since the Leibniz rule above holds for $x<0$ as well.
+The kernel vanishes for $x<t$, is continuous with value zero at
+$x=t$, and its first derivative jumps from $0$ to $\cos0=1$.
+Thus $(\partial_x^2+1)G=\delta(x-t)$. The difference of any two
 solutions is $A\sin x+B\cos x$; its zero initial position and velocity
 force $A=B=0$, so the verified solution is unique.
 
@@ -164,13 +185,17 @@ u(x)=\sin(x/2),\qquad v(x)=\cos(x/2).
 \]
 Here $u(0)=0$ and $v(\pi)=0$. A continuous kernel with the required
 endpoint behavior is $C u(x)v(t)$ for $x<t$ and $C u(t)v(x)$ for $x>t$.
-Its derivative jump is
+With $u'=\frac12\cos(x/2)$ and $v'=-\frac12\sin(x/2)$, the jump formula
+of Exercise 10.1.2(a) gives
 \begin{align*}
 G_x(t^+,t)-G_x(t^-,t)
-&=C\left[-\frac12\sin^2(t/2)-\frac12\cos^2(t/2)\right]\\
-&=-\frac C2.
+&=C\bigl[u(t)v'(t)-u'(t)v(t)\bigr]\\
+&=C\left[-\frac12\sin^2(t/2)-\frac12\cos^2(t/2)\right]
+=-\frac C2.
 \end{align*}
-Because the operator is $-\partial_x^2-1/4$, this jump must be $-1$.
+Because the operator is $-\partial_x^2-1/4$, integrating
+$(-\partial_x^2-\frac14)G=\delta(x-t)$ across $x=t$ gives
+$-[G_x]_{t^-}^{t^+}=1$, so this jump must be $-1$.
 Therefore $C=2$ and
 \[
 \boxed{G(x,t)=\begin{cases}
@@ -186,18 +211,22 @@ For a direct check of the source sign, put
 I(x)=\int_0^x\sin(t/2)f(t)\,dt,\qquad
 J(x)=\int_x^\pi\cos(t/2)f(t)\,dt.
 \]
-Then $y=2\cos(x/2)I+2\sin(x/2)J$. Since
-$I'=\sin(x/2)f$ and $J'=-\cos(x/2)f$, the two endpoint terms cancel
-in the first derivative:
+Splitting $y=\int_0^\pi G(x,t)f(t)\,dt$ at $t=x$ gives
+$y=2\cos(x/2)I+2\sin(x/2)J$. Since
+$I'=\sin(x/2)f$ and $J'=-\cos(x/2)f$, the terms of the first
+derivative that contain $I'$ and $J'$,
+$2\cos(x/2)\sin(x/2)f-2\sin(x/2)\cos(x/2)f$, cancel:
 \[
 y'=-\sin(x/2)I+\cos(x/2)J.
 \]
-Differentiating again gives
+Differentiating again, with the same $I'$ and $J'$, gives
 \[
 y''=-\tfrac12\cos(x/2)I-\tfrac12\sin(x/2)J
--\bigl[\sin^2(x/2)+\cos^2(x/2)\bigr]f=-\frac y4-f.
+-\bigl[\sin^2(x/2)+\cos^2(x/2)\bigr]f=-\frac y4-f,
 \]
-Also $I(0)=J(\pi)=0$ gives the two Dirichlet conditions.
+because $y/4=\frac12\cos(x/2)I+\frac12\sin(x/2)J$; thus $-y''-y/4=f$.
+Also $I(0)=J(\pi)=0$ gives the two Dirichlet conditions:
+$y(0)=2I(0)=0$ and $y(\pi)=2J(\pi)=0$.
 A homogeneous solution satisfying $y(0)=0$ is $A\sin(x/2)$, and its
 value at $\pi$ is $A$, so the homogeneous boundary problem has only
 the zero solution.
@@ -227,7 +256,8 @@ D=x^2\frac{d^2}{dx^2}+x\frac d{dx}+k^2x^2-1,
 L=\frac1xD=\frac d{dx}\left(x\frac d{dx}\right)+k^2x-\frac1x.
 \]
 First take $k>0$ with $J_1(k)\ne0$, and let $0<t<1$. On either side of
-the source, $Dy=0$ is Bessel's equation of order one. Its independent
+the source, $Dy=0$ is Bessel's equation of order one in the variable
+$z=kx$, $z^2y_{zz}+zy_z+(z^2-1)y=0$. Its independent
 solutions are $J_1(kx)$ and $Y_1(kx)$. Their small-$x$ behavior is
 \[
 J_1(kx)\sim\frac{kx}{2},\qquad
@@ -241,30 +271,37 @@ v(x)=Y_1(kx)-\frac{Y_1(k)}{J_1(k)}J_1(kx),\qquad v(1)=0.
 
 To determine the normalization, define $W=uv'-u'v$, with derivatives
 with respect to $x$. Dividing the homogeneous ODE by $x^2$ gives
-$y''=-y'/x-(k^2-x^{-2})y$. Hence
+$y''=-y'/x-(k^2-x^{-2})y$ for both $y=u$ and $y=v$. In $uv''-u''v$
+the terms $(k^2-x^{-2})uv$ cancel, and
 \[
-W'=uv''-u''v=-\frac1x(uv'-u'v)=-\frac Wx,
-\qquad W=\frac Cx.
+W'=uv''-u''v=-\frac1x(uv'-u'v)=-\frac Wx.
 \]
-The multiple of $J_1$ in $v$ does not change $W$. Using the displayed
-small-$x$ forms of $J_1,Y_1$ gives
+Hence $(xW)'=W+xW'=0$: $xW=w_0$ is constant (Abel's formula), and
+$W=w_0/x$. The multiple of $J_1$ in $v$ does not change $W$, because
+the Wronskian of $J_1(kx)$ with itself vanishes. The constant $w_0$ is
+the limit of $xW$ as $x\downarrow0$, which follows from the displayed
+small-$x$ forms of $J_1,Y_1$ and their $x$-derivatives $k/2$ and
+$2/(\pi kx^2)$:
 \[
 W\sim\frac{kx}{2}\frac{2}{\pi kx^2}
       -\frac k2\left(-\frac{2}{\pi kx}\right)
 =\frac{2}{\pi x}.
 \]
-Therefore the exact Wronskian is $W(x)=2/(\pi x)$.
+Therefore $w_0=2/\pi$, and the exact Wronskian is $W(x)=2/(\pi x)$.
 
-For $LG_L=\delta(x-t)$, the jump condition is
+For $LG_L=\delta(x-t)$, integrate
+$(xG_{L,x})_x+(k^2x-1/x)G_L=\delta(x-t)$ across $x=t$: only the
+flux $xG_{L,x}$ can jump, so the jump condition is
 $t[G_{L,x}]_{t^-}^{t^+}=1$. Set
 $G_L=C u(x_<)v(x_>)$, where $x_<=\min(x,t)$ and
-$x_>=\max(x,t)$. Its jump is $CW(t)$, giving
+$x_>=\max(x,t)$. By the jump formula of Exercise 10.1.2(a), its
+jump is $CW(t)$, giving
 $t\,C\,2/(\pi t)=1$, or $C=\pi/2$. Consequently
 \[
 \boxed{G_L(x,t)=\frac\pi2J_1(kx_<)
 \left[Y_1(kx_>)-\frac{Y_1(k)}{J_1(k)}J_1(kx_>)\right].}
 \]
-This is the symmetric kernel in the manual. Since $D=xL$,
+This is the symmetric kernel of the Instructor's Manual. Since $D=xL$,
 \[
 D_xG_L(x,t)=x\delta(x-t)=t\delta(x-t).
 \]
@@ -285,44 +322,74 @@ $x=1$, and tend to zero as $x\downarrow0$.
 The singular endpoint also restricts allowable sources if the integrated
 solution is required to vanish at zero. Sources supported inside $(0,1)$
 are sufficient; more generally $F(x)=O(x^\alpha)$ for $\alpha>0$ is
-sufficient. The small-$x$ kernel estimates give terms bounded by constants
-times $x^{-1}\int_0^x|F(t)|dt$ and
-$x\int_x^1|F(t)|t^{-2}dt$.  Up to constant multipliers, these bounds
-are respectively
+sufficient. To see this, split $y(x)=\int_0^1G_D(x,t)F(t)\,dt$ at
+$t=x$, and let $c$ denote constants. For $t<x$ the kernel is
+$\frac\pi2[J_1(kt)/t]\,v(x)$, where $J_1(kt)/t$ is bounded and
+$|v(x)|\le c/x$; for $t>x$ it is $\frac\pi2J_1(kx)\,v(t)/t$, where
+$|J_1(kx)|\le cx$ and $|v(t)/t|\le c/t^2$. The two parts of $y$ are
+therefore bounded by constants times $x^{-1}\int_0^x|F(t)|dt$ and
+$x\int_x^1|F(t)|t^{-2}dt$. For $|F(t)|\le ct^\alpha$, up to constant
+multipliers, these bounds are respectively
 \[
 \frac1x\int_0^x t^\alpha\,dt=\frac{x^\alpha}{\alpha+1},
 \qquad
 x\int_x^1t^{\alpha-2}\,dt=
 \begin{cases}
 \dfrac{x-x^\alpha}{\alpha-1},&\alpha\ne1,\\
--x\log x,&\alpha=1.
+-x\ln x,&\alpha=1.
 \end{cases}
 \]
 For every $\alpha>0$ both tend to zero, including the logarithmic case.
 An arbitrary nonzero constant source at zero is not covered by this
-boundary-value inverse.
+boundary-value inverse. For example, $Dy=1$ has the power-series
+solution $-1+\frac{k^2}3x^2+\cdots$ (the coefficient of $x^n$ gives
+$(n^2-1)a_n+k^2a_{n-2}=\delta_{n0}$), and the other solutions bounded
+at $0$ differ from it by multiples of $J_1(kx)$. All of them tend to
+$-1$ as $x\downarrow0$, so $y(0)=0$ cannot hold.
 
 At a positive root $J_1(k)=0$, the nonzero function $u=J_1(kx)$
 satisfies both endpoint conditions. The denominator vanishes for a
-reason: the homogeneous problem has a zero mode. Green's identity gives
-for an admissible solution of $Dy=F$
+reason: the homogeneous problem has a zero mode. Let $y$ solve $Dy=F$
+with $y(0)=y(1)=0$, for a source $F$ supported inside $(0,1)$. Then
+$Ly=F/x$ and $Lu=0$, and Lagrange's identity
+\[
+uLy-yLu=u(xy')'-y(xu')'=\bigl[x(uy'-u'y)\bigr]'
+\]
+gives
 \[
 \int_0^1u(x)\frac{F(x)}x\,dx
 =\int_0^1(uLy-yLu)\,dx
 =\left[x(uy'-u'y)\right]_0^1=0.
 \]
-A general source does not satisfy this compatibility condition, and a
-compatible solution is not unique because one can add $cu$.
-Therefore no ordinary inverse Green's function exists at these resonances.
+The boundary term vanishes at $x=1$ because $u(1)=y(1)=0$. Near
+$x=0$ the source vanishes, so there $y$ solves $Dy=0$ and, being
+regular at $0$, equals $cu$ for a constant $c$; hence $uy'-u'y=0$
+near $0$. For the delta source $F=\delta(x-t)$ the left
+side is $J_1(kt)/t$, which tends to $k/2\ne0$ as $t\downarrow0$. Thus
+a general source does not satisfy this compatibility condition, and a
+compatible solution is not unique because one can add any multiple
+of $u$. Therefore no ordinary inverse Green's function exists at these
+resonances.
 
 The case $k=0$ must be treated separately, rather than counted as a
-positive Bessel zero. Now the homogeneous solutions are $x$ and $1/x$.
-Choose $u=x$, $v=x-1/x$; then $W=2/x$. The kernels are
+positive Bessel zero. Now $Dy=x^2y''+xy'-y=0$ has the solutions $x$
+and $1/x$ (for $y=x^m$ it gives $m(m-1)+m-1=m^2-1=0$).
+Choose $u=x$ and $v=x-1/x$, so that $u(0)=0$ and $v(1)=0$; then
+$W=x(1+x^{-2})-(x-x^{-1})=2/x$. The jump condition $tCW(t)=2C=1$
+gives $C=1/2$, and the kernels are
 \[
 \boxed{G_{L,0}(x,t)=\frac12x_<\left(x_>-\frac1{x_>}\right),
 \qquad G_{D,0}(x,t)=\frac1{2t}x_<\left(x_>-\frac1{x_>}\right).}
 \]
 These are also the $k\downarrow0$ limits of the previous expressions.
+Indeed, as $k\to0$, $J_1(kx)\approx kx/2$, $Y_1(kx)\approx-2/(\pi kx)$
+and $Y_1(k)/J_1(k)\approx-4/(\pi k^2)$; the neglected terms are smaller
+by factors $O(k^2\ln k)$. Hence
+\[
+G_L(x,t)\approx\frac\pi2\,\frac{kx_<}{2}
+\left[-\frac2{\pi kx_>}+\frac4{\pi k^2}\,\frac{kx_>}2\right]
+=\frac12x_<\left(x_>-\frac1{x_>}\right).
+\]
 No nonzero multiple of $x$ vanishes at $1$, so this case is nonresonant.
 For real negative $k$, replace it by $|k|$ throughout, since the printed
 operator depends only on $k^2$.
@@ -344,9 +411,12 @@ Put the operator in divergence form:
 Ly=\frac d{dx}\bigl[(1-x^2)y'(x)\bigr].
 \]
 For a homogeneous solution, one integration gives
-$(1-x^2)y'=C$, and a second gives
+$(1-x^2)y'=C$. By partial fractions,
+$y'=C/(1-x^2)=\frac C2\bigl[1/(1+x)+1/(1-x)\bigr]$, and a second
+integration gives
 \[
-y(x)=D+\frac C2\log\frac{1+x}{1-x}.
+y(x)=D+\frac C2\bigl[\ln(1+x)-\ln(1-x)\bigr]
+=D+\frac C2\ln\frac{1+x}{1-x}.
 \]
 The logarithm diverges at either endpoint. Thus a homogeneous solution
 finite at $-1$ is a constant, and a homogeneous solution finite at $+1$
@@ -370,7 +440,11 @@ under the specified finite-endpoint conditions.
 The obstruction is the constant zero mode $L1=0$. For a regular source
 $f$, endpoint finiteness of a solution to $Ly=f$ forces the endpoint
 fluxes $(1-x^2)y'$ to vanish: a nonzero limiting flux would integrate
-to the logarithmic divergence displayed above. Consequently
+to the logarithmic divergence displayed above. Indeed, if
+$(1-x^2)y'\to\Phi\ne0$ as $x\uparrow1$, then
+$y'\approx\Phi/[2(1-x)]$ near $x=1$, and $y\approx-\frac\Phi2\ln(1-x)$
+is unbounded; the same holds at $x=-1$. Consequently, integrating
+$Ly=[(1-x^2)y']'=f$ over $(-1,1)$ gives
 \[
 \int_{-1}^1f(x)\,dx
 =\left[(1-x^2)y'(x)\right]_{-1}^1=0.
@@ -391,9 +465,11 @@ $t>0$ given $f(t)=\exp(-t)$.
 \solution
 Use $u$ for the source time and $t$ for the observation time.
 For $t<u$, the zero initial data require the causal kernel to vanish.
-For $t>u$, the homogeneous equation is $G_{tt}+kG_t=0$. When $k\ne0$
-its solution is $A(u)+B(u)e^{-kt}$. Continuity at $t=u$ requires
-$A+B e^{-ku}=0$, so it can be written $C(u)(1-e^{-k(t-u)})$.
+For $t>u$, the homogeneous equation is $G_{tt}+kG_t=0$, a first-order
+equation for $G_t$ with solution proportional to $e^{-kt}$. When
+$k\ne0$, a further integration gives $A(u)+B(u)e^{-kt}$. Continuity
+at $t=u$ requires $A+B e^{-ku}=0$, so it can be written
+$C(u)(1-e^{-k(t-u)})$.
 Its first derivative at $u^+$ is $kC(u)$, while that at $u^-$ is zero.
 The coefficient of $\psi''$ is one; therefore the jump must be one,
 and $C(u)=1/k$. We obtain
@@ -408,19 +484,22 @@ conditions, or take the limit:
 For either expression $G$ is continuous with value zero at the source
 and $[G_t]=1$, proving $(\partial_t^2+k\partial_t)G=\delta(t-u)$.
 
-\erratum{The manual's kernel on pp.~119--120 is normalized for the
-multiplied equation $(e^{kt}\psi')'=e^{kt}f$. It is $e^{-ku}G(t,u)$
+\erratum{The Instructor's Manual's kernel on pp.~119--120 is normalized
+for the multiplied equation $(e^{kt}\psi')'=e^{kt}f$. It is $e^{-ku}G(t,u)$
 and must be integrated against $e^{ku}f(u)$. The kernel above acts
 directly on the original source $f(u)$. Also, the apparent singularities
 at $k=0$ and $k=1$ in the final algebraic formula are removable and need
 the cases given below.}
 
-For $f(u)=e^{-u}$ and $k\ne0,1$, the convolution is
+For $f(u)=e^{-u}$ and $k\ne0,1$, the convolution is computed with
+$\int_0^te^{-u}\,du=1-e^{-t}$ and $e^{-k(t-u)}e^{-u}=e^{-kt}e^{(k-1)u}$:
 \begin{align*}
 \psi(t)&=\frac1k\int_0^t\left(1-e^{-k(t-u)}\right)e^{-u}\,du\\
 &=\frac1k\left[1-e^{-t}-e^{-kt}\int_0^t e^{(k-1)u}\,du\right]\\
-&=\frac1k\left[1-e^{-t}-\frac{e^{-t}-e^{-kt}}{k-1}\right]\\
-&=\boxed{\frac{(k-1)-ke^{-t}+e^{-kt}}{k(k-1)}}.
+&=\frac1k\left[1-e^{-t}-e^{-kt}\,\frac{e^{(k-1)t}-1}{k-1}\right]
+=\frac1k\left[1-e^{-t}-\frac{e^{-t}-e^{-kt}}{k-1}\right]\\
+&=\frac{(k-1)(1-e^{-t})-e^{-t}+e^{-kt}}{k(k-1)}
+=\boxed{\frac{(k-1)-ke^{-t}+e^{-kt}}{k(k-1)}}.
 \end{align*}
 Its derivatives are
 \[
@@ -428,14 +507,16 @@ Its derivatives are
 \psi''(t)=\frac{-e^{-t}+ke^{-kt}}{k-1},
 \]
 so $\psi''+k\psi'=e^{-t}$ and $\psi(0)=\psi'(0)=0$.
-For the exceptional values, evaluate the integrals directly:
+For the exceptional values, evaluate the integrals directly; for $k=0$
+integrate by parts:
 \begin{align*}
 k=1:\quad
-\psi(t)&=\int_0^t(e^{-u}-e^{-t})\,du
+\psi(t)&=\int_0^t(e^{-u}-e^{-t})\,du=(1-e^{-t})-te^{-t}
 =\boxed{1-(1+t)e^{-t}},\\
 k=0:\quad
 \psi(t)&=\int_0^t(t-u)e^{-u}\,du
-=\boxed{t-1+e^{-t}}.
+=\Bigl[-(t-u)e^{-u}\Bigr]_0^t-\int_0^te^{-u}\,du\\
+&=t-(1-e^{-t})=\boxed{t-1+e^{-t}}.
 \end{align*}
 For $k=1$, the derivatives are $te^{-t}$ and $(1-t)e^{-t}$;
 for $k=0$, they are $1-e^{-t}$ and $e^{-t}$. These verify the ODE
@@ -481,21 +562,32 @@ For a continuous compactly supported source $g$, define
 F(x)=\int_{-\infty}^xe^{-ikt}g(t)\,dt,\qquad
 H(x)=\int_x^\infty e^{ikt}g(t)\,dt.
 \]
-The convolution has the explicit form
+Since $e^{ik|x-t|}$ equals $e^{ikx}e^{-ikt}$ for $t<x$ and
+$e^{-ikx}e^{ikt}$ for $t>x$, the convolution
+$\psi(x)=\int_{-\infty}^\infty G(x,t)g(t)\,dt$ has the explicit form
 \[
 \psi(x)=-\frac{i}{2k}\left[e^{ikx}F(x)+e^{-ikx}H(x)\right].
 \]
-Because $F'=e^{-ikx}g$ and $H'=-e^{ikx}g$, their endpoint contributions
-cancel in the first derivative. A second differentiation gives
-\begin{align*}
-\psi'(x)&=\frac12\left[e^{ikx}F(x)-e^{-ikx}H(x)\right],\\
-\psi''(x)&=\frac{ik}{2}\left[e^{ikx}F(x)+e^{-ikx}H(x)\right]+g(x).
-\end{align*}
-Since $k^2\psi=-ik[e^{ikx}F+e^{-ikx}H]/2$, their sum is $g$.
+Because $F'=e^{-ikx}g$ and $H'=-e^{ikx}g$, the terms of $\psi'$ that
+contain $F'$ and $H'$ add up to $-\frac{i}{2k}(g-g)=0$, and only the
+derivatives of the exponentials remain:
+\[
+\psi'(x)=-\frac{i}{2k}\left[ike^{ikx}F-ike^{-ikx}H\right]
+=\frac12\left[e^{ikx}F(x)-e^{-ikx}H(x)\right].
+\]
+In the second derivative the terms with $F'$ and $H'$ give
+$\frac12(g+g)=g$:
+\[
+\psi''(x)=\frac{ik}{2}\left[e^{ikx}F(x)+e^{-ikx}H(x)\right]+g(x).
+\]
+Since $k^2\psi=-ik[e^{ikx}F+e^{-ikx}H]/2$, the sum $\psi''+k^2\psi$
+is $g$.
 
-If the source is supported in $[a,b]$, then for $x>b$ only the first
-term remains: $\psi=C_+e^{ikx}$. For $x<a$ only the second remains:
-$\psi=C_-e^{-ikx}$. With the time factor $e^{-i\omega\tau}$, constant
+If the source is supported in $[a,b]$, then for $x>b$ we have $H(x)=0$
+and $F(x)=F(b)$, so only the first term remains:
+$\psi=C_+e^{ikx}$ with $C_+=-iF(b)/(2k)$. For $x<a$, $F(x)=0$ and
+$H(x)=H(a)$, so only the second remains: $\psi=C_-e^{-ikx}$ with
+$C_-=-iH(a)/(2k)$. With the time factor $e^{-i\omega\tau}$, constant
 phase on the right obeys $kx-\omega\tau=\text{constant}$ and moves
 to increasing $x$; on the left it obeys $-kx-\omega\tau=\text{constant}$
 and moves to decreasing $x$. Both waves travel away from the source,
@@ -525,7 +617,9 @@ e^{\kappa(x-t)},&x<t,\\
 e^{-\kappa(x-t)},&x>t.
 \end{cases}
 \]
-The jump of its derivative is $-\kappa C-\kappa C=-2\kappa C$.
+Its derivative tends to $\kappa C$ as $x\uparrow t$ and to $-\kappa C$
+as $x\downarrow t$, so the jump of its derivative is
+$-\kappa C-\kappa C=-2\kappa C$.
 The coefficient of $\psi''$ is one, so this must equal one. Hence
 \[
 \boxed{G(x,t)=-\frac1{2\kappa}e^{-\kappa|x-t|}.}
@@ -533,7 +627,9 @@ The coefficient of $\psi''$ is one, so this must equal one. Hence
 It is continuous at $x=t$, solves $G_{xx}-\kappa^2G=0$ off the
 diagonal, and decays at both infinities. Its derivative limits are
 $-1/2$ and $+1/2$, so $(\partial_x^2-k^2)G=\delta(x-t)$.
-Therefore
+Therefore, splitting $\int_{-\infty}^\infty G(x,t)f(t)\,dt$ at $t=x$,
+where $e^{-\kappa|x-t|}$ equals $e^{-\kappa x}e^{\kappa t}$ for $t<x$
+and $e^{\kappa x}e^{-\kappa t}$ for $t>x$,
 \[
 \psi(x)=-\frac1{2\kappa}\left[
 e^{-\kappa x}\int_{-\infty}^x e^{\kappa t}f(t)\,dt
@@ -546,7 +642,8 @@ can decay at both ends only if $A=B=0$, proving uniqueness.
 \erratum{For $k=0$, no Green's function for $d^2/dx^2$ can vanish at
 both infinities. Each branch would be affine; decay at its corresponding
 infinity would make that branch zero, leaving no derivative jump.}
-The divergent constant in the $\kappa\downarrow0$ expansion
+The divergent constant in the $\kappa\downarrow0$ expansion, obtained
+from $e^{-\kappa|x-t|}=1-\kappa|x-t|+O(\kappa^2)$,
 \[
 G(x,t)=-\frac1{2\kappa}+\frac12|x-t|+O(\kappa)
 \]
@@ -585,14 +682,19 @@ There is no complex conjugation to display here because the chosen
 eigenfunctions are real.
 
 (a) With $\phi(0)=\phi(1)=0$, the equation $-\phi''=\lambda\phi$
-has positive eigenvalues. Indeed, integration by parts gives
+has positive eigenvalues. Indeed, multiplying it by $\phi^*$ and
+integrating by parts gives
 \[
 \lambda\int_0^1|\phi|^2dx
+=-\int_0^1\phi^*\phi''\,dx
+=-\bigl[\phi^*\phi'\bigr]_0^1+\int_0^1|\phi'|^2dx
 =\int_0^1|\phi'|^2dx,
 \]
-and equality at $\lambda=0$ would make $\phi$ a constant vanishing
-at the endpoints. Write $\lambda=q^2$ with $q>0$. The condition at zero
-removes the cosine term, and $\sin q=0$ gives $q=n\pi$, $n\ge1$.
+since the boundary term vanishes when $\phi(0)=\phi(1)=0$. Hence
+$\lambda\ge0$, and $\lambda=0$ would give $\phi'=0$, making $\phi$ a
+constant vanishing at the endpoints, i.e., $\phi=0$. Write
+$\lambda=q^2$ with $q>0$. In $\phi=A\sin(qx)+B\cos(qx)$ the condition
+at zero gives $B=0$, and $\phi(1)=A\sin q=0$ gives $q=n\pi$, $n\ge1$.
 Since
 \[
 \int_0^1\sin^2(n\pi x)\,dx
@@ -606,8 +708,9 @@ G_D(x,t)=\frac2{\pi^2}\sum_{n=1}^\infty
 \]
 Construct the same kernel directly. The left and right homogeneous
 solutions are $x$ and $1-x$, and continuity suggests
-$C x_<(1-x_>)$. Its derivative jump is
-$-Ct-C(1-t)=-C$. Requiring $-G_{xx}=\delta$ gives $C=1$.
+$C x_<(1-x_>)$. Its derivative is $C(1-t)$ for $x<t$ and $-Ct$ for
+$x>t$, so its jump is $-Ct-C(1-t)=-C$. Requiring $-G_{xx}=\delta$,
+i.e., a jump of $-1$ as in Exercise 10.1.1, gives $C=1$.
 Thus
 \[
 \boxed{\frac2{\pi^2}\sum_{n=1}^\infty
@@ -616,9 +719,10 @@ Thus
 \]
 
 (b) Now impose $\phi(0)=0$, $\phi'(1)=0$. The same energy identity
-shows that the eigenvalues are positive: its boundary term vanishes
-also for these mixed conditions. Again $\phi=A\sin(qx)$, while the
-second endpoint condition gives $q\cos q=0$. Thus
+shows that the eigenvalues are positive: its boundary term
+$-\phi^*(1)\phi'(1)+\phi^*(0)\phi'(0)$ vanishes also for these mixed
+conditions. Again $\phi=A\sin(qx)$, while the second endpoint
+condition gives $\phi'(1)=Aq\cos q=0$, i.e., $\cos q=0$. Thus
 \[
 q_n=(n+\tfrac12)\pi,\qquad
 \lambda_n=(n+\tfrac12)^2\pi^2,\qquad n=0,1,2,\ldots.
@@ -641,15 +745,18 @@ For completeness, the identification does not require differentiating
 either series twice term by term. For each fixed interior $t$, integrate
 by parts on $(0,t)$ and $(t,1)$, using $-G_{xx}=\delta(x-t)$ and
 the matching endpoint conditions.  Because each closed kernel is affine
-on either side of $t$, integration by parts twice gives
+on either side of $t$ ($G_{xx}=0$ there, so no integral remains),
+integration by parts twice gives
 \begin{align*}
 \int_0^1G(-\phi_n'')\,dx
 &=\bigl[-G\phi_n'+G_x\phi_n\bigr]_{0}^{t^-}
  +\bigl[-G\phi_n'+G_x\phi_n\bigr]_{t^+}^{1}\\
 &=\bigl[G_x(t^-,t)-G_x(t^+,t)\bigr]\phi_n(t)=\phi_n(t).
 \end{align*}
-Here the outer-endpoint terms vanish; the terms with $\phi_n'(t)$
-cancel because $G$ is continuous, and the derivative jump is $-1$.
+Here the outer-endpoint terms vanish: at $x=0$ both $G$ and $\phi_n$
+are zero, and at $x=1$ we have $G=\phi_n=0$ in (a) and
+$G_x=\phi_n'=0$ in (b). The terms with $\phi_n'(t)$ cancel because
+$G$ is continuous, and the derivative jump is $-1$.
 Since $-\phi_n''=\lambda_n\phi_n$, this gives
 \[
 \lambda_n\int_0^1G(x,t)\phi_n(x)\,dx
@@ -687,7 +794,13 @@ y'(s)=c+\int_{-1}^s y(t)\,dt,
 y(x)=1+c(x+1)+\int_{-1}^x\int_{-1}^s y(t)\,dt\,ds.
 \]
 Interchanging the order on the triangle $-1\le t\le s\le x$ turns
-the double integral into $\int_{-1}^x(x-t)y(t)dt$. At $x=1$,
+the double integral into a single one:
+\[
+\int_{-1}^x\int_{-1}^s y(t)\,dt\,ds
+=\int_{-1}^x y(t)\left(\int_t^x ds\right)dt
+=\int_{-1}^x(x-t)y(t)\,dt.
+\]
+At $x=1$, the condition $y(1)=1$ gives
 \[
 1=1+2c+\int_{-1}^1(1-t)y(t)\,dt,
 \qquad c=-\frac12\int_{-1}^1(1-t)y(t)\,dt.
@@ -697,13 +810,16 @@ Substitution yields
 y(x)=1+\int_{-1}^x(x-t)y(t)\,dt
 -\frac{x+1}{2}\int_{-1}^1(1-t)y(t)\,dt.
 \]
-Split the last integral at $t=x$. On $t<x$, its combined coefficient is
+Split the last integral at $t=x$. On $t<x$, the combined coefficient
+of $y(t)$ is
 \[
 (x-t)-\frac{x+1}{2}(1-t)
-=\frac{2x-2t-x-1+xt+t}{2}
+=\frac{2x-2t-(x+1-xt-t)}{2}
+=\frac{(x-1)+t(x-1)}{2}
 =-\frac{(1-x)(t+1)}2.
 \]
-On $t>x$, the coefficient is $-(x+1)(1-t)/2$. We obtain
+On $t>x$, only the last integral contributes, with coefficient
+$-(x+1)(1-t)/2$. We obtain
 \[
 \boxed{y(x)=1-\int_{-1}^1K(x,t)y(t)\,dt,\quad
 K(x,t)=\begin{cases}
@@ -713,14 +829,16 @@ K(x,t)=\begin{cases}
 \]
 
 (b) Homogenize the boundary conditions by setting $u=y-1$.
-Then $u(-1)=u(1)=0$, and the original equation gives
-$-u''=-y$. Construct the Green's function of $-d^2/dx^2$ on $[-1,1]$:
-the left and right homogeneous solutions are $x+1$ and $1-x$.
-The continuous kernel $C(x_<+1)(1-x_>)$ has derivative jump
+Then $u(-1)=u(1)=0$, and since $u''=y''=y$, the original equation
+becomes $-u''=-y$. Construct the Green's function of $-d^2/dx^2$ on
+$[-1,1]$: the left and right homogeneous solutions are $x+1$ and $1-x$.
+The continuous kernel $C(x_<+1)(1-x_>)$ has $x$-derivative $C(1-t)$
+for $x<t$ and $-C(t+1)$ for $x>t$, hence the derivative jump
 \[
 -C(t+1)-C(1-t)=-2C.
 \]
-Setting that jump to $-1$ gives $C=1/2$, which is exactly $K$ above.
+For $-G_{xx}=\delta(x-t)$ the jump must be $-1$ (as in
+Exercise 10.1.1), so $C=1/2$, which is exactly $K$ above.
 Thus
 \[
 u(x)=\int_{-1}^1K(x,t)(-y(t))\,dt,
@@ -728,16 +846,33 @@ u(x)=\int_{-1}^1K(x,t)(-y(t))\,dt,
 and adding $1$ recovers the same integral equation.
 
 Conversely, $K(\pm1,t)=0$ makes any solution of that integral equation
-satisfy $y(\pm1)=1$. Applying $-d^2/dx^2$ gives $-y''=-y$, or $y''-y=0$.
+satisfy $y(\pm1)=1$. Applying $-d^2/dx^2$ and using
+$-\partial_x^2K(x,t)=\delta(x-t)$ gives $-y''=-y$, or $y''-y=0$.
 As an explicit check, write $y=A\cosh x+B\sinh x$. The two endpoint
-values give $A\cosh1+B\sinh1=1$ and $A\cosh1-B\sinh1=1$,
-so
+values give $A\cosh1+B\sinh1=1$ and $A\cosh1-B\sinh1=1$, so $B=0$ and
+$A=1/\cosh1$:
 \[
 \boxed{y(x)=\frac{\cosh x}{\cosh1}.}
 \]
-Direct integration of the two branches of $K$ gives
-$\int_{-1}^1K(x,t)\cosh t\,dt=\cosh1-\cosh x$, verifying the
-integral equation with this solution.
+To verify the integral equation with this solution, integrate the two
+branches of $K$ against $\cosh t$, using the antiderivatives (found by
+integrating by parts)
+\[
+\int(t+1)\cosh t\,dt=(t+1)\sinh t-\cosh t,\qquad
+\int(1-t)\cosh t\,dt=(1-t)\sinh t+\cosh t.
+\]
+They give
+\begin{align*}
+\int_{-1}^1K(x,t)\cosh t\,dt
+&=\tfrac12(1-x)\bigl[(x+1)\sinh x-\cosh x+\cosh1\bigr]\\
+&\quad+\tfrac12(x+1)\bigl[\cosh1-(1-x)\sinh x-\cosh x\bigr]\\
+&=\cosh1-\cosh x,
+\end{align*}
+because the $\sinh x$ terms cancel and
+$\frac12(1-x)+\frac12(x+1)=1$. Hence
+$1-\int_{-1}^1K(x,t)\,\frac{\cosh t}{\cosh1}\,dt
+=1-\frac{\cosh1-\cosh x}{\cosh1}=\frac{\cosh x}{\cosh1}$,
+as required.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -764,19 +899,22 @@ related to self-adjointness of the ODE?
 and distinguish the ordinary unit-weight inner product from a weighted one.}
 \solution
 Let $c=y'(0)$ and use $y(0)=0$. One integration of
-$y''=-a_1y'-a_2y$ gives
+$y''=-a_1y'-a_2y$ over $(0,x)$, with
+$\int_0^xy'(t)\,dt=y(x)-y(0)=y(x)$, gives
 \[
 y'(x)=c-a_1y(x)-a_2\int_0^xy(t)\,dt.
 \]
-Integrate once more. Reversing the order in the double integral gives
+Integrate once more over $(0,x)$. Reversing the order in the double
+integral, as in Exercise 10.1.11,
+$\int_0^x\int_0^sy(t)\,dt\,ds=\int_0^x(x-t)y(t)\,dt$, so
 \[
 y(x)=cx-a_1\int_0^xy(t)\,dt-a_2\int_0^x(x-t)y(t)\,dt.
 \]
-The second boundary condition supplies
+The second boundary condition, $y(1)=0$, supplies
 \[
 0=c-a_1\int_0^1y(t)\,dt-a_2\int_0^1(1-t)y(t)\,dt.
 \]
-Eliminate $c$ from the preceding expression:
+Solve this for $c$ and substitute into the preceding expression:
 \begin{align*}
 y(x)={}&a_1x\int_0^1y(t)\,dt-a_1\int_0^xy(t)\,dt\\
 &+a_2x\int_0^1(1-t)y(t)\,dt-a_2\int_0^x(x-t)y(t)\,dt.
@@ -798,13 +936,16 @@ The value of $K$ at the single point $t=x$ does not affect the integral.
 
 The reverse implication can also be checked without assuming the ODE.
 Let the integral on the right be $F(x)$ and split it at $t=x$. The
-first branch at the diagonal minus the second branch there is $-a_1$,
-so the Leibniz rule gives
+first branch at the diagonal minus the second branch there is
+$[a_2x(1-x)+a_1(x-1)]-[a_2x(1-x)+a_1x]=-a_1$, and the $x$-derivatives
+of the two branches are $-a_2t+a_1$ and $a_2(1-t)+a_1$, so the
+Leibniz rule gives
 \[
 F'(x)=-a_1y(x)+\int_0^x(-a_2t+a_1)y(t)\,dt
 +\int_x^1\bigl[a_2(1-t)+a_1\bigr]y(t)\,dt.
 \]
-A second differentiation gives
+A second differentiation (the integrands no longer depend on $x$, so
+only the endpoint terms appear) gives
 \[
 F''=-a_1y'+\bigl[(-a_2x+a_1)-(a_2(1-x)+a_1)\bigr]y
 =-a_1y'-a_2y.
@@ -816,7 +957,15 @@ so the integral equation incorporates both boundary conditions.
 the unit-weight inner product. A nonzero real $a_1$ does not make the
 ODE intrinsically incapable of a self-adjoint formulation; it requires
 an integrating factor, or equivalently a weighted inner product.}
-For real coefficients and zero Dirichlet data, integration by parts gives
+For real coefficients and zero Dirichlet data, integrate by parts twice
+in the $\psi''$ term and once in the $\psi'$ term:
+\begin{align*}
+\int_0^1\phi^*(\psi''+a_1\psi'+a_2\psi)\,dx
+={}&\int_0^1(\phi''-a_1\phi'+a_2\phi)^*\psi\,dx\\
+&+\bigl[\phi^*\psi'-(\phi^*)'\psi+a_1\phi^*\psi\bigr]_0^1.
+\end{align*}
+The boundary term vanishes when $\phi$ and $\psi$ vanish at both ends.
+Hence
 \[
 \left(\frac{d^2}{dx^2}+a_1\frac d{dx}+a_2\right)^{\!\dagger}
 =\frac{d^2}{dx^2}-a_1\frac d{dx}+a_2.
@@ -827,14 +976,30 @@ precisely when $a_1=0$. In this case
 K(x,t)=a_2x_<(1-x_>),
 \]
 which is continuous and symmetric. When $a_1\ne0$, the kernel jumps by
-$a_1$ as $t$ passes from below to above $x$ and is not symmetric.
-Multiplication of the ODE by $p(x)=e^{a_1x}$ instead gives
+$a_1x-a_1(x-1)=a_1$ as $t$ passes from below to above $x$, and it is
+not symmetric: for $t<x$,
+\[
+K(x,t)-K(t,x)=\bigl[a_2t(1-x)+a_1(x-1)\bigr]-\bigl[a_2t(1-x)+a_1t\bigr]
+=-a_1(1+t-x),
+\]
+which is not identically zero.
+Since $(py')'=p(y''+a_1y')$ for $p(x)=e^{a_1x}$, multiplication of the
+ODE by $p$ instead gives
 \[
 (py')'+a_2py=0.
 \]
 This differential expression is self-adjoint with the Dirichlet domain;
 the original expression is symmetric in the weighted scalar product
-$\int_0^1p(x)\phi(x)^*\psi(x)dx$.
+$\int_0^1p(x)\phi(x)^*\psi(x)dx$. Indeed, with
+$L=d^2/dx^2+a_1d/dx+a_2$ we have $pL\psi=(p\psi')'+a_2p\psi$, and one
+integration by parts (its boundary term $[p\phi^*\psi']_0^1$ vanishes
+because $\phi=0$ at both ends) gives
+\[
+\int_0^1p\,\phi^*L\psi\,dx
+=-\int_0^1p\,(\phi^*)'\psi'\,dx+\int_0^1a_2p\,\phi^*\psi\,dx,
+\]
+which is unchanged when $\phi$ and $\psi$ are interchanged and
+complex conjugated.
 
 The homogeneous integral equation need not have a nonzero solution for
 arbitrary coefficients. To identify its exceptional parameters, put
@@ -845,10 +1010,13 @@ y''=e^{-a_1x/2}(v''-a_1v'+a_1^2v/4),
 \]
 and substitution reduces the ODE to
 \[
-v''+(a_2-a_1^2/4)v=0,\qquad v(0)=v(1)=0.
+v''+(a_2-a_1^2/4)v=0,\qquad v(0)=v(1)=0,
 \]
+because the $v'$ terms cancel ($-a_1v'+a_1v'=0$) and the coefficient
+of $v$ is $a_1^2/4-a_1^2/2+a_2=a_2-a_1^2/4$.
 For real coefficients, nonzero solutions exist exactly when
-$a_2-a_1^2/4=n^2\pi^2$, $n=1,2,\ldots$; they are
+$a_2-a_1^2/4=n^2\pi^2$, $n=1,2,\ldots$ (the Dirichlet eigenvalues
+found in Exercise 10.1.10(a), with $v=\sin(n\pi x)$); they are
 $y=C e^{-a_1x/2}\sin(n\pi x)$. Otherwise the only solution of either
 formulation is $y=0$.
 
@@ -878,9 +1046,10 @@ G(r,t)=\begin{cases}
 \erratum{The decaying kernel in the question assumes $k$ is the
 positive square root of a positive $k^2$ (more generally $\Re k>0$).
 The singular endpoint is interpreted using the regular solution
-$y(r)=O(r)$ as $r\downarrow0$. The manual's final sentence on p.~120,
-claiming that the question's $G$ is minus the Green's function, is
-incorrect for the chapter's convention $LG=+\delta$.}
+$y(r)=O(r)$ as $r\downarrow0$. The Instructor's Manual's final
+sentence on p.~120, claiming that the question's $G$ is minus the
+Green's function, is incorrect for the chapter's convention
+$LG=+\delta$.}
 Isolate the free operator and source:
 \[
 L_0=\frac{d^2}{dr^2}-k^2,\qquad
@@ -893,7 +1062,8 @@ uv'-u'v
 &=-k\sinh(kr)e^{-kr}-k\cosh(kr)e^{-kr}\\
 &=-ke^{-kr}\bigl[\sinh(kr)+\cosh(kr)\bigr]=-k.
 \end{align*}
-The continuous kernel $C u(r_<)v(r_>)$ has derivative jump $-kC$.
+By the jump formula of Exercise 10.1.2(a), the continuous kernel
+$C u(r_<)v(r_>)$ has derivative jump $C(uv'-u'v)=-kC$.
 For $L_0G=\delta(r-t)$ the jump must be $1$, so $C=-1/k$:
 \[
 \boxed{G(r,t)=-\frac1k\sinh(kr_<)e^{-kr_>},
@@ -905,8 +1075,10 @@ delta source. Equivalently, the method-of-images form is
 \[
 G(r,t)=-\frac1{2k}\left[e^{-k|r-t|}-e^{-k(r+t)}\right].
 \]
-The second term cancels the first at $r=0$ and is homogeneous as a
-function of positive $r$.
+Indeed, for $r<t$ the bracket is
+$e^{-kt}(e^{kr}-e^{-kr})=2e^{-kt}\sinh kr$, and for $r>t$ it is
+$2e^{-kr}\sinh kt$. The second term cancels the first at $r=0$ and is
+homogeneous as a function of positive $r$.
 
 Apply this inverse to the source $-V_0e^{-t}y(t)/t$:
 \[
@@ -920,8 +1092,9 @@ e^{-kr}\int_0^r\sinh(kt)\frac{e^{-t}}t y(t)\,dt
 +\sinh(kr)\int_r^\infty e^{-kt}\frac{e^{-t}}t y(t)\,dt\right].
 \]
 On the regular branch $y(t)=O(t)$, the source factor $y(t)/t$ is bounded
-near zero. For example, substitution of $y=At+Bt^2+\cdots$ into the
-ODE gives $2B+V_0A=0$, so
+near zero. For example, substitute $y=At+Bt^2+\cdots$ into the ODE:
+$y''=2B+O(t)$, $k^2y=O(t)$, and $V_0e^{-t}y/t=V_0A+O(t)$, so the
+$t^0$ terms give $2B+V_0A=0$ and
 $y(t)=At-(V_0A/2)t^2+\cdots$. At infinity the exponential factors
 ensure convergence for a decaying $y$.
 
@@ -934,7 +1107,8 @@ boundary problem within this regular, decaying class; it is a homogeneous
 eigenvalue equation for the allowed parameters, not an assertion that
 all $V_0,k$ admit a nonzero solution.
 
-The limit $k\downarrow0$ gives $G(r,t)\to-\min(r,t)$, which approaches
+The limit $k\downarrow0$ gives $G(r,t)\to-\min(r,t)$ (since
+$\sinh(kr_<)/k\to r_<$ and $e^{-kr_>}\to1$), which approaches
 $-t$, not zero, as $r\to\infty$. Accordingly there is no inverse of
 $d^2/dr^2$ satisfying these same two zero boundary values for an arbitrary
 source: its right homogeneous branch would have to be identically zero.
@@ -951,7 +1125,8 @@ in Example 10.1.1.
 \solution
 Write $x=x_1$, $t=x_2$. The fundamental solution
 $G_0(x,t)=|x-t|/2$ has derivative $-1/2$ for $x<t$ and $+1/2$ for
-$x>t$. Its derivative jump is $1$, so
+$x>t$. It is continuous, linear on each side, and its derivative jump
+is $1$, so (as in Exercise 10.1.1)
 \[
 \partial_x^2G_0(x,t)=\delta(x-t).
 \]
@@ -963,7 +1138,8 @@ in $x$, $h(x,t)=a(t)x+b(t)$. The endpoint equations are
 \[
 0=G_0(1,t)+a(t)+b(t)=(1-t)/2+a(t)-t/2.
 \]
-Hence $b=-t/2$, $a=t-1/2$, and
+Hence $b=-t/2$, and then the second equation gives
+$a=t/2-(1-t)/2=t-1/2$, so that $h=(t-\frac12)x-\frac t2$ and
 \[
 G_D(x,t)=\frac12|x-t|+xt-\frac{x+t}{2}.
 \]
@@ -1067,9 +1243,9 @@ k^{2}G(\mathbf{r}_{1},\mathbf{r}_{2})\,d^{3}r_{2}=0.}
 \erratum{The printed limit, including its value $-1$, is incorrect
 for a shrinking neighborhood of the source (textbook p.~466). The
 integration region must be specified as a ball of radius $\varepsilon$,
-and the local limit is $0$. The manual, p.~121, computes a different,
-whole-space Fourier integral, formally giving $+1/k^2$ for its
-Helmholtz denominator $k^2-p^2$.  It does not establish the printed
+and the local limit is $0$. The Instructor's Manual, p.~121, computes
+a different, whole-space Fourier integral, formally giving $+1/k^2$ for
+its Helmholtz denominator $k^2-p^2$.  It does not establish the printed
 local claim.}
 Fix $\mathbf r_1$ and put $s=|\mathbf r_2-\mathbf r_1|$.
 The three-dimensional outgoing and modified kernels are respectively
@@ -1077,7 +1253,8 @@ The three-dimensional outgoing and modified kernels are respectively
 G_H(s)=-\frac{e^{iks}}{4\pi s},\qquad
 G_M(s)=-\frac{e^{-ks}}{4\pi s},\qquad k>0.
 \]
-Their Taylor expansions at $s=0$ start with
+Since $e^{iks}=1+iks+O(s^2)$ and $e^{-ks}=1-ks+O(s^2)$, their
+expansions at $s=0$ start with
 \[
 G_H(s)=-\frac1{4\pi s}-\frac{ik}{4\pi}+O(s),\qquad
 G_M(s)=-\frac1{4\pi s}+\frac{k}{4\pi}+O(s).
@@ -1098,24 +1275,40 @@ k^2G(\mathbf r_1,\mathbf r_2)\,d^3r_2=0.}
 \]
 The same conclusion holds for $-k^2G$.
 
-The exact radial integrals independently show the limit. For Helmholtz,
+The exact radial integrals $I_H(\varepsilon)$ and $I_M(\varepsilon)$ of
+$k^2G_H$ and $k^2G_M$ over the ball independently show the limit.
+For Helmholtz, use the antiderivative
+$\int se^{iks}\,ds=e^{iks}\bigl(\frac{s}{ik}+\frac1{k^2}\bigr)$
+(differentiate to check) and $-k^2/(ik)=ik$:
 \begin{align*}
-I_H(\varepsilon)&=-k^2\int_0^\varepsilon s e^{iks}\,ds\\
-&=-k^2\left[e^{iks}\left(\frac{s}{ik}+\frac1{k^2}\right)\right]_0^\varepsilon\\
+I_H(\varepsilon)&=4\pi k^2\int_0^\varepsilon
+\left(-\frac{e^{iks}}{4\pi s}\right)s^2\,ds
+=-k^2\int_0^\varepsilon s e^{iks}\,ds\\
+&=-k^2\left[e^{iks}\left(\frac{s}{ik}+\frac1{k^2}\right)\right]_0^\varepsilon
+=ik\varepsilon e^{ik\varepsilon}-e^{ik\varepsilon}+1\\
 &=e^{ik\varepsilon}(ik\varepsilon-1)+1\longrightarrow0.
 \end{align*}
 For modified Helmholtz,
+$\frac{d}{ds}\bigl[(1+ks)e^{-ks}\bigr]=ke^{-ks}-k(1+ks)e^{-ks}
+=-k^2se^{-ks}$, so
 \begin{align*}
 I_M(\varepsilon)&=-k^2\int_0^\varepsilon s e^{-ks}\,ds\\
 &=\left[(1+ks)e^{-ks}\right]_0^\varepsilon
 =(1+k\varepsilon)e^{-k\varepsilon}-1\longrightarrow0.
 \end{align*}
-Integrating the defining equation over the ball now gives
+Integrating the defining equation $(\nabla^2\pm k^2)G=\delta^{(3)}$
+(upper sign for Helmholtz) over the ball, with the divergence theorem for
+$\nabla^2G=\nabla\cdot\nabla G$, now gives
 \[
 \int_{s=\varepsilon}\nabla G\cdot d\mathbf S
 \ \mathord{\pm}\ \int_{s<\varepsilon}k^2G\,dV=1.
 \]
-The second integral tends to zero, while the flux tends to one.
+The second integral tends to zero, while the flux tends to one: for
+these radial kernels the flux is $4\pi\varepsilon^2G'(\varepsilon)$,
+which equals $(1-ik\varepsilon)e^{ik\varepsilon}$ for $G_H$ and
+$(1+k\varepsilon)e^{-k\varepsilon}$ for $G_M$. (With the values of
+$I_H$ and $I_M$ above, both identities in fact hold exactly for every
+$\varepsilon>0$.)
 Therefore it is the Laplacian term that supplies the delta singularity;
 the zeroth-order $\pm k^2$ term cannot change its coefficient.
 For comparison, taking the entire space for the modified kernel means
@@ -1143,17 +1336,22 @@ Write $G=F(s)/s$. Then
 G'=\frac{F'}s-\frac F{s^2},\qquad
 G''=\frac{F''}s-\frac{2F'}{s^2}+\frac{2F}{s^3},
 \]
-so the first-derivative terms cancel and
+so in $G''+\frac2sG'$ the terms in $F'$ and $F$ cancel, leaving
+$F''/s$, and
 \[
 (\nabla^2+k^2)G=\frac{F''+k^2F}{s}.
 \]
-The homogeneous radial solutions are consequently
+The homogeneous radial solutions are consequently given by
+$F''+k^2F=0$, $F=Ae^{iks}+Be^{-iks}$, i.e.,
 $G=(Ae^{iks}+Be^{-iks})/s$. The $e^{iks-i\omega\tau}$ phase moves
 outward, whereas $e^{-iks-i\omega\tau}$ moves inward. Thus the outgoing
-condition selects $B=0$.
+condition selects $B=0$. (This is why the convention in the statement
+is needed: with the time factor $e^{+i\omega\tau}$ the roles of
+$e^{\pm iks}$ would be exchanged, and the displayed kernel would be
+incoming.)
 
-For $G=Ae^{iks}/s$, the flux through a sphere of radius $\varepsilon$
-centered on the source is
+For $G=Ae^{iks}/s$, $G'=Ae^{iks}(ik/s-1/s^2)$, and the flux through a
+sphere of radius $\varepsilon$ centered on the source is
 \[
 4\pi\varepsilon^2G'(\varepsilon)
 =4\pi A e^{ik\varepsilon}(ik\varepsilon-1)
@@ -1169,27 +1367,39 @@ giving
 \]
 It solves the homogeneous Helmholtz equation away from the source, is
 smooth there, and has a locally integrable $1/s$ singularity.
-Its outgoing Sommerfeld condition is explicit:
+Its outgoing Sommerfeld condition is explicit: with $A=-1/(4\pi)$,
+$\partial_sG-ikG=Ae^{iks}(ik/s-1/s^2)-ikAe^{iks}/s=-Ae^{iks}/s^2$, so
 \[
 s(\partial_s-ik)G=\frac{e^{iks}}{4\pi s}\longrightarrow0.
 \]
 
 To verify the delta identity against an arbitrary smooth compactly
-supported test function $\eta$, apply Green's second identity outside a
-ball of radius $\varepsilon$ around the source. The outer boundary
-contributes zero, while the outward normal of this punctured region
-at the inner sphere points in the direction $-\widehat{\mathbf s}$.
-Since $(\nabla^2+k^2)G=0$ there, the identity reads
+supported test function $\eta$, apply Green's second identity,
+\[
+\int_V\bigl(G\nabla^2\eta-\eta\nabla^2G\bigr)\,dV
+=\oint_{\partial V}\bigl(G\,\partial_n\eta-\eta\,\partial_nG\bigr)\,dS,
+\]
+to the region $V$ between a sphere of radius $\varepsilon$ around the
+source and a large sphere enclosing the support of $\eta$. The outer
+boundary contributes zero, while the outward normal of $V$ at the
+inner sphere points in the direction $-\widehat{\mathbf s}$, so
+$\partial_n=-\partial_s$ there. Since $(\nabla^2+k^2)G=0$ in $V$, the
+integrand on the left equals
+$G(\nabla^2+k^2)\eta-\eta(\nabla^2+k^2)G=G(\nabla^2+k^2)\eta$, and the
+identity reads
 \[
 \int_{s>\varepsilon}G(\nabla^2+k^2)\eta\,dV
 =\int_{s=\varepsilon}
 \left[-G\,\partial_s\eta+\eta\,\partial_sG\right]dS.
 \]
+As $\varepsilon\to0$, the left side tends to
+$\int G(\nabla^2+k^2)\eta\,dV$, because $G$ is locally integrable.
 The first surface term is $O(\varepsilon)$, because $G=O(1/\varepsilon)$
 and the sphere has area $O(\varepsilon^2)$. In the second term,
-$\eta=\eta(\mathbf r_2)+O(\varepsilon)$ and the flux tends to one,
-so its limit is $\eta(\mathbf r_2)$. This proves, with its sign and
-normalization,
+$\eta=\eta(\mathbf r_2)+O(\varepsilon)$ and the flux
+$\int_{s=\varepsilon}\partial_sG\,dS=4\pi\varepsilon^2G'(\varepsilon)$
+tends to one, so its limit is $\eta(\mathbf r_2)$. This proves, with
+its sign and normalization,
 \[
 (\nabla_1^2+k^2)G(\mathbf r_1,\mathbf r_2)
 =\delta^{(3)}(\mathbf r_1-\mathbf r_2).
@@ -1213,6 +1423,11 @@ G_{\rm in}=-\frac{e^{-iks}}{4\pi s}.
 \]
 For real $k$, they are complex conjugates. Each solves
 $(\nabla^2+k^2)G=\delta^{(3)}$; its small-sphere flux tends to $1$.
+For $G_{\rm in}$, which is $G_{\rm out}$ with $k$ replaced by $-k$,
+the calculation of Exercise 10.2.4 applies unchanged: $G_{\rm in}$
+solves the homogeneous equation off the source, is $O(1/s)$, and has
+flux $(1+ik\varepsilon)e^{-ik\varepsilon}\to1$, which is all the
+test-function argument there uses.
 The equal average therefore still has a unit, rather than doubled,
 delta source:
 \begin{align*}
@@ -1243,9 +1458,11 @@ constant $C$, adding $C\sin(ks)/s$ gives another real radial standing-wave
 kernel with the same delta source; an additional phase convention or
 boundary condition is needed to exclude it.}
 Indeed $\sin(ks)/s=k-k^3s^2/6+\cdots$ is smooth at the origin,
-its small-sphere flux tends to zero, and it satisfies the homogeneous
-Helmholtz equation everywhere. Thus it does not alter the singular
-normalization.
+its small-sphere flux
+$4\pi s^2\,[\sin(ks)/s]'=4\pi\bigl[ks\cos(ks)-\sin(ks)\bigr]$
+tends to zero, and it satisfies the homogeneous Helmholtz equation
+everywhere ($F=\sin(ks)$ satisfies $F''+k^2F=0$). Thus it does not
+alter the singular normalization.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1280,7 +1497,9 @@ so its flux is
 \[
 \Phi(R)=4\pi R^2G'(R)=(1+kR)e^{-kR}.
 \]
-The integral of $G$ over the ball is
+The integral of $G$ over the ball follows from
+$\frac{d}{ds}\bigl[e^{-ks}\bigl(\frac sk+\frac1{k^2}\bigr)\bigr]
+=-se^{-ks}$:
 \begin{align*}
 I(R)&=4\pi\int_0^R G(s)s^2\,ds=-\int_0^R s e^{-ks}\,ds\\
 &=\left[e^{-ks}\left(\frac s{k}+\frac1{k^2}\right)\right]_0^R
@@ -1346,13 +1565,20 @@ is fixed by the flux through a small sphere:
 \lim_{R\downarrow0}4\pi R^2h'(R)
 =-4\pi\lim_{R\downarrow0}(aR+1)e^{-aR}=-4\pi.
 \]
-The integral of $a^2h$ over that ball tends to zero, so the full
-distributional identity is
+The integral of $a^2h$ over that ball,
+$4\pi a^2\int_0^Rre^{-ar}\,dr\le2\pi a^2R^2$, tends to zero. As in
+Exercise 10.2.6 (with $k$ replaced by $a$), the full distributional
+identity is therefore
 \[
 \nabla^2\frac{e^{-ar}}r
 =a^2\frac{e^{-ar}}r-4\pi\delta^{(3)}(\mathbf r).
 \]
 Insert $\varphi=Zh/(4\pi\epsilon_0)$ into Poisson's equation:
+\[
+\rho=-\epsilon_0\nabla^2\varphi=-\frac Z{4\pi}\nabla^2h
+=-\frac Z{4\pi}\left[a^2\frac{e^{-ar}}r-4\pi\delta^{(3)}(\mathbf r)\right],
+\]
+that is,
 \[
 \boxed{\rho(\mathbf r)=Z\delta^{(3)}(\mathbf r)
 -\frac{Za^2e^{-ar}}{4\pi r}.}
@@ -1371,18 +1597,22 @@ Compute its total charge explicitly. Integration by parts gives
 Consequently
 \[
 Q_{\rm cloud}=4\pi\int_0^\infty r^2
-\left(-\frac{Za^2e^{-ar}}{4\pi r}\right)dr=-Z,
+\left(-\frac{Za^2e^{-ar}}{4\pi r}\right)dr
+=-Za^2\int_0^\infty re^{-ar}\,dr=-Z,
 \qquad Q_{\rm total}=Z-Z=0.
 \]
-As an independent check, the enclosed charge at a finite radius is
+As an independent check, the enclosed charge at a finite radius follows
+from the same integration by parts on $(0,R)$,
+$\int_0^Rre^{-ar}\,dr=[1-(1+aR)e^{-aR}]/a^2$:
 \[
 Q(R)=Z-Za^2\int_0^Rr e^{-ar}\,dr=Z(1+aR)e^{-aR}.
 \]
-The electric field obtained by differentiating the supplied potential is
+The electric field obtained by differentiating the given potential is
 \[
 E_r=-\varphi'(r)=\frac{Ze^{-ar}}{4\pi\epsilon_0}
 \left(\frac a{r}+\frac1{r^2}\right),
 \]
-and Gauss' law gives $4\pi\epsilon_0R^2E_r(R)=Q(R)$ exactly.
+and Gauss' law is satisfied exactly:
+$4\pi\epsilon_0R^2E_r(R)=Z(aR+1)e^{-aR}=Q(R)$.
 It tends to $Z$ as $R\downarrow0$ and to zero as $R\to\infty$,
 confirming both the point charge and the screening cloud.
