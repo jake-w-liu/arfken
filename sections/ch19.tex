@@ -1806,39 +1806,48 @@ expansion of $\delta(x)$ \erratum{in the distributional limit} as $n\to\infty$.
 \end{enumerate}
 \solution
 Use a different letter $m$ for the Fourier harmonic. The pulse has
-half-width $1/(2n)$ and total area $n(1/n)=1$. It is even, so $b_m=0$.
-Its coefficients are
-\[
-a_0=\frac1\pi\int_{-1/(2n)}^{1/(2n)}n\,dx=\frac1\pi,
-\qquad
-a_m=\frac{2n}{\pi}\int_0^{1/(2n)}\cos mx\,dx
+half-width $1/(2n)\le1/2<\pi$, so it lies inside the interval, and total
+area $n(1/n)=1$. It is even, so $b_m=0$. Since $\delta_n$ vanishes for
+$|x|>1/(2n)$ and $\cos mx$ is even, its coefficients are
+\begin{gather*}
+a_0=\frac1\pi\int_{-1/(2n)}^{1/(2n)}n\,dx=\frac1\pi,\\
+a_m=\frac1\pi\int_{-1/(2n)}^{1/(2n)}n\cos mx\,dx
+=\frac{2n}{\pi}\int_0^{1/(2n)}\cos mx\,dx
+=\frac{2n}{\pi}\left[\frac{\sin mx}{m}\right]_0^{1/(2n)}
 =\frac{2n}{\pi m}\sin\frac{m}{2n}.
-\]
-\textbf{(a)} Therefore
+\end{gather*}
+\textbf{(a)} Therefore, with $a_0/2=1/(2\pi)$,
 \[
 \boxed{\delta_n(x)=\frac1{2\pi}
 +\frac{2n}{\pi}\sum_{m=1}^{\infty}
 \frac{\sin(m/(2n))}{m}\cos mx.}
 \]
-For each fixed $n$ it converges to the pulse away from its two edges,
-and to $n/2$ at the edges.
+By Dirichlet's theorem (the pulse is piecewise constant), for each fixed
+$n$ the series converges to the pulse away from its two edges, and to
+the mean $(n+0)/2=n/2$ at the edges $x=\pm1/(2n)$.
 
-\textbf{(b)} At every fixed harmonic $m$,
+\textbf{(b)} At every fixed harmonic $m$, the argument $u=m/(2n)$ tends
+to zero and $\sin u/u\to1$, so
 \[
 \frac{2n}{m}\sin\frac{m}{2n}
-=\frac{\sin(m/(2n))}{m/(2n)}\longrightarrow1.
+=\frac{\sin(m/(2n))}{m/(2n)}\longrightarrow1,
+\qquad
+a_m=\frac1\pi\,\frac{\sin(m/(2n))}{m/(2n)}\longrightarrow\frac1\pi.
 \]
 The limiting coefficients therefore give
 $1/(2\pi)+(1/\pi)\sum_{m\ge1}\cos mx$, the delta expansion of 19.2.2.
 \erratum{This is a distributional limit; taking the coefficient limit
 is not justification for a pointwise limit of the infinite series.}
-A direct proof uses any continuous test function near zero:
+A direct proof uses any test function $f$ continuous at zero. Since
+$n\int_{-1/(2n)}^{1/(2n)}dx=1$, write $f(0)=n\int_{-1/(2n)}^{1/(2n)}f(0)\,dx$;
+the remaining integral runs over an interval of length $1/n$, so
 \[
 \left|\int f(x)\delta_n(x)\,dx-f(0)\right|
 =\left|n\int_{-1/(2n)}^{1/(2n)}[f(x)-f(0)]\,dx\right|
 \le\sup_{|x|\le1/(2n)}|f(x)-f(0)|\longrightarrow0.
 \]
-This proves the delta limit independently of formal coefficient passage.
+This proves $\delta_n\to\delta$ directly, without passing to the limit
+in the coefficients.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1850,28 +1859,44 @@ at $x=0$,
 \erratum{\lim_{n\to\infty}\lim_{M\to\infty}
 \int_{-\pi}^{\pi}f(x)S_{n,M}(x)\,dx=f(0),}
 \]
-\erratum{Here $S_{n,M}$ is the first $M$ harmonics, including the constant term, of the finite-width pulse $\delta_n$.}
+\erratum{Here $S_{n,M}$ is the partial sum of the Fourier series of the finite-width pulse $\delta_n$ through the harmonic $\cos Mx$.}
 \solution
 \erratum{The displayed integrals require an integrable test function;
 pointwise finiteness alone does not ensure integrability. A bounded
 measurable $f$ continuous at zero suffices. The Fourier expansion must
 first represent the finite-width pulse, followed by the pulse-width
 limit; no unrestricted interchange of two infinite limits is needed.}
-For fixed $n$, its Fourier series equals $\delta_n$ almost everywhere.
-If $f$ is bounded, it is in $L^2[-\pi,\pi]$, and the partial sums
-$S_{n,M}$ satisfy
+By 19.2.15(a), for fixed $n$ the partial sums are
 \[
-\left|\int f(S_{n,M}-\delta_n)\right|
+S_{n,M}(x)=\frac1{2\pi}+\sum_{m=1}^{M}a_m\cos mx,
+\qquad a_m=\frac{2n}{\pi m}\sin\frac{m}{2n},
+\]
+and the full series equals $\delta_n$ except at the two edges. The
+difference $\delta_n-S_{n,M}$ has the cosine coefficients $a_m$ for
+$m>M$ and no others, so Parseval's identity on $(-\pi,\pi)$ and
+$|a_m|\le2n/(\pi m)$ give
+\[
+\|\delta_n-S_{n,M}\|_2^2=\int_{-\pi}^{\pi}(\delta_n-S_{n,M})^2\,dx
+=\pi\sum_{m>M}a_m^2\le\frac{4n^2}{\pi}\sum_{m>M}\frac1{m^2}
+\longrightarrow0\quad(M\to\infty).
+\]
+If $|f|\le B$, then $f\in L^2[-\pi,\pi]$ with $\|f\|_2\le B\sqrt{2\pi}$,
+and the Cauchy--Schwarz inequality gives
+\[
+\left|\int_{-\pi}^{\pi}f\,(S_{n,M}-\delta_n)\,dx\right|
 \le\|f\|_2\,\|S_{n,M}-\delta_n\|_2\longrightarrow0.
 \]
-Consequently the action of the completed Fourier series is
+Consequently the inner limit is the action of the pulse itself; with
+$x=u/n$,
 \[
-I_n=n\int_{-1/(2n)}^{1/(2n)}f(x)\,dx
+I_n=\lim_{M\to\infty}\int_{-\pi}^{\pi}f(x)S_{n,M}(x)\,dx
+=n\int_{-1/(2n)}^{1/(2n)}f(x)\,dx
 =\int_{-1/2}^{1/2}f(u/n)\,du.
 \]
 Given $\epsilon>0$, continuity at zero provides $\eta>0$ such that
 $|f(x)-f(0)|<\epsilon$ when $|x|<\eta$. Choose $n>1/(2\eta)$.
-Then throughout the last integral $|u/n|<\eta$, and
+Then throughout the last integral $|u/n|\le1/(2n)<\eta$. Since the
+$u$-interval has length one, $f(0)=\int_{-1/2}^{1/2}f(0)\,du$ and
 \[
 |I_n-f(0)|
 \le\int_{-1/2}^{1/2}|f(u/n)-f(0)|\,du\le\epsilon.
@@ -1881,10 +1906,13 @@ Hence
 \boxed{\lim_{n\to\infty}\lim_{M\to\infty}
 \int_{-\pi}^{\pi}f(x)S_{n,M}(x)\,dx=f(0).}
 \]
-The same shrinking-interval proof applies directly to any measurable
-integrable $f$ continuous at zero; no behavior away from that shrinking
-interval can alter the pulse limit. It does not assert that arbitrary
-Dirichlet partial sums converge for every function continuous at one point.
+The shrinking-interval step uses only the values of $f$ near zero, so
+$\int f\delta_n\,dx\to f(0)$ holds for every integrable $f$ continuous
+at zero. The order of the limits matters: letting $n\to\infty$ first in
+the coefficients would leave
+$\int_{-\pi}^{\pi}f(x)\bigl[1/(2\pi)+\pi^{-1}\sum_{m=1}^M\cos mx\bigr]dx$,
+which is the $M$th Fourier partial sum of $f$ at $x=0$, and that need
+not converge even for a continuous $f$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1925,9 +1953,17 @@ $\dfrac{2}{\pi}\displaystyle\sum_{n=1}^{\infty}\dfrac{1}{n}
 \int_0^L\sin\frac{n\pi x}{L}\sin\frac{m\pi x}{L}\,dx
 =\frac L2\delta_{nm}.
 \]
-This follows by writing the product as half the difference of cosines;
-for $n=m$ the constant term integrates to $L/2$ and the oscillatory
-term integrates to zero. Thus the delta coefficient is
+This follows by writing the product as half the difference of cosines,
+\[
+\sin\frac{n\pi x}{L}\sin\frac{m\pi x}{L}
+=\frac12\Bigl[\cos\frac{(n-m)\pi x}{L}-\cos\frac{(n+m)\pi x}{L}\Bigr]:
+\]
+every $\cos(j\pi x/L)$ with $j\ne0$ integrates to zero over $(0,L)$, and
+for $n=m$ the constant term $\frac12$ integrates to $L/2$. Multiplying
+$\sum_nb_n\sin(n\pi x/L)$ by $\sin(m\pi x/L)$ and integrating over
+$(0,L)$ therefore isolates
+$(L/2)b_m$, and the sifting property ($0<a<L$) gives the delta
+coefficient
 \[
 b_n=\frac2L\int_0^L\delta(x-a)\sin\frac{n\pi x}{L}\,dx
 =\frac2L\sin\frac{n\pi a}{L},
@@ -1937,27 +1973,39 @@ which gives the requested expansion
 \boxed{\delta(x-a)=\frac2L\sum_{n=1}^{\infty}
 \sin\frac{n\pi a}{L}\sin\frac{n\pi x}{L},\qquad0<x,a<L.}
 \]
-The equality is distributional. Extending the sine basis to $(-L,L)$
-is odd, so the corresponding source is
-$\delta(x-a)-\delta(x+a)$ there, repeated with period $2L$.
+The equality is distributional. Each $\sin(n\pi x/L)$ is odd and has
+period $2L$, so on $(-L,L)$ the series represents the odd extension
+$\delta(x-a)-\delta(x+a)$, repeated with period $2L$.
 
-\textbf{(b)} Integrating from zero to $x$ gives the step $H(x-a)$.
+\textbf{(b)} For $0\le x<L$, $x\ne a$, integrating $\delta(t-a)$ from
+zero to $x$ gives the step $H(x-a)$: zero for $x<a$, one for $x>a$.
 For each mode,
 \[
 \int_0^x\sin\frac{n\pi t}{L}\,dt
-=\frac{L}{n\pi}\left(1-\cos\frac{n\pi x}{L}\right).
+=\frac{L}{n\pi}\left(1-\cos\frac{n\pi x}{L}\right),
 \]
-Therefore
+and multiplying by the coefficient $(2/L)\sin(n\pi a/L)$ gives
+$(2/(n\pi))\sin(n\pi a/L)\,[1-\cos(n\pi x/L)]$. Therefore
 \[
 \boxed{H(x-a)=\frac2\pi\sum_{n=1}^{\infty}
 \frac{\sin(n\pi a/L)}n
 -\frac2\pi\sum_{n=1}^{\infty}
 \frac{\sin(n\pi a/L)}n\cos\frac{n\pi x}{L}.}
 \]
-An Abel factor justifies the integration before passing to the limiting
-step; equivalently the integrated coefficients are those of the bounded
-step, verified directly in 19.2.18. At $x=a$ symmetric Fourier sums give
-$1/2$; the endpoints have values zero at $x=0$ and one at $x=L$.
+The termwise integration of the delta series is formal, since that
+series does not converge as a function. The result is nevertheless
+exact: the boxed series is the Fourier cosine series of the step on
+$(0,L)$, computed directly in 19.2.18 (its constant term is
+$1-a/L$ by (c)), so by Dirichlet's theorem it converges to $H(x-a)$ for
+$x\ne a$ and to the midpoint $1/2$ at the jump $x=a$. At the endpoints,
+$x=0$ makes the two sums cancel, giving $0$; at $x=L$,
+$\cos n\pi=(-1)^n$ leaves
+\[
+\frac2\pi\sum_{n=1}^{\infty}\frac{\sin(n\pi a/L)}n\,\bigl[1-(-1)^n\bigr]
+=\frac4\pi\sum_{n\ \mathrm{odd}}\frac{\sin(n\pi a/L)}n=1,
+\]
+because the square-wave series of 19.2.4 gives
+$\sum_{n\ \mathrm{odd}}\sin(n\theta)/n=\pi/4$ for $0<\theta<\pi$.
 
 \textbf{(c)} Put $\theta=\pi a/L\in(0,\pi)$ in 19.1.5:
 \[
@@ -1975,27 +2023,33 @@ of the square wave, Exercise~19.2.17(b), by direct calculation of
 the Fourier coefficients.
 \solution
 For a half-interval cosine expansion, write
-$f(x)=a_0/2+\sum_{n\ge1}a_n\cos(n\pi x/L)$.
-The constant mode has norm $L$ and every nonconstant cosine has norm
-$L/2$. Accordingly
+$f(x)=a_0/2+\sum_{n\ge1}a_n\cos(n\pi x/L)$. On $(0,L)$ the functions
+$1,\cos(\pi x/L),\cos(2\pi x/L),\ldots$ are orthogonal, with
+$\int_0^L1\,dx=L$ and $\int_0^L\cos^2(n\pi x/L)\,dx=L/2$ for $n\ge1$.
+Multiplying the expansion by $1$ or by $\cos(n\pi x/L)$ and integrating
+over $(0,L)$ therefore gives
+$a_n=(2/L)\int_0^Lf(x)\cos(n\pi x/L)\,dx$ for all $n\ge0$. Since $f=0$
+on $(0,a)$, only $(a,L)$ contributes:
 \[
 a_0=\frac2L\int_a^L1\,dx=2\left(1-\frac aL\right),
 \]
-and, for $n\ge1$,
+and, for $n\ge1$, using $\sin n\pi=0$,
 \[
 a_n=\frac2L\int_a^L\cos\frac{n\pi x}{L}\,dx
 =\frac2{n\pi}\left[\sin\frac{n\pi x}{L}\right]_a^L
 =-\frac2{n\pi}\sin\frac{n\pi a}{L}.
 \]
-Hence
+Hence, with $a_0/2=1-a/L$,
 \[
 \boxed{f(x)=1-\frac aL-\frac2\pi\sum_{n=1}^{\infty}
 \frac{\sin(n\pi a/L)}n\cos\frac{n\pi x}{L}.}
 \]
-The identity for the first sum in 19.2.17(c) shows exact agreement with
-that exercise. Its even extension is periodic with period $2L$; it is
-continuous at $0,L$ and jumps at $\pm a$. Thus the series has the
-specified step values away from the jumps and the midpoint $1/2$ there.
+By 19.2.17(c), $(2/\pi)\sum_n\sin(n\pi a/L)/n=1-a/L$, so the constant
+terms agree and the two expansions coincide term by term. The even
+extension of $f$ is periodic with period $2L$; it is continuous at
+$0,L$ and jumps at $\pm a$. Thus, by Dirichlet's theorem, the series has
+the specified step values away from the jumps and the midpoint $1/2$
+there.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2034,33 +2088,45 @@ $\partial y(x,t)/\partial t$ is given by
 \solution
 \textbf{(a)} Put $k_n=n\pi/L$ and $\Omega_n=vk_n$.
 The fixed-end condition selects the sine modes, so write
-$y(x,t)=\sum_{n\ge1}q_n(t)\sin k_nx$. Substitution and sine
-orthogonality give
+$y(x,t)=\sum_{n\ge1}q_n(t)\sin k_nx$. Since
+$(\sin k_nx)''=-k_n^2\sin k_nx$, substitution into $v^2y_{xx}=y_{tt}$
+gives $\sum_n(q_n''+\Omega_n^2q_n)\sin k_nx=0$. Multiplying by
+$\sin k_mx$ and integrating over $(0,L)$ (sine orthogonality, as in
+19.2.17(a)) isolates each mode:
 \[
 q_n''+\Omega_n^2q_n=0,
 \qquad q_n(t)=A_n\cos\Omega_nt+B_n\sin\Omega_nt.
 \]
-The zero initial displacement forces $A_n=0$. The sine coefficient of
-the initial velocity is
+The zero initial displacement $y(x,0)=\sum_nA_n\sin k_nx=0$ forces
+$A_n=0$. The sine coefficient of the initial velocity is
 \[
 q_n'(0)=\frac2L\int_0^L Lv_0\delta(x-a)\sin k_nx\,dx
 =2v_0\sin k_na.
 \]
-Since $q_n'(0)=\Omega_nB_n$, we obtain
+Since $q_n'(0)=\Omega_nB_n$,
+\[
+B_n=\frac{2v_0\sin k_na}{\Omega_n}
+=\frac{2v_0L}{\pi v}\,\frac{\sin(n\pi a/L)}{n},
+\]
+and we obtain
 \[
 \boxed{y(x,t)=\frac{2v_0L}{\pi v}\sum_{n=1}^{\infty}
 \frac{\sin(n\pi a/L)\sin(n\pi x/L)\sin(n\pi vt/L)}n.}
 \]
 Every mode solves the wave equation and vanishes at both fixed ends.
 
-\textbf{(b)} Differentiating each mode contributes the factor
-$\Omega_n=n\pi v/L$, cancelling the denominator and prefactor:
+\textbf{(b)} Differentiating $\sin\Omega_nt$ gives
+$\Omega_n\cos\Omega_nt$, and the factor $\Omega_n=n\pi v/L$ cancels the
+denominator and prefactor,
+$(2v_0L/(\pi v))(1/n)(n\pi v/L)=2v_0$:
 \[
 \boxed{y_t(x,t)=2v_0\sum_{n=1}^{\infty}
 \sin\frac{n\pi a}{L}\sin\frac{n\pi x}{L}
 \cos\frac{n\pi vt}{L}.}
 \]
-At $t=0$, the sine closure relation gives exactly $Lv_0\delta(x-a)$.
+At $t=0$ the series is
+$Lv_0\cdot(2/L)\sum_n\sin(n\pi a/L)\sin(n\pi x/L)$, which by the sine
+closure relation of 19.2.17(a) is exactly $Lv_0\delta(x-a)$.
 \erratum{The ideal impulse makes the velocity a distribution. The
 last series is not asserted to converge as an ordinary velocity function;
 differentiation and initial conditions are interpreted distributionally.}
@@ -2071,15 +2137,26 @@ oddly and periodically:
 G(s)=Lv_0\sum_{j\in\mathbb Z}
 [\delta(s-a-2jL)-\delta(s+a-2jL)].
 \]
-Then
+With zero initial displacement, d'Alembert's formula gives
 \[
 y(x,t)=\frac1{2v}\int_{x-vt}^{x+vt}G(s)\,ds,
-\qquad y_t(x,t)=\frac12[G(x+vt)+G(x-vt)].
+\qquad y_t(x,t)=\frac12[G(x+vt)+G(x-vt)],
 \]
-Oddness about both endpoints enforces the clamps. Before either pulse
-reaches an end, $y=Lv_0/(2v)$ where $|x-a|<vt$, and zero outside;
-the moving fronts and subsequent reflected images explain the singular
-velocity and confirm the Fourier solution.
+the second by differentiating the limits of integration. $G$ is odd
+about $s=0$ and, being odd with period $2L$, also about $s=L$, so its
+integrals over $(-vt,vt)$ and $(L-vt,L+vt)$ vanish: $y(0,t)=y(L,t)=0$,
+and the clamps hold. For $vt<\min(a,L-a)$ and $0<x<L$, the only source
+that can lie in $(x-vt,x+vt)$ is the one at $s=a$, and it does exactly
+when $|x-a|<vt$. Thus, before either pulse reaches an end,
+$y=Lv_0/(2v)$ where $|x-a|<vt$, and zero outside; the moving fronts and
+subsequent reflected images explain the singular velocity. This
+confirms the Fourier solution: the sine coefficients of this plateau are
+\[
+\frac2L\,\frac{Lv_0}{2v}\int_{a-vt}^{a+vt}\sin k_nx\,dx
+=\frac{v_0}{vk_n}\bigl[\cos k_n(a-vt)-\cos k_n(a+vt)\bigr]
+=\frac{2v_0L}{\pi v}\,\frac{\sin k_na}{n}\,\sin\Omega_nt,
+\]
+exactly the coefficients $B_n\sin\Omega_nt$ found in (a).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2126,23 +2203,35 @@ $(L/2)[b_m''+\Omega_m^2b_m]=0$. Thus
 \[
 b_n(t)=A_n\cos\Omega_nt+B_n\sin\Omega_nt.
 \]
-At zero, $b_n(0)=A_n$ and $b_n'(0)=\Omega_nB_n$.
-Project each initial condition onto its sine mode:
+At zero, $b_n(0)=A_n$ and $b_n'(0)=\Omega_nB_n$, so the initial
+conditions read
+\[
+\sum_{n\ge1}A_n\sin k_nx=f(x),\qquad
+\sum_{n\ge1}\Omega_nB_n\sin k_nx=g(x).
+\]
+Projecting each onto its sine mode (multiply by $\sin k_mx$ and
+integrate over $(0,L)$) gives $(L/2)A_m=\int_0^Lf\sin k_mx\,dx$ and
+$(L/2)\Omega_mB_m=\int_0^Lg\sin k_mx\,dx$, that is,
 \[
 \boxed{A_n=\frac2L\int_0^Lf(x)\sin\frac{n\pi x}{L}\,dx,\qquad
  B_n=\frac{2}{n\pi v}\int_0^Lg(x)\sin\frac{n\pi x}{L}\,dx.}
 \]
 Together with the displayed time dependence these determine the solution.
-The factor $2/(n\pi v)$ follows from $(2/L)/\Omega_n$; no extra $L$
-is missing. The cosine time factor carries the initial displacement,
-and the sine time factor carries the initial velocity.
+The factor $2/(n\pi v)$ is $(2/L)/\Omega_n=(2/L)\,L/(n\pi v)$. The
+cosine time factor carries the initial displacement, and the sine time
+factor carries the initial velocity.
 
 \erratum{For a classical solution the initial data must be regular enough
 for the differentiations and compatible with the clamps (in particular
 $f(0)=f(L)=0$, and $g(0)=g(L)=0$ when these traces exist). For less regular
 data the modal formula is interpreted in the corresponding weak sense.}
 For example $f\in H_0^1(0,L)$ and $g\in L^2(0,L)$ give a finite-energy
-solution. The energy
+solution. Since $u_t=\sum_nb_n'\sin k_nx$ and
+$u_x=\sum_nk_nb_n\cos k_nx$, and the sines and the cosines are each
+orthogonal on $(0,L)$ with squared norms $L/2$, we have
+$\int_0^Lu_t^2\,dx=(L/2)\sum_n(b_n')^2$ and
+$\int_0^Lu_x^2\,dx=(L/2)\sum_nk_n^2b_n^2$. With $v^2k_n^2=\Omega_n^2$,
+the energy
 \[
 E(t)=\frac12\int_0^L(u_t^2+v^2u_x^2)\,dx
 =\frac L4\sum_{n\ge1}[(b_n')^2+\Omega_n^2b_n^2]
@@ -2197,7 +2286,9 @@ Assume $k\ge0$, write $\Omega_n=n\pi v/L$, and let the initial sine coefficients
 F_n=\frac2L\int_0^Lf(x)\sin\frac{n\pi x}{L}\,dx,
 \qquad G_n=\frac2L\int_0^Lg(x)\sin\frac{n\pi x}{L}\,dx.
 \]
-Projection of the damped wave equation gives
+Substituting the expansion into the damped wave equation gives
+$\sum_n(b_n''+kb_n'+\Omega_n^2b_n)\sin(n\pi x/L)=0$, and projecting
+onto each sine mode as in 19.2.20 gives
 \[
 b_n''+kb_n'+\Omega_n^2b_n=0,
 \qquad b_n(0)=F_n,\quad b_n'(0)=G_n.
@@ -2208,42 +2299,58 @@ Then
 b_n'=e^{-kt/2}(z_n'-kz_n/2),\quad
 b_n''=e^{-kt/2}(z_n''-kz_n'+k^2z_n/4),
 \]
-and cancellation yields
+so that
+\begin{align*}
+b_n''+kb_n'+\Omega_n^2b_n
+&=e^{-kt/2}\Bigl[z_n''-kz_n'+\frac{k^2}{4}z_n
++kz_n'-\frac{k^2}{2}z_n+\Omega_n^2z_n\Bigr]\\
+&=e^{-kt/2}\Bigl[z_n''+\Bigl(\Omega_n^2-\frac{k^2}{4}\Bigr)z_n\Bigr].
+\end{align*}
+At $t=0$, $z_n(0)=b_n(0)$ and, from the expression for $b_n'$,
+$z_n'(0)=b_n'(0)+kb_n(0)/2$. Hence
 \[
 z_n''+(\Omega_n^2-k^2/4)z_n=0,
 \quad z_n(0)=F_n,\quad z_n'(0)=G_n+kF_n/2.
 \]
 \textbf{(a) Underdamped modes.} If $\Omega_n>k/2$, define
-$\omega_n=\sqrt{\Omega_n^2-k^2/4}>0$. The initial conditions give
+$\omega_n=\sqrt{\Omega_n^2-k^2/4}>0$. Then
+$z_n=C_n\cos\omega_nt+D_n\sin\omega_nt$, and the initial conditions
+give $C_n=z_n(0)=F_n$ and $\omega_nD_n=z_n'(0)=G_n+kF_n/2$, so
 \[
 \boxed{b_n=e^{-kt/2}\left[F_n\cos\omega_nt
 +\frac{G_n+kF_n/2}{\omega_n}\sin\omega_nt\right].}
 \]
 This is the printed formula with $A_n=F_n$ and
 $B_n=(G_n+kA_n/2)/\omega_n$.
-\erratum{The actual textbook's answer in (a), printed p. 957, omits the
-square on $n\pi v/L$ in $\omega_n^2$. The correct formula is
-$\omega_n^2=(n\pi v/L)^2-(k/2)^2$, already restored in the local question.}
+\erratum{The textbook's answer to (a) omits the square on $n\pi v/L$ in
+$\omega_n^2$; the equation for $z_n$ shows that the correct formula is
+$\omega_n^2=(n\pi v/L)^2-(k/2)^2$, as used in the answer above.}
 
 \textbf{(b) Overdamped modes.} If $0<\Omega_n<k/2$, define
-$\sigma_n=\sqrt{k^2/4-\Omega_n^2}>0$. Then
+$\sigma_n=\sqrt{k^2/4-\Omega_n^2}>0$. Now
+$z_n=C_n\cosh\sigma_nt+D_n\sinh\sigma_nt$ with $C_n=F_n$ and
+$\sigma_nD_n=G_n+kF_n/2$, so
 \[
 \boxed{b_n=e^{-kt/2}\left[F_n\cosh\sigma_nt
 +\frac{G_n+kF_n/2}{\sigma_n}\sinh\sigma_nt\right].}
 \]
-The two decay exponents $-k/2\pm\sigma_n$ are negative, since
-$0<\sigma_n<k/2$.
+This is the printed formula with $A_n=F_n$ and
+$B_n=(G_n+kA_n/2)/\sigma_n$. The two decay exponents
+$-k/2\pm\sigma_n$ are negative, since $0<\sigma_n<k/2$.
 
 \erratum{Damping is classified mode by mode. No finite $k$ overdamps
 all infinitely many modes, since $\Omega_n$ grows without bound.
-The critical case $\Omega_n=k/2$, omitted from the original question,
+The critical case $\Omega_n=k/2$, omitted from the textbook's question,
 also needs a separate formula.}
-Here $z_n''=0$, so
+Here $z_n''=0$, so $z_n=F_n+(G_n+kF_n/2)t$ and
 \[
 \boxed{b_n=e^{-kt/2}[F_n+(G_n+kF_n/2)t].}
 \]
-This is also the continuous $\omega_n\to0$ or $\sigma_n\to0$ limit.
-All modes are underdamped if $k<2\pi v/L$; otherwise modes with
+This is also the continuous $\omega_n\to0$ or $\sigma_n\to0$ limit,
+since $\sin(\omega_nt)/\omega_n\to t$, $\sinh(\sigma_nt)/\sigma_n\to t$
+and the cosine and hyperbolic cosine tend to $1$.
+All modes are underdamped if $k<2\pi v/L$, because then
+$\Omega_n\ge\Omega_1=\pi v/L>k/2$; otherwise modes with
 $n<kL/(2\pi v)$ are overdamped, equality is critical, and the larger
 indices remain underdamped.
 As a check, let $E=\tfrac12\int_0^L(u_t^2+v^2u_x^2)\,dx$.
@@ -2254,7 +2361,8 @@ E'&=\int_0^L(u_tu_{tt}+v^2u_xu_{xt})\,dx\\
 &=-k\int_0^Lu_t^2\,dx\le0\qquad(k\ge0).
 \end{align*}
 The boundary term vanishes because the clamped displacement is constant
-in time, hence $u_t=0$ at both ends. For smooth data this is a direct
+in time, hence $u_t=0$ at both ends, and the last line uses the equation
+of motion, $u_{tt}-v^2u_{xx}=-ku_t$. For smooth data this is a direct
 calculation; for finite-energy data it follows by limits of finite modal
 sums. It is consistent with the time dependence of every mode.
 
@@ -2279,7 +2387,7 @@ delta function.
 not equal an arbitrarily assigned $f(x_0)$. As in the chapter's Dirichlet
 conditions, assume a piecewise regular periodic function; bounded
 variation suffices. The existence of a jump alone is not a general
-pointwise-convergence hypothesis. The source Eq. (19.29) also omits
+pointwise-convergence hypothesis. The textbook's Eq. (19.29) also omits
 $n$ from the exponential; the correct finite kernel uses $e^{in(x-t)}$,
 as in Eq. (19.30).}
 Let
@@ -2287,13 +2395,33 @@ Let
 m=\frac{f(x_0+0)+f(x_0-0)}2,
 \qquad D_N(t)=\frac{\sin((N+1/2)t)}{\sin(t/2)}.
 \]
-The finite partial-sum formula and evenness of the kernel give
+Inserting the coefficient integrals into
+$s_N(x)=a_0/2+\sum_{n=1}^N(a_n\cos nx+b_n\sin nx)$ and using
+$\cos nt\cos nx+\sin nt\sin nx=\cos n(t-x)$ gives the finite
+partial-sum formula
+\[
+s_N(x)=\frac1{2\pi}\int_{-\pi}^{\pi}f(t)
+\Bigl[1+2\sum_{n=1}^N\cos n(t-x)\Bigr]dt
+=\frac1{2\pi}\int_{-\pi}^{\pi}f(t)D_N(t-x)\,dt,
+\]
+because the finite geometric sum is
+\[
+1+2\sum_{n=1}^N\cos nu=\sum_{n=-N}^{N}e^{inu}
+=\frac{e^{-iNu}\bigl(e^{i(2N+1)u}-1\bigr)}{e^{iu}-1}
+=\frac{e^{i(N+1/2)u}-e^{-i(N+1/2)u}}{e^{iu/2}-e^{-iu/2}}
+=D_N(u).
+\]
+Put $t=x_0+s$; the integrand has period $2\pi$ in $s$, so $s$ may
+still run over $(-\pi,\pi)$. On $(-\pi,0)$ replace $s$ by $-s$, using
+that $D_N$ is even, and rename $s$ as $t$:
 \[
 s_N(x_0)=\frac1{2\pi}\int_0^\pi
 [f(x_0+t)+f(x_0-t)]D_N(t)\,dt.
 \]
-Because $D_N=1+2\sum_{j=1}^N\cos jt$, its integral on $(0,\pi)$ is
-exactly $\pi$. Subtracting $m$ therefore gives
+Because $D_N=1+2\sum_{j=1}^N\cos jt$ and $\int_0^\pi\cos jt\,dt
+=\sin j\pi/j=0$, the integral of $D_N$ on $(0,\pi)$ is exactly $\pi$,
+so $m=(2\pi)^{-1}\int_0^\pi2m\,D_N(t)\,dt$. Subtracting $m$ therefore
+gives
 \[
 s_N(x_0)-m=\frac1{2\pi}\int_0^\pi g(t)D_N(t)\,dt,
 \quad g(t)=f(x_0+t)+f(x_0-t)-2m,
@@ -2302,26 +2430,33 @@ s_N(x_0)-m=\frac1{2\pi}\int_0^\pi g(t)D_N(t)\,dt,
 We prove that the last integral tends to zero, including its potentially
 singular neighborhood of zero.
 
-Put $M=N+1/2$ and $A_N(u)=\int_0^uD_N(t)\,dt$. Split
+Put $M=N+1/2$ and $A_N(u)=\int_0^uD_N(t)\,dt$ for $0\le u\le\pi$.
+Split
 \[
 \frac1{\sin(t/2)}=\frac2t+q(t),\qquad
 A_N(u)=2\int_0^{Mu}\frac{\sin v}{v}\,dv
-+\int_0^u q(t)\sin Mt\,dt.
++\int_0^u q(t)\sin Mt\,dt,
 \]
-Here $q(t)=O(t)$ at zero and is integrable on $[0,\pi]$.
-The sine integral is uniformly bounded: below $v=1$ its absolute
-integral is at most one; beyond one, integration by parts gives
+the first integral by the substitution $v=Mt$.
+Here $q(t)=t/12+O(t^3)$ at zero, so $q$ is continuous on $[0,\pi]$ and
+integrable. The sine integral is uniformly bounded: below $v=1$,
+$|\sin v/v|\le1$ makes its absolute integral at most one; beyond one,
+integration by parts gives
 \[
 \int_1^z\frac{\sin v}{v}\,dv
 =\left[-\frac{\cos v}{v}\right]_1^z
 -\int_1^z\frac{\cos v}{v^2}\,dv,
 \]
-whose absolute value is at most two. Consequently
+whose absolute value is at most
+$\cos1+1/z+\int_1^zv^{-2}\,dv=1+\cos1<2$. Hence
+$|\int_0^z\sin v/v\,dv|\le3$ for every $z\ge0$, and consequently
 $|A_N(u)|\le C=6+\int_0^\pi|q(t)|\,dt$, independently of $N,u$.
 
 Since $g$ has bounded variation and $g(0+)=0$, choose a small
 $\delta>0$ for which both $|g(\delta)|$ and its variation on
-$(0,\delta]$ are small. Stieltjes integration by parts gives
+$(0,\delta]$ are small. Since $dA_N=D_N\,dt$ and the boundary term at
+zero vanishes ($A_N(0)=0$, $g(0+)=0$), Stieltjes integration by parts
+gives
 \[
 \left|\int_0^\delta g(t)D_N(t)\,dt\right|
 =\left|g(\delta)A_N(\delta)-\int_{(0,\delta]}A_N(t)\,dg(t)\right|
@@ -2331,17 +2466,26 @@ The variation is the mass of a finite variation measure on $(0,\delta]$;
 these intervals shrink to the empty set, so that mass tends to zero.
 Also $g(\delta)\to0$. Thus the bound tends to zero as
 $\delta\downarrow0$, uniformly in $N$.
-For fixed $\delta$, the remaining integrand has the form
-$[g(t)/\sin(t/2)]\sin Mt$ with an integrable bracket on $[\delta,\pi]$.
-Its integral tends to zero: approximate the bracket in $L^1$ by a step
-function, whose finitely many sine integrals are each $O(1/M)$;
-the approximation error bounds the integral error independently of $M$.
-Combining the small-neighborhood bound and the outer limit proves
+For fixed $\delta$, the remaining integrand on $[\delta,\pi]$ has the
+form $[g(t)/\sin(t/2)]\sin Mt$, with a bracket bounded by
+$\sup|g|/\sin(\delta/2)$, hence integrable. Its integral tends to zero
+as $M\to\infty$ by the Riemann--Lebesgue lemma: approximate the bracket
+in $L^1$ by a step function, whose finitely many sine integrals are
+each $O(1/M)$; the approximation error bounds the integral error
+independently of $M$. Combining the two parts, for every such $\delta$
+\[
+\limsup_{N\to\infty}|s_N(x_0)-m|
+\le\frac{C}{2\pi}\bigl(|g(\delta)|+\operatorname{Var}_{(0,\delta]}g\bigr),
+\]
+and the right side tends to zero as $\delta\downarrow0$. This proves
 \[
 \boxed{\lim_{N\to\infty}s_N(x_0)
 =\frac{f(x_0+0)+f(x_0-0)}2.}
 \]
-The kernel's symmetry is what assigns equal weight to the two limits.
+This is the precise form of the hint: on $(0,\pi)$ the kernel
+$D_N/(2\pi)$ has total weight $1/2$ and acts in the limit as half a
+Dirac delta function at $t=0$ on $f(x_0+t)+f(x_0-t)$. The kernel's
+symmetry is what assigns equal weight to the two one-sided limits.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2361,43 +2505,54 @@ harmonics give
 s_n(x)=\frac{2h}{\pi}\sum_{p=1}^n
 \frac{\sin((2p-1)x)}{2p-1}.
 \]
-There are only finitely many terms, so integrate each cosine and
-interchange the finite sum with the integral:
+By hint (a) with $m=2p-1$, each term is
+$\sin((2p-1)x)/(2p-1)=\int_0^x\cos((2p-1)y)\,dy$. There are only
+finitely many terms, so the finite sum and the integral may be
+interchanged:
 \[
 s_n(x)=\frac{2h}{\pi}\int_0^x\sum_{p=1}^n\cos((2p-1)y)\,dy.
 \]
-The identity in the hint follows by telescoping:
+The identity in hint (b) follows by telescoping: the product formula
+$2\sin A\cos B=\sin(A+B)+\sin(A-B)$ with $A=y$, $B=(2p-1)y$ gives
 \[
 2\sin y\cos((2p-1)y)=\sin2py-\sin(2p-2)y,
 \]
-so its sum is $\sin2ny$. Consequently the exact partial sum is
+so the sum over $p=1,\ldots,n$ collapses to $\sin2ny-\sin0=\sin2ny$.
+Consequently, since $(2h/\pi)/2=h/\pi$, the exact partial sum is
 \[
 \boxed{s_n(x)=\frac h\pi\int_0^x\frac{\sin2ny}{\sin y}\,dy.}
 \]
 The apparent singularities at multiples of $\pi$ are removable because
 the quotient equals twice a finite cosine sum.
-For $h>0$, its first positive maximum occurs at
-$x_n=\pi/(2n)$: the derivative
-$(h/\pi)\sin2nx/\sin x$ changes from positive to negative there.
-Changing variables $t=2ny$ at that maximum gives
+For $h>0$, its first positive maximum occurs at $x_n=\pi/(2n)$: by the
+fundamental theorem of calculus the derivative is
+$(h/\pi)\sin2nx/\sin x$, positive for $0<x<\pi/(2n)$ and negative for
+$\pi/(2n)<x<\pi/n$. Changing variables $t=2ny$ ($dy=dt/(2n)$, and
+$y=x_n$ becomes $t=\pi$) at that maximum gives
 \[
 s_n(x_n)=\frac h\pi\int_0^\pi
 \frac{\sin t}{2n\sin(t/(2n))}\,dt
+=\frac h\pi\int_0^\pi\frac{\sin t}{t}\,
+\frac{t/(2n)}{\sin(t/(2n))}\,dt
 \longrightarrow\frac h\pi\int_0^\pi\frac{\sin t}{t}\,dt.
 \]
-The limit follows uniformly after removing $t=0$, since
-$(t/(2n))/\sin(t/(2n))\to1$ uniformly on $[0,\pi]$.
+The limit holds because $u/\sin u$ increases on $(0,\pi/2)$, so for
+$0<t\le\pi$ the last factor lies between $1$ and
+$(\pi/(2n))/\sin(\pi/(2n))$, which tends to $1$; the factor therefore
+tends to $1$ uniformly, and $|\sin t/t|\le1$.
 More generally, at $x=z/(2n)$ for fixed $z$ the limiting profile is
 $(h/\pi)\int_0^z\sin t/t\,dt$.
 
-\erratum{Eq. (19.40), cited in the original question, is a tail-integral identity,
-not a partial-sum formula. The exact expression above agrees with the
-small-$x$ approximation in (19.37) and the peak limit in (19.38).
-Using (19.40) together with $\int_0^\infty\sin t/t\,dt=\pi/2$
-gives the peak integral in (19.41).}
-Thus the limiting peak is $(h/2)I$, where $I$ is computed next. Its
-overshoot is approximately $0.08949h$: about $8.949\%$ of the jump
-height $h$, or $17.898\%$ of the positive level $h/2$.
+\erratum{Eq. (19.40), cited at the end of the textbook's question, is a
+tail-integral identity, not a partial-sum formula. The exact expression
+above agrees with the small-$x$ approximation in (19.37) and the peak
+limit in (19.38). Using (19.40) together with
+$\int_0^\infty\sin t/t\,dt=\pi/2$ gives the peak integral in (19.41).}
+Thus the limiting peak is
+$(h/\pi)\int_0^\pi\sin t/t\,dt=(h/2)\,(2/\pi)\int_0^\pi\sin t/t\,dt
+=(h/2)I$, with $I=1.178979744\ldots$ computed in 19.3.3. Its overshoot
+above the level $h/2$ is $(h/2)(I-1)\approx0.08949h$: about $8.949\%$
+of the jump height $h$, or $17.898\%$ of the positive level $h/2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2415,41 +2570,62 @@ integrated series. This calls for double-precision calculation.
 \par\nobreak\hfill\emph{ANS.}\enspace$I=1.178979744472$.
 \solution
 \textbf{(a)} Define the removable endpoint by $(\sin t/t)|_{t=0}=1$.
-Numerical Gauss--Legendre quadrature on $[0,\pi]$, evaluated with 65-digit
-arithmetic, gives
+Map the $n$-point Gauss--Legendre rule to $[0,\pi]$: with $t=\pi(1+x)/2$
+the prefactor $2/\pi$ cancels $dt=(\pi/2)\,dx$, so with the Legendre
+nodes $x_j$ (the zeros of $P_n$) and weights $w_j$ on $[-1,1]$,
 \[
-\boxed{I=1.178979744472167270232028845825\ldots.}
+I=\int_{-1}^{1}\frac{\sin t}{t}\,dx
+\approx\sum_{j=1}^nw_j\,\frac{\sin t_j}{t_j},
+\qquad t_j=\frac\pi2(1+x_j).
 \]
-Independent tanh--sinh quadrature gives the same displayed digits.
-To twelve significant figures the result is $\boxed{1.17897974447}$;
-the book's $1.178979744472$ agrees when rounded to twelve decimal places.
+Because the integrand is entire, the error falls very fast with $n$:
+it is $-2.9\times10^{-12}$ for $n=6$, $7.5\times10^{-15}$ for $n=7$,
+$-1.5\times10^{-17}$ for $n=8$ and $1.3\times10^{-38}$ for $n=15$.
+Thus $n=7$ in ordinary double precision already gives the requested
+twelve significant figures, and $n=20$ in 65-digit arithmetic gives
+\[
+\boxed{I=1.178979744472167270232028845824\ldots.}
+\]
+Adaptive tanh--sinh quadrature at the same precision gives the same
+digits. To twelve significant figures the result is
+$\boxed{1.17897974447}$; the textbook's $1.178979744472$ agrees when
+rounded to twelve decimal places.
 
 \textbf{(b)} The entire power series for the integrand is
 \[
 \frac{\sin t}{t}=\sum_{k=0}^{\infty}
 \frac{(-1)^kt^{2k}}{(2k+1)!}.
 \]
-It converges uniformly on $[0,\pi]$, so termwise integration gives
+On $[0,\pi]$ its terms are bounded by $\pi^{2k}/(2k+1)!$, the terms of
+a convergent series, so by the Weierstrass M-test it converges
+uniformly there and may be integrated termwise. With
+$\int_0^\pi t^{2k}\,dt=\pi^{2k+1}/(2k+1)$,
 \begin{align*}
 I&=\frac2\pi\sum_{k=0}^{\infty}
 \frac{(-1)^k}{(2k+1)!}\frac{\pi^{2k+1}}{2k+1}\\
 &=\boxed{2\sum_{k=0}^{\infty}
 \frac{(-1)^k\pi^{2k}}{(2k+1)(2k+1)!}}.
 \end{align*}
-Let $T_k=2\pi^{2k}/[(2k+1)(2k+1)!]$. Successive magnitudes satisfy
+Let $T_k=2\pi^{2k}/[(2k+1)(2k+1)!]$. Since
+$(2k+3)!=(2k+3)(2k+2)(2k+1)!$, successive magnitudes satisfy
 \[
 \frac{T_{k+1}}{T_k}
+=\frac{\pi^2(2k+1)\,(2k+1)!}{(2k+3)\,(2k+3)!}
 =\frac{\pi^2(2k+1)}{(2k+3)^2(2k+2)}<1\qquad(k\ge0).
 \]
-To see the monotonicity directly, put
-$r_k=(2k+1)/[(2k+3)^2(2k+2)]$. Subtracting successive terms gives
+To verify the inequality for every $k$, put
+$r_k=(2k+1)/[(2k+3)^2(2k+2)]$. Over the common denominator, using
+$2k+2=2(k+1)$ and $2k+4=2(k+2)$, the numerator of $r_k-r_{k+1}$ is
+$(2k+1)(k+2)(2k+5)^2-(k+1)(2k+3)^3$, so
 \[
 r_k-r_{k+1}
 =\frac{16k^3+68k^2+84k+23}
  {2(k+1)(k+2)(2k+3)^2(2k+5)^2}>0\qquad(k\ge0).
 \]
-Thus the largest ratio is $\pi^2r_0=\pi^2/18<1$. Hence the alternating-series remainder after $N$
-terms is at most $T_N$. Direct evaluation yields
+Thus the ratios decrease, and the largest is $\pi^2r_0=\pi^2/18<1$.
+The magnitudes $T_k$ therefore decrease monotonically to zero, and by
+the alternating-series (Leibniz) test the remainder after $N$ terms is
+at most $T_N$. Direct evaluation in high-precision arithmetic yields
 \[
 \begin{array}{r|l|l}
 N&\text{sum of terms }k=0,\ldots,N-1&\text{bound }T_N\\\hline
