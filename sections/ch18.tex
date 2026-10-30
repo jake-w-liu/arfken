@@ -3091,8 +3091,9 @@ Thus precisely one of these two unmodified formulas is usable
 
 \erratum{This does not mean that the second-order ODE has only
 one independent solution.  Nor does a zero denominator parameter
-make the hypergeometric series zero, as the paragraph following
-Eq.~(18.121) states: it makes the generic series undefined.}
+make the hypergeometric series zero: it makes the generic series
+undefined, since a vanishing factor of $(c)_j$ then stands in a
+denominator.}
 On a subinterval avoiding $0,1$ and zeros of a first solution
 $y_1$, reduction of order constructs a second solution:
 \[
@@ -3295,7 +3296,8 @@ All four analytic solutions at $t=0$ are uniquely determined by
 their constant term, because $c$ is positive and the coefficient
 recurrence $(j+1)(j+c)d_{j+1}=(j+a)(j+b)d_j$ of Exercise~18.5.1
 has no zero factor $j+c$.
-The needed constants are
+The needed constants are the values $f(0)$; they equal $Y(0)$ for
+even $Y$ and, by $Y'=f+2tf'$ at $t=0$, $Y'(0)$ for odd $Y$:
 \[
 T_{2n}(0)=U_{2n}(0)=(-1)^n,
 \quad T'_{2n+1}(0)=(-1)^n(2n+1),
@@ -3350,7 +3352,7 @@ U_n(1)=\lim_{\theta\to0}\frac{\sin((n+1)\theta)}{\sin\theta}=n+1,
 \[
 \lim_{x\to1^-}\frac{V_n(x)}{\sqrt{1-x^2}}=U_{n-1}(1)=n.
 \]
-Thus those three factors are, respectively,
+Thus the leading factors of $T_n$, $U_n$ and $V_n$ are, respectively,
 \[
 \boxed{1,\qquad n+1,\qquad n\sqrt{1-x^2}}.
 \]
@@ -3372,8 +3374,7 @@ $(-1)^n(2n+2)$.  Hence the four leading factors, in order, are
 \boxed{(-1)^n,\quad(-1)^n(2n+1),\quad(-1)^n,\quad(-1)^n(2n+2)}.
 \]
 Both sets of representations are therefore scaled at a point where
-the hypergeometric series equals one, with no comparison of infinite
-series left implicit.
+the hypergeometric series equals one.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3587,6 +3588,11 @@ requires
 \]
 There is no restriction on $a$ for this initial domain.
 Choose the branch of $(1-tz)^{-a}$ continued from $z=0$.
+For $t\in[0,1]$ the number $1-tz$ is real and $\le0$ only when
+$tz\ge1$, that is, only for real $z\ge1/t\ge1$; hence for
+$z\notin[1,\infty)$ this branch is
+$(1-tz)^{-a}=\exp[-a\operatorname{Log}(1-tz)]$, continuous in
+$(t,z)$ and analytic in $z$.
 For $z\in\mathbb C\setminus[1,\infty)$ the integral is analytic:
 on every compact subset the additional factor and its derivatives
 are uniformly bounded against the integrable endpoint weight.
@@ -3619,7 +3625,8 @@ First, the series converges at $z=1$.  If it does not terminate
 =\frac{\Gamma(c)}{\Gamma(a)\Gamma(b)}\,
  \frac{\Gamma(a+j)}{\Gamma(c+j)}\,\frac{\Gamma(b+j)}{\Gamma(1+j)},
 \]
-and $\Gamma(j+\alpha)/\Gamma(j+\beta)\sim j^{\alpha-\beta}$ makes
+and $\Gamma(j+\alpha)/\Gamma(j+\beta)\sim j^{\alpha-\beta}$ as
+$j\to\infty$ (a consequence of Stirling's formula) makes
 it $O(j^{\Re(a+b-c)-1})$ in magnitude.  Thus the series converges
 absolutely when $\Re(c-a-b)>0$, locally uniformly away from
 $c=0,-1,-2,\ldots$; a terminating series is a finite sum.
@@ -3928,8 +3935,9 @@ including $j=0$.  Hence
  =\frac2{\sqrt\pi}\sum_{j=0}^\infty
    \frac{(-1)^jx^{2j+1}}{(2j+1)j!}.
 \]
-On every bounded complex path, the exponential series is uniformly
-absolutely convergent, so its integral is
+On every bounded complex path, the exponential series
+$e^{-u^2}=\sum_j(-1)^ju^{2j}/j!$ is uniformly absolutely
+convergent, so it may be integrated term by term:
 \[
 \operatorname{erf}x=\frac2{\sqrt\pi}\int_0^xe^{-u^2}du
  =\frac2{\sqrt\pi}\sum_{j=0}^\infty\frac{(-1)^j}{j!}
@@ -4034,10 +4042,9 @@ U\big(\nu+\tfrac{1}{2},2\nu+1,2x\big).
 \]
 \erratum{Take $x>0$; first derive the identity for $\Re\nu>-1/2$, where the integral representations used converge, then continue in $\nu$.}\par\nobreak
 \solution
-\erratum{After $t=2zy$, the Instructor's Manual's exponential inside the integral is $e^{-2zy}$, not $e^{z-2zy}$; its outside factor already includes $e^{-z}$.}\par
-
-Start with the integral representation of $K_\nu$ used in
-Section~14.6 (compare Exercise~14.6.6), valid for $x>0$ and
+Start with the integral representation of $K_\nu$, Eq.~(14.128) of
+Section~14.6, proved in Exercise~14.5.10 for real $\nu>-1/2$; since
+both sides are analytic in $\nu$, it holds for $x>0$ and
 $\Re\nu>-1/2$:
 \[
 K_\nu(x)=\frac{\sqrt\pi(x/2)^\nu}{\Gamma(\nu+1/2)}
@@ -4074,6 +4081,21 @@ in $x$ uses the conventional cut and the same logarithm in $(2x)^\nu$.
 The integral restrictions belong to this derivation, not to an
 extra restriction on the continued identity.
 
+The Instructor's Manual (with $z$ for $x$) reaches the same
+integral from the form of Eq.~(14.128) used for the asymptotic
+expansion in Section~14.6, whose variable $t$ is $2z$ times ours,
+\[
+K_\nu(z)=\sqrt{\frac{\pi}{2z}}\,\frac{e^{-z}}{\Gamma(\nu+\frac12)}
+ \int_0^\infty e^{-t}t^{\nu-1/2}\Bigl(1+\frac{t}{2z}\Bigr)^{\nu-1/2}dt,
+\]
+by putting $t=2zy$: then $dt=2z\,dy$,
+$t^{\nu-1/2}=(2z)^{\nu-1/2}y^{\nu-1/2}$ and $1+t/(2z)=1+y$, so the
+powers $(2z)^{-1/2}(2z)^{\nu-1/2}(2z)$ combine to $(2z)^\nu$ and
+$y$ is our $t$.
+\erratum{The exponential inside the integral is then $e^{-2zy}$,
+not $e^{z-2zy}$ as the Instructor's Manual has it, since the
+factor $e^{-z}$ already stands outside.}
+
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{18.6.5}\quad Show that the cosine and sine
@@ -4084,7 +4106,7 @@ hypergeometric functions as
 \]
 This relation is useful in numerical computation of
 $\mathrm{Ci}(x)$ and $\mathrm{si}(x)$ for large values of $x$.
-\erratum{Take $x>0$, since for $x\le0$ the integral defining $\mathrm{Ci}(x)$ meets the singularity at $t=0$, and $\mathrm{si}(x)=-\int_x^\infty(\sin t)/t\,dt$.}\par\nobreak
+\erratum{Take $x>0$, since for $x\le0$ the integral defining $\mathrm{Ci}(x)$ meets the singularity at $t=0$; here $\mathrm{si}(x)=-\int_x^\infty(\sin t)/t\,dt$.}\par\nobreak
 \solution
 For real $x>0$, the convention in Section~13.6 is
 \[
@@ -4093,7 +4115,10 @@ For real $x>0$, the convention in Section~13.6 is
                          =\operatorname{Si}x-\frac\pi2.
 \]
 These oscillatory improper integrals converge by integration by
-parts.  For $\varepsilon>0$, the Laplace representation gives
+parts.  For $\varepsilon>0$, the Laplace representation of
+Exercise~18.6.10(b) with $a=c=1$ (weight
+$u^{a-1}(1+u)^{c-a-1}=(1+u)^{-1}$ and $\Gamma(a)=1$), valid because
+$\Re(\varepsilon-ix)=\varepsilon>0$, gives
 \[
 U(1,1,\varepsilon-ix)
  =\int_0^\infty\frac{e^{-(\varepsilon-ix)u}}{1+u}du.
@@ -4132,7 +4157,9 @@ taking its negative gives
        =-e^{ix}U(1,1,-ix)}.
 \]
 The value of $U$ is continued from the right half-plane, fixing
-the branch at $-ix$.  Equivalently, the answer is $-E_1(-ix)$.
+the branch at $-ix$.  Equivalently, since $E_1(z)=e^{-z}U(1,1,z)$
+on the principal cut plane (Exercise~18.6.12), the choice $z=-ix$,
+for which $e^{-z}=e^{ix}$, shows that the answer is $-E_1(-ix)$.
 \erratum{The lowercase $\operatorname{si}$ is essential: replacing
 it by $\operatorname{Si}$ would require adding $i\pi/2$.}
 
@@ -4270,11 +4297,18 @@ U(a,c,x)=\frac{\Gamma(1-c)}{\Gamma(a-c+1)}M(a,c,x)
  +\frac{\Gamma(c-1)}{\Gamma(a)}x^{1-c}M(a-c+1,2-c,x).
 \]
 It follows from Eq.~(18.142) by the reflection identity, with its
-\erratum{published replacement $\Gamma(-c)\to\Gamma(2-c)$}.
-For example, $\Gamma(z)\Gamma(1-z)=\pi/\sin\pi z$ with $z=c$ and
+\erratum{published replacement $\Gamma(-c)\to\Gamma(2-c)$}; so
+corrected, Eq.~(18.142) reads
+\[
+U(a,c,x)=\frac{\pi}{\sin\pi c}\left[
+ \frac{M(a,c,x)}{\Gamma(a-c+1)\Gamma(c)}
+ -\frac{x^{1-c}M(a-c+1,2-c,x)}{\Gamma(a)\Gamma(2-c)}\right].
+\]
+Explicitly, $\Gamma(z)\Gamma(1-z)=\pi/\sin\pi z$ with $z=c$ and
 with $z=c-1$ (where $\sin\pi(c-1)=-\sin\pi c$) gives
 $\pi/[\sin\pi c\,\Gamma(c)]=\Gamma(1-c)$ and
-$-\pi/[\sin\pi c\,\Gamma(2-c)]=\Gamma(c-1)$.
+$-\pi/[\sin\pi c\,\Gamma(2-c)]=\Gamma(c-1)$; substituting these
+into the bracket gives the connection formula above.
 Now replace $(a,c)$ by $(a-c+1,2-c)$; since $1-(2-c)=c-1$,
 $(a-c+1)-(2-c)+1=a$ and $2-(2-c)=c$,
 \begin{align*}
@@ -4415,7 +4449,8 @@ Here the substitution $v=t/(1+t)$, i.e.\ $t=v/(1-v)$,
 $1+t=1/(1-v)$, $dt=dv/(1-v)^2$, turns the integrand into
 $v^{a-1}(1-v)^{-c}$ on $[0,1]$, so the integral is
 $B(a,1-c)=\Gamma(a)\Gamma(1-c)/\Gamma(a-c+1)$.
-To compute $B$, take instead $1<c<a+1$ and put $u=xt$, for which
+To compute the coefficient $B$, take instead $1<c<a+1$ and put
+$u=xt$, for which
 $t^{a-1}(1+t)^{c-a-1}dt=x^{1-c}u^{a-1}(x+u)^{c-a-1}du$:
 \[
 x^{c-1}I=\frac1{\Gamma(a)}
@@ -4429,8 +4464,13 @@ $\Gamma(a)^{-1}\int_0^\infty e^{-u}u^{c-2}du$.
 The analytic first solution vanishes after multiplication by
 $x^{c-1}$, while $x^{c-1}\cdot x^{1-c}M(a-c+1,2-c,x)\to1$; hence
 this limit is $B$.  Write $y_1=M(a,c,x)$ and
-$y_2=x^{1-c}M(a-c+1,2-c,x)$.  By Abel's formula and their leading
-terms $1$ and $x^{1-c}$, $W(y_1,y_2)=(1-c)x^{-c}e^x\ne0$, so the
+$y_2=x^{1-c}M(a-c+1,2-c,x)$.  Abel's formula for $y''+py'+qy=0$,
+here with $p=(c-x)/x=c/x-1$, gives
+$W(y_1,y_2)=Ce^{-\int p\,dx}=Cx^{-c}e^x$.  As $x\to0$,
+$y_1=1+O(x)$, $y_1'=O(1)$, $y_2=x^{1-c}[1+O(x)]$ and
+$y_2'=(1-c)x^{-c}[1+O(x)]$, so
+$y_1y_2'-y_1'y_2=(1-c)x^{-c}+O(x^{1-c})$, whence $C=1-c$ and
+$W(y_1,y_2)=(1-c)x^{-c}e^x\ne0$.  Hence the
 coefficients $A=W(I,y_2)/W(y_1,y_2)$ and $B=W(y_1,I)/W(y_1,y_2)$
 are analytic in $a,c$ for $\Re a>0$, $c\notin\mathbb Z$.  The
 values found on the two real parameter sets therefore hold
