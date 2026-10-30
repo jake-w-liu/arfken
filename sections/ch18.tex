@@ -1781,14 +1781,18 @@ Therefore
 \boxed{X_n=T_n=U_n-xU_{n-1}\quad(n\ge1),\qquad X_0=T_0=U_0=1}.
 \]
 Defining $U_{-1}=0$ includes $n=0$ in the first expression.
-\erratum{The stated radius $|t|<1$ applies for real $-1\le x\le1$.
-For other $x$, restrict $t$ to the distance from zero to the nearest
-uncancelled pole of the rational generator.}
+The radius $|t|<1$ of the statement needs $-1\le x\le1$ (the erratum
+there): for any other $x$ the expansions hold only for $|t|$ less than
+the distance from $0$ to the nearest pole of the generator, and this
+distance is less than $1$.
 Indeed, $1-2xt+t^2$ vanishes at $t_\pm=x\pm\sqrt{x^2-1}$, with
 $t_+t_-=1$.  For $x=\cos\theta\in[-1,1]$ these are $e^{\pm i\theta}$,
 of modulus $1$.  Conversely, if $|t_+|=|t_-|=1$ then
 $t_-=1/t_+=\overline{t_+}$ and $x=(t_++t_-)/2=\Re t_+\in[-1,1]$; so
-for every other $x$ one root lies inside the unit circle.
+for every other $x$ one root lies inside the unit circle.  It is a
+pole of the generator, because the numerator $1-xt$ vanishes only at
+$t=1/x$ (never if $x=0$), where $1-2xt+t^2=(1-x^2)/x^2\ne0$ for
+${x\ne\pm1}$.
 The coefficient identities themselves are polynomial identities,
 so hold for every complex $x$.
 
@@ -1826,7 +1830,7 @@ $1-x^2=h^2$ and $-u/h+x^2u/h=-(1-x^2)u/h=-hu$:
  &=h\bigl[(1-x^2)u''-3xu'+(n^2-1)u\bigr].
 \end{align*}
 Because $(n-1)((n-1)+2)=n^2-1$, the bracket is exactly the
-supplied type-II equation at index $n-1$, and is zero.  This proves
+given type-II equation at index $n-1$, and is zero.  This proves
 the result.  The formulas with $h$ specify the positive root on
 this real interval; analytic continuation uses a consistent branch.
 
@@ -1837,13 +1841,14 @@ and $V_{n}(x)$ is given by
 \[
 T_{n}(x)V'_{n}(x)-T'_{n}(x)V_{n}(x)=-\frac{n}{(1-x^{2})^{1/2}}.
 \]
-\erratum{For $n\ge1$ and $-1<x<1$, this verifies that $T_n$
-and $V_n=\sin(n\arccos x)$ are independent solutions of
-Eq.~(18.97).  If the sine formula is extended to $n=0$, it gives
-the zero function.  Find an independent zero-order solution.}
+This verifies that $T_n$ and $V_n$ ($n\ne0$) are independent
+solutions of Eq.~(18.97). Conversely, for $n=0$, we do not have linear
+independence. What happens at $n=0$? Where is the ``second'' solution?
+\erratum{Work on $-1<x<1$, where $\sqrt{1-x^2}$ is differentiable and
+the right side is finite.}\par\nobreak
 \solution
 Put $x=\cos\theta$, $0<\theta<\pi$, so $\sqrt{1-x^2}=\sin\theta$ and
-$D_x=-(\sin\theta)^{-1}D_\theta$.  For $n\ge1$, $T_n=\cos n\theta$ and,
+$d/dx=-(\sin\theta)^{-1}\,d/d\theta$.  For $n\ge1$, $T_n=\cos n\theta$ and,
 since $U_{n-1}(\cos\theta)=\sin n\theta/\sin\theta$,
 $V_n=\sqrt{1-x^2}\,U_{n-1}=\sin n\theta$.  Hence
 \[
@@ -1873,8 +1878,6 @@ therefore $\arccos x$, equivalently $\arcsin x$ up to a constant
 and a sign.  It also follows from
 $\lim_{n\to0}\sin(n\arccos x)/n=\arccos x$, treating the order
 as continuous in this limit.
-\erratum{The independent zero-order solution is distinct from the
-zero member $V_0=0$ of the sine family.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1919,9 +1922,8 @@ and $W_{n}(x)=(1-x^{2})^{-1/2}T_{n+1}(x)$.
 \erratum{Work on $-1<x<1$, since $W_n$ is singular at $x=\pm1$.}\par\nobreak
 \solution
 Set $a=n+1$, $x=\cos\theta$ with $0<\theta<\pi$, and
-$s=\sin\theta=\sqrt{1-x^2}$.  Then, from $U_n(\cos\theta)=\sin(a\theta)/s$
-and $T_{n+1}(\cos\theta)=\cos(a\theta)$,
-$U_n=\sin(a\theta)/s$ and $W_n=\cos(a\theta)/s$.
+$s=\sin\theta=\sqrt{1-x^2}$.  Then $U_n=\sin(a\theta)/s$ and, since
+$T_{n+1}(\cos\theta)=\cos(a\theta)$, $W_n=T_{n+1}/s=\cos(a\theta)/s$.
 Their $\theta$ derivatives are
 \[
 \frac{dU_n}{d\theta}=\frac{a\cos(a\theta)}s
@@ -1955,8 +1957,10 @@ the Chebyshev differential equation for $T_{n}(x)$ ($n=0$) is
 $V_{0}(x)=\arccos x$ (or $\arcsin x$).
 \solution
 At $n=0$, the equation is $(1-x^2)y''-xy'=0$.
-Writing $v=y'$ gives, where $v\ne0$ (the case $v\equiv0$ gives the
-constant solution),
+Writing $v=y'$ gives the linear first-order equation
+$(1-x^2)v'=xv$.  By uniqueness for this equation, a solution that
+vanishes at one point of $(-1,1)$ vanishes identically; so either
+$v\equiv0$, which gives the constant solution, or $v$ has no zero and
 \[
 \frac{v'}v=\frac{x}{1-x^2},\qquad
 \ln|v|=-\frac12\ln(1-x^2)+\text{constant},
@@ -2005,20 +2009,18 @@ V_{n+1}+V_{n-1}
 Hence $\boxed{V_{n+1}-2xV_n+V_{n-1}=0}$.
 Equivalently, for $n\ge2$ multiply the type-II recurrence with
 index $n-1$, $U_n-2xU_{n-1}+U_{n-2}=0$, by $\sqrt{1-x^2}$.
-\erratum{At $n=1$ the recurrence uses $V_0=0$, not the independent
-solution $\arccos x$ introduced in Exercise 18.4.8.}
-Indeed $V_2-2xV_1=\sin2\theta-2\cos\theta\sin\theta=0$, so the case
-$n=1$ requires $V_0=0$.
-With that zero member the recurrence holds for every integer $n\ge1$;
-with the separate $\arccos x$ convention it only applies without
-modification for $n\ge2$.
+At $n=1$ the recurrence reads $V_2-2xV_1+V_0=0$.  Since
+$V_2-2xV_1=\sin2\theta-2\cos\theta\sin\theta=0$, it holds there
+exactly for the sine-family value $V_0=\sin0=0$ and fails for the
+solution $V_0=\arccos x$ of Exercise 18.4.8, as the qualification in
+the statement says; for $n\ge2$ the value of $V_0$ does not enter.
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{18.4.10}\quad Verify the series solutions for
 $T_{n}(x)$ and $U_{n}(x)$, Eqs.~(18.114) and (18.115).
 \solution
-\erratum{In the first ODE line of the Instructor's Manual, $x^2T_n$ must be $n^2T_n$, as in Chebyshev's equation.  After shifting the derivative sum, its factorial is $(n-2m+2)!$, not $(n-2m)!$.  Its evaluation at zero also omits the prefactor $n/2$.}\par
+\erratum{The Instructor's Manual substitutes the series for $T_n$ into Chebyshev's equation, a route not followed below.  In its first ODE line, $x^2T_n$ must be $n^2T_n$, as in Chebyshev's equation.  After shifting the derivative sum, its factorial is $(n-2m+2)!$, not $(n-2m)!$.  Its evaluation at zero also omits the prefactor $n/2$.}\par
 
 Start with the type-II generator near $t=0$ and expand geometrically,
 then binomially:
@@ -2053,8 +2055,10 @@ the coefficient of $(-1)^m(2x)^{n-2m}$ in the difference is
     \left[n-m-\frac{n-2m}{2}\right]\\
  &=\frac n2\frac{(n-m-1)!}{m!(n-2m)!}.
 \end{align*}
-When $n=2m$, the second term is absent and the same final expression
-holds by setting its factor $n-2m$ to zero before cancellation.
+When $n=2m$, the sum for $xU_{n-1}$ stops at $\lfloor(n-1)/2\rfloor=m-1$,
+so the second term is absent; its rewritten form
+$(n-m-1)!\,(n-2m)/[2\,m!\,(n-2m)!]$ is zero there, and the bracket is
+still $n-m=n/2$.  (Directly: $(n-m)!/[m!\,0!]=1=\frac n2(n-m-1)!/[m!\,0!]$.)
 Thus for $n\ge1$,
 \[
 \boxed{T_n(x)=\frac n2\sum_{m=0}^{\lfloor n/2\rfloor}
@@ -2320,7 +2324,7 @@ with $\theta$ as the variable.
 $I_{mn}=\pi\dfrac{m!\,(m-n-1)!!}{(m-n)!\,(m+n)!!}$,\qquad
 $m\ge n$, $m+n$ even.
 \solution
-\erratum{The Instructor's Manual uses the incorrect Rodrigues power $n+1/2$ twice; it must be $n-1/2$, as in the type-I Rodrigues formula below.  Its final gamma quotient has $((m+n)/2)!$ in the denominator, not $((m-n)/2)!$, as the quotient $\Gamma(j+\frac12)/\Gamma(n+j+1)$ in (a) shows, with $n+j=(m+n)/2$.}\par
+\erratum{The Instructor's Manual uses the incorrect Rodrigues power $n+1/2$ twice; it must be $n-1/2$, as in the type-I Rodrigues formula below.  Its final gamma quotient must have $((m+n)/2)!$ in the denominator, not $((m-n)/2)!$, as the quotient $\Gamma(j+\frac12)/\Gamma(n+j+1)$ in (a) shows, with $n+j=(m+n)/2$.}\par
 
 Let $m-n=2j\ge0$, and write $D=d/dx$.
 (a) The Rodrigues representation
@@ -2350,7 +2354,10 @@ integral, evenness and $u=x^2$, $dx=du/(2\sqrt u)$, give
  =B(j+\tfrac12,n+\tfrac12).
 \]
 Collecting these results, with $(m-n)!=(2j)!$ in the second line,
-$B(j+\frac12,n+\frac12)=\Gamma(j+\frac12)\Gamma(n+\frac12)/\Gamma(n+j+1)$
+\[
+B(j+\tfrac12,n+\tfrac12)
+ =\frac{\Gamma(j+\frac12)\Gamma(n+\frac12)}{\Gamma(n+j+1)}
+\]
 in the third, and
 $\Gamma(j+\frac12)=\sqrt\pi\,(2j)!/(4^jj!)$, $2^n4^j=2^m$ in the last,
 \begin{align*}
@@ -2477,10 +2484,14 @@ integrals.
 Put $x=\cos\theta$, $0<\theta<\pi$, so $dx=-\sin\theta\,d\theta$;
 reversing the integration limits gives $dx/\sqrt{1-x^2}=d\theta$ and
 $\sqrt{1-x^2}\,dx=\sin^2\theta\,d\theta$ in the integrals.
-With $T_m=\cos m\theta$, $V_m=\sin m\theta$,
-$U_m=\sin((m+1)\theta)/\sin\theta$ and
-$W_m=\cos((m+1)\theta)/\sin\theta$, the factor $\sin^2\theta$ cancels
-the two denominators in the last two cases.
+With
+\[
+T_m=\cos m\theta,\quad V_m=\sin m\theta,\quad
+U_m=\frac{\sin((m+1)\theta)}{\sin\theta},\quad
+W_m=\frac{\cos((m+1)\theta)}{\sin\theta},
+\]
+the factor $\sin^2\theta$ cancels the two denominators in the last two
+cases.
 The four transformations are
 \begin{align*}
 \int_{-1}^1\frac{T_mT_n}{\sqrt{1-x^2}}dx
@@ -2494,7 +2505,8 @@ The four transformations are
 \end{align*}
 For the cosine product use
 $2\cos a\theta\cos b\theta=\cos((a-b)\theta)+\cos((a+b)\theta)$;
-for the sine product change the last plus sign to a minus sign.
+for the sine product use
+$2\sin a\theta\sin b\theta=\cos((a-b)\theta)-\cos((a+b)\theta)$.
 Every nonzero integer-frequency cosine integrates to zero on
 $[0,\pi]$, whereas the zero-frequency cosine integrates to $\pi$.
 For nonnegative integers $a,b$, the difference $a-b$ is zero only for
@@ -2514,9 +2526,11 @@ Consequently the four answers are, respectively,
 \boxed{\frac\pi2\delta_{mn}},\qquad
 \boxed{\frac\pi2\delta_{mn}}.
 \]
-\erratum{The second formula uses $V_0=\sin0=0$.  Substituting
-the independent zero-order solution $\arccos x$ would change
-that normalization and its cross integrals.}
+The factor $1-\delta_{n0}$ in the second result comes from
+$V_0=\sin0=0$.  The solution $\arccos x$ of Exercise 18.4.8 would not
+satisfy relation (b): with $x=\cos\theta$, its weighted integral with
+$V_n$ is $\int_0^\pi\theta\sin n\theta\,d\theta=(-1)^{n+1}\pi/n\ne0$
+for $n\ge1$.
 Although $W_n$ is singular at the endpoints, its weight reduces
 the displayed integrals to bounded trigonometric integrals, so
 all four improper integrals converge.
@@ -2532,7 +2546,10 @@ $(1-x^{2})^{-1/2}$.
 the interval $[-1,1]$ with respect to the weighting factor
 $(1-x^{2})^{1/2}$.
 \end{enumerate}
-\erratum{Use $n\ge1$ in part (a), with $V_n=\sin(n\arccos x)$.}\par\nobreak
+\erratum{Use $n\ge1$ in part (a), with $V_n=\sin(n\arccos x)$: for the
+order-zero solution $\arccos x$ of Exercise 18.4.8 the integral is
+$\int_0^\pi\theta\cos m\theta\,d\theta$, which is $\pi^2/2$ for $m=0$,
+whereas the formula below gives $0$ at $n=0$.}\par\nobreak
 \solution
 For an integer $j$, define
 \[
@@ -2683,8 +2700,12 @@ V_n(x)=\frac{(-1)^{n-1}n\sqrt\pi}{2^n\Gamma(n+1/2)}
  D^{n-1}(1-x^2)^{n-1/2}.
 \]
 Differentiate once, then compare with the type-I Rodrigues formula
-$T_n/\sqrt{1-x^2}=(-1)^n\sqrt\pi\,D^n(1-x^2)^{n-1/2}/[2^n\Gamma(n+1/2)]$
-(Exercise 18.4.16), using $(-1)^{n-1}=-(-1)^n$:
+of Exercise 18.4.16,
+\[
+\frac{T_n}{\sqrt{1-x^2}}
+ =\frac{(-1)^n\sqrt\pi}{2^n\Gamma(n+1/2)}D^n(1-x^2)^{n-1/2},
+\]
+using $(-1)^{n-1}=-(-1)^n$:
 \begin{align*}
 V_n'
  &=\frac{(-1)^{n-1}n\sqrt\pi}{2^n\Gamma(n+1/2)}
@@ -2800,9 +2821,14 @@ $4(-1)^s/[\pi(2s+1)]$ for $n=2s+1$.  Therefore
 \boxed{\operatorname{sgn}x=\frac4\pi\sum_{s=0}^\infty
  \frac{(-1)^s}{2s+1}T_{2s+1}(x)},\qquad -1\le x\le1,\ x\ne0.
 \]
-The usual Fourier convergence argument for a piecewise constant
-function gives its value at each continuity point, including the
-endpoints of this cosine expansion.
+The cosine series is the Fourier series of the even $2\pi$-periodic
+extension of $F$, which is $1$ for $|\theta|<\pi/2$ and $-1$ for
+$\pi/2<|\theta|\le\pi$.  This extension is piecewise constant with
+jumps only at $\theta=\pm\pi/2$ in $[-\pi,\pi]$, so by Dirichlet's
+theorem the series converges to $F(\theta)$ at every other $\theta$,
+including $\theta=0$ and $\theta=\pi$, that is, $x=\pm1$.  At $x=1$,
+for example, $T_{2s+1}(1)=1$ and the series is
+$\frac4\pi\bigl(1-\frac13+\frac15-\cdots\bigr)=\frac4\pi\cdot\frac\pi4=1$.
 \erratum{At the jump $x=0$ the series equals the midpoint value
 $0$.}  In fact every odd $T_{2s+1}(0)$ is zero, so all partial
 sums already have that value; the series is not uniformly convergent
@@ -2956,8 +2982,12 @@ by $\pi/4$ gives
 \[
 \boxed{\frac{\pi^2}{8}=1+2\sum_{s=1}^\infty(4s^2-1)^{-2}}.
 \]
-Uniform convergence, or equivalently the weighted $L^2$ Parseval
-identity, justifies the limiting squared integral.
+For each partial sum $S_N$ of the expansion, orthogonality gives this
+identity with $|x|$ replaced by $S_N$ and the sum stopped at $N$.
+Passing to the limit $N\to\infty$ is justified because $S_N\to|x|$
+uniformly on $[-1,1]$, so $S_N^2\to x^2$ uniformly, and
+$\int_{-1}^1(1-x^2)^{-1/2}dx=\pi$ is finite; alternatively, use the
+weighted $L^2$ Parseval identity.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2998,9 +3028,11 @@ $-4/[\pi(2j+1)^2]$.  With $a_0/2=\pi/2$, therefore
 \boxed{\arccos x=\frac\pi2-\frac4\pi
  \sum_{j=0}^\infty\frac{T_{2j+1}(x)}{(2j+1)^2}}.
 \]
-The coefficients are absolutely summable.  The cosine expansion
-of the continuous function $\theta$ therefore converges uniformly
-on this interval and is valid at both endpoints as well.
+The coefficients are absolutely summable and $|T_n(x)|\le1$, so the
+series converges uniformly on $[-1,1]$; as in Exercise 18.4.25(a), its
+continuous sum has the cosine coefficients of $\theta$ (integrate term
+by term) and therefore equals $\theta=\arccos x$, including at both
+endpoints.
 
 (b) The principal real inverse functions satisfy
 $\arcsin x+\arccos x=\pi/2$ for $-1\le x\le1$.
@@ -3009,8 +3041,10 @@ Subtracting the first expansion from $\pi/2$ yields
 \boxed{\arcsin x=\frac4\pi
  \sum_{j=0}^\infty\frac{T_{2j+1}(x)}{(2j+1)^2}}.
 \]
-At $x=0$ all terms are zero; at $x=\pm1$ the sums give
-$\pm\pi/2$, using $\sum_{j\ge0}(2j+1)^{-2}=\pi^2/8$.
+At $x=0$ all terms are zero; at $x=\pm1$, where $T_{2j+1}(\pm1)=\pm1$,
+the sums give $\pm\pi/2$, using
+$\sum_{j\ge0}(2j+1)^{-2}=\zeta(2)-\sum_{k\ge1}(2k)^{-2}
+=\frac34\zeta(2)=\pi^2/8$ (from $\zeta(2)=\pi^2/6$).
 
 \Needspace{12\baselineskip}
 \subsection*{18.5 Hypergeometric Functions}
