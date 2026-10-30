@@ -457,6 +457,12 @@ zeros of $J_{n}(x)$ there is one and only one zero of $J_{n+1}(x)$.
 \erratum{Use consecutive positive zeros, excluding the origin. For
 integer $n\ge1$, the origin is also a zero of $J_n$; the assertion would
 be false on the interval between zero and its first positive zero.}
+Indeed, let $j$ be the first positive zero of $J_n$. If $J_{n+1}(c)=0$
+with $0<c<j$, then $x^{n+1}J_{n+1}$ vanishes at $0$ and at $c$, so by
+Rolle's theorem its derivative $x^{n+1}J_n$ (Exercise~14.1.4(a))
+vanishes at some point of $(0,c)$, contradicting the choice of $j$.
+Hence $J_{n+1}$ has no zero in $(0,j)$.
+
 Let $a<b$ be consecutive positive zeros of $J_n$. The function
 $f=x^{-n}J_n$ also vanishes at $a,b$. Rolle's theorem gives at least
 one $c\in(a,b)$ for which $f'(c)=0$. By Exercise 14.1.4(b),
@@ -642,13 +648,13 @@ since $C_n'(x)=i^{-n}\cdot iJ_n'(ix)$.
 \begin{enumerate}
 \item[(a)] Show by direct differentiation and substitution that
 \[
-J_{\nu}(x)=\frac{1}{2\pi i}\erratum{\int}_{C}e^{(x/2)(t-1/t)}t^{-\nu-1}\,dt
+J_{\nu}(x)=\frac{1}{2\pi i}\int_{C}e^{(x/2)(t-1/t)}t^{-\nu-1}\,dt
 \]
 (this is the Schlaefli integral representation of $J_{\nu}$), and that
 the equivalent equation,
 \[
 J_{\nu}(x)=\frac{1}{2\pi i}\left(\frac{x}{2}\right)^{\nu}
-\erratum{\int}_{C}e^{s-x^{2}/4s}s^{-\nu-1}\,ds,
+\int_{C}e^{s-x^{2}/4s}s^{-\nu-1}\,ds,
 \]
 both satisfy Bessel's equation. $C$ is the contour shown in
 Fig.~14.5. The negative real axis is the cut line.
@@ -685,7 +691,7 @@ x^2f_{xx}+xf_x+(x^2-\nu^2)f
 \end{align*}
 since $S^2+4=t^2-2+t^{-2}+4=T^2$. This is a total derivative.
 Indeed, $tS'=t(1+t^{-2})=T$ and $tT'=t(1-t^{-2})=S$, so the three
-factors below have derivatives $(xT/2t)e^{xS/2}$, $-\nu t^{-\nu}/t$,
+factors below have derivatives $[xT/(2t)]\,e^{xS/2}$, $-\nu t^{-\nu}/t$,
 and $xS/(2t)$, and the product rule gives
 \begin{align*}
 \frac d{dt}\left[e^{xS/2}t^{-\nu}
@@ -775,7 +781,10 @@ these are the arguments of the two banks of the negative real axis.
 Use the open contour and branch specified in Exercise~14.1.15, with
 $x>0$ initially.}
 Split its integral into a lower ray, the unit circle, and an upper
-ray. On the lower ray put $t=e^{u-i\pi}$ with $u:\infty\to0$.
+ray. (The hint's integration variable $u$ is called $t$ here, as in
+Exercise~14.1.15, and the hint's positive $t$ is written $e^u$, so its
+$u=te^{\pm i\pi}$ becomes $t=e^{u\pm i\pi}$.)
+On the lower ray put $t=e^{u-i\pi}$ with $u:\infty\to0$.
 On the upper ray use $t=e^{u+i\pi}$ with $u:0\to\infty$. In both
 cases $t=-e^u$, so $t-t^{-1}=-e^u+e^{-u}=-2\sinh u$ and the
 exponential becomes $e^{-x\sinh u}$, whereas
@@ -905,7 +914,7 @@ Fig.~14.5,
 \item[(a)] From
 \[
 J_{\nu}(x)=\frac{1}{2\pi i}\left(\frac{x}{2}\right)^{\nu}
-\erratum{\int}_{C}t^{-\nu-1}e^{t-x^{2}/4t}\,dt
+\int_{C}t^{-\nu-1}e^{t-x^{2}/4t}\,dt
 \]
 derive the recurrence relation
 \[
@@ -913,7 +922,7 @@ J'_{\nu}(x)=\frac{\nu}{x}J_{\nu}(x)-J_{\nu+1}(x).
 \]
 \item[(b)] From
 \[
-J_{\nu}(x)=\frac{1}{2\pi i}\erratum{\int}_{C}t^{-\nu-1}e^{(x/2)(t-1/t)}\,dt
+J_{\nu}(x)=\frac{1}{2\pi i}\int_{C}t^{-\nu-1}e^{(x/2)(t-1/t)}\,dt
 \]
 derive the recurrence relation
 \[
@@ -1147,7 +1156,18 @@ The function is even, so the diameter profile is symmetric:
 \end{tikzpicture}
 \end{center}
 The noncentral minima occur at the nonzero zeros of $J_1$, where the
-intensity vanishes. The first two positive zeros, found from
+intensity vanishes, and only there. Indeed, with $x=2\pi aq$,
+Exercise~14.1.4(b) with $n=1$ gives $[J_1(x)/x]'=-J_2(x)/x$, so
+$I=I(0)[2J_1(x)/x]^2$ has $dI/dx=-8I(0)J_1(x)J_2(x)/x^2$. Up to the
+first positive zero $j_{11}$ of $J_1$, neither $J_1$ nor $J_2$ vanishes
+(for $J_2$ see Exercise~14.1.11), so both keep the positive signs of
+their leading terms $x/2$ and $x^2/8$, and $I$ decreases to $0$.
+Between consecutive positive zeros of $J_1$, $J_2$ has exactly one
+zero (Exercise~14.1.11 with $n=1$), so $dI/dx$ vanishes at a single
+interior point. Since $I>0$ inside and $I=0$ at both ends, $I$ has an
+interior maximum, necessarily at that point (a bright ring), and no
+interior minimum.
+The first two positive zeros, found from
 $J_1(j)=0$ (e.g., by Newton's method from the starting values $3.8$
 and $7.0$, with $J_1'=J_0-J_1/x$), are
 \[
@@ -1162,9 +1182,10 @@ positions on either side of the center:
 =\pm\frac{1.1165652972}{a}}.
 \]
 The point $q=0$ is a maximum, not a zero: the apparent $0/0$ there
-has limit one. Physical angles require $|\sin\alpha|\le1$, so a
-given minimum is accessible only if its displayed value satisfies
-that bound.
+has limit one. Physical angles require $|\sin\alpha|\le1$, so the
+$k$th minimum exists only if $\lambda j_{1k}/(2\pi a)\le1$, i.e.,
+$a\ge0.6098\lambda$ for the first and $a\ge1.1166\lambda$ for the
+second.
 
 (b) In the small-angle diffraction plane the annular area element is
 $2\pi q\,dq$. Put $x=2\pi aq$; then $q\,dq\propto x\,dx$ and
@@ -1187,7 +1208,7 @@ ring, $X=j_{11}$ and $J_1(X)=0$. The central fraction is the ratio
 $\frac12[1-J_0(j_{11})^2]/\frac12$; with
 $J_0(j_{11})=-0.4027593957$ it is consequently
 \[
-\boxed{1-J_0(j_{11})^2=0.8377848692\ldots\ \simeq83.8\%}.
+\boxed{1-J_0(j_{11})^2=0.8377848691\ldots\ \simeq83.8\%}.
 \]
 \erratum{This is the usual paraxial, large-aperture estimate
 ($a/\lambda\gg1$). The Instructor's Manual, p.~201, says $a/\lambda$
@@ -1301,7 +1322,9 @@ $m$, so $\Phi=c_1e^{im\varphi}+c_2e^{-im\varphi}$. With $z=k\rho$
 and $P(\rho)=y(z)$, so that $\rho P'=zy'$ and $\rho^2P''=z^2y''$,
 the radial equation becomes Bessel's equation
 $z^2y''+zy'+(z^2-m^2)y=0$. Finiteness at the center
-excludes $Y_m$, leaving $P=J_m(k\rho)$ up to a constant. Multiplying
+excludes the second solution $Y_m(k\rho)$ (the Neumann function of
+Section~14.3, which is unbounded as $\rho\to0$), leaving
+$P=J_m(k\rho)$ up to a constant. Multiplying
 the three factors proves the displayed solution.
 \erratum{Its parameters must satisfy $\omega=vk$; they are not
 independent. For $m=0$ the two angular exponentials are the same
@@ -1483,7 +1506,11 @@ plotted families coincide. The point $r=0$ is an infinite-length
 limit, not a finite cavity, and the axial indices then become
 degenerate.}
 
-For TM modes the lowest transverse roots are
+For TM modes the lowest transverse roots are the first positive zeros
+$\alpha_{01}=2.4048255577$, $\alpha_{11}=3.8317059702$,
+$\alpha_{21}=5.1356223018$ of $J_0$, $J_1$, $J_2$ (Newton's method as
+in Exercise~14.1.22, started at $2.4$, $3.8$, $5.1$, with $J_0'=-J_1$
+and $J_m'=J_{m-1}-mJ_m/x$); their squares are
 \[
 A=\alpha_{01}^2=5.783185963,\quad
 B=\alpha_{11}^2=14.68197064,\quad
@@ -1519,11 +1546,16 @@ $r_3<r\le1.5$ & TM$_{010}$ & TM$_{110}$ & TM$_{210}$\\
 \bottomrule
 \end{tabular}
 \end{center}
-For TE modes let
+For TE modes the lowest transverse roots are the first positive zeros
+$\beta_{11}=1.8411837813$, $\beta_{21}=3.0542369282$ of $J_1'$, $J_2'$
+(Newton's method started at $1.8$ and $3.0$, with
+$J_m''=-J_m'/x-(1-m^2/x^2)J_m$ from Bessel's equation) and
+$\beta_{01}=\alpha_{11}$, because $J_0'=-J_1$ (Exercise~14.1.4(b) with
+$n=0$); their squares are
 \[
 D=\beta_{11}^2=3.389957717,\quad
-E=\beta_{21}^2=9.328363213,\quad
-F=\beta_{01}^2=14.68197064.
+E=\beta_{21}^2=9.328363214,\quad
+F=\beta_{01}^2=B=14.68197064.
 \]
 Here the candidates are $D+\pi^2X$, $D+4\pi^2X$,
 $D+9\pi^2X$, $E+\pi^2X$, and $F+\pi^2X$. As for TM, for $X>0$,
@@ -1562,7 +1594,7 @@ dashed the second, and black dotted the third:
 \begin{center}
 \begin{tikzpicture}[x=2cm,y=.075cm]
 \draw[->] (0,0)--(2.47,0) node[right] {$X$};
-\draw[->] (0,0)--(0,34) node[above] {$Y\ (TM)$};
+\draw[->] (0,0)--(0,34) node[above] {$Y$ (TM)};
 \foreach \a in {.5,1,1.5,2} {\draw (\a,0)--(\a,-.7) node[below,font=\scriptsize] {$\a$};}
 \foreach \a in {10,20,30} {\draw (0,\a)--(-.03,\a) node[left,font=\scriptsize] {$\a$};}
 \draw[blue,thick] (0.0000000,5.7831860)--(2.2500000,5.7831860);
@@ -1570,7 +1602,7 @@ dashed the second, and black dotted the third:
 \draw[black,densely dotted,very thick] (0.0000000,5.7831860)--(0.2254088,14.6819706)--(0.9016354,14.6819706)--(2.0863481,26.3746164)--(2.2500000,26.3746164);
 \end{tikzpicture}\hspace{.35cm}\begin{tikzpicture}[x=2cm,y=.075cm]
 \draw[->] (0,0)--(2.47,0) node[right] {$X$};
-\draw[->] (0,0)--(0,44) node[above] {$Y\ (TE)$};
+\draw[->] (0,0)--(0,44) node[above] {$Y$ (TE)};
 \foreach \a in {.5,1,1.5,2} {\draw (\a,0)--(\a,-.7) node[below,font=\scriptsize] {$\a$};}
 \foreach \a in {10,20,30,40} {\draw (0,\a)--(-.03,\a) node[left,font=\scriptsize] {$\a$};}
 \draw[blue,thick] (0.0000000,3.3899577)--(2.2500000,25.5965676);
