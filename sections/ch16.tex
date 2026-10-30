@@ -1849,14 +1849,17 @@ as a point charge $+e$ at the origin. Also find the electric potential
 of the electron distribution at an arbitrary field point.}
 \solution
 \erratum{For the hydrogen atom, the stated electrostatic energy is
-interpreted as the electron--nucleus interaction. The manual instead
+interpreted as the electron--nucleus interaction energy; the classical
+self-energy $\tfrac12\int\rho V\,d^3r$ of the electron cloud alone
+would be a different quantity. The Instructor's Manual instead
 displays a position-dependent electric potential; both quantities
-are obtained here. A classical self-energy
-$\tfrac12\int\rho V\,d^3r$ would be a different quantity, so a
-second charge is not required for every notion of electrostatic energy.}
+are obtained here.}
 
 Let the field point be $(R,\Theta,\Phi)$ and write $a=a_0$.
-The identity $\sin^2\theta=\frac23[1-P_2(\cos\theta)]$ gives
+Since $P_2(\cos\theta)=\frac12(3\cos^2\theta-1)$, we have
+$\cos^2\theta=\frac13[1+2P_2(\cos\theta)]$, hence the identity
+$\sin^2\theta=1-\cos^2\theta=\frac23[1-P_2(\cos\theta)]$; with
+$\frac23\cdot\frac1{64}=\frac1{96}$ it gives
 \[
 \rho(r,\theta)=-\frac{e}{96\pi a^5}r^2e^{-r/a}
 [1-P_2(\cos\theta)].
@@ -1864,23 +1867,41 @@ The identity $\sin^2\theta=\frac23[1-P_2(\cos\theta)]$ gives
 Its total charge is
 \[
 -\frac{e}{96\pi a^5}\,(4\pi)\int_0^\infty r^4e^{-r/a}dr
-=-\frac{e}{24a^5}(4!a^5)=-e.
+=-\frac{e}{24a^5}(4!a^5)=-e,
 \]
-Only the monopole and quadrupole survive. The addition theorem and
-orthogonality give, for $l=0,2$,
+because $\int P_2\,d\Omega=0$ (orthogonality to $P_0$), so the
+angular integral of $1-P_2$ is $4\pi$, and
+$\int_0^\infty r^ne^{-r/a}dr=n!\,a^{n+1}$.
+
+The addition theorem expands the Coulomb kernel, with
+$r_<=\min(r,R)$ and $r_>=\max(r,R)$, as
+\[
+\frac1{|\mathbf R-\mathbf r|}=\sum_{k=0}^\infty
+\frac{4\pi}{2k+1}\frac{r_<^k}{r_>^{k+1}}
+\sum_{m=-k}^{k}Y_k^{m*}(\theta,\varphi)Y_k^m(\Theta,\Phi).
+\]
+Write $P_l(\cos\theta)=\sqrt{4\pi/(2l+1)}\,Y_l^0(\theta,\varphi)$
+and integrate over the source angles: orthonormality,
+$\int Y_l^0Y_k^{m*}\,d\Omega=\delta_{kl}\delta_{m0}$, keeps only
+the term $k=l$, $m=0$, so
 \[
 \int\frac{P_l(\cos\theta)}{|\mathbf R-\mathbf r|}\,d\Omega
+=\frac{4\pi}{2l+1}\frac{r_<^l}{r_>^{l+1}}
+\sqrt{\frac{4\pi}{2l+1}}\,Y_l^0(\Theta,\Phi)
 =\frac{4\pi}{2l+1}\frac{r_<^l}{r_>^{l+1}}P_l(\cos\Theta).
 \]
-To see the factor, write
-$P_l(\cos\theta)=\sqrt{4\pi/(2l+1)}Y_l^0(\Omega)$ in the
-Coulomb expansion: the angular integral selects its $l,0$ term.
-Consequently
+The angular factor $P_0-P_2$ of $\rho$ therefore leaves only the
+monopole ($l=0$, factor $4\pi$) and the quadrupole ($l=2$, factor
+$4\pi/5$). With $d^3r=r^2dr\,d\Omega$ and
+$4\pi/(96\pi a^5)=1/(24a^5)$,
 \[
-V(R,\Theta)=-\frac{e}{4\pi\varepsilon_0}\frac1{24a^5}
+V(R,\Theta)=\frac1{4\pi\varepsilon_0}
+\int\frac{\rho(\mathbf r)}{|\mathbf R-\mathbf r|}\,d^3r
+=-\frac{e}{4\pi\varepsilon_0}\frac1{24a^5}
 \left[I_0(R)-\frac{P_2(\cos\Theta)}5I_2(R)\right],
 \]
-where splitting each radial integral at $r=R$ gives
+where $I_l(R)=\int_0^\infty r^4e^{-r/a}\,r_<^l/r_>^{l+1}\,dr$.
+Splitting each radial integral at $r=R$ gives
 \[
 \begin{aligned}
 I_0(R)&=\frac1R\int_0^R r^4e^{-r/a}dr
@@ -1889,7 +1910,17 @@ I_2(R)&=\frac1{R^3}\int_0^R r^6e^{-r/a}dr
 +R^2\int_R^\infty re^{-r/a}dr.
 \end{aligned}
 \]
-Thus, with $q=R/a$,
+Use the incomplete gamma functions
+$\gamma(n,q)=\int_0^qt^{n-1}e^{-t}dt$ and
+$\Gamma(n,q)=\int_q^\infty t^{n-1}e^{-t}dt$, with $q=R/a$.
+The substitution $r=at$ (new limits $0,q$ or $q,\infty$) gives
+\[
+\int_0^Rr^ne^{-r/a}dr=a^{n+1}\gamma(n+1,q),\qquad
+\int_R^\infty r^ne^{-r/a}dr=a^{n+1}\Gamma(n+1,q),
+\]
+so $I_0=a^5\gamma(5,q)/R+a^4\Gamma(4,q)$ and
+$I_2=a^7\gamma(7,q)/R^3+R^2a^2\Gamma(2,q)$. Dividing by $24a^5$,
+and the quadrupole term by a further $5$, gives
 \[
 \boxed{\begin{aligned}
 V(R,\Theta)=-\frac{e}{4\pi\varepsilon_0}
@@ -1901,9 +1932,20 @@ V(R,\Theta)=-\frac{e}{4\pi\varepsilon_0}
 +\frac{R^2\Gamma(2,q)}{a^3}\right]\bigg\}.
 \end{aligned}}
 \]
-\erratum{The manual's potential on printed p.~265 lacks the
-overall factor $-e$ required by the given electron charge density.
-The displayed result restores both the charge and its negative sign.}
+\erratum{The Instructor's Manual's potential (printed p.~265) lacks
+the overall factor $-e$ required by the given electron charge density;
+the boxed result includes the charge with its negative sign.}
+For integer $n$, repeated integration by parts gives the elementary
+forms
+$\Gamma(n,q)=(n-1)!\,e^{-q}\sum_{k=0}^{n-1}q^k/k!$ and
+$\gamma(n,q)=(n-1)!-\Gamma(n,q)$. As a check, for $R\gg a$ the
+$\Gamma$ terms decay exponentially while $\gamma(5,q)\to4!$ and
+$\gamma(7,q)\to6!$, so
+\[
+V\to-\frac{e}{4\pi\varepsilon_0}
+\left[\frac1R-\frac{6a^2}{R^3}P_2(\cos\Theta)\right],
+\]
+the potential of the total charge $-e$ plus a quadrupole term.
 A test charge $q_{\rm test}$ has energy $q_{\rm test}V(R,\Theta)$.
 
 For the hydrogen nucleus, $q_{\rm test}=+e$ and $R=0$.
@@ -1927,8 +1969,11 @@ Equivalently one may integrate the nuclear potential directly:
 U=\int\rho\,\frac{e}{4\pi\varepsilon_0 r}\,d^3r
 =-\frac{e^2}{4\pi\varepsilon_0}\frac1{24a^5}
 \int_0^\infty r^3e^{-r/a}dr
-=-\frac{e^2}{4\pi\varepsilon_0}\frac1{4a}.
+=-\frac{e^2}{4\pi\varepsilon_0}\frac1{4a},
 \]
+since the angular integral of $1-P_2$ is again $4\pi$, the factor
+$r^2/r=r$ of $d^3r/r$ turns $r^2e^{-r/a}$ into $r^3e^{-r/a}$, and
+$\int_0^\infty r^3e^{-r/a}dr=3!\,a^4=6a^4$.
 In the Coulomb units used in the question's $a_0=\hbar^2/(me^2)$,
 set $1/(4\pi\varepsilon_0)=1$: the energy is $-e^2/(4a_0)$.
 This is the electrostatic interaction energy; the kinetic energy
@@ -1964,9 +2009,10 @@ ordinary pointwise convergent formulas for a function.}
 
 \textbf{(a)} For a smooth test function $f$, let
 $f_{lm}=\int Y_l^{m*}(\Omega_2)f(\Omega_2)\,d\Omega_2$.
-Completeness gives
+Completeness gives the Laplace series
 $f(\Omega_1)=\sum_{lm}f_{lm}Y_l^m(\Omega_1)$.
-Therefore
+Therefore, integrating term by term (the $l,m$ term gives
+$Y_l^m(\Omega_1)f_{lm}$),
 \[
 \int\left[\sum_{lm}Y_l^{m*}(\Omega_2)Y_l^m(\Omega_1)\right]
 f(\Omega_2)\,d\Omega_2
@@ -1974,18 +2020,38 @@ f(\Omega_2)\,d\Omega_2
 \]
 This is precisely the defining action of
 $\delta(\Omega_1-\Omega_2)$, proving (a) in the distributional sense.
+It is the closure relation (5.27),
+$\delta(x-t)=\sum_j\varphi_j(x)\varphi_j^*(t)$, for the orthonormal
+set $\varphi_j=Y_l^m$ on the sphere, with $x=\Omega_1$ and
+$t=\Omega_2$.
+\erratum{The Instructor's Manual (printed p.~266) says that
+reconstructing the arbitrary test function yields $Y_l^m(\Omega_1)$.
+Its preceding sum instead yields $f(\Omega_1)$, as the delta's
+defining action requires. A single harmonic is recovered only when
+$f$ is that harmonic.}
 
 \textbf{(b)} Define the finite-dimensional projection kernel
 \[
 K_l(\Omega_1,\Omega_2)=
 \sum_{m=-l}^{l}Y_l^m(\Omega_1)Y_l^{m*}(\Omega_2).
 \]
-A common rotation of the two directions mixes their $m$ components
-by the same unitary matrix: rotations preserve $d\Omega$ and hence
-the harmonic inner product. In the sum, the two matrices multiply
-to the identity. Thus $K_l$ is unchanged by a common rotation.
-Choose one taking $\Omega_2$ to the north pole. The other direction
-then has polar angle $\gamma$, their angular separation. At the pole,
+By Eq.~(16.52), a rotation of the axes transforms the harmonics of
+degree $l$ among themselves,
+$Y_l^m(\Omega')=\sum_\mu D^l_{\mu m}Y_l^\mu(\Omega)$, with a unitary
+matrix $D^l$ (rotations preserve $d\Omega$ and hence the harmonic
+inner product). Applying the same rotation to both directions,
+\[
+K_l(\Omega_1',\Omega_2')
+=\sum_{\mu,\nu}\Bigl(\sum_mD^l_{\mu m}D^{l*}_{\nu m}\Bigr)
+Y_l^\mu(\Omega_1)Y_l^{\nu*}(\Omega_2)
+=K_l(\Omega_1,\Omega_2),
+\]
+because $\sum_mD^l_{\mu m}D^{l*}_{\nu m}=(D^lD^{l\dagger})_{\mu\nu}
+=\delta_{\mu\nu}$. Thus $K_l$ is unchanged by a common rotation.
+Choose the rotation so that $\Omega_2$ lies on the new polar axis.
+The other direction then has polar angle $\gamma$, their angular
+separation. At the pole the factor $(1-x^2)^{|m|/2}$ of $P_l^m$
+vanishes for $m\ne0$, and $P_l(1)=1$, so
 \[
 Y_l^m(0,\varphi)=0\quad(m\ne0),\qquad
 Y_l^0(0,\varphi)=\sqrt{\frac{2l+1}{4\pi}}.
@@ -1996,25 +2062,31 @@ K_l(\Omega_1,\Omega_2)
 =Y_l^0(\gamma,0)\sqrt{\frac{2l+1}{4\pi}}
 =\boxed{\frac{2l+1}{4\pi}P_l(\cos\gamma)},
 \]
-where
+where, from the scalar product of the unit vectors
+$(\sin\theta_i\cos\varphi_i,\sin\theta_i\sin\varphi_i,\cos\theta_i)$,
 \[
 \cos\gamma=\cos\theta_1\cos\theta_2+
 \sin\theta_1\sin\theta_2\cos(\varphi_1-\varphi_2).
 \]
-Summing these kernels gives the stated Legendre representation
-of the delta distribution.
+Summing these kernels over $l$ and using (a) gives the stated
+Legendre representation of the delta distribution.
 
-The term-by-term identification is justified by orthogonal
-projection, rather than by subtracting two arbitrary infinite sums.
-Apply the degree-$l$ projector in the first angular variable.
-It annihilates all $K_k$ with $k\ne l$, since
+The boxed identity is the addition theorem. The term-by-term
+identification of the two delta representations is justified by
+orthogonal projection, rather than by subtracting two infinite sums.
+As functions of $\Omega_1$, both $K_k$ and $P_k(\cos\gamma)$ are
+combinations of the degree-$k$ harmonics $Y_k^q(\Omega_1)$: in axes
+with $\Omega_2$ on the polar axis,
+$P_k(\cos\gamma)=\sqrt{4\pi/(2k+1)}\,Y_k^0(\Omega_1')$, and
+Eq.~(16.52) re-expresses this within degree $k$ in the original axes.
+Apply the degree-$l$ projector in $\Omega_1$,
+$f\mapsto\sum_mY_l^m(\Omega_1)\int Y_l^{m*}f\,d\Omega_1$.
+It annihilates every degree-$k$ function with $k\ne l$, since
 $\int Y_l^{m*}Y_k^q\,d\Omega=\delta_{lk}\delta_{mq}$, and leaves
-$K_l$ unchanged. Thus each degree block is uniquely determined.
-The boxed identity is the addition theorem.
-\erratum{The manual (printed p.~266) says that reconstructing the
-arbitrary test function yields $Y_l^m(\Omega_1)$. Its preceding
-sum instead yields $f(\Omega_1)$, as the delta's defining action
-requires. A single harmonic is recovered only when $f$ is that harmonic.}
+degree-$l$ functions unchanged. Applied to
+$\sum_kK_k=\sum_k\frac{2k+1}{4\pi}P_k(\cos\gamma)$ it gives
+$K_l=\frac{2l+1}{4\pi}P_l(\cos\gamma)$ for each $l$ separately:
+each degree block is uniquely determined.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2063,27 +2135,35 @@ $|M+1|\le L-1$; absent terms in recurrence formulas are omitted.}
 xP_L^M=\frac{L-M+1}{2L+1}P_{L+1}^M+
 \frac{L+M}{2L+1}P_{L-1}^M.
 \]
-For the upper term, the normalization ratio is
+Multiply by $N_{LM}e^{iM\varphi}$ and write
+$P_{L\pm1}^Me^{iM\varphi}=Y_{L\pm1}^M/N_{L\pm1,M}$.
+For the upper term, $(L-M)!/(L-M+1)!=1/(L-M+1)$ and
+$(L+M+1)!/(L+M)!=L+M+1$ give the normalization ratio
 \[
 \frac{N_{LM}}{N_{L+1,M}}
 =\sqrt{\frac{2L+1}{2L+3}\frac{L+M+1}{L-M+1}}.
 \]
 Multiplying by $(L-M+1)/(2L+1)$ therefore gives
 \[
-A_+=\sqrt{\frac{(L+1)^2-M^2}{(2L+1)(2L+3)}}.
+A_+=\sqrt{\frac{(L+M+1)(L-M+1)}{(2L+1)(2L+3)}}
+=\sqrt{\frac{(L+1)^2-M^2}{(2L+1)(2L+3)}}.
 \]
-For the lower term,
+For the lower term with $|M|\le L-1$,
+$(L-M)!/(L-M-1)!=L-M$ and $(L+M-1)!/(L+M)!=1/(L+M)$ give
 \[
 \frac{N_{LM}}{N_{L-1,M}}
 =\sqrt{\frac{2L+1}{2L-1}\frac{L-M}{L+M}},
 \qquad
-A_-=\sqrt{\frac{L^2-M^2}{(2L-1)(2L+1)}}.
+A_-=\frac{L+M}{2L+1}\frac{N_{LM}}{N_{L-1,M}}
+=\sqrt{\frac{L^2-M^2}{(2L-1)(2L+1)}}.
 \]
-At an endpoint the zero coefficient removes the nonexistent term.
+At $M=\pm L$ the lower term is absent ($P_{L-1}^L\equiv0$, and
+$L+M=0$ for $M=-L$), consistent with $A_-=0$ there.
 Thus
 $\cos\theta\,Y_L^M=A_+Y_{L+1}^M+A_-Y_{L-1}^M$.
 Multiply by $Y_{L+1}^{M*}$, integrate, and use
-$Y_1^0=\sqrt{3/(4\pi)}\cos\theta$:
+$Y_1^0=\sqrt{3/(4\pi)}\cos\theta$; orthonormality removes the
+$Y_{L-1}^M$ term and leaves $\sqrt{3/(4\pi)}\,A_+$:
 \[
 \boxed{\int Y_L^MY_1^0Y_{L+1}^{M*}d\Omega
 =\sqrt{\frac3{4\pi}
@@ -2095,8 +2175,10 @@ $Y_1^0=\sqrt{3/(4\pi)}\cos\theta$:
 \sqrt{1-x^2}\,P_L^M=
 \frac{P_{L-1}^{M+1}-P_{L+1}^{M+1}}{2L+1}.
 \]
-The required ratios, including the azimuthal factor $e^{i\varphi}$,
-are
+Multiply by $N_{LM}e^{i(M+1)\varphi}$, so that the left side becomes
+$\sin\theta\,e^{i\varphi}Y_L^M$, and write
+$P_{L\pm1}^{M+1}e^{i(M+1)\varphi}=Y_{L\pm1}^{M+1}/N_{L\pm1,M+1}$.
+The required ratios are
 \[
 \begin{aligned}
 \frac{N_{LM}}{(2L+1)N_{L+1,M+1}}
@@ -2105,16 +2187,30 @@ are
 &=\sqrt{\frac{(L-M)(L-M-1)}{(2L-1)(2L+1)}}=B_-.
 \end{aligned}
 \]
-For example the upper factorial quotient cancels $(L-M)!$
-and leaves $(L+M+2)!/(L+M)!=(L+M+2)(L+M+1)$;
-the lower quotient similarly leaves $(L-M)(L-M-1)$.
+Indeed, with
+\[
+N_{L+1,M+1}^2=\frac{2L+3}{4\pi}\frac{(L-M)!}{(L+M+2)!},\qquad
+N_{L-1,M+1}^2=\frac{2L-1}{4\pi}\frac{(L-M-2)!}{(L+M)!},
+\]
+the squares of the two ratios are
+\[
+B_+^2=\frac{(L+M+2)!/(L+M)!}{(2L+1)(2L+3)},\qquad
+B_-^2=\frac{(L-M)!/(L-M-2)!}{(2L-1)(2L+1)},
+\]
+and $(L+M+2)!/(L+M)!=(L+M+2)(L+M+1)$,
+$(L-M)!/(L-M-2)!=(L-M)(L-M-1)$.
+For $M\ge L-1$ the lower term is absent ($P_{L-1}^{M+1}\equiv0$),
+consistent with $B_-=0$ there.
 Hence
 \[
 \sin\theta\,e^{i\varphi}Y_L^M
 =-B_+Y_{L+1}^{M+1}+B_-Y_{L-1}^{M+1}.
 \]
-Because $Y_1^1=-\sqrt{3/(8\pi)}\sin\theta\,e^{i\varphi}$,
-orthogonality now selects each coefficient:
+Because $Y_1^1=-\sqrt{3/(8\pi)}\sin\theta\,e^{i\varphi}$, the
+integrands of (c) and (d) are
+$-\sqrt{3/(8\pi)}\,(\sin\theta\,e^{i\varphi}Y_L^M)\,Y_{L\pm1}^{M+1*}$,
+and orthonormality selects $-\sqrt{3/(8\pi)}\,(-B_+)$ and
+$-\sqrt{3/(8\pi)}\,B_-$:
 \[
 \boxed{\begin{aligned}
 \int Y_L^MY_1^1Y_{L+1}^{M+1*}d\Omega
@@ -2162,11 +2258,13 @@ $\int_{-1}^1P_jP_N\,dx=2\delta_{jN}/(2N+1)$.
 =a_L\frac{2\delta_{N,L+1}}{2L+3}
 +b_L\frac{2\delta_{N,L-1}}{2L-1}.
 \]
-This gives respectively
+For $N=L+1$ and $N=L-1$ this gives respectively
 $2(L+1)/[(2L+1)(2L+3)]$ and
-$2L/[(2L-1)(2L+1)]$.
+$2L/[(2L-1)(2L+1)]$; for every other $N$ both Kronecker deltas
+vanish and the integral is $0$.
 
-\textbf{(b)} Apply the recurrence a second time:
+\textbf{(b)} Apply the recurrence a second time, to $P_{L+1}$ and
+to $P_{L-1}$:
 \[
 \begin{aligned}
 x^2P_L
@@ -2175,7 +2273,10 @@ x^2P_L
 &=A_LP_{L+2}+B_LP_L+C_LP_{L-2},
 \end{aligned}
 \]
-where the coefficients are
+where $A_L=a_La_{L+1}$, $B_L=a_Lb_{L+1}+b_La_{L-1}$,
+$C_L=b_Lb_{L-1}$. With $a_{L+1}=(L+2)/(2L+3)$,
+$b_{L+1}=(L+1)/(2L+3)$, $a_{L-1}=L/(2L-1)$ and
+$b_{L-1}=(L-1)/(2L-1)$, the coefficients are
 \[
 A_L=\frac{(L+1)(L+2)}{(2L+1)(2L+3)},\qquad
 C_L=\frac{L(L-1)}{(2L+1)(2L-1)},
@@ -2188,17 +2289,21 @@ B_L&=\frac{(L+1)^2}{(2L+1)(2L+3)}
 {(2L+1)(2L-1)(2L+3)}\\
 &=\frac{(2L+1)(2L^2+2L-1)}
 {(2L+1)(2L-1)(2L+3)}
-=\frac{2L^2+2L-1}{(2L-1)(2L+3)}.
+=\frac{2L^2+2L-1}{(2L-1)(2L+3)},
 \end{aligned}
 \]
+because $(L+1)^2(2L-1)=2L^3+3L^2-1$ and $L^2(2L+3)=2L^3+3L^2$ add
+to $4L^3+6L^2-1=(2L+1)(2L^2+2L-1)$.
 For $L=0,1$, direct application of $xP_0=P_1$ removes every
 negative-degree term; the surviving formulas still give these
-same $A_L,B_L$. Integration against $P_N$ multiplies the three
-coefficients by $2/(2L+5)$, $2/(2L+1)$, and $2/(2L-3)$,
-respectively. These are exactly the three stated answers.
+same $A_L,B_L$: $x^2P_0=\frac23P_2+\frac13P_0$ and
+$x^2P_1=\frac25P_3+\frac35P_1$. Integration against $P_N$ multiplies
+the three coefficients by $2/(2N+1)$, that is, by $2/(2L+5)$,
+$2/(2L+1)$, and $2/(2L-3)$, respectively, and gives $0$ for every
+other $N$. These are exactly the three stated answers.
 \erratum{Both displayed case lists need a final case $0$ for every
-other nonnegative integer $N$. A case with a negative value of
-$N=L-1$ or $N=L-2$ is absent.}
+other nonnegative integer $N$. A case whose index $N=L-1$ or
+$N=L-2$ would be negative does not occur.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2225,7 +2330,9 @@ x\varphi_{n}=a_{n+1}\varphi_{n+1}+a_{n}\varphi_{n}
 Since the Legendre polynomials of degrees $0,\ldots,n+1$ form a
 basis of the polynomials of degree at most $n+1$, the expansion of
 $xP_n$ is finite and $a_s=0$ for $s>n+1$.
-For a coefficient with $s<n-1$, use the inner product:
+Multiplying the expansion by $P_s$ and integrating, with
+$\int_{-1}^1P_tP_s\,dx=2\delta_{ts}/(2s+1)$, gives each coefficient
+as an inner product; for $s<n-1$,
 \[
 a_s=\frac{2s+1}{2}\int_{-1}^1xP_n(x)P_s(x)\,dx
 =\frac{2s+1}{2}\int_{-1}^1P_n(x)[xP_s(x)]\,dx.
@@ -2240,16 +2347,19 @@ $x[P_n(x)]^2$ is odd:
 a_n=\frac{2n+1}{2}\int_{-1}^1x[P_n(x)]^2dx=0.
 \]
 To find the upper coefficient without assuming the desired
-recurrence, use Rodrigues' formula. The highest term in
+recurrence, use Rodrigues' formula,
+$P_n=(2^nn!)^{-1}\,d^n(x^2-1)^n/dx^n$. The highest term in
 $(x^2-1)^n$ is $x^{2n}$, whose $n$th derivative is
 $(2n)!x^n/n!$. Thus the leading coefficient of $P_n$ is
 \[
 \kappa_n=\frac{(2n)!}{2^n(n!)^2}.
 \]
 Matching the coefficient of $x^{n+1}$ in $xP_n=a_{n+1}P_{n+1}
-+a_{n-1}P_{n-1}$ gives
++a_{n-1}P_{n-1}$ (the left side has $\kappa_n$, the right side
+$a_{n+1}\kappa_{n+1}$, since $P_{n-1}$ has lower degree) gives
 \[
 a_{n+1}=\frac{\kappa_n}{\kappa_{n+1}}
+=\frac{(2n)!}{2^n(n!)^2}\cdot\frac{2^{n+1}[(n+1)!]^2}{(2n+2)!}
 =\frac{2(n+1)^2}{(2n+2)(2n+1)}
 =\frac{n+1}{2n+1}.
 \]
@@ -2266,7 +2376,9 @@ For $n=0$ the separate identity is $xP_0=P_1$.
 
 The same degree and inner-product argument works for orthogonal
 polynomials with any positive weight on their interval: multiplication
-by $x$ is symmetric in that inner product, so only the neighboring
+by $x$ is symmetric in that inner product,
+$\langle x\varphi_n,\varphi_s\rangle=\langle\varphi_n,x\varphi_s\rangle
+=0$ for $s+1<n$, so only the neighboring
 degrees and the original degree can appear. The middle coefficient
 need not vanish unless the weight and interval supply the parity
 symmetry used here.
@@ -2298,7 +2410,7 @@ Use the spherical Cartesian basis
 \mathbf e_-=\frac{\mathbf e_x-i\mathbf e_y}{\sqrt2}.
 \]
 The first index of $\mathbf Y_{JLM}$ is the total angular momentum;
-the second is the orbital degree. Its definition is
+the second is the orbital degree. Its definition, Eq.~(16.88), is
 \[
 \mathbf Y_{JLM}=\sum_{m,q}C(L\,1\,J\mid m\,q\,M)
 Y_L^m\mathbf e_q.
@@ -2309,41 +2421,58 @@ not a normalized vector harmonic. There is also no negative-degree
 orbital harmonic.}
 
 For $J=M=0$, only $L=1$ is allowed. The singlet coefficients from
-16.2.1 give
+16.2.1, $C(1\,1\,0\mid m,-m,0)=1/\sqrt3,-1/\sqrt3,1/\sqrt3$ for
+$m=1,0,-1$, give
 \[
 \mathbf Y_{010}=\frac1{\sqrt3}
 (Y_1^1\mathbf e_- -Y_1^0\mathbf e_0+Y_1^{-1}\mathbf e_+).
 \]
-With $\mathbf e_\rho=\cos\varphi\,\mathbf e_x+
-\sin\varphi\,\mathbf e_y$, the $m=\pm1$ terms combine to
-$-\sqrt{3/(4\pi)}\sin\theta\,\mathbf e_\rho$.
+Insert $Y_1^{\pm1}=\mp\sqrt{3/(8\pi)}\sin\theta\,e^{\pm i\varphi}$
+and $Y_1^0=\sqrt{3/(4\pi)}\cos\theta$. With
+$\mathbf e_\rho=\cos\varphi\,\mathbf e_x+\sin\varphi\,\mathbf e_y$,
+\[
+e^{i\varphi}(\mathbf e_x-i\mathbf e_y)
++e^{-i\varphi}(\mathbf e_x+i\mathbf e_y)
+=2\cos\varphi\,\mathbf e_x+2\sin\varphi\,\mathbf e_y
+=2\mathbf e_\rho,
+\]
+so the $m=\pm1$ terms combine to
+$Y_1^1\mathbf e_-+Y_1^{-1}\mathbf e_+
+=-\sqrt{3/(8\pi)}\,(\sin\theta/\sqrt2)\,2\mathbf e_\rho
+=-\sqrt{3/(4\pi)}\sin\theta\,\mathbf e_\rho$.
 The $m=0$ term is
-$-\sqrt{3/(4\pi)}\cos\theta\,\mathbf e_z$.
+$-Y_1^0\mathbf e_0=-\sqrt{3/(4\pi)}\cos\theta\,\mathbf e_z$.
 Since $\hat{\mathbf r}=\sin\theta\,\mathbf e_\rho+
-\cos\theta\,\mathbf e_z$,
+\cos\theta\,\mathbf e_z$ and
+$\frac1{\sqrt3}\sqrt{\frac3{4\pi}}=\frac1{\sqrt{4\pi}}$,
 \[
 \boxed{\mathbf Y_{010}=-\frac{\hat{\mathbf r}}{\sqrt{4\pi}}}.
 \]
 
-For $J=1,M=0,L=0$, coupling a scalar to spin one is immediate:
+For $J=1,M=0,L=0$, coupling a scalar to spin one is immediate,
+$C(0\,1\,1\mid0\,0\,0)=1$, and
+$\mathbf e_z=\cos\theta\,\hat{\mathbf r}-\sin\theta\,\hat{\boldsymbol\theta}$:
 \[
 \boxed{\mathbf Y_{100}=Y_0^0\mathbf e_0
 =\frac{\cos\theta\,\hat{\mathbf r}
 -\sin\theta\,\hat{\boldsymbol\theta}}{\sqrt{4\pi}}}.
 \]
-For $L=1$, the antisymmetric coefficients give
+For $L=1$, the triplet coefficients of 16.2.1,
+$C(1\,1\,1\mid m,-m,0)=1/\sqrt2,0,-1/\sqrt2$ for $m=1,0,-1$, give
 \[
 \mathbf Y_{110}=\frac1{\sqrt2}
 (Y_1^1\mathbf e_- -Y_1^{-1}\mathbf e_+).
 \]
-Insert $Y_1^{\pm1}=\mp\sqrt{3/(8\pi)}\sin\theta\,e^{\pm i\varphi}$.
-The Cartesian bracket is
+Insert $Y_1^{\pm1}=\mp\sqrt{3/(8\pi)}\sin\theta\,e^{\pm i\varphi}$:
+the bracket equals
+$\sqrt{3/(8\pi)}\,(\sin\theta/\sqrt2)$ times the Cartesian combination
 \[
 -e^{i\varphi}(\mathbf e_x-i\mathbf e_y)
 +e^{-i\varphi}(\mathbf e_x+i\mathbf e_y)
-=2i(-\sin\varphi\,\mathbf e_x+\cos\varphi\,\mathbf e_y),
+=2i(-\sin\varphi\,\mathbf e_x+\cos\varphi\,\mathbf e_y)
+=2i\hat{\boldsymbol\varphi},
 \]
-so
+so, with $\frac1{\sqrt2}\cdot\frac1{\sqrt2}\cdot2=1$,
 \[
 \boxed{\mathbf Y_{110}=i\sqrt{\frac3{8\pi}}\sin\theta\,
 \hat{\boldsymbol\varphi}}.
@@ -2352,15 +2481,26 @@ so
 Finally consider $L=2$. To obtain the $J=1$ coefficients, first
 write its highest $M=1$ state in the product basis
 $(m,q)=(2,-1),(1,0),(0,1)$ with coefficients $(a,b,c)$.
-Its raising must vanish. The coefficients of the two $M=2$
-products yield
+Its raising by $J_+=L_++S_+$ must vanish. The ladder factors
+$\sqrt{(j-m)(j+m+1)}$ give $L_+Y_2^1=2Y_2^2$,
+$L_+Y_2^0=\sqrt6\,Y_2^1$, $S_+\mathbf e_-=\sqrt2\,\mathbf e_0$ and
+$S_+\mathbf e_0=\sqrt2\,\mathbf e_+$, so the coefficients of the two
+$M=2$ products $(2,0)$ and $(1,1)$ yield
 \[
 \sqrt2a+2b=0,\qquad \sqrt2b+\sqrt6c=0.
 \]
-Thus $b=-a/\sqrt2$, $c=a/\sqrt6$, and
-$a^2+b^2+c^2=5a^2/3=1$ fixes
+Thus $b=-a/\sqrt2$, $c=-\sqrt2\,b/\sqrt6=a/\sqrt6$, and
+$a^2+b^2+c^2=a^2(1+\frac12+\frac16)=5a^2/3=1$ fixes, with $a>0$
+(the Condon--Shortley choice of a positive coefficient for the
+largest orbital $m$),
 $(a,b,c)=(\sqrt{3/5},-\sqrt{3/10},1/\sqrt{10})$.
-Lowering once and dividing by $\sqrt2$ gives
+Lower once with $J_-=L_-+S_-$: by $L_-Y_2^2=2Y_2^1$,
+$L_-Y_2^1=\sqrt6\,Y_2^0$, $L_-Y_2^0=\sqrt6\,Y_2^{-1}$,
+$S_-\mathbf e_0=\sqrt2\,\mathbf e_-$ and
+$S_-\mathbf e_+=\sqrt2\,\mathbf e_0$, the products $(1,-1)$,
+$(0,0)$, $(-1,1)$ receive $2a+\sqrt2b$, $\sqrt6b+\sqrt2c$ and
+$\sqrt6c$. Dividing by the total ladder factor
+$\sqrt{(J+M)(J-M+1)}=\sqrt2$ (for $J=M=1$) gives
 \[
 \begin{aligned}
 C(2\,1\,1\mid1,-1,0)&=(2a+\sqrt2b)/\sqrt2=\sqrt{3/10},\\
@@ -2376,7 +2516,13 @@ Consequently
 \]
 Use $Y_2^{\pm1}=\mp\sqrt{15/(8\pi)}\sin\theta\cos\theta
 e^{\pm i\varphi}$ and
-$Y_2^0=\sqrt{5/(16\pi)}(3\cos^2\theta-1)$:
+$Y_2^0=\sqrt{5/(16\pi)}(3\cos^2\theta-1)$. The $m=\pm1$ terms
+contain the same Cartesian combination $2\mathbf e_\rho$ as in
+$\mathbf Y_{010}$, so
+$Y_2^1\mathbf e_-+Y_2^{-1}\mathbf e_+
+=-\sqrt{15/(4\pi)}\sin\theta\cos\theta\,\mathbf e_\rho$; with
+$\sqrt{3/10}\sqrt{15/(4\pi)}=3/\sqrt{8\pi}$ and
+$\sqrt{2/5}\sqrt{5/(16\pi)}=1/\sqrt{8\pi}$,
 \[
 \mathbf Y_{120}=-\frac1{\sqrt{8\pi}}
 \left[3\sin\theta\cos\theta\,\mathbf e_\rho+
@@ -2387,10 +2533,11 @@ $\mathbf e_\rho=\sin\theta\,\hat{\mathbf r}
 +\cos\theta\,\hat{\boldsymbol\theta}$ and
 $\mathbf e_z=\cos\theta\,\hat{\mathbf r}
 -\sin\theta\,\hat{\boldsymbol\theta}$ give radial coefficient
-$3\sin^2\theta\cos\theta+(3\cos^2\theta-1)\cos\theta=2\cos\theta$
+$3\sin^2\theta\cos\theta+(3\cos^2\theta-1)\cos\theta
+=3\cos\theta-\cos\theta=2\cos\theta$
 and polar coefficient
 $3\sin\theta\cos^2\theta-(3\cos^2\theta-1)\sin\theta=\sin\theta$.
-Therefore
+Therefore, with $2/\sqrt{8\pi}=1/\sqrt{2\pi}$,
 \[
 \boxed{\mathbf Y_{120}
 =-\frac{\cos\theta}{\sqrt{2\pi}}\hat{\mathbf r}
@@ -2413,13 +2560,21 @@ have odd parity; $\hat{\boldsymbol{\theta}}$ has even parity (compare
 with Exercise~3.10.25).
 \solution
 Under inversion of the direction,
-$(\theta,\varphi)\mapsto(\pi-\theta,\varphi+\pi)$.
+$(\theta,\varphi)\mapsto(\pi-\theta,\varphi+\pi)$: indeed
+$\sin(\pi-\theta)=\sin\theta$, $\cos(\pi-\theta)=-\cos\theta$ and
+$\cos(\varphi+\pi)=-\cos\varphi$, $\sin(\varphi+\pi)=-\sin\varphi$
+reverse all three Cartesian components of $\hat{\mathbf r}$.
 For integer $m$, the associated Legendre and azimuthal factors give
 \[
 P_l^m(-\cos\theta)=(-1)^{l+m}P_l^m(\cos\theta),\qquad
 e^{im(\varphi+\pi)}=(-1)^m e^{im\varphi}.
 \]
-Their product is $(-1)^{l+2m}=(-1)^l$ times the original harmonic.
+The first follows from the Rodrigues form
+$P_l^m\propto(1-x^2)^{m/2}\,d^{l+m}(x^2-1)^l/dx^{l+m}$: the factors
+$(1-x^2)^{m/2}$ and $(x^2-1)^l$ are even, and each of the $l+m$
+derivatives reverses the parity.
+The product of the two factors is $(-1)^{l+2m}=(-1)^l$ times the
+original harmonic.
 Thus $Y_l^m(-\hat{\mathbf r})=(-1)^lY_l^m(\hat{\mathbf r})$,
 independently of $m$.
 
@@ -2470,9 +2625,16 @@ An unconjugated product cannot express it: already
 $\mathbf e_+\cdot\mathbf e_+=0$, whereas
 $\mathbf e_+^*\cdot\mathbf e_+=1$.}
 The spherical Cartesian basis obeys
-$\mathbf e_q^*\cdot\mathbf e_{q'}=\delta_{qq'}$.
+$\mathbf e_q^*\cdot\mathbf e_{q'}=\delta_{qq'}$; for example
+$\mathbf e_+^*\cdot\mathbf e_+=\frac12(\mathbf e_x-i\mathbf e_y)\cdot
+(\mathbf e_x+i\mathbf e_y)=\frac12(1+1)=1$ and
+$\mathbf e_+^*\cdot\mathbf e_-=-\frac12(\mathbf e_x-i\mathbf e_y)\cdot
+(\mathbf e_x-i\mathbf e_y)=-\frac12(1-1)=0$.
 Write $C_{mq}^{JM}=C(L\,1\,J\mid m\,q\,M)$.
-Expanding both vector harmonics before integrating gives
+Expanding both vector harmonics before integrating, the factors
+$\mathbf e_q^*\cdot\mathbf e_{q'}=\delta_{qq'}$ and
+$\int Y_L^{m*}Y_{L'}^{m'}\,d\Omega=\delta_{LL'}\delta_{mm'}$
+collapse the primed sums:
 \[
 \begin{aligned}
 &\int\mathbf Y_{JLM}^*\cdot\mathbf Y_{J'L'M'}\,d\Omega\\
@@ -2486,9 +2648,12 @@ C(L\,1\,J'\mid m\,q\,M').
 \end{aligned}
 \]
 The remaining sum is the inner product of two normalized coupled
-states expressed in the orthonormal product basis. The
-Clebsch--Gordan change of basis is unitary, so the sum is
-$\delta_{JJ'}\delta_{MM'}$. Therefore, for all allowed indices,
+states $|J M\rangle$, $|J' M'\rangle$ of the same $L$ and spin $1$,
+expressed in the orthonormal product basis $|m\rangle|q\rangle$. The
+Clebsch--Gordan change of basis is unitary (the coefficients are real,
+so the conjugation is immaterial), so the sum is
+$\delta_{JJ'}\delta_{MM'}$; this is the orthogonality relation of the
+Clebsch--Gordan coefficients. Therefore, for all allowed indices,
 \[
 \boxed{\int\mathbf Y_{JLM}^*\cdot\mathbf Y_{J'L'M'}\,d\Omega
 =\delta_{JJ'}\delta_{LL'}\delta_{MM'}}.
@@ -2516,12 +2681,19 @@ Show that this definition agrees with Eq.~(16.88)
 its denominator vanishes, and the formal $\mathbf Y_{000}=0$
 is not a normalized member of this family.}
 In the spherical Cartesian basis of 16.4.1, express the vector
-operator in terms of $L_\pm=L_x\pm iL_y$:
+operator in terms of $L_\pm=L_x\pm iL_y$. Since
+$L_x=\frac12(L_++L_-)$ and $L_y=\frac1{2i}(L_+-L_-)$,
+$\mathbf e_xL_x+\mathbf e_yL_y
+=\frac12(\mathbf e_x-i\mathbf e_y)L_++\frac12(\mathbf e_x+i\mathbf e_y)L_-$,
+and $\frac12(\mathbf e_x\mp i\mathbf e_y)$ equals
+$\mathbf e_-/\sqrt2$ and $-\mathbf e_+/\sqrt2$, respectively. Hence
 \[
 \mathbf L=\mathbf e_xL_x+\mathbf e_yL_y+\mathbf e_0L_z
 =\frac{\mathbf e_-L_+-\mathbf e_+L_-}{\sqrt2}+\mathbf e_0L_z.
 \]
-Applying the scalar ladder formulas gives
+Applying the scalar ladder formulas of 16.1.1,
+$L_\pm Y_L^M=\sqrt{(L\mp M)(L\pm M+1)}\,Y_L^{M\pm1}$, and
+$L_zY_L^M=MY_L^M$ gives
 \[
 \begin{aligned}
 \frac{\mathbf L Y_L^M}{\sqrt{L(L+1)}}={}&
@@ -2534,16 +2706,23 @@ These are the three Clebsch--Gordan coefficients for coupling
 orbital $L$ and vector spin $1$ to total $J=L$.
 
 One may establish their phase and total $J$ directly. At $M=L$
-the two nonzero coefficients are
-$-1/\sqrt{L+1}$ on $(m,q)=(L-1,1)$ and
-$\sqrt{L/(L+1)}$ on $(L,0)$. Their norm squared is one.
-Raising gives the coefficient
+the coefficient of $Y_L^{L+1}$ contains $L-M=0$, and the two nonzero
+coefficients are
+$-\sqrt{2L/[2L(L+1)]}=-1/\sqrt{L+1}$ on $(m,q)=(L-1,1)$ and
+$L/\sqrt{L(L+1)}=\sqrt{L/(L+1)}$ on $(L,0)$. Their norm squared is
+$1/(L+1)+L/(L+1)=1$.
+Apply $J_+=L_++S_+$: $L_+Y_L^{L-1}=\sqrt{2L}\,Y_L^L$,
+$S_+\mathbf e_0=\sqrt2\,\mathbf e_+$, while $L_+Y_L^L=0$ and
+$S_+\mathbf e_+=0$. Raising therefore gives the coefficient
 \[
 -\frac{\sqrt{2L}}{\sqrt{L+1}}
 +\sqrt{\frac{L}{L+1}}\sqrt2=0
 \]
-on $(L,1)$. Thus this is a highest state of total $J=L$,
-with positive coefficient at the largest orbital $m$.
+on $(L,1)$, the only product reached. A state with $J_z=L$ that
+$J_+$ annihilates has $\mathbf J^2=J_-J_++J_z^2+J_z=L(L+1)$; thus
+this is the highest state of total $J=L$, with positive coefficient
+at the largest orbital $m$, as the Condon--Shortley convention
+requires.
 
 The subsequent lowering uses the vector transformation law.
 On any scalar $f$, the total lowering generator acting on
@@ -2551,18 +2730,22 @@ $\mathbf Lf$ satisfies
 \[
 J_-(\mathbf Lf)=\mathbf L(L_-f).
 \]
-To exhibit the cancellation, the Cartesian spin-one matrices are
-$(S_i)_{jk}=-i\epsilon_{ijk}$, whereas
-$[L_i,L_j]=i\epsilon_{ijk}L_k$. Therefore, for each Cartesian $i$,
+To exhibit the cancellation, write $J_i=L_i+S_i$, where $L_i$ acts
+on each Cartesian component and the Cartesian spin-one matrices
+$(S_i)_{jk}=-i\epsilon_{ijk}$ act on the vector index, whereas
+$[L_i,L_j]=i\sum_k\epsilon_{ijk}L_k$. Therefore, for each Cartesian
+$i$, the $j$th component of the difference is
 \[
 \begin{aligned}
-J_i(\mathbf Lf)-\mathbf L(L_if)
-&=\sum_{j,k}\mathbf e_j\,i\epsilon_{ijk}L_kf
-+\sum_{j,k}\mathbf e_j(-i\epsilon_{ijk})L_kf=0.
+[J_i(\mathbf Lf)-\mathbf L(L_if)]_j
+&=L_iL_jf+\sum_k(S_i)_{jk}L_kf-L_jL_if\\
+&=[L_i,L_j]f-i\sum_k\epsilon_{ijk}L_kf=0.
 \end{aligned}
 \]
 Taking the $x-i y$ combination proves the stated lowering identity.
-It follows that lowering the displayed $M$ expression gives
+With $f=Y_L^M$ and
+$L_-Y_L^M=\sqrt{(L+M)(L-M+1)}\,Y_L^{M-1}$, it follows that lowering
+the displayed $M$ expression gives
 $\sqrt{(L+M)(L-M+1)}$ times the expression at $M-1$.
 The normalized highest state and these positive lowering factors
 uniquely generate the $J=L$ multiplet. Thus its coefficients are
@@ -2582,7 +2765,7 @@ exactly those of Eq.~(16.88), and
 expanded in Cartesian coordinates and to apply raising and lowering
 operators.
 \solution
-\erratum{This identity holds for $L\ge1$. The book's formal
+\erratum{This identity holds for $L\ge1$. The textbook's formal
 $\mathbf Y_{000}=0$ would give zero on the left for $L=0$,
 whereas the stated right side would be $1/(4\pi)$.}
 Use 16.4.4. Since Cartesian basis vectors are orthonormal,
@@ -2597,10 +2780,20 @@ Use 16.4.4. Since Cartesian basis vectors are orthonormal,
 \end{aligned}
 \]
 The second equality follows by expanding $L_x=(L_++L_-)/2$
-and $L_y=(L_+-L_-)/(2i)$: their cross terms cancel.
+and $L_y=(L_+-L_-)/(2i)$: with $u=L_+Y_L^M$ and $v=L_-Y_L^M$,
+\[
+|L_xY_L^M|^2+|L_yY_L^M|^2=\tfrac14|u+v|^2+\tfrac14|u-v|^2
+=\tfrac12\left(|u|^2+|v|^2\right),
+\]
+since the cross terms $\pm\frac14(uv^*+u^*v)$ cancel. By 16.1.1,
+$|L_+Y_L^M|^2=(L-M)(L+M+1)|Y_L^{M+1}|^2$ and
+$|L_-Y_L^M|^2=(L+M)(L-M+1)|Y_L^{M-1}|^2$, while
+$|L_zY_L^M|^2=M^2|Y_L^M|^2$.
 Now collect the coefficient of a fixed $|Y_L^k|^2$.
-The raising term comes from $M=k-1$ and the lowering term
-from $M=k+1$. Including the $L_z$ term, the coefficient is
+The raising term comes from $M=k-1$, with factor
+$\frac12(L-k+1)(L+k)$, and the lowering term
+from $M=k+1$, with factor $\frac12(L+k+1)(L-k)$. Including the
+$L_z$ term ($M=k$), the coefficient is
 \[
 \begin{aligned}
 &\frac12(L-k+1)(L+k)+\frac12(L+k+1)(L-k)+k^2\\
@@ -2617,7 +2810,7 @@ so the same collection is valid at both endpoints. Hence
 =\boxed{\frac{2L+1}{4\pi}},
 \]
 where the last step is the scalar addition theorem at coincident
-directions.
+directions ($\gamma=0$, $P_L(1)=1$).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2631,7 +2824,15 @@ The integrand represents an interference term in electromagnetic
 radiation that contributes to angular distributions but not to total
 intensity.
 \solution
-The original, unconjugated version has a stronger but different
+\erratum{The textbook's statement has no complex conjugate in this
+exercise. Its following statement about a nonzero angular
+interference term therefore cannot describe the integrand as printed,
+which vanishes identically (shown first). The physically relevant
+Hermitian version, with the first $\mathbf Y_{LLM}$ conjugated, can
+be nonzero pointwise; its angular integral also vanishes, as shown
+next.}
+
+The textbook's unconjugated version has a stronger but different
 property: its integrand is identically zero.
 For any vector $\mathbf A$, including one with complex components,
 the bilinear scalar triple product is
@@ -2642,16 +2843,20 @@ the bilinear scalar triple product is
 Interchanging $i$ and $k$ changes $\epsilon_{ijk}$ to its negative
 but leaves the commuting product $A_iA_k$ unchanged. The sum
 therefore equals its own negative and is zero at every point.
-Taking $\mathbf A=\mathbf Y_{LLM}$ proves the original integral.
+Taking $\mathbf A=\mathbf Y_{LLM}$ proves the unconjugated integral
+is zero.
 
-\erratum{The source has no complex conjugate in this exercise.
-Accordingly its following statement about a nonzero angular
-interference term cannot describe the integrand as printed.
-The physically relevant Hermitian version, with the first
-$\mathbf Y_{LLM}$ conjugated, can be nonzero pointwise; its
-angular integral also vanishes, as shown next.}
-
-For $L\ge1$ put $N=\sqrt{L(L+1)}$ and $Y=Y_L^M$.
+For the Hermitian version put $N=\sqrt{L(L+1)}$, $Y=Y_L^M$, and
+$\mathbf A=\mathbf Y_{LLM}=\mathbf LY/N$ (16.4.4). With
+$\nabla=\hat{\mathbf r}\,\partial_r+\hat{\boldsymbol\theta}\,r^{-1}
+\partial_\theta+\hat{\boldsymbol\varphi}\,(r\sin\theta)^{-1}
+\partial_\varphi$,
+$\hat{\mathbf r}\times\hat{\boldsymbol\theta}
+=\hat{\boldsymbol\varphi}$ and
+$\hat{\mathbf r}\times\hat{\boldsymbol\varphi}
+=-\hat{\boldsymbol\theta}$, we have
+$\mathbf r\times\nabla=\hat{\boldsymbol\varphi}\,\partial_\theta
+-\hat{\boldsymbol\theta}(\sin\theta)^{-1}\partial_\varphi$.
 Using $\mathbf L=-i\hat{\boldsymbol\varphi}\,\partial_\theta
 +i\hat{\boldsymbol\theta}(\sin\theta)^{-1}\partial_\varphi$ and
 $\partial_\varphi Y=iMY$ gives
@@ -2659,10 +2864,11 @@ $\partial_\varphi Y=iMY$ gives
 A_\theta=-\frac{M}{N\sin\theta}Y,\qquad
 A_\varphi=-\frac{i}{N}\partial_\theta Y,\qquad A_r=0.
 \]
-Since $\hat{\mathbf r}\times\hat{\boldsymbol\theta}
-=\hat{\boldsymbol\varphi}$ and
-$\hat{\mathbf r}\times\hat{\boldsymbol\varphi}
-=-\hat{\boldsymbol\theta}$,
+Hence $\hat{\mathbf r}\times\mathbf A
+=A_\theta\hat{\boldsymbol\varphi}-A_\varphi\hat{\boldsymbol\theta}$.
+Its dot product with $\mathbf A^*$, where
+$A_\theta^*=-MY^*/(N\sin\theta)$ and
+$A_\varphi^*=(i/N)\partial_\theta Y^*$, is
 \[
 \begin{aligned}
 \mathbf A^*\cdot(\hat{\mathbf r}\times\mathbf A)
@@ -2673,14 +2879,18 @@ $\hat{\mathbf r}\times\hat{\boldsymbol\varphi}
 &=-\frac{iM}{L(L+1)\sin\theta}\partial_\theta|Y|^2.
 \end{aligned}
 \]
-The modulus is independent of $\varphi$, so integration gives
+The modulus is independent of $\varphi$. In
+$d\Omega=\sin\theta\,d\theta\,d\varphi$ the factor $\sin\theta$
+cancels the $1/\sin\theta$, the $\varphi$ integration gives $2\pi$,
+and the $\theta$ integral of a derivative leaves its end values:
 \[
 \int\mathbf A^*\cdot(\hat{\mathbf r}\times\mathbf A)\,d\Omega
 =-\frac{2\pi iM}{L(L+1)}
 \left[|Y_L^M(\theta,0)|^2\right]_{\theta=0}^{\theta=\pi}=0.
 \]
 For $M=0$ the prefactor is zero; for $M\ne0$ the spherical
-harmonic vanishes at both poles. For example $L=M=1$ gives
+harmonic vanishes at both poles, since $P_L^M$ contains the factor
+$(1-x^2)^{|M|/2}=\sin^{|M|}\theta$. For example $L=M=1$ gives
 $|Y_1^1|^2=3\sin^2\theta/(8\pi)$ and hence
 \[
 -\frac{i}{2\sin\theta}\frac{d}{d\theta}
