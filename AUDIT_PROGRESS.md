@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 0 of 54 parts done (audited and verified); 9 audited and awaiting verification.
+Progress: 0 of 54 parts done (audited and verified); 10 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -105,7 +105,7 @@ Progress: 0 of 54 parts done (audited and verified); 9 audited and awaiting veri
 | ch11-p3 | 11.8.23–11.10.7 | pending |
 | ch12-p1 | 12.1.1–12.5.10 | audited |
 | ch12-p2 | 12.6.1–12.8.8 | pending |
-| ch13-p1 | 13.1.1–13.2.14 | pending |
+| ch13-p1 | 13.1.1–13.2.14 | audited |
 | ch13-p2 | 13.2.15–13.4.8 | pending |
 | ch13-p3 | 13.5.1–13.6.16 | pending |
 | ch14-p1 | 14.1.1–14.1.28 | pending |
@@ -151,3 +151,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch12-p1** (12.1.1–12.5.10) — audit: no mathematical errors found. Steps added in all 29 exercises (e.g. the arc bounds, residue and negative-axis substitution in 12.4.3(b), Euler–Maclaurin on $[n,M]$ with the $1/n$ shift in 12.3.2, the derivation of the corrected intermediate identities in the 12.1.4 erratum, the cotangent series from the Bernoulli generating function in 12.2.3). Cleanups: the vague double-precision description in 12.3.2 replaced by the explicit computation ($H_{1000}$, $\ln1000$, rounding budget of the $4.5\times10^{-16}$ discrepancy), all numbers re-verified; "it is restored above" (12.3.2) restated as a textbook erratum; "the source's" → "the textbook's" (12.1.4); undefined $R^{\rm bound}$ notation in 12.4.6–12.4.7 replaced by the explicit bounds $2^{-24}\zeta(25)$ and $\frac{32}{15}4^{-14}\zeta(14)$.
 - **ch11-p1** (11.2.1–11.6.11) — audit: no mathematical errors found. Steps added in 42 of 47 exercises (e.g. a Green's-theorem reason, $\oint(x^2-iy^2)dz=2iA(\bar x+\bar y)$, for the equal answers in 11.3.5; the explicit maximum-modulus contradiction in 11.4.5; the log formulas for arctan/arctanh and their derivatives in 11.2.10; why the fractional-power terms cannot cancel, with the circuit multipliers at $0$ and $\infty$, in 11.6.5). Cleanups: the "transcription" remark in 11.6.5 deleted and its statement-level `\erratum` on $z^{-1/4}$ (which the textbook prints) unwrapped; "In the actual figure" → "In Fig. 11.7"; "the manual" → "the Instructor's Manual" in 10 errata; the 11.4.5 erratum now quotes the printed (a), so $M$ is defined; notation clashes in 11.4.5 (contour $C$ vs. a constant, bound $m$ vs. a Taylor index) removed.
 - **ch07-p1** (7.2.1–7.5.10) — audit: no mathematical errors found. Steps added in 33 of 37 exercises (e.g. the partial fractions, sign argument and tanh/coth conversions in 7.2.16, the explicit $z=1/x$ substitutions in 7.4.1–7.4.4, the Gronwall bounds and connectedness argument in 7.5.1, the gamma-function form of the coefficients in 7.5.5 and the reduction-of-order integrand in 7.5.6). Cleanups: "the manual" → "the Instructor's Manual" in the 7.2.16, 7.4.3 and 7.5.1 errata; the arccoth argument in 7.2.16 renamed $w$ (it clashed with $q$); a stray comma removed from the 7.5.3(a) statement; the special-case remark in 7.2.5 reworded.
+- **ch13-p1** (13.1.1–13.2.14) — audit: no mathematical errors found. Steps added in 34 of 37 exercises (e.g. the general term of the printed series and where it ends for odd $n$ in 13.1.13, the sign and endpoint behavior of $\Gamma$ on $(-N,-N+1)$ in 13.1.9, the circle bound and reflection step in 13.1.23, the polygamma values at 3, $\Gamma'''$ and the order-by-order collection in 13.2.12, now with the closed-form and numerical $q^3$ coefficient). Cleanups: part labels in 13.1.11, 13.1.12, 13.1.14; a justification ($\alpha\simeq1/137.036$) for the 13.2.12 statement erratum; the convergence remark of 13.1.4 made precise. No script references or production remarks were present.

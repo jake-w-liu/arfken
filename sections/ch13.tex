@@ -22,23 +22,28 @@ from the Euler integral, Eq.~(13.5),
 \solution
 Initially let $\Re z>0$, so both Euler integrals and the boundary
 terms below converge.  Integrate $\Gamma(z+1)=\int_0^\infty t^ze^{-t}dt$
-by parts with $u=t^z$ and $dv=e^{-t}dt$:
+by parts with $u=t^z$ and $dv=e^{-t}dt$, so that $du=zt^{z-1}dt$ and
+$v=-e^{-t}$:
 \[
 \Gamma(z+1)=\bigl[-t^ze^{-t}\bigr]_0^\infty
  +z\int_0^\infty t^{z-1}e^{-t}dt.
 \]
-At zero, $|t^z|=t^{\Re z}\to0$; at infinity the exponential
-outweighs the power.  Hence
+At zero, $|t^ze^{-t}|\le|t^z|=t^{\Re z}\to0$; at infinity
+$|t^ze^{-t}|=t^{\Re z}e^{-t}\to0$, since the exponential outweighs the
+power.  The boundary term therefore vanishes, and the remaining
+integral is $\Gamma(z)$.  Hence
 \[
 \boxed{\Gamma(z+1)=z\Gamma(z)}.
 \]
-Repeated application gives
+Applying this $N$ times,
+$\Gamma(z+N)=(z+N-1)(z+N-2)\cdots(z+1)z\,\Gamma(z)$, that is,
 $\Gamma(z)=\Gamma(z+N)/[z(z+1)\cdots(z+N-1)]$ with
 $\Re(z+N)>0$.  This extends the identity to the meromorphic gamma
 function; at poles it is interpreted by meromorphic continuation,
 not as multiplication of finite values.  In particular
-$\Gamma(1)=\int_0^\infty e^{-t}dt=1$ and
-$\Gamma(N+1)=N!$ for every nonnegative integer $N$.
+$\Gamma(1)=\int_0^\infty e^{-t}dt=1$, and
+$\Gamma(N+1)=N(N-1)\cdots1\cdot\Gamma(1)=N!$ for every nonnegative
+integer $N$.
 
 
 \Needspace{5\baselineskip}
@@ -56,15 +61,23 @@ in which $s$ is a positive integer.
 \end{enumerate}
 \solution
 \textbf{(a)} For the factorials of integers take $n\ge0$ integral.
-Write the numerator as $(n+2s)!/n!$, the even product as $2^ss!$,
-and the odd product as
+The numerator is $(n+2s)!/n!$, and the even product is
+$2\cdot4\cdots(2s)=2^s(1\cdot2\cdots s)=2^ss!$.  The odd product is a
+quotient of odd double factorials.  Since $(2m+1)!=(2m+1)!!\,(2m)!!$
+and $(2m)!!=2^mm!$, each of them is $(2m+1)!!=(2m+1)!/(2^mm!)$; with
+$m=n+s$ and $m=n$,
 \[
 \frac{(2n+2s+1)!!}{(2n+1)!!}
 =\frac{(2n+2s+1)!}{2^{n+s}(n+s)!}
  \frac{2^nn!}{(2n+1)!}.
 \]
-Multiplying the two denominator factors and then dividing the
-numerator by them gives
+In the product of the two denominator factors the powers of two
+cancel:
+\[
+2^ss!\,\frac{(2n+2s+1)!\,2^nn!}{2^{n+s}(n+s)!\,(2n+1)!}
+=\frac{s!\,n!\,(2n+2s+1)!}{(n+s)!\,(2n+1)!}.
+\]
+Dividing the numerator $(n+2s)!/n!$ by this product gives
 \[
 \boxed{\frac{(n+2s)!(n+s)!(2n+1)!}
 {s!(n!)^2(2n+2s+1)!}}.
@@ -74,17 +87,31 @@ and the equality holds wherever the original denominator is nonzero,
 with any removable gamma quotients interpreted by limits.
 
 \textbf{(b)} By definition $(q)_s=q(q+1)\cdots(q+s-1)$.
-The numerator is $(n+1)_{2s}$, and the two denominator products are
-$2^s(1)_s$ and $2^s(n+\tfrac32)_s$.  Thus
+The numerator is $(n+1)_{2s}$.  Taking a factor $2$ out of each
+factor of the two denominator products gives
+\begin{gather*}
+2\cdot4\cdots(2s)=2^s(1)_s=2^ss!,\\
+(2n+3)(2n+5)\cdots(2n+2s+1)
+=2^s\left(n+\tfrac32\right)\left(n+\tfrac52\right)\cdots
+\left(n+s+\tfrac12\right)
+=2^s\left(n+\tfrac32\right)_s.
+\end{gather*}
+Thus
 \[
 \boxed{\frac{(n+1)_{2s}}{4^s s!(n+\tfrac32)_s}
 =\frac{(\tfrac{n+1}{2})_s(\tfrac{n+2}{2})_s}
 {s!(n+\tfrac32)_s}}.
 \]
-The last equality follows by separating the $2s$ consecutive
-numerator factors into the odd and even positions; each pair supplies
-a factor $4$.  These finite-product forms also cover complex $n$
-away from zeros of the original denominator.
+For the last equality, separate the $2s$ consecutive numerator
+factors into those in odd and even positions and take a factor $2$
+out of each:
+\begin{align*}
+(n+1)_{2s}&=\bigl[(n+1)(n+3)\cdots(n+2s-1)\bigr]
+ \bigl[(n+2)(n+4)\cdots(n+2s)\bigr]\\
+&=2^s\left(\tfrac{n+1}2\right)_s\cdot2^s\left(\tfrac{n+2}2\right)_s,
+\end{align*}
+so the factor $4^s$ cancels.  These finite-product forms also cover
+complex $n$ away from zeros of the original denominator.
 
 
 \Needspace{5\baselineskip}
@@ -97,8 +124,9 @@ away from zeros of the original denominator.
 \end{align*}
 \solution
 Start from $\Gamma(z)=\int_0^\infty e^{-u}u^{z-1}du$, with
-$\Re z>0$.  Put $u=t^2$; since $du=2t\,dt$ and the limits remain
-zero and infinity,
+$\Re z>0$.  Put $u=t^2$.  Then $du=2t\,dt$ and $u^{z-1}=t^{2z-2}$,
+so $e^{-u}u^{z-1}du=2e^{-t^2}t^{2z-1}dt$, and the limits remain
+zero and infinity:
 \[
 \boxed{\Gamma(z)=2\int_0^\infty e^{-t^2}t^{2z-1}\,dt}.
 \]
@@ -136,29 +164,37 @@ kinetic energy $E=mv^{2}/2$, with $dE=mv\,dv$.
 \solution
 \erratum{Assume $m,k,T>0$.  The moment requires $\Re n>-3$
 for convergence at zero.}
-Set $b=m/(2kT)>0$.  The normalized speed density is
-$(4/\sqrt\pi)b^{3/2}v^2e^{-bv^2}$, so
+Set $b=m/(2kT)>0$.  Then $m/(2\pi kT)=b/\pi$, the prefactor is
+$4\pi(b/\pi)^{3/2}=4b^{3/2}/\sqrt\pi$, and the normalized speed
+density is $(4/\sqrt\pi)b^{3/2}v^2e^{-bv^2}$.  Hence
 \[
 \langle v^n\rangle=\frac{4b^{3/2}}{\sqrt\pi}
 \int_0^\infty v^{n+2}e^{-bv^2}\,dv.
 \]
-With $u=bv^2$, $v=(u/b)^{1/2}$ and
-$dv=\tfrac12b^{-1/2}u^{-1/2}du$, this becomes
+Put $u=bv^2$; the limits $0,\infty$ are unchanged, $v=(u/b)^{1/2}$,
+$v^{n+2}=b^{-(n+2)/2}u^{(n+2)/2}$ and
+$dv=\tfrac12b^{-1/2}u^{-1/2}du$.  The powers combine to
+$b^{-(n+3)/2}u^{(n+1)/2}$, and since
+$b^{3/2}b^{-(n+3)/2}=b^{-n/2}$,
 \begin{align*}
 \langle v^n\rangle
 &=\frac{4b^{3/2}}{\sqrt\pi}\frac12b^{-(n+3)/2}
  \int_0^\infty e^{-u}u^{(n+1)/2}\,du\\
 &=\frac{2}{\sqrt\pi}b^{-n/2}\Gamma\left(\frac{n+3}2\right).
 \end{align*}
-Using $\Gamma(3/2)=\tfrac12\Gamma(1/2)=\sqrt\pi/2$, we obtain
+Finally $b^{-n/2}=(2kT/m)^{n/2}$, and
+$\Gamma(3/2)=\tfrac12\Gamma(1/2)=\sqrt\pi/2$, i.e.,
+$2/\sqrt\pi=1/\Gamma(3/2)$.  We obtain
 \[
 \boxed{\langle v^n\rangle=
 \left(\frac{2kT}{m}\right)^{n/2}
 \frac{\Gamma((n+3)/2)}{\Gamma(3/2)}}.
 \]
-At $n=0$ this equals one, checking normalization; at $n=2$ it gives
-$\langle v^2\rangle=3kT/m$.  The convergence restriction follows
-also directly from $v^{n+2}$ near $v=0$.
+At $n=0$ this equals one, checking normalization; at $n=2$,
+$\Gamma(5/2)=\tfrac32\Gamma(3/2)$ gives $\langle v^2\rangle=3kT/m$.
+The convergence restriction comes from the lower limit:
+$|v^{n+2}|=v^{\Re n+2}$ is integrable at $v=0$ exactly when
+$\Re n+2>-1$.
 
 
 \Needspace{5\baselineskip}
@@ -174,16 +210,20 @@ Then
 \[
 x=e^{-u/(k+1)},\quad
  dx=-\frac1{k+1}e^{-u/(k+1)}du,\quad
- -\log x=\frac u{k+1}.
+ -\log x=\frac u{k+1},
 \]
-After reversing the transformed limits, the factors $x^k$ and the
-exponential in $dx$ combine to $e^{-u}$, giving
-\[
+and $x=1$ and $x\to0^+$ correspond to $u=0$ and $u\to\infty$.  The
+factor $x^k=e^{-ku/(k+1)}$ and the exponential in $dx$ combine to
+$e^{-u}$.  Reversing the transformed limits absorbs the minus sign
+of $dx$:
+\begin{align*}
 -\int_0^1x^k\log x\,dx
-=\frac1{(k+1)^2}\int_0^\infty u e^{-u}\,du
-=\frac{\Gamma(2)}{(k+1)^2}
-=\boxed{\frac1{(k+1)^2}}.
-\]
+&=\int_\infty^0\frac u{k+1}\left(-\frac{e^{-u}}{k+1}\right)du
+=\frac1{(k+1)^2}\int_0^\infty u e^{-u}\,du\\
+&=\frac{\Gamma(2)}{(k+1)^2}
+=\boxed{\frac1{(k+1)^2}},
+\end{align*}
+since $\Gamma(2)=1!=1$.
 The restriction $k>-1$ ensures convergence at zero and makes the
 change of variable valid with these limits.
 
@@ -195,14 +235,16 @@ change of variable valid with these limits.
 \int_{0}^{\infty}e^{-x^{4}}\,dx=\Gamma\left(\frac{5}{4}\right).
 \]
 \solution
-With $t=x^4$, we have $dx=\tfrac14t^{-3/4}dt$.  Thus
+With $t=x^4$, i.e., $x=t^{1/4}$, we have $dx=\tfrac14t^{-3/4}dt$,
+and the limits $0,\infty$ are unchanged.  Thus
 \[
 \int_0^\infty e^{-x^4}dx
 =\frac14\int_0^\infty e^{-t}t^{1/4-1}dt
 =\frac14\Gamma\left(\frac14\right)
 =\boxed{\Gamma\left(\frac54\right)},
 \]
-where the last equality is the recurrence from Exercise 13.1.1.
+where the last equality is the recurrence from Exercise 13.1.1 with
+$z=\tfrac14$.
 The transformed power $t^{-3/4}$ is integrable at zero.
 
 
@@ -216,14 +258,16 @@ The transformed power $t^{-3/4}$ is integrable at zero.
 \erratum{Take a fixed $a\ne0$.}
 \solution
 \erratum{The parameter $a$ is fixed and nonzero.}
-Use the recurrence to remove the two poles near $x=0$:
+Use the recurrence in the form $\Gamma(w)=\Gamma(1+w)/w$, with
+$w=ax$ and $w=x$, to remove the two poles at $x=0$:
 \[
 \frac{\Gamma(ax)}{\Gamma(x)}
 =\frac{\Gamma(1+ax)/(ax)}{\Gamma(1+x)/x}
 =\frac1a\frac{\Gamma(1+ax)}{\Gamma(1+x)}.
 \]
-The gamma function is continuous and nonzero near $1$, with
-$\Gamma(1)=1$.  Consequently
+As $x\to0$, both $1+ax$ and $1+x$ tend to $1$.  The gamma function is
+continuous and nonzero near $1$, with $\Gamma(1)=1$, so the last
+quotient tends to $1$.  Consequently
 \[
 \boxed{\lim_{x\to0}\frac{\Gamma(ax)}{\Gamma(x)}=\frac1a}.
 \]
@@ -240,16 +284,23 @@ are simple poles and determine the residues.
 The Euler integral is analytic for $\Re z>0$; on compact subsets,
 its derivatives are dominated by integrable functions of the form
 $e^{-t}t^{\sigma-1}|\log t|^j$ near zero and infinity.
-For any point outside that half-plane, shift far enough to use
+For any point outside that half-plane, shift far enough
+(the recurrence of Exercise 13.1.1, applied $N+1$ times) to use
 \[
 \Gamma(z)=\frac{\Gamma(z+N+1)}{z(z+1)\cdots(z+N)}.
 \]
-Its only possible singularities are $z=0,-1,-2,\ldots$.
-At $z=-n$ choose $N=n$ and take the residue:
+In the half-plane $\Re z>-N-1$ the numerator is analytic, because
+$\Re(z+N+1)>0$; the only possible singularities there are the zeros
+$z=0,-1,\ldots,-N$ of the denominator.  Since $N$ is arbitrary, the
+only possible singularities of $\Gamma$ are $z=0,-1,-2,\ldots$.
+At $z=-n$ choose $N=n$.  The factor $z+n$ cancels the last
+denominator factor, and the residue is
 \begin{align*}
 \lim_{z\to-n}(z+n)\Gamma(z)
-&=\frac{\Gamma(1)}{(-n)(-n+1)\cdots(-1)}\\
-&=\boxed{\frac{(-1)^n}{n!}}\qquad(n=0,1,2,\ldots).
+&=\lim_{z\to-n}\frac{\Gamma(z+n+1)}{z(z+1)\cdots(z+n-1)}
+=\frac{\Gamma(1)}{(-n)(-n+1)\cdots(-1)}\\
+&=\frac1{(-1)^nn!}
+=\boxed{\frac{(-1)^n}{n!}}\qquad(n=0,1,2,\ldots).
 \end{align*}
 For $n=0$ the denominator product is empty and equals one.
 The denominator has exactly one vanishing factor, and the displayed
@@ -266,21 +317,32 @@ has an infinite number of real roots.
 \solution
 \erratum{Here $k$ must be a nonzero real number.  A nonreal $k$
 cannot equal $\Gamma(x)$ at a real nonsingular $x$.}
-On the interval $(-N,-N+1)$, with $N\ge1$, repeated recurrence shows
-that $\Gamma(x)$ has the fixed sign $(-1)^N$.
-Its residues at the endpoints give
+On the interval $(-N,-N+1)$, with $N\ge1$, repeated recurrence gives
+\[
+\Gamma(x)=\frac{\Gamma(x+N)}{x(x+1)\cdots(x+N-1)}.
+\]
+Here $0<x+N<1$, so $\Gamma(x+N)>0$, while all $N$ denominator factors
+are negative.  Hence $\Gamma(x)$ has the fixed sign $(-1)^N$ there.
+By the residues of Exercise 13.1.8,
+$\Gamma(x)\approx(-1)^N/[N!\,(x+N)]$ near $x=-N$, where $x+N>0$, and
+$\Gamma(x)\approx(-1)^{N-1}/[(N-1)!\,(x+N-1)]$ near $x=-N+1$, where
+$x+N-1<0$.  Therefore
 \[
 \Gamma(x)\longrightarrow(-1)^N\infty
 \quad\text{as }x\downarrow-N\text{ or }x\uparrow-N+1.
 \]
 At the midpoint, recurrence from $\Gamma(1/2)=\sqrt\pi$ gives
+(see Exercise 13.1.14)
 \[
 \Gamma\left(\frac12-N\right)
 =\frac{(-1)^N2^N\sqrt\pi}{(2N-1)!!}.
 \]
-Its magnitude tends to zero, since the ratio of consecutive magnitudes
-is $1/(N+1/2)\to0$.  Choose arbitrarily large $N$ of the parity
-making $(-1)^N=\operatorname{sgn}k$ and with midpoint magnitude
+Its magnitude tends to zero, since by
+$\Gamma(w)=\Gamma(w+1)/w$ with $w=-\tfrac12-N$,
+$|\Gamma(\tfrac12-N-1)|=|\Gamma(\tfrac12-N)|/(N+\tfrac12)$: the ratio
+of consecutive magnitudes is $1/(N+1/2)\to0$.  Choose arbitrarily
+large $N$ of the parity making $(-1)^N=\operatorname{sgn}k$ and with
+midpoint magnitude
 less than $|k|$.  The function is continuous between its poles,
 and its magnitude tends to infinity at either endpoint.  The
 intermediate value theorem therefore gives a root of $\Gamma(x)=k$
@@ -304,17 +366,24 @@ These Gaussian integrals are of major importance in statistical mechanics.
 \solution
 \erratum{For these convergent real Gaussian integrals, take $a>0$
 and integer $s\ge0$.}
-In both cases put $u=ax^2$, so
-$dx=\tfrac12a^{-1/2}u^{-1/2}du$.
-\textbf{(a)} Since $x^{2s+1}=a^{-s-1/2}u^{s+1/2}$,
+In both cases put $u=ax^2$, so $x=(u/a)^{1/2}$,
+$dx=\tfrac12a^{-1/2}u^{-1/2}du$, and the limits $0,\infty$ are
+unchanged.
+\textbf{(a)} Since $x^{2s+1}=a^{-s-1/2}u^{s+1/2}$, the integrand
+becomes
+$a^{-s-1/2}u^{s+1/2}e^{-u}\cdot\tfrac12a^{-1/2}u^{-1/2}du
+=\tfrac12a^{-s-1}u^se^{-u}du$, and
 \[
 \int_0^\infty x^{2s+1}e^{-ax^2}dx
 =\frac1{2a^{s+1}}\int_0^\infty u^se^{-u}du
+=\frac{\Gamma(s+1)}{2a^{s+1}}
 =\boxed{\frac{s!}{2a^{s+1}}}.
 \]
-\textbf{(b)} With $x^{2s}=a^{-s}u^s$ instead,
+\textbf{(b)} With $x^{2s}=a^{-s}u^s$ instead, the integrand becomes
+$\tfrac12a^{-s-1/2}u^{s-1/2}e^{-u}du$, and
 \[
 \int_0^\infty x^{2s}e^{-ax^2}dx
+=\frac1{2a^{s+1/2}}\int_0^\infty u^{s-1/2}e^{-u}du
 =\frac{\Gamma(s+1/2)}{2a^{s+1/2}}.
 \]
 Repeated recurrence gives
@@ -323,7 +392,7 @@ Repeated recurrence gives
 =\frac{2s-1}{2}\frac{2s-3}{2}\cdots\frac12\Gamma\left(\frac12\right)
 =\frac{(2s-1)!!}{2^s}\sqrt\pi.
 \]
-Thus
+Thus, writing $2a^{s+1/2}=2a^s\sqrt a$,
 \[
 \boxed{\int_0^\infty x^{2s}e^{-ax^2}dx
 =\frac{(2s-1)!!}{2^{s+1}a^s}\sqrt{\frac\pi a}}.
@@ -350,18 +419,27 @@ a_n=\binom{1/2}{n}
 =\frac{(1/2)(1/2-1)\cdots(1/2-n+1)}{n!}.
 \]
 The first two coefficients are $a_0=1$ and $a_1=1/2$.
-For $n\ge2$, pull a factor $1/2$ from each numerator term and
-count the $n-1$ negative factors:
+For $n\ge2$, pull a factor $1/2$ from each of the $n$ numerator
+terms; the last $n-1$ of them are negative:
+\[
+\frac12\left(-\frac12\right)\left(-\frac32\right)\cdots
+\left(-\frac{2n-3}2\right)
+=\frac{(-1)^{n-1}\,1\cdot3\cdots(2n-3)}{2^n}
+=\frac{(-1)^{n-1}(2n-3)!!}{2^n}.
+\]
+\textbf{(b)} Dividing by $n!$ and using $(2n)!!=2^n n!$,
 \[
 a_n=\frac{(-1)^{n-1}(2n-3)!!}{2^n n!}
 =\boxed{(-1)^{n+1}\frac{(2n-3)!!}{(2n)!!}}.
 \]
-Here $(2n)!!=2^n n!$.  To express the odd double factorial using
-ordinary factorials, separate the even factors of $(2n-3)!$:
+\textbf{(a)} To express the odd double factorial using ordinary
+factorials, separate the even factors of $(2n-3)!$, whose product is
+$2\cdot4\cdots(2n-4)=2^{n-2}(n-2)!$:
 \[
 (2n-3)!=(2n-3)!!\,2^{n-2}(n-2)!.
 \]
-Therefore
+Substituting $(2n-3)!!=(2n-3)!/[2^{n-2}(n-2)!]$ and
+$2^n2^{n-2}=2^{2n-2}$ gives
 \[
 \boxed{a_n=(-1)^{n+1}\frac{(2n-3)!}{2^{2n-2}n!(n-2)!}
 \quad(n\ge2)}.
@@ -382,18 +460,20 @@ the expansion of $(1+x)^{-1/2}$ in powers of $x$
 $a_{n}=(-1)^{n}\dfrac{(2n)!}{2^{2n}(n!)^{2}}
 =(-1)^{n}\dfrac{(2n-1)!!}{(2n)!!}$,\quad$n=1,2,3,\ldots$.
 \solution
-For $n\ge1$,
+For $n\ge1$, all $n$ numerator factors $-(2j-1)/2$,
+$j=1,\ldots,n$, are negative, so
 \[
 a_n=\binom{-1/2}{n}
 =\frac{(-1/2)(-3/2)\cdots(-(2n-1)/2)}{n!}
 =\frac{(-1)^n(2n-1)!!}{2^n n!}.
 \]
-Since $(2n)!!=2^n n!$, the double-factorial result is
+\textbf{(b)} Since $(2n)!!=2^n n!$, the double-factorial result is
 \[
 \boxed{a_n=(-1)^n\frac{(2n-1)!!}{(2n)!!}}.
 \]
-Splitting $(2n)!$ into its even and odd factors gives
-$(2n)!=(2n)!!(2n-1)!!=2^n n!(2n-1)!!$, so
+\textbf{(a)} Splitting $(2n)!$ into its even and odd factors gives
+$(2n)!=(2n)!!(2n-1)!!=2^n n!(2n-1)!!$.  Substituting
+$(2n-1)!!=(2n)!/(2^nn!)$ in the first expression for $a_n$ gives
 \[
 \boxed{a_n=(-1)^n\frac{(2n)!}{2^{2n}(n!)^2}}.
 \]
@@ -419,36 +499,55 @@ P_{n}(\cos\theta)=P_{2s+1}(\cos\theta)=\sum_{m=0}^{s}a_{m}\cos(2m+1)\theta.
 Find $a_{m}$ in terms of factorials and double factorials.
 \solution
 Let $k$ count downward steps of two from the highest harmonic $n$.
-Reading the coefficient of $\cos(n-2k)\theta$ from the given series,
-including its prefactor, gives
+The term in the braces that contains $\cos(n-2k)\theta$ is
+\[
+\frac{1\cdot3\cdots(2k-1)}{1\cdot2\cdots k}\,
+\frac{n(n-1)\cdots(n-k+1)}{(2n-1)(2n-3)\cdots(2n-2k+1)}
+\cos(n-2k)\theta,
+\]
+and its three products are $(2k-1)!!/k!$, $n!/(n-k)!$, and
+$(2n-1)!!/(2n-2k-1)!!$.  Including the prefactor, the coefficient of
+$\cos(n-2k)\theta$ is therefore
 \[
 c_k=2\frac{(2n-1)!!}{(2n)!!}
  \frac{(2k-1)!!}{k!}
  \frac{n!}{(n-k)!}
  \frac{(2n-2k-1)!!}{(2n-1)!!}.
 \]
-Cancel $(2n-1)!!$ and use $(2n)!!=2^n n!$ to obtain
+Cancel $(2n-1)!!$ and use $(2n)!!=2^n n!$; the factor $n!$ cancels
+too, leaving
 \[
 c_k=2^{1-n}\frac{(2k-1)!!(2n-2k-1)!!}{k!(n-k)!}.
 \]
-Now $n=2s+1$ and $n-2k=2m+1$ imply
-$k=s-m$ and $n-k=s+m+1$.  Hence
+For odd $n=2s+1$ the series in braces ends with its $\cos\theta$
+term, $k=s$, so $k=0,1,\ldots,s$ gives the harmonics
+$\cos(2m+1)\theta$ with $m=s,s-1,\ldots,0$.  Thus $n-2k=2m+1$ implies
+$k=s-m$ and $n-k=s+m+1$; also $2n-2k-1=2s+2m+1$ and
+$2^{1-n}=2^{-2s}$.  Hence
 \[
 \boxed{a_m=
 \frac{(2s-2m-1)!!(2s+2m+1)!!}
 {2^{2s}(s-m)!(s+m+1)!}\quad(0\le m\le s)}.
 \]
 The convention $(-1)!!=1$ includes the highest harmonic $m=s$.
-Finally apply $(2q-1)!!=(2q)!/(2^q q!)$ to both factors.  Their
-powers of two multiply to $2^{2s+1}$, giving
+Finally apply $(2q-1)!!=(2q)!/(2^q q!)$ with $q=s-m$ and
+$q=s+m+1$:
+\[
+(2s-2m-1)!!=\frac{(2s-2m)!}{2^{s-m}(s-m)!},\qquad
+(2s+2m+1)!!=\frac{(2s+2m+2)!}{2^{s+m+1}(s+m+1)!}.
+\]
+Their powers of two multiply to $2^{2s+1}$, which with the factor
+$2^{2s}$ already present makes $2^{4s+1}$:
 \[
 \boxed{a_m=
 \frac{(2s-2m)!(2s+2m+2)!}
 {2^{4s+1}[(s-m)!]^2[(s+m+1)!]^2}}.
 \]
-For $s=1$ this gives $P_3(\cos\theta)
-=(3\cos\theta+5\cos3\theta)/8$, which also follows by inserting
-$\cos3\theta=4\cos^3\theta-3\cos\theta$ in $P_3(x)=(5x^3-3x)/2$.
+For $s=1$ the double-factorial form gives
+$a_0=1!!\,3!!/(2^2\,1!\,2!)=3/8$ and $a_1=(-1)!!\,5!!/(2^2\,0!\,3!)=5/8$,
+so $P_3(\cos\theta)=(3\cos\theta+5\cos3\theta)/8$.  This also follows
+by inserting $\cos^3\theta=(\cos3\theta+3\cos\theta)/4$ in
+$P_3(x)=(5x^3-3x)/2$.
 
 
 \Needspace{5\baselineskip}
@@ -465,28 +564,40 @@ $\Gamma(\tfrac{1}{2}+n)=\dfrac{(2n-1)!!}{2^{n}}\pi^{1/2}$.
 \par\smallskip
 \erratum{The displayed double-factorial answer uses $n\ge0$ and $(-1)!!=1$. For negative integer $n$, interchange the two half-integer formulas derived below.}
 \solution
-First take $n=N\ge0$.  Recurrence upward from $1/2$ yields
+\textbf{(b)} First take $n=N\ge0$.  Recurrence upward from $1/2$,
+$\Gamma(\tfrac12+N)=(N-\tfrac12)(N-\tfrac32)\cdots\tfrac12\,
+\Gamma(\tfrac12)$, yields
 \[
 \Gamma\left(\frac12+N\right)
 =\Gamma\left(\frac12\right)
  \prod_{j=1}^N\left(j-\frac12\right)
+=\frac{1\cdot3\cdots(2N-1)}{2^N}\sqrt\pi
 =\boxed{\frac{(2N-1)!!}{2^N}\sqrt\pi}.
 \]
-Recurrence downward gives
+Recurrence downward,
+$\Gamma(\tfrac12)=(-\tfrac12)\Gamma(-\tfrac12)
+=(-\tfrac12)(-\tfrac32)\Gamma(-\tfrac32)=\cdots
+=\prod_{j=1}^N(\tfrac12-j)\,\Gamma(\tfrac12-N)$, gives, since each of
+the $N$ factors $\tfrac12-j=-(2j-1)/2$ is negative,
 \[
 \Gamma\left(\frac12-N\right)
 =\frac{\Gamma(1/2)}{\prod_{j=1}^N(1/2-j)}
+=\frac{2^N\sqrt\pi}{(-1)^N(2N-1)!!}
 =\boxed{\frac{(-1)^N2^N}{(2N-1)!!}\sqrt\pi}.
 \]
 The products are empty when $N=0$, consistently with $(-1)!!=1$.
-Their multiplication cancels the double factorial and power of two:
+
+\textbf{(a)} Multiplying the two results cancels the double
+factorial and the power of two:
 \[
 \boxed{\Gamma(1/2-N)\Gamma(1/2+N)=(-1)^N\pi}.
 \]
 For a negative integer $n=-N$, interchange the two boxed individual
 formulas.  The product is unchanged and $(-1)^{-N}=(-1)^N$, so the
 product identity holds for every integer $n$ without introducing
-undefined negative odd double factorials.
+undefined negative odd double factorials.  The reflection formula
+$\Gamma(z)\Gamma(1-z)=\pi/\sin\pi z$ with $z=\tfrac12+n$ confirms
+this directly: $\pi/\sin(\tfrac\pi2+n\pi)=\pi/\cos n\pi=(-1)^n\pi$.
 
 
 \Needspace{5\baselineskip}
@@ -513,7 +624,14 @@ $\Re(z+N)>0$ and use
 \Gamma(z)=\frac{\Gamma(z+N)}{\prod_{j=0}^{N-1}(z+j)}.
 \]
 Conjugating numerator and denominator and applying the proven
-half-plane result gives $\overline{\Gamma(z)}=\Gamma(\bar z)$
+half-plane result to $\Gamma(z+N)$ (note that
+$\Re(\bar z+N)=\Re(z+N)>0$) gives
+\[
+\overline{\Gamma(z)}
+=\frac{\overline{\Gamma(z+N)}}{\prod_{j=0}^{N-1}(\bar z+j)}
+=\frac{\Gamma(\bar z+N)}{\prod_{j=0}^{N-1}(\bar z+j)}
+=\Gamma(\bar z)
+\]
 there as well.  Thus if $\Gamma(x+iy)=u+iv$,
 \[
 \boxed{\Gamma(x-iy)=u-iv}.
@@ -541,18 +659,24 @@ The Euler product-limit representation is
 \Gamma(z)=\lim_{N\to\infty}
 \frac{N!\,N^z}{z(z+1)\cdots(z+N)}.
 \]
-Since $|N^{\alpha+i\beta}|=N^\alpha$, division of its absolute
-value at $z=\alpha+i\beta$ by that at $z=\alpha$ gives
+Since $|N^{\alpha+i\beta}|=|e^{(\alpha+i\beta)\ln N}|=N^\alpha$, the
+factors $N!\,|N^z|$ cancel when the absolute value at
+$z=\alpha+i\beta$ is divided by that at $z=\alpha$ (a finite nonzero
+limit, $|\Gamma(\alpha)|$).  This gives
 \begin{align*}
 \frac{|\Gamma(\alpha+i\beta)|}{|\Gamma(\alpha)|}
 &=\lim_{N\to\infty}\prod_{j=0}^N
  \frac{|\alpha+j|}{|\alpha+j+i\beta|}\\
 &=\prod_{j=0}^\infty
- \left(1+\frac{\beta^2}{(\alpha+j)^2}\right)^{-1/2}.
+ \left(1+\frac{\beta^2}{(\alpha+j)^2}\right)^{-1/2},
 \end{align*}
-This product converges to a positive value: for sufficiently large
-$j$, its logarithm in magnitude is bounded by a constant times
-$j^{-2}$, and the finitely many preceding factors are nonzero.
+because each factor is
+$|\alpha+j|/\sqrt{(\alpha+j)^2+\beta^2}
+=[1+\beta^2/(\alpha+j)^2]^{-1/2}$.
+This product converges to a positive value: by
+$0\le\ln(1+w)\le w$ for $w\ge0$, the logarithm of the $j$th factor
+has magnitude at most $\beta^2/[2(\alpha+j)^2]$, and these bounds
+form a convergent series.
 Multiplying by $|\Gamma(\alpha)|$ gives the requested identity.
 The argument applies to negative nonintegral $\alpha$ as well as
 positive $\alpha$, using the continued product-limit representation.
@@ -576,14 +700,17 @@ Take real $b$.  For $b\ne0$, reflection and recurrence give
 \Gamma(ib)\Gamma(1-ib)=\frac{\pi}{\sin(\pi ib)},
 \qquad\Gamma(1+ib)=ib\Gamma(ib).
 \]
-Because $\sin(i\pi b)=i\sinh(\pi b)$ and the two factors
-$\Gamma(1\pm ib)$ are conjugates, this yields
+Multiply the first relation by $ib$ and use the second.  Since
+$\sin(i\pi b)=(e^{-\pi b}-e^{\pi b})/(2i)=i\sinh(\pi b)$, and the two
+factors $\Gamma(1\pm ib)$ are conjugates (Exercise 13.1.15), this
+yields
 \[
-|\Gamma(1+ib)|^2
+|\Gamma(1+ib)|^2=\Gamma(1+ib)\Gamma(1-ib)
 =\frac{ib\pi}{i\sinh\pi b}
 =\frac{\pi b}{\sinh\pi b}.
 \]
-Apply recurrence $n$ more times:
+Apply recurrence $n$ more times,
+$\Gamma(n+1+ib)=(n+ib)\Gamma(n+ib)=\cdots$:
 \[
 \Gamma(n+1+ib)=\left[\prod_{s=1}^n(s+ib)\right]\Gamma(1+ib).
 \]
@@ -673,23 +800,32 @@ with $(-\infty,\infty)$ for the range of $x$. Show that
 \solution
 Take real $\mu$ and \erratum{$\sigma>0$}, as required for the stated
 probability density.  Set $u=(x-\mu)/\sigma$, so
-$x=\mu+\sigma u$ and
+$x=\mu+\sigma u$, $dx=\sigma\,du$, the limits remain $\mp\infty$, and
 $f(x)dx=(2\pi)^{-1/2}e^{-u^2/2}du$.
-The Gaussian integral gives
+The Gaussian integral (Exercise 13.1.10(b) with $s=0$ and
+$a=\tfrac12$ gives $\int_0^\infty e^{-u^2/2}du=\sqrt{\pi/2}$, doubled
+for the even integrand) and oddness of the second integrand give
 \[
-\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-u^2/2}du=1,
+\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-u^2/2}du
+=\frac{2\sqrt{\pi/2}}{\sqrt{2\pi}}=1,
 \qquad
-\int_{-\infty}^{\infty}u e^{-u^2/2}du=0
+\int_{-\infty}^{\infty}u e^{-u^2/2}du=0.
 \]
-(the second integrand is odd).  Integration by parts also gives
+Writing $ue^{-u^2/2}du=d(-e^{-u^2/2})$ and integrating by parts
+also gives, since the boundary term vanishes at both ends,
 \[
 \int_{-\infty}^{\infty}u^2e^{-u^2/2}du
 =\bigl[-u e^{-u^2/2}\bigr]_{-\infty}^{\infty}
 +\int_{-\infty}^{\infty}e^{-u^2/2}du=\sqrt{2\pi}.
 \]
 \textbf{(a)} Expanding the first moment now yields
-$\langle x\rangle=\mu\cdot1+\sigma\cdot0=\boxed{\mu}$.
-\textbf{(b)} Expanding $(\mu+\sigma u)^2$ yields
+\[
+\langle x\rangle=\frac1{\sqrt{2\pi}}
+\int_{-\infty}^{\infty}(\mu+\sigma u)e^{-u^2/2}du
+=\mu\cdot1+\sigma\cdot0=\boxed{\mu}.
+\]
+\textbf{(b)} Expanding $(\mu+\sigma u)^2=\mu^2+2\mu\sigma u+\sigma^2u^2$
+and using the three integrals yields
 \[
 \langle x^2\rangle=\mu^2+2\mu\sigma\cdot0+\sigma^2,
 \qquad
@@ -721,7 +857,8 @@ show that
 \erratum{A gamma probability distribution requires $\alpha>0$ and
 $\beta>0$.}
 For any moment exponent $q$ with $\Re q>-\alpha$, substitute
-$x=\beta u$, $dx=\beta du$:
+$x=\beta u$, $dx=\beta du$, so that
+$x^{\alpha+q-1}dx=\beta^{\alpha+q}u^{\alpha+q-1}du$:
 \begin{align*}
 \langle x^q\rangle
 &=\frac1{\beta^\alpha\Gamma(\alpha)}
@@ -731,12 +868,14 @@ $x=\beta u$, $dx=\beta du$:
 =\frac{\beta^q\Gamma(\alpha+q)}{\Gamma(\alpha)}.
 \end{align*}
 At $q=0$ this is one, checking normalization.
-\textbf{(a)} With $q=1$ and the gamma recurrence,
+\textbf{(a)} With $q=1$ and the gamma recurrence
+$\Gamma(\alpha+1)=\alpha\Gamma(\alpha)$,
 \[
 \boxed{\langle x\rangle
 =\frac{\beta\Gamma(\alpha+1)}{\Gamma(\alpha)}=\alpha\beta}.
 \]
-\textbf{(b)} With $q=2$,
+\textbf{(b)} With $q=2$ and
+$\Gamma(\alpha+2)=(\alpha+1)\Gamma(\alpha+1)=(\alpha+1)\alpha\Gamma(\alpha)$,
 $\langle x^2\rangle=\beta^2\alpha(\alpha+1)$, so
 \[
 \boxed{\sigma^2=\alpha(\alpha+1)\beta^2-(\alpha\beta)^2
@@ -758,7 +897,8 @@ where $\gamma>0$ is a dimensionless parameter, show that
 \]
 \solution
 The real exponential factor has squared magnitude $e^{-\pi\gamma}$.
-Using Exercise 13.1.17 with the empty product ($n=0$),
+Using Exercise 13.1.17 with the empty product ($n=0$), that is, its
+first step $|\Gamma(1+ib)|^2=\pi b/\sinh\pi b$ with $b=\gamma$,
 \[
 |\psi(0)|^2=e^{-\pi\gamma}|\Gamma(1+i\gamma)|^2
 =e^{-\pi\gamma}\frac{\pi\gamma}{\sinh\pi\gamma}.
@@ -766,10 +906,13 @@ Using Exercise 13.1.17 with the empty product ($n=0$),
 Write $\sinh\pi\gamma=(e^{\pi\gamma}-e^{-\pi\gamma})/2$
 and multiply numerator and denominator by $e^{\pi\gamma}$:
 \[
-\boxed{|\psi(0)|^2=\frac{2\pi\gamma}{e^{2\pi\gamma}-1}}.
+|\psi(0)|^2
+=\frac{2\pi\gamma\,e^{-\pi\gamma}}{e^{\pi\gamma}-e^{-\pi\gamma}}
+=\boxed{\frac{2\pi\gamma}{e^{2\pi\gamma}-1}}.
 \]
-The limit as $\gamma\downarrow0$ is one, agreeing with
-$\Gamma(1)=1$ in the original wave function.
+Since $e^{2\pi\gamma}-1=2\pi\gamma+O(\gamma^2)$, the limit as
+$\gamma\downarrow0$ is one, agreeing with $\Gamma(1)=1$ in the
+original wave function.
 
 
 \Needspace{5\baselineskip}
@@ -805,24 +948,32 @@ by $e^{-\pi i\nu}t^\nu$ with this continuous branch convention.}
 \end{tikzpicture}
 \end{center}
 The two lips of the cut are displaced in the sketch for visibility.
-Initially assume $\Re\nu>-1$.  On the upper lip $t=x$,
-$t^\nu=x^\nu$, but the direction is inward.  Its contribution is
+Initially assume $\Re\nu>-1$.  On the upper lip $t=x$ with
+$\arg t=0$, so $t^\nu=x^\nu$, but the direction is inward ($x$ runs
+from $\infty$ to $\varepsilon$).  Its contribution is
 \[
 I_{\rm upper}=-e^{-\pi i\nu}
 \int_\varepsilon^\infty e^{-x}x^\nu dx.
 \]
 On the lower lip the continuous argument is $2\pi$, so
-$t^\nu=e^{2\pi i\nu}x^\nu$ and the outward contribution is
+$t^\nu=e^{2\pi i\nu}x^\nu$; since $e^{-\pi i\nu}e^{2\pi i\nu}
+=e^{\pi i\nu}$, the outward contribution is
 \[
 I_{\rm lower}=e^{\pi i\nu}
 \int_\varepsilon^\infty e^{-x}x^\nu dx.
 \]
-On the small circle put $t=\varepsilon e^{i\theta}$, so
-$dt=i\varepsilon e^{i\theta}d\theta$ and
-$t^\nu=\varepsilon^\nu e^{i\nu\theta}$.  For fixed $\nu$ its
-integral in magnitude is at most a constant times
-$\varepsilon^{\Re\nu+1}e^\varepsilon$, which tends to zero.
-Thus, as $\varepsilon\downarrow0$,
+On the small circle put $t=\varepsilon e^{i\theta}$,
+$0\le\theta\le2\pi$, so $dt=i\varepsilon e^{i\theta}d\theta$ and
+$t^\nu=\varepsilon^\nu e^{i\nu\theta}$.  There $|e^{-t}|\le
+e^\varepsilon$ and
+$|e^{-\pi i\nu}t^\nu|=\varepsilon^{\Re\nu}e^{(\pi-\theta)\Im\nu}
+\le\varepsilon^{\Re\nu}e^{\pi|\Im\nu|}$, and the circle has length
+$2\pi\varepsilon$.  The circle integral is therefore at most
+$2\pi e^{\pi|\Im\nu|}\varepsilon^{\Re\nu+1}e^\varepsilon$ in
+magnitude, which tends to zero because $\Re\nu+1>0$.
+Thus, as $\varepsilon\downarrow0$, the two ray integrals tend to
+$\int_0^\infty e^{-x}x^\nu dx=\Gamma(\nu+1)$, and with
+$e^{\pi i\nu}-e^{-\pi i\nu}=2i\sin\pi\nu$,
 \begin{align*}
 \int_C e^{-t}e^{-\pi i\nu}t^\nu dt
 &=(e^{\pi i\nu}-e^{-\pi i\nu})
@@ -836,7 +987,10 @@ $\varepsilon$ the complete contour integral is entire in $\nu$:
 the circle is compact and the ray tails are dominated uniformly on
 compact parameter sets by an exponential times a fixed power.
 Deformation within the slit plane makes it independent of
-$\varepsilon$.  Therefore the identity continues analytically, with
+$\varepsilon$.  Therefore the identity continues analytically.  By the
+reflection formula,
+$\Gamma(\nu+1)\Gamma(-\nu)=\pi/\sin\pi(\nu+1)=-\pi/\sin\pi\nu$, so its
+left side is the entire function
 \[
 2i\Gamma(\nu+1)\sin\pi\nu=-\frac{2\pi i}{\Gamma(-\nu)}.
 \]
@@ -870,26 +1024,36 @@ a series for the Euler-Mascheroni constant. The convergence of this series is
 exceedingly slow. For actual computation of $\gamma$, other, indirect,
 approaches are far superior (see Exercise 12.3.2).
 \solution
-Write $\zeta(n)=1+d_n$, where
+Write $\zeta(n)=1+d_n$.  Since $k^{-n}\le\int_{k-1}^kt^{-n}dt$ for
+$k\ge3$,
 \[
 0<d_n=\sum_{k=2}^{\infty}k^{-n}
 \le 2^{-n}+\int_2^\infty t^{-n}dt
+=2^{-n}+\frac{2^{1-n}}{n-1}
 =2^{-n}\left(1+\frac2{n-1}\right).
 \]
-Thus the series is the sum of
-$\sum_{n=2}^\infty(-x)^n/n$, whose radius is one, and an
-absolutely convergent correction for $|x|<2$.  It converges
-absolutely for $|x|<1$.  At $x=1$ the first series is alternating
-harmonic, while at $x=-1$ it is a positive harmonic tail; the
-correction converges at both endpoints.  For $|x|>1$ the terms
-$\zeta(n)x^n/n$ do not tend to zero.  Hence the real convergence
-set is exactly
+Thus, apart from the term $-\gamma x$, the series is the sum of
+\[
+\sum_{n=2}^\infty\frac{(-x)^n}n
+\qquad\text{and}\qquad
+\sum_{n=2}^\infty\frac{(-1)^nd_n}{n}x^n.
+\]
+The first has radius one.  The second, the correction, converges
+absolutely for $|x|<2$, because $d_n/n\le3\cdot2^{-n}$ bounds its
+terms by $3(|x|/2)^n$.  The sum converges absolutely for $|x|<1$.
+At $x=1$ the first series is alternating harmonic, while at $x=-1$ it
+is a positive harmonic tail; the correction converges at both
+endpoints.  For $|x|>1$ the terms $\zeta(n)x^n/n$ do not tend to
+zero, since $\zeta(n)>1$ and $|x|^n/n\to\infty$.  Hence the real
+convergence set is exactly
 \[
 \boxed{-1<x\le1}.
 \]
 To identify the endpoint sum, let $x\uparrow1$ in the interior
-identity and use Abel's theorem for the convergent power series.
-Since $\Gamma(2)=1$, its logarithm tends to zero, giving
+identity.  By Abel's theorem the power series, which converges at
+$x=1$, tends to its value there, while
+$\ln\Gamma(1+x)\to\ln\Gamma(2)=\ln1=0$.  Hence
+$0=-\gamma+\sum_{n\ge2}(-1)^n\zeta(n)/n$, that is,
 \[
 \gamma=\sum_{n=2}^{\infty}(-1)^n\frac{\zeta(n)}n.
 \]
@@ -921,13 +1085,15 @@ powers:
 -\sum_{n=1}^{\infty}\frac{\zeta(2n+1)x^{2n+1}}{2n+1}.
 \]
 Reflection and recurrence give
-$\Gamma(1+x)\Gamma(1-x)=\pi x/\sin\pi x$.
-Adding the series at $x$ and $-x$ cancels the odd terms, so
+$\Gamma(1+x)\Gamma(1-x)=x\Gamma(x)\Gamma(1-x)=\pi x/\sin\pi x$.
+Adding the series at $x$ and $-x$ cancels $-\gamma x$ and the odd
+terms and doubles the even ones:
 \[
-\sum_{n=1}^{\infty}\frac{\zeta(2n)x^{2n}}{2n}
-=\frac12\ln\frac{\pi x}{\sin\pi x}.
+\ln\frac{\pi x}{\sin\pi x}=\ln\Gamma(1+x)+\ln\Gamma(1-x)
+=2\sum_{n=1}^{\infty}\frac{\zeta(2n)x^{2n}}{2n}.
 \]
-\textbf{(a)} Substitution gives exactly the first requested form.
+\textbf{(a)} Substituting half of this for the even series gives
+exactly the first requested form.
 Its remaining odd series has radius one; at $x=1$ its positive
 terms behave as $1/(2n+1)$, and at $x=-1$ their negatives do.
 It therefore converges for $\boxed{-1<x<1}$ only.  In particular,
@@ -940,21 +1106,35 @@ in the separated terms is invalid.
 \sum_{n=1}^{\infty}\frac{x^{2n+1}}{2n+1}
 =\frac12\ln\frac{1+x}{1-x}-x.
 \]
-This follows by integrating the geometric series for
-$(1-x^2)^{-1}$ from zero to $x$ and removing the linear term.
-It produces the second displayed form, including $(1-\gamma)x$.
-Now $\zeta(2n+1)-1\sim2^{-2n-1}$, so the remaining series has
-radius two.  At $x=\pm2$ its terms again form a signed harmonic
-tail, and it diverges.  Thus this series alone converges on
-$\boxed{-2<x<2}$, but \erratum{the expression as written with
+This follows by integrating the geometric series
+$(1-t^2)^{-1}=\sum_{n\ge0}t^{2n}$ from zero to $x$, which gives
+$\sum_{n\ge0}x^{2n+1}/(2n+1)=\int_0^xdt/(1-t^2)
+=\frac12\ln[(1+x)/(1-x)]$, and removing the linear term.  Hence
+\[
+-\sum_{n=1}^{\infty}\frac{\zeta(2n+1)x^{2n+1}}{2n+1}
+=-\frac12\ln\frac{1+x}{1-x}+x
+-\sum_{n=1}^{\infty}\left[\zeta(2n+1)-1\right]\frac{x^{2n+1}}{2n+1},
+\]
+and inserting this in (a) produces the second displayed form, with
+$-\gamma x+x=(1-\gamma)x$.
+By the bounds $2^{-m}<\zeta(m)-1\le2^{-m}[1+2/(m-1)]$ (the lower one
+is the first term of $d_m$, the upper one is from Exercise 13.2.1),
+$2^{2n+1}[\zeta(2n+1)-1]\to1$, so the remaining
+series has radius two.  At $x=\pm2$ its terms behave as
+$\pm1/(2n+1)$, a signed harmonic tail, and it diverges.  Thus this
+series alone converges on $\boxed{-2<x<2}$, but \erratum{the expression as written with
 separate real logarithms has the domain $-1<x<1$.}
 If those logarithms are first combined, their contribution is
 \[
 \frac12\ln\frac{\pi x(1-x)}{(1+x)\sin\pi x}.
 \]
-This has a removable limit $\tfrac12\ln(1/2)$ at $x=1$ and is
-real on $-1<x<2$.  Consequently the combined form extends the
-identity across $x=1$ to that larger interval.  This continuation
+This has a removable limit $\tfrac12\ln(1/2)$ at $x=1$, because
+$\sin\pi x=\sin\pi(1-x)\approx\pi(1-x)$ there, so the quotient tends
+to $\pi/(2\pi)=1/2$.  It is real on $-1<x<2$, since for $1<x<2$ both
+$1-x$ and $\sin\pi x$ are negative and the quotient stays positive.
+Both sides of the combined identity are analytic on $-1<x<2$ and
+agree on $-1<x<1$, so the combined form extends the identity across
+$x=1$ to that larger interval.  This continuation
 must be distinguished from the domain of the separate logarithms.
 
 
@@ -972,7 +1152,9 @@ For a fixed positive integer $n$, partial fractions give
 \[
 \frac{n}{j(n+j)}=\frac1j-\frac1{j+n}.
 \]
-Sum only to a finite $N$ before canceling:
+Sum only to a finite $N$ before canceling.  With
+$H_N=\sum_{j=1}^N1/j$ and
+$\sum_{j=1}^N1/(j+n)=\sum_{i=n+1}^{N+n}1/i=H_{N+n}-H_n$,
 \begin{align*}
 \sum_{j=1}^N\frac{n}{j(n+j)}
 &=H_N-(H_{N+n}-H_n)\\
@@ -998,10 +1180,12 @@ subtracting two divergent harmonic series separately.
 \erratum{The expansion holds for $|z|<1$.}
 \solution
 On every closed disk $|z|\le r<1$, the Maclaurin series for
-$\ln\Gamma(1+z)$ may be differentiated term by term.  For example,
-the derivative terms have absolute values at most
-$\zeta(2)r^{n-1}$, whose sum converges.  Since
-$\psi(1+z)=d\ln\Gamma(1+z)/dz$, differentiation gives
+$\ln\Gamma(1+z)$, Eq.~(13.44), may be differentiated term by term.
+For example, the derivative terms
+$(d/dz)[(-1)^n\zeta(n)z^n/n]=(-1)^n\zeta(n)z^{n-1}$ have absolute
+values at most $\zeta(2)r^{n-1}$, whose sum converges.  Since
+$\psi(1+z)=d\ln\Gamma(1+z)/dz$ and $(d/dz)(-\gamma z)=-\gamma$,
+differentiation gives
 \[
 \boxed{\psi(1+z)=-\gamma+
 \sum_{n=2}^{\infty}(-1)^n\zeta(n)z^{n-1}},
@@ -1030,8 +1214,10 @@ $\ln\Gamma(z+1)$, AMS-55 (see Additional Readings for the reference) lists
 \[
 \log(1+z)=z-\sum_{n=2}^{\infty}(-1)^n\frac{z^n}{n}.
 \]
-Add this to the series for $\log\Gamma(1+z)$.  Combining the
-linear coefficients and then each higher coefficient gives
+Add this to the series for $\log\Gamma(1+z)$.  The linear
+coefficients combine to $1-\gamma$, and for each $n\ge2$ the
+coefficients $(-1)^n\zeta(n)/n$ and $-(-1)^n/n$ combine to
+$(-1)^n[\zeta(n)-1]/n$, giving
 \[
 \log\Gamma(1+z)+\log(1+z)
 =(1-\gamma)z+
@@ -1039,23 +1225,31 @@ linear coefficients and then each higher coefficient gives
 \]
 Moving $\log(1+z)$ to the right proves the claimed agreement.
 
-\textbf{(b)} Set $e_n=\zeta(n)-1-2^{-n}$.  The estimate
+\textbf{(b)} Set $e_n=\zeta(n)-1-2^{-n}=\sum_{k\ge3}k^{-n}$.  The
+integral comparison of Exercise 13.2.1, now starting at $k=3$, gives
+the estimate
 \[
-0<e_n\le3^{-n}\left(1+\frac3{n-1}\right)
+0<e_n\le3^{-n}+\int_3^\infty t^{-n}dt
+=3^{-n}\left(1+\frac3{n-1}\right).
 \]
-shows that the new series is
-$\sum_{n=2}^\infty(-z/2)^n/n$ plus a correction absolutely
-convergent for $|z|<3$.  Thus its radius is two; on $|z|=2$ it
-converges except at $z=-2$, by the Dirichlet test for the leading
-series.  Its real convergence set is $\boxed{-2<z\le2}$.
+Since $(-1)^n[\zeta(n)-1]z^n/n=(-z/2)^n/n+(-1)^ne_nz^n/n$, the new
+series is $\sum_{n=2}^\infty(-z/2)^n/n$ plus a correction absolutely
+convergent for $|z|<3$ (its terms are at most $4(|z|/3)^n$).  Thus
+its radius is two; on $|z|=2$ it converges except at $z=-2$, by the
+Dirichlet test for the leading series $\sum w^n/n$, $|w|=1$, $w\ne1$.
+Its real convergence set is $\boxed{-2<z\le2}$.
 
 \erratum{Convergence of the series is distinct from the domain
 of the complete logarithmic identity: with ordinary real
 logarithms that identity requires $z>-1$, and hence holds for
 $-1<z\le2$.  It is undefined at $z=-1$.}
-More precisely, the analytic series equals
-$\log\Gamma(2+z)-(1-\gamma)z$ on $|z|<2$, with the logarithm
-continued from zero.  Subtracting $\log(1+z)$ gives the requested
+More precisely, since $\Gamma(2+z)=(1+z)\Gamma(1+z)$, part (a)
+shows that the analytic series equals
+$\log\Gamma(2+z)-(1-\gamma)z$ for $|z|<1$.  The function
+$\Gamma(2+z)$ has no zeros and its nearest pole is at $z=-2$, so
+$\log\Gamma(2+z)$, continued from zero, is analytic on $|z|<2$, as is
+the series (radius two).  Agreeing on $|z|<1$, the two agree on the
+whole disk $|z|<2$.  Subtracting $\log(1+z)$ gives the requested
 identity on a slit disk, for example
 $|z|<2$ with $z\notin(-2,-1]$, using compatible analytic branches.
 The endpoint $z=2$ follows by Abel's theorem and continuity.
@@ -1110,12 +1304,15 @@ Taking the analytic logarithm that is zero at $z=0$ gives
 \log\Gamma(1+z)=-\gamma z+
 \sum_{k=1}^{\infty}\left[\frac zk-\log\left(1+\frac zk\right)\right].
 \]
-For $|z|<1$, expand each logarithm.  Its linear term cancels:
+For $|z|<1$, expand each logarithm by
+$\log(1+w)=w-w^2/2+w^3/3-\cdots$ with $w=z/k$, $|w|<1$.  Its linear
+term cancels:
 \[
 \frac zk-\log\left(1+\frac zk\right)
 =\sum_{n=2}^{\infty}\frac{(-1)^n z^n}{n k^n}.
 \]
-The double series is absolutely convergent, since
+The double series is absolutely convergent, since summing over $k$
+first gives $\zeta(n)|z|^n/n\le\zeta(2)|z|^n$ and
 \[
 \sum_{n=2}^{\infty}\sum_{k=1}^{\infty}
 \frac{|z|^n}{n k^n}
@@ -1139,12 +1336,14 @@ polygamma function,
 \]
 \solution
 Differentiate $\Gamma(z+2)=(z+1)\Gamma(z+1)$ logarithmically
-at regular arguments.  The result is
+at regular arguments, i.e., differentiate
+$\ln\Gamma(z+2)=\ln(z+1)+\ln\Gamma(z+1)$.  The result is
 \[
 \psi(z+2)=\frac1{z+1}+\psi(z+1).
 \]
-This already proves the case $m=0$.  For $m\ge1$, repeated
-ordinary differentiation gives
+This already proves the case $m=0$.  For $m\ge1$, differentiate
+this relation $m$ times, using $\psi^{(m)}=d^m\psi/dz^m$; the $m$th
+derivative of the first term is
 \[
 \frac{d^m}{dz^m}(z+1)^{-1}
 =(-1)(-2)\cdots(-m)(z+1)^{-m-1}
@@ -1185,6 +1384,8 @@ $\dfrac{d}{da}(a)_{n}=(a)_{n}\left[\psi(a+n)-\psi(a)\right]$.
 \erratum{The finite-product definition here uses nonnegative
 integers $n$ and, in part (c), $k$.}
 \textbf{(a)} Repeated gamma recurrence gives
+$\Gamma(a+n)=(a+n-1)(a+n-2)\cdots a\,\Gamma(a)=(a)_n\Gamma(a)$,
+so
 \[
 \boxed{(a)_n=\frac{\Gamma(a+n)}{\Gamma(a)}
 =\frac{(a+n-1)!}{(a-1)!}}.
@@ -1198,19 +1399,29 @@ logarithmic differentiation of the finite product gives
 \[
 \frac{d}{da}(a)_n=(a)_n\sum_{j=0}^{n-1}\frac1{a+j}.
 \]
-Iterating $\psi(a+1)-\psi(a)=1/a$ identifies the finite sum:
+Iterating $\psi(a+1)-\psi(a)=1/a$ (Exercise 13.2.8 with $m=0$)
+identifies the finite sum by telescoping,
+$\psi(a+n)-\psi(a)=\sum_{j=0}^{n-1}[\psi(a+j+1)-\psi(a+j)]
+=\sum_{j=0}^{n-1}1/(a+j)$:
 \[
 \boxed{\frac{d}{da}(a)_n=(a)_n[\psi(a+n)-\psi(a)]}.
 \]
+The same result follows from (a):
+$(d/da)[\Gamma(a+n)/\Gamma(a)]
+=[\Gamma(a+n)/\Gamma(a)][\psi(a+n)-\psi(a)]$.
 At exceptional arguments use the equivalent polynomial formula
 \[
 \frac{d}{da}(a)_n=
 \sum_{j=0}^{n-1}\prod_{\substack{0\le\ell<n\\\ell\ne j}}(a+\ell).
 \]
-For example, at $a=-j$ with $0\le j<n$ its value is
-$(-1)^j j!(n-1-j)!$, even though the separated digamma factors
-have poles.  For $n=0$ the empty product is one and its derivative
-is zero.
+For example, at $a=-j$ with $0\le j<n$ only the term that omits the
+vanishing factor $a+j$ survives, and its value is
+\[
+\prod_{\ell=0}^{j-1}(\ell-j)\prod_{\ell=j+1}^{n-1}(\ell-j)
+=(-1)^jj!\,(n-1-j)!,
+\]
+even though the separated digamma factors have poles.  For $n=0$
+the empty product is one and its derivative is zero.
 
 \textbf{(c)} Split the product after its first $n$ factors:
 \begin{align*}
@@ -1231,13 +1442,20 @@ $\psi$ form of the digamma and polygamma functions:
 \psi^{(2)}(1)=-2\zeta(3).
 \]
 \solution
-From the convergent digamma representation,
+Differentiating the Weierstrass form
+$\log\Gamma(1+z)=-\gamma z+\sum_k[z/k-\log(1+z/k)]$ of
+Exercise 13.2.7 term by term (each term has derivative
+$1/k-1/(k+z)=z/[k(k+z)]$, and these converge locally uniformly
+away from the poles) gives the convergent digamma representation
 \[
 \psi(1+z)=-\gamma+
-\sum_{k=1}^{\infty}\left(\frac1k-\frac1{k+z}\right),
+\sum_{k=1}^{\infty}\left(\frac1k-\frac1{k+z}\right).
 \]
-putting $z=0$ gives $\boxed{\psi(1)=-\gamma}$.
-Differentiation on compact sets away from the poles gives
+Putting $z=0$ makes every term of the sum vanish, so
+$\boxed{\psi(1)=-\gamma}$.
+Differentiation on compact sets away from the poles, with
+$(d/dz)(k+z)^{-1}=-(k+z)^{-2}$ and $(d/dz)(k+z)^{-2}=-2(k+z)^{-3}$,
+gives
 \[
 \psi^{(1)}(1+z)=\sum_{k=1}^{\infty}\frac1{(k+z)^2},
 \qquad
@@ -1278,8 +1496,11 @@ so the integral is $\boxed{-\gamma}$.
 
 \textbf{(c)} Write $I_n=\int_0^\infty r^ne^{-r}\log r\,dr$.
 For integers $n\ge1$, integrate by parts with
-$u=r^n\log r$, $dv=e^{-r}dr$.  Since $r^n\log r\to0$ at zero
-and the exponential removes the upper boundary term,
+$u=r^n\log r$, $dv=e^{-r}dr$, so that
+$du=(nr^{n-1}\log r+r^{n-1})dr$ and $v=-e^{-r}$.  Since
+$r^n\log r\to0$ at zero and the exponential removes the upper
+boundary term, and since $\int_0^\infty r^{n-1}e^{-r}dr=\Gamma(n)
+=(n-1)!$,
 \begin{align*}
 I_n&=\bigl[-r^ne^{-r}\log r\bigr]_0^\infty
 +\int_0^\infty e^{-r}(nr^{n-1}\log r+r^{n-1})dr\\
@@ -1287,9 +1508,12 @@ I_n&=\bigl[-r^ne^{-r}\log r\bigr]_0^\infty
 \end{align*}
 \textbf{(b)} In particular, $I_1=I_0+0!=\boxed{1-\gamma}$.
 The general closed form is $I_n=n!(H_n-\gamma)$, as is checked
-by this recurrence and $I_0=-\gamma$.  Integration by parts at
-$n=0$ would have a divergent boundary term, which is why part (a)
-was evaluated before using this recurrence.
+by this recurrence and $I_0=-\gamma$: if
+$I_{n-1}=(n-1)!(H_{n-1}-\gamma)$, then
+$I_n=n!(H_{n-1}-\gamma)+n!/n=n!(H_n-\gamma)$.  It agrees with
+$I_n=\Gamma'(n+1)=\Gamma(n+1)\psi(n+1)$ and Exercise 13.2.3.
+Integration by parts at $n=0$ would have a divergent boundary term,
+which is why part (a) was evaluated before using this recurrence.
 
 
 \Needspace{5\baselineskip}
@@ -1301,19 +1525,26 @@ $\Gamma[2(1-\alpha^{2}Z^{2})^{1/2}+1]$ in a series of powers of
 $\alpha^{2}Z^{2}$.
 \solution
 Let $q=\alpha^2Z^2$ and expand about $q=0$, using the square-root
-branch that equals one there.  The binomial series gives
+branch that equals one there.  The binomial series
+$\sqrt{1-q}=1-\frac q2-\frac{q^2}8-\frac{q^3}{16}+O(q^4)$ gives
 \[
 2\sqrt{1-q}+1=3+\delta,
 \qquad\delta=-q-\frac{q^2}{4}-\frac{q^3}{8}+O(q^4).
 \]
 Set $p=\psi(3)$, $r=\psi^{(1)}(3)$ and $s=\psi^{(2)}(3)$.
-The recurrences in Exercise 13.2.8 yield
+The recurrence of Exercise 13.2.8, applied with $z=0$ and $z=1$,
+gives $\psi^{(m)}(3)=\psi^{(m)}(1)+(-1)^mm!\,(1+2^{-m-1})$; with
+the values at one from Exercise 13.2.10 this yields
 \[
 p=\frac32-\gamma,\qquad
 r=\zeta(2)-1-\frac14=\zeta(2)-\frac54,
 \qquad s=-2\zeta(3)+2+\frac14=\frac94-2\zeta(3).
 \]
-Differentiating $\Gamma'=\Gamma\psi$ twice more gives
+Differentiating $\Gamma'=\Gamma\psi$ and using $\Gamma'=\Gamma\psi$
+again at each step gives
+$\Gamma''=\Gamma'\psi+\Gamma\psi'=\Gamma(\psi^2+\psi')$ and
+$\Gamma^{(3)}=\Gamma\psi(\psi^2+\psi')+\Gamma(2\psi\psi'+\psi'')$,
+that is,
 \[
 \Gamma''=\Gamma(\psi^2+\psi'),\qquad
 \Gamma^{(3)}=\Gamma(\psi^3+3\psi\psi'+\psi'').
@@ -1325,24 +1556,45 @@ Since $\Gamma(3)=2$, Taylor expansion in $\delta$ is
 \frac{p^3+3pr+s}{6}\delta^3+O(\delta^4)\right].
 \]
 Now $\delta^2=q^2+q^3/2+O(q^4)$ and
-$\delta^3=-q^3+O(q^4)$.  Substitution and collection give
+$\delta^3=-q^3+O(q^4)$.  Inside the brackets the coefficient of $q$
+is $-p$; that of $q^2$ is $-p/4+(p^2+r)/2$; and that of $q^3$ is
+$-p/8+(p^2+r)/4-(p^3+3pr+s)/6$.  Multiplying by two,
 \begin{align*}
 \Gamma(2\sqrt{1-q}+1)
 ={}&2-2pq+\left(p^2+r-\frac p2\right)q^2\\
 &+\left[-\frac p4+\frac{p^2+r}{2}
 -\frac{p^3+3pr+s}{3}\right]q^3+O(q^4).
 \end{align*}
+Here $-2p=2\gamma-3$ and
+\[
+p^2+r-\frac p2
+=\left(\frac94-3\gamma+\gamma^2\right)+\zeta(2)-\frac54
+-\frac34+\frac\gamma2
+=\gamma^2-\frac52\gamma+\zeta(2)+\frac14.
+\]
 In particular, the first three terms in the original variables are
 \[
 \boxed{2+(2\gamma-3)\alpha^2Z^2+
 \left[\gamma^2-\frac52\gamma+\zeta(2)+\frac14\right]
 \alpha^4Z^4+O(\alpha^6Z^6)}.
 \]
+The same substitution in the $q^3$ coefficient gives
+$\gamma^3/3-\gamma^2-\gamma/4+(\gamma-1)\zeta(2)+\tfrac23\zeta(3)
++\tfrac18$.  Numerically,
+\[
+\Gamma(2\sqrt{1-q}+1)=2-1.845569\,q+0.785073\,q^2-0.182458\,q^3
++O(q^4),
+\]
+which can be checked by evaluating the gamma function directly: at
+$q=0.1$ the difference from this cubic is about $4.5\times10^{-6}$,
+the size of the omitted $q^4$ term.
 Higher terms follow from the same two Taylor expansions.  The
 expansion is local at $q=0$ and converges for $|q|<1$; there the
 chosen square root has positive real part, so its gamma argument
 encounters no gamma pole.  Physically, a short truncation requires
-$\alpha^2Z^2$ small.
+$\alpha^2Z^2$ small.  The value of $\alpha$ does not enter the
+coefficients; the statement's $1/137$ approximates the measured
+$\alpha\simeq1/137.036$.
 
 
 \Needspace{5\baselineskip}
@@ -1353,13 +1605,23 @@ $\Gamma(z)$ when $z$ is complex. Determine the argument of $\Gamma(1+ib)$
 for small, real $b$.
 \solution
 Choose the argument continuously from $b=0$, where $\Gamma(1)=1$
-and the argument is zero.  For $|b|<1$, substitute $z=ib$ in
+and the argument is zero; it is then the imaginary part of the
+logarithm of Eq.~(13.44), which vanishes at $z=0$.  For $|b|<1$,
+substitute $z=ib$ in
 \[
 \log\Gamma(1+z)=-\gamma z+
 \sum_{n=2}^{\infty}(-1)^n\frac{\zeta(n)}n z^n.
 \]
-Even powers of $ib$ are real.  For the odd powers $n=2m+1$,
-$(-1)^{2m+1}i^{2m+1}=(-1)^{m+1}i$.  Therefore
+The linear term $-\gamma ib$ contributes $-\gamma b$ to the
+imaginary part.  Even powers $(ib)^{2m}=(-1)^mb^{2m}$ are real.  For
+the odd powers $n=2m+1$,
+$(-1)^{2m+1}i^{2m+1}=-i\,(i^2)^m=(-1)^{m+1}i$.  Therefore
+\[
+\arg\Gamma(1+ib)=\Im\log\Gamma(1+ib)
+=-\gamma b+\sum_{m=1}^{\infty}(-1)^{m+1}
+\frac{\zeta(2m+1)}{2m+1}b^{2m+1},
+\]
+that is,
 \[
 \boxed{\arg\Gamma(1+ib)
 =-\gamma b+\frac{\zeta(3)}3b^3
@@ -1385,23 +1647,30 @@ functions.
 \solution
 Use the digamma identity
 \[
-\psi(1+z)+\gamma=\sum_{j=1}^{\infty}\frac{z}{j(j+z)}.
+\psi(1+z)+\gamma=\sum_{j=1}^{\infty}\frac{z}{j(j+z)},
 \]
+which is the representation of Exercise 13.2.10 with
+$1/j-1/(j+z)=z/[j(j+z)]$.
 \textbf{(a)} At $z=1$ the requested sum is
-$\psi(2)+\gamma$.  The recurrence
-$\psi(2)=\psi(1)+1=-\gamma+1$ gives
+$\psi(2)+\gamma$.  The recurrence of Exercise 13.2.8 ($m=0$, $z=0$),
+$\psi(2)=\psi(1)+1=-\gamma+1$, gives
 \[
 \boxed{\sum_{n=1}^{\infty}\frac1{n(n+1)}=1}.
 \]
-\textbf{(b)} Put $j=n-1$; then $n^2-1=j(j+2)$ and
+\textbf{(b)} Put $j=n-1$; then $n^2-1=(n-1)(n+1)=j(j+2)$.  At $z=2$
+the identity gives $\sum_j2/[j(j+2)]=\psi(3)+\gamma$, and the
+recurrence ($m=0$, $z=1$) gives $\psi(3)=\psi(2)+\tfrac12
+=\tfrac32-\gamma$.  Hence
 \begin{align*}
 \sum_{n=2}^{\infty}\frac1{n^2-1}
 &=\sum_{j=1}^{\infty}\frac1{j(j+2)}
 =\frac12[\psi(3)+\gamma]\\
 &=\frac12\left(1+\frac12\right)=\boxed{\frac34}.
 \end{align*}
-As a separate check, the finite partial sums are
-$1-1/(N+1)$ in (a) and
+As a separate check, the partial fractions
+$1/[n(n+1)]=1/n-1/(n+1)$ and
+$1/(n^2-1)=\tfrac12[1/(n-1)-1/(n+1)]$ make the finite partial sums
+telescope to $1-1/(N+1)$ in (a) and
 $\tfrac12[1+1/2-1/N-1/(N+1)]$ in (b), respectively;
 their limits give the same answers.
 
