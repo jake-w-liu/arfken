@@ -2834,9 +2834,14 @@ Put $F(t)=\cos kt$ and $f(s)=L\{F\}(s)$. The differential
 identity $F''=-k^2F$ and initial values $F(0)=1$, $F'(0)=0$
 give
 \[
-L\{F''\}=s^2f(s)-sF(0)-F'(0)=s^2f(s)-s=-k^2f(s).
+L\{F''\}=s^2f(s)-sF(0)-F'(0)=s^2f(s)-s=-k^2f(s),
 \]
-Solving this algebraic equation,
+where the last equality transforms $F''=-k^2F$ by linearity.
+The derivative formula applies for $\Re s>0$, since $F$ and
+$F'=-k\sin kt$ are continuous and bounded. Collecting the $f$
+terms gives $(s^2+k^2)f(s)=s$. For $\Re s>0$ the factor
+$s^2+k^2$ does not vanish (its zeros $\pm ik$ lie on the
+imaginary axis), so
 \[
 \boxed{L\{\cos kt\}(s)=\frac{s}{s^2+k^2}},\qquad \Re s>0
 \quad(k\in\mathbb R).
@@ -2859,7 +2864,8 @@ $\omega^{2}=\dfrac{k}{m}$,\par\nobreak\hfill
 (b) $x=\dfrac{a\omega^{2}}{4!}\,t^{4}$, $\omega t\ll1$.
 \par\erratum{Use the initially resting preparation $x(0)=x'(0)=0$, with the driven end initially at rest and $m,k>0$.}
 \solution
-Measure $x$ from the initial mass position and subtract
+(a) Measure $x$ from the initial mass position, positive in
+the direction of the acceleration $a$, and subtract
 the unstretched spring length from the driven endpoint's
 position. The latter coordinate is $y(t)=at^2/2$, so the spring
 extension is $y-x$. Newton's law is
@@ -2867,20 +2873,25 @@ extension is $y-x$. Newton's law is
 m x''=k(y-x),\qquad
 x''+\omega^2x=\frac{a\omega^2t^2}{2},\qquad \omega^2=k/m.
 \]
-The mass is initially at rest at $x=0$. With
-$\widehat x=L\{x\}$, the transformed equation is
+The mass is initially at rest at $x=0$, so with
+$\widehat x=L\{x\}$ we have
+$L\{x''\}=s^2\widehat x-sx(0)-x'(0)=s^2\widehat x$; together
+with $L\{t^2/2\}=1/s^3$, the transformed equation is
 \[
 (s^2+\omega^2)\widehat x=\frac{a\omega^2}{s^3},\qquad
 \widehat x=\frac{a\omega^2}{s^3(s^2+\omega^2)}
 =\frac a{s^3}-\frac a{s(s^2+\omega^2)}.
 \]
-Since
-$1/[s(s^2+\omega^2)]=\omega^{-2}[1/s-s/(s^2+\omega^2)]$,
-inversion yields
+The last step writes the numerator as
+$\omega^2=(s^2+\omega^2)-s^2$. The same splitting gives
+$1/[s(s^2+\omega^2)]=\omega^{-2}[1/s-s/(s^2+\omega^2)]$, and
+the pairs $L\{t^2/2\}=1/s^3$, $L\{1\}=1/s$,
+$L\{\cos\omega t\}=s/(s^2+\omega^2)$ then invert $\widehat x$
+term by term:
 \[
 \boxed{x(t)=\frac12at^2-\frac a{\omega^2}(1-\cos\omega t)}.
 \]
-Expanding the cosine shows explicitly the cancellation of the
+(b) Expanding the cosine shows explicitly the cancellation of the
 quadratic terms:
 \[
 x(t)=\frac12at^2-\frac a{\omega^2}
@@ -2942,14 +2953,20 @@ $N_{3}\approx N_{0}\big(1-e^{-\lambda_{1}t}\big)$,
 \quad$\lambda_{2}t\gg1$.
 \par\erratum{The quotient answers in part (a) are written for distinct rates; at equal rates take the continuous limits derived below.}
 \solution
-(a) Denote Laplace transforms by hats. The initial values
+(a) Denote Laplace transforms by hats. By
+$L\{N_i'\}=s\widehat N_i-N_i(0)$, the initial values
 and the three rate equations give
 \[
 (s+\lambda_1)\widehat N_1=N_0,\quad
 (s+\lambda_2)\widehat N_2=\lambda_1\widehat N_1,\quad
 s\widehat N_3=\lambda_2\widehat N_2.
 \]
-The first two inversions are
+Hence $\widehat N_1=N_0/(s+\lambda_1)$ and
+$\widehat N_2=N_0\lambda_1/[(s+\lambda_1)(s+\lambda_2)]$.
+For $\lambda_1\ne\lambda_2$ the partial fractions
+$1/[(s+\lambda_1)(s+\lambda_2)]
+=[1/(s+\lambda_1)-1/(s+\lambda_2)]/(\lambda_2-\lambda_1)$
+and the pair $L\{e^{-\lambda t}\}=1/(s+\lambda)$ give
 \begin{align*}
 N_1(t)&=N_0e^{-\lambda_1t},\\
 \widehat N_2&=\frac{N_0\lambda_1}{\lambda_2-\lambda_1}
@@ -2961,6 +2978,13 @@ Adding the three original equations gives
 $(N_1+N_2+N_3)'=0$, so their sum remains $N_0$. Subtraction
 therefore gives
 \[
+N_3=N_0-N_1-N_2=N_0\left[1-\left(1+\frac{\lambda_1}
+{\lambda_2-\lambda_1}\right)e^{-\lambda_1t}
++\frac{\lambda_1e^{-\lambda_2t}}{\lambda_2-\lambda_1}\right],
+\]
+and $1+\lambda_1/(\lambda_2-\lambda_1)=\lambda_2/(\lambda_2-\lambda_1)$,
+so
+\[
 \boxed{N_3(t)=N_0\left[1-
 \frac{\lambda_2e^{-\lambda_1t}-\lambda_1e^{-\lambda_2t}}
 {\lambda_2-\lambda_1}\right]}.
@@ -2970,9 +2994,26 @@ At the removable equal-rate case $\lambda_1=\lambda_2=\lambda$,
 $N_2=N_0\lambda t e^{-\lambda t}$ and
 $N_3=N_0[1-(1+\lambda t)e^{-\lambda t}]$.}
 They follow either from $\widehat N_2=N_0\lambda/(s+\lambda)^2$
-or from the limit of the exponential difference.
+and $L\{te^{-\lambda t}\}=1/(s+\lambda)^2$, or from the limit
+$(e^{-\lambda_1t}-e^{-\lambda_2t})/(\lambda_2-\lambda_1)\to
+-\partial_\lambda e^{-\lambda t}=te^{-\lambda t}$ of the
+exponential difference; then $N_3=N_0-N_1-N_2$.
 
-(b) Expand each exponential and cancel its constant term:
+(b) Insert $e^{-\lambda t}=1-\lambda t+\lambda^2t^2/2
+-\lambda^3t^3/6+O(t^4)$ into the formulas of (a):
+\begin{align*}
+e^{-\lambda_1t}-e^{-\lambda_2t}
+&=(\lambda_2-\lambda_1)t-\frac{\lambda_2^2-\lambda_1^2}2t^2
++O(t^3),\\
+\lambda_2e^{-\lambda_1t}-\lambda_1e^{-\lambda_2t}
+&=(\lambda_2-\lambda_1)\left[1-\frac{\lambda_1\lambda_2}2t^2
++\frac{\lambda_1\lambda_2(\lambda_1+\lambda_2)}6t^3\right]
++O(t^4);
+\end{align*}
+in the second line the terms linear in $t$ cancel. Dividing by
+$\lambda_2-\lambda_1$, with
+$(\lambda_2^2-\lambda_1^2)/(\lambda_2-\lambda_1)=\lambda_1+\lambda_2$,
+gives
 \begin{align*}
 N_2&=N_0\lambda_1\left[t-
 \frac{\lambda_1+\lambda_2}{2}t^2+O(t^3)\right],\\
@@ -2982,17 +3023,25 @@ N_3&=N_0\lambda_1\lambda_2\left[
 The leading terms are those stated. They hold when
 $\max(\lambda_1,\lambda_2)t\ll1$, including equal or nearly
 equal rates; closeness of the rates is not needed for this
-small-time expansion.
+small-time expansion. Indeed, Taylor's theorem and the rate
+equations at $t=0$ give the same leading terms for all rates:
+$N_2(0)=0$ and $N_2'(0)=\lambda_1N_1(0)=\lambda_1N_0$, while
+$N_3(0)=0$, $N_3'(0)=\lambda_2N_2(0)=0$ and
+$N_3''(0)=\lambda_2N_2'(0)=\lambda_1\lambda_2N_0$.
 
-(c1) If $\lambda_1\gg\lambda_2$ and $\lambda_1t\gg1$,
-discard $e^{-\lambda_1t}$ in the exact formulas:
+(c1) If $\lambda_1\gg\lambda_2$ and $\lambda_1t\gg1$, then
+$e^{-\lambda_1t}=e^{-(\lambda_1-\lambda_2)t}e^{-\lambda_2t}$ is
+negligible beside $e^{-\lambda_2t}$, because
+$(\lambda_1-\lambda_2)t\simeq\lambda_1t\gg1$. Discarding it in
+the exact formulas of (a) leaves
 \[
 N_2\simeq N_0\frac{\lambda_1}{\lambda_1-\lambda_2}e^{-\lambda_2t},
 \quad
 N_3\simeq N_0\left[1-
 \frac{\lambda_1}{\lambda_1-\lambda_2}e^{-\lambda_2t}\right].
 \]
-Since $\lambda_1/(\lambda_1-\lambda_2)=1+O(\lambda_2/\lambda_1)$,
+Since $\lambda_1/(\lambda_1-\lambda_2)=1/(1-\lambda_2/\lambda_1)
+=1+O(\lambda_2/\lambda_1)$,
 these become $N_0e^{-\lambda_2t}$ and
 $N_0(1-e^{-\lambda_2t})$.
 \erratum{The positive exponent printed for $N_2$ in this
@@ -3000,7 +3049,8 @@ case must be negative. A positive exponent would violate both
 the rate equation and $0\le N_2\le N_0$.}
 
 (c2) If $\lambda_1\ll\lambda_2$ and $\lambda_2t\gg1$,
-discard $e^{-\lambda_2t}$ instead:
+discard $e^{-\lambda_2t}$ instead, by the same argument with
+the rates interchanged:
 \[
 N_2\simeq N_0\frac{\lambda_1}{\lambda_2-\lambda_1}e^{-\lambda_1t}
 \simeq N_0\frac{\lambda_1}{\lambda_2}e^{-\lambda_1t},
@@ -3010,9 +3060,15 @@ N_3\simeq N_0\left[1-
 \frac{\lambda_2}{\lambda_2-\lambda_1}e^{-\lambda_1t}\right]
 \simeq N_0(1-e^{-\lambda_1t}).
 \]
-The last approximations retain the leading terms in the small
-rate ratio; they need not resolve a small transient correction
-to $N_3$ immediately after the fast decay.
+The last approximations keep the leading terms in the small
+ratio $\lambda_1/\lambda_2$, using
+$\lambda_2-\lambda_1=\lambda_2(1-\lambda_1/\lambda_2)$.
+Since $N_3=N_0-N_1-N_2$ exactly, the final form of $N_3$ drops
+precisely $N_2\simeq N_0(\lambda_1/\lambda_2)e^{-\lambda_1t}$.
+Relative to $N_0(1-e^{-\lambda_1t})$ this is
+$(\lambda_1/\lambda_2)/(e^{\lambda_1t}-1)\le1/(\lambda_2t)\ll1$,
+by $e^x-1\ge x$; so the approximation stays accurate even while
+$N_3$ itself is still small.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3047,14 +3103,16 @@ justified?
 \solution
 (a) Set $A=\varphi\sigma_1N_1(0)$ and
 $b=\varphi\sigma_2+\lambda_2$. The equation is
-$N_2'+bN_2=A$. With $N_2(0)=N_{20}$ its transform obeys
+$N_2'+bN_2=A$. With $N_2(0)=N_{20}$, the transforms
+$L\{N_2'\}=s\widehat N_2-N_{20}$ and $L\{A\}=A/s$ give
 \[
 (s+b)\widehat N_2=N_{20}+A/s,
 \quad
 \widehat N_2=\frac{N_{20}}{s+b}
-+\frac A b\left(\frac1s-\frac1{s+b}\right).
++\frac A b\left(\frac1s-\frac1{s+b}\right),
 \]
-Therefore
+by the partial fractions $1/[s(s+b)]=[1/s-1/(s+b)]/b$.
+Inverting with $L\{1\}=1/s$ and $L\{e^{-bt}\}=1/(s+b)$,
 \[
 \boxed{N_2(t)=N_{20}e^{-bt}+\frac A b(1-e^{-bt})}.
 \]
@@ -3062,7 +3120,7 @@ Therefore
 of the original isotope with none of the new isotope initially
 present, use $N_{20}=0$; the formula above also covers a
 nonzero initial inventory.} If $b=0$, the continuous limit is
-$N_{20}+At$.
+$N_{20}+At$, since $(1-e^{-bt})/b\to t$ as $b\to0$.
 
 (b) For the stated data,
 \begin{align*}
@@ -3071,16 +3129,22 @@ A&=(10^9)(400\times10^{-24})(10^{20})
 b&=(10^9)(1000\times10^{-24})+1.4\times10^{-9}
 =1.401\times10^{-9}\ \mathrm{s}^{-1}.
 \end{align*}
-Taking one year to mean $365$ days gives $T=31\,536\,000$ s.
+Taking one year to mean $365$ days gives
+$T=365\cdot86\,400=31\,536\,000$ s. Then
+$bT=(1.401\times10^{-9})(31\,536\,000)=0.0441819$, so
+$1-e^{-bT}=0.0432201$, while $A/b=2.85510\times10^{16}$.
 For $N_{20}=0$,
 \[
-N_2(T)=\frac{4.00\times10^7}{1.401\times10^{-9}}
-\left(1-e^{-(1.401\times10^{-9})(31\,536\,000)}\right)
+N_2(T)=\frac Ab\left(1-e^{-bT}\right)
+=(2.85510\times10^{16})(0.0432201)
 =\boxed{1.2340\times10^{15}}.
 \]
 This is $1.2\times10^{15}$ at the precision of the source data.
-The parent depletion rate is $\varphi\sigma_1=4.00\times10^{-13}$
-s$^{-1}$, so the fraction consumed is
+The parent ${}^{153}$Eu is stable, so it is consumed only by
+neutron absorption: $N_1'=-\varphi\sigma_1N_1$ and
+$N_1(T)=N_1(0)e^{-\varphi\sigma_1T}$. The depletion rate is
+$\varphi\sigma_1=4.00\times10^{-13}$ s$^{-1}$ and
+$\varphi\sigma_1T=1.26144\times10^{-5}$, so the fraction consumed is
 \[
 1-e^{-\varphi\sigma_1T}=1.26143\times10^{-5}
 =0.00126143\%.
@@ -3146,34 +3210,48 @@ I=N_{\rm I},\quad X=N_{\rm Xe}.
 \]
 The system becomes $I'+\alpha I=P\gamma_{\rm I}$ and
 $X'+\mu X=P\gamma_{\rm Xe}+\alpha I$.
-\erratum{The original part (a) did not specify initial inventories.
+\erratum{The textbook's part (a) did not specify initial inventories.
 We first keep $I(0)=I_0$, $X(0)=X_0$ arbitrary, and then give
 the usual initially clean case $I_0=X_0=0$.}
 The equilibrium values, obtained by setting both derivatives
-to zero, are
+to zero ($\alpha I_e=P\gamma_{\rm I}$ and
+$\mu X_e=P\gamma_{\rm Xe}+\alpha I_e
+=P(\gamma_{\rm Xe}+\gamma_{\rm I})$), are
 \[
 I_e=\frac{P\gamma_{\rm I}}\alpha,\qquad
 X_e=\frac{P(\gamma_{\rm I}+\gamma_{\rm Xe})}{\mu}.
 \]
-(a) The first transformed equation gives
+(a) With $L\{I'\}=s\widehat I-I_0$, the first equation
+transforms into
+$(s+\alpha)\widehat I=I_0+P\gamma_{\rm I}/s=I_0+\alpha I_e/s$.
+The partial fractions $\alpha/[s(s+\alpha)]=1/s-1/(s+\alpha)$
+then give
 \[
 \widehat I=\frac{I_e}s+\frac{I_0-I_e}{s+\alpha},\qquad
 I(t)=I_e+(I_0-I_e)e^{-\alpha t}.
 \]
-Subtract $X_e$ from the second equation. Then
+Next subtract $\mu X_e=P\gamma_{\rm Xe}+\alpha I_e$ from both
+sides of the second equation:
+\[
+(X-X_e)'+\mu(X-X_e)=\alpha(I-I_e)
+=\alpha(I_0-I_e)e^{-\alpha t}.
+\]
+Since $(X-X_e)(0)=X_0-X_e$, its transform is
 \[
 (s+\mu)L\{X-X_e\}=X_0-X_e+
 \frac{\alpha(I_0-I_e)}{s+\alpha}.
 \]
-Use
+Divide by $s+\mu$, use
 $1/[(s+\alpha)(s+\mu)]
-=[1/(s+\alpha)-1/(s+\mu)]/(\mu-\alpha)$ to obtain
+=[1/(s+\alpha)-1/(s+\mu)]/(\mu-\alpha)$ (for $\mu\ne\alpha$),
+and invert to obtain
 \[
 \boxed{X(t)=X_e+(X_0-X_e)e^{-\mu t}
 +\frac{\alpha(I_0-I_e)}{\mu-\alpha}
 (e^{-\alpha t}-e^{-\mu t})}.
 \]
-In particular, for zero initial inventories,
+In particular, for zero initial inventories ($I_0=X_0=0$,
+with $\alpha I_e=P\gamma_{\rm I}$),
 \[
 \boxed{X(t)=\frac{P(\gamma_{\rm I}+\gamma_{\rm Xe})}{\mu}
 (1-e^{-\mu t})
@@ -3183,55 +3261,77 @@ In particular, for zero initial inventories,
 \erratum{When $\mu=\alpha$, replace
 $(e^{-\alpha t}-e^{-\mu t})/(\mu-\alpha)$ by $t e^{-\alpha t}$.
 The populations remain finite at this coincident rate.}
+This is the limit of the quotient as $\mu\to\alpha$, namely
+$-\partial_\mu e^{-\mu t}=te^{-\mu t}$ at $\mu=\alpha$.
 For example, in the initially clean case this gives
 $X=X_e(1-e^{-\alpha t})-P\gamma_{\rm I}t e^{-\alpha t}$.
 
-(b) Since the rates are positive, the transients vanish, leaving
+(b) Since the rates $\alpha$ and $\mu$ are positive, all
+exponentials in (a) decay, so $X\to X_e$:
 \[
 \boxed{N_{\rm Xe}(\infty)=
 \frac{\varphi(\gamma_{\rm I}+\gamma_{\rm Xe})\sigma_fN_{\rm U}}
 {\lambda_{\rm Xe}+\varphi\sigma_{\rm Xe}}}.
 \]
 (c) Reset $t=0$ at shutdown. The initial values are now
-$I_e,X_e$, but production and neutron absorption cease.
-Thus $I=I_e e^{-\alpha t}$ and
+$I_e,X_e$, but production and neutron absorption cease:
+with $\varphi=0$ we have $P=0$ and $\mu=\beta$, so the
+equations become $I'=-\alpha I$ and $X'=-\beta X+\alpha I$.
+Thus $I=I_e e^{-\alpha t}$, and the second equation, with
+$X(0)=X_e$, transforms into
 \[
 (s+\beta)\widehat X=X_e+\frac{\alpha I_e}{s+\alpha}.
 \]
-Inverting gives
+Here $\alpha>\beta$, because the iodine half-life is the
+shorter. Dividing by $s+\beta$ and inverting with
+$1/[(s+\alpha)(s+\beta)]=[1/(s+\beta)-1/(s+\alpha)]/(\alpha-\beta)$
+gives
 \[
 \boxed{X(t)=X_e e^{-\beta t}
 +\frac{\alpha I_e}{\alpha-\beta}
 (e^{-\beta t}-e^{-\alpha t})}.
 \]
-\erratum{In the manual's shutdown formula the coefficient of
+\erratum{In the Instructor's Manual's shutdown formula the
+coefficient of
 the exponential difference uses $N_{\rm Xe}(0)$; it must use
 $N_{\rm I}(0)=I_e$. The source of xenon after shutdown is
 $\alpha I$, as the differential equation directly shows.}
-The initial slope is
-\[
-X'(0)=P\gamma_{\rm I}-\beta X_e
-=\frac{P(\gamma_{\rm I}\varphi\sigma_{\rm Xe}
+The initial slope follows from the shutdown equation at $t=0$,
+$X'(0)=\alpha I_e-\beta X_e$. With $\alpha I_e=P\gamma_{\rm I}$,
+the value of $X_e$, and $\mu-\beta=\varphi\sigma_{\rm Xe}$,
+\begin{align*}
+X'(0)&=P\gamma_{\rm I}-\beta X_e
+=\frac{P[\gamma_{\rm I}\mu-\beta(\gamma_{\rm I}+\gamma_{\rm Xe})]}
+{\mu}\\
+&=\frac{P(\gamma_{\rm I}\varphi\sigma_{\rm Xe}
 -\beta\gamma_{\rm Xe})}{\mu}.
-\]
+\end{align*}
 \erratum{A short-term increase is conditional, not automatic:
 for a positive pre-shutdown flux it occurs exactly when
 $\varphi\sigma_{\rm Xe}>\beta\gamma_{\rm Xe}/\gamma_{\rm I}$.}
 Here $\alpha=\ln2/(6.7\cdot3600)=2.87374\times10^{-5}$ s$^{-1}$
 and $\beta=\ln2/(9.2\cdot3600)=2.09284\times10^{-5}$ s$^{-1}$.
-The threshold is consequently
+Since $\gamma_{\rm Xe}/\gamma_{\rm I}=0.003/0.060=1/20$,
+the threshold is
 \[
 \varphi>\frac{\beta}{20\sigma_{\rm Xe}}
 =2.98977\times10^{11}\ \mathrm{cm}^{-2}\mathrm{s}^{-1}.
 \]
 For an explicit peak time put $A=\alpha I_e/(\alpha-\beta)>0$.
-Then $X=(X_e+A)e^{-\beta t}-Ae^{-\alpha t}$ and $X'=0$ gives
+Then $X=(X_e+A)e^{-\beta t}-Ae^{-\alpha t}$, and
+$X'=-\beta(X_e+A)e^{-\beta t}+\alpha Ae^{-\alpha t}=0$ gives
+$e^{(\alpha-\beta)t}=\alpha A/[\beta(X_e+A)]$, that is,
 \[
 t_{\rm peak}=\frac1{\alpha-\beta}
 \ln\frac{\alpha A}{\beta(X_e+A)}.
 \]
-This is positive exactly under the preceding increase condition;
-otherwise the maximum after shutdown is at $t=0$.
+This is positive exactly when $\alpha A>\beta(X_e+A)$, i.e.
+$(\alpha-\beta)A=\alpha I_e>\beta X_e$, which is the
+preceding increase condition $X'(0)>0$. Because
+$e^{\beta t}X'=-\beta(X_e+A)+\alpha Ae^{-(\alpha-\beta)t}$
+decreases in $t$, $X$ then has a single maximum, at
+$t_{\rm peak}$; otherwise $X'<0$ for all $t>0$ and the maximum
+after shutdown is at $t=0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3246,37 +3346,55 @@ $X'(0)=0$, and
 (a) $X(t)=X_{0}e^{-(b/2m)t}\left(1+\dfrac{b}{2m}t\right)$.
 \solution
 The equation is $mX''+bX'+kX=0$. Put
-$\alpha=b/(2m)$ and $\omega_0^2=k/m$. Using $X(0)=X_0$
-and $X'(0)=0$ gives
+$\alpha=b/(2m)$ and $\omega_0^2=k/m$, and divide by $m$:
+$X''+2\alpha X'+\omega_0^2X=0$. With $X(0)=X_0$ and $X'(0)=0$,
+the derivative formulas give $L\{X''\}=s^2\widehat X-sX_0$
+and $L\{X'\}=s\widehat X-X_0$, so
 \[
 (s^2+2\alpha s+\omega_0^2)\widehat X=(s+2\alpha)X_0,
 \quad
 \widehat X=X_0\frac{(s+\alpha)+\alpha}
-{(s+\alpha)^2+\omega_0^2-\alpha^2}.
+{(s+\alpha)^2+\omega_0^2-\alpha^2},
 \]
+where the denominator has been completed to a square,
+$s^2+2\alpha s+\omega_0^2=(s+\alpha)^2+\omega_0^2-\alpha^2$.
+Each case is inverted with the shift theorem
+$L\{e^{-\alpha t}F(t)\}=f(s+\alpha)$.
+
 (a) Critical damping means $\omega_0^2=\alpha^2$, so
+the pairs $L\{1\}=1/s$ and $L\{t\}=1/s^2$, shifted, give
 \[
 \widehat X=X_0\left(\frac1{s+\alpha}
 +\frac{\alpha}{(s+\alpha)^2}\right),\qquad
 \boxed{X=X_0e^{-\alpha t}(1+\alpha t)}.
 \]
 (b) In the overdamped case define
-$\kappa=\sqrt{\alpha^2-\omega_0^2}>0$. The elementary
-hyperbolic transform pairs, shifted by $s\mapsto s+\alpha$,
-give
+$\kappa=\sqrt{\alpha^2-\omega_0^2}>0$, so the denominator is
+$(s+\alpha)^2-\kappa^2$. The hyperbolic pairs
+$L\{\cosh\kappa t\}=s/(s^2-\kappa^2)$ and
+$L\{\sinh\kappa t\}=\kappa/(s^2-\kappa^2)$, shifted by
+$s\mapsto s+\alpha$, give
+\[
+\widehat X=X_0\left[\frac{s+\alpha}{(s+\alpha)^2-\kappa^2}
++\frac\alpha\kappa\,\frac{\kappa}{(s+\alpha)^2-\kappa^2}\right],
+\]
 \[
 \boxed{X=X_0e^{-\alpha t}
 \left(\cosh\kappa t+\frac\alpha\kappa\sinh\kappa t\right)}.
 \]
-Indeed this is
+Writing $\cosh$ and $\sinh$ in exponentials, this is
 \[
 \frac{X_0}{2}\left[
 \left(1+\frac\alpha\kappa\right)e^{(-\alpha+\kappa)t}
 +\left(1-\frac\alpha\kappa\right)e^{(-\alpha-\kappa)t}\right].
 \]
-Both exponents solve the characteristic equation; their
-coefficients sum to $X_0$, and their initial derivative is
-$0$. Taking $\kappa\to0$ gives the critical result because
+Both exponents $-\alpha\pm\kappa$ are the roots of the
+characteristic equation $r^2+2\alpha r+\omega_0^2=0$; the
+coefficients sum to $X_0$, and the initial derivative is
+$(X_0/2)[(1+\alpha/\kappa)(\kappa-\alpha)
+-(1-\alpha/\kappa)(\kappa+\alpha)]
+=(X_0/2)[(\kappa-\alpha^2/\kappa)-(\kappa-\alpha^2/\kappa)]=0$.
+Taking $\kappa\to0$ gives the critical result because
 $\sinh\kappa t/\kappa\to t$.
 
 \Needspace{5\baselineskip}
@@ -3295,32 +3413,46 @@ $X(0)=0$, $X'(0)=v_{0}$, and
 (b) $X(t)=v_{0}te^{-(b/2m)t}$.
 \solution
 With $\alpha=b/(2m)$, $\omega_0^2=k/m$, and initial data
-$X(0)=0$, $X'(0)=v_0$, transformation of the equation gives
+$X(0)=0$, $X'(0)=v_0$, we have $L\{X''\}=s^2\widehat X-v_0$
+and $L\{X'\}=s\widehat X$, so transformation of the equation
+(divided by $m$) gives
 \[
 (s^2+2\alpha s+\omega_0^2)\widehat X=v_0,
 \qquad
 \widehat X=\frac{v_0}{(s+\alpha)^2+\omega_0^2-\alpha^2}.
 \]
-(a) If $\omega_1=\sqrt{\omega_0^2-\alpha^2}>0$, the shifted
-sine transform gives
+(a) If $\omega_1=\sqrt{\omega_0^2-\alpha^2}
+=\sqrt{k/m-b^2/(4m^2)}>0$, then
+$\widehat X=(v_0/\omega_1)\,\omega_1/[(s+\alpha)^2+\omega_1^2]$,
+and the shifted sine transform
+$L\{e^{-\alpha t}\sin\omega_1t\}=\omega_1/[(s+\alpha)^2+\omega_1^2]$
+gives
 \[
 \boxed{X(t)=\frac{v_0}{\omega_1}e^{-\alpha t}\sin\omega_1t}.
 \]
 (b) At $\omega_0^2=\alpha^2$ the transform is
-$v_0/(s+\alpha)^2$, whose inverse is
+$v_0/(s+\alpha)^2$, whose inverse, by the shifted pair
+$L\{te^{-\alpha t}\}=1/(s+\alpha)^2$, is
 \[
 \boxed{X(t)=v_0t e^{-\alpha t}}.
 \]
-(c) If $\kappa=\sqrt{\alpha^2-\omega_0^2}>0$, then
+(c) If $\kappa=\sqrt{\alpha^2-\omega_0^2}>0$, the
+denominator factors as
+$(s+\alpha)^2-\kappa^2=(s+\alpha-\kappa)(s+\alpha+\kappa)$, and
+partial fractions give
 \[
 \widehat X=\frac{v_0}{2\kappa}
 \left(\frac1{s+\alpha-\kappa}-\frac1{s+\alpha+\kappa}\right),
 \]
 so
 \[
-\boxed{X(t)=\frac{v_0}{\kappa}e^{-\alpha t}\sinh\kappa t}.
+X(t)=\frac{v_0}{2\kappa}\left(e^{-(\alpha-\kappa)t}
+-e^{-(\alpha+\kappa)t}\right)
+=\boxed{\frac{v_0}{\kappa}e^{-\alpha t}\sinh\kappa t}.
 \]
-All three expressions have $X(0)=0$, $X'(0)=v_0$.
+All three expressions have $X(0)=0$, $X'(0)=v_0$; for example,
+in (a) $X'=v_0e^{-\alpha t}[\cos\omega_1t-(\alpha/\omega_1)
+\sin\omega_1t]$.
 The critical formula is the continuous limit of both others,
 using $\sin z/z\to1$ and $\sinh z/z\to1$.
 
@@ -3339,7 +3471,8 @@ X(0)=\left.\frac{dX}{dt}\right|_{t=0}=0.
 \solution
 Choose the downward direction positive and set
 $\Gamma=b/m>0$. The equation is $X''+\Gamma X'=g$.
-With both initial values zero,
+With both initial values zero, $L\{X''\}=s^2\widehat X$,
+$L\{X'\}=s\widehat X$, and $L\{g\}=g/s$, so
 \[
 (s^2+\Gamma s)\widehat X=g/s,\qquad
 \widehat X=\frac g{s^2(s+\Gamma)}.
@@ -3352,16 +3485,34 @@ The partial fractions are
 \]
 Multiplication by $s^2(s+\Gamma)$ verifies the identity: its
 right numerator is $(s+\Gamma)/\Gamma-s(s+\Gamma)/\Gamma^2
-+s^2/\Gamma^2=1$. Therefore
++s^2/\Gamma^2=1$. Inverting term by term with
+$L^{-1}\{1/s^2\}=t$, $L^{-1}\{1/s\}=1$, and
+$L^{-1}\{1/(s+\Gamma)\}=e^{-\Gamma t}$,
+\[
+X(t)=g\left[\frac t\Gamma-\frac1{\Gamma^2}
++\frac{e^{-\Gamma t}}{\Gamma^2}\right]
+=\frac g\Gamma t-\frac g{\Gamma^2}(1-e^{-\Gamma t}),
+\]
+and differentiation gives $X'=(g/\Gamma)(1-e^{-\Gamma t})$.
+With $\Gamma=b/m$,
 \[
 \boxed{X(t)=\frac{mg}{b}t-\frac{m^2g}{b^2}(1-e^{-bt/m})},
 \qquad
 \boxed{X'(t)=\frac{mg}{b}(1-e^{-bt/m})}.
 \]
-The velocity approaches the terminal value $mg/b$. Expanding
-$e^{-\Gamma t}=1-\Gamma t+\Gamma^2t^2/2-\cdots$ gives the
-zero-drag limits $X\to gt^2/2$ and $X'\to gt$, and checks
-that the apparent singularities as $b\to0$ cancel.
+The velocity approaches the terminal value $mg/b$, since
+$e^{-bt/m}\to0$. Expanding
+$e^{-\Gamma t}=1-\Gamma t+\Gamma^2t^2/2-\Gamma^3t^3/6+\cdots$
+gives
+\[
+X=\frac g\Gamma t-\frac g{\Gamma^2}
+\left(\Gamma t-\frac{\Gamma^2t^2}2+\frac{\Gamma^3t^3}6
+-\cdots\right)
+=\frac{gt^2}2-\frac{g\Gamma t^3}6+\cdots,
+\]
+and similarly $X'=gt-g\Gamma t^2/2+\cdots$. Hence the
+zero-drag limits are $X\to gt^2/2$ and $X'\to gt$: the
+apparent singularities as $b\to0$ cancel.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3388,34 +3539,54 @@ $q_{0}=$ initial charge of capacitor.
 The drawing has a series $R,L$ branch in parallel with
 $C$. Define $V_0=q_0/C$, $I(0)=I_0$ for the current through
 that branch, and use the voltage polarities in the hint.
-Kirchhoff's laws imply
+Kirchhoff's laws, with the hint's $E_C$ differentiated
+($E_C'=I_C/C$), imply
 \[
 I_C=-I,\qquad E_C'=-I/C,\qquad LI'+RI=E_C.
 \]
-Eliminating $I$ gives
+Substituting $I=-CE_C'$ into the last relation gives
 \[
 LC E_C''+RC E_C'+E_C=0,\qquad
 E_C(0)=V_0,\quad E_C'(0)=-I_0/C.
 \]
 Put $\alpha=R/(2L)$ and
 $\omega=\sqrt{1/(LC)-\alpha^2}>0$; ``small $R$'' means
-$R^2<4L/C$. Transformation gives
+$R^2<4L/C$. With $L\{E_C''\}=s^2\widehat E_C-sV_0+I_0/C$ and
+$L\{E_C'\}=s\widehat E_C-V_0$, transformation and division by
+$LC$ (note $R/L=2\alpha$) give
+\[
+\Big(s^2+2\alpha s+\frac1{LC}\Big)\widehat E_C
+=(s+2\alpha)V_0-\frac{I_0}C,
+\]
+and $s^2+2\alpha s+1/(LC)=(s+\alpha)^2+\omega^2$. Hence
 \[
 \widehat E_C(s)=
 \frac{(s+2\alpha)V_0-I_0/C}{(s+\alpha)^2+\omega^2}
 =V_0\frac{s+\alpha}{(s+\alpha)^2+\omega^2}
 +\frac{\alpha V_0-I_0/C}{(s+\alpha)^2+\omega^2}.
 \]
-Consequently
+The shifted pairs
+$L\{e^{-\alpha t}\cos\omega t\}=(s+\alpha)/[(s+\alpha)^2+\omega^2]$
+and
+$L\{e^{-\alpha t}\sin\omega t\}=\omega/[(s+\alpha)^2+\omega^2]$
+then give
 \[
 \boxed{E_C=e^{-\alpha t}\left[
 V_0\cos\omega t+\frac{\alpha V_0-I_0/C}{\omega}\sin\omega t
 \right]}.
 \]
-Differentiate this expression and use
-$\omega^2+\alpha^2=1/(LC)$. The cosine coefficient of
-$-C E_C'$ is $I_0$, while its sine coefficient is
-$(V_0/L-\alpha I_0)/\omega$. Thus
+Write $B=(\alpha V_0-I_0/C)/\omega$ for the sine coefficient.
+The product rule gives
+\[
+E_C'=e^{-\alpha t}\big[(\omega B-\alpha V_0)\cos\omega t
+-(\alpha B+\omega V_0)\sin\omega t\big],
+\]
+where $\omega B-\alpha V_0=-I_0/C$ and, using
+$\omega^2+\alpha^2=1/(LC)$,
+$\alpha B+\omega V_0=[(\alpha^2+\omega^2)V_0-\alpha I_0/C]/\omega
+=[V_0/(LC)-\alpha I_0/C]/\omega$. Multiplying by $-C$, the
+cosine coefficient of $I=-C E_C'$ is $I_0$, while its sine
+coefficient is $(V_0/L-\alpha I_0)/\omega$. Thus
 \[
 I=e^{-\alpha t}\left[I_0\cos\omega t+
 \frac{V_0/L-\alpha I_0}{\omega}\sin\omega t\right],
@@ -3428,7 +3599,11 @@ I=e^{-\alpha t}\left[I_0\cos\omega t+
 \boxed{E_L=e^{-\alpha t}\left[(V_0-RI_0)\cos\omega t+
 \frac{-\alpha V_0+(R\alpha-1/C)I_0}{\omega}\sin\omega t\right]}.
 \]
-The last expression is $E_C-E_R$, and also equals $LI'$.
+The last expression is $E_C-E_R$ (Kirchhoff's voltage law):
+its cosine coefficient is $V_0-RI_0$, and its sine coefficient
+is $[\alpha V_0-I_0/C-R(V_0/L-\alpha I_0)]/\omega
+=[-\alpha V_0+(R\alpha-1/C)I_0]/\omega$, because
+$RV_0/L=2\alpha V_0$. It also equals $LI'$.
 These formulas display both initial energy stores explicitly.
 
 For the circuit exactly as drawn, if the constant source has
@@ -3437,7 +3612,10 @@ the inductor has zero DC voltage but the resistor does not:
 \[
 \boxed{I_0=V_0/R}.
 \]
-Substitution gives
+Substitution gives, since then $I_0/C=V_0/(RC)$,
+$R(V_0/L-\alpha I_0)=(2\alpha-\alpha)V_0=\alpha V_0$,
+$V_0-RI_0=0$, and
+$-\alpha V_0+(R\alpha-1/C)I_0=-V_0/(RC)$,
 \begin{align*}
 E_C&=V_0e^{-\alpha t}\left[
 \cos\omega t+\frac{\alpha-1/(RC)}{\omega}\sin\omega t\right],\\
@@ -3447,7 +3625,7 @@ E_L&=-\frac{V_0}{RC\omega}e^{-\alpha t}\sin\omega t.
 \end{align*}
 These have $E_R(0)=E_C(0)=V_0$, $E_L(0)=0$, as a prior
 DC steady state requires.
-\erratum{The manual instead uses damping $1/(2RC)$ and
+\erratum{The Instructor's Manual instead uses damping $1/(2RC)$ and
 $E_C(0)=q_0=0$. Those are not the equations or initial state
 of the charged-capacitor circuit in Fig.~20.18. Its damping
 is $R/(2L)$. An ideal inductor in series with $R$ does not
@@ -3473,27 +3651,38 @@ the order of integration, and thus show that
 L\{J_{0}(t)\}=(s^{2}+1)^{-1/2},\quad\text{for }s>0.
 \]
 \solution
-Use the generating-function contour representation
+The generating function
+$\exp[(t/2)(z-z^{-1})]=\sum_nJ_n(t)z^n$ (Section~14.1) is a
+Laurent series in $z$, so the coefficient formula for its
+$z^0$ term gives the contour representation
 \[
 J_0(t)=\frac1{2\pi i}\oint_{|z|=1}
 \exp\left[\frac t2(z-z^{-1})\right]\frac{dz}{z},
 \]
 with counterclockwise orientation. On this contour
-$z-z^{-1}=2i\sin\theta$, so the exponential has modulus $1$.
+$z=e^{i\theta}$ and $z-z^{-1}=2i\sin\theta$, so the exponential
+has modulus $1$.
 For real $s>0$, multiplication by $e^{-st}$ makes the double
-integral absolutely convergent, and interchange is valid:
+integral absolutely convergent (the integrand is bounded by
+$e^{-st}$), and interchange is valid. The inner integral is
+elementary, because the real part of
+$s-(z-z^{-1})/2=s-i\sin\theta$ is $s>0$:
 \begin{align*}
 L\{J_0\}(s)
 &=\frac1{2\pi i}\oint\frac{dz}{z}
-\int_0^\infty e^{-t[s-(z-z^{-1})/2]}dt\\
-&=\frac1{2\pi i}\oint\frac{2\,dz}{1+2sz-z^2}.
+\int_0^\infty e^{-t[s-(z-z^{-1})/2]}dt
+=\frac1{2\pi i}\oint\frac{dz}{z[s-(z-z^{-1})/2]}\\
+&=\frac1{2\pi i}\oint\frac{2\,dz}{1+2sz-z^2},
 \end{align*}
-Let $D=\sqrt{s^2+1}>0$. The denominator vanishes at
-$z_\pm=s\pm D$. Here $z_+>1$ and
+since $z[s-(z-z^{-1})/2]=(2sz-z^2+1)/2$.
+Let $D=\sqrt{s^2+1}>0$. The denominator vanishes at the roots
+$z_\pm=s\pm D$ of $z^2-2sz-1=0$. Here $z_+>1$ and, since
+$(D-s)(D+s)=D^2-s^2=1$,
 $|z_-|=D-s=1/(D+s)<1$, so just $z_-$ lies inside.
-Its residue is
+At this simple pole the residue is the numerator divided by
+the derivative $2s-2z$ of the denominator:
 \[
-\frac{2}{2s-2z_-}=\frac1D.
+\frac{2}{2s-2z_-}=\frac{2}{2D}=\frac1D.
 \]
 The residue theorem therefore gives
 \[
@@ -3514,26 +3703,30 @@ recurrence relations.
 Write $g_n(s)=L\{J_n(t)\}(s)$,
 $D=\sqrt{s^2+1}$, and $r=D-s$ for $s>0$.
 Exercise~20.8.10 gives $g_0=1/D$. Since $J_0'=-J_1$ and
-$J_0(0)=1$,
+$J_0(0)=1$, the derivative formula
+$L\{F'\}=sL\{F\}-F(0)$ gives
 \[
-g_1=-[sg_0-J_0(0)]=1-s/D=(D-s)/D=r/D.
+g_1=-L\{J_0'\}=-[sg_0-J_0(0)]=1-s/D=(D-s)/D=r/D.
 \]
 For integer $n\ge1$, $2J_n'=J_{n-1}-J_{n+1}$ and
-$J_n(0)=0$, hence
+$J_n(0)=0$, so $L\{J_n'\}=sg_n$; transforming the recurrence
+gives
 \[
 2sg_n=g_{n-1}-g_{n+1},\qquad
 g_{n+1}=g_{n-1}-2sg_n.
 \]
-Assume $g_{n-1}=r^{n-1}/D$ and $g_n=r^n/D$. Then
+Assume $g_{n-1}=r^{n-1}/D$ and $g_n=r^n/D$ for some $n\ge1$;
+this holds for $n=1$ by the two results above. Then
 \[
-g_{n+1}=\frac{r^{n-1}}D(1-2sr).
+g_{n+1}=\frac{r^{n-1}}D-2s\frac{r^n}D
+=\frac{r^{n-1}}D(1-2sr).
 \]
-The identity
+The identity (with $D^2=s^2+1$)
 \[
 r^2=(D-s)^2=D^2-2sD+s^2
 =1+2s^2-2sD=1-2s(D-s)=1-2sr
 \]
-makes this $r^{n+1}/D$. Induction establishes
+makes this $r^{n-1}r^2/D=r^{n+1}/D$. Induction establishes
 \[
 \boxed{L\{J_n(t)\}(s)=
 \frac{(\sqrt{s^2+1}-s)^n}{\sqrt{s^2+1}}},\qquad n=0,1,2,\ldots.
@@ -3553,17 +3746,26 @@ leads to the integral
 \]
 Show that this integral is equal to $a/(z^{2}+a^{2})^{3/2}$.
 \solution
-\erratum{For an ordinary improper integral the originally printed
-boundary $\Re z=0$ must be excluded when $a>0$: the stated
+\erratum{For an ordinary improper integral the boundary
+$\Re z=0$, which the textbook's printed condition includes, must
+be excluded when $a>0$: the stated
 integrand has oscillations with amplitude growing like
 $\sqrt{k}$. The formula holds ordinarily for $\Re z>0$ and
 has boundary values in an Abel or distributional sense.}
-Scale Exercise~20.8.10 to obtain, for $a>0$ and $\Re z>0$,
+Scale Exercise~20.8.10: for $a>0$ and $\Re z>0$, substitute
+$t=ka$ ($dk=dt/a$) and use that result, continued
+analytically to $s=z/a$ with $\Re s>0$:
 \[
-\int_0^\infty e^{-kz}J_0(ka)dk=\frac1{\sqrt{z^2+a^2}}.
+\int_0^\infty e^{-kz}J_0(ka)dk
+=\frac1a\int_0^\infty e^{-(z/a)t}J_0(t)dt
+=\frac1a\,\frac1{\sqrt{(z/a)^2+1}}
+=\frac1{\sqrt{z^2+a^2}}.
 \]
-Exponential decay permits differentiation with respect to $a$.
-Because $J_0'(ka)=-J_1(ka)$,
+By the chain rule and $J_0'=-J_1$, the $a$-derivative of the
+integrand is $e^{-kz}kJ_0'(ka)=-e^{-kz}kJ_1(ka)$. Since
+$|J_1(x)|\le1$ for real $x$ (Exercise~14.1.1), it is bounded
+by the integrable $ke^{-k\Re z}$, so differentiation under the
+integral sign with respect to $a$ is allowed:
 \[
 -\int_0^\infty e^{-kz}kJ_1(ka)dk
 =\frac\partial{\partial a}(z^2+a^2)^{-1/2}
@@ -3579,11 +3781,12 @@ continued throughout the right half-plane. To see the
 boundary issue directly, at $z=0$,
 $kJ_1(ka)\sim\sqrt{2k/(\pi a)}\cos(ka-3\pi/4)$;
 its oscillatory primitive does not have a limit.
-Nevertheless inserting $e^{-\epsilon k}$ and letting
-$\epsilon\downarrow0$ gives the Abel value $1/a^2$.
+Nevertheless inserting $e^{-\epsilon k}$, that is, taking
+$z=\epsilon>0$ in the boxed formula, and letting
+$\epsilon\downarrow0$ gives the Abel value $a/(a^2)^{3/2}=1/a^2$.
 For $z=iy$, the analogous limiting formula is singular at
 $y=\pm a$; it is not a finite ordinary value there.
-\erratum{The manual, p.~351, also prints $K_1(ka)$ in its first
+\erratum{The Instructor's Manual, p.~351, also prints $K_1(ka)$ in its first
 intermediate integral where $J_1(ka)$ is required, and replaces
 the boundary term $[e^{-kz}J_0(ka)]_0^\infty=-1$ by $+1$.
 The latter constant disappears on differentiation, but the
@@ -3597,28 +3800,39 @@ L\{I_{0}(at)\}=(s^{2}-a^{2})^{-1/2},\qquad\erratum{a\in\mathbb R,\quad s>|a|}.
 \]
 \solution
 For real $a$ use the angular representation
+(Exercise~14.6.3 with $n=0$)
 \[
 I_0(at)=\frac1\pi\int_0^\pi e^{at\cos\theta}d\theta.
 \]
 \erratum{If $a$ is allowed to be negative, the sufficient
 real convergence condition is $s>|a|$, not merely $s>a$.
-For a positive scale $a$, the original condition $s>a$ is correct.}
-For $s>|a|$, the integrals are absolutely convergent, so
+For a positive scale $a$, the textbook's condition $s>a$ is correct.}
+For $s>|a|$ the integrand of the double integral is bounded by
+$e^{-st}e^{|a|t}=e^{-(s-|a|)t}$, so it converges absolutely and
+the order of integration may be exchanged. The inner integral
+is $\int_0^\infty e^{-(s-a\cos\theta)t}dt=1/(s-a\cos\theta)$,
+so
 \[
 L\{I_0(at)\}(s)=\frac1\pi\int_0^\pi
 \frac{d\theta}{s-a\cos\theta}.
 \]
 Set $u=\tan(\theta/2)$, so
 $\cos\theta=(1-u^2)/(1+u^2)$ and
-$d\theta=2du/(1+u^2)$. Then
+$d\theta=2du/(1+u^2)$; the range $0\le\theta<\pi$ becomes
+$0\le u<\infty$, and
+$s-a\cos\theta=[(s-a)+(s+a)u^2]/(1+u^2)$. Then
 \begin{align*}
 L\{I_0(at)\}
 &=\frac2\pi\int_0^\infty
 \frac{du}{(s-a)+(s+a)u^2}\\
 &=\frac2{\pi\sqrt{(s-a)(s+a)}}
 \left[\tan^{-1}\left(u\sqrt{\frac{s+a}{s-a}}\right)\right]_0^\infty\\
-&=\boxed{\frac1{\sqrt{s^2-a^2}}}.
+&=\frac2{\pi\sqrt{s^2-a^2}}\cdot\frac\pi2
+=\boxed{\frac1{\sqrt{s^2-a^2}}}.
 \end{align*}
+The second line uses
+$\int du/(p+qu^2)=(pq)^{-1/2}\tan^{-1}(u\sqrt{q/p})$ with
+$p=s-a>0$ and $q=s+a>0$.
 For complex $s$ in $\Re s>|a|$, use the branch positive on
 $s>|a|$, equivalently the branch asymptotic to $s$ at positive
 infinity in the denominator.
@@ -3640,36 +3854,49 @@ transforms:
 \solution
 Take $a>0$; use real $s>0$ for (a) and $s>a$ for (c).
 (a) Since $L\{\sin at\}(u)=a/(u^2+a^2)$, integrate the
-transform parameter from $s$ to infinity:
+transform parameter from $s$ to infinity, inserting the
+defining integral and using $\int_s^\infty e^{-ut}du=e^{-st}/t$:
 \[
 \int_s^\infty\frac a{u^2+a^2}du
 =\int_0^\infty\sin(at)\left(\int_s^\infty e^{-ut}du\right)dt
 =\int_0^\infty e^{-st}\frac{\sin at}{t}dt.
 \]
 Absolute integrability after the factor $e^{-st}$ justifies
-the interchange. Dividing by $a$ and integrating yields
+the interchange, because $|\sin at|/t\le a$. The left side is
+$[\tan^{-1}(u/a)]_s^\infty=\pi/2-\tan^{-1}(s/a)$, and
+$\pi/2-\tan^{-1}x=\cot^{-1}x$ for $x>0$. Since
+$j_0(at)=\sin(at)/(at)$, dividing by $a$ yields
 \[
 \boxed{L\{j_0(at)\}=
 \frac1a\left[\frac\pi2-\tan^{-1}(s/a)\right]
 =\frac1a\cot^{-1}(s/a)}.
 \]
 (b) The spherical Neumann function is
-$y_0(at)=-\cos(at)/(at)=-1/(at)+O(t)$ near zero.
+$y_0(at)=-\cos(at)/(at)=-1/(at)+O(t)$ near zero, since
+$\cos at=1+O(t^2)$.
 Thus its Laplace integral contains a nonzero multiple of
 $\int_0^\epsilon dt/t$ and diverges for every $s$.
 
-(c) In the convergent half-plane,
-$L\{\sinh at\}(u)=a/(u^2-a^2)$. The same integration gives
+(c) In the convergent half-plane $u>a$,
+$L\{\sinh at\}(u)=a/(u^2-a^2)$. The same integration, now
+justified by $0\le\sinh(at)/t\le a\cosh at\le ae^{at}$ and
+$s>a$, followed by division by $a$ (since
+$i_0(at)=\sinh(at)/(at)$), and the partial fractions
+$1/(u^2-a^2)=[1/(u-a)-1/(u+a)]/(2a)$, give
 \begin{align*}
 L\{i_0(at)\}
-&=\int_s^\infty\frac{du}{u^2-a^2}\\
-&=\frac1{2a}\left[\ln(u-a)-\ln(u+a)\right]_s^\infty\\
-&=\boxed{\frac1{2a}\ln\frac{s+a}{s-a}
+&=\int_s^\infty\frac{du}{u^2-a^2}
+=\frac1{2a}\left[\ln\frac{u-a}{u+a}\right]_s^\infty\\
+&=\frac1{2a}\left[0-\ln\frac{s-a}{s+a}\right]
+=\boxed{\frac1{2a}\ln\frac{s+a}{s-a}
 =\frac1a\coth^{-1}(s/a)}.
 \end{align*}
-Keep the two logarithms together when taking the infinite
-endpoint; the individual logarithms do not have finite limits.
-\erratum{The manual's final logarithmic expression for (c),
+The two logarithms $\ln(u-a)$ and $\ln(u+a)$ must be kept
+together at the infinite endpoint, where $(u-a)/(u+a)\to1$;
+the individual logarithms do not have finite limits. The last
+form uses $\coth^{-1}x=\frac12\ln[(x+1)/(x-1)]$ for $x>1$, with
+$x=s/a$.
+\erratum{The Instructor's Manual's final logarithmic expression for (c),
 on p.~351, omits the factor $1/a$. Its coefficient must be
 $1/(2a)$, as in the textbook answer and the partial fractions
 shown here.}
@@ -3697,18 +3924,23 @@ then (and only then) set $n=0$.
 \par\erratum{Find the solution regular at the origin, with finite $F(0)=C$ and $F'(0)$. A logarithmically singular second solution is outside these initial-value transform rules.}
 \solution
 Seek the solution regular at $t=0$, with finite
-$F(0)=C$ and $F'(0)$. Write $f=L\{F\}$. The needed transforms
-are
+$F(0)=C$ and $F'(0)$. Write $f=L\{F\}$. The derivative
+formulas and the derivative of a transform,
+$L\{tG(t)\}=-\frac d{ds}L\{G\}$, give the needed transforms
 \begin{align*}
 L\{F'\}&=sf-C, &L\{F''\}&=s^2f-sC-F'(0),\\
 L\{tF'\}&=-\frac d{ds}(sf-C)=-f-sf',
 &L\{tF''\}&=-\frac d{ds}(s^2f-sC-F'(0))=-2sf-s^2f'+C.
 \end{align*}
-Adding $L\{tF''\}+L\{F'\}-L\{tF'\}+nf$ gives
+In the sum $L\{tF''\}+L\{F'\}-L\{tF'\}+nf$ the $f'$ terms give
+$(-s^2+s)f'$, the $f$ terms give $(-2s+s+1+n)f$, and the
+constants $C-C$ cancel, so the transformed equation is
 \[
 s(1-s)f'+(n+1-s)f=0.
 \]
-For a nonzero solution, divide by $s(1-s)f$ and decompose:
+For a nonzero solution, divide by $s(1-s)f$ and decompose in
+partial fractions; covering up $s$ at $s=0$ and $1-s$ at $s=1$
+gives $(n+1-s)/[s(1-s)]=(n+1)/s+n/(1-s)$, so
 \[
 \frac{f'}f=-\frac{n+1-s}{s(1-s)}
 =-\frac{n+1}{s}+\frac n{s-1}.
@@ -3719,21 +3951,34 @@ Integrating each logarithmic derivative gives
 \qquad f(s)=A\frac{(s-1)^n}{s^{n+1}}.
 \]
 For general $n$, choose the powers by continuation from real
-$s>1$. The initial-value theorem gives
-$A=\lim_{s\to\infty}sf(s)=F(0)=C$.
-For $|s|>1$ in this half-plane, expand the generalized binomial:
+$s>1$. The initial-value theorem
+$\lim_{s\to\infty}sf(s)=F(0)$ gives $A=C$, because
+$sf(s)=A(1-1/s)^n\to A$.
+For $|s|>1$ in this half-plane, expand by the generalized
+binomial theorem,
+$(1-1/s)^n=\sum_j\binom nj(-1/s)^j$, where
+$(-1)^j\binom nj=(-n)(-n+1)\cdots(-n+j-1)/j!=(-n)_j/j!$:
 \[
 f(s)=\frac C s\left(1-\frac1s\right)^n
 =C\sum_{j=0}^\infty\frac{(-n)_j}{j!s^{j+1}}.
 \]
-Since $L\{t^j\}=j!/s^{j+1}$, this identifies the regular solution
+Since $L\{t^j\}=j!/s^{j+1}$, inverting term by term identifies
+the regular solution
 \[
 \boxed{F(t)=C\sum_{j=0}^\infty\frac{(-n)_j}{(j!)^2}t^j
 =C\,{}_1F_1(-n;1;t)}.
 \]
-The transform calculation is justified, for example, in
-$\Re s>1$, as in Exercise~20.7.8. If $n$ is a nonnegative
-integer, the series terminates and $F=C L_n(t)$, with
+The termwise inversion is justified by Exercise~20.7.8 with
+$a=-n$, $c=1$: for $\Re s>1$ it gives
+$L\{M(-n,1,t)\}=s^{-1}{}_2F_1(-n,1;1;1/s)=s^{-1}(1-1/s)^n$,
+because ${}_2F_1(-n,1;1;x)=\sum_j(-n)_jx^j/j!=(1-x)^n$; by
+uniqueness of the inverse transform,
+$F=C\,M(-n,1,t)=C\,{}_1F_1(-n;1;t)$.
+If $n$ is a nonnegative
+integer, the series terminates and $F=C L_n(t)$ (the
+coefficients $(-n)_j/(j!)^2=(-1)^j\binom nj/j!$ are those of
+the series (18.53) of $L_n$, in the ascending form derived in
+Exercise~18.3.1), with
 $f=C(s-1)^n/s^{n+1}$ already valid for $\Re s>0$.
 Only now set $n=0$: $f=C/s$, so
 \[
@@ -3754,11 +3999,15 @@ L\{L_{n}(at)\}=\frac{(s-a)^{n}}{s^{n+1}},\qquad s>0.
 \]
 \solution
 For integer $n\ge0$, use the finite polynomial expansion
+(Eq.~(18.53), in the ascending form derived in
+Exercise~18.3.1, where
+$n!/[(n-j)!(j!)^2]=\binom nj/j!$)
 \[
 L_n(x)=\sum_{j=0}^n(-1)^j\binom nj\frac{x^j}{j!}.
 \]
 There is no infinite-series interchange: transform its $n+1$
-terms directly in $\Re s>0$:
+terms directly in $\Re s>0$, with
+$L\{(at)^j\}=a^jj!/s^{j+1}$, and sum by the binomial theorem:
 \begin{align*}
 L\{L_n(at)\}(s)
 &=\sum_{j=0}^n(-1)^j\binom nj\frac{a^j}{j!}
@@ -3800,13 +4049,20 @@ cutoff $R$:
 \int_1^R\frac{dx}{x(s+x)}
 =\frac1s\big[\ln R-\ln(R+s)+\ln(1+s)\big].
 \]
-The first two logarithms approach $0$ together. Therefore
+The first two logarithms approach $0$ together, since
+$\ln R-\ln(R+s)=-\ln(1+s/R)\to0$ as $R\to\infty$. Therefore
 \[
 \boxed{L\{E_1(t)\}(s)=\frac{\ln(1+s)}s}.
 \]
-The apparent singularity at $s=0$ is removable: the limit is
-$1$, consistent with $\int_0^\infty E_1(t)dt=1$ obtained
-by reversing its defining integral.
+The apparent singularity at $s=0$ is removable: since
+$\ln(1+s)=s-s^2/2+\cdots$, the limit is $1$. This is
+consistent with
+\[
+\int_0^\infty E_1(t)dt
+=\int_1^\infty\frac{dx}{x}\int_0^\infty e^{-xt}dt
+=\int_1^\infty\frac{dx}{x^2}=1,
+\]
+obtained by reversing the order in its defining integral.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3831,29 +4087,49 @@ convergence justification. A simple sufficient condition for
 the direct calculation is
 $\int_0^\infty |F(t)|\,dt/t<\infty$; conditionally convergent
 cases need a limiting argument, as in part (b).}
-Under this absolute condition, Fubini gives
+Under this absolute condition the double integral of
+$e^{-xt}|F(t)|$ over $x,t>0$ equals
+$\int_0^\infty|F(t)|\,dt/t<\infty$, so Fubini's theorem gives
 \begin{align*}
 \int_0^\infty f(x)dx
 &=\int_0^\infty F(t)\left(\int_0^\infty e^{-xt}dx\right)dt\\
 &=\boxed{\int_0^\infty\frac{F(t)}t\,dt},
 \end{align*}
 because the inner integral is $1/t$ for $t>0$.
-Equivalently, the transform identity
-$L\{F(t)/t\}(s)=\int_s^\infty f(x)dx$ yields the same
-relation at the justified limit $s\downarrow0$.
+Equivalently, Eq.~(20.184),
+$L\{F(t)/t\}(s)=\int_s^\infty f(x)dx$ (the same interchange
+with $\int_s^\infty e^{-xt}dx=e^{-st}/t$), yields the same
+relation as $s\downarrow0$. Under the absolute condition this
+limit is justified on both sides: the left side tends to
+$\int_0^\infty F(t)\,dt/t$ by dominated convergence (dominating
+function $|F(t)|/t$), and the right side to
+$\int_0^\infty f(x)dx$ because
+$\int_0^\infty|f(x)|dx\le\int_0^\infty|F(t)|\,dt/t<\infty$.
 
-(b) For $F(t)=\sin t$, $f(x)=1/(1+x^2)$. Insert a positive
-lower cutoff $s$ in the $x$ integration; absolute integrability
-then permits
+(b) For $F(t)=\sin t$, $f(x)=1/(1+x^2)$ for $x>0$. Insert a
+positive lower cutoff $s$ in the $x$ integration. The double
+integral of $e^{-xt}|\sin t|$ over $x>s$, $t>0$ is
+$\int_0^\infty e^{-st}|\sin t|\,dt/t\le\int_0^\infty e^{-st}dt
+=1/s$, since $|\sin t|\le t$; this absolute integrability
+permits the interchange of (a), now with
+$\int_s^\infty e^{-xt}dx=e^{-st}/t$:
 \[
 \int_0^\infty e^{-st}\frac{\sin t}{t}dt
 =\int_s^\infty\frac{dx}{1+x^2}
 =\frac\pi2-\tan^{-1}s.
 \]
-The original sine integral exists: it is regular at zero,
-and integration by parts bounds its tail from $R$ to infinity
-by $2/R$. Abel's theorem thus lets $s\downarrow0$ in the
-regulated integral without changing its improper value.
+The unregulated sine integral exists: its integrand tends to
+$1$ as $t\to0$, and integration by parts bounds its tail,
+\[
+\int_R^\infty\frac{\sin t}t\,dt
+=\frac{\cos R}R-\int_R^\infty\frac{\cos t}{t^2}dt,
+\qquad
+\left|\int_R^\infty\frac{\sin t}t\,dt\right|
+\le\frac1R+\int_R^\infty\frac{dt}{t^2}=\frac2R.
+\]
+Abel's theorem for integrals (Exercise~20.2.2(c)) thus lets
+$s\downarrow0$ in the regulated integral without changing its
+improper value, and $\tan^{-1}s\to0$.
 Consequently
 \[
 \boxed{\int_0^\infty\frac{\sin t}{t}dt=\frac\pi2}.
@@ -3881,13 +4157,19 @@ where
 \end{enumerate}
 \par\erratum{The real inverse-cotangent expression in (a) assumes $k>0$, $s>0$, and values in $(0,\pi/2)$. Use $s>0$ also in (b).}
 \solution
-(a) For real $s>0$, integrate the sine transform in its
-transform parameter:
+(a) For real $s>0$, integrate the sine transform
+$L\{\sin kt\}(u)=k/(u^2+k^2)$ in its transform parameter, by
+the interchange of Exercise~20.8.14(a):
 \[
 L\left\{\frac{\sin kt}{t}\right\}(s)
 =\int_s^\infty\frac{k}{u^2+k^2}du
 =\boxed{\tan^{-1}(k/s)}.
 \]
+For $k>0$ the integral is
+$[\tan^{-1}(u/k)]_s^\infty=\pi/2-\tan^{-1}(s/k)$, which equals
+$\tan^{-1}(k/s)$ by $\tan^{-1}x+\tan^{-1}(1/x)=\pi/2$ for $x>0$;
+for $k<0$ the same steps hold with $-\pi/2$ in place of $\pi/2$,
+and for $k=0$ both sides vanish.
 For $k>0$ this is $\cot^{-1}(s/k)$ with the usual value in
 $(0,\pi/2)$.
 \erratum{The printed inverse-cotangent form presumes $k>0$
@@ -3895,14 +4177,18 @@ and this branch. The arctangent form extends continuously to
 $k=0$ and all real $k$.}
 
 (b) From the defining tail integral,
-$\mathrm{si}'(t)=\sin t/t$ and
-$\mathrm{si}(0+)=-\pi/2$. If $h(s)=L\{\mathrm{si}\}(s)$,
-the derivative transform gives
+$\mathrm{si}'(t)=\sin t/t$ (differentiate at the lower limit)
+and $\mathrm{si}(0+)=-\int_0^\infty(\sin x/x)\,dx=-\pi/2$ by
+Exercise~20.8.18(b). If $h(s)=L\{\mathrm{si}\}(s)$,
+the derivative formula $L\{\mathrm{si}'\}=sh(s)-\mathrm{si}(0+)$
+($\mathrm{si}$ is continuous and bounded, with a finite limit at
+$0$) and part (a) with $k=1$ give
 \[
 s h(s)-\mathrm{si}(0+)
 =s h(s)+\pi/2=\tan^{-1}(1/s).
 \]
 For $s>0$, $\tan^{-1}(1/s)=\pi/2-\tan^{-1}s$, so
+$sh(s)=-\tan^{-1}s$ and
 \[
 \boxed{L\{\mathrm{si}(t)\}(s)=-\frac{\tan^{-1}s}{s}}.
 \]
@@ -3925,7 +4211,9 @@ $F(t)$.
 \solution
 Assume $a>0$ and $F$ integrable over one period.
 For $\Re s>0$ split the half-line into successive periods,
-putting $t=na+u$ in the $n$th interval:
+putting $t=na+u$ ($0\le u\le a$) in the $n$th interval, so that
+$e^{-st}=e^{-nas}e^{-su}$, and $F(na+u)=F(u)$ by $n$
+applications of $F(t+a)=F(t)$:
 \begin{align*}
 L\{F\}(s)
 &=\sum_{n=0}^\infty\int_{na}^{(n+1)a}e^{-st}F(t)dt\\
@@ -3934,9 +4222,13 @@ L\{F\}(s)
 &=\left(\sum_{n=0}^\infty e^{-nas}\right)
 \int_0^a e^{-su}F(u)du.
 \end{align*}
-The geometric series converges because $|e^{-as}|<1$.
-It also bounds the absolute integrals, justifying the splitting
-and summation. Hence
+The geometric series converges because
+$|e^{-as}|=e^{-a\Re s}<1$, and its sum is
+$\sum_{n\ge0}(e^{-as})^n=1/(1-e^{-as})$.
+It also bounds the absolute integrals,
+$\sum_n\int_{na}^{(n+1)a}|e^{-st}F(t)|dt
+\le\int_0^a|F(u)|du/(1-e^{-a\Re s})<\infty$, justifying the
+splitting and summation. Hence
 \[
 \boxed{L\{F(t)\}(s)=\frac{\displaystyle\int_0^a e^{-st}F(t)dt}
 {1-e^{-as}}},\qquad\Re s>0.
@@ -3958,23 +4250,25 @@ F(t)=\begin{cases}
 $f(s)=\dfrac{1}{s}\,\dfrac{1-e^{-as/2}}{1-e^{-as}}$.
 \par\erratum{Take $a>0$ and $\Re s>0$.}
 \solution
-Apply Exercise~20.8.20. Only the first half of a period
-contributes to the numerator:
+Apply Exercise~20.8.20. Since $F=0$ on $(a/2,a)$, only the
+first half of a period contributes to the numerator:
 \[
 \int_0^a e^{-st}F(t)dt
-=\int_0^{a/2}e^{-st}dt=\frac{1-e^{-as/2}}s.
+=\int_0^{a/2}e^{-st}dt=\left[-\frac{e^{-st}}s\right]_0^{a/2}
+=\frac{1-e^{-as/2}}s.
 \]
-Therefore
+Dividing by $1-e^{-as}$ gives
 \[
 \boxed{f(s)=\frac{1-e^{-as/2}}{s(1-e^{-as})}
 =\frac1{s(1+e^{-as/2})}},\qquad\Re s>0.
 \]
 The simplification follows from
 $1-e^{-as}=(1-e^{-as/2})(1+e^{-as/2})$.
-For real $s\to\infty$, $sf(s)\to1$, which matches $F(0+)$.
-For $s\downarrow0$, $sf(s)\to1/2$, the average value over a
-period; this is not a pointwise final value of the oscillating
-square wave.
+For real $s\to\infty$, $sf(s)=1/(1+e^{-as/2})\to1$, which
+matches $F(0+)$ (the initial-value theorem).
+For $s\downarrow0$, $sf(s)\to1/(1+1)=1/2$, the average value
+over a period; this is not a pointwise final value of the
+oscillating square wave.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3992,18 +4286,23 @@ Take real $a$ and $\Re s>|a|$. Define
 D_-=(s-a)^2+a^2=s^2-2as+2a^2,\qquad
 D_+=(s+a)^2+a^2=s^2+2as+2a^2.
 \]
-Frequency shifting of the elementary sine and cosine transforms
-gives
+The substitution (frequency-shifting) theorem
+$L\{e^{bt}F(t)\}=f(s-b)$, applied with $b=\pm a$ to
+$L\{\cos at\}=s/(s^2+a^2)$ and $L\{\sin at\}=a/(s^2+a^2)$,
+gives, since $(s\mp a)^2+a^2=D_\mp$,
 \[
 L\{e^{\pm at}\cos at\}=\frac{s\mp a}{D_\mp},\qquad
 L\{e^{\pm at}\sin at\}=\frac a{D_\mp}.
 \]
-Also
+Also $D_\mp=(s^2+2a^2)\mp2as$, so
 \[
-D_-D_+=(s^2+2a^2)^2-(2as)^2=s^4+4a^4.
+D_-D_+=(s^2+2a^2)^2-(2as)^2=s^4+4a^4,\qquad
+D_++D_-=2s^2+4a^2,\qquad D_+-D_-=4as.
 \]
 Using $\cosh at=(e^{at}+e^{-at})/2$ and
-$\sinh at=(e^{at}-e^{-at})/2$:
+$\sinh at=(e^{at}-e^{-at})/2$, each transform is half the sum
+or difference of two shifted transforms, brought to the common
+denominator $D_-D_+$:
 \begin{align*}
 \text{(a)}\quad L\{\cosh at\cos at\}
 &=\frac{(s-a)D_++(s+a)D_-}{2D_-D_+}
@@ -4018,10 +4317,13 @@ $\sinh at=(e^{at}-e^{-at})/2$:
 &=\frac{a(D_+-D_-)}{2D_-D_+}
 =\boxed{\frac{2a^2s}{s^4+4a^4}}.
 \end{align*}
+In (b) and (d) the numerators are
+$a(2s^2+4a^2)$ and $a\cdot4as$, which halve to the boxed ones.
 For the two less immediate numerators, direct expansion gives
 $(s-a)D_+=s^3+as^2-2a^3$ and
-$(s+a)D_-=s^3-as^2+2a^3$; adding or subtracting proves the
-simplifications in (a) and (c).
+$(s+a)D_-=s^3-as^2+2a^3$; adding gives $2s^3$ and subtracting
+gives $2as^2-4a^3$, which proves the simplifications in (a)
+and (c).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4042,14 +4344,20 @@ Begin with
 $L\{\sin at/a\}=1/(s^2+a^2)$ and
 $L\{\cos at\}=s/(s^2+a^2)$ for real $a\ne0$, $\Re s>0$.
 (a) Differentiate the first pair with respect to $a$ and
-multiply by $-1/(2a)$:
+multiply by $-1/(2a)$. Differentiation under the transform
+integral is allowed because the $a$-derivative of the
+original,
+$\partial_a(\sin at/a)=t\cos at/a-\sin at/a^2$, is bounded by
+$t/|a|+1/a^2$; and
+$\partial_a(s^2+a^2)^{-1}=-2a(s^2+a^2)^{-2}$. Hence
 \[
 -\frac1{2a}\frac\partial{\partial a}\frac1{s^2+a^2}
 =\frac1{(s^2+a^2)^2},\quad
 -\frac1{2a}\frac\partial{\partial a}\frac{\sin at}{a}
 =\boxed{\frac{\sin at}{2a^3}-\frac{t\cos at}{2a^2}}.
 \]
-(b) Since $L\{tF\}=-dL\{F\}/ds$,
+(b) Since $L\{tF\}=-dL\{F\}/ds$, take $F=\sin at/a$, whose
+transform is $1/(s^2+a^2)$; then $\frac12tF$ has the transform
 \[
 -\frac12\frac d{ds}\frac1{s^2+a^2}
 =\frac{s}{(s^2+a^2)^2},
@@ -4063,13 +4371,15 @@ multiply by $-1/(2a)$:
 =\frac1{s^2+a^2}-\frac{a^2}{(s^2+a^2)^2}.
 \]
 Its inverse is
-$\sin at/a-a^2[\sin at/(2a^3)-t\cos at/(2a^2)]$, or
+$\sin at/a-a^2[\sin at/(2a^3)-t\cos at/(2a^2)]
+=\sin at/a-\sin at/(2a)+(t/2)\cos at$, or
 \[
 \boxed{\frac{\sin at}{2a}+\frac t2\cos at}.
 \]
-(d) Similarly
+(d) Similarly, from $s^3=s(s^2+a^2)-a^2s$,
 $s^3/(s^2+a^2)^2=s/(s^2+a^2)-a^2s/(s^2+a^2)^2$.
-Part (b) then gives
+The pair $L\{\cos at\}=s/(s^2+a^2)$ and part (b) then give
+$\cos at-a^2\,t\sin at/(2a)$, that is,
 \[
 \boxed{\cos at-\frac{at}{2}\sin at}.
 \]
@@ -4077,6 +4387,9 @@ Part (b) then gives
 continuous limits. The four answers reduce to $t^3/6$,
 $t^2/2$, $t$, and $1$, the inverses of $s^{-4}$ through
 $s^{-1}$.}
+For (a), $\sin at-at\cos at=a^3t^3/3+O(a^5)$ by the Maclaurin
+series, so $(\sin at-at\cos at)/(2a^3)\to t^3/6$; the other
+three limits follow from $\sin at/a\to t$ and $\cos at\to1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4097,14 +4410,18 @@ The step function restricts the transform to
 L\{(t^2-k^2)^{-1/2}u(t-k)\}
 =\int_k^\infty\frac{e^{-st}}{\sqrt{t^2-k^2}}dt.
 \]
-Set $t=k\cosh v$, $v\ge0$. Since
-$dt=k\sinh v\,dv$ and
+Set $t=k\cosh v$, $v\ge0$; the limits $t=k$ and $t\to\infty$
+become $v=0$ and $v\to\infty$. Since
+$dt=k\sinh v\,dv$ and, by $\cosh^2v-1=\sinh^2v$ with
+$\sinh v\ge0$,
 $\sqrt{t^2-k^2}=k\sinh v$, the Jacobian cancels the denominator:
 \[
-\int_0^\infty e^{-ks\cosh v}dv=\boxed{K_0(ks)}.
+\int_k^\infty\frac{e^{-st}}{\sqrt{t^2-k^2}}dt
+=\int_0^\infty e^{-ks\cosh v}dv=\boxed{K_0(ks)}.
 \]
 The last expression is the standard hyperbolic integral for
-$K_0$ on $\Re(ks)>0$. The value assigned to $u(0)$ does not
+$K_0$ on $\Re(ks)>0$ (Exercise~14.5.15, or Exercise~14.6.3 with
+$\nu=0$). The value assigned to $u(0)$ does not
 change this integrable transform.
 
 \Needspace{9\baselineskip}
