@@ -1490,42 +1490,55 @@ t\varphi(t)\,dt$,
 (t-x)\varphi(t)\,dt$.
 \end{enumerate}
 \solution
-(a) Define $(Tg)(x)=-2\int_0^x t\,g(t)dt$. The Neumann
-series is $\sum_{n\ge0}T^n1$. We prove the individual terms:
+(a) Define $(Tg)(x)=-2\int_0^x t\,g(t)dt$, so the equation is
+$\varphi=1+T\varphi$. Iterating $\varphi_{k+1}=1+T\varphi_k$ from
+$\varphi_0=1$ gives the Neumann series $\sum_{n\ge0}T^n1$.
+We find its individual terms by induction:
 if $T^n1=(-1)^nx^{2n}/n!$, then
 \[
 T^{n+1}1=-2\int_0^x t\,\frac{(-1)^nt^{2n}}{n!}dt
-=\frac{(-1)^{n+1}x^{2n+2}}{(n+1)!}.
+=-\frac{2(-1)^n}{n!}\,\frac{x^{2n+2}}{2n+2}
+=\frac{(-1)^{n+1}x^{2n+2}}{(n+1)!},
 \]
-The initial case is $T^01=1$, so
+since $(2n+2)\,n!=2\,(n+1)!$.
+The initial case is $T^01=1$, so, by the exponential series with
+argument $-x^2$,
 \[
 \boxed{\varphi_a(x)=\sum_{n=0}^\infty
 \frac{(-1)^nx^{2n}}{n!}=e^{-x^2}}.
 \]
-Substitution gives
-$1-2\int_0^xt e^{-t^2}dt=1+(e^{-x^2}-1)=e^{-x^2}$.
+Substitution gives, since $-2te^{-t^2}=\frac{d}{dt}e^{-t^2}$,
+$1-2\int_0^xt e^{-t^2}dt=1+\bigl[e^{-t^2}\bigr]_0^x
+=1+(e^{-x^2}-1)=e^{-x^2}$.
 
-(b) Put $(Jg)(x)=\int_0^x(x-t)g(t)dt$, so the equation is
-$\varphi=x-J\varphi$. The elementary monomial formula is
+(b) Put $(Jg)(x)=\int_0^x(x-t)g(t)dt$. Since $t-x=-(x-t)$, the
+equation is $\varphi=x-J\varphi$. The elementary monomial formula is
 \[
-J(t^p)(x)=x\frac{x^{p+1}}{p+1}
--\frac{x^{p+2}}{p+2}
-=\frac{x^{p+2}}{(p+1)(p+2)},\qquad p>-1.
+\begin{aligned}
+J(t^p)(x)&=x\int_0^xt^p\,dt-\int_0^xt^{p+1}dt
+=x\frac{x^{p+1}}{p+1}-\frac{x^{p+2}}{p+2}\\
+&=\frac{x^{p+2}}{(p+1)(p+2)},\qquad p>-1.
+\end{aligned}
 \]
-Starting with $J^0x=x$, induction gives
-$J^nx=x^{2n+1}/(2n+1)!$. Hence
+With $p=2n+1$ it maps $x^{2n+1}/(2n+1)!$ to
+$x^{2n+3}/[(2n+1)!\,(2n+2)(2n+3)]=x^{2n+3}/(2n+3)!$. Starting with
+$J^0x=x$, induction therefore gives $J^nx=x^{2n+1}/(2n+1)!$.
+The Neumann series of $\varphi=x-J\varphi$ is
+$\sum_n(-J)^nx=\sum_n(-1)^nJ^nx$. Hence
 \[
 \boxed{\varphi_b(x)=\sum_{n=0}^\infty
 \frac{(-1)^nx^{2n+1}}{(2n+1)!}=\sin x}.
 \]
-(c) The equation is $\varphi=x+J\varphi$, so all the same terms
-have positive signs:
+(c) Here $-(t-x)=x-t$, so the equation is $\varphi=x+J\varphi$; its
+Neumann series $\sum_nJ^nx$ has the same terms with positive signs:
 \[
 \boxed{\varphi_c(x)=\sum_{n=0}^\infty
 \frac{x^{2n+1}}{(2n+1)!}=\sinh x}.
 \]
-The factorials give uniform convergence on every bounded $x$ interval,
-justifying termwise integration. Direct substitutions for (b),(c) were
+The factorials give uniform convergence on every bounded interval
+$|x|\le R$ (Weierstrass M-test with the bounds $R^{2n}/n!$ and
+$R^{2n+1}/(2n+1)!$), justifying termwise integration when $T$ or $J$ is
+applied to the sums. Direct substitutions for (b),(c) were
 evaluated explicitly in Exercise~21.2.3.
 
 
@@ -1549,14 +1562,16 @@ Let $(Kg)(x)=\int_0^1(1+xt)g(t)dt$.
 \[
 x+Kx+K^2x+\cdots.
 \]
-For $g(x)=A+Bx$,
+For $g(x)=A+Bx$, since $\int_0^1(A+Bt)dt=A+\frac B2$ and
+$\int_0^1t(A+Bt)dt=\frac A2+\frac B3$,
 \[
 Kg(x)=A+\frac B2+x\left(\frac A2+\frac B3\right),
 \]
-so
+so (with $A=0$, $B=1$, and then $A=\frac12$, $B=\frac13$)
 \[
 Kx=\frac12+\frac x3,\qquad
-K^2x=\frac23+\frac{13x}{36}.
+K^2x=\frac12+\frac16+x\left(\frac14+\frac19\right)
+=\frac23+\frac{13x}{36}.
 \]
 Write $K^nx=A_n+B_nx$. Its coefficients obey
 \[
@@ -1564,29 +1579,48 @@ A_{n+1}=A_n+\frac{B_n}{2},\qquad
 B_{n+1}=\frac{A_n}{2}+\frac{B_n}{3},
 \quad (A_0,B_0)=(0,1).
 \]
-All coefficients are nonnegative, and $A_n\ge A_1=1/2$
-for every $n\ge1$. Thus $K^nx\ge1/2$ on $[0,1]$ for $n\ge1$:
-the terms do not even tend to zero.
+The recurrence has nonnegative coefficients, so by induction all
+$A_n,B_n\ge0$. Then $A_{n+1}-A_n=B_n/2\ge0$, so $A_n\ge A_1=1/2$
+for every $n\ge1$. Thus $K^nx\ge A_n\ge1/2$ on $[0,1]$ for $n\ge1$:
+the terms do not even tend to zero, and the series diverges.
 
-\erratum{The original part (a) cannot produce an ordinary convergent Neumann
-series for the equation as printed. The solution exists, but this
-particular expansion diverges. The manual's answer $-2$ does not
-address this obstruction.}
-For clarity, introducing a parameter $z$ gives the convergent
-resolvent expansion near zero:
+\erratum{The textbook's part (a) asks for the solution by the Neumann
+series, but for the equation as printed that series diverges, as just
+shown, although the solution exists (parts (b) and (c)). The
+Instructor's Manual's answer $-2$ does not address this obstruction.}
+Introducing a parameter $z$ locates the obstruction. Since the range of
+$K$ consists of linear functions, any solution of $\psi_z=x+zK\psi_z$
+has the form $\psi_z=A+Bx$, and by the formula for $Kg$ its
+coefficient vector satisfies
 \[
-\psi_z=x+zK\psi_z,\qquad
+\begin{pmatrix}A\\B\end{pmatrix}
+=\begin{pmatrix}0\\1\end{pmatrix}
++zM\begin{pmatrix}A\\B\end{pmatrix},\qquad
+M=\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}.
+\]
+Here $D(z)=\det(I-zM)=(1-z)(1-\frac z3)-\frac{z^2}4
+=1-\frac43z+\frac1{12}z^2$, and Cramer's rule gives
+$A=z/(2D)$, $B=(1-z)/D$:
+\[
 \psi_z(x)=
 \frac{z/2+(1-z)x}{1-\frac43z+\frac1{12}z^2}.
 \]
-Indeed, this is the inverse of
-$I-z\begin{pmatrix}1&1/2\\1/2&1/3\end{pmatrix}$
-applied to $(0,1)^T$. Its Taylor series is the Neumann series and
-has nearest pole $z=8-2\sqrt{13}<1$. Evaluating the rational
-continuation at $z=1$ gives $-2$, but that continuation is not
+Since $(A_n,B_n)^T=M^n(0,1)^T$, the expansion
+$(I-zM)^{-1}=\sum_nz^nM^n$ shows that the Taylor series of $\psi_z$ in
+$z$ is the Neumann series $\sum_nz^nK^nx$. The zeros of $D$ are the
+roots $z=8\mp2\sqrt{13}$ of $z^2-16z+12=0$ (the characteristic values
+of Exercise~21.2.14), and the numerator $z/2$ of $A$ does not vanish
+there. So the radius of convergence is $8-2\sqrt{13}\approx0.789<1$,
+and the series diverges at $z=1$. Evaluating the rational
+continuation at $z=1$, where $D(1)=1-\frac43+\frac1{12}=-\frac14$,
+gives $\psi_1=\frac12/(-\frac14)=-2$, but that continuation is not
 the sum of the divergent series at $z=1$.
 
-(b) Separability forces $\psi=A+Bx$. Comparing coefficients gives
+(b) Since $1+xt=1\cdot1+x\cdot t$, the integral term is $c_0+c_1x$
+with $c_0=\int_0^1\psi(t)dt$ and $c_1=\int_0^1t\psi(t)dt$.
+Separability therefore forces $\psi=A+Bx$ with $A=c_0$, $B=1+c_1$.
+By the moments computed in (a), $c_0=A+\frac B2$ and
+$c_1=\frac A2+\frac B3$, so comparing coefficients gives
 \[
 A=A+\frac B2,\qquad
 B=1+\frac A2+\frac B3.
@@ -1594,9 +1628,10 @@ B=1+\frac A2+\frac B3.
 The first equation gives $B=0$ and the second then gives $A=-2$.
 Thus $\boxed{\psi(x)=-2}$.
 
-(c) Guess a constant $c$. Substitution produces
+(c) Guess a constant $c$. Since $\int_0^1(1+xt)dt=1+\frac x2$,
+substitution produces
 \[
-c=x+c\int_0^1(1+xt)dt=c+x(1+c/2).
+c=x+c\int_0^1(1+xt)dt=x+c\left(1+\frac x2\right)=c+x(1+c/2).
 \]
 The coefficient of $x$ vanishes exactly when $c=-2$.
 Finally, $x+\int_0^1(1+xt)(-2)dt=x-2-x=-2$,
@@ -1617,12 +1652,15 @@ by each of the following methods:
 \end{enumerate}
 \par\nobreak\hfill\emph{ANS.}\enspace$\varphi(x)=\cosh\lambda x$.
 \solution
-(a) Differentiate the equation, including its zero endpoint term:
+(a) Differentiate the equation with the Leibniz rule
+$\frac{d}{dx}\int_0^xg(x,t)dt=g(x,x)+\int_0^x\partial_xg(x,t)dt$;
+the endpoint term $(x-x)\varphi(x)$ is zero:
 \[
 \varphi'(x)=\lambda^2\int_0^x\varphi(t)dt,\qquad
 \varphi''(x)=\lambda^2\varphi(x).
 \]
-The initial data are $\varphi(0)=1$, $\varphi'(0)=0$.
+Setting $x=0$ in the equation and in $\varphi'$ (both integrals
+vanish) gives the initial data $\varphi(0)=1$, $\varphi'(0)=0$.
 For $\lambda\ne0$, write $\varphi=Ae^{\lambda x}+Be^{-\lambda x}$.
 Then $A+B=1$ and $\lambda(A-B)=0$, so $A=B=1/2$.
 For $\lambda=0$ the original equation directly gives $\varphi=1$.
@@ -1632,12 +1670,15 @@ In both cases
 \]
 
 (b) With $J$ from Exercise~21.3.1, the equation is
-$\varphi=1+\lambda^2J\varphi$. Starting with $J^01=1$,
+$\varphi=1+\lambda^2J\varphi$. The monomial formula of that exercise
+with $p=2n$ gives
 \[
 J\!\left(\frac{t^{2n}}{(2n)!}\right)
+=\frac{x^{2n+2}}{(2n)!\,(2n+1)(2n+2)}
 =\frac{x^{2n+2}}{(2n+2)!},
 \]
-so its Neumann series is
+so, starting with $J^01=1$, induction gives $J^n1=x^{2n}/(2n)!$, and
+the Neumann series is
 \[
 \sum_{n=0}^\infty\lambda^{2n}J^n1
 =\sum_{n=0}^\infty\frac{(\lambda x)^{2n}}{(2n)!}
@@ -1646,24 +1687,36 @@ so its Neumann series is
 It converges uniformly on every finite $x$ interval for every fixed
 complex $\lambda$.
 
-(c) Since $\mathcal L\{1\}=1/s$ and $\mathcal L\{x\}=1/s^2$,
+(c) Since $\mathcal L\{1\}=1/s$ and $\mathcal L\{x\}=1/s^2$, the
+convolution theorem turns $\int_0^x(x-t)\varphi(t)dt$ into
+$\Phi(s)/s^2$, so
 \[
 \Phi(s)=\frac1s+\frac{\lambda^2}{s^2}\Phi(s),\qquad
-\Phi(s)=\frac{s}{s^2-\lambda^2}.
+\Phi(s)=\frac{s}{s^2-\lambda^2}
 \]
+(multiply by $s^2$: $(s^2-\lambda^2)\Phi=s$).
 For $\lambda\ne0$,
 \[
 \frac{s}{s^2-\lambda^2}
 =\frac12\left(\frac1{s-\lambda}+\frac1{s+\lambda}\right),
 \]
-whose inverse is the same hyperbolic cosine. At $\lambda=0$
-the transform is $1/s$.
-As a direct check, for $\lambda\ne0$,
+whose inverse, by $\mathcal L\{e^{ax}\}=1/(s-a)$, is
+$\frac12(e^{\lambda x}+e^{-\lambda x})=\cosh(\lambda x)$. At
+$\lambda=0$ the transform is $1/s$, the transform of $1=\cosh0$.
+As a direct check, for $\lambda\ne0$ integration by parts
+(differentiate $x-t$, integrate $\cosh\lambda t$) gives
 \[
+\begin{aligned}
 \int_0^x(x-t)\cosh(\lambda t)dt
-=\frac{\cosh(\lambda x)-1}{\lambda^2};
+&=\left[\frac{(x-t)\sinh\lambda t}{\lambda}\right]_0^x
++\frac1\lambda\int_0^x\sinh\lambda t\,dt\\
+&=\frac{\cosh(\lambda x)-1}{\lambda^2},
+\end{aligned}
 \]
-the continuous limit is $x^2/2$, consistent with the zero-parameter case.
+so the right side of the equation is
+$1+(\cosh\lambda x-1)=\cosh\lambda x$. As $\lambda\to0$ the integral
+tends to $x^2/2=\int_0^x(x-t)dt$, consistent with the zero-parameter
+case.
 
 
 \Needspace{5\baselineskip}
@@ -1686,18 +1739,22 @@ self-adjoint operator.}
 \[
 U(t,t_0)=I-\frac{i}{\hbar}\int_{t_0}^tV_0U(s,t_0)ds.
 \]
-Differentiating gives
+Differentiating with respect to $t$ (fundamental theorem of calculus),
+and setting $t=t_0$, where the integral vanishes, gives
 \[
 \partial_tU=-\frac{i}{\hbar}V_0U,\qquad U(t_0,t_0)=I.
 \]
-Put $\tau=t-t_0$ and $U=\sum_{n\ge0}C_n\tau^n$.
+Put $\tau=t-t_0$ and $U=\sum_{n\ge0}C_n\tau^n$, so that
+$\partial_tU=\sum_{n\ge0}(n+1)C_{n+1}\tau^n$.
 Equating powers gives
 \[
 C_0=I,\qquad (n+1)C_{n+1}
 =-\frac{i}{\hbar}V_0C_n.
 \]
 Induction yields
-$C_n=(-iV_0/\hbar)^n/n!$, so
+$C_n=(-iV_0/\hbar)^n/n!$. This series converges for every $\tau$
+(its terms are bounded in norm by $(\|V_0\|\,|\tau|/\hbar)^n/n!$) and
+solves the initial-value problem, whose solution is unique, so
 \[
 \boxed{U(t,t_0)=
 \exp[-i(t-t_0)V_0/\hbar]}.
@@ -1713,14 +1770,23 @@ U=I+\sum_{n=1}^\infty
 \int_{t_0}^{s_{n-1}}ds_n\,
 V(s_1)V(s_2)\cdots V(s_n).
 \]
-For constant $V_0$ the product is $V_0^n$. The remaining scalar
-simplex integral is $J_n(\tau)=\tau^n/n!$: $J_0=1$, and
+For constant $V_0$ the product is $V_0^n$, which comes out of the
+integrals. The remaining scalar simplex integral $S_n(\tau)$, a
+function of $\tau=t-t_0$, has $S_0=1$, and in $S_{n+1}$ the inner $n$
+integrals (over $s_2,\dots,s_{n+1}$) form $S_n(s_1-t_0)$. With
+$u=s_1-t_0$ and the induction hypothesis $S_n(u)=u^n/n!$,
 \[
-J_{n+1}(\tau)=\int_0^\tau J_n(u)du
+S_{n+1}(\tau)=\int_0^\tau S_n(u)du
 =\int_0^\tau\frac{u^n}{n!}du
 =\frac{\tau^{n+1}}{(n+1)!}.
 \]
-Substitution sums to precisely the same exponential, without using
+Substituting $S_n(\tau)=\tau^n/n!$,
+\[
+U=I+\sum_{n=1}^\infty\left(-\frac{i}{\hbar}\right)^nV_0^n
+\frac{\tau^n}{n!}
+=\sum_{n=0}^\infty\frac1{n!}\left(-\frac{i\tau V_0}{\hbar}\right)^n,
+\]
+precisely the same exponential, without using
 Eq.~(21.59). Oriented integrals give the formula also for $\tau<0$.
 For a scalar, matrix, or bounded operator $V_0$ both series converge
 on finite time intervals.
@@ -1755,9 +1821,15 @@ Extend the analysis of the present section to show that
 \item[(b)] the eigenvalues are real.
 \end{enumerate}
 \solution
-Let $\langle u,v\rangle=\int_a^b u(x)^*v(x)dx$ and assume the
+Let $\langle u,v\rangle=\int_a^b u(x)^*v(x)dx$ and
+$(Kg)(x)=\int_a^bK(x,t)g(t)dt$, and assume the
 kernel defines a self-adjoint operator on this $L^2$ space (a Hermitian
-Hilbert--Schmidt kernel is sufficient). The double-integral identity is
+Hilbert--Schmidt kernel is sufficient). The Hilbert--Schmidt condition
+in the statement is what makes the double integral below absolutely
+convergent for $L^2$ functions (by the Cauchy--Schwarz inequality), so
+that the order of integration may be interchanged (Fubini's theorem).
+Interchanging it and using $K(x,t)=K^*(t,x)$ gives the
+double-integral identity
 \[
 \begin{aligned}
 \langle\varphi_m,K\varphi_n\rangle
@@ -1769,20 +1841,23 @@ Hilbert--Schmidt kernel is sufficient). The double-integral identity is
 \end{aligned}
 \]
 A nonzero eigenfunction in the convention
-$\varphi_n=\lambda_nK\varphi_n$ has $\lambda_n\ne0$.
-Consequently
+$\varphi_n=\lambda_nK\varphi_n$ has $\lambda_n\ne0$ (otherwise
+$\varphi_n=0$), so $K\varphi_n=\varphi_n/\lambda_n$. Inserting this on
+both sides of the identity, and taking the factor $1/\lambda_m$ out of
+the first (conjugate-linear) slot as $1/\lambda_m^*$,
 \[
 \frac1{\lambda_n}\langle\varphi_m,\varphi_n\rangle
 =\frac1{\lambda_m^*}\langle\varphi_m,\varphi_n\rangle,
 \]
-or
+or, multiplying by $\lambda_m^*\lambda_n$,
 \[
 (\lambda_m^*-\lambda_n)
 \langle\varphi_m,\varphi_n\rangle=0.
 \]
 Take $m=n$. Since $\|\varphi_n\|^2>0$, this gives
 $\boxed{\lambda_n^*=\lambda_n}$, proving (b).
-Now for $\lambda_m\ne\lambda_n$ the factor is nonzero, so
+Now for $\lambda_m\ne\lambda_n$ the factor
+$\lambda_m^*-\lambda_n=\lambda_m-\lambda_n$ (by (b)) is nonzero, so
 \[
 \boxed{\langle\varphi_m,\varphi_n\rangle=0},
 \]
@@ -1801,13 +1876,18 @@ orthogonal.
 orthogonal.
 \end{enumerate}
 \solution
+Both kernels are real and symmetric, and in each case the eigenvalues
+are distinct, so Exercise~21.4.1 predicts the result; here it is
+checked directly.
+
 (a) Use the exact eigenfunctions found in Exercise~21.2.12:
 \[
 y_0=x,\qquad y_+=x^2+\frac1{\sqrt5},\qquad
 y_-=x^2-\frac1{\sqrt5}.
 \]
-Odd parity gives $\int_{-1}^1y_0y_\pm dx=0$. For the two
-even functions,
+The products $y_0y_\pm=x^3\pm x/\sqrt5$ are odd, so
+$\int_{-1}^1y_0y_\pm dx=0$. For the two
+even functions, $y_+y_-=x^4-\frac15$ and
 \[
 \int_{-1}^1y_+y_-dx
 =\int_{-1}^1\left(x^4-\frac15\right)dx
@@ -1816,15 +1896,18 @@ even functions,
 All three distinct eigenfunctions are therefore mutually orthogonal.
 
 (b) Write $\varphi_\pm=1+b_\pm x$, where
-$b_\pm=(-2\pm\sqrt{13})/3$. Their sum and product are
+$b_\pm=(-2\pm\sqrt{13})/3$ (Exercise~21.2.14). Their sum and product are
 \[
-b_++b_-=-\frac43,\qquad b_+b_-=-1.
+b_++b_-=-\frac43,\qquad b_+b_-=\frac{(-2)^2-13}{9}=-1.
 \]
 It follows that
 \[
+\begin{aligned}
 \int_0^1\varphi_+\varphi_-dx
-=1+\frac{b_++b_-}{2}+\frac{b_+b_-}{3}
+&=\int_0^1\bigl[1+(b_++b_-)x+b_+b_-x^2\bigr]dx\\
+&=1+\frac{b_++b_-}{2}+\frac{b_+b_-}{3}
 =1-\frac23-\frac13=\boxed{0}.
+\end{aligned}
 \]
 Using the exact coefficients is necessary to see exact zero;
 rounded decimal eigenfunctions only approximate this cancellation.
@@ -1848,39 +1931,54 @@ For $K(x,t)=t+x$, choose normalized eigenfunctions
 \[
 u_\pm(x)=\frac12(1\pm\sqrt3\,x).
 \]
-Their norms are one, because
-$\int_{-1}^1(1+3x^2)dx/4=1$, and their mutual inner product is
-$\int_{-1}^1(1-3x^2)dx/4=0$. Evaluate the kernel action:
+Their norms are one, because the odd term of
+$(1\pm\sqrt3\,x)^2=1\pm2\sqrt3\,x+3x^2$ integrates to zero and
+$\int_{-1}^1(1+3x^2)dx/4=(2+2)/4=1$; their mutual inner product is
+$\int_{-1}^1(1-3x^2)dx/4=0$. Evaluate the kernel action; the odd
+integrands $t$ and $\pm\sqrt3\,xt$ integrate to zero, leaving
 \[
+\begin{aligned}
 Ku_\pm(x)
-=\int_{-1}^1(t+x)\frac{1\pm\sqrt3\,t}{2}dt
-=x\pm\frac1{\sqrt3}
+&=\int_{-1}^1(t+x)\frac{1\pm\sqrt3\,t}{2}dt
+=\frac12\left(\pm\sqrt3\int_{-1}^1t^2dt+x\int_{-1}^1dt\right)\\
+&=x\pm\frac1{\sqrt3}
 =\pm\frac2{\sqrt3}u_\pm(x).
+\end{aligned}
 \]
-Thus the characteristic values are
-$\lambda_\pm=\pm\sqrt3/2$.
+Thus $u_\pm=\lambda_\pm Ku_\pm$ requires $\lambda_\pm(\pm2/\sqrt3)=1$:
+the characteristic values are
+$\lambda_\pm=\pm\sqrt3/2$, as in Example~21.2.3.
 
 The inhomogeneous term $f(x)=x$ has coefficients
 \[
 b_\pm=\langle u_\pm,x\rangle
+=\pm\frac{\sqrt3}{2}\int_{-1}^1x^2dx
 =\pm\frac{\sqrt3}{2}\frac23
 =\pm\frac1{\sqrt3}.
 \]
-For the requested coupling $\lambda=1/2$, Hilbert--Schmidt
+Since $x=(u_+-u_-)/\sqrt3$ and every $K\varphi$ is a combination of
+$1$ and $x$, the solution of $\varphi=x+\lambda K\varphi$ lies in the
+span of $u_\pm$: $\varphi=a_+u_++a_-u_-$. Projecting the equation onto
+$u_\pm$ and using $\langle u_\pm,K\varphi\rangle
+=\langle Ku_\pm,\varphi\rangle=a_\pm/\lambda_\pm$ ($K$ is real and
+symmetric) gives $a_\pm=b_\pm+\lambda a_\pm/\lambda_\pm$. For the
+requested coupling $\lambda=1/2$, this Hilbert--Schmidt
 projection gives
 \[
-a_\pm=\frac{b_\pm}{1-\lambda/\lambda_\pm}.
+a_\pm=\frac{b_\pm}{1-\lambda/\lambda_\pm},\qquad
+\frac{\lambda}{\lambda_\pm}=\pm\frac1{\sqrt3}.
 \]
 Specifically,
 \[
-a_+=\frac1{\sqrt3-1}=\frac{\sqrt3+1}{2},\qquad
-a_-=-\frac1{\sqrt3+1}=\frac{1-\sqrt3}{2}.
+a_+=\frac{1/\sqrt3}{1-1/\sqrt3}=\frac1{\sqrt3-1}=\frac{\sqrt3+1}{2},\qquad
+a_-=\frac{-1/\sqrt3}{1+1/\sqrt3}=-\frac1{\sqrt3+1}=\frac{1-\sqrt3}{2}.
 \]
-Reconstructing,
+Then $a_++a_-=1$ and $a_+-a_-=\sqrt3$. Reconstructing,
 \[
 \varphi=a_+u_++a_-u_-
 =\frac{a_++a_-}{2}
 +\frac{\sqrt3(a_+-a_-)}2x
+=\frac12+\frac32x
 =\boxed{\frac{1+3x}{2}}.
 \]
 Directly $\int_{-1}^1\varphi(t)dt=1$ and
@@ -1906,8 +2004,12 @@ Hilbert--Schmidt integrability condition; an infinite interval alone
 would not establish that failure. Its Taylor series cannot be integrated
 term by term against the displayed power solution.}
 \solution
+The restriction $x>0$ in the statement is needed because for $x\le0$
+the integrand $e^{-xt}t^{-1/2}$ is at least $t^{-1/2}$, whose integral
+over $(0,\infty)$ diverges.
 For $x>0$, set $u=xt$, so $dt=du/x$ and
-$t^{-1/2}=x^{1/2}u^{-1/2}$. Then
+$t^{-1/2}=x^{1/2}u^{-1/2}$. Then, with
+$\int_0^\infty e^{-u}u^{-1/2}du=\Gamma(\frac12)=\sqrt\pi$,
 \[
 \int_0^\infty e^{-xt}t^{-1/2}dt
 =x^{-1/2}\int_0^\infty e^{-u}u^{-1/2}du
@@ -1920,7 +2022,7 @@ Its truncated squared norm is
 \[
 \int_\epsilon^R|\varphi(x)|^2dx
 =\int_\epsilon^R\frac{dx}{x}
-=\log R-\log\epsilon.
+=\ln R-\ln\epsilon.
 \]
 It diverges as $R\to\infty$ and as $\epsilon\downarrow0$.
 No nonzero constant multiple is normalizable on $(0,\infty)$.
@@ -1929,10 +2031,12 @@ No nonzero constant multiple is normalizable on $(0,\infty)$.
 not an $L^2$ eigenfunction to which the chapter's compact
 Hilbert--Schmidt conclusions automatically apply.}
 The obstruction to that particular hypothesis can be checked directly:
+since $\int_0^\infty e^{-2xt}dx=1/(2t)$ for $t>0$,
 \[
 \int_0^\infty\!\!\int_0^\infty|e^{-xt}|^2dx\,dt
-=\int_0^\infty\frac{dt}{2t}=\infty.
+=\int_0^\infty\frac{dt}{2t}=\infty,
 \]
+the last integral diverging logarithmically at both ends.
 Thus the kernel is not Hilbert--Schmidt; this calculation identifies
 the failed hypothesis more precisely than the infinite interval alone.
 Nor can its Taylor series be integrated term by term against $t^{-1/2}$:
@@ -1940,7 +2044,10 @@ the coefficient of $(-x)^m/m!$ would contain
 $\int_0^\infty t^{m-1/2}dt$, which diverges for every integer $m\ge0$.
 
 The statement about infinitely many improper-integral solutions can also
-be verified explicitly. For $0<a<1$, the gamma integral gives
+be verified explicitly. The same substitution $u=xt$ gives, for $s>0$
+and $x>0$, the gamma integral
+$\int_0^\infty e^{-xt}t^{s-1}dt=\Gamma(s)x^{-s}$. For $0<a<1$, the
+choices $s=1-a$ and $s=a$ give
 \[
 K(t^{-a})(x)=\Gamma(1-a)x^{a-1},\qquad
 K(t^{a-1})(x)=\Gamma(a)x^{-a}.
@@ -1952,13 +2059,15 @@ K(A t^{-a}\pm B t^{a-1})(x)
 =AB^2x^{a-1}\pm BA^2x^{-a}
 =\pm\mu(Ax^{-a}\pm Bx^{a-1}).
 \]
-Therefore
+So $\varphi=\lambda K\varphi$ holds for these combinations when
+$\lambda(\pm\mu)=1$. Therefore
 \[
 \varphi_{a,\pm}(x)=\sqrt{\Gamma(a)}x^{-a}
 \pm\sqrt{\Gamma(1-a)}x^{a-1},\qquad
-\lambda_{a,\pm}=\pm\sqrt{\frac{\sin\pi a}{\pi}},
+\lambda_{a,\pm}=\pm\frac1\mu=\pm\sqrt{\frac{\sin\pi a}{\pi}},
 \]
-where the reflection formula gives $\mu^2=\pi/\sin\pi a$.
+where the reflection formula $\Gamma(a)\Gamma(1-a)=\pi/\sin\pi a$
+gives $\mu^2=\pi/\sin\pi a$.
 The minus combination at $a=1/2$ is zero and must be excluded;
 the plus combination there is a nonzero multiple of the requested
 $x^{-1/2}$. These power combinations belong to the improper-integral
@@ -1991,26 +2100,30 @@ y(x)=\frac{3x}{3-\lambda},\qquad\erratum{\lambda\ne3}.
 \end{enumerate}
 \solution
 Let $(Kg)(x)=x\int_0^1t\,g(t)dt$. Its action on the
-inhomogeneous term is $Kx=x/3$, so induction gives $K^nx=x/3^n$.
+inhomogeneous term is $Kx=x\int_0^1t^2dt=x/3$, so $K(x/3^n)=x/3^{n+1}$
+and induction gives $K^nx=x/3^n$.
 
-(a) The Neumann series is therefore
+(a) The Neumann series $\sum_n\lambda^nK^nx$ is therefore
 \[
 \boxed{y(x)=x\sum_{n=0}^\infty(\lambda/3)^n}.
 \]
 (b) Apart from the identically zero value at $x=0$, this geometric
 series converges precisely when $\boxed{|\lambda|<3}$.
-For $|\lambda|=3$ its terms do not tend to zero, and for larger
-modulus they grow. On $[0,1]^2$, $|K|_{\max}=1$ and the
+For $|\lambda|=3$ its terms $(\lambda/3)^nx$ have the constant modulus
+$x$, so they do not tend to zero, and for larger
+modulus they grow. On $[0,1]^2$, $|K|_{\max}=\max xt=1$ and the
 interval length is one, so the stated sufficient bound only gives
 $|\lambda|<1$. It is sufficient, not necessary.
 
-(c) A nonzero homogeneous solution lies in the span of $x$.
+(c) A nonzero homogeneous solution
+$y=\lambda x\int_0^1ty(t)dt$ is a multiple of $x$.
 Putting $y=Cx$ gives $Cx=\lambda Cx/3$, hence
 \[
 \boxed{\lambda_1=3,\qquad y_1(x)=Cx,\quad C\ne0}.
 \]
 (d) For the inhomogeneous equation put
 $c=\int_0^1ty(t)dt$, so $y=x(1+\lambda c)$. Taking its moment,
+$c=(1+\lambda c)\int_0^1t^2dt$, that is,
 \[
 c=\frac{1+\lambda c}{3},\qquad
 (3-\lambda)c=1.
@@ -2022,20 +2135,26 @@ For $\lambda\ne3$,
 \]
 \erratum{The formula excludes $\lambda=3$. At that value the moment
 equation becomes $0=1$, so the inhomogeneous equation has no solution.
-The rational solution at other $\lambda$ exists even when its original
+The rational solution at other $\lambda$ exists even when its
 Neumann series diverges.}
 
 (e) Normalize the homogeneous eigenfunction:
-$u(x)=\sqrt3\,x$, since $\int_0^1u^2dx=1$.
+$u(x)=\sqrt3\,x$, since $\int_0^1u^2dx=3\int_0^1x^2dx=1$.
 The coefficient of $f=x$ is
-$b=\int_0^1u(x)x\,dx=1/\sqrt3$.
-Hilbert--Schmidt projection gives
+$b=\int_0^1u(x)x\,dx=\sqrt3/3=1/\sqrt3$.
+Since $f=u/\sqrt3$ lies in the span of $u$, and so does every $Ky$,
+the solution is $y=au$. Projecting $y=x+\lambda Ky$ onto $u$ and
+using $\langle u,Ky\rangle=\langle Ku,y\rangle=a/\lambda_1$ gives
+$a=b+\lambda a/\lambda_1$, i.e.\ $(\lambda_1-\lambda)a=b\lambda_1$.
+For $\lambda\ne\lambda_1=3$, Hilbert--Schmidt projection thus gives
 \[
 y(x)=\frac{b\lambda_1}{\lambda_1-\lambda}u(x)
 =\frac{(1/\sqrt3)3}{3-\lambda}\sqrt3\,x
 =\frac{3x}{3-\lambda}.
 \]
-The pole is consistent with the nonzero overlap $b$ at resonance.
+At $\lambda=\lambda_1=3$ the projected equation reads
+$0\cdot a=3b=\sqrt3\ne0$, because the overlap $b$ is nonzero: there is
+no solution, in agreement with (d).
 
 
 \Needspace{5\baselineskip}
@@ -2055,17 +2174,22 @@ K(x,t)=\sum_{n=1}^{2}\frac{\varphi_{n}(x)\varphi_{n}(t)}
 \erratum{where $\varphi_n$ in this expansion are the unit-norm
 versions of the stated eigenfunctions.}
 \solution
-The norms of the stated functions are
+The squared norms of the stated functions are (Exercise~21.2.11;
+$\cos^2x,\sin^2x=(1\pm\cos2x)/2$, and $\cos2x$ integrates to zero
+over a period)
 \[
 \int_0^{2\pi}\cos^2x\,dx
 =\int_0^{2\pi}\sin^2x\,dx=\pi,
 \]
-and their mutual integral is zero. Therefore use
+and their mutual integral is
+$\int_0^{2\pi}\sin x\cos x\,dx=\frac12\int_0^{2\pi}\sin2x\,dx=0$.
+Therefore use
 \[
 u_1(x)=\frac{\cos x}{\sqrt\pi},\qquad
 u_2(x)=\frac{\sin x}{\sqrt\pi}.
 \]
-With $\lambda_1=\lambda_2=1/\pi$,
+With $\lambda_1=\lambda_2=1/\pi$ and the addition theorem for the
+cosine,
 \[
 \begin{aligned}
 \sum_{n=1}^2\frac{u_n(x)u_n(t)}{\lambda_n}
@@ -2085,8 +2209,9 @@ its squared norm as well as by its characteristic value.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{21.4.7}\quad The integral equation
-$\varphi(x)=\lambda\displaystyle\int_{0}^{1}(1+xt)\varphi(t)\,dt$
-
+\[
+\varphi(x)=\lambda\int_{0}^{1}(1+xt)\varphi(t)\,dt
+\]
 has eigenvalues \erratum{$\lambda_{1,2}=8\mp2\sqrt{13}$}
 (approximately $0.7889$ and $15.211$). The corresponding
 unnormalized eigenfunctions are
@@ -2112,24 +2237,30 @@ b_\pm=\frac{-2\pm\sqrt{13}}3,\qquad
 \lambda_\pm=8\mp2\sqrt{13},\qquad
 v_\pm(x)=1+b_\pm x.
 \]
-\erratum{The supplied decimal eigenpairs are approximations, so
+\erratum{The textbook's decimal eigenpairs are approximations, so
 exact orthogonality and exact kernel reconstruction use these radical
-values. After normalization, the eigenfunctions in part (c) are the
-unit-norm ones, not the original unnormalized linear functions.}
+values. In part (c) the eigenfunctions must be the unit-norm ones of
+part (b): with the unnormalized $v_\pm$ the same sum is
+$\frac43+\frac59(x+t)+\frac{16}{27}xt$, not $K(x,t)$.}
 
-(a) Since $b_++b_-=-4/3$ and $b_+b_-=-1$,
+(a) As in Exercise~21.4.2(b), since $b_++b_-=-4/3$ and $b_+b_-=-1$,
 \[
 \int_0^1v_+(x)v_-(x)dx
+=\int_0^1\bigl[1+(b_++b_-)x+b_+b_-x^2\bigr]dx
 =1+\frac{b_++b_-}{2}+\frac{b_+b_-}{3}=0.
 \]
 (b) Their squared norms are
 \[
-N_\pm^2=\int_0^1(1+b_\pm x)^2dx
+N_\pm^2=\int_0^1(1+2b_\pm x+b_\pm^2x^2)dx
 =1+b_\pm+\frac{b_\pm^2}{3}.
 \]
-The root equation $3b_\pm^2+4b_\pm-3=0$ reduces this to
+Since $3b_\pm+2=\pm\sqrt{13}$, squaring gives the root equation
+$9b_\pm^2+12b_\pm-9=0$, i.e.\ $3b_\pm^2+4b_\pm-3=0$, so
+$b_\pm^2=1-\frac43b_\pm$. This reduces $N_\pm^2$ to
 \[
-N_\pm^2=\frac43+\frac{5b_\pm}{9}
+N_\pm^2=1+b_\pm+\frac13-\frac{4b_\pm}9
+=\frac43+\frac{5b_\pm}{9}
+=\frac{36+5(-2\pm\sqrt{13})}{27}
 =\frac{26\pm5\sqrt{13}}{27}.
 \]
 Thus the normalized functions are
@@ -2138,24 +2269,41 @@ Thus the normalized functions are
 \sqrt{\frac{27}{26\pm5\sqrt{13}}}
 \left(1+\frac{-2\pm\sqrt{13}}3x\right)}.
 \]
-Their numerical forms are
+Their numerical forms ($u_+$ and $u_-$ are the answer's $\varphi_1$
+and $\varphi_2$) are
 \[
 u_+(x)=0.7831024897+0.4191037337x,\qquad
 u_-(x)=1.8403126068-3.4386555600x.
 \]
+\erratum{The printed coefficient $3.4386$ in the answer is not
+correctly rounded: $3.43865556\ldots$ rounds to $3.4387$.}
 
-(c) Put $A_\pm=1/(\lambda_\pm N_\pm^2)$.
-Rationalizing the radicals gives
+(c) Put $A_\pm=1/(\lambda_\pm N_\pm^2)$. Multiplying out,
 \[
-A_\pm=\frac12\pm\frac1{\sqrt{13}}.
+\lambda_\pm N_\pm^2
+=\frac{(8\mp2\sqrt{13})(26\pm5\sqrt{13})}{27}
+=\frac{78\mp12\sqrt{13}}{27}
+=\frac{26\mp4\sqrt{13}}{9},
 \]
-In the sum of kernel terms, the constant, $x+t$, and $xt$
+and rationalizing, with $26^2-16\cdot13=468=9\cdot52$,
+\[
+A_\pm=\frac{9(26\pm4\sqrt{13})}{468}
+=\frac{26\pm4\sqrt{13}}{52}
+=\frac12\pm\frac1{\sqrt{13}}.
+\]
+Each kernel term is
+$u_\pm(x)u_\pm(t)/\lambda_\pm
+=A_\pm(1+b_\pm x)(1+b_\pm t)
+=A_\pm\bigl[1+b_\pm(x+t)+b_\pm^2xt\bigr]$,
+so in their sum the constant, $x+t$, and $xt$
 coefficients are respectively
 $\sum A_\pm$, $\sum A_\pm b_\pm$, and
-$\sum A_\pm b_\pm^2$. Evaluate each:
+$\sum A_\pm b_\pm^2$. Evaluate each, using
+$b_+-b_-=2\sqrt{13}/3$:
 \[
 \sum A_\pm=1,\qquad
 \sum A_\pm b_\pm
+=\frac12(b_++b_-)+\frac{b_+-b_-}{\sqrt{13}}
 =\frac12\left(-\frac43\right)
 +\frac1{\sqrt{13}}\frac{2\sqrt{13}}3=0,
 \]
@@ -2182,7 +2330,7 @@ the inhomogeneous integral equation, Eq.~(21.81), is
 \erratum{Here $\varphi_i$ are orthonormal eigenfunctions for the
 nonzero operator eigenvalues, $b_i=\langle\varphi_i,f\rangle$,
 $f_0$ is the projection of $f$ onto $\ker K$, and
-$\lambda\ne\lambda_i$. The original pure sum applies when $f_0=0$.}
+$\lambda\ne\lambda_i$. The textbook's pure sum applies when $f_0=0$.}
 \begin{enumerate}
 \item[(a)] Derive this form without using Eq.~(21.89).
 \item[(b)] Show that this form and Eq.~(21.89) are equivalent.
@@ -2192,7 +2340,10 @@ Let $K$ be the self-adjoint compact integral operator in the
 chapter, and let its normalized nonzero-eigenvalue functions satisfy
 $K\varphi_i=\varphi_i/\lambda_i$.
 
-(a) Decompose both functions into their nullspace components and
+(a) By the Hilbert--Schmidt (spectral) theorem for a compact
+self-adjoint operator, $L^2$ is the orthogonal sum of $\ker K$ and the
+closed span of the $\varphi_i$. Decompose both functions accordingly
+into their nullspace components and
 their components along the nonzero-eigenvalue eigenfunctions:
 \[
 f=f_0+\sum_i b_i\varphi_i,\qquad
@@ -2203,7 +2354,9 @@ $K$ is self-adjoint: for $h\in\ker K$,
 $\langle h,K\varphi\rangle=\langle Kh,\varphi\rangle=0$.
 Projecting the integral equation onto that nullspace gives
 $\varphi_0=f_0$.
-Project $\varphi=f+\lambda K\varphi$ onto $\varphi_i$:
+Project $\varphi=f+\lambda K\varphi$ onto $\varphi_i$, using
+$\langle\varphi_i,K\varphi\rangle=\langle K\varphi_i,\varphi\rangle
+=a_i/\lambda_i$ ($\lambda_i$ is real by Exercise~21.4.1):
 \[
 a_i=b_i+\frac{\lambda}{\lambda_i}a_i,\qquad
 (\lambda_i-\lambda)a_i=b_i\lambda_i.
@@ -2220,8 +2373,8 @@ without using Eq.~(21.89).
 \frac{\lambda_i}{\lambda_i-\lambda}
 =1+\frac{\lambda}{\lambda_i-\lambda}.
 \]
-Summing the first terms gives $f-f_0$; adding the explicit
-nullspace term restores $f$, so
+Summing the first terms gives $\sum_ib_i\varphi_i=f-f_0$; adding the
+explicit nullspace term restores $f$, so
 \[
 \varphi(x)=f(x)+\lambda\sum_i
 \frac{\varphi_i(x)}{\lambda_i-\lambda}
@@ -2230,34 +2383,42 @@ nullspace term restores $f$, so
 This is Eq.~(21.89), with the conjugate included for a complex
 orthonormal basis.
 
-\erratum{The original textbook's pure eigenfunction sum assumes that $f$ has no component
-in the nullspace of $K$. Nonzero-eigenvalue eigenfunctions need not
-span the whole $L^2$ space, for example for the finite-rank kernels in
-this chapter. In general an additional unchanged nullspace component
-is required.}
+\erratum{The textbook's pure eigenfunction sum assumes that $f$ has no
+component in the nullspace of $K$. Nonzero-eigenvalue eigenfunctions
+need not span the whole $L^2$ space, for example for the finite-rank
+kernels in this chapter. In general an additional unchanged nullspace
+component is required.}
 Thus Eq.~(21.89) already retains $f_0$ in its explicit $f$ term,
-while the original displayed pure sum required the extra condition
+while the textbook's pure sum requires the extra condition
 $f_0=0$.
 
 For a concrete check, take $K(x,t)=xt$ on $[0,1]$,
-$f=1$, and $\lambda=1$. Here $u=\sqrt3x$, $\lambda_1=3$,
-$b=\sqrt3/2$, and $f_0=1-3x/2$. The corrected formula gives
+$f=1$, and $\lambda=1$. Here $u=\sqrt3x$ satisfies
+$Ku=x\int_0^1\sqrt3\,t^2dt=u/3$, so $\lambda_1=3$;
+$b=\int_0^1\sqrt3\,x\,dx=\sqrt3/2$, and
+$f_0=f-bu=1-3x/2$. The corrected formula gives, with
+$\frac{3b}{3-1}u=\frac{3\sqrt3}{4}\sqrt3\,x=\frac94x$,
 \[
 \varphi=f_0+\frac{3b}{3-1}u
 =1-\frac32x+\frac94x
 =\boxed{1+\frac34x}.
 \]
-Indeed $1+x\int_0^1t(1+3t/4)dt=1+3x/4$.
-The sum without $f_0$ would give $9x/4$, which fails the equation.
+Indeed $1+x\int_0^1t(1+3t/4)dt=1+x(\frac12+\frac14)=1+3x/4$.
+The sum without $f_0$ would give $9x/4$, which fails the equation:
+its right side is again $1+3x/4$.
 
 For a compact self-adjoint operator the nonzero operator eigenvalues
 $\mu_i=1/\lambda_i$ can accumulate only at zero. For a fixed finite
 $\lambda$, all but finitely many satisfy $|\lambda\mu_i|<1/2$,
-so their multipliers obey $|1/(1-\lambda\mu_i)|\le2$.
+so their multipliers
+$\lambda_i/(\lambda_i-\lambda)=1/(1-\lambda\mu_i)$ obey
+$|1/(1-\lambda\mu_i)|\le1/(1-|\lambda\mu_i|)\le2$.
 The finitely many remaining denominators are nonzero away from
 resonance and therefore have a positive minimum modulus. Hence all
-multipliers are bounded, and Parseval's identity proves convergence
-of the solution expansion in $L^2$ whenever $f\in L^2$.
+multipliers are bounded by some $M$, so $|a_i|\le M|b_i|$, and
+Parseval's identity in the closed span of the $\varphi_i$ gives
+$\sum_i|a_i|^2\le M^2\sum_i|b_i|^2=M^2\|f-f_0\|^2<\infty$: the
+solution expansion converges in $L^2$ whenever $f\in L^2$.
 At $\lambda=\lambda_j$, the projected equation instead requires
 $b_j=0$ for every eigenfunction in that eigenspace; if so, its
 solution coefficients are free, and otherwise there is no solution.
