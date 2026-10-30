@@ -9,16 +9,25 @@ audit can be resumed from this file at any time.
 
 ## How to resume
 
-1. `git pull origin main`, then take the next `pending` part(s) from the
-   table below. Work on at most one part per chapter file at a time.
-2. Audit every exercise of the part with the checklist below, editing only
-   that exercise range of `sections/chNN.tex`.
-3. Compile the chapter on its own (the preamble of `main.tex`, the
-   chapter's `\section` line, and `\input{sections/chNN.tex}`); it must
-   give no errors and no overfull boxes.
-4. Mark the part `done` in the table, add its corrections to the log at the
-   end of this file, commit `sections/chNN.tex` together with this file,
-   and push to `main`.
+Each part passes through three stages, recorded in its Status column:
+`pending` → `audited` (audit committed) → `done` (independently verified,
+confirmed findings applied, committed). The pre-audit text of every chapter
+is commit `d04e67a`; diff a part against it to see what the audit changed.
+
+1. `git pull origin main`, then take the next part that is not `done`.
+   Work on at most one part per chapter file at a time.
+2. **Audit** a `pending` part: check every exercise against the checklist
+   below, editing only that exercise range of `sections/chNN.tex`; commit
+   it as `audited` with a log entry.
+3. **Verify** an `audited` part with three independent, read-only reviews:
+   (a) every changed line of the audit diff, trying to refute each
+   correction; (b) an independent re-solution of every exercise; (c) a
+   student's line-by-line reading for missing steps. Apply the confirmed
+   findings and commit the part as `done`, adding a verification note to
+   its log entry.
+4. Before each commit, compile the chapter on its own (the preamble of
+   `main.tex`, the chapter's `\section` line, and
+   `\input{sections/chNN.tex}`): no errors and no overfull boxes.
 5. Rebuild `main.pdf` (`latexmk -pdf main.tex`) after every few completed
    chapters and at the end, and commit it.
 
@@ -66,11 +75,13 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 0 of 54 parts done. `main.pdf` last rebuilt: before the audit.
+Progress: 0 of 54 parts done (audited and verified); 1 audited and awaiting verification.
+
+`main.pdf` last rebuilt: before the audit.
 
 | Part | Exercises | Status |
 |---|---|---|
-| ch01-p1 | 1.1.1–1.2.16 | pending |
+| ch01-p1 | 1.1.1–1.2.16 | audited |
 | ch01-p2 | 1.3.1–1.7.11 | pending |
 | ch01-p3 | 1.8.1–1.11.9 | pending |
 | ch02-p1 | 2.1.1–2.2.34 | pending |
@@ -131,3 +142,4 @@ Each finished part adds an entry: the exercises whose mathematics was
 corrected (and how), and a summary of the steps added and other cleanups.
 
 - Setup: 15.2.22/15.2.23 were run together on one source line; separated.
+- **ch01-p1** (1.1.1–1.2.16) — audit: no wrong results; a typo in 1.1.11(a) corrected ($[(\ln x)^2-1]/2$ → $[(\ln M)^2-1]/2$). Steps added in 31 of 32 exercises (e.g. the shifted $\alpha$-sums and error bound in 1.1.14, the assembly of 1.1.16(b), Gauss' test parameters in 1.2.5–1.2.7, the Lagrange remainder in 1.2.8). Script references in 1.1.3, 1.1.12, 1.1.16 replaced by the computations themselves; "the manual" → "the Instructor's Manual"; a reason added to the 1.2.7 erratum.
