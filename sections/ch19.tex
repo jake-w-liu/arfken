@@ -31,12 +31,29 @@ series.
 \erratum{Take the coefficients real as well. For complex data, replace the squared residual by its modulus squared.}
 \solution
 Write $s_p=a_0/2+\sum_{n=1}^p(a_n\cos nx+b_n\sin nx)$.
-\erratum{The squared error as printed is a real least-squares error when
-$f$ and the coefficients are real. For complex data use $|f-s_p|^2$.}
+\erratum{The restriction to real values is needed because for complex
+$f$ or coefficients $[f-s_p]^2$ is complex and cannot be minimized; the
+real measure of the error is then $|f-s_p|^2$.}
 All integrals below exist: Cauchy--Schwarz on the finite interval gives
 $\int|f|\le\sqrt{2\pi}\,(\int|f|^2)^{1/2}$.
 
-For $1\le m\le p$, differentiate the finite quadratic polynomial:
+The orthogonality integrals on $(0,2\pi)$ are, for $m,n\ge1$,
+\begin{gather*}
+\int_0^{2\pi}\cos mx\,dx=\int_0^{2\pi}\sin mx\,dx
+=\int_0^{2\pi}\sin nx\cos mx\,dx=0,\\
+\int_0^{2\pi}\cos nx\cos mx\,dx=\int_0^{2\pi}\sin nx\sin mx\,dx
+=\pi\delta_{nm}.
+\end{gather*}
+Hence, for $1\le m\le p$,
+\[
+\int_0^{2\pi}s_p\cos mx\,dx=\pi a_m,\qquad
+\int_0^{2\pi}s_p\sin mx\,dx=\pi b_m,\qquad
+\int_0^{2\pi}s_p\,dx=\frac{a_0}2\,2\pi=\pi a_0.
+\]
+$\Delta_p$ is a quadratic polynomial in the finitely many coefficients,
+with $\partial s_p/\partial a_m=\cos mx$ and
+$\partial s_p/\partial b_m=\sin mx$. Differentiating under the
+integral sign, for $1\le m\le p$,
 \begin{align*}
 \frac{\partial\Delta_p}{\partial a_m}
  &=-2\int_0^{2\pi}(f-s_p)\cos mx\,dx
@@ -45,9 +62,8 @@ For $1\le m\le p$, differentiate the finite quadratic polynomial:
  &=-2\int_0^{2\pi}(f-s_p)\sin mx\,dx
  =-2\int_0^{2\pi}f\sin mx\,dx+2\pi b_m.
 \end{align*}
-Here the mixed sine--cosine integrals vanish, while
-$\int\cos nx\cos mx=\int\sin nx\sin mx=\pi\delta_{nm}$.
-For the constant coefficient its factor $1/2$ gives instead
+For the constant coefficient, $\partial s_p/\partial a_0=1/2$ gives
+instead
 \[
 \frac{\partial\Delta_p}{\partial a_0}
 =-\int_0^{2\pi}(f-s_p)\,dx=-\int_0^{2\pi}f\,dx+\pi a_0.
@@ -58,8 +74,19 @@ Setting these derivatives to zero yields
 \qquad b_m=\frac1\pi\int_0^{2\pi}f(x)\sin mx\,dx\quad(m\ge1).}
 \]
 These stationary values are the unique minimum, not merely a stationary
-point. If $s_p^*$ has the displayed coefficients and the coefficients are
-changed by $\alpha_0,\alpha_m,\beta_m$, orthogonality to the residual gives
+point. Let $s_p^*$ have the displayed coefficients, with error
+$\Delta_p^*$, and change the coefficients by $\alpha_0,\alpha_m,\beta_m$,
+so that $s_p=s_p^*+u$ with
+$u=\alpha_0/2+\sum_{m=1}^p(\alpha_m\cos mx+\beta_m\sin mx)$. Then
+\[
+\Delta_p=\int_0^{2\pi}(f-s_p^*-u)^2dx
+=\Delta_p^*-2\int_0^{2\pi}(f-s_p^*)u\,dx+\int_0^{2\pi}u^2dx.
+\]
+The middle integral vanishes, since the vanishing derivatives above say
+that $f-s_p^*$ is orthogonal to $1$, $\cos mx$, $\sin mx$ ($m\le p$).
+The orthogonality integrals give
+$\int_0^{2\pi}u^2dx=2\pi(\alpha_0/2)^2+\pi\sum_{m=1}^p(\alpha_m^2+\beta_m^2)$,
+so
 \[
 \Delta_p=\Delta_p^*+\frac\pi2\alpha_0^2
 +\pi\sum_{m=1}^p(\alpha_m^2+\beta_m^2).
@@ -95,9 +122,13 @@ The cosine subtraction formula gives, for each harmonic,
 \alpha_n\cos(nx-\theta_n)
 =\alpha_n\cos\theta_n\cos nx+\alpha_n\sin\theta_n\sin nx.
 \]
-Matching the independent sine and cosine coefficients gives
+The Fourier coefficients of a function are unique (they are given by
+Eqs.~(19.2) and (19.3)), so matching the coefficients of $\cos nx$ and
+$\sin nx$ with Eq.~(19.1) gives
 $a_n=\alpha_n\cos\theta_n$, $b_n=\alpha_n\sin\theta_n$.
-Squaring and adding, and then dividing when $a_n\ne0$, gives
+Squaring and adding gives
+$a_n^2+b_n^2=\alpha_n^2(\cos^2\theta_n+\sin^2\theta_n)=\alpha_n^2$,
+and dividing $b_n$ by $a_n$ when $a_n\ne0$ gives $\tan\theta_n$:
 \[
 \boxed{\alpha_n=\sqrt{a_n^2+b_n^2},\qquad
 \tan\theta_n=b_n/a_n.}
@@ -109,8 +140,12 @@ $a_n=b_n=0$ the phase is arbitrary.}
 In particular, when $a_n=0$ and $b_n\ne0$, the phase is
 $\operatorname{sgn}(b_n)\pi/2$ modulo $2\pi$.
 
-Under a shift $x\mapsto x+x_0$, the phase becomes
-$\theta_n-nx_0$, while the amplitude stays unchanged. Equivalently the
+Under a shift $x\mapsto x+x_0$,
+$\alpha_n\cos(n(x+x_0)-\theta_n)=\alpha_n\cos(nx-(\theta_n-nx_0))$:
+the phase becomes $\theta_n-nx_0$, while the amplitude stays unchanged.
+Equivalently, expanding
+$a_n'=\alpha_n\cos(\theta_n-nx_0)$ and
+$b_n'=\alpha_n\sin(\theta_n-nx_0)$ by the addition formulas, the
 coefficient pair is rotated:
 \[
 \begin{pmatrix}a_n'\\b_n'\end{pmatrix}
@@ -130,18 +165,20 @@ f(x)=\sum_{n=-\infty}^{\infty}c_{n}e^{inx}.
 If $f(x)$ is real, $f(x)=f^{*}(x)$, what restriction is imposed on
 the coefficients $c_{n}$?
 \solution
-The coefficient formula, with $f$ real, gives
+The coefficient formula, with $f$ real so that only the exponential is
+conjugated, gives
 \[
 c_n^*=\left[\frac1{2\pi}\int_{-\pi}^{\pi}f(x)e^{-inx}\,dx\right]^*
 =\frac1{2\pi}\int_{-\pi}^{\pi}f(x)e^{inx}\,dx=c_{-n}.
 \]
-Thus
+Thus, with $n=0$ giving $c_0^*=c_0$,
 \[
 \boxed{c_{-n}=c_n^*\quad\hbox{for every integer }n;\qquad c_0\in\mathbb R.}
 \]
 Conversely, this relation makes every symmetric partial sum real because
 \[
-c_ne^{inx}+c_{-n}e^{-inx}=2\operatorname{Re}(c_ne^{inx}).
+c_ne^{inx}+c_{-n}e^{-inx}=c_ne^{inx}+(c_ne^{inx})^*
+=2\operatorname{Re}(c_ne^{inx}).
 \]
 Consequently its pointwise limit, wherever it exists, is real; its
 $L^2$ limit is real almost everywhere as well.
@@ -161,27 +198,38 @@ is square integrable
 that $\displaystyle\int_{-\pi}^{\pi}|f(x)|\,dx$ is also finite. The
 converse does not hold.
 \solution
-Let $s_N$ be the finite Fourier projection. Expanding the square and using
-the coefficient integrals gives
-\begin{align*}
+Let $s_N=a_0/2+\sum_{n=1}^N(a_n\cos nx+b_n\sin nx)$ be the finite
+Fourier projection; all integrals are over $(-\pi,\pi)$. Expanding the
+square gives
+\[
 0\le\int_{-\pi}^{\pi}(f-s_N)^2\,dx
-&=\int f^2\,dx-2\int fs_N\,dx+\int s_N^2\,dx,\\
-\int fs_N\,dx=\int s_N^2\,dx
-&=\frac\pi2a_0^2+\pi\sum_{n=1}^N(a_n^2+b_n^2).
-\end{align*}
+=\int f^2\,dx-2\int fs_N\,dx+\int s_N^2\,dx.
+\]
+The coefficient formulas $\int f\,dx=\pi a_0$, $\int f\cos nx\,dx=\pi a_n$,
+$\int f\sin nx\,dx=\pi b_n$ give
+\[
+\int fs_N\,dx=\frac{a_0}2\pi a_0+\sum_{n=1}^N(a_n\pi a_n+b_n\pi b_n)
+=\frac\pi2a_0^2+\pi\sum_{n=1}^N(a_n^2+b_n^2),
+\]
+and orthogonality ($\int1\,dx=2\pi$, $\int\cos^2nx\,dx=\int\sin^2nx\,dx=\pi$,
+all cross terms zero) gives the same value for $\int s_N^2\,dx$.
 Therefore
+$0\le\int f^2\,dx-\frac\pi2a_0^2-\pi\sum_{n=1}^N(a_n^2+b_n^2)$, that is,
 \[
 \frac{a_0^2}{2}+\sum_{n=1}^N(a_n^2+b_n^2)
 \le\frac1\pi\int_{-\pi}^{\pi}f^2\,dx<\infty.
 \]
-The nonnegative partial sums are bounded, so their increments tend to
-zero: $a_n^2+b_n^2\to0$. Since each square is no larger than the sum,
+This is Bessel's inequality. The partial sums of the nonnegative series
+$\sum(a_n^2+b_n^2)$ are nondecreasing and bounded, so the series
+converges, and the terms of a convergent series tend to zero:
+$a_n^2+b_n^2\to0$. Since each square is no larger than the sum,
 \[
 \boxed{a_n\to0,\qquad b_n\to0.}
 \]
 No pointwise convergence of the original Fourier series was used.
-For complex $f$, use modulus squares throughout, as in 19.1.1, obtaining
-$|a_n|^2+|b_n|^2\to0$.
+The statement assumes $f$ real because the argument uses
+$(f-s_N)^2\ge0$; for complex $f$ the same argument with modulus squares,
+as in 19.1.1, gives $|a_n|^2+|b_n|^2\to0$.
 
 The integrability assertion in the hint follows directly from
 \[
@@ -189,8 +237,10 @@ The integrability assertion in the hint follows directly from
 \le\left(\int|f|^2\,dx\right)^{1/2}\sqrt{2\pi}.
 \]
 For a counterexample to the converse, $f(x)=|x|^{-2/3}$ on $0<|x|<1$,
-and zero elsewhere, has $\int|f|=6$ but
-$\int|f|^2=2\int_0^1x^{-4/3}\,dx=\infty$.
+and zero elsewhere, has
+$\int|f|=2\int_0^1x^{-2/3}\,dx=2\bigl[3x^{1/3}\bigr]_0^1=6$ but
+$\int|f|^2=2\int_0^1x^{-4/3}\,dx
+=2\lim_{\epsilon\downarrow0}\bigl[-3x^{-1/3}\bigr]_\epsilon^1=\infty$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -205,23 +255,38 @@ section to show that
 \]
 This is the reverse sawtooth wave shown in Fig.~19.5.
 \solution
-First insert an Abel factor $0<r<1$. Absolute convergence permits taking
-the imaginary part of the logarithmic power series:
+First insert an Abel factor $0<r<1$. With $z=re^{ix}$, $|z|<1$, the
+series $-\log(1-z)=\sum_{n\ge1}z^n/n$ converges absolutely, and
+$\operatorname{Im}z^n=r^n\sin nx$, so
 \[
 S_r(x)=\sum_{n=1}^{\infty}\frac{r^n\sin nx}{n}
 =\operatorname{Im}\{-\log(1-re^{ix})\}.
 \]
-Use the principal logarithm. For $0<x<2\pi$,
+Use the principal logarithm; it is continuous on the right half-plane,
+which contains $1-re^{ix}$ (real part $1-r\cos x>0$) and, for
+$0<x<2\pi$, also $1-e^{ix}$ (real part $1-\cos x>0$). For $0<x<2\pi$,
 \[
-1-e^{ix}=-2i e^{ix/2}\sin(x/2)
+1-e^{ix}=e^{ix/2}\bigl(e^{-ix/2}-e^{ix/2}\bigr)
+=-2i e^{ix/2}\sin(x/2)
 =2\sin(x/2)e^{i(x/2-\pi/2)},
 \]
-whose argument is $x/2-\pi/2\in(-\pi/2,\pi/2)$. Hence
-$\lim_{r\uparrow1}S_r(x)=(\pi-x)/2$.
+with modulus $2\sin(x/2)>0$ and argument
+$x/2-\pi/2\in(-\pi/2,\pi/2)$. Hence
+\[
+\lim_{r\uparrow1}S_r(x)=-\operatorname{Arg}(1-e^{ix})
+=-\Bigl(\frac x2-\frac\pi2\Bigr)=\frac{\pi-x}2,\qquad0<x<2\pi.
+\]
 The original series converges for $x\notin2\pi\mathbb Z$ by Dirichlet's
-test: the partial sums of $e^{inx}$ are bounded by
-$2/|1-e^{ix}|$, and $1/n$ decreases to zero. Abel's theorem then identifies
-its ordinary sum with this limit. Oddness supplies the negative interval:
+test: $1/n$ decreases to zero, and the partial sums of $e^{inx}$ are
+bounded,
+\[
+\Bigl|\sum_{n=1}^Ne^{inx}\Bigr|
+=\Bigl|\frac{e^{ix}(1-e^{iNx})}{1-e^{ix}}\Bigr|\le\frac2{|1-e^{ix}|}.
+\]
+Abel's theorem (if $\sum c_n$ converges, then
+$\lim_{r\uparrow1}\sum c_nr^n=\sum c_n$) then identifies its ordinary sum
+with this limit. Oddness supplies the negative interval: for
+$-\pi\le x<0$ the sum is $-(\pi-|x|)/2=-(\pi+x)/2$. Thus
 \[
 \boxed{\sum_{n=1}^{\infty}\frac{\sin nx}{n}
 =\begin{cases}(\pi-x)/2,&0<x\le\pi,\\
@@ -237,24 +302,31 @@ $2\pi$-periodic.
 $\displaystyle\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\sin nx}{n}$ and
 show that it equals $x/2$ \erratum{for $-\pi<x<\pi$}.
 \solution
-For $0<r<1$, the alternating logarithmic series gives
+For $0<r<1$, the alternating logarithmic series
+$\log(1+z)=\sum_{n\ge1}(-1)^{n+1}z^n/n$ with $z=re^{ix}$ gives
 \[
 \sum_{n=1}^{\infty}(-1)^{n+1}\frac{r^n\sin nx}{n}
 =\operatorname{Im}\log(1+re^{ix}).
 \]
 When $-\pi<x<\pi$,
 \[
-1+e^{ix}=2\cos(x/2)e^{ix/2},\qquad \cos(x/2)>0,
+1+e^{ix}=e^{ix/2}\bigl(e^{-ix/2}+e^{ix/2}\bigr)
+=2\cos(x/2)e^{ix/2},\qquad \cos(x/2)>0,
 \]
-so its principal argument is $x/2$. Dirichlet convergence and Abel's
-theorem, as in 19.1.5, therefore give
+so its principal argument is $x/2$; as in 19.1.5 the logarithm is
+continuous as $r\uparrow1$, since $1+re^{ix}$ and $1+e^{ix}$ have
+positive real parts. The series converges by Dirichlet's test, because
+the partial sums of $(-1)^{n+1}e^{inx}=-(-e^{ix})^n$ are bounded by
+$2/|1+e^{ix}|$ when $e^{ix}\ne-1$. Abel's theorem, as in 19.1.5,
+therefore gives
 \[
 \boxed{\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\sin nx}{n}=\frac{x}{2},
 \qquad -\pi<x<\pi.}
 \]
 \erratum{The interval is essential: the left side is periodic, whereas
 $x/2$ is not. At $x=(2k+1)\pi$ its value is zero, not $x/2$.}
-On $( (2k-1)\pi,(2k+1)\pi)$ its value is $(x-2k\pi)/2$.
+By $2\pi$-periodicity, on $((2k-1)\pi,(2k+1)\pi)$ its value is
+$(x-2k\pi)/2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -268,20 +340,25 @@ that it equals
 \end{cases}
 \]
 \solution
-Subtract the even harmonics from the sum of all harmonics. With $S$
-denoting the function in 19.1.5,
+Subtract the even harmonics from the sum of all harmonics. Let
+$S(x)=\sum_{n\ge1}\sin nx/n$ be the function of 19.1.5, where the
+principal-logarithm computation gave $S(y)=(\pi-y)/2$ for every
+$0<y<2\pi$. Split a partial sum of $S$ into odd and even $n$, writing
+$n=2m$ in the even terms:
+\[
+\sum_{n=1}^{2N}\frac{\sin nx}{n}
+=\sum_{n=0}^{N-1}\frac{\sin(2n+1)x}{2n+1}
++\frac12\sum_{m=1}^{N}\frac{\sin(2mx)}{m}.
+\]
+For $0<x<\pi$, as $N\to\infty$ the left side tends to $S(x)$ and the
+last sum to $S(2x)$, since $x$ and $2x$ lie in $(0,2\pi)$. Hence the odd
+series converges, and
 \[
 \sum_{n=0}^{\infty}\frac{\sin(2n+1)x}{2n+1}
-=S(x)-\frac12S(2x).
-\]
-This subtraction is legitimate either for Abel sums before $r\uparrow1$
-or for the convergent ordinary odd/even subseries. For $0<x<\pi$ both
-$x$ and $2x$ lie in $(0,2\pi)$, so
-\[
-S(x)-\frac12S(2x)
+=S(x)-\frac12S(2x)
 =\frac{\pi-x}{2}-\frac{\pi-2x}{4}=\frac\pi4.
 \]
-The series is odd, giving $-\pi/4$ on $(-\pi,0)$. Thus
+The series is odd in $x$, giving $-\pi/4$ on $(-\pi,0)$. Thus
 \[
 \boxed{\sum_{n=0}^{\infty}\frac{\sin(2n+1)x}{2n+1}
 =\begin{cases}\pi/4,&0<x<\pi,\\-\pi/4,&-\pi<x<0.\end{cases}}
@@ -314,11 +391,14 @@ for $|z| \le 1$, except at the point $z=-1$.
 \[
 1+e^{i\theta}=2\cos(\theta/2)e^{i\theta/2}
 \]
-has a positive real amplitude, so the principal logarithm is
+has a positive real amplitude $2\cos(\theta/2)$ and argument
+$\theta/2\in(-\pi/2,\pi/2)$, so the principal logarithm is
 \[
 \log(1+e^{i\theta})=\ln(2\cos(\theta/2))+i\theta/2.
 \]
-Taking real parts of the convergent logarithmic series gives
+By the statement the series converges to this value at $z=e^{i\theta}$,
+$\theta\ne\pi$. Taking real parts, with
+$\operatorname{Re}e^{in\theta}=\cos n\theta$, gives
 \[
 \boxed{\ln(2\cos(\theta/2))
 =\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\cos n\theta}{n}.}
@@ -332,13 +412,19 @@ to $(-\pi,\pi)$ when $0<\theta<2\pi$. Then
 \cos\frac{\theta-\pi}{2}=\sin\frac\theta2,
 \qquad \cos(n\theta-n\pi)=(-1)^n\cos n\theta.
 \]
-Consequently the two alternating factors multiply to $-1$, yielding
+Consequently (a) becomes
+\[
+\ln\Bigl(2\sin\frac\theta2\Bigr)
+=\sum_{n=1}^{\infty}(-1)^{n+1}(-1)^n\frac{\cos n\theta}{n}
+=-\sum_{n=1}^{\infty}\frac{\cos n\theta}{n},
+\]
+since the two alternating factors multiply to $(-1)^{2n+1}=-1$. Hence
 \[
 \boxed{-\ln(2\sin(\theta/2))
 =\sum_{n=1}^{\infty}\frac{\cos n\theta}{n},\qquad0<\theta<2\pi.}
 \]
-\erratum{The manual's intermediate exponential identity in (b) has
-the wrong sign. The correct identity is
+\erratum{The Instructor's Manual's intermediate exponential identity
+in (b) has the wrong sign. The correct identity is
 $2\sin(\theta/2)=i e^{-i\theta/2}(1-e^{i\theta})$.
 Its final real-part result agrees with the formula above.}
 
@@ -370,21 +456,34 @@ Two elementary antiderivatives are
 \qquad
 \int x\sin kx\,dx=-\frac{x\cos kx}{k}+\frac{\sin kx}{k^2}.
 \]
-At $k=k_n$, the endpoint sines vanish and the endpoint cosines are one.
-Consequently $a_n=0$ and $b_n=-2/k_n=-2L/(n\pi)$. Thus
+At $k=k_n$ and $x=0,2L$ the sines vanish and the cosines are one
+($k_n2L=2n\pi$). Consequently
+\begin{align*}
+a_n&=\frac1L\left[\frac{x\sin k_nx}{k_n}
++\frac{\cos k_nx}{k_n^2}\right]_0^{2L}
+=\frac1L\,\frac{1-1}{k_n^2}=0,\\
+b_n&=\frac1L\left[-\frac{x\cos k_nx}{k_n}
++\frac{\sin k_nx}{k_n^2}\right]_0^{2L}
+=\frac1L\left(-\frac{2L}{k_n}\right)=-\frac{2L}{n\pi}.
+\end{align*}
+With $a_0/2=L$, this gives
 \[
 \boxed{x=L-\frac{2L}{\pi}\sum_{n=1}^{\infty}\frac{\sin(n\pi x/L)}n,
 \qquad0<x<2L.}
 \]
-On $(-2L,0)$ this same series equals $x+2L$, and at $x=0$ its value
-is the jump midpoint $L$.
+The series has period $2L$, so on $(-2L,0)$ it equals $x+2L$; at $x=0$
+its value is the midpoint $L$ of the jump from $2L$ to $0$ (every sine
+vanishes there).
 
-\textbf{(b)} A sine series on $(0,L)$ uses the odd extension and the
-normalization $2/L$. Integration by parts now gives
+\textbf{(b)} A sine series on $(0,L)$ uses the odd extension to
+$(-L,L)$, period $2L$, and the normalization $2/L$. The same
+antiderivative, with $\sin k_nL=\sin n\pi=0$ and
+$\cos k_nL=(-1)^n$, gives
 \[
 b_n=\frac2L\int_0^Lx\sin k_nx\,dx
 =\frac2L\left[-\frac{x\cos k_nx}{k_n}
 +\frac{\sin k_nx}{k_n^2}\right]_0^L
+=\frac2L\,\frac{-L(-1)^n}{k_n}
 =\frac{2L(-1)^{n+1}}{n\pi}.
 \]
 Therefore the corrected answer is
@@ -392,10 +491,11 @@ Therefore the corrected answer is
 \boxed{x=\frac{2L}{\pi}\sum_{n=1}^{\infty}
 \frac{(-1)^{n+1}}n\sin\frac{n\pi x}{L},\qquad0<x<L.}
 \]
-\erratum{The book's printed answer in (b), with coefficient $4L/\pi$
-and only odd harmonics, is incorrect for $f(x)=x$. By 19.1.7 that
-printed series equals the constant $L$ throughout $(0,L)$. The answer
-in the question above has been restored in red.}
+\erratum{The textbook's printed answer in (b), with coefficient
+$4L/\pi$ and only odd harmonics, is incorrect for $f(x)=x$: by 19.1.7,
+with $\pi x/L$ in place of $x$, that printed series equals the constant
+$L$ throughout $(0,L)$. The ANS.\ line above shows the corrected
+series.}
 The corrected series equals $x$ on $(-L,L)$, $x+2L$ on $(-2L,-L)$,
 and $x-2L$ on $(L,2L)$; its values at $\pm L$ are zero.
 
@@ -449,27 +549,33 @@ $b_{n}=\dfrac{32}{\pi^{3}n^{3}}$,\quad $n$ odd,\qquad
 $b_{n}=0$,\quad $n$ even.
 \par This approximation is shown in Fig.~19.6.
 \solution
-The stated extension is odd, so all cosine coefficients vanish. Put
-$k=n\pi$; the sine coefficient is
+The stated extension is odd, since $f(-x)=4(-x)(1-x)=-f(x)$ for
+$0\le x\le1$, so all cosine coefficients vanish. The period is $2$
+($L=1$), and the integrand $f(x)\sin n\pi x$, a product of two odd
+functions, is even. Put $k=n\pi$; the sine coefficient is
 \[
-b_n=2\int_0^14x(1-x)\sin kx\,dx=8I_n.
+b_n=\int_{-1}^1f(x)\sin kx\,dx=2\int_0^14x(1-x)\sin kx\,dx=8I_n,
+\qquad I_n=\int_0^1x(1-x)\sin kx\,dx.
 \]
-Integrating by parts twice, with $\sin k=0$,
+Integrate by parts twice. The boundary terms vanish because
+$x(1-x)=0$ at $x=0,1$ and $\sin k=\sin0=0$:
 \begin{align*}
 I_n&=\left[-\frac{x(1-x)\cos kx}{k}\right]_0^1
- +\frac1k\int_0^1(1-2x)\cos kx\,dx,\\
+ +\frac1k\int_0^1(1-2x)\cos kx\,dx\\
 &=\frac1k\left[\frac{(1-2x)\sin kx}{k}\right]_0^1
  +\frac2{k^2}\int_0^1\sin kx\,dx
+ =\frac2{k^2}\,\frac{1-\cos k}{k}
  =\frac{2(1-\cos k)}{k^3}.
 \end{align*}
-It follows that
+With $\cos k=\cos n\pi=(-1)^n$ and $k^3=\pi^3n^3$, it follows that
 \[
 \boxed{b_n=\frac{16[1-(-1)^n]}{\pi^3n^3}
 =\begin{cases}32/(\pi^3n^3),&n\text{ odd},\\0,&n\text{ even}.
 \end{cases}}
 \]
-Thus the fundamental sine has coefficient $32/\pi^3$, and the next
-nonzero coefficient is smaller by a factor $27$. The series converges
+Thus the fundamental sine has coefficient $32/\pi^3\approx1.032$, and
+the next nonzero coefficient, $b_3=32/(27\pi^3)\approx0.038$, is smaller
+by a factor $27$. The series converges
 absolutely and uniformly, since its terms are bounded by a convergent
 multiple of $\sum n^{-3}$. It equals the continuous odd periodic
 extension, including its zero values at $-1,0,1$.
@@ -491,22 +597,34 @@ Fourier series.
 \erratum{Use the periodic delta distribution on the circle, with a smooth $2\pi$-periodic test function $f$; take the series through symmetric finite partial sums.}
 \solution
 \erratum{This is the periodic delta distribution on the circle, not a
-pointwise convergent series of functions. On the real line it is the
-comb $\delta_{2\pi}(u)=\sum_{k\in\mathbb Z}\delta(u-2\pi k)$.
+pointwise convergent series of functions: the terms $e^{imu}$ do not
+tend to zero, so the series diverges at every $u$. On the real line it
+is the comb $\delta_{2\pi}(u)=\sum_{k\in\mathbb Z}\delta(u-2\pi k)$.
 The interval endpoints are identified.}
 Take a smooth $2\pi$-periodic test function
 $f(\varphi)=\sum_{j\in\mathbb Z}c_je^{ij\varphi}$, with
 $c_j=(2\pi)^{-1}\int_{-\pi}^{\pi}f(\varphi)e^{-ij\varphi}\,d\varphi$.
-Integration by parts twice shows $c_j=O(j^{-2})$, so its coefficient
-series is absolutely summable. For a finite symmetric kernel,
+For $j\ne0$, integrating by parts twice, with boundary terms that cancel
+by periodicity, gives
+\[
+c_j=\frac1{2\pi ij}\int_{-\pi}^{\pi}f'(\varphi)e^{-ij\varphi}\,d\varphi
+=-\frac1{2\pi j^2}\int_{-\pi}^{\pi}f''(\varphi)e^{-ij\varphi}\,d\varphi,
+\]
+so $|c_j|\le j^{-2}(2\pi)^{-1}\int|f''|$ and the coefficient series is
+absolutely summable. For a finite symmetric kernel, interchange the
+finite sum with the integral and use
+$(2\pi)^{-1}\int_{-\pi}^{\pi}f(\varphi_1)e^{im\varphi_1}\,d\varphi_1=c_{-m}$:
 \begin{align*}
 \int_{-\pi}^{\pi}f(\varphi_1)\frac1{2\pi}
  \sum_{m=-N}^Ne^{im(\varphi_1-\varphi_2)}\,d\varphi_1
 &=\sum_{m=-N}^Nc_{-m}e^{-im\varphi_2}\\
-&=\sum_{j=-N}^Nc_je^{ij\varphi_2}.
+&=\sum_{j=-N}^Nc_je^{ij\varphi_2}\qquad(j=-m).
 \end{align*}
-The last expression tends to $f(\varphi_2)$ as $N\to\infty$. This is
-exactly the defining distributional action, hence
+The last expression is the symmetric partial sum of the Fourier series
+of $f$, which converges to $f(\varphi_2)$ as $N\to\infty$ because $f$ is
+smooth (Section 19.1); the absolutely summable coefficients make the
+convergence uniform. This is exactly the defining distributional action,
+hence
 \[
 \boxed{\delta_{2\pi}(\varphi_1-\varphi_2)
 =\frac1{2\pi}\sum_{m\in\mathbb Z}e^{im(\varphi_1-\varphi_2)}.}
@@ -528,27 +646,31 @@ expansion of $f(x)=x$, $-\pi<x<\pi$, leads to
 Example~19.1.1. Confirm that the change in the defined range from
 $[0,2\pi]$ to $[-\pi,\pi]$ has no effect on the expansion.
 \solution
-From 19.1.6, or from direct integration of its Fourier coefficients,
+From 19.1.6, or from the Fourier coefficients computed in 19.2.7,
 \[
 x=2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}n\sin nx,
 \qquad-\pi<x<\pi.
 \]
-Integrating from $0$ to $x$ gives
+Integrating from $0$ to $x$ term by term, with
+$\int_0^x\sin nt\,dt=(1-\cos nx)/n$, gives
 \[
 \frac{x^2}{2}
 =2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}(1-\cos nx).
 \]
-The integrated series is absolutely and uniformly convergent; integration
-can also be justified by integrating the $L^2$ partial sums, since
+The integrated series is absolutely and uniformly convergent (its terms
+are bounded by $4/n^2$); termwise integration is justified by
+integrating the $L^2$-convergent partial sums $s_N$ of the series for
+$f(x)=x$, since by Cauchy--Schwarz
 $|\int_0^x(f-s_N)|\le\sqrt{2\pi}\,\|f-s_N\|_2$ uniformly in $x$.
-Average the integrated identity over $(-\pi,\pi)$. Every cosine has
-zero average, and
+Average the integrated identity over $(-\pi,\pi)$; uniform convergence
+allows averaging term by term. Every cosine has zero average, so the
+right side averages to $2\sum_{n\ge1}(-1)^{n+1}/n^2$, while
 \[
 \frac1{2\pi}\int_{-\pi}^{\pi}\frac{x^2}{2}\,dx
 =\frac1{2\pi}\left[\frac{x^3}{6}\right]_{-\pi}^{\pi}
-=\frac{\pi^2}{6}.
+=\frac1{2\pi}\,\frac{2\pi^3}{6}=\frac{\pi^2}{6}.
 \]
-Consequently
+Consequently $2\sum_{n\ge1}(-1)^{n+1}/n^2=\pi^2/6$, that is,
 \[
 \boxed{\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}=\frac{\pi^2}{12}.}
 \]
@@ -582,54 +704,72 @@ f(x)=\begin{cases}-1,&-\pi<x<0\\1,&0<x<\pi\end{cases}
 \]
 \end{enumerate}
 \solution
-\textbf{(a)} Orthogonality gives for every finite partial sum
+\textbf{(a)} Square the partial sum
+$s_N=a_0/2+\sum_{n=1}^N(a_n\cos nx+b_n\sin nx)$ and integrate over
+$(-\pi,\pi)$. All cross terms integrate to zero, while
+$\int(a_0/2)^2dx=\pi a_0^2/2$ and
+$\int\cos^2nx\,dx=\int\sin^2nx\,dx=\pi$. Hence for every finite partial
+sum
 \[
 \frac1\pi\int_{-\pi}^{\pi}s_N^2\,dx
 =\frac{a_0^2}{2}+\sum_{n=1}^N(a_n^2+b_n^2).
 \]
-If $s_N\to f$ uniformly, the $s_N$ and $f$ are bounded and
+If $s_N\to f$ uniformly, $f$ is bounded, the $s_N$ are bounded for large
+$N$, and, since $s_N^2-f^2=(s_N-f)(s_N+f)$,
 \[
 \left|\int(s_N^2-f^2)\right|
 \le2\pi\|s_N-f\|_\infty(\|s_N\|_\infty+\|f\|_\infty)\longrightarrow0.
 \]
-Taking limits proves the stated identity.
+Letting $N\to\infty$ on both sides of the finite identity proves the
+stated identity.
 \erratum{The displayed identity is for real functions; the complex
-version uses modulus squares. Also the manual's first display in
-19.1.13(a) is missing the factor $1/\pi$ on its integral: for $f=1$
-its unnormalized left side is $2\pi$, whereas its right side is $2$.}
+version uses modulus squares. Also the Instructor's Manual's first
+display in 19.1.13(a) is missing the factor $1/\pi$ on its integral:
+for $f=1$ its unnormalized left side is $2\pi$, whereas its right side
+is $2$.}
 More generally $L^2$ convergence suffices, because
 $|\|s_N\|_2-\|f\|_2|\le\|s_N-f\|_2$.
 
-\textbf{(b)} For $f=x^2$, $a_0=2\pi^2/3$, $a_n=4(-1)^n/n^2$,
-and $b_n=0$. The identity becomes
+\textbf{(b)} Reading off the given series for $f=x^2$:
+$a_0/2=\pi^2/3$, so $a_0=2\pi^2/3$; $a_n=4(-1)^n/n^2$, so
+$a_n^2=16/n^4$; and $b_n=0$. The identity becomes
 \[
 \frac1\pi\int_{-\pi}^{\pi}x^4\,dx
+=\frac1\pi\,\frac{2\pi^5}5
 =\frac{2\pi^4}{5}
 =\frac12\left(\frac{2\pi^2}{3}\right)^2
- +16\sum_{n=1}^{\infty}\frac1{n^4}.
+ +16\sum_{n=1}^{\infty}\frac1{n^4}
+=\frac{2\pi^4}9+16\,\zeta(4).
 \]
-Solving,
+Solving, with $2/5-2/9=8/45$,
 \[
 \boxed{\zeta(4)=\frac1{16}\left(\frac25-\frac29\right)\pi^4
-=\frac{\pi^4}{90}.}
+=\frac1{16}\,\frac{8\pi^4}{45}=\frac{\pi^4}{90}.}
 \]
 The given $x^2$ series is uniformly convergent by comparison with
 $\sum n^{-2}$, so part (a) applies directly.
 
-\textbf{(c)} The square wave has $\int f^2=2\pi$, no cosine terms,
-and $b_{2j-1}=4/[\pi(2j-1)]$. Hence Parseval reads
+\textbf{(c)} The square wave has $f^2=1$, so
+$\pi^{-1}\int_{-\pi}^{\pi}f^2\,dx=2$. From the given series it has no
+constant or cosine terms, $b_{2j-1}=4/[\pi(2j-1)]$, and the even-$n$
+sine coefficients vanish. Hence Parseval reads
 \[
 2=\frac{16}{\pi^2}\sum_{j=1}^{\infty}\frac1{(2j-1)^2}.
 \]
 To check this independently, integrate the $\pm1$ square-wave expansion
-from $0$ to $\pi$:
+from $0$ to $\pi$; term-by-term integration of the $L^2$-convergent
+series is justified as in 19.1.12, and
+$\int_0^\pi\sin((2j-1)x)\,dx=[1-\cos((2j-1)\pi)]/(2j-1)=2/(2j-1)$:
 \[
 \pi=\frac4\pi\sum_{j=1}^{\infty}
 \frac{1-\cos((2j-1)\pi)}{(2j-1)^2}
 =\frac8\pi\sum_{j=1}^{\infty}\frac1{(2j-1)^2}.
 \]
-Thus the right side of Parseval is indeed $2$. For any fixed partial sum $s_N$, $s_N(x)\to0$ as $x\downarrow0$,
-whereas the square wave equals one there. Thus
+Thus $\sum_{j\ge1}(2j-1)^{-2}=\pi^2/8$, and the right side of Parseval
+is indeed $(16/\pi^2)(\pi^2/8)=2$.
+
+For any fixed partial sum $s_N$, which is continuous with $s_N(0)=0$,
+$s_N(x)\to0$ as $x\downarrow0$, whereas the square wave equals one there. Thus
 $\sup_{0<x<\pi}|s_N(x)-1|\ge1$, ruling out uniform convergence. This supplies the requested counterexample
 to necessity of uniform convergence, while $L^2$ completeness still
 justifies Parseval.
@@ -653,31 +793,43 @@ show by integrating that
 \end{cases}
 \]
 \solution
-The cosine series for $\varphi_2$ is absolutely and uniformly convergent.
-Integrating the sine series for $\varphi_1$ from $0$ to $x>0$ is valid
-because its partial sums converge in $L^2$ and
-$|\int_0^x(\varphi_1-s_N)|\le\sqrt{\pi}\,\|\varphi_1-s_N\|_2$. Thus
+The cosine series for $\varphi_2$ is absolutely and uniformly convergent
+by comparison with $\sum n^{-2}$.
+Integrating the sine series for $\varphi_1$ term by term from $0$ to $x$,
+$0<x\le\pi$, is valid because its partial sums $s_N$ converge in $L^2$
+and, by Cauchy--Schwarz,
+$|\int_0^x(\varphi_1-s_N)|\le\sqrt{\pi}\,\|\varphi_1-s_N\|_2$.
+Since $\int_0^x\sin nt\,dt/n=(1-\cos nx)/n^2$, the term-by-term
+integral is $\sum_{n\ge1}(1-\cos nx)/n^2=\varphi_2(0)-\varphi_2(x)$, and
+integrating the closed form instead gives
 \[
 \varphi_2(0)-\varphi_2(x)
 =\int_0^x\frac{\pi-t}{2}\,dt
 =\frac{\pi x}{2}-\frac{x^2}{4}.
 \]
-Write $C=\varphi_2(0)$. Evenness then gives, on $[-\pi,\pi]$,
+Write $C=\varphi_2(0)$, so $\varphi_2(x)=C-\pi x/2+x^2/4$ on $[0,\pi]$.
+The cosine series is even in $x$, which gives, on $[-\pi,\pi]$,
 $\varphi_2(x)=C-\pi|x|/2+x^2/4$.
-Every term in its uniformly convergent cosine series has zero mean, so
+Every term of the uniformly convergent cosine series has zero integral
+over $[0,\pi]$, because $\int_0^\pi\cos nx\,dx=\sin(n\pi)/n=0$, so
+termwise integration gives
 \[
 0=\int_0^\pi\varphi_2(x)\,dx
 =C\pi-\frac\pi2\frac{\pi^2}{2}+\frac14\frac{\pi^3}{3}
+=C\pi-\frac{\pi^3}{4}+\frac{\pi^3}{12}
 =C\pi-\frac{\pi^3}{6}.
 \]
-Therefore $C=\pi^2/6$. Completing the square yields
+Therefore $C=\pi^2/6$. Completing the square,
+$\pi^2/6-\pi|x|/2+x^2/4=(\pi-|x|)^2/4-\pi^2/4+\pi^2/6$, yields
 \[
 \boxed{\varphi_2(x)=\frac{(\pi-|x|)^2}{4}-\frac{\pi^2}{12},
 \qquad -\pi\le x\le\pi,}
 \]
-which gives exactly the two requested branches. Uniform convergence
-includes $x=0,\pm\pi$; in particular it also proves
-$\sum n^{-2}=\pi^2/6$ by setting $x=0$.
+which gives exactly the two requested branches ($|x|=-x$ for $x\le0$ and
+$|x|=x$ for $x\ge0$). The derivation covered every $0\le x\le\pi$, and
+evenness every $-\pi\le x\le0$, so the endpoints $x=0,\pm\pi$ are
+included; in particular setting $x=0$ proves
+$\sum n^{-2}=\varphi_2(0)=\pi^2/6$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -703,41 +855,61 @@ more powerful, the balance progressively shifts so that we are
 doing less and demanding that computers do more.
 \erratum{Here $s=1,2,\ldots$. When $s=1$, the first integral is improper at multiples of $2\pi$ crossed by the interval.}
 \solution
-Let $s$ be a positive integer, and use $t$ as the integration variable.
-For $s\ge2$, the series for $\psi_{2s-1}$ converges absolutely and
-uniformly. Thus
+Let $s$ be a positive integer. The statement writes the integration
+variable as $t$, since $x$ is already the upper limit.
+For $s\ge2$, the terms of the series for $\psi_{2s-1}$ are bounded by
+$n^{-(2s-1)}\le n^{-3}$, so it converges absolutely and uniformly
+(Weierstrass M-test) and may be integrated term by term, with
+$\int_0^x\cos nt\,dt=\sin nx/n$. Thus
 \[
 \int_0^x\psi_{2s-1}(t)\,dt
 =\sum_{n=1}^{\infty}\frac1{n^{2s-1}}\int_0^x\cos nt\,dt
 =\sum_{n=1}^{\infty}\frac{\sin nx}{n^{2s}}
 =\boxed{\psi_{2s}(x)}.
 \]
-For every $s\ge1$, the even-index series is absolutely uniform, giving
+For every $s\ge1$, the even-index series has terms bounded by
+$n^{-2s}\le n^{-2}$, so it too converges absolutely and uniformly.
+Termwise integration with $\int_0^x\sin nt\,dt=(1-\cos nx)/n$, and
+splitting into two absolutely convergent series ($2s+1\ge3$), gives
 \begin{align*}
 \int_0^x\psi_{2s}(t)\,dt
-&=\sum_{n=1}^{\infty}\frac{1-\cos nx}{n^{2s+1}}\\
+&=\sum_{n=1}^{\infty}\frac{1-\cos nx}{n^{2s+1}}
+=\sum_{n=1}^{\infty}\frac1{n^{2s+1}}
+-\sum_{n=1}^{\infty}\frac{\cos nx}{n^{2s+1}}\\
 &=\zeta(2s+1)-\psi_{2s+1}(x).
 \end{align*}
-Rearrangement proves the second recurrence.
+Solving for $\psi_{2s+1}(x)$ proves the second recurrence.
 
 \erratum{The first recurrence at $s=1$ has an integrable logarithmic
 singularity at its lower endpoint: $\psi_1(t)=-\ln(2|\sin(t/2)|)$.
 The integral must be read as improper at every multiple of $2\pi$ it
 crosses; $\psi_1$ itself is not finite at those points.}
 To justify this base case, insert $r^n$ with $0<r<1$. Then
+$\sum_{n\ge1}r^n\cos nt/n=\operatorname{Re}\{-\log(1-re^{it})\}
+=-\ln|1-re^{it}|$, and this series is uniformly convergent (its terms
+are bounded by $r^n$), so termwise integration gives
 \[
 \int_0^x-\ln|1-re^{it}|\,dt
 =\sum_{n=1}^{\infty}\frac{r^n\sin nx}{n^2}.
 \]
-The right side tends uniformly to $\psi_2(x)$. On any bounded interval,
+The right side tends uniformly to $\psi_2(x)$ as $r\uparrow1$, because
+the difference is bounded by $\sum_n(1-r^n)/n^2$, whose terms tend to
+zero and are dominated by $n^{-2}$. On the left, for $t\notin2\pi\mathbb Z$
+the integrand tends to $-\ln|1-e^{it}|=-\ln(2|\sin(t/2)|)=\psi_1(t)$.
+To dominate it, use
 \[
-|1-re^{it}|^2=(1-r)^2+4r\sin^2(t/2)
+|1-re^{it}|^2=1-2r\cos t+r^2=(1-r)^2+4r\sin^2(t/2).
 \]
-shows, for $r\ge1/2$, that the absolute logarithm is bounded by
-$C+|\ln\operatorname{dist}(t,2\pi\mathbb Z)|$ near the finitely many
-singularities. This bound is integrable because
-$\int_0^\epsilon|\ln t|\,dt=\epsilon(1-\ln\epsilon)$.
-Dominated convergence proves the first recurrence also for $s=1$.
+For $1/2\le r<1$ this gives $2\sin^2(t/2)\le|1-re^{it}|^2<4$, hence
+$|\ln|1-re^{it}||\le\ln2+|\ln|\sin(t/2)||$, independently of $r$. By
+Jordan's inequality ($\sin u\ge2u/\pi$ on $[0,\pi/2]$),
+$|\sin(t/2)|\ge\operatorname{dist}(t,2\pi\mathbb Z)/\pi$, so on any
+bounded interval the integrand is bounded by
+$\ln(2\pi)+|\ln\operatorname{dist}(t,2\pi\mathbb Z)|$, which is
+integrable near the finitely many singularities because
+$\int_0^\epsilon|\ln t|\,dt=\epsilon(1-\ln\epsilon)$ for $0<\epsilon<1$.
+Dominated convergence therefore lets $r\uparrow1$ under the integral,
+which proves the first recurrence also for $s=1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -752,15 +924,20 @@ where $\psi_{1}(x)$ and $\varphi_{2}(x)$ are the Clausen functions
 defined in Exercises~19.1.14 and 19.1.15.
 \erratum{For the finite-valued identity take $x\notin2\pi\mathbb Z$.}
 \solution
-The elementary coefficient identity is
+The elementary coefficient identity, over the common denominator
+$n^2(n+1)$, is
 \[
 \frac1n-\frac1{n^2}+\frac1{n^2(n+1)}
 =\frac{n(n+1)-(n+1)+1}{n^2(n+1)}
+=\frac{n^2}{n^2(n+1)}
 =\frac1{n+1}.
 \]
 Multiply by $\cos nx$, sum first to a finite $N$, and then pass to the
-limit. The first series is $\psi_1$, the second is $\varphi_2$, and the
-last is absolutely convergent. Therefore
+limit; for $x\notin2\pi\mathbb Z$ each of the three series converges, so
+the limit of the sum is the sum of the limits. The first series is
+$\psi_1=\sum\cos nx/n$ (the case $s=0$ of $\psi_{2s+1}$ in 19.1.15),
+the second is $\varphi_2=\sum\cos nx/n^2$ of 19.1.14, and the last is
+absolutely convergent. Therefore
 \[
 \boxed{f(x)=\psi_1(x)-\varphi_2(x)
 +\sum_{n=1}^{\infty}\frac{\cos nx}{n^2(n+1)}.}
@@ -769,15 +946,23 @@ last is absolutely convergent. Therefore
 $x\notin2\pi\mathbb Z$. At a multiple of $2\pi$ both $f$ and $\psi_1$
 diverge.}
 Away from those points, Dirichlet's test proves convergence of the
-original series and of $\psi_1$. The correction series has a simple
-uniform truncation bound:
+original series and of $\psi_1$, as in 19.1.5. The correction series has
+a simple uniform truncation bound: $|\cos nx|/(n^2(n+1))<n^{-3}$, and
+$n^{-3}\le\int_{n-1}^n t^{-3}\,dt$, so
 \[
 \left|\sum_{n>N}\frac{\cos nx}{n^2(n+1)}\right|
 \le\sum_{n>N}\frac1{n^3}\le\int_N^\infty\frac{dt}{t^3}
 =\frac1{2N^2}.
 \]
-Thus known closed forms for the first two terms leave a rapidly
-convergent remainder.
+Thus the known closed forms of the first two terms, for $0<x<2\pi$,
+\[
+\psi_1(x)=-\ln\Bigl(2\sin\frac x2\Bigr),\qquad
+\varphi_2(x)=\frac{(\pi-x)^2}4-\frac{\pi^2}{12},
+\]
+leave a rapidly convergent remainder. The first is 19.1.8(b); the second
+is 19.1.14 on $(0,\pi]$, extended to $[\pi,2\pi)$ by
+$\varphi_2(x)=\varphi_2(x-2\pi)=\varphi_2(2\pi-x)$ (periodicity and
+evenness), which reproduces the same formula.
 
 \Needspace{12\baselineskip}
 \subsection*{19.2 Applications of Fourier Series}
@@ -803,25 +988,34 @@ For each individual term its entire Taylor expansion is
 =x-\frac{(2j+1)^2x^3}{3!}
 +\frac{(2j+1)^4x^5}{5!}-\cdots.
 \]
-Retain only the first $N$ harmonics before collecting powers. The linear
-coefficient is $2hN/\pi$. The cubic coefficient is
-\[
+Retain only the first $N$ harmonics before collecting powers. Each
+harmonic contributes $2h/\pi$ to the coefficient of $x$, so the linear
+coefficient is $2hN/\pi$. For the cubic coefficient expand
+$(2j+1)^2=4j^2+4j+1$ and use
+$\sum_{j=0}^{N-1}j^2=(N-1)N(2N-1)/6$,
+$\sum_{j=0}^{N-1}j=N(N-1)/2$:
+\begin{align*}
 -\frac{2h}{6\pi}\sum_{j=0}^{N-1}(2j+1)^2
-=-\frac{h}{3\pi}
+&=-\frac{h}{3\pi}
 \left[4\frac{(N-1)N(2N-1)}6
-+4\frac{N(N-1)}2+N\right]
-=-\frac{hN(4N^2-1)}{9\pi}.
-\]
-For nonzero $h$ neither coefficient has a finite limit; their magnitudes
-grow as $N$ and $N^3$, respectively. Formally, the coefficient of
++4\frac{N(N-1)}2+N\right]\\
+&=-\frac{h}{3\pi}\,\frac{N(4N^2-1)}3
+=-\frac{hN(4N^2-1)}{9\pi},
+\end{align*}
+since the bracket is
+$[(4N^3-6N^2+2N)+(6N^2-6N)+3N]/3=(4N^3-N)/3$.
+For nonzero $h$ neither coefficient has a finite limit as $N\to\infty$;
+their magnitudes grow as $N$ and $N^3$, respectively. Formally, the coefficient of
 $x^{2k+1}$ would be
 \[
 \frac{2h}{\pi}\frac{(-1)^k}{(2k+1)!}
 \sum_{j=0}^{\infty}(2j+1)^{2k},
 \]
-and it diverges for every $k\ge0$.
-\erratum{The original request to transform the Fourier series is therefore only formal, not a
-valid convergent power-series rearrangement. Interchanging the harmonic
+and it diverges for every $k\ge0$, because every term of the sum is at
+least $1$.
+\erratum{The textbook's request to transform the Fourier series into a
+power series is therefore only formal, not a valid convergent
+power-series rearrangement. Interchanging the harmonic
 sum and Taylor sum is precisely the invalid step.}
 A convergent power series on a neighborhood of zero is continuous
 there, so it cannot reproduce the jump between $0$ and $h$.
@@ -847,20 +1041,21 @@ with Eq.~(5.27).
 \end{enumerate}
 \erratum{Interpret the expansion distributionally. In the finite-sum identity use the continuous limiting value where $\sin(x/2)=0$.}
 \solution
-Apply the coefficient formulas to the distribution on $(-\pi,\pi)$:
+Apply the coefficient formulas to the distribution on $(-\pi,\pi)$,
+using the sampling rule $\int_{-\pi}^{\pi}\delta(x)g(x)\,dx=g(0)$:
 \[
 a_0=\frac1\pi\int\delta(x)\,dx=\frac1\pi,
-\quad a_n=\frac{\cos0}\pi=\frac1\pi,
+\quad a_n=\frac1\pi\int\delta(x)\cos nx\,dx=\frac{\cos0}\pi=\frac1\pi,
 \quad b_n=\frac{\sin0}\pi=0.
 \]
-Thus
+Thus, with $a_0/2=1/(2\pi)$,
 \[
 \boxed{\delta_{2\pi}(x)=\frac1{2\pi}
 +\frac1\pi\sum_{n=1}^{\infty}\cos nx.}
 \]
 \textbf{(a)} The constant $1/(2\pi)$ is the mean density over one
-period. All other terms integrate to zero; this term alone ensures
-unit total mass.
+period. All other terms integrate to zero over $(-\pi,\pi)$; this term
+alone ensures unit total mass, $\int_{-\pi}^{\pi}dx/(2\pi)=1$.
 
 \textbf{(b)} \erratum{The equality is distributional, and its global
 extension is periodic: $\delta_{2\pi}(x)=\sum_{k\in\mathbb Z}
@@ -868,34 +1063,51 @@ extension is periodic: $\delta_{2\pi}(x)=\sum_{k\in\mathbb Z}
 $(-\pi,\pi)$, not a single isolated delta on the whole real line.}
 The series cannot be interpreted as an ordinary pointwise function.
 
-\textbf{(c)} \erratum{The printed finite-sum identity has an incorrect
-angle: its cosine must be $\cos((N+1)x/2)$, not
-$\cos((N+1/2)x/2)$. This correction is marked in the question.}
-Indeed, the geometric sum is
-\[
+\textbf{(c)} \erratum{The textbook's finite-sum identity has an
+incorrect angle: its cosine must be $\cos((N+1)x/2)$, not
+$\cos((N+1/2)x/2)$, as the geometric sum below shows.}
+Indeed, factoring $e^{iNx/2}$ from the numerator and $e^{ix/2}$ from
+the denominator, and using $e^{-iu}-e^{iu}=-2i\sin u$, the geometric
+sum is
+\begin{align*}
 \sum_{n=1}^Ne^{inx}
-=e^{ix}\frac{1-e^{iNx}}{1-e^{ix}}
-=e^{i(N+1)x/2}\frac{\sin(Nx/2)}{\sin(x/2)}.
-\]
-Taking real parts proves the corrected identity. Adding the constant
-term and using $2\sin A\cos B=\sin(A+B)+\sin(A-B)$ yields
+&=e^{ix}\frac{1-e^{iNx}}{1-e^{ix}}
+=e^{ix}\,\frac{e^{iNx/2}(e^{-iNx/2}-e^{iNx/2})}
+{e^{ix/2}(e^{-ix/2}-e^{ix/2})}\\
+&=e^{i(N+1)x/2}\frac{\sin(Nx/2)}{\sin(x/2)}.
+\end{align*}
+Taking real parts proves the corrected identity. Add the constant
+term and use $2\sin A\cos B=\sin(A+B)+\sin(A-B)$ with $A=Nx/2$,
+$B=(N+1)x/2$, so that $A+B=(N+1/2)x$ and $A-B=-x/2$. This yields
 \begin{align*}
 1+2\sum_{n=1}^N\cos nx
 &=\frac{\sin(x/2)+\sin((N+1/2)x)-\sin(x/2)}{\sin(x/2)}\\
 &=\frac{\sin((N+1/2)x)}{\sin(x/2)}=D_N(x).
 \end{align*}
-The quotient has the removable value $D_N(0)=2N+1$.
-Its normalized integral is one. Moreover $D_N/(2\pi)$ reproduces every
-Fourier polynomial of degree at most $N$ under integration. For smooth
-periodic $f$, the absolutely summable Fourier coefficients then give
-$\int fD_N/(2\pi)\to f(0)$, as proved in 19.1.11.
+The quotient has the removable value $D_N(0)=2N+1$ (the left side at
+$x=0$, or the limit $(N+1/2)/(1/2)$ of the quotient).
+Its normalized integral is one,
+$(2\pi)^{-1}\int_{-\pi}^{\pi}D_N\,dx=1$, since each $\cos nx$
+integrates to zero. Moreover, since
+$D_N(x)=\sum_{n=-N}^Ne^{inx}$, for a periodic $f$ with exponential
+Fourier coefficients $c_n$ (as in 19.1.11)
+\[
+\frac1{2\pi}\int_{-\pi}^{\pi}f(x)D_N(x)\,dx=\sum_{n=-N}^Nc_{-n}
+=\sum_{n=-N}^Nc_n,
+\]
+the symmetric partial sum of the Fourier series of $f$ at $x=0$; in
+particular $D_N/(2\pi)$ reproduces the value at $0$ of every Fourier
+polynomial of degree at most $N$. For smooth periodic $f$ these
+partial sums tend to $f(0)$ as $N\to\infty$, as shown in 19.1.11.
 This is the delta limit.
 
 Specifically Eq. (5.27) is the closure relation
 $\delta(x-t)=\sum_j\phi_j(x)\phi_j^*(t)$.
 For the orthonormal functions
 $1/\sqrt{2\pi}$, $\cos nx/\sqrt\pi$, $\sin nx/\sqrt\pi$,
-setting $t=0$ gives exactly the boxed formula. Thus the finite kernel
+setting $t=0$ gives
+$1/(2\pi)+\pi^{-1}\sum_{n\ge1}(\cos nx\cos0+\sin nx\sin0)$,
+exactly the boxed formula. Thus the finite kernel
 and the general bilinear closure relation agree.
 
 \Needspace{5\baselineskip}
@@ -909,25 +1121,31 @@ $\delta(x-t)=\dfrac{1}{2\pi}+\dfrac{1}{\pi}
 \displaystyle\sum_{n=1}^{\infty}\cos n(x-t)$.
 \erratum{Use the periodic distribution on $(-\pi,\pi)$, with $t$ in that interval, or equivalently work on the circle.}
 \solution
-For $t$ strictly inside $(-\pi,\pi)$, the delta's sampling rule gives
+For $t$ strictly inside $(-\pi,\pi)$, the delta's sampling rule
+$\int_{-\pi}^{\pi}\delta(x-t)g(x)\,dx=g(t)$, applied to $g=1$,
+$\cos nx$, $\sin nx$ in the coefficient formulas, gives
 \[
 a_0(t)=\frac1\pi,\qquad
  a_n(t)=\frac{\cos nt}{\pi},\qquad
  b_n(t)=\frac{\sin nt}{\pi}.
 \]
-Substitution gives
+Substitution into $a_0/2+\sum_{n\ge1}(a_n\cos nx+b_n\sin nx)$ gives
 \begin{align*}
 \delta_{2\pi}(x-t)
 &=\frac1{2\pi}+\frac1\pi\sum_{n=1}^{\infty}
 (\cos nx\cos nt+\sin nx\sin nt)\\
 &=\boxed{\frac1{2\pi}+\frac1\pi\sum_{n=1}^{\infty}\cos n(x-t)}.
 \end{align*}
-The last equality is the cosine subtraction identity, applied first to
-finite sums. With the normalized sine, cosine and constant basis from
-19.2.2, the first line is precisely
-$\sum_j\phi_j(x)\phi_j^*(t)$ in Eq. (5.27).
-For example, integrating against $\phi_k(x)$ leaves only the $k$th
-orthonormal term and gives $\phi_k(t)$; by the convergent Fourier
+The last equality is the cosine subtraction identity
+$\cos nx\cos nt+\sin nx\sin nt=\cos n(x-t)$, applied first to finite
+sums. With the real orthonormal basis $1/\sqrt{2\pi}$,
+$\cos nx/\sqrt\pi$, $\sin nx/\sqrt\pi$ from 19.2.2, the first line is
+precisely $\sum_j\phi_j(x)\phi_j^*(t)$ in Eq.~(5.27), because
+$(1/\sqrt{2\pi})(1/\sqrt{2\pi})=1/(2\pi)$ and
+$(\cos nx/\sqrt\pi)(\cos nt/\sqrt\pi)=\pi^{-1}\cos nx\cos nt$, and
+similarly for the sines.
+For example, integrating against $\phi_k(x)$ leaves, by orthonormality,
+only the $k$th term and gives $\phi_k(t)$; by the convergent Fourier
 expansion this extends to smooth test functions.
 The periodic/distributional and endpoint qualifications of 19.2.2
 apply equally to the translated kernel.
@@ -943,25 +1161,41 @@ a term $x/2\pi$. What are you going to do with this?
 \solution
 Let $H(x)$ be zero for $-\pi<x<0$ and one for $0<x<\pi$.
 Within this open interval, $H'=\delta(x)$ and the symmetric value at
-zero is $H(0)=1/2$. Integrating the delta Fourier series from zero,
-with that symmetric convention, gives
+zero is $H(0)=1/2$. Integrate the delta Fourier series from zero term
+by term,
+\[
+\int_0^x\Bigl[\frac1{2\pi}+\frac1\pi\sum_{n=1}^{\infty}\cos nt\Bigr]dt
+=\frac x{2\pi}+\frac1\pi\sum_{n=1}^{\infty}\frac{\sin nx}n,
+\]
+and add $H(0)=1/2$. This gives
 \[
 H(x)=\frac12+\frac{x}{2\pi}
 +\frac1\pi\sum_{n=1}^{\infty}\frac{\sin nx}{n},
 \qquad -\pi<x<\pi.
 \]
+As a check, by 19.1.5 the sine series is $(\pi-x)/2$ on $(0,\pi)$ and
+$-(\pi+x)/2$ on $(-\pi,0)$, so the right side is
+$1/2+x/(2\pi)+(\pi-x)/(2\pi)=1$ and
+$1/2+x/(2\pi)-(\pi+x)/(2\pi)=0$, respectively.
 The term mentioned in the hint must be retained. Expand it using the
-sawtooth series $x=2\sum_{n\ge1}(-1)^{n+1}\sin nx/n$:
+sawtooth series $x=2\sum_{n\ge1}(-1)^{n+1}\sin nx/n$ of 19.2.7, that
+is, $x/(2\pi)=\pi^{-1}\sum_{n\ge1}(-1)^{n+1}\sin nx/n$:
 \begin{align*}
 H(x)&=\frac12+\frac1\pi\sum_{n=1}^{\infty}
 \frac{1+(-1)^{n+1}}n\sin nx\\
 &=\boxed{\frac12+\frac2\pi\sum_{j=0}^{\infty}
 \frac{\sin((2j+1)x)}{2j+1}}.
 \end{align*}
-The even terms cancel and the odd terms double, which is Eq. (19.26)
-with $h=1$.
+Since $1+(-1)^{n+1}$ is $0$ for even $n$ and $2$ for odd $n=2j+1$, the
+even terms cancel and the odd terms double, which is Eq.~(19.26) with
+$h=1$.
 
-There is also a direct way to keep the periodic boundary bookkeeping:
+There is also a direct way to keep the periodic boundary bookkeeping.
+Integrate the series of 19.2.3 over $0<t<\pi$. The constant term gives
+$\pi/(2\pi)=1/2$, and with $u=x-t$,
+$\int_0^\pi\cos n(x-t)\,dt=\int_{x-\pi}^x\cos nu\,du
+=[\sin nx-\sin(n(x-\pi))]/n$, and
+$\sin(n(x-\pi))=(-1)^n\sin nx$:
 \begin{align*}
 H(x)&=\int_0^\pi\delta_{2\pi}(x-t)\,dt\\
 &=\frac12+\frac1\pi\sum_{n=1}^{\infty}
@@ -969,8 +1203,12 @@ H(x)&=\int_0^\pi\delta_{2\pi}(x-t)\,dt\\
 &=\frac12+\frac1\pi\sum_{n=1}^{\infty}
 \frac{1-(-1)^n}{n}\sin nx.
 \end{align*}
-\erratum{The manual's final negative-$x$ branch is printed as $1$;
-it must be $0$. Also the derivative of the periodic step is
+For $0<x<\pi$ the delta at $t=x$ lies in $(0,\pi)$ and the integral is
+$1$; for $-\pi<x<0$ the comb members at $t=x$ and $t=x+2\pi$ both lie
+outside $(0,\pi)$ and it is $0$. The coefficient $1-(-1)^n$ again keeps
+only odd $n$, with value $2$, reproducing the boxed series.
+\erratum{The Instructor's Manual's final negative-$x$ branch is
+printed as $1$; it must be $0$. Also the derivative of the periodic step is
 $\delta_{2\pi}(x)-\delta_{2\pi}(x-\pi)$, including the downward
 boundary jump. Integrating a single periodic delta produces the linear
 term above, not by itself a periodic primitive.}
@@ -986,7 +1224,9 @@ given as lines 4 and 5 of Table~19.1, show that:
 \]
 \erratum{Exclude $x\in\pi\mathbb Z$.}
 \solution
-On $0<|x|<\pi$, the two logarithmic series in Table 19.1 read
+On $0<|x|<\pi$, the two logarithmic series in Table 19.1 read as
+follows; they are 19.1.8(b), extended to $-\pi<x<0$ because both sides
+are even, and 19.1.8(a) multiplied by $-1$:
 \[
 A(x)=\sum_{n=1}^{\infty}\frac{\cos nx}{n}
 =-\ln(2|\sin(x/2)|),
@@ -994,16 +1234,22 @@ A(x)=\sum_{n=1}^{\infty}\frac{\cos nx}{n}
 B(x)=\sum_{n=1}^{\infty}\frac{(-1)^n\cos nx}{n}
 =-\ln(2\cos(x/2)).
 \]
-\erratum{In the manual's intermediate first sum, the denominator
-printed as $x$ must be $n$, and that sum starts at $n=1$.}
-Subtracting eliminates every even harmonic:
+\erratum{In the Instructor's Manual's intermediate first sum, the
+denominator printed as $x$ must be $n$, and that sum starts at $n=1$.}
+Subtracting the two convergent series term by term eliminates every even
+harmonic, since $1-(-1)^n$ is $0$ for even $n$ and $2$ for odd $n$:
 \[
 A-B=\sum_{n=1}^{\infty}\frac{1-(-1)^n}{n}\cos nx
 =2\sum_{j=0}^{\infty}\frac{\cos((2j+1)x)}{2j+1}.
 \]
-The corresponding logarithmic difference is
-$\ln(2\cos(x/2))-\ln(2|\sin(x/2)|)
-=\ln|\cot(x/2)|$. Hence
+The corresponding logarithmic difference is, since $\cos(x/2)>0$ for
+$|x|<\pi$,
+\[
+\ln(2\cos(x/2))-\ln(2|\sin(x/2)|)
+=\ln\frac{\cos(x/2)}{|\sin(x/2)|}
+=\ln|\cot(x/2)|.
+\]
+Dividing $A-B$ by $2$ gives
 \[
 \boxed{\sum_{j=0}^{\infty}\frac{\cos((2j+1)x)}{2j+1}
 =\frac12\ln|\cot(x/2)|.}
@@ -1013,7 +1259,8 @@ the series diverges to $+\infty$; at odd multiples it diverges to
 $-\infty$.}
 Elsewhere its ordinary convergence follows from Dirichlet's test for
 $\sum e^{i(2j+1)x}$, whose geometric ratio is $e^{2ix}\ne1$.
-Periodicity extends the displayed identity to every other real $x$.
+Both sides have period $2\pi$, so periodicity extends the displayed
+identity to every other real $x\notin\pi\mathbb Z$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1041,9 +1288,14 @@ a_0=\frac1\pi\int_0^\pi\sin x\,dx=\frac2\pi.
 Orthogonality of sines on $(0,\pi)$ gives
 \[
 b_n=\frac1\pi\int_0^\pi\sin x\sin nx\,dx
-=\frac12\delta_{n1}.
+=\frac1{2\pi}\int_0^\pi[\cos((n-1)x)-\cos((n+1)x)]\,dx
+=\frac12\delta_{n1},
 \]
-For $n\ne1$, the product-to-sum identity gives
+because for $n\ge2$ both cosines integrate to zero, while for $n=1$ the
+integrand is $1-\cos2x$, with integral $\pi$.
+For $n\ne1$, the product-to-sum identity
+$\sin x\cos nx=\frac12[\sin((n+1)x)+\sin((1-n)x)]$ and
+$\int_0^\pi\sin mx\,dx=[1-(-1)^m]/m$ ($m\ne0$) give
 \begin{align*}
 a_n&=\frac1{2\pi}\int_0^\pi
  [\sin((n+1)x)+\sin((1-n)x)]\,dx\\
@@ -1051,14 +1303,16 @@ a_n&=\frac1{2\pi}\int_0^\pi
 \frac{1-(-1)^{n+1}}{n+1}
 +\frac{1-(-1)^{1-n}}{1-n}\right].
 \end{align*}
-This vanishes for odd $n>1$. For even $n$ it is
+For odd $n>1$ both $n+1$ and $1-n$ are even, so both numerators vanish.
+For even $n$ both are odd and both numerators equal $2$, so
 \[
-\frac1\pi\left(\frac1{n+1}+\frac1{1-n}\right)
+a_n=\frac1\pi\left(\frac1{n+1}+\frac1{1-n}\right)
+=\frac1\pi\,\frac{(1-n)+(n+1)}{(n+1)(1-n)}
 =-\frac{2}{\pi(n^2-1)}.
 \]
 The exceptional coefficient is also zero:
 $a_1=(2\pi)^{-1}\int_0^\pi\sin2x\,dx=0$.
-Consequently
+Consequently, with $a_0/2=1/\pi$ and $n=2j$, $n^2-1=4j^2-1$,
 \[
 \boxed{f(t)=\frac1\pi+\frac12\sin\omega t
 -\frac2\pi\sum_{j=1}^{\infty}
@@ -1079,11 +1333,15 @@ Show that
 f(x)=2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\sin nx.
 \]
 \solution
-Oddness gives $a_0=a_n=0$. The sine coefficient is
+Oddness gives $a_0=a_n=0$, since $x$ and $x\cos nx$ are odd. The
+integrand $x\sin nx$ is even, so with the antiderivative of 19.1.9,
+$\sin n\pi=0$ and $\cos n\pi=(-1)^n$, the sine coefficient is
 \begin{align*}
-b_n&=\frac2\pi\int_0^\pi x\sin nx\,dx\\
+b_n&=\frac1\pi\int_{-\pi}^\pi x\sin nx\,dx
+=\frac2\pi\int_0^\pi x\sin nx\,dx\\
 &=\frac2\pi\left[-\frac{x\cos nx}{n}
 +\frac{\sin nx}{n^2}\right]_0^\pi
+=\frac2\pi\left(-\frac{\pi(-1)^n}{n}\right)
 =\frac{2(-1)^{n+1}}n.
 \end{align*}
 Thus
@@ -1108,16 +1366,20 @@ f(x)=\begin{cases}
 \]
 Show that $f(x)=\displaystyle\sum_{n=1}^{\infty}(\sin nx/n)$.
 \solution
-The function is odd, so only sine terms remain. For $n\ge1$,
+The function is odd, so only sine terms remain. For $n\ge1$, using
+$\int_0^\pi\sin nx\,dx=[1-(-1)^n]/n$ and
+$\int_0^\pi x\sin nx\,dx=-\pi(-1)^n/n$ from 19.2.7,
 \begin{align*}
 b_n&=\frac2\pi\int_0^\pi\frac{\pi-x}{2}\sin nx\,dx\\
 &=\int_0^\pi\sin nx\,dx
 -\frac1\pi\int_0^\pi x\sin nx\,dx\\
 &=\frac{1-(-1)^n}{n}
--\frac1\pi\left(-\frac{\pi(-1)^n}{n}\right)=\frac1n.
+-\frac1\pi\left(-\frac{\pi(-1)^n}{n}\right)
+=\frac{1-(-1)^n+(-1)^n}{n}=\frac1n.
 \end{align*}
-\erratum{The manual's last integral in its coefficient calculation
-prints $x\sin x$; it must be $x\sin nx$. The $n$-dependence is retained above.}
+\erratum{The Instructor's Manual's last integral in its coefficient
+calculation prints $x\sin x$; it must be $x\sin nx$. The
+$n$-dependence is retained above.}
 Therefore
 \[
 \boxed{f(x)=\sum_{n=1}^{\infty}\frac{\sin nx}{n}}
@@ -1142,18 +1404,21 @@ Represent $f(x)$ by a Fourier series.
 $f(x)=\dfrac{\pi}{2}-\dfrac{4}{\pi}
 \displaystyle\sum_{n=1,3,5,\ldots}\dfrac{\cos nx}{n^{2}}$.
 \solution
-Here $f(x)=|x|$ is even, so $b_n=0$. Its constant coefficient is
+Here $f(x)=|x|$ is even, so $b_n=0$ and the cosine integrals may be
+taken over $(0,\pi)$ and doubled. Its constant coefficient is
 \[
-a_0=\frac2\pi\int_0^\pi x\,dx=\pi.
+a_0=\frac2\pi\int_0^\pi x\,dx=\frac2\pi\,\frac{\pi^2}2=\pi.
 \]
-For $n\ge1$, integration by parts gives
+For $n\ge1$, integration by parts (the antiderivative of 19.1.9, with
+$\sin n\pi=0$, $\cos n\pi=(-1)^n$) gives
 \begin{align*}
 a_n&=\frac2\pi\int_0^\pi x\cos nx\,dx\\
 &=\frac2\pi\left[\frac{x\sin nx}{n}
 +\frac{\cos nx}{n^2}\right]_0^\pi
 =\frac{2[(-1)^n-1]}{\pi n^2}.
 \end{align*}
-Thus the even coefficients vanish, while each odd one is $-4/(\pi n^2)$:
+Thus the even coefficients vanish, while each odd one is $-4/(\pi n^2)$;
+with $a_0/2=\pi/2$,
 \[
 \boxed{|x|=\frac\pi2-\frac4\pi\sum_{j=0}^{\infty}
 \frac{\cos((2j+1)x)}{(2j+1)^2},\qquad-\pi\le x\le\pi.}
@@ -1177,29 +1442,40 @@ importance in electronic music.
 \erratum{Take $x_0$ real and include zero width and full width; at a jump state the Fourier midpoint value.}
 \solution
 Because the definition involves $x_0^2$, write $\alpha=|x_0|$.
-First assume $0<\alpha<\pi$. The waveform is even, giving $b_n=0$ and
+First assume $0<\alpha<\pi$. The waveform depends only on $x^2$, so it is
+even, giving $b_n=0$; on $(0,\pi)$ it is $1$ for $x<\alpha$ and $0$ for
+$x>\alpha$. Hence
 \[
 a_0=\frac2\pi\int_0^\alpha1\,dx=\frac{2\alpha}{\pi},
 \qquad
 a_n=\frac2\pi\int_0^\alpha\cos nx\,dx
-=\frac{2\sin n\alpha}{n\pi}.
+=\frac2\pi\left[\frac{\sin nx}n\right]_0^\alpha
+=\frac{2\sin n\alpha}{n\pi},
 \]
-Hence
+and, with $a_0/2=\alpha/\pi$,
 \[
 \boxed{f(x)=\frac\alpha\pi+\frac2\pi\sum_{n=1}^{\infty}
 \frac{\sin n\alpha}{n}\cos nx.}
 \]
 The constant term is the duty fraction: the pulse occupies length
-$2\alpha$ of a period $2\pi$. At the two jumps $x=\pm\alpha$ the
-Fourier value is $1/2$; it is one or zero in the open constant regions.
+$2\alpha$ of a period $2\pi$. The series is one or zero in the open
+constant regions. At the two jumps $x=\pm\alpha$ its value is the
+midpoint $1/2$: with $2\sin n\alpha\cos n\alpha=\sin2n\alpha$ and
+19.1.5 for $0<2\alpha<2\pi$,
+\[
+\frac\alpha\pi+\frac1\pi\sum_{n=1}^{\infty}\frac{\sin2n\alpha}{n}
+=\frac\alpha\pi+\frac1\pi\,\frac{\pi-2\alpha}2=\frac12.
+\]
 
 \erratum{The usual variable-width formula presumes $0<|x_0|<\pi$.
 For $|x_0|\ge\pi$ the function is one almost everywhere in the interval;
 for $x_0=0$ it is zero almost everywhere.}
-The equality points in the original piecewise definition can be assigned
-arbitrarily without changing any coefficient. One formula for all real
-$x_0$ is obtained by replacing $\alpha$ by $\min(|x_0|,\pi)$ above:
-it reduces to the appropriate constant series in the two limiting cases.
+The equality points $x^2=x_0^2$ in the piecewise definition can be
+assigned arbitrarily without changing any coefficient. One formula for
+all real $x_0$ is obtained by replacing $\alpha$ by $\min(|x_0|,\pi)$
+above: it reduces to the appropriate constant series in the two limiting
+cases, since $\alpha=\pi$ gives $\alpha/\pi=1$ and $\sin n\pi=0$, and
+$\alpha=0$ makes every term zero.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1217,31 +1493,39 @@ along its axis and negligible slit width. Finite end effects or a finite
 open gap require additional boundary data. At the ideal slit endpoints
 the two assigned boundary limits disagree, so a single boundary value
 cannot be imposed there.}
-Take $0<\varphi<\pi$ to be the top half. In the interior, Laplace's
-equation is
+Take $0<\varphi<\pi$ to be the top half. With no dependence on the axial
+coordinate, Laplace's equation in the interior, in polar coordinates, is
 \[
 \Phi_{rr}+\frac1r\Phi_r+\frac1{r^2}\Phi_{\varphi\varphi}=0.
 \]
 With $\Phi=R(r)\Theta(\varphi)$, multiplication by $r^2/(R\Theta)$
-separates this into
+separates this into a function of $r$ equal to a function of $\varphi$,
+hence to a constant, written $n^2$:
 \[
 \frac{r^2R''+rR'}R=-\frac{\Theta''}\Theta=n^2.
 \]
-Single-valued angular functions have integer $n$, with
-$\Theta=\cos n\varphi,\sin n\varphi$. The radial equation has
-$R=r^n,r^{-n}$ for $n\ge1$, and $R=1,\ln r$ for $n=0$.
+The angular equation $\Theta''+n^2\Theta=0$ has $2\pi$-periodic
+(single-valued) solutions only for integer $n\ge0$, namely
+$\Theta=\cos n\varphi,\sin n\varphi$; a negative constant would give
+nonperiodic exponentials. The radial equation $r^2R''+rR'-n^2R=0$ is
+of Euler type: $R=r^k$ gives $k^2=n^2$, so $R=r^n,r^{-n}$ for $n\ge1$,
+while for $n=0$ it reads $(rR')'=0$, with solutions $R=1,\ln r$.
 Boundedness at the axis excludes $r^{-n}$ and $\ln r$, leaving
 \[
 \Phi(r,\varphi)=C_0+\sum_{n=1}^{\infty}
 (r/a)^n(C_n\cos n\varphi+D_n\sin n\varphi).
 \]
-The boundary function is odd and has zero mean, so $C_0=C_n=0$.
-Its sine coefficients are
+At $r=a$ this must be the Fourier series of the boundary function,
+$V$ on $(0,\pi)$ and $-V$ on $(-\pi,0)$. That function is odd and has
+zero mean, so $C_0=C_n=0$. Its sine coefficients, with the even
+integrand reduced to $(0,\pi)$ and
+$\int_0^\pi\sin n\varphi\,d\varphi=[1-(-1)^n]/n$, are
 \[
-D_n=\frac2\pi\int_0^\pi V\sin n\varphi\,d\varphi
-=\frac{2V}{n\pi}[1-(-1)^n].
+D_n=\frac1\pi\int_{-\pi}^{\pi}\Phi(a,\varphi)\sin n\varphi\,d\varphi
+=\frac2\pi\int_0^\pi V\sin n\varphi\,d\varphi
+=\frac{2V}{n\pi}[1-(-1)^n],
 \]
-Therefore
+that is, $4V/(n\pi)$ for odd $n$ and $0$ for even $n$. Therefore
 \[
 \boxed{\Phi(r,\varphi)=\frac{4V}{\pi}\sum_{j=0}^{\infty}
 \frac{(r/a)^{2j+1}}{2j+1}\sin((2j+1)\varphi),\qquad r<a.}
@@ -1251,20 +1535,37 @@ subdisks, so it is harmonic. As $r\uparrow a$, it becomes the $\pm V$
 square-wave series and attains the prescribed values away from the slits.
 Its radial limit on a slit is the midpoint zero.
 
-For an additional closed-form check put $q=r/a<1$ and $z=qe^{i\varphi}$.
-The geometric-series integral gives
-$\sum_{j\ge0}z^{2j+1}/(2j+1)=\tfrac12\log[(1+z)/(1-z)]$.
-Since
+For an additional closed-form check put $q=r/a<1$ and $z=qe^{i\varphi}$,
+so that the boxed series is
+$(4V/\pi)\operatorname{Im}\sum_{j\ge0}z^{2j+1}/(2j+1)$. Integrate the
+geometric series $\sum_{j\ge0}z^{2j}=1/(1-z^2)$ from $0$ to $z$, using
+the partial fractions $1/(1-z^2)=\frac12[1/(1+z)+1/(1-z)]$:
 \[
-\frac{1+z}{1-z}
+\sum_{j=0}^{\infty}\frac{z^{2j+1}}{2j+1}
+=\frac12\bigl[\log(1+z)-\log(1-z)\bigr]
+=\frac12\log\frac{1+z}{1-z},
+\]
+with principal logarithms; $1\pm z$ lie in the right half-plane, so
+their arguments lie in $(-\pi/2,\pi/2)$ and subtract without a $2\pi$
+correction. Multiplying numerator and denominator by $1-\bar z$, and
+using $z-\bar z=2iq\sin\varphi$,
+\[
+\frac{1+z}{1-z}=\frac{(1+z)(1-\bar z)}{|1-z|^2}
 =\frac{1-q^2+2iq\sin\varphi}{|1-z|^2},
 \]
-its real part is positive. Thus the principal argument gives
+whose real part is positive. Thus
+\[
+\Phi=\frac{2V}\pi\operatorname{Arg}\frac{1+z}{1-z}
+=\frac{2V}\pi\arctan\frac{2q\sin\varphi}{1-q^2},
+\]
+and multiplying numerator and denominator by $a^2$ gives
 \[
 \boxed{\Phi(r,\varphi)=\frac{2V}{\pi}
 \arctan\frac{2ar\sin\varphi}{a^2-r^2},\qquad r<a.}
 \]
-The limit is $+V$ above and $-V$ below. The bounded harmonic Dirichlet
+As $r\uparrow a$ the argument of the arctangent tends to $+\infty$ where
+$\sin\varphi>0$ and to $-\infty$ where $\sin\varphi<0$, so the limit is
+$+V$ above and $-V$ below. The bounded harmonic Dirichlet
 solution is unique: the difference of two such solutions has zero
 boundary data almost everywhere and its Poisson representation is zero.
 
@@ -1281,22 +1582,29 @@ function of angular position.
 \erratum{Assume an infinitely long neutral cylinder in vacuum. Take its radius to be $a$ and set its constant potential to zero.}
 \solution
 \erratum{The usual solution assumes an infinitely long, neutral cylinder
-in vacuum. The original problem does not specify a net charge; allowing one adds
-a logarithmic monopole potential. Finite cylinders require end data.}
+in vacuum. The textbook's problem does not specify a net charge; allowing
+one adds a logarithmic monopole potential. Finite cylinders require end
+data.}
 Let the radius be $a$ and take the original field to be $E_0\hat{\mathbf x}$.
 Choose the conductor potential as zero, so the far-field potential is
 $-E_0r\cos\varphi$.
 
-\textbf{(a)} The separated exterior harmonic functions are
-$1,\ln r,r^{\pm n}\cos n\varphi,r^{\pm n}\sin n\varphi$.
-The applied field has only the $n=1$ cosine component. All other angular
-coefficients vanish because the surface potential is constant and the
-perturbation decays at infinity. Thus
+\textbf{(a)} The separated exterior harmonic functions are those of
+19.2.11, $1,\ln r,r^{\pm n}\cos n\varphi,r^{\pm n}\sin n\varphi$, now
+keeping $r^{-n}$ and $\ln r$ because the axis is excluded. Thus
 \[
-\Phi_{\rm out}=(-E_0r+C/r)\cos\varphi.
+\Phi_{\rm out}=A_0+B_0\ln r+\sum_{n=1}^{\infty}
+\bigl[(A_nr^n+B_nr^{-n})\cos n\varphi
++(A_n'r^n+B_n'r^{-n})\sin n\varphi\bigr].
 \]
-The conductor condition $\Phi(a,\varphi)=0$ fixes
-$-E_0a+C/a=0$, or $C=E_0a^2$. Hence
+The applied field has only the $n=1$ cosine component. Since the
+perturbation $\Phi_{\rm out}+E_0r\cos\varphi$ decays at infinity,
+$A_1=-E_0$, every other $A_n$ and every $A_n'$ vanish, and
+$A_0=B_0=0$ ($\ln r$ grows; it is the potential of a net line charge).
+The conductor condition $\Phi_{\rm out}(a,\varphi)=0$ for all $\varphi$
+makes every Fourier coefficient of the boundary values vanish:
+$B_na^{-n}=0$ for $n\ge2$, $B_n'a^{-n}=0$ for $n\ge1$, and
+$-E_0a+B_1/a=0$, or $B_1=E_0a^2$. Hence
 \[
 \boxed{\Phi_{\rm out}(r,\varphi)
 =-E_0\left(r-\frac{a^2}{r}\right)\cos\varphi\quad(r\ge a),
@@ -1305,19 +1613,25 @@ $-E_0a+C/a=0$, or $C=E_0a^2$. Hence
 Each radial term solves the separated Laplace equation, and
 $\Phi_{\rm out}+E_0r\cos\varphi=E_0a^2\cos\varphi/r\to0$.
 
-\textbf{(b)} The outward normal field just outside the surface is
+\textbf{(b)} Since $\partial_r(r-a^2/r)=1+a^2/r^2$, the outward normal
+field just outside the surface is
 \[
 E_r=-\partial_r\Phi_{\rm out}
 =E_0\left(1+\frac{a^2}{r^2}\right)\cos\varphi,
 \qquad E_r(a^+)=2E_0\cos\varphi.
 \]
-Since the field inside the metal is zero, the boundary condition gives
+Since the field inside the metal is zero, the boundary condition
+(Gauss's law for a thin pillbox across the surface) gives
 \[
 \boxed{\sigma(\varphi)=\epsilon_0[E_r(a^+)-E_r(a^-)]
 =2\epsilon_0E_0\cos\varphi.}
 \]
-Also $E_\varphi(a)=0$ and the total induced charge per unit length is
-$a\int_0^{2\pi}\sigma\,d\varphi=0$, verifying neutrality.
+Also
+$E_\varphi=-r^{-1}\partial_\varphi\Phi_{\rm out}
+=-E_0(1-a^2/r^2)\sin\varphi$ vanishes at $r=a$, as it must on a
+conductor, and the total induced charge per unit length is
+$a\int_0^{2\pi}\sigma\,d\varphi=2\epsilon_0E_0a\int_0^{2\pi}\cos\varphi
+\,d\varphi=0$, verifying neutrality.
 If a net line charge $\lambda$ is specified instead, the more general
 solution contains
 \[
@@ -1344,36 +1658,43 @@ x, & 0\le x<\pi.
 \]
 \end{enumerate}
 \solution
-\textbf{(a)} All coefficient integrals run only from zero to $\pi$:
+\textbf{(a)} Since $f=0$ on $(-\pi,0)$, all coefficient integrals run
+only from zero to $\pi$:
 \[
-a_0=\frac1\pi\int_0^\pi x\,dx=\frac\pi2.
+a_0=\frac1\pi\int_0^\pi x\,dx=\frac1\pi\,\frac{\pi^2}2=\frac\pi2.
 \]
-For $n\ge1$,
+For $n\ge1$, the antiderivatives of $x\cos nx$ and $x\sin nx$ from
+19.1.9, with $\sin n\pi=0$ and $\cos n\pi=(-1)^n$, give
 \begin{align*}
-a_n&=\frac1\pi\left[\frac{x\sin nx}{n}
+a_n&=\frac1\pi\int_0^\pi x\cos nx\,dx
+=\frac1\pi\left[\frac{x\sin nx}{n}
 +\frac{\cos nx}{n^2}\right]_0^\pi
 =\frac{(-1)^n-1}{\pi n^2},\\
-b_n&=\frac1\pi\left[-\frac{x\cos nx}{n}
+b_n&=\frac1\pi\int_0^\pi x\sin nx\,dx
+=\frac1\pi\left[-\frac{x\cos nx}{n}
 +\frac{\sin nx}{n^2}\right]_0^\pi
 =\frac{(-1)^{n+1}}n.
 \end{align*}
-Thus
+Thus $a_0/2=\pi/4$, and $a_n=-2/(\pi n^2)$ for odd $n$ and $0$ for even
+$n$:
 \[
 \boxed{f(x)=\frac\pi4-\frac2\pi\sum_{j=0}^{\infty}
 \frac{\cos((2j+1)x)}{(2j+1)^2}
 +\sum_{n=1}^{\infty}\frac{(-1)^{n+1}\sin nx}{n}.}
 \]
-This also follows by splitting $f(x)=(|x|+x)/2$ and combining the
-triangular and sawtooth expansions. The equality holds on $(-\pi,\pi)$,
-including zero, where $f$ is continuous. At the period endpoints the
-series equals the midpoint $\pi/2$ of the jump between $0$ and $\pi$.
+This also follows by splitting $f(x)=(|x|+x)/2$ and taking half the sum
+of the triangular expansion of 19.2.9 and the sawtooth expansion of
+19.2.7. The function is piecewise smooth, so by Dirichlet's theorem the
+equality holds on $(-\pi,\pi)$, including zero, where $f$ is continuous.
+At the period endpoints the series equals the midpoint $\pi/2$ of the
+jump between $f(\pi^-)=\pi$ and $f(-\pi^+)=0$.
 
-\textbf{(b)} Set $x=0$. All sine terms vanish and every cosine is one,
-so
+\textbf{(b)} Set $x=0$, where $f(0)=0$. All sine terms vanish and every
+cosine is one, so
 \[
 0=\frac\pi4-\frac2\pi\sum_{j=0}^{\infty}\frac1{(2j+1)^2}.
 \]
-Solving gives
+Solving, $\sum_j(2j+1)^{-2}=(\pi/2)(\pi/4)$, gives
 \[
 \boxed{\sum_{j=0}^{\infty}\frac1{(2j+1)^2}=\frac{\pi^2}{8}.}
 \]
@@ -1390,13 +1711,15 @@ f(x)=\begin{cases}
 \]
 Show that your integrated series agrees with Exercise~19.2.13.
 \solution
-The unit step has the series
+The unit step has the series (Eq.~(19.26) with $h=1$; see 19.2.4)
 \[
 H(t)=\frac12+\frac2\pi\sum_{j=0}^{\infty}
 \frac{\sin((2j+1)t)}{2j+1}.
 \]
-Its integral from zero to $x$ is $F(x)=0$ for negative $x$ and $F(x)=x$
-for positive $x$, as in 19.2.13. Integrating term by term gives
+Its integral $F(x)=\int_0^xH(t)\,dt$ is $0$ for $-\pi<x<0$, where $H=0$
+between $x$ and $0$, and $x$ for $0<x<\pi$; this is the function $f$
+of 19.2.13. Integrating term by term, with
+$\int_0^x\sin((2j+1)t)\,dt=[1-\cos((2j+1)x)]/(2j+1)$, gives
 \[
 F(x)=\frac x2+\frac2\pi\sum_{j=0}^{\infty}
 \frac{1-\cos((2j+1)x)}{(2j+1)^2}.
@@ -1404,17 +1727,19 @@ F(x)=\frac x2+\frac2\pi\sum_{j=0}^{\infty}
 This step is justified in $L^2$: integration against the indicator of
 $(0,x)$ is a bounded linear functional, and the Fourier partial sums
 converge in $L^2$. The resulting series is absolutely uniform.
-Using $\sum_{j\ge0}(2j+1)^{-2}=\pi^2/8$ yields
+Splitting it into two absolutely convergent series and using
+$\sum_{j\ge0}(2j+1)^{-2}=\pi^2/8$ (19.2.13(b)), so that the constant part
+is $(2/\pi)(\pi^2/8)=\pi/4$, yields
 \[
 F(x)=\frac\pi4+\frac x2-\frac2\pi\sum_{j=0}^{\infty}
 \frac{\cos((2j+1)x)}{(2j+1)^2}.
 \]
-Finally, on $(-\pi,\pi)$,
+Finally, on $(-\pi,\pi)$, half of the sawtooth series of 19.2.7 gives
 $x/2=\sum_{n\ge1}(-1)^{n+1}\sin nx/n$. Substituting it produces
-exactly the constant, cosine and sine terms in 19.2.13. The original
-integral is not periodic; replacing its linear term by the sawtooth
-series supplies the required periodic extension, with midpoint values
-at the endpoints.
+exactly the constant, cosine and sine terms in 19.2.13. The integral
+$F$ itself is not periodic, because of its linear term $x/2$; replacing
+that term by the sawtooth series supplies the required periodic
+extension, with midpoint values at the endpoints.
 
 \Needspace{5\baselineskip}
 \par\bigskip
