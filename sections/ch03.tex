@@ -3398,8 +3398,8 @@ Note that even though $\hat{\mathbf{e}}_{1}$ is a unit vector, its divergence
 and curl \textbf{do not necessarily vanish}.
 \erratum{Use a regular, right-handed orthogonal coordinate chart with positive scale factors $h_i$.}
 \solution
-For physical components $V_i$ in an orthogonal system, the flux through
-opposite $q_i$ faces gives
+\textbf{(a)} For physical components $V_i$ in an orthogonal system, the
+flux through opposite $q_i$ faces gives
 \[
 \nabla\cdot\mathbf V=\frac1{h_1h_2h_3}
 \sum_i\partial_{q_i}(h_jh_kV_i),\qquad\{i,j,k\}=\{1,2,3\}.
@@ -3408,7 +3408,8 @@ For $\mathbf V=\hat{\mathbf e}_1$, $V_1=1,V_2=V_3=0$, so only the
 $i=1$ term survives, $\partial_{q_1}(h_2h_3\cdot1)$, and
 $\boxed{\nabla\cdot\hat{\mathbf e}_1=
 (h_1h_2h_3)^{-1}\partial_{q_1}(h_2h_3)}$.
-For the curl, the gradient formula
+
+\textbf{(b)} For the curl, the gradient formula
 $\nabla\psi=\sum_j\hat{\mathbf e}_jh_j^{-1}\partial_{q_j}\psi$ with
 $\psi=q_1$ gives $\nabla q_1=\hat{\mathbf e}_1/h_1$, i.e.\
 $\hat{\mathbf e}_1=h_1\nabla q_1$. By the product rule
@@ -3431,7 +3432,7 @@ other two terms give
 -\frac{\hat{\mathbf e}_3}{h_2}\partial_{q_2}h_1\right]}.
 \]
 For a left-handed ordering both cross products, and hence the result
-of (b), change sign; this is why the note under the statement asks
+of (b), change sign; this is why the qualification in the statement asks
 for a right-handed chart.
 The basis direction can vary even though its magnitude is fixed.
 
@@ -3696,8 +3697,22 @@ Therefore Eq.~(3.148) gives
 \nabla\cdot\mathbf r=\frac1\rho\partial_\rho(\rho^2)
 +\frac1\rho\partial_\varphi0+\partial_zz=2+0+1=3.
 \]
-For the curl, expanding the determinant form of the curl with
-$h_\rho=1$, $h_\varphi=\rho$, $h_z=1$ gives the components
+For the curl, expand the determinant form of the curl in orthogonal
+coordinates (Section 3.10),
+\[
+\nabla\times\mathbf V=\frac1{h_1h_2h_3}
+\begin{vmatrix}
+h_1\hat{\mathbf e}_1&h_2\hat{\mathbf e}_2&h_3\hat{\mathbf e}_3\\
+\partial_{q_1}&\partial_{q_2}&\partial_{q_3}\\
+h_1V_1&h_2V_2&h_3V_3
+\end{vmatrix},
+\]
+with the right-handed ordering $(q_1,q_2,q_3)=(\rho,\varphi,z)$
+(Exercise 3.10.6) and $h_\rho=1$, $h_\varphi=\rho$, $h_z=1$.
+For instance, the $\hat{\mathbf e}_\rho$ component is
+$\rho^{-1}[\partial_\varphi V_z-\partial_z(\rho V_\varphi)]
+=\rho^{-1}\partial_\varphi V_z-\partial_zV_\varphi$, since $\rho$ does
+not depend on $z$. The three components are
 \[
 (\nabla\times\mathbf V)_\rho=\frac1\rho\partial_\varphi V_z-\partial_zV_\varphi,\quad
 (\nabla\times\mathbf V)_\varphi=\partial_zV_\rho-\partial_\rho V_z,\quad
@@ -3874,8 +3889,8 @@ The remaining component need not vanish:
 \frac{\hat{\mathbf e}_z}{\rho}
 [\partial_\rho(\rho V_\varphi)-\partial_\varphi V_\rho]}.
 \]
-More generally, expanding the determinant form of the curl in
-orthogonal coordinates gives the first two components
+More generally, expanding the determinant of Exercise 3.10.10 for
+general orthogonal coordinates gives the first two components
 \[
 (\nabla\times\mathbf V)_1=\frac{\partial_2(h_3V_3)-\partial_3(h_2V_2)}{h_2h_3},
 \qquad
@@ -4026,8 +4041,9 @@ Its $r,\theta,\varphi$ derivatives are
 \end{aligned}
 \]
 with lengths $1,r,r\sin\theta$ on a regular patch $r>0$, $0<\theta<\pi$
-(for the first two, the squared components sum to
-$\sin^2\theta+\cos^2\theta=1$ after $\cos^2\varphi+\sin^2\varphi=1$).
+(for $\partial_r\mathbf r$ and $\partial_\theta\mathbf r/r$, the
+squared components sum to $\sin^2\theta+\cos^2\theta=1$ after
+$\cos^2\varphi+\sin^2\varphi=1$).
 Normalize each derivative to obtain
 \[
 \boxed{\begin{aligned}
@@ -4047,8 +4063,11 @@ and
 =\hat{\mathbf e}_\varphi,
 \]
 so $(r,\theta,\varphi)$ is right-handed.
-At the polar axis, the angular basis requires a choice of azimuthal
-limit and is not a unique coordinate basis.
+On the polar axis ($\sin\theta=0$) the azimuth $\varphi$ is undefined
+and $\partial_\varphi\mathbf r$ vanishes, so it cannot be normalized;
+moreover the boxed $\hat{\mathbf e}_\theta$ and $\hat{\mathbf e}_\varphi$
+depend on $\varphi$, so the angular unit vectors have no unique value
+on the axis.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4320,9 +4339,14 @@ the cross product is
 -\sin\theta\,\hat{\mathbf e}_\theta\times\hat{\mathbf e}_r)
 =\boxed{\omega r\sin\theta\,\hat{\mathbf e}_\varphi}.
 \]
-\textbf{(b)} Expanding the determinant form of the curl with
-$h_r=1$, $h_\theta=r$, $h_\varphi=r\sin\theta$ gives the spherical
-components
+\textbf{(b)} Expanding the determinant of Exercise 3.10.10 with the
+right-handed ordering $(q_1,q_2,q_3)=(r,\theta,\varphi)$
+(Exercise 3.10.18) and $h_r=1$, $h_\theta=r$, $h_\varphi=r\sin\theta$
+gives the spherical components below. For instance, in the expansion
+along the first row the $\hat{\mathbf e}_\theta$ term (cofactor sign $-1$)
+has the coefficient
+$(r^2\sin\theta)^{-1}\,r\,[\partial_\varphi V_r-\partial_r(r\sin\theta\,V_\varphi)]$,
+which is the $\theta$ formula because $\sin\theta$ does not depend on $r$:
 \[
 \begin{aligned}
 (\nabla\times\mathbf V)_r&=\frac1{r\sin\theta}
@@ -4575,10 +4599,14 @@ and in the same way $\theta_y=zy/(r^3\sin\theta)=\cos\theta\sin\varphi/r$.
 With respect to $z$,
 $-\sin\theta\,\theta_z=1/r-z^2/r^3=(x^2+y^2)/r^3=\sin^2\theta/r$, so
 $\theta_z=-\sin\theta/r$.
-Finally differentiating $\varphi=\operatorname{atan2}(y,x)$ (locally
-$\tan\varphi=y/x$) on a
-regular local branch gives $\varphi_x=-y/(x^2+y^2)$,
-$\varphi_y=x/(x^2+y^2)$, $\varphi_z=0$; with
+Finally, on a regular local branch of $\varphi=\operatorname{atan2}(y,x)$
+with $x\ne0$, differentiate $\tan\varphi=y/x$:
+$\sec^2\varphi\,\varphi_x=-y/x^2$ and $\sec^2\varphi\,\varphi_y=1/x$, where
+$\sec^2\varphi=1+\tan^2\varphi=(x^2+y^2)/x^2$; hence
+$\varphi_x=-y/(x^2+y^2)$ and $\varphi_y=x/(x^2+y^2)$ (where $x=0$,
+differentiating $\cot\varphi=x/y$ gives the same), while $\varphi_z=0$
+because $\varphi$ does not depend on $z$. With
+$x=r\sin\theta\cos\varphi$, $y=r\sin\theta\sin\varphi$, and
 $x^2+y^2=r^2\sin^2\theta$ these are
 $-\sin\varphi/(r\sin\theta)$, $\cos\varphi/(r\sin\theta)$, $0$.
 The full Jacobian obtained this way is
@@ -4721,23 +4749,28 @@ commute, leaving
 \[
 [X,Y]=(Xb^\theta-Ya^\theta)\partial_\theta+(Xb^\varphi-Ya^\varphi)\partial_\varphi .
 \]
-Put $t=\cot\theta$ and $s=\csc^2\theta$, so $\partial_\theta t=-s$.
+Put $t=\cot\theta$ and $q=\csc^2\theta$, so $\partial_\theta t=-q$.
 Here $a^\theta=\sin\varphi$, $a^\varphi=t\cos\varphi$,
 $b^\theta=-\cos\varphi$, $b^\varphi=t\sin\varphi$.
 The coefficient of $\partial_\theta$ in $[X,Y]$ is
 $Xb^\theta-Ya^\theta=t\cos\varphi\sin\varphi-t\sin\varphi\cos\varphi=0$.
 The coefficient of $\partial_\varphi$ is
 \[
-Xb^\varphi-Ya^\varphi=[-s\sin^2\varphi+t^2\cos^2\varphi]
--[s\cos^2\varphi-t^2\sin^2\varphi]
-=t^2-s=-1,
+Xb^\varphi-Ya^\varphi=[-q\sin^2\varphi+t^2\cos^2\varphi]
+-[q\cos^2\varphi-t^2\sin^2\varphi]
+=t^2-q=-1,
 \]
 since $\cot^2\theta-\csc^2\theta=-1$.
 Thus $[L_x,L_y]=i^2[X,Y]=-[X,Y]=\partial_\varphi=iL_z$.
 For the other two commutators, $(-i)(i)=1$ and $(i)(-i)=1$ give
-$[L_z,L_x]=[\partial_\varphi,X]$ and $[L_y,L_z]=[Y,\partial_\varphi]$;
-since $\partial_\varphi$ has constant coefficients, these commutators
-simply differentiate the coefficients of $X$ and $Y$ with respect to $\varphi$:
+$[L_z,L_x]=[\partial_\varphi,X]$ and $[L_y,L_z]=[Y,\partial_\varphi]$.
+The commutator formula above holds for any two first-order operators;
+with $\partial_\varphi$ as one of them, whose coefficients $0$ and $1$
+are constant and hence annihilated by $X$ and $Y$, it reduces to
+$[\partial_\varphi,X]=(\partial_\varphi a^\theta)\partial_\theta
++(\partial_\varphi a^\varphi)\partial_\varphi$ and
+$[Y,\partial_\varphi]=-(\partial_\varphi b^\theta)\partial_\theta
+-(\partial_\varphi b^\varphi)\partial_\varphi$:
 \[
 \begin{aligned}
 {}[L_z,L_x]&=[\partial_\varphi,X]
@@ -4867,13 +4900,12 @@ verify the operator identities
 \begin{enumerate}
 \item[(a)] $\displaystyle\nabla=\hat{\mathbf{e}}_{r}\frac{\partial}{\partial r}
   -i\frac{\mathbf{r}\times\mathbf{L}}{r^{2}}$,
-\item[(b)] $\displaystyle \erratum{\mathbf r}\nabla^{2}-\nabla\left(1+r\frac{\partial}
+\item[(b)] $\displaystyle \mathbf{r}\nabla^{2}-\nabla\left(1+r\frac{\partial}
   {\partial r}\right)=i\nabla\times\mathbf{L}$.
 \end{enumerate}
 \solution
-\erratum{In (b), the first $r$ is the position vector $\mathbf r$,
-as printed in bold on textbook p.~202; a scalar $r\nabla^2$
-cannot equal the other vector operators.}
+In (b) the first factor is the position vector $\mathbf r$, not the
+scalar $r$: every other term of (b) is a vector operator.
 All identities below act on an arbitrary smooth scalar $f$.
 \textbf{(a)} The ordinary triple-product identity
 $\mathbf a\times(\mathbf b\times\mathbf c)
@@ -4911,7 +4943,7 @@ i\nabla\times(\mathbf Lf)
 \]
 because $(\nabla f\cdot\nabla)\mathbf r=\nabla f$ (Exercise 3.10.26 with
 $\mathbf A=\nabla f$) and $\nabla\cdot\mathbf r=3$.
-Componentwise, with $x_j$ summed over $j$,
+Componentwise, with the repeated index $j$ summed,
 $\partial_i(Df)=\partial_i(x_j\partial_jf)
 =\delta_{ij}\partial_jf+x_j\partial_j\partial_i f
 =\partial_i f+x_j\partial_j\partial_i f$, so
@@ -4922,7 +4954,7 @@ Substitution yields
 i\nabla\times(\mathbf Lf)=\mathbf r\nabla^2f-2\nabla f-\nabla(Df)+\nabla f
 =\mathbf r\nabla^2f-\nabla(f+r\partial_rf),
 \]
-which is precisely the corrected operator identity
+which is precisely the operator identity (b),
 $\mathbf r\nabla^2-\nabla(1+r\partial_r)=i\nabla\times\mathbf L$.
 
 \Needspace{5\baselineskip}
@@ -5096,7 +5128,9 @@ $\mathbf{r}$ given by
 \]
 Find the electric field, $\mathbf{E}=-\nabla\psi$ at $\mathbf{r}$.
 \solution
-The dipole moment is constant and $r>0$. Apply the scalar product rule:
+The dipole moment is constant and $r>0$. Apply the product rule
+$\nabla(fg)=f\nabla g+g\nabla f$ to the scalars $f=\mathbf p\cdot\mathbf r$
+and $g=r^{-3}$:
 \[
 \nabla\psi=\frac1{4\pi\epsilon_0}
 \left[r^{-3}\nabla(\mathbf p\cdot\mathbf r)
