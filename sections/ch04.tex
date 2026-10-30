@@ -1344,7 +1344,9 @@ without these qualifications, does not establish the printed global
 ``necessary and sufficient'' statement.}
 
 (a) First suppose $f(u(x,y,z),v(x,y,z))=0$ is a regular relation.
-Differentiating it with respect to the three coordinates gives
+It holds identically near the point, so its partial derivatives vanish;
+by the chain rule, $\partial_x f(u,v)=f_uu_x+f_vv_x=0$, and likewise
+for $y$ and $z$. Together,
 \[
 f_u\nabla u+f_v\nabla v=0.
 \]
@@ -1359,10 +1361,19 @@ neighborhood so that $u_x\ne0$ throughout. The coordinate change
 \[
 (s,\eta,\zeta)=(u(x,y,z),y,z)
 \]
-has Jacobian $u_x\ne0$, so the inverse function theorem makes it locally
-invertible. The vanishing cross product says that
-$\nabla v=\lambda\nabla u$, with $\lambda=v_x/u_x$; in differential
-notation this is $dv=\lambda\,du$. Expressing it in the new coordinates,
+has Jacobian
+\[
+\frac{\partial(s,\eta,\zeta)}{\partial(x,y,z)}
+=\begin{vmatrix}u_x&u_y&u_z\\0&1&0\\0&0&1\end{vmatrix}=u_x\ne0,
+\]
+so the inverse function theorem makes it locally invertible. The
+vanishing cross product says that $\nabla v=\lambda\nabla u$, with
+$\lambda=v_x/u_x$: its $z$- and $y$-components,
+$u_xv_y-u_yv_x=0$ and $u_zv_x-u_xv_z=0$, give $v_y=\lambda u_y$ and
+$v_z=\lambda u_z$, while $v_x=\lambda u_x$ by the choice of $\lambda$.
+In differential notation this is $dv=\lambda\,du$. Let
+$\widetilde v(s,\eta,\zeta)$ denote $v$ expressed in the new
+coordinates. Since $s=u$, we have $du=ds$, and the relation reads
 \[
 d\widetilde v
 =\frac{\partial\widetilde v}{\partial s}\,ds
@@ -1370,10 +1381,14 @@ d\widetilde v
  +\frac{\partial\widetilde v}{\partial\zeta}\,d\zeta
 =\lambda\,ds.
 \]
-Independence of $ds,d\eta,d\zeta$ gives
+The differentials $ds,d\eta,d\zeta$ of a coordinate system are linearly
+independent, so the coefficients agree: $\widetilde v_s=\lambda$ and
 $\widetilde v_\eta=\widetilde v_\zeta=0$. On a sufficiently small
-rectangular coordinate neighborhood, $\widetilde v$ consequently
-depends only on $s$: $\widetilde v=F(s)$. Therefore
+coordinate box $|s-s_0|<\delta$, $|\eta-\eta_0|<\delta$,
+$|\zeta-\zeta_0|<\delta$, the mean value theorem applied in $\eta$ and
+then in $\zeta$ gives
+$\widetilde v(s,\eta,\zeta)=\widetilde v(s,\eta_0,\zeta_0)\equiv F(s)$,
+a $C^1$ function of $s$ alone. Therefore
 \[
 v=F(u),\qquad f(u,v)=v-F(u)=0,
 \]
@@ -1382,13 +1397,17 @@ $\nabla v$ is known to be nonzero, interchange $u$ and $v$ in the
 argument.
 
 The restriction at critical points is substantive. For $u=x^2$,
-$v=x^3$, the cross product vanishes everywhere, but no regular $C^1$
-relation describes the image near $(u,v)=(0,0)$. If $f_v\ne0$, the
-implicit function theorem would give $v=F(u)$, contradicted by
-$x$ and $-x$ producing the same $u$ and opposite $v$. If $f_u\ne0$,
-it would give $u=G(v)=|v|^{2/3}$, whose difference quotient at zero is
-unbounded. The singular relation $v^2-u^3=0$ does exist, illustrating
-why a regularity statement is needed.
+$v=x^3$, the gradients $(2x,0,0)$ and $(3x^2,0,0)$ are parallel, so the
+cross product vanishes everywhere, and both gradients vanish at $x=0$.
+Yet no regular $C^1$ relation describes the image near
+$(u,v)=(0,0)$. If $f_v(0,0)\ne0$, the implicit function theorem would
+make the zero set of $f$ near the origin a graph $v=F(u)$; this is
+contradicted by $x$ and $-x$ producing the same $u$ and opposite $v$.
+If $f_u(0,0)\ne0$, it would give a $C^1$ function with $u=G(v)$, that
+is, $G(x^3)=x^2$, so $G(v)=|v|^{2/3}$, whose difference quotient
+$|v|^{2/3}/v$ at zero is unbounded. The singular relation
+$v^2-u^3=0$, with $f_u=-3u^2$ and $f_v=2v$ both zero at the origin,
+does exist, illustrating why a regularity statement is needed.
 
 (b) If the functions are independent of $z$, write their gradients as
 $(u_x,u_y,0)$ and $(v_x,v_y,0)$. Expanding the cross product gives
@@ -1425,11 +1444,17 @@ At a given point set
 \[
 a=x_{q_1},\quad b=y_{q_1},\quad c=x_{q_2},\quad d=y_{q_2}.
 \]
-The coordinate basis vectors are $(a,b)$ and $(c,d)$, so
+The coordinate basis vectors are
+$\partial\mathbf r/\partial q_1=(a,b)$ and
+$\partial\mathbf r/\partial q_2=(c,d)$, and the scale factors are their
+lengths, $h_i=|\partial\mathbf r/\partial q_i|$ (from
+$ds^2=h_1^2dq_1^2+h_2^2dq_2^2$). Hence
 \[
 h_1^2=a^2+b^2,\qquad h_2^2=c^2+d^2,\qquad ac+bd=0.
 \]
-The last equality is precisely orthogonality. Now expand the squares:
+The last equality is precisely orthogonality,
+$(\partial\mathbf r/\partial q_1)\cdot(\partial\mathbf r/\partial q_2)=0$.
+Now expand the squares:
 \begin{align*}
 h_1^2h_2^2-(ac+bd)^2
 &=(a^2+b^2)(c^2+d^2)-(a^2c^2+2abcd+b^2d^2)\\
@@ -1458,17 +1483,21 @@ $v\ge0$, and the inverse transformation follows directly from
 $x=vy$:
 \[
 u=x+y=(v+1)y,\qquad
-\boxed{y=\frac{u}{v+1},\qquad x=\frac{uv}{v+1}.}
+\boxed{y=\frac{u}{v+1},\qquad x=\frac{uv}{v+1}}.
 \]
-(a) Differentiate the inverse formulas:
+(a) Differentiate the inverse formulas; for $x_v$ the quotient rule
+gives $x_v=u[(v+1)-v]/(v+1)^2$:
 \[
 x_u=\frac{v}{v+1},\qquad x_v=\frac{u}{(v+1)^2},\qquad
 y_u=\frac1{v+1},\qquad y_v=-\frac{u}{(v+1)^2}.
 \]
 Their determinant is
 \begin{align*}
-J&=x_uy_v-x_vy_u\\
+J&=x_uy_v-x_vy_u
+ =\frac{v}{v+1}\left(-\frac{u}{(v+1)^2}\right)
+  -\frac{u}{(v+1)^2}\cdot\frac1{v+1}\\
  &=-\frac{uv}{(v+1)^3}-\frac{u}{(v+1)^3}
+ =-\frac{u(v+1)}{(v+1)^3}
  =\boxed{-\frac{u}{(v+1)^2}}.
 \end{align*}
 (b) For the forward transformation,
@@ -1479,9 +1508,13 @@ Thus
 \[
 J^{-1}=\frac{\partial(u,v)}{\partial(x,y)}
 =\begin{vmatrix}1&1\\1/y&-x/y^2\end{vmatrix}
+=-\frac{x}{y^2}-\frac1y
 =-\frac{x+y}{y^2}=-\frac{u}{y^2}.
 \]
-It is nonzero on the admissible domain, so inversion is valid:
+It is nonzero on the admissible domain. The chain rule makes the
+Jacobian matrices of a map and its inverse mutually inverse, so
+$\dfrac{\partial(x,y)}{\partial(u,v)}\,\dfrac{\partial(u,v)}{\partial(x,y)}=1$,
+and with $y=u/(v+1)$,
 \[
 J=-\frac{y^2}{u}
 =-\frac1u\left(\frac{u}{v+1}\right)^2
@@ -1513,20 +1546,33 @@ concatenation $(I,J)$, and $m$ the number of spatial indices in $I$.
 Then
 \[
 e^I\wedge e^J=(-1)^N\mathrm{vol},\qquad
-\langle e^I,e^I\rangle=(-1)^m.
+\langle e^I,e^I\rangle=(-1)^m:
 \]
-The defining equation
-$e^I\wedge *e^I=\langle e^I,e^I\rangle\mathrm{vol}$ therefore gives
+the first because sorting $(I,J)$ into the order $0123$ takes $N$
+interchanges of adjacent factors, each of which changes the sign; the
+second because $\langle e^I,e^I\rangle$ is the product of the diagonal
+metric entries $\eta^{aa}$, $a\in I$, and $m$ of them equal $-1$.
+The Hodge star of a $p$-form $\beta$ is fixed by
+$\alpha\wedge *\beta=\langle\alpha,\beta\rangle\mathrm{vol}$ for every
+$p$-form $\alpha$. Take $\beta=e^I$. For $\alpha=e^K$ with $K\ne I$ the
+right side is zero, and $e^K$ has a nonzero wedge product only with the
+basis form of its own complement; hence $*e^I$ has no component along
+the complement of any $K\ne I$, and $*e^I=s\,e^J$ for some number $s$.
+Then $\alpha=e^I$ gives $s(-1)^N=(-1)^m$, so
 \[
-\boxed{*e^I=(-1)^{N+m}e^J.}
+\boxed{*e^I=(-1)^{N+m}e^J}.
 \]
-The same definition makes the wedge product zero for unequal basis
-forms of the same degree, so it determines the Hodge star completely.
+The sign combines the parity $(-1)^N$ of the permutation that orders
+$e^I\wedge e^J$ with a factor $-1$ for each negative metric entry of
+the form $e^I$ being starred.
 
 \erratum{The rule in the first paragraph of textbook p.~236 says to
 count negative metric entries in the complementary form $\omega'$.
 That is a typographical error: count them in the form $\omega$ being
-starred. The worked example and Eq.~(4.82) use this corrected rule.}
+starred. The worked example and Eq.~(4.82) use this corrected rule:
+for $\omega=1$ the complement $\omega'=\mathrm{vol}$ has three negative
+metric factors, so the printed rule would give $*1=-\mathrm{vol}$,
+whereas Eq.~(4.82) has $*1=+\mathrm{vol}$.}
 For instance, $*1=\mathrm{vol}$ has $m=0$, while
 $*\mathrm{vol}=-1$ has $m=3$.
 
@@ -1557,7 +1603,16 @@ e^{0123}&1&0&3&-1
 The table includes $1+4+6+4+1=16$ independent forms. Take $(i,j,k)$
 to be $(1,2,3)$, $(2,3,1)$, or $(3,1,2)$. Rewriting the table in cyclic order
 absorbs the displayed minus signs associated with reordering spatial
-indices. It gives exactly
+indices. These occur in the rows $e^2$, $e^{13}$, $e^{013}$; using
+$dx_1\wedge dx_3=-dx_3\wedge dx_1$ (also inside the starred forms),
+\begin{gather*}
+*dx_2=-dt\wedge dx_1\wedge dx_3=dt\wedge dx_3\wedge dx_1,\qquad
+*(dx_3\wedge dx_1)=-{*}(dx_1\wedge dx_3)=dt\wedge dx_2,\\
+*(dt\wedge dx_3\wedge dx_1)=-{*}(dt\wedge dx_1\wedge dx_3)=dx_2,
+\end{gather*}
+while the row $e^{02}$ gives
+$*(dt\wedge dx_2)=dx_1\wedge dx_3=-dx_3\wedge dx_1$.
+The table thus gives exactly
 \begin{gather*}
 *1=dt\wedge dx_1\wedge dx_2\wedge dx_3,\qquad
 *dt=dx_1\wedge dx_2\wedge dx_3,\\
@@ -1568,11 +1623,14 @@ indices. It gives exactly
 *(dt\wedge dx_i\wedge dx_j)=dx_k,\\
 *(dt\wedge dx_1\wedge dx_2\wedge dx_3)=-1.
 \end{gather*}
-As an independent sign check, reversing the order of a $p$-form and its
-complement contributes $(-1)^{p(4-p)}$, and the metric factors from both
-sets contribute $(-1)^3$. Hence
+As an independent sign check, apply the boxed rule twice to a $p$-form:
+$*e^I=(-1)^{N_I+m_I}e^J$ and $*e^J=(-1)^{N_J+m_J}e^I$, where $N_J$
+counts the inversions of $(J,I)$. Each of the $p(4-p)$ pairs made of one
+index from $I$ and one from $J$ is an inversion in exactly one of the
+orders $(I,J)$ and $(J,I)$, so $N_I+N_J=p(4-p)$; and $m_I+m_J=3$, the
+total number of spatial indices. Hence
 \[
-**\omega_p=(-1)^{p(4-p)+3}\omega_p,
+{*}{*}\omega_p=(-1)^{p(4-p)+3}\omega_p,
 \]
 which is negative for even $p$ and positive for odd $p$, in agreement
 with every pair of rows in the table.
@@ -1593,7 +1651,7 @@ taken outside the line integral. The three given displacements are
 \]
 They yield $3F_x=a$, $2F_y=b$, and $F_z=c$. Therefore
 \[
-\boxed{\omega=\frac a3\,dx+\frac b2\,dy+c\,dz.}
+\boxed{\omega=\frac a3\,dx+\frac b2\,dy+c\,dz}.
 \]
 For a direct check, integrating along the three paths multiplies these
 coefficients by $3,2,1$, respectively, returning $a,b,c$. The form is
@@ -1627,7 +1685,8 @@ d\omega_1
 \end{align*}
 Indeed $\omega_1=d(xy)$.
 
-(b) Changing the sign between the terms gives
+(b) Changing the sign between the terms, and using the two derivatives
+$d(x\,dy)=dx\wedge dy$ and $d(y\,dx)=dy\wedge dx$ found in (a), gives
 \begin{align*}
 d\omega_2
 &=d(x\,dy)-d(y\,dx)\\
@@ -1665,9 +1724,11 @@ The two terms with coefficient $x$ cancel. Reordering the last two
 terms reverses their signs, so the terms with coefficients $y$ and $z$
 each add rather than cancel:
 \[
-\boxed{d\omega_3=2y\,dx\wedge dz+2z\,dx\wedge dy.}
+\boxed{d\omega_3=2y\,dx\wedge dz+2z\,dx\wedge dy}.
 \]
 Apply $d$ again. Derivatives of the basis differentials vanish, leaving
+$d(2y)\wedge dx\wedge dz+d(2z)\wedge dx\wedge dy$ with $d(2y)=2\,dy$
+and $d(2z)=2\,dz$:
 \begin{align*}
 d(d\omega_3)
 &=2\,dy\wedge dx\wedge dz+2\,dz\wedge dx\wedge dy\\
@@ -1699,13 +1760,17 @@ Verify that both approaches give the same result.
 \end{align*}
 The repeated-differential terms vanish, and the two $xyz$ terms cancel
 because $dy\wedge dx=-dx\wedge dy$. Differentiating the surviving
-coefficients gives
+coefficients, $d(x^2y)=2xy\,dx+x^2\,dy$ and $d(xy^2)=y^2\,dx+2xy\,dy$,
+gives the following; in the third line the terms
+$x^2\,dy\wedge dy\wedge dz$ and $-y^2\,dx\wedge dx\wedge dz$ are dropped
+because they contain a repeated differential:
 \begin{align*}
 d(\omega_2\wedge\omega_3)
 &=(2xy\,dx+x^2\,dy)\wedge dy\wedge dz\\
 &\hspace{1.5em}-(y^2\,dx+2xy\,dy)\wedge dx\wedge dz\\
 &=2xy\,dx\wedge dy\wedge dz-2xy\,dy\wedge dx\wedge dz\\
-&=\boxed{4xy\,dx\wedge dy\wedge dz}.
+&=2xy\,dx\wedge dy\wedge dz+2xy\,dx\wedge dy\wedge dz
+=\boxed{4xy\,dx\wedge dy\wedge dz}.
 \end{align*}
 
 (b) Since $\omega_2$ is a 1-form, the product rule has a minus sign:
@@ -1754,7 +1819,8 @@ dy=b_1du+b_2dv+b_3dw,\quad
 dz=c_1du+c_2dv+c_3dw.
 \]
 Expand their exterior product. Any term containing two copies of a
-differential vanishes; precisely six terms remain:
+differential vanishes; precisely six terms remain, one for each
+ordering of $du,dv,dw$:
 \begin{align*}
 dx\wedge dy\wedge dz
 ={}&a_1b_2c_3\,du\wedge dv\wedge dw
@@ -1762,11 +1828,23 @@ dx\wedge dy\wedge dz
 &+a_2b_1c_3\,dv\wedge du\wedge dw
  +a_2b_3c_1\,dv\wedge dw\wedge du\\
 &+a_3b_1c_2\,dw\wedge du\wedge dv
- +a_3b_2c_1\,dw\wedge dv\wedge du\\
-={}&(a_1b_2c_3-a_1b_3c_2-a_2b_1c_3+a_2b_3c_1
-     +a_3b_1c_2-a_3b_2c_1)\,du\wedge dv\wedge dw.
+ +a_3b_2c_1\,dw\wedge dv\wedge du.
 \end{align*}
-The coefficient is the determinant of $L$, namely
+Each interchange of two factors changes the sign. The orderings
+$du\wedge dw\wedge dv$, $dv\wedge du\wedge dw$, $dw\wedge dv\wedge du$
+are one interchange away from $du\wedge dv\wedge dw$ and acquire a
+factor $-1$; the cyclic shifts $dv\wedge dw\wedge du$ and
+$dw\wedge du\wedge dv$ are two interchanges away and keep their sign.
+Hence
+\[
+dx\wedge dy\wedge dz
+=(a_1b_2c_3-a_1b_3c_2-a_2b_1c_3+a_2b_3c_1
+     +a_3b_1c_2-a_3b_2c_1)\,du\wedge dv\wedge dw.
+\]
+The coefficient is
+$a_1(b_2c_3-b_3c_2)-a_2(b_1c_3-b_3c_1)+a_3(b_1c_2-b_2c_1)$, the
+first-row expansion of the determinant of $L$. Since $x_u=a_1$,
+$x_v=a_2$, \dots, $z_w=c_3$, it is
 \[
 J=\det L
 =\begin{vmatrix}x_u&x_v&x_w\\y_u&y_v&y_w\\z_u&z_v&z_w\end{vmatrix}
@@ -1774,7 +1852,7 @@ J=\det L
 \]
 Therefore the transformed 3-form is
 \[
-\boxed{A(x(u,v,w),y(u,v,w),z(u,v,w))\,J\,du\wedge dv\wedge dw.}
+\boxed{A(x(u,v,w),y(u,v,w),z(u,v,w))\,J\,du\wedge dv\wedge dw}.
 \]
 Its integral is taken over the corresponding parameter region with the
 induced orientation. Differential forms retain the sign of $J$;
@@ -1795,9 +1873,20 @@ Associate the 1-form
 \[
 h=H_x\,dx+H_y\,dy+H_z\,dz
 \]
-with the magnetic field. Its exterior derivative is obtained by
-expanding $dH_x\wedge dx+dH_y\wedge dy+dH_z\wedge dz$ and grouping
-terms with the same ordered differential pair:
+with the magnetic field. Its exterior derivative is
+$dh=dH_x\wedge dx+dH_y\wedge dy+dH_z\wedge dz$. Expanding each
+$dH_i=\partial_xH_i\,dx+\partial_yH_i\,dy+\partial_zH_i\,dz$, dropping
+the terms with a repeated differential, and writing every pair in the
+order $dy\wedge dz$, $dz\wedge dx$, or $dx\wedge dy$,
+\begin{align*}
+dH_x\wedge dx&=\partial_yH_x\,dy\wedge dx+\partial_zH_x\,dz\wedge dx
+ =-\partial_yH_x\,dx\wedge dy+\partial_zH_x\,dz\wedge dx,\\
+dH_y\wedge dy&=\partial_xH_y\,dx\wedge dy+\partial_zH_y\,dz\wedge dy
+ =\partial_xH_y\,dx\wedge dy-\partial_zH_y\,dy\wedge dz,\\
+dH_z\wedge dz&=\partial_xH_z\,dx\wedge dz+\partial_yH_z\,dy\wedge dz
+ =-\partial_xH_z\,dz\wedge dx+\partial_yH_z\,dy\wedge dz.
+\end{align*}
+Grouping terms with the same ordered differential pair,
 \begin{align*}
 dh={}&(\partial_yH_z-\partial_zH_y)\,dy\wedge dz\\
 &+(\partial_zH_x-\partial_xH_z)\,dz\wedge dx\\
@@ -1808,7 +1897,7 @@ On an oriented surface, $dy\wedge dz$, $dz\wedge dx$, and
 $dx\wedge dy$ pull back to the three components of its vector area
 form. Stokes' theorem thus gives the requested notation:
 \[
-\boxed{\int_{\partial S}h=\int_Sdh\ \sim\ I.}
+\boxed{\int_{\partial S}h=\int_Sdh\ \sim\ I}.
 \]
 The boundary orientation is the one induced by $S$. More explicitly,
 if the current density is $\mathbf J$, its flux 2-form is
@@ -1843,13 +1932,18 @@ y\,dx+x\,dy,\quad\frac{y\,dx+x\,dy}{x^{2}+y^{2}},\quad
 f(z)\,dz\text{ with }z=x+iy.
 \]
 \solution
-For a $C^1$ 1-form $\omega=A\,dx+B\,dy$,
+For a $C^1$ 1-form $\omega=A\,dx+B\,dy$, the terms $A_x\,dx\wedge dx$
+and $B_y\,dy\wedge dy$ vanish, so
 \[
 d\omega=dA\wedge dx+dB\wedge dy
+=A_y\,dy\wedge dx+B_x\,dx\wedge dy
 =(B_x-A_y)\,dx\wedge dy.
 \]
 Thus closedness means $B_x=A_y$. A globally exact form $\omega=d\Phi$
-is closed and has zero integral around every closed curve. We use
+is closed, because $A_y=\Phi_{xy}=\Phi_{yx}=B_x$ ($\Phi$ is $C^2$ since
+its first derivatives $A,B$ are $C^1$), and it has zero integral around
+every closed curve, because $\int_Cd\Phi$ is the difference of the
+values of $\Phi$ at the endpoints of $C$. We use
 $\Phi$ for a potential to distinguish it from the last question's $f$.
 
 \erratum{Exactness depends on the domain. In particular the angular
@@ -1862,7 +1956,7 @@ form is closed. Integrate $\Phi_x=y$ with respect to $x$:
 $\Phi=xy+h(y)$. The other equation gives
 $\Phi_y=x+h'(y)=x$, hence $h'=0$. Therefore
 \[
-\boxed{\omega=d(xy),\qquad\Phi=xy+C,}
+\boxed{\omega=d(xy),\qquad\Phi=xy+C},
 \]
 and the form is globally exact on $\mathbb R^2$.
 
@@ -1875,7 +1969,8 @@ B_x=\frac{x^2+y^2-2x^2}{(x^2+y^2)^2}
 =\frac{y^2-x^2}{(x^2+y^2)^2}.
 \]
 These derivatives differ except on the lines $y=\pm x$. Those lines
-contain no nonempty open subset of the plane. Consequently
+contain no nonempty open subset of the plane, and a form that is exact
+on an open set is closed there. Consequently
 \[
 \boxed{\frac{y\,dx+x\,dy}{x^2+y^2}\text{ is neither closed nor exact}}
 \]
@@ -1888,11 +1983,12 @@ The two coefficients obey
 \qquad \partial_x(x/y)=\frac1y,
 \]
 so the form is closed. Integration in $x$ gives
-$\Phi=x\ln(xy)+h(y)$, because
-$\partial_x[x\ln(xy)]=\ln(xy)+1$. Then
+$\Phi=x\ln(xy)+h(y)$, because, by the product rule and
+$\partial_x\ln(xy)=y/(xy)=1/x$,
+$\partial_x[x\ln(xy)]=\ln(xy)+x\cdot(1/x)=\ln(xy)+1$. Then
 $\Phi_y=x/y+h'(y)=x/y$, so $h$ is constant. Thus
 \[
-\boxed{[\ln(xy)+1]\,dx+\frac xy\,dy=d[x\ln(xy)].}
+\boxed{[\ln(xy)+1]\,dx+\frac xy\,dy=d[x\ln(xy)]}.
 \]
 It is exact on each component of $xy>0$, and also on their union
 with the displayed potential; arbitrary additive constants may be
@@ -1902,39 +1998,46 @@ chosen independently on the two components.
 $B=x/(x^2+y^2)$, so
 \[
 A_y=\frac{-(x^2+y^2)+2y^2}{(x^2+y^2)^2}
-=\frac{y^2-x^2}{(x^2+y^2)^2}=B_x.
+=\frac{y^2-x^2}{(x^2+y^2)^2}=B_x,
 \]
+with $B_x$ as computed for the second form.
 The form is closed everywhere on $\mathbb R^2\setminus\{0\}$.
 On a region with a continuous angle coordinate $\theta$, use
-$x=r\cos\theta$, $y=r\sin\theta$:
+$x=r\cos\theta$, $y=r\sin\theta$, so that
+$dx=\cos\theta\,dr-r\sin\theta\,d\theta$ and
+$dy=\sin\theta\,dr+r\cos\theta\,d\theta$. The $dr$ terms cancel and the
+$d\theta$ terms combine through $\sin^2\theta+\cos^2\theta=1$:
 \begin{align*}
 -y\,dx+x\,dy
 ={}&-r\sin\theta(\cos\theta\,dr-r\sin\theta\,d\theta)\\
 &+r\cos\theta(\sin\theta\,dr+r\cos\theta\,d\theta)
 =r^2\,d\theta.
 \end{align*}
-Thus $\omega=d\theta$ locally. For example, on $x>0$ a potential is
+Dividing by $x^2+y^2=r^2$, $\omega=d\theta$ locally. For example, on
+$x>0$ a potential is
 $\Phi=\arctan(y/x)+C$, since
 \[
 \Phi_x=\frac{-y/x^2}{1+y^2/x^2}=-\frac{y}{x^2+y^2},\qquad
 \Phi_y=\frac{1/x}{1+y^2/x^2}=\frac{x}{x^2+y^2}.
 \]
 For a complete counterclockwise circle
-$x=R\cos t$, $y=R\sin t$, $0\le t\le2\pi$,
+$x=R\cos t$, $y=R\sin t$, $0\le t\le2\pi$, where
+$dx=-R\sin t\,dt$ and $dy=R\cos t\,dt$,
 \[
 \oint\omega
 =\int_0^{2\pi}\frac{R^2\sin^2t+R^2\cos^2t}{R^2}\,dt=2\pi.
 \]
 A single-valued potential would make this integral zero. Therefore
 \[
-\boxed{\omega\text{ is closed but not globally exact on the punctured plane}.}
+\boxed{\omega\text{ is closed but not globally exact on the punctured plane}}.
 \]
 \erratum{The Instructor's Manual, p.~65, prints $d\tan(y/x)$;
 the local primitive is $\arctan(y/x)$, and its assertion of exactness
 needs the domain qualification just proved.}
 
 \emph{Fifth form.} Write the complex-valued coefficient as $f(x,y)$
-and use $dz=dx+i\,dy$. Thus $A=f$ and $B=if$, giving
+and use $dz=dx+i\,dy$. Thus $A=f$ and $B=if$, so
+$B_x-A_y=if_x-f_y=2i\cdot\frac12(f_x+if_y)$, giving
 \[
 d(f\,dz)=(if_x-f_y)\,dx\wedge dy
 =2i\frac{\partial f}{\partial\bar z}\,dx\wedge dy,
@@ -1942,36 +2045,46 @@ d(f\,dz)=(if_x-f_y)\,dx\wedge dy
 \frac{\partial f}{\partial\bar z}=\frac12(f_x+if_y).
 \]
 For $C^1$ coefficients the form is closed exactly when
-$f_y=if_x$, the Cauchy--Riemann condition for $f$ to be holomorphic.
+$f_y=if_x$. With $f=u+iv$ this reads $u_y+iv_y=iu_x-v_x$, that is,
+$u_x=v_y$ and $u_y=-v_x$: the Cauchy--Riemann conditions
+(Section 11.2) for $f$ to be holomorphic.
 Under that condition it is locally exact. One can construct a primitive
 on a small rectangle, without presupposing a complex antiderivative:
 \[
 \Phi(x,y)=\int_{x_0}^{x}f(s,y_0)\,ds
           +i\int_{y_0}^{y}f(x,t)\,dt.
 \]
-Indeed,
+Only the second integral depends on $y$, so the fundamental theorem of
+calculus gives $\Phi_y$. For $\Phi_x$, differentiate the second
+integral under the integral sign (allowed for $C^1$ $f$), then use
+$if_x=f_y$ and the fundamental theorem in $t$:
 \[
 \Phi_y=if(x,y),\qquad
 \Phi_x=f(x,y_0)+i\int_{y_0}^{y}f_x(x,t)\,dt
 =f(x,y_0)+\int_{y_0}^{y}f_y(x,t)\,dt=f(x,y).
 \]
-Hence $d\Phi=f\,dz$. On a simply connected complex domain, every closed
-curve is contractible, and Stokes' theorem for the closed form gives
-zero integral around it. Two paths with the same endpoints therefore
-have equal integrals. The local primitives thus give a global primitive
+Hence $d\Phi=\Phi_x\,dx+\Phi_y\,dy=f\,(dx+i\,dy)=f\,dz$. On a simply
+connected complex domain, every closed curve is contractible, and
+Stokes' theorem for the closed form gives zero integral around it (this
+is Cauchy's integral theorem, Section 11.3). Two paths with the same
+endpoints together form a closed curve, so they have equal integrals.
+The local primitives thus give a global primitive
 \[
-\boxed{F(z)=\int_{z_0}^{z}f(\zeta)\,d\zeta+C,\qquad dF=f(z)\,dz,}
+\boxed{F(z)=\int_{z_0}^{z}f(\zeta)\,d\zeta+C,\qquad dF=f(z)\,dz},
 \]
-where the integral is path independent. More generally, this formula
+where the integral is path independent; near each point $F$ differs
+from a local primitive $\Phi$ by a constant, so $dF=d\Phi=f\,dz$.
+More generally, this formula
 defines a global primitive precisely when every closed-curve period
 of $f(z)\,dz$ vanishes. The domain condition cannot be omitted:
 $f(z)=1/z$ is holomorphic on $\mathbb C\setminus\{0\}$, but on
-$z=Re^{it}$,
+$z=Re^{it}$, $0\le t\le2\pi$, where $dz=iRe^{it}\,dt$,
 \[
 \oint\frac{dz}{z}=\int_0^{2\pi}i\,dt=2\pi i\ne0,
 \]
 so it is not globally exact there. If $f$ is not holomorphic, even
-closedness can fail: $f=\bar z$ gives $d(f\,dz)=2i\,dx\wedge dy$.
-\erratum{Accordingly, the manual's unqualified claim that $f(z)\,dz$
-is exact must be read with both the analyticity and domain conditions
-above.}
+closedness can fail: $f=\bar z=x-iy$ has $f_x=1$, $f_y=-i$, so
+$d(f\,dz)=(i+i)\,dx\wedge dy=2i\,dx\wedge dy$.
+\erratum{Accordingly, the Instructor's Manual's unqualified claim that
+$f(z)\,dz$ is exact must be read with both the analyticity and domain
+conditions above.}
