@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 0 of 54 parts done (audited and verified); 1 audited and awaiting verification.
+Progress: 0 of 54 parts done (audited and verified); 2 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -84,7 +84,7 @@ Progress: 0 of 54 parts done (audited and verified); 1 audited and awaiting veri
 | ch01-p1 | 1.1.1–1.2.16 | audited |
 | ch01-p2 | 1.3.1–1.7.11 | pending |
 | ch01-p3 | 1.8.1–1.11.9 | pending |
-| ch02-p1 | 2.1.1–2.2.34 | pending |
+| ch02-p1 | 2.1.1–2.2.34 | audited |
 | ch02-p2 | 2.2.35–2.2.51 | pending |
 | ch03-p1 | 3.2.1–3.5.13 | pending |
 | ch03-p2 | 3.6.1–3.10.2 | pending |
@@ -143,3 +143,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 
 - Setup: 15.2.22/15.2.23 were run together on one source line; separated.
 - **ch01-p1** (1.1.1–1.2.16) — audit: no wrong results; a typo in 1.1.11(a) corrected ($[(\ln x)^2-1]/2$ → $[(\ln M)^2-1]/2$). Steps added in 31 of 32 exercises (e.g. the shifted $\alpha$-sums and error bound in 1.1.14, the assembly of 1.1.16(b), Gauss' test parameters in 1.2.5–1.2.7, the Lagrange remainder in 1.2.8). Script references in 1.1.3, 1.1.12, 1.1.16 replaced by the computations themselves; "the manual" → "the Instructor's Manual"; a reason added to the 1.2.7 erratum.
+- **ch02-p1** (2.1.1–2.2.34) — audit: no mathematical errors found. Steps added in 22 exercises (e.g. the general elimination step and pivots of the Hilbert matrix in 2.1.5, an integer back substitution in 2.1.7, the $L_\pm$ algebra in 2.2.13, a derivation replacing a guess in 2.2.25, both orthogonal families in 2.2.29). The script reference in 2.1.5 replaced by a closed-form product; `\,10^{-n}` → `\times10^{-n}`; cross-references added; "the manual" → "the Instructor's Manual".

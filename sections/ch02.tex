@@ -34,7 +34,9 @@ D_b=1\begin{vmatrix}1&2\\3&1\end{vmatrix}
 \]
 \item[(c)] Write $s=\sqrt3$. The factor $1/\sqrt2$ in the question
 multiplies the determinant once; it is not a factor on each row.
-Expand row 1 and then column 1 of the resulting minor:
+Expand along row 1, whose only nonzero entry is $a_{12}=s$ with sign
+$(-1)^{1+2}=-1$, and then along column 1 of the resulting minor, whose
+only nonzero entry is $s$ in position $(1,1)$:
 \[
 \begin{aligned}
 D_c
@@ -56,7 +58,7 @@ x+3y+3z=0,\quad x-y+z=0,\quad 2x+y+3z=0
 to see if it possesses a nontrivial solution. In any case, find a solution to
 this equation set.
 \solution
-The coefficient determinant is
+The coefficient determinant, expanded along row 1, is
 \[
 \begin{aligned}
 D&=\begin{vmatrix}1&3&3\\1&-1&1\\2&1&3\end{vmatrix}\\
@@ -113,6 +115,8 @@ $(-1)^{i+j}$, show that
   $j\neq k$.
 \end{enumerate}
 \solution
+Let $A_{\widehat i,\widehat j}$ denote $A$ with row $i$ and column $j$
+struck out, so that $C_{ij}=(-1)^{i+j}\det A_{\widehat i,\widehat j}$.
 For fixed $j$, Laplace expansion down column $j$ is
 $\det A=\sum_i a_{ij}(-1)^{i+j}\det A_{\widehat i,\widehat j}
 =\sum_i a_{ij}C_{ij}$.
@@ -154,7 +158,8 @@ n&\mathrm{Det}(H_{n})\\
 \end{array}$
 \solution
 Use exact fractions so that small determinants are not lost by subtracting
-rounded numbers. The first three determinants are
+rounded numbers. The first three determinants ($D_3$ expanded along
+row 1) are
 \[
 D_1=1,\qquad D_2=1\cdot\frac13-\frac12\cdot\frac12=\frac1{12},
 \]
@@ -179,6 +184,29 @@ step on $H_6$ changes an entry with $i,j\ge2$ into
 \frac1{i+j-1}-\frac1i\frac1j
 =\frac{(i-1)(j-1)}{ij(i+j-1)}.
 \]
+Every later step has the same structure. Suppose that before step $k$
+the entries with $i,j\ge k$ have the form $\alpha_i\beta_j/(i+j-1)$;
+for $H_6$ itself $\alpha_i=\beta_j=1$. The multiplier for row $i$ is
+then $(\alpha_i/\alpha_k)(2k-1)/(i+k-1)$, and the identity
+$(i+k-1)(j+k-1)-(2k-1)(i+j-1)=(i-k)(j-k)$ turns the entry in
+row $i$, column $j$ into
+\[
+\alpha_i\beta_j\left[\frac1{i+j-1}-\frac{2k-1}{(i+k-1)(j+k-1)}\right]
+=\frac{\alpha_i\beta_j\,(i-k)(j-k)}{(i+k-1)(j+k-1)(i+j-1)}.
+\]
+The form is preserved, with $\alpha_i$ multiplied by $(i-k)/(i+k-1)$
+and $\beta_j$ by $(j-k)/(j+k-1)$; for $k=1$ this is the formula above.
+Hence at step $k$
+\[
+\alpha_k=\beta_k=\prod_{m=1}^{k-1}\frac{k-m}{k+m-1}
+=\frac{[(k-1)!]^2}{(2k-2)!},\qquad
+u_{kk}=\frac{\alpha_k\beta_k}{2k-1}
+=\frac{[(k-1)!]^4}{(2k-2)!\,(2k-1)!},
+\]
+which gives the pivots $1$, $1/12$, $1/180$, $1/2800$, $1/44100$,
+$1/698544$ for $k=1,\ldots,6$. The other entries of row $k$ of the
+final triangular matrix are $u_{kj}=\alpha_k\beta_j/(k+j-1)$ for $j>k$,
+with $\beta_j=\prod_{m=1}^{k-1}(j-m)/(j+m-1)$.
 For completeness, the multipliers $u_{ik}/u_{kk}$ in the successive
 steps are listed below. At step $k$, subtract the indicated multiple
 of the current row $k$ from each listed row $i$:
@@ -218,15 +246,17 @@ The resulting exact values and six-significant-figure approximations are
 \boxed{\begin{array}{c|c|c}
 n&D_n&\text{decimal value}\\\hline
 1&1&1\\
-2&1/12&8.33333\,10^{-2}\\
-3&1/2160&4.62963\,10^{-4}\\
-4&1/6048000&1.65344\,10^{-7}\\
-5&1/266716800000&3.74930\,10^{-12}\\
-6&1/186313420339200000&5.36730\,10^{-18}
+2&1/12&8.33333\times10^{-2}\\
+3&1/2160&4.62963\times10^{-4}\\
+4&1/6048000&1.65344\times10^{-7}\\
+5&1/266716800000&3.74930\times10^{-12}\\
+6&1/186313420339200000&5.36730\times10^{-18}
 \end{array}}
 \]
-The supplementary program reproduces the elimination and independently
-checks its products against exact determinant evaluation.
+Equivalently, $D_n=\prod_{k=1}^n[(k-1)!]^4/[(2k-2)!\,(2k-1)!]$.
+As an independent check, evaluating $\det H_n$ directly in exact
+rational arithmetic (for instance by cofactor expansion in a
+computer-algebra system) reproduces the same six fractions.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -236,7 +266,10 @@ coefficients from a set of linearly dependent forms has the value zero.
 Write the $n$ forms as $L_i(x)=\sum_{j=1}^n a_{ij}x_j$.
 Linear dependence means that constants $c_i$, not all zero, satisfy
 $\sum_i c_iL_i(x)=0$ for every $x$.
-Equating coefficients gives $\sum_i c_i a_{ij}=0$ for each $j$.
+Since $\sum_i c_iL_i(x)=\sum_j\bigl(\sum_i c_ia_{ij}\bigr)x_j$, the
+choice $x=e_j$ (the $j$th unit vector) gives $\sum_i c_i a_{ij}=0$ for
+each $j$; that is, the rows $R_i=(a_{i1},\ldots,a_{in})$ of the
+coefficient matrix $A$ satisfy $\sum_i c_iR_i=0$.
 Choose $r$ with $c_r\ne0$. Then the row vectors obey
 \[
 R_r=-\sum_{i\ne r}\frac{c_i}{c_r}R_i.
@@ -286,7 +319,8 @@ rows $3,4,5,6$. The last four rows, omitting the zero first column, become
 -8&-28&-49&-88&-44&-45
 \end{array}\right].
 \]
-Next add $8R_2,3R_2,11R_2,8R_2$ to those rows.
+Next add $8R_2,3R_2,11R_2,8R_2$ to rows $3,4,5,6$, respectively,
+which clears the $x_2$ column.
 In columns $x_3,x_4,x_5,x_6$ this gives
 \[
 \left[\begin{array}{rrrr|r}
@@ -317,27 +351,40 @@ $R_6\leftarrow-7R_6+9R_4$. The final two equations are
 368x_5+46x_6=169,\qquad186x_5-192x_6=1.
 \]
 Finally $R_6\leftarrow(368R_6-186R_5)/14$ gives
-$-5658x_6=-2219$. Back substitution gives every component:
+$-5658x_6=-2219$, because
+$368(-192)-186\cdot46=-79212=14(-5658)$ and
+$368\cdot1-186\cdot169=-31066=14(-2219)$.
+Hence $x_6=2219/5658$. To back-substitute without fractions, write
+$x_r=y_r/5658$ and use, in turn, $368x_5+46x_6=169$,
+row 4 ($-7x_4+2x_5+16x_6=4$), row 3
+($-6x_3-17x_4-36x_5+42x_6=0$), and rows 2 and 1 of the reordered
+matrix:
 \[
 \begin{aligned}
-x_6&=\frac{2219}{5658},\\
-x_5&=\frac{169-46x_6}{368}=\frac{2321}{5658},\\
-x_4&=\frac{2x_5+16x_6-4}{7}=\frac{417}{943},\\
-x_3&=\frac{-17x_4-36x_5+42x_6}{6}=-\frac{2741}{2829},\\
-x_2&=5-2x_3-3x_4-5x_5-10x_6=-\frac{89}{246},\\
-x_1&=6-2x_2-4x_3-6x_4-10x_5-5x_6=\frac{3551}{1886}.
+y_6&=2219,\\
+y_5&=\frac{169\cdot5658-46y_6}{368}
+=\frac{956202-102074}{368}=2321,\\
+y_4&=\frac{2y_5+16y_6-4\cdot5658}{7}
+=\frac{4642+35504-22632}{7}=2502,\\
+y_3&=\frac{-17y_4-36y_5+42y_6}{6}
+=\frac{-42534-83556+93198}{6}=-5482,\\
+y_2&=5\cdot5658-2y_3-3y_4-5y_5-10y_6\\
+&=28290+10964-7506-11605-22190=-2047,\\
+y_1&=6\cdot5658-2y_2-4y_3-6y_4-10y_5-5y_6\\
+&=33948+4094+21928-15012-23210-11095=10653.
 \end{aligned}
+\]
+Reducing the fractions $y_r/5658$,
+\[
+x=\Bigl(\frac{3551}{1886},-\frac{89}{246},-\frac{2741}{2829},
+\frac{417}{943},\frac{2321}{5658},\frac{2219}{5658}\Bigr)^T.
 \]
 Thus, to five decimal places,
 \[
 \boxed{x=(1.88282,-0.36179,-0.96889,0.44221,0.41022,0.39219)^T}.
 \]
 For an exact check, let $B$ be ten times the original coefficient
-matrix. In a common denominator,
-\[
-x=\frac1{5658}(10653,-2047,-5482,2502,2321,2219)^T.
-\]
-Direct multiplication gives
+matrix and multiply it into the vector of numerators $y_r$:
 \[
 \begin{aligned}
 B(10653,-2047,-5482,2502,2321,2219)^T
@@ -369,12 +416,15 @@ Every remaining Levi-Civita symbol has a repeated index.
 \item[(c)] If $i=j$, the only nonzero terms have $(p,q)$ equal to the
 two orderings of the other two indices. Their squares are both $1$, so
 the sum is $2$. If $i\ne j$, a nonzero $\varepsilon_{ipq}$ requires
-$\{i,p,q\}=\{1,2,3\}$. For the same $p,q$, $\varepsilon_{jpq}$
+$\{i,p,q\}=\{1,2,3\}$, so $j\ne i$ equals $p$ or $q$. For the same
+$p,q$, $\varepsilon_{jpq}$
 then has a repeated index and vanishes. Thus the sum is $2$ for $i=j$
 and $0$ otherwise: $\sum_{pq}\varepsilon_{ipq}\varepsilon_{jpq}=2\delta_{ij}$.
 \item[(d)] There are $3!=6$ permutations of $(1,2,3)$.
 For each, $\varepsilon_{ijk}^2=1$, and every other term vanishes.
 Thus $\sum_{ijk}\varepsilon_{ijk}\varepsilon_{ijk}=6$.
+Equivalently, set $j=i$ in (c) and sum over $i$:
+$\sum_i2\delta_{ii}=6$ by (a).
 \end{enumerate}
 
 \Needspace{5\baselineskip}
@@ -387,7 +437,8 @@ Thus $\sum_{ijk}\varepsilon_{ijk}\varepsilon_{ijk}=6$.
 \emph{Note.}~See Exercise 2.1.8 for definitions of $\delta_{ij}$ and
 $\varepsilon_{ijk}$.
 \solution
-\erratum{The textbook identity is correct. The manual's final line has
+\erratum{The textbook identity is correct. In the Instructor's Manual
+the final line has
 $\delta_{ip}\delta_{jp}$ in place of $\delta_{ip}\delta_{jq}$.
 For $i=p=1$, $j=q=2$, the left side is $1$, whereas that misprinted
 right side is $0$.}
@@ -395,8 +446,11 @@ If $i=j$ or $p=q$, a Levi-Civita factor on the left vanishes for
 every $k$; the two delta products on the right are identical and cancel.
 Now take $i\ne j$ and $p\ne q$. A nonzero product requires a $k$
 different from both $i,j$ and from both $p,q$. In three dimensions
-this requires the unordered pairs $\{i,j\}$ and $\{p,q\}$ to agree.
-If they differ, both sides are zero. If $(p,q)=(i,j)$, the single
+$k$ is then the one index missing from $\{i,j\}$ and also the one
+missing from $\{p,q\}$, so the unordered pairs $\{i,j\}$ and
+$\{p,q\}$ must agree. If they differ, the left side is zero, and so
+is the right side, since each delta product on the right requires
+$(p,q)=(i,j)$ or $(p,q)=(j,i)$. If $(p,q)=(i,j)$, the single
 allowed $k$ contributes $\varepsilon_{ijk}^2=1$, and the right side is
 $1-0$. If $(p,q)=(j,i)$, antisymmetry gives
 $\varepsilon_{ijk}\varepsilon_{jik}=-1$, and the right side is $0-1$.
@@ -482,14 +536,22 @@ $(a+ib)(c+id)=(ac-bd)+i(ad+bc)$.
 The representation is one-to-one, since its first row recovers $a,b$,
 and $F(1)=I_2$.
 
-For $a+ib\ne0$,
+For $a+ib\ne0$, multiplying numerator and denominator by $a-ib$
+gives $(a+ib)^{-1}=x+iy$ with $x=a/(a^2+b^2)$, $y=-b/(a^2+b^2)$, so
 \[
-\frac1{a+ib}=\frac{a-ib}{a^2+b^2},\qquad
-\boxed{F((a+ib)^{-1})=\frac1{a^2+b^2}
+\boxed{F((a+ib)^{-1})=\begin{pmatrix}x&y\\-y&x\end{pmatrix}
+=\frac1{a^2+b^2}
 \begin{pmatrix}a&-b\\b&a\end{pmatrix}}.
 \]
-Multiplication by $F(a+ib)$ gives
-$(a^2+b^2)I_2/(a^2+b^2)=I_2$; if $a=b=0$, neither inverse exists.
+As a check,
+\[
+\begin{pmatrix}a&b\\-b&a\end{pmatrix}
+\begin{pmatrix}a&-b\\b&a\end{pmatrix}
+=\begin{pmatrix}a^2+b^2&0\\0&a^2+b^2\end{pmatrix}
+=(a^2+b^2)I_2,
+\]
+so this matrix is the inverse of $F(a+ib)$; if $a=b=0$, neither
+inverse exists.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -556,8 +618,11 @@ a^2b^2-a^2b^2&ab^3-ab^3\\
 $s\begin{pmatrix}ab&b^2\\-a^2&-ab\end{pmatrix}$, with
 $a,b\in\mathbb R$ and $s=\pm1$.}
 For $v\ne0$, take $s=\operatorname{sgn}v$, $b=\sqrt{|v|}$,
-$a=u/(sb)$; for $v=0,w\ne0$, take
-$s=-\operatorname{sgn}w$, $a=\sqrt{|w|}$, $b=0$.
+$a=u/(sb)$; then $sab=u$, $sb^2=s|v|=v$, and
+$-sa^2=-su^2/|v|=-u^2/v=w$ (using $s^2=1$ and $v=s|v|$).
+For $v=0,w\ne0$, take
+$s=-\operatorname{sgn}w$, $a=\sqrt{|w|}$, $b=0$; then
+$-sa^2=\operatorname{sgn}(w)|w|=w$ and the other entries vanish.
 For example $\begin{pmatrix}0&-1\\0&0\end{pmatrix}$ would require
 $b^2=-1$ in the unmodified real formula.
 
@@ -605,9 +670,12 @@ Expand without reordering factors:
 [C,[A,B]]&=CAB-CBA-ABC+BAC.
 \end{aligned}
 \]
-Subtracting the third line from the second cancels $BAC$ and $CAB$,
-leaving the first line. This proves the identity for arbitrary square
-matrices of the same size.
+Subtracting the third line from the second cancels $BAC$ and $CAB$:
+\[
+[B,[A,C]]-[C,[A,B]]=-BCA-ACB+CBA+ABC,
+\]
+which is the first line rearranged. This proves the identity for
+arbitrary square matrices of the same size.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -665,7 +733,8 @@ basis is provided by the four $2\times2$ matrices, $i\sigma_{1}$, $i\sigma_{2}$,
 $-i\sigma_{3}$, and $\mathbf{1}$, where the $\sigma_{i}$ are the Pauli spin
 matrices of Example 2.2.1.
 \solution
-Track the four standard basis columns. The given matrices act as
+Track the four standard basis columns: column $r$ of a matrix is its
+image of $e_r$. Reading off the columns, the given matrices act as
 \[
 \begin{array}{c|rrrr}
 &e_1&e_2&e_3&e_4\\\hline
@@ -678,7 +747,9 @@ Applying each row twice sends every $e_r$ to $-e_r$; hence
 $\mathsf i^2=\mathsf j^2=\mathsf k^2=-I_4$.
 For example $\mathsf i^2e_1=\mathsf i(-e_2)=-e_1$ and
 $\mathsf j^2e_1=\mathsf j(e_4)=-e_1$.
-For the cyclic products the successive images are
+For the cyclic products apply the right-hand factor first, e.g.\
+$\mathsf i\mathsf je_1=\mathsf i(\mathsf je_1)=\mathsf ie_4=e_3$.
+The successive images are
 \[
 \begin{array}{c|rrrr}
 &e_1&e_2&e_3&e_4\\\hline
@@ -703,8 +774,8 @@ The complete multiplication table is
 \end{array}.
 \]
 For the alternative basis, put $q_1=i\sigma_1$, $q_2=i\sigma_2$,
-$q_3=-i\sigma_3$. The Pauli products in 2.2.11 give
-$q_r^2=-I_2$ and
+$q_3=-i\sigma_3$. The Pauli products of Exercise 2.2.11 give
+$q_r^2=-\sigma_r^2=-I_2$ and
 \[
 q_1q_2=-\sigma_1\sigma_2=-i\sigma_3=q_3,\quad
 q_2q_3=\sigma_2\sigma_3=i\sigma_1=q_1,\quad
@@ -767,6 +838,11 @@ The six products with distinct indices are
 &\sigma_1\sigma_3=-i\sigma_2.
 \end{array}
 \]
+The reversed products in the right column follow in the same way, or
+from $\sigma_j\sigma_i=\sigma_j^\dagger\sigma_i^\dagger
+=(\sigma_i\sigma_j)^\dagger=(i\sigma_k)^\dagger=-i\sigma_k$, since each
+$\sigma_i$ is Hermitian; for example
+$\sigma_2\sigma_1=\begin{pmatrix}-i&0\\0&i\end{pmatrix}=-i\sigma_3$.
 Hence the anticommutator is zero for distinct indices; for equal
 indices it is $2\sigma_i^2=2I_2$. Together,
 \[
@@ -824,7 +900,14 @@ M_zM_x&=\frac1{\sqrt2}\begin{pmatrix}0&1&0\\0&0&0\\0&-1&0\end{pmatrix},
 M_xM_z&=\frac1{\sqrt2}\begin{pmatrix}0&0&0\\1&0&-1\\0&0&0\end{pmatrix}.
 \end{aligned}
 \]
-Subtraction gives $[M_y,M_z]=iM_x$ and $[M_z,M_x]=iM_y$.
+Subtraction gives
+\[
+[M_y,M_z]=\frac i{\sqrt2}\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix}
+=iM_x,\qquad
+[M_z,M_x]=\frac1{\sqrt2}\begin{pmatrix}0&1&0\\-1&0&1\\0&-1&0\end{pmatrix}
+=iM_y,
+\]
+where the last matrix is $iM_y$ because $i(-i)=1$ and $i\cdot i=-1$.
 Reversed commutators change sign and $[M_i,M_i]=0$, yielding the
 Levi-Civita expression for all indices.
 
@@ -835,10 +918,14 @@ M_x^2=\frac12\begin{pmatrix}1&0&1\\0&2&0\\1&0&1\end{pmatrix},
 M_y^2=\frac12\begin{pmatrix}1&0&-1\\0&2&0\\-1&0&1\end{pmatrix},
 \quad M_z^2=\operatorname{diag}(1,0,1).
 \]
-Adding cancels the off-diagonal entries and gives $\boxed{M^2=2I_3}$.
+Adding cancels the off-diagonal entries $\pm\frac12$; the diagonal
+entries add to $\frac12+\frac12+1=2$, $1+1+0=2$, and
+$\frac12+\frac12+1=2$. Hence $\boxed{M^2=2I_3}$.
 
 \textbf{(c)} Since $M^2=2I_3$, $[M^2,M_i]=2M_i-2M_i=0$.
-The raising and lowering matrices are
+Next, the matrix $iM_y$ found in (a) agrees with $M_x$ above the
+diagonal and is its negative below it.
+Adding and subtracting, the raising and lowering matrices are
 \[
 L^+=\sqrt2\begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},
 \qquad L^-=\sqrt2\begin{pmatrix}0&0&0\\1&0&0\\0&1&0\end{pmatrix}.
@@ -877,33 +964,43 @@ The numerical spin-1 value is not retained.}
 \erratum{For spin $3/2$, the analogue of 2.2.12(b) is
 $M^2=\tfrac{15}{4}I_4$, not $2I_3$ (nor $2I_4$).
 The commutator identities are unchanged, with $4\times4$ matrices.}
-Form the sums and differences:
+Form the sums and differences. Since $i\cdot\frac i2=-\frac12$, the
+matrix $iM_y$ agrees with $M_x$ above the diagonal and is its negative
+below it; hence
 \[
 L^+=M_x+iM_y=
 \begin{pmatrix}0&\sqrt3&0&0\\0&0&2&0\\0&0&0&\sqrt3\\0&0&0&0\end{pmatrix},
-\qquad L^-=(L^+)^T.
+\qquad L^-=M_x-iM_y=(L^+)^T.
 \]
 The diagonal entries of $M_z$ are $3/2,1/2,-1/2,-3/2$.
-Each nonzero entry of $L^+$ connects adjacent entries whose
-difference is $1$. Thus
-$[M_z,L]_{ij}=((M_z)_{ii}-(M_z)_{jj})L_{ij}$ gives
+As in Exercise 2.2.12, $[M_z,L]_{ij}=((M_z)_{ii}-(M_z)_{jj})L_{ij}$
+for any $L$. The nonzero entries of $L^+$ are at positions $(i,i+1)$,
+where this difference is $1$, and those of $L^-$ are at $(i+1,i)$,
+where it is $-1$. Thus
 \[
 [M_z,L^+]=L^+,\qquad [M_z,L^-]=-L^-.
 \]
-Sparse multiplication gives
+Because $L^-=(L^+)^T$ is real, $(L^+L^-)_{ii}$ is the sum of the
+squares of row $i$ of $L^+$ and $(L^-L^+)_{ii}$ that of column $i$;
+the off-diagonal entries vanish because each row and each column of
+$L^+$ has at most one nonzero entry. Thus
 \[
 L^+L^-=\operatorname{diag}(3,4,3,0),\qquad
 L^-L^+=\operatorname{diag}(0,3,4,3),
 \]
 so $[L^+,L^-]=\operatorname{diag}(3,1,-1,-3)=2M_z$.
-Now $M_x=(L^++L^-)/2$ and $M_y=(L^+-L^-)/(2i)$, giving
+Now $M_x=(L^++L^-)/2$ and $M_y=(L^+-L^-)/(2i)$. Using
+$[L^\pm,L^\pm]=0$, $[L^-,L^+]=-[L^+,L^-]$, and
+$[M_z,L^\pm]=\pm L^\pm$,
 \[
 \begin{aligned}
-{}[M_x,M_y]&=\frac1{4i}
-\bigl(-[L^+,L^-]+[L^-,L^+]\bigr)
+{}[M_x,M_y]&=\frac1{4i}[L^++L^-,L^+-L^-]
+=\frac1{4i}\bigl(-[L^+,L^-]+[L^-,L^+]\bigr)
 =-\frac{4M_z}{4i}=iM_z,\\
-[M_z,M_x]&=\tfrac12(L^+-L^-)=iM_y,\\
-[M_y,M_z]&=\tfrac1{2i}(-L^+-L^-)=iM_x.
+[M_z,M_x]&=\tfrac12\bigl([M_z,L^+]+[M_z,L^-]\bigr)
+=\tfrac12(L^+-L^-)=iM_y,\\
+[M_y,M_z]&=-\tfrac1{2i}\bigl([M_z,L^+]-[M_z,L^-]\bigr)
+=\tfrac1{2i}(-L^+-L^-)=iM_x.
 \end{aligned}
 \]
 Expand the squares:
@@ -916,7 +1013,8 @@ M_x^2+M_y^2
 =\operatorname{diag}(3/2,7/2,7/2,3/2).
 \end{aligned}
 \]
-Adding $M_z^2=\operatorname{diag}(9/4,1/4,1/4,9/4)$ gives
+Adding $M_z^2=\operatorname{diag}(9/4,1/4,1/4,9/4)$ gives, since
+$\frac32+\frac94=\frac72+\frac14=\frac{15}4$,
 $\boxed{M^2=\tfrac{15}{4}I_4}$.
 This commutes with every $M_i$; the other identities in part (c)
 were established directly above.
@@ -1016,8 +1114,10 @@ Taking traces and cycling the first $B$ to the end,
 =\operatorname{tr}(ABB)=\operatorname{tr}A.
 \]
 Hence $2\operatorname{tr}A=0$.
-Similarly $ABA=-BA^2=-B$ and
-$\operatorname{tr}(ABA)=\operatorname{tr}(BAA)=\operatorname{tr}B$.
+Similarly $A^2=I$ gives $ABA=-BA^2=-B$, and cycling the first $A$
+to the end,
+$-\operatorname{tr}B=\operatorname{tr}(ABA)=\operatorname{tr}(BAA)
+=\operatorname{tr}B$, so $2\operatorname{tr}B=0$.
 Thus $\boxed{\operatorname{tr}A=\operatorname{tr}B=0}$.
 
 \Needspace{5\baselineskip}
@@ -1032,22 +1132,25 @@ Thus $\boxed{\operatorname{tr}A=\operatorname{tr}B=0}$.
   if $n$ is \textbf{odd}, a contradiction results.
 \end{enumerate}
 \solution
-\erratum{The manual's left multiplication by $B^{-1}$ proves the
-vanishing of $\operatorname{tr}A$, not of $\operatorname{tr}B$ as printed.
+\erratum{The Instructor's Manual's left multiplication by $B^{-1}$
+proves the vanishing of $\operatorname{tr}A$, not of
+$\operatorname{tr}B$ as printed.
 Interchanging the roles of $A$ and $B$ supplies the second trace.}
-\textbf{(a)} Invertibility of $B$ and $AB=-BA$ give $BAB^{-1}=-A$.
-Taking the trace,
+\textbf{(a)} Multiplying $AB=-BA$ on the right by $B^{-1}$ gives
+$A=-BAB^{-1}$, that is, $BAB^{-1}=-A$.
+Taking the trace and cycling $B$ to the end,
 \[
 -\operatorname{tr}A=\operatorname{tr}(BAB^{-1})
 =\operatorname{tr}(AB^{-1}B)=\operatorname{tr}A,
 \]
-so $\operatorname{tr}A=0$. Likewise invertibility of $A$ gives
-$ABA^{-1}=-B$, and
+so $\operatorname{tr}A=0$. Likewise, multiplying $BA=-AB$ on the
+right by $A^{-1}$ gives $ABA^{-1}=-B$, and
 $-\operatorname{tr}B=\operatorname{tr}(ABA^{-1})
 =\operatorname{tr}(BA^{-1}A)=\operatorname{tr}B$.
 Hence $\operatorname{tr}B=0$.
 
-\textbf{(b)} Taking determinants gives
+\textbf{(b)} Taking determinants and using the product rule and
+$\det(-X)=(-1)^n\det X$ (Exercise 2.2.4) gives
 \[
 \det A\det B=\det(AB)=\det(-BA)
 =(-1)^n\det B\det A.
@@ -1074,11 +1177,12 @@ Let $B_{ij}=C_{ji}/\det A$, with $\det A\ne0$. Then
 (BA)_{ij}=\sum_k\frac{C_{ki}}{\det A}a_{kj}
 =\frac1{\det A}\sum_k a_{kj}C_{ki}.
 \]
-For $i=j$, the numerator is expansion down column $i$ and equals
-$\det A$. For $i\ne j$, it is the determinant with column $i$
-replaced by column $j$, so it is zero. Thus
+For $i=j$, the numerator is the expansion down column $i$ and equals
+$\det A$ (Exercise 2.1.4(a)). For $i\ne j$, it is the expansion of
+the determinant with column $i$ replaced by column $j$, so it is zero
+(Exercise 2.1.4(b)). Thus
 $(BA)_{ij}=\delta_{ij}$ and $BA=I$.
-The corresponding row-cofactor identity gives
+The corresponding row identities of Exercise 2.1.4 give
 \[
 (AB)_{ij}=\frac1{\det A}\sum_k a_{ik}C_{jk}=\delta_{ij}.
 \]
@@ -1099,7 +1203,7 @@ product $\mathsf{M}_{L}\mathsf{A}$ will be $\mathsf{A}$ but with:
 \solution
 \erratum{In (b), the varying index in the parentheses must be $j$,
 not $i$: $i$ labels the one row being changed.
-For (c), the manual's $M_{mi}-M_{im}=1$ must read
+For (c), the Instructor's Manual's $M_{mi}-M_{im}=1$ must read
 $M_{mi}=M_{im}=1$ when $i\ne m$. Both inserted entries are positive.}
 Let $E_{ab}$ have a single $1$ in position $(a,b)$. Its action is
 \[
@@ -1152,8 +1256,8 @@ Column $i$ in (a) is $C_i+(k-1)C_i=kC_i$; in (b), it is
 $C_i-kC_m$; in (c), the two columns are removed and reinserted
 in exchanged positions.
 \erratum{The off-diagonal entry in (b) is $(m,i)$, the transpose
-of the row-operation entry $(i,m)$; the manual's statement that the
-answers are the same requires this transpose.}
+of the row-operation entry $(i,m)$; the Instructor's Manual's
+statement that the answers are the same requires this transpose.}
 For rectangular $A$, $M_L$ has order equal to the number of rows
 of $A$, whereas $M_R$ has order equal to the number of columns.
 
@@ -1168,7 +1272,7 @@ Expansion along row 1 gives
 \[
 \det A=3(8-1)-2(8-1)+(2-2)=21-14=7.
 \]
-The signed minors are
+The cofactors (signed $2\times2$ minors) are
 \[
 \begin{array}{lll}
 C_{11}=8-1=7,&C_{12}=-(8-1)=-7,&C_{13}=2-2=0,\\
@@ -1176,7 +1280,9 @@ C_{21}=-(8-1)=-7,&C_{22}=12-1=11,&C_{23}=-(3-2)=-1,\\
 C_{31}=2-2=0,&C_{32}=-(3-2)=-1,&C_{33}=6-4=2.
 \end{array}
 \]
-The cofactor matrix is symmetric, so its transpose is unchanged:
+By Exercise 2.2.20, $(A^{-1})_{ij}=C_{ji}/\det A$, so $A^{-1}$ is the
+transposed cofactor matrix divided by $7$. The cofactor matrix is
+symmetric, so its transpose is unchanged:
 \[
 \boxed{A^{-1}=\frac17
 \begin{pmatrix}7&-7&0\\-7&11&-1\\0&-1&2\end{pmatrix}}.
@@ -1248,10 +1354,25 @@ $i,j=0,\ldots,5$. Subtract $r$ times original row $i-1$ from
 row $i$ for each $i=1,\ldots,5$. For $j<i$, the new entry is
 $r^{i-j}-r\,r^{i-1-j}=0$; for $j\ge i$, it is
 $r^{j-i}-r\,r^{j-i+1}=(1-r^2)r^{j-i}$.
-This suggests that a second difference can isolate a diagonal entry.
-
-Define tridiagonal $T$ with end diagonal entries $1$, interior
-diagonal entries $1+r^2$, and adjacent entries $-r$.
+The result is $EA$, where $E$ has $1$ on the diagonal and $-r$ just
+below it. Now subtract $r$ times column $j-1$ from column $j$ of $EA$
+for $j=1,\ldots,5$, which is right multiplication by $E^T$. Above the
+diagonal this gives $r^j-r\,r^{j-1}=0$ in row $0$ and
+$(1-r^2)(r^{j-i}-r\,r^{j-1-i})=0$ for $j>i\ge1$; the diagonal and
+lower entries are unchanged, because the entry to the left of each is
+$0$. Hence
+\[
+EAE^T=\Delta\equiv\operatorname{diag}(1,1-r^2,\ldots,1-r^2),
+\qquad A^{-1}=E^T\Delta^{-1}E.
+\]
+Column $i$ of $E$ has only the entries $1$ (row $i$) and $-r$
+(row $i+1$), so with $\delta_0=1$, $\delta_1=\cdots=\delta_5=1/(1-r^2)$,
+and $\delta_6=0$, the product $E^T\Delta^{-1}E$ has diagonal entries
+$\delta_i+r^2\delta_{i+1}$, entries $-r\delta_{\max(i,j)}$ for
+$|i-j|=1$, and zeros elsewhere. This is $T/(1-r^2)$, where $T$ is
+tridiagonal with end diagonal entries $1$, interior diagonal entries
+$1+r^2$, and adjacent entries $-r$.
+The result can be confirmed by multiplying $A$ and $T$ directly.
 For an interior column $j=1,\ldots,4$,
 \[
 (AT)_{ij}=-rA_{i,j-1}+(1+r^2)A_{ij}-rA_{i,j+1}.
@@ -1267,7 +1388,10 @@ At the first column,
 =\begin{cases}1-r^2,&i=0,\\r^i-r r^{i-1}=0,&i>0.\end{cases}
 \]
 Reversing the indices proves the same statement for the last column.
-Thus $AT=(1-r^2)I_6$. At $r=1/2$,
+Thus $AT=(1-r^2)I_6$, confirming $A^{-1}=T/(1-r^2)$.
+At $r=1/2$, $1-r^2=3/4$, so $A^{-1}=\frac43T$ has end diagonal
+entries $\frac43$, interior diagonal entries $\frac43\cdot\frac54=\frac53$,
+and adjacent entries $\frac43\bigl(-\frac12\bigr)=-\frac23$:
 \[
 \boxed{A^{-1}=\frac{T}{1-r^2}
 =\frac13\begin{pmatrix}
@@ -1279,7 +1403,6 @@ Thus $AT=(1-r^2)I_6$. At $r=1/2$,
 0&0&0&0&-2&4
 \end{pmatrix}}.
 \]
-This product calculation both derives and verifies the inverse.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1327,11 +1450,13 @@ the most general form of
 \mathsf{A}=\begin{pmatrix}a&b\\c&d\end{pmatrix}.
 \]
 \solution
-For real orthogonal $A$, its first row is a real unit vector,
-so write $(a,b)=(\cos\theta,\sin\theta)$.
+For real orthogonal $A$, $A^TA=I$ means $A^T=A^{-1}$, so also
+$AA^T=I$: the rows are orthonormal. The first row is a real unit
+vector, so write $(a,b)=(\cos\theta,\sin\theta)$.
 The second row is a unit vector perpendicular to the first.
-That one-dimensional subspace is spanned by the unit vector
-$(-\sin\theta,\cos\theta)$. Hence
+The vectors perpendicular to $(\cos\theta,\sin\theta)$ form the line
+spanned by $(-\sin\theta,\cos\theta)$, whose only unit vectors are
+$\pm(-\sin\theta,\cos\theta)$. Hence
 \[
 \boxed{A=\begin{pmatrix}
 \cos\theta&\sin\theta\\
@@ -1340,8 +1465,13 @@ $(-\sin\theta,\cos\theta)$. Hence
 \]
 The two row norms are $1$, their inner product is $0$, and
 $\det A=s(\cos^2\theta+\sin^2\theta)=s$.
-\erratum{Both signs are required. The manual assumes $\det A=1$
-and omits the $\det A=-1$ reflection family.}
+For $s=1$, $A$ is the two-dimensional rotation matrix: it rotates the
+coordinate axes through the angle $\theta$,
+$x'=x\cos\theta+y\sin\theta$, $y'=-x\sin\theta+y\cos\theta$.
+For $s=-1$, $A=\operatorname{diag}(1,-1)$ times that rotation, i.e.\
+the rotation followed by the reflection $y'\to-y'$.
+\erratum{Both signs are required. The Instructor's Manual assumes
+$\det A=1$ and omits the $\det A=-1$ reflection family.}
 If orthogonality is extended to complex $A$ with $A^TA=I$, the
 algebraic form is
 $A=\begin{pmatrix}a&b\\-sb&sa\end{pmatrix}$ with
@@ -1435,7 +1565,8 @@ which has a zero eigenvalue.
 matrices, show that $(\mathsf{AB}+\mathsf{BA})$ and $i(\mathsf{AB}-\mathsf{BA})$
 are also Hermitian.
 \solution
-Using $A^\dagger=A$, $B^\dagger=B$, and reversing the product order,
+Using $A^\dagger=A$, $B^\dagger=B$, and reversing the product order
+(Exercise 2.2.32),
 \[
 (AB+BA)^\dagger=B^\dagger A^\dagger+A^\dagger B^\dagger
 =BA+AB=AB+BA.
