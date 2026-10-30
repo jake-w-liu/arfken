@@ -3149,7 +3149,7 @@ planes $x=0$ and $y=0$, and $v=0$ the planes $y=x$ and $y=-x$.
 \textbf{(b)} Here blue curves have $u=\pm1$ and red curves have
 $v=\pm1.2$. Arrows show increasing coordinates:
 \begin{center}
-\begin{tikzpicture}[scale=0.9,>=stealth]
+\begin{tikzpicture}[>=stealth]
 \clip (-3,-3.2) rectangle (3,3.2);
 \draw[->] (-2.8,0)--(2.85,0) node[below]{$x$};
 \draw[->] (0,-2.8)--(0,2.85) node[left]{$y$};
@@ -3161,15 +3161,15 @@ $v=\pm1.2$. Arrows show increasing coordinates:
  \draw[red!65!black,thick,domain=-2.45:2.45,samples=70]
  plot (\x,{\sg*sqrt(1.2+\x*\x)});
 }
-\foreach \sx/\sy in {1/1,-1/1,-1/-1,1/-1}{
- \coordinate (p) at ({1.6*\sx},{1.6*\sy});
- \fill (p) circle(1.1pt);
- \draw[->,black,thick] (p)--++({0.43*\sy},{0.43*\sx});
- \node[font=\scriptsize] at ({1.6*\sx+0.62*\sy},{1.6*\sy+0.62*\sx})
- {$\hat{\mathbf e}_u$};
- \draw[->,black,thick] (p)--++({0.43*\sx},{-0.43*\sy});
- \node[font=\scriptsize] at ({1.6*\sx+0.62*\sx},{1.6*\sy-0.62*\sy})
- {$\hat{\mathbf e}_v$};
+\foreach \px/\py/\lux/\luy/\lvx/\lvy in {2.1/1.45/2.61/1.8/2.45/0.99,
+ -2.1/1.45/-1.94/0.87/-2.45/0.99,-2.1/-1.45/-2.61/-1.8/-2.45/-0.99,
+ 2.1/-1.45/1.94/-0.87/2.45/-0.99}{
+ \pgfmathsetmacro\fac{0.45/sqrt(\px*\px+\py*\py)}
+ \fill (\px,\py) circle(1.1pt);
+ \draw[->,black,thick] (\px,\py)--++({\fac*\py},{\fac*\px});
+ \draw[->,black,thick] (\px,\py)--++({\fac*\px},{-\fac*\py});
+ \node[font=\scriptsize] at (\lux,\luy){$\hat{\mathbf e}_u$};
+ \node[font=\scriptsize] at (\lvx,\lvy){$\hat{\mathbf e}_v$};
 }
 \node[blue,font=\small,anchor=base west] at (0.45,2.86)
 {$u=\text{const.}$};
