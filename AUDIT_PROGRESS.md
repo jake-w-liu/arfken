@@ -77,7 +77,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 Progress: 18 of 54 parts done (audited and verified); 8 audited and awaiting verification.
 
-`main.pdf` last rebuilt: before the audit.
+`main.pdf` last rebuilt: from commit 3a4e171 (18 of 54 parts done; 999 pages).
 
 | Part | Exercises | Status |
 |---|---|---|
