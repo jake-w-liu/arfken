@@ -3754,28 +3754,45 @@ $\mathbf{A}$ and then $\mathbf{B}$ for all points outside the sphere.
 \solution
 Let the shell radius be $a$, its uniform surface charge density be
 $\sigma$, and its angular velocity be $\omega\hat{\mathbf z}$.
-A strip at polar angle $\alpha$ has charge
-$dq=2\pi\sigma a^2\sin\alpha\,d\alpha$ and current
+The strip between the polar angles $\alpha$ and $\alpha+d\alpha$ has
+circumference $2\pi a\sin\alpha$ and width $a\,d\alpha$, hence charge
+$dq=2\pi\sigma a^2\sin\alpha\,d\alpha$. This charge passes a fixed
+point once per period $2\pi/\omega$, so the strip carries the current
 $dI=(\omega/2\pi)dq=\sigma\omega a^2\sin\alpha\,d\alpha$.
-Its circular radius is $a\sin\alpha$ and its center is $a\cos\alpha$.
+It is a circular loop of radius $a\sin\alpha$ centered on the axis at
+$z=a\cos\alpha$.
 
-(a) Add the standard axial field of each strip:
+(a) A circular loop of radius $R$ carrying current $I$ produces on its
+axis, at distance $d$ from its center, the field
+$B_z=\mu_0IR^2/[2(R^2+d^2)^{3/2}]$. For the strip, $R=a\sin\alpha$,
+$d=z-a\cos\alpha$, and
+$R^2+d^2=z^2+a^2-2az\cos\alpha$. Adding the strips and putting
+$u=\cos\alpha$, $du=-\sin\alpha\,d\alpha$, $\sin^2\alpha=1-u^2$
+(the limits $\alpha=0,\pi$ become $u=1,-1$),
 \[
-B_z(z)=\frac{\mu_0\sigma\omega a^4}{2}
+B_z(z)=\int_0^\pi\frac{\mu_0\sigma\omega a^4\sin^3\alpha\,d\alpha}
+{2(z^2+a^2-2az\cos\alpha)^{3/2}}
+=\frac{\mu_0\sigma\omega a^4}{2}
 \int_{-1}^1\frac{1-u^2}{(z^2+a^2-2azu)^{3/2}}du,\qquad z>a.
 \]
-Set $t=z^2+a^2-2azu$. The integral becomes
+Set $t=z^2+a^2-2azu$. Then $du=-dt/(2az)$, the limits $u=-1$ and
+$u=1$ become $t=(z+a)^2$ and $t=(z-a)^2$, and
+$1-u^2=[4a^2z^2-(z^2+a^2-t)^2]/(4a^2z^2)$, so the integral becomes
 \[
 \frac1{8a^3z^3}\int_{(z-a)^2}^{(z+a)^2}
 [4a^2z^2-(z^2+a^2-t)^2]t^{-3/2}dt.
 \]
-An antiderivative of the numerator times $t^{-3/2}$ is
+Since $(z^2+a^2)^2-4a^2z^2=(z^2-a^2)^2$, the integrand is
+$-(z^2-a^2)^2t^{-3/2}+2(z^2+a^2)t^{-1/2}-t^{1/2}$, with the
+antiderivative
 \[
 2(z^2-a^2)^2t^{-1/2}
 +4(z^2+a^2)t^{1/2}-\frac23t^{3/2}.
 \]
 Since $z>a$, the endpoint square roots are $z+a$ and $z-a$.
-The difference of the antiderivative values is
+With $1/(z+a)-1/(z-a)=-2a/(z^2-a^2)$ and
+$(z+a)^3-(z-a)^3=6az^2+2a^3$, the difference of the antiderivative
+values is
 \begin{align*}
 &2(z^2-a^2)^2\left(\frac1{z+a}-\frac1{z-a}\right)
 +8a(z^2+a^2)-\frac23[(z+a)^3-(z-a)^3]\\
@@ -3786,30 +3803,59 @@ Multiplication by $1/(8a^3z^3)$ leaves $4/(3z^3)$. Therefore
 \[
 \boxed{\mathbf B(z\hat{\mathbf z})
 =\frac{2\mu_0\sigma\omega a^4}{3|z|^3}\hat{\mathbf z}},
-\qquad |z|>a,
+\qquad |z|>a.
 \]
-where reflection symmetry supplies the negative axis.
+For $z<-a$ the integral representation of $B_z$ still holds, and
+replacing $z$ by $-z$ and $u$ by $-u$ leaves it unchanged; so $B_z$
+depends only on $|z|$.
 
-(b) Use the same decaying vector-potential expansion as the loop example:
+(b) Use the same decaying vector-potential expansion as for the
+current loop of Example 15.4.2:
 \[
 A_\varphi=\sum_{l\ge1}c_lr^{-l-1}P_l^1(\cos\theta).
 \]
-Its radial curl is
-$B_r=-\sum l(l+1)c_lr^{-l-2}P_l(\cos\theta)$.
-On the positive axis, $P_l(1)=1$, and part (a) has only $z^{-3}$.
-Uniqueness of the power series therefore gives
-$c_1=-\mu_0\sigma\omega a^4/3$ and $c_l=0$ for $l>1$. Consequently
+With $x=\cos\theta$, $P_l^1(x)=-(1-x^2)^{1/2}P_l'(x)$ and
+$\partial_\theta=-\sin\theta\,d/dx$, we have
+$\sin\theta\,P_l^1=-(1-x^2)P_l'$ and, by Legendre's equation,
+\[
+\partial_\theta[\sin\theta\,P_l^1(\cos\theta)]
+=\sin\theta\,\frac{d}{dx}[(1-x^2)P_l'(x)]
+=-l(l+1)\sin\theta\,P_l(x).
+\]
+Hence the radial component of the curl is
+\[
+B_r=\frac1{r\sin\theta}\partial_\theta(\sin\theta A_\varphi)
+=-\sum_{l\ge1}l(l+1)c_lr^{-l-2}P_l(\cos\theta).
+\]
+On the positive axis ($\theta=0$, $r=z$), $B_r=B_z$ and $P_l(1)=1$,
+so part (a) requires
+$-\sum_ll(l+1)c_lz^{-l-2}=2\mu_0\sigma\omega a^4/(3z^3)$ for all $z>a$.
+Uniqueness of the power series in $1/z$ therefore gives
+$-2c_1=2\mu_0\sigma\omega a^4/3$ and $l(l+1)c_l=0$ for $l>1$, that is,
+$c_1=-\mu_0\sigma\omega a^4/3$ and $c_l=0$ for $l>1$. Consequently,
+with $P_1^1(\cos\theta)=-\sin\theta$,
 \[
 \boxed{A_\varphi=-\frac{\mu_0\sigma\omega a^4}{3r^2}P_1^1
-=\frac{\mu_0\sigma\omega a^4}{3r^2}\sin\theta},
+=\frac{\mu_0\sigma\omega a^4}{3r^2}\sin\theta}.
 \]
+The radial component is $B_r=-2c_1r^{-3}\cos\theta$, and
+\[
+B_\theta=-\frac1r\partial_r(rA_\varphi)
+=-\frac{\mu_0\sigma\omega a^4\sin\theta}{3r}\,\partial_r\frac1r
+=\frac{\mu_0\sigma\omega a^4}{3r^3}\sin\theta,
+\]
+while $B_\varphi=0$ because $A_\varphi$ is the only component and does
+not depend on $\varphi$. Thus
 \[
 \boxed{B_r=\frac{2\mu_0\sigma\omega a^4}{3r^3}\cos\theta,\qquad
 B_\theta=\frac{\mu_0\sigma\omega a^4}{3r^3}\sin\theta,\qquad B_\varphi=0}.
 \]
-This is exactly a dipole with
+Comparison with the point-dipole field of Exercise 15.4.18,
+$B_r=\mu_0m\cos\theta/(2\pi r^3)$,
+$B_\theta=\mu_0m\sin\theta/(4\pi r^3)$, shows that this is exactly a
+dipole field with
 $m=4\pi\sigma\omega a^4/3=Q\omega a^2/3$, $Q=4\pi a^2\sigma$.
-\erratum{The manual's part (a), p.~252, has an extra factor $3$
+\erratum{Part (a) of the Instructor's Manual, p.~252, has an extra factor $3$
 in its denominator: its displayed coefficient is $2/9$ instead
 of $2/3$. This also conflicts with its own radial field on the
 positive axis. In its expressions in terms of $P_1^1$, both
@@ -3846,7 +3892,11 @@ ds=(r^{2}d\theta^{2}+dr^{2})^{1/2}
 Put $\alpha=\alpha_2$, $P=P_2(\cos\theta)$ and
 $\dot P=dP_2(\cos\theta)/d\theta$. Then
 $r=r_0(1+\alpha P)$ and $r_\theta=r_0\alpha\dot P$.
-For small $\alpha$ the radius is positive, so the area integrand is
+For small $\alpha$ the radius is positive and $r_\theta/r=O(\alpha)$.
+The binomial series $\sqrt{1+\varepsilon}=1+\varepsilon/2+O(\varepsilon^2)$
+with $\varepsilon=(r_\theta/r)^2=O(\alpha^2)$, together with
+$r^2=r_0^2(1+2\alpha P+\alpha^2P^2)$ and
+$r_\theta^2=r_0^2\alpha^2\dot P^2$, gives the area integrand
 \begin{align*}
 r\sqrt{r^2+r_\theta^2}
 &=r^2\sqrt{1+(r_\theta/r)^2}\\
@@ -3854,21 +3904,28 @@ r\sqrt{r^2+r_\theta^2}
 &=r_0^2[1+2\alpha P+\alpha^2(P^2+\tfrac12\dot P^2)]
 +O(\alpha^3).
 \end{align*}
-The first-order integral vanishes because $\int_{-1}^1P_2dx=0$.
-The norm gives $\int_{-1}^1P_2^2dx=2/5$. Also
-$\dot P=-3\cos\theta\sin\theta$, whence
+With $x=\cos\theta$, $\sin\theta\,d\theta=-dx$, each
+$\int_0^\pi(\cdots)\sin\theta\,d\theta$ becomes
+$\int_{-1}^1(\cdots)dx$. The zeroth-order term gives
+$\int_{-1}^1dx=2$. The first-order integral vanishes because
+$\int_{-1}^1P_2dx=0$ (orthogonality to $P_0=1$).
+The norm $2/(2l+1)$ gives $\int_{-1}^1P_2^2dx=2/5$. Also, from
+$P=(3\cos^2\theta-1)/2$,
+$\dot P=-3\cos\theta\sin\theta$, so $\dot P^2=9x^2(1-x^2)$, whence
 \[
 \int_0^\pi\dot P^2\sin\theta\,d\theta
 =9\int_{-1}^1(x^2-x^4)dx
 =9\left(\frac23-\frac25\right)=\frac{12}{5}.
 \]
-Integrating over $\varphi$ now gives
+Integrating over $\varphi$ (a factor $2\pi$) now gives, with
+$\tfrac12\cdot\tfrac{12}5=\tfrac65$,
 \[
 A=2\pi r_0^2\left[2+\alpha^2\left(\frac25+\frac65\right)
 +O(\alpha^3)\right]
 =\boxed{4\pi r_0^2[1+\tfrac45\alpha_2^2+O(\alpha_2^3)]}.
 \]
-The reference radius is kept as specified in the given surface equation.
+Here $r_0$ is the fixed constant of the given surface equation; no
+volume-conserving readjustment of $r_0$ is made.
 
 \Needspace{8\baselineskip}
 \subsection*{15.5 Spherical Harmonics}
@@ -3881,13 +3938,20 @@ any $m$ dependence.
 \par\emph{Hint.}~For the parity operation in spherical polar
 coordinates, see Exercise~3.10.25.
 \solution
-Spatial parity sends $\mathbf r$ to $-\mathbf r$, so
-$(\theta,\varphi)\mapsto(\pi-\theta,\varphi+\pi)$.
-Rodrigues's formula gives
-$P_l^m(-x)=(-1)^{l+m}P_l^m(x)$ for integer admissible orders;
-negative $m$ follow from the factorial relation.
+Spatial parity sends $\mathbf r$ to $-\mathbf r$, so, by
+Exercise 3.10.25, $(\theta,\varphi)\mapsto(\pi-\theta,\varphi+\pi)$
+and $x=\cos\theta\mapsto\cos(\pi-\theta)=-x$.
+In Rodrigues's formula (as in Exercise 15.4.3), valid for integers
+$-l\le m\le l$,
+\[
+P_l^m(x)=\frac{(-1)^m}{2^ll!}(1-x^2)^{m/2}
+\frac{d^{l+m}}{dx^{l+m}}(x^2-1)^l,
+\]
+the factor $(1-x^2)^{m/2}$ is even, while $(x^2-1)^l$ is even, so its
+$(l+m)$th derivative has parity $(-1)^{l+m}$ (each derivative reverses
+the parity). Hence $P_l^m(-x)=(-1)^{l+m}P_l^m(x)$.
 The azimuthal factor changes by
-$e^{im(\varphi+\pi)}=(-1)^me^{im\varphi}$.
+$e^{im(\varphi+\pi)}=e^{im\pi}e^{im\varphi}=(-1)^me^{im\varphi}$.
 The normalization constant is unchanged. Multiplying the two signs,
 \[
 \boxed{Y_l^m(\pi-\theta,\varphi+\pi)
@@ -3902,13 +3966,20 @@ that removes the $m$ dependence.
 \noindent\textbf{15.5.2}\quad Prove that
 $Y_{l}^{m}(0,\varphi)=\left(\dfrac{2l+1}{4\pi}\right)^{1/2}\delta_{m0}$.
 \solution
+At $\theta=0$, $x=\cos\theta=1$, so the definition, Eq. (15.137)
+(displayed in Exercise 15.5.3), gives
+\[
+Y_l^m(0,\varphi)=\sqrt{\frac{2l+1}{4\pi}\frac{(l-m)!}{(l+m)!}}\,
+P_l^m(1)e^{im\varphi}.
+\]
 For $m>0$, $P_l^m(x)=(-1)^m(1-x^2)^{m/2}P_l^{(m)}(x)$.
 The derivative is a finite polynomial, so at $x=1$ the factor
 $(1-x^2)^{m/2}$ forces $P_l^m(1)=0$.
-The relation between positive and negative orders gives the same
-zero for $m<0$.
-For $m=0$, $P_l(1)=1$, the factorial normalization ratio is one,
-and the azimuthal exponential is one. Therefore
+For $m<0$, Exercise 15.4.3 makes $P_l^m$ a constant multiple of
+$P_l^{|m|}$, which gives the same zero.
+For $m=0$, $P_l(1)=1$, the factorial normalization ratio
+$(l-m)!/(l+m)!$ is one, and the azimuthal exponential is one.
+Therefore
 \[
 \boxed{Y_l^m(0,\varphi)=\sqrt{\frac{2l+1}{4\pi}}\delta_{m0}}.
 \]
@@ -3934,27 +4005,37 @@ Y_l^m(\theta,\varphi)=
 P_l^m(\cos\theta)e^{im\varphi},
 \]
 with the Condon--Shortley sign already in $P_l^m$.
-At the point in question, $x=0$ and the exponential equals one.
+At the point in question, $x=\cos(\pi/2)=0$ and the exponential
+equals one, so only $P_l^m(0)$ is needed; Exercise 15.4.5 gives it
+for all integers $-l\le m\le l$.
 If $l+m$ is odd, Exercise 15.4.5 gives zero.
-If $l+m$ is even, substitution gives
+If $l+m$ is even, substitution of
+$P_l^m(0)=(-1)^{(l+m)/2}(l+m-1)!!/(l-m)!!$ gives
 \[
 Y_l^m(\tfrac\pi2,0)=
 (-1)^{(l+m)/2}
 \sqrt{\frac{2l+1}{4\pi}\frac{(l-m)!}{(l+m)!}}\,
 \frac{(l+m-1)!!}{(l-m)!!}.
 \]
-Use $(l+m)!=(l+m)!!(l+m-1)!!$ to rewrite the magnitude:
+Use $(l+m)!=(l+m)!!(l+m-1)!!$, that is,
+$(l+m-1)!!=(l+m)!/(l+m)!!$, to rewrite the magnitude:
+\[
+\sqrt{\frac{(l-m)!}{(l+m)!}}\,\frac{(l+m)!}{(l+m)!!\,(l-m)!!}
+=\frac{\sqrt{(l-m)!(l+m)!}}{(l-m)!!(l+m)!!},
+\]
+so that
 \[
 \boxed{Y_l^m(\tfrac\pi2,0)=
 (-1)^{(l+m)/2}\sqrt{\frac{2l+1}{4\pi}}\,
 \frac{\sqrt{(l-m)!(l+m)!}}{(l-m)!!(l+m)!!}}.
 \]
-The negative-order identity extends the result to $-l\le m<0$ as well.
+Since Exercise 15.4.5 covers negative orders, the result holds for
+$-l\le m<0$ as well.
 \erratum{The printed phase $(-1)^{(l-m)/2}$ differs by $(-1)^m$
 from the phase required by the book's own definition. For $l=m=1$,
 $Y_1^1(\pi/2,0)=-\sqrt{3/(8\pi)}$, which directly disproves the
-printed positive sign. The manual obtains the correct $(l+m)/2$
-phase before claiming agreement with the printed result.}
+printed positive sign. The Instructor's Manual obtains the correct
+$(l+m)/2$ phase before claiming agreement with the printed result.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3970,27 +4051,63 @@ restriction there will be additional delta-function contributions at
 intervals of $2\pi$ in $\varphi_{1}-\varphi_{2}$.
 \solution
 On the circle, the normalized functions are
-$\phi_m(\varphi)=e^{im\varphi}/\sqrt{2\pi}$.
+$\phi_m(\varphi)=e^{im\varphi}/\sqrt{2\pi}$, and the proposed kernel
+is the sum of $\phi_m(\varphi_1)\phi_m(\varphi_2)^*$ over all $m$.
 For a smooth periodic $f$, its Fourier coefficients are
 $c_m=(2\pi)^{-1}\int_0^{2\pi}f(\varphi_2)e^{-im\varphi_2}d\varphi_2$.
-Pair the proposed kernel with $f$:
+Pair the proposed kernel with $f$, taking the sum as the limit of the
+symmetric partial sums $|m|\le N$ and integrating each of these term
+by term:
 \[
-\int_0^{2\pi}\frac1{2\pi}\sum_{m\in\mathbb Z}
+\int_0^{2\pi}\frac1{2\pi}\sum_{|m|\le N}
 e^{im(\varphi_1-\varphi_2)}f(\varphi_2)d\varphi_2
-=\sum_mc_me^{im\varphi_1}=f(\varphi_1).
+=\sum_{|m|\le N}c_me^{im\varphi_1}\longrightarrow f(\varphi_1)
+\quad(N\to\infty).
 \]
-Smoothness makes this test-function Fourier series converge, proving
-the periodic delta identity.
-One explicit regularization is to insert $\rho^{|m|}$:
+For the limit, let $f$ be twice continuously differentiable. Two
+integrations by parts, whose boundary terms cancel by periodicity, give
+$c_m=-(2\pi m^2)^{-1}\int_0^{2\pi}f''(\varphi_2)e^{-im\varphi_2}
+d\varphi_2$ for $m\ne0$, so $|c_m|\le\max|f''|/m^2$. The Fourier
+series of $f$ therefore converges absolutely and uniformly, and by
+Dirichlet's theorem for Fourier series (Chapter 19) its sum is $f$.
+This proves the periodic delta identity. The series itself converges
+at no point, since its terms all have modulus $1/(2\pi)$; it has a
+meaning only through this action on test functions, as the qualification
+in the statement records.
+
+One explicit regularization is to insert $\rho^{|m|}$ with
+$0<\rho<1$. Summing the geometric series over $m\ge0$ and over
+$m\le-1$ separately ($|\rho e^{\pm iu}|=\rho<1$) gives
 \[
-\frac1{2\pi}\sum_m\rho^{|m|}e^{imu}
+\frac1{1-\rho e^{iu}}+\frac{\rho e^{-iu}}{1-\rho e^{-iu}}
+=\frac{1-\rho e^{-iu}+\rho e^{-iu}-\rho^2}
+{(1-\rho e^{iu})(1-\rho e^{-iu})},
+\]
+whose numerator is $1-\rho^2$ and whose denominator is
+$1-\rho(e^{iu}+e^{-iu})+\rho^2=1-2\rho\cos u+\rho^2$, so that
+\[
+K_\rho(u)\equiv\frac1{2\pi}\sum_m\rho^{|m|}e^{imu}
 =\frac{1-\rho^2}{2\pi(1-2\rho\cos u+\rho^2)},\quad 0<\rho<1.
 \]
-It is nonnegative, has total integral one on the circle, and tends
-uniformly to zero away from $u=0$ modulo $2\pi$; hence it tends to
-the periodic delta as $\rho\uparrow1$.
+It is nonnegative, since $1-2\rho\cos u+\rho^2\ge(1-\rho)^2>0$. Its
+integral over a period is one, since the series converges uniformly
+in $u$ and integrating term by term leaves only $m=0$. It tends
+uniformly to zero away from $u=0$ modulo $2\pi$: for
+$\delta\le|u|\le\pi$,
+$1-2\rho\cos u+\rho^2=(1-\rho)^2+2\rho(1-\cos u)\ge2\rho(1-\cos\delta)$,
+so $K_\rho(u)\le(1-\rho^2)/[4\pi\rho(1-\cos\delta)]\to0$.
+Consequently, for continuous periodic $f$,
+\[
+\int_0^{2\pi}K_\rho(\varphi_1-\varphi_2)f(\varphi_2)d\varphi_2
+-f(\varphi_1)
+=\int_{-\pi}^{\pi}K_\rho(u)[f(\varphi_1-u)-f(\varphi_1)]du,
+\]
+where the part $|u|<\delta$ is small for small $\delta$ by continuity
+and the part $|u|\ge\delta$ tends to zero by the uniform bound. Hence
+$K_\rho$ tends to the periodic delta as $\rho\uparrow1$.
 On the real line the same distribution is
-$\sum_{k\in\mathbb Z}\delta(u-2\pi k)$, in agreement with the note.
+$\delta_{2\pi}(u)\equiv\sum_{k\in\mathbb Z}\delta(u-2\pi k)$, one delta
+in each period, in agreement with the note.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4014,27 +4131,38 @@ K(\Omega_1,\Omega_2)=\sum_{l,m}
 Y_l^m(\Omega_1)Y_l^m(\Omega_2)^*.
 \]
 For a smooth function $f=\sum f_{lm}Y_l^m$, with
-$f_{lm}=\int Y_l^m(\Omega)^*f(\Omega)d\Omega$,
+$f_{lm}=\int Y_l^m(\Omega)^*f(\Omega)d\Omega$, integration term by term
+gives
 \[
 \int K(\Omega_1,\Omega_2)f(\Omega_2)d\Omega_2
+=\sum_{l,m}Y_l^m(\Omega_1)\int Y_l^m(\Omega_2)^*f(\Omega_2)d\Omega_2
 =\sum_{l,m}f_{lm}Y_l^m(\Omega_1)=f(\Omega_1).
 \]
 Thus $K$ is the delta distribution for spherical area measure.
 
 For completeness of the basis used here, first expand in Fourier
-modes in $\varphi$. At fixed $m$, the polar factors are
-$(1-x^2)^{|m|/2}$ times polynomials of successive degrees in
-$x=\cos\theta$. If an $L^2$ function is orthogonal to every such
+modes in $\varphi$. At fixed $m$, the polar factors
+$P_l^m$, $l=|m|,|m|+1,\ldots$, are
+$(1-x^2)^{|m|/2}$ times polynomials of successive degrees
+$0,1,2,\ldots$ in $x=\cos\theta$, and $d\Omega=dx\,d\varphi$.
+If an $L^2$ function of $x$ is orthogonal on $[-1,1]$ to every such
 factor, its product with $(1-x^2)^{|m|/2}$ is orthogonal to every
-polynomial. Polynomial density makes that product zero almost
-everywhere, and then the original function is zero almost everywhere.
-This proves completeness of each polar family and hence of the
-combined spherical harmonics.
+polynomial. Polynomial density (Weierstrass) makes that product zero
+almost everywhere, and since $(1-x^2)^{|m|/2}>0$ for $|x|<1$, the
+original function is zero almost everywhere.
+This proves completeness of each polar family. Now let $F$ be
+orthogonal to every $Y_l^m$. Then, for each $m$, its Fourier
+coefficient $F_m(x)=\int_0^{2\pi}F e^{-im\varphi}d\varphi$ is
+orthogonal to every $P_l^m$ with $l\ge|m|$, hence zero almost
+everywhere; by completeness of the $e^{im\varphi}$, $F=0$ almost
+everywhere. So the spherical harmonics are complete.
 
 The distributional passage to the infinite kernel can be made
 without assuming pointwise convergence of an arbitrary $L^2$ series.
 Let $K_N$ retain degrees $l\le N$, so integration against $f$ gives
 its orthogonal projection $S_Nf$. For every smooth test function $h$,
+the Cauchy--Schwarz inequality and completeness (Parseval:
+$\|S_Nf-f\|_2^2=\sum_{l>N}\sum_m|f_{lm}|^2\to0$) give
 \[
 \left|\int h^*(\Omega_1)
 \left[\int K_N(\Omega_1,\Omega_2)f(\Omega_2)d\Omega_2
@@ -4045,14 +4173,25 @@ Thus the limiting kernel acts as the identity when tested in both
 variables, which is precisely the delta kernel. For smooth $f$ this
 agrees with the evaluation formula used above.
 
-The coordinate kernel that reproduces the same test-function action is
+The coordinate kernel that reproduces the same test-function action is,
+with the periodic delta $\delta_{2\pi}$ of Exercise 15.5.4,
 \[
 \boxed{K=\frac{\delta(\theta_1-\theta_2)
 \delta_{2\pi}(\varphi_1-\varphi_2)}{\sin\theta_1}
 =\delta(\cos\theta_1-\cos\theta_2)
 \delta_{2\pi}(\varphi_1-\varphi_2)}.
 \]
-Indeed $d(\cos\theta)=-\sin\theta\,d\theta$, so the Jacobian cancels.
+Indeed, for $0<\theta_1<\pi$,
+\[
+\int_0^{2\pi}\!\!\int_0^\pi
+\frac{\delta(\theta_1-\theta_2)\delta_{2\pi}(\varphi_1-\varphi_2)}
+{\sin\theta_1}f(\theta_2,\varphi_2)\sin\theta_2\,d\theta_2\,d\varphi_2
+=f(\theta_1,\varphi_1),
+\]
+and, since $g(\theta_2)=\cos\theta_1-\cos\theta_2$ has the single zero
+$\theta_2=\theta_1$ in $(0,\pi)$ with $g'(\theta_1)=\sin\theta_1>0$,
+$\delta(\cos\theta_1-\cos\theta_2)=\delta(\theta_1-\theta_2)/\sin\theta_1$:
+the Jacobian of $d(\cos\theta)=-\sin\theta\,d\theta$ cancels.
 \erratum{The closure formula is a distributional identity. Its polar
 coordinate form is used for $0<\theta_1<\pi$; at a pole the invariant
 spherical delta, rather than division by a zero sine, specifies its meaning.}
@@ -4084,12 +4223,19 @@ harmonics for $0<m<n$. For $\overset{e}{Y}_{mn}$, $n=4$, $m=0,2,4$,
 indicate on a diagram of a hemisphere (one diagram for each spherical
 harmonic) the regions in which the spherical harmonic is positive.
 \solution
-First separate the two normalization integrals. The polar one is
-$2(n+m)!/[(2n+1)(n-m)!]$. For $m>0$, both
+First separate the two normalization integrals. With $x=\cos\theta$,
+the polar one is the associated Legendre normalization
+$\int_{-1}^1[P_n^m(x)]^2dx=2(n+m)!/[(2n+1)(n-m)!]$. For $m>0$, both
 $\int_0^{2\pi}\cos^2m\varphi\,d\varphi$ and its sine counterpart
-equal $\pi$, giving the stated $2\pi(n+m)!/[(2n+1)(n-m)!]$.
-For $m=0$, the cosine factor is identically one and its integral is
-$2\pi$, so
+equal $\pi$ (write $\cos^2m\varphi=(1+\cos2m\varphi)/2$ and
+$\sin^2m\varphi=(1-\cos2m\varphi)/2$; the $\cos2m\varphi$ term
+integrates to zero), giving the stated value
+\[
+\pi\,\frac{2(n+m)!}{(2n+1)(n-m)!}
+=\frac{4\pi}{2(2n+1)}\frac{(n+m)!}{(n-m)!},\qquad 1\le m\le n.
+\]
+For $m=0$, the cosine factor is identically one, its square integrates
+to $2\pi$, and the polar integral is $2/(2n+1)$, so
 \[
 \boxed{\|Y^e_{0n}\|^2=\frac{4\pi}{2n+1}}.
 \]
@@ -4097,14 +4243,17 @@ $2\pi$, so
 For the included $m=0$ harmonics it is smaller than the correct
 norm by a factor of two. The separate $n=0$ value $4\pi$ is correct.}
 
-For $n=4$, the three real functions are
+For $n=4$, use $P_4^m=(-1)^m(1-x^2)^{m/2}d^mP_4/dx^m$ with
+$P_4=(35x^4-30x^2+3)/8$ and $x=\cos\theta$; the sign $(-1)^m$ is $+1$
+for even $m$. Since
+$d^2P_4/dx^2=(420x^2-60)/8=\frac{15}2(7x^2-1)$ and
+$d^4P_4/dx^4=35\cdot24/8=105$, the three real functions are
 \[
 Y^e_{04}=\frac18(35x^4-30x^2+3),\quad
 Y^e_{24}=\frac{15}{2}(1-x^2)(7x^2-1)\cos2\varphi,\quad
-Y^e_{44}=105(1-x^2)^2\cos4\varphi,
+Y^e_{44}=105(1-x^2)^2\cos4\varphi.
 \]
-where $x=\cos\theta$.
-\erratum{The manual's first polynomial on p.~253 prints
+\erratum{The first polynomial in the Instructor's Manual, p.~253, prints
 $35\cos^2\theta$ in the leading term. It must be
 $35\cos^4\theta$, as in $P_4$ above; the squared power would
 incorrectly reduce this degree-four polynomial to degree two.}
@@ -4151,14 +4300,23 @@ curves are zeros.
 \end{scope}
 \end{tikzpicture}
 \end{center}
-For $m=0$, the two latitude zeros have
-$x^2=(15\pm2\sqrt{30})/35$; the polar cap and the equatorial band
-are positive. For $m=2$, the latitude zero is $x=1/\sqrt7$ and
-the meridians are $\varphi=\pi/4+j\pi/2$. Inside that latitude
-circle the sign is that of $\cos2\varphi$; outside it the sign reverses.
+For $m=0$, the latitude zeros solve $35y^2-30y+3=0$ with $y=x^2$, so
+$x^2=(30\pm\sqrt{900-420})/70=(15\pm2\sqrt{30})/35$, that is,
+$x\approx0.861$ and $0.340$ ($\theta\approx30.6^\circ$ and
+$70.1^\circ$, $\rho\approx0.508$ and $0.940$). Since $P_4(1)=1>0$ and
+$P_4(0)=3/8>0$, the polar cap and the equatorial band
+are positive, and the band between them is negative.
+For $m=2$, the factor $7x^2-1$ gives the latitude zero $x=1/\sqrt7$
+($\rho=\sqrt{6/7}$), and the zeros of $\cos2\varphi$ give the
+meridians $\varphi=\pi/4+j\pi/2$. Inside that latitude
+circle ($x>1/\sqrt7$, where $7x^2-1>0$) the sign is that of
+$\cos2\varphi$; outside it the sign reverses.
 For $m=4$ there are no interior latitude zeros, and positivity is
 $\cos4\varphi>0$, namely sectors centered at $\varphi=j\pi/2$
 of half-width $\pi/8$. The pole is also a zero for $m=2,4$.
+Since $n+m$ is even in all three cases, each function is even in $x$
+($P_n^m(-x)=(-1)^{n+m}P_n^m(x)$, Exercise 15.5.1), so the southern
+hemisphere has the same pattern.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4180,21 +4338,22 @@ Use $Y_0^0=1/\sqrt{4\pi}$ and orthogonality:
 =\sqrt{4\pi}\int Y_l^m(Y_0^0)^*d\Omega
 =\sqrt{4\pi}\,\delta_{l0}\delta_{m0}.
 \]
-Averaging the regular solid-harmonic expansion over a sphere of radius
-$r$ therefore leaves only its constant term:
+The average over the sphere of radius $r$ is
+$\langle f\rangle_{\rm sphere}=(4\pi)^{-1}\int f(r,\theta,\varphi)\,d\Omega$.
+Integrating the regular solid-harmonic expansion term by term, which the
+assumed uniform convergence permits, therefore leaves only its constant
+term:
 \[
 \langle f\rangle_{\rm sphere}
 =\frac1{4\pi}\sum_{l,m}a_{lm}r^l\int Y_l^m\,d\Omega
 =\frac{a_{00}}{\sqrt{4\pi}}.
 \]
-At the origin every $r^lY_l^m$ with $l>0$ tends to zero, whereas
-the $l=0$ term has the same value $a_{00}/\sqrt{4\pi}$.
+At the origin every $r^lY_l^m$ with $l>0$ vanishes, whereas
+the $l=0$ term has the same value $a_{00}Y_0^0=a_{00}/\sqrt{4\pi}$.
 Thus
 \[
 \boxed{\langle f\rangle_{\rm sphere}=f(0,0,0)}.
 \]
-The termwise average is justified on spheres inside the convergence
-region of the stated regular Laplace expansion.
 \erratum{This is the mean-value property for the assumed regular
 harmonic expansion. It does not hold for an arbitrary function;
 for example, $f=r^2$ has sphere average $r^2$ but $f(0)=0$.}
@@ -4215,9 +4374,15 @@ Q_0(x)=\frac12\ln\left|\frac{1+x}{1-x}\right|,\qquad
 Q_1(x)=xQ_0(x)-1,\qquad x\ne\pm1.
 \]
 Replacing $x$ by $-x$ inverts the logarithm's positive absolute
-argument, so $Q_0$ is odd and $Q_1$ is even.
+argument,
+$Q_0(-x)=\frac12\ln|(1-x)/(1+x)|=-Q_0(x)$, so $Q_0$ is odd, and then
+$Q_1(-x)=(-x)(-Q_0(x))-1=Q_1(x)$, so $Q_1$ is even. Thus
+$Q_l(-x)=(-1)^{l+1}Q_l(x)$ holds for $l=0,1$.
+The $Q_l$ obey the same three-term recurrence as the $P_l$,
+$(n+1)Q_{n+1}(x)=(2n+1)xQ_n(x)-nQ_{n-1}(x)$.
 Assume $Q_n(-x)=(-1)^{n+1}Q_n(x)$ and
-$Q_{n-1}(-x)=(-1)^nQ_{n-1}(x)$. Then
+$Q_{n-1}(-x)=(-1)^nQ_{n-1}(x)$ for some $n\ge1$. Then the
+recurrence at $-x$ and $-(-1)^{n+1}=(-1)^{n+2}=(-1)^n$ give
 \begin{align*}
 (n+1)Q_{n+1}(-x)
 &=-(2n+1)x(-1)^{n+1}Q_n(x)-n(-1)^nQ_{n-1}(x)\\
@@ -4254,31 +4419,47 @@ Q_{2p+1}(x)=(-1)^{p+1}2^{2p}&\sum_{s=0}^{p}(-1)^{s}
 \end{aligned}$
 \end{enumerate}
 \solution
-Use the real analytic branch at $x=0$. The Legendre equation gives
-the coefficient recurrence for any Taylor solution:
+Use the real analytic branch at $x=0$. Substituting
+$y=\sum_ja_jx^j$ into $(1-x^2)y''-2xy'+l(l+1)y=0$, the coefficient of
+$x^j$ is $(j+2)(j+1)a_{j+2}-j(j-1)a_j-2ja_j+l(l+1)a_j$, so the Legendre
+equation gives the coefficient recurrence for any Taylor solution:
 \[
 (j+2)(j+1)a_{j+2}
 =[j(j+1)-l(l+1)]a_j.
 \]
-Its initial scales follow from $Q_0=x+\cdots$, $Q_1=-1+\cdots$
-and the degree recurrence:
+By Exercise 15.6.1, $Q_{2p}$ is odd and $Q_{2p+1}$ is even, so their
+Taylor series contain only odd and only even powers, respectively, and
+the recurrence determines them from $Q'_{2p}(0)$ and $Q_{2p+1}(0)$.
+These initial scales follow from $Q_0=x+\cdots$, $Q_1=-1+\cdots$
+and the degree recurrences:
 \[
 Q'_{2p}(0)=(-1)^p\frac{(2p)!!}{(2p-1)!!},\qquad
 Q_{2p+1}(0)=(-1)^{p+1}\frac{(2p)!!}{(2p+1)!!}.
 \]
-For example, the values for the odd-degree branch obey
-$(2p+1)Q_{2p+1}(0)=-2pQ_{2p-1}(0)$.
-For the even-degree derivative,
-$(1-x^2)Q'_{2p}=2p(Q_{2p-1}-xQ_{2p})$ gives
+For the odd-degree values, the three-term recurrence
+$(n+1)Q_{n+1}=(2n+1)xQ_n-nQ_{n-1}$ at $x=0$ with $n=2p$ gives
+$(2p+1)Q_{2p+1}(0)=-2pQ_{2p-1}(0)$; iterating down to $Q_1(0)=-1$,
+\[
+Q_{2p+1}(0)=\prod_{k=1}^p\left(-\frac{2k}{2k+1}\right)Q_1(0)
+=(-1)^{p+1}\frac{(2p)!!}{(2p+1)!!}.
+\]
+For the even-degree derivative, the identity
+$(1-x^2)Q'_n=n(Q_{n-1}-xQ_n)$, which the $Q_n$ share with the $P_n$,
+gives with $n=2p$ at $x=0$, and the odd-degree value for
+$2p-1=2(p-1)+1$,
 \[
 Q'_{2p}(0)=2pQ_{2p-1}(0)
 =(-1)^p\frac{2p(2p-2)!!}{(2p-1)!!}
 =(-1)^p\frac{(2p)!!}{(2p-1)!!}\quad(p\ge1).
 \]
-The case $p=0$ comes from $Q_0$.
+The case $p=0$ comes from $Q_0$. With $(2p)!!=2^pp!$,
+$(2p-1)!!=(2p)!/(2^pp!)$ and $(2p+1)!!=(2p+1)!/(2^pp!)$, these are
+the values $C_0$ and $D_0$ below.
 
 (a) Write $Q_{2p}=\sum_{s\ge0}C_sx^{2s+1}$.
-The Taylor recurrence is
+For $j=2s+1$ and $l=2p$,
+$(2s+1)(2s+2)-2p(2p+1)=2(s+p+1)(2s-2p+1)$, so
+the Taylor recurrence is
 \[
 \frac{C_{s+1}}{C_s}
 =\frac{(s+p+1)(2s-2p+1)}{(s+1)(2s+3)},\qquad
@@ -4287,26 +4468,34 @@ C_0=(-1)^p2^{2p}\frac{(p!)^2}{(2p)!}.
 For $0\le s\le p$, its product gives
 \[
 C_s=(-1)^{p+s}2^{2p}
-\frac{(p+s)!(p-s)!}{(2s+1)!(2p-2s)!}.
+\frac{(p+s)!(p-s)!}{(2s+1)!(2p-2s)!},
 \]
+which equals $C_0$ at $s=0$.
 To check the product explicitly, the factorial ratio between adjacent
-terms is
+terms of this formula ($0\le s\le p-1$) is, with $(2p-2s)/(p-s)=2$,
 \[
 -\frac{p+s+1}{p-s}
 \frac{(2p-2s)(2p-2s-1)}{(2s+3)(2s+2)}
 =\frac{(p+s+1)(2s-2p+1)}{(s+1)(2s+3)}.
 \]
-At the transition, $C_p=2^{2p}/(2p+1)$ and
-$C_{p+1}=2^{2p}/[(p+1)(2p+3)]$.
+At the transition, the formula gives $C_p=2^{2p}/(2p+1)$, and the
+recurrence with $s=p$ gives
+$C_{p+1}=C_p(2p+1)/[(p+1)(2p+3)]=2^{2p}/[(p+1)(2p+3)]$.
 For $s\ge p+1$, the all-positive continuation is
 \[
-C_s=2^{2p}\frac{(p+s)!(2s-2p)!}{(2s+1)!(s-p)!}.
+C_s=2^{2p}\frac{(p+s)!(2s-2p)!}{(2s+1)!(s-p)!},
 \]
-Its adjacent ratio reduces to the same recurrence by canceling
-$2(s-p+1)$ against $s-p+1$. These formulas give exactly the two
+which reproduces $C_{p+1}$ at $s=p+1$. Its adjacent ratio,
+\[
+\frac{(p+s+1)(2s-2p+2)(2s-2p+1)}{(2s+3)(2s+2)(s-p+1)},
+\]
+reduces to the same recurrence by canceling
+$2s-2p+2=2(s-p+1)$ against $s-p+1$. These formulas give exactly the two
 sums in part (a).
 
-(b) Put $Q_{2p+1}=\sum_{s\ge0}D_sx^{2s}$. This time
+(b) Put $Q_{2p+1}=\sum_{s\ge0}D_sx^{2s}$. This time $j=2s$,
+$l=2p+1$, and
+$2s(2s+1)-(2p+1)(2p+2)=2(s+p+1)(2s-2p-1)$, so
 \[
 \frac{D_{s+1}}{D_s}
 =\frac{(s+p+1)(2s-2p-1)}{(s+1)(2s+1)},\qquad
@@ -4315,19 +4504,25 @@ D_0=(-1)^{p+1}2^{2p}\frac{(p!)^2}{(2p+1)!}.
 For $0\le s\le p$, repeated multiplication gives
 \[
 D_s=(-1)^{p+1+s}2^{2p}
-\frac{(p+s)!(p-s)!}{(2s)!(2p-2s+1)!}.
+\frac{(p+s)!(p-s)!}{(2s)!(2p-2s+1)!},
 \]
-Its ratio is
+which equals $D_0$ at $s=0$.
+Its ratio ($0\le s\le p-1$) is
 $-(p+s+1)(2p-2s+1)(2p-2s)/
-[(p-s)(2s+2)(2s+1)]$, equal to the required ratio.
-The transition has $D_p=-2^{2p}$ and
-$D_{p+1}=2^{2p}/(p+1)$.
+[(p-s)(2s+2)(2s+1)]$, equal to the required ratio after canceling
+$(2p-2s)/(p-s)=2$ against $2s+2=2(s+1)$ and writing
+$-(2p-2s+1)=2s-2p-1$.
+At the transition, the formula gives $D_p=-2^{2p}$, and the recurrence
+with $s=p$ gives $D_{p+1}=D_p(2p+1)(-1)/[(p+1)(2p+1)]=2^{2p}/(p+1)$.
 For the positive tail,
 \[
 D_s=2^{2p+1}\frac{(p+s)!(2s-2p-2)!}{(2s)!(s-p-1)!},
-\qquad s\ge p+1.
+\qquad s\ge p+1,
 \]
-Canceling consecutive factorials again gives the same recurrence.
+which reproduces $D_{p+1}=2^{2p+1}/(2p+2)$ at $s=p+1$. Its adjacent
+ratio is
+$(p+s+1)(2s-2p)(2s-2p-1)/[(2s+2)(2s+1)(s-p)]$, and canceling
+$2s-2p=2(s-p)$ against $s-p$ again gives the same recurrence.
 The initial value, all within-range ratios and both transition values
 therefore establish the two requested sums without leaving a missing
 index case. Their term ratios tend to $x^2$, proving convergence
@@ -4360,19 +4555,31 @@ Show that this choice of $b_{l0}$ brings this negative power-series
 form of $Q_{n}(x)$ into agreement with the closed-form solutions.
 \end{enumerate}
 \solution
-(a) For a monomial $x^\alpha$, the Legendre operator is
+(a) For a monomial $x^\alpha$, the Legendre operator
+$L_l=(1-x^2)\,d^2/dx^2-2x\,d/dx+l(l+1)$ gives
+$(1-x^2)\alpha(\alpha-1)x^{\alpha-2}-2\alpha x^\alpha+l(l+1)x^\alpha$,
+that is,
 \[
 L_l[x^\alpha]=\alpha(\alpha-1)x^{\alpha-2}
 +[l(l+1)-\alpha(\alpha+1)]x^\alpha.
 \]
-The leading term of the proposed series therefore requires
+The leading term $b_{l0}x^k$ ($b_{l0}\ne0$) of the proposed series
+gives the highest power $x^k$, with coefficient
+$[l(l+1)-k(k+1)]b_{l0}$; the equation therefore requires
 $k(k+1)=l(l+1)$, giving $k=l$ or $k=-l-1$.
 The solution that decays at infinity uses the latter root.
-At the next power, $x^{-l-2}$, the coefficient is
-$[l(l+1)-(l+1)(l+2)]b_{l1}=-2(l+1)b_{l1}$.
+The power $x^{k-j}=x^{-l-1-j}$ then receives
+$[l(l+1)-(l+j)(l+j+1)]b_{lj}=-j(2l+j+1)b_{lj}$ from the term $j$, and,
+through $\alpha(\alpha-1)x^{\alpha-2}$ with $\alpha=-l-j+1$,
+$(l+j-1)(l+j)b_{l,j-2}$ from the term $j-2$. Hence
+\[
+j(2l+j+1)b_{lj}=(l+j)(l+j-1)b_{l,j-2},\qquad b_{l,-1}=0.
+\]
+At $j=1$, the power $x^{-l-2}$, this says
+$2(l+1)b_{l1}=0$.
 It follows that $b_{l1}=0$, and the recurrence then makes every
 odd $j$ vanish. Set $c_s=b_{l,2s}$.
-At power $x^{-l-1-2s}$ the equation gives
+At power $x^{-l-1-2s}$ ($j=2s$) the equation gives
 \[
 2s(2l+2s+1)c_s=(l+2s)(l+2s-1)c_{s-1}.
 \]
@@ -4383,39 +4590,69 @@ Hence
 =\frac{(l+s)!(l+2s)!(2l+1)!}
 {s!(l!)^2(2l+2s+1)!}.
 \]
-For the last equality, the numerator product is $(l+2s)!/l!$,
+For the last equality, the numerator product is
+$(l+1)(l+2)\cdots(l+2s)=(l+2s)!/l!$,
 while the denominator product is
+$2^ss!\,(2l+3)(2l+5)\cdots(2l+2s+1)=2^ss!\,(2l+2s+1)!!/(2l+1)!!$;
+with $(2k+1)!!=(2k+1)!/(2^kk!)$ for $k=l+s$ and $k=l$, this is
 $s!\,l!(2l+2s+1)!/[(l+s)!(2l+1)!]$.
-This proves the requested series, convergent for $|x|>1$.
+This proves the requested series. Since
+$c_s/c_{s-1}=(l+2s)(l+2s-1)/[2s(2l+2s+1)]\to1$, the ratio of
+successive terms tends to $x^{-2}$, and the series converges for
+$|x|>1$.
 
 (b) The normalization can be checked against the closed logarithmic
 solutions for every degree by the integral
 \[
 R_l(z)=\frac12\int_{-1}^1\frac{P_l(t)}{z-t}dt,\qquad |z|>1.
 \]
-Directly,
-$R_0=\tfrac12\operatorname{Log}[(z+1)/(z-1)]$ with the branch
-vanishing at infinity, and $R_1=zR_0-1$.
-For $l\ge1$, multiply the polynomial degree recurrence by
-$1/[2(z-t)]$ and use
-$t/(z-t)=z/(z-t)-1$ and $\int P_l=0$. This gives
+Directly, since $-\operatorname{Log}(z-t)$ is an antiderivative of
+$1/(z-t)$,
+$R_0=\tfrac12[\operatorname{Log}(z+1)-\operatorname{Log}(z-1)]
+=\tfrac12\operatorname{Log}[(z+1)/(z-1)]$ with the branch
+vanishing at infinity (for real $z>1$ this is
+$\frac12\ln[(z+1)/(z-1)]=Q_0(z)$), and, with $t/(z-t)=z/(z-t)-1$,
+$R_1=\frac12\int_{-1}^1[z/(z-t)-1]dt=zR_0-1=Q_1(z)$.
+For $l\ge1$, multiply the polynomial degree recurrence
+$(l+1)P_{l+1}(t)=(2l+1)tP_l(t)-lP_{l-1}(t)$ by
+$1/[2(z-t)]$, integrate over $[-1,1]$, and use
+$t/(z-t)=z/(z-t)-1$ and $\int_{-1}^1P_l\,dt=0$; the middle term
+becomes $(2l+1)[zR_l-\frac12\int_{-1}^1P_l\,dt]=(2l+1)zR_l$. This gives
 \[
 (l+1)R_{l+1}=(2l+1)zR_l-lR_{l-1}.
 \]
-Thus $R_l$ agrees with the standard closed forms $Q_l$ by induction.
-Expand $1/(z-t)=\sum_{j\ge0}t^jz^{-j-1}$ under the finite integral.
-All moments with $j<l$ vanish, so its leading coefficient is
+The closed forms $Q_l$ obey the same recurrence and have the same
+first two members, so $R_l=Q_l$ for every $l$ by induction.
+For $|t|\le1<|z|$ the geometric series
+$1/(z-t)=\sum_{j\ge0}t^jz^{-j-1}$ converges uniformly in $t$, so it may
+be integrated term by term under the finite integral:
+$R_l(z)=\sum_{j\ge0}z^{-j-1}\,\frac12\int_{-1}^1t^jP_l(t)dt$.
+All moments with $j<l$ vanish by orthogonality ($t^j$ is a combination
+of $P_0,\ldots,P_j$), so the series starts with $z^{-l-1}$, as in part
+(a), and its leading coefficient is the moment with $j=l$. Since $P_l$
+has leading coefficient $(2l)!/[2^l(l!)^2]$, $t^l$ equals
+$2^l(l!)^2P_l(t)/(2l)!$ plus a polynomial of lower degree; with
+$\int_{-1}^1P_l^2dt=2/(2l+1)$,
 \[
 b_{l0}=\frac12\int_{-1}^1t^lP_l(t)dt
-=\frac{l!}{(2l+1)!!}
+=\frac{2^l(l!)^2}{(2l)!}\,\frac1{2l+1}
 =\boxed{\frac{2^l(l!)^2}{(2l+1)!}}.
 \]
-Multiplying the part (a) coefficient by this value and splitting even
-and odd factorials gives
+Multiplying the part (a) coefficient by this value gives
+\[
+b_{l0}\frac{(l+s)!(l+2s)!(2l+1)!}{s!(l!)^2(2l+2s+1)!}
+=\frac{2^l(l+s)!(l+2s)!}{s!(2l+2s+1)!},
+\]
+and splitting even and odd factorials,
+$(2l+2s+1)!=2^{l+s}(l+s)!\,(2l+2s+1)!!$ and $2^ss!=(2s)!!$, gives
 \[
 \boxed{Q_l(z)=z^{-l-1}\sum_{s=0}^\infty
 \frac{(l+2s)!}{(2s)!!(2l+2s+1)!!}z^{-2s}},\qquad |z|>1.
 \]
+For example, for $l=0$ the coefficients are
+$(2s)!/[(2s)!!(2s+1)!!]=(2s)!/(2s+1)!=1/(2s+1)$, and
+$\sum_sz^{-2s-1}/(2s+1)=\frac12\ln[(z+1)/(z-1)]$ is the familiar
+expansion of $Q_0$.
 The integral and series specify a consistent exterior logarithm branch.
 
 \Needspace{5\baselineskip}
@@ -4433,11 +4670,13 @@ n\big[P_{n}(x)Q_{n-1}(x)-P_{n-1}(x)Q_{n}(x)\big]
 this equation equals 1.
 \end{enumerate}
 \solution
-Let $D_n=P_nQ_{n-1}-P_{n-1}Q_n$. For $n\ge2$, both families obey
+(a) Let $D_n=P_nQ_{n-1}-P_{n-1}Q_n$. For $n\ge2$, both families obey
+the three-term recurrence (with $n$ shifted to $n-1$)
 \[
 nF_n=(2n-1)xF_{n-1}-(n-1)F_{n-2}.
 \]
-Substitute this for $P_n$ and $Q_n$:
+Substitute this for $nP_n$ and $nQ_n$ in $nD_n=(nP_n)Q_{n-1}-P_{n-1}(nQ_n)$;
+the terms $\pm(2n-1)xP_{n-1}Q_{n-1}$ cancel:
 \begin{align*}
 nD_n
 &=[(2n-1)xP_{n-1}-(n-1)P_{n-2}]Q_{n-1}\\
@@ -4445,8 +4684,11 @@ nD_n
 &=(n-1)[P_{n-1}Q_{n-2}-P_{n-2}Q_{n-1}]\\
 &=(n-1)D_{n-1}.
 \end{align*}
-Repeating gives $nD_n=D_1$, with $n=1$ already included.
-Finally $P_0=1$, $P_1=x$, and $Q_1=xQ_0-1$, so
+Repeating gives $nD_n=(n-1)D_{n-1}=(n-2)D_{n-2}=\cdots=1\cdot D_1$,
+which is the stated identity, since $D_1=P_1Q_0-P_0Q_1$; the case
+$n=1$ is trivially included.
+
+(b) Finally $P_0=1$, $P_1=x$, and $Q_1=xQ_0-1$, so
 \[
 D_1=xQ_0-(xQ_0-1)=1.
 \]
