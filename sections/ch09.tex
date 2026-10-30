@@ -17,11 +17,14 @@ $\dfrac{\partial\psi}{\partial x}+2\dfrac{\partial\psi}{\partial y}+(2x-y)\psi=0
 Let $s=x$ and $u=y-2x$, so $y=u+2s$.  The chain rule gives
 \[
 \partial_x=\partial_s-2\partial_u,\qquad
-\partial_y=\partial_u,\qquad 2x-y=-u.
+\partial_y=\partial_u,\qquad 2x-y=2s-(u+2s)=-u.
 \]
-Consequently the PDE reduces, at fixed $u$, to
+Hence $\partial_x+2\partial_y=\partial_s-2\partial_u+2\partial_u=\partial_s$,
+and the PDE reduces, at fixed $u$, to
 $\psi_s-u\psi=0$.  Multiplying by $e^{-us}$ gives
-$\partial_s(e^{-us}\psi)=0$, so
+$\partial_s(e^{-us}\psi)=e^{-us}(\psi_s-u\psi)=0$, so
+$e^{-us}\psi=F(u)$ does not depend on $s$.  Returning to $s=x$,
+$u=y-2x$,
 \[
 \boxed{\psi(x,y)=e^{x(y-2x)}F(y-2x)},
 \]
@@ -37,18 +40,22 @@ The coordinate map has determinant one, so it loses no local solutions.
 \noindent\textbf{9.2.2}\quad
 $\dfrac{\partial\psi}{\partial x}-2\dfrac{\partial\psi}{\partial y}+x+y=0$.
 \solution
-Put $s=x$, $u=y+2x$.  Then $\partial_x-2\partial_y=\partial_s$
-and $x+y=u-s$, reducing the PDE to
+Put $s=x$, $u=y+2x$.  The chain rule gives
+$\partial_x=\partial_s+2\partial_u$ and $\partial_y=\partial_u$, so
+$\partial_x-2\partial_y=\partial_s$; also $x+y=s+(u-2s)=u-s$.
+This reduces the PDE to
 \[
 \psi_s=s-u.
 \]
 Integration with $u$ held fixed gives
 \[
 \psi=\tfrac12s^2-us+F(u)
+=\tfrac12x^2-(y+2x)x+F(y+2x)
 =-\tfrac32x^2-xy+F(y+2x).
 \]
 Since
-$\tfrac12(x+y)^2-(-\tfrac32x^2-xy)=\tfrac12(y+2x)^2$,
+$\tfrac12(x+y)^2-(-\tfrac32x^2-xy)=2x^2+2xy+\tfrac12y^2
+=\tfrac12(y+2x)^2$,
 the difference is an arbitrary function of $u$ and can be absorbed into
 $F$.  An equivalent convenient form is
 \[
@@ -73,7 +80,10 @@ $x=s$, $y=u+s$, $z=v-s$, and
 \quad\partial_y=\partial_u,
 \quad\partial_z=\partial_v.
 \]
-Thus $(\partial_x+\partial_y-\partial_z)\psi=\psi_s=0$, giving
+Thus
+$(\partial_x+\partial_y-\partial_z)\psi
+=(\partial_s-\partial_u+\partial_v+\partial_u-\partial_v)\psi
+=\psi_s=0$, so $\psi$ does not depend on $s$ at fixed $(u,v)$, giving
 \[
 \boxed{\psi(x,y,z)=F(y-x,z+x)}.
 \]
@@ -90,8 +100,10 @@ $\dfrac{\partial\psi}{\partial x}+\dfrac{\partial\psi}{\partial y}
 +\dfrac{\partial\psi}{\partial z}=x-y$.
 \solution
 Choose $s=z$, $u=x-z$, $v=y-z$, whose inverse is
-$x=u+s$, $y=v+s$, $z=s$.  The sum of the three original derivatives
-is $\partial_s$, and $x-y=u-v$.  Therefore
+$x=u+s$, $y=v+s$, $z=s$.  The chain rule gives
+$\partial_x=\partial_u$, $\partial_y=\partial_v$ and
+$\partial_z=\partial_s-\partial_u-\partial_v$, so the sum of the three
+original derivatives is $\partial_s$; also $x-y=u-v$.  Therefore
 \[
 \psi_s=u-v,\qquad \psi=s(u-v)+F(u,v),
 \]
@@ -126,21 +138,26 @@ Every characteristic is a straight line in the direction $(1,1,1)$.
 \]
 Thus
 \[
-y\psi_x+x\psi_y=(x^2+y^2)\psi_u.
+y\psi_x+x\psi_y
+=y(y\psi_u+2x\psi_v)+x(x\psi_u-2y\psi_v)
+=(x^2+y^2)\psi_u.
 \]
 Away from $(0,0)$ the coefficient is nonzero, so $\psi_u=0$ and
 \[
 \boxed{\psi=F(v)=F(x^2-y^2)\quad\text{locally}}.
 \]
 The Jacobian is
-$\partial(u,v)/\partial(x,y)=-2(x^2+y^2)$, confirming local
+$\partial(u,v)/\partial(x,y)=u_xv_y-u_yv_x=y(-2y)-x(2x)
+=-2(x^2+y^2)$, confirming local
 invertibility at every such point.
 
 \textbf{(b)} A characteristic parametrized by $s$ satisfies
-$x'=y$, $y'=x$, $\psi'=0$.  Adding and subtracting the first two
-relations yields
+$x'=y$, $y'=x$, $\psi'=0$: along such a curve
+$\psi'=x'\psi_x+y'\psi_y=y\psi_x+x\psi_y$, which the PDE sets to zero.
+Adding and subtracting the first two relations gives
+$(x+y)'=x+y$ and $(x-y)'=-(x-y)$, so
 \[
-x+y=Ae^s,\qquad x-y=Be^{-s},\qquad x^2-y^2=AB.
+x+y=Ae^s,\qquad x-y=Be^{-s},\qquad x^2-y^2=(x+y)(x-y)=AB.
 \]
 The nonzero level sets are hyperbolas, and the zero level consists of
 the lines $y=\pm x$, with each ray a separate characteristic; the
@@ -199,11 +216,14 @@ x\psi_x-y\psi_y
 =x(y\psi_u+2x\psi_v)-y(x\psi_u-2y\psi_v)
 =2(x^2+y^2)\psi_v.
 \]
-Thus, off the origin,
+Off the origin the coefficient $2(x^2+y^2)$ is nonzero, so $\psi_v=0$
+and
 \[
 \boxed{\psi(x,y)=F(xy)\quad\text{locally}}.
 \]
-The characteristic equations integrate to
+Along a curve with $x'=x$, $y'=-y$ the PDE gives
+$\psi'=x'\psi_x+y'\psi_y=x\psi_x-y\psi_y=0$.  The characteristic
+equations and their integrals are therefore
 \[
 x'=x,\quad y'=-y,\quad\psi'=0,
 \qquad x=Ae^s,\quad y=Be^{-s},\quad xy=AB.
@@ -254,7 +274,10 @@ The displayed change of coordinates requires $c\ne0$; take $c>0$
 for real square roots.  The coefficients are constants.}
 Expanding Eq.~(9.18) gives
 $L=a\partial_x^2+2b\partial_x\partial_y+c\partial_y^2$.
-For the given $\xi,\eta$, the chain rule gives
+For the given $\xi,\eta$ we have $\xi_x=\sqrt c$, $\eta_x=0$,
+$\xi_y=-b/\sqrt c$, $\eta_y=1/\sqrt c$, so the chain rule
+$\partial_x=\xi_x\partial_\xi+\eta_x\partial_\eta$ (and likewise for
+$\partial_y$) gives
 \[
 \partial_x=\sqrt c\,\partial_\xi,\qquad
 \partial_y=-\frac b{\sqrt c}\partial_\xi
@@ -369,7 +392,9 @@ Define the angular differential expression
 \frac1{\sin\theta}\partial_\theta(\sin\theta\,\partial_\theta Y)
 +\frac1{\sin^2\theta}\partial_\varphi^2Y.
 \]
-The Helmholtz equation becomes
+In spherical polar coordinates
+$\nabla^2=r^{-2}\partial_r(r^2\partial_r)+r^{-2}\Delta_\Omega$, so the
+Helmholtz equation becomes
 \[
 \frac{Y}{r^2}(r^2R')'+\frac{R}{r^2}\Delta_\Omega Y+k^2RY=0.
 \]
@@ -408,19 +433,18 @@ these boundary restrictions.
 \par\bigskip
 \noindent\textbf{9.4.4}\quad Verify that
 \[
-\erratum{\nabla^{2}\psi(r,\theta,\varphi)+
+\nabla^{2}\psi(r,\theta,\varphi)+
 \left[k^{2}+f(r)+\frac{1}{r^{2}}g(\theta)
-+\frac{1}{r^{2}\sin^{2}\theta}h(\varphi)\right]\psi(r,\theta,\varphi)=0}
++\frac{1}{r^{2}\sin^{2}\theta}h(\varphi)\right]\psi(r,\theta,\varphi)=0
 \]
 is separable (in spherical polar coordinates). The functions $f$, $g$, and $h$
 are functions only of the variables indicated; $k^{2}$ is a constant.
 \solution
-\erratum{The Laplacian acts once on $\psi$; the square brackets
-contain only the multiplying coefficient.  The original transcription
-placed the first term inside the brackets and would have made the
-PDE nonlinear.}
-Substitute $\psi=R(r)\Theta(\theta)\Phi(\varphi)$ in the corrected
-PDE and multiply by $r^2/\psi$.  We obtain
+Substitute $\psi=R(r)\Theta(\theta)\Phi(\varphi)$ in the PDE, write the
+Laplacian as in Exercise~9.4.3 with
+$\Delta_\Omega=(\sin\theta)^{-1}\partial_\theta(\sin\theta\,\partial_\theta)
++(\sin\theta)^{-2}\partial_\varphi^2$, and multiply by $r^2/\psi$.
+We obtain
 \[
 \frac{(r^2R')'}R+r^2[k^2+f(r)]
 +\frac{(\sin\theta\,\Theta')'}{\Theta\sin\theta}+g(\theta)
@@ -473,13 +497,19 @@ $XYZ$ gives
 \[
 \frac{X''}X+\frac{Y''}Y+\frac{Z''}Z=-\frac{2mE}{\hbar^2}.
 \]
-Each ratio must be a constant, written $-k_x^2,-k_y^2,-k_z^2$.
-For $X''=-k_x^2X$ with $X(0)=X(a)=0$, integration by parts gives
+Each ratio depends on a different variable, so each must be a constant,
+written $-k_x^2,-k_y^2,-k_z^2$; then
+$E=\hbar^2(k_x^2+k_y^2+k_z^2)/(2m)$.
+For $X''=-k_x^2X$ with $X(0)=X(a)=0$, multiply by $X^*$ and integrate
+by parts; the boundary term vanishes because $X(0)=X(a)=0$:
 \[
-k_x^2\int_0^a|X|^2dx=\int_0^a|X'|^2dx>0
+-k_x^2\int_0^a|X|^2dx=\int_0^aX^*X''dx
+=\bigl[X^*X'\bigr]_0^a-\int_0^a|X'|^2dx=-\int_0^a|X'|^2dx.
 \]
-for a nonzero $X$.  Thus $X=A\sin k_xx+B\cos k_xx$;
-$X(0)=0$ makes $B=0$, and $X(a)=0$ requires
+Hence $k_x^2\int_0^a|X|^2dx=\int_0^a|X'|^2dx>0$ for a nonzero $X$
+(if $X'\equiv0$, then $X\equiv X(0)=0$), so $k_x^2>0$; take $k_x>0$.
+Thus $X=A\sin k_xx+B\cos k_xx$;
+$X(0)=0$ makes $B=0$, and $X(a)=A\sin k_xa=0$ with $A\ne0$ requires
 $k_x=n_x\pi/a$, $n_x=1,2,\ldots$.  The other two directions give
 $k_y=n_y\pi/b$, $k_z=n_z\pi/c$.  Consequently
 \[
@@ -507,16 +537,24 @@ Since $s''=-(\pi/a)^2s$,
 &=\left[(s')^2-\frac{\pi^2}{a^2}s^2\right]|V|^2
   +ss'\bigl(V'^*V+V^*V'\bigr).
 \end{align*}
-Subtracting the second identity from the first and integrating gives
+Subtracting the second identity from the first and using
+$s^2|V|^2=|X|^2$ gives
+$|X'|^2-(\pi/a)^2|X|^2=s^2|V'|^2+(ss'|V|^2)'$; integrating,
 \[
 \int_0^a\left(|X'|^2-\frac{\pi^2}{a^2}|X|^2\right)dx
 =\int_0^a\sin^2(\pi x/a)|V'|^2dx\ge0.
 \]
-The boundary term vanishes for regular Dirichlet functions.  Apply this
-inequality to each coordinate slice of $\psi$, integrate over the other
-two coordinates, and use
-$E\int|\psi|^2=(\hbar^2/2m)\int|\nabla\psi|^2$.
-The same lower bound follows, with equality for the state above.
+The boundary term $[ss'|V|^2]_0^a=[s'|X|^2/s]_0^a$ vanishes for regular
+Dirichlet functions: if $X$ is continuously differentiable with
+$X(0)=0$, then $|X|^2=O(x^2)$ while $s\sim\pi x/a$ as $x\to0$, and
+similarly at $x=a$.  Apply this inequality to each slice
+$x\mapsto\psi(x,y,z)$ at fixed $(y,z)$ and integrate over $y$ and $z$:
+$\int|\partial_x\psi|^2dV\ge(\pi/a)^2\int|\psi|^2dV$, and likewise
+with $(\pi/b)^2$ and $(\pi/c)^2$ for $\partial_y\psi$ and
+$\partial_z\psi$.  Multiplying the Schr\"odinger equation by $\psi^*$
+and integrating by parts, with $\psi=0$ on the walls, gives
+$E\int|\psi|^2dV=(\hbar^2/2m)\int|\nabla\psi|^2dV$.  Adding the three
+inequalities yields $E\ge E_{\min}$, with equality for the state above.
 
 
 \Needspace{5\baselineskip}
@@ -530,9 +568,13 @@ leads to the associated Legendre equation.
 
 \emph{Hint.}~Section 8.3 and Exercise 8.3.1 may be helpful.
 \solution
-In the given units $L_i=-i\epsilon_{ijk}x_j\partial_k$.
+In the given units $L_i=-i\epsilon_{ijk}x_j\partial_k$, so
+$L_iL_i\psi=(-i)^2\epsilon_{ijk}\epsilon_{ilm}x_j\partial_k(x_l\partial_m\psi)$
+(summed over repeated indices).
 The derivative in the first operator must also act on the coordinate
-in the second.  Contracting the two epsilon symbols gives
+in the second.  Contracting the two epsilon symbols with
+$\epsilon_{ijk}\epsilon_{ilm}=\delta_{jl}\delta_{km}-\delta_{jm}\delta_{kl}$,
+and then using $\partial_kx_j=\delta_{jk}$ and $\partial_kx_k=3$, gives
 \begin{align*}
 L_iL_i\psi
 &=-(\delta_{jl}\delta_{km}-\delta_{jm}\delta_{kl})
@@ -546,13 +588,20 @@ L_iL_i\psi
  +\sum_{j,k}x_jx_k\partial_j\partial_k\psi.
 \end{align*}
 If $D=\mathbf r\cdot\nabla=r\partial_r$, then
-$D^2\psi=D\psi+\sum_{j,k}x_jx_k\partial_j\partial_k\psi$.
-Therefore
+$D^2\psi=x_j\partial_j(x_k\partial_k\psi)
+=D\psi+\sum_{j,k}x_jx_k\partial_j\partial_k\psi$.
+Substituting $\sum_{j,k}x_jx_k\partial_j\partial_k\psi=D^2\psi-D\psi$
+above, and using $D^2+D=r\partial_r(r\partial_r)+r\partial_r
+=r^2\partial_r^2+2r\partial_r$, we obtain
 \[
 \mathbf L^2=-r^2\nabla^2+D^2+D
 =-r^2\nabla^2+r^2\partial_r^2+2r\partial_r
-=-\Delta_\Omega.
+=-\Delta_\Omega,
 \]
+because the spherical Laplacian gives
+$r^2\nabla^2=\partial_r(r^2\partial_r)+\Delta_\Omega
+=r^2\partial_r^2+2r\partial_r+\Delta_\Omega$, with $\Delta_\Omega$ the
+angular operator of Exercise~9.4.3.
 \erratum{The Instructor's Manual, p.~114, prints
 $L^2=+\Delta_\Omega$; the sign must be negative for the stated
 $L_i=-i(\mathbf r\times\nabla)_i$.  For example,
@@ -564,17 +613,21 @@ The eigenvalue equation is consequently
 +\frac1{\sin^2\theta}\partial_\varphi^2\psi
 +l(l+1)\psi=0.
 \]
-Separate an angular mode as $\Theta(\theta)\Phi(\varphi)$.
-Setting $\Phi''=-m^2\Phi$ leaves
+Separate an angular mode as $\Theta(\theta)\Phi(\varphi)$ and
+multiply by $\sin^2\theta/(\Theta\Phi)$, as in Exercise~9.4.3 with
+$\lambda=l(l+1)$.  Setting $\Phi''=-m^2\Phi$ and dividing by
+$\sin^2\theta$ leaves
 \[
 \frac1{\sin\theta}(\sin\theta\,\Theta')'
 +\left[l(l+1)-\frac{m^2}{\sin^2\theta}\right]\Theta=0.
 \]
 Put $u=\cos\theta$ and $\Theta(\theta)=P(u)$.  Then
-$\Theta'=-\sin\theta P'$ and
+$d/d\theta=-\sin\theta\,d/du$, so $\Theta'=-\sin\theta P'$,
+$\sin\theta\,\Theta'=-(1-u^2)P'$, and
 \[
 \frac1{\sin\theta}(\sin\theta\,\Theta')'
 =\frac1{\sin\theta}\frac{d}{d\theta}[-(1-u^2)P']
+=\frac{d}{du}[(1-u^2)P']
 =(1-u^2)P''-2uP'.
 \]
 Thus
@@ -630,13 +683,17 @@ while $a^2=\sqrt{mk}/\hbar$ gives
 \]
 Hence $\boxed{\psi_{\xi\xi}+(\lambda-\xi^2)\psi=0}$.
 
-\textbf{(b)} Differentiating $\psi=ye^{-\xi^2/2}$ twice gives
+\textbf{(b)} Differentiating $\psi=ye^{-\xi^2/2}$ by the product rule,
+with $(e^{-\xi^2/2})'=-\xi e^{-\xi^2/2}$, gives
+$\psi'=e^{-\xi^2/2}(y'-\xi y)$ and
 \[
-\psi'=e^{-\xi^2/2}(y'-\xi y),
-\qquad
-\psi''=e^{-\xi^2/2}[y''-2\xi y'+(\xi^2-1)y].
+\psi''=e^{-\xi^2/2}(y''-y-\xi y')-\xi e^{-\xi^2/2}(y'-\xi y)
+=e^{-\xi^2/2}[y''-2\xi y'+(\xi^2-1)y].
 \]
-The terms $+\xi^2y$ and $-\xi^2y$ cancel upon substitution, leaving
+Substitution in part (a) gives
+$e^{-\xi^2/2}[y''-2\xi y'+(\xi^2-1)y+(\lambda-\xi^2)y]=0$.
+The terms $+\xi^2y$ and $-\xi^2y$ cancel, and dividing by the
+nonzero exponential leaves
 \[
 \boxed{y''-2\xi y'+(\lambda-1)y=0}.
 \]
@@ -677,7 +734,15 @@ With $z=r\cos\theta$ and $0<\theta<\pi$,
 g(\theta)=\frac12\log\frac{1+\cos\theta}{1-\cos\theta}
 =\log\cot\frac\theta2.
 \]
-The radial and azimuthal contributions vanish:
+Here $(1+\cos\theta)/(1-\cos\theta)
+=2\cos^2(\theta/2)/[2\sin^2(\theta/2)]=\cot^2(\theta/2)$, and
+$\cot(\theta/2)>0$.  In the spherical Laplacian
+\[
+\nabla^2=\frac1{r^2}\partial_r(r^2\partial_r)
++\frac1{r^2\sin\theta}\partial_\theta(\sin\theta\,\partial_\theta)
++\frac1{r^2\sin^2\theta}\partial_\varphi^2
+\]
+the radial and azimuthal contributions vanish:
 \[
 \partial_r(r^2\partial_r\psi_2)=\partial_r[-g(\theta)]=0,
 \qquad\partial_\varphi^2\psi_2=0.
@@ -686,9 +751,10 @@ For the remaining angular term, direct differentiation gives
 \[
 g'=-\frac{\sin\theta}{2}
 \left(\frac1{1+\cos\theta}+\frac1{1-\cos\theta}\right)
+=-\frac{\sin\theta}{2}\,\frac{2}{1-\cos^2\theta}
 =-\frac1{\sin\theta},
-\quad (\sin\theta\,g')'=(-1)'=0.
 \]
+so $(\sin\theta\,g')'=(-1)'=0$.
 Consequently
 \[
 \boxed{\nabla^2\psi_2=
@@ -784,15 +850,20 @@ Differentiate the first equation and solve these two linear equations:
 \[
 F'=\tfrac12(f'-v/c),\qquad G'=\tfrac12(f'+v/c).
 \]
-Integrating and combining the two traveling waves yields d'Alembert's
-formula
+Integrating,
+$F(\zeta)=\tfrac12f(\zeta)-\tfrac1{2c}\int_0^\zeta v(s)\,ds+K$ and
+$G(\zeta)=\tfrac12f(\zeta)+\tfrac1{2c}\int_0^\zeta v(s)\,ds-K$, where
+the two constants of integration add to zero because $F+G=f$.
+Evaluating $F$ at $x-ct$ and $G$ at $x+ct$, and combining the two
+integrals into one, yields d'Alembert's formula
 \[
 \psi(x,t)=\frac{f(x-ct)+f(x+ct)}2
  +\frac1{2c}\int_{x-ct}^{x+ct}v(s)\,ds.
 \]
 For $f(x)=\sin x$, $v(x)=\cos x$, the integral is
-$\sin(x+ct)-\sin(x-ct)=2\cos x\sin ct$.  The first term is
-$\sin x\cos ct$, so
+$\sin(x+ct)-\sin(x-ct)=2\cos x\sin ct$ by the addition formula
+$\sin(x\pm ct)=\sin x\cos ct\pm\cos x\sin ct$.  The same formula makes
+the first term $[\sin(x-ct)+\sin(x+ct)]/2=\sin x\cos ct$, so
 \[
 \boxed{\psi(x,t)=\sin x\cos ct+\frac{\cos x}{c}\sin ct}.
 \]
@@ -812,7 +883,7 @@ distributions, gives
 \[
 \boxed{\psi(x,t)=\tfrac12\delta(x-ct)+\tfrac12\delta(x+ct)}.
 \]
-\erratum{The manual prints $\delta(x-ct)$ twice.  The second pulse
+\erratum{The Instructor's Manual prints $\delta(x-ct)$ twice.  The second pulse
 must have argument $x+ct$ to obtain zero initial velocity.}
 For any smooth compactly supported test function $\varphi$,
 \[
@@ -823,7 +894,9 @@ At $t=0$ this is $\varphi(0)$, while its time derivative is
 $\tfrac c2[\varphi'(ct)-\varphi'(-ct)]$, which is zero at $0$.
 The second time derivative is
 $\tfrac{c^2}2[\varphi''(ct)+\varphi''(-ct)]$, exactly the action
-of $c^2\partial_x^2\psi$ on the same test function.
+of $c^2\partial_x^2\psi$ on the same test function, which by definition
+of the distributional derivative is
+$c^2\langle\psi(\cdot,t),\varphi''\rangle$.
 Thus both the PDE and the initial data hold distributionally.
 The unit impulse splits into equal masses moving with speeds $+c$
 and $-c$.
@@ -840,7 +913,8 @@ time derivative of $\psi$ is zero.
 \solution
 Take $a,c>0$ and write
 $f(x)=a^{-1}\mathbf1_{\{|x|<a/2\}}$, where $\mathbf1$ denotes an
-indicator function.  Since the initial velocity is zero,
+indicator function.  Since the initial velocity is zero, d'Alembert's
+formula (Exercise~9.6.1) reduces to $\psi=\tfrac12[f(x-ct)+f(x+ct)]$:
 \[
 \boxed{\psi(x,t)=\frac1{2a}
 \left[\mathbf1_{\{|x-ct|<a/2\}}
@@ -849,9 +923,11 @@ indicator function.  Since the initial velocity is zero,
 The right-moving pulse occupies $(ct-a/2,ct+a/2)$ and the left-moving
 pulse occupies $(-ct-a/2,-ct+a/2)$; each has height $1/(2a)$ and
 integral $1/2$.  At $t=0$ they coincide to reproduce $f$.
-For $0<t<a/(2c)$ their overlap has height $1/a$; for $t>a/(2c)$
-the pulses are disjoint.  Endpoint values may be assigned the half-jump
-convention; they do not affect the associated distribution.
+The two intervals overlap in $(ct-a/2,\,a/2-ct)$, which is nonempty
+exactly when $2ct<a$.  Thus for $0<t<a/(2c)$ their overlap has height
+$1/a$; for $t\ge a/(2c)$ the pulses are disjoint.  Endpoint values may
+be assigned the half-jump convention; they do not affect the associated
+distribution.
 As for any traveling profile, each term solves the wave equation
 weakly, and their time derivatives cancel initially.
 
@@ -892,9 +968,10 @@ d'Alembert's formula vanish, leaving
 \begin{align*}
 \psi(x,t)&=\frac1{2c}\int_{x-ct}^{x+ct}\sin s\,ds\\
 &=\frac1{2c}[\cos(x-ct)-\cos(x+ct)]
-=\boxed{\frac{\sin x\sin ct}{c}}.
+=\boxed{\frac{\sin x\sin ct}{c}},
 \end{align*}
-Direct checks give $\psi(x,0)=0$,
+since $\cos(x\mp ct)=\cos x\cos ct\pm\sin x\sin ct$ makes the
+bracket $2\sin x\sin ct$.  Direct checks give $\psi(x,0)=0$,
 $\psi_t(x,0)=\sin x$, and
 $\psi_{tt}=-c\sin x\sin ct=c^2\psi_{xx}$.
 
@@ -934,7 +1011,9 @@ expressions to a separation constant, conventionally $-\alpha^2$:
 \frac{\mathcal T'}{K\mathcal T}
 =\frac{(r^2R')'}{r^2R}=-\alpha^2.
 \]
-This gives the decaying time factor and radial equation
+Integrating $\mathcal T'=-K\alpha^2\mathcal T$, and writing
+$(r^2R')'=r^2R''+2rR'$ in $(r^2R')'+\alpha^2r^2R=0$, gives the decaying
+time factor and radial equation
 \[
 \mathcal T=C e^{-K\alpha^2t},\qquad
 \boxed{r^2R''+2rR'+\alpha^2r^2R=0}.
@@ -945,13 +1024,16 @@ R'=\frac{u'}r-\frac u{r^2},\qquad
 R''=\frac{u''}r-\frac{2u'}{r^2}+\frac{2u}{r^3},
 \]
 so $r^2R''+2rR'+\alpha^2r^2R=r(u''+\alpha^2u)$.
-For $\alpha\ne0$,
+The radial equation is therefore $u''+\alpha^2u=0$ for $r>0$.
+For $\alpha\ne0$ its solutions are $u=A\sin\alpha r+B\cos\alpha r$, so
 \[
 \boxed{R=A\frac{\sin\alpha r}{r}
        +B\frac{\cos\alpha r}{r}}.
 \]
 \erratum{These two functions form a basis only for $\alpha\ne0$.
 At $\alpha=0$, the independent radial solutions are $1$ and $1/r$.}
+Indeed, at $\alpha=0$ the sine solution vanishes identically, while
+$u''=0$ gives $u=A+Br$, that is, $R=A/r+B$.
 If the solid contains its center and the temperature is finite there,
 the cosine term (or $1/r$ term) must be absent.  The sine term is
 regular because $\sin\alpha r/r=\alpha-\alpha^3r^2/6+\cdots$.
@@ -975,12 +1057,16 @@ R\mathcal T'=K\mathcal T\frac1\rho(\rho R')',
 \frac{\mathcal T'}{K\mathcal T}
 =\frac{(\rho R')'}{\rho R}=-\alpha^2.
 \]
-Therefore
+The time equation $\mathcal T'=-K\alpha^2\mathcal T$ integrates to an
+exponential, and the radial equation $(\rho R')'+\alpha^2\rho R=0$,
+multiplied by $\rho$ with $\rho(\rho R')'=\rho^2R''+\rho R'$, becomes
 \[
 \boxed{\mathcal T=C e^{-K\alpha^2t},\qquad
 \rho^2R''+\rho R'+\alpha^2\rho^2R=0}.
 \]
-For nonzero $\alpha$ put $s=\alpha\rho$; then
+For nonzero $\alpha$ put $s=\alpha\rho$, so that $R_\rho=\alpha R_s$ and
+$R_{\rho\rho}=\alpha^2R_{ss}$; then $\rho^2R_{\rho\rho}=s^2R_{ss}$,
+$\rho R_\rho=sR_s$, and
 $s^2R_{ss}+sR_s+s^2R=0$, the order-zero Bessel equation.
 Its solution is $R=A J_0(\alpha\rho)+B Y_0(\alpha\rho)$.
 If the axis is included, finiteness there selects $J_0$ since $Y_0$
@@ -1007,20 +1093,28 @@ Let $D=a^2>0$.  Use the Fourier transform convention
 \qquad
 \psi(x,t)=\frac1{2\pi}\int_{\mathbb R}\widehat\psi(k,t)e^{ikx}\,dk.
 \]
-Integration by parts (or distributional differentiation) gives
-$\partial_t\widehat\psi=-Dk^2\widehat\psi$ and
-$\widehat\psi(k,0)=A$.  Solving this scalar ODE yields
-$\widehat\psi=Ae^{-Dk^2t}$.
-For $t>0$, put $I(x)=\int_{\mathbb R}e^{-Dtk^2}e^{ikx}\,dk$.
-Its derivative, using $ke^{-Dtk^2}=-(2Dt)^{-1}\partial_k e^{-Dtk^2}$,
-is
+Integrating by parts twice, with boundary terms that vanish for $\psi$
+decaying as $|x|\to\infty$ (or by distributional differentiation), the
+transform of $\psi_{xx}$ is $(ik)^2\widehat\psi=-k^2\widehat\psi$.
+Hence $\partial_t\widehat\psi=-Dk^2\widehat\psi$, and
+$\widehat\psi(k,0)=\int_{\mathbb R}A\delta(x)e^{-ikx}\,dx=A$.
+Solving this scalar ODE yields
+$\widehat\psi=Ae^{-Dk^2t}$, so $\psi=(A/2\pi)I(x)$, where for $t>0$
+we put $I(x)=\int_{\mathbb R}e^{-Dtk^2}e^{ikx}\,dk$.
+Differentiate under the integral sign, use
+$ke^{-Dtk^2}=-(2Dt)^{-1}\partial_k e^{-Dtk^2}$, and integrate by
+parts in $k$:
 \[
 I'(x)=-\frac i{2Dt}\int_{\mathbb R}
  \partial_k(e^{-Dtk^2})e^{ikx}\,dk
+=\frac i{2Dt}\int_{\mathbb R}e^{-Dtk^2}\,(ix)e^{ikx}\,dk
 =-\frac{x}{2Dt}I(x).
 \]
-The boundary term vanishes, and $I(0)=\sqrt{\pi/(Dt)}$ from the
-Gaussian integral.  Thus $I(x)=\sqrt{\pi/(Dt)}e^{-x^2/(4Dt)}$ and
+The boundary term vanishes because of the Gaussian factor.  This linear
+ODE gives $[e^{x^2/(4Dt)}I(x)]'=0$, and
+$I(0)=\int_{\mathbb R}e^{-Dtk^2}dk=\sqrt{\pi/(Dt)}$ from the
+Gaussian integral.  Thus $I(x)=\sqrt{\pi/(Dt)}e^{-x^2/(4Dt)}$ and,
+since $(2\pi)^{-1}\sqrt{\pi/(Dt)}=1/\sqrt{4\pi Dt}$,
 \[
 \boxed{\psi(x,t)=\frac{A}{\sqrt{4\pi Dt}}
  e^{-x^2/(4Dt)}\quad(t>0)}.
@@ -1028,13 +1122,15 @@ Gaussian integral.  Thus $I(x)=\sqrt{\pi/(Dt)}e^{-x^2/(4Dt)}$ and
 In terms of $a$, the denominator is $2|a|\sqrt{\pi t}$.
 \erratum{Writing $2a\sqrt{\pi t}$ presumes $a>0$; the diffusivity
 itself is $a^2$.}
-Direct differentiation gives
+Direct differentiation, with $\psi_x=-x\psi/(2Dt)$ and hence
+$\psi_{xx}=[-1/(2Dt)+x^2/(4D^2t^2)]\psi$, gives
 \[
 \psi_t=\left(-\frac1{2t}+\frac{x^2}{4Dt^2}\right)\psi,
 \qquad
 D\psi_{xx}=\left(-\frac1{2t}+\frac{x^2}{4Dt^2}\right)\psi.
 \]
-The total heat is $\int\psi\,dx=A$.  To check the initial impulse,
+The total heat is $\int\psi\,dx=A$: substitute $x=2\sqrt{Dt}\,u$ and
+use $\int e^{-u^2}du=\sqrt\pi$.  To check the initial impulse,
 substitute $x=2\sqrt{Dt}\,u$ in its action on a test function:
 \[
 \int\psi(x,t)\varphi(x)\,dx
@@ -1063,17 +1159,21 @@ $S(x)=1-x/L$, since $S''=0$, $S(0)=1$, $S(L)=0$.
 Write $T=S+u$.  Then
 \[
 u_t=D u_{xx},\quad u(0,t)=u(L,t)=0,\quad
-u(x,0)=\frac xL-1\quad(0<x<L),
+u(x,0)=\frac xL-1\quad(0<x<L).
 \]
-Separate its zero-boundary modes: $X''=-\kappa^2X$,
-$X(0)=X(L)=0$ give $X_n=\sin(n\pi x/L)$,
-$\kappa_n=n\pi/L$, and the time factors are $e^{-D\kappa_n^2t}$.
+Separate its zero-boundary modes: a product $X(x)\mathcal T(t)$ gives
+$\mathcal T'/(D\mathcal T)=X''/X=-\kappa^2$.  As in Exercise~9.4.5,
+$X''=-\kappa^2X$ with $X(0)=X(L)=0$ forces $\kappa^2>0$,
+$X\propto\sin\kappa x$ and $\sin\kappa L=0$; this gives
+$X_n=\sin(n\pi x/L)$, $\kappa_n=n\pi/L$, and the time factors
+$e^{-D\kappa_n^2t}$.
 Hence
 \[
 u(x,t)=\sum_{n=1}^{\infty}b_n\sin\frac{n\pi x}{L}
  e^{-D(n\pi/L)^2t}.
 \]
-Sine orthogonality gives
+Setting $t=0$ and using the orthogonality relation
+$\int_0^L\sin(n\pi x/L)\sin(m\pi x/L)\,dx=(L/2)\delta_{nm}$ gives
 \begin{align*}
 b_n&=\frac2L\int_0^L\left(\frac xL-1\right)
                   \sin\frac{n\pi x}L\,dx\\
@@ -1082,6 +1182,10 @@ b_n&=\frac2L\int_0^L\left(\frac xL-1\right)
  +\frac{\sin(n\pi x/L)}{L(n\pi/L)^2}\right]_0^L
 =-\frac2{n\pi}.
 \end{align*}
+The antiderivative comes from one integration by parts, differentiating
+$x/L-1$ and integrating the sine.  At $x=L$ both terms vanish
+($x/L-1=0$ and $\sin n\pi=0$), while at $x=0$ the bracket equals
+$1/(n\pi/L)=L/(n\pi)$; hence $b_n=(2/L)[0-L/(n\pi)]=-2/(n\pi)$.
 Therefore
 \[
 \boxed{T(x,t)=1-\frac xL-\frac2\pi
@@ -1096,30 +1200,61 @@ For $0<x<L$, its initial limit is zero because
 \[
 \sum_{n=1}^{\infty}\frac{\sin(n\theta)}n
 =\frac{\pi-\theta}{2}\quad(0<\theta<2\pi),
-\qquad\theta=\frac{\pi x}L.
+\qquad\theta=\frac{\pi x}L,
 \]
-For example, this identity follows by taking the imaginary part of
-$\sum_{n\ge1}r^ne^{in\theta}/n=-\log(1-re^{i\theta})$ and
-letting $r\uparrow1$; $\arg(1-e^{i\theta})=(\theta-\pi)/2$.
+so at $t=0$ the series term is $(2/\pi)(\pi-\pi x/L)/2=1-x/L$, which
+cancels $S(x)$.
+This identity follows by taking the imaginary part of
+$\sum_{n\ge1}r^ne^{in\theta}/n=-\log(1-re^{i\theta})$ ($0\le r<1$,
+principal logarithm) and letting $r\uparrow1$.  By Abel's theorem the
+limit equals the series at $r=1$, which converges by Dirichlet's test
+because the partial sums of $\sin(n\theta)$ are bounded (see below).
+Since $1-e^{i\theta}=-2i\sin(\theta/2)e^{i\theta/2}
+=2\sin(\theta/2)e^{i(\theta-\pi)/2}$ with $\sin(\theta/2)>0$, we have
+$\arg(1-e^{i\theta})=(\theta-\pi)/2$, and the imaginary part of
+$-\log(1-e^{i\theta})$ is $(\pi-\theta)/2$.
+
 The initial limit is justified without assuming uniform convergence at
-$x=0$: for fixed $0<\theta<\pi$, partial sums of $\sin(n\theta)$
-are bounded by $1/|\sin(\theta/2)|$.  Summation by parts with the
-decreasing coefficients $e^{-\eta n^2}/n$ bounds the tail starting at
-$N+1$ by $1/[(N+1)|\sin(\theta/2)|$, uniformly for $\eta\ge0$.
+$x=0$.  Write $\eta=D\pi^2t/L^2$, so the $n$th term carries
+$e^{-\eta n^2}$, and fix $0<\theta<\pi$.  Summing
+$2\sin(\theta/2)\sin(n\theta)=\cos((n-\tfrac12)\theta)
+-\cos((n+\tfrac12)\theta)$ telescopically gives, for $M>N\ge0$,
+\[
+B_M=\sum_{n=N+1}^{M}\sin(n\theta)
+=\frac{\cos((N+\frac12)\theta)-\cos((M+\frac12)\theta)}{2\sin(\theta/2)},
+\qquad |B_M|\le\frac1{\sin(\theta/2)}.
+\]
+Summation by parts with $B_N=0$ and the decreasing coefficients
+$c_n=e^{-\eta n^2}/n$ gives
+\[
+\sum_{n=N+1}^{M}c_n\sin(n\theta)
+=c_MB_M+\sum_{n=N+1}^{M-1}(c_n-c_{n+1})B_n,
+\]
+of modulus at most $[c_M+(c_{N+1}-c_M)]/\sin(\theta/2)
+=c_{N+1}/\sin(\theta/2)$.  Letting $M\to\infty$ bounds the tail
+starting at $N+1$ by $1/[(N+1)\sin(\theta/2)]$, uniformly for
+$\eta\ge0$.  Hence the series at time $t$ and at $t=0$ differ by at most
+$\sum_{n\le N}(1-e^{-\eta n^2})/n+2/[(N+1)\sin(\theta/2)]$.
 Take $t\downarrow0$ in the finite initial portion and then let
-$N\to\infty$.  The long-time limit is $S(x)$.
+$N\to\infty$.  The long-time limit is $S(x)$, since the modulus of the
+series is at most
+$\sum_{n\ge1}e^{-\eta n^2}\le\sum_{n\ge1}e^{-\eta n}=1/(e^{\eta}-1)$,
+which tends to zero as $t\to\infty$.
 
 The initial interior temperature tends to zero as $x\downarrow0$,
 whereas the imposed endpoint is one.  There is consequently a corner
 discontinuity at $(0,0)$; the initial limit is taken at fixed interior
 $x$, as the question specifies, not jointly with $x\to0$.
-For numerical evaluation with $\eta=D\pi^2t/L^2>0$, truncation after
-$N\ge1$ terms has the uniform error bound
+For numerical evaluation at $t>0$, so that $\eta=D\pi^2t/L^2>0$,
+truncation after $N\ge1$ terms has the uniform error bound
 \[
 |R_N|\le\frac2\pi\sum_{n>N}\frac{e^{-\eta n^2}}n
 \le\frac2\pi\int_N^\infty\frac{e^{-\eta s^2}}s\,ds
 \le\frac{e^{-\eta N^2}}{\pi\eta N^2}.
 \]
-The last inequality uses $1/s\le s/N^2$ for $s\ge N$ and integrates
-$s e^{-\eta s^2}$ exactly.
+The first inequality uses $|\sin|\le1$; the second holds because
+$e^{-\eta s^2}/s$ decreases, so each term with $n>N$ is at most the
+integral of that function over $[n-1,n]$.  The last inequality uses
+$1/s\le s/N^2$ for $s\ge N$ and integrates $s e^{-\eta s^2}$ exactly:
+$\int_N^\infty se^{-\eta s^2}ds=e^{-\eta N^2}/(2\eta)$.
 
