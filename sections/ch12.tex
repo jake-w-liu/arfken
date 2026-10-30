@@ -1547,8 +1547,8 @@ remainder integral by
 |J_N|\le x^{-N-1}+(N+1)\int_x^\infty t^{-N-2}dt
 =2x^{-N-1}.
 \]
-The residual $(-i)^NN!J_N$ after $N$ displayed terms is therefore at
-most $2N!/x^{N+1}$, of the order of the first omitted term.
+The residual $-(-i)^NN!J_N$ after $N$ displayed terms therefore has
+modulus at most $2N!/x^{N+1}$, of the order of the first omitted term.
 In the sum, $-i(-i)^k$ equals $-i(-1)^j$ for $k=2j$ and $-(-1)^j$ for
 $k=2j+1$. Collect the real even/odd subsequences:
 \begin{align*}
@@ -1707,8 +1707,9 @@ Thus $(Kf)''+2i(Kf)'=f$, and $Kf\to0$ at infinity, since
 $|Kf(x)|\le\int_x^\infty|f|\,dt$.
 Apply this to $f=\mu w/x^2$, which is integrable because $w\to1$.
 Since $w''+2iw'=f$ as well, the difference $d=w-1-Kf$ solves
-$d''+2id'=0$, so $d=A+Be^{-2ix}$.
-Since $d\to0$ on the positive axis, $A=B=0$.
+$d''+2id'=0$, so $d=\alpha+\beta e^{-2ix}$.
+Since $d$ has period $\pi$ and tends to $0$ on the positive axis, it
+vanishes identically, so $\alpha=\beta=0$.
 This proves the Volterra equation
 \[
 w(x)=1+\frac\mu{2i}\int_x^\infty
@@ -1717,8 +1718,14 @@ w(x)=1+\frac\mu{2i}\int_x^\infty
 Its kernel has absolute value at most $1$ after division by $2i$, so
 $|T[w](x)|\le|\mu|\sup|w|\int_x^\infty t^{-2}dt=|\mu|\sup|w|/x$.
 On $x\ge R>|\mu|$, the operator $T$ therefore has sup-norm at most
-$|\mu|/R<1$, so the bounded outgoing solution is uniquely obtained by
-successive substitution. Let $S_N=\sum_{k=0}^{N-1}c_kx^{-k}$, $N\ge1$.
+$|\mu|/R<1$, so by the contraction-mapping principle the bounded
+outgoing solution is unique and is obtained by successive substitution.
+Indeed, two bounded solutions $w,\tilde w$ satisfy
+$\sup|w-\tilde w|=\sup|T[w-\tilde w]|\le(|\mu|/R)\sup|w-\tilde w|$,
+which forces $\tilde w=w$; and the iterates $w^{(0)}=1$,
+$w^{(m+1)}=1+T[w^{(m)}]$ satisfy
+$\sup|w^{(m+1)}-w^{(m)}|\le(|\mu|/R)^m\sup|T[1]|$, so they converge
+uniformly. Let $S_N=\sum_{k=0}^{N-1}c_kx^{-k}$, $N\ge1$.
 In $S_N''+2iS_N'-\mu S_N/x^2$, the coefficient of $x^{-k-2}$ is the
 left side of the recurrence for $k\le N-2$, hence zero; for $k=N-1$
 the term $c_N$ is absent. This leaves precisely
@@ -1747,8 +1754,14 @@ it equals $E_N=w-S_N$; hence $E_N=O(x^{-N})$. This is the required
 asymptotic remainder estimate for every fixed truncation. Taking real
 and imaginary parts proves the $P_\nu,Q_\nu$ expansions (for real $\nu$,
 $H^{(2)}_\nu(x)=\overline{H^{(1)}_\nu(x)}$ makes $P_\nu,Q_\nu$ real on
-the axis); retaining one extra term when necessary gives the next even
-or odd inverse-power remainder.
+the axis). For real $\nu$ the $c_k=i^kA_k$ are real for even $k$ and
+imaginary for odd $k$, so $\Re S_{2n+1}=\Re S_{2n+2}$ and
+$\Im S_{2n}=\Im S_{2n+1}$. Hence the $P_\nu$ series stopped after its
+$x^{-2n}$ term, which is $\Re S_{2n+1}$, has error
+$\Re E_{2n+2}=O(x^{-2n-2})$, and the $Q_\nu$ series stopped after its
+$x^{-(2n-1)}$ term, which is $\Im S_{2n}$, has error
+$\Im E_{2n+1}=O(x^{-2n-1})$; each error is of the order of the first
+omitted term.
 
 For nonterminating cases the ratio of two consecutive $P$ terms is
 \[
@@ -1765,11 +1778,17 @@ equation exactly: for $N=j+1$,
 $N(N-1)-\mu=j(j+1)-[(j+\frac12)^2-\frac14]=0$, so $r_N=0$.
 \erratum{These terminating cases satisfy the usual fixed-order remainder
 definition. They are excluded only if one imposes the textbook's extra
-divergence convention, Eq. (12.98); see Exercise 12.6.5.}
+divergence convention, Eq.~(12.98); see Exercise 12.6.5.}
 
 The proof also supplies a complex sector, rather than assuming that an
 expansion on the real axis automatically extends to all directions.
-For $\Re z\ge0$, integrate along $t=z+u$, $u\ge0$. Then
+For $\Re z\ge0$, $|z|\ge R$, integrate along $t=z+u$, $u\ge0$, so that
+$e^{2i(t-z)}=e^{2iu}$ and the Volterra equation reads
+\[
+w(z)=1+\frac\mu{2i}\int_0^\infty\bigl[e^{2iu}-1\bigr]
+\frac{w(z+u)}{(z+u)^2}\,du.
+\]
+Then
 \[
 |e^{2iu}-1|\le2,\qquad
 |z+u|\ge (|z|+u)/\sqrt2,
@@ -1793,9 +1812,17 @@ $(-i)^kA_k$ (replace $i$ by $-i$ throughout, since $H^{(2)}_\nu$
 carries the factor $e^{-iz}$). Therefore $P=(w+w_-)/2$ selects the even
 terms and $Q=(w-w_-)/(2i)$ selects the odd terms, because
 $i^k+(-i)^k$ vanishes for odd $k$ and $i^k-(-i)^k$ for even $k$.
-These analytic solutions agree with the Hankel normalizations on the
-positive axis and hence throughout the sector. This argument also works
-for each fixed complex $\nu$, since only $|\mu|$ enters the bounds. Wider continuation sectors require
+The successive-substitution iterates (starting from $1$) are analytic
+for $\Re z>0$, $|z|>R$: each is an integral, along paths $z+u$ that
+stay in that region, of a function analytic in $z$ (differentiate under
+the integral sign). They converge uniformly, so by Weierstrass's theorem
+on uniform limits the fixed points $w$ and $w_-$ are analytic there.
+For real $z=x>R$ the paths stay on the axis, so by the uniqueness
+proved above (with $i\to-i$ for $w_-$) these fixed points coincide
+there with the Hankel normalizations, which are analytic in the same
+region; by the identity theorem they coincide throughout the sector.
+This argument also works for each fixed complex $\nu$, since only
+$|\mu|$ enters the bounds. Wider continuation sectors require
 the corresponding Hankel branches; no expansion across an unspecified
 branch or Stokes boundary is being asserted.
 
@@ -1824,9 +1851,9 @@ Consequently
 x^mR_m(x)=\frac{(-1)^m}{1+x}.
 \]
 For each fixed $m$ this tends to zero as $x\to+\infty$, satisfying
-Eq. (12.97). For each fixed $x>1$, however, its absolute value is the
+Eq.~(12.97). For each fixed $x>1$, however, its absolute value is the
 constant $1/(1+x)$; it does not diverge as $m\to\infty$.
-Thus the extra requirement in Eq. (12.98) is not met:
+Thus the extra requirement in Eq.~(12.98) is not met:
 \[
 \boxed{\text{not an asymptotic series under the textbook's convention}.}
 \]
@@ -2018,9 +2045,16 @@ For comparison, the \emph{original} squared-denominator integral has
 Its coefficients follow from $(1+w)^{-2}=\sum(-1)^k(k+1)w^k$ with
 $w=v^2$, the $k$th term integrating to $(-1)^k(k+1)(2k)!/x^{2k+1}$
 ($2\cdot2!=4$, $3\cdot4!=72$).
-More precisely, differentiating the finite geometric identity
-$1/(1+w)=\sum_{k=0}^{N+1}(-w)^k+(-w)^{N+2}/(1+w)$ with respect to $w$
-and changing sign gives
+More precisely, differentiate the finite geometric identity
+$1/(1+w)=\sum_{k=0}^{N+1}(-w)^k+(-w)^{N+2}/(1+w)$ with respect to $w$.
+The derivative of the sum is $\sum_{k=1}^{N+1}(-1)^kkw^{k-1}$, which after the shift
+$k\to k+1$ is $-\sum_{k=0}^N(-1)^k(k+1)w^k$, and $(-1)^{N+2}=(-1)^N$;
+so
+\[
+-\frac1{(1+w)^2}=-\sum_{k=0}^N(-1)^k(k+1)w^k
++(-1)^N\frac d{dw}\frac{w^{N+2}}{1+w}.
+\]
+Changing sign gives
 \[
 \frac1{(1+w)^2}=\sum_{k=0}^N(-1)^k(k+1)w^k
 +(-1)^{N+1}\frac{w^{N+1}[(N+2)+(N+1)w]}{(1+w)^2},
@@ -2049,7 +2083,8 @@ from the Taylor coefficients of $F$. Prove that $|F|$ has no interior
 local maximum and no positive interior local minimum. In particular,
 if $F$ never vanishes, it has no interior modulus extremum.}
 \solution
-\erratum{Both the asserted mean-value identity for $|F|^2$ and the
+\erratum{Both the asserted mean-value identity for $|F|^2$ (that its
+mean over a circle about $z_0$ equals $|F(z_0)|^2$) and the
 unqualified absence of minima are false. For $F(z)=z$ at $z_0=0$,
 the circle average is $r^2$, whereas $|F(0)|^2=0$ is a minimum.
 The nonconstant, nonzero case used in the textbook's discussion of
@@ -2084,7 +2119,9 @@ again impossible for nonconstant $F$. Thus a nonconstant analytic
 function has no positive interior local minimum; zeros are allowed
 minima. A constant function is the usual exception to both statements.
 
-For comparison, the true mean-value identities are
+For comparison, writing
+$\langle g\rangle=\frac1{2\pi}\int_0^{2\pi}g(z_0+re^{i\theta})\,d\theta$
+for the mean over the circle, the true mean-value identities are
 $\langle F\rangle=F(z_0)$ (Cauchy's integral formula on the circle
 $z=z_0+re^{i\theta}$, $dz=ire^{i\theta}d\theta$), and, on a zero-free
 disk, $\langle\log|F|\rangle=\log|F(z_0)|$. The latter follows by taking
@@ -2159,14 +2196,14 @@ $e^{i\pi/4}\sqrt\pi/2=(1+i)\sqrt{\pi/8}$, $-ie^{is^2}/(2s)$,
 $-e^{is^2}/(4s^3)$ and $s\,O(s^{-6})=O(s^{-5})$. Since
 $\Re(-ie^{i\alpha})=\sin\alpha$ and $\Im(-ie^{i\alpha})=-\cos\alpha$,
 taking real and imaginary parts yields
-\begin{align*}
-\boxed{\int_0^s\cos x^2dx}
-&\boxed{=\sqrt{\frac\pi8}+\frac{\sin s^2}{2s}
--\frac{\cos s^2}{4s^3}+O(s^{-5}),}\\
-\boxed{\int_0^s\sin x^2dx}
-&\boxed{=\sqrt{\frac\pi8}-\frac{\cos s^2}{2s}
--\frac{\sin s^2}{4s^3}+O(s^{-5}).}
-\end{align*}
+\[
+\boxed{\begin{aligned}
+\int_0^s\cos x^2dx&=\sqrt{\frac\pi8}+\frac{\sin s^2}{2s}
+-\frac{\cos s^2}{4s^3}+O(s^{-5}),\\
+\int_0^s\sin x^2dx&=\sqrt{\frac\pi8}-\frac{\cos s^2}{2s}
+-\frac{\sin s^2}{4s^3}+O(s^{-5}).
+\end{aligned}}
+\]
 Both integrals are odd in $s$, so for $s\to-\infty$ the constants
 become $-\sqrt{\pi/8}$.
 \erratum{The saddle is an endpoint, so it contributes half of a full
@@ -2190,11 +2227,13 @@ Starting with $\Gamma(1+s)=\int_0^\infty e^{-u}u^sdu$, set $u=sz$.
 As $u$ runs over $(0,\infty)$, $z$ runs along the ray $\arg z=-\phi$;
 this ray can be rotated to the positive $z$ axis, i.e.\ the $u$ path to
 the ray $\arg u=\phi$. By Cauchy's theorem this only requires the arcs
-$|u|=\varrho$ between the two rays to contribute nothing as
-$\varrho\to\infty$ and as $\varrho\to0$. On such an arc
-$|e^{-u}u^s|\le e^{-\varrho\cos\phi}\varrho^{\Re s}e^{|\phi\,\Im s|}$
-and the length is $\varrho|\phi|$; the product tends to zero in both
-limits because $\cos\phi>0$ and $\Re s>0$.
+$|u|=r$ between the two rays to contribute nothing as
+$r\to\infty$ and as $r\to0$. On such an arc $u=re^{i\psi}$ with $\psi$
+between $0$ and $\phi$, so $|e^{-u}|=e^{-r\cos\psi}\le e^{-r\cos\phi}$
+and $|u^s|=|e^{s(\ln r+i\psi)}|=r^{\Re s}e^{-\psi\Im s}
+\le r^{\Re s}e^{|\phi\,\Im s|}$; the length is $r|\phi|$, and the
+product tends to zero in both limits because $\cos\phi>0$ and
+$\Re s>0$.
 On the rotated path $z>0$, so $\operatorname{Log}u=\operatorname{Log}s+
 \ln z$ and $u^s=s^sz^s$ with principal branches; also $du=s\,dz$. Thus
 \[
@@ -2215,13 +2254,17 @@ Then $\frac s2(z-1)^2=\frac{v^2}2$, so
 $sf(z)=-s-\frac{v^2}2+\frac{v^3}{3\sqrt s}+\cdots$, whose imaginary
 part is $-\Im s$ up to the cubic term.
 This is the local steepest path and keeps $\Im[sf(z)]$ constant to
-quadratic order. Since $dz=dv/\sqrt s$, its leading Gaussian
-contribution is
+quadratic order. Near $z=1$ the real $z$ path may be turned onto this
+line by Cauchy's theorem, since $e^{sf(z)}$ is analytic for $\Re z>0$.
+Since $dz=dv/\sqrt s$, the leading Gaussian contribution of the line is
 \[
 \int e^{sf(z)}dz
 \sim\frac{e^{-s}}{\sqrt s}\int_{-\infty}^{\infty}e^{-v^2/2}dv
 =\frac{\sqrt{2\pi}e^{-s}}{\sqrt s}.
 \]
+Equivalently, staying on the real axis with $z=1+y$,
+$\int_{-\infty}^{\infty}e^{-sy^2/2}dy=\sqrt{2\pi/s}$ for $\Re s>0$
+gives the same value.
 Therefore, with the same branch for all powers,
 \[
 \boxed{\Gamma(1+s)\sim\sqrt{2\pi s}\,s^s e^{-s}}.
@@ -2246,7 +2289,9 @@ Apply the Euler--Maclaurin formula with one Bernoulli correction
 +\frac{h'(M)-h'(0)}{12}
 -\frac12\int_0^M\widetilde B_2(t)h''(t)dt,
 \]
-where $\widetilde B_2(t)=B_2(\{t\})$ is periodic. Using
+where $\widetilde B_2(t)=B_2(t-\lfloor t\rfloor)$ is the periodic
+extension of the Bernoulli polynomial $B_2(x)=x^2-x+\frac16$ from
+$[0,1)$. Using
 $h'=1/(s+t)$, $h''=-1/(s+t)^2$, and
 $\int h=(s+t)\operatorname{Log}(s+t)-(s+t)$, the finite sum is
 \begin{align*}
@@ -2268,7 +2313,15 @@ $+M$ cancel, and the remaining $M$-dependent logarithms are
 for each fixed $s$ with $\Re s>0$, because
 $\operatorname{Log}(1+s/M)=s/M+O(M^{-2})$ makes the product
 $-s+O(1/M)$; also $1/(M+s)\to0$, and the last integral converges
-absolutely as $M\to\infty$. Adding $\operatorname{Log}s$ to pass from
+absolutely as $M\to\infty$. Collecting this limit $-s$, the constant
+$\frac12\ln2\pi$ from Stirling's formula, and the remaining terms of
+the finite sum with their signs reversed by the minus sign in front of
+the sum,
+\[
+\log\Gamma(s)=(s-\tfrac12)\operatorname{Log}s-s+\tfrac12\ln2\pi
++\frac1{12s}-\frac12\int_0^\infty\frac{\widetilde B_2(t)}{(s+t)^2}dt.
+\]
+Adding $\operatorname{Log}s$ to pass from
 $\Gamma(s)$ to $\Gamma(1+s)=s\Gamma(s)$ therefore yields
 \[
 \log\Gamma(1+s)=(s+\tfrac12)\operatorname{Log}s-s
@@ -2423,14 +2476,20 @@ against the bounded primitive $-\cos t$ of $\sin t$ gives
 \]
 for every $\epsilon\ge0$, since $\int_L^\infty|g'|\,dt=g(L)$. On
 $[0,L]$, dominated convergence (the integrand is bounded by $1$) gives
-the limit $\epsilon\to0$. Since $L$ is arbitrary,
+the limit $\epsilon\to0$. Splitting $\int_0^\infty$ at $L$ and using the
+tail bound both for $\epsilon=0$ and for $\epsilon>0$ therefore gives
+\[
+\limsup_{\epsilon\to0}\Bigl|\int_0^\infty\frac{\sin t}{t}\,dt-A(1)\Bigr|
+\le\frac2L+\frac2L=\frac4L.
+\]
+Since $L$ is arbitrary,
 $\int_0^\infty\sin t\,dt/t=\lim_{\epsilon\to0}A(1)=\pi/2$,
 and by evenness the whole-line sine integral is $\pi$. Hence
 \[
 \operatorname{PV}\int_{-\infty}^{\infty}\frac{e^{ix}}{x-x_0}dx
 =i\pi e^{ix_0}=-\pi\sin x_0+i\pi\cos x_0.
 \]
-Dividing by $i\pi$ verifies Eq. (12.117). Separating the imaginary and
+Dividing by $i\pi$ verifies Eq.~(12.117). Separating the imaginary and
 real parts also gives
 \[
 \frac1\pi\operatorname{PV}\int\frac{\sin x}{x-x_0}dx=\cos x_0,\qquad
@@ -2447,10 +2506,12 @@ $v\in C^1$ and $v^{(j)}(x)=O(x^{-2-\epsilon-j})$; for (b), require
 $u\in C^1$ and $u^{(j)}(x)=O(x^{-1-\epsilon-j})$, $j=0,1$,
 with $0<\epsilon<1$.} Show that as $x_0\to+\infty$,
 \begin{enumerate}
-\item[(a)] $u(x_{0})\erratum{=}-\dfrac{2}{\pi x_{0}^{2}}
-  \displaystyle\int_{0}^{\infty}xv(x)\,dx\erratum{+o(x_0^{-2})}$,
-\item[(b)] $v(x_{0})\erratum{=}\dfrac{2}{\pi x_{0}}
-  \displaystyle\int_{0}^{\infty}u(x)\,dx\erratum{+o(x_0^{-1})}$.
+\item[(a)] $u(x_{0})\mathrel{\erratum{=}}-\dfrac{2}{\pi x_{0}^{2}}
+  \displaystyle\int_{0}^{\infty}xv(x)\,dx
+  \mathbin{\erratum{+}}\erratum{o(x_0^{-2})}$,
+\item[(b)] $v(x_{0})\mathrel{\erratum{=}}\dfrac{2}{\pi x_{0}}
+  \displaystyle\int_{0}^{\infty}u(x)\,dx
+  \mathbin{\erratum{+}}\erratum{o(x_0^{-1})}$.
 \end{enumerate}
 In quantum mechanics relations of this form are often called \emph{sum rules}.
 \solution
@@ -2561,7 +2622,8 @@ needed to find the first nonzero term.
 \solution
 The cut integral sign denotes a Cauchy principal value, written
 $\operatorname{PV}\int$ below; it is necessary at $x=x_0$. All integrals
-below have that meaning. Use the convention of Eqs.~(12.118),
+below have that meaning. Write $a$ for $x_0$ and use the convention of
+Eqs.~(12.118),
 \[
 (Hg)(a)=\frac1\pi\operatorname{PV}\int_{-\infty}^{\infty}
 \frac{g(x)}{x-a}dx,\qquad u=Hv,\quad v=-Hu.
@@ -2793,5 +2855,7 @@ Thus
 \int_{-\infty}^{\infty}\frac{dx}{(x-s)(x-t)}}
 \]
 with the same regularization: its finite-$\epsilon$ kernel is
-$2\epsilon/[\pi((s-t)^2+4\epsilon^2)]$. This also supplies the
-consistent kernel identity used in the Parseval calculation.
+$2\epsilon/[\pi((s-t)^2+4\epsilon^2)]$. This is also the kernel
+identity used in the textbook's derivation of the Parseval relation
+$\int|u|^2dx=\int|v|^2dx$ in Section 12.8 (checked directly in
+Exercise 12.8.7).
