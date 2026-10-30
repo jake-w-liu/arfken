@@ -1439,7 +1439,8 @@ $x(d/dx)x^3=3x^3$.
 Use the adjoint identities $(\lambda A)^\dagger=\lambda^*A^\dagger$,
 $(A+B)^\dagger=A^\dagger+B^\dagger$, and
 $(A^\dagger)^\dagger=A$ \erratum{for bounded, everywhere-defined operators. General unbounded
-operators require additional domain assumptions, as noted in 5.3.1--5.3.2}.
+operators require additional domain assumptions, as noted in
+Exercises 5.3.1--5.3.2}.
 
 (a) If $B=A+A^\dagger$, then
 \[
@@ -1452,8 +1453,10 @@ C^\dagger=-i\{A^\dagger-(A^\dagger)^\dagger\}
 \]
 Thus both operators are Hermitian.
 
-(b) Solving these two definitions for $A$ gives
+(b) Solve these two definitions for $A$: since
+$iC=i^2(A-A^\dagger)=-(A-A^\dagger)$,
 \[
+B-iC=(A+A^\dagger)+(A-A^\dagger)=2A,\qquad\text{so}\qquad
 \boxed{A=\frac12B-\frac i2C.}
 \]
 Equivalently, define the Hermitian real and imaginary parts
@@ -1461,9 +1464,12 @@ Equivalently, define the Hermitian real and imaginary parts
 H=\frac{A+A^\dagger}{2},\qquad
 K=\frac{A-A^\dagger}{2i};\qquad \boxed{A=H+iK}.
 \]
-Substitution verifies the reconstruction because the $A^\dagger$ terms
-cancel and the two $A/2$ terms add. This decomposition works also if
-$A$ happens already to be Hermitian, in which case $K=0$.
+Because $1/(2i)=-i/2$, these are $H=B/2$ and $K=-C/2$, real multiples
+of the operators of (a), hence Hermitian, and $H+iK=B/2-iC/2$ is the
+first boxed formula. Directly, substitution verifies the reconstruction
+because the $A^\dagger$ terms cancel and the two $A/2$ terms add. This
+decomposition works also if $A$ happens already to be Hermitian, in
+which case $K=0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1471,7 +1477,8 @@ $A$ happens already to be Hermitian, in which case $K=0$.
 \erratum{bounded, everywhere-defined} Hermitian operators is Hermitian
 if and only if the two operators commute.
 \solution
-For Hermitian $A$ and $B$, the product-adjoint identity gives
+For Hermitian $A$ and $B$, the product-adjoint identity
+$(AB)^\dagger=B^\dagger A^\dagger$ (Exercise 5.3.2) gives
 \[
 (AB)^\dagger=B^\dagger A^\dagger=BA.
 \]
@@ -1502,14 +1509,16 @@ assertion alone is insufficient.}
 \erratum{The conclusion requires $A$ and $B$ themselves to be Hermitian,
 as when they represent quantum observables. Being merely ``quantum
 mechanical operators'' or merely noncommuting does not imply this.}
-With that assumption and the indicated adjoint/domain conditions,
+With that assumption and the indicated adjoint/domain conditions, the
+product-adjoint identity of Exercise 5.3.2 gives
 \begin{align*}
 (AB-BA)^\dagger
 &=B^\dagger A^\dagger-A^\dagger B^\dagger\\
 &=BA-AB=-(AB-BA)=-iC.
 \end{align*}
-But the adjoint of the right side of $AB-BA=iC$ is $-iC^\dagger$.
-Thus $-iC^\dagger=-iC$, and
+But the adjoint of the right side of $AB-BA=iC$ is
+$(iC)^\dagger=i^*C^\dagger=-iC^\dagger$.
+Thus $-iC^\dagger=-iC$, and multiplication by $i$ gives
 \[
 \boxed{C^\dagger=C.}
 \]
@@ -1533,7 +1542,9 @@ $\langle\psi|L^{2}|\psi\rangle\ge0$.
 \erratum{For an unbounded $L$, the expression in the question requires
 $\psi\in D(L^2)=\{\psi\in D(L):L\psi\in D(L)\}$, not merely
 $\psi\in D(L)$.}
-Move the left factor of $L$ across the scalar product and use
+Write $L^2\psi=L\chi$ with $\chi=L\psi$, move the left factor of $L$
+across the scalar product by the adjoint definition
+$\langle\psi|L\chi\rangle=\langle L^\dagger\psi|\chi\rangle$, and use
 $L^\dagger=L$:
 \[
 \boxed{\langle\psi|L^2|\psi\rangle
@@ -1575,19 +1586,26 @@ a value that makes the $\varphi_{i}$ normalized.
 \solution
 (a) Put $n_x=x/r=\sin\theta\cos\phi$,
 $n_y=\sin\theta\sin\phi$, $n_z=\cos\theta$, and
-$d\Omega=\sin\theta\,d\theta\,d\phi$. Then
+$d\Omega=\sin\theta\,d\theta\,d\phi$. In the $\theta$ integrals
+substitute $u=\cos\theta$, $du=-\sin\theta\,d\theta$; the limits
+$\theta=0,\pi$ become $u=1,-1$, and reversing them absorbs the minus
+sign, while $\sin^2\theta=1-u^2$. With
+$\int_0^{2\pi}\cos^2\phi\,d\phi=\int_0^{2\pi}\sin^2\phi\,d\phi=\pi$
+(their sum is $2\pi$ and their difference is
+$\int_0^{2\pi}\cos2\phi\,d\phi=0$),
 \begin{align*}
 \int n_x^2d\Omega
 &=\left(\int_0^{2\pi}\cos^2\phi\,d\phi\right)
   \left(\int_0^\pi\sin^3\theta\,d\theta\right)\\
-&=\pi\int_{-1}^1(1-u^2)du=\frac{4\pi}{3},\\
-\int n_y^2d\Omega&=\frac{4\pi}{3},\qquad
+&=\pi\int_{-1}^1(1-u^2)du=\pi\left(2-\frac23\right)=\frac{4\pi}{3},\\
+\int n_y^2d\Omega&=\frac{4\pi}{3}\quad(\cos^2\phi\to\sin^2\phi),\qquad
 \int n_z^2d\Omega=2\pi\int_{-1}^1u^2du=\frac{4\pi}{3}.
 \end{align*}
 The mixed $xy$ integral contains
 $\int_0^{2\pi}\sin\phi\cos\phi\,d\phi=0$; the $xz$ and $yz$
 integrals contain respectively the zero integrals of $\cos\phi$ and
-$\sin\phi$. Choosing the common normalization real and positive gives
+$\sin\phi$. Normalization requires $C^2(4\pi/3)=1$ for each
+$\varphi_i$, and choosing the common constant real and positive gives
 \[
 \boxed{C=\sqrt{\frac3{4\pi}}},\qquad
 \langle\varphi_i|\varphi_j\rangle=\delta_{ij}.
@@ -1597,7 +1615,10 @@ $\sin\phi$. Choosing the common normalization real and positive gives
 \left(y\partial_z-z\partial_y\right)\frac1r
 =y\frac{-z}{r^3}-z\frac{-y}{r^3}=0.
 \]
-The product rule therefore leaves only differentiation of $x,y,z$.
+The same cancellation occurs for $z\partial_x-x\partial_z$ and
+$x\partial_y-y\partial_x$. The product rule therefore leaves only
+differentiation of $x,y,z$; for example,
+$L_x\varphi_2=-iC(y\cdot0-z\cdot1)/r=iCz/r=i\varphi_3$.
 The nine actions are
 \[
 \begin{array}{c|ccc}
@@ -1607,7 +1628,12 @@ L_y&-i\varphi_3&0&i\varphi_1\\
 L_z&i\varphi_2&-i\varphi_1&0
 \end{array}
 \]
-and each matrix column is the corresponding action:
+Because the $\varphi_i$ are orthonormal by (a), the matrix element
+$(L_x)_{ij}=\langle\varphi_i|L_x\varphi_j\rangle$ is the coefficient
+of $\varphi_i$ in $L_x\varphi_j$. Thus column $j$ of each matrix lists
+the coefficients of the table entry under $\varphi_j$ in that
+operator's row; e.g.\ $L_x\varphi_2=i\varphi_3$ gives the second
+column $(0,0,i)^T$ of $L_x$:
 \[
 \boxed{L_x=\begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix},\quad
 L_y=\begin{pmatrix}0&0&i\\0&0&0\\-i&0&0\end{pmatrix},\quad
@@ -1615,7 +1641,10 @@ L_z=\begin{pmatrix}0&-i&0\\i&0&0\\0&0&0\end{pmatrix}.}
 \]
 Conjugate transposition checks that each is Hermitian.
 
-(c) Multiplication gives
+(c) Each product has a single nonzero entry,
+$(L_xL_y)_{21}=(L_x)_{23}(L_y)_{31}=(-i)(-i)=-1$ and
+$(L_yL_x)_{12}=(L_y)_{13}(L_x)_{32}=i\cdot i=-1$; every other
+row--column pairing meets a zero. Hence
 \[
 L_xL_y=\begin{pmatrix}0&0&0\\-1&0&0\\0&0&0\end{pmatrix},\qquad
 L_yL_x=\begin{pmatrix}0&-1&0\\0&0&0\\0&0&0\end{pmatrix}.
@@ -1663,11 +1692,15 @@ on the displayed matrix. Euler's identities give
 \chi'_4&=\frac{\chi_4-i\chi_3}{\sqrt2},&
 \chi'_5&=\chi_5.
 \end{align*}
-For example, $e^{2i\phi}=\cos2\phi+i\sin2\phi$ and
-$\sin2\phi=2\sin\phi\cos\phi$ yield the third identity with exactly
+For example, $e^{\pm i\phi}=\cos\phi\pm i\sin\phi$ yields the first two
+identities, and $e^{2i\phi}=\cos2\phi+i\sin2\phi$ together with
+$\sin2\phi=2\sin\phi\cos\phi$ yields the third, with exactly
 the normalizing constants in the example. Since
 $U_{ij}=\langle\chi'_i|\chi_j\rangle$, the coefficients in these
-identities must be conjugated to obtain the rows of $U$. Thus
+identities must be conjugated to obtain the rows of $U$: if
+$\chi'_i=\sum_ka_{ik}\chi_k$, the orthonormality of the $\chi_k$ gives
+$U_{ij}=\sum_ka_{ik}^*\langle\chi_k|\chi_j\rangle=a_{ij}^*$. For instance
+$U_{12}=(-i/\sqrt2)^*=i/\sqrt2$. Thus
 \[
 U=\frac1{\sqrt2}\begin{pmatrix}
 -1&\erratum{i}&0&0&0\\
@@ -1689,8 +1722,11 @@ Substituting the basis relations back into the expansion checks it:
 \sum_jc'_j\chi'_j
 &=\frac52(\chi_1+i\chi_2)+\frac12(\chi_1-i\chi_2)\\
 &\quad+\frac i2(\chi_4+i\chi_3)-\frac i2(\chi_4-i\chi_3)+\chi_5\\
-&=3\chi_1+2i\chi_2-\chi_3+\chi_5=f.
+&=3\chi_1+2i\chi_2-\chi_3+\chi_5=f,
 \end{align*}
+since the coefficients of $\chi_1$, $\chi_2$, $\chi_3$ collect to
+$\frac52+\frac12$, $\frac{5i-i}2$, and $\frac{i^2}2+\frac{i^2}2$, while
+the two $\chi_4$ terms cancel.
 For comparison, using the matrix as printed gives
 $\widetilde c'=(-1,5,-i,i,\sqrt2)^T/\sqrt2$ and reconstructs
 $3\chi_1-2i\chi_2+\chi_3+\chi_5$, which is not the requested $f$.
@@ -1708,7 +1744,9 @@ Their products with their adjoints are
 \begin{pmatrix}i&-i\\1&1\end{pmatrix}
 =\frac12\begin{pmatrix}2&-1+1\\-1+1&2\end{pmatrix}=I_2.
 \]
-The blocks have disjoint support, so $UU^\dagger=U^\dagger U=I_5$.
+The blocks have disjoint support and $(\sqrt2/\sqrt2)^2=1$ for the last
+entry, so $UU^\dagger=I_5$; for a square matrix a right inverse is also
+a left inverse, hence $U^\dagger U=I_5$ as well.
 The printed matrix is also unitary; that test by itself cannot detect a
 matrix that represents the wrong basis transformation.
 
@@ -1734,13 +1772,15 @@ coordinates)}. Find the $3\times3$ matrix $\mathsf{U}$ for
 exercise; a knowledge of the linear relationship between the original and
 transformed functions is sufficient.
 \solution
-\erratum{The arrows require a convention: here, consistent with the
+\erratum{The textbook writes the transformation as $x\to z$, $y\to y$,
+$z\to-x$. The arrows require a convention: here, consistent with the
 coefficient transformation in Section 5.5, they express the old
 coordinate functions in new coordinates, $x=z'$, $y=y'$, $z=-x'$.
 Equivalently the new functions are $x'=-z$, $y'=y$, $z'=x$.}
 
 (a) Each column of $U$ contains the coefficients of an old basis function
-in the new basis $(x',y',z')$. The identities
+in the new basis $(x',y',z')$: for $f=\varphi_j$ the old column is
+$c=e_j$, and $c'=Uc$ is column $j$ of $U$. The identities
 \[
 x=0x'+0y'+1z',\qquad y=0x'+1y'+0z',\qquad
 z=-1x'+0y'+0z'
@@ -1749,16 +1789,22 @@ therefore give
 \[
 \boxed{U=\begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix}.}
 \]
-(b) The new coordinate axes are
+(b) Since $x'=-z$ and $z'=x$, the new coordinate axes are
 $\hat e'_x=-\hat e_z$, $\hat e'_y=\hat e_y$,
 $\hat e'_z=\hat e_x$. They result from a right-handed rotation of the
-axes by $\pi/2$ about $+y$. For the Euler convention of Eq.~(3.37),
+axes by $\pi/2$ about $+y$: such a rotation by $\beta$ carries
+$\hat e_x\to\cos\beta\,\hat e_x-\sin\beta\,\hat e_z$ and
+$\hat e_z\to\sin\beta\,\hat e_x+\cos\beta\,\hat e_z$, which for
+$\beta=\pi/2$ are $-\hat e_z$ and $\hat e_x$. For the Euler convention
+of Eq.~(3.37), setting $\alpha=\gamma=0$ ($\cos\alpha=\cos\gamma=1$,
+$\sin\alpha=\sin\gamma=0$) leaves
 \[
 S(0,\beta,0)=\begin{pmatrix}
 \cos\beta&0&-\sin\beta\\0&1&0\\\sin\beta&0&\cos\beta
-\end{pmatrix}.
+\end{pmatrix},
 \]
-Putting $\beta=\pi/2$ gives $S(0,\pi/2,0)=U$, as required.
+whose rows are the components of the three rotated axes just
+described. Putting $\beta=\pi/2$ gives $S(0,\pi/2,0)=U$, as required.
 
 (c) The original coefficient column and its transform are
 \[
@@ -1784,10 +1830,11 @@ these interpretations and their opposite rotation senses.
 the transformation in Exercise 5.5.2, and show that this matrix and the
 transformation matrix of that exercise are matrix inverses of each other.
 \solution
-Using the convention established in 5.5.2, solve the transformation
-$x=z'$, $y=y'$, $z=-x'$ for the primed variables:
+Using the convention established in Exercise 5.5.2, solve the
+transformation $x=z'$, $y=y'$, $z=-x'$ for the primed variables:
 $x'=-z$, $y'=y$, $z'=x$. To express a primed expansion in the old basis,
-read the coefficients of these three functions as columns:
+read the coefficients of these three functions as columns (as in
+5.5.2(a), with the roles of the two bases exchanged):
 \[
 \boxed{V=\begin{pmatrix}0&0&1\\0&1&0\\-1&0&0\end{pmatrix}=U^T=U^\dagger.}
 \]
@@ -1801,6 +1848,9 @@ UV=\begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix}
 VU=\begin{pmatrix}0&0&1\\0&1&0\\-1&0&0\end{pmatrix}
 \begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix}=I_3.
 \]
+(Each row of $V$ has a single nonzero entry, so the rows of $VU$ are
+row 3 of $U$, row 2 of $U$, and minus row 1 of $U$, namely
+$(1,0,0)$, $(0,1,0)$, $(0,0,1)$.)
 As a vector check, $V(-1,-3,2)^T=(2,-3,1)^T$, recovering the original
 coefficients from 5.5.2.
 
@@ -1836,7 +1886,9 @@ products.
 
 (a) Row-by-column multiplication gives
 \[
-Ua=\begin{pmatrix}3is-c\\-3c-is\\-2\end{pmatrix}.
+Ua=\begin{pmatrix}(is)\cdot3+c\cdot(-1)\\(-c)\cdot3+(is)\cdot(-1)\\-2
+\end{pmatrix}
+=\begin{pmatrix}3is-c\\-3c-is\\-2\end{pmatrix}.
 \]
 Applying $V$ to this column gives
 \begin{align*}
@@ -1854,11 +1906,14 @@ coefficient changes, the formal expansion is
 f=(-c+3is)\chi_1+[-3c^2-is(c+2)]\chi_2
                  +[-3c^2+is(2-c)]\chi_3.
 \]
-\erratum{These signs also correct the manual's multiplication: the second
-entry of the initial vector is $-1$, so the first two entries of $Ua$
-are $3is-c$ and $-3c-is$.}
+\erratum{These signs also correct the Instructor's Manual's
+multiplication: the second entry of the initial vector is $-1$, so the
+first two entries of $Ua$ are $3is-c$ and $-3c-is$.}
 
-(b) Form both matrix products before acting on $a$:
+(b) Form both matrix products before acting on $a$; each entry has at
+most two nonzero terms, e.g.\ $(UV)_{12}=c\cdot c$,
+$(UV)_{23}=(is)(is)=-s^2$, $(VU)_{21}=c\,(-c)$,
+$(VU)_{32}=c\,(is)$:
 \[
 UV=\begin{pmatrix}
 is&c^2&ics\\-c&ics&-s^2\\0&c&-is
@@ -1878,20 +1933,32 @@ Consequently
 \]
 Only $VU$ corresponds to applying $U$ first and $V$ second. In fact,
 the two resulting columns differ for every real $\theta$: equality of
-their first entries would require $c(c-1)+2isc=0$, so $c=0$ or $c=1$.
+their first entries, $-c^2+3is-2isc=-c+3is$, would require
+$c(c-1)+2isc=0$; its real part $c(c-1)$ must vanish, so $c=0$ or $c=1$.
 For $c=0$, their second entries are $2$ and $-2is$ and differ; for
 $c=1$, $s=0$ and their third entries are $-1$ and $-3$ and differ.
 
-\erratum{The original premise that both printed matrices are unitary is false; this is why the corrected question permits general bases and excludes singular angles.}
-An explicit check gives
+\erratum{The textbook's premise that both printed matrices are unitary
+is false; this is why the corrected question permits general bases and
+excludes singular angles.}
+An explicit check, with
+\[
+U^\dagger=\begin{pmatrix}-is&-c&0\\c&-is&0\\0&0&1\end{pmatrix},\qquad
+V^\dagger=\begin{pmatrix}1&0&0\\0&c&c\\0&-is&is\end{pmatrix},
+\]
+gives (for instance $(U^\dagger U)_{12}=(-is)c+(-c)(is)=-2isc$ and
+$(V^\dagger V)_{33}=(-is)(is)+(is)(-is)=2s^2$)
 \[
 U^\dagger U=\begin{pmatrix}1&-2isc&0\\2isc&1&0\\0&0&1\end{pmatrix},
 \qquad V^\dagger V=\begin{pmatrix}1&0&0\\0&2c^2&0\\0&0&2s^2\end{pmatrix}.
 \]
 Thus $U$ is unitary only when $sc=0$, whereas $V$ is unitary only when
-$c^2=s^2=1/2$. These conditions never hold simultaneously. Moreover,
+$c^2=s^2=1/2$. These conditions never hold simultaneously, because
+$sc=0$ forces $c^2=0$ or $c^2=1$. Moreover, expanding each determinant
+along the row that contains its isolated entry $1$,
 \[
-\det U=c^2-s^2,\qquad \det V=-2isc.
+\det U=(is)(is)-c(-c)=c^2-s^2,\qquad
+\det V=c(-is)-(is)c=-2isc.
 \]
 At their zeros even an invertible change of basis is impossible. Away
 from those zeros the calculations above describe general changes of
@@ -1903,9 +1970,17 @@ problem, is to use the following unitary families instead:}
 \widehat U=\begin{pmatrix}is&c&0\\\erratum{c}&is&0\\0&0&1\end{pmatrix},\qquad
 \widehat V=\begin{pmatrix}1&0&0\\0&c&is\\0&\erratum{is}&\erratum{c}\end{pmatrix}.
 \]
-Their nontrivial blocks are $isI+c\sigma_1$ and $cI+is\sigma_1$;
-multiplication by their adjoints cancels the cross terms and leaves
-$(s^2+c^2)I=I$. With these repaired data, the full calculation becomes
+Their nontrivial blocks are $isI+c\sigma_1$ and $cI+is\sigma_1$, with
+$\sigma_1=\bigl(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\bigr)$ and
+$\sigma_1^2=I$; multiplication by their adjoints cancels the cross
+terms:
+\begin{align*}
+(-isI+c\sigma_1)(isI+c\sigma_1)
+&=s^2I-isc\,\sigma_1+isc\,\sigma_1+c^2\sigma_1^2=(s^2+c^2)I=I,\\
+(cI-is\sigma_1)(cI+is\sigma_1)
+&=c^2I+isc\,\sigma_1-isc\,\sigma_1+s^2\sigma_1^2=I.
+\end{align*}
+With these repaired data, the full calculation becomes
 \[
 \widehat Ua=\begin{pmatrix}-c+3is\\3c-is\\-2\end{pmatrix},\qquad
 \widehat V\widehat Ua=\begin{pmatrix}
@@ -1952,7 +2027,7 @@ are obtained in terms of scalar products.
 \end{enumerate}
 \solution
 Use $M_k=\int_{-1}^1x^kdx$, so $M_k=0$ for odd $k$ and
-$M_k=2/(k+1)$ for even $k$.
+$M_k=2/(k+1)$ for even $k$: $M_0=2$, $M_2=2/3$, $M_4=2/5$.
 
 (a) The normalization integrals are
 \begin{align*}
@@ -1982,7 +2057,10 @@ For completeness, the original off-diagonal integrals are
 \langle F_0|F_2\rangle=5M_4-3M_2=0,\quad
 \langle F_1|F_2\rangle=5M_3-3M_1=0.
 \]
-(b) Evaluate all nine overlaps $U_{ij}=\int_{-1}^1g_ip_jdx$:
+(b) With the convention $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$ of
+Section 5.5, used in Exercise 5.5.1 (new functions $g_i$, old functions
+$p_j$), evaluate all
+nine overlaps $U_{ij}=\int_{-1}^1g_ip_jdx$:
 \begin{align*}
 U_{00}&=\frac{\sqrt5}{2}M_2=\frac{\sqrt5}{3},&
 U_{01}&=\frac{\sqrt{15}}2M_3=0,\\
@@ -1995,7 +2073,16 @@ U_{21}&=\frac{\sqrt3}{4}(5M_3-3M_1)=0,\\
 U_{22}&=\frac{\sqrt5}{8}(15M_4-14M_2+3M_0)
 =\frac{\sqrt5}{3}.&&
 \end{align*}
-Thus
+In $U_{02}$, $U_{20}$, $U_{22}$ the moments evaluate as
+\[
+\frac54\Bigl(\frac65-\frac23\Bigr)=\frac54\cdot\frac8{15}=\frac23,\qquad
+\frac14\Bigl(\frac{10}3-6\Bigr)=-\frac23,\qquad
+\frac{\sqrt5}8\Bigl(6-\frac{28}3+6\Bigr)=\frac{\sqrt5}8\cdot\frac83
+=\frac{\sqrt5}3;
+\]
+for $U_{22}$ the constants combine as
+$(2\sqrt2)^{-1}\sqrt{5/2}\cdot\frac12=\sqrt5/8$ and
+$(5x^2-3)(3x^2-1)=15x^4-14x^2+3$. Thus
 \[
 \boxed{U=\begin{pmatrix}\sqrt5/3&0&2/3\\0&1&0\\-2/3&0&\sqrt5/3\end{pmatrix}.}
 \]
@@ -2012,7 +2099,9 @@ The $0,2$ block of $UV$ is
 \begin{pmatrix}a&-b\\b&a\end{pmatrix}
 =\begin{pmatrix}a^2+b^2&-ab+ab\\-ab+ab&a^2+b^2\end{pmatrix}=I_2.
 \]
-The middle entry is $1$ and other entries vanish, so $UV=VU=I_3$.
+The middle entry is $1$ and other entries vanish, so $UV=I_3$; the
+$0,2$ block of $VU$ is the same computation with $b\to-b$, so also
+$VU=I_3$.
 Since $V=U^\dagger$, both matrices are unitary and $V=U^{-1}$.
 
 (e) Evaluate the six coefficient integrals, retaining their moment
@@ -2026,12 +2115,30 @@ a_2&=\int p_2f\,dx
 =\frac{2\sqrt{10}}3,\\
 b_0&=\int g_0f\,dx=\sqrt{\frac52}(5M_4-3M_3+M_2)
 =\frac{4\sqrt{10}}3,\\
-b_1&=\int g_1f\,dx=-\sqrt6,\\
+b_1&=\int g_1f\,dx=a_1=-\sqrt6\qquad(g_1=p_1),\\
 b_2&=\int g_2f\,dx
 =\frac{25M_4-15M_3-10M_2+9M_1-3M_0}{2\sqrt2}
 =-\frac{2\sqrt2}{3}.
 \end{align*}
-(All integrals in this part have limits $-1,1$.) Thus
+(All integrals in this part have limits $-1,1$.) The moment
+combinations in $a_0,a_1,a_2,b_0,b_2$ are
+\[
+\frac{10}3+2=\frac{16}3,\qquad -2,\qquad 6-\frac43-2=\frac83,\qquad
+2+\frac23=\frac83,\qquad 10-\frac{20}3-6=-\frac83,
+\]
+where the integrands of $a_2$ and $b_2$ use
+\[
+(3x^2-1)f=15x^4-9x^3-2x^2+3x-1,\qquad
+(5x^2-3)f=25x^4-15x^3-10x^2+9x-3.
+\]
+With $\sqrt{3/2}=\sqrt6/2$ and $\sqrt{5/2}=\sqrt{10}/2$ these give the
+values shown, e.g.
+\[
+a_0=\frac{16}{3\sqrt2}=\frac{8\sqrt2}3,\qquad
+a_2=\frac12\cdot\frac{\sqrt{10}}2\cdot\frac83=\frac{2\sqrt{10}}3,\qquad
+b_2=-\frac83\cdot\frac1{2\sqrt2}=-\frac{2\sqrt2}3.
+\]
+Thus
 \[
 \boxed{f=\frac{8\sqrt2}{3}p_0-\sqrt6\,p_1+\frac{2\sqrt{10}}3p_2
 =\frac{4\sqrt{10}}3g_0-\sqrt6\,g_1-\frac{2\sqrt2}{3}g_2.}
@@ -2048,7 +2155,10 @@ Ua=\begin{pmatrix}
 \end{pmatrix}
 =\begin{pmatrix}4\sqrt{10}/3\\-\sqrt6\\-2\sqrt2/3\end{pmatrix}=b,
 \]
-checking the coefficient transformation independently of reconstruction.
+because $\sqrt5\sqrt2=\sqrt{10}$ and $\sqrt5\sqrt{10}=5\sqrt2$ make the
+first entry $(8\sqrt{10}+4\sqrt{10})/9=12\sqrt{10}/9$ and the third
+$(-16\sqrt2+10\sqrt2)/9=-6\sqrt2/9$. This checks the coefficient
+transformation independently of reconstruction.
 
 \Needspace{9\baselineskip}
 \subsection*{5.6 Transformations of Operators}
@@ -2082,7 +2192,7 @@ checking the coefficient transformation independently of reconstruction.
 \solution
 (a) In the order $(\alpha,\beta)$, an operator's first column gives its
 action on $\alpha$ and its second gives its action on $\beta$.
-The supplied six relations therefore give
+The six given relations therefore give
 \[
 \boxed{S_x=\frac12\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
 S_y=\frac12\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
@@ -2098,13 +2208,26 @@ this fixes the imaginary signs without an appeal to a memorized matrix.
 \[
 \|\alpha\pm\beta\|^2=1\pm0\pm0+1=2.
 \]
-Hence $C=1/\sqrt2$ is a real positive normalizing choice. The overlap
-matrix $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$ is
+Hence $\|\varphi'_{1,2}\|^2=2C^2=1$, and $C=1/\sqrt2$ is a real
+positive normalizing choice. The overlap
+matrix $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$ has, for example,
+$U_{21}=\langle(\alpha-\beta)/\sqrt2|\alpha\rangle=1/\sqrt2$ and
+$U_{22}=\langle(\alpha-\beta)/\sqrt2|\beta\rangle=-1/\sqrt2$; altogether
 \[
 \boxed{U=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}},
 \qquad U^\dagger=U,\quad U^2=\frac12\begin{pmatrix}2&0\\0&2\end{pmatrix}=I.
 \]
-(c) Put $H=\sqrt2U$. The transformed operator is $S'_j=US_jU^\dagger$.
+Thus $U^\dagger U=U^2=I$: $U$ is unitary.
+
+(c) For $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$ an operator matrix
+transforms as $A'=UAU^\dagger$: expanding in the orthonormal $\varphi_k$,
+$\varphi'_j=\sum_k\langle\varphi_k|\varphi'_j\rangle\varphi_k
+=\sum_kU_{jk}^*\varphi_k=\sum_k(U^\dagger)_{kj}\varphi_k$, and so
+$A'_{ij}=\langle\varphi'_i|A\varphi'_j\rangle
+=\sum_{k,l}U_{ik}A_{kl}(U^\dagger)_{lj}$, where conjugate linearity in
+the first slot turned $(U^\dagger)_{ki}^*$ into $U_{ik}$.
+Hence $S'_j=US_jU^\dagger$. Put $H=\sqrt2U$, so that
+$US_jU^\dagger=\frac12HS_jH$ because $U^\dagger=U$.
 The three unscaled products are
 \begin{align*}
 H\begin{pmatrix}0&1\\1&0\end{pmatrix}H
@@ -2160,13 +2283,17 @@ in the hint gives
 \int_{\mathbb R^3}x^2e^{-ar^2}d^3r=\frac{\pi^{3/2}}{2a^{5/2}}.
 \]
 For the second formula substitute $(X,Y,Z)=\sqrt a(x,y,z)$ in the
-hint: $x^2d^3r=X^2d^3R/a^{5/2}$. The squared wavefunctions involve
-$a=2$, not $a=1$, so
+hint: $x^2d^3r=X^2d^3R/a^{5/2}$ and $e^{-ar^2}=e^{-R^2}$. The squared
+wavefunctions involve $a=2$, not $a=1$:
+$\|\varphi_1\|^2=C^2\int x^2e^{-2r^2}d^3r=C^2\pi^{3/2}/(2\cdot2^{5/2})$,
+so
 \[
 1=C^2\frac{\pi^{3/2}}{2^{7/2}},\qquad
 \boxed{C=\frac{2^{7/4}}{\pi^{3/4}}}.
 \]
-The mixed integrals vanish by odd parity, so the basis is orthonormal.
+By symmetry the same $C$ normalizes $\varphi_2$ and $\varphi_3$. The
+mixed integrals vanish by odd parity (e.g.\ $\int xy\,e^{-2r^2}d^3r$
+is odd in $x$), so the basis is orthonormal.
 
 (a) Write $E=e^{-r^2}$. Its rotational derivative is zero:
 \[
@@ -2177,25 +2304,32 @@ The product rule then gives
 L_x(xE)=0,\qquad L_x(yE)=-i(0-z)E=izE,\qquad
 L_x(zE)=-i(y-0)E=-iyE.
 \]
-The common factor $C$ does not change the coefficients, so
+The common factor $C$ does not change the coefficients, and in the
+orthonormal basis column $j$ holds the coefficients of $L_x\varphi_j$, so
 \[
 \boxed{L_x=\begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix}.}
 \]
 (b) The nontrivial block of $U$ has rows $(1,-i)/\sqrt2$ and
 $(1,i)/\sqrt2$, whose norms are one and whose mutual Hermitian scalar
-product is $(1+(-i)(-i))/2=0$. Thus $U^{-1}=U^\dagger$. Explicitly,
+product is $(1+(-i)(-i))/2=0$. Thus $U^{-1}=U^\dagger$, and the
+transformed matrix is $L'_x=UL_xU^\dagger$ (Exercise 5.6.1(c)).
+Explicitly,
 \[
 UL_x=\begin{pmatrix}0&0&0\\0&1/\sqrt2&-i/\sqrt2\\
 0&-1/\sqrt2&-i/\sqrt2\end{pmatrix},\qquad
 U^\dagger=\begin{pmatrix}1&0&0\\0&1/\sqrt2&1/\sqrt2\\
 0&i/\sqrt2&-i/\sqrt2\end{pmatrix}.
 \]
-Multiplication gives
+The first row of $UL_x$ vanishes. Row 2 of $UL_x$ times columns 2 and 3
+of $U^\dagger$ gives $\frac12+\frac{(-i)(i)}2=1$ and
+$\frac12+\frac{(-i)(-i)}2=0$; row 3 gives
+$-\frac12+\frac{(-i)(i)}2=0$ and $-\frac12+\frac{(-i)(-i)}2=-1$. Hence
 \[
 \boxed{L'_x=UL_xU^\dagger=\begin{pmatrix}0&0&0\\0&1&0\\0&0&-1\end{pmatrix}.}
 \]
 (c) Because $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$, the new ket
-functions use the \emph{conjugates} of the rows of $U$:
+functions are $\varphi'_i=\sum_jU_{ij}^*\varphi_j$ (Exercise 5.6.1(c)),
+i.e.\ they use the \emph{conjugates} of the rows of $U$:
 \[
 \boxed{\varphi'_1=CxE,\quad
 \varphi'_2=\frac{C}{\sqrt2}(y+iz)E,\quad
@@ -2226,35 +2360,50 @@ Use the complex scalar-product convention of the chapter and define
 S_{ij}=\langle\chi_i|\chi_j\rangle,\quad S_{ji}=S_{ij}^*,\qquad
 D_1=S_{11},\quad D_2=S_{11}S_{22}-S_{12}S_{21},\quad D_3=\det S.
 \]
-Since the $\chi_i$ form a basis, their Gram matrix is positive definite,
-so $D_1,D_2,D_3>0$ and all square roots below are well defined and
-positive. Gram--Schmidt begins with
+Since the $\chi_i$ are linearly independent,
+$v^\dagger Sv=\sum_{i,j}v_i^*S_{ij}v_j=\|\sum_iv_i\chi_i\|^2>0$ for every
+nonzero column $v$; so $S$, and likewise its leading $1\times1$ and
+$2\times2$ blocks (the Gram matrices of $\chi_1$ and of
+$\chi_1,\chi_2$), are positive definite. Their determinants
+$D_1,D_2,D_3$ are products of positive eigenvalues, hence positive, and
+all square roots below are well defined and positive. Gram--Schmidt
+begins with
 \[
 \varphi_1=\frac{\chi_1}{\sqrt{D_1}},\qquad
-\psi_2=\chi_2-\frac{S_{12}}{D_1}\chi_1.
+\psi_2=\chi_2-\langle\varphi_1|\chi_2\rangle\varphi_1
+=\chi_2-\frac{S_{12}}{D_1}\chi_1 .
 \]
-Expanding the norm, including complex conjugation, gives
+Expanding the norm, including complex conjugation, gives with
+$a=S_{12}/D_1$, $a^*=S_{21}/D_1$,
 \begin{align*}
-\|\psi_2\|^2
+\|\psi_2\|^2&=S_{22}-aS_{21}-a^*S_{12}+a^*aS_{11}\\
 &=S_{22}-\frac{S_{12}S_{21}}{D_1}
  -\frac{S_{21}S_{12}}{D_1}
- +\frac{S_{21}S_{12}S_{11}}{D_1^2}
-=\frac{D_2}{D_1}.
+ +\frac{S_{21}S_{12}S_{11}}{D_1^2}\\
+&=S_{22}-\frac{S_{12}S_{21}}{D_1}
+=\frac{S_{11}S_{22}-S_{12}S_{21}}{D_1}
+=\frac{D_2}{D_1},
 \end{align*}
-Consequently
+because $S_{11}=D_1$ makes the last term cancel one of the two middle
+ones. Consequently
 \[
-\varphi_2=\frac{D_1\chi_2-S_{12}\chi_1}{\sqrt{D_1D_2}}.
+\varphi_2=\frac{\psi_2}{\|\psi_2\|}
+=\sqrt{\frac{D_1}{D_2}}\Bigl(\chi_2-\frac{S_{12}}{D_1}\chi_1\Bigr)
+=\frac{D_1\chi_2-S_{12}\chi_1}{\sqrt{D_1D_2}}.
 \]
 For the third step define $K=D_1S_{23}-S_{21}S_{13}$. The two projection
-coefficients, with the conjugation on the first argument accounted for,
-are
+coefficients, with the conjugation on the first argument accounted for
+($D_1$ is real and $S_{12}^*=S_{21}$), are
 \[
 \langle\varphi_1|\chi_3\rangle=\frac{S_{13}}{\sqrt{D_1}},\qquad
 \langle\varphi_2|\chi_3\rangle
-=\frac{D_1S_{23}-S_{21}S_{13}}{\sqrt{D_1D_2}}
+=\frac{D_1S_{23}-S_{12}^*S_{13}}{\sqrt{D_1D_2}}
 =\frac K{\sqrt{D_1D_2}}.
 \]
-Substitute the already-expanded $\varphi_1,\varphi_2$:
+Substitute the already-expanded $\varphi_1,\varphi_2$ into
+$\psi_3=\chi_3-\langle\varphi_1|\chi_3\rangle\varphi_1
+-\langle\varphi_2|\chi_3\rangle\varphi_2$ and collect the coefficient of
+each $\chi_i$:
 \begin{align*}
 \psi_3
 &=\chi_3-\frac{S_{13}}{D_1}\chi_1
@@ -2262,27 +2411,34 @@ Substitute the already-expanded $\varphi_1,\varphi_2$:
 &=\chi_3-\frac K{D_2}\chi_2
  +\frac{-D_2S_{13}+S_{12}K}{D_1D_2}\chi_1.
 \end{align*}
-The last numerator simplifies without any reality assumption:
+The last numerator simplifies without any reality assumption, since
+the two terms $\pm S_{12}S_{21}S_{13}$ cancel:
 \begin{align*}
 -D_2S_{13}+S_{12}K
 &=-(D_1S_{22}-S_{12}S_{21})S_{13}
   +S_{12}(D_1S_{23}-S_{21}S_{13})\\
 &=D_1(S_{12}S_{23}-S_{22}S_{13}).
 \end{align*}
-Thus the unnormalized third vector is
+Thus, with $-K=S_{21}S_{13}-D_1S_{23}$ and the factor $D_1$ cancelled,
+the unnormalized third vector is
 \[
 \psi_3=\chi_3
  +\frac{S_{21}S_{13}-D_1S_{23}}{D_2}\chi_2
  +\frac{S_{12}S_{23}-S_{22}S_{13}}{D_2}\chi_1.
 \]
 Its norm can be evaluated by subtracting the squared orthogonal
-projection lengths:
+projection lengths: $\chi_3=\psi_3+\langle\varphi_1|\chi_3\rangle\varphi_1
++\langle\varphi_2|\chi_3\rangle\varphi_2$ is a sum of three mutually
+orthogonal vectors, so by Pythagoras
+$\|\chi_3\|^2=\|\psi_3\|^2+|\langle\varphi_1|\chi_3\rangle|^2
++|\langle\varphi_2|\chi_3\rangle|^2$, i.e.
 \[
 \|\psi_3\|^2
 =S_{33}-\frac{S_{31}S_{13}}{D_1}-\frac{K^*K}{D_1D_2}
 =\frac{D_3}{D_2}.
 \]
-To verify the determinant simplification explicitly, multiply by $D_1D_2$:
+To verify the determinant simplification explicitly, multiply by
+$D_1D_2$ and use $K^*=D_1S_{32}-S_{12}S_{31}$:
 \begin{align*}
 D_1D_2\|\psi_3\|^2
 &=D_1(D_1S_{22}-S_{12}S_{21})S_{33}
@@ -2293,7 +2449,13 @@ D_1D_2\|\psi_3\|^2
                           +S_{12}S_{31}S_{23}\}\\
 &=D_1\det S.
 \end{align*}
-Dividing $\psi_3$ by $\sqrt{D_3/D_2}$ now expresses all three
+In the second step the two products $S_{12}S_{21}S_{31}S_{13}$ (from the
+second and third terms) cancel and every remaining term contains $D_1$;
+with $D_1=S_{11}$ the six terms in braces are exactly the six terms of
+the expansion
+$\det S=S_{11}S_{22}S_{33}+S_{12}S_{23}S_{31}+S_{13}S_{21}S_{32}
+-S_{13}S_{22}S_{31}-S_{12}S_{21}S_{33}-S_{11}S_{23}S_{32}$.
+Dividing $\psi_3$ by $\|\psi_3\|=\sqrt{D_3/D_2}$ now expresses all three
 $\varphi_j$ in the original $\chi_i$. Since the coefficients of
 $\varphi_j=\sum_iT_{ij}\chi_i$ form column $j$, the answer is
 \[
@@ -2305,7 +2467,9 @@ $\varphi_j=\sum_iT_{ij}\chi_i$ form column $j$, the answer is
 0&0&\sqrt{\dfrac{D_2}{D_3}}
 \end{pmatrix}.}
 \]
-Every column has unit $S$-norm and is $S$-orthogonal to the others, so
+Every column has unit $S$-norm and is $S$-orthogonal to the others,
+because $(T^\dagger ST)_{\mu\nu}=\sum_{i,j}T_{i\mu}^*S_{ij}T_{j\nu}
+=\langle\varphi_\mu|\varphi_\nu\rangle=\delta_{\mu\nu}$; so
 $T^\dagger ST=I$. Finally, if $A_{ij}=\langle\chi_i|\mathcal A\chi_j\rangle$,
 expanding both arguments gives
 \[
@@ -2380,6 +2544,9 @@ gives
   \begin{pmatrix}c&-s\\s&c\end{pmatrix}
 =\begin{pmatrix}c^2-s^2&-2sc\\-2sc&-(c^2-s^2)\end{pmatrix}.
 \end{align*}
+In $\sigma'_2$ the diagonal entries are $isc-ics=0$ and $-isc+isc=0$,
+and $c^2+s^2=1$ reduces the off-diagonal ones $-i(s^2+c^2)$ and
+$i(c^2+s^2)$ to $-i$ and $i$.
 Write $C=\cos2\theta=c^2-s^2$ and $S=\sin2\theta=2sc$. Then
 \[
 \sigma'_1\sigma'_2
@@ -2397,8 +2564,9 @@ Subtracting proves
 \[
 \boxed{[\sigma'_1,\sigma'_2]=2i\sigma'_3.}
 \]
-This also follows from $[UAU^\dagger,UBU^\dagger]=U[A,B]U^\dagger$,
-but the displayed products check the signs and factors directly.
+This also follows from $[UAU^\dagger,UBU^\dagger]=U[A,B]U^\dagger$
+(the computation of Exercise 5.7.1), but the displayed products check
+the signs and factors directly.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2436,14 +2604,16 @@ but the displayed products check the signs and factors directly.
 \emph{Hint.}~The results of Exercise 5.6.2 may be useful.
 \solution
 Put $E=e^{-r^2}$ and use the same positive normalization
-$C=2^{7/4}/\pi^{3/4}$ as in 5.6.2.
+$C=2^{7/4}/\pi^{3/4}$ as in Exercise 5.6.2.
 
-(a) Since $(y\partial_z-z\partial_y)E=0$, the product rule gives
+(a) Since $(y\partial_z-z\partial_y)E=0$, the product rule gives, as in
+Exercise 5.6.2(a),
 \[
 L_x\varphi_1=0,\qquad L_x\varphi_2=i\varphi_3,\qquad
 L_x\varphi_3=-i\varphi_2.
 \]
-Every result belongs to the span, so the set is closed under $L_x$ and
+Every result belongs to the span, so the set is closed under $L_x$.
+Column $j$ of the matrix holds the coefficients of $L_x\varphi_j$, so
 \[
 L=\begin{pmatrix}0&0&0\\0&0&-i\\0&i&0\end{pmatrix}.
 \]
@@ -2465,15 +2635,21 @@ Transform both vectors and the operator, not just the vectors:
 \[
 a'=Ua=\begin{pmatrix}1\\i/\sqrt2\\i/\sqrt2\end{pmatrix},\quad
 b'=Ub=\begin{pmatrix}0\\i/\sqrt2\\-i/\sqrt2\end{pmatrix},\quad
-L'=ULU^\dagger=\begin{pmatrix}0&0&0\\0&1&0\\0&0&-1\end{pmatrix}.
+L'=ULU^\dagger=\begin{pmatrix}0&0&0\\0&1&0\\0&0&-1\end{pmatrix},
 \]
+with $L'$ taken from Exercise 5.6.2(b). For instance, the second entry
+of $a'$ is $\frac1{\sqrt2}\cdot i+\bigl(-\frac i{\sqrt2}\bigr)\cdot0$ and
+the third entry of $b'$ is $\frac i{\sqrt2}\cdot(-1)$. The equation
+survives the transformation because $U^\dagger U=I$:
+$L'a'=ULU^\dagger Ua=U(La)=Ub=b'$.
 The transformed equation is therefore
 \[
 \boxed{\begin{pmatrix}0&0&0\\0&1&0\\0&0&-1\end{pmatrix}
 \begin{pmatrix}1\\i/\sqrt2\\i/\sqrt2\end{pmatrix}
 =\begin{pmatrix}0\\i/\sqrt2\\-i/\sqrt2\end{pmatrix}.}
 \]
-(d) Conjugating the rows of $U$ to form the new ket functions yields
+(d) Conjugating the rows of $U$ to form the new ket functions,
+$\varphi'_i=\sum_jU_{ij}^*\varphi_j$ as in Exercise 5.6.2(c), yields
 \[
 \varphi'_1=CxE,\qquad
 \varphi'_2=\frac C{\sqrt2}(y+iz)E,\qquad
@@ -2494,13 +2670,17 @@ L_x\left(\varphi'_1+\frac i{\sqrt2}\varphi'_2
                     +\frac i{\sqrt2}\varphi'_3\right)
 =\frac i{\sqrt2}\varphi'_2-\frac i{\sqrt2}\varphi'_3.
 \]
-Substitute their explicit forms. The input is
+By the three actions just found, the left side is
+$0+\frac i{\sqrt2}\varphi'_2+\frac i{\sqrt2}(-\varphi'_3)$, which is the
+right side; this verifies the transformed equation. To see that it is
+the equation of (b), substitute the explicit forms, using
+$\frac i{\sqrt2}\cdot\frac C{\sqrt2}=\frac{iC}2$. The input is
 \[
-CxE+\frac{iC}{2}[(y+iz)+(y-iz)]E=C(x+iy)E,
+CxE+\frac{iC}{2}[(y+iz)+(y-iz)]E=CxE+\frac{iC}2(2y)E=C(x+iy)E,
 \]
 and the output is
 \[
-\frac{iC}{2}[(y+iz)-(y-iz)]E=-CzE.
+\frac{iC}{2}[(y+iz)-(y-iz)]E=\frac{iC}2(2iz)E=-CzE.
 \]
 This is precisely the functional equation from (b), verifying the
 invariance using both matrices and differential operators.
