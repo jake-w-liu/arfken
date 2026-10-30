@@ -87,15 +87,16 @@ x+2y=3,\quad 2x+4y=6,
 \item[(c)] Find at least two solutions.
 \end{enumerate}
 \solution
-The three determinants in Cramer's rule are
+\textbf{(a), (b)} The coefficient determinant $D$ and the numerator
+determinants $D_x$, $D_y$ of Cramer's rule are
 \[
 D=\begin{vmatrix}1&2\\2&4\end{vmatrix}=4-4=0,\quad
 D_x=\begin{vmatrix}3&2\\6&4\end{vmatrix}=12-12=0,\quad
 D_y=\begin{vmatrix}1&3\\2&6\end{vmatrix}=6-6=0.
 \]
-The quotients $D_x/D,D_y/D$ are undefined and cannot determine a unique
-solution. The second equation is twice the first, so put $y=t$.
-Then $x=3-2t$, and every real solution is
+\textbf{(c)} The quotients $D_x/D,D_y/D$ are undefined and cannot
+determine a unique solution. The second equation is twice the first,
+so put $y=t$. Then $x=3-2t$, and every real solution is
 \[
 \boxed{(x,y)=(3-2t,t),\quad t\in\mathbb R}.
 \]
@@ -157,9 +158,9 @@ n&\mathrm{Det}(H_{n})\\
 6&5.36730\times10^{-18}.
 \end{array}$
 \solution
-Use exact fractions so that small determinants are not lost by subtracting
-rounded numbers. The first three determinants ($D_3$ expanded along
-row 1) are
+\textbf{(a)} Use exact fractions so that small determinants are not lost
+by subtracting rounded numbers. The first three determinants ($D_3$
+expanded along row 1) are
 \[
 D_1=1,\qquad D_2=1\cdot\frac13-\frac12\cdot\frac12=\frac1{12},
 \]
@@ -173,11 +174,14 @@ D_3
 =\frac{9-18+10}{2160}=\frac1{2160}.
 \end{aligned}
 \]
-For the larger matrices, Gaussian elimination uses
+
+\textbf{(b)} For the larger matrices, Gaussian elimination uses
 \[
 R_i\longleftarrow R_i-\frac{u_{ik}}{u_{kk}}R_k
-\quad(i=k+1,\ldots,n;\ k=1,\ldots,n-1).
+\quad(i=k+1,\ldots,n;\ k=1,\ldots,n-1),
 \]
+where $u_{ik}$ is the current entry in row $i$, column $k$; row $k$ no
+longer changes after step $k-1$, so $u_{kk}$ is the $k$th pivot.
 Each operation preserves the determinant. For example, the first
 step on $H_6$ changes an entry with $i,j\ge2$ into
 \[
@@ -187,9 +191,18 @@ step on $H_6$ changes an entry with $i,j\ge2$ into
 Every later step has the same structure. Suppose that before step $k$
 the entries with $i,j\ge k$ have the form $\alpha_i\beta_j/(i+j-1)$;
 for $H_6$ itself $\alpha_i=\beta_j=1$. The multiplier for row $i$ is
-then $(\alpha_i/\alpha_k)(2k-1)/(i+k-1)$, and the identity
-$(i+k-1)(j+k-1)-(2k-1)(i+j-1)=(i-k)(j-k)$ turns the entry in
-row $i$, column $j$ into
+then
+\[
+\frac{u_{ik}}{u_{kk}}
+=\frac{\alpha_i\beta_k/(i+k-1)}{\alpha_k\beta_k/(2k-1)}
+=\frac{\alpha_i}{\alpha_k}\,\frac{2k-1}{i+k-1}.
+\]
+Subtracting it times the row-$k$ entry $\alpha_k\beta_j/(k+j-1)$ and
+using the identity (expand both products)
+\[
+(i+k-1)(j+k-1)-(2k-1)(i+j-1)=ij-k(i+j)+k^2=(i-k)(j-k)
+\]
+turns the entry in row $i$, column $j$ into
 \[
 \alpha_i\beta_j\left[\frac1{i+j-1}-\frac{2k-1}{(i+k-1)(j+k-1)}\right]
 =\frac{\alpha_i\beta_j\,(i-k)(j-k)}{(i+k-1)(j+k-1)(i+j-1)}.
@@ -203,9 +216,20 @@ Hence at step $k$
 u_{kk}=\frac{\alpha_k\beta_k}{2k-1}
 =\frac{[(k-1)!]^4}{(2k-2)!\,(2k-1)!},
 \]
-which gives the pivots $1$, $1/12$, $1/180$, $1/2800$, $1/44100$,
-$1/698544$ for $k=1,\ldots,6$. The other entries of row $k$ of the
-final triangular matrix are $u_{kj}=\alpha_k\beta_j/(k+j-1)$ for $j>k$,
+because $\prod_{m=1}^{k-1}(k-m)=(k-1)!$,
+$\prod_{m=1}^{k-1}(k+m-1)=k(k+1)\cdots(2k-2)=(2k-2)!/(k-1)!$, and
+$(2k-2)!\,(2k-1)=(2k-1)!$. Successive pivots therefore have the ratio
+\[
+\frac{u_{k+1,k+1}}{u_{kk}}
+=\frac{k^4}{(2k-1)(2k)\cdot(2k)(2k+1)}
+=\frac{k^2}{4(4k^2-1)}
+=\frac1{12},\ \frac1{15},\ \frac9{140},\ \frac4{63},\ \frac{25}{396}
+\quad(k=1,\ldots,5),
+\]
+which, starting from $u_{11}=1$, gives the pivots $1$, $1/12$, $1/180$,
+$1/2800$, $1/44100$, $1/698544$ for $k=1,\ldots,6$. The other entries
+of row $k$ of the final triangular matrix are
+$u_{kj}=\alpha_k\beta_j/(k+j-1)$ for $j>k$,
 with $\beta_j=\prod_{m=1}^{k-1}(j-m)/(j+m-1)$.
 For completeness, the multipliers $u_{ik}/u_{kk}$ in the successive
 steps are listed below. At step $k$, subtract the indicated multiple
@@ -374,7 +398,9 @@ y_1&=6\cdot5658-2y_2-4y_3-6y_4-10y_5-5y_6\\
 &=33948+4094+21928-15012-23210-11095=10653.
 \end{aligned}
 \]
-Reducing the fractions $y_r/5658$,
+Since $5658=2\cdot3\cdot23\cdot41$ and the common factors of $5658$ with
+$y_1,\ldots,y_6$ are $3$, $23$, $2$, $6$, $1$, $1$, the fractions
+$y_r/5658$ reduce to
 \[
 x=\Bigl(\frac{3551}{1886},-\frac{89}{246},-\frac{2741}{2829},
 \frac{417}{943},\frac{2321}{5658},\frac{2219}{5658}\Bigr)^T.
@@ -518,14 +544,14 @@ $-[A,B]=0$. This proves both directions.
   \erratum{assuming $a+ib\ne0$}.
 \end{enumerate}
 \solution
-Define $F(a+ib)=\begin{pmatrix}a&b\\-b&a\end{pmatrix}$.
-For real $a,b,c,d$,
+\textbf{(a)} Define $F(a+ib)=\begin{pmatrix}a&b\\-b&a\end{pmatrix}$.
+(i) For real $a,b,c,d$,
 \[
 F(a+ib)+F(c+id)=
 \begin{pmatrix}a+c&b+d\\-(b+d)&a+c\end{pmatrix}
 =F((a+c)+i(b+d)).
 \]
-Multiplication gives
+(ii) Multiplication gives
 \[
 \begin{pmatrix}a&b\\-b&a\end{pmatrix}
 \begin{pmatrix}c&d\\-d&c\end{pmatrix}
@@ -536,8 +562,9 @@ $(a+ib)(c+id)=(ac-bd)+i(ad+bc)$.
 The representation is one-to-one, since its first row recovers $a,b$,
 and $F(1)=I_2$.
 
-For $a+ib\ne0$, multiplying numerator and denominator by $a-ib$
-gives $(a+ib)^{-1}=x+iy$ with $x=a/(a^2+b^2)$, $y=-b/(a^2+b^2)$, so
+\textbf{(b)} For $a+ib\ne0$, multiplying numerator and denominator by
+$a-ib$ gives $(a+ib)^{-1}=x+iy$ with $x=a/(a^2+b^2)$,
+$y=-b/(a^2+b^2)$, so
 \[
 \boxed{F((a+ib)^{-1})=\begin{pmatrix}x&y\\-y&x\end{pmatrix}
 =\frac1{a^2+b^2}
@@ -550,8 +577,8 @@ As a check,
 =\begin{pmatrix}a^2+b^2&0\\0&a^2+b^2\end{pmatrix}
 =(a^2+b^2)I_2,
 \]
-so this matrix is the inverse of $F(a+ib)$; if $a=b=0$, neither
-inverse exists.
+so, after division by $a^2+b^2\ne0$, the boxed matrix is the inverse
+of $F(a+ib)$; if $a=b=0$, neither inverse exists.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -590,10 +617,6 @@ No nonsingularity assumption is needed.
   Construct a specific numerical example to illustrate this inequality.
 \end{enumerate}
 \solution
-\erratum{In (a), complex parameters are needed to cover every matrix
-by the displayed formula. Restricting both parameters to real numbers
-does not cover every real square-zero matrix.}
-
 \textbf{(a)} Let $A=\begin{pmatrix}u&v\\w&t\end{pmatrix}$. Then
 \[
 A^2=\begin{pmatrix}u^2+vw&v(u+t)\\w(u+t)&t^2+vw\end{pmatrix}.
@@ -733,8 +756,9 @@ basis is provided by the four $2\times2$ matrices, $i\sigma_{1}$, $i\sigma_{2}$,
 $-i\sigma_{3}$, and $\mathbf{1}$, where the $\sigma_{i}$ are the Pauli spin
 matrices of Example 2.2.1.
 \solution
-Track the four standard basis columns: column $r$ of a matrix is its
-image of $e_r$. Reading off the columns, the given matrices act as
+\textbf{(a)} Track the four standard basis columns: column $r$ of a
+matrix is its image of $e_r$. Reading off the columns, the given
+matrices act as
 \[
 \begin{array}{c|rrrr}
 &e_1&e_2&e_3&e_4\\\hline
@@ -747,8 +771,9 @@ Applying each row twice sends every $e_r$ to $-e_r$; hence
 $\mathsf i^2=\mathsf j^2=\mathsf k^2=-I_4$.
 For example $\mathsf i^2e_1=\mathsf i(-e_2)=-e_1$ and
 $\mathsf j^2e_1=\mathsf j(e_4)=-e_1$.
-For the cyclic products apply the right-hand factor first, e.g.\
-$\mathsf i\mathsf je_1=\mathsf i(\mathsf je_1)=\mathsf ie_4=e_3$.
+
+\textbf{(b)} For the cyclic products apply the right-hand factor first,
+e.g.\ $\mathsf i\mathsf je_1=\mathsf i(\mathsf je_1)=\mathsf ie_4=e_3$.
 The successive images are
 \[
 \begin{array}{c|rrrr}
@@ -773,6 +798,11 @@ The complete multiplication table is
 \mathsf k&\mathsf j&-\mathsf i&-I_4
 \end{array}.
 \]
+
+The matrices $I_4,\mathsf i,\mathsf j,\mathsf k$ are linearly
+independent: the first row of
+$a_0I_4+a_1\mathsf i+a_2\mathsf j+a_3\mathsf k$ is
+$(a_0,a_1,-a_3,-a_2)$, which vanishes only if every $a_r=0$.
 For the alternative basis, put $q_1=i\sigma_1$, $q_2=i\sigma_2$,
 $q_3=-i\sigma_3$. The Pauli products of Exercise 2.2.11 give
 $q_r^2=-\sigma_r^2=-I_2$ and
@@ -821,13 +851,14 @@ Show that
   \mathbf{1}_{2}$; $\mathbf{1}_{2}$ is the $2\times2$ unit matrix.
 \end{enumerate}
 \solution
-Direct multiplication gives
+\textbf{(a)} Direct multiplication gives
 \[
 \sigma_1^2=I_2,\qquad
 \sigma_2^2=\begin{pmatrix}(-i)i&0\\0&i(-i)\end{pmatrix}=I_2,\qquad
 \sigma_3^2=\begin{pmatrix}1&0\\0&(-1)^2\end{pmatrix}=I_2.
 \]
-The six products with distinct indices are
+
+\textbf{(b)} The six products with distinct indices are
 \[
 \begin{array}{ll}
 \sigma_1\sigma_2=\begin{pmatrix}i&0\\0&-i\end{pmatrix}=i\sigma_3,
@@ -841,10 +872,12 @@ The six products with distinct indices are
 The reversed products in the right column follow in the same way, or
 from $\sigma_j\sigma_i=\sigma_j^\dagger\sigma_i^\dagger
 =(\sigma_i\sigma_j)^\dagger=(i\sigma_k)^\dagger=-i\sigma_k$, since each
-$\sigma_i$ is Hermitian; for example
+$\sigma_i$ is Hermitian and $(XY)^\dagger=Y^\dagger X^\dagger$
+(Exercise 2.2.32); for example
 $\sigma_2\sigma_1=\begin{pmatrix}-i&0\\0&i\end{pmatrix}=-i\sigma_3$.
-Hence the anticommutator is zero for distinct indices; for equal
-indices it is $2\sigma_i^2=2I_2$. Together,
+
+\textbf{(c)} Hence the anticommutator is zero for distinct indices; for
+equal indices it is $2\sigma_i^2=2I_2$. Together,
 \[
 \boxed{\sigma_i\sigma_j+\sigma_j\sigma_i=2\delta_{ij}I_2},
 \qquad \sigma_i\sigma_j=\delta_{ij}I_2+
@@ -961,12 +994,10 @@ and
 for these matrices the claim is $M^2=\tfrac{15}{4}I_4$.
 The numerical spin-1 value is not retained.}
 \solution
-\erratum{For spin $3/2$, the analogue of 2.2.12(b) is
-$M^2=\tfrac{15}{4}I_4$, not $2I_3$ (nor $2I_4$).
-The commutator identities are unchanged, with $4\times4$ matrices.}
-Form the sums and differences. Since $i\cdot\frac i2=-\frac12$, the
-matrix $iM_y$ agrees with $M_x$ above the diagonal and is its negative
-below it; hence
+The commutator identities are unchanged, with $4\times4$ matrices.
+All three parts use the ladder matrices $L^\pm=M_x\pm iM_y$, so form
+them first. Since $i\cdot\frac i2=-\frac12$, the matrix $iM_y$ agrees
+with $M_x$ above the diagonal and is its negative below it; hence
 \[
 L^+=M_x+iM_y=
 \begin{pmatrix}0&\sqrt3&0&0\\0&0&2&0\\0&0&0&\sqrt3\\0&0&0&0\end{pmatrix},
@@ -989,7 +1020,8 @@ L^+L^-=\operatorname{diag}(3,4,3,0),\qquad
 L^-L^+=\operatorname{diag}(0,3,4,3),
 \]
 so $[L^+,L^-]=\operatorname{diag}(3,1,-1,-3)=2M_z$.
-Now $M_x=(L^++L^-)/2$ and $M_y=(L^+-L^-)/(2i)$. Using
+
+\textbf{(a)} Now $M_x=(L^++L^-)/2$ and $M_y=(L^+-L^-)/(2i)$. Using
 $[L^\pm,L^\pm]=0$, $[L^-,L^+]=-[L^+,L^-]$, and
 $[M_z,L^\pm]=\pm L^\pm$,
 \[
@@ -1003,7 +1035,11 @@ $[M_z,L^\pm]=\pm L^\pm$,
 =\tfrac1{2i}(-L^+-L^-)=iM_x.
 \end{aligned}
 \]
-Expand the squares:
+Reversed commutators change sign and $[M_i,M_i]=0$, so, as in
+Exercise 2.2.12(a), $[M_i,M_j]=i\sum_k\varepsilon_{ijk}M_k$ for all
+$i,j$.
+
+\textbf{(b)} Expand the squares:
 \[
 \begin{aligned}
 M_x^2+M_y^2
@@ -1016,8 +1052,11 @@ M_x^2+M_y^2
 Adding $M_z^2=\operatorname{diag}(9/4,1/4,1/4,9/4)$ gives, since
 $\frac32+\frac94=\frac72+\frac14=\frac{15}4$,
 $\boxed{M^2=\tfrac{15}{4}I_4}$.
-This commutes with every $M_i$; the other identities in part (c)
-were established directly above.
+
+\textbf{(c)} Since $M^2=\tfrac{15}{4}I_4$,
+$[M^2,M_i]=\tfrac{15}{4}(M_i-M_i)=0$. The identities
+$[M_z,L^+]=L^+$ and $[L^+,L^-]=2M_z$ were established at the start of
+this solution.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1355,21 +1394,37 @@ row $i$ for each $i=1,\ldots,5$. For $j<i$, the new entry is
 $r^{i-j}-r\,r^{i-1-j}=0$; for $j\ge i$, it is
 $r^{j-i}-r\,r^{j-i+1}=(1-r^2)r^{j-i}$.
 The result is $EA$, where $E$ has $1$ on the diagonal and $-r$ just
-below it. Now subtract $r$ times column $j-1$ from column $j$ of $EA$
-for $j=1,\ldots,5$, which is right multiplication by $E^T$. Above the
+below it. Now subtract $r$ times original column $j-1$ of $EA$ from
+column $j$, for each $j=1,\ldots,5$, which is right multiplication by
+$E^T$. Above the
 diagonal this gives $r^j-r\,r^{j-1}=0$ in row $0$ and
 $(1-r^2)(r^{j-i}-r\,r^{j-1-i})=0$ for $j>i\ge1$; the diagonal and
 lower entries are unchanged, because the entry to the left of each is
 $0$. Hence
 \[
-EAE^T=\Delta\equiv\operatorname{diag}(1,1-r^2,\ldots,1-r^2),
-\qquad A^{-1}=E^T\Delta^{-1}E.
+EAE^T=\Delta\equiv\operatorname{diag}(1,1-r^2,\ldots,1-r^2).
 \]
-Column $i$ of $E$ has only the entries $1$ (row $i$) and $-r$
-(row $i+1$), so with $\delta_0=1$, $\delta_1=\cdots=\delta_5=1/(1-r^2)$,
-and $\delta_6=0$, the product $E^T\Delta^{-1}E$ has diagonal entries
-$\delta_i+r^2\delta_{i+1}$, entries $-r\delta_{\max(i,j)}$ for
-$|i-j|=1$, and zeros elsewhere. This is $T/(1-r^2)$, where $T$ is
+Since $E$ is lower triangular with unit diagonal, $\det E=1$, so
+$\det A=\det\Delta=(1-r^2)^5$: $A$ is invertible exactly when
+$r^2\ne1$ (for $r=\pm1$ every row of $A$ is $\pm$ row~$0$).
+For $r^2\ne1$, $A=E^{-1}\Delta(E^T)^{-1}$ gives
+$A^{-1}=E^T\Delta^{-1}E$.
+Write $\Delta^{-1}=\operatorname{diag}(\delta_0,\ldots,\delta_5)$, so
+$\delta_0=1$ and $\delta_1=\cdots=\delta_5=1/(1-r^2)$, and set
+$\delta_6=0$. Column $i$ of $E$ has only the entries $1$ (row $i$) and
+$-r$ (row $i+1$), so $(E^T\Delta^{-1}E)_{ij}=\sum_kE_{ki}\delta_kE_{kj}$
+receives contributions only from $k\in\{i,i+1\}\cap\{j,j+1\}$. It is
+$\delta_i+r^2\delta_{i+1}$ on the diagonal, $-r\delta_{\max(i,j)}$ for
+$|i-j|=1$, and zero elsewhere. Explicitly,
+\[
+\begin{aligned}
+\delta_0+r^2\delta_1&=1+\frac{r^2}{1-r^2}=\frac1{1-r^2},&
+\delta_5+r^2\delta_6&=\frac1{1-r^2},\\
+\delta_i+r^2\delta_{i+1}&=\frac{1+r^2}{1-r^2}\quad(1\le i\le4),&
+-r\delta_{\max(i,j)}&=-\frac{r}{1-r^2}.
+\end{aligned}
+\]
+This is $T/(1-r^2)$, where $T$ is
 tridiagonal with end diagonal entries $1$, interior diagonal entries
 $1+r^2$, and adjacent entries $-r$.
 The result can be confirmed by multiplying $A$ and $T$ directly.
@@ -1387,7 +1442,11 @@ At the first column,
 (AT)_{i0}=A_{i0}-rA_{i1}
 =\begin{cases}1-r^2,&i=0,\\r^i-r r^{i-1}=0,&i>0.\end{cases}
 \]
-Reversing the indices proves the same statement for the last column.
+At the last column, likewise,
+\[
+(AT)_{i5}=-rA_{i4}+A_{i5}
+=\begin{cases}1-r^2,&i=5,\\-r\,r^{4-i}+r^{5-i}=0,&i<5.\end{cases}
+\]
 Thus $AT=(1-r^2)I_6$, confirming $A^{-1}=T/(1-r^2)$.
 At $r=1/2$, $1-r^2=3/4$, so $A^{-1}=\frac43T$ has end diagonal
 entries $\frac43$, interior diagonal entries $\frac43\cdot\frac54=\frac53$,
@@ -1472,10 +1531,18 @@ For $s=-1$, $A=\operatorname{diag}(1,-1)$ times that rotation, i.e.\
 the rotation followed by the reflection $y'\to-y'$.
 \erratum{Both signs are required. The Instructor's Manual assumes
 $\det A=1$ and omits the $\det A=-1$ reflection family.}
+
 If orthogonality is extended to complex $A$ with $A^TA=I$, the
 algebraic form is
 $A=\begin{pmatrix}a&b\\-sb&sa\end{pmatrix}$ with
 $a^2+b^2=1$, $a,b\in\mathbb C$, and $s=\pm1$.
+Indeed, as in the real case $A^TA=I$ gives $AA^T=I$, so
+$a^2+b^2=1$, $ac+bd=0$, and $c^2+d^2=1$. Since $(a,b)\ne(0,0)$, the
+solutions $(c,d)$ of the single linear equation $ac+bd=0$ form a
+one-dimensional space containing $(-b,a)\ne0$, so
+$(c,d)=\lambda(-b,a)$; then $c^2+d^2=\lambda^2(a^2+b^2)=\lambda^2=1$
+gives $\lambda=s=\pm1$. Conversely, every such $A$ has
+$A^TA=(a^2+b^2)I=I$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1554,7 +1621,8 @@ Therefore
 \]
 Every summand is nonnegative. The sum is zero exactly when every
 entry is zero; otherwise it is strictly positive. The trace is thus
-a positive-definite quadratic form in the entries of $S$.
+a positive-definite quadratic form in the real and imaginary parts of
+the entries of $S$.
 This does not imply that $C$ itself is positive definite:
 $S=\operatorname{diag}(1,0)$ gives $C=\operatorname{diag}(1,0)$,
 which has a zero eigenvalue.

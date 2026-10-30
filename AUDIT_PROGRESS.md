@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 2 of 54 parts done (audited and verified); 12 audited and awaiting verification.
+Progress: 3 of 54 parts done (audited and verified); 11 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -84,7 +84,7 @@ Progress: 2 of 54 parts done (audited and verified); 12 audited and awaiting ver
 | ch01-p1 | 1.1.1–1.2.16 | done |
 | ch01-p2 | 1.3.1–1.7.11 | pending |
 | ch01-p3 | 1.8.1–1.11.9 | pending |
-| ch02-p1 | 2.1.1–2.2.34 | audited |
+| ch02-p1 | 2.1.1–2.2.34 | done |
 | ch02-p2 | 2.2.35–2.2.51 | pending |
 | ch03-p1 | 3.2.1–3.5.13 | done |
 | ch03-p2 | 3.6.1–3.10.2 | pending |
@@ -145,6 +145,7 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch01-p1** (1.1.1–1.2.16) — audit: no wrong results; a typo in 1.1.11(a) corrected ($[(\ln x)^2-1]/2$ → $[(\ln M)^2-1]/2$). Steps added in 31 of 32 exercises (e.g. the shifted $\alpha$-sums and error bound in 1.1.14, the assembly of 1.1.16(b), Gauss' test parameters in 1.2.5–1.2.7, the Lagrange remainder in 1.2.8). Script references in 1.1.3, 1.1.12, 1.1.16 replaced by the computations themselves; "the manual" → "the Instructor's Manual"; a reason added to the 1.2.7 erratum.
   - verification (3 independent reviews): 36 findings applied (29 distinct; errors fixed: quoted digits in 1.1.3 ($1/\ln10^5$; the 16-digit $S_{100000}$ is reproducible only by smallest-first summation, now stated), 1.1.8 ($H_{1000}$) and 1.1.12 (quadrature value); a false generalization in 1.2.2 (any set bounded away from $\pm1$ → any such subset of $(-1,1)$); the $m^{-3/2}$ rate in 1.2.11 credited to Exercise 1.1.4 instead of Gauss' test; the over-restrictive 1.1.4 erratum reduced to $u_n\ne0$, with the sign reduction in the solution; steps added in 1.1.1(b) ($A=+\infty$), 1.1.4 ($B(n)$), 1.1.7, 1.1.9 ($\Delta\Omega_n$, $\Omega_N$ defined), 1.1.16, 1.2.7, 1.2.9 (solving for $a_3,a_5,a_7$), 1.2.11(a), 1.2.15 (tangent series from $\cot x-2\cot2x$, $x^7$ coefficient counts); wording, part labels and references in 1.1.2, 1.1.3, 1.1.11, 1.1.13–1.1.16, 1.2.11 (the textbook's $x_0\ne0$ restored), 1.2.14; squeezed or line-broken formulas displayed in 1.2.5, 1.2.10 and, found on re-reading, 1.1.4, 1.1.14), 0 rejected.
 - **ch02-p1** (2.1.1–2.2.34) — audit: no mathematical errors found. Steps added in 22 exercises (e.g. the general elimination step and pivots of the Hilbert matrix in 2.1.5, an integer back substitution in 2.1.7, the $L_\pm$ algebra in 2.2.13, a derivation replacing a guess in 2.2.25, both orthogonal families in 2.2.29). The script reference in 2.1.5 replaced by a closed-form product; `\,10^{-n}` → `\times10^{-n}`; cross-references added; "the manual" → "the Instructor's Manual".
+  - verification (3 independent reviews): 26 findings applied (errors fixed, final answers unchanged: 2.2.25 general-$r$ inverse now requires $r^2\ne1$ and the column operations use the original columns; 2.2.3 the check called the unnormalized factor the inverse; 2.2.33 the positive-definite form is now in the real and imaginary parts of the entries. Also: steps added in 2.1.5, 2.1.7, 2.2.9, 2.2.11, 2.2.13, 2.2.25, 2.2.29; part labels in six exercises; duplicate red notes removed in 2.2.5 and 2.2.13), 1 rejected.
 - **ch03-p1** (3.2.1–3.5.13) — audit: no wrong results; a misleading side remark in 3.2.6 (altitude described as adjacent side times the sine of the opposite angle) replaced by $h=A\sin\beta=B\sin\alpha$. Steps added in 31 exercises (e.g. every matrix–vector product in 3.3.4–3.3.5, the Euler-angle construction in 3.4.2, the passive-rotation argument in 3.4.5, the commutator in 3.5.12); part labels added; notation $\hat{\mathbf z}$ → $\hat{\mathbf e}_z$ in the 3.2.12 statement.
   - verification (3 independent reviews): 27 findings applied (errors fixed: in 3.4.2(b) the listed four-digit inputs, which do not reproduce the printed $S_{13}$ and $S_{21}$, replaced by six-digit ones; in 3.2.6 the altitude argument extended to obtuse angles; other: steps added in 3.2.3, 3.2.13, 3.2.15, 3.3.4 (proof of the pseudovector law), 3.4.1, 3.4.2, 3.4.4; the Euler matrix tagged (3.37); notation and wording cleanups in 3.2.11, 3.4.2, 3.5.11, 3.5.13, including an unexplained dark-red "in" made plain; "the manual" → "the Instructor's Manual", with an orthogonality reason added to the 3.3.5 erratum), 0 rejected.
 - **ch04-p1** (4.1.1–4.3.12) — audit: no mathematical errors found. Steps added in 23 exercises (e.g. the expansion of $B_{kilm}$ in 4.1.5, the polarization argument and a complex boost in 4.1.9, Jacobi's formula in 4.3.11). Cleanups: a comma in the 4.1.2 statement; the translation vector renamed $s^i$ in 4.1.7 (it clashed with a dummy index); a summed-index clash in 4.3.4.
