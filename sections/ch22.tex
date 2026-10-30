@@ -1684,7 +1684,11 @@ $\partial_iV(q_0+\eta)=K_{ij}\eta_j+O(|\eta|^2)$; thus
 \[
 M_0\ddot\eta+K\eta=0,\qquad M_0=M(q_0).
 \]
-Put $\eta=M_0^{-1/2}\xi$ and multiply by $M_0^{-1/2}$:
+Let $M_0^{1/2}$ be the symmetric positive-definite square root of $M_0$
+(write $M_0=U\operatorname{diag}(\mu_j)U^T$ with $U$ orthogonal and all
+$\mu_j>0$, and set $M_0^{1/2}=U\operatorname{diag}(\sqrt{\mu_j})U^T$),
+and $M_0^{-1/2}$ its inverse. Put $\eta=M_0^{-1/2}\xi$ and multiply on
+the left by $M_0^{-1/2}$; since $M_0^{-1/2}M_0M_0^{-1/2}=I$,
 $\ddot\xi+M_0^{-1/2}KM_0^{-1/2}\xi=0$. The real symmetric matrix
 $M_0^{-1/2}KM_0^{-1/2}$ equals $O\operatorname{diag}(\omega_j^2)O^T$
 with $O$ orthogonal, so the normal coordinates $Q=O^T\xi$ satisfy
@@ -1696,7 +1700,9 @@ $Q_j=Ae^{\kappa t}+Be^{-\kappa t}$ and hence instability under
 arbitrarily small perturbations (by Lyapunov's linearization theorem,
 this growing mode makes the equilibrium of the full nonlinear equations
 unstable as well). In the nondegenerate stable case no $\omega_j^2$ is
-negative (stability) or zero (nondegeneracy), so all $\omega_j^2>0$,
+negative (stability) or zero (nondegeneracy: $\det K\ne0$, and
+$\prod_j\omega_j^2=\det(M_0^{-1/2}KM_0^{-1/2})=\det K/\det M_0$),
+so all $\omega_j^2>0$,
 and $K$ is positive definite: for $\eta\ne0$,
 \[
 \eta^TK\eta=\xi^TM_0^{-1/2}KM_0^{-1/2}\xi=\sum_j\omega_j^2Q_j^2>0.
@@ -2315,7 +2321,7 @@ f'(R)=-\frac{2j^2}{R^3}+\frac{4\pi^4R^3}{V^2}
 vanishes only at $R^6=j^2V^2/(2\pi^4)$. There
 $(R/H)^2=(\pi R^3/V)^2=\pi^2R^6/V^2=j^2/(2\pi^2)$, the multiplier
 ratio. Thus the stationary ratio gives the unique global minimum.
-(With the unrounded zero $j_{0,1}=2.4048255577\ldots$ the ratio would be
+(With the unrounded zero $j_{0,1}=2.4048255576\ldots$ the ratio would be
 $0.5412759\ldots$.)
 \erratum{The Instructor's Manual replaces $2.4048$ by $2.048$ in both
 its derivative and its final ratio; the textbook's coefficient is
@@ -2329,7 +2335,11 @@ the total length plus girth may not exceed 36 inches. Using Lagrange multipliers
 rectangular parallelepiped of maximum volume subject to this
 constraint.
 \solution
-Use the stated 36-inch mathematical constraint. Let the length be
+\erratum{The textbook presents this 36-inch length-plus-girth limit as
+an actual postal regulation; the statement qualifies it as a
+stipulation because real postal size limits change over time and need
+not have this form, and only the mathematical constraint is used.}
+Let the length be
 $L$ and the two transverse widths be $w,h$. A maximum uses the
 whole allowance: otherwise increasing $L$ raises the volume while
 remaining admissible. Thus
@@ -2514,7 +2524,7 @@ multiplier solution attains this bound, proving the global claim.
 inscribed in an ellipsoid of semiaxes $a$, $b$, and $c$. Maximize
 the volume of the inscribed rectangular parallelepiped. Show
 that the ratio of the maximum volume to the volume of the
-ellipsoid is $\erratum{\dfrac{2}{\pi\sqrt{3}}}\approx0.367$.
+ellipsoid is $\erratum{2/(\pi\sqrt{3})}\approx0.367$.
 \solution
 For an aligned box let the positive half-lengths be $x,y,z$.
 Maximize $V=8xyz$ subject to
@@ -2823,6 +2833,36 @@ since $\sqrt{1+y'^2}=\sqrt{1+\sinh^2((x-b)/c)}=\cosh((x-b)/c)$,
 \erratum{The Instructor's Manual repeats $x_2$ in both terms of this
 length formula. The second evaluation is at $x_1$; otherwise the
 displayed length would be zero.}
+These three conditions do fix the constants. Let the supports be
+$(x_1,y_1)$ and $(x_2,y_2)$, and write
+$\Delta x=x_2-x_1>0$, $\Delta y=y_2-y_1$ and $u_k=(x_k-b)/c$, so that
+$u_2-u_1=\Delta x/c$, $\Delta y=c(\cosh u_2-\cosh u_1)$ and
+$L_0=c(\sinh u_2-\sinh u_1)$. Expanding the squares and using
+$\cosh^2u-\sinh^2u=1$,
+$\cosh u_2\cosh u_1-\sinh u_2\sinh u_1=\cosh(u_2-u_1)$ and
+$\cosh z-1=2\sinh^2(z/2)$,
+\[
+ L_0^2-\Delta y^2=2c^2\bigl[\cosh(u_2-u_1)-1\bigr]
+ =4c^2\sinh^2\frac{\Delta x}{2c},
+\]
+that is, $\sqrt{L_0^2-\Delta y^2}=\Delta x\,(\sinh\tau)/\tau$ with
+$\tau=\Delta x/(2c)$. Since $(\sinh\tau)/\tau$ has derivative
+$(\tau\cosh\tau-\sinh\tau)/\tau^2>0$ (because $\tanh\tau<\tau$), it
+increases strictly from $1$ (as $\tau\to0^+$) to $\infty$, and $\tau$
+decreases as $c$ increases, so exactly one $c>0$ solves this when
+$L_0^2>\Delta x^2+\Delta y^2$, i.e.\ when the cable is longer than the
+straight-line distance between the supports, as the statement assumes.
+Next, $L_0+\Delta y=c(e^{u_2}-e^{u_1})$ and
+$L_0-\Delta y=c(e^{-u_1}-e^{-u_2})=e^{-u_1-u_2}(L_0+\Delta y)$, so
+\[
+ u_1+u_2=\frac{x_1+x_2-2b}{c}=\ln\frac{L_0+\Delta y}{L_0-\Delta y}
+\]
+fixes $b$ (both $L_0\pm\Delta y>0$ because $L_0>|\Delta y|$), and
+$y(x_1)=y_1$ then fixes $d$. These steps reverse: for the constants
+found, the catenary's own length $\ell$ and rise $\delta$ satisfy the
+same identities, so $\ell\pm\delta$ (both positive) have the product
+and the ratio of $L_0\pm\Delta y$, hence equal them, and all three
+conditions hold.
 
 To verify that the hanging solution minimizes energy, rather than
 merely makes it stationary, parameterize it by arc length
@@ -2954,14 +2994,23 @@ If it predicts a negative depth, a dry central region appears.
 The physical minimizer is
 $h(r)=\max\{0,C+\omega^2r^2/(2g)\}$, with $C$ chosen from the volume;
 the wetted free surface remains parabolic.}
-For example, if its inner wet radius is $r_d$, then
+Explicitly, if its inner wet radius is $r_d$, then
 $C=-\omega^2r_d^2/(2g)$ and
 $h=\omega^2(r^2-r_d^2)/(2g)$ on $r_d\le r\le R$, and direct integration,
 \[
  V=\frac{\pi\omega^2}{g}\int_{r_d}^R(r^2-r_d^2)\,r\,dr
  =\frac{\pi\omega^2}{g}\Bigl[\frac{r^4}4-\frac{r_d^2r^2}2\Bigr]_{r_d}^R,
 \]
-gives $V=\pi\omega^2(R^2-r_d^2)^2/(4g)$.
+gives, since the bracket equals
+$R^4/4-r_d^2R^2/2+r_d^4/4=(R^2-r_d^2)^2/4$,
+\[
+ V=\frac{\pi\omega^2(R^2-r_d^2)^2}{4g},\qquad
+ r_d^2=R^2-2\sqrt{\frac{gV}{\pi\omega^2}},
+\]
+taking the positive square root because $r_d<R$. Thus $0<r_d<R$
+exactly when $V<\pi\omega^2R^4/(4g)$, which by the full-disk formula
+for $h_0$ is exactly the case $h_0<0$; for $V\ge\pi\omega^2R^4/(4g)$
+the bottom is fully wet and $C=h_0$.
 The same expansion proves the minimum with the inequality $h\ge0$
 imposed. Put $\mu(r)=\rho(gh-\omega^2r^2/2)$: it equals $\rho gC$ on
 the wet annulus, and $-\rho\omega^2r^2/2\ge-\rho\omega^2r_d^2/2=\rho gC$
@@ -2981,7 +3030,8 @@ vanishes except on the dry disk, where $h=0$ and $\eta=\tilde h$. Hence
 \par\bigskip
 \noindent\textbf{22.4.5}\quad
 \erratum{Consider simple closed regular plane curves enclosing
-positive area.}
+positive area, so that Green's theorem gives the enclosed area and the
+curve has a periodic arc-length parameterization.}
 \begin{enumerate}
 \item[(a)] Show that for a fixed-length perimeter the plane
 figure with maximum area is a circle.
@@ -3200,8 +3250,9 @@ The quotient to be used is
 \]
 Since $\delta F=(\delta N-F\,\delta D)/D$, $F$ is stationary exactly
 when $\delta N-\lambda\,\delta D=0$ with $\lambda=F[y]$. For
-$y\to y+\epsilon\eta$ with $\eta(1)=0$ ($\eta(0)$ free, because $F$ does
-not depend on the scale of $y$), $\delta N=2\int_0^1y'\eta'\,dx
+$y\to y+\epsilon\eta$ with $\eta(1)=0$ ($\eta(0)$ free: $F[cy]=F[y]$ for
+every constant $c\ne0$, so dividing $y+\epsilon\eta$ by
+$1+\epsilon\eta(0)$ restores $y(0)=1$ without changing $F$), $\delta N=2\int_0^1y'\eta'\,dx
 =2[y'\eta]_0^1-2\int_0^1y''\eta\,dx$ and $\delta D=2\int_0^1y\eta\,dx$,
 so the condition is
 \[
@@ -3280,8 +3331,8 @@ Therefore
  F(n)=\frac ND=\frac{n^2}{2n-1}\cdot\frac{(n+1)(2n+1)}{2n^2}
  =\frac{(n+1)(2n+1)}{2(2n-1)}.
 \]
-Write $F=(2n^2+3n+1)/(4n-2)$. The quotient rule, without dropping the
-denominator derivative, and
+Write $F=f/g$ with $f=2n^2+3n+1$ and $g=4n-2$, so that $f'=4n+3$ and
+$g'=4$. The quotient rule $F'=(f'g-fg')/g^2$ and
 $(4n+3)(4n-2)-4(2n^2+3n+1)=(16n^2+4n-6)-(8n^2+12n+4)=8n^2-8n-10$ give
 \[
  F'(n)
@@ -3430,6 +3481,10 @@ quotient is
 $\pm a$.  It belongs to the quadratic-form domain, and the quotient
 above is valid.  Treating its second derivative as an ordinary
 function across those joins would omit delta-function terms.}
+For this trial, however, those terms carry the factor $\psi(\pm a)=0$
+and vanish, so $-\int_{-a}^{a}\psi\psi''\,dx
+=(2/a^2)\int_{-a}^{a}\psi\,dx=8/(3a)$ equals the kinetic term
+$N_{\rm kin}$ found below, and both forms give the same $\lambda(a)$.
 All three integrals reduce to $[-a,a]$:
 \begin{align*}
  D&=2\int_0^a\left(1-\frac{2x^2}{a^2}+\frac{x^4}{a^4}\right)dx
@@ -3506,6 +3561,8 @@ $\psi=e^{-\beta x^2/2}$, $\beta>0$.  Since $\psi^2=e^{-\beta x^2}$,
  \langle x^2\rangle=\frac{\int x^2e^{-\beta x^2}dx}{\int e^{-\beta x^2}dx}
  =\frac{\sqrt\pi/(2\beta^{3/2})}{\sqrt{\pi/\beta}}=\frac1{2\beta},
 \]
+where the numerator follows by differentiating
+$\int e^{-\beta x^2}dx=\sqrt{\pi/\beta}$ with respect to $\beta$,
 and $\psi'=-\beta x\psi$ gives
 $\int\psi'^2dx/\int\psi^2dx=\beta^2\langle x^2\rangle=\beta/2$. Hence
 \[
@@ -3540,8 +3597,12 @@ continuous part of the spectrum.}
 \solution
 \erratum{The strict inequality is for $l>0$ and a normalizable bound
 eigenstate, with $E_0$ the lowest eigenvalue of the $l=0$ radial
-operator.  For $l=0$ the ground state has equality.  A continuum
-threshold need not have a strict gap above $E_0$.}
+operator.  For $l=0$ the ground state has equality.  Normalizability
+matters: if the $l=0$ operator has no bound state, its spectrum begins
+at the continuum threshold ($0$ for a potential vanishing at infinity),
+and so does that for $l>0$, because the centrifugal term only raises
+energies and also vanishes at infinity; the two spectra then have the
+same bottom, so no strict inequality holds.}
 Normalize $u$ by $\int_0^\infty|u|^2dr=1$ and assume it belongs to the
 quadratic-form domain of the radial Hamiltonian, including the
 centrifugal term. For form-domain functions,
@@ -3563,8 +3624,14 @@ relation and $\mathcal Lu_i=E_iu_i$, $\langle u_i,u_j\rangle=\delta_{ij}$,
 where $E_0=E_0\sum_i|c_i|^2$ has been added and subtracted and each
 $E_i-E_0\ge0$.
 There is no need to assume $c_0\ne0$ or to divide by it.  If there
-is continuous spectrum, the same argument uses its spectral
-integral; the defining lower bound of $\mathcal L$ suffices.
+is continuous spectrum, the sum is replaced by the spectral integral
+$\langle u,\mathcal Lu\rangle=\int E\,d\mu_u(E)$, in which the
+nonnegative spectral weight $d\mu_u$ of $u$ lives on the spectrum of
+$\mathcal L$ and has total weight $\int d\mu_u=1$. This integral is
+$\ge E_0\int d\mu_u=E_0$ provided no part of the spectrum lies below
+$E_0$, i.e.\ $E_0$ is the
+bottom of the spectrum, as it is for a bound ground state below the
+continuum threshold.
 
 Now let $u$ be, in addition, a bound eigenfunction of the radial
 equation with $l>0$ and energy $E$. Multiply the radial equation by
