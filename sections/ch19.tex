@@ -133,10 +133,17 @@ and dividing $b_n$ by $a_n$ when $a_n\ne0$ gives $\tan\theta_n$:
 \boxed{\alpha_n=\sqrt{a_n^2+b_n^2},\qquad
 \tan\theta_n=b_n/a_n.}
 \]
-We choose the nonnegative amplitude. \erratum{The tangent alone does not
+We choose the nonnegative amplitude: a negative $\alpha_n$ gives the
+same term as $|\alpha_n|$ with $\theta_n$ increased by $\pi$, since
+$-\cos u=\cos(u-\pi)$. \erratum{The tangent alone does not
 fix the quadrant and is undefined when $a_n=0$. For nonzero amplitude
-take $\theta_n=\operatorname{atan2}(b_n,a_n)$ modulo $2\pi$; for
-$a_n=b_n=0$ the phase is arbitrary.}
+take $\theta_n$ to be the angle with $\cos\theta_n=a_n/\alpha_n$ and
+$\sin\theta_n=b_n/\alpha_n$ (the two-argument arctangent
+$\operatorname{atan2}(b_n,a_n)$), unique modulo $2\pi$; for
+$a_n=b_n=0$ the phase is arbitrary. Reality is needed because for
+complex data the amplitude--phase form can fail: $e^{ix}=\cos x+i\sin x$
+has $a_1=1$, $b_1=i$, so $\alpha_1^2=a_1^2+b_1^2=0$ although
+$a_1\ne0$.}
 In particular, when $a_n=0$ and $b_n\ne0$, the phase is
 $\operatorname{sgn}(b_n)\pi/2$ modulo $2\pi$.
 
@@ -231,7 +238,8 @@ The statement assumes $f$ real because the argument uses
 $(f-s_N)^2\ge0$; for complex $f$ the same argument with modulus squares,
 as in 19.1.1, gives $|a_n|^2+|b_n|^2\to0$.
 
-The integrability assertion in the hint follows directly from
+The integrability assertion in the hint follows from the
+Cauchy--Schwarz inequality applied to $|f|$ and $1$:
 \[
 \int_{-\pi}^{\pi}|f|\cdot1\,dx
 \le\left(\int|f|^2\,dx\right)^{1/2}\sqrt{2\pi}.
@@ -401,7 +409,8 @@ $\theta\ne\pi$. Taking real parts, with
 $\operatorname{Re}e^{in\theta}=\cos n\theta$, gives
 \[
 \boxed{\ln(2\cos(\theta/2))
-=\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\cos n\theta}{n}.}
+=\sum_{n=1}^{\infty}(-1)^{n+1}\frac{\cos n\theta}{n},
+\qquad-\pi<\theta<\pi.}
 \]
 At the included point $\theta=0$ this is the convergent alternating
 harmonic series. The excluded endpoints have the logarithmic singularity.
@@ -576,8 +585,9 @@ With $\cos k=\cos n\pi=(-1)^n$ and $k^3=\pi^3n^3$, it follows that
 Thus the fundamental sine has coefficient $32/\pi^3\approx1.032$, and
 the next nonzero coefficient, $b_3=32/(27\pi^3)\approx0.038$, is smaller
 by a factor $27$. The series converges
-absolutely and uniformly, since its terms are bounded by a convergent
-multiple of $\sum n^{-3}$. It equals the continuous odd periodic
+absolutely and uniformly, since its terms are bounded by
+$32/(\pi^3n^3)$ and $\sum n^{-3}$ converges (Weierstrass M-test). It
+equals the continuous odd periodic
 extension, including its zero values at $-1,0,1$.
 
 \Needspace{5\baselineskip}
@@ -594,7 +604,7 @@ definition,
 \]
 \par\emph{Hint.}~Represent $f(\varphi_{1})$ by an exponential
 Fourier series.
-\erratum{Use the periodic delta distribution on the circle, with a smooth $2\pi$-periodic test function $f$; take the series through symmetric finite partial sums.}
+\erratum{Use the periodic delta distribution on the circle, with a smooth $2\pi$-periodic test function $f$; interpret the series as the limit $N\to\infty$ of its symmetric partial sums $\sum_{m=-N}^{N}$.}
 \solution
 \erratum{This is the periodic delta distribution on the circle, not a
 pointwise convergent series of functions: the terms $e^{imu}$ do not
@@ -658,10 +668,19 @@ $\int_0^x\sin nt\,dt=(1-\cos nx)/n$, gives
 =2\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}(1-\cos nx).
 \]
 The integrated series is absolutely and uniformly convergent (its terms
-are bounded by $4/n^2$); termwise integration is justified by
-integrating the $L^2$-convergent partial sums $s_N$ of the series for
-$f(x)=x$, since by Cauchy--Schwarz
-$|\int_0^x(f-s_N)|\le\sqrt{2\pi}\,\|f-s_N\|_2$ uniformly in $x$.
+are bounded by $4/n^2$). Termwise integration is justified as follows.
+The partial sums $s_N$ of the series for $f(x)=x$ are its Fourier
+partial sums, and since the trigonometric functions form a complete set,
+the Fourier series of a square-integrable function converges to it in
+the mean: $\|f-s_N\|_2\to0$, where
+$\|g\|_2=\bigl(\int_{-\pi}^{\pi}|g|^2\,dx\bigr)^{1/2}$. By Cauchy--Schwarz
+on the interval between $0$ and $x$,
+\[
+\Bigl|\int_0^x(f-s_N)\,dt\Bigr|\le\sqrt{|x|}\,\|f-s_N\|_2
+\le\sqrt{\pi}\,\|f-s_N\|_2\longrightarrow0
+\]
+uniformly in $x$, so the integrated partial sums converge to
+$\int_0^xt\,dt=x^2/2$.
 Average the integrated identity over $(-\pi,\pi)$; uniform convergence
 allows averaging term by term. Every cosine has zero average, so the
 right side averages to $2\sum_{n\ge1}(-1)^{n+1}/n^2$, while
@@ -674,11 +693,12 @@ Consequently $2\sum_{n\ge1}(-1)^{n+1}/n^2=\pi^2/6$, that is,
 \[
 \boxed{\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n^2}=\frac{\pi^2}{12}.}
 \]
-There is no change in the underlying periodic function in the note:
-Example 19.1.1 defines it as $x$ on $(0,\pi)$ and $x-2\pi$ on
+The change of range in the note does not change the underlying periodic
+function: Example 19.1.1 defines it as $x$ on $(0,\pi)$ and $x-2\pi$ on
 $(\pi,2\pi)$. Moving that latter interval left by $2\pi$ gives $x$ on
-$(-\pi,0)$. Integrals over either complete period therefore give exactly
-these same Fourier coefficients.
+$(-\pi,0)$. Since the integral of a $2\pi$-periodic function is the same
+over every interval of length $2\pi$, integrals over $[0,2\pi]$ and over
+$[-\pi,\pi]$ give exactly these same Fourier coefficients.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -714,8 +734,10 @@ sum
 \frac1\pi\int_{-\pi}^{\pi}s_N^2\,dx
 =\frac{a_0^2}{2}+\sum_{n=1}^N(a_n^2+b_n^2).
 \]
-If $s_N\to f$ uniformly, $f$ is bounded, the $s_N$ are bounded for large
-$N$, and, since $s_N^2-f^2=(s_N-f)(s_N+f)$,
+If $s_N\to f$ uniformly, that is, $\|s_N-f\|_\infty\to0$ with
+$\|g\|_\infty=\sup_{-\pi<x<\pi}|g(x)|$, then $f$ is bounded, the $s_N$
+are uniformly bounded for large $N$ ($\|s_N\|_\infty\le\|f\|_\infty+1$
+once $\|s_N-f\|_\infty\le1$), and, since $s_N^2-f^2=(s_N-f)(s_N+f)$,
 \[
 \left|\int(s_N^2-f^2)\right|
 \le2\pi\|s_N-f\|_\infty(\|s_N\|_\infty+\|f\|_\infty)\longrightarrow0.
@@ -727,8 +749,10 @@ version uses modulus squares. Also the Instructor's Manual's first
 display in 19.1.13(a) is missing the factor $1/\pi$ on its integral:
 for $f=1$ its unnormalized left side is $2\pi$, whereas its right side
 is $2$.}
-More generally $L^2$ convergence suffices, because
-$|\|s_N\|_2-\|f\|_2|\le\|s_N-f\|_2$.
+More generally $L^2$ convergence suffices: with $\|\cdot\|_2$ as in
+19.1.12, the triangle inequality gives
+$|\|s_N\|_2-\|f\|_2|\le\|s_N-f\|_2\to0$, so
+$\pi^{-1}\int_{-\pi}^{\pi}s_N^2\,dx=\|s_N\|_2^2/\pi\to\|f\|_2^2/\pi$.
 
 \textbf{(b)} Reading off the given series for $f=x^2$:
 $a_0/2=\pi^2/3$, so $a_0=2\pi^2/3$; $a_n=4(-1)^n/n^2$, so
@@ -756,17 +780,18 @@ sine coefficients vanish. Hence Parseval reads
 \[
 2=\frac{16}{\pi^2}\sum_{j=1}^{\infty}\frac1{(2j-1)^2}.
 \]
-To check this independently, integrate the $\pm1$ square-wave expansion
-from $0$ to $\pi$; term-by-term integration of the $L^2$-convergent
-series is justified as in 19.1.12, and
-$\int_0^\pi\sin((2j-1)x)\,dx=[1-\cos((2j-1)\pi)]/(2j-1)=2/(2j-1)$:
+To check this independently, the $L^2$ convergence of the square-wave
+series may not be used: by the expansion in 19.1.4,
+$\int(f-s_N)^2\,dx=\int f^2\,dx-\pi\sum_{n\le N}b_n^2$, so for this $f$
+it is equivalent to the identity being checked. Instead use the
+primitive $\int_0^xf\,dt=|x|$, which is continuous and piecewise smooth;
+its cosine series (19.2.9) converges to it at every point, and at $x=0$
+it gives
 \[
-\pi=\frac4\pi\sum_{j=1}^{\infty}
-\frac{1-\cos((2j-1)\pi)}{(2j-1)^2}
-=\frac8\pi\sum_{j=1}^{\infty}\frac1{(2j-1)^2}.
+0=\frac\pi2-\frac4\pi\sum_{j=1}^{\infty}\frac1{(2j-1)^2}.
 \]
-Thus $\sum_{j\ge1}(2j-1)^{-2}=\pi^2/8$, and the right side of Parseval
-is indeed $(16/\pi^2)(\pi^2/8)=2$.
+Thus $\sum_{j\ge1}(2j-1)^{-2}=\pi^2/8$ (as also found in 19.2.13(b)),
+and the right side of Parseval is indeed $(16/\pi^2)(\pi^2/8)=2$.
 
 For any fixed partial sum $s_N$, which is continuous with $s_N(0)=0$,
 $s_N(x)\to0$ as $x\downarrow0$, whereas the square wave equals one there. Thus
@@ -796,10 +821,16 @@ show by integrating that
 The cosine series for $\varphi_2$ is absolutely and uniformly convergent
 by comparison with $\sum n^{-2}$.
 Integrating the sine series for $\varphi_1$ term by term from $0$ to $x$,
-$0<x\le\pi$, is valid because its partial sums $s_N$ converge in $L^2$
-and, by Cauchy--Schwarz,
-$|\int_0^x(\varphi_1-s_N)|\le\sqrt{\pi}\,\|\varphi_1-s_N\|_2$.
-Since $\int_0^x\sin nt\,dt/n=(1-\cos nx)/n^2$, the term-by-term
+$0<x\le\pi$, is valid because the series is the Fourier series of
+$\varphi_1$ (its coefficients $b_n=1/n$ are computed in 19.2.8). Its
+partial sums $s_N$ therefore converge to $\varphi_1$ in the mean,
+$\|\varphi_1-s_N\|_2\to0$, as in 19.1.12, and by Cauchy--Schwarz on
+$(0,x)$,
+\[
+\Bigl|\int_0^x(\varphi_1-s_N)\,dt\Bigr|\le\sqrt{x}\,\|\varphi_1-s_N\|_2
+\le\sqrt{\pi}\,\|\varphi_1-s_N\|_2\longrightarrow0.
+\]
+Since $n^{-1}\int_0^x\sin nt\,dt=(1-\cos nx)/n^2$, the term-by-term
 integral is $\sum_{n\ge1}(1-\cos nx)/n^2=\varphi_2(0)-\varphi_2(x)$, and
 integrating the closed form instead gives
 \[
@@ -855,8 +886,10 @@ more powerful, the balance progressively shifts so that we are
 doing less and demanding that computers do more.
 \erratum{Here $s=1,2,\ldots$. When $s=1$, the first integral is improper at multiples of $2\pi$ crossed by the interval.}
 \solution
-Let $s$ be a positive integer. The statement writes the integration
-variable as $t$, since $x$ is already the upper limit.
+Let $s$ be a positive integer, as the statement requires: for $s=0$,
+(b) would contain the divergent $\zeta(1)=\sum_n1/n$, and (a) the
+divergent series $\psi_{-1}=\sum_nn\cos nx$. The statement writes the
+integration variable as $t$, since $x$ is already the upper limit.
 For $s\ge2$, the terms of the series for $\psi_{2s-1}$ are bounded by
 $n^{-(2s-1)}\le n^{-3}$, so it converges absolutely and uniformly
 (Weierstrass M-test) and may be integrated term by term, with
@@ -900,12 +933,19 @@ To dominate it, use
 \[
 |1-re^{it}|^2=1-2r\cos t+r^2=(1-r)^2+4r\sin^2(t/2).
 \]
-For $1/2\le r<1$ this gives $2\sin^2(t/2)\le|1-re^{it}|^2<4$, hence
-$|\ln|1-re^{it}||\le\ln2+|\ln|\sin(t/2)||$, independently of $r$. By
-Jordan's inequality ($\sin u\ge2u/\pi$ on $[0,\pi/2]$),
-$|\sin(t/2)|\ge\operatorname{dist}(t,2\pi\mathbb Z)/\pi$, so on any
-bounded interval the integrand is bounded by
-$\ln(2\pi)+|\ln\operatorname{dist}(t,2\pi\mathbb Z)|$, which is
+For $1/2\le r<1$ this gives $2\sin^2(t/2)\le|1-re^{it}|^2<4$ (for the
+lower bound drop $(1-r)^2\ge0$ and use $4r\ge2$; for the upper bound use
+$|1-re^{it}|\le1+r<2$). Taking half the logarithm,
+\[
+\tfrac12\ln2+\ln|\sin(t/2)|\le\ln|1-re^{it}|<\ln2,
+\]
+and since $\ln|\sin(t/2)|\le0$ this gives
+$|\ln|1-re^{it}||\le\ln2+|\ln|\sin(t/2)||$, independently of $r$. Let
+$d=\operatorname{dist}(t,2\pi\mathbb Z)\in[0,\pi]$, so that
+$|\sin(t/2)|=\sin(d/2)$. By Jordan's inequality ($\sin u\ge2u/\pi$ on
+$[0,\pi/2]$), $\sin(d/2)\ge d/\pi$, hence
+$|\ln|\sin(t/2)||\le\ln\pi-\ln d\le\ln\pi+|\ln d|$. So on any bounded
+interval the integrand is bounded by $\ln(2\pi)+|\ln d|$, which is
 integrable near the finitely many singularities because
 $\int_0^\epsilon|\ln t|\,dt=\epsilon(1-\ln\epsilon)$ for $0<\epsilon<1$.
 Dominated convergence therefore lets $r\uparrow1$ under the integral,
@@ -969,10 +1009,11 @@ evenness), which reproduces the same formula.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{19.2.1}\quad \erratum{Formally expand each sine in the Fourier expansion of a
-nonzero-height square wave, Eq.~(19.26), in powers of $x$.} Show that the
-coefficients of $x^{1}$ form a divergent series. Repeat for the
-coefficients of $x^{3}$.
+\noindent\textbf{19.2.1}\quad Transform the Fourier expansion of a
+square wave, Eq.~(19.26), into a power series \erratum{(formally: expand
+each sine in powers of $x$ and collect like powers; height $h\ne0$)}.
+Show that the coefficients of $x^{1}$ form a divergent series. Repeat
+for the coefficients of $x^{3}$.
 \par\emph{Note.}~A power series cannot handle a discontinuity.
 These infinite coefficients are the result of attempting to beat
 this basic limitation on power series.
@@ -1177,7 +1218,8 @@ As a check, by 19.1.5 the sine series is $(\pi-x)/2$ on $(0,\pi)$ and
 $-(\pi+x)/2$ on $(-\pi,0)$, so the right side is
 $1/2+x/(2\pi)+(\pi-x)/(2\pi)=1$ and
 $1/2+x/(2\pi)-(\pi+x)/(2\pi)=0$, respectively.
-The term mentioned in the hint must be retained. Expand it using the
+The term $x/(2\pi)$ of the note must be retained; the answer to the
+note's question is to replace it by its own Fourier series, the
 sawtooth series $x=2\sum_{n\ge1}(-1)^{n+1}\sin nx/n$ of 19.2.7, that
 is, $x/(2\pi)=\pi^{-1}\sum_{n\ge1}(-1)^{n+1}\sin nx/n$:
 \begin{align*}
@@ -1424,8 +1466,11 @@ with $a_0/2=\pi/2$,
 \frac{\cos((2j+1)x)}{(2j+1)^2},\qquad-\pi\le x\le\pi.}
 \]
 The periodic triangular wave is continuous, including at the period
-endpoints, and the series is absolutely uniform by comparison with
-$\sum n^{-2}$. The cusp in its derivative does not obstruct equality.
+endpoints, and piecewise smooth, so by Dirichlet's theorem its Fourier
+series converges to it at every point; the corners at $x=0$ and
+$x=\pm\pi$, where the slope jumps between $-1$ and $+1$, do not obstruct
+equality. The series converges absolutely and uniformly by comparison
+with $\sum n^{-2}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1439,7 +1484,7 @@ f(x)=\begin{cases}
 in the interval $[-\pi,\pi]$.
 \par\emph{Note.}~This variable-width square wave is of some
 importance in electronic music.
-\erratum{Take $x_0$ real and include zero width and full width; at a jump state the Fourier midpoint value.}
+\erratum{Take $x_0$ real and include zero width and full width; at a jump, state the Fourier midpoint value.}
 \solution
 Because the definition involves $x_0^2$, write $\alpha=|x_0|$.
 First assume $0<\alpha<\pi$. The waveform depends only on $x^2$, so it is
@@ -1506,7 +1551,9 @@ hence to a constant, written $n^2$:
 \]
 The angular equation $\Theta''+n^2\Theta=0$ has $2\pi$-periodic
 (single-valued) solutions only for integer $n\ge0$, namely
-$\Theta=\cos n\varphi,\sin n\varphi$; a negative constant would give
+$\Theta=\cos n\varphi,\sin n\varphi$ (for $n=0$ the general solution
+$A+B\varphi$ changes by $2\pi B$ around the axis, so periodicity forces
+$B=0$ and leaves the constant); a negative constant would give
 nonperiodic exponentials. The radial equation $r^2R''+rR'-n^2R=0$ is
 of Euler type: $R=r^k$ gives $k^2=n^2$, so $R=r^n,r^{-n}$ for $n\ge1$,
 while for $n=0$ it reads $(rR')'=0$, with solutions $R=1,\ln r$.
@@ -1726,7 +1773,8 @@ F(x)=\frac x2+\frac2\pi\sum_{j=0}^{\infty}
 \]
 This step is justified in $L^2$: integration against the indicator of
 $(0,x)$ is a bounded linear functional, and the Fourier partial sums
-converge in $L^2$. The resulting series is absolutely uniform.
+converge in $L^2$. The resulting series converges absolutely and
+uniformly, since its terms are bounded by $(4/\pi)(2j+1)^{-2}$.
 Splitting it into two absolutely convergent series and using
 $\sum_{j\ge0}(2j+1)^{-2}=\pi^2/8$ (19.2.13(b)), so that the constant part
 is $(2/\pi)(\pi^2/8)=\pi/4$, yields
