@@ -1773,9 +1773,15 @@ cancel),
 \[
 \frac d{dx}\{x(yz'-y'z)\}=(k^2-k'^2)xyz.
 \]
-Integrate first from $\epsilon>0$ to $a$, so no individually
-divergent origin terms have been introduced. To take $\epsilon\to0$,
-write the first two terms of the series as
+Integrate first from $\epsilon>0$ to $a$:
+\[
+\bigl[x(yz'-y'z)\bigr]_\epsilon^a=(k^2-k'^2)\int_\epsilon^a xyz\,dx.
+\]
+As $\epsilon\to0$ the integral converges, since $xyz=O(x^{2\nu+1})$
+with $2\nu+1>-1$. The bracket needs care: for $-1<\nu<0$ the separate
+products $xyz'$ and $xy'z$ each behave like $x^{2\nu}$ and diverge as
+$x\to0$, so its value at the origin must be found as a limit. For
+this, write the first two terms of the series as
 \[
 y=A x^\nu\left[1-px^2+O(x^4)\right],\quad
 z=B x^\nu\left[1-qx^2+O(x^4)\right],
@@ -1808,7 +1814,7 @@ and denominator both vanish at $k'=k$; their $k'$ derivatives are
 \[
 a[J_\nu(ka)J_\nu'(k'a)+k'aJ_\nu(ka)J_\nu''(k'a)
 -kaJ_\nu'(ka)J_\nu'(k'a)]
-\quad\text{and}\quad -2k'.
+\quad\text{and}\quad {-2k'}.
 \]
 By l'H\^opital's rule, writing $J=J_\nu(ka)$ and using primes for
 argument derivatives,
@@ -1847,7 +1853,7 @@ J_{\nu}\left(\beta_{\nu n}\frac{\rho}{a}\right)\rho\,d\rho=0,
 \par\nobreak\hfill\emph{ANS.}\enspace
 (b) $\dfrac{a^{2}}{2}\left(1-\dfrac{\nu^{2}}{\beta_{\nu m}^{2}}\right)
 [J_{\nu}(\beta_{\nu m})]^{2}$, $\nu>-1$.
-\par\erratum{These formulas refer to positive derivative roots. For $\nu=0$ the additional constant mode has norm $a^2/2$.}
+\par\erratum{These formulas refer to positive derivative roots. For $\nu=0$ the additional constant mode has norm $a^2/2$. For $-1<\nu<0$, $J_\nu^\prime$ also has the imaginary zeros $\pm i\kappa$, where $\kappa>0$ and $I_\nu^\prime(\kappa)=0$ (differentiate $J_\nu(\pm ix)=(\pm i)^\nu I_\nu(x)$); the corresponding mode $I_\nu(\kappa\rho/a)$ is treated in Exercise~14.2.5.}
 \solution
 Interpret $\beta_{\nu m}$ as a positive argument satisfying
 $J_\nu'(\beta_{\nu m})=0$, so the derivative with respect to $\rho$
@@ -1878,7 +1884,11 @@ constant mode $J_0(0\rho/a)=1$, of norm $a^2/2$. It is not one
 of the positive roots, and the displayed expression containing
 $\nu^2/\beta^2$ must not be used as $0/0$. Its orthogonality to
 the positive modes follows from
-$\int_0^a\rho J_0(\beta\rho/a)d\rho=a^2J_1(\beta)/\beta=0$.}
+$\int_0^a\rho J_0(\beta\rho/a)d\rho=(a/\beta)^2\int_0^\beta uJ_0(u)du
+=(a/\beta)^2[uJ_1(u)]_0^\beta=a^2J_1(\beta)/\beta=0$
+(substitute $u=\beta\rho/a$ and use $[uJ_1(u)]'=uJ_0(u)$,
+Exercise~14.1.4(a)); the value is zero because $J_1=-J_0'$
+vanishes at the derivative root $\beta$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1964,9 +1974,18 @@ a root. Suppose both its real and imaginary parts are nonzero. Then
 $z_0^2-(z_0^*)^2=4i\,\Re z_0\,\Im z_0\ne0$.
 For complex $k$ and $0<x\le1$ put $u_k(x)=x^\nu F_\nu(kx)$, with the
 real power $x^\nu$. For $k>0$ this is a constant multiple of
-$J_\nu(kx)$; its series contains only $k^2$, so the termwise check
-of Bessel's equation is the same for complex $k$, and
-$(xu_k')'+(k^2x-\nu^2/x)u_k=0$. Hence the derivation of the first
+$J_\nu(kx)$. Its series contains only $k^2$:
+$u_k=\sum_{r\ge0}c_rk^{2r}x^{\nu+2r}$ with
+$c_r=(-1)^r\Gamma(\nu+1)/[4^rr!\,\Gamma(\nu+r+1)]$, so that
+$4r(\nu+r)c_r=-c_{r-1}$ for $r\ge1$. Since
+$(\nu+2r)^2-\nu^2=4r(\nu+r)$, termwise differentiation gives, for
+every complex $k$,
+\begin{align*}
+(xu_k')'-\frac{\nu^2}{x}u_k
+&=\sum_{r\ge1}4r(\nu+r)c_rk^{2r}x^{\nu+2r-1}\\
+&=-k^2x\sum_{r\ge1}c_{r-1}k^{2r-2}x^{\nu+2r-2}=-k^2x\,u_k,
+\end{align*}
+that is, $(xu_k')'+(k^2x-\nu^2/x)u_k=0$. Hence the derivation of the first
 Lommel identity in Exercise~14.2.1 (the derivation of
 Eqs.~(14.43)--(14.44)) applies to $y=u_{z_0}$ and $w=u_{z_0^*}$:
 \[
@@ -2020,7 +2039,7 @@ d_{\nu m}=\frac{2}{a^{2}(1-\nu^{2}/\beta_{\nu m}^{2})
 \rho\,d\rho.
 \]
 \end{enumerate}
-\par\erratum{Use real $\nu>-1$ and convergence in $L^2((0,a),\rho\,d\rho)$; the roots are positive. In (b), include $f_{\rm extra}=0$ for $\nu>0$, a constant mode for $\nu=0$, and the mode proportional to $I_\nu(\kappa\rho/a)$ with $I_\nu^\prime(\kappa)=0$ for $-1<\nu<0$. Its coefficient is determined below.}
+\par\erratum{Use real $\nu>-1$ and convergence in $L^2((0,a),\rho\,d\rho)$; the roots are positive. In (b), $f_{\rm extra}=0$ for $\nu>0$; for $\nu=0$ it is a constant mode, and for $-1<\nu<0$ a multiple of $I_\nu(\kappa\rho/a)$ with $I_\nu^\prime(\kappa)=0$, $\kappa>0$. Its coefficient is determined below.}
 \solution
 Use the weighted inner product
 $\langle g,h\rangle=\int_0^a g(\rho)^*h(\rho)\rho\,d\rho$.
@@ -2041,8 +2060,11 @@ Exercise~14.2.3):
 \]
 Division gives the asserted $c_{\nu n}$.
 
-(b) Repeat with $J_\nu(\beta_{\nu n}\rho/a)\rho$ instead.
-The Neumann orthogonality and norm from Exercise~14.2.2 give
+(b) Repeat with $J_\nu(\beta_{\nu n}\rho/a)\rho$ instead. The term
+$f_{\rm extra}$ contributes nothing, because it is orthogonal to every
+$J_\nu(\beta_{\nu n}\rho/a)$ (see the erratum of Exercise~14.2.2 for
+$\nu=0$, and the check below for $-1<\nu<0$). The Neumann
+orthogonality and norm from Exercise~14.2.2 then give
 \[
 \int_0^a f(\rho)J_\nu(\beta_{\nu n}\rho/a)\rho d\rho
 =d_{\nu n}\frac{a^2}{2}
@@ -2056,7 +2078,8 @@ formula for each positive root.
 of an arbitrary function throughout the stated range $\nu>-1$.
 For $\nu=0$ one must add the constant mode with coefficient
 $d_{00}=2a^{-2}\int_0^a f(\rho)\rho\,d\rho$.
-For $-1<\nu<0$ one must also include a negative-eigenvalue mode
+For $-1<\nu<0$ there is no constant mode; one must instead include
+a negative-eigenvalue mode
 $I_\nu(\kappa\rho/a)$, where $I_\nu'(\kappa)=0$, $\kappa>0$.
 These omissions do not change the coefficient formulas for the
 positive-root terms.}
@@ -2070,7 +2093,20 @@ modified Bessel equation $x^2I_\nu''=(x^2+\nu^2)I_\nu-xI_\nu'$ turns
 this into $xw'=x^2+\nu^2-w^2$. At every zero of $w$ its derivative
 is positive, so it crosses zero only once. The corresponding radial
 function has eigenvalue $-\kappa^2/a^2$ and is orthogonal to all
-positive-eigenvalue modes by the same boundary-bracket argument.
+positive-eigenvalue modes by the boundary-bracket argument of
+Exercise~14.2.1. Indeed, $y=I_\nu(\kappa\rho/a)$ satisfies
+$(\rho y')'-(\kappa^2\rho/a^2+\nu^2/\rho)y=0$, the equation of
+Exercise~14.2.1 with $k^2=-\kappa^2/a^2$, so with
+$z=J_\nu(\beta_{\nu n}\rho/a)$ the identity derived there becomes
+\[
+\frac d{d\rho}\{\rho(yz'-y'z)\}
+=-\frac{\kappa^2+\beta_{\nu n}^2}{a^2}\,\rho yz.
+\]
+The bracket vanishes at $\rho=a$, where $y'=z'=0$, and it is
+$O(\rho^{2\nu+2})$ as $\rho\to0$ by the expansion of
+Exercise~14.2.1, now with $p=k^2/[4(\nu+1)]=-\kappa^2/[4(\nu+1)a^2]$.
+Integrating from $0$ to $a$ therefore gives $\int_0^a\rho yz\,d\rho=0$,
+since $\kappa^2+\beta_{\nu n}^2>0$.
 For clarity, derive its norm rather than assuming a modified Lommel
 formula. Put $y(x)=I_\nu(x)$ and
 \[
@@ -2083,8 +2119,12 @@ F'=x(y^2-y'^2)+(x^2+\nu^2)yy'-x^2y'y''.
 The modified equation says
 $x^2y''=(x^2+\nu^2)y-xy'$. Substitution cancels the two
 $yy'$ terms and the two $xy'^2$ terms, leaving $F'=xy^2$.
-Near zero, the leading $x^{2\nu}$ contributions cancel in $F$,
-so $F=O(x^{2\nu+2})\to0$ for $\nu>-1$.
+Near zero, the series of $I_\nu$ gives $y=Cx^\nu[1+O(x^2)]$ and
+$y'=Cx^{\nu-1}[\nu+O(x^2)]$, with $C=2^{-\nu}/\Gamma(\nu+1)$. So in
+$2F=x^2y^2-x^2y'^2+\nu^2y^2$ the last two terms are
+$C^2x^{2\nu}[-\nu^2+O(x^2)]$ and $C^2x^{2\nu}[\nu^2+O(x^2)]$, whose
+leading parts cancel, while $x^2y^2=O(x^{2\nu+2})$. Hence
+$F=O(x^{2\nu+2})\to0$ for $\nu>-1$.
 Now set $x=\kappa\rho/a$ and use $I_\nu^\prime(\kappa)=0$:
 \[
 N_-=\int_0^aI_\nu(\kappa\rho/a)^2\rho\,d\rho
@@ -2173,9 +2213,20 @@ harmonic barrier
 B(\mathbf x)=\int_\Gamma\frac{d\ell_{\mathbf y}}{|\mathbf x-\mathbf y|}.
 \]
 It is finite in the interior, harmonic there, and diverges to
-$+\infty$ at the rim: the local line integral is comparable to
-$\int_{-\delta}^{\delta}(d^2+s^2)^{-1/2}ds
-=2\operatorname{arsinh}(\delta/d)\to\infty$.
+$+\infty$ at the rim. Indeed, let $d$ be the distance from $\mathbf x$
+to $\Gamma$, attained at $\mathbf y_0\in\Gamma$, and let $s$ be arc
+length along that rim circle, measured from $\mathbf y_0$. On the arc
+$|s|\le\delta$ (a fixed $\delta$, $0<\delta<\pi a$) a chord is no
+longer than its arc, so
+$|\mathbf x-\mathbf y|\le d+|\mathbf y-\mathbf y_0|\le d+|s|
+\le\sqrt2\,(d^2+s^2)^{1/2}$ (since $2d|s|\le d^2+s^2$). The rest of
+the integrand is positive; hence
+\[
+B(\mathbf x)\ge\frac1{\sqrt2}\int_{-\delta}^{\delta}
+\frac{ds}{\sqrt{d^2+s^2}}
+=\sqrt2\operatorname{arsinh}\frac\delta d\longrightarrow\infty
+\qquad(d\to0).
+\]
 For any $\epsilon>0$, both $U-\epsilon B$ and
 $-U-\epsilon B$ have nonpositive boundary upper limits, including
 the rim because $U$ is bounded. The maximum principle gives
@@ -2227,8 +2278,12 @@ For complex functions, the norm version is
 =\frac12\sum_{n=1}^{\infty}|a_n|^2J_{m+1}(\alpha_{mn})^2;
 \]
 the bilinear square identity also follows by the same limiting
-argument. Completeness of the Dirichlet Bessel basis identifies the
-limit with $f$, rather than merely its orthogonal projection.
+argument. The assumption holds for every $f$ in $L^2((0,1),x\,dx)$
+when the $a_n$ are its Fourier--Bessel coefficients (those of
+Exercise~14.2.5(a) with $a=1$), because the Dirichlet Bessel
+functions are complete; without completeness the partial sums would
+converge only to the orthogonal projection of $f$ onto their closed
+span.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2241,7 +2296,11 @@ Parseval relation.
 \par\erratum{Here $m>-1$ is real and $\alpha_{mn}$ is the $n$th positive zero of $J_m$.}
 \solution
 Expand $f(x)=x^m$ on $0<x<1$ in the Dirichlet Bessel basis.
-For $m>-1$, $\int_0^1|x^m|^2x\,dx=1/[2(m+1)]$ is finite.
+For $m>-1$, $\int_0^1|x^m|^2x\,dx=1/[2(m+1)]$ is finite, so $x^m$
+lies in $L^2((0,1),x\,dx)$. By the completeness of the Dirichlet
+Bessel functions (end of Exercise~14.2.7), its Fourier--Bessel series
+then converges to $x^m$ in this space, which is the hypothesis of the
+Parseval relation.
 The coefficient formula of Exercise~14.2.5(a), with $a=1$ and
 $\nu=m$, gives
 \[
@@ -2359,7 +2418,27 @@ $\cosh(2\alpha_ns)/\cosh\alpha_n\le e^{2\alpha_ns}/(e^{\alpha_n}/2)
 =2e^{-\alpha_n(1-2s)}$, with $\alpha_n\approx(n-\frac14)\pi$; for
 $s\le0.4$ this factor is at most $2e^{-0.2\alpha_n}$. At $s=1/2$ it
 equals one and only the algebraic decay of the $A_n$ remains, which
-is the slow convergence mentioned in the Note. For the interior
+is the slow convergence mentioned in the Note. Quantitatively, the
+large-$x$ forms $J_0(x)\approx\sqrt{2/(\pi x)}\cos(x-\pi/4)$ and
+$J_1(x)\approx\sqrt{2/(\pi x)}\cos(x-3\pi/4)$ (Section~14.6) give
+$\alpha_n\approx(n-\frac14)\pi$ and
+$J_1(\alpha_n)^2\approx2/(\pi\alpha_n)$, while
+$\int_0^{\alpha_n}J_0\,dy\to\int_0^\infty J_0\,dy=1$
+(Exercise~14.1.20 with $a=0$, $b=1$). Hence
+\[
+A_n\approx\frac{100\pi}{\alpha_n^2}\approx\frac{100}{\pi(n-\frac14)^2}.
+\]
+The main relative correction,
+$-\int_{\alpha_n}^\infty J_0\,dy\approx(-1)^{n+1}\sqrt{2/(\pi\alpha_n)}$
+(integrate the cosine form by parts), alternates in sign and so
+largely cancels in sums. At the top center, where $J_0(0)=1$ and the
+axial factor is one, the modes after the twentieth therefore add about
+\[
+\sum_{n\ge21}\frac{100}{\pi(n-\frac14)^2}
+\approx\frac{100}{\pi}\int_{20.5}^\infty\frac{dt}{(t-\frac14)^2}
+=\frac{100}{20.25\,\pi}\approx1.57,
+\]
+which is the shortfall $100-98.42$ quoted in the Note. For the interior
 entries, the integrals $\int_0^{\alpha_n}J_0(y)dy$ were accumulated
 as sums of quadratures over the intervals between consecutive zeros
 of $J_0$, and 120 modes were summed. Comparing 80 and 120 modes changed
@@ -2574,8 +2653,9 @@ W[J_\nu,Y_\nu]
 =\boxed{\frac2{\pi x}}.
 \]
 Both formulas extend to integer orders by their removable order
-limits. In the first, both sides then vanish because $J_{-n}$ is
-proportional to $J_n$; the second remains nonzero.
+limits. In the first, both sides then vanish: $\sin n\pi=0$, and
+$J_{-n}=(-1)^nJ_n$, $J_{1-n}=(-1)^{n-1}J_{n-1}$ turn the left side
+into $[(-1)^{n-1}+(-1)^n]J_nJ_{n-1}=0$. The second remains nonzero.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2718,9 +2798,11 @@ F(x)=\int_1^\infty\frac{\cos(xu)}u\,du
 \left(\frac1{\sqrt{u^2-1}}-\frac1u\right)du.
 \]
 In the first, put $t=xu$: it equals
-$\int_x^\infty t^{-1}\cos t\,dt=-\operatorname{Ci}(x)$, and
+$\int_x^\infty t^{-1}\cos t\,dt=-\operatorname{Ci}(x)$, and, by
+Exercise~13.6.14,
 $\operatorname{Ci}(x)=\gamma+\ln x+\int_0^x t^{-1}(\cos t-1)dt
-=\gamma+\ln x+O(x^2)$. The difference in parentheses is positive,
+=\gamma+\ln x+O(x^2)$, because $|\cos t-1|\le t^2/2$ bounds the last
+integral by $x^2/4$. The difference in parentheses is positive,
 $O((u-1)^{-1/2})$ as $u\to1$ and $O(u^{-3})$ as $u\to\infty$, hence
 integrable; since $|\cos(xu)|\le1$, dominated convergence gives for
 the second integral the limit
@@ -2820,13 +2902,14 @@ $-(-1)^n(-1)^{n+1}J_nL=J_nL$ add to $2J_nL$; the finite sum enters
 with a minus sign; and the two infinite sums, both with a minus
 sign, combine into one with $\psi(k+1)+\psi(n+k+1)$. Dividing by
 $\pi$,
-\begin{align*}
-\boxed{Y_n(x)={}}&\boxed{\frac2\pi J_n(x)\ln(x/2)
--\frac1\pi\sum_{r=0}^{n-1}\frac{(n-r-1)!}{r!}(x/2)^{2r-n}}\\
-&\boxed{\quad-\frac1\pi\sum_{k=0}^\infty
-\frac{(-1)^k[\psi(k+1)+\psi(n+k+1)]}{k!(n+k)!}
-(x/2)^{n+2k}.}
-\end{align*}
+\[
+\boxed{\begin{aligned}
+Y_n(x)={}&\frac2\pi J_n(x)\ln(x/2)
+-\frac1\pi\sum_{r=0}^{n-1}\frac{(n-r-1)!}{r!}(x/2)^{2r-n}\\
+&-\frac1\pi\sum_{k=0}^\infty
+\frac{(-1)^k[\psi(k+1)+\psi(n+k+1)]}{k!(n+k)!}(x/2)^{n+2k}.
+\end{aligned}}
+\]
 This is Eq.~(14.61). When $n=0$ the finite sum is empty; negative
 integer orders follow from $Y_{-n}=(-1)^nY_n$. The gamma-pole
 limit above also supplies $q=0$, needed by the last finite-sum term.
@@ -2937,8 +3020,11 @@ $x$ & $f(x)$ & $x$ & $f(x)$ & $x$ & $f(x)$ & $x$ & $f(x)$\\
 \bottomrule
 \end{tabular}\normalsize
 \end{center}
-The plot separates each interval between poles; vertical values
-outside $[-6,6]$ are clipped. Red points mark the first three roots.
+The plot draws the branch of $f$ on each interval between consecutive
+poles (listed below) as a separate curve, clipped to $|f|\le6$. The
+branches on $(3.5430,3.9577)$, $(6.6805,7.0861)$ and $(9.8207,10]$ stay
+above $6$ (their minima are about $6.79$, $6.98$ and $7.06$) and
+therefore do not appear. Red points mark the first three roots.
 \begin{center}
 \begin{tikzpicture}[x=1.05cm,y=.34cm]
 \draw[->] (0,0)--(10.4,0) node[right] {$x$};
@@ -2991,10 +3077,15 @@ R_j(\rho)=J_0(\lambda_j\rho)Y_0(\lambda_j)
 vanishes at $\rho=1$ identically and at $\rho=2$ by $g=0$.
 At zero parameter the radial equation has solution $A+B\ln\rho$;
 both boundary values zero force $A=B=0$. Consistently,
-$g(0^+)=2\ln2/\pi\ne0$, although $f(0^+)=0$ because each
-$Y_0$ grows logarithmically.
+$g(0^+)=2\ln2/\pi\ne0$: since $J_0(x)$ and $J_0(2x)$ are $1+O(x^2)$,
+$g(x)=Y_0(2x)-Y_0(x)+O(x^2\ln x)$, and the small-$x$ form
+$Y_0(x)=\frac2\pi[\ln(x/2)+\gamma]+o(1)$ of Exercise~14.3.7(b) gives
+$Y_0(2x)-Y_0(x)=\frac2\pi[\ln x-\ln(x/2)]+o(1)\to\frac2\pi\ln2$.
+On the other hand $f=-g/[Y_0(x)Y_0(2x)]\to0$, because each $Y_0$
+grows logarithmically.
 
-For large $x$, substitute
+For large $x$, substitute the leading terms of the asymptotic forms
+of Section~14.6,
 $J_0(x)=\sqrt{2/(\pi x)}[\cos(x-\pi/4)+O(x^{-1})]$ and
 $Y_0(x)=\sqrt{2/(\pi x)}[\sin(x-\pi/4)+O(x^{-1})]$.
 The products carry the factor
@@ -3029,7 +3120,14 @@ eigenvalue therefore gives, for every $j\ge1$,
 \le\sqrt{(j\pi)^2-\tfrac1{16}}.
 \]
 These disjoint intervals contain the three computed roots for
-$j=1,2,3$, so they are indeed the first three. The same bounds
+$j=1,2,3$. Every positive root $\lambda$ of $g$ is one of the
+$\lambda_k$, because $R$ as above, with $\lambda$ in place of
+$\lambda_j$, is an eigenfunction (it is not identically zero, since
+$J_0(\lambda)$ and $Y_0(\lambda)$ cannot both vanish: their Wronskian
+is $2/(\pi\lambda)$, Exercise~14.3.5); and $\lambda_k$ lies in the
+$k$th interval. Since the intervals are disjoint, the root found in
+the $j$th interval is $\lambda_j$, so the computed roots are indeed
+the first three. The same bounds
 give $\lambda_j=j\pi+O(j^{-1})$, hence
 $\lambda_{j+1}-\lambda_j\to\pi$.
 
