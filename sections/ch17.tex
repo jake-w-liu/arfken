@@ -1347,12 +1347,19 @@ each of the irreducible representations in the direct sum
 corresponding to $E\otimes E$.
 \end{enumerate}
 \solution
-\textbf{(a)} For matrices $A,B$,
-$\operatorname{tr}(A\otimes B)=(\operatorname{tr}A)(\operatorname{tr}B)$.
-The product character is consequently
+\textbf{(a)} The matrices of $E\otimes E$ are $D(g)\otimes D(g)$,
+where $D(g)$ are those of $E$. For matrices $A,B$,
+$\operatorname{tr}(A\otimes B)=(\operatorname{tr}A)(\operatorname{tr}B)$,
+since the diagonal entries of $A\otimes B$ are the products
+$A_{ii}B_{jj}$. On the classes $(I,2C_4,C_2,2\sigma_v,2\sigma_d)$
+the product character is consequently
 \[
 \chi_{E\otimes E}=(2,0,-2,0,0)^2=(4,0,4,0,0).
 \]
+The multiplicity of an irreducible $K$ is
+$n_K=\frac18\sum_C|C|\,\chi_K(C)^*\chi_{E\otimes E}(C)$, summed over
+the classes $C$ with sizes $|C|=(1,2,1,2,2)$, as in 17.4.5(b);
+only $I$ and $C_2$ contribute.
 For each of the four one-dimensional irreducibles,
 $\chi(I)=\chi(C_2)=1$, so its multiplicity is
 $(4+4)/8=1$. For $E$ itself it is
@@ -1361,7 +1368,12 @@ $[2(4)+(-2)(4)]/8=0$. Thus
 \boxed{E\otimes E=A_1\oplus A_2\oplus B_1\oplus B_2}.
 \]
 
-\textbf{(b)} Take $r x=y$, $r y=-x$,
+\textbf{(b)} Let $r=C_4$ (the counterclockwise quarter-turn),
+$s=\sigma_v$ (reflection in the $xz$ plane), and $d=\sigma_d$
+(reflection in the plane $x=y$). With functions transformed by
+$(gf)(\mathbf r)=f(g^{-1}\mathbf r)$ as in 17.4.4, for instance
+$(rx)(x,y)=y$ because $r^{-1}(x,y)=(y,-x)$, they act as
+$r x=y$, $r y=-x$,
 $s x=x$, $s y=-y$, and $d x=y$, $d y=x$.
 In the ordered basis $(x,y)$ their coefficient matrices are
 \[
@@ -1372,6 +1384,10 @@ D(d)=\begin{pmatrix}0&1\\1&0\end{pmatrix}.
 \]
 Their traces, together with $\operatorname{tr}I_2=2$, are
 $(2,0,-2,0,0)$ as in the $E$ row.
+One element of each class suffices, because conjugate elements have
+similar matrices and hence equal traces. For instance, the other
+members $r^3$, $\sigma_v'=r^2s$, $\sigma_d'=r^3s$ of the classes
+have the traceless matrices $D(r)^T$, $-D(s)$, $-D(d)$.
 
 \textbf{(c)} The product basis has independent variables for
 particles 1 and 2. Its four convenient combinations are
@@ -1387,14 +1403,32 @@ Apply $r$ to each factor: $x_1x_2\to y_1y_2$,
 $y_1y_2\to x_1x_2$,
 $x_1y_2\to-y_1x_2$, and
 $y_1x_2\to-x_1y_2$.
+Since $r$ interchanges $x_1x_2$ with $y_1y_2$, and $x_1y_2$ with
+$y_1x_2$ up to sign, the sums and differences of these pairs, which
+are the four combinations above, are its eigenvectors:
+\[
+\begin{aligned}
+ra_1&=(y_1y_2+x_1x_2)/\sqrt2=a_1,&
+ra_2&=(-y_1x_2+x_1y_2)/\sqrt2=a_2,\\
+rb_1&=(y_1y_2-x_1x_2)/\sqrt2=-b_1,&
+rb_2&=(-y_1x_2-x_1y_2)/\sqrt2=-b_2.
+\end{aligned}
+\]
 Thus the four eigenvalues of $r$ are $(1,1,-1,-1)$.
 Under $s$ a product acquires one minus sign for each $y$,
 so the eigenvalues are $(1,-1,1,-1)$.
-Under $d$ the two variables are exchanged, giving
-$(1,-1,-1,1)$.
-These reproduce the four claimed one-dimensional characters.
-Their independent coefficient vectors span the full four-dimensional
-tensor-product space.
+Under $d$ the variables $x_i,y_i$ are exchanged, so
+$x_1x_2\leftrightarrow y_1y_2$ and $x_1y_2\leftrightarrow y_1x_2$,
+giving $(1,-1,-1,1)$.
+Every element of $C_{4v}$ is a product $r^js^k$ (and $d=rs$, since
+$D(r)D(s)=D(d)$), so each combination spans an invariant line, and
+$r^2$ has eigenvalue $(\pm1)^2=1$ on it. The eigenvalues on the
+classes $2C_4$, $2\sigma_v$, $2\sigma_d$ are those of $r$, $s$, $d$,
+and they reproduce the rows $A_1$, $A_2$, $B_1$, $B_2$ of the table.
+The coefficient vectors $(1,0,0,1)$, $(0,1,-1,0)$, $(1,0,0,-1)$,
+$(0,1,1,0)$, each divided by $\sqrt2$, in the basis
+$(x_1x_2,x_1y_2,y_1x_2,y_1y_2)$ are orthonormal, so the four
+combinations span the full four-dimensional tensor-product space.
 
 \Needspace{12\baselineskip}
 \subsection*{17.6 Symmetric Group}
@@ -1410,7 +1444,7 @@ $4\times4$ matrix representation of this one permutation.
 \item[(c)] Is \erratum{either of the permutations in (a) and (b)} a possible member of the $D_{4}$
 group, which was the subject of Exercise~17.4.3? Why or why not?
 \end{enumerate}
-\par\erratum{Keep the two printed inputs distinct. In (c), distinguish the standard cyclic square labeling $1,2,3,4$ from an embedding obtained by relabeling its vertices.}
+\par\erratum{As printed, (b) starts from $(abdc)$ rather than the $(abcd)$ of (a), so the two parts concern different permutations; (c), printed for a single permutation, is therefore answered for both, and for the permutation of (b) the answer depends on how the four slots are placed around the square.}
 \solution
 \textbf{(a)} The target column selects entries $4,1,3,2$
 of the original column:
@@ -1421,13 +1455,17 @@ of the original column:
 P\begin{pmatrix}a\\b\\c\\d\end{pmatrix}
 =\begin{pmatrix}d\\a\\c\\b\end{pmatrix}.
 \]
-As a map from old positions to new positions, this is
+As a map from old positions to new positions ($a$ moves from 1 to 2,
+$b$ from 2 to 4, $d$ from 4 to 1), this is
 $(1\,2\,4)$ with position 3 fixed. It is a 3-cycle, has
-order three, and is even: a 3-cycle is a product of two transpositions.
+order three, and is even: a 3-cycle is a product of two
+transpositions, here $(1\,2\,4)=(1\,4)(1\,2)$ with the right factor
+applied first. Correspondingly $\det P=+1$.
 
 \textbf{(b)} \erratum{The printed input changes from $(abcd)$
 in (a) to $(abdc)$ in (b). These are different permutations.
-The manual's answer \emph{even} applies to (a), not to (b) as printed.}
+The Instructor's Manual's answer \emph{even} applies to (a), not to
+(b) as printed.}
 For the literal input $(a,b,d,c)$, the target $(d,a,c,b)$
 selects entries $3,1,4,2$. Its matrix is
 \[
@@ -1435,8 +1473,10 @@ Q=\begin{pmatrix}
 0&0&1&0\\1&0&0&0\\0&0&0&1\\0&1&0&0
 \end{pmatrix}.
 \]
-Its position cycle is $(1\,2\,4\,3)$, which is a product
-of three transpositions. Thus the answer to (b) as printed is
+Its position cycle ($a$ moves from 1 to 2, $b$ from 2 to 4,
+$c$ from 4 to 3, $d$ from 3 to 1) is $(1\,2\,4\,3)$, which is a
+product of three transpositions,
+$(1\,2\,4\,3)=(1\,3)(1\,4)(1\,2)$. Thus the answer to (b) as printed is
 \[
 \boxed{\text{odd},\qquad \det Q=-1}.
 \]
@@ -1445,18 +1485,21 @@ inversions, also giving $(-1)^3=-1$.
 
 \textbf{(c)} For the permutation in (a), the answer is unambiguously
 $\boxed{\text{no}}$: its order is three, while $D_4$ has only
-elements of orders one, two, and four. In particular its order
-cannot divide $|D_4|=8$.
+elements of orders one, two, and four (its classes $I$, $2C_4$,
+$C_2$, $2C_2'$, $2C_2''$ of 17.4.3 consist of the identity, two
+quarter-turns, and five half-turns). Equivalently, by Lagrange's
+theorem the order of every element divides $|D_4|=8$, and $3\nmid8$.
 
-\erratum{The original reference in (c) was ambiguous. For the literal
-permutation of (b), the geometric labeling must be specified.}
+\erratum{For the literal permutation of (b), the answer depends on
+the placement of the slots around the square, which the printed
+statement does not specify.}
 With slots $1,2,3,4$ placed in that cyclic order around the square,
 $Q$ is not a symmetry: it sends the adjacent pair $(1,2)$ to
-$(2,4)$, a diagonal pair. But a four-cycle is compatible with
+$(2,4)$, a diagonal pair, whereas every symmetry of the square maps
+adjacent vertices to adjacent vertices. But a four-cycle is compatible with
 an abstract $D_4$ embedding. If the cyclic order of vertices is
 chosen to be $1,2,4,3$, then $Q=(1\,2\,4\,3)$ is a quarter-turn.
-This distinction resolves the ambiguity without silently changing
-the input in (b).
+This distinction resolves the ambiguity.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1470,7 +1513,8 @@ of $C_{4}$. Note that $C_{4}$ is a subgroup of \erratum{$S_{4}$}.
 representation of $C_{4}$ must be reducible?
 \end{enumerate}
 \solution
-Let $R$ cyclically shift a column of four entries to the left.
+\textbf{(a)} Let $R$ cyclically shift a column of four entries to the
+left, $R(a,b,c,d)^T=(b,c,d,a)^T$.
 The four matrices are
 \[
 U(I)=I_4,\qquad
@@ -1488,26 +1532,37 @@ U(C_4^3)=R^3=\begin{pmatrix}
 \]
 Four shifts restore the original column, so $R^4=I_4$.
 The products satisfy $R^jR^k=R^{j+k\pmod4}$, exactly the
-cyclic-group law. All four are permutation matrices, so they
-form a subgroup of the full permutation group $S_4$
-\erratum{(the original note writes $P_4$; this denotes the permutation group $S_4$ just introduced).}
+cyclic-group law. All four are permutation matrices, closed under
+products and containing $I_4$ and the inverses $R^{-j}=R^{4-j}$, so
+they form a subgroup of the full permutation group $S_4$
+\erratum{(the printed note writes $P_4$; this denotes the permutation group $S_4$ just introduced).}
 
-For reducibility, the vector $(1,1,1,1)^T$ is fixed by all
+\textbf{(b)} The representation must be reducible because every
+irreducible representation of the cyclic group $C_4$ is
+one-dimensional (Exercise 17.2.5). Equivalently, the squared
+dimensions of the inequivalent irreducible representations sum to the
+group order $4$, so none has dimension four ($4^2=16>4$).
+Explicitly, the vector $(1,1,1,1)^T$ is fixed by all
 four matrices, giving a proper invariant line.
 More fully, let $\omega=i$ and define
 \[
 v_k=\frac12\begin{pmatrix}1\\\omega^k\\\omega^{2k}\\
 \omega^{3k}\end{pmatrix},\qquad k=0,1,2,3.
 \]
-Cyclic shifting gives $Rv_k=\omega^kv_k$; the last component
-works because $\omega^{4k}=1$.
-Their inner products are
+Cyclic shifting gives $Rv_k=\omega^kv_k$: component $m$ of
+$Rv_k$ ($m=0,\ldots,3$) is
+$\omega^{(m+1)k}/2=\omega^k\,\omega^{mk}/2$; for $m=3$ the
+shifted-in entry is the first one, $1/2=\omega^{4k}/2$.
+Since $\omega^*=\omega^{-1}$, their inner products are
 \[
 v_j^\dagger v_k=\frac14\sum_{m=0}^3\omega^{(k-j)m}
 =\begin{cases}1,&j=k,\\0,&j\ne k,\end{cases}
 \]
-by the finite geometric-series formula.
-Thus $V=(v_0\,v_1\,v_2\,v_3)$ is unitary and
+by the finite geometric-series formula: for $j\ne k$,
+$q=\omega^{k-j}\ne1$ while $q^4=1$, so
+$\sum_{m=0}^3q^m=(1-q^4)/(1-q)=0$.
+Thus $V=(v_0\,v_1\,v_2\,v_3)$ is unitary. Since
+$R^mv_k=\omega^{km}v_k$, $R^mV=V\operatorname{diag}(\omega^{km})$, and
 \[
 \boxed{V^\dagger R^mV=\operatorname{diag}(1,i^m,(-1)^m,(-i)^m)}.
 \]
@@ -1556,6 +1611,10 @@ its notation describes the same cycle, leaving $k!/k=(k-1)!$
 choices. The sizes sum to $24$.
 
 \textbf{(b)} The trivial character is $(1,1,1,1,1)$.
+The sign $\operatorname{sgn}\sigma=\pm1$ of an even or odd permutation
+is the determinant of its permutation matrix, hence multiplicative,
+$\operatorname{sgn}(\sigma\tau)=\operatorname{sgn}\sigma\,\operatorname{sgn}\tau$,
+so it is a one-dimensional representation.
 A cycle of length $k$ is a product of $k-1$ transpositions, so
 the signs of the five classes are $(1,-1,1,1,-1)$.
 These give the $A_1,A_2$ rows below.
@@ -1563,8 +1622,9 @@ These give the $A_1,A_2$ rows below.
 \textbf{(c)} There are five irreducibles. The known dimensions
 $1,1,2$ account for $1+1+4=6$ of the squared-dimension sum.
 The other dimensions $d,e$ obey
-$d^2+e^2=24-6=18$. The only positive integer solution is
-$d=e=3$.
+$d^2+e^2=24-6=18$. Trying $d=1,2,3,4$ gives $e^2=17,14,9,2$,
+of which only $9$ is a square, so the only positive integer
+solution is $d=e=3$.
 
 \textbf{(d)} A useful independent construction supplies the
 remaining characters. The ordinary four-dimensional permutation
@@ -1572,14 +1632,20 @@ representation has character equal to its number of fixed letters:
 \[
 (4,2,0,1,0).
 \]
-Removing its invariant all-ones line leaves a three-dimensional
-representation with character
+The all-ones vector is fixed by every permutation and spans an
+$A_1$ line; its orthogonal complement, the vectors with zero
+component sum, is invariant because permutation matrices are
+orthogonal, as in 17.4.2(b). Traces add over this direct sum, so
+the complement is a three-dimensional representation with character
 \[
-\chi_{T_2}=(3,1,-1,0,-1).
+\chi_{T_2}=(4,2,0,1,0)-(1,1,1,1,1)=(3,1,-1,0,-1).
 \]
 Its squared character norm is
-$9+6(1)+3(1)+8(0)+6(1)=24$, proving irreducibility.
-Multiplying by the sign representation gives a second irreducible,
+$9+6(1)+3(1)+8(0)+6(1)=24=|S_4|$. A character with
+$\sum_C|C|\,|\chi(C)|^2$ equal to the group order is irreducible,
+so this proves irreducibility.
+Multiplying by the sign representation gives a second irreducible
+(its squared norm is again $24$, since the signs have modulus one),
 \[
 \chi_{T_1}=(3,-1,-1,0,1).
 \]
@@ -1595,8 +1661,9 @@ are $(3,1,3,0,1)$. For example $(12)$ fixes $12|34$ and
 exchanges the other two; $(12)(34)$ fixes all three; a 3-cycle
 cycles all three. A 4-cycle fixes $13|24$ and exchanges the other two.
 Remove the all-ones invariant line from this three-dimensional
-permutation space to obtain $\chi_E=(2,0,2,-1,0)$.
-Its norm is $4+3(4)+8(1)=24$, again proving irreducibility.
+permutation space, exactly as above, to obtain
+$\chi_E=(3,1,3,0,1)-(1,1,1,1,1)=(2,0,2,-1,0)$.
+Its squared norm is $4+3(4)+8(1)=24$, again proving irreducibility.
 
 The complete table is therefore
 \[
@@ -1643,6 +1710,10 @@ H_{23}&=\left\{\begin{pmatrix}1&0&0\\0&a&b\\0&-b^*&a^*\end{pmatrix}\right\}.
 \end{aligned}}
 \]
 Each set has the stated constraint on $a,b$.
+Each such $3\times3$ matrix $M$ is unitary, $M^\dagger M=I_3$, because
+the block $W$ is unitary and the remaining diagonal entry is $1$;
+expanding along the row of that isolated $1$ gives $\det M=\det W=1$.
+Hence each set lies in $SU(3)$.
 Products and adjoints act only in the chosen $2\times2$ block,
 so each set is a subgroup. Each embedding is injective and
 preserves multiplication, making these subgroups isomorphic to
@@ -1661,7 +1732,10 @@ Then
 \[
 [A,B]=D,\qquad [D,A]=2A,\qquad[D,B]=-2B.
 \]
-Substitution displays all three commutators:
+Substitution, with bilinearity and antisymmetry of the commutator
+giving $[A+B,A-B]=-2[A,B]$,
+$[A-B,D]=-[D,A]+[D,B]$, and $[D,A+B]=[D,A]+[D,B]$,
+displays all three commutators:
 \[
 \begin{aligned}
 {}[T_x,T_y]&=\frac{[A+B,A-B]}{4i}
@@ -1672,7 +1746,12 @@ Substitution displays all three commutators:
 =\frac{A-B}{2}=i\,\frac{A-B}{2i}=iT_y.
 \end{aligned}
 \]
-In terms of the Gell-Mann matrices, the three triples are
+The Gell-Mann matrices $\lambda_1,\lambda_4,\lambda_6$ are
+$E_{ij}+E_{ji}=2T_x$ and $\lambda_2,\lambda_5,\lambda_7$ are
+$-iE_{ij}+iE_{ji}=2T_y$ for $(i,j)=(1,2),(1,3),(2,3)$, while
+$\lambda_3=\operatorname{diag}(1,-1,0)$ and
+$\lambda_8=\operatorname{diag}(1,1,-2)/\sqrt3$. In their terms the
+three triples are
 \[
 \left(\frac{\lambda_1}2,\frac{\lambda_2}2,\frac{\lambda_3}2\right),
 \quad
@@ -1739,14 +1818,17 @@ U(\alpha,\beta,\gamma)
 Since $\sigma_j^2=I$, separating even and odd powers of the
 exponential gives
 $e^{it\sigma_j/2}=I\cos(t/2)+i\sigma_j\sin(t/2)$.
-In particular
+In particular, with $\sigma_3=\operatorname{diag}(1,-1)$ and
+$i\sigma_2=\bigl(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\bigr)$,
 \[
 Z(t)=\begin{pmatrix}e^{it/2}&0\\0&e^{-it/2}\end{pmatrix},
 \qquad
 Y(\beta)=\begin{pmatrix}\cos(\beta/2)&\sin(\beta/2)\\
 -\sin(\beta/2)&\cos(\beta/2)\end{pmatrix}.
 \]
-First multiply on the right:
+First multiply on the right: the diagonal $Z(\alpha)$ multiplies the
+first column of $Y(\beta)$ by $e^{i\alpha/2}$ and the second by
+$e^{-i\alpha/2}$, so
 \[
 Y(\beta)Z(\alpha)=
 \begin{pmatrix}
@@ -1777,7 +1859,7 @@ of $SO(3)$ by $SU(2)$.
 \par\bigskip
 \noindent\textbf{17.7.4}\quad For a product of three quarks, the
 member of $SU(3)$ representation \textbf{10} with
-$(I_{3},Y)=\big(\erratum{+\tfrac{3}{2}},1\big)$ is $uuu$.
+$(I_{3},Y)=\big(\tfrac{3}{2},1\big)$ is $uuu$.
 \begin{enumerate}
 \item[(a)] Apply operators in the root diagram for $SU(3)$,
 Fig.~17.8, to obtain all the remaining members of the decuplet
@@ -1806,10 +1888,7 @@ independent of all the $\psi(0,0)$ functions found in parts
 \end{enumerate}
 \par\erratum{Use the ordered flavor tensor space with $u,d,s$ orthonormal, and the root convention $I_-u=d$, $U_-d=s$, $V_-u=s$ from Fig.~17.8. The conflicting $U,V$ matrix labels in Eq.~(17.67) are corrected below.}
 \solution
-\erratum{The supplied transcription has $I_3=2/3$ for $uuu$.
-The actual textbook (printed p.~861) correctly has $I_3=3/2$:
-each $u$ contributes $1/2$. This value is restored in the question.
-Also, the matrices labeled $U_\pm$ and $V_\pm$ in Eq.~(17.67)
+\erratum{The matrices labeled $U_\pm$ and $V_\pm$ in Eq.~(17.67)
 are interchanged relative to Eqs.~(17.64)--(17.66) and Fig.~17.8.
 We use the consistent root-diagram convention below.}
 
@@ -1866,7 +1945,14 @@ $N'/N=n_a/(n_b+1)$. Therefore its action on normalized sums is
 T_{b\leftarrow a}D_{n_u,n_d,n_s}
 =\sqrt{n_a(n_b+1)}\,D_{\text{new occupations}}.
 \]
-For example $I_-uuu=duu+udu+uud=\sqrt3D_{uud}$.
+For example $I_-uuu=duu+udu+uud=\sqrt3D_{uud}$, and
+\[
+I_-\mathcal S(uud)=(dud+udd)+(ddu+udd)+(ddu+dud)=2\,\mathcal S(udd),
+\]
+each target word arising once from each of its two $d$'s; since
+$D_{uud}=\mathcal S(uud)/\sqrt3$ and $D_{udd}=\mathcal S(udd)/\sqrt3$,
+this is $I_-D_{uud}=2D_{udd}$, in agreement with
+$\sqrt{n_u(n_d+1)}=\sqrt{2\cdot2}$.
 Successive $I_-$ operations down the top row have coefficients
 $\sqrt3,2,\sqrt3$.
 The remaining rows follow from
@@ -1895,8 +1981,10 @@ a=(0,1,-1),\qquad b=(2,-1,-1).
 Their sums are zero, so both are orthogonal to the decuplet.
 Also $a\cdot b=-1+1=0$ and their squared norms are $2,6$.
 They span the two-dimensional remaining weight space.
-Each is annihilated by $I_+$ because its coefficients sum to zero,
-and by $U_+,V_+$ because it contains no strange quark.
+Since $I_+$ sends each of $uud$, $udu$, $duu$ to $uuu$, it maps a
+combination of them to its coefficient sum times $uuu$; both sums
+vanish, so $I_+$ annihilates both vectors. $U_+$ and $V_+$
+annihilate them because they contain no strange quark.
 They can therefore be taken as the two highest states.
 The constructions below exhibit all eight states generated from
 each, thereby identifying the two octets directly.
@@ -1956,9 +2044,14 @@ I_-F&sdu+sud-dsu-usd&Z_1-Z_2
 \end{array}.
 \]
 For example $V_-A$ changes either $u$ in each term of
-$udu-duu$, giving the four terms in $Z_1$; all six rows
-are obtained by the same slot-by-slot rule.
-The inner products are
+$udu-duu$, giving $(sdu+uds)-(dsu+dus)=Z_1$; all six rows
+are obtained by the same slot-by-slot rule. In the third and last
+rows, $Z_1-Z_2=sdu+sud-dsu-usd$ because the terms $uds$ and $dus$
+cancel.
+In the order $(uds,usd,dus,dsu,sud,sdu)$ of the six zero-weight
+words, the coefficient vectors are
+$Z_1=(1,0,-1,-1,0,1)$ and $Z_2=(1,1,-1,0,-1,0)$, so the inner
+products are
 \[
 \langle Z_1,Z_1\rangle=\langle Z_2,Z_2\rangle=4,\qquad
 \langle Z_1,Z_2\rangle=2.
@@ -2003,21 +2096,43 @@ use the same path $I_-,V_-,U_-,I_+,V_+$ as in (c):
 \]
 For instance lowering the first row gives
 $2(dud+udd)-(ddu+udd)-(ddu+dud)=dud+udd-2ddu$.
+The second and fourth steps change the single $u$ or $d$ of each
+word; the third and fifth are
+\[
+\begin{aligned}
+U_-(dsd+sdd-2dds)&=(ssd+dss)+(ssd+sds)-2(sds+dss)\\
+&=2ssd-sds-dss,\\
+V_+(2ssu-sus-uss)&=2(usu+suu)-(uus+suu)-(uus+usu)\\
+&=usu+suu-2uus.
+\end{aligned}
+\]
 Applying $V_-$ to its first row and $U_-$ to its second yields
 \[
 \begin{aligned}
-T_1&=2sud+2usd-sdu-uds-dsu-dus,\\
-T_2&=sud+dus+usd+uds-2sdu-2dsu.
+T_1&=2(sud+usd)-(sdu+uds)-(dsu+dus)\\
+&=2sud+2usd-sdu-uds-dsu-dus,\\
+T_2&=(sud+dus)+(usd+uds)-2(sdu+dsu)\\
+&=sud+dus+usd+uds-2sdu-2dsu.
 \end{aligned}
 \]
+In the word order used in (d) their coefficient vectors are
+$T_1=(-1,2,-1,-1,2,-1)$ and $T_2=(1,1,1,-2,1,-2)$, so
+$|T_1|^2=|T_2|^2=12$ and $\langle T_1,T_2\rangle=-1+2-1+2+2+2=6$.
 Their Gram matrix is
 $\begin{pmatrix}12&6\\6&12\end{pmatrix}$ with determinant
 $108>0$, giving two more independent states at zero weight.
-The six outer states have norm squared six; a normalized central
-pair is $T_1/\sqrt{12}$ and $(2T_2-T_1)/6$.
+The six outer states have norm squared $4+1+1=6$; a normalized
+central pair is $T_1/\sqrt{12}$ and $(2T_2-T_1)/6$, since
+$\langle T_1,2T_2-T_1\rangle=12-12=0$ and
+$|2T_2-T_1|^2=4(12)+12-4(6)=36$.
 
 For completeness, the slot-symmetric subspace under $P_{12}$
-has dimension $6\cdot3=18$. Its completely symmetric decuplet
+has dimension $6\cdot3=18$: the first two slots carry one of the six
+symmetric combinations $uu$, $dd$, $ss$, $ud+du$, $us+su$, $ds+sd$,
+and the third slot any of three quarks. (Likewise the three
+antisymmetric pairs $ud-du$, $us-su$, $ds-sd$ give the
+$3\cdot3=9$-dimensional slot-antisymmetric space.)
+Its completely symmetric decuplet
 takes ten dimensions, leaving eight. This orthogonal complement
 is invariant under $SU(3)$, because both the slot exchange and
 full symmetrization commute with $U\otimes U\otimes U$.
@@ -2034,18 +2149,27 @@ There are six ordered words at zero weight, in the order
 The decuplet supplies the all-ones vector; the two octets supply
 $Z_1,Z_2,T_1,T_2$. These five vectors are independent:
 $Z_1,Z_2$ have odd $P_{12}$ parity, while the other three have
-even parity; $T_1,T_2$ are independent and each has coefficient
-sum zero, so neither their span nor any of its nonzero vectors
-is the all-ones line.
-The normalized vector orthogonal to all five is
+even parity; $T_1,T_2$ are independent and have coefficient
+sum zero, whereas the all-ones vector has coefficient sum six,
+so it is not in their span.
+The three even vectors therefore span the three-dimensional
+$P_{12}$-even part of the zero-weight space (spanned by $uds+dus$,
+$usd+sud$, $dsu+sdu$), and a vector orthogonal to them is $P_{12}$-odd:
+\[
+\psi=\alpha(uds-dus)+\beta(usd-sud)+\gamma(dsu-sdu).
+\]
+Since $Z_1=(uds-dus)-(dsu-sdu)$ and $Z_2=(uds-dus)+(usd-sud)$, and
+each bracket has squared norm two, orthogonality to $Z_1,Z_2$ requires
+$2\alpha-2\gamma=0$ and $2\alpha+2\beta=0$. Taking
+$\alpha=\gamma=-\beta=1/\sqrt6$, the normalized vector orthogonal to
+all five is
 \[
 \boxed{\psi_{\mathbf1}
 =\frac{uds-usd-dus+dsu+sud-sdu}{\sqrt6}}.
 \]
-Its coefficients are $(1,-1,-1,1,1,-1)/\sqrt6$.
-Their sum is zero, their dot products with $Z_1,Z_2$ are zero,
-and orthogonality to $T_1,T_2$ follows also from opposite
-$P_{12}$ parity. Its squared norm is one.
+As a check, its coefficients $(1,-1,-1,1,1,-1)/\sqrt6$ have zero
+sum and zero dot products with the vectors $Z_1,Z_2,T_1,T_2$
+listed above, and squared norm one.
 
 Finally this is an invariant state, not merely an unused vector:
 it is the fully antisymmetric tensor. Under $U\otimes U\otimes U$
@@ -2062,12 +2186,17 @@ states. In either octet all nonzero outer weights other than the
 starting state have a nonzero raising image: use $I_+$ on $B,C$,
 $V_+$ on $D$, $U_+$ on $E,F$. At zero weight the replacement
 rules give
+$I_+Z_1=suu+uus-usu-uus=F$, $I_+Z_2=usu+uus-suu-uus=-F$,
+$V_+Z_1=(udu+udu)-(duu+duu)=2A$, and
+$V_+Z_2=uud+udu-uud-duu=A$; hence
 \[
 I_+(aZ_1+bZ_2)=(a-b)F,\qquad
 V_+(aZ_1+bZ_2)=(2a+b)A.
 \]
-Both vanish only if $a=b=0$. The same equations hold with
-$Z_j$ replaced by $T_j$ and $A,F$ by the second-octet states.
+Both vanish only if $a=b$ and $2a+b=0$, that is, $a=b=0$.
+The same equations hold with
+$Z_j$ replaced by $T_j$ and $A,F$ by the second-octet states
+$2uud-udu-duu$ and $usu+suu-2uus$.
 Thus the common kernel of $I_+,U_+,V_+$ in each octet is exactly
 its one-dimensional highest-state line. In the decuplet the
 occupation formula shows that any $d$ can be raised by $I_+$
@@ -2112,7 +2241,10 @@ $(x^{0},x^{1},x^{2},x^{3})$, the generator
 Let $x^0=ct$ and
 $\mathbf n=(\cos\theta,\sin\theta,0)$.
 For an infinitesimal passive boost of rapidity $\delta\rho$,
-the frame velocity is $c\,\delta\rho\,\mathbf n$ to first order.
+the frame velocity is
+$c\tanh(\delta\rho)\,\mathbf n=c\,\delta\rho\,\mathbf n+O(\delta\rho^3)$.
+To first order $\gamma=\cosh\delta\rho=1$, and the spatial coordinates
+change as $\mathbf r'=\mathbf r-\mathbf vt$ with $t=x^0/c$.
 Thus
 \[
 \delta x=-\delta\rho\cos\theta\,x^0,\qquad
@@ -2176,7 +2308,7 @@ direction of that axis using Eq.~(17.70), and (3) rotating back to
 the original coordinate system.
 \end{enumerate}
 \solution
-Put $c_\theta=\cos\theta$, $s_\theta=\sin\theta$, and let $B$
+\textbf{(a)} Put $c_\theta=\cos\theta$, $s_\theta=\sin\theta$, and let $B$
 be the real matrix in 17.8.1, so $S=iB$.
 Direct multiplication gives
 \[
@@ -2240,7 +2372,16 @@ C&-Hc_\theta&-Hs_\theta&0\\
 Left multiplication by $R^T$ forms
 $c_\theta$ times row 2 minus $s_\theta$ times row 3 for
 the new $x$ row, and $s_\theta$ times row 2 plus $c_\theta$
-times row 3 for the new $y$ row. These are exactly the
+times row 3 for the new $y$ row:
+\[
+\begin{aligned}
+&c_\theta(-H,Cc_\theta,Cs_\theta,0)-s_\theta(0,-s_\theta,c_\theta,0)
+=(-c_\theta H,\ s_\theta^2+c_\theta^2C,\ c_\theta s_\theta(C-1),\ 0),\\
+&s_\theta(-H,Cc_\theta,Cs_\theta,0)+c_\theta(0,-s_\theta,c_\theta,0)
+=(-s_\theta H,\ c_\theta s_\theta(C-1),\ c_\theta^2+s_\theta^2C,\ 0).
+\end{aligned}
+\]
+These are exactly the
 two middle rows of the boxed matrix. The other rows are unchanged.
 This verifies the rotation--boost--inverse-rotation construction.
 
@@ -2298,9 +2439,28 @@ in Eqs.~(17.82) and (17.83).
 \solution
 Factor out the common $\varepsilon_0$ in Eq.~(17.79) and use
 $\beta=v/c$, $\gamma=(1-\beta^2)^{-1/2}>0$, so $\gamma^2(1-\beta^2)=1$.
+In matrix form, with $x^0=ct$, the field tensor of Eq.~(17.79) and
+the boost of Eq.~(17.80), along $x^3=z$, are
+\[
+\frac{F}{\varepsilon_0}=\begin{pmatrix}
+0&-E_x&-E_y&-E_z\\
+E_x&0&-cB_z&cB_y\\
+E_y&cB_z&0&-cB_x\\
+E_z&-cB_y&cB_x&0
+\end{pmatrix},\qquad
+U=\begin{pmatrix}
+\gamma&0&0&-\beta\gamma\\
+0&1&0&0\\
+0&0&1&0\\
+-\beta\gamma&0&0&\gamma
+\end{pmatrix}.
+\]
 The transformation is $F'=UFU^T$; the particular boost matrix
 is symmetric, so this is $UFU$, as in Eq.~(17.81).
-The first multiplication gives
+Left multiplication by $U$ replaces row 0 by
+$\gamma(\text{row }0)-\beta\gamma(\text{row }3)$ and row 3 by
+$-\beta\gamma(\text{row }0)+\gamma(\text{row }3)$, leaving rows 1
+and 2 unchanged. The first multiplication therefore gives
 \[
 \frac{UF}{\varepsilon_0}=
 \begin{pmatrix}
@@ -2313,7 +2473,10 @@ E_y&cB_z&0&-cB_x\\
 \beta\gamma E_y+\gamma cB_x&\beta\gamma E_z
 \end{pmatrix}.
 \]
-Right multiplication by $U$ mixes only columns 0 and 3.
+Right multiplication by $U$ mixes only columns 0 and 3 in the same
+way: column 0 becomes
+$\gamma(\text{column }0)-\beta\gamma(\text{column }3)$ and column 3
+becomes $-\beta\gamma(\text{column }0)+\gamma(\text{column }3)$.
 The six independent entries are therefore
 \[
 \begin{aligned}
@@ -2327,7 +2490,8 @@ F'^{23}/\varepsilon_0&=-\gamma(cB_x+\beta E_y).
 \]
 For instance $F'^{13}/\varepsilon_0$ is row 1 of $UF/\varepsilon_0$
 dotted with column 3 of $U$, namely
-$E_x(-\beta\gamma)+(cB_y)\gamma$.
+$E_x(-\beta\gamma)+(cB_y)\gamma$, and $F'^{03}/\varepsilon_0$ is
+$-\beta\gamma(-\beta\gamma E_z)+\gamma(-\gamma E_z)$.
 The remaining off-diagonal entries are their negatives because
 $(UFU^T)^T=UF^TU^T=-UFU^T$; every diagonal entry is zero.
 
@@ -2348,7 +2512,8 @@ Y&cB_z&0&-P\\
 E_z&-Q&P&0
 \end{pmatrix}.
 \]
-Reading it in the same pattern as the original field tensor gives
+Reading it in the same pattern as the original field tensor,
+$E_x'=X$, $E_y'=Y$, $cB_x'=P$, $cB_y'=Q$, and with $\beta c=v$,
 \[
 \boxed{\begin{aligned}
 E_x'&=\gamma(E_x-vB_y),&
@@ -2382,9 +2547,12 @@ Choose a proper spatial rotation taking $\mathbf n$ to the
 $z$ axis. In those coordinates 17.9.1 says that the longitudinal
 components do not change, while the transverse electric components
 are $\gamma(E_x-vB_y,E_y+vB_x)$.
-These are exactly
+Since $\mathbf v=v\hat{\mathbf z}$ there, with $v=|\mathbf v|$,
+$\mathbf v\times\mathbf B=v(-B_y,B_x,0)$ and
+$\mathbf v\times\mathbf E=v(-E_y,E_x,0)$, so these are exactly
 $\gamma(\mathbf E_\perp+\mathbf v\times\mathbf B)$.
-Likewise the transverse magnetic components are
+Likewise the transverse magnetic components
+$\gamma(B_x+vE_y/c^2,\,B_y-vE_x/c^2)$ are
 $\gamma(\mathbf B_\perp-\mathbf v\times\mathbf E/c^2)$.
 Proper rotations preserve dot and cross products, so these vector
 statements remain valid after rotating back.
@@ -2413,8 +2581,16 @@ $\mathbf E'=\mathbf E$, $\mathbf B'=\mathbf B$.}
 An equivalent form makes this endpoint explicit. Since
 $\gamma^2-1=\gamma^2v^2/c^2$,
 \[
-\frac{\gamma-1}{v^2}=\frac{\gamma^2}{(\gamma+1)c^2}.
+\frac{\gamma-1}{v^2}=\frac{\gamma^2}{(\gamma+1)c^2}
 \]
+(divide $(\gamma-1)(\gamma+1)=\gamma^2v^2/c^2$ by $(\gamma+1)v^2$).
+With $\mathbf E_\parallel=\mathbf v(\mathbf v\cdot\mathbf E)/v^2$,
+\[
+(1-\gamma)\mathbf E_\parallel
+=-\frac{\gamma-1}{v^2}\,\mathbf v(\mathbf v\cdot\mathbf E)
+=-\frac{\gamma^2}{\gamma+1}\frac{\mathbf v(\mathbf v\cdot\mathbf E)}{c^2},
+\]
+and likewise for $\mathbf B_\parallel$.
 Thus, for all $|\mathbf v|<c$, including zero,
 \[
 \boxed{\begin{aligned}
