@@ -18,8 +18,14 @@ Show that the series expansion is unique for a given set of $\varphi_{n}(x)$.
 The functions $\varphi_{n}(x)$ are being taken here as the basis vectors in an
 infinite-dimensional Hilbert space.
 \solution
-Write $S_N=\sum_{n=0}^N a_n\varphi_n$ and interpret the expansion as
-$S_N\to f$ in the Hilbert-space norm. For a fixed $k$ and $N\ge k$,
+Write $S_N=\sum_{n=0}^N a_n\varphi_n$; the expansion means that
+$S_N\to f$ in the Hilbert-space norm.
+\erratum{The textbook does not say in what sense the series converges,
+and uniqueness depends on it: the argument below uses norm convergence,
+whereas for convergence almost everywhere uniqueness fails (Menshov
+constructed a trigonometric series, with coefficients not all zero,
+that converges to zero almost everywhere).}
+For a fixed $k$ and $N\ge k$,
 \[
 \langle\varphi_k|S_N\rangle
 =\sum_{n=0}^N a_n\langle\varphi_k|\varphi_n\rangle
@@ -95,9 +101,13 @@ b_{i}=\int_{0}^{1}x^{i}f(x)\,dx,\quad i=0,1,2,\ldots,n-1.
 The determinant of this Hilbert matrix is a rapidly decreasing function of
 $n$. For $n=5$, $\det\mathsf{A}=3.7\times10^{-12}$ and the set of equations
 $\mathsf{A}\mathbf{c}=\mathbf{b}$ is becoming ill-conditioned and unstable.
-\erratum{The determinant alone does not establish ill-conditioning; here
-$\kappa_2(\mathsf A)\approx4.7661\times10^5$ provides the relevant test.}
 \solution
+\erratum{The added square integrability is needed: otherwise the mean
+square error is infinite for every choice of the $c_i$, because
+$|f|^2\le2|f-p|^2+2|p|^2$ and the polynomial $p=\sum_ic_ix^i$ is bounded
+on $[0,1]$.
+It also makes each $b_i$ finite, by Schwarz's inequality
+$|b_i|\le(\int_0^1x^{2i}dx)^{1/2}(\int_0^1|f|^2dx)^{1/2}$.}
 For real $f$ and real coefficients, put $p(x)=\sum_{j=0}^{n-1}c_jx^j$.
 Expanding the error before differentiating gives
 \begin{align*}
@@ -133,15 +143,32 @@ E(c_*+d)&=\int_0^1f^2dx-2c_*^TA(c_*+d)+(c_*+d)^TA(c_*+d)\\
 &=\int_0^1f^2dx-c_*^TAc_*+d^TAd=E(c_*)+d^TAd.
 \end{align*}
 Since $d^TAd>0$ for $d\ne0$, $c_*$ is the unique minimizer.
-For complex $f$, minimize $\int|f-p|^2dx$;
-variation of real and imaginary parts gives the same equations, with
-$c,b$ complex and $v^T$ replaced by $v^\dagger$.
 
-For $n=5$, exact rational elimination gives
+For complex $f$ and complex $c$, minimize $E(c)=\int_0^1|f-p|^2dx$. The
+$x^j$ are real, so $\int_0^1f^*p\,dx=b^\dagger c$ and
+$\int_0^1fp^*dx=c^\dagger b$, with the same, now complex, $b_i$, and
 \[
-\det A=\frac1{266716800000}=3.7492951325\ldots\times10^{-12}.
+E(c)=\int_0^1|f|^2dx-b^\dagger c-c^\dagger b+c^\dagger Ac.
 \]
-\erratum{A small determinant alone is not a condition-number test (rescaling
+If $Ac_*=b$, then $b^\dagger=c_*^\dagger A$ because $A$ is real and
+symmetric, and the same completion of the square gives
+\[
+E(c_*+d)=\int_0^1|f|^2dx-c_*^\dagger Ac_*+d^\dagger Ad=E(c_*)+d^\dagger Ad,
+\]
+where $d^\dagger Ad=\int_0^1|\sum_jd_jx^j|^2dx>0$ for $d\ne0$. The same
+equations $Ac=b$, now with complex $c$ and $b$, thus give the unique
+minimizer.
+
+For $n=5$, Gaussian elimination in exact fractions, without row
+interchanges, gives the pivots $1$, $1/12$, $1/180$, $1/2800$, $1/44100$
+(Exercise 2.1.5, where the indices start at $1$), and the determinant is
+their product:
+\[
+\det A=\frac1{12\cdot180\cdot2800\cdot44100}=\frac1{266716800000}
+=3.7492951325\ldots\times10^{-12}.
+\]
+\erratum{The Note infers ill-conditioning from the small determinant, but a
+small determinant alone is not a condition-number test (rescaling
 any well-conditioned matrix can make its determinant small). For this
 particular matrix the condition number
 $\kappa_2(A)=\sigma_{\max}/\sigma_{\min}\simeq4.7661\times10^5$, the ratio of
@@ -150,8 +177,18 @@ Because $A$ is symmetric and positive definite, its singular values are its
 eigenvalues. Computing them numerically (with any symmetric eigenvalue
 routine, e.g., the Jacobi method) gives $\lambda_{\max}\simeq1.56705$ and
 $\lambda_{\min}\simeq3.28793\times10^{-6}$, whose ratio is the quoted
-$\kappa_2$. A relative error in $b$ can thus be magnified by a factor of up
-to about $5\times10^5$ in the solution $c$.
+$\kappa_2$. To see what this ratio measures, let $b$ change by $\delta b$,
+so that $c$ changes by $\delta c=A^{-1}\delta b$. Expanding in orthonormal
+eigenvectors of $A$ shows that, for Euclidean lengths,
+$|\delta c|\le|\delta b|/\lambda_{\min}$ and
+$|b|=|Ac|\le\lambda_{\max}|c|$. Hence
+\[
+\frac{|\delta c|}{|c|}\le\frac{|\delta b|/\lambda_{\min}}{|b|/\lambda_{\max}}
+=\kappa_2(A)\,\frac{|\delta b|}{|b|},
+\]
+with equality when $c$ is an eigenvector for $\lambda_{\max}$ and
+$\delta b$ one for $\lambda_{\min}$. A relative error in $b$ can thus be
+magnified by a factor of up to about $5\times10^5$ in the solution $c$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -189,8 +226,8 @@ E(c)&=\int_a^bF^2w\,dx
 &=\|F\|^2-2\sum_{n=0}^m c_na_n+\sum_{n=0}^m c_n^2\\
 &=\|F\|^2-\sum_{n=0}^m a_n^2+\sum_{n=0}^m(c_n-a_n)^2.
 \end{align*}
-Here $\|F\|^2=\int_a^bF^2w\,dx$, and the last line completes the square term
-by term, $c_n^2-2c_na_n=(c_n-a_n)^2-a_n^2$.
+Here $\|F\|^2=\int_a^bF^2w\,dx$, and the last line uses
+$c_n^2-2c_na_n=(c_n-a_n)^2-a_n^2$ to complete the square term by term.
 Only the last sum depends on the trial coefficients. It is nonnegative
 and vanishes exactly when
 \[
@@ -257,12 +294,23 @@ even, so
 =h\left[-\frac{\cos(2n+1)x}{2n+1}\right]_0^\pi=\frac{2h}{2n+1},
 \]
 and hence
-$\langle f_N|f\rangle=\frac{2h}{\pi}\sum_{n=0}^N\frac1{2n+1}\,\frac{2h}{2n+1}
-=\|f_N\|^2$, i.e., $\langle f_N|f-f_N\rangle=0$. By Pythagoras,
-$\|f\|^2=\|f_N\|^2+\|f-f_N\|^2\ge\|f_N\|^2$, which is Bessel's
-inequality.
-The Fourier expansion converges in $L^2$; letting $N\to\infty$ makes the
-residual norm zero and proves the stated Parseval equality.
+\[
+\langle f_N|f\rangle=\frac{2h}{\pi}\sum_{n=0}^N\frac1{2n+1}\,\frac{2h}{2n+1}
+=\frac{4h^2}{\pi}\sum_{n=0}^N\frac1{(2n+1)^2}=\|f_N\|^2,
+\]
+i.e., $\langle f_N|f-f_N\rangle=0$. By Pythagoras,
+\[
+\|f\|^2=\|f_N\|^2+2\langle f_N|f-f_N\rangle+\|f-f_N\|^2
+=\|f_N\|^2+\|f-f_N\|^2\ge\|f_N\|^2,
+\]
+which is Bessel's inequality.
+The functions $1,\cos kx,\sin kx$ ($k\ge1$) form a complete orthogonal set
+on $[-\pi,\pi]$, so the Fourier series of every square-integrable function
+converges to it in the mean-square norm. Here all cosine coefficients
+vanish ($f$ is odd), and so do the even-order sine coefficients, since
+$\int_0^\pi\sin2mx\,dx=0$; the partial sums of the Fourier series of $f$
+are therefore the $f_N$, and $\|f-f_N\|\to0$. Letting $N\to\infty$ in the
+Pythagoras identity proves the stated Parseval equality.
 
 (b) Split the positive integers into odd and even ones:
 \[
@@ -284,9 +332,14 @@ $(4h^2/\pi)(\pi^2/8)=\pi h^2/2$, an independent check of the equality.
 [f(x)g(y)-f(y)g(x)]^{2}.
 \]
 \solution
-The displayed identity is for real square-integrable functions. To check
-it, expand its double integral. Fubini's theorem applies since
-$f,g\in L^2$ and $fg\in L^1$. The latter fact follows from
+\erratum{The qualification is needed for the derivation: square
+integrability makes every integral below finite, and for real functions
+the integrand of the double integral is a nonnegative square. (The
+identity is pure algebra and also holds for complex functions, but then
+that integrand need not be nonnegative.)}
+To check the identity, expand its double integral. Fubini's theorem
+applies since $\int_a^bf^2dx$ and $\int_a^bg^2dx$ are finite and
+$\int_a^b|fg|\,dx<\infty$. The latter fact follows from
 $2|fg|\le f^2+g^2$, so it does not assume the Schwarz inequality we
 are proving:
 \begin{align*}
@@ -302,10 +355,13 @@ integrates to a product of single integrals, e.g.,
 $\int\!\!\int f(x)^2g(y)^2\,dx\,dy=\int f^2dx\int g^2dy$; the second term
 gives the same product with $x$ and $y$ renamed, and the third gives
 $-2(\int fg\,dx)(\int fg\,dy)$. Dividing by $2$ gives
-$\frac12D=\int f^2dx\int g^2dx-(\int fg\,dx)^2$, which is the identity.
-Since the original integrand in $D$ is a square, $D\ge0$. Hence
-$(\int fg\,dx)^2\le\int f^2dx\int g^2dx$, and taking nonnegative square
-roots proves
+\[
+\frac12D=\int_a^bf^2dx\int_a^bg^2dx-\left(\int_a^bfg\,dx\right)^2,
+\]
+which is the identity.
+Since the original integrand in $D$ is a square, $D\ge0$, and the
+identity gives $(\int fg\,dx)^2\le\int f^2dx\int g^2dx$. Taking
+nonnegative square roots proves
 \[
 \boxed{\left|\int_a^bfg\,dx\right|
 \le\left(\int_a^bf^2dx\right)^{1/2}
@@ -337,6 +393,13 @@ $\langle f|f\rangle\ge\sum_{n}|a_{n}|^{2}$.
 \erratum{Here the $\varphi_n$ are orthonormal and
 $a_n=\langle\varphi_n|f\rangle$; begin with finite partial sums.}
 \solution
+\erratum{The added hypotheses are needed: for $f=\varphi_0$, the
+arbitrary choice $a_0=2$ (all other $a_n=0$) gives
+$\sum|a_n|^2=4>\langle f|f\rangle=1$, and $a_n=\langle\varphi_n|f\rangle$
+with the nonorthogonal choice $\varphi_1=\varphi_0$ gives
+$|a_0|^2+|a_1|^2=2>1$. Finite sums come first because the convergence of
+$\sum_ia_i\varphi_i$, which the printed $I$ presupposes, is not known in
+advance.}
 Take a finite set of orthonormal functions first, and use the projection
 coefficients $a_j=\langle\varphi_j|f\rangle$. The scalar product is
 conjugate-linear in its first argument, so
@@ -361,9 +424,14 @@ are bounded by $\|f\|^2$. Taking their limit gives
 No completeness assumption on the orthonormal set is needed for this
 inequality. To check the equality case, let $S_N=\sum_{i=0}^Na_i\varphi_i$.
 For $M>N$, orthonormality gives
-$\|S_M-S_N\|^2=\sum_{i=N+1}^M|a_i|^2\to0$ as $N\to\infty$ (a tail of the
-convergent series), so completeness of the Hilbert space supplies a limit
-$S$ in the closed span. Letting $N\to\infty$ in the residual identity
+$\|S_M-S_N\|^2=\sum_{i=N+1}^M|a_i|^2$, which tends to $0$ as $N\to\infty$
+(a tail of the convergent series), so the $S_N$ form a Cauchy sequence.
+A Hilbert space is complete in the sense that every Cauchy sequence
+converges in it (a property of the space, not of the orthonormal set), so
+$S_N\to S$ for some $S$. This $S$ lies in the closed span of the
+$\varphi_i$, the set of all norm limits of finite linear combinations of
+the $\varphi_i$.
+Letting $N\to\infty$ in the residual identity
 $\|f-S_N\|^2=I_N=\|f\|^2-\sum_{i=0}^N|a_i|^2$ (the norm is continuous) gives
 \[
 \|f-S\|^2=\|f\|^2-\sum_{i=0}^\infty|a_i|^2.
@@ -392,12 +460,12 @@ Keep the first four terms of the expansion. The first four $\varphi_{i}$ are:
 \solution
 For an orthogonal but unnormalized family,
 $c_n=\langle\varphi_n|f\rangle/\langle\varphi_n|\varphi_n\rangle$.
-Direct polynomial integration gives the four norms
+Direct polynomial integration gives the four squared norms
 \[
 \int_0^1\varphi_n^2dx=1,\ \frac13,\ \frac15,\ \frac17
 \qquad(n=0,1,2,3).
 \]
-For the nonconstant norms, square the polynomials,
+For the nonconstant squared norms, square the polynomials,
 \begin{align*}
 \varphi_1^2&=4x^2-4x+1,\qquad
 \varphi_2^2=36x^4-72x^3+48x^2-12x+1,\\
@@ -427,8 +495,11 @@ I_j&=\left[-\frac{x^j\cos\pi x}{\pi}\right]_0^1
 &=\frac1\pi-\frac{j(j-1)}{\pi^2}I_{j-2},
 \end{align*}
 since $\cos\pi=-1$ and $\sin\pi=\sin0=0$. Hence
-$I_2=1/\pi-(2/\pi^2)I_0=1/\pi-4/\pi^3$ and
-$I_3=1/\pi-(6/\pi^2)I_1=1/\pi-6/\pi^3$. Substituting,
+\[
+I_2=\frac1\pi-\frac2{\pi^2}I_0=\frac1\pi-\frac4{\pi^3},\qquad
+I_3=\frac1\pi-\frac6{\pi^2}I_1=\frac1\pi-\frac6{\pi^3}.
+\]
+Substituting,
 \begin{align*}
 \langle\varphi_0|f\rangle&=I_0=2/\pi,\\
 \langle\varphi_1|f\rangle&=2I_1-I_0=0,\\
@@ -437,19 +508,28 @@ $I_3=1/\pi-(6/\pi^2)I_1=1/\pi-6/\pi^3$. Substituting,
 \langle\varphi_3|f\rangle&=20I_3-30I_2+12I_1-I_0
 =\frac{20-30+12-2}{\pi}+\frac{-120+120}{\pi^3}=0.
 \end{align*}
-Dividing by the norms $1$ and $1/5$ gives $c_0=2/\pi$ and
-$c_2=5(2/\pi-24/\pi^3)=10(\pi^2-12)/\pi^3\approx-0.6871$, while
-$c_1=c_3=0$. The requested four-term projection is therefore
+Dividing by the squared norms $\|\varphi_0\|^2=1$ and
+$\|\varphi_2\|^2=1/5$ gives
+\[
+c_0=\frac2\pi,\qquad
+c_2=5\Bigl(\frac2\pi-\frac{24}{\pi^3}\Bigr)=\frac{10(\pi^2-12)}{\pi^3}
+\approx-0.6871,
+\]
+while $c_1=c_3=0$. The requested four-term projection is therefore
 \[
 \boxed{\sin\pi x\ \approx\ \frac2\pi\varphi_0
  +0\varphi_1+\frac{10(\pi^2-12)}{\pi^3}\varphi_2+0\varphi_3.}
 \]
 The two zero coefficients can also be checked by reflection:
-$\sin\pi(1-x)=\sin\pi x$, whereas
-$\varphi_1(1-x)=-\varphi_1(x)$ and
-$\varphi_3(1-x)=-\varphi_3(x)$, so the substitution $x\to1-x$ reverses the
-sign of $\int_0^1\varphi_1\sin\pi x\,dx$ and of
-$\int_0^1\varphi_3\sin\pi x\,dx$ while leaving their values unchanged.
+\[
+\sin\pi(1-x)=\sin\pi x,\qquad\text{whereas}\qquad
+\varphi_1(1-x)=-\varphi_1(x),\quad \varphi_3(1-x)=-\varphi_3(x).
+\]
+The substitution $x\to1-x$, which maps
+$[0,1]$ onto itself and so leaves the value of an integral over $[0,1]$
+unchanged, therefore turns each of $\int_0^1\varphi_1\sin\pi x\,dx$ and
+$\int_0^1\varphi_3\sin\pi x\,dx$ into its own negative; both integrals
+vanish.
 Because each $c_n$ is a projection coefficient, the residual
 $\sin\pi x-\sum_{n=0}^3c_n\varphi_n$ has zero scalar product with each of
 the four retained functions.
@@ -469,7 +549,9 @@ L_{3}=\frac{6-18x+9x^{2}-x^{3}}{6}.
 \]
 \solution
 The weight contributes an additional factor $e^{-x}$, so
-$a_n=\int_0^\infty L_n(x)e^{-2x}dx$.
+\[
+a_n=\langle L_n|e^{-x}\rangle=\int_0^\infty L_n(x)e^{-2x}dx.
+\]
 Set $J_k=\int_0^\infty x^ke^{-2x}dx$. Then $J_0=1/2$, and for $k\ge1$
 integration by parts gives
 \[
@@ -497,15 +579,25 @@ $-\frac14-\frac14-\frac3{16}=-\frac{11}{16}$, that of $x^2$ is
 $\frac1{16}+\frac3{32}=\frac5{32}$, and that of $x^3$ is $-\frac1{96}$.
 As a check of both the weight and the normalization, the residual identity
 of Exercise 5.1.7, with $\|e^{-x}\|^2=\int_0^\infty e^{-2x}e^{-x}dx$, gives
-the error norm of the four-term sum $f_3$:
+the squared error norm of the four-term sum $f_3$:
 \begin{align*}
 \|e^{-x}-f_3\|^2
 &=\int_0^\infty e^{-3x}dx-\sum_{n=0}^3|a_n|^2\\
 &=\frac13-\left(\frac14+\frac1{16}+\frac1{64}+\frac1{256}\right)
 =\frac13-\frac{85}{256}=\frac1{768}.
 \end{align*}
-Direct integration of the squared residual with weight $e^{-x}$ gives
-the same value.
+Expanding the square gives the same value:
+\begin{align*}
+\int_0^\infty(e^{-x}-f_3)^2e^{-x}dx
+&=\int_0^\infty e^{-3x}dx-2\int_0^\infty f_3e^{-2x}dx
+ +\int_0^\infty f_3^2e^{-x}dx\\
+&=\frac13-2\cdot\frac{85}{256}+\frac{85}{256}=\frac1{768},
+\end{align*}
+where the polynomial form of $f_3$ and the $J_k$ give
+$\int_0^\infty f_3e^{-2x}dx
+=\frac{15}{32}-\frac{11}{64}+\frac5{128}-\frac1{256}=\frac{85}{256}$, and
+orthonormality gives
+$\int_0^\infty f_3^2e^{-x}dx=\sum_{n=0}^3a_n^2=\frac{85}{256}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -537,9 +629,14 @@ the resolution of the identity $\sum_m|\chi_m\rangle\langle\chi_m|=1$ gives
            \langle\chi_m|\varphi_k\rangle
 =\langle\varphi_j|\varphi_k\rangle=\delta_{jk}.
 \]
-Similarly, $\sum_n|\varphi_n\rangle\langle\varphi_n|=1$ gives
-$(UU^\dagger)_{mn}=\langle\chi_m|\chi_n\rangle=\delta_{mn}$, i.e.,
-$UU^\dagger=I$. If the $\chi_m$ do not span $f$, the same
+Similarly, $\sum_k|\varphi_k\rangle\langle\varphi_k|=1$ gives
+\[
+(UU^\dagger)_{mn}
+=\sum_k\langle\chi_m|\varphi_k\rangle
+           \langle\varphi_k|\chi_n\rangle
+=\langle\chi_m|\chi_n\rangle=\delta_{mn},
+\]
+i.e., $UU^\dagger=I$. If the $\chi_m$ do not span $f$, the same
 formula instead gives the coefficients of its orthogonal projection;
 it cannot reconstruct a component outside their closed span.
 
@@ -564,7 +661,12 @@ $(\sum_j\hat{\mathbf e}_j\hat{\mathbf e}_j^{\mathsf T})\mathbf a=I\mathbf a$.
 \erratum{Orthonormality is needed here; unit length and spanning alone are
 insufficient.} For example, the unit vectors $(1,0)$ and
 $(1,1)/\sqrt2$ span $\mathbb R^2$, but the displayed sum applied to
-$(1,0)$ is $(1,0)\cdot1+\frac{(1,1)}{\sqrt2}\cdot\frac1{\sqrt2}=(3/2,1/2)$,
+$(1,0)$ is
+\[
+(1,0)\,[(1,0)\cdot(1,0)]
++\frac{(1,1)}{\sqrt2}\Bigl[\frac{(1,1)}{\sqrt2}\cdot(1,0)\Bigr]
+=(1,0)+\frac12(1,1)=\Bigl(\frac32,\frac12\Bigr),
+\]
 not $(1,0)$.
 
 \Needspace{5\baselineskip}
@@ -626,8 +728,8 @@ These are the first four shifted Legendre polynomials.
 instead of $[-1,1]$. It does not mean complex conjugate.
 \solution
 \erratum{The first answer on textbook p.~273 is printed $P_n^*(x)=1$;
-its subscript must be $0$, since the subsequent higher-degree
-polynomials are not constant.}
+its subscript must be $0$, because $P_n^*$ has degree $n$, so the
+constant answer is $P_0^*$.}
 It is convenient first to construct monic orthogonal polynomials $q_n$:
 \[
 q_n=x^n-\sum_{j=0}^{n-1}
@@ -692,12 +794,22 @@ To verify orthogonality, multiply the derivative formula by $x^j$, $j<n$, and
 integrate by parts $n$ times. All boundary terms vanish because
 $x^n(x-1)^n$ and its first $n-1$ derivatives vanish at both endpoints;
 the remaining integral vanishes because $d^nx^j/dx^n=0$.
-At $x=1$, in the Leibniz-rule expansion
-$\frac{d^n}{dx^n}[x^n(x-1)^n]=\sum_{k=0}^n\binom nk
-\frac{d^kx^n}{dx^k}\frac{d^{n-k}(x-1)^n}{dx^{n-k}}$, only the term
-differentiating $(x-1)^n$ all $n$ times ($k=0$) survives,
-and it equals $1^n\,n!=n!$, so $P_n^*(1)=1$. Uniqueness of Gram--Schmidt with
-this normalization identifies these as its output.
+At $x=1$, use the Leibniz rule
+\[
+\frac{d^n}{dx^n}[x^n(x-1)^n]=\sum_{k=0}^n\binom nk
+\frac{d^kx^n}{dx^k}\,\frac{d^{n-k}(x-1)^n}{dx^{n-k}}.
+\]
+For $k\ge1$ the last factor is $(x-1)^k\,n!/k!$, which vanishes at
+$x=1$, so only the term differentiating $(x-1)^n$ all $n$ times ($k=0$)
+survives; it equals $1^n\,n!=n!$, so $P_n^*(1)=1$.
+Finally, these are the Gram--Schmidt polynomials: the polynomial given by
+the derivative formula and the Gram--Schmidt $P_n^*$ (orthogonal to
+$P_0^*,\ldots,P_{n-1}^*$, which span the polynomials of degree below $n$)
+both have degree $n$, are orthogonal to every polynomial of lower degree,
+and equal $1$ at $x=1$. If $R$ and $S$ are two such polynomials,
+$R-\lambda S$, with $\lambda$ the ratio of their leading coefficients, has
+lower degree and is orthogonal to itself, hence zero; $x=1$ then gives
+$\lambda=1$, so $R=S$.
 
 A useful check is the norm formula. The leading coefficient is
 $\binom{2n}n$ and lower powers are orthogonal to $P_n^*$, so
@@ -788,10 +900,11 @@ leaves each polynomial's overall sign free.
 \begin{enumerate}
 \item[(a)] a set of functions $u_{n}(x)=x^{n}$, $n=0,1,2,\ldots$,
 \item[(b)] an interval $(0,\infty)$,
-\item[(c)] a weighting function $w(x)=xe^{-x}$. Use the Gram-Schmidt procedure
-  to construct the first three orthonormal functions from the set $u_{n}(x)$
-  for this interval and this weighting function.
+\item[(c)] a weighting function $w(x)=xe^{-x}$.
 \end{enumerate}
+Use the Gram-Schmidt procedure to construct the first three orthonormal
+functions from the set $u_{n}(x)$ for this interval and this weighting
+function.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $\varphi_{0}(x)=1$,\quad$\varphi_{1}(x)=(x-2)/\sqrt{2}$,\quad
 $\varphi_{2}(x)=\erratum{\dfrac{x^{2}-6x+6}{2\sqrt{3}}}$.
@@ -896,17 +1009,14 @@ w(x)=(1-x^{2})^{-1/2}.
 Take the normalization
 \[
 \int_{-1}^{1}T_{m}(x)T_{n}(x)w(x)\,dx
-=\erratum{\begin{cases}\pi,&m=n=0,\\[1ex]
-\dfrac{\pi}{2},&m=n\ge1,\\[1ex]0,&m\ne n.
-\end{cases}}
+=\delta_{mn}\begin{cases}\pi,&m=n=0,\\[1ex]
+\dfrac{\pi}{2},&m=n\ge1.
+\end{cases}
 \]
 \emph{Hint.}~The needed integrals are given in Exercise 13.3.2.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $T_{0}=1$,\quad$T_{1}=x$,\quad$T_{2}=2x^{2}-1$,\quad$(T_{3}=4x^{3}-3x)$.
 \solution
-\erratum{The textbook gives only the two diagonal cases, multiplied by
-$\delta_{mn}$; the completed piecewise formula also explicitly defines
-the value for $m\ne n$.}
 Substitute $x=\cos t$. Since $dx=-\sin t\,dt$,
 $\sqrt{1-x^2}=\sin t$ on $0\le t\le\pi$, and $x=-1,1$ correspond to
 $t=\pi,0$ (the minus sign of $dx$ is absorbed by interchanging these
@@ -1021,9 +1131,10 @@ certainly not the Hermite polynomials.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $\varphi_{0}=1$,\quad$\varphi_{1}=x-\pi^{-1/2}$.
 \solution
-\erratum{Both references to Exercise 5.2.5 in the original question should be to
-Exercise 5.2.4, which uses the Gaussian weight and gives Hermite
-polynomials. The reference error is present in the textbook (p.~275).}
+\erratum{The textbook (p.~275) twice refers to Exercise 5.2.5, which
+constructs the Chebyshev polynomials; both references should be to
+Exercise 5.2.4, which uses the Gaussian weight on $(-\infty,\infty)$ and
+gives the Hermite polynomials.}
 
 On the half-line the moments required for the first two polynomials are
 as follows; $M_0$ is half the full-line value $\sqrt\pi$ because the
@@ -1248,7 +1359,10 @@ p_2=\sqrt{\frac52}\frac{3x^2-1}{2},\quad
 p_3=\sqrt{\frac72}\frac{5x^3-3x}{2}.
 \]
 (a) Differentiate each polynomial and then re-expand, using
-$3x^2=(3x^2-1)+1$ and $15x^3-3x=3(5x^3-3x)+6x$:
+\[
+3x^2=(3x^2-1)+1,\qquad 15x^3-3x=3(5x^3-3x)+6x.
+\]
+This gives
 \begin{align*}
 Ap_0&=0,\qquad Ap_1=\sqrt{\frac32}x=p_1,\\
 Ap_2&=\sqrt{\frac52}3x^2
@@ -1288,8 +1402,11 @@ Therefore
 \qquad c=\begin{pmatrix}0\\\sqrt6/5\\0\\2\sqrt{14}/35\end{pmatrix}.
 \]
 Substitution of the polynomials checks the expansion directly: since
-$\frac{\sqrt6}5\sqrt{\frac32}=\frac35$ and
-$\frac{2\sqrt{14}}{35}\cdot\frac12\sqrt{\frac72}=\frac{14}{70}=\frac15$,
+\[
+\frac{\sqrt6}5\sqrt{\frac32}=\frac{\sqrt9}5=\frac35,\qquad
+\frac{2\sqrt{14}}{35}\cdot\frac12\sqrt{\frac72}=\frac{\sqrt{49}}{35}
+=\frac15,
+\]
 the sum is $(3/5)x+(1/5)(5x^3-3x)=x^3$.
 
 (c) Matrix multiplication gives
