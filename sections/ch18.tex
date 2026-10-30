@@ -5068,12 +5068,15 @@ at every point of its boundary circle.  More explicitly,
 \[
 \left|\sum_{n=N+1}^\infty\frac{z^n}{n^2}\right|
  \le\sum_{n=N+1}^\infty\frac1{n^2}
- \le\int_N^\infty\frac{dt}{t^2}=\frac1N.
+ \le\int_N^\infty\frac{dt}{t^2}=\frac1N,
 \]
+since $1/n^2\le\int_{n-1}^n dt/t^2$ for each $n\ge2$.
 This controls every boundary point with the same remainder bound.
-The sum is continuous there.  Convergence at $z=1$ does not
-make it analytic across that point: its derivative
-$-\log(1-z)/z$ has the stated logarithmic branch singularity.
+As a uniform limit of continuous partial sums, the sum is
+continuous there.  Convergence at $z=1$ does not
+make it analytic across that point: its derivative, the termwise
+derivative $\sum_{n\ge1}z^{n-1}/n=-\log(1-z)/z$ for $|z|<1$, has a
+logarithmic branch point at $z=1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5081,8 +5084,8 @@ $-\log(1-z)/z$ has the stated logarithmic branch singularity.
 Eqs.~(18.161) to (18.163), to find the principal value of
 $\mathrm{Li}_{2}(1/2)$.
 \solution
-On the principal real branch for $0<z<1$, the reflection identity
-is
+On the principal real branch for $0<z<1$, the reflection identity,
+Eq.~(18.161), is
 \[
 \operatorname{Li}_2(z)+\operatorname{Li}_2(1-z)
  =\frac{\pi^2}{6}-\ln z\ln(1-z).
@@ -5095,11 +5098,20 @@ are $-\ln2$.  Thus
 \boxed{\operatorname{Li}_2(1/2)=\frac{\pi^2}{12}
                                       -\frac12(\ln2)^2}.
 \]
-As a check using a second supplied identity, set $z=1/2$ in
-Eq.~(18.163).  Its transformed argument is $-1$, so
+As a check using a second functional relation, set $z=1/2$ in
+Eq.~(18.163),
+$\operatorname{Li}_2(z)+\operatorname{Li}_2(z/(z-1))
+=-\tfrac12\ln^2(1-z)$.  Its transformed argument is
+$z/(z-1)=-1$, so
 $\operatorname{Li}_2(1/2)+\operatorname{Li}_2(-1)
-=-\tfrac12\ln^2(1/2)$.  Since
-$\operatorname{Li}_2(-1)=-\pi^2/12$, the same answer follows.
+=-\tfrac12\ln^2(1/2)=-\tfrac12\ln^22$.  Splitting the series
+into even and odd terms,
+\[
+\operatorname{Li}_2(-1)=\sum_{n=1}^\infty\frac{(-1)^n}{n^2}
+ =-\zeta(2)+2\sum_{n\ \rm even}\frac1{n^2}
+ =-\zeta(2)+\frac{\zeta(2)}2=-\frac{\pi^2}{12},
+\]
+so the same answer follows.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5107,7 +5119,10 @@ $\operatorname{Li}_2(-1)=-\pi^2/12$, the same answer follows.
 $\mathrm{Li}_{2}(1/2)$.
 \solution
 Let $b=1/2$ and $F_0=\pi^2/12-\tfrac12\ln^22$ denote the
-principal value.  To find every value, continue the differential
+principal value (Exercise~18.7.2).  Termwise differentiation of
+the series (18.156) gives
+$F'(z)=\sum_{n\ge1}z^{n-1}/n=-\log(1-z)/z$ for $|z|<1$.  To find
+every value, continue the differential
 \[
 dF=-L_1(z)\frac{dz}{z},\qquad L_1(z)=\log(1-z),
 \]
@@ -5128,45 +5143,61 @@ homotopy.  The two circles below are valid representatives.
 \node at (-.1,.68) {$A$};\node at (1.1,.68) {$B$};
 \end{tikzpicture}
 \end{center}
-On a sheet where $L_1$ has increased by $2\pi i n$, traversal
-of $A$ leaves $L_1$ unchanged and changes $F$ by
+On a sheet where $L_1=\log(1-z)+2\pi in$ (principal logarithm
+plus $2\pi in$), traversal of $A$ leaves $L_1$ unchanged, because
+$1-z$ does not wind around zero, and changes $F$ by
 \[
-\Delta_A F=-2\pi i n\oint_A\frac{dz}{z}=4\pi^2n.
+\Delta_A F=-\oint_A\frac{\log(1-z)}z\,dz
+ -2\pi i n\oint_A\frac{dz}{z}=0-2\pi in\cdot2\pi i=4\pi^2n.
 \]
-The principal part contributes zero because
-$-\log(1-z)/z$ is analytic inside the zero circle.
-For $B$, the additive constant $2\pi i n$ contributes zero
-because $B$ has zero winding about zero.  To find the remaining
-increment, let $L_0$ be the logarithm of $z$ analytic inside
-this one-circle neighborhood, with $L_0(1)=0$.  Integration by
-parts gives
-\[
-\Delta_B F=-[L_1L_0]_{\rm start}^{\rm end}
-             +\oint_B L_0\,dL_1
-           =-2\pi i\ln b+2\pi i L_0(1)
-           =2\pi i\ln2.
-\]
-Here $L_1$ gains $2\pi i$, so $B$ also changes the integer
+The first integral vanishes by Cauchy's theorem: $-\log(1-z)/z$
+is analytic inside and on the zero circle (its singularity at
+$z=0$ is removable).
+For $B$, the additive constant $2\pi i n$ contributes
+$-2\pi in\oint_Bdz/z=0$ because $B$ has zero winding about zero.
+To find the remaining increment, let $L_0$ be the logarithm of $z$
+analytic on the closed disk bounded by $B$ (which excludes $z=0$),
+with $L_0(1)=0$; then $dL_0=dz/z$ and $L_0(b)=\ln b$.  Along $B$,
+$1-z$ winds once counterclockwise about zero, so $L_1$ gains
+$2\pi i$ while $L_0$ returns to $\ln b$.  Integration by parts,
+with $dL_1=dz/(z-1)$ and Cauchy's integral formula for the last
+integral, gives
+\begin{align*}
+\Delta_B F=-\oint_B L_1\,dL_0
+ &=-[L_1L_0]_{\rm start}^{\rm end}+\oint_B L_0\,dL_1\\
+ &=-2\pi i\ln b+\oint_B\frac{L_0(z)}{z-1}\,dz
+  =-2\pi i\ln b+2\pi i L_0(1)
+  =2\pi i\ln2.
+\end{align*}
+Because $L_1$ gains $2\pi i$, $B$ also changes the integer
 sheet label from $n$ to $n+1$.  Inverse loops give the inverse
-increments.  It follows inductively that every word in $A,B$
-ends at a value of the form
+increments: on sheet $n$, $A^{-1}$ subtracts $4\pi^2n$, while
+$B^{-1}$ subtracts $2\pi i\ln2$ and lowers the label to $n-1$.
+Hence $A^{\pm1}$ changes $F-2\pi in\ln2$ by an integer multiple of
+$4\pi^2$, and $B^{\pm1}$ leaves it unchanged.  Starting from $F_0$
+with $n=0$, induction on the length of the word shows that every
+word in $A,B$ ends at a value of the form
 \[
 \boxed{F_0+2\pi i n\ln2+4\pi^2m,\qquad m,n\in\mathbb Z}.
 \]
 Conversely, follow $B$, then $A$, then $B^{-1}$, then $A^{-1}$.
 The two $B$ increments cancel, while $A$ was traversed with
-sheet label one; this path adds $4\pi^2$ and returns the label
+sheet label one and $A^{-1}$ with sheet label zero; this path adds
+$4\pi^2$ and returns the label
 to zero.  Its repetitions and inverse give every $m$, after
 which $B^n$ gives every $n$.  Thus the boxed set is both
 necessary and sufficient, with no branch values omitted.
 
-\erratum{The manual's proposed $2n^2\pi^2-2\pi i n\ln2$
-correction is not the full branch set and is incorrect for odd
-$n$.  Substituting a multivalued logarithm into the principal
+\erratum{The Instructor's Manual's proposed correction
+$2n^2\pi^2-2\pi i n\ln2$ to the principal value does not give the
+full branch set and is incorrect for odd $n$, whose real shift
+$2n^2\pi^2$ is not a multiple of $4\pi^2$.  Substituting a
+multivalued logarithm into the principal
 reflection formula while equating its two dilogarithms assigns
 incompatible branches.}  For example one loop $B$ gives
 $F_0+2\pi i\ln2$ with no real shift, directly contradicting
-that proposed enumeration.
+that proposed enumeration, in which the imaginary part $2\pi\ln2$
+requires $n=-1$ and hence the real shift $2\pi^2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5185,7 +5216,13 @@ Writing $z=re^{i\theta}$ with $|\theta|\le\pi$ gives
 $|z\ln z|\le r(|\ln r|+\pi)\to0$; the remainder also
 vanishes.  The dilogarithm series gives
 $\operatorname{Li}_2(0)=0$, while its continuous boundary value
-at one is $\operatorname{Li}_2(1)=\sum n^{-2}=\pi^2/6$.
+at one is $\operatorname{Li}_2(1)=\sum n^{-2}=\pi^2/6$
+(Exercise~18.7.1).  The limit $\operatorname{Li}_2(1-z)\to\pi^2/6$
+holds from every direction off the cut, also where $|1-z|>1$:
+since $\operatorname{Li}_2'(t)=-\log(1-t)/t$,
+$\operatorname{Li}_2(w)-\operatorname{Li}_2(1)
+=-\int_1^w\log(1-t)\,dt/t$ along the segment, which tends to zero
+as $w\to1$ because the logarithmic singularity is integrable.
 Consequently the two sides of Eq.~(18.161) both tend to
 \[
 \boxed{\pi^2/6}.
@@ -5203,7 +5240,7 @@ consistently.
 =-\mathrm{Li}_{2}\left(\frac{1+z}{1-z}\right)
 -\frac{1}{2}\ln^{2}\left(\frac{1-z^{-1}}{2}\right).
 \]
-\erratum{Exclude $z=0,1$ and use matching logarithm and dilogarithm branches.  Principal values give the identity directly for real $z>1$ or $z<0$; continue consistently elsewhere.}\par\nobreak
+\erratum{Exclude $z=0,1$.  With principal branches the identity holds for every $z$ off the real segment $[0,1]$; for $0<z<1$ both dilogarithm arguments lie on their cuts, so matching boundary values must be used (see the solution).}\par\nobreak
 \solution
 Set $w=(1+z^{-1})/2=(z+1)/(2z)$, with $z\ne0,1$.
 Two elementary reductions are
@@ -5211,7 +5248,7 @@ Two elementary reductions are
 \frac{w}{w-1}
  =\frac{(z+1)/(2z)}{(1-z)/(2z)}=\frac{1+z}{1-z},
 \qquad
-1-w=\frac{1-z^{-1}}2.
+1-w=\frac{z-1}{2z}=\frac{1-z^{-1}}2.
 \]
 Insert them into Eq.~(18.163),
 $\operatorname{Li}_2(w)+\operatorname{Li}_2(w/(w-1))
@@ -5224,19 +5261,40 @@ right:
 \]
 For real $z>1$ or $z<0$, both dilogarithm arguments are less
 than one and the logarithm's argument is positive, so this is
-an equality of ordinary real principal values.  Complex values
-follow by continuing all three terms along the same path from
-such a domain.
+an equality of ordinary real principal values.
+
+More generally, Eq.~(18.163) holds with principal branches for
+every $w\notin[1,\infty)$.  There $w$, $w/(w-1)$ and $1-w$ avoid
+the cuts $[1,\infty)$, $[1,\infty)$ and $(-\infty,0]$ (if
+$w/(w-1)=t\ge1$, then $w=t/(t-1)>1$), so both sides are analytic
+in $w$ on this cut plane; they agree for real $w<1$, hence
+everywhere on it by analytic continuation.  Since
+$w=(z+1)/(2z)=t$ gives $z=1/(2t-1)$, which lies in $(0,1]$ for
+$t\ge1$, the boxed identity holds with principal values for every
+$z$ off the real segment $[0,1]$.
 
 \erratum{The formula is not an unrestricted identity between
 independently selected boundary values on the cut.}  For
 $0<z<1$, both dilogarithm arguments exceed one, but a small
-imaginary part of $z$ puts them on opposite sides of their cuts.
-For example, at $z=1/3$ the arguments both equal $2$.
+imaginary part of $z$ puts them on opposite sides of their cuts:
+for $z=x+i\varepsilon$, $\operatorname{Im}(1+z^{-1})/2
+=-\varepsilon/[2(x^2+\varepsilon^2)]<0$, while
+$\operatorname{Im}(1+z)/(1-z)=2\varepsilon/|1-z|^2>0$.
+For example, at $z=1/3$ the arguments both equal $2$, and the
+logarithm's argument is $(1-3)/2=-1$, with $\ln^2(-1\pm i0)=-\pi^2$;
+the identity then demands that the two dilogarithm values add up to
+$\pi^2/2$.  The reflection formula (18.161), applied at the point
+$2\pm i0$, where $\ln(1-(2\pm i0))=\ln(-1\mp i0)=\mp i\pi$,
+together with $\operatorname{Li}_2(-1)=-\pi^2/12$
+(Exercise~18.7.2), gives the boundary values
+$\operatorname{Li}_2(2\pm i0)=\pi^2/6+\pi^2/12\pm i\pi\ln2
+=\pi^2/4\pm i\pi\ln2$.
 Selecting the same boundary value for both would incorrectly
-assert $2\operatorname{Li}_2(2)=\pi^2/2$, although the boundary
-values have imaginary parts $\pm\pi\ln2$.  Opposite boundary
-values, with the matching logarithm, satisfy the continued identity.
+assert $2\operatorname{Li}_2(2\pm i0)=\pi^2/2$, whereas the left
+side is $\pi^2/2\pm2\pi i\ln2$.  Opposite boundary
+values, $\operatorname{Li}_2(2+i0)+\operatorname{Li}_2(2-i0)
+=\pi^2/2$, with the matching logarithm, satisfy the continued
+identity.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5278,30 +5336,55 @@ For a positive variable $\zeta$, denote one summand by
 S(\zeta)=\operatorname{Li}_2(\zeta)-\operatorname{Li}_2(-\zeta)
  +\ln\zeta\log\frac{1-\zeta}{1+\zeta}.
 \]
-Start with $0<\zeta<1$, where all terms are real.  Reflection
-and the logarithm of a positive quotient give
+Start with $0<\zeta<1$, where all terms are real.  Reflection,
+Eq.~(18.161), and the logarithm of a positive quotient give
 \[
 \operatorname{Li}_2(\zeta)=\frac{\pi^2}{6}
- -\operatorname{Li}_2(1-\zeta)-\ln\zeta\ln(1-\zeta),
+ -\operatorname{Li}_2(1-\zeta)-\ln\zeta\log(1-\zeta),
 \]
 \[
 \log\frac{1-\zeta}{1+\zeta}
  =\log(1-\zeta)-\ln(1+\zeta).
 \]
+Substituting both into $S(\zeta)$,
+\begin{align*}
+S(\zeta)&=\frac{\pi^2}{6}-\operatorname{Li}_2(1-\zeta)
+ -\ln\zeta\log(1-\zeta)-\operatorname{Li}_2(-\zeta)\\
+&\quad+\ln\zeta\log(1-\zeta)-\ln\zeta\ln(1+\zeta).
+\end{align*}
 The terms containing $\ln\zeta\log(1-\zeta)$ cancel, leaving
 \[
 S(\zeta)=\frac{\pi^2}{6}
  -\operatorname{Li}_2(1-\zeta)-\operatorname{Li}_2(-\zeta)
  -\ln\zeta\ln(1+\zeta).
 \]
-Continue this equality consistently above or below $\zeta=1$.
-The imaginary parts in the original combination cancel; the
-right side is already real for every $\zeta>0$.
-At $\zeta=1$ it has a finite limit, so no $0\log0$ product
+For $\zeta>1$, continue consistently from above, $\zeta+i0$
+(from below, change the sign of every $i\pi$).  Then
+$\log(1-\zeta)=\ln(\zeta-1)-i\pi$, and Eq.~(18.161) gives the
+first display with this value, so that
+$\operatorname{Im}\operatorname{Li}_2(\zeta+i0)=\pi\ln\zeta$.
+The quotient $(1-\zeta)/(1+\zeta)<0$ is approached from below
+(at $\zeta+i\varepsilon$ its imaginary part is
+$-2\varepsilon/|1+\zeta+i\varepsilon|^2$), so its logarithm is
+$\ln[(\zeta-1)/(\zeta+1)]-i\pi$, and the second display holds
+with the same value of $\log(1-\zeta)$.  The cancellation
+therefore goes through unchanged: the imaginary parts
+$+\pi\ln\zeta$ of $\operatorname{Li}_2(\zeta+i0)$ and
+$-\pi\ln\zeta$ of the logarithmic product cancel, and the right
+side, whose arguments $1-\zeta$, $-\zeta$ lie below one and
+$\zeta$, $1+\zeta$ are positive, is real for every $\zeta>0$.
+At $\zeta=1$ it has the finite value
+$\pi^2/6-\operatorname{Li}_2(-1)=\pi^2/4$, so no $0\log0$ product
 needs to be evaluated separately.
 
 Sum over $j=1,2,3$.  The three constants $\pi^2/6$ cancel
-the original $-\pi^2/2$ exactly.  Thus the desired form is
+the original $-\pi^2/2$ exactly:
+\[
+-\frac{\pi^2}2+\sum_{j=1}^3S(\zeta_j)
+ =-\sum_{j=1}^3\left[\operatorname{Li}_2(-\zeta_j)
+ +\operatorname{Li}_2(1-\zeta_j)+\ln\zeta_j\ln(1+\zeta_j)\right].
+\]
+Thus the desired form is
 \[
 \boxed{I=-\frac{32\pi^3}{\alpha_1\alpha_2\alpha_3}
  \sum_{j=1}^3\left[
@@ -5337,8 +5420,10 @@ The arc-length element is therefore
 \begin{align*}
 ds&=\sqrt{(dx)^2+(dy)^2}
  =\sqrt{a^2\cos^2\theta+b^2\sin^2\theta}\,d\theta\\
- &=a\sqrt{1-\frac{a^2-b^2}{a^2}\sin^2\theta}\,d\theta.
+ &=\sqrt{a^2-(a^2-b^2)\sin^2\theta}\,d\theta
+ =a\sqrt{1-\frac{a^2-b^2}{a^2}\sin^2\theta}\,d\theta,
 \end{align*}
+using $\cos^2\theta=1-\sin^2\theta$.
 As $\theta$ increases from $0$ to $\pi/2$, the point moves
 from $(0,b)$ to $(a,0)$ along precisely the first-quadrant arc.
 Thus its length is
@@ -5350,7 +5435,9 @@ For $a=b$, $m=0$ and $\ell=\pi a/2$, the quarter-circle length.
 The limit $b\downarrow0$ gives $m\uparrow1$ and
 $\ell\to a\int_0^{\pi/2}\cos\theta\,d\theta=a$;
 this is a degenerate limiting ellipse.  If $b>a$, interchange the
-axis labels (or use $\theta\mapsto\pi/2-\theta$) to obtain
+axis labels (or use $\theta\mapsto\pi/2-\theta$, which turns
+$a^2\cos^2\theta+b^2\sin^2\theta$ into
+$b^2-(b^2-a^2)\sin^2\theta$) to obtain
 $bE(1-a^2/b^2)$ in the conventional nonnegative-parameter form.
 
 \Needspace{5\baselineskip}
@@ -5371,16 +5458,23 @@ For $|m|<1$, expand the integrand uniformly in $\theta$:
 \]
 For $n\ge1$, direct multiplication of the binomial factors gives
 \[
+\binom{1/2}{n}
+ =\frac{\frac12(\frac12-1)\cdots(\frac12-n+1)}{n!}
+ =\frac{(-1)^{n-1}\,1\cdot3\cdots(2n-3)}{2^nn!},
+\qquad
 (-1)^n\binom{1/2}{n}=-\frac{(2n-3)!!}{(2n)!!},
 \]
-where $(-1)!!=1$.  The sine moment is the beta integral
+where $(-1)!!=1$ and $2^nn!=(2n)!!$.  The sine moment is the beta
+integral
 \[
 \int_0^{\pi/2}\sin^{2n}\theta\,d\theta
  =\frac12B(n+\tfrac12,\tfrac12)
  =\frac\pi2\frac{(2n-1)!!}{(2n)!!}.
 \]
-Multiply these factors and use
-$(2n-3)!!=(2n-1)!!/(2n-1)$:
+Integrating termwise, the $m^n$ term is the product of these two
+factors,
+$-\frac\pi2\frac{(2n-3)!!\,(2n-1)!!}{[(2n)!!]^2}m^n$; with
+$(2n-3)!!=(2n-1)!!/(2n-1)$ this gives
 \[
 \boxed{E(m)=\frac\pi2\left[
  1-\sum_{n=1}^\infty\frac1{2n-1}
@@ -5393,11 +5487,12 @@ which reproduce the requested series.  In ordinary powers,
 E(m)=\frac\pi2\left(1-\frac m4-\frac{3m^2}{64}
                              -\frac{5m^3}{256}-\cdots\right).
 \]
-Since $(2n-1)!!/(2n)!!\sim1/\sqrt{\pi n}$, the absolute
+Since $(2n-1)!!/(2n)!!=(2n)!/(2^nn!)^2\sim1/\sqrt{\pi n}$ by
+Stirling's formula, the absolute
 coefficients are $O(n^{-2})$.  Thus the series is absolutely
 uniformly convergent for $|m|\le1$ and extends to the boundary
 by continuity.  In particular $m=1$ gives $E(1)=1$, consistent
-with its defining integral.
+with its defining integral $\int_0^{\pi/2}\cos\theta\,d\theta=1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5407,10 +5502,8 @@ with its defining integral.
 =\frac{\pi}{4}.
 \]
 \solution
-\erratum{The original printed exercise has $(K-E)/m$, without
-an extra factor $\pi$ in the numerator.  That extra factor in
-the supplied transcription has been removed.  The published
-erratum also makes both arguments explicitly $m$.}
+The statement incorporates the published erratum, which makes
+both elliptic arguments explicitly $m$.
 Subtract the defining integrands before taking the limit:
 \begin{align*}
 K(m)-E(m)
@@ -5419,18 +5512,18 @@ K(m)-E(m)
  &=m\int_0^{\pi/2}\frac{\sin^2\theta}
                                {\sqrt{1-m\sin^2\theta}}d\theta.
 \end{align*}
-For $|m|$ bounded strictly below one, the integrand is dominated
-by a constant times $\sin^2\theta$.  Dominated convergence gives
+For $|m|\le\frac12$ we have $1-m\sin^2\theta\ge\frac12$, so the
+integrand is dominated by $\sqrt2\sin^2\theta$, and it tends to
+$\sin^2\theta$ as $m\to0$.  Dominated convergence gives
 \[
 \boxed{\lim_{m\to0}\frac{K(m)-E(m)}m
  =\int_0^{\pi/2}\sin^2\theta\,d\theta=\frac\pi4}.
 \]
 Equivalently the two series start with
 $K=(\pi/2)(1+m/4+O(m^2))$ and
-$E=(\pi/2)(1-m/4+O(m^2))$.
-If the spurious numerator factor $\pi$ were retained, the limit
-would instead be $\pi^2/4$, so it cannot accompany the stated
-right side.
+$E=(\pi/2)(1-m/4+O(m^2))$ (Exercise~18.8.2; for $K$ the $m$ term
+is $\frac m2\int_0^{\pi/2}\sin^2\theta\,d\theta=\pi m/8$), so
+$(K-E)/m=(\pi/2)(\tfrac12)+O(m)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5461,8 +5554,9 @@ Assume $a>0$, $\rho>0$, away from the ideal wire
 $(\rho,z)=(a,0)$.  Set
 \[
 D=(a+\rho)^2+z^2,\quad m=k^2=\frac{4a\rho}D,
-\quad 0<m<1.
+\quad 0<m<1,
 \]
+where $m<1$ because $D-4a\rho=(a-\rho)^2+z^2>0$ off the wire.
 Using $\cos\alpha=2\cos^2(\alpha/2)-1$, the denominator
 squared becomes
 \[
@@ -5470,18 +5564,25 @@ a^2+\rho^2+z^2-2a\rho\cos\alpha
  =D-4a\rho\cos^2(\alpha/2)
  =D[1-m\cos^2(\alpha/2)].
 \]
-Put $u=\alpha/2$ and then $\theta=\pi/2-u$:
+Put $u=\alpha/2$, so $d\alpha=2\,du$, $0\le u\le\pi/2$ and
+$\cos\alpha=2\cos^2u-1$; then put $\theta=\pi/2-u$, so
+$\cos u=\sin\theta$ and $d\theta=-du$ (which restores the order of
+the limits).  The factor $2$ from $d\alpha$ turns
+$a\mu_0I/(2\pi)$ into $a\mu_0I/\pi$, and $\sqrt D$ comes out of the
+root:
 \[
 A_\varphi=\frac{a\mu_0 I}{\pi\sqrt D}
  \int_0^{\pi/2}\frac{2\sin^2\theta-1}
                          {\sqrt{1-m\sin^2\theta}}d\theta.
 \]
-The difference of the elliptic integrands gives
+The difference of the elliptic integrands gives, as in
+Exercise~18.8.3,
 \[
 K(m)-E(m)=m\int_0^{\pi/2}
  \frac{\sin^2\theta}{\sqrt{1-m\sin^2\theta}}d\theta.
 \]
-Therefore the remaining angular integral is
+Therefore, splitting the numerator $2\sin^2\theta-1$, the remaining
+angular integral is
 \[
 \frac2m[K(m)-E(m)]-K(m)
  =\frac2m\left[(1-\tfrac m2)K(m)-E(m)\right].
@@ -5489,20 +5590,28 @@ Therefore the remaining angular integral is
 Finally
 \[
 \frac{2a}{m\sqrt D}
+ =\frac{2aD}{4a\rho\sqrt D}=\frac{\sqrt D}{2\rho}
+ =\frac{\sqrt D}{2\sqrt{a\rho}}\sqrt{\frac a\rho}
  =\frac1k\sqrt{\frac a\rho},
 \]
-because $k=2\sqrt{a\rho}/\sqrt D$.  Substitution yields
+because $k=2\sqrt{a\rho}/\sqrt D$.  Substitution of
+$A_\varphi=(\mu_0I/\pi)\,[2a/(m\sqrt D)]\,
+[(1-\tfrac m2)K-E]$ yields
 \[
 \boxed{A_\varphi(\rho,\varphi,z)=\frac{\mu_0I}{\pi k}
  \sqrt{\frac a\rho}
  \left[(1-\tfrac{k^2}2)K(k^2)-E(k^2)\right]}.
 \]
 Rotational symmetry explains the absence of $\varphi$.
-\erratum{At $\rho=0$ the apparent singular factors are interpreted
-by a limit: the original integral is zero, so $A_\varphi=0$ on
-the axis.  At the ideal wire $k^2=1$, the logarithmic singularity
-is real and is not a removable limit.}
-The cancellation near $k=0$ is also quantified by the next exercise.
+At $\rho=0$ the apparent singular factors are interpreted
+by a limit: the original integral is
+$\int_0^\pi\cos\alpha\,d\alpha/\sqrt{a^2+z^2}=0$, so $A_\varphi=0$
+on the axis.  The formula reproduces this as $\rho\to0$, where
+$k\to0$: by the next exercise the bracket is
+$(m/2)f(m)=\pi m^2/32+O(m^3)$, so
+$A_\varphi\simeq\mu_0Ia^2\rho/(4D^{3/2})\to0$.  At the ideal wire
+$k^2=1$, where $K$ diverges logarithmically while $E(1)=1$, the
+singularity is real and is not a removable limit.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5527,12 +5636,23 @@ K(m)=\frac\pi2\left(1+\frac m4+\frac{9m^2}{64}+O(m^3)\right),
 \quad
 E(m)=\frac\pi2\left(1-\frac m4-\frac{3m^2}{64}+O(m^3)\right).
 \]
-Then
+The series for $E$ is Exercise~18.8.2; the same binomial and
+sine-moment computation applied to $(1-m\sin^2\theta)^{-1/2}$, whose
+binomial coefficients are $(2n-1)!!/(2n)!!$, gives
+\[
+K(m)=\frac\pi2\sum_{n=0}^\infty
+ \left[\frac{(2n-1)!!}{(2n)!!}\right]^2m^n.
+\]
+Then, since
+\[
+(2-m)\Big(1+\frac m4+\frac{9m^2}{64}\Big)
+=2+\frac m2+\frac{9m^2}{32}-m-\frac{m^2}4+O(m^3),
+\]
 \begin{align*}
 (2-m)K(m)-2E(m)
  &=\frac\pi2\left[
- 2-\frac m2+\left(\frac{18}{64}-\frac14\right)m^2
- -2+\frac m2+\frac{6m^2}{64}+O(m^3)\right]\\
+ 2-\frac m2+\frac{m^2}{32}
+ -2+\frac m2+\frac{3m^2}{32}+O(m^3)\right]\\
  &=\frac\pi2\left[\frac{m^2}{8}+O(m^3)\right].
 \end{align*}
 The constant and linear terms cancel.  Dividing by $m$ gives
@@ -5540,16 +5660,25 @@ The constant and linear terms cancel.  Dividing by $m$ gives
 \boxed{f(k^2)=\frac{\pi k^2}{16}+O(k^4)}.
 \]
 Keeping the next terms $25m^3/256$ in $2K/\pi$ and
-$-5m^3/256$ in $2E/\pi$ would give
+$-5m^3/256$ in $2E/\pi$ adds
+$(2\cdot\frac{25}{256}-\frac9{64}+2\cdot\frac5{256})m^3
+=\frac3{32}m^3$ to the bracket, and so gives
 $f(m)=\pi m/16+3\pi m^2/64+O(m^3)$.
 Thus $f$ has the removable value $f(0)=0$.
 
-For the distant loop field, $D\sim r^2$,
-$m\sim4a\rho/r^2$ and the preceding exercise has
-$A_\varphi=a\mu_0I f(m)/(\pi\sqrt D)$.
-Consequently its leading term is
-$\mu_0Ia^2\rho/(4r^3)=\mu_0Ia^2\sin\theta/(4r^2)$,
-the magnetic-dipole form.  Large $r/a$ is a sufficient way to
+For the distant loop field, $D=(a+\rho)^2+z^2=r^2+2a\rho+a^2>r^2$,
+so $m=4a\rho/D<4a\rho/r^2\le4a/r$, using $\rho\le r$; hence $r\gg a$
+makes $m\ll1$, with $D\sim r^2$ and $m\sim4a\rho/r^2$.  The
+preceding exercise has
+$A_\varphi=(a\mu_0I/\pi\sqrt D)(2/m)[(1-\tfrac m2)K-E]
+=a\mu_0I f(m)/(\pi\sqrt D)$.
+Consequently, with $\rho=r\sin\theta$, its leading term is
+\[
+A_\varphi\simeq\frac{a\mu_0I}{\pi r}\cdot\frac\pi{16}\cdot
+ \frac{4a\rho}{r^2}=\frac{\mu_0Ia^2\rho}{4r^3}
+ =\frac{\mu_0}{4\pi}\,\frac{(\pi a^2I)\sin\theta}{r^2},
+\]
+the field of a magnetic dipole of moment $\pi a^2I$.  Large $r/a$ is a sufficient way to
 make $m$ small; it is not the only one, since $m\to0$ also
 on approaching the symmetry axis.
 
@@ -5574,12 +5703,18 @@ by comparing series expansions.
 Take initially $0<k<1$, put $m=k^2$, and use differentiation
 under the integral on compact subintervals of this range.
 (a) The chain rule gives
+$\partial_k\sqrt{1-k^2\sin^2\theta}
+=-k\sin^2\theta/\sqrt{1-k^2\sin^2\theta}$, so
 \[
 \frac{dE(k^2)}{dk}
  =-k\int_0^{\pi/2}\frac{\sin^2\theta}
                              {\sqrt{1-k^2\sin^2\theta}}d\theta.
 \]
-Since $-k\sin^2\theta=[(1-k^2\sin^2\theta)-1]/k$,
+Since $-k\sin^2\theta=[(1-k^2\sin^2\theta)-1]/k$, the integrand
+equals
+$\frac1k\bigl[\sqrt{1-k^2\sin^2\theta}
+-1/\sqrt{1-k^2\sin^2\theta}\,\bigr]$, whose integral is
+$(E-K)/k$:
 \[
 \boxed{\frac{dE(k^2)}{dk}=\frac{E(k^2)-K(k^2)}k}.
 \]
@@ -5590,28 +5725,43 @@ Define
 a_n=\left[\frac{(1/2)_n}{n!}\right]^2,
 \qquad J(m)=\int_0^{\pi/2}(1-m\sin^2\theta)^{-3/2}d\theta.
 \]
-The binomial series and the sine moment give
+For $|m|<1$, the binomial series
+$(1-x)^{-3/2}=\sum_n(3/2)_nx^n/n!$ and the sine moment
+$\int_0^{\pi/2}\sin^{2n}\theta\,d\theta=\frac\pi2(1/2)_n/n!$ of
+Exercise~18.8.2 (there written $\frac\pi2(2n-1)!!/(2n)!!$), integrated
+termwise, give
 \[
 J(m)=\frac\pi2\sum_{n=0}^\infty
  \frac{(3/2)_n(1/2)_n}{(n!)^2}m^n
- =\frac\pi2\sum_{n=0}^\infty(2n+1)a_nm^n.
+ =\frac\pi2\sum_{n=0}^\infty(2n+1)a_nm^n,
 \]
-For $n\ge1$, $a_n/a_{n-1}=(2n-1)^2/(4n^2)$.
-Hence the $m^n$ coefficient of $2(1-m)J/\pi$ is
+since $(3/2)_n=\frac32\cdot\frac52\cdots\frac{2n+1}2=(2n+1)(1/2)_n$.
+For $n\ge1$, $(1/2)_n=(n-\tfrac12)(1/2)_{n-1}$ gives
+$a_n/a_{n-1}=(2n-1)^2/(4n^2)$.
+Write $2(1-m)J/\pi=\sum_n(2n+1)a_nm^n-\sum_{n\ge1}(2n-1)a_{n-1}m^n$,
+shifting the index by one in the second sum.  Hence, for $n\ge1$,
+the $m^n$ coefficient of $2(1-m)J/\pi$ is
 \[
 (2n+1)a_n-(2n-1)a_{n-1}
  =a_n\left[(2n+1)-\frac{4n^2}{2n-1}\right]
- =-\frac{a_n}{2n-1}.
+ =-\frac{a_n}{2n-1},
 \]
-The constant is one, so Exercise~18.8.2 identifies the entire
+because $(2n+1)(2n-1)-4n^2=-1$.  The constant is one and
+$a_n=[(2n-1)!!/(2n)!!]^2$, so Exercise~18.8.2 identifies the entire
 series with $2E(m)/\pi$.  Thus
 \[
 \boxed{E(m)=(1-m)J(m)},\qquad |m|<1.
 \]
-This uses the \erratum{corrected integrand $1-k^2\sin^2\theta$},
-not $1-k\sin^2\theta$.
+This uses the corrected integrand $1-k^2\sin^2\theta$ of the
+hint.  With the printed $1-k\sin^2\theta$ the right side would be
+$(1-k^2)\frac\pi2(1+\frac34k+\cdots)$, with a linear term
+$\frac{3\pi}8k$ that $E(k^2)=\frac\pi2-\frac\pi8k^2+\cdots$ lacks.
 
-Now differentiate $K$ and rewrite its numerator:
+Now differentiate $K$, using
+$\partial_k(1-k^2\sin^2\theta)^{-1/2}
+=k\sin^2\theta\,(1-k^2\sin^2\theta)^{-3/2}$, and rewrite the
+numerator with $k\sin^2\theta=[1-(1-k^2\sin^2\theta)]/k$; the
+hint, $J(k^2)=E(k^2)/(1-k^2)$, gives the last step:
 \begin{align*}
 \frac{dK(k^2)}{dk}
  &=k\int_0^{\pi/2}\frac{\sin^2\theta}
@@ -5626,6 +5776,9 @@ All elliptic arguments in these formulas are the parameter
 $k^2$, as stated in the published erratum.
 At $k=0$ both derivatives have the removable value zero:
 $E(k^2)=\pi/2-\pi k^2/8+O(k^4)$ and
-$K(k^2)=\pi/2+\pi k^2/8+O(k^4)$.
+$K(k^2)=\pi/2+\pi k^2/8+O(k^4)$, so
+$(E-K)/k=-\pi k/4+O(k^3)$, while
+$E/[k(1-k^2)]-K/k=[E-(1-k^2)K]/[k(1-k^2)]
+=\pi k/4+O(k^3)$.
 The singular endpoint $k=1$ is outside the finite derivative
 formulas and is approached only as a limit.
