@@ -1901,13 +1901,20 @@ $\Psi=k\Phi^2/2$:
 \partial_i\Psi=k\Phi\,\partial_i\Phi,\qquad
 \partial_i^2\Psi=k(\partial_i\Phi)^2+k\Phi\,\partial_i^2\Phi.
 \]
-Summing over the three coordinates gives
+Summing over the three coordinates, with
+$\sum_i(\partial_i\Phi)^2=|\nabla\Phi|^2$ for real $\Phi$, gives
 \[
 \nabla^2\Psi=k|\nabla\Phi|^2+k\Phi\nabla^2\Phi
 =\boxed{k|\nabla\Phi|^2}.
 \]
 Thus it is a solution. One can add any harmonic function to $\Psi$
 because its Laplacian contributes zero.
+\erratum{Both qualifications are needed. The complex harmonic function
+$\Phi=x+iy$ has $\nabla\Phi=(1,i,0)$ and
+$\sum_i(\partial_i\Phi)^2=1+i^2=0$, so $\nabla^2(k\Phi^2/2)=0$, whereas
+$k|\nabla\Phi|^2=2k$; and for nonconstant $k$ the product rule adds
+$\frac12\Phi^2\nabla^2k+2\Phi\,\nabla k\cdot\nabla\Phi$, nonzero in
+general, to $\nabla^2\Psi$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1990,8 +1997,8 @@ matrix $\mathsf M\cdot\nabla$ even though it includes
 $c^{-1}\partial_t I$. After multiplying that equation by $c$, the
 imaginary part is $c[\nabla\times\mathbf B-c^{-2}\partial_t\mathbf E]$,
 so its displayed imaginary bracket is also missing an overall factor
-$c$. These notation and normalization errors do not change the two
-zero curl-equation residuals.}
+$c$. These notation and normalization errors do not affect the
+conclusion that both brackets vanish.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2097,7 +2104,7 @@ while the outward vector areas still sum to zero.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{3.7.2}\quad Find the work $\erratum{-\int_C}\mathbf{F}\cdot d\mathbf{r}$
+\noindent\textbf{3.7.2}\quad Find the work $\erratum{-\int_C}\,\mathbf{F}\cdot d\mathbf{r}$
 done moving on a unit circle in the $xy$-plane, doing work against a force
 field given by
 \[
@@ -2110,7 +2117,8 @@ field given by
 \end{enumerate}
 Note that the work done depends on the path.
 \solution
-\erratum{These paths are semicircles, not closed loops. Also, work
+\erratum{The textbook writes $\oint\mathbf F\cdot d\mathbf r$, but these
+paths are semicircles, not closed loops. Also, work
 against the specified field is $-\int_C\mathbf F\cdot d\mathbf r$;
 $\int_C\mathbf F\cdot d\mathbf r$ is the work done by the field.}
 Parametrize the unit circle by
@@ -2296,11 +2304,14 @@ side, and multiply by $\epsilon_0$:
 =\epsilon_0\int_{r<R}E^2\,d\tau
 +\epsilon_0\oint_{r=R}\varphi\mathbf E\cdot d\boldsymbol\sigma.
 \]
-\erratum{The all-space identity requires convergence and a vanishing
-outer surface term. For a localized regular charge distribution,
-$\varphi=O(R^{-1})$ and $\mathbf E=O(R^{-2})$ ensure this; ideal
-point charges have divergent self-energy integrals.}
-Under these conditions the surface term is $O(R^{-1})$:
+\erratum{The hint alone does not suffice: $\varphi=\sin(r^3)/r$ is
+$O(r^{-1})$, yet $E_r=-\varphi'=-3r\cos r^3+r^{-2}\sin r^3$ oscillates
+with an amplitude growing like $r$, so the surface term
+$4\pi R^2\varphi E_r=-6\pi R^2\sin(2R^3)+4\pi R^{-1}\sin^2R^3$ has no
+limit and $\int E^2\,d\tau$ diverges. For ideal point charges both
+volume integrals diverge.}
+Under the conditions $\varphi=O(R^{-1})$, $\mathbf E=O(R^{-2})$ of the
+statement, the surface term is $O(R^{-1})$:
 \[
 \Bigl|\oint_{r=R}\varphi\mathbf E\cdot d\boldsymbol\sigma\Bigr|
 \le4\pi R^2\max_{r=R}|\varphi|\,|\mathbf E|
@@ -2407,6 +2418,10 @@ As $\theta$ increases from $0$ to $2\pi$ the ellipse is traversed once
 counterclockwise, so by (a)
 $2A=\oint(x\,dy-y\,dx)=\int_0^{2\pi}ab\,d\theta=2\pi ab$, hence
 $\boxed{A=\pi ab}$.
+\erratum{The qualifications are needed: a self-intersecting loop in (a)
+gives signed areas counted with multiplicity (Exercise 3.8.6), and for
+$ab<0$ in (b) the same parametrization runs clockwise and gives
+$\oint(x\,dy-y\,dx)=2\pi ab<0$, while the area is $\pi|ab|$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2601,12 +2616,12 @@ find
 \item[(d)] For what value of the exponent $n$ does the scalar potential
   diverge at both the origin and infinity?
 \end{enumerate}
+\erratum{Take $n\in\mathbb R$ and initially work at $r>0$; any extension across the origin requires a separate regularity check.}
 \par\nobreak\hfill\emph{ANS.}\enspace
 $\begin{array}{ll}
 \text{(a)}\ (2n+3)r^{2n}&\text{(b)}\ 0\\
 \text{(c)}\ -r^{2n+2}/(2n+2),\ n\neq-1&\text{(d)}\ n=-1,\ \varphi=-\ln r.
 \end{array}$
-\erratum{Take $n\in\mathbb R$ and initially work at $r>0$; any extension across the origin requires a separate regularity check.}
 \solution
 Write $\mathbf F=r^{2n}\mathbf r$, with $r>0$ and
 $r^2=x^2+y^2+z^2=\sum_ix_i^2$.
@@ -2691,8 +2706,9 @@ Consequently
 \dfrac{Q}{4\pi\epsilon_0r},&r\ge a.
 \end{cases}}
 \]
-Both $\varphi$ and $-\varphi'=E_r$ agree at $r=a$ (the two formulas
-give $Q/(4\pi\epsilon_0a)$ and $Q/(4\pi\epsilon_0a^2)$ there), and
+At $r=a$ the inner and outer formulas agree: both give
+$\varphi(a)=Q/(4\pi\epsilon_0a)$ and
+$E_r(a)=-\varphi'(a)=Q/(4\pi\epsilon_0a^2)$. Also
 $\varphi(0)=3Q/(8\pi\epsilon_0a)$ is finite.
 
 \Needspace{5\baselineskip}
@@ -2729,7 +2745,7 @@ every required force component. Its intermediate expression also
 includes an extra factor $r^2$ before $(3z^2-r^2)$. The consistent
 chain, with $r^2=x^2+y^2+z^2$ and
 $P_2(\cos\theta)=\frac12(3\cos^2\theta-1)=(3z^2-r^2)/(2r^2)$, is
-$V=-\dfrac{GmM}{2R^3}(3z^2-r^2)=-\dfrac{GmMr^2}{R^3}P_2(\cos\theta)$,
+$V=-GmM(3z^2-r^2)/(2R^3)=-GmMr^2P_2(\cos\theta)/R^3$,
 as in the textbook answer.}
 
 \Needspace{5\baselineskip}
@@ -2741,10 +2757,10 @@ produces a magnetic induction $\mathbf{B}$ with components
 \frac{x}{x^{2}+y^{2}},0\right).
 \]
 Find a magnetic vector potential $\mathbf{A}$.
+\erratum{Work off the ideal wire, where $x^2+y^2>0$.}
 \par\nobreak\hfill\emph{ANS.}\enspace
 $\mathbf{A}=-\hat{\mathbf{e}}_{z}(\mu_{0}I/4\pi)\ln(x^{2}+y^{2})$.\enspace
 (This solution is not unique.)
-\erratum{Work off the ideal wire, where $x^2+y^2>0$.}
 \solution
 Choose $\mathbf A=A_z(x,y)\hat{\mathbf e}_z$.
 Then $\nabla\times\mathbf A=(\partial_yA_z,-\partial_xA_z,0)$.
@@ -2935,6 +2951,8 @@ electric charges on or within the sphere.
 \emph{Hint.}~Use Green's theorem, Eq.~(3.85), with $u=r^{-1}$, \erratum{where $r$ is the distance}
 from $P$, and $v=\varphi$. Equation (3.120) will also be useful.
 \solution
+\erratum{The hint is reworded to make clear that the distance from $P$
+is $r$, not $u=r^{-1}$.}
 Place $P$ at the origin and let the sphere have radius $a$.
 With no charge on or within the sphere,
 $\nabla^2\varphi=-\rho/\epsilon_0=0$: the potential is harmonic
@@ -2994,12 +3012,15 @@ vector Poisson equation,
 provided we require $\nabla\cdot\mathbf{A}=0$.
 \erratum{Use magnetostatics in a medium with spatially constant scalar permeability $\mu$.}
 \solution
-\erratum{Use a magnetostatic field in a medium with spatially constant
-scalar permeability $\mu$.}
+\erratum{The permeability must be spatially constant: by the product
+rule of Exercise 3.6.4,
+$\nabla\times(\mu\mathbf H)=\nabla\mu\times\mathbf H
++\mu\nabla\times\mathbf H$, so for nonuniform $\mu$ Amp\`ere's law
+below would contain the extra term $\nabla\mu\times\mathbf H$.}
 For steady currents $\partial\mathbf D/\partial t=0$, so the Maxwell
 equation $\nabla\times\mathbf H=\mathbf J+\partial\mathbf D/\partial t$
-with $\mathbf B=\mu\mathbf H$ gives Amp\`ere's law
-$\nabla\times\mathbf B=\mu\mathbf J$.
+with $\mathbf B=\mu\mathbf H$ and constant $\mu$ gives Amp\`ere's law
+$\nabla\times\mathbf B=\mu\nabla\times\mathbf H=\mu\mathbf J$.
 Insert $\mathbf B=\nabla\times\mathbf A$ and expand the double curl by
 Eq.~(3.70) (Exercise 3.6.9):
 \[
@@ -3129,7 +3150,7 @@ planes $x=0$ and $y=0$, and $v=0$ the planes $y=x$ and $y=-x$.
 $v=\pm1.2$. Arrows show increasing coordinates:
 \begin{center}
 \begin{tikzpicture}[scale=0.9,>=stealth]
-\clip (-3,-3) rectangle (3,3);
+\clip (-3,-3.2) rectangle (3,3.2);
 \draw[->] (-2.8,0)--(2.85,0) node[below]{$x$};
 \draw[->] (0,-2.8)--(0,2.85) node[left]{$y$};
 \foreach \sg in {-1,1}{
@@ -3143,21 +3164,28 @@ $v=\pm1.2$. Arrows show increasing coordinates:
 \foreach \sx/\sy in {1/1,-1/1,-1/-1,1/-1}{
  \coordinate (p) at ({1.6*\sx},{1.6*\sy});
  \fill (p) circle(1.1pt);
- \draw[->,black,thick] (p)--++({0.43*\sy},{0.43*\sx})
- node[above,font=\scriptsize]{$\hat{\mathbf e}_u$};
- \draw[->,black,thick] (p)--++({0.43*\sx},{-0.43*\sy})
- node[below,font=\scriptsize]{$\hat{\mathbf e}_v$};
+ \draw[->,black,thick] (p)--++({0.43*\sy},{0.43*\sx});
+ \node[font=\scriptsize] at ({1.6*\sx+0.62*\sy},{1.6*\sy+0.62*\sx})
+ {$\hat{\mathbf e}_u$};
+ \draw[->,black,thick] (p)--++({0.43*\sx},{-0.43*\sy});
+ \node[font=\scriptsize] at ({1.6*\sx+0.62*\sx},{1.6*\sy-0.62*\sy})
+ {$\hat{\mathbf e}_v$};
 }
-\node[blue,fill=white,font=\small] at (0.7,2.5){$u=\text{const.}$};
-\node[red!65!black,fill=white,font=\small] at (-0.85,-2.6){$v=\text{const.}$};
+\node[blue,font=\small,anchor=base west] at (0.45,2.86)
+{$u=\text{const.}$};
+\node[red!65!black,font=\small,anchor=base west] at (0.45,-3.12)
+{$v=\text{const.}$};
 \end{tikzpicture}
 \end{center}
 \textbf{(c)} For $\rho=\sqrt{x^2+y^2}>0$,
 $\nabla u=(y,x,0)$ and $\nabla v=(2x,-2y,0)$.
 They are orthogonal, since their dot product is $2xy-2xy=0$.
-A gradient points in the direction in which its function increases, so
-the increasing-coordinate unit vectors are $\nabla u/|\nabla u|$ and
-$\nabla v/|\nabla v|$, with $|\nabla u|=\sqrt{y^2+x^2}=\rho$ and
+For orthogonal coordinates the gradient formula of Section 3.10,
+$\nabla\psi=\sum_i\hat{\mathbf e}_i\,h_i^{-1}\,\partial\psi/\partial q_i$
+with scale factors $h_i>0$, applied to $\psi=u$ and $\psi=v$ gives
+$\nabla u=\hat{\mathbf e}_u/h_u$ and $\nabla v=\hat{\mathbf e}_v/h_v$.
+Hence the increasing-coordinate unit vectors are $\nabla u/|\nabla u|$
+and $\nabla v/|\nabla v|$, with $|\nabla u|=\sqrt{y^2+x^2}=\rho$ and
 $|\nabla v|=2\rho$:
 \[
 \boxed{\hat{\mathbf e}_u=\frac{(y,x,0)}{\rho},\qquad
@@ -3206,6 +3234,11 @@ whose determinant is the reciprocal of the one above,
 \det\frac{\partial(x,y)}{\partial(u,v)}
 =-\frac{y^2}{2\rho^4}-\frac{x^2}{2\rho^4}=-\frac1{2\rho^2}.
 \]
+The columns of the inverse matrix are the tangent vectors
+$\partial\mathbf r/\partial u=(y,x,0)/\rho^2$ and
+$\partial\mathbf r/\partial v=(x,-y,0)/(2\rho^2)$ of the coordinate
+lines; as a check on (c), they point along $\hat{\mathbf e}_u$ and
+$\hat{\mathbf e}_v$, with lengths $h_u=1/\rho$ and $h_v=1/(2\rho)$.
 \erratum{The Instructor's Manual, p.~49, omits the factor $1/2$ in this
 inverse determinant. Its earlier differential must likewise read
 $dv=2x\,dx-2y\,dy$, with a minus sign, since
@@ -3235,8 +3268,12 @@ x=a\cosh u\cos v,\qquad y=a\sinh u\sin v,\qquad z=z,\quad a>0.
 Dividing its squared coordinates by $a^2\cosh^2u,a^2\sinh^2u$
 and adding gives $1$; dividing by $a^2\cos^2v,a^2\sin^2v$
 and subtracting also gives $1$. Thus it generates both stated families.
-Constant $u>0$ gives ellipses with foci $(\pm a,0)$, and constant
-$v$ gives confocal hyperbolas. In the first quadrant use
+Constant $u>0$ gives ellipses with semi-axes $a\cosh u>a\sinh u$, whose
+foci $(\pm c,0)$ have $c^2=a^2\cosh^2u-a^2\sinh^2u=a^2$; constant $v$
+(not a multiple of $\pi/2$) gives hyperbolas with semi-axes
+$a|\cos v|$ and $a|\sin v|$, whose foci $(\pm c,0)$ have
+$c^2=a^2\cos^2v+a^2\sin^2v=a^2$. Both families are therefore confocal,
+with foci $(\pm a,0)$. In the first quadrant use
 $u>0$, $0<v<\pi/2$. The sketch shows the ellipses $u=0.45,0.8,1.15$
 (blue), the hyperbolas $v=20^\circ,45^\circ,70^\circ$ (red), and the
 unit vectors at the point $u=1$, $v=30^\circ$:
@@ -3260,9 +3297,10 @@ unit vectors at the point $u=1$, $v=30^\circ$:
 \draw[->,thick] (p)--++(0.30,0.227)
  node[right,font=\small]{$\hat{\mathbf e}_u$};
 \draw[->,thick] (p)--++(-0.227,0.30)
- node[above,font=\small]{$\hat{\mathbf e}_v$};
-\node[blue,font=\small] at (0.65,1.5){$u=\text{const.}$};
-\node[red!65!black,font=\small] at (1.75,1.1){$v=\text{const.}$};
+ node[above left,font=\small,inner sep=1pt]{$\hat{\mathbf e}_v$};
+\node[blue,font=\small,anchor=west] at (0.75,1.6){$u=\text{const.}$};
+\node[red!65!black,font=\small,anchor=west] at (1.45,1.15)
+{$v=\text{const.}$};
 \end{tikzpicture}
 \end{center}
 Differentiate the position:

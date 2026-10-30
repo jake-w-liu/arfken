@@ -1701,17 +1701,21 @@ factor two:
 G_T(x,t)=\frac{1-t^2}{1-2xt+t^2}
        =T_0(x)+2\sum_{n=1}^\infty T_n(x)t^n,\qquad |t|<1.
 \]
-At the three requested arguments it becomes
+At $x=\pm1$ the denominator is $(1\mp t)^2$, and its factor $1\mp t$
+cancels against $1-t^2=(1-t)(1+t)$.  Writing each quotient as
+$2/(\text{denominator})-1$ and expanding geometrically, with
+$2\sum_{n\ge0}t^n-1=1+2\sum_{n\ge1}t^n$, gives at the three requested
+arguments
 \begin{align*}
-G_T(1,t)&=\frac{1+t}{1-t}
+G_T(1,t)&=\frac{1+t}{1-t}=\frac2{1-t}-1
         =1+2\sum_{n=1}^\infty t^n,\\
-G_T(-1,t)&=\frac{1-t}{1+t}
+G_T(-1,t)&=\frac{1-t}{1+t}=\frac2{1+t}-1
         =1+2\sum_{n=1}^\infty(-1)^nt^n,\\
-G_T(0,t)&=\frac{1-t^2}{1+t^2}
+G_T(0,t)&=\frac{1-t^2}{1+t^2}=\frac2{1+t^2}-1
         =1+2\sum_{j=1}^\infty(-1)^jt^{2j}.
 \end{align*}
-Equating coefficients, including the constant coefficient $T_0=1$,
-gives
+Equating coefficients with $T_0(x)+2\sum_{n\ge1}T_n(x)t^n$, including
+the constant coefficient $T_0=1$, gives
 \[
 \boxed{T_n(1)=1,\quad T_n(-1)=(-1)^n,\quad
 T_{2j}(0)=(-1)^j,\quad T_{2j+1}(0)=0}.
@@ -1737,8 +1741,10 @@ G_U(1,t)&=(1-t)^{-2}=\sum_{n=0}^\infty(n+1)t^n,\\
 G_U(-1,t)&=(1+t)^{-2}=\sum_{n=0}^\infty(-1)^n(n+1)t^n,\\
 G_U(0,t)&=(1+t^2)^{-1}=\sum_{j=0}^\infty(-1)^jt^{2j}.
 \end{align*}
-The first two series follow by differentiating $(1\mp t)^{-1}$.
-Comparison gives
+The first series is the derivative of $(1-t)^{-1}=\sum_{n\ge0}t^n$,
+namely $\sum_{n\ge1}nt^{n-1}=\sum_{n\ge0}(n+1)t^n$; the second is the
+first with $t$ replaced by $-t$, and the third is the geometric series
+in $-t^2$.  Comparison gives
 \[
 \boxed{U_n(1)=n+1,\quad U_n(-1)=(-1)^n(n+1),\quad
 U_{2j}(0)=(-1)^j,\quad U_{2j+1}(0)=0}.
@@ -1754,11 +1760,18 @@ U_{2j}(0)=(-1)^j,\quad U_{2j+1}(0)=0}.
 How is $X_{n}(x)$ related to $T_{n}(x)$ and $U_{n}(x)$?
 \erratum{Take $-1\le x\le1$ for the stated radius $|t|<1$.}\par\nobreak
 \solution
-Write the proposed generator in two ways:
+Write the proposed generator in two ways.  Since
+$(1-2xt+t^2)+(1-t^2)=2(1-xt)$, the type-I generator, with $T_0=1$,
+gives
 \begin{align*}
 \frac{1-xt}{1-2xt+t^2}
  &=\frac12\left[1+\frac{1-t^2}{1-2xt+t^2}\right]
- =1+\sum_{n=1}^\infty T_n(x)t^n,\\
+ =\frac12\left[1+T_0(x)+2\sum_{n=1}^\infty T_n(x)t^n\right]\\
+ &=1+\sum_{n=1}^\infty T_n(x)t^n.
+\end{align*}
+The type-II generator, with the index shift
+$xt\sum_{n\ge0}U_nt^n=\sum_{n\ge1}xU_{n-1}t^n$, gives
+\begin{align*}
 \frac{1-xt}{1-2xt+t^2}
  &=(1-xt)\sum_{n=0}^\infty U_n(x)t^n\\
  &=U_0(x)+\sum_{n=1}^\infty[U_n(x)-xU_{n-1}(x)]t^n.
@@ -1771,6 +1784,11 @@ Defining $U_{-1}=0$ includes $n=0$ in the first expression.
 \erratum{The stated radius $|t|<1$ applies for real $-1\le x\le1$.
 For other $x$, restrict $t$ to the distance from zero to the nearest
 uncancelled pole of the rational generator.}
+Indeed, $1-2xt+t^2$ vanishes at $t_\pm=x\pm\sqrt{x^2-1}$, with
+$t_+t_-=1$.  For $x=\cos\theta\in[-1,1]$ these are $e^{\pm i\theta}$,
+of modulus $1$.  Conversely, if $|t_+|=|t_-|=1$ then
+$t_-=1/t_+=\overline{t_+}$ and $x=(t_++t_-)/2=\Re t_+\in[-1,1]$; so
+for every other $x$ one root lies inside the unit circle.
 The coefficient identities themselves are polynomial identities,
 so hold for every complex $x$.
 
@@ -1785,19 +1803,26 @@ show that $V_{n}(x)$, Eq.~(18.106), satisfies
 (1-x^{2})V''_{n}(x)-xV'_{n}(x)+n^{2}V_{n}(x)=0,
 \]
 which is Chebyshev's equation.
-\erratum{Use $n\ge1$ and $-1<x<1$.}\par\nobreak
+\erratum{Use $n\ge1$ (so that $U_{n-1}$ exists) and $-1<x<1$ (where
+$\sqrt{1-x^2}$ is differentiable).}\par\nobreak
 \solution
 On $-1<x<1$ put $h=\sqrt{1-x^2}$, $u=U_{n-1}$ and
-$V_n=hu$, for $n\ge1$.  Since $h'=-x/h$ and $h''=-1/h^3$,
+$V_n=hu$, for $n\ge1$.  Since $h'=-x/h$,
 \[
-V_n'=hu'-\frac{x}{h}u,\qquad
-V_n''=hu''-\frac{2x}{h}u'-\frac1{h^3}u.
+h''=-\frac1h+\frac{xh'}{h^2}=-\frac{h^2+x^2}{h^3}=-\frac1{h^3},
 \]
-Substitute these derivatives into the claimed equation:
+and the product rule gives
+\[
+V_n'=hu'+h'u=hu'-\frac{x}{h}u,\qquad
+V_n''=hu''+2h'u'+h''u=hu''-\frac{2x}{h}u'-\frac1{h^3}u.
+\]
+Substitute these derivatives into the claimed equation, using
+$1-x^2=h^2$ and $-u/h+x^2u/h=-(1-x^2)u/h=-hu$:
 \begin{align*}
 (1-x^2)V_n''-xV_n'+n^2V_n
  &=h^3u''-2xhu'-\frac{u}{h}
    -xhu'+\frac{x^2u}{h}+n^2hu\\
+ &=h^3u''-3xhu'-hu+n^2hu\\
  &=h\bigl[(1-x^2)u''-3xu'+(n^2-1)u\bigr].
 \end{align*}
 Because $(n-1)((n-1)+2)=n^2-1$, the bracket is exactly the
@@ -1817,11 +1842,12 @@ and $V_n=\sin(n\arccos x)$ are independent solutions of
 Eq.~(18.97).  If the sine formula is extended to $n=0$, it gives
 the zero function.  Find an independent zero-order solution.}
 \solution
-Put $x=\cos\theta$, $0<\theta<\pi$, so
-$D_x=-(\sin\theta)^{-1}D_\theta$.  For $n\ge1$,
+Put $x=\cos\theta$, $0<\theta<\pi$, so $\sqrt{1-x^2}=\sin\theta$ and
+$D_x=-(\sin\theta)^{-1}D_\theta$.  For $n\ge1$, $T_n=\cos n\theta$ and,
+since $U_{n-1}(\cos\theta)=\sin n\theta/\sin\theta$,
+$V_n=\sqrt{1-x^2}\,U_{n-1}=\sin n\theta$.  Hence
 \[
-T_n=\cos n\theta,\quad V_n=\sin n\theta,\quad
-T_n'=\frac{n\sin n\theta}{\sin\theta},\quad
+T_n'=\frac{n\sin n\theta}{\sin\theta},\qquad
 V_n'=-\frac{n\cos n\theta}{\sin\theta}.
 \]
 Thus
@@ -1833,8 +1859,15 @@ T_nV_n'-T_n'V_n
 It is nonzero throughout $(-1,1)$, proving independence there.
 At $n=0$ this particular family gives $T_0=1$ and
 $\sin(0\theta)=0$, so its second member has collapsed to zero.
-The transformed equation is then $d^2y/d\theta^2=0$, whose general
-solution is $A+B\theta$.  The missing independent solution is
+To find the second solution, transform Eq.~(18.97) to $\theta$: with
+$y'=-y_\theta/\sin\theta$,
+\[
+y''=\frac{y_{\theta\theta}}{\sin^2\theta}
+   -\frac{\cos\theta\,y_\theta}{\sin^3\theta},\qquad
+(1-x^2)y''-xy'+n^2y=y_{\theta\theta}+n^2y,
+\]
+the two $\cot\theta\,y_\theta$ terms cancelling.  At $n=0$ the
+equation is $d^2y/d\theta^2=0$, whose general solution is $A+B\theta$.  The missing independent solution is
 therefore $\arccos x$, equivalently $\arcsin x$ up to a constant
 and a sign.  It also follows from
 $\lim_{n\to0}\sin(n\arccos x)/n=\arccos x$, treating the order
@@ -1849,21 +1882,28 @@ $W_{n}(x)=(1-x^{2})^{-1/2}T_{n+1}(x)$ is a solution of
 \[
 (1-x^{2})W''_{n}(x)-3xW'_{n}(x)+n(n+2)W_{n}(x)=0.
 \]
-\erratum{Work on $-1<x<1$.}\par\nobreak
+\erratum{Work on $-1<x<1$, since $W_n$ is singular at $x=\pm1$.}\par\nobreak
 \solution
-Let $h=\sqrt{1-x^2}$ and $T=T_{n+1}$ on $-1<x<1$.
-For $W=T/h$, direct differentiation gives
+Let $h=\sqrt{1-x^2}$ and $T=T_{n+1}$ on $-1<x<1$.  Since $h'=-x/h$,
+\[
+\Bigl(\frac1h\Bigr)'=\frac{x}{h^3},\qquad
+\Bigl(\frac{x}{h^3}\Bigr)'=\frac1{h^3}+\frac{3x^2}{h^5}
+ =\frac{h^2+3x^2}{h^5}=\frac{1+2x^2}{h^5}.
+\]
+Hence for $W=T/h$ the product rule gives
 \[
 W'=\frac{T'}h+\frac{xT}{h^3},\qquad
 W''=\frac{T''}h+\frac{2xT'}{h^3}
                     +\frac{(1+2x^2)T}{h^5}.
 \]
-Insert these expressions and collect coefficients:
+Insert these expressions and collect coefficients, using
+$(1-x^2)/h^3=1/h$ and $1+n(n+2)=(n+1)^2$:
 \begin{align*}
 h^2W''-3xW'+n(n+2)W
  &=hT''-\frac{xT'}h
    +\frac{(1+2x^2-3x^2)T}{h^3}
    +\frac{n(n+2)T}h\\
+ &=hT''-\frac{xT'}h+\frac{[1+n(n+2)]T}h\\
  &=\frac1h\bigl[(1-x^2)T''-xT'+(n+1)^2T\bigr]=0.
 \end{align*}
 The last bracket is the type-I equation for $T_{n+1}$.
@@ -1875,9 +1915,11 @@ open interval; $W_n$ itself is singular at its endpoints.
 \par\bigskip
 \noindent\textbf{18.4.7}\quad Evaluate the Wronskian of $U_{n}(x)$
 and $W_{n}(x)=(1-x^{2})^{-1/2}T_{n+1}(x)$.
-\erratum{Work on $-1<x<1$.}\par\nobreak
+\erratum{Work on $-1<x<1$, since $W_n$ is singular at $x=\pm1$.}\par\nobreak
 \solution
-Set $a=n+1$, $s=\sin\theta$, $x=\cos\theta$.  Then
+Set $a=n+1$, $x=\cos\theta$ with $0<\theta<\pi$, and
+$s=\sin\theta=\sqrt{1-x^2}$.  Then, from $U_n(\cos\theta)=\sin(a\theta)/s$
+and $T_{n+1}(\cos\theta)=\cos(a\theta)$,
 $U_n=\sin(a\theta)/s$ and $W_n=\cos(a\theta)/s$.
 Their $\theta$ derivatives are
 \[
@@ -1887,9 +1929,17 @@ Their $\theta$ derivatives are
 \frac{dW_n}{d\theta}=-\frac{a\sin(a\theta)}s
                     -\frac{\cos(a\theta)\cos\theta}{s^2}.
 \]
-In $U_n(dW_n/d\theta)-(dU_n/d\theta)W_n$ the two terms
-with $\cos\theta$ cancel, leaving $-a/s^2$.
-Multiplying by $d\theta/dx=-1/s$ gives
+In the $\theta$ Wronskian the two terms with $\cos\theta$ cancel:
+\begin{align*}
+U_n\frac{dW_n}{d\theta}-\frac{dU_n}{d\theta}W_n
+ &=-\frac{a\sin^2(a\theta)}{s^2}
+   -\frac{\sin(a\theta)\cos(a\theta)\cos\theta}{s^3}\\
+ &\quad-\frac{a\cos^2(a\theta)}{s^2}
+   +\frac{\sin(a\theta)\cos(a\theta)\cos\theta}{s^3}
+ =-\frac a{s^2}.
+\end{align*}
+Each $x$ derivative is $d\theta/dx=-1/s$ times the $\theta$
+derivative, so multiplying by $-1/s$ gives
 \[
 \boxed{U_nW_n'-U_n'W_n=\frac{n+1}{(1-x^2)^{3/2}}}.
 \]
@@ -1904,23 +1954,32 @@ the Chebyshev differential equation for $T_{n}(x)$ ($n=0$) is
 $V_{0}(x)=\arccos x$ (or $\arcsin x$).
 \solution
 At $n=0$, the equation is $(1-x^2)y''-xy'=0$.
-Writing $v=y'$ gives
+Writing $v=y'$ gives, where $v\ne0$ (the case $v\equiv0$ gives the
+constant solution),
 \[
 \frac{v'}v=\frac{x}{1-x^2},\qquad
 \ln|v|=-\frac12\ln(1-x^2)+\text{constant},
 \]
-so $v=C/\sqrt{1-x^2}$ on $(-1,1)$ and
+so $v=C/\sqrt{1-x^2}$ on $(-1,1)$ and, since
+$\arcsin x=\pi/2-\arccos x$,
 \[
-y=A+C\arcsin x=\widetilde A+\widetilde C\arccos x.
+y=A+C\arcsin x=\widetilde A+\widetilde C\arccos x,\qquad
+\widetilde A=A+\frac{\pi C}2,\quad \widetilde C=-C.
 \]
 The constant solution is $T_0=1$.  The derivative of $\arccos x$
-is $-1/\sqrt{1-x^2}$, so its Wronskian with $1$ is nonzero,
-proving independence.  Directly,
+is $-1/\sqrt{1-x^2}$, so its Wronskian with $1$ is
+$1\cdot(\arccos x)'-0=-1/\sqrt{1-x^2}\ne0$, proving independence.
+Directly,
 \[
 (\arccos x)'=-\frac1{\sqrt{1-x^2}},\qquad
 (\arccos x)''=-\frac{x}{(1-x^2)^{3/2}},
 \]
-and the two terms of the ODE cancel.
+and the two terms of the ODE cancel:
+\[
+(1-x^2)\Bigl(-\frac{x}{(1-x^2)^{3/2}}\Bigr)
+ -x\Bigl(-\frac1{\sqrt{1-x^2}}\Bigr)
+ =-\frac{x}{\sqrt{1-x^2}}+\frac{x}{\sqrt{1-x^2}}=0.
+\]
 \erratum{Calling this solution $V_0$ is a separate zero-order
 convention.  It must not replace the sine-family value $V_0=0$
 in recurrences or orthogonality formulas for $V_n=\sin(n\arccos x)$.}
@@ -1931,18 +1990,24 @@ in recurrences or orthogonality formulas for $V_n=\sin(n\arccos x)$.}
 three-term recurrence relation as $T_{n}(x)$, Eq.~(18.92).
 \erratum{The recurrence holds for $n\ge2$ with the book's $V_0=\arccos x$.  It also holds at $n=1$ if instead the sine family is extended by $V_0=0$.}\par\nobreak
 \solution
-For the sine family $V_n(x)=\sin(n\theta)$, $x=\cos\theta$,
-addition of the two angle formulas gives
+With $x=\cos\theta$, $0\le\theta\le\pi$, the sine family is
+$V_n=\sqrt{1-x^2}\,U_{n-1}(x)=\sin\theta\cdot\sin(n\theta)/\sin\theta
+=\sin(n\theta)$ (by continuity also at $\theta=0,\pi$).
+Adding the two angle formulas
+$\sin(n\theta\pm\theta)=\sin n\theta\cos\theta\pm\cos n\theta\sin\theta$
+gives
 \begin{align*}
 V_{n+1}+V_{n-1}
  &=\sin(n\theta+\theta)+\sin(n\theta-\theta)\\
  &=2\sin(n\theta)\cos\theta=2xV_n.
 \end{align*}
 Hence $\boxed{V_{n+1}-2xV_n+V_{n-1}=0}$.
-Equivalently, multiply
-$U_n-2xU_{n-1}+U_{n-2}=0$ by $\sqrt{1-x^2}$.
+Equivalently, for $n\ge2$ multiply the type-II recurrence with
+index $n-1$, $U_n-2xU_{n-1}+U_{n-2}=0$, by $\sqrt{1-x^2}$.
 \erratum{At $n=1$ the recurrence uses $V_0=0$, not the independent
 solution $\arccos x$ introduced in Exercise 18.4.8.}
+Indeed $V_2-2xV_1=\sin2\theta-2\cos\theta\sin\theta=0$, so the case
+$n=1$ requires $V_0=0$.
 With that zero member the recurrence holds for every integer $n\ge1$;
 with the separate $\arccos x$ convention it only applies without
 modification for $n\ge2$.
@@ -1952,26 +2017,37 @@ modification for $n\ge2$.
 \noindent\textbf{18.4.10}\quad Verify the series solutions for
 $T_{n}(x)$ and $U_{n}(x)$, Eqs.~(18.114) and (18.115).
 \solution
-\erratum{In the manual's first ODE line, $x^2T_n$ must be $n^2T_n$.  After shifting the derivative sum, its factorial is $(n-2m+2)!$, not $(n-2m)!$.  Its evaluation at zero also omits the prefactor $n/2$.}\par
+\erratum{In the first ODE line of the Instructor's Manual, $x^2T_n$ must be $n^2T_n$, as in Chebyshev's equation.  After shifting the derivative sum, its factorial is $(n-2m+2)!$, not $(n-2m)!$.  Its evaluation at zero also omits the prefactor $n/2$.}\par
 
-Start with the type-II generator near $t=0$ and expand geometrically:
+Start with the type-II generator near $t=0$ and expand geometrically,
+then binomially:
 \begin{align*}
 \frac1{1-2xt+t^2}
- &=\sum_{j=0}^\infty(2xt-t^2)^j\\
+ &=\sum_{j=0}^\infty(2xt-t^2)^j
+  =\sum_{j=0}^\infty\sum_{m=0}^j\binom jm(2xt)^{j-m}(-t^2)^m\\
  &=\sum_{j=0}^\infty\sum_{m=0}^j
        (-1)^m\binom jm(2x)^{j-m}t^{j+m}.
 \end{align*}
-For a fixed power $t^n$, $j=n-m$ and $0\le m\le\lfloor n/2\rfloor$.
-Its coefficient is therefore
+For $2|x||t|+|t|^2<1$ the double series converges absolutely, so its
+terms may be collected by powers of $t$.
+For a fixed power $t^n$, $j=n-m$, and the condition $m\le j=n-m$
+gives $0\le m\le\lfloor n/2\rfloor$.  Since
+$\binom{n-m}m=(n-m)!/[m!(n-2m)!]$, the coefficient is
 \[
 \boxed{U_n(x)=\sum_{m=0}^{\lfloor n/2\rfloor}
  \frac{(-1)^m(n-m)!}{m!(n-2m)!}(2x)^{n-2m}}.
 \]
-For $T_n$, use $T_n=U_n-xU_{n-1}$ from Exercise 18.4.3.
-The coefficient of $(-1)^m(2x)^{n-2m}$ in this difference is
+For $T_n$, use $T_n=U_n-xU_{n-1}$ from Exercise 18.4.3, $n\ge1$.
+Writing $x(2x)^{n-1-2m}=\frac12(2x)^{n-2m}$,
+\[
+xU_{n-1}(x)=\frac12\sum_{m=0}^{\lfloor(n-1)/2\rfloor}
+ \frac{(-1)^m(n-m-1)!}{m!(n-2m-1)!}(2x)^{n-2m}.
+\]
+With $(n-m)!=(n-m)(n-m-1)!$ and $1/(n-2m-1)!=(n-2m)/(n-2m)!$,
+the coefficient of $(-1)^m(2x)^{n-2m}$ in the difference is
 \begin{align*}
 \frac{(n-m)!}{m!(n-2m)!}
- -\frac{(n-m-1)!}{2m!(n-2m-1)!}
+ -\frac{(n-m-1)!}{2\,m!\,(n-2m-1)!}
  &=\frac{(n-m-1)!}{m!(n-2m)!}
     \left[n-m-\frac{n-2m}{2}\right]\\
  &=\frac n2\frac{(n-m-1)!}{m!(n-2m)!}.
@@ -1998,17 +2074,24 @@ $n\ge1$,\par\nobreak
 \hfill$T_{2n+1}(x)=\dfrac{2n+1}{2}\displaystyle\sum_{m=0}^{n}
 \dfrac{(-1)^{m+n}(n+m)!}{(n-m)!\,(2m+1)!}\,(2x)^{2m+1}$.
 \solution
-In the finite series for $T_N$, change the descending-power index
-$j$ to $n-m$.
-For $N=2n$, with $n\ge1$, the power is $N-2j=2m$,
-$N-j-1=n+m-1$, and $(-1)^j=(-1)^n(-1)^m$.
+In the finite series (18.114),
+\[
+T_N(x)=\frac N2\sum_{j=0}^{\lfloor N/2\rfloor}
+ \frac{(-1)^j(N-j-1)!}{j!\,(N-2j)!}(2x)^{N-2j},\qquad N\ge1,
+\]
+change the descending-power index $j$ to $n-m$; as $j$ runs from
+$0$ to $n=\lfloor N/2\rfloor$, $m$ runs from $n$ down to $0$.
+For $N=2n$, with $n\ge1$, the prefactor is $N/2=n$, the power is
+$N-2j=2m$, $N-j-1=n+m-1$, $j!=(n-m)!$, $(N-2j)!=(2m)!$, and
+$(-1)^j=(-1)^{n-m}=(-1)^n(-1)^m$.
 Thus reversing the finite sum yields
 \[
 \boxed{T_{2n}(x)=(-1)^nn\sum_{m=0}^n
  \frac{(-1)^m(n+m-1)!}{(n-m)!(2m)!}(2x)^{2m}}.
 \]
-For $N=2n+1$, the corresponding values are
-$N-2j=2m+1$ and $N-j-1=n+m$, giving
+For $N=2n+1$, the corresponding values are $N/2=(2n+1)/2$,
+$N-2j=2m+1$, $N-j-1=n+m$, $j!=(n-m)!$, $(N-2j)!=(2m+1)!$ and
+$(-1)^j=(-1)^{n+m}$, giving
 \[
 \boxed{T_{2n+1}(x)=\frac{2n+1}{2}\sum_{m=0}^n
  \frac{(-1)^{n+m}(n+m)!}{(n-m)!(2m+1)!}(2x)^{2m+1}}.
@@ -2029,14 +2112,16 @@ $U_{2n}(x)=(-1)^{n}\displaystyle\sum_{m=0}^{n}
 Use
 $U_N=\sum_{j=0}^{\lfloor N/2\rfloor}
 (-1)^j(N-j)!(2x)^{N-2j}/[j!(N-2j)!]$.
-For $N=2n$ put $j=n-m$, so the numerator factorial becomes
-$(n+m)!$ and the power becomes $2m$.  Hence
+For $N=2n$ put $j=n-m$ ($m$ from $n$ down to $0$), so the numerator
+factorial $(N-j)!$ becomes $(n+m)!$, the denominator $j!(N-2j)!$
+becomes $(n-m)!(2m)!$, the sign is $(-1)^{n-m}$, and the power becomes
+$2m$.  Hence
 \[
 \boxed{U_{2n}(x)=(-1)^n\sum_{m=0}^n
  \frac{(-1)^m(n+m)!}{(n-m)!(2m)!}(2x)^{2m}}.
 \]
-For $N=2n+1$ the same substitution gives numerator $(n+m+1)!$
-and power $2m+1$, so
+For $N=2n+1$ the same substitution gives numerator $(n+m+1)!$,
+denominator $(n-m)!(2m+1)!$ and power $2m+1$, so
 \[
 \boxed{U_{2n+1}(x)=(-1)^n\sum_{m=0}^n
  \frac{(-1)^m(n+m+1)!}{(n-m)!(2m+1)!}(2x)^{2m+1}}.
@@ -2061,12 +2146,15 @@ self-adjoint form) show that
 \]
 \end{enumerate}
 \solution
-(a) Set $p=\sqrt{1-x^2}$ and $w=1/p$.  The self-adjoint equations are
+(a) Set $p=\sqrt{1-x^2}$ and $w=1/p$.  Since
+$(pT_n')'=pT_n''-xT_n'/p$, dividing Chebyshev's equation
+$(1-x^2)T_n''-xT_n'+n^2T_n=0$ by $p$ gives the self-adjoint equations
 \[
 (pT_n')'+n^2wT_n=0,\qquad (pT_m')'+m^2wT_m=0.
 \]
-Multiplying by $T_m,T_n$ respectively, subtracting and integrating
-gives
+Multiply the first by $T_m$ and the second by $T_n$ and subtract.
+Since $T_m(pT_n')'-T_n(pT_m')'=[p(T_mT_n'-T_nT_m')]'$ (the terms
+$pT_m'T_n'$ cancel), integration gives
 \[
 [p(T_mT_n'-T_nT_m')]_{-1}^1
  +(n^2-m^2)\int_{-1}^1wT_mT_n\,dx=0.
@@ -2075,22 +2163,33 @@ The boundary term is zero because polynomials and their derivatives
 are finite there while $p\to0$.  For distinct nonnegative $m,n$,
 $n^2-m^2\ne0$, so the integral is zero.
 Next multiply the first self-adjoint equation by $T_m$ alone and
-integrate by parts:
+integrate, using
+$\int_{-1}^1T_m(pT_n')'dx=[pT_mT_n']_{-1}^1-\int_{-1}^1pT_m'T_n'\,dx$:
 \[
 \int_{-1}^1pT_m'T_n'\,dx
- =[pT_mT_n']_{-1}^1+n^2\int_{-1}^1wT_mT_n\,dx=\boxed{0}.
+ =[pT_mT_n']_{-1}^1+n^2\int_{-1}^1wT_mT_n\,dx=\boxed{0},
+ \qquad m\ne n,
 \]
+because the boundary term again contains $p(\pm1)=0$ and the last
+integral was just shown to vanish.
 All endpoint integrals converge since $w$ has only square-root
 singularities.
 
-(b) With $x=\cos\theta$,
+(b) With $x=\cos\theta$, $dT_n/dx=(dT_n/d\theta)/(dx/d\theta)$ and
+$U_{n-1}(\cos\theta)=\sin n\theta/\sin\theta$, so
 \[
 T_n'(x)=\frac{-n\sin n\theta}{-\sin\theta}
         =\boxed{nU_{n-1}(x)}\qquad(n\ge1).
 \]
-Therefore the derivative integral equals $mn$ times the type-II
-orthogonality integral for indices $m-1,n-1$, and vanishes for
-$m\ne n$.  If either index is zero, its derivative is zero directly.
+Both sides are polynomials, so the identity holds on all of $[-1,1]$.
+Therefore, by the type-II orthogonality of Exercise 18.4.19(c),
+\[
+\int_{-1}^1T_m'T_n'\sqrt{1-x^2}\,dx
+ =mn\int_{-1}^1U_{m-1}U_{n-1}\sqrt{1-x^2}\,dx
+ =mn\,\frac\pi2\,\delta_{mn},\qquad m,n\ge1,
+\]
+which vanishes for $m\ne n$.  If either index is zero, its derivative
+is zero directly.
 As a normalization check, the same calculation gives
 $\int_{-1}^1p(T_n')^2dx=\pi n^2/2$ for $n\ge1$.
 
@@ -2121,7 +2220,8 @@ $T_{6}^{*}=2048x^{6}-6144x^{5}+6912x^{4}-3584x^{3}+840x^{2}-72x+1$\\
 \end{tabular}
 \end{center}
 \solution
-Put $y=x'$ and $S_n(y)=T_n(2y-1)$.  The recurrence becomes
+Put $y=x'$ and $S_n(y)=T_n(2y-1)$.  The recurrence (18.92),
+$T_{n+1}=2xT_n-T_{n-1}$, with $2x=4y-2$ becomes
 \[
 S_{n+1}=(4y-2)S_n-S_{n-1},\qquad S_0=1,\quad S_1=2y-1.
 \]
@@ -2129,31 +2229,43 @@ Successive multiplication and subtraction give
 \begin{align*}
 S_2&=(4y-2)(2y-1)-1=8y^2-8y+1,\\
 S_3&=(4y-2)(8y^2-8y+1)-(2y-1)\\
-   &=32y^3-48y^2+18y-1,\\
+   &=(32y^3-48y^2+20y-2)-(2y-1)
+    =32y^3-48y^2+18y-1,\\
 S_4&=(4y-2)(32y^3-48y^2+18y-1)-(8y^2-8y+1)\\
+   &=(128y^4-256y^3+168y^2-40y+2)-(8y^2-8y+1)\\
    &=128y^4-256y^3+160y^2-32y+1,\\
 S_5&=(4y-2)S_4-S_3\\
+   &=(512y^5-1280y^4+1152y^3-448y^2+68y-2)
+     -(32y^3-48y^2+18y-1)\\
    &=512y^5-1280y^4+1120y^3-400y^2+50y-1,\\
 S_6&=(4y-2)S_5-S_4\\
+   &=(2048y^6-6144y^5+7040y^4-3840y^3+1000y^2-104y+2)-S_4\\
    &=2048y^6-6144y^5+6912y^4-3584y^3+840y^2-72y+1.
 \end{align*}
 For example the $y^3$ coefficient of $S_5$ is
 $4(160)-2(-256)-32=1120$.
-\erratum{The source table's $120y^3$ is therefore $1120y^3$.
+\erratum{The $y^3$ coefficient of $T_5^*$ is therefore $1120$, not the
+$120$ printed in Table~18.5.
 The integration formula needs a star on both polynomials and the
 same primed variable throughout.  The relation is orthogonality
 with the stated norms, not unit normalization.}
 
 In the integral set $x=2y-1$, so $dx=2dy$ and
-$1-x^2=4y(1-y)$.  Therefore
+$1-x^2=(1-x)(1+x)=(2-2y)(2y)=4y(1-y)$; thus
+$dx/\sqrt{1-x^2}=dy/\sqrt{y(1-y)}$, and $y=0,1$ correspond to
+$x=-1,1$.  Then $x=\cos\theta$, with $dx/\sqrt{1-x^2}=-d\theta$ and
+reversed limits, gives
 \begin{align*}
 \int_0^1\frac{S_n(y)S_m(y)}{\sqrt{y(1-y)}}\,dy
  &=\int_{-1}^1\frac{T_n(x)T_m(x)}{\sqrt{1-x^2}}\,dx\\
  &=\int_0^\pi\cos(n\theta)\cos(m\theta)\,d\theta\\
  &=\boxed{\frac{\pi\delta_{mn}}{2-\delta_{n0}}}.
 \end{align*}
-The last line is $\pi$ for $m=n=0$, $\pi/2$ for $m=n\ge1$,
-and zero for unequal nonnegative indices.
+For the last line write
+$\cos n\theta\cos m\theta=\frac12[\cos((n-m)\theta)+\cos((n+m)\theta)]$
+and use $\int_0^\pi\cos k\theta\,d\theta=\pi$ for $k=0$ and $0$ for
+every other integer $k$: the result is $\pi$ for $m=n=0$, $\pi/2$ for
+$m=n\ge1$, and zero for unequal nonnegative indices.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2178,9 +2290,15 @@ I_{mn}=\sum_{j=0}^m c_j
 \]
 since no index $j$ equals $n$.
 
-(b) The finite series gives $T_n(-x)=(-1)^nT_n(x)$.
-Changing $x$ to $-x$ in the integral thus gives
-$I_{mn}=(-1)^{m+n}I_{mn}$.  For odd $m+n$ this says
+(b) Every power $x^{n-2m}$ in the finite series (18.114) has the
+parity of $n$, so $T_n(-x)=(-1)^nT_n(x)$.
+Changing $x$ to $-u$ in the integral, which leaves the interval and
+the weight unchanged, thus gives
+\[
+I_{mn}=\int_{-1}^1(-u)^mT_n(-u)\frac{du}{\sqrt{1-u^2}}
+ =(-1)^{m+n}I_{mn}.
+\]
+For odd $m+n$ this says
 $I_{mn}=-I_{mn}$, so again $\boxed{I_{mn}=0}$.
 The weight is integrable at both endpoints, so this symmetry
 argument applies to ordinary convergent integrals.
@@ -2201,19 +2319,39 @@ with $\theta$ as the variable.
 $I_{mn}=\pi\dfrac{m!\,(m-n-1)!!}{(m-n)!\,(m+n)!!}$,\qquad
 $m\ge n$, $m+n$ even.
 \solution
-\erratum{The manual uses the incorrect Rodrigues power $n+1/2$ twice; it must be $n-1/2$.  Its final gamma quotient has $((m+n)/2)!$ in the denominator, not $((m-n)/2)!$.}\par
+\erratum{The Instructor's Manual uses the incorrect Rodrigues power $n+1/2$ twice; it must be $n-1/2$, as in the type-I Rodrigues formula below.  Its final gamma quotient has $((m+n)/2)!$ in the denominator, not $((m-n)/2)!$, as the quotient $\Gamma(j+\frac12)/\Gamma(n+j+1)$ in (a) shows, with $n+j=(m+n)/2$.}\par
 
-Let $m-n=2j\ge0$.
-(a) The Rodrigues representation gives
+Let $m-n=2j\ge0$, and write $D=d/dx$.
+(a) The Rodrigues representation
+$T_n(x)=(-1)^n\sqrt\pi\,(1-x^2)^{1/2}D^n(1-x^2)^{n-1/2}/[2^n\Gamma(n+1/2)]$
+gives
 \[
 \frac{T_n(x)}{\sqrt{1-x^2}}
  =\frac{(-1)^n\sqrt\pi}{2^n\Gamma(n+1/2)}
     D^n(1-x^2)^{n-1/2}.
 \]
-Integrate by parts $n$ times.  Each derivative of
-$(1-x^2)^{n-1/2}$ of order at most $n-1$ tends to zero at both
-endpoints; this follows from its minimum remaining endpoint exponent
-$1/2$.  Hence
+Integrate by parts $n$ times:
+\[
+\int_{-1}^1x^mD^nf\,dx
+ =\Bigl[\sum_{k=0}^{n-1}(-1)^kD^k(x^m)\,D^{n-1-k}f\Bigr]_{-1}^1
+  +(-1)^n\int_{-1}^1D^n(x^m)\,f\,dx,
+\]
+with $f=(1-x^2)^{n-1/2}$.  By induction,
+$D^rf=(1-x^2)^{n-1/2-r}q_r(x)$ with a polynomial $q_r$, and
+$n-1/2-r\ge1/2$ for $r\le n-1$; so every boundary term vanishes at
+both endpoints.  The factor $(-1)^n$ cancels the sign of the
+Rodrigues formula, and $D^nx^m=m!\,x^{m-n}/(m-n)!$.  For the remaining
+integral, evenness and $u=x^2$, $dx=du/(2\sqrt u)$, give
+\[
+\int_{-1}^1x^{2j}(1-x^2)^{n-1/2}dx
+ =2\int_0^1x^{2j}(1-x^2)^{n-1/2}dx
+ =\int_0^1u^{j-1/2}(1-u)^{n-1/2}du
+ =B(j+\tfrac12,n+\tfrac12).
+\]
+Collecting these results, with $(m-n)!=(2j)!$ in the second line,
+$B(j+\frac12,n+\frac12)=\Gamma(j+\frac12)\Gamma(n+\frac12)/\Gamma(n+j+1)$
+in the third, and
+$\Gamma(j+\frac12)=\sqrt\pi\,(2j)!/(4^jj!)$, $2^n4^j=2^m$ in the last,
 \begin{align*}
 I_{mn}
  &=\frac{\sqrt\pi}{2^n\Gamma(n+1/2)}
@@ -2224,7 +2362,6 @@ I_{mn}
  &=\frac{\sqrt\pi m!\Gamma(j+1/2)}{2^n(2j)!\Gamma(n+j+1)}\\
  &=\boxed{\frac{\pi m!}{2^m j!(n+j)!}}.
 \end{align*}
-The beta integral follows by evenness and $u=x^2$.
 For $n=0$ no integration by parts is needed and the same beta
 calculation applies.  Since
 $(2j-1)!!=(2j)!/(2^jj!)$ and
@@ -2241,12 +2378,17 @@ The binomial expansion is
 \cos^m\theta=2^{-m}\sum_{\ell=0}^m
        \binom m\ell e^{i(m-2\ell)\theta}.
 \]
-Pair the terms $\ell$ and $m-\ell$.  For $n>0$ the coefficient
-of $\cos n\theta$ is $2^{1-m}\binom mj$; multiplication by
-$\cos n\theta$ and integration multiplies it by $\pi/2$.
+Pair the terms $\ell$ and $m-\ell$, which have equal binomial
+coefficients and opposite frequencies: each pair with $\ell<m/2$
+gives $2^{1-m}\binom m\ell\cos((m-2\ell)\theta)$.  Since
+$\int_0^\pi\cos k\theta\cos n\theta\,d\theta=0$ for nonnegative
+integers $k\ne n$, only the frequency $m-2\ell=n$, i.e.\ $\ell=j$,
+survives.  For $n>0$ the coefficient of $\cos n\theta$ is thus
+$2^{1-m}\binom mj$, and multiplication by $\cos n\theta$ and
+integration multiplies it by $\int_0^\pi\cos^2n\theta\,d\theta=\pi/2$.
 For $n=0$ the unpaired constant coefficient is
 $2^{-m}\binom m{m/2}$ and its integral is $\pi$ times that
-coefficient.  Both cases give
+coefficient.  Both cases give, since $m-j=n+j$,
 $\pi2^{-m}\binom mj=\pi m!/[2^mj!(n+j)!]$, agreeing with (a).
 
 \Needspace{5\baselineskip}
@@ -2265,9 +2407,15 @@ U_n(\cos\theta)
  =\frac{\sin((n+1)\theta)}{\sin\theta}
  =\sum_{j=0}^n e^{i(n-2j)\theta}.
 \]
-Indeed summing $e^{in\theta}\sum_{j=0}^ne^{-2ij\theta}$ and
-factoring its numerator and denominator into sines produces the
-middle expression.  There are $n+1$ unit-modulus terms, so
+Indeed, summing the geometric series with ratio $e^{-2i\theta}\ne1$
+and multiplying numerator and denominator by $e^{i\theta}$,
+\[
+e^{in\theta}\sum_{j=0}^ne^{-2ij\theta}
+ =e^{in\theta}\frac{1-e^{-2i(n+1)\theta}}{1-e^{-2i\theta}}
+ =\frac{e^{i(n+1)\theta}-e^{-i(n+1)\theta}}{e^{i\theta}-e^{-i\theta}}
+ =\frac{\sin((n+1)\theta)}{\sin\theta}.
+\]
+There are $n+1$ unit-modulus terms, so the triangle inequality gives
 $\boxed{|U_n(x)|\le n+1}$.  By polynomial continuity the bound
 also holds at $x=\pm1$, where the values are $n+1$ and
 $(-1)^n(n+1)$; thus it is sharp.
@@ -2295,12 +2443,13 @@ Then $V_n(x)=\sin(n\theta)$, so $\boxed{|V_n(x)|\le1}$.
 member $V_0=0$), not the separate solution $\arccos x$ at order
 zero, whose maximum is $\pi$.}
 
-(b) As $x\to1^-$, $T_{n+1}(x)\to1$ and
-$\sqrt{1-x^2}\sim\sqrt{2(1-x)}$.  Thus
+(b) As $x\to1^-$, $T_{n+1}(x)\to T_{n+1}(1)=1$ (Exercise 18.4.1) and
+$\sqrt{1-x^2}=\sqrt{(1-x)(1+x)}\sim\sqrt{2(1-x)}$.  Thus
 \[
 W_n(x)\sim\frac1{\sqrt{2(1-x)}}\longrightarrow+\infty.
 \]
-Similarly, as $x\to-1^+$,
+Similarly, as $x\to-1^+$, $T_{n+1}(x)\to(-1)^{n+1}$ and
+$\sqrt{1-x^2}\sim\sqrt{2(1+x)}$, so
 \[
 W_n(x)\sim\frac{(-1)^{n+1}}{\sqrt{2(1+x)}}.
 \]
@@ -2322,11 +2471,15 @@ integrals for
 integrals.
 \erratum{For $V_m,V_n$, take $m,n\ge1$.  The zero-norm entry in Eq.~(18.117) uses the optional sine-family extension $V_0=0$, not the independent solution $\arccos x$.}\par\nobreak
 \solution
-\erratum{The second cosine in the manual's part (d) is $\cos((n+1)\theta)$, not a repeated $\cos((m+1)\theta)$.}\par
+\erratum{In part (d) of the Instructor's Manual the second cosine should be $\cos((n+1)\theta)$, not a repeated $\cos((m+1)\theta)$, since the integrand is $W_mW_n$.}\par
 
-Put $x=\cos\theta$, $0<\theta<\pi$; reversing the integration
-limits gives $dx/\sqrt{1-x^2}=d\theta$ and
+Put $x=\cos\theta$, $0<\theta<\pi$, so $dx=-\sin\theta\,d\theta$;
+reversing the integration limits gives $dx/\sqrt{1-x^2}=d\theta$ and
 $\sqrt{1-x^2}\,dx=\sin^2\theta\,d\theta$ in the integrals.
+With $T_m=\cos m\theta$, $V_m=\sin m\theta$,
+$U_m=\sin((m+1)\theta)/\sin\theta$ and
+$W_m=\cos((m+1)\theta)/\sin\theta$, the factor $\sin^2\theta$ cancels
+the two denominators in the last two cases.
 The four transformations are
 \begin{align*}
 \int_{-1}^1\frac{T_mT_n}{\sqrt{1-x^2}}dx
@@ -2343,6 +2496,16 @@ $2\cos a\theta\cos b\theta=\cos((a-b)\theta)+\cos((a+b)\theta)$;
 for the sine product change the last plus sign to a minus sign.
 Every nonzero integer-frequency cosine integrates to zero on
 $[0,\pi]$, whereas the zero-frequency cosine integrates to $\pi$.
+For nonnegative integers $a,b$, the difference $a-b$ is zero only for
+$a=b$ and the sum $a+b$ only for $a=b=0$, so
+\[
+\int_0^\pi\cos a\theta\cos b\theta\,d\theta
+ =\frac\pi2(\delta_{ab}+\delta_{a0}\delta_{b0}),\qquad
+\int_0^\pi\sin a\theta\sin b\theta\,d\theta
+ =\frac\pi2(\delta_{ab}-\delta_{a0}\delta_{b0}).
+\]
+In (a) and (b) take $a=m$, $b=n$; in (c) and (d) take $a=m+1\ge1$,
+$b=n+1$, so the term $\delta_{a0}\delta_{b0}$ is absent.
 Consequently the four answers are, respectively,
 \[
 \boxed{\frac{\pi\delta_{mn}}{2-\delta_{n0}}},\qquad
@@ -2373,11 +2536,15 @@ $(1-x^{2})^{1/2}$.
 For an integer $j$, define
 \[
 S(j)=\int_0^\pi\sin(j\theta)d\theta
+ =\Bigl[-\frac{\cos j\theta}j\Bigr]_0^\pi
  =\begin{cases}[1-(-1)^j]/j,&j\ne0,\\0,&j=0.\end{cases}
 \]
 This formula includes negative integers; in particular $S(-j)=-S(j)$.
+Thus $S(j)=0$ for even $j$ and $S(j)=2/j$ for odd $j$.
 
-(a) With the sine-family convention for $V_n$,
+(a) Use the sine-family convention for $V_n$, the transformation
+of Exercise 18.4.19, and
+$2\cos(m\theta)\sin(n\theta)=\sin((n+m)\theta)+\sin((n-m)\theta)$:
 \begin{align*}
 A_{mn}&=\int_{-1}^1\frac{T_mV_n}{\sqrt{1-x^2}}dx
  =\int_0^\pi\cos(m\theta)\sin(n\theta)d\theta\\
@@ -2387,11 +2554,16 @@ A_{mn}&=\int_{-1}^1\frac{T_mV_n}{\sqrt{1-x^2}}dx
  \displaystyle\frac{2n}{n^2-m^2},&m+n\text{ odd}.
  \end{cases}}
 \end{align*}
+For $m+n$ even, $n\pm m$ are both even; for $m+n$ odd, both are odd,
+and $\frac12[2/(n+m)+2/(n-m)]=[(n-m)+(n+m)]/(n^2-m^2)=2n/(n^2-m^2)$.
 The odd-parity case cannot have $m=n$, so its denominator is
-nonzero.  For example $A_{0,1}=2$.  Thus the two families are not
+nonzero.  For example $A_{0,1}=\int_0^\pi\sin\theta\,d\theta=2$.  Thus the two families are not
 mutually orthogonal, although all pairs of equal parity are.
 
-(b) The weight cancels the two sine denominators in $U_mW_n$:
+(b) The weight cancels the two sine denominators in $U_mW_n$, as in
+Exercise 18.4.19, and
+$2\sin(a\theta)\cos(b\theta)=\sin((a+b)\theta)+\sin((a-b)\theta)$
+with $a=m+1$, $b=n+1$:
 \begin{align*}
 B_{mn}&=\int_{-1}^1\sqrt{1-x^2}\,U_mW_n\,dx\\
  &=\int_0^\pi\sin((m+1)\theta)\cos((n+1)\theta)d\theta\\
@@ -2401,7 +2573,14 @@ B_{mn}&=\int_{-1}^1\sqrt{1-x^2}\,U_mW_n\,dx\\
  \displaystyle\frac{2(m+1)}{(m+1)^2-(n+1)^2},&m+n\text{ odd}.
  \end{cases}}
 \end{align*}
-For example $B_{0,1}=-2/3$, so again there is no mutual
+Here $m+n+2$ and $m-n$ have the parity of $m+n$; for $m+n$ odd,
+\[
+\frac1{m+n+2}+\frac1{m-n}=\frac{2(m+1)}{(m+n+2)(m-n)}
+ =\frac{2(m+1)}{(m+1)^2-(n+1)^2}.
+\]
+For example
+$B_{0,1}=\int_0^\pi\sin\theta\cos2\theta\,d\theta
+=\frac12[S(3)+S(-1)]=\frac13-1=-\frac23$, so again there is no mutual
 orthogonality across the full two families.
 
 \Needspace{5\baselineskip}
@@ -2443,21 +2622,26 @@ and
 \[
 (1-x^{2})U_{n}(x)=xT_{n+1}(x)-T_{n+2}(x).
 \]
-\erratum{The first identity uses $n\ge1$; the second uses $n\ge0$.}\par\nobreak
+\erratum{The first identity uses $n\ge1$, since it contains $U_{n-1}$; the second uses $n\ge0$.}\par\nobreak
 \solution
-Put $x=\cos\theta$ with $0<\theta<\pi$.  For $n\ge1$,
+Put $x=\cos\theta$ with $0<\theta<\pi$, so that
+$U_n=\sin((n+1)\theta)/\sin\theta$ and $T_n=\cos n\theta$.  For $n\ge1$,
 \begin{align*}
 U_n-xU_{n-1}
  &=\frac{\sin((n+1)\theta)-\cos\theta\sin(n\theta)}{\sin\theta}\\
  &=\frac{\cos(n\theta)\sin\theta}{\sin\theta}
  =\boxed{T_n}.
 \end{align*}
-The sine addition formula gives the second line.
-For the other identity, expand the cosine of a sum:
+The sine addition formula
+$\sin((n+1)\theta)=\sin n\theta\cos\theta+\cos n\theta\sin\theta$
+gives the second line.
+For the other identity, expand the cosine of a sum,
+$\cos((n+2)\theta)=\cos((n+1)\theta)\cos\theta-\sin((n+1)\theta)\sin\theta$:
 \begin{align*}
 xT_{n+1}-T_{n+2}
  &=\cos\theta\cos((n+1)\theta)-\cos((n+2)\theta)\\
  &=\sin\theta\sin((n+1)\theta)
+  =\sin^2\theta\,\frac{\sin((n+1)\theta)}{\sin\theta}
  =\boxed{(1-x^2)U_n}.
 \end{align*}
 Continuity supplies the endpoints, and polynomial identity extends
@@ -2475,21 +2659,30 @@ which case it reads $T_0=U_0=1$.
 \item[(a)] using the trigonometric forms of $V_{n}$ and $T_{n}$,
 \item[(b)] using the Rodrigues representation.
 \end{enumerate}
-\erratum{Use $n\ge1$ and $-1<x<1$.}\par\nobreak
+\erratum{Use $n\ge1$ and $-1<x<1$: $V_0$ is not given by $\sqrt{1-x^2}\,U_{n-1}$, and the right side is singular at $x=\pm1$.}\par\nobreak
 \solution
 (a) For $n\ge1$, $V_n=\sin(n\theta)$ and $x=\cos\theta$, so
+$d\theta/dx=-1/\sin\theta=-1/\sqrt{1-x^2}$ for $0<\theta<\pi$ and
 \[
 V_n'(x)=n\cos(n\theta)\frac{d\theta}{dx}
  =\boxed{-\frac{nT_n(x)}{\sqrt{1-x^2}}},\qquad -1<x<1.
 \]
 
-(b) Multiply the Rodrigues formula for $U_{n-1}$ by
-$\sqrt{1-x^2}$:
+(b) The type-II Rodrigues formula is
+\[
+U_n(x)=\frac{(-1)^n(n+1)\sqrt\pi}{2^{n+1}\Gamma(n+3/2)\sqrt{1-x^2}}
+ D^n(1-x^2)^{n+1/2},\qquad D=\frac d{dx}.
+\]
+Replace $n$ by $n-1$, so that $(n+1)\to n$, $2^{n+1}\to2^n$,
+$\Gamma(n+3/2)\to\Gamma(n+1/2)$ and $n+1/2\to n-1/2$, and multiply
+by $\sqrt{1-x^2}$:
 \[
 V_n(x)=\frac{(-1)^{n-1}n\sqrt\pi}{2^n\Gamma(n+1/2)}
  D^{n-1}(1-x^2)^{n-1/2}.
 \]
-Differentiate once, then compare with the type-I Rodrigues formula:
+Differentiate once, then compare with the type-I Rodrigues formula
+$T_n/\sqrt{1-x^2}=(-1)^n\sqrt\pi\,D^n(1-x^2)^{n-1/2}/[2^n\Gamma(n+1/2)]$
+(Exercise 18.4.16), using $(-1)^{n-1}=-(-1)^n$:
 \begin{align*}
 V_n'
  &=\frac{(-1)^{n-1}n\sqrt\pi}{2^n\Gamma(n+1/2)}
@@ -2518,12 +2711,14 @@ the series in brackets terminating after the term containing $T_{1}$
 or $T_{0}$.\erratum{\ (If the series ends with a $T_{0}$ term, that
 term carries an additional factor of $1/2$.)}
 \solution
-For a nonnegative integer $k$, expand binomially:
+For a nonnegative integer $k$, expand binomially, with
+$(e^{i\theta})^{k-j}(e^{-i\theta})^j=e^{i(k-2j)\theta}$:
 \[
 x^k=2^{-k}\sum_{j=0}^k\binom kj e^{i(k-2j)\theta}.
 \]
 The terms $j$ and $k-j$ have equal binomial coefficients and
-opposite frequencies.  Each such pair sums to
+opposite frequencies.  Each such pair, $j<k/2$, sums by
+$e^{i\phi}+e^{-i\phi}=2\cos\phi$ to
 $2\binom kj\cos((k-2j)\theta)=2\binom kjT_{k-2j}(x)$.
 If $k$ is odd all terms pair.  If $k$ is even, $j=k/2$ is
 an unpaired zero-frequency term.  Thus the precise formula is
@@ -2535,7 +2730,9 @@ an unpaired zero-frequency term.  Thus the precise formula is
  \end{cases}}
 \]
 The first sum is empty at $k=0$ and the last term is then $1$.
-Factoring out $2^{1-k}$ shows that the last $T_0$ coefficient,
+Factoring out $2^{1-k}$ leaves the bracketed terms
+$\binom kjT_{k-2j}$ of the statement and turns the $T_0$ term into
+$2^{1-k}\cdot\frac12\binom k{k/2}T_0$; so the last $T_0$ coefficient,
 when present, has the \erratum{additional factor $1/2$ specified
 by the published erratum}.  For example
 $x^2=(T_2+T_0)/2$ and $x^3=(T_3+3T_1)/4$.
@@ -2558,32 +2755,44 @@ f(x)=\frac{a_0}{2}+\sum_{n=1}^\infty a_nT_n(x),\qquad
  a_n=\frac2\pi\int_0^\pi F(\theta)\cos(n\theta)d\theta.
 \]
 (a) Here $F(\theta)=\sin\theta$ on $[0,\pi]$.
-The constant is $a_0=4/\pi$, and reflection
-$\theta\mapsto\pi-\theta$ makes every odd coefficient zero.
-For $s\ge1$, the product-to-sum formula gives
+The constant is $a_0=(2/\pi)\int_0^\pi\sin\theta\,d\theta=4/\pi$.
+The reflection $\theta\mapsto\pi-\theta$ leaves $\sin\theta$ unchanged
+and multiplies $\cos n\theta$ by $\cos(n\pi)=(-1)^n$, so every odd
+coefficient equals its own negative and is zero.
+For $s\ge1$, the product-to-sum formula
+$2\sin A\cos B=\sin(A+B)+\sin(A-B)$ and
+$\int_0^\pi\sin(k\theta)d\theta=2/k$ for odd $k$
+(Exercise 18.4.20) give
 \begin{align*}
 \int_0^\pi\sin\theta\cos(2s\theta)d\theta
  &=\frac12\int_0^\pi
   [\sin((2s+1)\theta)+\sin((1-2s)\theta)]d\theta\\
- &=\frac1{2s+1}+\frac1{1-2s}=-\frac2{4s^2-1}.
+ &=\frac1{2s+1}+\frac1{1-2s}
+  =\frac{2}{(2s+1)(1-2s)}=-\frac2{4s^2-1}.
 \end{align*}
-Thus $a_{2s}=-4/[\pi(4s^2-1)]$ and
+Thus $a_{2s}=-4/[\pi(4s^2-1)]$, and with $a_0/2=2/\pi$,
 \[
 \boxed{\sqrt{1-x^2}=\frac2\pi
  \left[1-2\sum_{s=1}^\infty\frac{T_{2s}(x)}{4s^2-1}\right]}.
 \]
 The coefficients are absolutely summable and $|T_n(x)|\le1$ on
 $[-1,1]$, so the series converges uniformly, including both endpoints.
-Its cosine coefficients identify the continuous function there.
+Its sum is continuous with the same cosine coefficients as
+$\sin\theta$ (integrate term by term), and a continuous function on
+$[0,\pi]$ is determined by its cosine coefficients, so the sum is
+$\sqrt{1-x^2}$ there.
 
 (b) Now $F=1$ on $0\le\theta<\pi/2$ and $F=-1$ on
-$\pi/2<\theta\le\pi$.  Its average is zero.  For $n\ge1$,
+$\pi/2<\theta\le\pi$.  Its average is zero, so $a_0=0$.  For $n\ge1$,
 \begin{align*}
 a_n&=\frac2\pi\left[\int_0^{\pi/2}\cos(n\theta)d\theta
               -\int_{\pi/2}^{\pi}\cos(n\theta)d\theta\right]\\
- &=\frac4{\pi n}\sin\frac{n\pi}{2}.
+ &=\frac2{\pi n}\left[\sin\frac{n\pi}2
+   -\Bigl(\sin n\pi-\sin\frac{n\pi}2\Bigr)\right]
+ =\frac4{\pi n}\sin\frac{n\pi}{2},
 \end{align*}
-This vanishes for even $n$, and equals
+since $\sin n\pi=0$.
+This vanishes for even $n$, and, as $\sin((2s+1)\pi/2)=(-1)^s$, equals
 $4(-1)^s/[\pi(2s+1)]$ for $n=2s+1$.  Therefore
 \[
 \boxed{\operatorname{sgn}x=\frac4\pi\sum_{s=0}^\infty
@@ -2618,10 +2827,11 @@ $xP_{n}(x)$ as a linear combination of derivatives. The
 trigonometric substitution $x=\cos\theta$, $T_{n}(x)=\cos n\theta$
 is most helpful for the Chebyshev part.
 \solution
-(a) For the Legendre expansion, parity removes all odd degrees and
-the constant coefficient is
-$\tfrac12\int_{-1}^1|x|dx=1/2$.  At degree $N=2s\ge2$ the
-coefficient is $(2N+1)J_N$, where
+(a) For the Legendre expansion the coefficient of $P_N$ is
+$\frac{2N+1}2\int_{-1}^1|x|P_N(x)dx$.  Parity removes all odd degrees,
+and the constant coefficient is
+$\tfrac12\int_{-1}^1|x|dx=1/2$.  At even degree $N=2s\ge2$ the
+integrand is even, so the coefficient is $(2N+1)J_N$, where
 $J_N=\int_0^1xP_N(x)dx$.
 Multiply the self-adjoint Legendre equation
 $[(1-x^2)P_N']'+N(N+1)P_N=0$ by $x$ and integrate:
@@ -2629,27 +2839,37 @@ $[(1-x^2)P_N']'+N(N+1)P_N=0$ by $x$ and integrate:
 0=[x(1-x^2)P_N']_0^1
   -\int_0^1(1-x^2)P_N'dx+N(N+1)J_N.
 \]
-The boundary term is zero, while another integration by parts gives
+The boundary term is zero (the factor $x$ vanishes at $0$ and
+$1-x^2$ at $1$), while another integration by parts gives
 \[
 \int_0^1(1-x^2)P_N'dx
- =[(1-x^2)P_N]_0^1+2J_N=-P_N(0)+2J_N.
+ =[(1-x^2)P_N]_0^1+\int_0^12xP_N\,dx=-P_N(0)+2J_N.
 \]
-Consequently
+Consequently $0=P_N(0)-2J_N+N(N+1)J_N$, and since
+$N(N+1)-2=(N-1)(N+2)$,
 \[
 J_N=-\frac{P_N(0)}{(N-1)(N+2)}.
 \]
-Use $P_{2s}(0)=(-1)^s(2s-1)!!/(2s)!!$ and cancel
-$2s-1$ and $2s+2$:
+Use $P_{2s}(0)=(-1)^s(2s-1)!!/(2s)!!$, $(2s-1)!!=(2s-1)(2s-3)!!$
+and $(2s)!!\,(2s+2)=(2s+2)!!$:
 \[
-J_{2s}=(-1)^{s+1}\frac{(2s-3)!!}{(2s+2)!!}.
+J_{2s}=-\frac{(-1)^s(2s-1)!!}{(2s)!!\,(2s-1)(2s+2)}
+ =(-1)^{s+1}\frac{(2s-3)!!}{(2s+2)!!},
 \]
+with $(-1)!!=1$ at $s=1$.
 It follows that
 \[
 \boxed{|x|=\frac12+\sum_{s=1}^\infty
  (-1)^{s+1}(4s+1)\frac{(2s-3)!!}{(2s+2)!!}P_{2s}(x)}.
 \]
-For the Chebyshev expansion, $F(\theta)=|\cos\theta|$ has
-$a_0=4/\pi$ and zero odd coefficients.  For $s\ge1$,
+For the Chebyshev expansion, with the cosine-series convention of
+Exercise 18.4.25, $F(\theta)=|\cos\theta|$ has
+$a_0=(2/\pi)\int_0^\pi|\cos\theta|d\theta=4/\pi$.  Under
+$\theta\mapsto\pi-\theta$, $|\cos\theta|$ is unchanged and
+$\cos n\theta$ acquires the factor $(-1)^n$, so the odd coefficients
+vanish and each even one is twice the integral over $[0,\pi/2]$.
+With $2\cos\theta\cos(2s\theta)=\cos((2s-1)\theta)+\cos((2s+1)\theta)$
+and $\sin((2s\mp1)\pi/2)=\mp(-1)^s$, for $s\ge1$,
 \begin{align*}
 a_{2s}
  &=\frac4\pi\int_0^{\pi/2}\cos\theta\cos(2s\theta)d\theta\\
@@ -2660,7 +2880,7 @@ a_{2s}
       \left[\frac1{2s-1}-\frac1{2s+1}\right]
  =\frac4\pi\frac{(-1)^{s+1}}{4s^2-1}.
 \end{align*}
-Hence
+Hence, with $a_0/2=2/\pi$,
 \[
 \boxed{|x|=\frac2\pi+\frac4\pi\sum_{s=1}^\infty
  \frac{(-1)^{s+1}}{4s^2-1}T_{2s}(x)}.
@@ -2672,13 +2892,20 @@ are $O(s^{-2})$ and $|T_n(x)|\le1$.  Thus both are absolutely
 uniformly convergent, and orthogonal completeness identifies their
 continuous sums with $|x|$.
 
-(b) Convert the double-factorial ratio to gamma functions:
+(b) Let $A_s=(-1)^{s+1}(4s+1)(2s-3)!!/(2s+2)!!$ and
+$B_s=4(-1)^{s+1}/[\pi(4s^2-1)]$ be the coefficients of $P_{2s}$ and
+$T_{2s}$.  Convert the double-factorial ratio to gamma functions with
+$(2k-1)!!=2^k\Gamma(k+\frac12)/\sqrt\pi$ at $k=s-1$ and
+$(2k)!!=2^kk!$ at $k=s+1$, and use
+$\Gamma(s+a)/\Gamma(s+b)\sim s^{a-b}$ as $s\to\infty$:
 \[
 \frac{(2s-3)!!}{(2s+2)!!}
+ =\frac{2^{s-1}\Gamma(s-1/2)}{\sqrt\pi\,2^{s+1}\Gamma(s+2)}
  =\frac{\Gamma(s-1/2)}{4\sqrt\pi\,\Gamma(s+2)}
  \sim\frac1{4\sqrt\pi}\,s^{-5/2}.
 \]
-Therefore the Legendre and Chebyshev coefficients satisfy
+Therefore, with $4s+1\sim4s$ and $4s^2-1\sim4s^2$, the Legendre and
+Chebyshev coefficients satisfy
 \[
 A_s\sim\frac{(-1)^{s+1}}{\sqrt\pi\,s^{3/2}},\qquad
 B_s\sim\frac{(-1)^{s+1}}{\pi s^2},
@@ -2701,8 +2928,18 @@ expansions use different orthogonality weights.
 relation) to the results of Exercise~18.4.26.
 \solution
 Use the uniformly convergent Chebyshev expansion of $|x|$ from
-Exercise 18.4.26.  Orthogonality eliminates the mixed terms upon
-squaring and integrating with weight $(1-x^2)^{-1/2}$.  Thus
+Exercise 18.4.26, with $a_0/2=2/\pi$ and
+$a_{2s}=4(-1)^{s+1}/[\pi(4s^2-1)]$.  Orthogonality eliminates the
+mixed terms upon squaring and integrating with weight
+$(1-x^2)^{-1/2}$, and the norms of Exercise 18.4.19(a),
+$\int_{-1}^1T_0^2(1-x^2)^{-1/2}dx=\pi$ and
+$\int_{-1}^1T_n^2(1-x^2)^{-1/2}dx=\pi/2$ ($n\ge1$), give Parseval's
+identity
+\[
+\int_{-1}^1\frac{|x|^2}{\sqrt{1-x^2}}dx
+ =\Bigl(\frac{a_0}2\Bigr)^2\pi+\sum_{s=1}^\infty a_{2s}^2\,\frac\pi2.
+\]
+Thus
 \begin{align*}
 \int_{-1}^1\frac{x^2}{\sqrt{1-x^2}}dx
  &=\left(\frac2\pi\right)^2\pi
@@ -2710,8 +2947,10 @@ squaring and integrating with weight $(1-x^2)^{-1/2}$.  Thus
        \left(\frac4{\pi(4s^2-1)}\right)^2\frac\pi2\\
  &=\frac4\pi+\frac8\pi\sum_{s=1}^\infty(4s^2-1)^{-2}.
 \end{align*}
-The integral on the left is $\int_0^\pi\cos^2\theta\,d\theta=\pi/2$.
-Multiplication by $\pi/4$ gives
+The integral on the left is, with $x=\cos\theta$,
+$\int_0^\pi\cos^2\theta\,d\theta=\pi/2$.  So
+$\pi/2=4/\pi+(8/\pi)\sum_{s\ge1}(4s^2-1)^{-2}$, and multiplication
+by $\pi/4$ gives
 \[
 \boxed{\frac{\pi^2}{8}=1+2\sum_{s=1}^\infty(4s^2-1)^{-2}}.
 \]
@@ -2730,24 +2969,29 @@ identity, justifies the limiting squared integral.
 \end{enumerate}
 \erratum{Use principal real inverse trigonometric functions on $-1\le x\le1$.}\par\nobreak
 \solution
-\erratum{The manual's intermediate constant coefficient is $\pi/2$, not $\pi^2/2$.  Its final expansion has the correct constant.}\par
+\erratum{The intermediate constant coefficient in the Instructor's Manual should be $\pi/2$, not $\pi^2/2$, since $\frac1\pi\int_0^\pi\theta\,d\theta=\pi/2$.  Its final expansion has the correct constant.}\par
 
 (a) Put $x=\cos\theta$, $0\le\theta\le\pi$, so $\arccos x=\theta$.
-The cosine coefficients of this linear function are
+In the cosine-series convention of Exercise 18.4.25, the
+coefficients of this linear function are
 \[
-a_0=\frac2\pi\int_0^\pi\theta\,d\theta=\pi,
+a_0=\frac2\pi\int_0^\pi\theta\,d\theta=\frac2\pi\cdot\frac{\pi^2}2=\pi,
 \]
-and, for $n\ge1$, integration by parts gives
+and, for $n\ge1$, integration by parts with $u=\theta$,
+$dv=\cos(n\theta)d\theta$, $v=\sin(n\theta)/n$, i.e.\
+$\int\theta\cos(n\theta)d\theta=\theta\sin(n\theta)/n
+-\int\sin(n\theta)d\theta/n$, gives
 \begin{align*}
 a_n
  &=\frac2\pi\int_0^\pi\theta\cos(n\theta)d\theta\\
  &=\frac2\pi\left[
        \frac{\theta\sin(n\theta)}n+\frac{\cos(n\theta)}{n^2}
        \right]_0^\pi
- =\frac2\pi\frac{(-1)^n-1}{n^2}.
+ =\frac2\pi\frac{(-1)^n-1}{n^2},
 \end{align*}
+since $\sin n\pi=\sin0=0$, $\cos n\pi=(-1)^n$ and $\cos0=1$.
 Even coefficients vanish, and for $n=2j+1$ the result is
-$-4/[\pi(2j+1)^2]$.  Therefore
+$-4/[\pi(2j+1)^2]$.  With $a_0/2=\pi/2$, therefore
 \[
 \boxed{\arccos x=\frac\pi2-\frac4\pi
  \sum_{j=0}^\infty\frac{T_{2j+1}(x)}{(2j+1)^2}}.
