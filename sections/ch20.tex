@@ -4590,8 +4590,13 @@ H(t)&=\frac1{2a}\int_0^t
 The assumption $a^2\ne b^2$ makes $a\pm b$ nonzero.
 \erratum{If $a=0$ (allowed when $b\ne0$), the first factor is
 $1/s^2$, the transform of $x$ rather than $\sin(ax)/a$. Then
-the substitution $w=t-x$ and an integration by parts give
-$H(t)=\int_0^t(t-w)\cos bw\,dw=(1-\cos bt)/b^2$, which is the
+$H(t)=\int_0^tx\cos[b(t-x)]dx$. The substitution $w=t-x$
+($dx=-dw$; the limits $x=0,t$ become $w=t,0$) gives
+$H(t)=\int_0^t(t-w)\cos bw\,dw$. Integrate by parts with
+$\sin(bw)/b$ as the antiderivative of $\cos bw$: the boundary
+term $[(t-w)\sin(bw)/b]_0^t$ vanishes at both ends, and since
+$d(t-w)=-dw$ what remains is
+$H(t)=\frac1b\int_0^t\sin bw\,dw=(1-\cos bt)/b^2$, which is the
 boxed formula at $a=0$.}
 This agrees with the independently transformed result of
 Exercise~20.7.3.
@@ -4608,7 +4613,6 @@ the free oscillator. \erratum{Find the resonant limit separately.}
 \par\nobreak\hfill\emph{ANS.}\enspace
 $X(t)=\dfrac{F_{0}/m}{\omega^{2}-\omega_{0}^{2}}
 \left(\dfrac{\omega}{\omega_{0}}\sin\omega_{0}t-\sin\omega t\right)$.
-\par\erratum{The displayed quotient answer applies for $\omega^2\ne\omega_0^2$.}
 \solution
 Let $\omega_0^2=k/m>0$. The equation $mX''+kX=F_0\sin\omega t$
 and the initial data, divided by $m$, are
@@ -4700,7 +4704,7 @@ Cauchy's integral formula.
 f(s)=\frac{1}{2\pi i}\lim_{\alpha\to\infty}
 \int_{\beta-i\alpha}^{\beta+i\alpha}\frac{f(z)}{s-z}\,dz,
 \]
-where $f(z)$ is analytic for $\Re e\,z\ge\beta$.
+where $f(z)$ is analytic for $\Re z\ge\beta$.
 \par\erratum{Assume decay sufficient to make the right closing arc vanish and the usual Laplace inversion hypotheses; analyticity alone does not imply the identity in the hint. Take $\Re s>\beta$.}
 \solution
 Choose $\beta$ to the right of all singularities of the
@@ -4719,6 +4723,9 @@ If, for example, $|f(z)|\le M|z|^{-\epsilon}$ on these arcs for
 some $\epsilon>0$, the arc integral is $O(R^{-\epsilon})$: the
 arc $z=\beta+Re^{i\theta}$, $|\theta|\le\pi/2$, has length $\pi R$,
 and on it $|s-z|\ge R-|s-\beta|\ge R/2$ once $R\ge2|s-\beta|$.
+Since also $|z|\ge R-|\beta|$ on the arc, the arc integral is
+at most $\pi R\cdot M(R-|\beta|)^{-\epsilon}\cdot(2/R)
+=2\pi M(R-|\beta|)^{-\epsilon}$.
 Letting $R\to\infty$ then gives the identity in the hint.
 For each $z$ on the line $\Re z=\beta$,
 \[
@@ -4777,7 +4784,7 @@ f(s)=\int_{0}^{\infty}e^{-sz}F(z)\,dz
 we can convert our integral into the Fourier representation of a
 Dirac delta function. From this derive the inverse Laplace
 transform.
-\par\erratum{Use a Bromwich line to the right of the convergence abscissa, and recover $F(t)$ at positive continuity points; interpret the delta integral distributionally.}
+\par\erratum{Use a Bromwich line to the right of the abscissa of absolute convergence, and recover $F(t)$ at positive continuity points; interpret the delta integral distributionally.}
 \solution
 Parameterize the line by $s=\beta+i\omega$, so
 $ds/(2\pi i)=d\omega/(2\pi)$ and
@@ -4811,27 +4818,39 @@ e^{-\epsilon\omega^2+i\omega u}d\omega
 =\frac{e^{-u^2/(4\epsilon)}}{\sqrt{4\pi\epsilon}}.
 \]
 It is positive, even and decreasing in $|u|$, and has mass $1$
-(substitute $u=2\sqrt\epsilon\,v$); for fixed $\delta>0$ both
-$K_\epsilon(\delta)$ and $\int_{|u|\ge\delta}K_\epsilon(u)du$
+(substitute $u=2\sqrt\epsilon\,v$); for fixed $\rho>0$ both
+$K_\epsilon(\rho)$ and $\int_{|u|\ge\rho}K_\epsilon(u)du$
 tend to zero as $\epsilon\to0$. Let
 $H(z)=e^{-\beta z}F(z)$ for $z\ge0$ and $H(z)=0$ for $z<0$,
 with $H\in L^1$ ($\beta$ beyond the abscissa of absolute
-convergence). Since $e^{-\epsilon\omega^2}|H(z)|$ is integrable
-over the $(\omega,z)$ plane, Fubini's theorem justifies the
-interchange in the regularized inverse:
+convergence). On the line, since
+$e^{s(t-z)}=e^{\beta t}e^{i\omega(t-z)}e^{-\beta z}$,
+\[
+e^{st}f(s)=\int_0^\infty e^{s(t-z)}F(z)dz
+=e^{\beta t}\int_{-\infty}^{\infty}e^{i\omega(t-z)}H(z)dz.
+\]
+Since $e^{-\epsilon\omega^2}|H(z)|$ is integrable over the
+$(\omega,z)$ plane, Fubini's theorem justifies interchanging
+the $\omega$ and $z$ integrations in the regularized inverse;
+the inner $\omega$ integral is then $K_\epsilon(t-z)$:
 \[
 \frac1{2\pi}\int_{-\infty}^{\infty}e^{-\epsilon\omega^2}
 e^{st}f(s)\,d\omega
 =e^{\beta t}\int_{-\infty}^{\infty}K_\epsilon(t-z)H(z)dz.
 \]
 Let $t>0$ be a continuity point of $F$, hence of $H$. Given
-$\eta>0$, choose $\delta>0$ with $|H(z)-H(t)|<\eta$ for
-$|z-t|<\delta$. Because $K_\epsilon$ has mass $1$ and
-$K_\epsilon(t-z)\le K_\epsilon(\delta)$ for $|z-t|\ge\delta$,
+$\eta>0$, choose $\rho>0$ with $|H(z)-H(t)|<\eta$ for
+$|z-t|<\rho$. Because $K_\epsilon$ has mass $1$, the
+difference below equals
+$\int_{-\infty}^{\infty}K_\epsilon(t-z)[H(z)-H(t)]dz$. On
+$|z-t|<\rho$ the bracket is less than $\eta$ in absolute value
+and $K_\epsilon$ integrates to at most $1$; on $|z-t|\ge\rho$
+use $|H(z)-H(t)|\le|H(z)|+|H(t)|$ and, in the $|H(z)|$ term,
+$K_\epsilon(t-z)\le K_\epsilon(\rho)$. Hence
 \[
 \left|\int_{-\infty}^{\infty}K_\epsilon(t-z)H(z)dz-H(t)\right|
-\le\eta+K_\epsilon(\delta)\int_{-\infty}^\infty|H|\,dz
-+|H(t)|\int_{|u|\ge\delta}K_\epsilon(u)du.
+\le\eta+K_\epsilon(\rho)\int_{-\infty}^\infty|H|\,dz
++|H(t)|\int_{|u|\ge\rho}K_\epsilon(u)du.
 \]
 The last two terms tend to zero as $\epsilon\to0$, and $\eta$
 is arbitrary. Hence the regularized inverse tends to
@@ -4869,8 +4888,15 @@ e^{s(t-u)}f(s)ds\right]du.
 \end{align*}
 The bracket is the Bromwich integral of Exercise~20.10.2
 evaluated at the time $t-u$. It therefore equals $F(t-u)$ for
-$u<t$ and vanishes for $u>t$, where $t-u<0$ (the inverse is
-causal). Hence for $t\ge0$ the $u$ integral stops at
+$u<t$ and vanishes for $u>t$, where $t-u<0$: at a time
+$\tau=t-u<0$ the function $H$ of Exercise~20.10.2 (built from
+$F$) vanishes on a whole neighborhood of $\tau$, so the
+argument given there yields the limit $e^{\beta\tau}H(\tau)=0$.
+For piecewise continuous $F$ the bracket can differ from
+$F(t-u)$ only at isolated values of $u$ (at $u=t$ it equals
+$F(0+)/2$, and at a jump of $F$ the mean of the one-sided
+limits, by Exercise~20.10.2), and such values do not change
+the $u$ integral. Hence for $t\ge0$ the $u$ integral stops at
 $u=t$, and the result is
 \[
 \boxed{L^{-1}\{f(s)g(s)\}(t)=\int_0^tF(t-u)G(u)du}.
@@ -4885,11 +4911,35 @@ $|e^{s(t-u)}f(s)G(u)|=e^{\beta t}|f(\beta+i\omega)|\,
 e^{-\beta u}|G(u)|$, so the double integral converges
 absolutely and Fubini's theorem applies.
 For the usual broader class of locally integrable functions
-of exponential order, insert the Gaussian frequency regulator
-of Exercise~20.10.2, interchange the absolutely convergent
-integrals, and then take its approximate-identity limit at
-continuity points of the convolution. Values at isolated
-endpoints do not alter the convolution integral.
+of exponential order, take $\beta$ beyond the abscissas of
+absolute convergence of $f$ and $g$, and insert the Gaussian
+regulator $e^{-\epsilon\omega^2}$ of Exercise~20.10.2. Since
+$|f(\beta+i\omega)|\le\int_0^\infty e^{-\beta z}|F(z)|dz$, the
+double integral then converges absolutely and may be
+interchanged, and by Exercise~20.10.2 the regularized bracket
+is $e^{\beta(t-u)}\int_{-\infty}^{\infty}K_\epsilon(t-u-z)
+H_F(z)dz$. Here $H_F(z)=e^{-\beta z}F(z)$ (the $H$ of that
+exercise) and $H_G(u)=e^{-\beta u}G(u)$ for nonnegative
+arguments, and both vanish for negative ones. Since
+$G(u)e^{\beta(t-u)}=e^{\beta t}H_G(u)$, the regularized inverse
+of $fg$ is the left side below; substituting $z=v-u$ and
+interchanging once more (allowed because
+$K_\epsilon\le1/\sqrt{4\pi\epsilon}$ and $H_F$, $H_G$ are
+integrable) gives the right side:
+\begin{align*}
+&e^{\beta t}\int_{-\infty}^{\infty}H_G(u)\int_{-\infty}^{\infty}
+K_\epsilon(t-u-z)H_F(z)\,dz\,du\\
+&\qquad=e^{\beta t}\int_{-\infty}^{\infty}K_\epsilon(t-v)
+\left[\int_{-\infty}^{\infty}H_F(v-u)H_G(u)\,du\right]dv.
+\end{align*}
+For $v>0$ the bracket is
+$\int_0^ve^{-\beta(v-u)}F(v-u)e^{-\beta u}G(u)du
+=e^{-\beta v}(F*G)(v)$, and for $v<0$ it is zero. The
+approximate-identity argument of Exercise~20.10.2, applied to
+this function in place of $H$ (it is integrable, with integral
+of its modulus at most $\int|H_F|\,dz\int|H_G|\,du$), now gives
+$e^{\beta t}e^{-\beta t}(F*G)(t)=(F*G)(t)$ at continuity
+points of the convolution.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4920,17 +4970,25 @@ is used throughout this section. Suppose the factor $\varphi(s)$
 multiplying $e^{st}$ satisfies $|\varphi(s)|\le M_R$ on the
 arc, with $M_R\to0$ as $R\to\infty$. On the left semicircle
 $s=Re^{i\theta}$, $\pi/2\le\theta\le3\pi/2$, put
-$\theta=\pi/2+\phi$; then $|e^{st}|=e^{-tR\sin\phi}$, and
-Jordan's inequality $\sin\phi\ge2\phi/\pi$ on $[0,\pi/2]$ gives
-\[
-\int|e^{st}|\,|ds|=2R\int_0^{\pi/2}e^{-tR\sin\phi}d\phi
-\le2R\int_0^{\pi/2}e^{-2tR\phi/\pi}d\phi<\frac\pi t.
-\]
+$\theta=\pi/2+\psi$ with $0\le\psi\le\pi$; then $|ds|=R\,d\psi$
+and $|e^{st}|=e^{tR\cos\theta}=e^{-tR\sin\psi}$. Since
+$\sin(\pi-\psi)=\sin\psi$, the halves $\psi\le\pi/2$ and
+$\psi\ge\pi/2$ contribute equally, and Jordan's inequality
+$\sin\psi\ge2\psi/\pi$ on $[0,\pi/2]$ gives
+\begin{align*}
+\int|e^{st}|\,|ds|&=2R\int_0^{\pi/2}e^{-tR\sin\psi}d\psi
+\le2R\int_0^{\pi/2}e^{-2tR\psi/\pi}d\psi\\
+&=\frac\pi t\,(1-e^{-tR})<\frac\pi t.
+\end{align*}
 The two remaining pieces (present for $\beta>0$), where
-$0<\Re s<\beta$, have length
-$R\arcsin(\beta/R)\le\pi\beta/2$ each, and there
-$|e^{st}|\le e^{\beta t}$. Hence the arc contributes at most
-$M_R(\pi/t+\pi\beta e^{\beta t})\to0$. Here
+$0<\Re s<\beta$ and hence $|e^{st}|\le e^{\beta t}$, run
+between the angles $\pm\arccos(\beta/R)$ of $\beta\pm iT$ and
+$\pm\pi/2$. Each therefore has length
+$R[\pi/2-\arccos(\beta/R)]=R\arcsin(\beta/R)\le\pi\beta/2$,
+since Jordan's inequality at the angle
+$\arcsin(\beta/R)\in[0,\pi/2]$ reads
+$\beta/R\ge(2/\pi)\arcsin(\beta/R)$. Hence the arc contributes
+at most $M_R(\pi/t+\pi\beta e^{\beta t})\to0$. Here
 $\varphi(s)=s/(s^2-k^2)$ and $|s^2-k^2|\ge R^2-k^2$, so
 $M_R=R/(R^2-k^2)$. The Bromwich integral therefore equals
 the sum of the residues at the simple poles $s=\pm k$, each
@@ -4945,8 +5003,16 @@ found by cancelling its factor $s\mp k$ and setting $s=\pm k$:
 \]
 Their sum $(e^{kt}+e^{-kt})/2$ reproduces $\cosh kt$. At $k=0$
 the transform reduces directly to $1/s$, with inverse $1$, also
-the continuous limit of the answer. At $t=0$ the formula gives
-the right-hand value $F(0+)=\cosh0=1$.
+the continuous limit of the answer. At $t=0$ the answer takes
+the right-hand value $F(0+)=\cosh0=1$. The symmetric Bromwich
+integral itself, for which the arc estimate (with its factor
+$\pi/t$) is unavailable at $t=0$, gives $F(0+)/2=\frac12$
+there, as noted in Exercise~20.10.2. Indeed, in
+$s/(s^2-k^2)=1/s+k^2/[s(s^2-k^2)]$ the first term gives
+$\frac1{2\pi}\int_{-T}^{T}\frac{d\omega}{\beta+i\omega}
+=\frac1\pi\arctan\frac T\beta\to\frac12$, while the second is
+$O(s^{-3})$, so its arc vanishes even at $t=0$ and its
+residues $-1$, $\frac12$, $\frac12$ at $s=0,k,-k$ cancel.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5012,7 +5078,9 @@ for the Bromwich integral.
 \solution
 Choose the principal branch
 $s^{-1/2}=|s|^{-1/2}e^{-i\arg(s)/2}$ with
-$-\pi<\arg(s)<\pi$. For $t>0$, close the Bromwich segment
+$-\pi<\arg(s)<\pi$. The Bromwich line lies at
+$\Re s=\beta>0$, to the right of the branch point. For $t>0$,
+close the Bromwich segment
 to the left as in Exercise~20.10.4(b), but leave out the cut:
 the closed contour follows the arc down to the upper bank of
 the cut, runs along the upper bank from $-R$ to $-\rho$,
@@ -5084,7 +5152,8 @@ On the left bank its sign is reversed:
 $-D(-s)$ is also analytic outside the cut, squares to
 $s^2+1$ and behaves as $s$ at infinity, so $D(-s)=-D(s)$ and
 $D(iy-0)=-D(-iy+0)=-\sqrt{1-y^2}$.
-For $t>0$, close the Bromwich segment by the arc of
+The Bromwich line lies at $\Re s=\beta>0$, to the right of the
+cut. For $t>0$, close its segment by the arc of
 Exercise~20.10.4(b). On $|s|=R>1$,
 $|1/D(s)|\le(R^2-1)^{-1/2}\to0$, so the arc contributes
 nothing in the limit. The closed contour encloses the cut,
@@ -5251,10 +5320,11 @@ $z^{-1}$, so the residue is
 $\sum_{n\ge0}(at/2)^{2n}/(n!)^2=I_0(at)$.
 \erratum{For $at\ne0$, the singularity at $z=0$ is essential,
 not the simple pole called for in the Instructor's Manual; the
-residue calculation still applies. Also the image of the
-undeformed vertical Bromwich line is a curve, not exactly a
-vertical line in $z$. Mapping the already deformed cut contour
-avoids that unwarranted replacement.}
+residue calculation still applies. Also, the image of the
+vertical Bromwich line $\Re s=\beta$ under this map is a curve
+in the $z$ plane, not a vertical line, so it may not simply be
+replaced by one; mapping the already deformed cut contour, as
+above, avoids the issue.}
 The answer is even in $a$, so real negative $a$ gives the
 same result with $|a|$. At $a=0$ the transform is $1/s$ and
 its inverse is $1$.
@@ -5309,7 +5379,8 @@ for
 f(s)=\frac{s}{(s^{2}+a^{2})^{2}}.
 \]
 \solution
-For real $a\ne0$, close the Bromwich line to the left
+For real $a\ne0$, take the Bromwich line at $\Re s=\beta>0$,
+to the right of the poles $\pm ia$, and close it to the left
 when $t>0$. The integrand
 \[
 \frac{se^{st}}{(s-ia)^2(s+ia)^2}
