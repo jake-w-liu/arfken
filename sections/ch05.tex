@@ -25,12 +25,15 @@ $S_N\to f$ in the Hilbert-space norm. For a fixed $k$ and $N\ge k$,
 =\sum_{n=0}^N a_n\langle\varphi_k|\varphi_n\rangle
 =\sum_{n=0}^N a_n\delta_{kn}=a_k.
 \]
-The scalar product is continuous: Schwarz's inequality gives
+The scalar product is continuous: by linearity in the second argument and
+Schwarz's inequality, for every $N\ge k$,
 \[
-|\langle\varphi_k|f-S_N\rangle|
+|\langle\varphi_k|f\rangle-a_k|
+=|\langle\varphi_k|f-S_N\rangle|
 \le\|\varphi_k\|\,\|f-S_N\|=\|f-S_N\|\longrightarrow0.
 \]
-Taking the limit therefore determines each coefficient uniquely:
+The left side does not depend on $N$, so it is zero. Each coefficient is
+therefore determined by $f$ alone:
 \[
 \boxed{a_k=\langle\varphi_k|f\rangle.}
 \]
@@ -61,12 +64,16 @@ $\varphi_i$ has every coefficient zero. Consequently $c_i-c'_i=0$ for
 $i=1,\ldots,N$, proving uniqueness without any orthogonality assumption.
 
 As a scalar-product check, let $G_{ij}=\langle\varphi_i|\varphi_j\rangle$.
-For any nonzero column $d$,
+For any nonzero column $d$, linear independence makes $\sum_id_i\varphi_i$
+a nonzero function, so
 \[
-d^\dagger Gd=\left\|\sum_i d_i\varphi_i\right\|^2>0.
+d^\dagger Gd=\sum_{i,j}d_i^*\langle\varphi_i|\varphi_j\rangle d_j
+=\left\|\sum_i d_i\varphi_i\right\|^2>0.
 \]
-Thus $G$ is invertible, and the equations
-$\sum_jG_{ij}c_j=\langle\varphi_i|f\rangle$ also have exactly one solution.
+Hence $Gd\ne0$ whenever $d\ne0$, i.e., $G$ is invertible. Taking the
+scalar product of the expansion of $f$ with $\varphi_i$ gives the equations
+$\sum_jG_{ij}c_j=\langle\varphi_i|f\rangle$, which therefore also have
+exactly one solution.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -99,7 +106,11 @@ E(c)&=\int_0^1(f-p)^2\,dx\\
  -2\sum_jc_j\int_0^1x^jf\,dx
  +\sum_{j,k}c_jc_k\int_0^1x^{j+k}\,dx.
 \end{align*}
-Since the last matrix is symmetric,
+In the notation of the statement,
+$E(c)=\int_0^1f^2dx-2\sum_jb_jc_j+\sum_{j,k}A_{jk}c_jc_k$. The last matrix
+is symmetric, $A_{jk}=A_{kj}$, so
+$\partial(\sum_{j,k}A_{jk}c_jc_k)/\partial c_i
+=\sum_kA_{ik}c_k+\sum_jA_{ji}c_j=2\sum_jA_{ij}c_j$, and
 \[
 \frac{\partial E}{\partial c_i}
 =-2b_i+2\sum_{j=0}^{n-1}A_{ij}c_j=0,
@@ -113,12 +124,16 @@ minimum, not merely a stationary point: for any nonzero vector $v$,
 v^TAv=\int_0^1\left(\sum_{j=0}^{n-1}v_jx^j\right)^2dx>0.
 \]
 A nonzero polynomial cannot vanish on an interval, so the Hessian $2A$ is
-positive definite. If $c_*$ solves the normal equations, direct completion
-of the square gives
-\[
-E(c)=E(c_*)+(c-c_*)^TA(c-c_*),
-\]
-which proves uniqueness. For complex $f$, minimize $\int|f-p|^2dx$;
+positive definite. In particular $Av\ne0$ for $v\ne0$, so $A$ is invertible
+and the normal equations have exactly one solution $c_*$. To complete the
+square, put $c=c_*+d$ in $E(c)=\int_0^1f^2dx-2b^Tc+c^TAc$ and use
+$b=Ac_*$, $A^T=A$:
+\begin{align*}
+E(c_*+d)&=\int_0^1f^2dx-2c_*^TA(c_*+d)+(c_*+d)^TA(c_*+d)\\
+&=\int_0^1f^2dx-c_*^TAc_*+d^TAd=E(c_*)+d^TAd.
+\end{align*}
+Since $d^TAd>0$ for $d\ne0$, $c_*$ is the unique minimizer.
+For complex $f$, minimize $\int|f-p|^2dx$;
 variation of real and imaginary parts gives the same equations, with
 $c,b$ complex and $v^T$ replaced by $v^\dagger$.
 
@@ -128,8 +143,15 @@ For $n=5$, exact rational elimination gives
 \]
 \erratum{A small determinant alone is not a condition-number test (rescaling
 any well-conditioned matrix can make its determinant small). For this
-particular matrix, the supplementary singular-value calculation gives
-$\kappa_2(A)\simeq4.7661\times10^5$, confirming sensitivity of the equations.}
+particular matrix the condition number
+$\kappa_2(A)=\sigma_{\max}/\sigma_{\min}\simeq4.7661\times10^5$, the ratio of
+the extreme singular values, confirms sensitivity of the equations.}
+Because $A$ is symmetric and positive definite, its singular values are its
+eigenvalues. Computing them numerically (with any symmetric eigenvalue
+routine, e.g., the Jacobi method) gives $\lambda_{\max}\simeq1.56705$ and
+$\lambda_{\min}\simeq3.28793\times10^{-6}$, whose ratio is the quoted
+$\kappa_2$. A relative error in $b$ can thus be magnified by a factor of up
+to about $5\times10^5$ in the solution $c$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -167,6 +189,8 @@ E(c)&=\int_a^bF^2w\,dx
 &=\|F\|^2-2\sum_{n=0}^m c_na_n+\sum_{n=0}^m c_n^2\\
 &=\|F\|^2-\sum_{n=0}^m a_n^2+\sum_{n=0}^m(c_n-a_n)^2.
 \end{align*}
+Here $\|F\|^2=\int_a^bF^2w\,dx$, and the last line completes the square term
+by term, $c_n^2-2c_na_n=(c_n-a_n)^2-a_n^2$.
 Only the last sum depends on the trial coefficients. It is nonnegative
 and vanishes exactly when
 \[
@@ -175,7 +199,8 @@ E_{\min}=\|F\|^2-\sum_{n=0}^m a_n^2.
 \]
 Adding another orthonormal function only adds its own square to this
 calculation; it does not alter the earlier coefficients. If the full
-expansion converges in norm, $E_{\min}=\sum_{n>m}a_n^2$.
+expansion converges in norm, Parseval's identity
+$\|F\|^2=\sum_{n=0}^\infty a_n^2$ gives $E_{\min}=\sum_{n>m}a_n^2$.
 For complex functions the corresponding formula uses
 $a_n=\int\varphi_n^*Fw\,dx$ and $E=\int|F-\sum c_n\varphi_n|^2w\,dx$;
 the last sum is then $\sum|c_n-a_n|^2$, with the same conclusion.
@@ -217,15 +242,25 @@ For positive integers $k,\ell$, the product-to-sum identity gives
 =\frac12\int_{-\pi}^{\pi}
 [\cos(k-\ell)x-\cos(k+\ell)x]dx=\pi\delta_{k\ell}.
 \]
-The norm squared of the partial sum through $n=N$ is therefore
+The norm squared of the partial sum $f_N$ through $n=N$ is therefore
 \begin{align*}
 \int_{-\pi}^{\pi}f_N^2\,dx
 &=\frac{4h^2}{\pi^2}
  \sum_{n,m=0}^N\frac{\pi\delta_{nm}}{(2n+1)(2m+1)}\\
 &=\frac{4h^2}{\pi}\sum_{n=0}^N\frac1{(2n+1)^2}.
 \end{align*}
-The residual is orthogonal to this partial sum, so
-$\|f\|^2=\|f_N\|^2+\|f-f_N\|^2\ge\|f_N\|^2$.
+The residual is orthogonal to this partial sum. Indeed, $f\sin(2n+1)x$ is
+even, so
+\[
+\int_{-\pi}^{\pi}f\sin(2n+1)x\,dx
+=2\cdot\frac h2\int_0^\pi\sin(2n+1)x\,dx
+=h\left[-\frac{\cos(2n+1)x}{2n+1}\right]_0^\pi=\frac{2h}{2n+1},
+\]
+and hence
+$\langle f_N|f\rangle=\frac{2h}{\pi}\sum_{n=0}^N\frac1{2n+1}\,\frac{2h}{2n+1}
+=\|f_N\|^2$, i.e., $\langle f_N|f-f_N\rangle=0$. By Pythagoras,
+$\|f\|^2=\|f_N\|^2+\|f-f_N\|^2\ge\|f_N\|^2$, which is Bessel's
+inequality.
 The Fourier expansion converges in $L^2$; letting $N\to\infty$ makes the
 residual norm zero and proves the stated Parseval equality.
 
@@ -255,26 +290,37 @@ $f,g\in L^2$ and $fg\in L^1$. The latter fact follows from
 $2|fg|\le f^2+g^2$, so it does not assume the Schwarz inequality we
 are proving:
 \begin{align*}
-D&=\int_a^b\!\int_a^b
+D&=\int_a^b\!\int_a^b[f(x)g(y)-f(y)g(x)]^2\,dx\,dy\\
+&=\int_a^b\!\int_a^b
  \{f(x)^2g(y)^2+f(y)^2g(x)^2
           -2f(x)g(x)f(y)g(y)\}\,dx\,dy\\
 &=2\left(\int_a^bf^2dx\right)\left(\int_a^bg^2dx\right)
  -2\left(\int_a^bfg\,dx\right)^2.
 \end{align*}
-Since the original integrand in $D$ is a square, $D\ge0$. Rearranging and
-taking nonnegative square roots proves
+In the last step each term, a function of $x$ times a function of $y$,
+integrates to a product of single integrals, e.g.,
+$\int\!\!\int f(x)^2g(y)^2\,dx\,dy=\int f^2dx\int g^2dy$; the second term
+gives the same product with $x$ and $y$ renamed, and the third gives
+$-2(\int fg\,dx)(\int fg\,dy)$. Dividing by $2$ gives
+$\frac12D=\int f^2dx\int g^2dx-(\int fg\,dx)^2$, which is the identity.
+Since the original integrand in $D$ is a square, $D\ge0$. Hence
+$(\int fg\,dx)^2\le\int f^2dx\int g^2dx$, and taking nonnegative square
+roots proves
 \[
 \boxed{\left|\int_a^bfg\,dx\right|
 \le\left(\int_a^bf^2dx\right)^{1/2}
    \left(\int_a^bg^2dx\right)^{1/2}.}
 \]
-If $g\ne0$, set $\lambda=(\int fg)/(\int g^2)$. Then
-\[
+If $\int g^2dx>0$, set $\lambda=(\int fg)/(\int g^2)$. Then
+\begin{align*}
 \int_a^b(f-\lambda g)^2dx
-=\int f^2dx-\frac{(\int fg\,dx)^2}{\int g^2dx}.
-\]
-Thus equality holds exactly when $f=\lambda g$ almost everywhere; the
-zero-function cases also give equality. For complex functions the
+&=\int f^2dx-2\lambda\int fg\,dx+\lambda^2\int g^2dx\\
+&=\int f^2dx-\frac{(\int fg\,dx)^2}{\int g^2dx}.
+\end{align*}
+The right side vanishes exactly in the case of equality, and the left
+side exactly when $f=\lambda g$ almost everywhere. Thus equality holds
+exactly when $f=\lambda g$ almost everywhere; the zero-function cases also
+give equality. For complex functions the
 Schwarz inequality is $|\int f^*g|^2\le\int|f|^2\int|g|^2$;
 ordinary squares in the displayed real identity must be replaced by
 appropriate modulus squares.
@@ -305,6 +351,8 @@ I_N&=\left\langle f-\sum_{i=0}^Na_i\varphi_i\,\middle|\,
  +\sum_i|a_i|^2
 =\|f\|^2-\sum_{i=0}^N|a_i|^2\ge0.
 \end{align*}
+The passage to the last line uses $\langle\varphi_i|f\rangle=a_i$ and
+$\langle f|\varphi_j\rangle=\langle\varphi_j|f\rangle^*=a_j^*$.
 The partial sums of the nonnegative series $\sum|a_i|^2$ increase and
 are bounded by $\|f\|^2$. Taking their limit gives
 \[
@@ -313,16 +361,19 @@ are bounded by $\|f\|^2$. Taking their limit gives
 No completeness assumption on the orthonormal set is needed for this
 inequality. To check the equality case, let $S_N=\sum_{i=0}^Na_i\varphi_i$.
 For $M>N$, orthonormality gives
-$\|S_M-S_N\|^2=\sum_{i=N+1}^M|a_i|^2\to0$, so completeness of the
-Hilbert space supplies a limit $S$ in the closed span. Taking limits in
-the residual identity gives
+$\|S_M-S_N\|^2=\sum_{i=N+1}^M|a_i|^2\to0$ as $N\to\infty$ (a tail of the
+convergent series), so completeness of the Hilbert space supplies a limit
+$S$ in the closed span. Letting $N\to\infty$ in the residual identity
+$\|f-S_N\|^2=I_N=\|f\|^2-\sum_{i=0}^N|a_i|^2$ (the norm is continuous) gives
 \[
 \|f-S\|^2=\|f\|^2-\sum_{i=0}^\infty|a_i|^2.
 \]
 Thus equality implies $f=S$ in that closed span. Conversely, if $f$ is in
 the closed span, the residual $f-S$ belongs to it and is orthogonal to
-every $\varphi_i$, hence to the entire closed span. Its squared norm is
-therefore zero, proving equality.
+every $\varphi_k$, since
+$\langle\varphi_k|f-S\rangle=a_k-\lim_N\langle\varphi_k|S_N\rangle=a_k-a_k=0$;
+by linearity and continuity it is orthogonal to the entire closed span.
+Its squared norm is therefore zero, proving equality.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -346,7 +397,13 @@ Direct polynomial integration gives the four norms
 \int_0^1\varphi_n^2dx=1,\ \frac13,\ \frac15,\ \frac17
 \qquad(n=0,1,2,3).
 \]
-The nonconstant norm calculations are, explicitly,
+For the nonconstant norms, square the polynomials,
+\begin{align*}
+\varphi_1^2&=4x^2-4x+1,\qquad
+\varphi_2^2=36x^4-72x^3+48x^2-12x+1,\\
+\varphi_3^2&=400x^6-1200x^5+1380x^4-760x^3+204x^2-24x+1,
+\end{align*}
+and integrate term by term with $\int_0^1x^k\,dx=1/(k+1)$:
 \begin{align*}
 \|\varphi_1\|^2&=\frac43-\frac42+1=\frac13,\\
 \|\varphi_2\|^2&=\frac{36}5-\frac{72}4+\frac{48}3-\frac{12}2+1=\frac15,\\
@@ -362,18 +419,27 @@ I_1=\left[-\frac{x\cos\pi x}{\pi}
 \]
 Two integrations by parts, for $j\ge2$, give
 \begin{align*}
-I_j&=\frac1\pi+\frac{j}{\pi}\int_0^1x^{j-1}\cos\pi x\,dx\\
-&=\frac1\pi-\frac{j(j-1)}{\pi^2}I_{j-2}.
+I_j&=\left[-\frac{x^j\cos\pi x}{\pi}\right]_0^1
+ +\frac{j}{\pi}\int_0^1x^{j-1}\cos\pi x\,dx\\
+&=\frac1\pi+\frac{j}{\pi}\left(
+ \left[\frac{x^{j-1}\sin\pi x}{\pi}\right]_0^1
+ -\frac{j-1}{\pi}\int_0^1x^{j-2}\sin\pi x\,dx\right)\\
+&=\frac1\pi-\frac{j(j-1)}{\pi^2}I_{j-2},
 \end{align*}
-Hence $I_2=1/\pi-4/\pi^3$ and $I_3=1/\pi-6/\pi^3$. Substituting,
+since $\cos\pi=-1$ and $\sin\pi=\sin0=0$. Hence
+$I_2=1/\pi-(2/\pi^2)I_0=1/\pi-4/\pi^3$ and
+$I_3=1/\pi-(6/\pi^2)I_1=1/\pi-6/\pi^3$. Substituting,
 \begin{align*}
 \langle\varphi_0|f\rangle&=I_0=2/\pi,\\
 \langle\varphi_1|f\rangle&=2I_1-I_0=0,\\
 \langle\varphi_2|f\rangle&=6I_2-6I_1+I_0
 =2/\pi-24/\pi^3,\\
-\langle\varphi_3|f\rangle&=20I_3-30I_2+12I_1-I_0=0.
+\langle\varphi_3|f\rangle&=20I_3-30I_2+12I_1-I_0
+=\frac{20-30+12-2}{\pi}+\frac{-120+120}{\pi^3}=0.
 \end{align*}
-The requested four-term projection is therefore
+Dividing by the norms $1$ and $1/5$ gives $c_0=2/\pi$ and
+$c_2=5(2/\pi-24/\pi^3)=10(\pi^2-12)/\pi^3\approx-0.6871$, while
+$c_1=c_3=0$. The requested four-term projection is therefore
 \[
 \boxed{\sin\pi x\ \approx\ \frac2\pi\varphi_0
  +0\varphi_1+\frac{10(\pi^2-12)}{\pi^3}\varphi_2+0\varphi_3.}
@@ -381,8 +447,12 @@ The requested four-term projection is therefore
 The two zero coefficients can also be checked by reflection:
 $\sin\pi(1-x)=\sin\pi x$, whereas
 $\varphi_1(1-x)=-\varphi_1(x)$ and
-$\varphi_3(1-x)=-\varphi_3(x)$. Orthogonality verifies that the residual
-has zero scalar product with each of the four retained functions.
+$\varphi_3(1-x)=-\varphi_3(x)$, so the substitution $x\to1-x$ reverses the
+sign of $\int_0^1\varphi_1\sin\pi x\,dx$ and of
+$\int_0^1\varphi_3\sin\pi x\,dx$ while leaving their values unchanged.
+Because each $c_n$ is a projection coefficient, the residual
+$\sin\pi x-\sum_{n=0}^3c_n\varphi_n$ has zero scalar product with each of
+the four retained functions.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -400,9 +470,14 @@ L_{3}=\frac{6-18x+9x^{2}-x^{3}}{6}.
 \solution
 The weight contributes an additional factor $e^{-x}$, so
 $a_n=\int_0^\infty L_n(x)e^{-2x}dx$.
-Set $J_k=\int_0^\infty x^ke^{-2x}dx$. Integration by parts gives
-$J_0=1/2$ and $J_k=(k/2)J_{k-1}$, hence
-$J_k=k!/2^{k+1}$. The four coefficients are
+Set $J_k=\int_0^\infty x^ke^{-2x}dx$. Then $J_0=1/2$, and for $k\ge1$
+integration by parts gives
+\[
+J_k=\left[-\frac{x^ke^{-2x}}{2}\right]_0^\infty
+ +\frac k2\int_0^\infty x^{k-1}e^{-2x}dx=\frac k2J_{k-1},
+\]
+hence $J_k=k!/2^{k+1}$, i.e., $(J_0,J_1,J_2,J_3)=(1/2,1/4,1/4,3/8)$.
+Inserting the powers of $x$ in each $L_n$, the four coefficients are
 \begin{align*}
 a_0&=J_0=\frac12,\\
 a_1&=J_0-J_1=\frac12-\frac14=\frac14,\\
@@ -416,12 +491,18 @@ Consequently
 \boxed{e^{-x}\approx\frac12L_0+\frac14L_1+\frac18L_2+\frac1{16}L_3
 =\frac{15}{16}-\frac{11x}{16}+\frac{5x^2}{32}-\frac{x^3}{96}.}
 \]
-As a check of both the weight and the normalization, the error norm is
+Collecting powers of $x$: the constant is
+$\frac12+\frac14+\frac18+\frac1{16}=\frac{15}{16}$, the coefficient of $x$ is
+$-\frac14-\frac14-\frac3{16}=-\frac{11}{16}$, that of $x^2$ is
+$\frac1{16}+\frac3{32}=\frac5{32}$, and that of $x^3$ is $-\frac1{96}$.
+As a check of both the weight and the normalization, the residual identity
+of Exercise 5.1.7, with $\|e^{-x}\|^2=\int_0^\infty e^{-2x}e^{-x}dx$, gives
+the error norm of the four-term sum $f_3$:
 \begin{align*}
 \|e^{-x}-f_3\|^2
 &=\int_0^\infty e^{-3x}dx-\sum_{n=0}^3|a_n|^2\\
 &=\frac13-\left(\frac14+\frac1{16}+\frac1{64}+\frac1{256}\right)
-=\frac1{768}.
+=\frac13-\frac{85}{256}=\frac1{768}.
 \end{align*}
 Direct integration of the squared residual with weight $e^{-x}$ gives
 the same value.
@@ -443,18 +524,22 @@ with the $m$th new basis vector gives
 \]
 Thus only overlaps between known basis functions are required. In matrix
 notation $b=Ua$, where $U_{mn}=\langle\chi_m|\varphi_n\rangle$.
-For an infinite expansion the interchange follows by taking scalar
-products with its norm-convergent partial sums, as in 5.1.1.
+For an infinite expansion the interchange of $\langle\chi_m|$ and the sum
+follows by taking scalar products with its norm-convergent partial sums,
+as in Exercise 5.1.1.
 
-If both sets are complete in the same space, inserting their resolutions
-of the identity gives
+If both sets are complete in the same space, then
+$(U^\dagger)_{jm}=U_{mj}^*=\langle\varphi_j|\chi_m\rangle$, and inserting
+the resolution of the identity $\sum_m|\chi_m\rangle\langle\chi_m|=1$ gives
 \[
 (U^\dagger U)_{jk}
 =\sum_m\langle\varphi_j|\chi_m\rangle
            \langle\chi_m|\varphi_k\rangle
-=\langle\varphi_j|\varphi_k\rangle=\delta_{jk},
+=\langle\varphi_j|\varphi_k\rangle=\delta_{jk}.
 \]
-and similarly $UU^\dagger=I$. If the $\chi_m$ do not span $f$, the same
+Similarly, $\sum_n|\varphi_n\rangle\langle\varphi_n|=1$ gives
+$(UU^\dagger)_{mn}=\langle\chi_m|\chi_n\rangle=\delta_{mn}$, i.e.,
+$UU^\dagger=I$. If the $\chi_m$ do not span $f$, the same
 formula instead gives the coefficients of its orthogonal projection;
 it cannot reconstruct a component outside their closed span.
 
@@ -479,7 +564,8 @@ $(\sum_j\hat{\mathbf e}_j\hat{\mathbf e}_j^{\mathsf T})\mathbf a=I\mathbf a$.
 \erratum{Orthonormality is needed here; unit length and spanning alone are
 insufficient.} For example, the unit vectors $(1,0)$ and
 $(1,1)/\sqrt2$ span $\mathbb R^2$, but the displayed sum applied to
-$(1,0)$ is $(3/2,1/2)$, not $(1,0)$.
+$(1,0)$ is $(1,0)\cdot1+\frac{(1,1)}{\sqrt2}\cdot\frac1{\sqrt2}=(3/2,1/2)$,
+not $(1,0)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -494,7 +580,7 @@ $\mathbb{R}^{2}$, for what values of $k$, if any, is
 a valid definition of a scalar product?
 \solution
 The proposed form is bilinear and symmetric for every real $k$, because
-its matrix is
+it equals $(a_1,a_2)\,G\,(b_1,b_2)^T$ with the matrix
 \[
 G=\begin{pmatrix}1&-1\\-1&k\end{pmatrix}=G^T.
 \]
@@ -510,8 +596,9 @@ Thus all scalar-product axioms hold exactly for
 \[
 \boxed{k>1.}
 \]
-The determinant check $\det G=k-1>0$, together with $G_{11}=1>0$,
-agrees with the direct square-completion argument.
+The determinant check $\det G=k-1>0$, together with $G_{11}=1>0$
+(Sylvester's criterion for positive definiteness), agrees with the direct
+square-completion argument.
 
 \Needspace{9\baselineskip}
 \subsection*{5.2 Gram-Schmidt Orthogonalization}
@@ -558,27 +645,33 @@ For the next polynomial,
 \langle q_0|x^2\rangle=\frac13,\qquad
 \langle q_1|x^2\rangle=\frac14-\frac16=\frac1{12}.
 \]
-Thus
+Dividing by $\|q_0\|^2=1$ and $\|q_1\|^2=1/12$, the coefficients are $1/3$
+and $1$, so
 \[
 q_2=x^2-\frac13-q_1=x^2-x+\frac16,
 \]
 \[
+q_2^2=x^4-2x^3+\frac43x^2-\frac13x+\frac1{36},\qquad
 \|q_2\|^2
 =\frac15-\frac12+\frac49-\frac16+\frac1{36}=\frac1{180}.
 \]
 For $x^3$ the three projection numerators are
 \[
-\frac14,\qquad \frac15-\frac18=\frac3{40},\qquad
-\frac16-\frac15+\frac1{24}=\frac1{120}.
+\langle q_0|x^3\rangle=\frac14,\qquad
+\langle q_1|x^3\rangle=\frac15-\frac18=\frac3{40},\qquad
+\langle q_2|x^3\rangle=\frac16-\frac15+\frac1{24}=\frac1{120}.
 \]
-Dividing by $1,1/12,1/180$, respectively, gives
+Dividing by $1,1/12,1/180$, respectively, gives the coefficients
+$1/4$, $9/10$, $3/2$ and
 \begin{align*}
 q_3&=x^3-\frac14-\frac9{10}\left(x-\frac12\right)
  -\frac32\left(x^2-x+\frac16\right)\\
-&=x^3-\frac32x^2+\frac35x-\frac1{20}.
+&=x^3-\frac32x^2+\frac35x-\frac1{20},
 \end{align*}
+since the coefficient of $x$ is $-\frac9{10}+\frac32=\frac35$ and the
+constant is $-\frac14+\frac9{20}-\frac14=-\frac1{20}$.
 The endpoint values are $q_0(1)=1$, $q_1(1)=1/2$,
-$q_2(1)=1/6$, and $q_3(1)=1/20$. Hence
+$q_2(1)=1/6$, and $q_3(1)=(20-30+12-1)/20=1/20$. Hence
 \[
 \boxed{P_0^*=1,\quad P_1^*=2x-1,\quad
 P_2^*=6x^2-6x+1,\quad P_3^*=20x^3-30x^2+12x-1.}
@@ -599,8 +692,11 @@ To verify orthogonality, multiply the derivative formula by $x^j$, $j<n$, and
 integrate by parts $n$ times. All boundary terms vanish because
 $x^n(x-1)^n$ and its first $n-1$ derivatives vanish at both endpoints;
 the remaining integral vanishes because $d^nx^j/dx^n=0$.
-At $x=1$ only the term differentiating $(x-1)^n$ all $n$ times survives,
-and it equals $n!$, so $P_n^*(1)=1$. Uniqueness of Gram--Schmidt with
+At $x=1$, in the Leibniz-rule expansion
+$\frac{d^n}{dx^n}[x^n(x-1)^n]=\sum_{k=0}^n\binom nk
+\frac{d^kx^n}{dx^k}\frac{d^{n-k}(x-1)^n}{dx^{n-k}}$, only the term
+differentiating $(x-1)^n$ all $n$ times ($k=0$) survives,
+and it equals $1^n\,n!=n!$, so $P_n^*(1)=1$. Uniqueness of Gram--Schmidt with
 this normalization identifies these as its output.
 
 A useful check is the norm formula. The leading coefficient is
@@ -612,7 +708,14 @@ $\binom{2n}n$ and lower powers are orthogonal to $P_n^*$, so
 =\frac{(2n)!}{(n!)^2}\frac{(n!)^2}{(2n+1)!}
 =\frac1{2n+1}.
 \end{align*}
-The middle equality again uses $n$ integrations by parts. To evaluate the
+The middle equality again uses $n$ integrations by parts with vanishing
+boundary terms, now moving all derivatives onto $x^n$:
+\[
+\int_0^1x^nP_n^*dx
+=\frac{(-1)^n}{n!}\int_0^1\frac{d^nx^n}{dx^n}\,x^n(x-1)^n\,dx
+=(-1)^n\int_0^1x^n(x-1)^ndx=\int_0^1x^n(1-x)^ndx.
+\]
+To evaluate the
 last integral without a table, set $J_{a,b}=\int_0^1x^a(1-x)^b dx$.
 For integers $a\ge0$, $b\ge1$, integration by parts gives
 \[
@@ -620,7 +723,11 @@ J_{a,b}=\left[\frac{x^{a+1}(1-x)^b}{a+1}\right]_0^1
  +\frac b{a+1}J_{a+1,b-1}=\frac b{a+1}J_{a+1,b-1}.
 \]
 Repeating $b$ times and using $J_{a+b,0}=1/(a+b+1)$ yields
-$J_{a,b}=a!b!/(a+b+1)!$; take $a=b=n$.
+\[
+J_{a,b}=\frac b{a+1}\,\frac{b-1}{a+2}\cdots\frac1{a+b}\,\frac1{a+b+1}
+=\frac{a!\,b!}{(a+b+1)!};
+\]
+take $a=b=n$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -636,13 +743,14 @@ The conventional normalization is
 \par\nobreak\hfill\emph{ANS.}\enspace
 $L_{0}=1$,\quad$L_{1}=(1-x)$,\quad$L_{2}=\dfrac{2-4x+x^{2}}{2}$.
 \solution
-For $k\ge1$, integration by parts gives
+All scalar products reduce to the moments
+$M_k=\int_0^\infty x^ke^{-x}dx$. For $k\ge1$, integration by parts gives
 \[
 M_k=[-x^ke^{-x}]_0^\infty+kM_{k-1}=kM_{k-1},\qquad M_0=1.
 \]
-The boundary term is zero, so repeated application gives the moments
+The boundary term is zero, so repeated application gives
 \[
-M_k=\int_0^\infty x^ke^{-x}dx=k!,\qquad
+M_k=k!,\qquad
 M_0=1,\ M_1=1,\ M_2=2,\ M_3=6,\ M_4=24.
 \]
 Begin with $q_0=1$ and subtract its projection from $x$:
@@ -652,14 +760,15 @@ q_1=x-\frac{M_1}{M_0}=x-1,\qquad
 \]
 For $x^2$, the projections onto $q_0$ and $q_1$ have coefficients
 \[
-\frac{\langle q_0|x^2\rangle}{\|q_0\|^2}=2,
+\frac{\langle q_0|x^2\rangle}{\|q_0\|^2}=\frac{M_2}{M_0}=2,
 \qquad
 \frac{\langle q_1|x^2\rangle}{\|q_1\|^2}=M_3-M_2=4.
 \]
 Therefore
 \[
-q_2=x^2-2-4(x-1)=x^2-4x+2,
+q_2=x^2-2-4(x-1)=x^2-4x+2.
 \]
+Since $q_2^2=x^4-8x^3+20x^2-16x+4$,
 \[
 \|q_2\|^2=M_4-8M_3+20M_2-16M_1+4M_0
 =24-48+40-16+4=4.
@@ -687,7 +796,8 @@ leaves each polynomial's overall sign free.
 $\varphi_{0}(x)=1$,\quad$\varphi_{1}(x)=(x-2)/\sqrt{2}$,\quad
 $\varphi_{2}(x)=\erratum{\dfrac{x^{2}-6x+6}{2\sqrt{3}}}$.
 \solution
-With the extra factor $x$ in the weight, the moments are
+With the extra factor $x$ in the weight, the moments are those of
+Exercise 5.2.2 with $k$ raised by one:
 \[
 M_k=\int_0^\infty x^kxe^{-x}dx=(k+1)!,
 \quad (M_0,M_1,M_2,M_3,M_4)=(1,2,6,24,120).
@@ -720,7 +830,8 @@ Thus
 \erratum{The printed slash notation for $\varphi_2$ means division by the
 entire quantity $2\sqrt3$; writing a fraction removes the ambiguity.}
 As a direct orthogonality check,
-$\langle1|q_2\rangle=6-12+6=0$ and
+$\langle1|q_2\rangle=M_2-6M_1+6M_0=6-12+6=0$ and, since
+$(x-2)(x^2-6x+6)=x^3-8x^2+18x-12$,
 $\langle q_1|q_2\rangle=24-8(6)+18(2)-12=0$.
 
 \Needspace{5\baselineskip}
@@ -756,15 +867,17 @@ For $x^2$ the projection onto $x$ vanishes, and
 \[
 q_2=x^2-\frac{M_2}{M_0}=x^2-\frac12.
 \]
-Their squared norms are
+Their squared norms, using $q_2^2=x^4-x^2+\frac14$, are
 \[
 \|q_0\|^2=\sqrt\pi,\qquad
-\|q_1\|^2=\frac{\sqrt\pi}{2},\qquad
-\|q_2\|^2=M_4-M_2+\frac14M_0=\frac{\sqrt\pi}{2}.
+\|q_1\|^2=M_2=\frac{\sqrt\pi}{2},\qquad
+\|q_2\|^2=M_4-M_2+\frac14M_0
+=\Bigl(\frac34-\frac12+\frac14\Bigr)\sqrt\pi=\frac{\sqrt\pi}{2}.
 \]
-The required norms for degrees $0,1,2$ are respectively
-$\sqrt\pi,2\sqrt\pi,8\sqrt\pi$.
-The needed positive scale factors are therefore
+The required squared norms $2^nn!\,\pi^{1/2}$ for degrees $0,1,2$ are
+respectively $\sqrt\pi,2\sqrt\pi,8\sqrt\pi$.
+The needed positive scale factors $s_n$, with $s_n^2\|q_n\|^2$ equal to
+these, are therefore
 $1$, $\sqrt{2/(1/2)}=2$, and $\sqrt{8/(1/2)}=4$. Hence
 \[
 \boxed{H_0=1,\qquad H_1=2x,\qquad H_2=4x^2-2.}
@@ -791,11 +904,13 @@ Take the normalization
 \par\nobreak\hfill\emph{ANS.}\enspace
 $T_{0}=1$,\quad$T_{1}=x$,\quad$T_{2}=2x^{2}-1$,\quad$(T_{3}=4x^{3}-3x)$.
 \solution
-\erratum{The source gives only the two diagonal cases, multiplied by
+\erratum{The textbook gives only the two diagonal cases, multiplied by
 $\delta_{mn}$; the completed piecewise formula also explicitly defines
 the value for $m\ne n$.}
-Substitute $x=\cos t$. Since $dx=-\sin t\,dt$ and
-$\sqrt{1-x^2}=\sin t$ on $0\le t\le\pi$,
+Substitute $x=\cos t$. Since $dx=-\sin t\,dt$,
+$\sqrt{1-x^2}=\sin t$ on $0\le t\le\pi$, and $x=-1,1$ correspond to
+$t=\pi,0$ (the minus sign of $dx$ is absorbed by interchanging these
+limits),
 \[
 M_{2j}=\int_{-1}^1\frac{x^{2j}}{\sqrt{1-x^2}}dx
 =\int_0^\pi\cos^{2j}t\,dt,
@@ -808,7 +923,9 @@ M_{2j}=[\cos^{2j-1}t\sin t]_0^\pi
  +(2j-1)\int_0^\pi\sin^2t\cos^{2j-2}t\,dt
  =(2j-1)(M_{2j-2}-M_{2j}).
 \]
-Moving the last term to the left gives the stated recurrence. It yields
+The boundary term vanishes because $\sin0=\sin\pi=0$, and the last step
+uses $\sin^2t=1-\cos^2t$. Moving the last term to the left gives
+$2jM_{2j}=(2j-1)M_{2j-2}$, the stated recurrence. It yields
 $M_0=\pi$, $M_2=\pi/2$, $M_4=3\pi/8$, and $M_6=5\pi/16$;
 all odd moments vanish. Gram--Schmidt therefore gives
 \[
@@ -817,8 +934,9 @@ q_2=x^2-\frac{M_2}{M_0}=x^2-\frac12.
 \]
 Their squared norms are
 \[
-\|q_0\|^2=\pi,\quad \|q_1\|^2=\frac\pi2,\quad
-\|q_2\|^2=M_4-M_2+\frac14M_0=\frac\pi8.
+\|q_0\|^2=\pi,\quad \|q_1\|^2=M_2=\frac\pi2,\quad
+\|q_2\|^2=M_4-M_2+\frac14M_0
+=\frac{3\pi}8-\frac\pi2+\frac\pi4=\frac\pi8.
 \]
 Thus $q_0$ and $q_1$ already have the requested normalization, and $q_2$
 needs multiplication by $2$:
@@ -826,7 +944,8 @@ needs multiplication by $2$:
 \boxed{T_0=1,\qquad T_1=x,\qquad T_2=2x^2-1.}
 \]
 To check the additional answer $T_3$, only the projection of $x^3$ onto
-$x$ survives parity:
+$x$ survives parity; its coefficient is
+$\langle x|x^3\rangle/\langle x|x\rangle=M_4/M_2$:
 \[
 q_3=x^3-\frac{M_4}{M_2}x=x^3-\frac34x,
 \]
@@ -863,7 +982,8 @@ $U_{0}=1$,\quad$U_{1}=2x$,\quad$U_{2}=4x^{2}-1$.
 \solution
 The hint gives the even moments
 \[
-M_0=\frac\pi2,\qquad M_2=\frac\pi8,\qquad M_4=\frac\pi{16},
+M_0=\frac\pi2,\qquad M_2=\frac\pi2\cdot\frac14=\frac\pi8,\qquad
+M_4=\frac\pi2\cdot\frac{1\cdot3}{4\cdot6}=\frac\pi{16},
 \]
 and symmetry makes the odd moments zero. The monic Gram--Schmidt
 polynomials are
@@ -873,9 +993,10 @@ q_2=x^2-\frac{\langle1|x^2\rangle}{\langle1|1\rangle}
 =x^2-\frac14.
 \]
 There is no projection onto $x$ in the last line because
-$\langle x|x^2\rangle=M_3=0$. The squared norms are
+$\langle x|x^2\rangle=M_3=0$. The squared norms are, with
+$q_2^2=x^4-\frac12x^2+\frac1{16}$,
 \[
-\|q_0\|^2=\frac\pi2,\qquad \|q_1\|^2=\frac\pi8,
+\|q_0\|^2=\frac\pi2,\qquad \|q_1\|^2=M_2=\frac\pi8,
 \]
 \[
 \|q_2\|^2=M_4-\frac12M_2+\frac1{16}M_0
@@ -905,6 +1026,8 @@ Exercise 5.2.4, which uses the Gaussian weight and gives Hermite
 polynomials. The reference error is present in the textbook (p.~275).}
 
 On the half-line the moments required for the first two polynomials are
+as follows; $M_0$ is half the full-line value $\sqrt\pi$ because the
+integrand is even:
 \[
 M_0=\int_0^\infty e^{-x^2}dx=\frac{\sqrt\pi}{2},\qquad
 M_1=\int_0^\infty xe^{-x^2}dx
@@ -918,9 +1041,11 @@ from $x$ gives
 \]
 Indeed, $\langle\varphi_0|\varphi_1\rangle
 =1/2-(1/\sqrt\pi)(\sqrt\pi/2)=0$.
-For an independent norm check, $M_2=\sqrt\pi/4$, so
+For an independent norm check, $M_2=\sqrt\pi/4$ (half the full-line
+value of Exercise 5.2.4), so
 \[
 \|\varphi_1\|^2=M_2-\frac2{\sqrt\pi}M_1+\frac1\pi M_0
+=\frac{\sqrt\pi}4-\frac1{\sqrt\pi}+\frac1{2\sqrt\pi}
 =\frac{\pi-2}{4\sqrt\pi}>0.
 \]
 On the full line the first moment is zero; on the half-line it is $1/2$.
@@ -957,7 +1082,9 @@ For the third vector,
 \qquad
 \mathbf e_2\cdot\mathbf c_3=\frac{-1+4}{\sqrt6}=\frac3{\sqrt6}.
 \]
-Thus
+Since $\sqrt3\,\mathbf e_1=(1,1,1)^T$ and
+$(3/\sqrt6)\,\mathbf e_2=\frac12(-1,-1,2)^T$, subtracting both
+projections gives
 \begin{align*}
 \mathbf q_3&=(1,0,2)^T-(1,1,1)^T
  -\frac12(-1,-1,2)^T\\
@@ -997,6 +1124,10 @@ symmetry of the scalar product give, step by step,
 &=\langle(A^\dagger)^\dagger g|f\rangle^*
 =\langle f|(A^\dagger)^\dagger g\rangle.
 \end{align*}
+The first and third equalities are the definition
+$\langle u|Bv\rangle=\langle B^\dagger u|v\rangle$, applied with
+$(B,u,v)=(A,f,g)$ and $(A^\dagger,g,f)$, respectively; the second and
+fourth are $\langle u|v\rangle=\langle v|u\rangle^*$.
 Hence $\langle f|[A-(A^\dagger)^\dagger]g\rangle=0$ for every $f$.
 For fixed $g$, choose $f=[A-(A^\dagger)^\dagger]g$. Its squared norm is
 zero, so it is the zero vector. Since $g$ was arbitrary,
@@ -1020,20 +1151,22 @@ operators, including all finite matrices. For general unbounded
 operators their domains matter; the formal algebra alone does not prove
 equality of the adjoint domains.}
 For arbitrary $f,g$ in the bounded setting, apply the adjoint definition
-twice, in the order the operators act:
+twice, first to $U$ acting on the vector $Vg$, then to $V$ with $U^\dagger f$
+in the left slot:
 \[
 \langle f|UVg\rangle
 =\langle U^\dagger f|Vg\rangle
 =\langle V^\dagger U^\dagger f|g\rangle.
 \]
-The operator multiplying $f$ in the first slot is thus the adjoint of
-$UV$, proving
+By definition also $\langle f|UVg\rangle=\langle(UV)^\dagger f|g\rangle$.
+Subtracting, $\langle[(UV)^\dagger-V^\dagger U^\dagger]f|g\rangle=0$ for
+every $g$; the choice $g=[(UV)^\dagger-V^\dagger U^\dagger]f$ shows, as in
+the previous exercise, that this vector is zero. Since $f$ is arbitrary,
 \[
 \boxed{(UV)^\dagger=V^\dagger U^\dagger.}
 \]
-The order reverses because $U$ is moved across the scalar product
-before $V$. Uniqueness follows from nondegeneracy of the scalar product,
-as in the previous exercise.
+The order reverses because $U$, the operator applied last, is the first
+to be moved across the scalar product.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1055,7 +1188,9 @@ scalar product defined by $\langle x_{\nu}|x_{\mu}\rangle=\delta_{\nu\mu}$.
   $\mathcal{A}_{1}-\mathcal{A}_{2}$ to $\psi$.
 \end{enumerate}
 \solution
-(a) The $j$th matrix column is the expansion of $A\varphi_j$ in the
+(a) Because $\langle x_\nu|x_\mu\rangle=\delta_{\nu\mu}$, the matrix
+element $A_{ij}=\langle x_i|Ax_j\rangle$ is the coefficient of $x_i$ in
+$Ax_j$: the $j$th matrix column is the expansion of $A\varphi_j$ in the
 ordered basis $(x_1,x_2,x_3)$. Since
 $\partial x_j/\partial x_i=\delta_{ij}$,
 \[
@@ -1085,8 +1220,9 @@ Independently, differentiating the function itself yields
 A_1\psi=x_1-2x_2+3x_3,\qquad
 A_2\psi=x_1(-2)-x_2(1)=-2x_1-x_2.
 \]
-Thus $\chi=3x_1-x_2+3x_3$, exactly the function represented by the
-matrix result.
+Thus
+$\chi=A_1\psi-A_2\psi=(x_1-2x_2+3x_3)-(-2x_1-x_2)=3x_1-x_2+3x_3$,
+exactly the function represented by the matrix result $(3,-1,3)^T$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1101,7 +1237,7 @@ matrix result.
   representation.
 \end{enumerate}
 \solution
-\erratum{The source says only ``5.2.1.'' The intended reference is
+\erratum{The textbook says only ``5.2.1.'' The intended reference is
 \emph{Example} 5.2.1 (textbook pp.~270--271), which uses $[-1,1]$.
 Exercise 5.2.1 instead uses shifted polynomials on $[0,1]$.}
 Write the orthonormal basis without confusing it with the conventionally
@@ -1111,7 +1247,8 @@ p_0=\frac1{\sqrt2},\quad p_1=\sqrt{\frac32}x,\quad
 p_2=\sqrt{\frac52}\frac{3x^2-1}{2},\quad
 p_3=\sqrt{\frac72}\frac{5x^3-3x}{2}.
 \]
-(a) Differentiate each polynomial and then re-expand:
+(a) Differentiate each polynomial and then re-expand, using
+$3x^2=(3x^2-1)+1$ and $15x^3-3x=3(5x^3-3x)+6x$:
 \begin{align*}
 Ap_0&=0,\qquad Ap_1=\sqrt{\frac32}x=p_1,\\
 Ap_2&=\sqrt{\frac52}3x^2
@@ -1121,7 +1258,12 @@ Ap_3&=\sqrt{\frac72}\frac{15x^3-3x}{2}\\
  +3\sqrt{\frac72}x
 =3p_3+\sqrt{21}\,p_1.
 \end{align*}
-All outputs remain in this four-dimensional span. With row and column
+The leftover lower-degree terms are re-expressed with $1=\sqrt2\,p_0$ and
+$x=\sqrt{2/3}\,p_1$: $\sqrt{5/2}=\sqrt5\,p_0$ and
+$3\sqrt{7/2}\,x=3\sqrt{7/3}\,p_1=\sqrt{21}\,p_1$.
+All outputs remain in this four-dimensional span. The matrix element
+$A_{ij}=\langle p_i|Ap_j\rangle$ is the coefficient of $p_i$ in $Ap_j$, so
+the $j$th column lists the coefficients of $Ap_j$. With row and column
 order $0,1,2,3$, the matrix is
 \[
 \boxed{A=\begin{pmatrix}
@@ -1135,24 +1277,30 @@ odd coefficients are
 &=\sqrt{\frac32}\int_{-1}^1x^4dx
 =\sqrt{\frac32}\frac25=\frac{\sqrt6}{5},\\
 \langle p_3|x^3\rangle
-&=\frac12\sqrt{\frac72}\left(5\frac27-3\frac25\right)
-=\frac{2\sqrt{14}}{35}.
+&=\frac12\sqrt{\frac72}\int_{-1}^1(5x^6-3x^4)\,dx
+=\frac12\sqrt{\frac72}\left(5\frac27-3\frac25\right)\\
+&=\frac12\sqrt{\frac72}\,\frac8{35}
+=\frac4{35}\,\frac{\sqrt{14}}2=\frac{2\sqrt{14}}{35}.
 \end{align*}
 Therefore
 \[
 \boxed{x^3=\frac{\sqrt6}{5}p_1+\frac{2\sqrt{14}}{35}p_3},
 \qquad c=\begin{pmatrix}0\\\sqrt6/5\\0\\2\sqrt{14}/35\end{pmatrix}.
 \]
-Substitution of the polynomials checks the expansion directly:
-$(3/5)x+(1/5)(5x^3-3x)=x^3$.
+Substitution of the polynomials checks the expansion directly: since
+$\frac{\sqrt6}5\sqrt{\frac32}=\frac35$ and
+$\frac{2\sqrt{14}}{35}\cdot\frac12\sqrt{\frac72}=\frac{14}{70}=\frac15$,
+the sum is $(3/5)x+(1/5)(5x^3-3x)=x^3$.
 
 (c) Matrix multiplication gives
 \[
 Ac=\begin{pmatrix}
 0\\ \sqrt6/5+\sqrt{21}(2\sqrt{14}/35)\\0\\6\sqrt{14}/35
 \end{pmatrix}
-=\begin{pmatrix}0\\3\sqrt6/5\\0\\6\sqrt{14}/35\end{pmatrix}=3c.
+=\begin{pmatrix}0\\3\sqrt6/5\\0\\6\sqrt{14}/35\end{pmatrix}=3c,
 \]
+because $\sqrt{21}\sqrt{14}=\sqrt{294}=7\sqrt6$ makes the second entry
+$\sqrt6/5+14\sqrt6/35=\sqrt6/5+2\sqrt6/5=3\sqrt6/5$.
 This represents $3x^3$, agreeing with the direct derivative
 $x(d/dx)x^3=3x^3$.
 

@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 0 of 54 parts done (audited and verified); 4 audited and awaiting verification.
+Progress: 0 of 54 parts done (audited and verified); 5 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -91,7 +91,7 @@ Progress: 0 of 54 parts done (audited and verified); 4 audited and awaiting veri
 | ch03-p3 | 3.10.3–3.10.37 | pending |
 | ch04-p1 | 4.1.1–4.3.12 | audited |
 | ch04-p2 | 4.4.1–4.7.3 | pending |
-| ch05-p1 | 5.1.1–5.3.4 | pending |
+| ch05-p1 | 5.1.1–5.3.4 | audited |
 | ch05-p2 | 5.4.1–5.7.3 | pending |
 | ch06-p1 | 6.2.1–6.5.11 | pending |
 | ch06-p2 | 6.5.12–6.5.21 | pending |
@@ -146,3 +146,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch02-p1** (2.1.1–2.2.34) — audit: no mathematical errors found. Steps added in 22 exercises (e.g. the general elimination step and pivots of the Hilbert matrix in 2.1.5, an integer back substitution in 2.1.7, the $L_\pm$ algebra in 2.2.13, a derivation replacing a guess in 2.2.25, both orthogonal families in 2.2.29). The script reference in 2.1.5 replaced by a closed-form product; `\,10^{-n}` → `\times10^{-n}`; cross-references added; "the manual" → "the Instructor's Manual".
 - **ch03-p1** (3.2.1–3.5.13) — audit: no wrong results; a misleading side remark in 3.2.6 (altitude described as adjacent side times the sine of the opposite angle) replaced by $h=A\sin\beta=B\sin\alpha$. Steps added in 31 exercises (e.g. every matrix–vector product in 3.3.4–3.3.5, the Euler-angle construction in 3.4.2, the passive-rotation argument in 3.4.5, the commutator in 3.5.12); part labels added; notation $\hat{\mathbf z}$ → $\hat{\mathbf e}_z$ in the 3.2.12 statement.
 - **ch04-p1** (4.1.1–4.3.12) — audit: no mathematical errors found. Steps added in 23 exercises (e.g. the expansion of $B_{kilm}$ in 4.1.5, the polarization argument and a complex boost in 4.1.9, Jacobi's formula in 4.3.11). Cleanups: a comma in the 4.1.2 statement; the translation vector renamed $s^i$ in 4.1.7 (it clashed with a dummy index); a summed-index clash in 4.3.4.
+- **ch05-p1** (5.1.1–5.3.4) — audit: no mathematical errors found. Steps added in all 24 exercises (e.g. both integrations by parts in 5.1.8, the Leibniz-rule norm in 5.2.1, the re-expansion of lower-degree terms in 5.3.4). The condition number in 5.1.3 is now computed from the eigenvalues instead of citing a deleted script; "the source" → "the textbook" in two notes.
