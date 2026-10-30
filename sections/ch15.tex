@@ -1929,7 +1929,7 @@ stated $0.46638$.
 \erratum{Again the printed numerical coefficient multiplies
 $q/(4\pi\varepsilon_0a)$. If the prefactor is instead
 $q/(4\pi\varepsilon_0r)$, its coefficient is
-$R F=0.932761073637541\ldots$.}
+$R F=0.932761073637540\ldots$.}
 For all the tabulated points, $|P_{2s}(\cos\theta)|\le1$ and
 $1/(2s+1)\le1/25$ for $s\ge12$, so summing the geometric series gives
 \[
@@ -1943,8 +1943,10 @@ six-decimal rounding, while at $R=1.5$ it can change the last displayed
 digit; as in Exercise 15.2.19, the table describes the truncated sum
 $F_{22}$.
 
-For an independent check, two rows of the exact potential can be summed
-in closed form. On the axis $P_{2s}(1)=1$, and in the plane of the disk
+For an independent check, two columns of the table, the axis
+($\theta=0^\circ$) and the plane of the disk ($\theta=90^\circ$), can be
+summed in closed form for the exact potential. On the axis
+$P_{2s}(1)=1$, and in the plane of the disk
 $(-1)^sP_{2s}(0)=\binom{2s}{s}/4^s$, so the Maclaurin series of
 $\arctan$ and $\arcsin$ give
 \[
@@ -1953,6 +1955,12 @@ F(R,0^\circ)=\sum_{s=0}^\infty\frac{(-1)^s}{(2s+1)R^{2s+1}}
 F(R,90^\circ)=\sum_{s=0}^\infty\binom{2s}{s}\frac{R^{-2s-1}}{4^s(2s+1)}
 =\arcsin\frac1R.
 \]
+For the second, $\arcsin y=\int_0^y(1-t^2)^{-1/2}dt$; the binomial
+series with $\binom{-1/2}{s}=(-1)^s\binom{2s}{s}/4^s$
+(Exercise 15.1.2) gives $(1-t^2)^{-1/2}=\sum_s\binom{2s}{s}t^{2s}/4^s$
+for $|t|<1$, and integrating term by term gives
+$\arcsin y=\sum_s\binom{2s}{s}y^{2s+1}/[4^s(2s+1)]$ for $|y|<1$; put
+$y=1/R$.
 At other angles, add the potentials of the rings that make up the disk.
 With $\rho=a\sin t$, the annulus charge of Exercise 15.2.14,
 $dq=(q/a)\rho\,d\rho/\sqrt{a^2-\rho^2}$, becomes $dq=q\sin t\,dt$. As
@@ -1992,14 +2000,15 @@ where $f=1-x$:
 a_{2n}=(4n+1)\int_0^1(1-x)P_{2n}(x)\,dx.
 \]
 For the numerical integration note that $(1-x)P_{2n}(x)$ is a
-polynomial of degree $2n+1\le17$ when $2n\le8$. The 9-point
+polynomial of degree $2n+1\le9$ when $2n\le8$. The 9-point
 Gauss--Legendre rule, with the standard nodes $\xi_i$ and weights $w_i$
 of $[-1,1]$ mapped to $[0,1]$ (nodes $(1+\xi_i)/2$, weights $w_i/2$),
-is exact through degree $17$, so it gives these integrals up to
-rounding error:
+is exact through degree $17$ (an $N$-point rule is exact through
+degree $2N-1$, so five nodes would already suffice), so it gives these
+integrals up to rounding error:
 \[
 \begin{array}{c|r|c}
-n_{\rm degree}&\text{numerical coefficient}&\text{exact coefficient}\\\hline
+2n&a_{2n}\ \text{(9-point rule)}&\text{exact }a_{2n}\\\hline
 0&0.5000000000&1/2\\
 2&-0.6250000000&-5/8\\
 4&0.1875000000&3/16\\
@@ -2145,7 +2154,7 @@ $n$&$a_n$&$n$&$a_n$\\\midrule
 0&1.000000000&42&0.115695743\\
 2&-1.875000000&44&-0.429575813\\
 4&1.054687500&46&0.309464967\\
-6&0.266601562&48&0.108557716\\
+6&0.266601563&48&0.108557716\\
 8&-0.982086182&50&-0.403296282\\
 10&0.663539886&52&0.291080519\\
 12&0.203865767&54&0.102595591\\
@@ -2196,8 +2205,8 @@ $x$&$S_{80}(x)$&$x$&$S_{80}(x)$\\\midrule
 \begin{tikzpicture}[x=28cm,y=1.25cm]
 \draw[->] (.395,0)--(.61,0) node[right]{$x$};
 \draw[->] (.4,-.3)--(.4,2.4) node[above]{$S_{80}$};
-\foreach \x in {.4,.45,.5,.55,.6} {
- \draw (\x,.035)--(\x,-.035) node[below,font=\small]{$\x$};}
+\foreach \x/\lbl in {.4/0.40,.45/0.45,.5/0.50,.55/0.55,.6/0.60} {
+ \draw (\x,.035)--(\x,-.035) node[below,font=\small]{$\lbl$};}
 \foreach \y in {1,2} {
  \draw (.401,\y)--(.399,\y) node[left,font=\small]{$\y$};}
 \draw[dashed,gray] (.4,2)--(.5,2)--(.5,0)--(.6,0);
@@ -2207,16 +2216,18 @@ $x$&$S_{80}(x)$&$x$&$S_{80}(x)$\\\midrule
 
 The dashed line is the original step function; the solid line connects
 all 41 requested computed values. On this grid the largest value is
-$S_{80}(0.465)=2.167165489\ldots$ and the smallest is
-$S_{80}(0.535)=-0.184550845\ldots$.
+$S_{80}(0.465)=2.1671654888\ldots$ and the smallest is
+$S_{80}(0.535)=-0.1845508446\ldots$.
 At the jump the partial sums tend to the midpoint value $1$: the same
 computation gives $S_N(1/2)=1.0386$, $0.9893$, $1.0101$, $0.9972$,
 $1.0026$ for $N=20$, $40$, $80$, $160$, $320$. The overshoot near the
-jump, however, does not die out. On a fine grid the maximum of $S_{80}$
-is $2.1690$, near $x=0.4665$, about $8.4\%$ of the jump above $f=2$;
-for larger $N$ the maximum moves toward $x=1/2$, while the overshoot
-approaches the Gibbs fraction of about $9\%$ of the jump found for
-Fourier series in Section~19.3 ($S_{640}$ peaks at $2.1797$). This is
+jump, however, does not die out. On the grid
+$x=0.40000(0.00001)0.50000$ (the same recurrence, in double precision)
+the maximum of $S_{80}$ is $2.1690$, near $x=0.4665$, about $8.4\%$ of
+the jump above $f=2$; for larger $N$ the maximum moves toward $x=1/2$,
+while the overshoot approaches the Gibbs fraction of about $9\%$ of the
+jump found for Fourier series in Section~19.3 ($S_{640}$ peaks at
+$2.1797$ on the same grid). This is
 the Gibbs phenomenon; it is not a failure of the exact coefficient
 calculation.
 
@@ -2271,9 +2282,10 @@ and setting $z=0$ removes all other terms and leaves
 $a_n\,n!/(2n+1)!!=(2n+1)i^n\,n!/(2n+1)!!$; the common factor
 $n!/(2n+1)!!$ cancels. Comparing power-series coefficients avoids any
 division by $j_n(z)$, which has zeros. That the series with these
-coefficients does sum to $e^{izx}$ is verified by the recurrence
-argument in Exercise 15.2.25 and the integral argument in
-Exercise 15.2.27.
+coefficients does sum to $e^{izx}$ is proved by the recurrence
+argument in Exercise 15.2.25; Exercise 15.2.27 checks the coefficients
+independently, by evaluating
+$\frac{2n+1}2\int_{-1}^1e^{izx}P_n\,dx=i^n(2n+1)j_n(z)$ directly.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2294,7 +2306,9 @@ combination of $j_{n-1}$ and $j_{n+1}$.
 \solution
 Again put $z=kr$, $x=\cos\gamma$, and $F=\sum a_nj_n(z)P_n(x)$.
 (a) If $F=e^{izx}$, then $F_z=ixF$. Differentiating the series term by
-term (justified below) gives $F_z=\sum_na_nj_n'(z)P_n(x)$, while
+term (assumed in this derivation of the $a_n$; for the coefficients
+found, it is justified in the sufficiency argument below) gives
+$F_z=\sum_na_nj_n'(z)P_n(x)$, while
 $ixF=i\sum_na_nj_n(z)\,xP_n(x)$; this is the displayed equation.
 
 (b) Use the three-term recurrence
@@ -2312,14 +2326,17 @@ i\left[\frac{m\,a_{m-1}}{2m-1}j_{m-1}
 \]
 The first term is absent for $m=0$.
 
-(c) The spherical Bessel recurrence is
+(c) The spherical Bessel recurrence
+$mj_{m-1}-(m+1)j_{m+1}=(2m+1)j_m'$ of Exercise 14.7.5 gives
 \[
 j_m'=\frac{m}{2m+1}j_{m-1}
--\frac{m+1}{2m+1}j_{m+1},
+-\frac{m+1}{2m+1}j_{m+1}
 \]
-including $j_0'=-j_1$ separately. The $P_m$ are linearly independent,
-so the coefficient $a_mj_m'$ of $P_m$ on the left must equal the
-expression in (b). Inserting the recurrence and collecting terms,
+for $m\ge1$; at $m=0$, where the coefficient of $j_{m-1}$ vanishes, it
+reads $j_0'=-j_1$. Multiplying both sides of (a) by $P_m$ and
+integrating over $-1\le x\le1$ (again term by term), orthogonality
+shows that the coefficient $a_mj_m'$ of $P_m$ on the left must equal
+the expression in (b). Inserting the recurrence and collecting terms,
 \[
 \left[\frac{m\,a_m}{2m+1}-\frac{i\,m\,a_{m-1}}{2m-1}\right]j_{m-1}
 =\left[\frac{(m+1)a_m}{2m+1}+\frac{i(m+1)a_{m+1}}{2m+3}\right]j_{m+1}.
@@ -2565,8 +2582,9 @@ $t=r/a$:
 =\boxed{\frac{q}{4\pi\varepsilon_0a}
 \sum_{n=0}^\infty\left(\frac ra\right)^nP_n(\cos\theta)}.
 \]
-The condition $r/a<1$ ensures convergence uniformly on angular
-directions for each fixed smaller radius. At $r=0$ the value is
+For each fixed $r<a$ the series converges uniformly in $\theta$, since
+$|P_n(\cos\theta)|\le1$ bounds its terms by those of the geometric
+series $\sum_n(r/a)^n$. At $r=0$ the value is
 $q/(4\pi\varepsilon_0a)$, with all higher terms vanishing.
 
 \Needspace{5\baselineskip}
@@ -2627,6 +2645,8 @@ The $uP_l$ terms cancel, leaving
 \boxed{\partial_z\!\left[\frac{P_l(\cos\theta)}{r^{l+1}}\right]
 =-(l+1)\frac{P_{l+1}(\cos\theta)}{r^{l+2}}},\qquad r>0.
 \]
+Both sides are singular at the origin, where $\theta$ is undefined;
+hence the restriction $r>0$ added to the statement.
 This chain-rule calculation is equivalent to
 $\partial_z=\cos\theta\,\partial_r-(\sin\theta/r)\partial_\theta$.
 
@@ -2718,6 +2738,9 @@ $a<r_{0}<a'$. Show that the potential vanishes for $r=r_{0}$ if we
 take $q'=-qr_{0}/a$.
 \solution
 For $0<a<r_0$, place $q'=-qr_0/a$ at $a'=r_0^2/a>r_0$.
+The restriction added to the statement is needed: for $a=0$ there is
+no image point $a'$ (that case is treated as a limit at the end), and
+$a<r_0$ puts $q$ inside the sphere and its image outside.
 Consider
 \[
 V(\mathbf r)=\frac1{4\pi\varepsilon_0}
@@ -2735,7 +2758,8 @@ Their positive square roots therefore satisfy
 $|\mathbf r-a'\hat{\mathbf z}|=(r_0/a)|\mathbf r-a\hat{\mathbf z}|$,
 and the two potential terms cancel exactly.
 
-The Legendre version of the same cancellation holds for $a<r<r_0$.
+The Legendre version of the same cancellation uses expansions valid
+for $a<r<a'$, a range that contains the sphere $r=r_0$.
 There $r>a$ and $r<a'$, so the generating function gives
 $1/|\mathbf r-a\hat{\mathbf z}|=\sum_na^nP_n/r^{n+1}$ and
 $1/|\mathbf r-a'\hat{\mathbf z}|=\sum_nr^nP_n/(a')^{n+1}$ (as in
@@ -2757,7 +2781,8 @@ source is outside; the real charge has exactly the required Coulomb
 singularity. The difference from any other grounded solution is
 harmonic, including across the canceled source singularity, and zero
 on the boundary. Uniqueness for the Dirichlet problem proves the result
-throughout the interior, not only in the expansion annulus.
+throughout the interior, including $r<a$, where the first expansion
+diverges.
 For $a=0$, take the limit directly: as $a\to0$, $a'\to\infty$ and the
 image term tends to $-(qr_0/a)/a'=-q/r_0$, so
 $V=q(1/r-1/r_0)/(4\pi\varepsilon_0)$.
@@ -2843,11 +2868,14 @@ $4P_2^{-2}=x^2-(3x^2-1)/2=(1-x^2)/2=s^2/2$, so
 \[
 \boxed{P_2^{-2}=\frac18(1-x^2)}.
 \]
-Independently, Eq. (15.81),
+For the comparison the exercise asks for, Eq. (15.81),
 $P_l^{-m}=(-1)^m[(l-m)!/(l+m)!]P_l^m$, applied to the Table 15.3
 entries predicts
 $P_2^{-1}=-(1!/3!)P_2^1=xs/2$ and
 $P_2^{-2}=(0!/4!)P_2^2=3s^2/24=s^2/8$, in agreement.
+(For $P_2^{-1}$ and $P_2^{-2}$ this is a consistency check rather than
+an independent derivation, since Exercise 15.4.8 proves the recurrence
+for $m\le0$ from Eq. (15.81), in the form of Exercise 15.4.3.)
 The endpoint values follow by continuity.
 
 \Needspace{5\baselineskip}
@@ -2902,6 +2930,12 @@ P_l^{-m}
 =\boxed{(-1)^m\frac{(l-m)!}{(l+m)!}P_l^m}.
 \end{align*}
 On $(-1,1)$ choose the positive square root of $1-x^2$.
+The restrictions added to the statement are needed: for $m>l$ the
+definition of $P_l^{-m}$ would require a derivative of negative order
+$l-m$, and $(l-m)!$ is undefined; at $x=\pm1$ its factor
+$(1-x^2)^{-m/2}$ is undefined for $m\ge1$, although both sides extend
+continuously there. (Orders $-l\le m<0$ give the same identity solved
+for $P_l^{|m|}$.)
 The identity also extends with any consistently chosen complex branch.
 
 \Needspace{5\baselineskip}
@@ -2949,8 +2983,10 @@ gives
 =-\sum_{s\ge0}(-1)^s\frac{(2s+1)!!}{2^ss!}t^{2s+1},
 \]
 because
-$\binom{-3/2}{s}=\frac{(-\frac32)(-\frac52)\cdots(-\frac{2s+1}2)}{s!}
-=(-1)^s\frac{(2s+1)!!}{2^ss!}$.
+\[
+\binom{-3/2}{s}=\frac{(-\frac32)(-\frac52)\cdots(-\frac{2s+1}2)}{s!}
+=(-1)^s\frac{(2s+1)!!}{2^ss!}.
+\]
 There are no even powers, and $2^ss!=(2s)!!$, so the coefficient of
 $t^{2s+1}$ is $(-1)^{s+1}(2s+1)!!/(2s)!!$: the same values.
 
@@ -2974,7 +3010,7 @@ This proves both formulas by the third requested method.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{15.4.5}\quad Evaluate $P_{l}^{m}(0)$ for \erratum{integers $0\le m\le l$}.
+\noindent\textbf{15.4.5}\quad Evaluate $P_{l}^{m}(0)$ for \erratum{integers $-l\le m\le l$}.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $P_{l}^{m}(0)=\begin{cases}
 (-1)^{(l+m)/2}\dfrac{(l+m-1)!!}{(l-m)!!}, & l+m\text{ even},\\[10pt]
@@ -3012,9 +3048,24 @@ Hence the stated nonzero value is
 \]
 For $m=0$ this is $P_l(0)=(-1)^{l/2}(l-1)!!/l!!$ for even $l$, as in
 Exercise 15.1.12, and $m=1$ reproduces Exercise 15.4.4.
-The restriction $m\le l$ in the statement is needed: for integer $m>l$
-the defining derivative makes $P_l^m=0$, while for even $l+m$ the
-factorial expression would contain $(l-m)!!$ with $l-m<0$.
+
+Negative orders need no separate formula. For $m=-\mu$ with
+$1\le\mu\le l$, Exercise 15.4.3 gives
+$P_l^{-\mu}(0)=(-1)^\mu\frac{(l-\mu)!}{(l+\mu)!}P_l^\mu(0)$, which
+vanishes when $l+\mu$, and hence $l+m=l-\mu$, is odd. Otherwise, by
+$(l-\mu)!/(l-\mu)!!=(l-\mu-1)!!$, $(l+\mu)!/(l+\mu-1)!!=(l+\mu)!!$ and
+$(-1)^{\mu+(l+\mu)/2}=(-1)^{(l-\mu)/2+2\mu}=(-1)^{(l-\mu)/2}$,
+\[
+P_l^{-\mu}(0)=(-1)^\mu\frac{(l-\mu)!}{(l+\mu)!}\,
+(-1)^{(l+\mu)/2}\frac{(l+\mu-1)!!}{(l-\mu)!!}
+=(-1)^{(l-\mu)/2}\frac{(l-\mu-1)!!}{(l+\mu)!!},
+\]
+which is the boxed formula with $m=-\mu$.
+The restriction $|m|\le l$ in the statement is needed: for integer
+$m>l$ the defining derivative makes $P_l^m=0$, while for even $l+m$ the
+factorial expression would contain $(l-m)!!$ with $l-m<0$; for $m<-l$
+the Rodrigues definition would require a derivative of negative order
+$l+m$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3057,9 +3108,13 @@ These are Eqs. (15.130) and (15.131), with $E_\varphi=0$ since $V$
 does not depend on $\varphi$.
 Because $P_1^1(\cos\theta)=-\sin\theta$, the leading terms are
 $E_r=qa\cos\theta/(\pi\varepsilon_0r^3)$ and
-$E_\theta=qa\sin\theta/(2\pi\varepsilon_0r^3)$, which point in the
-positive $r$ and $\theta$ directions for positive $qa$, in agreement
-with Exercise 15.3.4.
+$E_\theta=qa\sin\theta/(2\pi\varepsilon_0r^3)$: the components found in
+Exercise 15.3.4 for the dipole moment $2aq$, since
+$4aq/(4\pi\varepsilon_0)=qa/(\pi\varepsilon_0)$ and
+$2aq/(4\pi\varepsilon_0)=qa/(2\pi\varepsilon_0)$. For positive $qa$ the
+leading $E_\theta$ points in the positive $\theta$ direction, since
+$\sin\theta\ge0$, while the leading $E_r$ has the sign of $\cos\theta$:
+outward for $\theta<\pi/2$ and inward for $\theta>\pi/2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3088,8 +3143,8 @@ The convention $(-1)!!=1$ includes $l=0$.
 \par\bigskip
 \noindent\textbf{15.4.8}\quad Derive the associated Legendre recurrence
 relation, \erratum{for $-1<x<1$ and integer orders
-$-l\le m\le l$, $l\ge1$, with a zero-coefficient term omitted
-when its order falls outside this range},
+$-l\le m\le l$, $l\ge1$, with $P_l^{l+1}=0$ and, at $m=-l$, the
+zero-coefficient term of order $-l-1$ omitted},
 \[
 P_{l}^{m+1}(x)+\frac{2mx}{(1-x^{2})^{1/2}}P_{l}^{m}(x)
 +\big[l(l+1)-m(m-1)\big]P_{l}^{m-1}(x)=0.
@@ -3154,9 +3209,11 @@ R_{-l}=c_{l-1}P_l^{l-1}-\frac{2lx}{\sqrt{1-x^2}}c_lP_l^l
 =-c_lR_l=0.
 \]
 The $l=0$ case is simply $P_0^1=0$.
-At $x=\pm1$ the separate quotients can be singular: the recurrence
-is interpreted as the limit of their combined expression from
-$-1<x<1$.
+At $x=\pm1$ the factor $2mx/\sqrt{1-x^2}$ is infinite, but for $m\ne0$
+its product with $P_l^m$, which is $(1-x^2)^{|m|/2}$ times a polynomial
+(for $m<0$ by Exercise 15.4.3), tends to a finite limit; every term
+extends continuously to $x=\pm1$, and the recurrence holds there in
+that limiting sense.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3230,11 +3287,18 @@ These integrals occur in the theory of scattering of electromagnetic
 waves by spheres.
 \solution
 (a) Put $u=P_l^m(\cos\theta)$, $v=P_{l'}^m(\cos\theta)$.
-The self-adjoint angular equation for $u$ is
+Primes on $u$ and $v$ denote $d/d\theta$, while $P_l'$ denotes
+$dP_l/dx$. The self-adjoint angular equation for $u$ is
 \[
 (\sin\theta\,u')'
 +\left[l(l+1)\sin\theta-\frac{m^2}{\sin\theta}\right]u=0.
 \]
+This is the associated Legendre equation in the self-adjoint form
+$[(1-x^2)P']'+[l(l+1)-m^2/(1-x^2)]P=0$ (Exercise 15.4.14) written in
+$\theta$: for $x=\cos\theta$, $d/dx=-(\sin\theta)^{-1}d/d\theta$ and
+$1-x^2=\sin^2\theta$, so $(1-x^2)\,dP/dx=-\sin\theta\,u'$ and
+$[(1-x^2)P']'=(\sin\theta)^{-1}(\sin\theta\,u')'$; multiply by
+$\sin\theta$.
 Multiply by $v$ and integrate over $0\le\theta\le\pi$. Integration by
 parts, $\int_0^\pi(\sin\theta\,u')'v\,d\theta
 =[\sin\theta\,u'v]_0^\pi-\int_0^\pi\sin\theta\,u'v'\,d\theta$, then
@@ -3280,7 +3344,8 @@ $n\ge2$ and $m\ge0$}
 \end{align*}
 \solution
 Since $P_n^1=-\sqrt{1-x^2}P_n'$, we have
-$(1-x^2)P_n'P_m'=P_n^1P_m^1$, so the integrand is $xP_n^1P_m^1$.
+$(1-x^2)P_n'P_m'=P_n^1P_m^1$, so the required integral is
+$I_{nm}=\int_{-1}^1xP_n^1P_m^1\,dx$.
 The fixed-order recurrence
 $(2l+1)xP_l^k=(l+k)P_{l-1}^k+(l-k+1)P_{l+1}^k$ with $k=1$, $l=n$ gives
 \[
@@ -3402,7 +3467,11 @@ given by the leading terms in these expansions if we take the limit
 $dz\to0$, $a\to0$, and $I\to\infty$ subject to $Ia^{2}dz=\mathrm{constant}$.
 \solution
 Take a positive current loop at $+h$ and the opposite loop at $-h$,
-where $h=dz$ in the question. A small loop at the origin has
+where $h=dz$ in the question. A small loop at the origin has, to
+leading order in $a/r$ (the first term of the series of
+Example 15.4.2, i.e.\ the dipole potential of Exercise 15.4.17 with
+$\mathbf m=I\pi a^2\hat{\mathbf z}$, since
+$\hat{\mathbf z}\times\mathbf r=r\sin\theta\,\hat{\mathbf e}_\varphi$),
 \[
 A_\varphi^{(D)}=\frac{\mu_0Ia^2}{4}\frac{\sin\theta}{r^2}
 =-\frac{\mu_0Ia^2}{4}\frac{P_1^1(\cos\theta)}{r^2}.
@@ -3523,8 +3592,9 @@ $\hat{\mathbf z}=-\hat{\mathbf e}_\theta$ on the equator, this gives
 The first terms are
 $\mu_0I[1+\tfrac34\rho^2+\tfrac{45}{64}\rho^4+\cdots]/(2a)$.
 
-(b) All coefficients $c_n=(2n+1)[\binom{2n}{n}/4^n]^2$ are positive
-for positive $I$. Tonelli's theorem (monotone convergence) permits
+(b) All coefficients $c_n=(2n+1)[\binom{2n}{n}/4^n]^2$ are positive,
+so for $I>0$ every term of the series for $B_z$ is positive. Tonelli's
+theorem (monotone convergence) permits
 integrating term by term up to the edge, as an extended nonnegative
 integral; with $\int_0^ar(r/a)^{2n}dr=a^2/(2n+2)$,
 \[
@@ -3630,7 +3700,7 @@ point magnetic dipole of Exercise~15.4.17. Take
 $\mathbf{m}=\hat{\mathbf{z}}m$.
 \end{enumerate}
 \solution
-The leading term of the loop's exterior vector potential (the
+(a) The leading term of the loop's exterior vector potential (the
 first term of the series of Example 15.4.2) is
 $A_\varphi=\mu_0Ia^2\sin\theta/(4r^2)
 =\mu_0m\sin\theta/(4\pi r^2)$, where $m=I\pi a^2$. The following
@@ -3655,7 +3725,8 @@ B_\theta=-\frac{\mu_0m}{4\pi r^3}P_1^1(\cos\theta)}.
 \]
 \erratum{The printed $B_\theta$ denominator $2\pi$ must be $4\pi$.
 Its value as written is too large by a factor of two.}
-For part (b), insert $\mathbf m=m\hat{\mathbf z}$ into Exercise 15.4.17
+
+(b) Insert $\mathbf m=m\hat{\mathbf z}$ into Exercise 15.4.17
 and use $\hat{\mathbf r}\cdot\mathbf m=m\cos\theta$ and
 $\hat{\mathbf z}=\cos\theta\,\hat{\mathbf e}_r
 -\sin\theta\,\hat{\mathbf e}_\theta$. Then
@@ -3667,8 +3738,8 @@ $\hat{\mathbf z}=\cos\theta\,\hat{\mathbf e}_r
 \]
 so $B_r=\mu_0m\cos\theta/(2\pi r^3)$ and
 $B_\theta=\mu_0m\sin\theta/(4\pi r^3)$, which agrees with both
-corrected components: the point-dipole limit of the loop is the point
-magnetic dipole.
+components of (a), including the corrected $B_\theta$: the point-dipole
+limit of the loop is the point magnetic dipole.
 
 \Needspace{5\baselineskip}
 \par\bigskip
