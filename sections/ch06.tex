@@ -343,8 +343,8 @@ Consequently a normalized orthogonal choice is
 2&(1,1,1)^{\mathsf T}/\sqrt3
 \end{array}}
 \]
-The coordinate sum of each vector in the first row is zero, so each is
-also perpendicular to $u_2$.
+The coordinate sum of each eigenvector for $\lambda=-1$ is zero, so each
+is also perpendicular to $u_2$.
 
 
 \Needspace{5\baselineskip}
@@ -520,7 +520,9 @@ surface
 \[
 x^{2}+2xy+2y^{2}+2yz+z^{2}=1.
 \]
-How is it oriented in 3-D space? \erratum{Classify the quadric surface and its cross sections perpendicular to its axis.}
+How is it oriented in 3-D space? Is it a conic section? If so, which kind?
+\erratum{It is a quadric surface rather than a planar conic: classify it
+and its cross sections perpendicular to its axis.}
 \solution
 The quadratic form is
 \[
@@ -667,8 +669,10 @@ there must be $n$ of them for an $n\times n$ matrix.}
 Let $U$ have those eigenvectors as its columns and set
 $D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)$. The $(i,j)$
 element of $U^\dagger U$ is $x_i^\dagger x_j=\delta_{ij}$, so
-$U^\dagger U=I$; since $U$ is square, $U^\dagger$ is then its inverse,
-and also $UU^\dagger=I$. Column $j$ of $AU$ is $Ax_j=\lambda_jx_j$,
+$U^\dagger U=I$. Since $U$ is square, $\det U^\dagger\det U=\det I=1$
+shows that $U$ is invertible, and then
+$U^\dagger=(U^\dagger U)U^{-1}=U^{-1}$, so that also $UU^\dagger=I$.
+Column $j$ of $AU$ is $Ax_j=\lambda_jx_j$,
 which is column $j$ of $UD$. Hence
 \[
 U^\dagger U=UU^\dagger=I,\qquad AU=UD.
@@ -691,7 +695,7 @@ orthonormal set does not provide $UU^\dagger=I$.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{6.4.3}\quad Show that a real matrix that is not symmetric
-cannot be diagonalized by an orthogonal transformation.
+cannot be diagonalized by an orthogonal or unitary transformation.
 \erratum{For unitary diagonalization, add the hypothesis that all
 eigenvalues are real.}
 
@@ -882,8 +886,11 @@ WAW^\dagger b_i=WAa_i=\lambda_iWa_i=\lambda_i b_i=Bb_i.
 Because the $b_i$ span the space, $\boxed{B=WAW^\dagger}$.
 Within a degenerate eigenspace any orthonormal basis may be used.
 If multiplicities were ignored, the statement would fail, for example
-for $\operatorname{diag}(1,1,2)$ and $\operatorname{diag}(1,2,2)$,
-whose traces differ despite having the same two distinct eigenvalues.
+for $\operatorname{diag}(1,1,2)$ and $\operatorname{diag}(1,2,2)$:
+both have the two distinct eigenvalues $1$ and $2$, but their traces,
+$4$ and $5$, differ, whereas a unitary transformation
+$WAW^\dagger=WAW^{-1}$ is a similarity transformation and leaves the
+trace unchanged (Exercise 6.4.1).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1043,10 +1050,12 @@ Squaring and adding exhibits the cancellation of cross terms:
 &+s^2a_{i\mu}^2+c^2a_{j\mu}^2+2cs\,a_{i\mu}a_{j\mu}\\
 ={}&a_{i\mu}^2+a_{j\mu}^2.
 \end{align*}
-Symmetry gives the same result for the transposed entries
-$a'_{\mu i},a'_{\mu j}$. Entries with neither index $i,j$ are unchanged.
-Thus, in the sum $S=\sum_{\mu\ne\nu}a_{\mu\nu}^2$, the only net
-change is the removal of $a_{ij}$ and $a_{ji}$ themselves:
+Since $A'$ is again symmetric, the transposed entries
+$a'_{\mu i},a'_{\mu j}$ give the same result. Entries with neither
+index $i,j$ are unchanged by (b), and with $\theta$ chosen as in (a)
+the pair itself becomes $a'_{ij}=a'_{ji}=0$. Thus, in the sum
+$S=\sum_{\mu\ne\nu}a_{\mu\nu}^2$, the only net change is the removal
+of $a_{ij}$ and $a_{ji}$ themselves:
 \[
 \boxed{S'=S-a_{ij}^2-a_{ji}^2=S-2a_{ij}^2.}
 \]
@@ -1220,7 +1229,15 @@ and summation give
 \]
 The two outer sums equal one, proving the stated bounds. Equality at
 an endpoint occurs precisely when $y$ has components only in the
-eigenspace of that endpoint eigenvalue.
+eigenspace of that endpoint eigenvalue. Indeed, $\sum_i|c_i|^2=1$ gives
+\[
+\langle y|A|y\rangle-\lambda_1=\sum_i(\lambda_i-\lambda_1)|c_i|^2,
+\qquad
+\lambda_n-\langle y|A|y\rangle=\sum_i(\lambda_n-\lambda_i)|c_i|^2,
+\]
+sums of nonnegative terms. The first vanishes exactly when $c_i=0$ for
+every $i$ with $\lambda_i>\lambda_1$, the second exactly when $c_i=0$
+for every $i$ with $\lambda_i<\lambda_n$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1267,11 +1284,16 @@ We next exclude $n=2$, not merely odd $n$. Hermiticity and unitarity give
 $\Gamma_a^2=\Gamma_a^\dagger\Gamma_a=I$ and, by Exercise 6.5.6,
 eigenvalues $\pm1$. The first matrix cannot be $I$
 or $-I$, because anticommuting with either would give
-$\pm2\Gamma_b=0$ for every other matrix. So $\Gamma_1$ has the
-eigenvalues $1$ and $-1$, and a unitary $V$ diagonalizes it.
-Replacing every $\Gamma_a$ by $V^\dagger\Gamma_aV$ preserves
-Hermiticity, unitarity, and all anticommutation relations, so we may
-take
+$\pm2\Gamma_b=0$ for every other matrix. Being Hermitian, $\Gamma_1$ is
+diagonalized by a unitary $V$:
+$V^\dagger\Gamma_1V=\operatorname{diag}(\epsilon_1,\epsilon_2)$ with
+$\epsilon_1,\epsilon_2\in\{1,-1\}$. If $\epsilon_1=\epsilon_2=\epsilon$,
+then $\Gamma_1=V(\epsilon I)V^\dagger=\epsilon I$, which was just
+excluded. So $\Gamma_1$ has the eigenvalues $1$ and $-1$, and, after
+ordering the columns of $V$,
+$V^\dagger\Gamma_1V=\operatorname{diag}(1,-1)$. Replacing every
+$\Gamma_a$ by $V^\dagger\Gamma_aV$ preserves Hermiticity, unitarity,
+and all anticommutation relations, so we may take
 \[
 \Gamma_1=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
 \]
@@ -1360,8 +1382,11 @@ $|y\rangle$.
 \solution
 Let
 $B=\sum_n\lambda_n|x_n\rangle\langle x_n|$ be the proposed expression.
-The normal matrix has the complete orthonormal eigenbasis specified in
-the question. Expand an arbitrary vector as
+Because $A$ is normal, it is diagonalized by a unitary matrix
+(Section~6.5), whose columns are orthonormal eigenvectors, one for each
+eigenvalue counted with its multiplicity. So there are as many
+orthonormal $|x_n\rangle$ as the dimension of the space, and they form
+a complete basis. Expand an arbitrary vector as
 \[
 |y\rangle=\sum_j c_j|x_j\rangle,
 \qquad c_j=\langle x_j|y\rangle.
@@ -1555,13 +1580,25 @@ likewise $\ker(AA^{\mathsf T})=\ker A^{\mathsf T}$. Choose orthonormal
 vectors $f_n$ in $\ker A$ and $g_n$ in $\ker A^{\mathsf T}$; both pair
 equations then hold with $\lambda_n=0$. For a square $N\times N$ matrix
 these kernels have the same dimension,
-$N-\operatorname{rank}A=N-\operatorname{rank}A^{\mathsf T}$, so they
+$N-\operatorname{rank}A=N-\operatorname{rank}A^{\mathsf T}$, by the
+rank--nullity theorem ($\dim\ker M=N-\operatorname{rank}M$ for an
+$N\times N$ matrix $M$) and the equality of row and column rank
+($\operatorname{rank}A^{\mathsf T}=\operatorname{rank}A$), so they
 can be paired. These $f_n$ are orthogonal to the earlier ones, which
 belong to different eigenvalues of $A^{\mathsf T}A$; these $g_n$ are
 orthogonal to the earlier ones $g_m=Af_m/\sigma_m$, since
 $h\in\ker A^{\mathsf T}$ gives
-$h^\dagger Af_m=(A^{\mathsf T}h)^\dagger f_m=0$. This gives the
-complete orthonormal families used in the following exercises.
+$h^\dagger Af_m=(A^{\mathsf T}h)^\dagger f_m=0$.
+
+Both families are complete. Because $A^{\mathsf T}A$ is real
+symmetric, its eigenspaces together span the whole space, so there are
+$N$ orthonormal $f_n$. Those with $\sigma_n=0$ form a basis of
+$\ker(A^{\mathsf T}A)=\ker A$, so $N-\dim\ker A=\operatorname{rank}A$
+of them have $\sigma_n>0$ and give the $g_m=Af_m/\sigma_m$. Together
+with the $N-\operatorname{rank}A$ vectors $g_n$ in $\ker A^{\mathsf T}$,
+there are also $N$ orthonormal, hence linearly independent, $g_n$,
+which therefore form a basis. These are the complete orthonormal families used in the following
+exercises.
 
 \Needspace{5\baselineskip}
 \par\bigskip
