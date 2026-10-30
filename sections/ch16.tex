@@ -42,8 +42,14 @@ N_{LM}=\sqrt{\frac{2L+1}{4\pi}\frac{(L-M)!}{(L+M)!}}.
 Put $P=P_L^M(\cos\theta)$,
 $A=P_L^{M+1}(\cos\theta)$ and
 $B=(L+M)(L-M+1)P_L^{M-1}(\cos\theta)$.
-The associated-Legendre recurrences (15.87) and (15.91), with
-$d/d\theta=-\sin\theta\,d/d(\cos\theta)$, read
+In the variable $x=\cos\theta$ the associated-Legendre recurrences
+(15.87) and (15.91) read
+\[
+A+\frac{2Mx}{\sqrt{1-x^2}}\,P+B=0,\qquad
+\sqrt{1-x^2}\,\frac{dP}{dx}=\frac{B-A}{2}.
+\]
+Since $\sqrt{1-x^2}=\sin\theta$, $x/\sqrt{1-x^2}=\cot\theta$ and
+$d/d\theta=-\sin\theta\,d/dx$, they become
 \[
 -M\cot\theta\,P=\frac{A+B}{2},\qquad
 \frac{dP}{d\theta}=\frac{A-B}{2}.
@@ -53,30 +59,51 @@ Adding them, or subtracting the second from the first, gives
 (\partial_\theta-M\cot\theta)P=A,\qquad
 (-\partial_\theta-M\cot\theta)P=B.
 \]
-The first identity also follows directly by differentiating
-$P_L^M=(-1)^M\sin^M\theta\,
-d^MP_L(x)/dx^M$, $x=\cos\theta$, for $M\ge0$.
-
-Since $\partial_\varphi e^{iM\varphi}=iM e^{iM\varphi}$,
+The first identity also follows directly from the form
+$P_L^M=c\,\sin^M\theta\,f(x)$ of Exercise 15.4.3, valid for
+$-L\le M\le L$, where $c=(-1)^M/(2^LL!)$ and
+$f=d^{L+M}(x^2-1)^L/dx^{L+M}$:
 \[
-L_+Y_L^M=N_{LM}P_L^{M+1}e^{i(M+1)\varphi}
+\partial_\theta P
+=M\cot\theta\,P-c\sin^{M+1}\theta\,f'(x)
+=M\cot\theta\,P+P_L^{M+1},
+\]
+because the same form of $P_L^{M+1}$ has the constant
+$(-1)^{M+1}/(2^LL!)=-c$ and the function $f'$.
+
+Since $\partial_\varphi e^{iM\varphi}=iM e^{iM\varphi}$, the
+azimuthal term of $L_+$ acts on $Y_L^M$ as
+$i\cot\theta\cdot iM=-M\cot\theta$, so
+\[
+L_+Y_L^M=N_{LM}e^{i(M+1)\varphi}(\partial_\theta-M\cot\theta)P
+=N_{LM}P_L^{M+1}e^{i(M+1)\varphi}
 =\frac{N_{LM}}{N_{L,M+1}}Y_L^{M+1}.
 \]
-The normalization ratio is
+For $M<L$ the normalization ratio is
 \[
 \frac{N_{LM}^2}{N_{L,M+1}^2}
 =\frac{(L-M)!(L+M+1)!}{(L+M)!(L-M-1)!}
 =(L-M)(L+M+1),
 \]
-proving (a). Similarly,
+proving (a). Similarly, the azimuthal term of $L_-$ acts as
+$-i\cot\theta\cdot iM=M\cot\theta$, so
 \[
-L_-Y_L^M=(L+M)(L-M+1)
+\begin{aligned}
+L_-Y_L^M&=N_{LM}e^{i(M-1)\varphi}(-\partial_\theta-M\cot\theta)P
+=N_{LM}B\,e^{i(M-1)\varphi}\\
+&=(L+M)(L-M+1)
 \frac{N_{LM}}{N_{L,M-1}}Y_L^{M-1},
+\end{aligned}
 \]
-and
+and, for $M>-L$,
 \[
 \frac{N_{LM}^2}{N_{L,M-1}^2}
+=\frac{(L-M)!(L+M-1)!}{(L+M)!(L-M+1)!}
 =\frac1{(L+M)(L-M+1)}.
+\]
+The coefficient of $Y_L^{M-1}$ is therefore
+\[
+\frac{(L+M)(L-M+1)}{\sqrt{(L+M)(L-M+1)}}=\sqrt{(L+M)(L-M+1)}.
 \]
 Taking positive square roots establishes
 \[
@@ -86,7 +113,12 @@ Taking positive square roots establishes
 These formulas hold for integer $-L\le M\le L$ with the endpoint
 understood as annihilation: $L_+Y_L^L=L_-Y_L^{-L}=0$.
 Indeed $Y_L^{\pm L}$ is proportional to
-$\sin^L\theta\,e^{\pm iL\varphi}$, and direct substitution gives zero.
+$\sin^L\theta\,e^{\pm iL\varphi}$, and direct substitution gives zero:
+\[
+L_\pm(\sin^L\theta\,e^{\pm iL\varphi})
+=\pm e^{\pm i(L+1)\varphi}
+(L\sin^{L-1}\theta\cos\theta-L\cot\theta\,\sin^L\theta)=0.
+\]
 No harmonic outside the permitted $M$ range is needed.
 
 \Needspace{5\baselineskip}
@@ -106,14 +138,17 @@ show that
 \end{enumerate}
 \solution
 Each application of $L_-$ changes $m$ to $m-1$ with the coefficient
-proved in 16.1.1. Starting at $m=l$, after $k$ steps we therefore have
+proved in 16.1.1. Starting at $m=l$, step $j$ ($j=0,1,\ldots$) acts on
+magnetic index $m=l-j$, so its coefficient is
+$\sqrt{(l+m)(l-m+1)}=\sqrt{(2l-j)(j+1)}$. After $k$ steps we therefore
+have
 \[
 (L_-)^kY_l^l
 =\left[\prod_{j=0}^{k-1}(2l-j)(j+1)\right]^{1/2}Y_l^{l-k}.
 \]
 The two products are
-$\prod_{j=0}^{k-1}(2l-j)=(2l)!/(2l-k)!$ and
-$\prod_{j=0}^{k-1}(j+1)=k!$. Set $k=l-m$:
+$\prod_{j=0}^{k-1}(2l-j)=2l(2l-1)\cdots(2l-k+1)=(2l)!/(2l-k)!$ and
+$\prod_{j=0}^{k-1}(j+1)=k!$. Set $k=l-m$, so that $2l-k=l+m$:
 \[
 (L_-)^{l-m}Y_l^l
 =\sqrt{\frac{(2l)!(l-m)!}{(l+m)!}}\,Y_l^m.
@@ -125,13 +160,19 @@ Dividing by this positive coefficient proves
 \]
 
 For raising from $m=-l$, the successive squared coefficients are
-again $(2l-j)(j+1)$, because at step $j$ the magnetic index is $-l+j$.
+again $(2l-j)(j+1)$, because at step $j$ the magnetic index is
+$m=-l+j$ and $(l-m)(l+m+1)=(2l-j)(j+1)$.
 Thus
 \[
 (L_+)^kY_l^{-l}
 =\sqrt{\frac{(2l)!\,k!}{(2l-k)!}}Y_l^{-l+k}.
 \]
-Putting $k=l+m$ and solving for the final harmonic gives
+Putting $k=l+m$, so that $2l-k=l-m$, gives
+\[
+(L_+)^{l+m}Y_l^{-l}
+=\sqrt{\frac{(2l)!(l+m)!}{(l-m)!}}\,Y_l^m,
+\]
+and solving for the final harmonic gives
 \[
 \boxed{Y_l^m=\sqrt{\frac{(l-m)!}{(2l)!(l+m)!}}\,
 (L_+)^{l+m}Y_l^{-l}}.
@@ -158,17 +199,30 @@ sphere, with $\varphi$-periodic coordinate expressions. Since
 L_-v=-e^{-i\varphi}v_\theta
 +i e^{-i\varphi}\cot\theta\,v_\varphi,
 \]
-we have
+we have, with $d\Omega=\sin\theta\,d\theta\,d\varphi$,
 \[
 \langle u,L_-v\rangle
 =\int_0^{2\pi}\int_0^\pi
 \left[-u^*e^{-i\varphi}\sin\theta\,v_\theta
 +i u^*e^{-i\varphi}\cos\theta\,v_\varphi\right]d\theta\,d\varphi.
 \]
-The $\theta$ boundary term vanishes because of $\sin\theta$ at
-the poles; the $\varphi$ boundary term vanishes by periodicity.
-After moving both derivatives onto their coefficients, the remaining
-integrand is
+Integrate the first term by parts in $\theta$ and the second in
+$\varphi$:
+\[
+\begin{aligned}
+-\int_0^\pi u^*e^{-i\varphi}\sin\theta\,v_\theta\,d\theta
+&=\int_0^\pi v\,e^{-i\varphi}
+(\sin\theta\,u_\theta^*+\cos\theta\,u^*)\,d\theta,\\
+\int_0^{2\pi}iu^*e^{-i\varphi}\cos\theta\,v_\varphi\,d\varphi
+&=-\int_0^{2\pi}v\,e^{-i\varphi}\cos\theta\,
+(iu_\varphi^*+u^*)\,d\varphi,
+\end{aligned}
+\]
+where $\partial_\varphi(iu^*e^{-i\varphi})
+=e^{-i\varphi}(iu_\varphi^*+u^*)$.
+The $\theta$ boundary term $[-u^*e^{-i\varphi}\sin\theta\,v]_0^\pi$
+vanishes because $\sin\theta=0$ at the poles; the $\varphi$ boundary
+term vanishes by periodicity. The remaining integrand is
 \[
 v\left[
 e^{-i\varphi}\sin\theta\,u_\theta^*
@@ -177,7 +231,10 @@ e^{-i\varphi}\sin\theta\,u_\theta^*
 -i e^{-i\varphi}\cos\theta\,u_\varphi^*
 \right].
 \]
-The middle two terms cancel, leaving
+The middle two terms cancel. Dividing the rest by $\sin\theta$ to
+restore $d\Omega$, and using
+$(L_+u)^*=e^{-i\varphi}(u_\theta^*-i\cot\theta\,u_\varphi^*)$,
+we are left with
 \[
 \langle u,L_-v\rangle
 =\int v\,e^{-i\varphi}(u_\theta^*
@@ -185,10 +242,10 @@ The middle two terms cancel, leaving
 =\langle L_+u,v\rangle.
 \]
 Take $u=Y_L^M$ and $v=L_+Y_L^M$, both regular spherical harmonics
-or zero. This is exactly the requested equality. Moreover both
-sides equal
-$\boxed{(L-M)(L+M+1)}$ by normalization and 16.1.1, including
-zero at the upper endpoint.
+or zero. This is exactly the requested equality. Moreover, since
+$L_+Y_L^M=\sqrt{(L-M)(L+M+1)}\,Y_L^{M+1}$ by 16.1.1 and
+$\int|Y_L^{M+1}|^2d\Omega=1$, both sides equal
+$\boxed{(L-M)(L+M+1)}$, including zero at the upper endpoint.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -225,25 +282,36 @@ L_+L_-f=-f_{\theta\theta}-\cot\theta f_\theta
 L_-L_+f=-f_{\theta\theta}-\cot\theta f_\theta
 -\cot^2\theta f_{\varphi\varphi}+if_\varphi.
 \]
-For example, writing $c=\cot\theta$ and using $c'=-\csc^2\theta$,
-the two parts of $L_+L_-f$ before cancellation are
+For the first, write $c=\cot\theta$, so $c'=-\csc^2\theta$, and
+$L_-f=-e^{-i\varphi}(f_\theta-icf_\varphi)$. Then
+$L_+L_-f=e^{i\varphi}\partial_\theta(L_-f)
++e^{i\varphi}ic\,\partial_\varphi(L_-f)$, and since
+$\partial_\varphi(-e^{-i\varphi})=ie^{-i\varphi}$ the two parts are
 \[
 \begin{aligned}
 e^{i\varphi}\partial_\theta(L_-f)
 &=-f_{\theta\theta}+ic'f_\varphi+ic f_{\theta\varphi},\\
 e^{i\varphi}ic\,\partial_\varphi(L_-f)
+&=ic\,[\,i(f_\theta-icf_\varphi)-(f_{\theta\varphi}-icf_{\varphi\varphi})\,]\\
 &=-c f_\theta-ic f_{\theta\varphi}
 +c^2if_\varphi-c^2f_{\varphi\varphi}.
 \end{aligned}
 \]
-The mixed derivatives cancel and $i(c'+c^2)=-i$.
-Interchanging the ladder signs changes the last first-order term
+The mixed derivatives cancel and $i(c'+c^2)=-i$, because
+$\csc^2\theta-\cot^2\theta=1$.
+For the second, replacing $i$ by $-i$ in the coefficients turns
+$L_+$ into $-L_-$ and $L_-$ into $-L_+$, hence turns $L_+L_-$ into
+$(-L_-)(-L_+)=L_-L_+$. This changes only the last first-order term,
 from $-if_\varphi$ to $+if_\varphi$.
-\erratum{The manual (printed p.~257) writes the difference
+\erratum{The Instructor's Manual (printed p.~257) writes the difference
 $(L_+L_--L_-L_+)/2$ when extracting the common second-order terms.
 It must use the sum. The half-difference is $L_z=-i\partial_\varphi$,
-not $\mathbf L^2-L_z^2$.} Since
-$L_z^2f=-f_{\varphi\varphi}$, (a) gives
+not $\mathbf L^2-L_z^2$.} In the half-sum the terms $\mp if_\varphi$
+cancel:
+$\tfrac12(L_+L_-+L_-L_+)f=-f_{\theta\theta}-\cot\theta f_\theta
+-\cot^2\theta f_{\varphi\varphi}$.
+Since $L_z^2f=-f_{\varphi\varphi}$ and $\cot^2\theta+1=\csc^2\theta$,
+(a) gives
 \[
 \mathbf L^2f=-f_{\theta\theta}-\cot\theta f_\theta
 -\csc^2\theta f_{\varphi\varphi}.
@@ -261,7 +329,9 @@ sc&1&c^2-s^2,\ -4sc&4sc-c^3/s+cs+c/s=6sc\\
 3c^2-1&0&-6sc,\ -6(c^2-s^2)&12c^2-6s^2=6(3c^2-1)
 \end{array}
 \]
-Both signs of $m$ have the same $m^2$, so the first two rows each
+The last column uses $s^2+c^2=1$: $4=4s^2+4c^2$ in the first row,
+$c/s-c^3/s=c(1-c^2)/s=cs$ in the second, and $-6s^2=6c^2-6$ in the
+third. Both signs of $m$ have the same $m^2$, so the first two rows each
 verify two harmonics. Multiplying by their normalization constants
 does not change the eigenvalue:
 $\boxed{\mathbf L^2Y_2^m=6Y_2^m}$ for all five $m$.
@@ -290,24 +360,32 @@ Assume the Hermitian angular-momentum algebra, and choose states with
 $\mathbf L^2\psi_L^M=L(L+1)\psi_L^M$ and
 $L_z\psi_L^M=M\psi_L^M$. The commutators
 $[L_z,L_\pm]=\pm L_\pm$ and $[\mathbf L^2,L_\pm]=0$ show that
-$L_\pm\psi_L^M$ has the same $L$ and magnetic index $M\pm1$.
+$L_\pm\psi_L^M$ has the same $L$ and magnetic index $M\pm1$:
+$L_zL_\pm\psi_L^M=L_\pm(L_z\pm1)\psi_L^M=(M\pm1)L_\pm\psi_L^M$.
 Within a fixed irreducible multiplet it is therefore proportional
 to $\psi_L^{M\pm1}$.
 
-Using $L_\pm^\dagger=L_\mp$ and
-$[L_+,L_-]=2L_z$ in the identity of 16.1.4 gives
+From $[L_x,L_y]=iL_z$,
+$[L_+,L_-]=-i[L_x,L_y]+i[L_y,L_x]=2L_z$, while the identity of
+16.1.4(a) gives $L_+L_-+L_-L_+=2(\mathbf L^2-L_z^2)$. Adding and
+subtracting these two equations and halving gives
 \[
 L_-L_+=\mathbf L^2-L_z^2-L_z,\qquad
 L_+L_-=\mathbf L^2-L_z^2+L_z.
 \]
-Thus normalization determines the squared proportionality factors:
+Since $L_\pm^\dagger=L_\mp$, normalization determines the squared
+proportionality factors:
 \[
-\|L_+\psi_L^M\|^2=L(L+1)-M^2-M=(L-M)(L+M+1),
+\|L_+\psi_L^M\|^2=\langle\psi_L^M,L_-L_+\psi_L^M\rangle
+=L(L+1)-M^2-M=(L-M)(L+M+1),
 \]
 \[
-\|L_-\psi_L^M\|^2=L(L+1)-M^2+M=(L+M)(L-M+1).
+\|L_-\psi_L^M\|^2=\langle\psi_L^M,L_+L_-\psi_L^M\rangle
+=L(L+1)-M^2+M=(L+M)(L-M+1).
 \]
 Choose the relative phases so these factors have positive square roots.
+As in 16.1.2, lowering step $j$ acts on $M=L-j$, where
+$(L+M)(L-M+1)=(2L-j)(j+1)$.
 Iteration now gives, without any coordinate formula,
 \[
 (L_-)^k\psi_L^L
@@ -347,7 +425,12 @@ in $\cos\theta$ taken at fixed $\varphi$}:
 \par\emph{Hint.}~Try mathematical induction (Section~1.4).
 \solution
 All derivatives with respect to $x=\cos\theta$ below hold $\varphi$
-fixed. A function $g_m=F(\theta)e^{im\varphi}$ satisfies
+fixed, so $\partial_\theta=-\sin\theta\,\partial_x$; the interior
+range $0<\theta<\pi$ keeps $\cot\theta$ and the powers
+$\sin^{\pm M}\theta$ finite. Since
+$\partial_\theta\sin^{\mp m}\theta=\mp m\cot\theta\,\sin^{\mp m}\theta$,
+a function $g_m=F(\theta)e^{im\varphi}$, for which
+$\partial_\varphi g_m=img_m$, satisfies
 \[
 \begin{aligned}
 L_+g_m
@@ -369,8 +452,13 @@ These establish both claims for $n=1$; $n=0$ is the identity.
 Assume the raising formula at $n$:
 $g_{M+n}=(-1)^ne^{in\varphi}\sin^{M+n}\theta
 \,\partial_x^n(\sin^{-M}\theta\,Y_L^M)$.
-It has magnetic index $M+n$. Applying the first identity and
-canceling the two opposite powers of sine inside the derivative gives
+It has magnetic index $M+n$, because $Y_L^M\propto e^{iM\varphi}$ and
+$\partial_x$ at fixed $\varphi$ keeps that factor. Apply the first
+identity with $m=M+n$. The two opposite powers of sine cancel inside
+the derivative,
+$\sin^{-(M+n)}\theta\,g_{M+n}
+=(-1)^ne^{in\varphi}\partial_x^n(\sin^{-M}\theta\,Y_L^M)$,
+and $e^{in\varphi}$ is constant in $x$, so
 \[
 L_+g_{M+n}
 =(-1)^{n+1}e^{i(n+1)\varphi}\sin^{M+n+1}\theta\,
@@ -382,7 +470,10 @@ For lowering, the induction hypothesis is
 $g_{M-n}=e^{-in\varphi}\sin^{n-M}\theta
 \,\partial_x^n(\sin^M\theta\,Y_L^M)$.
 Use the second identity with $m=M-n$; its factor
-$\sin^m\theta$ cancels $\sin^{n-M}\theta$, leaving
+$\sin^m\theta$ cancels $\sin^{n-M}\theta$:
+$\sin^{M-n}\theta\,g_{M-n}
+=e^{-in\varphi}\partial_x^n(\sin^M\theta\,Y_L^M)$. Since
+$\sin^{1-m}\theta=\sin^{n+1-M}\theta$, this leaves
 \[
 L_-g_{M-n}
 =e^{-i(n+1)\varphi}\sin^{n+1-M}\theta\,
@@ -406,27 +497,34 @@ gives
 Y_L^M=c_M(L_+)^M Y_L^0,\qquad
 c_M=\sqrt{\frac{(L-M)!}{(L+M)!}}.
 \]
-Indeed the squared product is
-$\prod_{j=0}^{M-1}(L-j)(L+j+1)=(L+M)!/(L-M)!$.
+Indeed step $j$ acts on magnetic index $j$, with squared coefficient
+$(L-j)(L+j+1)$ by 16.1.1, and the squared product is
+\[
+\prod_{j=0}^{M-1}(L-j)\prod_{j=0}^{M-1}(L+j+1)
+=\frac{L!}{(L-M)!}\cdot\frac{(L+M)!}{L!}
+=\frac{(L+M)!}{(L-M)!}.
+\]
 The differential forms show, for any differentiable $f$,
 \[
 (L_+f)^*
 =e^{-i\varphi}(\partial_\theta-i\cot\theta\,\partial_\varphi)f^*
 =-L_-f^*.
 \]
-Because $Y_L^0$ is real, repeated conjugation therefore gives
+Applying this $M$ times gives
+$[(L_+)^Mf]^*=(-1)^M(L_-)^Mf^*$. Because $Y_L^0$ is real, therefore
 \[
 (Y_L^M)^*=(-1)^M c_M(L_-)^M Y_L^0.
 \]
 Lowering from zero to $-M$ has the same squared coefficient product
-$(L+M)!/(L-M)!$, so $c_M(L_-)^M Y_L^0=Y_L^{-M}$.
-Consequently
+$(L+M)!/(L-M)!$, since step $j$ acts on $m=-j$ and
+$(L+m)(L-m+1)=(L-j)(L+j+1)$. Hence $c_M(L_-)^M Y_L^0=Y_L^{-M}$, so
+$(Y_L^M)^*=(-1)^MY_L^{-M}$. Multiplying by $(-1)^M$,
 \[
 \boxed{Y_L^{-M}=(-1)^M(Y_L^M)^*}.
 \]
 Replacing $M$ by $-M$ and conjugating proves the identical statement
 for negative $M$, since $(-1)^{-M}=(-1)^M$ for integral $M$.
-\erratum{The manual (printed p.~258) says to start with $Y_0^0$.
+\erratum{The Instructor's Manual (printed p.~258) says to start with $Y_0^0$.
 For a fixed degree $L$ the starting function must be $Y_L^0$.
 Indeed both ladders annihilate $Y_0^0$, so they cannot generate
 any nonconstant harmonic from it.}
@@ -453,7 +551,9 @@ Y_1^1=-\sqrt{\frac3{8\pi}}\sin\theta\,e^{i\varphi},\qquad
 Y_1^{-1}=\sqrt{\frac3{8\pi}}\sin\theta\,e^{-i\varphi}.
 \]
 Since $Y_1^0$ is independent of $\varphi$, the azimuthal derivatives
-in $L_\pm$ vanish. Direct differentiation gives
+in $L_\pm$ vanish. Direct differentiation, with
+$\partial_\theta\cos\theta=-\sin\theta$ and
+$\sqrt{3/(4\pi)}=\sqrt2\sqrt{3/(8\pi)}$, gives
 \[
 L_+Y_1^0=e^{i\varphi}\sqrt{\frac3{4\pi}}(-\sin\theta)
 =-\sqrt{\frac3{4\pi}}\sin\theta\,e^{i\varphi}
@@ -483,9 +583,13 @@ Write $|m_1,m_2\rangle=|j_1m_1\rangle|j_2m_2\rangle$ and
 \[
 |JM\rangle=\sum_{m_1+m_2=M}C_M(m_1,m_2)|m_1,m_2\rangle.
 \]
-Define $a_i^\pm(m)=\sqrt{(j_i\mp m)(j_i\pm m+1)}$.
+Define $a_i^\pm(m)=\sqrt{(j_i\mp m)(j_i\pm m+1)}$, so that
+$J_{i\pm}|j_im\rangle=a_i^\pm(m)|j_i,m\pm1\rangle$.
 Apply $J_+=J_{1+}+J_{2+}$ to this expansion and collect the
-coefficient of the \emph{target} state $|m_1,m_2\rangle$:
+coefficient of the \emph{target} state $|m_1,m_2\rangle$
+($m_1+m_2=M+1$); it comes from $|m_1-1,m_2\rangle$ through $J_{1+}$
+and from $|m_1,m_2-1\rangle$ through $J_{2+}$, while the left side
+is $\sqrt{(J-M)(J+M+1)}\,|J,M+1\rangle$:
 \[
 \begin{aligned}
 \sqrt{(J-M)(J+M+1)}\,C_{M+1}(m_1,m_2)
@@ -505,8 +609,15 @@ Coefficients outside the allowed magnetic ranges are zero.
 A recursion within a fixed $M$ follows from
 \[
 \mathbf J^2=\mathbf J_1^2+\mathbf J_2^2+2J_{1z}J_{2z}
-+J_{1+}J_{2-}+J_{1-}J_{2+}:
++J_{1+}J_{2-}+J_{1-}J_{2+},
 \]
+since $J_{1+}J_{2-}+J_{1-}J_{2+}=2(J_{1x}J_{2x}+J_{1y}J_{2y})$, so the
+last three terms are $2\mathbf J_1\cdot\mathbf J_2$. The first three
+terms multiply $|m_1,m_2\rangle$ by
+$j_1(j_1+1)+j_2(j_2+1)+2m_1m_2$; $J_{1+}J_{2-}$ reaches
+$|m_1,m_2\rangle$ from $|m_1-1,m_2+1\rangle$ and $J_{1-}J_{2+}$ from
+$|m_1+1,m_2-1\rangle$. Equating coefficients of $|m_1,m_2\rangle$ in
+$\mathbf J^2|JM\rangle=J(J+1)|JM\rangle$ gives
 \[
 \begin{aligned}
 &[J(J+1)-j_1(j_1+1)-j_2(j_2+1)-2m_1m_2]C_M(m_1,m_2)\\
@@ -518,22 +629,34 @@ Together with normalization and phase, these determine the coefficients.
 
 For $j_1=j_2=1$, choose positive lowering coefficients and a positive
 coefficient of the largest $m_1$ in each highest-$M$ state, consistent
-with the text's Condon--Shortley convention. Start with
-$|2,2\rangle=|1,1\rangle$. The first lowering gives
+with the text's Condon--Shortley convention. For $j_i=1$,
+$J_{i-}|1\rangle=\sqrt2|0\rangle$, $J_{i-}|0\rangle=\sqrt2|-1\rangle$
+and $J_{i-}|-1\rangle=0$; the total ladder factors are
+$J_-|J,M\rangle=\sqrt{(J+M)(J-M+1)}\,|J,M-1\rangle$.
+Start with $|2,2\rangle=|1,1\rangle$. Since
+$J_-|1,1\rangle=\sqrt2|0,1\rangle+\sqrt2|1,0\rangle$ and
+$J_-|2,2\rangle=2|2,1\rangle$, the first lowering gives
 \[
 2|2,1\rangle
 =\sqrt2(|1,0\rangle+|0,1\rangle).
 \]
-The next gives
+Next, $J_-(|1,0\rangle+|0,1\rangle)
+=\sqrt2(|0,0\rangle+|1,-1\rangle)+\sqrt2(|-1,1\rangle+|0,0\rangle)$
+and $J_-|2,1\rangle=\sqrt6|2,0\rangle$, so, after dividing by the
+$\sqrt2$ in $|2,1\rangle$,
 \[
 \sqrt6|2,0\rangle
 =|1,-1\rangle+2|0,0\rangle+|-1,1\rangle.
 \]
 Lowering this numerator gives
-$3\sqrt2(|0,-1\rangle+|-1,0\rangle)$; after dividing by its
-existing $\sqrt6$ and the next ladder factor $\sqrt6$,
-$|2,-1\rangle=(|0,-1\rangle+|-1,0\rangle)/\sqrt2$.
-The final lowering gives $2|2,-2\rangle=2|-1,-1\rangle$.
+$\sqrt2|0,-1\rangle+2\sqrt2(|-1,0\rangle+|0,-1\rangle)
++\sqrt2|-1,0\rangle=3\sqrt2(|0,-1\rangle+|-1,0\rangle)$;
+after dividing by its existing $\sqrt6$ and the next ladder factor
+$\sqrt6$,
+$|2,-1\rangle=3\sqrt2(|0,-1\rangle+|-1,0\rangle)/6
+=(|0,-1\rangle+|-1,0\rangle)/\sqrt2$.
+The final lowering gives
+$2|2,-2\rangle=(\sqrt2+\sqrt2)|-1,-1\rangle/\sqrt2=2|-1,-1\rangle$.
 Thus the complete quintet is
 \[
 \begin{array}{c|l}
@@ -546,16 +669,24 @@ M&|2,M\rangle\\ \hline
 \end{array}
 \]
 
-The normalized vector at $M=1$ orthogonal to the quintet is
+The normalized vector at $M=1$ orthogonal to $|2,1\rangle$, with a
+positive coefficient of $|1,0\rangle$, is
 $|1,1\rangle_{\rm coupled}=(|1,0\rangle-|0,1\rangle)/\sqrt2$.
-Its two lowerings are
+Its two lowerings, with ladder factors
+$\sqrt{(1+M)(2-M)}=\sqrt2$ for $M=1,0$, are
 \[
+\begin{aligned}
 J_-|1,1\rangle_{\rm coupled}
-=|1,-1\rangle-|-1,1\rangle=\sqrt2|1,0\rangle_{\rm coupled},
+&=\tfrac1{\sqrt2}\bigl[\sqrt2(|0,0\rangle+|1,-1\rangle)
+-\sqrt2(|-1,1\rangle+|0,0\rangle)\bigr]\\
+&=|1,-1\rangle-|-1,1\rangle=\sqrt2|1,0\rangle_{\rm coupled},
+\end{aligned}
 \]
 \[
 J_-|1,0\rangle_{\rm coupled}
-=|0,-1\rangle-|-1,0\rangle=\sqrt2|1,-1\rangle_{\rm coupled}.
+=\tfrac1{\sqrt2}\bigl(\sqrt2|0,-1\rangle-\sqrt2|-1,0\rangle\bigr)
+=|0,-1\rangle-|-1,0\rangle
+=\sqrt2|1,-1\rangle_{\rm coupled}.
 \]
 Hence the triplet is
 \[
@@ -568,13 +699,20 @@ M&|1,M\rangle_{\rm coupled}\\ \hline
 \]
 Finally write the singlet as
 $u|1,-1\rangle+v|0,0\rangle+w|-1,1\rangle$.
-Orthogonality to the $J=2$ and $J=1$ states gives
+Orthogonality to $|2,0\rangle$ and $|1,0\rangle_{\rm coupled}$ gives
 $u+2v+w=0$ and $u-w=0$, so $w=u,v=-u$.
-Normalization and the chosen sign give
+Normalization gives $3u^2=1$, and the chosen sign gives $u>0$:
 \[
 \boxed{|0,0\rangle_{\rm coupled}
 =\frac{|1,-1\rangle-|0,0\rangle+|-1,1\rangle}{\sqrt3}}.
 \]
+The fixed-$M$ recursion checks all three $M=0$ states at once. For
+$m_1=1$, $m_2=-1$ its bracket is $J(J+1)-2-2+2$, and only the term
+with $a_1^+(0)a_2^-(0)=2$ survives on the right (the other needs
+$m_1=2$), so
+$C_0(0,0)=\tfrac12[J(J+1)-2]\,C_0(1,-1)$. This gives $2C_0(1,-1)$,
+$0$ and $-C_0(1,-1)$ for $J=2,1,0$, as in the tables.
+
 Every Clebsch--Gordan coefficient requested is the coefficient of its
 product ket in these nine normalized states; all unlisted coefficients
 are zero. Their dimensions $5+3+1=9$ exhaust the product basis.
@@ -610,10 +748,18 @@ In this basis,
 \begin{pmatrix}M&q\\q&-M\end{pmatrix},
 \]
 where $K=l+\tfrac12$ and $q=\sqrt{K^2-M^2}$.
-For example, $L_+S_-u=qv$, $L_-S_+v=qu$;
-the diagonal terms are $l(l+1)+3/4\pm(M\mp1/2)$.
+Indeed, by 16.1.1 and $S_-\chi_+=\chi_-$, $S_+\chi_-=\chi_+$,
+\[
+L_+S_-u=\sqrt{(l-M+\tfrac12)(l+M+\tfrac12)}\,v=\sqrt{(K-M)(K+M)}\,v=qv,
+\]
+and likewise $L_-S_+v=qu$, while $S_-\chi_-=S_+\chi_+=0$ make
+$L_+S_-v=L_-S_+u=0$. With $\mathbf S^2=\tfrac34$ and
+$2L_zS_z=2(M\mp\tfrac12)(\pm\tfrac12)$ on $u$ and $v$, respectively,
+the diagonal terms are
+$l(l+1)+\tfrac34\pm(M\mp\tfrac12)=l(l+1)+\tfrac14\pm M$.
 The square of the last matrix is
-$(M^2+q^2)I=K^2I$, so its eigenvalues are $+K,-K$.
+$(M^2+q^2)I=K^2I$, so its eigenvalues are $\pm K$; its trace is zero,
+so one is $+K$ and the other $-K$.
 
 The corresponding normalized eigenvectors are
 \[
@@ -638,8 +784,19 @@ l(l+1)+\tfrac14+K=(l+\tfrac12)(l+\tfrac32),\qquad
 l(l+1)+\tfrac14-K=(l-\tfrac12)(l+\tfrac12).
 \]
 These are $J(J+1)$ for $J=l+1/2$ and $J=l-1/2$.
-Their displayed coefficients are precisely the normalized
-Clebsch--Gordan coefficients in the stated coupling convention.
+Since $K\pm M=l\pm M+\tfrac12$ and $2K=2l+1$, the displayed
+coefficients are the Condon--Shortley Clebsch--Gordan coefficients
+for $j_2=\tfrac12$:
+\[
+C(l\tfrac12J\,|\,M\mp\tfrac12,\pm\tfrac12,M)=
+\begin{cases}
+\sqrt{\dfrac{l\pm M+\frac12}{2l+1}},&J=l+\tfrac12,\\[2ex]
+\mp\sqrt{\dfrac{l\mp M+\frac12}{2l+1}},&J=l-\tfrac12.
+\end{cases}
+\]
+In particular the top state of each multiplet has a positive
+coefficient of $Y_l^l$, and for $l=1$ these coefficients reproduce
+the states obtained by explicit lowering in 16.2.3.
 At the extreme $M=\pm(l+1/2)$ only the permitted basis vector
 survives. The lower multiplet exists only for $l\ge1$.
 Consequently
@@ -669,17 +826,21 @@ $S_-\alpha=\beta$, $S_-\beta=0$:
 \[
 J_-(p_1\alpha)=\sqrt2p_0\alpha+p_1\beta.
 \]
-Divide by $\sqrt3$, the $J=3/2$ ladder coefficient, to get
+Divide by $\sqrt3$, the $J=3/2$ ladder coefficient
+$\sqrt{(J+M)(J-M+1)}$ at $M=3/2$, to get
 $|\tfrac32,\tfrac12\rangle$ below. Lower its numerator once more:
 \[
 J_-(\sqrt2p_0\alpha+p_1\beta)
+=\sqrt2(\sqrt2p_{-1}\alpha+p_0\beta)+\sqrt2p_0\beta
 =2p_{-1}\alpha+2\sqrt2p_0\beta.
 \]
 Dividing by the previous $\sqrt3$ and the next ladder coefficient
-$2$ gives $|\tfrac32,-\tfrac12\rangle$.
+$\sqrt{2\cdot2}=2$ gives $|\tfrac32,-\tfrac12\rangle
+=(p_{-1}\alpha+\sqrt2p_0\beta)/\sqrt3$.
 The last lowering is
 $J_-(p_{-1}\alpha+\sqrt2p_0\beta)/\sqrt3
-=\sqrt3p_{-1}\beta$. Therefore
+=(p_{-1}\beta+2p_{-1}\beta)/\sqrt3=\sqrt3p_{-1}\beta$, and the ladder
+coefficient at $M=-1/2$ is $\sqrt{1\cdot3}=\sqrt3$. Therefore
 \[
 \boxed{\begin{aligned}
 |\tfrac32,\tfrac32\rangle&=p_1\alpha,\\
@@ -690,11 +851,12 @@ $J_-(p_{-1}\alpha+\sqrt2p_0\beta)/\sqrt3
 |\tfrac32,-\tfrac32\rangle&=p_{-1}\beta.
 \end{aligned}}
 \]
-For the remaining $M=1/2$ state, orthogonality to the quartet
-requires $\sqrt2u+v=0$ in $u p_0\alpha+v p_1\beta$.
-Normalization gives $|u|^2+|v|^2=1$; choosing the coefficient
-of $p_1\beta$ positive fixes $u=-1/\sqrt3$, $v=\sqrt{2/3}$.
-Its lowering coefficient for $J=1/2$ is one:
+For the remaining $M=1/2$ state, orthogonality to
+$|\tfrac32,\tfrac12\rangle$ requires $\sqrt2u+v=0$ in
+$u p_0\alpha+v p_1\beta$. Normalization gives $|u|^2+|v|^2=3u^2=1$;
+choosing the coefficient of $p_1\beta$ ($m_l=l$) positive, as in
+16.2.1, fixes $u=-1/\sqrt3$, $v=\sqrt{2/3}$.
+Its lowering coefficient for $J=1/2$ is $\sqrt{1\cdot1}=1$:
 \[
 \begin{aligned}
 J_-\left(-\frac{p_0\alpha}{\sqrt3}
@@ -713,7 +875,7 @@ Thus
 \sqrt{\tfrac13}p_0\beta.
 \end{aligned}}
 \]
-\erratum{The manual's displayed doublet changes the relative phase
+\erratum{The Instructor's Manual's displayed doublet changes the relative phase
 between its two $M$ states and does not obey
 $J_-|\tfrac12,\tfrac12\rangle=|\tfrac12,-\tfrac12\rangle$.
 The explicit lowering above fixes that phase. A common overall sign
@@ -750,7 +912,10 @@ B_M=(p_+\chi_{M-1},\ p_0\chi_M,\ p_-\chi_{M+1}),
 \]
 A nonexistent spin state is omitted, and its coefficient is zero.
 Let $\sigma(\mu)=\sqrt{(3/2+\mu)(5/2-\mu)}$ for allowed $\mu$;
-set $\sigma=0$ outside the spin range. Applying $J_-=L_-+S_-$
+set $\sigma=0$ outside the spin range. Thus
+$\sigma(\tfrac32)=\sqrt3$, $\sigma(\tfrac12)=2$,
+$\sigma(-\tfrac12)=\sqrt3$, $\sigma(-\tfrac32)=0$, the $S_-$
+coefficients above. Applying $J_-=L_-+S_-$
 and collecting the three target coefficients gives the explicit rule
 \[
 \sqrt{(J+M)(J-M+1)}\,c_{M-1}^{(J)}
@@ -762,23 +927,48 @@ and collecting the three target coefficients gives the explicit rule
 \end{pmatrix}c_M^{(J)}.
 \tag{*}
 \]
+Its columns are the images of the three basis states:
+$J_-(p_+\chi_{M-1})=\sigma(M-1)p_+\chi_{M-2}+\sqrt2p_0\chi_{M-1}$,
+$J_-(p_0\chi_M)=\sigma(M)p_0\chi_{M-1}+\sqrt2p_-\chi_M$, and
+$J_-(p_-\chi_{M+1})=\sigma(M+1)p_-\chi_M$.
 Thus the rows below give full expansions, not only their multiplicities.
 
 For $J=5/2$, start with $c_{5/2}=(1,0,0)^T$.
-The first lowering gives $(\sqrt3,\sqrt2,0)^T$ and has norm $\sqrt5$.
-The next gives
+The first lowering gives $(\sigma(\tfrac32),\sqrt2,0)^T
+=(\sqrt3,\sqrt2,0)^T$, whose norm $\sqrt5$ equals the ladder factor
+$\sqrt{5\cdot1}$. The next, with $\sigma(\tfrac12)=2$,
+$\sigma(\tfrac32)=\sqrt3$, gives
 \[
-\frac1{\sqrt5}(2\sqrt3,\ \sqrt6+\sqrt6,\ 2)^T;
+\frac1{\sqrt5}(2\sqrt3,\ \sqrt2\sqrt3+\sqrt3\sqrt2,\ \sqrt2\sqrt2)^T
+=\frac1{\sqrt5}(2\sqrt3,\ 2\sqrt6,\ 2)^T;
 \]
-dividing by the next factor $2\sqrt2$ gives the $M=1/2$ row.
-For the remaining steps the factors in (*) are $3,2\sqrt2,\sqrt5$.
-For example the middle step has numerator
+dividing by the next factor $\sqrt{4\cdot2}=2\sqrt2$ gives the
+$M=1/2$ row.
+For the remaining steps the factors in (*) are
+$\sqrt{3\cdot3}=3$, $\sqrt{2\cdot4}=2\sqrt2$, $\sqrt{1\cdot5}=\sqrt5$,
+and the numerators are ($\sigma(-\tfrac32)=0$ in the last two)
 \[
-\left(\frac3{\sqrt{10}},\
-3\sqrt{\frac35},\
-3\sqrt{\frac3{10}}\right)^T,
+\begin{aligned}
+M=\tfrac12:&\quad
+\bigl(\sqrt3\sqrt{\tfrac3{10}},\
+\sqrt2\sqrt{\tfrac3{10}}+2\sqrt{\tfrac35},\
+\sqrt2\sqrt{\tfrac35}+\sqrt3\sqrt{\tfrac1{10}}\bigr)^T
+=\bigl(\tfrac3{\sqrt{10}},\ 3\sqrt{\tfrac35},\
+3\sqrt{\tfrac3{10}}\bigr)^T,\\
+M=-\tfrac12:&\quad
+\bigl(0,\ \sqrt2\sqrt{\tfrac1{10}}+\sqrt3\sqrt{\tfrac35},\
+\sqrt2\sqrt{\tfrac35}+2\sqrt{\tfrac3{10}}\bigr)^T
+=\bigl(0,\ \tfrac4{\sqrt5},\ 2\sqrt{\tfrac65}\bigr)^T,\\
+M=-\tfrac32:&\quad
+\bigl(0,\ 0,\ \sqrt2\sqrt{\tfrac25}+\sqrt3\sqrt{\tfrac35}\bigr)^T
+=(0,\ 0,\ \sqrt5)^T,
+\end{aligned}
 \]
-which, divided by $3$, gives the $M=-1/2$ row. The complete sextet is
+where $\sqrt2\sqrt{3/10}=\sqrt{3/5}$,
+$\sqrt2\sqrt{3/5}=\sqrt{6/5}=2\sqrt{3/10}$,
+$\sqrt3\sqrt{1/10}=\sqrt{3/10}$ and $\sqrt2\sqrt{1/10}=1/\sqrt5$.
+Dividing by the factors $3$, $2\sqrt2$, $\sqrt5$ gives the last three
+rows of the complete sextet:
 \[
 \boxed{\begin{array}{c|ccc}
 M&c_+&c_0&c_-\\ \hline
@@ -790,25 +980,36 @@ M&c_+&c_0&c_-\\ \hline
 -5/2&0&0&1
 \end{array}}\qquad ({}^4p_{5/2}).
 \]
-For the penultimate step, the nonzero numerator components are
-$1/\sqrt5+3/\sqrt5=4/\sqrt5$ and
-$\sqrt{6/5}+\sqrt{6/5}=2\sqrt{6/5}$; division by $2\sqrt2$
-gives the indicated row. The last numerator is
-$2/\sqrt5+3/\sqrt5=\sqrt5$, leaving coefficient one.
 
 At $M=3/2$, the highest state of the $J=3/2$ multiplet must be
 orthogonal to $(\sqrt{3/5},\sqrt{2/5},0)^T$. A positive first
-coefficient fixes it to $(\sqrt{2/5},-\sqrt{3/5},0)^T$.
-Its first lowering has numerator
+coefficient ($m_l=l$, as in 16.2.1) fixes it to
+$(\sqrt{2/5},-\sqrt{3/5},0)^T$.
+Its three lowerings, with factors $\sqrt{3\cdot1}=\sqrt3$,
+$\sqrt{2\cdot2}=2$ and $\sqrt{1\cdot3}=\sqrt3$, have numerators
 \[
-(2\sqrt{2/5},\ 2/\sqrt5-3/\sqrt5,\ -\sqrt{6/5})^T.
+\begin{aligned}
+M=\tfrac32:&\quad
+\bigl(2\sqrt{\tfrac25},\ \sqrt2\sqrt{\tfrac25}-\sqrt3\sqrt{\tfrac35},\
+-\sqrt2\sqrt{\tfrac35}\bigr)^T
+=\bigl(2\sqrt{\tfrac25},\ -\tfrac1{\sqrt5},\ -\sqrt{\tfrac65}\bigr)^T,\\
+M=\tfrac12:&\quad
+\bigl(\sqrt3\sqrt{\tfrac8{15}},\
+\sqrt2\sqrt{\tfrac8{15}}-\tfrac2{\sqrt{15}},\
+-\tfrac{\sqrt2}{\sqrt{15}}-\sqrt3\sqrt{\tfrac25}\bigr)^T
+=\bigl(2\sqrt{\tfrac25},\ \tfrac2{\sqrt{15}},\
+-2\sqrt{\tfrac8{15}}\bigr)^T,\\
+M=-\tfrac12:&\quad
+\bigl(0,\ \sqrt2\sqrt{\tfrac25}+\tfrac{\sqrt3}{\sqrt{15}},\
+\tfrac{\sqrt2}{\sqrt{15}}-2\sqrt{\tfrac8{15}}\bigr)^T
+=\bigl(0,\ \tfrac3{\sqrt5},\ -\sqrt{\tfrac65}\bigr)^T,
+\end{aligned}
 \]
-Divide by $\sqrt3$ to obtain the next row. The next lowering has
-numerator
-$(2\sqrt{2/5},\,2/\sqrt{15},\,-2\sqrt{8/15})^T$ and factor $2$.
-The final lowering has nonzero components
-$3/\sqrt5$ and $-\sqrt{6/5}$ and factor $\sqrt3$.
-Consequently
+where $\sqrt2\sqrt{2/5}=2/\sqrt5$, $\sqrt3\sqrt{3/5}=3/\sqrt5$,
+$\sqrt2\sqrt{8/15}=4/\sqrt{15}$, $\sqrt3\sqrt{2/5}=3\sqrt{2/15}$ and
+$2\sqrt{8/15}=4\sqrt{2/15}$; for example the last component is
+$\sqrt{2/15}-4\sqrt{2/15}=-3\sqrt{2/15}=-\sqrt{6/5}$.
+Dividing by the factors gives
 \[
 \boxed{\begin{array}{c|ccc}
 M&c_+&c_0&c_-\\ \hline
@@ -820,15 +1021,19 @@ M&c_+&c_0&c_-\\ \hline
 \]
 
 For the remaining highest state at $M=1/2$, write
-$c=(A,B,C)^T$. Orthogonality to the two existing rows gives
+$c=(A,B,C)^T$. Orthogonality to the two existing $M=1/2$ rows
+(multiplied by $\sqrt{10}$ and $\sqrt{15}$, respectively) gives
 \[
 \sqrt3 A+\sqrt6 B+C=0,\qquad
 2\sqrt2 A-B-\sqrt6 C=0.
 \]
 Substituting $C=-\sqrt3 A-\sqrt6 B$ in the second equation yields
-$5\sqrt2 A+5B=0$, so $B=-\sqrt2 A$ and $C=\sqrt3 A$.
-Normalization gives $6A^2=1$; choose $A=1/\sqrt6$.
-Applying (*) with its factor one produces
+$2\sqrt2A-B+3\sqrt2A+6B=5\sqrt2 A+5B=0$, so $B=-\sqrt2 A$ and
+$C=-\sqrt3A+2\sqrt3A=\sqrt3 A$.
+Normalization gives $(1+2+3)A^2=6A^2=1$; choose $A=1/\sqrt6>0$.
+Then $c_{1/2}=(1/\sqrt6,-1/\sqrt3,1/\sqrt2)^T$.
+Applying (*) with $\sigma(-\tfrac12)=\sqrt3$, $\sigma(\tfrac12)=2$,
+$\sigma(\tfrac32)=\sqrt3$ and its factor $\sqrt{1\cdot1}=1$ produces
 \[
 \left(\frac1{\sqrt2},\
 \frac1{\sqrt3}-\frac2{\sqrt3},\
@@ -844,14 +1049,18 @@ M&c_+&c_0&c_-\\ \hline
 \end{array}}\qquad ({}^4p_{1/2}).
 \]
 Each row has norm one; rows of the same $M$ but different $J$ are
-orthogonal by the construction and the lowering algebra. The dimension
+orthogonal, being eigenvectors of the Hermitian operator $\mathbf J^2$
+with different eigenvalues. For instance, at $M=1/2$ the $J=5/2$ and
+$J=3/2$ rows give
+$\sqrt{3/10}\sqrt{8/15}-\sqrt{3/5}/\sqrt{15}-\sqrt{1/10}\sqrt{2/5}
+=(2-1-1)/5=0$. The dimension
 $6+4+2=12=3\cdot4$ confirms that every product-basis state is included.
 A common sign change within a complete multiplet changes no physics;
 the tables use the same ladder phase convention as 16.2.1.
-\erratum{The manual's $J=3/2,M=-1/2$ row contains an invalid spin
+\erratum{The Instructor's Manual's $J=3/2,M=-1/2$ row contains an invalid spin
 label on its $p_+$ term. That label must be $-3/2$, since
 $1+(-3/2)=-1/2$. The corrected table above obeys $m_l+m_s=M$
-in every entry. Its $J=3/2$ multiplet differs from the manual by
+in every entry. Its $J=3/2$ multiplet differs from the Instructor's Manual by
 one common, harmless overall sign. Its intermediate lowering
 work on printed p.~261 also has two $p_0$ labels that must be $p_-$:
 the term with spin $-1/2$ in $J=5/2,M=-3/2$, and the term with
@@ -891,7 +1100,9 @@ The particles are distinct, so reordering their tensor factors while
 writing a coupling scheme introduces no fermionic exchange sign.
 
 \textbf{(a)} The product space has dimension $2^3=8$. Its numbers
-of states at $M=3/2,1/2,-1/2,-3/2$ are respectively $1,3,3,1$.
+of states at $M=3/2,1/2,-1/2,-3/2$ are respectively $1,3,3,1$,
+the numbers $\binom30,\binom31,\binom32,\binom33$ of ways to choose
+which of the three spins point down.
 The unique highest state generates one $J=3/2$ quartet, removing
 one state from each row. The remainder has two states at each of
 $M=\pm1/2$, hence two independent $J=1/2$ doublets.
@@ -948,9 +1159,15 @@ M&Q_M&T_M&S_M\\ \hline
 \end{array}
 \]
 together with the two extreme quartet states already written.
-For instance $J_-A=D+E$, $J_-B=D+F$ and $J_-C=E+F$.
+For example $t_+e_\beta=A$ and $t_0e_\alpha=(B+C)/\sqrt2$, so
+$T_{1/2}=\sqrt{2/3}\,A-\sqrt{1/3}\,(B+C)/\sqrt2=(2A-B-C)/\sqrt6$;
+the other entries follow in the same way.
+Lowering each spin in turn gives $J_-A=D+E$, $J_-B=D+F$ and
+$J_-C=E+F$ (for example, in $A=p_\alpha n_\alpha e_\beta$ lowering
+$p$ gives $E$, lowering $n$ gives $D$, and $e_\beta$ is annihilated).
 Consequently $J_-(2A-B-C)=D+E-2F$ and
-$J_-(B-C)=D-E$, explicitly checking the doublet ladder phases.
+$J_-(B-C)=D-E$. Since the $J=1/2$ ladder coefficient at $M=1/2$ is
+$\sqrt{1\cdot1}=1$, this explicitly checks the doublet ladder phases.
 
 \textbf{(c)} Replace the first pair by $pe$:
 \[
@@ -968,7 +1185,10 @@ T'_{-1/2}&=\sqrt{\tfrac13}t'_0n_\beta-\sqrt{\tfrac23}t'_-n_\alpha,&
 S'_{-1/2}&=s'n_\beta.
 \end{aligned}
 \]
-Reordering the displayed factors back to $pne$ gives
+Reordering the displayed factors back to $pne$ (for example
+$t'_+n_\beta=p_\alpha n_\beta e_\alpha=B$ and
+$t'_0n_\alpha=(A+C)/\sqrt2$, so
+$T'_{1/2}=\sqrt{2/3}\,B-\sqrt{1/3}\,(A+C)/\sqrt2$) gives
 \[
 \begin{array}{c|cc}
 M&T'_M&S'_M\\ \hline
@@ -979,14 +1199,26 @@ M&T'_M&S'_M\\ \hline
 and the same four $Q_M$: the quartet is totally symmetric under
 permuting its spin labels.
 
-\textbf{(d)} For $M=1/2$, the coefficient dot products give
+\textbf{(d)} At each $M=\pm1/2$ the product space is
+three-dimensional, with orthonormal basis $Q_M,T_M,S_M$. The states
+$T'_M,S'_M$ have $J=1/2$, so they are orthogonal to the $J=3/2$
+state $Q_M$ (eigenvectors of the Hermitian $\mathbf J^2$ with different
+eigenvalues), and therefore
+$T'_M=\langle T_M,T'_M\rangle T_M+\langle S_M,T'_M\rangle S_M$, and
+similarly for $S'_M$. For $M=1/2$ the coefficient vectors in the
+basis $(A,B,C)$ are $T_M=(2,-1,-1)/\sqrt6$, $S_M=(0,1,-1)/\sqrt2$,
+$T'_M=(-1,2,-1)/\sqrt6$, $S'_M=(1,0,-1)/\sqrt2$, and their dot
+products give
 \[
 \langle T_M,T'_M\rangle=(-2-2+1)/6=-\tfrac12,\qquad
 \langle S_M,T'_M\rangle=(2+1)/\sqrt{12}=\tfrac{\sqrt3}{2}.
 \]
-The corresponding products with $S'_M$ are $\sqrt3/2$ and $1/2$.
-Using the second rows of the tables gives exactly the same four
-numbers at $M=-1/2$. Thus, for both magnetic values,
+The corresponding products with $S'_M$ are
+$\langle T_M,S'_M\rangle=(2+1)/\sqrt{12}=\sqrt3/2$ and
+$\langle S_M,S'_M\rangle=1/2$.
+Using the second rows of the tables, in the basis $(D,E,F)$, gives
+exactly the same four numbers at $M=-1/2$. Thus, for both magnetic
+values,
 \[
 \boxed{\begin{pmatrix}T'_M\\S'_M\end{pmatrix}
 =\begin{pmatrix}-1/2&\sqrt3/2\\ \sqrt3/2&1/2\end{pmatrix}
@@ -996,7 +1228,7 @@ The real matrix squares to the identity and has orthonormal rows.
 It therefore changes basis in the same two-dimensional doublet space
 at each $M$. Together with the unchanged quartet, it is a unitary
 change of basis in the full eight-dimensional Hilbert space.
-\erratum{The manual repeats the relative doublet-phase mismatch
+\erratum{The Instructor's Manual repeats the relative doublet-phase mismatch
 from 16.2.3 in its triplet--electron coupling. The expansions here
 use $J_-T_{1/2}=T_{-1/2}$ and $J_-T'_{1/2}=T'_{-1/2}$, so the
 same recoupling matrix applies to both $M$ values.}
@@ -1029,7 +1261,10 @@ Thus the Cartesian column transforms by
 $\mathbf r'=A\mathbf r$, where $A=Z(\gamma)B(\beta)Z(\alpha)$.
 
 The $l=1$ harmonics are linear combinations of the Cartesian
-components of $\hat{\mathbf r}$:
+components $(x,y,z)$ of $\hat{\mathbf r}$: since
+$\sin\theta\,e^{\pm i\varphi}=x\pm iy$ and $\cos\theta=z$,
+$Y_1^{\pm1}=\mp\sqrt{3/(8\pi)}\,(x\pm iy)$ and
+$Y_1^0=\sqrt{3/(4\pi)}\,z$, that is,
 \[
 \mathcal Y=\begin{pmatrix}Y_1^{-1}\\Y_1^0\\Y_1^1\end{pmatrix}
 =\sqrt{\frac3{4\pi}}\,Q\hat{\mathbf r},\qquad
@@ -1039,13 +1274,21 @@ Q=\begin{pmatrix}
 -1/\sqrt2&-i/\sqrt2&0
 \end{pmatrix}.
 \]
-Direct row products give $QQ^\dagger=I$. In the index convention
-of Eq.~(16.52),
-$Y_1^m(\Omega')=\sum_{m'}D^1_{m'm}Y_1^{m'}(\Omega)$; consequently
-the matrix acting on this column is $(D^1)^T$, and
+Direct row products give $QQ^\dagger=I$; for a square matrix this
+also gives $Q^\dagger Q=I$, so
+$\hat{\mathbf r}=\sqrt{4\pi/3}\,Q^\dagger\mathcal Y$.
+In the index convention of Eq.~(16.52),
+$Y_1^m(\Omega')=\sum_{m'}D^1_{m'm}Y_1^{m'}(\Omega)$, so the $m$th
+component of $\mathcal Y'$ is $\sum_{m'}(D^1)^T_{mm'}\mathcal Y_{m'}$:
+the matrix acting on this column is $(D^1)^T$. On the other hand,
 \[
-\mathcal Y'=\sqrt{\frac3{4\pi}}QA\hat{\mathbf r}
-=QAQ^\dagger\mathcal Y,\qquad
+\mathcal Y'=\sqrt{\frac3{4\pi}}\,Q\hat{\mathbf r}'
+=\sqrt{\frac3{4\pi}}\,QA\hat{\mathbf r}
+=QAQ^\dagger\mathcal Y.
+\]
+The three functions $Y_1^m$ are linearly independent, so the two
+matrices agree:
+\[
 \boxed{(D^1)^T=QAQ^\dagger,\quad A=Q^\dagger(D^1)^TQ}.
 \]
 The transpose here follows from the displayed summation indices.
@@ -1063,20 +1306,36 @@ s_\beta/\sqrt2&c_\beta&-s_\beta/\sqrt2\\
 \end{pmatrix},
 \]
 where $c_t=\cos t$, $s_t=\sin t$.
-For example the first diagonal entry of $H$ is
-$c_\beta/2+1/2$, and its first-row middle entry is
-$-s_\beta/\sqrt2$; the other entries follow from the same row-column
-products. Hence $(D^1)^T=E(\gamma)H(\beta)E(\alpha)$.
-Converting this back to Cartesian coordinates gives
+To obtain them, write $(u_{-1},u_0,u_1)^T=Q\hat{\mathbf r}$, i.e.
+$u_{\mp1}=\pm(x\mp iy)/\sqrt2$, $u_0=z$; inversely
+$x=(u_{-1}-u_1)/\sqrt2$, $iy=-(u_{-1}+u_1)/\sqrt2$, $z=u_0$.
+Under $Z(t)$, $x'\mp iy'=(x\mp iy)(\cos t\pm i\sin t)
+=e^{\pm it}(x\mp iy)$ and $z'=z$, which gives $E(t)$.
+Under $B(\beta)$, $x'=c_\beta x-s_\beta z$, $y'=y$,
+$z'=s_\beta x+c_\beta z$, so for example
+\[
+u'_{-1}=\frac{x'-iy'}{\sqrt2}
+=\frac{c_\beta(u_{-1}-u_1)+(u_{-1}+u_1)}{2}-\frac{s_\beta u_0}{\sqrt2},
+\]
+which is the first row of $H$; the rows for $u'_0=z'$ and
+$u'_1=-(x'+iy')/\sqrt2$ follow in the same way.
+Inserting $Q^\dagger Q=I$ between the factors of
+$QZ(\gamma)B(\beta)Z(\alpha)Q^\dagger$ gives
+$(D^1)^T=E(\gamma)H(\beta)E(\alpha)$.
+Converting this back to Cartesian coordinates, $A=Z(\gamma)B(\beta)Z(\alpha)$,
+and multiplying out the first two factors gives
 \[
 B(\beta)Z(\alpha)=
 \begin{pmatrix}
 c_\beta c_\alpha&c_\beta s_\alpha&-s_\beta\\
 -s_\alpha&c_\alpha&0\\
 s_\beta c_\alpha&s_\beta s_\alpha&c_\beta
-\end{pmatrix},
+\end{pmatrix}.
 \]
-and the final multiplication yields
+Multiplying by $Z(\gamma)$ on the left replaces the first row by
+$c_\gamma$ times the first row plus $s_\gamma$ times the second, and
+the second row by $-s_\gamma$ times the first plus $c_\gamma$ times
+the second; the third row is unchanged. This yields
 \[
 \boxed{A=
 \begin{pmatrix}
@@ -1101,32 +1360,41 @@ over the lower index, $l$?
 polynomials $r^lY_l^m$}. Their restrictions to the sphere have terms
 of the form $\cos^{l-p}\theta\sin^p\theta\erratum{e^{im\varphi}}$,
 or $x^{l-p-s}y^pz^s/r^l$. Alternatively examine the rotation
-invariance of the angular Laplacian. \erratum{The original angular
+invariance of the angular Laplacian. \erratum{The textbook's angular
 hint omits the azimuthal factor; homogeneity alone also needs the
 harmonicity condition to exclude lower-degree traces.}
 \solution
-Let $R$ be the fixed rotation, and let $U_Rf(\hat{\mathbf r})
-=f(R\hat{\mathbf r})$ denote its action on functions. A rotation
+Let $R$ be the fixed rotation, and let $U_Rf(\mathbf r)
+=f(R\mathbf r)$ denote its action on functions. A rotation
 preserves $r$, dot products, and the Cartesian Laplacian. The identity
 \[
 \nabla^2=\frac1{r^2}\frac{\partial}{\partial r}
 \left(r^2\frac{\partial}{\partial r}\right)-\frac{\mathbf L^2}{r^2}
 \]
-therefore implies $U_R\mathbf L^2=\mathbf L^2U_R$. Expand the
+can be solved as
+$\mathbf L^2=\partial_r(r^2\partial_r)-r^2\nabla^2$. Each term on the
+right commutes with $U_R$: $\nabla^2$ is rotation invariant, and
+$r$ and $\partial_r$ are unchanged because $R(r\hat{\mathbf r})
+=r\,R\hat{\mathbf r}$. Therefore $U_R\mathbf L^2=\mathbf L^2U_R$. Expand the
 rotated harmonic in the complete orthonormal spherical-harmonic basis:
 \[
 U_RY_l^m=\sum_{k=0}^{\infty}\sum_{q=-k}^{k}a_{kq}Y_k^q.
 \]
-Applying $\mathbf L^2$ in the two orders gives
+Applying $\mathbf L^2$ in the two orders, $\mathbf L^2U_RY_l^m
+=U_R\mathbf L^2Y_l^m=l(l+1)U_RY_l^m$, gives
 \[
 l(l+1)\sum_{kq}a_{kq}Y_k^q
 =\sum_{kq}k(k+1)a_{kq}Y_k^q.
 \]
-Multiply by $Y_{k'}^{q'*}$ and integrate:
+Multiply by $Y_{k'}^{q'*}$ and integrate, using orthonormality:
 \[
 \big[k'(k'+1)-l(l+1)\big]a_{k'q'}=0.
 \]
-For nonnegative integers $k',l$, the factor is zero only for $k'=l$.
+(Equivalently, $k'(k'+1)a_{k'q'}=\langle\mathbf L^2Y_{k'}^{q'},U_RY_l^m\rangle
+=\langle Y_{k'}^{q'},\mathbf L^2U_RY_l^m\rangle=l(l+1)a_{k'q'}$ by the
+Hermiticity of $\mathbf L^2$, without differentiating the series.)
+Since $k(k+1)$ increases strictly for $k\ge0$, the factor is zero only
+for $k'=l$.
 All other coefficients vanish, proving
 \[
 \boxed{U_RY_l^m=\sum_{q=-l}^{l}a_{lq}Y_l^q}.
@@ -1137,7 +1405,11 @@ condition is retained. The solid harmonic $r^lY_l^m$ is a homogeneous
 harmonic polynomial of degree $l$. Linear substitution by a rotation
 preserves its degree, and rotation invariance of $\nabla^2$ preserves
 its being harmonic. It therefore remains in the space spanned by
-$r^lY_l^{-l},\ldots,r^lY_l^l$. Homogeneity alone would not suffice:
+$r^lY_l^{-l},\ldots,r^lY_l^l$: writing a homogeneous polynomial of
+degree $l$ as $r^lf(\hat{\mathbf r})$, the displayed form of
+$\nabla^2$ gives $\nabla^2(r^lf)=r^{l-2}[l(l+1)f-\mathbf L^2f]$, so
+harmonicity means $\mathbf L^2f=l(l+1)f$, and the coefficient argument
+above leaves only the $Y_l^q$. Homogeneity alone would not suffice:
 a general homogeneous polynomial may contain traces such as
 $r^2$ times a lower-degree harmonic. Harmonicity excludes those traces.
 
@@ -1163,9 +1435,10 @@ Apply the addition theorem to two identical directions. Their
 separation angle is zero, so $\cos\gamma=1$, and $P_l(1)=1$:
 \[
 1=P_l(1)=\frac{4\pi}{2l+1}
-\sum_{m=-l}^{l}Y_l^{m*}(\theta,\varphi)Y_l^m(\theta,\varphi).
+\sum_{m=-l}^{l}Y_l^{m*}(\theta,\varphi)Y_l^m(\theta,\varphi),
 \]
-Thus
+that is, $\sum_{m}|Y_l^m(\theta,\varphi)|^2=(2l+1)/(4\pi)$ for every
+direction. Thus
 \[
 \boxed{\sum_{m=-l}^{l}\psi_m^*\psi_m
 =\frac{2l+1}{4\pi}|f(r)|^2}.
@@ -1196,7 +1469,9 @@ How should $\Phi$ be written for $r_{e}<r_{p}$?
 $(-e)(+e)=-e^2$, so it is an interaction energy. The electric
 potential of the protons alone has coefficient $+e/(4\pi\varepsilon_0)$.}
 For each proton define $\gamma_p$ as the angle between
-$\mathbf r_e$ and $\mathbf r_p$. With $t=r_p/r_e<1$,
+$\mathbf r_e$ and $\mathbf r_p$, so that
+$|\mathbf r_e-\mathbf r_p|^2=r_e^2-2r_er_p\cos\gamma_p+r_p^2$.
+With $t=r_p/r_e<1$, the Legendre generating function gives
 \[
 \frac1{|\mathbf r_e-\mathbf r_p|}
 =\frac1{r_e}(1-2t\cos\gamma_p+t^2)^{-1/2}
@@ -1207,11 +1482,14 @@ The addition theorem is
 P_L(\cos\gamma_p)=\frac{4\pi}{2L+1}
 \sum_{M=-L}^{L}Y_L^{M*}(\Omega_p)Y_L^M(\Omega_e).
 \]
-Substitution into each term of the proton sum gives exactly the
-first requested expansion.
+Substitution into each term of the proton sum, with the factor
+$-e^2/(4\pi\varepsilon_0)$, gives exactly the first requested
+expansion.
 
-For $r_e<r_p$, factor out $r_p$ instead. The same angular factor
-then gives
+For $r_e<r_p$, factor out $r_p$ instead:
+$|\mathbf r_e-\mathbf r_p|^{-1}
+=r_p^{-1}(1-2t'\cos\gamma_p+t'^2)^{-1/2}$ with $t'=r_e/r_p<1$.
+The same angular factor then gives
 \[
 \boxed{\Phi=-\frac{e^2}{4\pi\varepsilon_0}
 \sum_{p=1}^{Z}\frac1{r_p}
@@ -1260,27 +1538,44 @@ calculation is used in accounting for the mass difference in
 \par\nobreak\hfill\emph{ANS.}\enspace$\dfrac{6}{5}\dfrac{e^{2}}{R}$.
 \solution
 The angular average of the Coulomb expansion retains only $L=0$.
-Indeed $\int P_L(\hat{\mathbf r}_1\cdot\hat{\mathbf r}_2)
-\,d\Omega_2=4\pi\delta_{L0}$, so
+As in 16.3.4, for $r_1\ne r_2$,
+\[
+\frac1{r_{12}}=\sum_{L=0}^{\infty}\frac{r_<^L}{r_>^{L+1}}
+P_L(\cos\gamma),\qquad r_<=\min(r_1,r_2),\ r_>=\max(r_1,r_2).
+\]
+By the addition theorem and $\int Y_L^M\,d\Omega
+=\sqrt{4\pi}\int Y_0^{0*}Y_L^M\,d\Omega=\sqrt{4\pi}\,\delta_{L0}\delta_{M0}$,
+\[
+\int P_L(\hat{\mathbf r}_1\cdot\hat{\mathbf r}_2)\,d\Omega_2
+=\frac{4\pi}{2L+1}\sum_{M}Y_L^{M*}(\Omega_1)\sqrt{4\pi}\,
+\delta_{L0}\delta_{M0}=4\pi\delta_{L0},
+\]
+since $Y_0^0=1/\sqrt{4\pi}$. The remaining $\Omega_1$ integral
+gives another factor $4\pi$, so
 \[
 \int d\Omega_1\int d\Omega_2\,\frac1{r_{12}}
 =\frac{16\pi^2}{\max(r_1,r_2)}.
 \]
-The diagonal $r_1=r_2$ has zero measure in the remaining double
-radial integral. Split its square into the two equal triangles:
+After these angular integrations, $U=\int d\psi$ is the double radial
+integral in the first line below. The diagonal $r_1=r_2$ has zero
+measure in it. The integrand is symmetric in $r_1,r_2$, and on the
+triangle $r_2<r_1$ we have $\max(r_1,r_2)=r_1$. Split its square
+into the two equal triangles:
 \[
 \begin{aligned}
 U&=16\pi^2\rho^2\int_0^R\!\!\int_0^R
 \frac{r_1^2r_2^2}{\max(r_1,r_2)}\,dr_2\,dr_1\\
 &=32\pi^2\rho^2\int_0^R r_1\,dr_1
 \int_0^{r_1}r_2^2\,dr_2\\
-&=\frac{32\pi^2\rho^2}{3}\int_0^R r_1^4\,dr_1
+&=32\pi^2\rho^2\int_0^R r_1\,\frac{r_1^3}{3}\,dr_1
+=\frac{32\pi^2\rho^2}{3}\int_0^R r_1^4\,dr_1
 =\frac{32\pi^2\rho^2R^5}{15}.
 \end{aligned}
 \]
 Substitute $\rho^2=9e^2/(16\pi^2R^6)$:
 \[
 \boxed{U=\frac{32\cdot9}{15\cdot16}\frac{e^2}{R}
+=\frac{288}{240}\frac{e^2}{R}
 =\frac65\frac{e^2}{R}}.
 \]
 There is no factor $1/2$: this is the mutual energy of two distinct
@@ -1309,16 +1604,25 @@ Put $\lambda=2Z/a_0$ and $N=Z^3/(\pi a_0^3)$, so
 $|\psi(r)|^2=Ne^{-\lambda r}$. Its normalization is
 \[
 4\pi N\int_0^\infty r^2e^{-\lambda r}\,dr
-=4\pi N\,\frac{2}{\lambda^3}=1.
+=4\pi N\,\frac{2}{\lambda^3}
+=\frac{8\pi Z^3}{\pi a_0^3}\,\frac{a_0^3}{8Z^3}=1.
 \]
-The angular integration is the same as in 16.3.5. Splitting the
-radial quadrant into $r_2<r_1$ and $r_1<r_2$ gives
+The angular integration is the same as in 16.3.5: it replaces
+$1/|\mathbf r_1-\mathbf r_2|$ by $16\pi^2/\max(r_1,r_2)$, so
+\[
+U=16\pi^2e^2N^2\int_0^\infty\!\!\int_0^\infty
+\frac{r_1^2r_2^2e^{-\lambda(r_1+r_2)}}{\max(r_1,r_2)}\,dr_2\,dr_1.
+\]
+The integrand is symmetric, so splitting the radial quadrant into
+the equal halves $r_2<r_1$ and $r_1<r_2$ gives
 \[
 U=32\pi^2e^2N^2
 \int_0^\infty r_1e^{-\lambda r_1}\,dr_1
 \int_0^{r_1}r_2^2e^{-\lambda r_2}\,dr_2.
 \]
-Set $x=\lambda r_2$, $y=\lambda r_1$ and reverse the order:
+Set $x=\lambda r_2$, $y=\lambda r_1$, so that
+$r_1\,dr_1\,r_2^2\,dr_2=\lambda^{-5}y\,dy\,x^2\,dx$ and the region
+$0<r_2<r_1$ becomes $0<x<y$, and reverse the order:
 \[
 U=\frac{32\pi^2e^2N^2}{\lambda^5}
 \int_0^\infty x^2e^{-x}
@@ -1330,6 +1634,7 @@ Integration by parts gives
 =[-ye^{-y}]_x^\infty+\int_x^\infty e^{-y}dy
 =(x+1)e^{-x}.
 \]
+The $x$ integrand is therefore $x^2(x+1)e^{-2x}=(x^3+x^2)e^{-2x}$.
 For $I_k=\int_0^\infty x^ke^{-2x}dx$ and $k\ge1$,
 \[
 I_k=\left[-\frac{x^ke^{-2x}}2\right]_0^\infty
@@ -1343,10 +1648,13 @@ Hence the dimensionless integral is
 \int_0^\infty(x^3+x^2)e^{-2x}\,dx
 =\frac{3!}{2^4}+\frac{2!}{2^3}=\frac38+\frac14=\frac58.
 \]
-The prefactor simplifies without an approximation:
+The prefactor simplifies without an approximation, using
+$N^2=Z^6/(\pi^2a_0^6)$ and $(2Z/a_0)^5=32Z^5/a_0^5$:
 \[
 \frac{32\pi^2e^2}{(2Z/a_0)^5}
-\frac{Z^6}{\pi^2a_0^6}=\frac{e^2Z}{a_0}.
+\frac{Z^6}{\pi^2a_0^6}
+=\frac{32e^2a_0^5}{32Z^5}\,\frac{Z^6}{a_0^6}
+=\frac{e^2Z}{a_0}.
 \]
 Thus
 \[
@@ -1380,17 +1688,14 @@ Expand \erratum{$1/r_{12}$}.
 Apply the Legendre polynomial addition theorem and show that the
 angular dependence of $V(\mathbf{r}_{1})$ drops out.
 \par\nobreak\hfill\emph{ANS.}\enspace
-$V(r_{1})=-\dfrac{e}{4\pi\varepsilon_{0}}\dfrac{1}{2r_{1}}
-\left[\gamma\left(3,\dfrac{2r_{1}}{a_{0}}\right)
-+\erratum{\dfrac{2r_{1}}{a_{0}}}\Gamma\left(2,\dfrac{2r_{1}}{a_{0}}\right)\right]$, where
+$V(r_{1})=-\dfrac{e}{4\pi\varepsilon_{0}}
+\left[\dfrac{1}{2r_{1}}\gamma\left(3,\dfrac{2r_{1}}{a_{0}}\right)
++\dfrac{1}{a_{0}}\Gamma\left(2,\dfrac{2r_{1}}{a_{0}}\right)\right]$, where
 $\gamma$ and $\Gamma$ are incomplete gamma functions, Eq.~(13.73).
 \solution
-\erratum{The supplied transcription incorrectly puts both incomplete
-gamma functions under $1/(2r_1)$. The actual textbook answer
-(printed p.~807) has coefficients $1/(2r_1)$ and $1/a_0$,
-respectively. The latter is restored below and in the answer line.
-The textbook's instruction ``Expand $r_{12}$'' must instead say
-``Expand $1/r_{12}$'', the Coulomb kernel in the integral.}
+\erratum{The textbook's instruction ``Expand $r_{12}$'' must instead say
+``Expand $1/r_{12}$'', since $1/r_{12}$ is the Coulomb kernel in the
+integral.}
 Write $R=r_1$ and $r=r_2$. Expand the inverse separation:
 \[
 \frac1{r_{12}}=\sum_{l=0}^{\infty}\frac{r_<^l}{r_>^{l+1}}
@@ -1400,15 +1705,22 @@ Y_l^m(\Omega_1)Y_l^{m*}(\Omega_2).
 The density is independent of $\Omega_2$. Because
 $\int Y_l^{m*}\,d\Omega_2=\sqrt{4\pi}\delta_{l0}\delta_{m0}$
 and $Y_0^0(\Omega_1)=1/\sqrt{4\pi}$, its angular integral is
-$4\pi/r_>$. Thus no choice of polar axis is needed, and
+$4\pi\cdot Y_0^0(\Omega_1)\sqrt{4\pi}/r_>=4\pi/r_>$. Thus no choice of
+polar axis is needed. With $d^3r_2=r^2dr\,d\Omega_2$, the factor
+$4\pi/(\pi a_0^3)=4/a_0^3$, and $r_>=R$ for $r<R$, $r_>=r$ for $r>R$,
 \[
 V(R)=-\frac{e}{4\pi\varepsilon_0}\frac4{a_0^3}
 \left[\frac1R\int_0^R r^2e^{-2r/a_0}\,dr
 +\int_R^\infty re^{-2r/a_0}\,dr\right].
 \]
-Put $q=2R/a_0$, $t=2r/a_0$. By the definitions
+Put $q=2R/a_0$ and $r=a_0t/2$, so $dr=(a_0/2)\,dt$. By the definitions
 $\gamma(s,q)=\int_0^q t^{s-1}e^{-t}dt$ and
 $\Gamma(s,q)=\int_q^\infty t^{s-1}e^{-t}dt$,
+\[
+\int_0^R r^2e^{-2r/a_0}\,dr=\frac{a_0^3}{8}\,\gamma(3,q),\qquad
+\int_R^\infty re^{-2r/a_0}\,dr=\frac{a_0^2}{4}\,\Gamma(2,q),
+\]
+and multiplying by $4/a_0^3$ gives
 \[
 \boxed{V(R)=-\frac{e}{4\pi\varepsilon_0}
 \left[\frac{\gamma(3,q)}{2R}+\frac{\Gamma(2,q)}{a_0}\right]}.
@@ -1427,14 +1739,23 @@ For clarity, the required integrations by parts are
 =e^{-q}(q+1).
 \end{aligned}
 \]
-Since $q/(2R)=1/a_0$, substitution cancels the $q^2$ and $q$
-radial contributions to leave
+Since $q/(2R)=1/a_0$, so that $q^2/(2R)=q/a_0$ and $2q/(2R)=2/a_0$,
+substitution gives
+\[
+\frac{\gamma(3,q)}{2R}+\frac{\Gamma(2,q)}{a_0}
+=\frac1R-e^{-q}\left(\frac{q}{a_0}+\frac2{a_0}+\frac1R\right)
++e^{-q}\left(\frac{q}{a_0}+\frac1{a_0}\right),
+\]
+in which the $q/a_0$ terms cancel and $2/a_0-1/a_0=1/a_0$, leaving
 \[
 \boxed{V(R)=-\frac{e}{4\pi\varepsilon_0}
 \left[\frac1R-e^{-2R/a_0}\left(\frac1R+\frac1{a_0}\right)\right]}.
 \]
-For example, $(1-e^{-2R/a_0})/R\to2/a_0$ as $R\to0$,
-so $V(0)=-e/(4\pi\varepsilon_0a_0)$. At large $R$ the
+For example, writing the bracket as
+$(1-e^{-2R/a_0})/R-e^{-2R/a_0}/a_0$ and using
+$(1-e^{-2R/a_0})/R\to2/a_0$ as $R\to0$ (since $1-e^{-x}=x+O(x^2)$)
+gives the limit
+$2/a_0-1/a_0$, so $V(0)=-e/(4\pi\varepsilon_0a_0)$. At large $R$ the
 exponential disappears and the potential is that of charge $-e$,
 as required.
 
