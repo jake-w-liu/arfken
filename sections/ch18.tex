@@ -3064,20 +3064,28 @@ x^{1-c}\,{}_{2}F_{1}(a+1-c,b+1-c;2-c;x)
 $c=-2$?
 \end{enumerate}
 \solution
-(a) Write $F(a,b;c;x)={}_2F_1(a,b;c;x)$.  Its coefficient
-recurrence, obtained by substituting $y=\sum_{j\ge0}d_jx^j$ into
-$x(1-x)y''+[c-(a+b+1)x]y'-aby=0$, is
+(a) Write $F(a,b;c;x)={}_2F_1(a,b;c;x)$ and substitute
+$y=\sum_{j\ge0}d_jx^j$ into
+$x(1-x)y''+[c-(a+b+1)x]y'-aby=0$.  In the coefficient of $x^j$,
+the terms $xy''$ and $cy'$ contribute $(j+1)jd_{j+1}+c(j+1)d_{j+1}$,
+and the other three contribute
+$-[j(j-1)+(a+b+1)j+ab]d_j=-(j+a)(j+b)d_j$.  Hence
 \[
 (j+1)(j+c)d_{j+1}=(j+a)(j+b)d_j.
 \]
-The two Frobenius exponents at zero are $0$ and $1-c$.
+For $y=x^s(1+O(x))$ the lowest power $x^{s-1}$ gives the indicial
+equation $s(s-1)+cs=s(s+c-1)=0$, so the two Frobenius exponents at
+zero are $0$ and $1-c$.
 For nonintegral $a,b$, neither numerator series terminates.
 If $c=1$, the two displayed expressions coincide term for term.
-If $c=0,-1,-2,\ldots$, the first series encounters $(c)_j=0$
-with nonzero numerator, while the second has the positive integer
+If $c=0,-1,-2,\ldots$, the first series encounters
+$(c)_j=c(c+1)\cdots(c+j-1)=0$ for $j\ge1-c$, with nonzero
+numerator $(a)_j(b)_j$, while the second has the positive integer
 denominator parameter $2-c$ and is well defined near zero.
 If $c=2,3,\ldots$, the first series is well defined and the
-second encounters the nonpositive integer parameter $2-c$.
+second encounters the nonpositive integer parameter $2-c$, again
+with nonzero numerator $(a+1-c)_j(b+1-c)_j$ because $a,b$ are
+nonintegral.
 Thus precisely one of these two unmodified formulas is usable
 (or they are identical when $c=1$).
 
@@ -3090,9 +3098,14 @@ $y_1$, reduction of order constructs a second solution:
 \[
 y_2=y_1\int^x\frac{s^{-c}(1-s)^{c-a-b-1}}{y_1(s)^2}\,ds.
 \]
-Indeed the ODE's first-derivative coefficient is
-$c/x+(c-a-b-1)/(1-x)$, so the numerator in this integral is
-$\exp(-\int p(x)dx)$.  Its Wronskian is that nonzero numerator.
+Indeed, written as $y''+py'+qy=0$, the ODE has, by partial
+fractions,
+\[
+p=\frac{c-(a+b+1)x}{x(1-x)}=\frac cx+\frac{c-a-b-1}{1-x},
+\]
+so $\exp(-\int p\,dx)=x^{-c}(1-x)^{c-a-b-1}$ is the numerator in
+this integral.  The Wronskian $y_1y_2'-y_1'y_2=y_1^2(y_2/y_1)'$
+equals that nonzero numerator.
 Initial-value uniqueness then extends the independent pair across any
 zeros of $y_1$ to the whole interval avoiding $0,1$.
 The resonant Frobenius construction generally introduces a logarithm;
@@ -3100,6 +3113,8 @@ the loss is in the displayed pair of formulas, not the dimension
 of the solution space.
 
 (b) For $a=-1,c=-2$, termination occurs before the zero denominator:
+$(a)_j=0$ for $j\ge2$, while $(c)_1=-2$, $(c)_2=2$ and $(c)_j=0$
+only for $j\ge3$.  With $2-c=4$, $a+1-c=2$, $b+1-c=b+3$,
 \[
 y_1=1+\frac{(-1)b}{-2}x=1+\frac b2x,
 \qquad
@@ -3113,12 +3128,19 @@ Direct substitution of $y_1'=b/2$, $y_1''=0$ gives
 $(-2-bx)b/2+b(1+bx/2)=0$.
 For the other solution, set $y=x^3u$ and differentiate:
 $y'=3x^2u+x^3u'$, $y''=6xu+6x^2u'+x^3u''$.
-After substitution and division by $x^3$, the equation is
+After substitution the $u''$ terms are $x^4(1-x)u''$, the $u'$ terms
+$[6x^3(1-x)-2x^3-bx^4]u'=x^3[4-(b+6)x]u'$, and the $u$ terms
+$[6x^2(1-x)-6x^2-3bx^3+bx^3]u=-2(b+3)x^3u$.
+Division by $x^3$ gives
 \[
 x(1-x)u''+[4-(b+6)x]u'-2(b+3)u=0,
 \]
-which is the equation for $F(2,b+3;4;x)$.
-Since $y_1=1+O(x)$ and $y_2=x^3+O(x^4)$, they are independent.
+which is the hypergeometric equation with parameters $2,b+3;4$,
+since $2+(b+3)+1=b+6$ and $2\cdot(b+3)=2(b+3)$; its analytic
+solution with value one at zero is $F(2,b+3;4;x)$.
+Since $y_1=1+O(x)$ and $y_2=x^3+O(x^4)$, they are independent:
+here, unlike part (a), both formulas give solutions, and no
+logarithm is needed.
 The coefficient recurrence also shows exactly the extra freedom:
 $d_1=b d_0/2$, $d_2=0$, and at $j=2$ both sides vanish, leaving
 $d_3$ free.  Here $F(-1,b;-2;x)$ means the explicitly terminating
@@ -3134,7 +3156,15 @@ hypergeometric contiguous function relation given as Eq.~(18.126).
 To avoid confusing the hypergeometric argument with the polynomial
 variable, put $u=(1-z)/2$ and write the contiguous relation as
 $AF(a,b;c;u)=BF(a-1,b+1;c;u)+CF(a+1,b-1;c;u)$.
-Substitution into Eq.~(18.126) gives the following coefficients:
+In this notation Eq.~(18.126) has
+\begin{gather*}
+A=(a-b)\{c(a+b-1)+1-a^2-b^2+[(a-b)^2-1](1-u)\},\\
+B=(c-a)(a-b+1)b,\qquad C=(c-b)(a-b-1)a.
+\end{gather*}
+We use the hypergeometric representations
+$P_n(z)=F(-n,n+1;1;u)$, $T_n(z)=F(-n,n;\frac12;u)$ and
+$U_n(z)=(n+1)F(-n,n+2;\frac32;u)$.
+Their parameter sets give the following coefficients:
 \[
 \begin{array}{c|c|c|c}
 (a,b,c)&A&B&C\\\hline
@@ -3144,16 +3174,27 @@ Substitution into Eq.~(18.126) gives the following coefficients:
  &-(n+2)(2n+1)(2n+3)/2&-n(2n+1)(2n+3)/2
 \end{array}
 \]
-For example, in the Legendre row $a-b=-2n-1$, and the expression
-in braces on the left is
-\[
+For example, in the Legendre row $a-b=-2n-1$, $c(a+b-1)=0$ and
+$(a-b)^2-1=4n(n+1)$, so the expression in braces on the left is
+\begin{align*}
 1-n^2-(n+1)^2+4n(n+1)(1-u)
-=2n(n+1)(1-2u)=2n(n+1)z.
-\]
+&=-2n(n+1)+4n(n+1)(1-u)\\
+&=2n(n+1)(1-2u)=2n(n+1)z.
+\end{align*}
 This gives the first entry and illustrates the substitution used
-for each row.
+for each row.  In the two Chebyshev rows, $c(a+b-1)+1-a^2-b^2$
+equals $\frac12-2n^2=-\frac12(4n^2-1)$ and
+$-2n^2-4n-\frac32=-\frac12(2n+1)(2n+3)$, while $(a-b)^2-1$ equals
+$4n^2-1$ and $(2n+1)(2n+3)$.  Since $(1-u)-\frac12=z/2$, the
+braces are $(4n^2-1)z/2$ and $(2n+1)(2n+3)z/2$; multiplication by
+$a-b=-2n$ and $-2(n+1)$ gives the other two entries of $A$.
+The entries $B,C$ are direct products, e.g.\ $B=(1+n)(-2n)(n+1)$
+and $C=(-n)(-2n-2)(-n)$ in the Legendre row.
 
-For Legendre, the three functions are $P_n,P_{n+1},P_{n-1}$.
+In each row, $F(a-1,b+1;c;u)$ and $F(a+1,b-1;c;u)$ are the
+hypergeometric functions of that row with $n$ replaced by $n+1$
+and $n-1$, since $a\mp1=-(n\pm1)$ and $b$ moves with it.
+For Legendre, the three functions are therefore $P_n,P_{n+1},P_{n-1}$.
 Divide the first row by $-2n(n+1)$ for $n\ge1$:
 \[
 \boxed{(n+1)P_{n+1}(z)-(2n+1)zP_n(z)+nP_{n-1}(z)=0}.
@@ -3206,19 +3247,25 @@ x^{2}\big)$.\par\nobreak
 x^{2}\big)$.\par\nobreak
 \hfill(d) $x^{-1}U_{2n+1}(x)=(-1)^{n}(2n+2)\,
 {}_{2}F_{1}\big(-n,n+2;\tfrac{3}{2};x^{2}\big)$.
-\erratum{Interpret the quotients at $x=0$ by their removable limits.}\par\nobreak
+\erratum{Interpret the quotients at $x=0$ by their removable limits,
+since $x^{-1}$ is undefined there.}\par\nobreak
 \solution
-Take $n=0,1,2,\ldots$ and $t=x^2$.  For an even function
-$Y(x)=f(t)$,
+Take $n=0,1,2,\ldots$ and $t=x^2$.  The polynomials $T_{2n}$ and
+$U_{2n}$ are even and $T_{2n+1}$, $U_{2n+1}$ are odd, so each has
+the form $f(t)$ or $xf(t)$ with $f$ a polynomial.  For an even
+function $Y(x)=f(t)$, the chain rule $d/dx=2x\,d/dt$ gives
 \[
 Y'=2xf',\qquad Y''=2f'+4tf''.
 \]
 For an odd function $Y(x)=xf(t)$,
 \[
-Y'=f+2tf',\qquad Y''=x(6f'+4tf'').
+Y'=f+2tf',\qquad Y''=2xf'+4xf'+4xtf''=x(6f'+4tf'').
 \]
 Substitution into the type-I equation
-$(1-x^2)Y''-xY'+N^2Y=0$ gives, respectively,
+$(1-x^2)Y''-xY'+N^2Y=0$ turns its left side into
+$4t(1-t)f''+(2-4t)f'+N^2f$ for even $Y$ and into
+$x[4t(1-t)f''+(6-8t)f'+(N^2-1)f]$ for odd $Y$.
+Division by $4$ (and by $x$) gives, respectively,
 \[
 t(1-t)f''+(\tfrac12-t)f'+\frac{N^2}{4}f=0,
 \]
@@ -3226,11 +3273,14 @@ t(1-t)f''+(\tfrac12-t)f'+\frac{N^2}{4}f=0,
 t(1-t)f''+(\tfrac32-2t)f'+\frac{N^2-1}{4}f=0.
 \]
 With $N=2n$ in the first and $N=2n+1$ in the second, comparison
-with $t(1-t)f''+[c-(a+b+1)t]f'-abf=0$ gives
-$(a,b,c)=(-n,n,\tfrac12)$ and $(-n,n+1,\tfrac32)$.
+with $t(1-t)f''+[c-(a+b+1)t]f'-abf=0$ gives $c=\tfrac12$, $a+b=0$,
+$ab=-n^2$ and $c=\tfrac32$, $a+b=1$, $ab=-[(2n+1)^2-1]/4=-n(n+1)$,
+that is, $(a,b,c)=(-n,n,\tfrac12)$ and $(-n,n+1,\tfrac32)$.
 
 For type II, use $(1-x^2)Y''-3xY'+N(N+2)Y=0$ instead.
-The corresponding equations are
+Compared with type I, the extra term $-2xY'$ adds $-4tf'$ in the
+even case and $-x(2f+4tf')$ in the odd case, and $N^2$ becomes
+$N(N+2)$.  Dividing as before, the corresponding equations are
 \[
 t(1-t)f''+(\tfrac12-2t)f'+\frac{N(N+2)}4f=0,
 \]
@@ -3238,19 +3288,27 @@ t(1-t)f''+(\tfrac12-2t)f'+\frac{N(N+2)}4f=0,
 t(1-t)f''+(\tfrac32-3t)f'
  +\frac{N(N+2)-3}{4}f=0.
 \]
-Their parameters are $(-n,n+1,\tfrac12)$ and
-$(-n,n+2,\tfrac32)$.  All four analytic solutions at $t=0$
-are uniquely determined by their constant term, because $c$ is
-positive and the coefficient recurrence has no zero denominator.
+With $N=2n$, $a+b=1$ and $ab=-n(n+1)$; with $N=2n+1$, $a+b=2$ and
+$ab=-[(2n+1)(2n+3)-3]/4=-n(n+2)$.  The parameters are therefore
+$(-n,n+1,\tfrac12)$ and $(-n,n+2,\tfrac32)$.
+All four analytic solutions at $t=0$ are uniquely determined by
+their constant term, because $c$ is positive and the coefficient
+recurrence $(j+1)(j+c)d_{j+1}=(j+a)(j+b)d_j$ of Exercise~18.5.1
+has no zero factor $j+c$.
 The needed constants are
 \[
 T_{2n}(0)=U_{2n}(0)=(-1)^n,
 \quad T'_{2n+1}(0)=(-1)^n(2n+1),
 \quad U'_{2n+1}(0)=(-1)^n(2n+2).
 \]
-For example, with $x=\cos\theta$, $d/dx=-\csc\theta\,d/d\theta$,
-these follow at $\theta=\pi/2$ from $T_N=\cos N\theta$ and
-$U_N=\sin((N+1)\theta)/\sin\theta$.
+To obtain them put $x=\cos\theta$, so that $x=0$ at
+$\theta=\pi/2$ and $d/dx=-\csc\theta\,d/d\theta$.  From
+$T_N=\cos N\theta$, $T_N(0)=\cos(N\pi/2)$ and
+$T_N'=N\sin N\theta/\sin\theta$, so $T_N'(0)=N\sin(N\pi/2)$.  From
+$U_N=\sin((N+1)\theta)/\sin\theta$, $U_N(0)=\sin((N+1)\pi/2)$ and,
+since $\cos\theta=0$ at $\theta=\pi/2$,
+$U_N'(0)=-(N+1)\cos((N+1)\pi/2)$.  With $N=2n$ or $N=2n+1$ these
+are the displayed values.
 Since $F(a,b;c;0)=1$, the four answers are
 \begin{align*}
 T_{2n}(x)&=\boxed{(-1)^nF(-n,n;\tfrac12;x^2)},\\
@@ -3268,10 +3326,28 @@ these are polynomial identities, so hold also for complex $x$.
 the hypergeometric representations of the Chebyshev functions.
 \solution
 In Eqs.~(18.133)--(18.135), the hypergeometric argument is
-$(1-x)/2$, which is zero at $x=1$.  Since its series starts with
-one, the prefactors follow from endpoint normalization:
+$u=(1-x)/2$, which is zero at $x=1$.  Each representation is a
+constant multiple of a hypergeometric series: with $x=1-2u$,
+$d/dx=-\frac12\,d/du$ and $1-x^2=4u(1-u)$, the type-I and type-II
+equations $(1-x^2)y''-xy'+n^2y=0$ and
+$(1-x^2)y''-3xy'+n(n+2)y=0$ become
+\begin{gather*}
+u(1-u)y_{uu}+(\tfrac12-u)y_u+n^2y=0,\\
+u(1-u)y_{uu}+(\tfrac32-3u)y_u+n(n+2)y=0,
+\end{gather*}
+the hypergeometric equations with $(a,b,c)=(-n,n,\frac12)$ and
+$(-n,n+2,\frac32)$.  The polynomials $T_n$, $U_n$ and
+$V_n/\sqrt{1-x^2}=U_{n-1}$ are analytic at $u=0$, where the other
+exponent $1-c=\pm\frac12$ is not an integer, so each is a constant
+times the corresponding $F(a,b;c;u)$ (for $U_{n-1}$ replace $n$ by
+$n-1$ in the type-II parameters, giving $F(-n+1,n+1;\frac32;u)$).
+Since that series starts with one, the constants follow from
+endpoint normalization, $\theta=\arccos x\to0$:
 \[
-T_n(1)=1,\qquad U_n(1)=n+1,\qquad
+T_n(1)=\cos0=1,\qquad
+U_n(1)=\lim_{\theta\to0}\frac{\sin((n+1)\theta)}{\sin\theta}=n+1,
+\]
+\[
 \lim_{x\to1^-}\frac{V_n(x)}{\sqrt{1-x^2}}=U_{n-1}(1)=n.
 \]
 Thus those three factors are, respectively,
@@ -3285,7 +3361,7 @@ separate solution $\arccos x$.
 For the four $x^2$ representations in Exercise~18.5.3, evaluate
 at $x=0$ instead.  The even values are $(-1)^n$; for each odd
 quotient use $\lim_{x\to0}Y(x)/x=Y'(0)$.  Differentiating the
-trigonometric representations gives
+trigonometric representations (as in Exercise~18.5.3) gives
 \[
 T_N'(0)=N\sin(N\pi/2),\qquad
 U_N'(0)=-(N+1)\cos((N+1)\pi/2).
@@ -3310,21 +3386,33 @@ Q_{\nu}(z)=\frac{\pi^{1/2}\nu!}{\Gamma\big(\nu+\frac{3}{2}\big)
 \]
 where $|z| > 1$, $|\arg z| < \pi$, and
 $\nu\neq-1,-2,-3,\cdots$.
-\erratum{When $\nu+3/2$ is a nonpositive integer, interpret ${}_2F_1/\Gamma(\nu+3/2)$ as the regularized hypergeometric function, as defined in the solution; use $\nu!=\Gamma(\nu+1)$.}\par\nobreak
+\erratum{When $\nu+3/2$ is a nonpositive integer, interpret ${}_2F_1/\Gamma(\nu+3/2)$ as the regularized hypergeometric function, as defined in the solution, since the series ${}_2F_1$ alone is then undefined; use $\nu!=\Gamma(\nu+1)$.}\par\nobreak
 \solution
-Put $r=\nu+1$, $t=z^{-2}$ and $Q=z^{-r}f(t)$.  Chain-rule
-differentiation gives
+Put $r=\nu+1$, $t=z^{-2}$ and $Q=z^{-r}f(t)$, so that
+$dt/dz=-2z^{-3}=-2t/z$.  The product and chain rules give
 \[
-Q'=z^{-r-1}[-rf-2tf'],\qquad
-Q''=z^{-r-2}[r(r+1)f+(4r+6)tf'+4t^2f''].
+Q'=-rz^{-r-1}f+z^{-r}f'\frac{dt}{dz}=z^{-r-1}[-rf-2tf'].
 \]
-Substitution into $(1-z^2)Q''-2zQ'+\nu(\nu+1)Q=0$
-and division by $-4tz^{-r}$ gives
+The bracket has derivative
+$-[(r+2)f'+2tf'']\,dt/dz=(2t/z)[(r+2)f'+2tf'']$, so
+\begin{align*}
+Q''&=-(r+1)z^{-r-2}[-rf-2tf']+2tz^{-r-2}[(r+2)f'+2tf'']\\
+ &=z^{-r-2}[r(r+1)f+(4r+6)tf'+4t^2f''].
+\end{align*}
+Substitute into $(1-z^2)Q''-2zQ'+\nu(\nu+1)Q=0$, using
+$(1-z^2)z^{-2}=t-1$ and $\nu(\nu+1)=r(r-1)$.  The left side becomes
+$z^{-r}$ times
+\[
+4t^2(t-1)f''+[(4r+6)t(t-1)+4t]f'+[r(r+1)(t-1)+2r+r(r-1)]f,
+\]
+and the last bracket is $r(r+1)t$.  Division by $-4tz^{-r}$ and
+$r=\nu+1$ give
 \[
 t(1-t)f''+[\nu+\tfrac32-(\nu+\tfrac52)t]f'
  -\frac{(\nu+1)(\nu+2)}4 f=0.
 \]
-Thus
+Thus $c=\nu+\frac32$, $a+b=\nu+\frac32$ and
+$ab=(\nu+1)(\nu+2)/4$, so
 \[
 a=\frac{\nu+1}{2},\quad b=\frac{\nu+2}{2},\quad
 \boxed{c=\nu+\tfrac32},
@@ -3348,8 +3436,9 @@ normalization, is recorded in
 \href{https://dlmf.nist.gov/14.12.E6}{DLMF 14.12.6} and
 \href{https://dlmf.nist.gov/14.3.E10}{14.3.10}.
 Multiply by $z^{\nu+1}$ and let $z\to+\infty$.
-For $z\ge2$, the integrand is bounded by a constant multiple
-of $(1+\cosh u)^{-\nu-1}$, so dominated convergence gives
+The integrand becomes $[1+\sqrt{1-z^{-2}}\cosh u]^{-\nu-1}$, which
+for $z\ge2$ is at most $(\sqrt3/2)^{-\nu-1}(1+\cosh u)^{-\nu-1}$,
+an integrable function.  Dominated convergence gives
 \begin{align*}
 A&=\int_0^\infty(1+\cosh u)^{-\nu-1}du\\
  &=2^{-\nu}\int_0^\infty\operatorname{sech}^{2\nu+2}v\,dv
@@ -3358,8 +3447,17 @@ A&=\int_0^\infty(1+\cosh u)^{-\nu-1}du\\
  \qquad(s=\tanh^2v)\\
  &=\frac{\sqrt\pi\,\Gamma(\nu+1)}{2^{\nu+1}\Gamma(\nu+3/2)}.
 \end{align*}
-The decaying Frobenius solution is unique in this initial parameter
-range; the other infinity exponent is $\nu$.  Therefore
+Here $1+\cosh2v=2\cosh^2v$ and $du=2\,dv$; next
+$ds=2\tanh v\operatorname{sech}^2v\,dv$ and
+$\operatorname{sech}^2v=1-s$ give
+$\operatorname{sech}^{2\nu+2}v\,dv=\frac12s^{-1/2}(1-s)^\nu ds$;
+the last integral is
+$B(\frac12,\nu+1)=\Gamma(\frac12)\Gamma(\nu+1)/\Gamma(\nu+\frac32)$.
+At $t=0$ the other Frobenius exponent is $1-c=-\nu-\frac12<0$, so
+every solution of the $f$ equation independent of $F$ is unbounded
+as $t\to0$ (in $Q$ it grows like $z^{-r}t^{1-c}=z^\nu$).  Since
+$Q_\nu$ satisfies Legendre's equation and $f=z^{\nu+1}Q_\nu\to A$
+stays bounded, $f=AF(a,b;c;t)$.  Therefore
 \[
 \boxed{Q_\nu(z)=
  \frac{\sqrt\pi\,\Gamma(\nu+1)}{\Gamma(\nu+3/2)(2z)^{\nu+1}}
@@ -3370,11 +3468,14 @@ Analytic continuation in degree and in $z$ gives the requested
 exterior branch, with $(2z)^{\nu+1}=\exp((\nu+1)\operatorname{Log}(2z))$
 and $|\arg z|<\pi$.  The condition $|z|>1$ makes $|t|<1$.
 At nonnegative integer $\nu=n$, the leading coefficient also reduces
-to $n!/(2n+1)!!$, agreeing with the ordinary $Q_n$ normalization.
+to $n!/(2n+1)!!$, since $\Gamma(n+\frac32)=(2n+1)!!\sqrt\pi/2^{n+1}$,
+agreeing with the ordinary $Q_n$ normalization.
 
-\erratum{At $\nu=-3/2,-5/2,\ldots$, the displayed product must
-be read as a regularized limit; its separate hypergeometric factor
-is undefined.}  A formula that includes these values directly is
+At $\nu=-3/2,-5/2,\ldots$ (the case of the red note in the
+statement) the displayed product must be read as a regularized
+limit, since its separate hypergeometric factor is undefined.
+Using $\Gamma(c)(c)_j=\Gamma(c+j)$, a formula that includes these
+values directly is
 \[
 Q_\nu(z)=\frac{\sqrt\pi\,\Gamma(\nu+1)}{(2z)^{\nu+1}}
  \sum_{j=0}^\infty
@@ -3400,23 +3501,26 @@ Show that
 \[
 B_{x}(p,q)=p^{-1}x^{p}\,{}_{2}F_{1}(p,1-q;p+1;x).
 \]
-\erratum{Initially take $0\le x<1$ and $\Re p>0$; at $x=1$ also require $\Re q>0$.}\par\nobreak
+\erratum{Initially take $0\le x<1$ and $\Re p>0$, so that the integral converges at $t=0$; at $x=1$ also require $\Re q>0$, for convergence at $t=1$.}\par\nobreak
 \solution
 First take $0<x<1$, $\Re p>0$ and arbitrary complex $q$, using
 real logarithms for positive $t$ and $1-t$.
-The binomial series is uniformly convergent for $0\le t\le x$:
+The binomial series $(1-t)^{-\alpha}=\sum_j(\alpha)_jt^j/j!$ with
+$\alpha=1-q$ is uniformly convergent for $0\le t\le x$:
 \[
 (1-t)^{q-1}=\sum_{j=0}^\infty\frac{(1-q)_j}{j!}t^j.
 \]
 Its product with $t^{p-1}$ is integrable at zero, and termwise
-integration therefore gives
+integration, with $\int_0^xt^{p+j-1}dt=x^{p+j}/(p+j)$, therefore
+gives
 \[
 B_x(p,q)=\sum_{j=0}^\infty
  \frac{(1-q)_j}{j!}\frac{x^{p+j}}{p+j}.
 \]
 The finite-product cancellation
 \[
-\frac{(p)_j}{(p+1)_j}=\frac{p}{p+j}
+\frac{(p)_j}{(p+1)_j}=\frac{p(p+1)\cdots(p+j-1)}{(p+1)\cdots(p+j)}
+=\frac{p}{p+j}
 \]
 holds also at $j=0$.  Insert it into the last series:
 \[
@@ -3426,7 +3530,10 @@ holds also at $j=0$.  Insert it into the last series:
 \]
 At $x=0$ both sides tend to zero under $\Re p>0$.
 At $x=1$, convergence of the defining integral additionally requires
-$\Re q>0$, yielding the complete beta function.
+$\Re q>0$, yielding the complete beta function.  The series also
+converges there ($c-a-b=q$), both sides are continuous as
+$x\to1^-$, and Exercise~18.5.8 confirms the value:
+$p^{-1}F(p,1-q;p+1;1)=\Gamma(p+1)\Gamma(q)/[p\,\Gamma(p+q)]=B(p,q)$.
 For complex $x$, continue along a path avoiding the branch points
 $0,1$, with the same logarithms used in the integral and $x^p$.
 Parameter continuation beyond $\Re p>0$ is a continuation of the
@@ -3455,8 +3562,9 @@ For $|z|<1$, expand the last factor:
 (1-tz)^{-a}=\sum_{j=0}^\infty\frac{(a)_j}{j!}t^jz^j.
 \]
 Assume $\Re b>0$ and $\Re(c-b)>0$.  The beta weight is absolutely
-integrable and the binomial series is uniformly absolutely convergent
-for $t\in[0,1]$, so integration and summation may be interchanged.
+integrable and, since $|tz|\le|z|<1$, the binomial series is
+uniformly absolutely convergent for $t\in[0,1]$ (Weierstrass
+M-test), so integration and summation may be interchanged.
 The proposed right side becomes
 \begin{align*}
 \frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)}
@@ -3467,6 +3575,9 @@ The proposed right side becomes
  &=\sum_{j=0}^\infty\frac{(a)_j(b)_j}{(c)_j j!}z^j
  =F(a,b;c;z).
 \end{align*}
+Here the integral is the beta function
+$B(b+j,c-b)=\Gamma(b+j)\Gamma(c-b)/\Gamma(c+j)$, and
+$\Gamma(b+j)=\Gamma(b)(b)_j$, $\Gamma(c+j)=\Gamma(c)(c)_j$.
 Near $t=0$ and $t=1$, for $z\ne1$ off the cut, the additional
 factor is finite and nonzero.  Ordinary endpoint convergence thus
 requires
@@ -3482,23 +3593,45 @@ are uniformly bounded against the integrable endpoint weight.
 The identity theorem therefore extends the representation from the
 unit disk to this cut plane.
 \erratum{On the cut itself a boundary value or another explicit
-prescription is needed; ``general $z$'' does not guarantee an
-ordinary integral through $t=1/z$.}  At $z=1$, the endpoint powers
-combine and require $\Re(c-a-b)>0$ instead at $t=1$, as used next.
+prescription is needed; the textbook's ``general $z$'' does not
+guarantee an ordinary integral through $t=1/z$.}  At $z=1$, the
+endpoint powers combine and require $\Re(c-a-b)>0$ instead at
+$t=1$, as used next.
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{18.5.8}\quad Prove that
 \[
 {}_{2}F_{1}(a,b;c;1)=\frac{\Gamma(c)\Gamma(c-a-b)}
-{\Gamma(c-a)\Gamma(c-b)},\qquad c\neq0,-1,-2,\ldots,\quad \erratum{\Re(c-a-b)>0}.
+{\Gamma(c-a)\Gamma(c-b)},\qquad c\neq0,-1,-2,\ldots,\quad c>a+b.
 \]
+\erratum{For complex parameters read $c>a+b$ as $\Re(c-a-b)>0$, the
+condition for convergence of the series at $1$.}
 \par\emph{Hint.}~Here is a chance to use the integral
 representation in Exercise~18.5.7.
 \solution
 Initially impose $\Re b>0$, $\Re(c-b)>0$ and
 $\Re(c-a-b)>0$, so Euler's integral remains convergent at $z=1$.
-Combining its two factors involving $1-t$ gives
+First, the series converges at $z=1$.  If it does not terminate
+($a,b\notin\{0,-1,-2,\ldots\}$), its $j$th term is
+\[
+\frac{(a)_j(b)_j}{(c)_jj!}
+=\frac{\Gamma(c)}{\Gamma(a)\Gamma(b)}\,
+ \frac{\Gamma(a+j)}{\Gamma(c+j)}\,\frac{\Gamma(b+j)}{\Gamma(1+j)},
+\]
+and $\Gamma(j+\alpha)/\Gamma(j+\beta)\sim j^{\alpha-\beta}$ makes
+it $O(j^{\Re(a+b-c)-1})$ in magnitude.  Thus the series converges
+absolutely when $\Re(c-a-b)>0$, locally uniformly away from
+$c=0,-1,-2,\ldots$; a terminating series is a finite sum.
+By Abel's theorem, $F(a,b;c;z)\to F(a,b;c;1)$ as $z\to1^-$.
+In Euler's integral, $0\le z<1$ gives $1-tz\ge1-t$, so
+$|(1-tz)^{-a}|=(1-tz)^{-\Re a}\le\max\{1,(1-t)^{-\Re a}\}$.  The
+integrand is therefore dominated by an integrable function (at
+$t=0$ because $\Re b>0$, at $t=1$ because $\Re(c-b)>0$ and
+$\Re(c-a-b)>0$), and dominated convergence lets $z\to1^-$ under
+the integral.
+Combining its two factors involving $1-t$ and using the beta
+integral $B(b,c-a-b)$ gives
 \begin{align*}
 F(a,b;c;1)
  &=\frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)}
@@ -3508,13 +3641,13 @@ F(a,b;c;1)
  &=\boxed{\frac{\Gamma(c)\Gamma(c-a-b)}
                  {\Gamma(c-a)\Gamma(c-b)}}.
 \end{align*}
-For the nonterminating series, the gamma-quotient asymptotic makes
-its $j$th term $O(j^{a+b-c-1})$ in magnitude, with real part
-understood in the exponent.  Thus it converges absolutely when
-$\Re(c-a-b)>0$, locally uniformly away from $c=0,-1,-2,\ldots$.
-Analytic continuation in the parameters removes the temporary
-Euler-integral conditions on $b$ and $c-b$ and proves the stated
-formula throughout
+Both sides are analytic in $(a,b,c)$ on the connected set below:
+the series by its locally uniform convergence, the right side
+because $\Gamma(c)$ and $\Gamma(c-a-b)$ are analytic there and
+$1/\Gamma$ is entire.  Analytic continuation in the
+parameters therefore removes the temporary Euler-integral
+conditions on $b$ and $c-b$ and proves the stated formula
+throughout
 \[
 c\notin\{0,-1,-2,\ldots\},\qquad \Re(c-a-b)>0.
 \]
@@ -3535,7 +3668,7 @@ without imposing this nonterminating convergence condition.
 \par\emph{Hint.}~Try an integral representation.
 \par\emph{Note.}~This relation is useful in developing a Rodrigues
 representation of $T_{n}(x)$ (see Exercise~18.5.10).
-\erratum{Take $c\notin\{0,-1,-2,\ldots\}$ and principal branches on the cut plane $x\notin[1,\infty)$; further continuation must follow matching paths.}\par\nobreak
+\erratum{Take $c\notin\{0,-1,-2,\ldots\}$ and principal branches on the cut plane $x\notin[1,\infty)$; further continuation must follow matching paths, since both sides are multivalued around $x=1$.}\par\nobreak
 \solution
 Assume first $\Re b>0$, $\Re(c-b)>0$ and take $x$ close
 to zero.  In Euler's integral for $F(a,b;c;x)$ put $u=1-t$.
@@ -3553,12 +3686,18 @@ F(a,b;c;x)
        \left(1-u\frac{-x}{1-x}\right)^{-a}du\\
  &=\boxed{(1-x)^{-a}F\!\left(a,c-b;c;\frac{-x}{1-x}\right)}.
 \end{align*}
-The prefactor is unchanged when $b$ and $c-b$ exchange places,
-which is why the last integral has exactly the required normalization.
-This proves the identity in a neighborhood of $x=0$.  Continue
-both sides along the same path, avoiding the singular points and
-using $(1-x)^{-a}=\exp[-a\operatorname{Log}(1-x)]$ on the
-chosen branch.  It holds on the principal cut plane and on matching
+The last integral is Euler's integral (Exercise~18.5.7) for
+$F(a,b';c;X)$ with $b'=c-b$ and $X=-x/(1-x)$: its weight is
+$u^{b'-1}(1-u)^{c-b'-1}$, its conditions $\Re b'>0$, $\Re(c-b')>0$
+are the ones assumed, and the prefactor
+$\Gamma(c)/[\Gamma(b')\Gamma(c-b')]$ is unchanged when $b$ and $c-b$
+exchange places.  For $x$ near zero, $|X|<1$.
+This proves the identity in a neighborhood of $x=0$.  Both sides
+are analytic on the principal cut plane, with
+$(1-x)^{-a}=\exp[-a\operatorname{Log}(1-x)]$: if $x\notin[1,\infty)$
+then $1-x\notin(-\infty,0]$, hence $1/(1-x)\notin(-\infty,0]$ and
+$X=1-1/(1-x)\notin[1,\infty)$.  The identity theorem extends the
+identity to this whole cut plane.  It also holds on matching
 analytic continuations; independent branch choices need not agree.
 Parameter continuation removes the temporary beta-integral
 restrictions whenever the functions are defined.  The singular
@@ -3582,10 +3721,11 @@ function relation
 with $z=(1-x)/2$. An alternate approach is to develop a first-order
 differential equation for $y=(1-x^{2})^{n-1/2}$. Repeated
 differentiation of this equation leads to the Chebyshev equation.
-\erratum{Derive the identity on $-1<x<1$; at $x=\pm1$ use the polynomial's continuous limits.}\par\nobreak
+\erratum{Derive the identity on $-1<x<1$; at $x=\pm1$, where the $n$th derivative is singular, use the polynomial's continuous limits.}\par\nobreak
 \solution
 Take $n=0,1,2,\ldots$ and first $-1<x<1$.
-Set $g=(1-x^2)^{n-1/2}$; direct differentiation gives
+Set $g=(1-x^2)^{n-1/2}$; direct differentiation,
+$g'=-(2n-1)x(1-x^2)^{n-3/2}$, gives
 \[
 (1-x^2)g'+(2n-1)xg=0.
 \]
@@ -3599,37 +3739,57 @@ derivatives and $x$ only one, so Leibniz's formula gives
 \end{align*}
 Thus $u=g^{(n)}$ satisfies
 $(1-x^2)u''-3xu'+(n^2-1)u=0$.
-With $h=\sqrt{1-x^2}$, differentiation of $R=hu$ gives
-\[
+With $h=\sqrt{1-x^2}$ we have $h'=-x/h$ and
+$h''=-1/h-x^2/h^3=-1/h^3$ (as $h^2+x^2=1$), so $R=hu$ has
+$R'=hu'-xu/h$ and $R''=hu''-2xu'/h-u/h^3$.  Hence
+\begin{align*}
 (1-x^2)R''-xR'+n^2R
-=h[(1-x^2)u''-3xu'+(n^2-1)u]=0.
-\]
+&=h^3u''-3xhu'+\Bigl(n^2h-\frac{1-x^2}h\Bigr)u\\
+&=h[(1-x^2)u''-3xu'+(n^2-1)u]=0.
+\end{align*}
 Moreover $R$ is a polynomial.  Indeed induction gives
 \[
 g^{(j)}=(1-x^2)^{n-1/2-j}p_j(x),\quad p_0=1,
 \]
 \[
 p_{j+1}=(1-x^2)p_j'-2(n-1/2-j)xp_j,
-\qquad \deg p_j\le j.
+\qquad \deg p_j\le j,
 \]
+since differentiating $(1-x^2)^{\alpha}p_j$ gives
+$(1-x^2)^{\alpha-1}[(1-x^2)p_j'-2\alpha xp_j]$.
 At $j=n$, multiplication by $h$ leaves $R=p_n$.
 The polynomial solution of this degree-$n$ Chebyshev equation
-is a scalar multiple of $T_n$: substitution of powers gives
-$(k+2)(k+1)a_{k+2}+(n^2-k^2)a_k=0$, fixing all coefficients
-from the leading one and forcing the opposite parity to vanish.
+is a scalar multiple of $T_n$: substitution of
+$\sum_ka_kx^k$ gives
+$(k+2)(k+1)a_{k+2}+(n^2-k^2)a_k=0$.  If $a_k\ne0$ for some $k$ of
+parity opposite to $n$, then $k^2\ne n^2$ makes
+$a_{k+2},a_{k+4},\ldots$ all nonzero, impossible for a polynomial;
+for the parity of $n$, $a_k=(k+2)(k+1)a_{k+2}/(k^2-n^2)$ ($k<n$)
+fixes every coefficient from $a_n$.  As $T_n$ is such a polynomial
+solution with $T_n(1)=1$, $R=R(1)\,T_n$.
 
 It remains to determine the scalar, rather than assume its sign.
-Write $g=(1-x)^{n-1/2}(1+x)^{n-1/2}$ and use Leibniz at $x\to1^-$.
-After multiplying by $h$, every term with fewer than $n$
-derivatives on the first factor vanishes as $(1-x)^{n-j}$.
-The remaining term gives
+Write $g=(1-x)^{n-1/2}(1+x)^{n-1/2}$ and use Leibniz's formula
+\[
+g^{(n)}=\sum_{j=0}^n\binom nj
+ \frac{d^j(1-x)^{n-1/2}}{dx^j}\,
+ \frac{d^{n-j}(1+x)^{n-1/2}}{dx^{n-j}}
+\]
+as $x\to1^-$.  The $j$th term contains $(1-x)^{n-1/2-j}$; after
+multiplication by $h=(1-x)^{1/2}(1+x)^{1/2}$, every term with
+$j<n$ vanishes as $(1-x)^{n-j}$.  The term $j=n$ is
+$(-1)^n(n-\frac12)(n-\frac32)\cdots\frac12\,(1-x)^{-1/2}(1+x)^{n-1/2}$,
+where $(n-\frac12)(n-\frac32)\cdots\frac12
+=\Gamma(n+\frac12)/\Gamma(\frac12)$; multiplied by $h$, its last
+two factors become $(1+x)^{n-1/2}(1+x)^{1/2}\to2^{n-1/2}\sqrt2$.
+Hence
 \begin{align*}
 R(1)
  &=(-1)^n\frac{\Gamma(n+1/2)}{\Gamma(1/2)}
        2^{n-1/2}\sqrt2\\
  &=(-1)^n2^n\frac{\Gamma(n+1/2)}{\sqrt\pi}.
 \end{align*}
-Since $T_n(1)=1$, division by this value proves
+Since $R=R(1)\,T_n$, division by this value proves
 \[
 \boxed{T_n(x)=\frac{(-1)^n\sqrt\pi}{2^n\Gamma(n+1/2)}
  \sqrt{1-x^2}\,\frac{d^n}{dx^n}(1-x^2)^{n-1/2}}.
@@ -3652,7 +3812,7 @@ Eq.~(18.43),
 \left(\frac{a^{2}}{2(a^{2}-1)}\right)^{\nu},
 \]
 can be written as a hypergeometric function.
-\erratum{Take $m,n\ge0$ and $a^2\ne1$.  Interpret a singular lower hypergeometric parameter by the terminating finite series, not an undefined infinite-series quotient.}\par\nobreak
+\erratum{Take integers $m,n\ge0$, as in Eq.~(18.43), and $a^2\ne1$, since the argument is undefined at $a^2=1$.  Interpret a singular lower hypergeometric parameter by the terminating finite series, not an undefined infinite-series quotient.}\par\nobreak
 \solution
 Let $m,n$ be nonnegative integers and set
 \[
@@ -3662,23 +3822,26 @@ Compare each coefficient with the defining hypergeometric series:
 \[
 F(A,B;C;w)=\sum_{j\ge0}\frac{(A)_j(B)_j}{(C)_j j!}w^j.
 \]
-The numerator parameters are $A=-m,B=-n$.  Their Pochhammer
-symbols terminate at $j=m$ and $j=n$, respectively, so the finite
-sum is
+The numerator parameters are $A=-m$, $B=-n$, and the denominator
+parameter is $C=c$.  The Pochhammer symbols $(-m)_j=(-m)(-m+1)\cdots(-m+j-1)$ and $(-n)_j$
+vanish for $j>m$ and $j>n$, respectively, so the series terminates
+at $j=\min(m,n)$ and the finite sum is
 \[
 \boxed{F\!\left(-m,-n;\frac{1-m-n}{2};
                   \frac{a^2}{2(a^2-1)}\right)}.
 \]
 Here one must specify what ``terminates'' means when $c$ is
 itself a nonpositive integer.  If $m+n=2\ell+1$, then $c=-\ell$
-and the first denominator zero occurs at $j=\ell+1$.
-But $\min(m,n)\le\ell$, so every term actually retained has a
+and $(c)_j=(-\ell)(-\ell+1)\cdots(-\ell+j-1)$ first vanishes at
+$j=\ell+1$.  But $2\min(m,n)\le m+n=2\ell+1$ gives
+$\min(m,n)\le\ell$, so every term actually retained has a
 nonzero denominator.  If $m+n$ is even, $c$ is a half-integer
 and no denominator factor vanishes.  Thus the original finite
 sum is well defined in every degree case.
-\erratum{At the singular integer denominator parameters, the
-boxed notation means this terminating polynomial, not a generic
-infinite series with later $0/0$ coefficients.}
+At the singular integer denominator parameters the boxed notation
+therefore means this terminating polynomial (the convention of the
+red note in the statement), not a generic infinite series with
+later $0/0$ coefficients.
 For $a^2\ne1$ the argument is finite.  At $a=\pm1$ it is
 undefined as written; if one index is zero the polynomial is
 identically one and has that removable value.  With both indices
@@ -3700,8 +3863,11 @@ Alternatively, use the integral representation and the beta
 function.
 \solution
 For the finite identity take $n=0,1,2,\ldots$ and initially
-$\Re b>0$, $\Re(c-b)>0$.  Euler's integral with first parameter
-$-n$ gives
+$\Re b>0$, $\Re(c-b)>0$.  In Euler's integral (Exercise~18.5.7)
+with first parameter $-n$ the factor is $(1-tz)^n$, so both sides
+are polynomials in $z$; the representation, proved for $|z|<1$,
+therefore also holds at $z=1$.  With the beta integral
+$B(b,c-b+n)$ it gives
 \begin{align*}
 F(-n,b;c;1)
  &=\frac{\Gamma(c)}{\Gamma(b)\Gamma(c-b)}
@@ -3712,11 +3878,12 @@ F(-n,b;c;1)
    \frac{\Gamma(c)}{\Gamma(c+n)}
  =\boxed{\frac{(c-b)_n}{(c)_n}}.
 \end{align*}
-Because the left side is the finite sum
+Since $(-n)_j/j!=(-1)^jn!/[(n-j)!\,j!]$, the left side is the
+finite sum
 \[
-\sum_{j=0}^n(-1)^j\binom nj\frac{(b)_j}{(c)_j},
+\sum_{j=0}^n(-1)^j\binom nj\frac{(b)_j}{(c)_j};
 \]
-both sides are rational functions of $b,c$.  Multiply by $(c)_n$:
+hence both sides are rational functions of $b,c$.  Multiply by $(c)_n$:
 for every $j\le n$, the quotient $(c)_n/(c)_j=(c+j)_{n-j}$
 is a polynomial.  The resulting polynomial identity, proved on
 an open parameter set, holds identically.  Division back gives
@@ -3747,7 +3914,9 @@ M\left(\frac{1}{2},\frac{3}{2},-x^{2}\right).
 \]
 \solution
 By definition $M(a,c,z)=\sum_{j\ge0}(a)_jz^j/[(c)_j j!]$.
-The finite products telescope:
+The finite products $(1/2)_j=\frac12\cdot\frac32\cdots(j-\frac12)$
+and $(3/2)_j=\frac32\cdots(j+\frac12)$ share all factors except the
+first and the last, so
 \[
 \frac{(1/2)_j}{(3/2)_j}
  =\frac{1/2}{j+1/2}=\frac1{2j+1},
@@ -3765,7 +3934,8 @@ absolutely convergent, so its integral is
  =\frac2{\sqrt\pi}\sum_{j=0}^\infty\frac{(-1)^j}{j!}
           \int_0^xu^{2j}du.
 \]
-Evaluating the last monomial integral gives the preceding series,
+Evaluating the last monomial integral,
+$\int_0^xu^{2j}du=x^{2j+1}/(2j+1)$, gives the preceding series,
 proving the identity for every complex $x$, including its zero value
 at the origin.  The entire integrand makes the integration path
 irrelevant.
@@ -3811,14 +3981,15 @@ satisfies
 \[
 xy''+(a+1+x)y'+ay=0.
 \]
-\erratum{For the defining integral, take $x>0$ and $\Re a>0$.}\par\nobreak
+\erratum{For the defining integral, take $x>0$ and $\Re a>0$; for $\Re a\le0$ the integral diverges at $t=0$.}\par\nobreak
 \solution
 Take $x>0$ and $\Re a>0$, the domain in which the defining
 lower-endpoint integral converges.  Write
 $G(x)=\gamma(a,x)$, so $G'=e^{-x}x^{a-1}$, and let
 $y=ax^{-a}G$.  The product rule gives
 \[
-y'=-\frac ax y+\frac a x e^{-x}.
+y'=-a^2x^{-a-1}G+ax^{-a}e^{-x}x^{a-1}
+ =-\frac ax y+\frac a x e^{-x}.
 \]
 Differentiate this equality once more and substitute for $y'$:
 \begin{align*}
@@ -3837,14 +4008,20 @@ Every term cancels upon addition, proving
 \[
 \boxed{xy''+(a+1+x)y'+ay=0}.
 \]
-Also $\gamma(a,x)=x^a/a+O(x^{a+1})$, so $y(0)=1$ by
-continuity.  Expanding the integral gives $y=M(a,a+1,-x)$;
-this supplies analytic continuation with matching branches.
-\erratum{For $\Re a\le0$ the displayed integral is generally
-not an ordinary convergent integral; any extension uses that
-analytic continuation.}  For example its removable continuation
-at $a=0$ is $1$, not a direct evaluation of $0$ times a divergent
-integral.
+Integrating $e^{-t}=\sum_j(-t)^j/j!$ termwise gives
+$\gamma(a,x)=\sum_j(-1)^jx^{a+j}/[j!\,(a+j)]$, so, with
+$a/(a+j)=(a)_j/(a+1)_j$ as in Exercise~18.5.6,
+\[
+y=\sum_{j=0}^\infty\frac{a}{a+j}\frac{(-x)^j}{j!}
+ =\sum_{j=0}^\infty\frac{(a)_j}{(a+1)_j}\frac{(-x)^j}{j!}
+ =M(a,a+1,-x),
+\]
+and $y(0)=1$.  This supplies analytic continuation with matching
+branches.  For $\Re a\le0$ the displayed integral is not an
+ordinary convergent integral (the red note in the statement); any
+extension uses that analytic continuation.  For example its
+removable continuation at $a=0$ is $1$, not a direct evaluation of
+$0$ times a divergent integral.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3854,18 +4031,19 @@ of the second kind, $K_{\nu}(x)$, is given by
 K_{\nu}(x)=\pi^{1/2}e^{-x}(2x)^{\nu}\,
 U\big(\nu+\tfrac{1}{2},2\nu+1,2x\big).
 \]
-\erratum{Take $x>0$; first derive the identity for $\Re\nu>-1/2$, then continue in $\nu$.}\par\nobreak
+\erratum{Take $x>0$; first derive the identity for $\Re\nu>-1/2$, where the integral representations used converge, then continue in $\nu$.}\par\nobreak
 \solution
-\erratum{After $t=2zy$, the manual's exponential inside the integral is $e^{-2zy}$, not $e^{z-2zy}$; its outside factor already includes $e^{-z}$.}\par
+\erratum{After $t=2zy$, the Instructor's Manual's exponential inside the integral is $e^{-2zy}$, not $e^{z-2zy}$; its outside factor already includes $e^{-z}$.}\par
 
-Start with the second-kind Bessel integral for $x>0$ and
+Start with the integral representation of $K_\nu$ used in
+Section~14.6 (compare Exercise~14.6.6), valid for $x>0$ and
 $\Re\nu>-1/2$:
 \[
 K_\nu(x)=\frac{\sqrt\pi(x/2)^\nu}{\Gamma(\nu+1/2)}
  \int_1^\infty e^{-xs}(s^2-1)^{\nu-1/2}ds.
 \]
-Set $s=1+2t$, so $ds=2dt$, $s^2-1=4t(1+t)$ and
-$e^{-xs}=e^{-x}e^{-2xt}$.  Then
+Set $s=1+2t$, so $ds=2dt$, the limits become $0$ and $\infty$,
+$s^2-1=(s-1)(s+1)=4t(1+t)$ and $e^{-xs}=e^{-x}e^{-2xt}$.  Then
 \begin{align*}
 K_\nu(x)
  &=\frac{\sqrt\pi(x/2)^\nu e^{-x}\,2\,4^{\nu-1/2}}
@@ -3873,13 +4051,18 @@ K_\nu(x)
    \int_0^\infty e^{-2xt}t^{\nu-1/2}(1+t)^{\nu-1/2}dt\\
  &=\sqrt\pi e^{-x}(2x)^\nu
    \frac1{\Gamma(\nu+1/2)}
-   \int_0^\infty e^{-2xt}t^{\nu-1/2}(1+t)^{\nu-1/2}dt.
+   \int_0^\infty e^{-2xt}t^{\nu-1/2}(1+t)^{\nu-1/2}dt,
 \end{align*}
-In the integral for $U(a,c,z)$, choose
+since $2\cdot4^{\nu-1/2}=2^{2\nu}$ and $(x/2)^\nu2^{2\nu}=(2x)^\nu$.
+In the integral representation
+$U(a,c,z)=\Gamma(a)^{-1}\int_0^\infty e^{-zt}t^{a-1}(1+t)^{c-a-1}dt$
+of Exercise~18.6.10(b), choose
 \[
 a=\nu+\tfrac12,\quad c=2\nu+1,\quad z=2x,
 \]
-so that $a-1=c-a-1=\nu-1/2$.  Therefore
+so that $a-1=c-a-1=\nu-1/2$ and $\Gamma(a)=\Gamma(\nu+\frac12)$;
+the last integral divided by $\Gamma(\nu+\frac12)$ is
+$U(\nu+\frac12,2\nu+1,2x)$.  Therefore
 \[
 \boxed{K_\nu(x)=\sqrt\pi e^{-x}(2x)^\nu
                U(\nu+\tfrac12,2\nu+1,2x)}.
@@ -3900,7 +4083,7 @@ hypergeometric functions as
 \]
 This relation is useful in numerical computation of
 $\mathrm{Ci}(x)$ and $\mathrm{si}(x)$ for large values of $x$.
-\erratum{Take $x>0$ and $\mathrm{si}(x)=-\int_x^\infty(\sin t)/t\,dt$.}\par\nobreak
+\erratum{Take $x>0$, since for $x\le0$ the integral defining $\mathrm{Ci}(x)$ meets the singularity at $t=0$, and $\mathrm{si}(x)=-\int_x^\infty(\sin t)/t\,dt$.}\par\nobreak
 \solution
 For real $x>0$, the convention in Section~13.6 is
 \[
@@ -3919,14 +4102,30 @@ Multiplying by $e^{-\varepsilon+ix}$ and setting $v=1+u$ gives
 e^{-\varepsilon+ix}U(1,1,\varepsilon-ix)
  =\int_1^\infty\frac{e^{-(\varepsilon-ix)v}}v\,dv.
 \]
-Let $\varepsilon\downarrow0$.  The tail is uniformly controlled
-by integration by parts against $e^{ixv}$, so the Abel limit is
-the ordinary oscillatory integral.  With $t=xv$ it becomes
+Let $\varepsilon\downarrow0$.  The left side tends to
+$e^{ix}U(1,1,-ix)$, since $U(1,1,z)$ is continuous at $z=-ix$,
+which is off its cut.  On the right, with $w=\varepsilon-ix\ne0$,
+integration by parts gives
+\[
+\int_1^\infty\frac{e^{-wv}}v\,dv
+=\frac{e^{-w}}w-\frac1w\int_1^\infty\frac{e^{-wv}}{v^2}\,dv,
+\]
+and this holds also at $\varepsilon=0$ (as an improper integral),
+because the integrated term $e^{-wv}/(wv)$ still vanishes as
+$v\to\infty$.  The last integrand is bounded by $v^{-2}$ for all
+$\varepsilon\ge0$, so by dominated convergence the right side tends
+to its value at $\varepsilon=0$, the ordinary oscillatory
+integral.  With $t=xv$ it becomes
 \[
 e^{ix}U(1,1,-ix)=\int_1^\infty\frac{e^{ixv}}v\,dv
                         =\int_x^\infty\frac{e^{it}}t\,dt.
 \]
-Taking its negative gives
+By the definitions above, the last integral is
+\[
+\int_x^\infty\frac{\cos t}t\,dt+i\int_x^\infty\frac{\sin t}t\,dt
+=-\operatorname{Ci}x-i\operatorname{si}x;
+\]
+taking its negative gives
 \[
 \boxed{\operatorname{Ci}x+i\operatorname{si}x
        =-e^{ix}U(1,1,-ix)}.
@@ -3948,7 +4147,8 @@ equation with $a=-n$, $c=3/2$ and argument $x^{2}$,
 =(-1)^{n}\frac{2(2n+1)!}{n!}$.
 \end{enumerate}
 \solution
-(a) Let $t=x^2$ and $H_{2n+1}(x)=xf(t)$.  Then
+(a) Let $t=x^2$ and $H_{2n+1}(x)=xf(t)$.  Then, as in
+Exercise~18.5.3,
 \[
 H'=f+2tf',\qquad H''=x(6f'+4tf'').
 \]
@@ -3976,7 +4176,9 @@ $(-1)^n2(2n+1)!/n!$.  Therefore
  =\boxed{(-1)^n\frac{2(2n+1)!}{n!}}.
 \]
 Because $M(-n,3/2,0)=1$ and the analytic solution is uniquely
-fixed by its constant term, parts (a) and (b) together prove
+fixed by its constant term (Kummer's recurrence
+$(j+1)(j+c)d_{j+1}=(j+a)d_j$ has $j+c\ne0$ for $c=\frac32$),
+parts (a) and (b) together prove
 \[
 H_{2n+1}(x)=(-1)^n\frac{2(2n+1)!}{n!}
              xM(-n,\tfrac32,x^2).
@@ -3998,17 +4200,26 @@ Use $a=-n$, $c=k+1$ and
 M(-n,k+1,x)=A_nL_n^k(x),\qquad
  A_n=\frac{n!\,k!}{(n+k)!}.
 \]
-For $n\ge1$, the contiguous equation becomes
+This follows on comparing the two finite series
+\[
+M(-n,k+1,x)=\sum_{j=0}^n\frac{(-n)_j}{(k+1)_j\,j!}x^j,\qquad
+L_n^k(x)=\sum_{j=0}^n\frac{(-1)^j(n+k)!}{(n-j)!\,(k+j)!\,j!}x^j,
+\]
+with $(-n)_j=(-1)^jn!/(n-j)!$ and $(k+1)_j=(k+j)!/k!$.
+For $n\ge1$, with $c-a=n+k+1$, $2a-c+x=x-(2n+k+1)$, $-a=n$ and
+$a\mp1=-(n\pm1)$, the contiguous equation becomes
 \[
 (n+k+1)A_{n+1}L_{n+1}^k
  +[x-(2n+k+1)]A_nL_n^k+nA_{n-1}L_{n-1}^k=0.
 \]
 The two ratios are
 \[
-\frac{A_{n+1}}{A_n}=\frac{n+1}{n+k+1},\qquad
+\frac{A_{n+1}}{A_n}=\frac{(n+1)!\,(n+k)!}{n!\,(n+k+1)!}
+=\frac{n+1}{n+k+1},\qquad
 \frac{A_{n-1}}{A_n}=\frac{n+k}{n}.
 \]
-Divide by $A_n$ and cancel the factors multiplying these ratios:
+Divide by $A_n$; the first and last coefficients become
+$(n+k+1)(n+1)/(n+k+1)=n+1$ and $n(n+k)/n=n+k$:
 \[
 \boxed{(n+1)L_{n+1}^k-(2n+k+1-x)L_n^k
                          +(n+k)L_{n-1}^k=0}.
@@ -4027,10 +4238,12 @@ nonsingular parameter values, in particular real $k>-1$.
 \item[(a)] $M(a,c,x)=e^{x}M(c-a,c,-x)$,
 \item[(b)] $U(a,c,x)=x^{1-c}U(a-c+1,2-c,x)$.
 \end{enumerate}
-\erratum{For $M$, take $c\notin\{0,-1,-2,\ldots\}$; for $U$ and powers of $x$, use matching branches, initially $|\arg x|<\pi$.}\par\nobreak
+\erratum{For $M$, take $c\notin\{0,-1,-2,\ldots\}$, where its series is defined; for $U$ and powers of $x$, which are multivalued, use matching branches, initially $|\arg x|<\pi$.}\par\nobreak
 \solution
-(a) Put $g(x)=M(c-a,c,-x)$.  Its equation, after changing the
-sign of the argument, is
+(a) Put $g(x)=M(c-a,c,-x)$.  The function $w(z)=M(c-a,c,z)$
+satisfies Kummer's equation $zw''+(c-z)w'-(c-a)w=0$; since
+$g(x)=w(-x)$ has $g'=-w'(-x)$ and $g''=w''(-x)$, setting $z=-x$
+and multiplying by $-1$ gives
 \[
 xg''+(c+x)g'+(c-a)g=0.
 \]
@@ -4038,6 +4251,7 @@ For $y=e^xg$, $y'=e^x(g+g')$ and $y''=e^x(g+2g'+g'')$.
 Hence
 \begin{align*}
 xy''+(c-x)y'-ay
+ &=e^x\{x(g+2g'+g'')+(c-x)(g+g')-ag\}\\
  &=e^x\{xg''+(c+x)g'+(c-a)g\}=0.
 \end{align*}
 Both $y$ and $M(a,c,x)$ are analytic at zero with value one.
@@ -4056,10 +4270,12 @@ U(a,c,x)=\frac{\Gamma(1-c)}{\Gamma(a-c+1)}M(a,c,x)
 \]
 It follows from Eq.~(18.142) by the reflection identity, with its
 \erratum{published replacement $\Gamma(-c)\to\Gamma(2-c)$}.
-For example
+For example, $\Gamma(z)\Gamma(1-z)=\pi/\sin\pi z$ with $z=c$ and
+with $z=c-1$ (where $\sin\pi(c-1)=-\sin\pi c$) gives
 $\pi/[\sin\pi c\,\Gamma(c)]=\Gamma(1-c)$ and
 $-\pi/[\sin\pi c\,\Gamma(2-c)]=\Gamma(c-1)$.
-Now replace $(a,c)$ by $(a-c+1,2-c)$:
+Now replace $(a,c)$ by $(a-c+1,2-c)$; since $1-(2-c)=c-1$,
+$(a-c+1)-(2-c)+1=a$ and $2-(2-c)=c$,
 \begin{align*}
 U(a-c+1,2-c,x)
  &=\frac{\Gamma(c-1)}{\Gamma(a)}M(a-c+1,2-c,x)\\
@@ -4085,10 +4301,12 @@ initially $|\arg x|<\pi$.
 \item[(b)] $\dfrac{d^{n}}{dx^{n}}\,U(a,c,x)
 =(-1)^{n}(a)_{n}\,U(a+n,c+n,x)$.
 \end{enumerate}
-\erratum{Take $n\ge0$; for $M$, exclude $c=0,-1,-2,\ldots$.  For $U$, differentiate on a fixed branch away from $x=0$.}\par\nobreak
+\erratum{Take $n\ge0$; for $M$, exclude $c=0,-1,-2,\ldots$, where its series is undefined.  For $U$, differentiate on a fixed branch away from its branch point $x=0$.}\par\nobreak
 \solution
 Let $n$ be a nonnegative integer.
-(a) Differentiate the entire defining series $n$ times:
+(a) Differentiate the entire defining series $n$ times, using
+$d^n(x^j/j!)/dx^n=x^{j-n}/(j-n)!$ for $j\ge n$ and $0$ for $j<n$,
+and then put $j=n+r$:
 \begin{align*}
 \frac{d^n}{dx^n}M(a,c,x)
  &=\sum_{j=n}^\infty\frac{(a)_j}{(c)_j}
@@ -4098,8 +4316,9 @@ Let $n$ be a nonnegative integer.
  &=\frac{(a)_n}{(c)_n}
    \sum_{r=0}^\infty\frac{(a+n)_r}{(c+n)_r}\frac{x^r}{r!}.
 \end{align*}
-The last step uses $(a)_{n+r}=(a)_n(a+n)_r$ and its
-$c$ analogue.  Therefore
+The last step uses $(a)_{n+r}=(a)_n(a+n)_r$ (both sides are the
+product of $a,a+1,\ldots,a+n+r-1$) and its $c$ analogue.
+Therefore
 \[
 \boxed{\frac{d^n}{dx^n}M(a,c,x)
  =\frac{(a)_n}{(c)_n}M(a+n,c+n,x)}.
@@ -4110,8 +4329,9 @@ integer $c$; terminating cases with $n$ beyond the polynomial
 degree have zero derivative, exactly as $(a)_n=0$ predicts.
 
 (b) For $\Re a>0$, $\Re x>0$, differentiate the Laplace
-integral; exponential decay justifies every finite number of
-derivatives:
+integral of Exercise~18.6.10(b); each derivative brings down a
+factor $-t$, and exponential decay justifies every finite number
+of derivatives under the integral:
 \begin{align*}
 \frac{d^n}{dx^n}U(a,c,x)
  &=\frac{(-1)^n}{\Gamma(a)}
@@ -4120,8 +4340,9 @@ derivatives:
  &=\boxed{(-1)^n(a)_nU(a+n,c+n,x)}.
 \end{align*}
 The exponent $c-a-1$ stays unchanged because both parameters
-increase by $n$.  Analytic continuation supplies the usual cut
-plane and other parameter values.  For $a=-N$, the resulting
+increase by $n$: $(c+n)-(a+n)-1=c-a-1$, so the integral is
+$\Gamma(a+n)\,U(a+n,c+n,x)$.  Analytic continuation supplies the
+usual cut plane and other parameter values.  For $a=-N$, the resulting
 polynomial has zero derivatives for $n>N$, consistently with
 the vanishing Pochhammer factor.
 
@@ -4151,12 +4372,15 @@ its uniformly convergent series against the beta weight:
                   {\Gamma(a)\Gamma(c+j)}\frac{x^j}{j!}\\
  &=\boxed{M(a,c,x)}.
 \end{align*}
+Here $B(a+j,c-a)=\Gamma(a+j)\Gamma(c-a)/\Gamma(c+j)$, and
+$\Gamma(a+j)/\Gamma(a)=(a)_j$, $\Gamma(c+j)/\Gamma(c)=(c)_j$.
 This holds for every finite complex $x$; for real parameters
 its restrictions are precisely $c>a>0$.
 
 (b) Denote the proposed integral by $I(a,c,x)$.  It converges
 absolutely for $\Re a>0$, $\Re x>0$, with no restriction on
-$c$.  Differentiation under the integral gives
+$c$.  Differentiation under the integral brings down $-t$ for
+$I'$ and $t^2$ for $I''$, and $xt^2-(c-x)t-a=xt(t+1)-ct-a$; so
 \begin{align*}
 xI''+(c-x)I'-aI
  &=\frac1{\Gamma(a)}\int_0^\infty
@@ -4165,33 +4389,51 @@ xI''+(c-x)I'-aI
  &=-\frac1{\Gamma(a)}
      \left[e^{-xt}t^a(1+t)^{c-a}\right]_0^\infty=0.
 \end{align*}
+The integrand is an exact derivative: by the product rule,
+\[
+\frac{d}{dt}\bigl[e^{-xt}t^a(1+t)^{c-a}\bigr]
+=e^{-xt}t^{a-1}(1+t)^{c-a-1}[-xt(1+t)+a(1+t)+(c-a)t],
+\]
+and $a(1+t)+(c-a)t=a+ct$.
 The endpoint terms vanish by $\Re a>0$ at zero and exponential
 decay at infinity.  This verifies the differential equation, but
 we must also identify the particular solution and its scale.
 
 For noninteger $c$, its local basis is
 $M(a,c,x)$ and $x^{1-c}M(a-c+1,2-c,x)$.  Let their coefficients
-in $I$ be $A,B$.  Initially with real $a>0,c<1$, dominated
-convergence at $x\downarrow0$ gives
+in $I$ be $A,B$.  Initially take real $a>0,c<1$.  As
+$x\downarrow0$, $M(a,c,x)\to1$ and $x^{1-c}\to0$, so $I\to A$; on
+the other hand dominated convergence (the integrand is bounded by
+its value at $x=0$) gives
 \[
 A=I(a,c,0)
  =\frac1{\Gamma(a)}\int_0^\infty t^{a-1}(1+t)^{c-a-1}dt
  =\frac{\Gamma(1-c)}{\Gamma(a-c+1)}.
 \]
-Here the substitution $v=t/(1+t)$ reduces the integral to
-$B(a,1-c)$.  To compute $B$, take instead $1<c<a+1$ and
-put $u=xt$:
+Here the substitution $v=t/(1+t)$, i.e.\ $t=v/(1-v)$,
+$1+t=1/(1-v)$, $dt=dv/(1-v)^2$, turns the integrand into
+$v^{a-1}(1-v)^{-c}$ on $[0,1]$, so the integral is
+$B(a,1-c)=\Gamma(a)\Gamma(1-c)/\Gamma(a-c+1)$.
+To compute $B$, take instead $1<c<a+1$ and put $u=xt$, for which
+$t^{a-1}(1+t)^{c-a-1}dt=x^{1-c}u^{a-1}(x+u)^{c-a-1}du$:
 \[
 x^{c-1}I=\frac1{\Gamma(a)}
  \int_0^\infty e^{-u}u^{a-1}(x+u)^{c-a-1}du
  \longrightarrow\frac{\Gamma(c-1)}{\Gamma(a)}.
 \]
-The exponent $c-a-1$ is negative in this initial strip, so the
-integrand is bounded by $e^{-u}u^{c-2}$, an integrable function.
+The exponent $c-a-1$ is negative in this initial strip, so
+$(x+u)^{c-a-1}\le u^{c-a-1}$ and the integrand is bounded by
+$e^{-u}u^{c-2}$, an integrable function since $c>1$; the limit is
+$\Gamma(a)^{-1}\int_0^\infty e^{-u}u^{c-2}du$.
 The analytic first solution vanishes after multiplication by
-$x^{c-1}$; hence this limit is $B$.  The local coefficients
-continue meromorphically in the parameters away from integer
-$c$, so the independently computed $A,B$ give
+$x^{c-1}$, while $x^{c-1}\cdot x^{1-c}M(a-c+1,2-c,x)\to1$; hence
+this limit is $B$.  Write $y_1=M(a,c,x)$ and
+$y_2=x^{1-c}M(a-c+1,2-c,x)$.  By Abel's formula and their leading
+terms $1$ and $x^{1-c}$, $W(y_1,y_2)=(1-c)x^{-c}e^x\ne0$, so the
+coefficients $A=W(I,y_2)/W(y_1,y_2)$ and $B=W(y_1,I)/W(y_1,y_2)$
+are analytic in $a,c$ for $\Re a>0$, $c\notin\mathbb Z$.  The
+values found on the two real parameter sets therefore hold
+throughout, and
 \[
 I=\frac{\Gamma(1-c)}{\Gamma(a-c+1)}M(a,c,x)
  +\frac{\Gamma(c-1)}{\Gamma(a)}x^{1-c}M(a-c+1,2-c,x).
@@ -4222,6 +4464,10 @@ absolutely convergent for $\Re c<1$ and conditionally convergent
 for $1\le\Re c<2$.  For $\Re c\ge2$, the nonvanishing leading
 oscillatory boundary term prevents an ordinary improper limit;
 repeated integration by parts separates it from lower powers.
+Thus $\Re x=0$ is acceptable, with $\Re a>0$, at $x=0$ when
+$\Re c<1$ and at $x=iy\ne0$ when $\Re c<2$; there the convergent
+integral equals the limit of $U$ as $\Re x\downarrow0$ (Abel's
+theorem for Laplace integrals).
 A value assigned by $\Re x\downarrow0$ outside these ranges is
 an Abel continuation, not that ordinary integral.
 
@@ -4234,7 +4480,7 @@ M(a,c,x)=e^{x}M(c-a,c,-x).
 \]
 \par\emph{Hint.}~Replace the variable of integration $t$ by $1-s$
 to release a factor $e^{x}$ from the integral.
-\erratum{For the integral derivation, take $\Re a>0$ and $\Re(c-a)>0$; then continue in the nonsingular parameters.}\par\nobreak
+\erratum{For the integral derivation, take $\Re a>0$ and $\Re(c-a)>0$, where the integral converges at both endpoints; then continue in the nonsingular parameters.}\par\nobreak
 \solution
 For $\Re a>0$, $\Re(c-a)>0$, put $s=1-t$ in the Euler
 integral.  Reversing the limits cancels the sign from $dt=-ds$:
@@ -4263,13 +4509,14 @@ E_{1}(x)=e^{-x}U(1,1,x).
 \]
 \par\emph{Hint.}~Replace the variable of integration $t$ in
 $E_{1}(x)$ by $x(1+s)$.
-\erratum{Initially take $x>0$; both sides then have matching continuation to the principal cut plane.}\par\nobreak
+\erratum{Initially take $x>0$, so that the integral defining $E_1(x)$ runs along the positive axis; both sides then have matching continuation to the principal cut plane.}\par\nobreak
 \solution
 For real $x>0$ start with
 $E_1(x)=\int_x^\infty e^{-t}dt/t$.
-Make exactly the suggested substitution $t=x(1+s)$:
+Make exactly the suggested substitution $t=x(1+s)$: then
+$dt=x\,ds$, $t=x\Rightarrow s=0$, $t\to\infty\Rightarrow s\to\infty$,
+$e^{-t}=e^{-x}e^{-xs}$ and $dt/t=ds/(1+s)$, so
 \[
-dt=x\,ds,\quad t=x\Rightarrow s=0,\quad
 E_1(x)=e^{-x}\int_0^\infty\frac{e^{-xs}}{1+s}ds.
 \]
 The Laplace integral for $U$ with $a=c=1$ has
@@ -4304,17 +4551,20 @@ each fixed truncation has the stated remainder, not that the
 whole series converges.
 
 (a) Initially take real $0<a<c$.  In the Euler integral set
-$u=1-t$, obtaining
+$u=1-t$, so $e^{xt}=e^xe^{-xu}$, obtaining
 \[
 M(a,c,x)=\frac{\Gamma(c)e^x}{\Gamma(a)\Gamma(c-a)}
  \int_0^1e^{-xu}u^{c-a-1}(1-u)^{a-1}du.
 \]
-Near $u=0$ the Taylor expansion is
+Near $u=0$ the Taylor (binomial) expansion is
 \[
-(1-u)^{a-1}=\sum_{j=0}^{N-1}\frac{(1-a)_j}{j!}u^j+O(u^N).
+(1-u)^{a-1}=\sum_{j=0}^{N-1}\frac{(1-a)_j}{j!}u^j+R_N(u).
 \]
-Choose a fixed $0<\delta<1$.  On $[0,\delta]$ the remainder
-integral is $O(x^{-(c-a+N)})$ by $v=xu$.  On $[\delta,1]$
+Choose a fixed $0<\delta<1$.  On $[0,\delta]$,
+$|R_N(u)|\le K_\delta u^N$ for a constant $K_\delta$, so the
+remainder integral is at most
+$K_\delta\int_0^\infty e^{-xu}u^{c-a+N-1}du
+=K_\delta\Gamma(c-a+N)x^{-(c-a+N)}$ (put $v=xu$).  On $[\delta,1]$
 the integrable endpoint weight is multiplied by at most
 $e^{-\delta x}$, making its contribution exponentially small.
 Replacing each Taylor-term integral's upper limit by infinity
@@ -4323,7 +4573,8 @@ also changes it by an exponentially small amount.  Since
 \int_0^\infty e^{-xu}u^{c-a+j-1}du
  =\frac{\Gamma(c-a+j)}{x^{c-a+j}},
 \]
-we obtain
+multiplication by $\Gamma(c)e^x/[\Gamma(a)\Gamma(c-a)]$ and
+$\Gamma(c-a+j)=\Gamma(c-a)(c-a)_j$ give
 \[
 \boxed{M(a,c,x)=\frac{\Gamma(c)}{\Gamma(a)}e^xx^{a-c}
  \left[\sum_{j=0}^{N-1}\frac{(1-a)_j(c-a)_j}{j!x^j}
@@ -4335,14 +4586,19 @@ $(1-a)(2-a)(c-a)(c-a+1)/2$, as printed.
 The derivation extends to $\Re a>0$, $\Re(c-a)>0$ with
 complex parameters and the same fixed positive-real limit.
 
-(b) For $\Re a>0$, expand the Laplace-integral amplitude at zero:
+(b) For $\Re a>0$, expand the Laplace-integral amplitude at zero
+by the binomial series, whose coefficients are
+$\binom{c-a-1}j=(c-a-1)(c-a-2)\cdots(c-a-j)/j!
+=(-1)^j(1+a-c)_j/j!$:
 \[
 (1+t)^{c-a-1}
  =\sum_{j=0}^{N-1}\frac{(-1)^j(1+a-c)_j}{j!}t^j+O(t^N).
 \]
-The same split at a fixed $\delta>0$ works; the tail grows only
+The same split at a fixed $0<\delta<1$ works; the tail grows only
 as a fixed power and is exponentially suppressed by $e^{-xt}$.
-Termwise Laplace integration therefore gives
+Termwise Laplace integration, with
+$\int_0^\infty e^{-xt}t^{a+j-1}dt=\Gamma(a+j)x^{-a-j}$ and
+$\Gamma(a+j)/\Gamma(a)=(a)_j$, therefore gives
 \begin{align*}
 U(a,c,x)
  &=\frac1{\Gamma(a)}\sum_{j=0}^{N-1}
@@ -4354,23 +4610,31 @@ U(a,c,x)
 In particular the first correction is $-a(1+a-c)/x$, fixing
 its sign.
 
-\erratum{These displayed forms need a limit direction and
-parameter qualifications; a positive-axis exponential expansion
-for $M$ cannot be applied unchanged at a terminating $a$.}
+As the red note in the statement says, these displayed forms need
+a limit direction and parameter qualifications; a positive-axis
+exponential expansion for $M$ cannot be applied unchanged at a
+terminating $a$.
 If $a=-m$, $m=0,1,\ldots$, use the exact polynomial
 $M(-m,c,x)$, whose leading term is $(-1)^mx^m/(c)_m$
-when $(c)_m\ne0$.  The apparent exponential prefactor
-$1/\Gamma(a)$ then vanishes.  The $U$ expansion instead
-terminates at $j=m$ and gives its exact polynomial, with leading
+when $(c)_m\ne0$, since $(-m)_m=(-1)^mm!$.  The apparent
+exponential prefactor $1/\Gamma(a)$ then vanishes.  The $U$
+expansion instead terminates at $j=m$, because $(-m)_j=0$ for
+$j>m$, and gives its exact polynomial, with leading
 term $x^m$.  To justify this without applying the integral outside
 its domain, use the connection formula from Exercise~18.6.8:
 its second term vanishes because $1/\Gamma(-m)=0$, while
 \[
-\frac{\Gamma(1-c)}{\Gamma(1-c-m)}=(-1)^m(c)_m.
+\frac{\Gamma(1-c)}{\Gamma(1-c-m)}=(1-c-m)(2-c-m)\cdots(-c)
+=(-1)^m(c)_m.
 \]
 Thus $U(-m,c,x)=(-1)^m(c)_mM(-m,c,x)$, first for noninteger
 $c$ and then by continuation.  Reversing the finite powers of this
-polynomial gives the displayed terminating $U$ expansion.
+polynomial gives the displayed terminating $U$ expansion: with
+$(-m)_{m-j}=(-1)^{m-j}m!/j!$ and $(c)_m/(c)_{m-j}=(c+m-j)_j$, the
+coefficient of $x^{m-j}$ in $(-1)^m(c)_mM(-m,c,x)$ is
+$(-1)^j\binom mj(c+m-j)_j$; in the $U$ expansion with $a=-m$ it is
+$(-m)_j(1-m-c)_j/[j!\,(-1)^j]=\binom mj(1-m-c)_j$, the same number
+because $(1-m-c)_j=(-1)^j(c+m-j)_j$.
 On other complex rays one must choose the relevant
 asymptotic sector; the estimates above specifically establish the
 positive-real expansions requested by the given integrals.
@@ -4384,23 +4648,28 @@ given by
 MU'-M'U=-\frac{(c-1)!\,e^{x}}{(a-1)!\,x^{c}}.
 \]
 What happens if $a$ is $0$ or a negative integer?
-\erratum{Take $c\notin\{0,-1,-2,\ldots\}$ and $x\ne0$ on a fixed branch.  Interpret factorials by gamma functions, including reciprocal-gamma zeros.}\par\nobreak
+\erratum{Take $c\notin\{0,-1,-2,\ldots\}$, where $M$ is defined, and $x\ne0$ on a fixed branch of the multivalued $x^{-c}$.  Interpret factorials by gamma functions, including reciprocal-gamma zeros.}\par\nobreak
 \solution
 Assume initially $c\notin\{0,-1,-2,\ldots\}$ so that $M$
 is defined.  Write $W=MU'-M'U$.  Since both functions satisfy
-$y''+(c/x-1)y'-(a/x)y=0$, differentiation gives
-\[
-W'=MU''-M''U=(1-c/x)(MU'-M'U)=(1-c/x)W.
-\]
-Integration yields $W=C(a,c)e^xx^{-c}$ on a fixed branch.
-For real $0<a<c$, Exercise~18.6.13 and the corresponding
- differentiated Laplace estimates give
+$y''=(1-c/x)y'+(a/x)y$, differentiation gives
+\begin{align*}
+W'=MU''-M''U
+&=M[(1-\tfrac cx)U'+\tfrac axU]-[(1-\tfrac cx)M'+\tfrac axM]U\\
+&=(1-c/x)(MU'-M'U)=(1-c/x)W.
+\end{align*}
+Integration ($\ln W=x-c\ln x+{}$const) yields $W=C(a,c)e^xx^{-c}$
+on a fixed branch.
+For real $0<a<c$, Exercise~18.6.13 applies to $M$ and $U$ and,
+through Exercise~18.6.9, to $M'=(a/c)M(a+1,c+1,x)$ and
+$U'=-aU(a+1,c+1,x)$; since
+$(a/c)\Gamma(c+1)/\Gamma(a+1)=\Gamma(c)/\Gamma(a)$, it gives
 \[
 M\sim\frac{\Gamma(c)}{\Gamma(a)}e^xx^{a-c},\quad
 M'\sim M,\quad U\sim x^{-a},\quad U'\sim-ax^{-a-1}.
 \]
-Thus $MU'$ is smaller than $M'U$ by a factor $O(x^{-1})$,
-and
+Thus $e^{-x}x^cMU'\sim-a\Gamma(c)x^{-1}/\Gamma(a)\to0$,
+while $e^{-x}x^cM'U\to\Gamma(c)/\Gamma(a)$, and
 \[
 \lim_{x\to+\infty}e^{-x}x^cW
  =-\frac{\Gamma(c)}{\Gamma(a)}.
@@ -4413,18 +4682,22 @@ exact, and parameter continuation gives
 The factorials in the question are these gamma functions.
 
 If $a=-m$ is zero or a negative integer, $1/\Gamma(a)=0$ and
-$W=0$.  \erratum{The manual's explanation that $M$ does not
-exist is incorrect: it exists and terminates.  The two solutions
-have become proportional.}  Their leading polynomial coefficients
-are $(-1)^m/(c)_m$ for $M$ and $1$ for $U$, so
+$W=0$.  \erratum{The Instructor's Manual's explanation that $M$
+does not exist is incorrect: it exists and terminates.  The two
+solutions have become proportional.}  Their leading polynomial
+coefficients are $(-1)^m/(c)_m$ for $M$ and $1$ for $U$
+(Exercise~18.6.13), so, with $L_m^{c-1}(x)=(c)_mM(-m,c,x)/m!$
+from Exercise~18.6.7 ($k=c-1$),
 \[
 \boxed{U(-m,c,x)=(-1)^m(c)_mM(-m,c,x)
                     =(-1)^mm!L_m^{c-1}(x)}.
 \]
 The degree recurrence in the ODE uniquely fixes the polynomial
-from that leading coefficient.  At $m=0$ both functions equal
-one.  The ODE still has a second independent solution, but it is
-not supplied by this now-degenerate pair.
+from that leading coefficient: Kummer's recurrence
+$(j+1)(j+c)d_{j+1}=(j-m)d_j$ gives $d_{m-1},\ldots,d_0$ from $d_m$.
+At $m=0$ both functions equal one.  The ODE still has a second
+independent solution, but it is not supplied by this now-degenerate
+pair.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4441,18 +4714,24 @@ F_{L}(\eta,r)=C_{L}(\eta)r^{L+1}e^{-ir}M(L+1-i\eta,2L+2,2ir).
 \erratum{For the physical radial problem, take $L\ge0$ integral, $\eta$ real and $r>0$.}\par\nobreak
 \solution
 Set $z=2ir$, $g(r)=r^{L+1}e^{-ir}$ and $y=Cg(r)f(z)$.
-The logarithmic derivatives of $g$ are
+The logarithmic derivatives of $g$ are, using
+$g''/g=(g'/g)'+(g'/g)^2$,
 \[
 \frac{g'}g=\frac{L+1}{r}-i,\qquad
 \frac{g''}g=\frac{L(L+1)}{r^2}-\frac{2i(L+1)}r-1.
 \]
-Since $dz/dr=2i$,
+Since $dz/dr=2i$, $y'=C(g'f+2igf')$ and
+$y''=C(g''f+4ig'f'-4gf'')$, so
 \[
 \frac{y''}{Cg}=-4f''+4i\left(\frac{L+1}r-i\right)f'
  +\left[\frac{L(L+1)}{r^2}-\frac{2i(L+1)}r-1\right]f.
 \]
 Adding the potential term cancels $L(L+1)/r^2$ and $1$.
-Use $1/r=2i/z$ in the remainder to obtain
+Use $1/r=2i/z$ in the remainder: the $f'$ coefficient is
+$4i(L+1)/r+4=4-8(L+1)/z=-(4/z)(2L+2-z)$, and the $f$
+coefficient is
+$-(2/r)[i(L+1)+\eta]=-(4i/z)[i(L+1)+\eta]=(4/z)(L+1-i\eta)$.
+Hence
 \begin{align*}
 \frac1{Cg}\left\{y''+
   \left[1-\frac{2\eta}r-\frac{L(L+1)}{r^2}\right]y\right\}
