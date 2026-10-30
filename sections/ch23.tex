@@ -95,8 +95,11 @@ $P(A\cup B)$, $P(A\cup C)$, $P(B\cup C)$, and $P(A\cup B\cup C)$.
 For two events, $P(A\cap B)=P(A)+P(B)-P(A\cup B)$, and likewise for
 the pairs $A,C$ and $B,C$. Adding the three identities,
 \[
+\begin{aligned}
 P(A\cap B)+P(A\cap C)+P(B\cap C)
-=2[P(A)+P(B)+P(C)]-P(A\cup B)-P(A\cup C)-P(B\cup C).
+&=2[P(A)+P(B)+P(C)]\\
+&\quad-P(A\cup B)-P(A\cup C)-P(B\cup C).
+\end{aligned}
 \]
 Substitute this sum into the three-event inclusion--exclusion formula
 of Exercise~23.1.7:
@@ -1863,8 +1866,10 @@ For the five given measurements,
 The deviations $x_j-\bar x_5$ are $-.14$, $.36$, $-.24$, $-.04$, $.06$,
 so the squared-deviation sum is
 \[
-S_5=(-.14)^2+(.36)^2+(-.24)^2+(-.04)^2+(.06)^2
-=.0196+.1296+.0576+.0016+.0036=.212.
+\begin{aligned}
+S_5&=(-.14)^2+(.36)^2+(-.24)^2+(-.04)^2+(.06)^2\\
+&=.0196+.1296+.0576+.0016+.0036=.212.
+\end{aligned}
 \]
 Thus
 \[
