@@ -1378,7 +1378,10 @@ The apparent pole cancels in $P$, leaving
                           +\frac{2x^5}{945}+O(x^7)\right)}.
 \]
 In particular $P(0)=0$ by continuous extension, and the leading
-small-field response is $cx/3$.
+small-field response is $cx/3$. The series converges for $|x|<\pi$:
+the singularity of $\coth x-1/x$ at $x=0$ is removable, and the nearest
+other singularities are the poles of $\coth x$ at the zeros $x=\pm i\pi$
+of $\sinh x$ (compare $\cot x$ in Exercise 1.2.9).
 
 
 \Needspace{5\baselineskip}
@@ -1466,7 +1469,8 @@ times that prefactor rather than an ordinary Maclaurin series.
 \item[(b)] a direct Maclaurin expansion.
 \end{enumerate}
 \solution
-(a) Seek $y=x+a x^3+b x^5+d x^7+O(x^9)$ in
+(a) Because $\sinh$ is odd, so is its inverse, and $\sinh y=y+O(y^3)$
+gives $y=x+O(x^3)$. Hence seek $y=x+a x^3+b x^5+d x^7+O(x^9)$ in
 $x=\sinh y=y+y^3/6+y^5/120+y^7/5040+O(y^9)$.
 Since
 \[
@@ -1511,8 +1515,9 @@ for $y'$ termwise with $y(0)=0$) produces the full Maclaurin series
  =x-\frac{x^3}6+\frac{3x^5}{40}-\frac{5x^7}{112}+\cdots},
 \]
 in agreement with (a): $9/5!=3/40$ and $225/7!=5/112$.
-Its radius is $1$ (branch points at $\pm i$): the ratio of successive
-coefficient magnitudes is $(2r+1)^2/[(2r+2)(2r+3)]\to1$. At the real
+Its radius is $1$ (branch points at $\pm i$): the coefficient
+magnitudes are $[(2r-1)!!]^2/(2r+1)!$, so the ratio of successive ones is
+$(2r+1)^2\,(2r+1)!/(2r+3)!=(2r+1)^2/[(2r+2)(2r+3)]\to1$. At the real
 endpoints $x=\pm1$ the coefficient magnitudes are $O(r^{-3/2})$, because
 $\binom{2r}r/4^r\sim1/\sqrt{\pi r}$ (Stirling's formula, as in
 Exercise 1.1.10), so the series also converges absolutely there.
@@ -1638,9 +1643,9 @@ $(1+\delta)^2-1=\beta_3[(1+\delta)^2+1]$. Hence
  =(\delta+\tfrac12\delta^2)(1-\delta+O(\delta^2))
  =\delta-\frac12\delta^2+O(\delta^3).
 \]
-Thus all three reduce to $v=c\delta$ at first order. Through second
-order their coefficients of $c\delta^2$ are $+1/2,-3/2,-1/2$;
-for small positive nonzero $\delta$, $v_1>v_3>v_2$.
+\emph{1.}~All three therefore reduce to $v=c\delta$ at first order.
+\emph{2.}~Through second order their coefficients of $c\delta^2$ are
+$+1/2,-3/2,-1/2$; for small positive nonzero $\delta$, $v_1>v_3>v_2$.
 
 
 \Needspace{5\baselineskip}
@@ -1664,8 +1669,8 @@ Substitution first gives an exact rational function:
 \]
 because $1+(1-\alpha)^2-2(1-\alpha)=[1-(1-\alpha)]^2=\alpha^2$ and
 $1+(1-\alpha)^2=2-2\alpha+\alpha^2$.
-Near $\alpha=0$, with $1/(1-u)=1+u+O(u^2)$ for
-$u=\alpha-\alpha^2/2$,
+Near $\alpha=0$, with $1/(1-\eta)=1+\eta+O(\eta^2)$ for
+$\eta=\alpha-\alpha^2/2$,
 \[
  \frac1{2-2\alpha+\alpha^2}
  =\frac12\frac1{1-\alpha+\alpha^2/2}
@@ -1712,12 +1717,21 @@ $\binom{1/2}kq^k$ becomes $\binom{1/2}k g^{2k-1}t^{2k}/c^{2k-2}$:
 The first term is the classical displacement. For $|gt/c|\ll1$ the
 leading relative correction is
 $[-g^3t^4/(8c^2)]/(gt^2/2)=-g^2t^2/(4c^2)$.
-The binomial series converges for $|gt/c|<1$ and at the real endpoints
-$|gt/c|=1$, where its coefficients
-$\binom{1/2}k=(-1)^{k-1}\binom{2k}k/[4^k(2k-1)]=O(k^{-3/2})$
-are absolutely summable (Exercise 1.1.10);
-the original expression, unlike the small-time truncation, also describes
-larger times.
+The binomial series converges for $|gt/c|<1$, and also at the real
+endpoints $|gt/c|=1$, where its coefficients are absolutely summable.
+To see this, note that for $k\ge1$ the $k$ numerator factors $\frac12-j$
+($j=0,\ldots,k-1$) of $\binom{1/2}k$ are $\frac12$ followed by $k-1$
+negative ones, so, with $(2k-3)!!=(2k-1)!!/(2k-1)$ (where $(-1)!!=1$) and
+$(2k-1)!!=(2k)!/(2^kk!)$ as in Exercise 1.3.4,
+\[
+ \binom{1/2}k=\frac{\frac12(-\frac12)(-\frac32)\cdots(-\frac{2k-3}2)}{k!}
+ =(-1)^{k-1}\frac{(2k-3)!!}{2^kk!}
+ =(-1)^{k-1}\frac{\binom{2k}k}{4^k(2k-1)}.
+\]
+Since $\binom{2k}k/4^k\sim1/\sqrt{\pi k}$ (Exercise 1.1.10), these
+coefficients are $O(k^{-3/2})$, hence absolutely summable by comparison
+with $\sum k^{-3/2}$. The original expression, unlike the small-time
+truncation, also describes larger times.
 
 
 \Needspace{5\baselineskip}
@@ -1740,8 +1754,9 @@ Experimental results support the Dirac theory.
 \erratum{In the physical definition the parameter is
 $\gamma=Ze^2/(4\pi\epsilon_0\hbar c)=Z\alpha$, not
 $\gamma^2=Ze^2/(4\pi\epsilon_0\hbar c)$.}
-This follows by matching the given denominator with the standard
-Dirac formula containing $(Z\alpha)^2$; see
+Here $\alpha=e^2/(4\pi\epsilon_0\hbar c)\approx1/137$ is the
+fine-structure constant. The correction follows by matching the given
+denominator with the standard Dirac formula containing $(Z\alpha)^2$; see
 \href{https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=842564}
 {Kramida's NIST compilation, Sec.~2, Eq.~(3)}.
 For the algebra set $K=|k|>0$ and $q=\gamma^2$. With
@@ -1757,8 +1772,8 @@ with $\varepsilon=q/(2Kn)+O(q^2)$,
  =\frac q{n^2}\left(1-\frac q{2Kn}+O(q^2)\right)^{-2}
  =\frac q{n^2}+\frac{q^2}{Kn^3}+O(q^3).
 \]
-Now apply $(1+u)^{-1/2}=1-u/2+3u^2/8+O(u^3)$ with this $u$, for which
-$u^2=q^2/n^4+O(q^3)$:
+Now $E/mc^2=(1+u)^{-1/2}$ with $u=q/(s+n-K)^2$ as just expanded, so
+$u^2=q^2/n^4+O(q^3)$, and $(1+u)^{-1/2}=1-u/2+3u^2/8+O(u^3)$ gives
 \[
  \frac E{mc^2}=1-\frac q{2n^2}-\frac{q^2}{2Kn^3}+\frac{3q^2}{8n^4}+O(q^3),
 \]
@@ -1768,14 +1783,17 @@ and $-q^2/(2Kn^3)+3q^2/(8n^4)=-[q^2/(2n^4)](n/K-3/4)$. Thus
  -\frac{\gamma^4}{2n^4}\left(\frac n{|k|}-\frac34\right)
  +O(\gamma^6)\right]}.
 \]
-The expansion is for $|\gamma|<|k|$ and small $\gamma$ at fixed
-positive $n$. For $n=|k|=1$ the exact expression reduces to
+The expansion is for small $\gamma$ at fixed $n$. The qualification in
+the statement is needed because $|\gamma|<|k|$ keeps $s$ real and $n>0$
+keeps the denominator $s+n-|k|\to n$ away from zero as $\gamma\to0$;
+both hold for the physical states, which have $n\ge|k|\ge1$ and
+$|\gamma|=Z\alpha<1$ for every known element. For $n=|k|=1$ the exact
+expression reduces to
 $mc^2[1+\gamma^2/(1-\gamma^2)]^{-1/2}=mc^2\sqrt{1-\gamma^2}$, whose expansion
 $mc^2(1-\gamma^2/2-\gamma^4/8+\cdots)$ checks the result.
 The $\gamma^2$ term $-mc^2\gamma^2/(2n^2)$ is the Bohr energy
-$-mc^2(Z\alpha)^2/(2n^2)$, with $\alpha=e^2/(4\pi\epsilon_0\hbar c)$,
-exactly when $\gamma=Z\alpha$, which confirms the corrected definition
-of $\gamma$.
+$-mc^2(Z\alpha)^2/(2n^2)$ exactly when $\gamma=Z\alpha$, which confirms
+the corrected definition of $\gamma$.
 
 
 \Needspace{5\baselineskip}
@@ -2279,10 +2297,19 @@ Because $1-y=1/(1+x)$, its complete prefactor simplifies to
 Thus the result is $\sum_{k\ge0}(-1)^k c_kx^k$, precisely Eq.~(1.86).
 The exchanges hold wherever the double series converges absolutely;
 if the original radius is $R>0$, it suffices that
-$|y|<1$ and $|y|/(1-|y|)<R$. This includes a neighborhood of zero.
-The identity then extends to any common connected analytic domain containing zero
-where the resulting series converge. It is not a license to rearrange
-an arbitrary divergent double series.
+$|y|<1$ and $|y|/(1-|y|)<R$, because by the same identity the double
+series of absolute values sums to
+\[
+ \sum_{k=0}^\infty|c_k|\,|y|^k\sum_{j=0}^\infty\binom{k+j}j|y|^j
+ =\frac1{1-|y|}\sum_{k=0}^\infty|c_k|\Bigl(\frac{|y|}{1-|y|}\Bigr)^k,
+\]
+and $\sum_k|c_k|t^k$, which has the same radius $R$ as
+$\sum_kc_kx^k$, converges at $t=|y|/(1-|y|)<R$.
+Both conditions hold near $x=0$, since $y=x/(1+x)\to0$ as $x\to0$.
+By the identity theorem for analytic functions (uniqueness of analytic
+continuation), the equality then persists on any connected open set
+containing $x=0$ on which both series converge. It is not a license to
+rearrange an arbitrary divergent double series.
 
 
 \Needspace{5\baselineskip}
@@ -2526,9 +2553,8 @@ swept out by the tip of $\mathbf{r}$ if
   $\mathbf{a}$ geometrically.
 \item[(b)] $(\mathbf{r}-\mathbf{a})\cdot\mathbf{r}=0$. Describe the geometric
   role of $\mathbf{a}$.
-
-  The vector $\mathbf{a}$ is constant (in magnitude and direction).
 \end{enumerate}
+The vector $\mathbf{a}$ is constant (in magnitude and direction).
 \solution
 (a) Expanding gives $\mathbf r\cdot\mathbf a=|\mathbf a|^2$.
 For $\mathbf a\ne0$ this is a plane perpendicular to $\mathbf a$ and
@@ -2643,7 +2669,7 @@ gives $G$ at parameter $2/3$ in every case:
  \coordinate (G) at (2,1);
  \draw[thick] (A)--(B)--(C)--cycle;
  \draw[blue!65!black] (A)--(MA) (B)--(MB) (C)--(MC);
- \fill (G) circle (2pt) node[above right,fill=white,inner sep=1pt] {$G$};
+ \fill (G) circle (2pt) node[above=1pt] {$G$};
  \fill (A) circle (1.5pt) node[below left] {$A=(0,0)$};
  \fill (B) circle (1.5pt) node[below right] {$B=(6,0)$};
  \fill (C) circle (1.5pt) node[above] {$C=(0,3)$};
@@ -2657,10 +2683,11 @@ gives $G$ at parameter $2/3$ in every case:
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{1.7.10}\quad Prove the law of cosines starting from
-\erratum{$A^{2}=|\mathbf B-\mathbf C|^{2}$}.
+$A^{2}=(\mathbf{B}-\mathbf{C})^{2}$.
 \solution
-\erratum{The starting equation is a vector identity:
-$A^2=|\mathbf B-\mathbf C|^2$, where $A,B,C$ denote side lengths.}
+Here $(\mathbf B-\mathbf C)^2$ means
+$(\mathbf B-\mathbf C)\cdot(\mathbf B-\mathbf C)=|\mathbf B-\mathbf C|^2$,
+and $A,B,C$ denote the side lengths $|\mathbf A|,|\mathbf B|,|\mathbf C|$.
 Place the tails of $\mathbf B$ and $\mathbf C$ at the same triangle
 vertex, and let $\theta$ be the included angle. The opposite side is
 $\mathbf A=\mathbf B-\mathbf C$ up to orientation. Therefore
