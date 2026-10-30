@@ -21,15 +21,22 @@ Taylor's theorem applied to the entire function $f(x)=e^{-x^2}$ gives
 \[
 f(x-t)=\sum_{n=0}^{\infty}\frac{(-t)^n}{n!}f^{(n)}(x).
 \]
-Multiply by $e^{x^2}$ and insert the Rodrigues expression term by term:
+Multiply by $e^{x^2}$. By the Rodrigues formula each term becomes
+\[
+e^{x^2}\frac{(-t)^n}{n!}f^{(n)}(x)
+=(-1)^ne^{x^2}f^{(n)}(x)\,\frac{t^n}{n!}=H_n(x)\frac{t^n}{n!},
+\]
+so
 \[
 \sum_{n=0}^{\infty}H_n(x)\frac{t^n}{n!}
 =e^{x^2}e^{-(x-t)^2}
+=e^{x^2-(x^2-2xt+t^2)}
 =\boxed{e^{2xt-t^2}}.
 \]
 The Taylor series converges for every finite complex $t$, so the generating
 function is an identity, not only a formal expansion. As a normalization
-check, its first three coefficients are $1,2x,2x^2-1$, corresponding to
+check, $e^{2xt-t^2}=1+(2xt-t^2)+\frac12(2xt)^2+O(t^3)$, so its first three
+coefficients are $1,2x,2x^2-1$, corresponding to
 $H_0=1$, $H_1=2x$, $H_2=4x^2-2$ after multiplying by $n!$.
 
 \Needspace{5\baselineskip}
@@ -46,19 +53,24 @@ $H_0=1$, $H_1=2x$, $H_2=4x^2-2$ after multiplying by $n!$.
 \end{enumerate}
 \solution
 (a) If $y$ is a polynomial of degree $n$ with leading coefficient $a_n\ne0$,
-the coefficient of $x^n$ in the ODE is $(\lambda-n)a_n$. Thus
+the coefficient of $x^n$ in the ODE is $(\lambda-n)a_n$: the term $xy''$
+has degree at most $n-1$, $y'$ has degree $n-1$, and only $-xy'$
+(contributing $-na_nx^n$) and $\lambda y$ (contributing $\lambda a_nx^n$)
+reach degree $n$. Thus
 $\lambda=n$. The weight needed to put the equation in self-adjoint form
-satisfies
+satisfies $(pw)'=qw$ with $p=x$, $q=1-x$:
 \[
 (xw)'=(1-x)w,\quad xw'+w=w-xw,\quad w'=-w,
 \]
-so choose $w=e^{-x}$. The Rodrigues construction with $p=x$ gives
+so choose $w=e^{-x}$. The Rodrigues construction
+$y_n=w^{-1}D^n(wp^n)$ with $p=x$, multiplied by the factor $1/n!$ used in
+Table 12.1, gives
 \[
 \boxed{L_n(x)=\frac{e^x}{n!}\frac{d^n}{dx^n}(x^ne^{-x})}.
 \]
 We can verify this construction directly. Put $F=x^ne^{-x}$, so
-$xF'=(n-x)F$. Differentiate $n+1$ times. Since both $x$ and $n-x$ are
-linear, the product rule leaves
+$xF'=x(nx^{n-1}-x^n)e^{-x}=(n-x)F$. Differentiate $n+1$ times. Since
+both $x$ and $n-x$ are linear, the Leibniz product rule leaves
 \[
 xF^{(n+2)}+(n+1)F^{(n+1)}
 =(n-x)F^{(n+1)}-(n+1)F^{(n)}.
@@ -67,28 +79,45 @@ With $G=F^{(n)}$ this becomes $xG''+(x+1)G'+(n+1)G=0$.
 Now $G=n!e^{-x}L_n$, so
 $G'=n!e^{-x}(L_n'-L_n)$ and
 $G''=n!e^{-x}(L_n''-2L_n'+L_n)$.
-Substitution cancels the common factor and gives
-$xL_n''+(1-x)L_n'+nL_n=0$, exactly the required ODE.
+Substitution and division by the common factor $n!e^{-x}$ give
+\[
+x(L_n''-2L_n'+L_n)+(x+1)(L_n'-L_n)+(n+1)L_n
+=xL_n''+(1-x)L_n'+nL_n=0,
+\]
+exactly the required ODE.
 
 Leibniz's rule also shows that the result is a polynomial:
 \[
+\frac{d^n}{dx^n}(x^ne^{-x})
+=\sum_{k=0}^n\binom nk\frac{d^{n-k}x^n}{dx^{n-k}}\,
+ \frac{d^ke^{-x}}{dx^k},
+\qquad
 L_n(x)=\sum_{k=0}^n\binom nk\frac{(-x)^k}{k!}.
 \]
 Indeed, differentiating $x^n$ $n-k$ times gives $n!x^k/k!$, while the
-remaining $k$ derivatives of $e^{-x}$ give $(-1)^ke^{-x}$.
+remaining $k$ derivatives of $e^{-x}$ give $(-1)^ke^{-x}$; the factors
+$n!$ and $e^{-x}$ cancel against the prefactor $e^x/n!$.
 This fixes the scale $L_n(0)=1$ and gives leading coefficient $(-1)^n/n!$.
 
-(b) Sum that explicit polynomial formula:
+(b) Sum that explicit polynomial formula, exchanging the order of the
+double sum over $0\le k\le n$:
 \begin{align*}
 \sum_{n=0}^{\infty}L_n(x)t^n
 &=\sum_{k=0}^{\infty}\frac{(-x)^k}{k!}
-       \sum_{n=k}^{\infty}\binom nk t^n\\
-&=\sum_{k=0}^{\infty}\frac{(-x)^k}{k!}
+       \sum_{n=k}^{\infty}\binom nk t^n
+ =\sum_{k=0}^{\infty}\frac{(-x)^k}{k!}
        \frac{t^k}{(1-t)^{k+1}}\\
-&=\boxed{\frac1{1-t}\exp\left(-\frac{xt}{1-t}\right)},\qquad |t|<1.
+&=\frac1{1-t}\sum_{k=0}^{\infty}\frac1{k!}
+       \left(-\frac{xt}{1-t}\right)^k
+ =\boxed{\frac1{1-t}\exp\left(-\frac{xt}{1-t}\right)},\qquad |t|<1.
 \end{align*}
-The inner sum follows by differentiating $(1-t)^{-1}$ $k$ times and
-multiplying by $t^k/k!$. Interchanging the sums is justified because the
+The inner sum follows by differentiating the geometric series
+$k$ times,
+\[
+\frac{k!}{(1-t)^{k+1}}=\frac{d^k}{dt^k}\sum_{n=0}^{\infty}t^n
+=\sum_{n=k}^{\infty}\frac{n!}{(n-k)!}t^{n-k},
+\]
+and multiplying by $t^k/k!$. Interchanging the sums is justified because the
 corresponding absolute sum is at most
 $(1-|t|)^{-1}\exp[|x||t|/(1-|t|)]<\infty$.
 
@@ -97,7 +126,8 @@ $(1-|t|)^{-1}\exp[|x||t|/(1-|t|)]<\infty$.
 \noindent\textbf{12.1.3}\quad Carry out in detail the steps needed to confirm
 that the $(n+1)$-fold differentiation of Eq.~(12.10) leads to Eq.~(12.12).
 \solution
-Set $F=wp^n$ and $A=(n-1)p'+q$. Equation (12.10) is $pF'=AF$.
+Set $F=wp^n$ and $A=(n-1)p'+q$. Equation (12.10) is $pF'=AF$
+(indeed $pF'=pw'p^n+np'wp^n$ and $pw'=(q-p')w$).
 Because $p$ has degree at most two, $p^{(j)}=0$ for $j\ge3$; because
 $A$ is at most linear, $A^{(j)}=0$ for $j\ge2$. Leibniz's formula
 therefore gives, with every surviving term displayed,
@@ -114,12 +144,14 @@ The coefficient of $F^{(n+1)}/w$ is
 \[
 (n+1)p'-[(n-1)p'+q]=2p'-q.
 \]
-The coefficient of $F^{(n)}/w=y_n$ is
+The coefficient of $F^{(n)}/w=y_n$ is, with $A'=(n-1)p''+q'$,
 \begin{align*}
 \frac{n(n+1)}2p''-(n+1)[(n-1)p''+q']
+&=(n+1)\left[\frac n2-(n-1)\right]p''-(n+1)q'\\
 &=\frac{(n+1)(2-n)}2p''-(n+1)q'\\
-&=-\left[\frac{n^2-n-2}{2}p''+(n+1)q'\right].
+&=-\left[\frac{n^2-n-2}{2}p''+(n+1)q'\right],
 \end{align*}
+since $(n+1)(2-n)=-(n^2-n-2)$.
 Hence
 \[
 \boxed{\frac p wF^{(n+2)}+\frac{2p'-q}{w}F^{(n+1)}
@@ -134,28 +166,32 @@ Eq.~(12.12) into Eq.~(12.16).
 \solution
 Write $G=D^n(wp^n)=wy_n$ and
 \[
-S=\frac{w'}w=\frac{q-p'}p.
+S=\frac{w'}w=\frac{q-p'}p,
 \]
-Two product differentiations give
+where the second form follows from the weight condition $(pw)'=qw$,
+i.e.\ $p'w+pw'=qw$. Since $w'=Sw$ and hence $w''=(Sw)'=(S'+S^2)w$, two product
+differentiations of $G=wy_n$ give
 \[
 \frac{G'}w=y_n'+Sy_n,\qquad
 \frac{G''}w=y_n''+2Sy_n'+(S'+S^2)y_n.
 \]
-Put $A=(n^2-n-2)p''/2+(n+1)q'$. Substitution into Eq. (12.12) gives
+Put $A=(n^2-n-2)p''/2+(n+1)q'$, so that Eq. (12.12) reads
+$(p/w)G''+[(2p'-q)/w]G'-Ay_n=0$. Substitution gives
 \[
 p y_n''+[2pS+2p'-q]y_n'
 +[pS'+pS^2+(2p'-q)S-A]y_n=0.
 \]
-The first-derivative coefficient simplifies to
+The first-derivative coefficient simplifies, with $pS=q-p'$, to
 $2(q-p')+2p'-q=q$. In the last coefficient,
 \[
 pS^2+(2p'-q)S=S[(q-p')+2p'-q]=p'S,
 \]
 so
-\[
-pS'+p'S-A=(pS)'-A=q'-p''-A
-=-\frac{n(n-1)}2p''-nq'.
-\]
+\begin{align*}
+pS'+p'S-A=(pS)'-A
+&=q'-p''-\frac{n^2-n-2}2p''-(n+1)q'\\
+&=-\frac{n(n-1)}2p''-nq'.
+\end{align*}
 Thus
 \[
 \boxed{p y_n''+q y_n'-\left[\frac{n(n-1)}2p''+nq'\right]y_n=0},
@@ -163,7 +199,7 @@ Thus
 exactly Eq. (12.16), with eigenvalue
 $\lambda_n=-n(n-1)\alpha-n\mu$ when $p''=2\alpha$, $q'=\mu$.
 
-\erratum{The source's intermediate Eqs. (12.13)--(12.15), on textbook
+\erratum{The textbook's intermediate Eqs. (12.13)--(12.15), on
 p.~553, contain algebraic errors. Equation (12.16) is correct. The
 consistent intermediate identities are the following:}
 \begin{align*}
@@ -176,9 +212,17 @@ consistent intermediate identities are the following:}
 \erratum{\frac q wG'}
 &\erratum{=q y_n'+\frac{q(q-p')}{p}y_n.}
 \end{align*}
-For the first identity, eliminate $y_n'$ from $G''/w$ using
-$G'/w=y_n'+Sy_n$; then
-$p(S'-S^2)=q'-p''-q(q-p')/p$. The other two follow by substitution.
+For the first identity, multiply $G''/w$ by $p$ and eliminate $y_n'$
+from the term $2pSy_n'$ using $y_n'=G'/w-Sy_n$ and $pS=q-p'$:
+\[
+\frac pwG''=py_n''+\frac{2(q-p')}{w}G'+p(S'-S^2)y_n.
+\]
+Here $pS'=q'-p''-p'(q-p')/p$ and $pS^2=(q-p')^2/p$, so
+$p(S'-S^2)=q'-p''-(q-p')(p'+q-p')/p=q'-p''-q(q-p')/p$.
+Inserting the first identity into Eq. (12.12) gives the second, because
+$2(q-p')+2p'-q=q$ and $p''-q'+A=n(n-1)p''/2+nq'$. The third is $q$
+times $G'/w=y_n'+Sy_n$; substituting it into the second gives
+Eq. (12.16).
 The opposite signs printed in (12.14) and (12.15) would cancel each
 other, but neither intermediate identity is valid with those signs.
 
@@ -198,10 +242,15 @@ the corresponding generating functions:
   \]
 \end{enumerate}
 \solution
-Both integrands are analytic in the punctured $t$-plane, so their
-Laurent coefficients on $0<|t|<\infty$ are extracted by the given
-positively oriented contour integrals. Uniqueness of the Laurent
-expansion therefore gives
+Both functions $f(t)=e^{(x/2)(t\mp1/t)}$ are analytic in the
+punctured $t$-plane $0<|t|<\infty$, so each has a Laurent expansion
+$f(t)=\sum_{n=-\infty}^{\infty}c_nt^n$ there, with
+\[
+c_n=\frac1{2\pi i}\oint f(t)\,t^{-n-1}\,dt
+\]
+for any contour encircling the origin once counterclockwise. These are
+exactly the given integrals, so $c_n=J_n(x)$, respectively $I_n(x)$.
+Uniqueness of the Laurent expansion therefore gives
 \[
 \boxed{e^{(x/2)(t-1/t)}=\sum_{n=-\infty}^{\infty}J_n(x)t^n},
 \qquad
@@ -210,7 +259,8 @@ expansion therefore gives
 For $x\ne0$, the essential singularity at zero requires the full integer
 range rather than a Taylor series. At $x=0$ both generating functions
 are one, so only the $n=0$ coefficient survives.
-To exhibit the coefficients directly, multiply the two exponential series:
+To exhibit the coefficients directly, multiply the two exponential series
+(upper sign for $J_n$, lower sign for $I_n$):
 \[
 e^{xt/2}e^{\mp x/(2t)}
 =\sum_{j,k\ge0}\frac{(x/2)^{j+k}(\mp1)^k}{j!k!}t^{j-k}.
@@ -220,8 +270,13 @@ For $n\ge0$, the terms with $j-k=n$ have $j=k+n$ and give
 J_n(x)=\sum_{k\ge0}\frac{(-1)^k(x/2)^{n+2k}}{k!(n+k)!},\quad
 I_n(x)=\sum_{k\ge0}\frac{(x/2)^{n+2k}}{k!(n+k)!}.
 \]
-The negative coefficients similarly give $J_{-n}=(-1)^nJ_n$ and
-$I_{-n}=I_n$. On any compact annulus in $t$, the product of exponential
+For $n=-m<0$, the terms have $k=j+m$, so the coefficient of $t^{-m}$ is
+\[
+\sum_{j\ge0}\frac{(\mp1)^{j+m}(x/2)^{m+2j}}{j!(m+j)!}
+=(\mp1)^m\times(\text{coefficient of }t^{m}),
+\]
+that is, $J_{-m}=(-1)^mJ_m$ and $I_{-m}=I_m$.
+On any compact annulus in $t$, the product of exponential
 series converges absolutely and uniformly, justifying collection of
 coefficients and contour integration term by term.
 
@@ -234,8 +289,12 @@ small. Collect the coefficients of $t^{0}$, $t^{1}$, and $t^{2}$.
 $a_{0}=P_{0}(z)=1$,\quad$a_{1}=P_{1}(z)=z$,\quad
 $a_{2}=P_{2}(z)=\frac{1}{2}(3z^{2}-1)$.
 \solution
-Use $(1+u)^{-1/2}=1-u/2+3u^2/8+O(u^3)$ with
-$u=-2tz+t^2$. To retain only powers through $t^2$,
+Use the binomial series
+\[
+(1+u)^{-1/2}=1-\frac12u+\frac{(-\frac12)(-\frac32)}{2!}u^2+O(u^3)
+=1-\frac u2+\frac{3u^2}8+O(u^3)
+\]
+with $u=-2tz+t^2=O(t)$. To retain only powers through $t^2$,
 \[
 -\frac u2=zt-\frac{t^2}2,\qquad
 \frac{3u^2}{8}=\frac38(4z^2t^2+O(t^3))
@@ -244,6 +303,7 @@ $u=-2tz+t^2$. To retain only powers through $t^2$,
 Consequently
 \[
 (1-2tz+t^2)^{-1/2}
+=1+zt-\frac{t^2}2+\frac32z^2t^2+O(t^3)
 =1+zt+\frac{3z^2-1}{2}t^2+O(t^3).
 \]
 Thus $\boxed{P_0=1,\ P_1=z,\ P_2=(3z^2-1)/2}$.
@@ -262,10 +322,14 @@ consecutive $n$, \erratum{using $U_{-1}(x)=0$ at $n=0$}.
 \solution
 Multiply the generating-function identity by its denominator:
 \[
-(1-2xt+t^2)\sum_{n=0}^{\infty}U_n(x)t^n=1.
+(1-2xt+t^2)\sum_{n=0}^{\infty}U_n(x)t^n
+=\sum_{n=0}^{\infty}U_nt^n-2x\sum_{n=0}^{\infty}U_nt^{n+1}
++\sum_{n=0}^{\infty}U_nt^{n+2}=1.
 \]
 The constant term gives $U_0=1$, and the coefficient of $t$ gives
-$U_1-2xU_0=0$, so $U_1=2x$. At power $t^{n+1}$ for $n\ge1$,
+$U_1-2xU_0=0$, so $U_1=2x$. At power $t^{n+1}$ for $n\ge1$, the three
+sums contribute $U_{n+1}$, $-2xU_n$, and $U_{n-1}$, and the right side
+contributes nothing:
 \[
 U_{n+1}-2xU_n+U_{n-1}=0.
 \]
@@ -276,7 +340,8 @@ Hence
 \erratum{To write this recurrence at $n=0$ as requested, define
 $U_{-1}=0$; otherwise the three-term formula starts at $n=1$ and the
 $n=0$ case is the separate initial equation $U_1=2xU_0$.}
-The recurrence gives $U_2=4x^2-1$ and $U_3=8x^3-4x$, which also
+The recurrence gives $U_2=2x(2x)-1=4x^2-1$ and
+$U_3=2x(4x^2-1)-2x=8x^3-4x$, which also
 follow by direct expansion of the rational generating function.
 
 \Needspace{8\baselineskip}
@@ -287,9 +352,9 @@ follow by direct expansion of the rational generating function.
 \noindent\textbf{12.2.1}\quad Verify the identities, Eqs.~(12.32) and (12.46).
 \solution
 For Eq. (12.32), multiply the numerator and denominator involving
-$e^{-t}$ by $e^t$:
+$e^{-t}$ by $e^t$, then write $e^t=(e^t-1)+1$:
 \[
-\frac{-t}{e^{-t}-1}=\frac{te^t}{e^t-1}
+\frac{-t}{e^{-t}-1}=\frac{-te^t}{1-e^t}=\frac{te^t}{e^t-1}
 =\frac{t(e^t-1)+t}{e^t-1}=t+\frac{t}{e^t-1}.
 \]
 Subtracting $t$ gives
@@ -316,16 +381,24 @@ Note that $B_{n}(0)=B_{n}$, the Bernoulli number.
 \solution
 The defining generating function is
 $te^{st}/(e^t-1)=\sum_{n\ge0}B_n(s)t^n/n!$.
-First invert the series $(e^t-1)/t=1+t/2+t^2/6+O(t^3)$.
-If its inverse is $1+at+bt^2+O(t^3)$, the product requires
-$a+1/2=0$ and $b+a/2+1/6=0$. Thus $a=-1/2$, $b=1/12$.
-Multiply by $e^{st}=1+st+s^2t^2/2+O(t^3)$:
+First invert the series $(e^t-1)/t=\sum_{k\ge0}t^k/(k+1)!
+=1+t/2+t^2/6+O(t^3)$.
+If its inverse is $1+at+bt^2+O(t^3)$, then
+\[
+\left(1+\frac t2+\frac{t^2}6\right)(1+at+bt^2)
+=1+\left(a+\frac12\right)t+\left(b+\frac a2+\frac16\right)t^2+O(t^3)
+\]
+must equal one, which requires
+$a+1/2=0$ and $b+a/2+1/6=0$. Thus $a=-1/2$, $b=1/4-1/6=1/12$.
+Multiply $t/(e^t-1)=1-t/2+t^2/12+O(t^3)$ by
+$e^{st}=1+st+s^2t^2/2+O(t^3)$:
 \[
 \frac{te^{st}}{e^t-1}
 =1+\left(s-\frac12\right)t
 +\left(\frac{s^2}{2}-\frac s2+\frac1{12}\right)t^2+O(t^3).
 \]
-Comparing with $B_0+B_1t+B_2t^2/2!+\cdots$ yields
+Comparing with $B_0(s)+B_1(s)t+B_2(s)t^2/2!+\cdots$, so that $B_2(s)$ is
+twice the coefficient of $t^2$, yields
 \[
 \boxed{B_0(s)=1,\quad B_1(s)=s-\frac12,\quad
  B_2(s)=s^2-s+\frac16}.
@@ -343,22 +416,35 @@ function itself, proving $B_n(0)=B_n$ for every $n$.
 \]
 \emph{Hint.}~$\tan x=\cot x-2\cot2x$.
 \solution
-First verify the hinted identity:
+First verify the hinted identity, using $\cos2x=\cos^2x-\sin^2x$ and
+$\sin2x=2\sin x\cos x$:
 \[
 \cot x-2\cot2x
 =\frac{\cos x}{\sin x}
  -\frac{\cos^2x-\sin^2x}{\sin x\cos x}
+=\frac{\cos^2x-(\cos^2x-\sin^2x)}{\sin x\cos x}
 =\frac{\sin x}{\cos x}=\tan x.
 \]
 The identity extends through zero by continuity after the poles cancel.
-From the Bernoulli generating function,
+Next express the cotangent through exponentials:
 \[
-\cot x=i+\frac{2i}{e^{2ix}-1}
-=\frac1x+\sum_{n=1}^{\infty}
+\cot x=\frac{i(e^{ix}+e^{-ix})}{e^{ix}-e^{-ix}}
+=\frac{i(e^{2ix}+1)}{e^{2ix}-1}
+=i+\frac{2i}{e^{2ix}-1}
+=i+\frac1x\sum_{k=0}^{\infty}B_k\frac{(2ix)^k}{k!},
+\]
+where the Bernoulli generating function $t/(e^t-1)=\sum_kB_kt^k/k!$ was
+used with $t=2ix$; it converges for $|t|<2\pi$, that is, $|x|<\pi$.
+The $k=0$ term is $1/x$; the $k=1$ term, $2iB_1=-i$, cancels the initial
+$i$; all odd Bernoulli numbers beyond $B_1$ vanish (Eq. (12.32), verified
+in Exercise 12.2.1, shows that $t/(e^t-1)+t/2$ is even); and
+$(2ix)^{2n}=(-1)^n2^{2n}x^{2n}$. Hence
+\[
+\cot x=\frac1x+\sum_{n=1}^{\infty}
  \frac{(-1)^n2^{2n}B_{2n}}{(2n)!}x^{2n-1},\quad |x|<\pi.
 \]
-Here the $B_1=-1/2$ term cancels the initial $i$, and all odd Bernoulli
-numbers beyond $B_1$ vanish. Substitute this series at $x$ and at $2x$:
+Substitute this series at $x$ and at $2x$, noting
+$2(2x)^{2n-1}=2^{2n}x^{2n-1}$:
 \begin{align*}
 \cot x-2\cot2x
 &=\left(\frac1x-\frac2{2x}\right)
@@ -367,9 +453,12 @@ numbers beyond $B_1$ vanish. Substitute this series at $x$ and at $2x$:
 &=\boxed{\sum_{n=1}^{\infty}
 \frac{(-1)^{n-1}2^{2n}(2^{2n}-1)B_{2n}}{(2n)!}x^{2n-1}}.
 \end{align*}
-Both cotangent expansions converge for $|x|<\pi/2$. The nearest poles
+In the last step $(-1)^n(1-2^{2n})=(-1)^{n-1}(2^{2n}-1)$.
+Both cotangent expansions converge for $|x|<\pi/2$ (the one at $2x$ needs
+$|2x|<\pi$). The nearest poles
 of $\tan x$ are at $\pm\pi/2$, so this is also its exact Taylor radius.
-The first terms are $x+x^3/3+2x^5/15+\cdots$.
+With $B_2=1/6$, $B_4=-1/30$, $B_6=1/42$ the first terms are
+$x+x^3/3+2x^5/15+\cdots$.
 
 \Needspace{8\baselineskip}
 \subsection*{12.3 Euler-Maclaurin Integration Formula}
@@ -392,37 +481,49 @@ Show that
 \end{enumerate}
 \solution
 For each polynomial, the Euler--Maclaurin correction sequence terminates
-because sufficiently high derivatives vanish. Use $B_2=1/6$, $B_4=-1/30$.
+because sufficiently high derivatives vanish; the remainder, an integral
+containing such a derivative, is then zero, so the formula is exact. The
+term following the one displayed in the statement is
+$(B_4/4!)[f'''(n)-f'''(1)]$. Use $B_2/2!=1/12$ and $B_4/4!=-1/720$
+(from $B_2=1/6$, $B_4=-1/30$).
 
-(a) For $f(x)=x$, the first-derivative difference is $1-1=0$, so
+(a) For $f(x)=x$, $\int_1^nx\,dx=(n^2-1)/2$ and the first-derivative
+difference is $1-1=0$, so
 \[
 \sum_{m=1}^nm=\frac{n^2-1}{2}+\frac{1+n}{2}
-=\boxed{\frac{n(n+1)}2}.
+=\frac{n^2+n}{2}=\boxed{\frac{n(n+1)}2}.
 \]
-(b) For $f(x)=x^2$, $f'=2x$ and higher odd derivatives vanish. Hence
+(b) For $f(x)=x^2$, $f'=2x$ and higher odd derivatives vanish. Hence,
+over the common denominator $6$,
 \begin{align*}
 \sum_{m=1}^nm^2
-&=\frac{n^3-1}{3}+\frac{1+n^2}{2}+\frac1{12}(2n-2)\\
+&=\frac{n^3-1}{3}+\frac{1+n^2}{2}+\frac1{12}(2n-2)
+=\frac{2(n^3-1)+3(1+n^2)+(n-1)}{6}\\
 &=\frac{2n^3+3n^2+n}{6}
-=\boxed{\frac{n(n+1)(2n+1)}6}.
+=\boxed{\frac{n(n+1)(2n+1)}6},
 \end{align*}
+since $n(n+1)(2n+1)=n(2n^2+3n+1)$.
 (c) For $f(x)=x^3$, $f'=3x^2$ and $f^{(3)}=6$, whose endpoint
-difference is zero. Thus
+difference is zero. Thus, over the common denominator $4$,
 \begin{align*}
 \sum_{m=1}^nm^3
-&=\frac{n^4-1}{4}+\frac{1+n^3}{2}+\frac1{12}(3n^2-3)\\
+&=\frac{n^4-1}{4}+\frac{1+n^3}{2}+\frac1{12}(3n^2-3)
+=\frac{(n^4-1)+2(1+n^3)+(n^2-1)}{4}\\
 &=\frac{n^4+2n^3+n^2}{4}
 =\boxed{\frac{n^2(n+1)^2}{4}}.
 \end{align*}
 (d) For $f(x)=x^4$, $f'=4x^3$, $f^{(3)}=24x$, and $f^{(5)}=0$.
-Retain both nonzero endpoint corrections:
+Retain both nonzero endpoint corrections, and note
+$(4n^3-4)/12=10(n^3-1)/30$ and $(24n-24)/720=(n-1)/30$:
 \begin{align*}
 \sum_{m=1}^nm^4
 &=\frac{n^5-1}{5}+\frac{1+n^4}{2}
  +\frac1{12}(4n^3-4)-\frac1{720}(24n-24)\\
+&=\frac{6(n^5-1)+15(1+n^4)+10(n^3-1)-(n-1)}{30}\\
 &=\frac{6n^5+15n^4+10n^3-n}{30}\\
 &=\boxed{\frac{n(n+1)(2n+1)(3n^2+3n-1)}{30}}.
 \end{align*}
+The constants cancel in the second line, $-6+15-10+1=0$.
 The last factorization follows from
 $(n+1)(2n+1)(3n^2+3n-1)=6n^4+15n^3+10n^2-1$.
 
@@ -445,29 +546,48 @@ $N=1,2,\ldots$ \erratum{at $n=1000$}, as in the printed answer below.
 For $n=1000$, $N=2$\quad$\gamma\erratum{\approx}0.5772\,1566\,4901$
 \erratum{(truncated, rather than rounded, to twelve decimal places)}.
 \solution
-\erratum{The printed finite-$N$ equality omits the remainder $R_{n,N}$; it is restored above.}
+\erratum{The textbook prints this finite-$N$ formula as an equality
+without the remainder $R_{n,N}$; for finite $N$ it holds only with
+$R_{n,N}$ included, as derived below.}
 Put $H_n=\sum_{s=1}^n1/s$ and define the computable approximation
 \[
 A_{n,N}=H_n-\ln n-\frac1{2n}
  +\sum_{k=1}^N\frac{B_{2k}}{2k\,n^{2k}}.
 \]
-To see the signs, apply Euler--Maclaurin to the tail from $n$ to $M$.
-Since $f^{(2k-1)}(x)=-(2k-1)!/x^{2k}$, it gives
+To derive the formula with its signs and remainder, apply
+Euler--Maclaurin to $f(x)=1/x$ on the interval $[n,M]$:
+\[
+\sum_{s=n}^{M}\frac1s=\int_n^M\frac{dx}{x}+\frac{f(n)+f(M)}2
++\sum_{k=1}^N\frac{B_{2k}}{(2k)!}
+\left[f^{(2k-1)}(M)-f^{(2k-1)}(n)\right]+\text{remainder}.
+\]
+The left side is $H_M-H_n+1/n$, and
+$f^{(2k-1)}(x)=-(2k-1)!/x^{2k}$, so
+$B_{2k}[f^{(2k-1)}(M)-f^{(2k-1)}(n)]/(2k)!
+=B_{2k}(n^{-2k}-M^{-2k})/(2k)$. Moving $1/n$ to the right turns
+$\frac1{2n}+\frac1{2M}$ into $\frac1{2M}-\frac1{2n}$:
 \[
 H_M-H_n=\ln(M/n)+\frac1{2M}-\frac1{2n}
  +\sum_{k=1}^N\frac{B_{2k}}{2k}
  (n^{-2k}-M^{-2k})+\text{remainder}.
 \]
-Let $M\to\infty$ and use $H_M-\ln M\to\gamma$.
-This yields $\gamma=A_{n,N}+R_{n,N}$. A rigorous signed remainder
+Move $\ln(M/n)=\ln M-\ln n$ to the left, which becomes
+$(H_M-\ln M)-(H_n-\ln n)$, let $M\to\infty$, and
+use $H_M-\ln M\to\gamma$ (Eq. (1.13)); the terms containing $M$ vanish.
+This yields $\gamma=A_{n,N}+R_{n,N}$, where $R_{n,N}$ is the limit of the
+remainder. A rigorous signed remainder
 bound, derived in Exercise 12.6.6, is
 \[
 0<(-1)^N R_{n,N}
 <\frac{|B_{2N+2}|}{(2N+2)n^{2N+2}}.
 \]
 
-Using IEEE double arithmetic, $n=1000$, an accurately summed harmonic
-sum, and then accurately summing the corrections, gives
+The computation in IEEE double precision runs as follows. Summing the
+terms $1/s$, $s=1,\ldots,1000$, gives $H_{1000}=7.485470860550345$, the
+correctly rounded value (plain summation in either order and compensated
+summation agree here); subtract $\ln1000=6.907755278982137$ and then
+$1/2000$; finally add the corrections $B_{2k}/(2k\cdot1000^{2k})$,
+$k=1,\ldots,N$. This gives
 \begin{center}
 \begin{tabular}{rrr}\toprule
 $N$&$A_{1000,N}$&last correction\\\midrule
@@ -478,11 +598,20 @@ $N$&$A_{1000,N}$&last correction\\\midrule
 5&$0.5772156649015333$&$7.5757575758\times10^{-33}$\\
 6&$0.5772156649015333$&$-2.1092796093\times10^{-38}$\\
 \bottomrule\end{tabular}\end{center}
+The ``last correction'' column lists the $k=N$ term
+$B_{2N}/(2N\cdot1000^{2N})$; for instance $B_4/(4\cdot1000^4)
+=-1/(120\cdot10^{12})$.
 The exact truncation error at $N=2$ is below
-$1/(252\,1000^6)=3.9682539683\times10^{-21}$.
-The remaining roughly $4\times10^{-16}$ difference from
-$\gamma=0.5772156649015328606\ldots$ is double-arithmetic rounding
-in the harmonic sum and subtraction. More corrections cannot recover
+$|B_6|/(6\cdot1000^6)=1/(252\cdot1000^6)=3.9682539683\times10^{-21}$.
+The remaining difference of about $4.5\times10^{-16}$ from
+$\gamma=0.5772156649015328606\ldots$ is double-precision rounding:
+$H_{1000}$ and $\ln1000$ lie near $7$, where adjacent doubles are
+$8.9\times10^{-16}$ apart, so each is rounded by up to
+$4.4\times10^{-16}$. Here $H_{1000}$ is rounded up by
+$1.4\times10^{-16}$ and $\ln1000$ down by $2.4\times10^{-16}$, both of
+which raise $H_{1000}-\ln1000$, and the roundings after subtracting
+$1/2000$ and after adding the corrections contribute a further
+$0.7\times10^{-16}$. More corrections cannot recover
 those already lost digits. To twelve decimal places the result is
 $\boxed{\gamma=0.577215664902}$, consistent with the textbook's
 truncated display $0.5772\,1566\,4901$.
@@ -507,13 +636,19 @@ Rearrange the stated identity before inserting numbers:
 \zeta(2n)=\frac{(-1)^{n-1}B_{2n}(2\pi)^{2n}}{2(2n)!}.
 \]
 With $B_2=1/6$, $B_4=-1/30$, $B_6=1/42$, $B_8=-1/30$,
-$B_{10}=5/66$, the five evaluations are
+$B_{10}=5/66$, $(2\pi)^{2n}=2^{2n}\pi^{2n}$, and
+$(2n)!=2,\,24,\,720,\,40320,\,3628800$, the five evaluations are
 \begin{align*}
-\zeta(2)&=\frac{(1/6)4\pi^2}{2\cdot2}=\boxed{\pi^2/6},\\
-\zeta(4)&=\frac{(1/30)16\pi^4}{2\cdot24}=\boxed{\pi^4/90},\\
-\zeta(6)&=\frac{(1/42)64\pi^6}{2\cdot720}=\boxed{\pi^6/945},\\
-\zeta(8)&=\frac{(1/30)256\pi^8}{2\cdot40320}=\boxed{\pi^8/9450},\\
+\zeta(2)&=\frac{(1/6)4\pi^2}{2\cdot2}=\frac{4\pi^2}{24}
+=\boxed{\pi^2/6},\\
+\zeta(4)&=\frac{(1/30)16\pi^4}{2\cdot24}=\frac{16\pi^4}{1440}
+=\boxed{\pi^4/90},\\
+\zeta(6)&=\frac{(1/42)64\pi^6}{2\cdot720}=\frac{64\pi^6}{60480}
+=\boxed{\pi^6/945},\\
+\zeta(8)&=\frac{(1/30)256\pi^8}{2\cdot40320}=\frac{256\pi^8}{2419200}
+=\boxed{\pi^8/9450},\\
 \zeta(10)&=\frac{(5/66)1024\pi^{10}}{2\cdot3628800}
+=\frac{5120\pi^{10}}{479001600}
 =\boxed{\pi^{10}/93555}.
 \end{align*}
 Each alternating sign cancels the sign of the corresponding Bernoulli
@@ -531,17 +666,25 @@ electron. Show that it equals $2\zeta(3)$.
 \emph{Hint.}~Let $1-x=e^{-t}$.
 \solution
 Let $1-x=e^{-t}$, so $x=1-e^{-t}$, $dx=e^{-t}dt$, and
-$\ln(1-x)=-t$. The endpoints $x=0,1$ become $t=0,\infty$, giving
+$\ln(1-x)=-t$. The endpoints $x=0,1$ become $t=0,\infty$, and
+$[\ln(1-x)]^2/x=t^2/(1-e^{-t})$, giving
 \[
 I=\int_0^\infty\frac{t^2e^{-t}}{1-e^{-t}}dt.
 \]
-For $t>0$, $e^{-t}/(1-e^{-t})=\sum_{m=1}^\infty e^{-mt}$.
+For $t>0$, the geometric series gives
+$e^{-t}/(1-e^{-t})=\sum_{m=1}^\infty e^{-mt}$.
 All summands are nonnegative, so Tonelli's theorem permits interchange:
 \[
 I=\sum_{m=1}^\infty\int_0^\infty t^2e^{-mt}dt.
 \]
-Put $u=mt$ in each integral. Two integrations by parts give
-$\int_0^\infty u^2e^{-u}du=2\int_0^\infty ue^{-u}du=2$.
+Put $u=mt$, $dt=du/m$, in each integral:
+$\int_0^\infty t^2e^{-mt}dt=m^{-3}\int_0^\infty u^2e^{-u}du$.
+Two integrations by parts, whose boundary terms
+$[-u^2e^{-u}]_0^\infty$ and $[-ue^{-u}]_0^\infty$ vanish, give
+\[
+\int_0^\infty u^2e^{-u}du=2\int_0^\infty ue^{-u}du
+=2\int_0^\infty e^{-u}du=2.
+\]
 Consequently
 \[
 \boxed{I=2\sum_{m=1}^\infty\frac1{m^3}=2\zeta(3)}.
@@ -562,40 +705,65 @@ integral, including its logarithmic endpoint singularity.
   four times the parenthesized series,} evaluates to $\pi^{3}/8$.
 \end{enumerate}
 \solution
-(a) In the part from $1$ to $\infty$, set $z=1/t$. Since
-$dz/(1+z^2)=-dt/(1+t^2)$ and $(\ln z)^2=(\ln t)^2$,
+(a) Split $I=\int_0^\infty(\ln z)^2dz/(1+z^2)$ at $z=1$. In the part
+from $1$ to $\infty$, set $z=1/t$. Since $dz=-dt/t^2$ and
+$1+z^2=(1+t^2)/t^2$, $dz/(1+z^2)=-dt/(1+t^2)$; also
+$(\ln z)^2=(\ln t)^2$, and $z=1\to\infty$ becomes $t=1\to0$. The minus
+sign reverses the limits, so this part equals the part from $0$ to $1$:
 \[
 I=2\int_0^1\frac{(\ln t)^2}{1+t^2}dt.
 \]
-Expand the denominator geometrically. The absolute sum of the integrals
-is finite, because
+Expand the denominator geometrically,
+$1/(1+t^2)=\sum_{k\ge0}(-1)^kt^{2k}$ for $0\le t<1$. The absolute sum of
+the integrals is finite, because
 \[
 \int_0^1t^{2k}(\ln t)^2dt
 =\int_0^\infty u^2e^{-(2k+1)u}du=\frac2{(2k+1)^3}.
 \]
-Here $t=e^{-u}$ was used. Thus termwise integration gives
+Here $t=e^{-u}$, $dt=-e^{-u}du$, $(\ln t)^2=u^2$ was used, with
+$t=0\to1$ becoming $u=\infty\to0$; the last integral is the one of
+Exercise 12.4.2 with $m=2k+1$. Thus termwise integration gives
 \[
-\boxed{I=4\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)^3}=4\beta(3)}.
+\boxed{I=2\sum_{k=0}^\infty(-1)^k\frac{2}{(2k+1)^3}
+=4\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)^3}=4\beta(3)}.
 \]
 
 (b) Integrate $F(z)=(\operatorname{Log}z)^2/(1+z^2)$ round an upper
-semicircle, indenting the origin, using $0<\arg z<\pi$ inside the
-contour. The large arc is $O((\ln R)^2/R)$ and the small arc is
+semicircle of radius $R$, indenting the origin by a small semicircle of
+radius $\epsilon$, using $0<\arg z<\pi$ inside the
+contour. On the large arc $|\operatorname{Log}z|\le\ln R+\pi$ and
+$|1+z^2|\ge R^2-1$; on the small arc $|\operatorname{Log}z|\le
+|\ln\epsilon|+\pi$ and $|1+z^2|\ge1-\epsilon^2$. Multiplying by the arc
+lengths $\pi R$ and $\pi\epsilon$ shows that the large arc is
+$O((\ln R)^2/R)$ and the small arc is
 $O(\epsilon|\ln\epsilon|^2)$; both vanish. The sole enclosed pole is
-$z=i$, where
+$z=i$, a simple zero of $1+z^2$ with $(1+z^2)'=2i$ there and
+$\operatorname{Log}i=i\pi/2$, so
 \[
 \operatorname{Res}_{z=i}F
 =\frac{(i\pi/2)^2}{2i}=\frac{i\pi^2}{8},\qquad
-\oint Fdz=-\frac{\pi^3}{4}.
+\oint Fdz=2\pi i\,\frac{i\pi^2}{8}=-\frac{\pi^3}{4}.
 \]
-On the negative real edge, $z=-t$ and $\operatorname{Log}z=\ln t+i\pi$.
+On the positive real axis $F$ gives $I$ in the limit. On the negative
+real edge, put $z=-t$, $dz=-dt$, so that $z=-R\to-\epsilon$ becomes
+$t=R\to\epsilon$ and $\operatorname{Log}z=\ln t+i\pi$:
+\[
+\int_{-R}^{-\epsilon}F\,dz
+=\int_\epsilon^R\frac{(\ln t+i\pi)^2}{1+t^2}dt,\qquad
+(\ln t+i\pi)^2=(\ln t)^2+2i\pi\ln t-\pi^2.
+\]
 The two real-axis contributions therefore add to
 \[
 2I+2i\pi J-\pi^2K,\qquad
 J=\int_0^\infty\frac{\ln t}{1+t^2}dt,\quad
 K=\int_0^\infty\frac{dt}{1+t^2}=\frac\pi2.
 \]
-The substitution $t=1/u$ gives $J=-J$, so $J=0$. Equating to the
+The substitution $t=1/u$, $dt=-du/u^2$, gives
+\[
+J=\int_\infty^0\frac{-\ln u}{1+u^{-2}}\left(-\frac{du}{u^2}\right)
+=\int_\infty^0\frac{\ln u}{u^2+1}du=-J,
+\]
+so $J=0$. Equating to the
 residue result yields $2I-\pi^3/2=-\pi^3/4$, hence
 \[
 \boxed{I=\pi^3/8},\qquad \boxed{\beta(3)=\pi^3/32}.
@@ -618,14 +786,17 @@ Separate the positive odd integers into their two residue classes:
 A=\sum_{k\ge1}(4k-3)^{-2},\qquad
 B=\sum_{k\ge1}(4k-1)^{-2}.
 \]
-Absolute convergence permits grouping. By definition $\beta(2)=A-B$,
-while
+Absolute convergence permits grouping. By definition
+$\beta(2)=1-3^{-2}+5^{-2}-\cdots=A-B$, while the odd integers make up
+all positive integers except the even ones $2j$, so
 \[
 A+B=\sum_{j\ge0}(2j+1)^{-2}
 =\zeta(2)-\sum_{j\ge1}(2j)^{-2}
-=\frac34\zeta(2)=\frac{\pi^2}{8}.
+=\zeta(2)-\frac14\zeta(2)
+=\frac34\zeta(2)=\frac{\pi^2}{8},
 \]
-Eliminate $B=\pi^2/8-A$ to obtain
+using the hint $\zeta(2)=\pi^2/6$ in the last step.
+Eliminate $B=\pi^2/8-A$ to obtain $\beta(2)=A-(\pi^2/8-A)$, that is,
 \[
 \boxed{\beta(2)=2\sum_{k=1}^\infty(4k-3)^{-2}-\frac{\pi^2}{8}}.
 \]
@@ -641,18 +812,23 @@ Note that the integrand in part (b) diverges for $a=1$ but that the integral
 is convergent.
 \solution
 (a) For $0\le x<1$, expand
-$\ln(1+x)/x=\sum_{k\ge1}(-1)^{k+1}x^{k-1}/k$.
-The sum of the integrals of the absolute values is
+$\ln(1+x)/x=\sum_{k\ge1}(-1)^{k+1}x^{k-1}/k$; each term integrates to
+$\int_0^1x^{k-1}dx/k=1/k^2$ in absolute value.
+The sum of the integrals of the absolute values is thus
 $\sum_{k\ge1}1/k^2<\infty$, which justifies termwise integration up
-to the endpoint. Therefore
+to the endpoint. Therefore, subtracting the even terms twice,
 \[
 \int_0^1\frac{\ln(1+x)}x dx
 =\sum_{k\ge1}\frac{(-1)^{k+1}}{k^2}
 =\zeta(2)-2\sum_{j\ge1}\frac1{(2j)^2}
+=\zeta(2)-\frac24\zeta(2)
 =\boxed{\frac12\zeta(2)}.
 \]
-(b) For $a<1$, the logarithm series is uniformly convergent on
-$[0,a]$ after removing the harmless limit at zero, giving
+(b) For $a<1$, the logarithm series
+$\ln(1-x)/x=-\sum_{k\ge1}x^{k-1}/k$ is uniformly convergent on
+$[0,a]$ (its terms are bounded by $a^{k-1}/k$), after removing the
+harmless limit at zero. Since $\int_0^ax^{k-1}dx/k=a^k/k^2$, termwise
+integration gives
 \[
 \int_0^a\frac{\ln(1-x)}x dx
 =-\sum_{k=1}^\infty\frac{a^k}{k^2}.
@@ -681,17 +857,22 @@ is $\zeta(2)$ and is finite.
 \item[(b)] Calculate $\ln2$ to six significant figures.
 \end{enumerate}
 \solution
-(a) Pair neighboring terms of the convergent alternating harmonic series:
+(a) Pair neighboring terms of the convergent alternating harmonic series
+(grouping terms of a convergent series does not change its sum):
 \[
 \ln2=\sum_{p=1}^\infty\left(\frac1{2p-1}-\frac1{2p}\right)
-=\sum_{p=1}^\infty\frac{(2p)^{-2}}{1-(2p)^{-1}}.
+=\sum_{p=1}^\infty\frac1{(2p-1)2p}
+=\sum_{p=1}^\infty\frac{(2p)^{-2}}{1-(2p)^{-1}},
 \]
+where the last form divides numerator and denominator by $(2p)^2$.
 For $r=(2p)^{-1}$ the finite geometric identity is
 \[
-\frac{r^2}{1-r}=\sum_{s=2}^{n}r^s+\frac{r^{n+1}}{1-r}.
+\frac{r^2}{1-r}=\sum_{s=2}^{n}r^s+\frac{r^{n+1}}{1-r},
 \]
+since $\sum_{s=2}^nr^s=(r^2-r^{n+1})/(1-r)$.
 Sum it over $p$. The first sum has finitely many $s$, and all terms
-are nonnegative, giving exactly
+are nonnegative; with $\sum_{p\ge1}(2p)^{-s}=2^{-s}\zeta(s)$ this gives
+exactly
 \[
 \boxed{\ln2=\sum_{s=2}^{n}2^{-s}\zeta(s)
 +\sum_{p=1}^\infty\frac{(2p)^{-n-1}}{1-(2p)^{-1}}}.
@@ -699,17 +880,20 @@ are nonnegative, giving exactly
 The usual nonempty first sum takes $n\ge2$; the $n=1$ case also holds
 if that sum is interpreted as empty.
 
-(b) The remainder $R_n$ is positive and, since
-$1-(2p)^{-1}\ge1/2$, obeys
+(b) Call the two sums on the right $S_n$ and $R_n$. The remainder $R_n$
+is positive and, since $1-(2p)^{-1}\ge1/2$, obeys
 \[
-0<R_n\le2\sum_{p\ge1}(2p)^{-n-1}=2^{-n}\zeta(n+1).
+0<R_n\le2\sum_{p\ge1}(2p)^{-n-1}=2\cdot2^{-n-1}\zeta(n+1)
+=2^{-n}\zeta(n+1).
 \]
-Take $n=24$. Direct summation of the 23 zeta terms gives
+Take $n=24$, for which this bound is below $10^{-7}$. Direct summation
+of the 23 terms $2^{-s}\zeta(s)$, $s=2,\ldots,24$, gives
 \[
 S_{24}=0.6931471209552993497\ldots,\qquad
-R_{24}<5.9604646552\times10^{-8}.
+R_{24}\le2^{-24}\zeta(25)=5.9604646552\times10^{-8}.
 \]
-Both ends of the interval $S_{24}<\ln2<S_{24}+R_{24}^{\rm bound}$
+Both ends of the interval
+$S_{24}<\ln2\le S_{24}+2^{-24}\zeta(25)=0.6931471805599\ldots$
 round to the same six-significant-figure value:
 \[
 \boxed{\ln2=0.693147\quad\text{(six significant figures)}}.
@@ -731,35 +915,44 @@ precomputed logarithm value.
 \item[(b)] Calculate $\pi/4$ to six significant figures.
 \end{enumerate}
 \solution
-(a) Separate the first term of the arctangent series, then pair the rest:
+(a) Separate the first term of the arctangent series, then pair the rest
+($-1/3+1/5$, $-1/7+1/9$, \ldots):
 \[
 \frac\pi4=1+\sum_{p=1}^\infty
 \left(-\frac1{4p-1}+\frac1{4p+1}\right)
-=1-2\sum_{p=1}^\infty\frac1{(4p)^2-1}.
+=1-2\sum_{p=1}^\infty\frac1{(4p)^2-1},
 \]
-With $r=(4p)^{-2}$,
+because $-(4p+1)+(4p-1)=-2$ and $(4p-1)(4p+1)=(4p)^2-1$.
+With $r=(4p)^{-2}$ (divide numerator and denominator by $(4p)^2$) and
+the finite geometric sum $\sum_{s=1}^nr^s=(r-r^{n+1})/(1-r)$,
 \[
 \frac1{(4p)^2-1}=\frac r{1-r}
 =\sum_{s=1}^nr^s+\frac{r^{n+1}}{1-r}.
 \]
-Summing over $p$ yields
+Summing over $p$, with $\sum_{p\ge1}(4p)^{-2s}=4^{-2s}\zeta(2s)$, yields
 \[
 \boxed{\frac\pi4=1-2\sum_{s=1}^n4^{-2s}\zeta(2s)
 -2\sum_{p=1}^\infty
 \frac{(4p)^{-2n-2}}{1-(4p)^{-2}}}.
 \]
-(b) The omitted correction has negative sign. Its magnitude is bounded
+(b) Write the result as $\pi/4=S_n-R_n$, with
+$S_n=1-2\sum_{s=1}^n4^{-2s}\zeta(2s)$; the omitted correction $-R_n$ has
+negative sign. Its magnitude is bounded
 using $1-(4p)^{-2}\ge15/16$:
 \[
 0<R_n:=2\sum_{p\ge1}\frac{(4p)^{-2n-2}}{1-(4p)^{-2}}
-\le\frac{32}{15}\,4^{-2n-2}\zeta(2n+2).
+\le\frac{32}{15}\sum_{p\ge1}(4p)^{-2n-2}
+=\frac{32}{15}\,4^{-2n-2}\zeta(2n+2).
 \]
-For $n=6$, the finite part and bound are
+For $n=6$ the bound is below $10^{-8}$. Summing the six terms
+$4^{-2s}\zeta(2s)$, $s=1,\ldots,6$, gives the finite part, and the bound is
+evaluated with $\zeta(14)$:
 \[
 S_6=0.7853981713451978431\ldots,\qquad
-R_6<7.9477727265\times10^{-9}.
+R_6\le\tfrac{32}{15}4^{-14}\zeta(14)=7.9477727265\times10^{-9}.
 \]
-Thus $S_6-R_6^{\rm bound}<\pi/4<S_6$, whose endpoints both round to
+Thus $0.7853981633974\ldots=S_6-\tfrac{32}{15}4^{-14}\zeta(14)\le\pi/4<S_6$,
+whose endpoints both round to
 \[
 \boxed{\pi/4=0.785398\quad\text{(six significant figures)}}.
 \]
@@ -785,17 +978,26 @@ factors are eventually positive. A convergent infinite product here means
 a finite, nonzero limit, with no zero factor.}
 Discarding finitely many initial nonzero factors only multiplies all later
 partial products by a fixed nonzero constant. We therefore apply real
-logarithms to the eventually positive tail. For that tail, convergence
-of the product is equivalent to convergence of its logarithmic series. If $a_n\not\to0$, a nonzero product limit
-is already impossible, since the ratio of two successive partial products
-would not tend to one. Otherwise, eventually $0\le a_n\le1/2$.
-Integration of $1/(1+t)$ and $1/(1-t)$ on $[0,a_n]$ gives
+logarithms to the eventually positive tail. For that tail, with partial
+products $P_N$, convergence of $P_N$ to some $L>0$ is equivalent to
+convergence of $\ln P_N=\sum_{n\le N}\ln(1\pm a_n)$, because $\ln$ and
+$\exp$ are continuous and $P_N=e^{\ln P_N}$.
+If $a_n\not\to0$, a nonzero product limit
+is already impossible, since the ratio $P_n/P_{n-1}=1\pm a_n$ of two
+successive partial products would not tend to one; and $\sum a_n$
+diverges as well. Otherwise, eventually $0\le a_n\le1/2$.
+For $0\le t\le1/2$ one has $\frac12\le1/(1+t)\le1$ and
+$1\le1/(1-t)\le2$, so integration of $1/(1+t)$ and $1/(1-t)$ on
+$[0,a_n]$ gives
 \[
 \frac{a_n}{2}\le\ln(1+a_n)\le a_n,\qquad
  a_n\le-\ln(1-a_n)\le2a_n.
 \]
-The comparison test now proves the stated equivalence for both choices
-of sign. If $\sum a_n$ diverges, the plus-product grows without bound
+The comparison test, applied to the nonnegative series
+$\sum\ln(1+a_n)$ and $\sum[-\ln(1-a_n)]$, now proves the stated
+equivalence for both choices
+of sign. If $\sum a_n$ diverges, then $\sum\ln(1+a_n)=+\infty$ and
+$\sum\ln(1-a_n)=-\infty$: the plus-product grows without bound
 and the minus-product tends to zero.
 
 To see why the hypotheses matter, take
@@ -805,7 +1007,9 @@ and every $1+a_n$ is positive. But the logarithm expansion gives
 \ln(1+a_n)=a_n-\frac12a_n^2+O(|a_n|^3).
 \]
 Here $\sum a_n^2=\sum1/(n+1)=\infty$, while
-$\sum|a_n|^3<\infty$. Consequently the logarithmic partial sums tend
+$\sum|a_n|^3=\sum(n+1)^{-3/2}<\infty$. Consequently the logarithmic
+partial sums, a convergent series minus $\frac12\sum a_n^2$ plus an
+absolutely convergent one, tend
 to $-\infty$, and $\prod(1+a_n)$ tends to zero, not a nonzero limit.
 
 A useful corrected version for signed or complex terms is: if
@@ -815,9 +1019,12 @@ converges. Indeed $\log(1+a_n)-a_n=O(|a_n|^2)$, using the logarithm
 branch near one; its error series is absolutely convergent. To justify
 necessity as well as sufficiency, suppose the partial products $P_n\to L\ne0$.
 Choose a disk about $L$ avoiding zero and one analytic logarithm $\ell$
-there. For large $n$, $\ell(P_n)-\ell(P_{n-1})=\log(1+a_n)$:
-both sides tend to zero, and their difference is an integer multiple
-of $2\pi i$. The logarithmic tail telescopes to a convergent limit.
+there. For large $n$, both $\ell(P_n)-\ell(P_{n-1})$ and
+$\log(1+a_n)$ are logarithms of $P_n/P_{n-1}=1+a_n$, so they differ by an
+integer multiple of $2\pi i$; both tend to zero, so the multiple is zero
+and $\ell(P_n)-\ell(P_{n-1})=\log(1+a_n)$. The logarithmic tail
+$\sum_{n=N+1}^M\log(1+a_n)=\ell(P_M)-\ell(P_N)$ therefore telescopes to
+the convergent limit $\ell(L)-\ell(P_N)$.
 Conversely, a convergent logarithmic series exponentiates to a nonzero
 product. Subtracting the absolutely convergent error proves the claim
 about $\sum a_n$. The minus case follows by replacing $a_n$ by $-a_n$.
@@ -836,23 +1043,32 @@ converges \erratum{to a finite nonzero limit} only if $a=b$.
 and assume every denominator and numerator factor is nonzero. If a zero
 limit were counted as convergence, the asserted ``only if'' would fail.}
 For fixed real or complex $a,b$, the tail has a logarithm branch near one.
-Its expansion is
+From $\log(1+u)=u+O(u^2)$, its expansion is
 \[
 \log\frac{1+a/n}{1+b/n}
+=\log\Big(1+\frac an\Big)-\log\Big(1+\frac bn\Big)
 =\frac{a-b}{n}+O(n^{-2}).
 \]
-The error series converges absolutely, so for the partial product $P_N$,
+The error series converges absolutely. Hence, summing the logarithms
+over the tail $n_0\le n\le N$ and collecting all constants in $C$, the
+partial product $T_N$ of the tail satisfies, with
+$H_N=\sum_{n\le N}1/n=\ln N+\gamma+o(1)$ by Eq. (1.13),
 \[
-\log P_N=(a-b)H_N+C+o(1)
-=(a-b)\log N+C_1+o(1).
+\log T_N=(a-b)H_N+C+o(1)
+=(a-b)\log N+C_1+o(1),\qquad C_1=C+(a-b)\gamma.
 \]
 The finitely many initial factors only alter the nonzero multiplicative
-constant. Thus $P_N=K N^{a-b}(1+o(1))$, $K\ne0$.
+constant. Thus, exponentiating, the full partial product is
+$P_N=K N^{a-b}(1+o(1))$, $K\ne0$, where
+$|N^{a-b}|=N^{\Re(a-b)}$.
 If $\Re(a-b)>0$, its modulus tends to infinity; if $\Re(a-b)<0$,
-it tends to zero. If $a-b=i\beta$ with real $\beta\ne0$, its phase
-$\beta\ln N$ has no limit modulo $2\pi$: integers nearest
-$e^{2\pi k/|\beta|}$ and $e^{(2\pi k+\pi)/|\beta|}$ give opposite
-limiting phases. Hence no finite nonzero limit exists unless $a=b$.
+it tends to zero. If $a-b=i\beta$ with real $\beta\ne0$, then
+$N^{i\beta}=e^{i\beta\ln N}$ has modulus one, but its phase
+$\beta\ln N$ has no limit modulo $2\pi$: for the integers $N_k$ nearest
+$e^{2\pi k/|\beta|}$, $\ln N_k=2\pi k/|\beta|+o(1)$ and so
+$N_k^{i\beta}\to1$, while the integers nearest
+$e^{(2\pi k+\pi)/|\beta|}$ give the limit $-1$. Then $P_N$ has the two
+limit points $K\ne-K$. Hence no finite nonzero limit exists unless $a=b$.
 When $a=b$, every defined factor equals one, so
 \[
 \boxed{\text{the nonzero product converges exactly when }a=b.}
@@ -875,14 +1091,16 @@ The product formulas are
  \left(1-\frac{4x^2}{(2n-1)^2\pi^2}\right).
 \]
 In the sine product rewrite $x^2/(n^2\pi^2)=4x^2/[(2n)^2\pi^2]$.
-The two products then supply the even and odd positive integers:
+The two products then supply the even values $m=2n$ and the odd values
+$m=2n-1$ of the positive integers $m$, and $4x^2=(2x)^2$:
 \begin{align*}
 2\sin x\cos x
 &=2x\prod_{n\ge1}\left(1-\frac{4x^2}{(2n)^2\pi^2}\right)
        \prod_{n\ge1}\left(1-\frac{4x^2}{(2n-1)^2\pi^2}\right)\\
 &=2x\prod_{m=1}^{\infty}\left(1-\frac{(2x)^2}{m^2\pi^2}\right)
-=\boxed{\sin2x}.
+=\boxed{\sin2x},
 \end{align*}
+the last step being the sine product with $x$ replaced by $2x$.
 The deviations of the factors from one are bounded on compact $x$ sets
 by a constant times $1/n^2$. Their absolute summability justifies
 interleaving the factors. At zeros of a factor the equality extends
@@ -901,7 +1119,8 @@ Pair the factor with even index $2k$ with the following odd index:
 =\frac{2k+1}{2k}\frac{2k}{2k+1}=1.
 \]
 To ensure that pairing has not hidden a subsequence issue, let
-$P_N=\prod_{n=2}^N[1+(-1)^n/n]$. Then exactly
+$P_N=\prod_{n=2}^N[1+(-1)^n/n]$. The factors $n=2,\ldots,2M+1$ form the
+$M$ pairs $k=1,\ldots,M$, and $P_{2M}=P_{2M-1}(1+1/(2M))$. Then exactly
 \[
 P_{2M+1}=1,\qquad P_{2M}=\frac{2M+1}{2M}.
 \]
@@ -929,7 +1148,7 @@ P_N&=\left(\prod_{n=2}^N\frac{n-1}{n}\right)
      \left(\prod_{n=2}^N\frac{n+2}{n+1}\right)\\
 &=\left(\frac12\frac23\cdots\frac{N-1}{N}\right)
   \left(\frac43\frac54\cdots\frac{N+2}{N+1}\right)\\
-&=\frac1N\frac{N+2}{3}.
+&=\frac1N\frac{N+2}{3}=\frac{N+2}{3N}=\frac13+\frac2{3N}.
 \end{align*}
 Taking $N\to\infty$ proves $\boxed{P_\infty=1/3}$.
 
@@ -938,12 +1157,14 @@ Taking $N\to\infty$ proves $\boxed{P_\infty=1/3}$.
 \noindent\textbf{12.5.6}\quad Prove that
 $\displaystyle\prod_{n=2}^{\infty}\left(1-\frac{1}{n^{2}}\right)=\frac{1}{2}$.
 \solution
-Use $1-1/n^2=(n-1)(n+1)/n^2$. For a finite upper limit,
-\[
-P_N=\left(\prod_{n=2}^N\frac{n-1}{n}\right)
+Use $1-1/n^2=(n^2-1)/n^2=(n-1)(n+1)/n^2$. For a finite upper limit,
+\begin{align*}
+P_N&=\left(\prod_{n=2}^N\frac{n-1}{n}\right)
     \left(\prod_{n=2}^N\frac{n+1}{n}\right)
-=\frac1N\frac{N+1}{2}=\frac{N+1}{2N}.
-\]
+=\left(\frac12\frac23\cdots\frac{N-1}{N}\right)
+ \left(\frac32\frac43\cdots\frac{N+1}{N}\right)\\
+&=\frac1N\frac{N+1}{2}=\frac{N+1}{2N}.
+\end{align*}
 Both telescoping factors are exact for every $N\ge2$.
 Thus $\boxed{\lim_{N\to\infty}P_N=1/2}$.
 
@@ -956,7 +1177,7 @@ $\displaystyle\prod_{p=1}^{\infty}(1+z^{p})
 For $|z|<1$, all factors $1\pm z^n$ are nonzero and
 $\sum_{n\ge1}|z|^n<\infty$. The corresponding products and their
 logarithmic tails converge absolutely, permitting the following
-factorization and regrouping:
+factorization and regrouping, based on $1+z^p=(1-z^{2p})/(1-z^p)$:
 \[
 \prod_{p=1}^{\infty}(1+z^p)
 =\frac{\prod_{p=1}^{\infty}(1-z^{2p})}
@@ -989,14 +1210,16 @@ Write the $r$th factor as $1+a_r$ with $u=x/r$:
 \begin{align*}
 (1+u)e^{-u}
 &=(1+u)\left(1-u+\frac{u^2}{2}-\frac{u^3}{6}+\cdots\right)\\
+&=1-u+\frac{u^2}{2}-\frac{u^3}{6}+u-u^2+\frac{u^3}{2}+O(u^4)\\
 &=1-\frac{u^2}{2}+\frac{u^3}{3}+O(u^4).
 \end{align*}
 Hence $a_r=-x^2/(2r^2)+O(r^{-3})$ for fixed finite complex $x$,
-and $\sum|a_r|<\infty$. Once $|a_r|<1/2$, the convergent logarithm
-series has the bound
+and $\sum|a_r|<\infty$ by comparison with $\sum r^{-2}$. Once
+$|a_r|<1/2$, the convergent logarithm series has the bound
 \[
 |\log(1+a_r)|
-\le\sum_{k\ge1}\frac{|a_r|^k}{k}\le2|a_r|.
+\le\sum_{k\ge1}\frac{|a_r|^k}{k}\le|a_r|\sum_{k\ge0}|a_r|^k
+=\frac{|a_r|}{1-|a_r|}\le2|a_r|.
 \]
 The logarithmic tail therefore converges absolutely, proving a finite
 nonzero product whenever no factor vanishes. The exceptional points
@@ -1023,18 +1246,28 @@ It is convenient to remove the known logarithmic singularity first:
 \[
 \frac d{dx}\ln\frac{\sin x}{x}=\cot x-\frac1x.
 \]
-The Bernoulli expansion of the right side is
+The Bernoulli expansion of the right side, derived in the solution of
+Exercise 12.2.3, is
 \[
 \cot x-\frac1x
 =\sum_{k=1}^{\infty}
  \frac{(-1)^k2^{2k}B_{2k}}{(2k)!}x^{2k-1},\qquad |x|<\pi.
 \]
 Integrate term by term from zero, using
+$\int_0^xt^{2k-1}dt=x^{2k}/(2k)$ and
 $\sin x/x\to1$ to fix the integration constant to zero:
 \[
 \boxed{\ln\frac{\sin x}{x}
 =\sum_{k=1}^{\infty}
 \frac{(-1)^k2^{2k}B_{2k}}{2k(2k)!}x^{2k}}.
+\]
+Inserting $B_{2k}=(-1)^{k-1}2(2k)!\,\zeta(2k)/(2\pi)^{2k}$, the formula
+used in Exercise 12.4.1, gives
+\[
+\frac{(-1)^k2^{2k}B_{2k}}{2k(2k)!}
+=\frac{(-1)^{2k-1}\,2^{2k}\cdot2(2k)!\,\zeta(2k)}
+      {2k(2k)!\,2^{2k}\pi^{2k}}
+=-\frac{\zeta(2k)}{k\pi^{2k}}.
 \]
 Therefore
 \[
@@ -1042,7 +1275,8 @@ Therefore
 =-\frac{\zeta(2k)}{k\pi^{2k}},\qquad a_{2k-1}=0\quad(k\ge1)}.
 \]
 The constant coefficient is $a_0=0$ by the normalization at zero.
-In particular,
+In particular, with $\zeta(2)=\pi^2/6$, $\zeta(4)=\pi^4/90$,
+$\zeta(6)=\pi^6/945$,
 $\ln(\sin x/x)=-x^2/6-x^4/180-x^6/2835-\cdots$.
 \erratum{For real logarithms the question's form $\ln\sin x=\ln x+\cdots$
 uses $0<x<\pi$. For $-\pi<x<0$, write $\ln|\sin x|=\ln|x|+\cdots$.
@@ -1065,8 +1299,16 @@ This is an alternate route to Eq.~(12.38).
 
 \emph{Hint.}~The result of Exercise 12.5.9 will be helpful.
 \solution
-Take the logarithmic derivative of the sine product on a compact subset
-avoiding its zeros. Local uniform convergence of the derivative series
+Take the logarithmic derivative of the sine product
+$\sin z=z\prod_{n\ge1}(1-z^2/(n^2\pi^2))$ on a compact subset
+avoiding its zeros; this is the derivative of the logarithm used in
+Exercise 12.5.9. Each factor contributes
+\[
+\frac{d}{dz}\ln\left(1-\frac{z^2}{n^2\pi^2}\right)
+=\frac{-2z/(n^2\pi^2)}{1-z^2/(n^2\pi^2)}
+=\frac{-2z}{n^2\pi^2-z^2}.
+\]
+Local uniform convergence of the derivative series
 follows from its $O(n^{-2})$ terms. Thus
 \[
 \cot z=\frac1z+\sum_{n=1}^{\infty}
@@ -1075,9 +1317,10 @@ z\cot z=1-2\sum_{n=1}^{\infty}\frac{z^2}{n^2\pi^2-z^2}.
 \]
 \erratum{The requested double power series is restricted to $|z|<\pi$;
 it is not a representation for arbitrary $z$ away from the poles.}
-In that disk each denominator can be expanded geometrically:
+In that disk $w=(z/(n\pi))^2$ has $|w|<1$ for every $n\ge1$, so each
+term can be expanded geometrically:
 \[
-\frac{z^2}{n^2\pi^2-z^2}
+\frac{z^2}{n^2\pi^2-z^2}=\frac{w}{1-w}
 =\sum_{m=1}^{\infty}\left(\frac{z}{n\pi}\right)^{2m}.
 \]
 For $|z|\le r<\pi$ the double absolute sum is bounded by
@@ -1085,17 +1328,25 @@ For $|z|\le r<\pi$ the double absolute sum is bounded by
 \sum_{n\ge1}\frac{r^2/(n\pi)^2}{1-r^2/(n\pi)^2}
 \le\frac{r^2\zeta(2)}{\pi^2[1-r^2/\pi^2]}<\infty,
 \]
-so the two summations may be interchanged. Hence
+so the two summations may be interchanged. Summing first over $n$,
+$\sum_{n\ge1}(z/(n\pi))^{2m}=\zeta(2m)z^{2m}/\pi^{2m}$. Hence
 \[
 \boxed{z\cot z=1-2\sum_{m,n\ge1}(z/(n\pi))^{2m}}
 =1-2\sum_{m\ge1}\frac{\zeta(2m)}{\pi^{2m}}z^{2m}.
 \]
-Independently, the Bernoulli generating function gives
+Independently, the Bernoulli generating function gives, by multiplying
+the cotangent expansion of Exercise 12.2.3 by $z$,
 \[
 z\cot z=1+\sum_{m\ge1}
  \frac{(-1)^m2^{2m}B_{2m}}{(2m)!}z^{2m}.
 \]
-Equate the coefficients of $z^{2m}$ and solve for $B_{2m}$:
+Both are power series of the same function on $|z|<\pi$, so by uniqueness
+their coefficients of $z^{2m}$ agree:
+\[
+\frac{(-1)^m2^{2m}B_{2m}}{(2m)!}=-\frac{2\zeta(2m)}{\pi^{2m}}.
+\]
+Multiply by $(-1)^m(2m)!/2^{2m}$ and use $-(-1)^m=(-1)^{m-1}$ to solve
+for $B_{2m}$:
 \[
 \boxed{B_{2m}=(-1)^{m-1}\frac{2(2m)!}{(2\pi)^{2m}}\zeta(2m)}.
 \]
