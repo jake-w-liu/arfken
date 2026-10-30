@@ -1349,16 +1349,29 @@ P(x)=c\left(\frac{\cosh x}{\sinh x}-\frac{1}{x}\right).
 \]
 Expand $P(x)$ as a power series for small $x$ (low fields, high temperature).
 \solution
-Write
+Since $x\coth x=x\cosh x/\sinh x$ is even and regular at $x=0$ (it tends
+to $1$), write
 $\coth x=x^{-1}+a x+b x^3+d x^5+\cdots$ and multiply by
-$\sinh x=x+x^3/6+x^5/120+x^7/5040+\cdots$.
+$\sinh x=x+x^3/6+x^5/120+x^7/5040+\cdots$:
+\[
+ \begin{aligned}
+ \coth x\sinh x
+ &=1+\Bigl(a+\frac16\Bigr)x^2+\Bigl(b+\frac a6+\frac1{120}\Bigr)x^4\\
+ &\quad+\Bigl(d+\frac b6+\frac a{120}+\frac1{5040}\Bigr)x^6+O(x^8).
+ \end{aligned}
+\]
 Equating to $\cosh x=1+x^2/2+x^4/24+x^6/720+\cdots$ gives
 \[
  a+\frac16=\frac12,\qquad
  b+\frac a6+\frac1{120}=\frac1{24},\qquad
  d+\frac b6+\frac a{120}+\frac1{5040}=\frac1{720}.
 \]
-Solving successively yields $a=1/3$, $b=-1/45$, $d=2/945$.
+Solving successively yields $a=1/3$,
+$b=\frac1{24}-\frac1{18}-\frac1{120}=\frac{15-20-3}{360}=-\frac1{45}$, and
+\[
+ d=\frac1{720}+\frac1{270}-\frac1{360}-\frac1{5040}
+  =\frac{21+56-42-3}{15120}=\frac2{945}.
+\]
 The apparent pole cancels in $P$, leaving
 \[
  \boxed{P(x)=c\left(\frac x3-\frac{x^3}{45}
@@ -1390,20 +1403,24 @@ slowly that it is quite useless for numerical work.
 \solution
 For $|x|<1$, the geometric expansion is
 $(1+x^2)^{-1}=\sum_{n=0}^\infty(-1)^n x^{2n}$.
-To justify integrating all the way to $1$, use the finite identity
+To justify integrating all the way to $1$, use the finite geometric sum
+$\sum_{n=0}^Nr^n=(1-r^{N+1})/(1-r)$ with $r=-x^2$, which gives the
+identity
 \[
  \frac1{1+x^2}=\sum_{n=0}^N(-1)^n x^{2n}
               +\frac{(-1)^{N+1}x^{2N+2}}{1+x^2}.
 \]
-Integrating from $0$ to $1$ gives
+Integrating from $0$ to $1$, with $\int_0^1x^{2n}dx=1/(2n+1)$, gives
 \[
  \frac\pi4=\sum_{n=0}^N\frac{(-1)^n}{2n+1}+R_N,
- \qquad |R_N|\le\int_0^1x^{2N+2}dx=\frac1{2N+3}\to0.
+ \qquad R_N=(-1)^{N+1}\int_0^1\frac{x^{2N+2}}{1+x^2}\,dx.
 \]
+Since $1+x^2\ge1$, $|R_N|\le\int_0^1x^{2N+2}dx=1/(2N+3)\to0$.
 Thus the stated Leibniz series follows. At $x=1$ the integrand series
 is $1-1+1-1+\cdots$, whose terms fail to tend to zero. The integrated
 series has decreasing term magnitudes $1/(2n+1)\to0$ and converges
-conditionally; its absolute series diverges by harmonic comparison.
+conditionally; its absolute series diverges by comparison with the
+harmonic series, since $1/(2n+1)\ge\frac12\cdot1/(n+1)$.
 
 
 \Needspace{5\baselineskip}
@@ -1425,14 +1442,17 @@ For a nonnegative integer $n$, expand $e^{-t}$ and integrate:
  =x^{n+1}\sum_{p=0}^\infty\frac{(-1)^p x^p}{p!(n+p+1)}.
  \end{aligned}
 \]
+Here $\int_0^xt^{n+p}dt=x^{n+p+1}/(n+p+1)$.
 On every bounded integration segment the exponential series is uniformly
 absolutely convergent, which justifies the interchange.
-The absolute ratio of successive nonzero terms is
+For $x\ne0$ the absolute ratio of successive terms of the bracketed series is
 \[
- |x|\frac{n+p+1}{(p+1)(n+p+2)}\longrightarrow0.
+ \frac{|x|^{p+1}}{(p+1)!\,(n+p+2)}\cdot\frac{p!\,(n+p+1)}{|x|^p}
+ =|x|\frac{n+p+1}{(p+1)(n+p+2)}\longrightarrow0
+ \quad(p\to\infty).
 \]
-Thus the resulting power series converges for every real or complex
-$x$. For nonintegral $n$ with $\Re n>-1$ the same coefficient formula
+Thus, by the ratio test, the resulting power series converges for every
+real or complex $x$. For nonintegral $n$ with $\Re n>-1$ the same coefficient formula
 holds with a consistent branch of $x^{n+1}$; it is then a power series
 times that prefactor rather than an ordinary Maclaurin series.
 
@@ -1453,28 +1473,49 @@ Since
  y^3=x^3+3a x^5+(3b+3a^2)x^7+O(x^9),\quad
  y^5=x^5+5a x^7+O(x^9),\quad y^7=x^7+O(x^9),
 \]
-the coefficients of $x^3,x^5,x^7$ give
+the coefficients of $x^3,x^5,x^7$ in $y+y^3/6+y^5/120+y^7/5040$ give
 \[
  a+\frac16=0,\quad b+\frac a2+\frac1{120}=0,\quad
  d+\frac{b+a^2}2+\frac a{24}+\frac1{5040}=0.
 \]
-Hence $a=-1/6$, $b=3/40$, $d=-5/112$.
-
-(b) Differentiating $\sinh y=x$ gives $\cosh y\,y'=1$.
-As $\cosh y=\sqrt{1+x^2}$ on the branch through zero,
+Hence $a=-1/6$, $b=-a/2-1/120=1/12-1/120=3/40$, and, with
+$b+a^2=3/40+1/36=37/360$,
 \[
- y'=(1+x^2)^{-1/2}
- =\sum_{r=0}^\infty(-1)^r\frac{\binom{2r}{r}}{4^r}x^{2r}.
+ d=-\frac{37}{720}+\frac1{144}-\frac1{5040}
+  =\frac{-259+35-1}{5040}=-\frac{225}{5040}=-\frac5{112}.
 \]
-Integrating and using $y(0)=0$ produces the full Maclaurin series
+Thus $y=x-x^3/6+3x^5/40-5x^7/112+O(x^9)$.
+
+(b) The Maclaurin coefficients are $y^{(k)}(0)/k!$.
+Differentiating $\sinh y=x$ gives $\cosh y\,y'=1$.
+As $\cosh y=\sqrt{1+\sinh^2y}=\sqrt{1+x^2}$ on the branch through zero,
+the binomial theorem gives
+\[
+ y'=(1+x^2)^{-1/2}=\sum_{r=0}^\infty\binom{-1/2}{r}x^{2r}
+ =\sum_{r=0}^\infty(-1)^r\frac{\binom{2r}{r}}{4^r}x^{2r},
+\]
+because, using $(2r-1)!!=(2r)!/(2^rr!)$,
+\[
+ \binom{-1/2}{r}
+ =\frac{(-\frac12)(-\frac32)\cdots(-\frac{2r-1}2)}{r!}
+ =(-1)^r\frac{(2r-1)!!}{2^rr!}=(-1)^r\frac{(2r)!}{4^r(r!)^2}.
+\]
+Hence
+$y^{(2r+1)}(0)=(2r)!\,(-1)^r\binom{2r}r/4^r=(-1)^r[(2r-1)!!]^2
+=1,-1,9,-225,\ldots$, while the even-order derivatives vanish because
+$y$ is odd. Dividing by $(2r+1)!$ (equivalently, integrating the series
+for $y'$ termwise with $y(0)=0$) produces the full Maclaurin series
 \[
  \boxed{\operatorname{arsinh}x
  =\sum_{r=0}^\infty(-1)^r\frac{\binom{2r}{r}}{4^r(2r+1)}x^{2r+1}
- =x-\frac{x^3}6+\frac{3x^5}{40}-\frac{5x^7}{112}+\cdots}.
+ =x-\frac{x^3}6+\frac{3x^5}{40}-\frac{5x^7}{112}+\cdots},
 \]
-Its radius is $1$ (branch points at $\pm i$); at the real endpoints
-$x=\pm1$ the coefficient magnitudes are $O(r^{-3/2})$, so it also
-converges absolutely there.
+in agreement with (a): $9/5!=3/40$ and $225/7!=5/112$.
+Its radius is $1$ (branch points at $\pm i$): the ratio of successive
+coefficient magnitudes is $(2r+1)^2/[(2r+2)(2r+3)]\to1$. At the real
+endpoints $x=\pm1$ the coefficient magnitudes are $O(r^{-3/2})$, because
+$\binom{2r}r/4^r\sim1/\sqrt{\pi r}$ (Stirling's formula, as in
+Exercise 1.1.10), so the series also converges absolutely there.
 
 
 \Needspace{5\baselineskip}
@@ -1482,14 +1523,18 @@ converges absolutely there.
 \noindent\textbf{1.3.5}\quad Show that for integral $n\geq0$ \erratum{and $|x|<1$},
 $\displaystyle\frac{1}{(1-x)^{n+1}}=\sum_{m=n}^{\infty}\binom{m}{n}x^{m-n}$.
 \solution
-For $|x|<1$, differentiate the geometric series $n$ times:
+For $|x|<1$, differentiate the geometric series $n$ times. Each
+differentiation turns $k!(1-x)^{-k-1}$ into $(k+1)!(1-x)^{-k-2}$, and
+$d^nx^m/dx^n=m(m-1)\cdots(m-n+1)x^{m-n}=\frac{m!}{(m-n)!}x^{m-n}$ for
+$m\ge n$, while it vanishes for $m<n$:
 \[
  \frac{d^n}{dx^n}\frac1{1-x}=\frac{n!}{(1-x)^{n+1}},\qquad
  \frac{d^n}{dx^n}\sum_{m=0}^\infty x^m
  =\sum_{m=n}^\infty\frac{m!}{(m-n)!}x^{m-n}.
 \]
 Termwise differentiation is valid inside the radius of convergence,
-as established in Exercise 1.2.16. Divide by $n!$ to obtain
+as established in Exercise 1.2.16. Divide by $n!$, using
+$m!/[(m-n)!\,n!]=\binom mn$, to obtain
 \[
  \frac1{(1-x)^{n+1}}=\sum_{m=n}^\infty\binom mn x^{m-n}.
 \]
@@ -1503,13 +1548,15 @@ convergence domain is $|x|<1$.
 $\displaystyle(1+x)^{-m/2}=\sum_{n=0}^{\infty}(-1)^{n}
 \frac{(m+2n-2)!!}{2^{n}\,n!\,(m-2)!!}\,x^{n}$, for $m=1,2,3,\ldots$ \erratum{and $|x|<1$, with $(-1)!!=0!!=1$}.
 \solution
-The generalized binomial coefficient is
+The $n$ factors in the numerator of the generalized binomial coefficient
+are $-m/2-k=-(m+2k)/2$, $k=0,\ldots,n-1$, so
 \[
  \binom{-m/2}{n}
  =\frac{(-m/2)(-m/2-1)\cdots(-m/2-n+1)}{n!}
  =(-1)^n\frac{m(m+2)\cdots(m+2n-2)}{2^n n!}.
 \]
-Canceling the initial factors in the double factorial gives
+Since $(m+2n-2)!!=(m+2n-2)(m+2n-4)\cdots m\cdot(m-2)!!$, canceling the
+final factors $(m-2)!!$ of the double factorial gives
 $m(m+2)\cdots(m+2n-2)=(m+2n-2)!!/(m-2)!!$.
 Substitute into $(1+x)^{-m/2}=\sum_{n\ge0}\binom{-m/2}{n}x^n$
 to obtain the requested formula for $|x|<1$.
@@ -1532,7 +1579,9 @@ Doppler shift formulas:
 terms of order $v^{2}/c^{2}$ can be neglected.
 \solution
 Put $\beta=v/c$ and use a single sign $\sigma=+1$ for the upper
-signs and $\sigma=-1$ for the lower signs. Then
+signs and $\sigma=-1$ for the lower signs, so $\sigma^2=1$. With the
+geometric series in (a) and the binomial series
+$(1-\beta^2)^{-1/2}=1+\frac12\beta^2+\frac38\beta^4+\cdots$ in (c),
 \[
  \begin{aligned}
  \text{(a)}\quad\nu'/\nu&=(1-\sigma\beta)^{-1}
@@ -1572,18 +1621,21 @@ by
 \]
 \solution
 (a) The first formula already reads $v_1/c=\delta+\delta^2/2$.
-(b) Since $(1+\delta)^{-2}=1-2\delta+3\delta^2+O(\delta^3)$,
+(b) Since $(1+\delta)^{-2}=1-2\delta+3\delta^2+O(\delta^3)$ (binomial
+series),
 \[
  \frac{v_2}{c}=(\delta+\tfrac12\delta^2)
        (1-2\delta+3\delta^2+\cdots)
+       =\delta-2\delta^2+\tfrac12\delta^2+O(\delta^3)
        =\delta-\frac32\delta^2+O(\delta^3).
 \]
-(c) Squaring and solving the third formula for $\beta_3=v_3/c$ gives
+(c) Squaring the third formula and multiplying by $1-\beta_3$, where
+$\beta_3=v_3/c$, gives $(1+\delta)^2(1-\beta_3)=1+\beta_3$, i.e.,
+$(1+\delta)^2-1=\beta_3[(1+\delta)^2+1]$. Hence
 \[
- (1+\delta)^2(1-\beta_3)=1+\beta_3,
- \quad
  \beta_3=\frac{2\delta+\delta^2}{2+2\delta+\delta^2}
  =\frac{\delta+\delta^2/2}{1+\delta+\delta^2/2}
+ =(\delta+\tfrac12\delta^2)(1-\delta+O(\delta^2))
  =\delta-\frac12\delta^2+O(\delta^3).
 \]
 Thus all three reduce to $v=c\delta$ at first order. Through second
@@ -1608,14 +1660,18 @@ $\alpha^{3}$.
 Substitution first gives an exact rational function:
 \[
  \frac wc=\frac{2(1-\alpha)}{1+(1-\alpha)^2}
-          =1-\frac{\alpha^2}{2-2\alpha+\alpha^2}.
+          =1-\frac{\alpha^2}{2-2\alpha+\alpha^2},
 \]
-Near $\alpha=0$,
+because $1+(1-\alpha)^2-2(1-\alpha)=[1-(1-\alpha)]^2=\alpha^2$ and
+$1+(1-\alpha)^2=2-2\alpha+\alpha^2$.
+Near $\alpha=0$, with $1/(1-u)=1+u+O(u^2)$ for
+$u=\alpha-\alpha^2/2$,
 \[
  \frac1{2-2\alpha+\alpha^2}
  =\frac12\frac1{1-\alpha+\alpha^2/2}
  =\frac12[1+\alpha+O(\alpha^2)].
 \]
+Multiplying by $\alpha^2$ gives $\alpha^2/2+\alpha^3/2+O(\alpha^4)$.
 Therefore
 \[
  \boxed{w/c=1-\frac{\alpha^2}{2}-\frac{\alpha^3}{2}+O(\alpha^4)}.
@@ -1639,16 +1695,27 @@ time $t$. Compare with the classical result,
 x=\frac{1}{2}gt^{2}.
 \]
 \solution
-Set $q=(gt/c)^2$ and use
-$(1+q)^{1/2}=1+q/2-q^2/8+q^3/16-5q^4/128+\cdots$.
-After subtraction of $1$ and multiplication by $c^2/g$,
+Set $q=(gt/c)^2$ and use the binomial series
+$(1+q)^{1/2}=1+q/2-q^2/8+q^3/16-5q^4/128+\cdots$, whose coefficients are
+\[
+ \binom{1/2}2=\frac{\frac12(-\frac12)}{2!}=-\frac18,\quad
+ \binom{1/2}3=\frac{\frac12(-\frac12)(-\frac32)}{3!}=\frac1{16},\quad
+ \binom{1/2}4=\frac{\frac12(-\frac12)(-\frac32)(-\frac52)}{4!}
+ =-\frac5{128}.
+\]
+After subtraction of $1$ and multiplication by $c^2/g$, each term
+$\binom{1/2}kq^k$ becomes $\binom{1/2}k g^{2k-1}t^{2k}/c^{2k-2}$:
 \[
  \boxed{x=\frac{gt^2}{2}-\frac{g^3t^4}{8c^2}
               +\frac{g^5t^6}{16c^4}-\frac{5g^7t^8}{128c^6}+\cdots}.
 \]
 The first term is the classical displacement. For $|gt/c|\ll1$ the
-leading relative correction is $-g^2t^2/(4c^2)$.
-The binomial series converges for $|gt/c|<1$ and at the real endpoints;
+leading relative correction is
+$[-g^3t^4/(8c^2)]/(gt^2/2)=-g^2t^2/(4c^2)$.
+The binomial series converges for $|gt/c|<1$ and at the real endpoints
+$|gt/c|=1$, where its coefficients
+$\binom{1/2}k=(-1)^{k-1}\binom{2k}k/[4^k(2k-1)]=O(k^{-3/2})$
+are absolutely summable (Exercise 1.1.10);
 the original expression, unlike the small-time truncation, also describes
 larger times.
 
@@ -1677,18 +1744,25 @@ This follows by matching the given denominator with the standard
 Dirac formula containing $(Z\alpha)^2$; see
 \href{https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=842564}
 {Kramida's NIST compilation, Sec.~2, Eq.~(3)}.
-For the algebra set $K=|k|>0$ and $q=\gamma^2$. Then
+For the algebra set $K=|k|>0$ and $q=\gamma^2$. With
+$\sqrt{1-w}=1-w/2-w^2/8+O(w^3)$ for $w=q/K^2$,
 \[
  s=K\sqrt{1-q/K^2}=K-\frac q{2K}-\frac{q^2}{8K^3}+O(q^3),
  \quad s+n-K=n-\frac q{2K}+O(q^2).
 \]
-Consequently
+Consequently, using $(1-\varepsilon)^{-2}=1+2\varepsilon+O(\varepsilon^2)$
+with $\varepsilon=q/(2Kn)+O(q^2)$,
 \[
  \frac{q}{(s+n-K)^2}
  =\frac q{n^2}\left(1-\frac q{2Kn}+O(q^2)\right)^{-2}
  =\frac q{n^2}+\frac{q^2}{Kn^3}+O(q^3).
 \]
-Now apply $(1+u)^{-1/2}=1-u/2+3u^2/8+O(u^3)$:
+Now apply $(1+u)^{-1/2}=1-u/2+3u^2/8+O(u^3)$ with this $u$, for which
+$u^2=q^2/n^4+O(q^3)$:
+\[
+ \frac E{mc^2}=1-\frac q{2n^2}-\frac{q^2}{2Kn^3}+\frac{3q^2}{8n^4}+O(q^3),
+\]
+and $-q^2/(2Kn^3)+3q^2/(8n^4)=-[q^2/(2n^4)](n/K-3/4)$. Thus
 \[
  \boxed{E=mc^2\left[1-\frac{\gamma^2}{2n^2}
  -\frac{\gamma^4}{2n^4}\left(\frac n{|k|}-\frac34\right)
@@ -1696,8 +1770,12 @@ Now apply $(1+u)^{-1/2}=1-u/2+3u^2/8+O(u^3)$:
 \]
 The expansion is for $|\gamma|<|k|$ and small $\gamma$ at fixed
 positive $n$. For $n=|k|=1$ the exact expression reduces to
-$mc^2\sqrt{1-\gamma^2}$, whose expansion
+$mc^2[1+\gamma^2/(1-\gamma^2)]^{-1/2}=mc^2\sqrt{1-\gamma^2}$, whose expansion
 $mc^2(1-\gamma^2/2-\gamma^4/8+\cdots)$ checks the result.
+The $\gamma^2$ term $-mc^2\gamma^2/(2n^2)$ is the Bohr energy
+$-mc^2(Z\alpha)^2/(2n^2)$, with $\alpha=e^2/(4\pi\epsilon_0\hbar c)$,
+exactly when $\gamma=Z\alpha$, which confirms the corrected definition
+of $\gamma$.
 
 
 \Needspace{5\baselineskip}
@@ -1717,17 +1795,22 @@ Find the value of this ratio of kinetic energies for
 answer is a sort of law of diminishing returns for high-energy particle
 accelerators (with stationary targets).
 \solution
-Let $q=E_k/(mc^2)>0$. Rationalizing removes the cancellation at $q=0$:
+Let $q=E_k/(mc^2)>0$. Since
+$\sqrt{2mc^2(E_k+2mc^2)}=mc^2\sqrt{4+2q}$, dividing numerator and
+denominator by $mc^2$ gives the first form below; rationalizing
+(multiplying above and below by $\sqrt{4+2q}+2$) removes the
+cancellation at $q=0$:
 \[
  R=\frac{\sqrt{4+2q}-2}{q}
    =\frac2{\sqrt{4+2q}+2}
    =\frac1{\sqrt{1+q/2}+1}.
 \]
 (a) For $q\ll1$, $\sqrt{1+q/2}=1+q/4+O(q^2)$, giving
-$R=\frac12(1+q/8+O(q^2))^{-1}=1/2-q/16+O(q^2)$.
+$R=1/[2+q/4+O(q^2)]=\frac12(1+q/8+O(q^2))^{-1}=1/2-q/16+O(q^2)$.
 Thus the nonrelativistic limit is $1/2$.
 
-(b) For $q\gg1$, the original numerator gives
+(b) For $q\gg1$, write $\sqrt{4+2q}=\sqrt{2q}\sqrt{1+2/q}$ in the
+original form and use $\sqrt{1+2/q}=1+1/q+O(q^{-2})$:
 \[
  R=\sqrt{\frac2q}\sqrt{1+\frac2q}-\frac2q
  =\sqrt{\frac2q}-\frac2q+O(q^{-3/2})\longrightarrow0.
@@ -1780,10 +1863,13 @@ cancel wherever they are defined.
 \end{enumerate}
 \solution
 (a) Put $q=e^{-\varepsilon_0/(kT)}$, so $0<q<1$ for
-$\varepsilon_0,kT>0$. The geometric and differentiated geometric sums are
+$\varepsilon_0,kT>0$. Both sums are binomial expansions: the
+denominator is $(1-q)^{-1}=\sum_{n\ge0}q^n$, and the numerator is
+$\varepsilon_0q$ times $(1-q)^{-2}=\sum_{n\ge0}(n+1)q^n$ (Exercise 1.3.5
+with $n=1$; equivalently, apply $q\,d/dq$ to the geometric series):
 \[
  \sum_{n=0}^\infty q^n=\frac1{1-q},\qquad
- \sum_{n=1}^\infty n q^n=q\frac d{dq}\frac1{1-q}
+ \sum_{n=1}^\infty n q^n=q\sum_{n=0}^\infty(n+1)q^n
                          =\frac q{(1-q)^2}.
 \]
 Their ratio, including the energy factor, is
@@ -1793,20 +1879,23 @@ Their ratio, including the energy factor, is
  =\frac{\varepsilon_0 q}{1-q}
  =\frac{\varepsilon_0}{e^{\varepsilon_0/(kT)}-1}.
 \]
-(b) With $z=\varepsilon_0/(kT)\ll1$,
-$e^z-1=z(1+z/2+z^2/6+\cdots)$, hence
+(b) With $z=\varepsilon_0/(kT)\ll1$, write
+$\langle\varepsilon\rangle=kT\,z/(e^z-1)$ and
+$e^z-1=z(1+z/2+z^2/6+z^3/24+\cdots)$. The reciprocal series
+$1+az+bz^2+cz^3+\cdots$ of the bracket follows from setting
+$(1+z/2+z^2/6+z^3/24+\cdots)(1+az+bz^2+cz^3+\cdots)=1$:
+$a+1/2=0$, $b+a/2+1/6=0$, and $c+b/2+a/6+1/24=0$, so $a=-1/2$,
+$b=1/12$, and $c=0$. Hence
 \[
  \langle\varepsilon\rangle
  =kT\left(1-\frac z2+\frac{z^2}{12}+O(z^4)\right)
  =kT-\frac{\varepsilon_0}{2}+O(\varepsilon_0^2/(kT)).
 \]
-For clarity, the reciprocal series was found by setting
-$(1+z/2+z^2/6+\cdots)(1+a z+b z^2+\cdots)=1$:
-$a+1/2=0$ and $b+a/2+1/6=0$, so $a=-1/2$ and $b=1/12$.
 Its leading high-temperature value is $kT$.
-\erratum{The manual (p.~14) gives a plus sign in
-$z/(e^z-1)$ and a positive constant correction to the energy.
-The expansion above fixes the first correction as $-\varepsilon_0/2$.}
+\erratum{The Instructor's Manual, p.~14, gives a plus sign in the
+linear term of $z/(e^z-1)$ and a positive constant correction to the
+energy. The expansion above fixes the first correction as
+$-\varepsilon_0/2$.}
 
 
 \Needspace{5\baselineskip}
@@ -1824,7 +1913,9 @@ y=x$):
 \solution
 For $|x|<1$ the expansion
 $(1+t^2)^{-1}=\sum_{n=0}^\infty(-1)^nt^{2n}$ is uniformly convergent
-on the segment from $0$ to $x$. Termwise integration therefore gives
+on the segment from $0$ to $x$ (Weierstrass $M$ test with
+$M_n=|x|^{2n}$). Termwise integration, with
+$\int_0^xt^{2n}dt=x^{2n+1}/(2n+1)$, therefore gives
 \[
  \arctan x=\sum_{n=0}^\infty(-1)^n\frac{x^{2n+1}}{2n+1}.
 \]
@@ -1850,21 +1941,28 @@ rest mass energy. Find $\displaystyle\lim_{\varepsilon\to0}f(\varepsilon)$.
 \par\nobreak\hfill\emph{ANS.}\enspace $\dfrac{4}{3}$.
 \solution
 The prefactor contains $\varepsilon^{-2}$, so expand the bracket at
-least through $\varepsilon^2$:
+least through $\varepsilon^2$. Use the geometric series for
+$1/(1+2\varepsilon)$ and $\ln(1+u)=u-u^2/2+u^3/3-u^4/4+\cdots$ with
+$u=2\varepsilon$:
 \[
  \begin{aligned}
  \frac{2+2\varepsilon}{1+2\varepsilon}
  &=2(1+\varepsilon)(1-2\varepsilon+4\varepsilon^2-8\varepsilon^3+\cdots)
-  =2-2\varepsilon+4\varepsilon^2-8\varepsilon^3+O(\varepsilon^4),\\
+  =2(1-\varepsilon+2\varepsilon^2-4\varepsilon^3+\cdots)\\
+ &=2-2\varepsilon+4\varepsilon^2-8\varepsilon^3+O(\varepsilon^4),\\
  \frac{\ln(1+2\varepsilon)}{\varepsilon}
- &=2-2\varepsilon+\frac83\varepsilon^2-4\varepsilon^3+O(\varepsilon^4).
+ &=\frac{2\varepsilon-2\varepsilon^2+\frac83\varepsilon^3
+   -4\varepsilon^4+\cdots}{\varepsilon}
+ =2-2\varepsilon+\frac83\varepsilon^2-4\varepsilon^3+O(\varepsilon^4).
  \end{aligned}
 \]
 The constant and linear terms cancel, leaving
-$\frac43\varepsilon^2-4\varepsilon^3+O(\varepsilon^4)$.
+$(4-\frac83)\varepsilon^2+(-8+4)\varepsilon^3+O(\varepsilon^4)
+=\frac43\varepsilon^2-4\varepsilon^3+O(\varepsilon^4)$.
 Multiplication by $(1+\varepsilon)/\varepsilon^2$ now gives
 \[
- f(\varepsilon)=\frac43-\frac83\varepsilon+O(\varepsilon^2),
+ f(\varepsilon)=(1+\varepsilon)\Bigl(\frac43-4\varepsilon\Bigr)+O(\varepsilon^2)
+ =\frac43-\frac83\varepsilon+O(\varepsilon^2),
  \qquad \boxed{\lim_{\varepsilon\to0}f(\varepsilon)=\frac43}.
 \]
 
@@ -1891,22 +1989,35 @@ Set $x=1/A$, with $|x|<1$. Then
  =-2\left(x+\frac{x^3}3+\frac{x^5}5+\cdots\right),
  \qquad \frac{(A-1)^2}{2A}=\frac{1-2x+x^2}{2x}.
 \]
-Retain through $x^4$ in the product (the $x^{-1}$ prefactor requires
+The logarithm series is that of Exercise 1.6.1 with $x\to-x$, so the
+product of the two factors is
+\[
+ \frac{1-2x+x^2}{2x}\cdot(-2x)\Bigl(1+\frac{x^2}3+\frac{x^4}5+\cdots\Bigr)
+ =-(1-2x+x^2)\Bigl(1+\frac{x^2}3+\frac{x^4}5+\cdots\Bigr).
+\]
+Retain through $x^4$ in this product (the $x^{-1}$ prefactor requires
 the logarithm through $x^5$):
 \[
+ (1-2x+x^2)\Bigl(1+\frac{x^2}3+\frac{x^4}5+\cdots\Bigr)
+ =1-2x+\frac43x^2-\frac23x^3+\Bigl(\frac13+\frac15\Bigr)x^4+O(x^5),
+\]
+with $\frac13+\frac15=\frac8{15}$. Expanding $\xi_2=2x/(1+2x/3)$ by
+the geometric series,
+\[
  \begin{aligned}
- \xi_1&=1-(1-2x+x^2)(1+x^2/3+x^4/5+\cdots)\\
- &=2x-\frac43x^2+\frac23x^3-\frac8{15}x^4+O(x^5),\\
- \xi_2&=\frac{2x}{1+2x/3}
+ \xi_1&=1-\Bigl(1-2x+\frac43x^2-\frac23x^3+\frac8{15}x^4+O(x^5)\Bigr)
+ =2x-\frac43x^2+\frac23x^3-\frac8{15}x^4+O(x^5),\\
+ \xi_2&=2x\Bigl(1-\frac{2x}3+\frac{4x^2}9-\frac{8x^3}{27}+\cdots\Bigr)
        =2x-\frac43x^2+\frac89x^3-\frac{16}{27}x^4+O(x^5).
  \end{aligned}
 \]
 Thus they agree through $A^{-2}$, and
 $\xi_2-\xi_1=(8/9-2/3)A^{-3}+O(A^{-4})
 =\boxed{(2/9)A^{-3}+O(A^{-4})}$.
-\erratum{The manual (p.~14) prints $4x^3/3$ in its intermediate
-expansion of $\xi_1$. The coefficient is $2/3$, as follows from the
-product above; its final coefficient difference $2/9$ is correct.}
+\erratum{The Instructor's Manual, p.~14, prints $4x^3/3$ in its
+intermediate expansion of $\xi_1$. The coefficient is $2/3$, as follows
+from the product above; its final coefficient difference $2/9$ is
+correct.}
 
 
 \Needspace{5\baselineskip}
@@ -1921,25 +2032,35 @@ Catalan's constant:
 \emph{Note.}~The definition and numerical computation of Catalan's constant
 was addressed in Exercise 1.1.12.
 \solution
-(a) Divide the Gregory series by $t$ and integrate:
+(a) Divide the Gregory series (Exercise 1.3.15) by $t$ and integrate:
 \[
  \int_0^1\frac{\arctan t}{t}dt
  =\sum_{n=0}^\infty\frac{(-1)^n}{2n+1}\int_0^1t^{2n}dt
- =\sum_{n=0}^\infty\frac{(-1)^n}{(2n+1)^2}=G.
+ =\sum_{n=0}^\infty\frac{(-1)^n}{(2n+1)^2}=G,
 \]
+Catalan's constant $G=\beta(2)$ of Exercise 1.1.12.
 The apparent singularity at zero is removable since $\arctan t/t\to1$.
-Interchanging summation and integration is justified by
-$\sum_n\int_0^1t^{2n}/(2n+1)dt=\sum_n(2n+1)^{-2}<\infty$.
+To justify the termwise integration, integrate the finite identity of
+Exercise 1.3.2 from $0$ to $t$ and divide by $t$:
+$\arctan t/t=\sum_{n=0}^N(-1)^nt^{2n}/(2n+1)+r_N(t)$ with
+$|r_N(t)|\le t^{-1}\int_0^ts^{2N+2}ds=t^{2N+2}/(2N+3)$. The integrated
+remainder is at most $1/(2N+3)^2\to0$.
 
-(b) Similarly expand $1/(1+x^2)$ and use integration by parts:
+(b) Similarly expand $1/(1+x^2)$ and use integration by parts with
+$u=\ln x$, $dv=x^{2n}dx$:
 \[
  \int_0^1x^{2n}\ln x\,dx
  =\left[\frac{x^{2n+1}\ln x}{2n+1}\right]_0^1
    -\frac1{2n+1}\int_0^1x^{2n}dx
  =-\frac1{(2n+1)^2}.
 \]
+The boundary term vanishes: $\ln1=0$, and $x^{2n+1}\ln x\to0$ as
+$x\to0^+$ (l'H\^opital's rule applied to $\ln x/x^{-(2n+1)}$).
 Therefore $-\int_0^1\ln x/(1+x^2)dx=\sum_{n\ge0}(-1)^n/(2n+1)^2=G$.
-The same summable absolute integrals justify this interchange too.
+This termwise integration is justified in the same way: multiplying the
+finite identity of Exercise 1.3.2 by $-\ln x\ge0$ and integrating, the
+remainder is at most $\int_0^1x^{2N+2}(-\ln x)\,dx=1/(2N+3)^2\to0$, by
+the integral just computed.
 
 
 \Needspace{9\baselineskip}
@@ -1950,18 +2071,23 @@ The same summable absolute integrals justify this interchange too.
 \noindent\textbf{1.4.1}\quad Show that
 $\displaystyle\sum_{j=1}^{n}j^{4}=\frac{n}{30}(2n+1)(n+1)(3n^{2}+3n-1)$.
 \solution
-Let $F(n)=n(n+1)(2n+1)(3n^2+3n-1)/30$. Multiplying the factors gives
+Let $F(n)=n(n+1)(2n+1)(3n^2+3n-1)/30$. Since
+$n(n+1)(2n+1)=2n^3+3n^2+n$, multiplying the factors gives
 \[
- F(n)=\frac15n^5+\frac12n^4+\frac13n^3-\frac1{30}n.
+ F(n)=\frac{6n^5+15n^4+10n^3-n}{30}
+     =\frac15n^5+\frac12n^4+\frac13n^3-\frac1{30}n.
 \]
-The base case is $F(1)=1$. For the inductive step use the binomial
-expansions of $(n+1)^j$:
+The base case is $F(1)=\frac15+\frac12+\frac13-\frac1{30}
+=\frac{6+15+10-1}{30}=1$. For the inductive step use the binomial
+expansions of $(n+1)^j$ in $(n+1)^j-n^j$:
 \[
  \begin{aligned}
  F(n+1)-F(n)
  &=\tfrac15(5n^4+10n^3+10n^2+5n+1)\\
  &\quad+\tfrac12(4n^3+6n^2+4n+1)
        +\tfrac13(3n^2+3n+1)-\tfrac1{30}\\
+ &=n^4+(2+2)n^3+(2+3+1)n^2+(1+2+1)n
+   +\bigl(\tfrac15+\tfrac12+\tfrac13-\tfrac1{30}\bigr)\\
  &=n^4+4n^3+6n^2+4n+1=(n+1)^4.
  \end{aligned}
 \]
@@ -1987,17 +2113,25 @@ Differentiating each term gives
  =\sum_{j=0}^n\binom nj f^{(j+1)}g^{(n-j)}
   +\sum_{j=0}^n\binom nj f^{(j)}g^{(n+1-j)}.
 \]
-In the first sum replace $j+1$ by $r$. The boundary terms are
-$f^{(n+1)}g$ and $fg^{(n+1)}$, and for $1\le r\le n$ the coefficient
-of $f^{(r)}g^{(n+1-r)}$ is
+In the first sum replace $j+1$ by $r$, and in the second write $r$ for
+$j$:
+\[
+ (fg)^{(n+1)}
+ =\sum_{r=1}^{n+1}\binom n{r-1}f^{(r)}g^{(n+1-r)}
+  +\sum_{r=0}^n\binom nr f^{(r)}g^{(n+1-r)}.
+\]
+The boundary terms $f^{(n+1)}g$ ($r=n+1$, first sum only) and
+$fg^{(n+1)}$ ($r=0$, second sum only) have coefficient $1$, and for
+$1\le r\le n$ the coefficient of $f^{(r)}g^{(n+1-r)}$ is, over the
+common denominator $r!(n+1-r)!$,
 \[
  \binom n{r-1}+\binom nr
- =\frac{n!r+n!(n+1-r)}{r!(n+1-r)!}
- =\binom{n+1}r.
+ =\frac{n!\,r+n!\,(n+1-r)}{r!(n+1-r)!}
+ =\frac{(n+1)!}{r!(n+1-r)!}=\binom{n+1}r.
 \]
 The boundary coefficients also equal the corresponding binomial
-coefficients, both $1$. This is exactly the formula at order $n+1$,
-completing induction.
+coefficients, $\binom{n+1}{n+1}=\binom{n+1}0=1$. This is exactly the
+formula at order $n+1$, completing induction.
 
 
 \Needspace{9\baselineskip}
@@ -2039,15 +2173,13 @@ where $p$ is a positive integer.
 \emph{Hint.}~Use mathematical induction. Two binomial coefficient formulas of
 use here are
 \[
-\erratum{\frac{p+1}{p+1-j}\binom{p}{j}=\binom{p+1}{j}},\qquad
+\frac{p+1}{p+1-j}\binom{p}{j}=\binom{p+1}{j},\qquad
 \sum_{j=1}^{p+1}(-1)^{j-1}\binom{p+1}{j}=1.
 \]
 \solution
-\erratum{The first identity in the transcribed hint should be
-$\dfrac{p+1}{p+1-j}\binom pj=\binom{p+1}j$ for $0\le j\le p$,
-as printed in the textbook (p.~44).}
 For an induction convenient here, let $F_p(n)=1/[n(n+1)\cdots(n+p)]$.
-The base case $p=0$ is $F_0(n)=1/n$.
+The formula holds trivially for $p=0$, where it reads $F_0(n)=1/n$;
+this is the base case.
 Directly bringing two fractions to a common denominator gives
 \[
  F_p(n)-F_p(n+1)
@@ -2055,15 +2187,20 @@ Directly bringing two fractions to a common denominator gives
  =(p+1)F_{p+1}(n).
 \]
 Assume $F_p(n)=\frac1{p!}\sum_{j=0}^p(-1)^j\binom pj/(n+j)$.
-Apply it at both $n$ and $n+1$, subtract, and divide by $p+1$:
+Apply it at both $n$ and $n+1$, subtract, and divide by $p+1$; in the
+second sum, $\sum_{j=0}^p(-1)^j\binom pj/(n+1+j)$, shift the index
+$j\to j-1$:
 \[
  F_{p+1}(n)=\frac1{(p+1)!}
  \left[\sum_{j=0}^p\frac{(-1)^j\binom pj}{n+j}
  -\sum_{j=1}^{p+1}\frac{(-1)^{j-1}\binom p{j-1}}{n+j}\right].
 \]
-For internal indices the numerator becomes
-$(-1)^j[\binom pj+\binom p{j-1}]=(-1)^j\binom{p+1}j$.
-The endpoint numerators are $1$ and $(-1)^{p+1}$, as required.
+For $1\le j\le p$ the numerator of $1/(n+j)$ becomes
+$(-1)^j\binom pj-(-1)^{j-1}\binom p{j-1}
+=(-1)^j[\binom pj+\binom p{j-1}]=(-1)^j\binom{p+1}j$,
+by Pascal's rule (proved in Exercise 1.4.2).
+The endpoint numerators are $\binom p0=1=\binom{p+1}0$ for $j=0$ and
+$-(-1)^p\binom pp=(-1)^{p+1}\binom{p+1}{p+1}$ for $j=p+1$, as required.
 Thus the formula holds at $p+1$ and for all $p$ by induction.
 All formulas are rational identities away from the poles $n=0,-1,\ldots$.
 
@@ -2093,7 +2230,10 @@ $1/[(n+1)\cdots(n+p-1)]$ gives
  -\frac1{(n+1)\cdots(n+p)}\right]
  =\frac{u_n(p-1)-u_{n+1}(p-1)}p.
 \]
-Now sum only to a finite $N$, so the cancellation is unambiguous:
+Now sum only to a finite $N$, so the cancellation is unambiguous: the
+sum telescopes, since each $u_n(p-1)$ with $2\le n\le N$ appears once
+with each sign. With $u_1(p-1)=1/(1\cdot2\cdots p)=1/p!$ (the hint) and
+$u_{N+1}(p-1)=1/[(N+1)(N+2)\cdots(N+p)]$,
 \[
  \sum_{n=1}^N u_n(p)
  =\frac1p[u_1(p-1)-u_{N+1}(p-1)]
@@ -2114,8 +2254,11 @@ indices are summed on the range $(0,\infty)$. Then the summation not
 containing the coefficients $c_{j}$ can be recognized as a binomial expansion.
 \solution
 In the book's notation put $y=x/(1+x)$ and
-$a_n=\sum_{j=0}^n(-1)^j\binom nj c_{n-j}$. Substitute this in the
-transformed series and set $k=n-j$:
+$a_n=\sum_{j=0}^n(-1)^j\binom nj c_{n-j}$, Eq.~(1.88). Substitute this
+in the transformed series, Eq.~(1.87), and set $k=n-j$. Then $n=k+j$,
+$(-1)^n(-1)^j=(-1)^{k+2j}=(-1)^k$, and $\binom nj=\binom{k+j}j$; as $n$
+runs over $0,1,2,\ldots$ and $j$ over $0,\ldots,n$, the pair $(k,j)$
+runs over all pairs of nonnegative integers:
 \[
  \begin{aligned}
  \frac1{1+x}\sum_{n=0}^\infty(-1)^n a_n y^n
@@ -2125,10 +2268,13 @@ transformed series and set $k=n-j$:
        \sum_{j=0}^\infty\binom{k+j}j y^j.
  \end{aligned}
 \]
-Exercise 1.3.5 identifies the inner sum as $(1-y)^{-k-1}$.
+Exercise 1.3.5, with $n$ replaced by $k$ and $m=k+j$, reads
+$\sum_{j\ge0}\binom{k+j}ky^j=(1-y)^{-k-1}$ for $|y|<1$; since
+$\binom{k+j}k=\binom{k+j}j$, this identifies the inner sum.
 Because $1-y=1/(1+x)$, its complete prefactor simplifies to
 \[
- \frac{y^k}{(1+x)(1-y)^{k+1}}=x^k.
+ \frac{y^k}{(1+x)(1-y)^{k+1}}
+ =\frac{x^k}{(1+x)^k}\cdot\frac{(1+x)^{k+1}}{1+x}=x^k.
 \]
 Thus the result is $\sum_{k\ge0}(-1)^k c_kx^k$, precisely Eq.~(1.86).
 The exchanges hold wherever the double series converges absolutely;
@@ -2150,28 +2296,47 @@ for $\arctan(x)$:
 Check your work by computing $\arctan(1)=\pi/4$ and
 $\arctan(3^{-1/2})=\pi/6$.
 \solution
-Apply Exercise 1.5.4 to $\arctan x/x$ with variable $u=x^2$ and
-$c_j=1/(2j+1)=\int_0^1t^{2j}dt$. Its difference coefficient is
+Apply Exercise 1.5.4 to
+$\arctan x/x=\sum_{j\ge0}(-1)^jc_ju^j$ with variable $u=x^2$ and
+$c_j=1/(2j+1)=\int_0^1t^{2j}dt$. By the binomial theorem its difference
+coefficient is
 \[
  a_n=\int_0^1\sum_{j=0}^n(-1)^j\binom nj t^{2(n-j)}dt
      =\int_0^1(t^2-1)^n dt=(-1)^n I_n,
  \quad I_n=\int_0^1(1-t^2)^n dt.
 \]
-Integration by parts gives, for $n\ge1$,
-$I_n=2n\int_0^1t^2(1-t^2)^{n-1}dt=2n(I_{n-1}-I_n)$.
-Since $I_0=1$, this yields
-$I_n=\frac{2n}{2n+1}I_{n-1}=(2n)!!/(2n+1)!!$.
-The transformed series is therefore
+For $n\ge1$, integration by parts (differentiating $(1-t^2)^n$ and
+integrating $1$ to $t$; the boundary term $[t(1-t^2)^n]_0^1$ vanishes),
+followed by $t^2=1-(1-t^2)$, gives
+\[
+ I_n=2n\int_0^1t^2(1-t^2)^{n-1}dt=2n(I_{n-1}-I_n).
+\]
+Thus $(2n+1)I_n=2nI_{n-1}$, and since $I_0=1$,
+\[
+ I_n=\frac{2n}{2n+1}I_{n-1}
+ =\frac{2n(2n-2)\cdots2}{(2n+1)(2n-1)\cdots3}=\frac{(2n)!!}{(2n+1)!!}.
+\]
+In Eq.~(1.87) with $x$ replaced by $u=x^2$, the prefactor is
+$1/(1+x^2)$, the variable is $q=x^2/(1+x^2)$, and the coefficients are
+$(-1)^na_n=I_n$. Multiplying by $x$, the transformed series is therefore
 \[
  \boxed{\arctan x=\frac{x}{1+x^2}
  \sum_{n=0}^\infty\frac{(2n)!!}{(2n+1)!!}
        \left(\frac{x^2}{1+x^2}\right)^n}.
 \]
-For every finite real $x$, $0\le q=x^2/(1+x^2)<1$ and $0<I_n\le1$,
-so this series converges. Summing its integral representation gives
-$\frac{x}{1+x^2}\int_0^1[1-q(1-t^2)]^{-1}dt
-=\int_0^1x/(1+x^2t^2)dt=\arctan x$, confirming its full real domain.
-Keeping $n=0,\ldots,39$ gives
+For every finite real $x$, $0\le q<1$ and $0<I_n\le1$ (the
+integrand $(1-t^2)^n$ lies between $0$ and $1$), so this series
+converges. Summing the geometric series under the integral sign (its
+ratio $q(1-t^2)$ is at most $q<1$, so it converges uniformly) gives
+$\sum_nI_nq^n=\int_0^1[1-q(1-t^2)]^{-1}dt$; since
+$1-q(1-t^2)=(1+x^2t^2)/(1+x^2)$,
+\[
+ \frac{x}{1+x^2}\int_0^1\frac{dt}{1-q(1-t^2)}
+ =\int_0^1\frac{x\,dt}{1+x^2t^2}=\arctan x,
+\]
+confirming its full real domain.
+Keeping $n=0,\ldots,39$, with $I_n$ from the recurrence and the sums
+evaluated to 30 significant digits, gives (rounded to 16 digits)
 \[
  \begin{array}{c|c|c}
  x&q&\text{computed value}\\\hline
@@ -2179,9 +2344,17 @@ Keeping $n=0,\ldots,39$ gives
  1/\sqrt3&1/4&0.5235987755982989
  \end{array}
 \]
-These agree with $\pi/4$ and $\pi/6$; the absolute remainder is at
-most $|x|q^{40}$ (respectively $9.10\times10^{-13}$ and
-$4.78\times10^{-25}$).
+These agree with $\pi/4=0.78539816339744830\ldots$ and
+$\pi/6=0.52359877559829887\ldots$ within the truncation error. For
+$x>0$, since $I_n\le1$ and $1/(1-q)=1+x^2$, the omitted terms satisfy
+\[
+ 0<\frac{x}{1+x^2}\sum_{n=40}^\infty I_nq^n
+ \le\frac{x}{1+x^2}\cdot\frac{q^{40}}{1-q}=xq^{40},
+\]
+that is, $2^{-40}\approx9.09\times10^{-13}$ for $x=1$ and
+$4^{-40}/\sqrt3\approx4.78\times10^{-25}$ for $x=1/\sqrt3$. (The actual
+differences from $\pi/4$ and $\pi/6$ are $1.25\times10^{-13}$ and
+$6.6\times10^{-26}$.)
 
 
 \Needspace{9\baselineskip}
@@ -2219,16 +2392,20 @@ units makes equal angles with the \erratum{positive} coordinate axes. Find $A_{x
 $A_{z}$.
 \solution
 If the common angle with the positive coordinate axes is $\theta$, then
-$A_x=A_y=A_z=A\cos\theta$. Taking the squared magnitude gives
-$A^2=3A^2\cos^2\theta$, so $\cos\theta=\pm1/\sqrt3$.
+the direction cosines are equal: $A_x=A_y=A_z=A\cos\theta$. Taking the
+squared magnitude gives
+$A^2=A_x^2+A_y^2+A_z^2=3A^2\cos^2\theta$, so $\cos\theta=\pm1/\sqrt3$.
 Thus
 \[
  (A_x,A_y,A_z)=\pm\frac{1.732}{\sqrt3}(1,1,1)
              \simeq\pm(0.999971,0.999971,0.999971).
 \]
 The usual first-octant interpretation selects approximately $(1,1,1)$.
-\erratum{Equal angles alone permits the opposite vector as well; a
-first-octant or acute-angle condition is needed to select the plus sign.}
+\erratum{With the axes read as undirected lines, equal angles would give
+only $|A_x|=|A_y|=|A_z|$, i.e., all eight vectors
+$(1.732/\sqrt3)(\pm1,\pm1,\pm1)$; hence ``positive'' in the statement.
+Even then the opposite vector is allowed; a first-octant or acute-angle
+condition is needed to select the plus sign.}
 The value $1.732$ is a rounded magnitude, so components exactly equal
 to $1$ correspond to the unrounded magnitude $\sqrt3$.
 
@@ -2321,15 +2498,20 @@ connecting vector is $(1-2a,1-2b,1-2c)$, with each component $\pm1$.
 Opposite orientations describe the same geometric diagonal, leaving
 four representatives:
 \[
- (1,1,1),\quad(1,1,-1),\quad(1,-1,1),\quad(1,-1,-1).
+ (1,1,1),\quad(1,1,-1),\quad(1,-1,1),\quad(1,-1,-1),
 \]
-Each has squared length $1+1+1=3$.
-A face diagonal changes exactly two coordinates, giving the six
+running from $(0,0,0)$ to $(1,1,1)$, from $(0,0,1)$ to $(1,1,0)$, from
+$(0,1,0)$ to $(1,0,1)$, and from $(0,1,1)$ to $(1,0,0)$.
+Each has squared length $1+1+1=3$, hence length $\sqrt3$.
+A face diagonal joins two vertices of one face, which share one coordinate
+and differ in the other two; this gives the six
 unoriented direction representatives
 \[
  (1,\pm1,0),\qquad(1,0,\pm1),\qquad(0,1,\pm1),
 \]
-all of length $\sqrt2$. Each direction occurs on two opposite faces,
+all of squared length $1+1=2$, hence length $\sqrt2$. Each direction
+occurs on two opposite faces ($(1,\pm1,0)$ on $z=0$ and $z=1$,
+$(1,0,\pm1)$ on $y=0$ and $y=1$, $(0,1,\pm1)$ on $x=0$ and $x=1$),
 so there are twelve face-diagonal segments, two on each of six faces.
 Reversing any listed vector supplies its opposite orientation.
 
@@ -2355,7 +2537,9 @@ $\mathbf r\cdot\widehat{\mathbf a}=|\mathbf a|$, so $\mathbf a$
 is the perpendicular displacement from the origin to the plane.
 If $\mathbf a=0$, the equation is $0=0$ and the set is all space.
 
-(b) Expanding and completing the square gives
+(b) Expanding gives $|\mathbf r|^2-\mathbf a\cdot\mathbf r=0$.
+Since $|\mathbf r-\mathbf a/2|^2=|\mathbf r|^2-\mathbf a\cdot\mathbf r
++|\mathbf a|^2/4$, completing the square gives
 \[
  |\mathbf r|^2-\mathbf a\cdot\mathbf r=0
  \quad\Longleftrightarrow\quad
@@ -2380,7 +2564,9 @@ Choose $x$ east, $y$ north, and $z$ upward. From the southwest corner,
 a ray back along the south-wall pipe can be represented by
 $\mathbf a=(1,0,1)$, while the ray forward down the west-wall pipe is
 $\mathbf b=(0,1,-1)$. Each has equal horizontal and vertical component
-magnitudes, as required by the $45^\circ$ slopes. Their included angle is
+magnitudes, as required by the $45^\circ$ slopes. With
+$\mathbf a\cdot\mathbf b=1\cdot0+0\cdot1+1\cdot(-1)=-1$ and
+$|\mathbf a|=|\mathbf b|=\sqrt2$, their included angle is
 \[
  \cos\theta=\frac{\mathbf a\cdot\mathbf b}{|\mathbf a||\mathbf b|}
             =\frac{-1}{\sqrt2\sqrt2}=-\frac12,
@@ -2399,10 +2585,16 @@ The rocket was launched at time $t=0$ from $(1,1,1)$. Lengths are in
 kilometers.
 \solution
 At time $t\ge0$ seconds the rocket is at
-$\mathbf r(t)=(1+t,1+2t,1+3t)$. Its squared distance from the observer is
+$\mathbf r(t)=(1+t,1+2t,1+3t)$, so
+$\mathbf r(t)-(2,1,3)=(t-1,2t,3t-2)$. Its squared distance from the
+observer is
 \[
- d^2(t)=(t-1)^2+(2t)^2+(3t-2)^2
-       =14t^2-14t+5=14(t-\tfrac12)^2+\frac32.
+ \begin{aligned}
+ d^2(t)&=(t-1)^2+(2t)^2+(3t-2)^2
+       =(t^2-2t+1)+4t^2+(9t^2-12t+4)\\
+       &=14t^2-14t+5=14\bigl(t^2-t+\tfrac14\bigr)-\tfrac{14}4+5
+       =14(t-\tfrac12)^2+\frac32.
+ \end{aligned}
 \]
 The minimum is attained at the permitted time $t=1/2$ s, with
 \[
@@ -2425,15 +2617,24 @@ The midpoint opposite $\mathbf a$ is $\mathbf m_a=(\mathbf b+\mathbf c)/2$.
 At fraction $2/3$ of this median from $\mathbf a$ the position is
 \[
  \mathbf a+\frac23(\mathbf m_a-\mathbf a)
+ =\frac13\mathbf a+\frac23\cdot\frac{\mathbf b+\mathbf c}2
  =\frac{\mathbf a+\mathbf b+\mathbf c}{3}=\mathbf g.
 \]
 Cyclically interchanging the vertex labels gives exactly the same
-$\mathbf g$ on each of the other two medians. Thus all three intersect
+$\mathbf g$ on each of the other two medians, because $\mathbf g$ is
+symmetric in $\mathbf a,\mathbf b,\mathbf c$. Thus all three intersect
 there, and each median is divided in the length ratio $2:1$.
 For a concrete example use $A=(0,0)$, $B=(6,0)$, $C=(0,3)$.
 The midpoints are $M_A=(3,3/2)$, $M_B=(0,3/2)$, $M_C=(3,0)$,
-and $G=(2,1)$. Substitution in the three parametric medians gives
-$G$ at parameter $2/3$ in every case.
+and $G=(A+B+C)/3=(2,1)$. Substitution in the three parametric medians
+gives $G$ at parameter $2/3$ in every case:
+\[
+ \begin{aligned}
+ A+\tfrac23(M_A-A)&=\tfrac23(3,\tfrac32)=(2,1),\\
+ B+\tfrac23(M_B-B)&=(6,0)+\tfrac23(-6,\tfrac32)=(2,1),\\
+ C+\tfrac23(M_C-C)&=(0,3)+\tfrac23(3,-3)=(2,1).
+ \end{aligned}
+\]
 \begin{center}
 \begin{tikzpicture}[scale=.85]
  \coordinate (A) at (0,0); \coordinate (B) at (6,0);
@@ -2465,12 +2666,16 @@ vertex, and let $\theta$ be the included angle. The opposite side is
 $\mathbf A=\mathbf B-\mathbf C$ up to orientation. Therefore
 \[
  \begin{aligned}
- A^2&=(\mathbf B-\mathbf C)\cdot(\mathbf B-\mathbf C)\\
+ A^2&=(\mathbf B-\mathbf C)\cdot(\mathbf B-\mathbf C)
+ =\mathbf B\cdot\mathbf B-\mathbf B\cdot\mathbf C
+  -\mathbf C\cdot\mathbf B+\mathbf C\cdot\mathbf C\\
  &=\mathbf B\cdot\mathbf B+\mathbf C\cdot\mathbf C
        -2\mathbf B\cdot\mathbf C
- =B^2+C^2-2BC\cos\theta.
+ =B^2+C^2-2BC\cos\theta,
  \end{aligned}
 \]
+using $\mathbf C\cdot\mathbf B=\mathbf B\cdot\mathbf C$ and
+$\mathbf B\cdot\mathbf C=BC\cos\theta$.
 This is the law of cosines, reducing to Pythagoras when $\theta=\pi/2$.
 
 

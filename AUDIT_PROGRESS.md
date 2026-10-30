@@ -75,14 +75,14 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 7 of 54 parts done (audited and verified); 8 audited and awaiting verification.
+Progress: 7 of 54 parts done (audited and verified); 9 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
 | Part | Exercises | Status |
 |---|---|---|
 | ch01-p1 | 1.1.1–1.2.16 | done |
-| ch01-p2 | 1.3.1–1.7.11 | pending |
+| ch01-p2 | 1.3.1–1.7.11 | audited |
 | ch01-p3 | 1.8.1–1.11.9 | pending |
 | ch02-p1 | 2.1.1–2.2.34 | done |
 | ch02-p2 | 2.2.35–2.2.51 | pending |
@@ -164,3 +164,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
   - verification (3 independent reviews): 20 findings applied (13 distinct; error fixed: in 20.2.5 the mean value theorem for integrals, false for complex test functions, replaced by a direct continuity bound; other: Abel's theorem for integrals stated and proved in 20.2.2(c) and cited in 20.2.13, the distributional pairing argument written out in 20.2.14, the jump term of the distributional derivative made explicit in 20.3.4, the source and limit of the $I_0$ asymptotic form given in 20.2.10(d); wording and references corrected in 20.2.1, 20.2.7, 20.2.11 (statement erratum), 20.2.13, 20.2.15), 0 rejected.
 - **ch18-p1** (18.1.1–18.3.10) — audit: no mathematical errors found (all results, ANS values, the 18.3.4 convergence claims and Kramers' relation in 18.3.9 re-derived and checked numerically). Steps added in all 25 exercises (e.g. the transformation of Eq. (18.80) and the full integration-by-parts bookkeeping in 18.3.9, the $u^nv^n$ coefficient extraction and hockey-stick sum behind the Laguerre bound in 18.3.4, the $w^{(n+1)},w^{(n+2)}$ computation and uniqueness argument in 18.1.2, the Frobenius coefficient product identifying $L_n^k$ in 18.3.7; a concrete dominating function in 18.1.6). Cleanups: "the manual" → "the Instructor's Manual" in five errata; a justification added to the 18.1.1 erratum and to the 18.2.6 hint erratum ($r$ applications); ambiguous $2n!/(2\pi i)$ in 18.1.7 and $(n-j)!^2$ in 18.3.1 rewritten; $D=d/dx$ defined where used.
 - **ch03-p2** (3.6.1–3.10.2) — audit: no mathematical errors found. Steps added in 46 of 50 exercises (e.g. the derivation of $A_\varphi$ and a direct Cartesian check of the curl in 3.9.5, Green's theorem with the harmonicity of $1/r$ and both small-sphere limits in 3.9.9, the outwardness of each face normal in 3.7.1, the explicit Pauli products in 3.6.18); Levi-Civita contractions now cite Exercise 2.1.9, and part labels were added in 3.6.11 and 3.9.7. Cleanups: "the manual" → "the Instructor's Manual" (6 errata); the converse remark in 3.6.11 and the check example in the 3.6.12 erratum reworded; reasons added to the 3.6.15 and 3.8.3 errata; $\hat{\mathbf z}$ → $\hat{\mathbf e}_z$ in the 3.9.4 answer; bare exercise numbers made "Exercise N.M.K".
+- **ch01-p2** (1.3.1–1.7.11) — audit: no wrong results; one quoted number corrected (the 1.5.5 truncation bound $2^{-40}$ is $9.09\times10^{-13}$, not $9.10\times10^{-13}$). Steps added in 30 of 37 exercises (e.g. the derivatives $y^{(2r+1)}(0)=(-1)^r[(2r-1)!!]^2$ and $\binom{-1/2}{r}$ in 1.3.4(b), the collected $\gamma^4$ terms plus a Bohr-energy check of $\gamma=Z\alpha$ in 1.3.11, finite-remainder bounds justifying the termwise integrations in 1.3.18, the integration by parts, coefficient identification and remainder bound in 1.5.5). Cleanups: the 1.5.2 "transcribed hint" remark deleted and the hint's dark-red marking removed (it matches the textbook); "the manual" → "the Instructor's Manual" (1.3.14, 1.3.17); the 1.5.5 table now states the precision used; the 1.7.1 erratum now explains the inserted "positive".
