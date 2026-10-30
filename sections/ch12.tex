@@ -204,13 +204,13 @@ p.~553, contain algebraic errors. Equation (12.16) is correct. The
 consistent intermediate identities are the following:}
 \begin{align*}
 \erratum{\frac p wG''}
-&\erratum{=p y_n''+\frac{2(q-p')}{w}G'
+&\erratum{{}=p y_n''+\frac{2(q-p')}{w}G'
  -\left[p''-q'+\frac{q(q-p')}{p}\right]y_n,}\\
 \erratum{0}
-&\erratum{=p y_n''+\frac q wG'
+&\erratum{{}=p y_n''+\frac q wG'
  -\left[\frac{n(n-1)}2p''+nq'+\frac{q(q-p')}{p}\right]y_n,}\\
 \erratum{\frac q wG'}
-&\erratum{=q y_n'+\frac{q(q-p')}{p}y_n.}
+&\erratum{{}=q y_n'+\frac{q(q-p')}{p}y_n.}
 \end{align*}
 For the first identity, multiply $G''/w$ by $p$ and eliminate $y_n'$
 from the term $2pSy_n'$ using $y_n'=G'/w-Sy_n$ and $pS=q-p'$:
@@ -229,7 +229,7 @@ other, but neither intermediate identity is valid with those signs.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{12.1.5}\quad Given the following integral representations, in
-which \erratum{$n\in\mathbb Z$} and the contours \erratum{encircle the origin once counterclockwise} but no other singular points, derive
+which \erratum{$n\in\mathbb Z$} and the contours encircle the origin \erratum{once counterclockwise} but no other singular points, derive
 the corresponding generating functions:
 \begin{enumerate}
 \item[(a)] Bessel functions:
@@ -250,6 +250,11 @@ c_n=\frac1{2\pi i}\oint f(t)\,t^{-n-1}\,dt
 \]
 for any contour encircling the origin once counterclockwise. These are
 exactly the given integrals, so $c_n=J_n(x)$, respectively $I_n(x)$.
+\erratum{This is why the statement requires $n\in\mathbb Z$ and a single
+counterclockwise circuit: for non-integer $n$ the factor $t^{-n-1}$ is not
+single-valued around the origin, so the closed-contour integral is not
+defined, and a contour winding $k$ times about the origin ($k<0$ for
+clockwise winding) would give $k\,c_n$ instead of $c_n$.}
 Uniqueness of the Laurent expansion therefore gives
 \[
 \boxed{e^{(x/2)(t-1/t)}=\sum_{n=-\infty}^{\infty}J_n(x)t^n},
@@ -361,7 +366,7 @@ Subtracting $t$ gives
 \[
 \boxed{\frac{t}{e^t-1}=\frac{-t}{e^{-t}-1}-t}.
 \]
-The first equality already proves Eq. (12.46):
+The first two equalities already prove Eq. (12.46):
 \[
 \boxed{\frac{te^t}{e^t-1}=\frac{-t}{e^{-t}-1}}.
 \]
@@ -434,7 +439,10 @@ Next express the cotangent through exponentials:
 =i+\frac1x\sum_{k=0}^{\infty}B_k\frac{(2ix)^k}{k!},
 \]
 where the Bernoulli generating function $t/(e^t-1)=\sum_kB_kt^k/k!$ was
-used with $t=2ix$; it converges for $|t|<2\pi$, that is, $|x|<\pi$.
+used with $t=2ix$; it converges for $|t|<2\pi$, that is, $|x|<\pi$,
+because the singularities of $t/(e^t-1)$ nearest the origin are the poles
+$t=\pm2\pi i$ (the zeros of $e^t-1$ are $t=2\pi ik$, $k\in\mathbb Z$, and
+the one at $t=0$ is removable).
 The $k=0$ term is $1/x$; the $k=1$ term, $2iB_1=-i$, cancels the initial
 $i$; all odd Bernoulli numbers beyond $B_1$ vanish (Eq. (12.32), verified
 in Exercise 12.2.1, shows that $t/(e^t-1)+t/2$ is even); and
@@ -503,6 +511,7 @@ over the common denominator $6$,
 =\boxed{\frac{n(n+1)(2n+1)}6},
 \end{align*}
 since $n(n+1)(2n+1)=n(2n^2+3n+1)$.
+
 (c) For $f(x)=x^3$, $f'=3x^2$ and $f^{(3)}=6$, whose endpoint
 difference is zero. Thus, over the common denominator $4$,
 \begin{align*}
@@ -535,7 +544,7 @@ Using $f(x)=1/x$ in Eq.~(12.57) (with interval $[1,n]$) and the definition of
 $\gamma$, Eq.~(1.13), we obtain
 \[
 \gamma=\sum_{s=1}^{n}s^{-1}-\ln n-\frac{1}{2n}
-+\sum_{k=1}^{N}\frac{B_{2k}}{(2k)n^{2k}}\erratum{+R_{n,N}}.
++\sum_{k=1}^{N}\frac{B_{2k}}{(2k)n^{2k}}\erratum{{}+R_{n,N}}.
 \]
 Using double-precision arithmetic, calculate the approximation for
 $N=1,2,\ldots$ \erratum{at $n=1000$}, as in the printed answer below.
@@ -543,8 +552,8 @@ $N=1,2,\ldots$ \erratum{at $n=1000$}, as in the printed answer below.
 \emph{Note.}~See D.~E. Knuth, Euler's constant to 1271 places.
 \emph{Math.\ Comput.}~\textbf{16}: 275 (1962).
 \par\nobreak\hfill\emph{ANS.}\enspace
-For $n=1000$, $N=2$\quad$\gamma\erratum{\approx}0.5772\,1566\,4901$
-\erratum{(truncated, rather than rounded, to twelve decimal places)}.
+For $n=1000$, $N=2$\quad$\gamma\mathrel{\erratum{\approx}}0.5772\,1566\,4901$
+\par\nobreak\hfill\erratum{(truncated, rather than rounded, to twelve decimal places)}.
 \solution
 \erratum{The textbook prints this finite-$N$ formula as an equality
 without the remainder $R_{n,N}$; for finite $N$ it holds only with
@@ -575,17 +584,37 @@ Move $\ln(M/n)=\ln M-\ln n$ to the left, which becomes
 $(H_M-\ln M)-(H_n-\ln n)$, let $M\to\infty$, and
 use $H_M-\ln M\to\gamma$ (Eq. (1.13)); the terms containing $M$ vanish.
 This yields $\gamma=A_{n,N}+R_{n,N}$, where $R_{n,N}$ is the limit of the
-remainder. A rigorous signed remainder
+remainder.
+
+The statement's interval $[1,n]$ leads to the same result. On it,
+$\int_1^n dx/x=\ln n$, $\frac12[f(1)+f(n)]=\frac12+\frac1{2n}$, and
+$B_{2k}[f^{(2k-1)}(n)-f^{(2k-1)}(1)]/(2k)!=B_{2k}(1-n^{-2k})/(2k)$, so
+Euler--Maclaurin for $H_n$, with the terms containing $n$ moved to the
+left, reads
+\[
+A_{n,N}=\frac12+\sum_{k=1}^N\frac{B_{2k}}{2k}
++(\text{remainder on }[1,n]).
+\]
+As $n\to\infty$ the left side tends to $\gamma$ by Eq. (1.13) and the
+remainder to the remainder on $[1,\infty)$. Subtracting the identity from
+this limit leaves $\gamma-A_{n,N}$ equal to the remainder on $[n,\infty)$,
+because the remainder is an integral over the interval.
+A rigorous signed remainder
 bound, derived in Exercise 12.6.6, is
 \[
 0<(-1)^N R_{n,N}
 <\frac{|B_{2N+2}|}{(2N+2)n^{2N+2}}.
 \]
 
-The computation in IEEE double precision runs as follows. Summing the
-terms $1/s$, $s=1,\ldots,1000$, gives $H_{1000}=7.485470860550345$, the
-correctly rounded value (plain summation in either order and compensated
-summation agree here); subtract $\ln1000=6.907755278982137$ and then
+The computation in IEEE double precision runs as follows. The exact value
+is $H_{1000}=7.4854708605503449126\ldots$; summing the terms $1/s$,
+$s=1,\ldots,1000$, with compensated (Kahan) summation, in either order,
+gives its correctly rounded double $H_{1000}=7.485470860550345$. Plain
+summation is less accurate here: left to right it gives
+$7.485470860550343$ and right to left $7.485470860550341$, which would
+lower every entry of the table below by $1.8\times10^{-15}$, respectively
+$4.4\times10^{-15}$, without changing the twelve-decimal result. From the
+correctly rounded $H_{1000}$ subtract $\ln1000=6.907755278982137$ and then
 $1/2000$; finally add the corrections $B_{2k}/(2k\cdot1000^{2k})$,
 $k=1,\ldots,N$. This gives
 \begin{center}
@@ -600,7 +629,9 @@ $N$&$A_{1000,N}$&last correction\\\midrule
 \bottomrule\end{tabular}\end{center}
 The ``last correction'' column lists the $k=N$ term
 $B_{2N}/(2N\cdot1000^{2N})$; for instance $B_4/(4\cdot1000^4)
-=-1/(120\cdot10^{12})$.
+=-1/(120\cdot10^{12})$. The Bernoulli numbers needed are
+$B_2,B_4,\ldots,B_{12}=\frac16,-\frac1{30},\frac1{42},-\frac1{30},
+\frac5{66},-\frac{691}{2730}$.
 The exact truncation error at $N=2$ is below
 $|B_6|/(6\cdot1000^6)=1/(252\cdot1000^6)=3.9682539683\times10^{-21}$.
 The remaining difference of about $4.5\times10^{-16}$ from
@@ -628,7 +659,7 @@ $B_{2n}=(-1)^{n-1}\dfrac{2(2n)!}{(2\pi)^{2n}}\zeta(2n)$, show that
 (d) $\zeta(8)=\dfrac{\pi^{8}}{9450}$,
 \item[(b)] $\zeta(4)=\dfrac{\pi^{4}}{90}$,\qquad
 (e) $\zeta(10)=\dfrac{\pi^{10}}{93{,}555}$,
-\item[(c)] $\zeta(6)=\dfrac{\pi^{6}}{945}$,
+\item[(c)] $\zeta(6)=\dfrac{\pi^{6}}{945}$.
 \end{enumerate}
 \solution
 Rearrange the stated identity before inserting numbers:
@@ -722,23 +753,34 @@ the integrals is finite, because
 \]
 Here $t=e^{-u}$, $dt=-e^{-u}du$, $(\ln t)^2=u^2$ was used, with
 $t=0\to1$ becoming $u=\infty\to0$; the last integral is the one of
-Exercise 12.4.2 with $m=2k+1$. Thus termwise integration gives
+Exercise 12.4.2 with $m=2k+1$. By the Fubini--Tonelli theorem for sums
+and integrals, this finite absolute sum permits termwise integration.
+Directly: by the finite geometric sum,
+$1/(1+t^2)$ minus its partial sum through $t^{2K}$ is
+$(-1)^{K+1}t^{2K+2}/(1+t^2)$, of modulus at most $t^{2K+2}$, so the $K$th
+partial sum of the termwise integrals differs from $I/2$ by at most
+$\int_0^1t^{2K+2}(\ln t)^2dt=2/(2K+3)^3\to0$. Thus termwise integration
+gives
 \[
 \boxed{I=2\sum_{k=0}^\infty(-1)^k\frac{2}{(2k+1)^3}
 =4\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)^3}=4\beta(3)}.
 \]
 
-(b) Integrate $F(z)=(\operatorname{Log}z)^2/(1+z^2)$ round an upper
+(b) Integrate $F(z)=(\log z)^2/(1+z^2)$ round an upper
 semicircle of radius $R$, indenting the origin by a small semicircle of
-radius $\epsilon$, using $0<\arg z<\pi$ inside the
-contour. On the large arc $|\operatorname{Log}z|\le\ln R+\pi$ and
-$|1+z^2|\ge R^2-1$; on the small arc $|\operatorname{Log}z|\le
+radius $\epsilon$. Here $\log z=\ln|z|+i\arg z$ with
+$-\pi/2<\arg z<3\pi/2$; its branch cut along the negative imaginary axis
+avoids the contour, so $F$ is analytic on and inside the contour except
+at $z=i$, and $\arg z=0$ on the positive, $\arg z=\pi$ on the negative
+real axis.
+On the large arc $|\log z|\le\ln R+\pi$ and
+$|1+z^2|\ge R^2-1$; on the small arc $|\log z|\le
 |\ln\epsilon|+\pi$ and $|1+z^2|\ge1-\epsilon^2$. Multiplying by the arc
 lengths $\pi R$ and $\pi\epsilon$ shows that the large arc is
 $O((\ln R)^2/R)$ and the small arc is
 $O(\epsilon|\ln\epsilon|^2)$; both vanish. The sole enclosed pole is
 $z=i$, a simple zero of $1+z^2$ with $(1+z^2)'=2i$ there and
-$\operatorname{Log}i=i\pi/2$, so
+$\log i=i\pi/2$, so
 \[
 \operatorname{Res}_{z=i}F
 =\frac{(i\pi/2)^2}{2i}=\frac{i\pi^2}{8},\qquad
@@ -746,7 +788,7 @@ $\operatorname{Log}i=i\pi/2$, so
 \]
 On the positive real axis $F$ gives $I$ in the limit. On the negative
 real edge, put $z=-t$, $dz=-dt$, so that $z=-R\to-\epsilon$ becomes
-$t=R\to\epsilon$ and $\operatorname{Log}z=\ln t+i\pi$:
+$t=R\to\epsilon$ and $\log z=\ln t+i\pi$:
 \[
 \int_{-R}^{-\epsilon}F\,dz
 =\int_\epsilon^R\frac{(\ln t+i\pi)^2}{1+t^2}dt,\qquad
@@ -816,7 +858,11 @@ $\ln(1+x)/x=\sum_{k\ge1}(-1)^{k+1}x^{k-1}/k$; each term integrates to
 $\int_0^1x^{k-1}dx/k=1/k^2$ in absolute value.
 The sum of the integrals of the absolute values is thus
 $\sum_{k\ge1}1/k^2<\infty$, which justifies termwise integration up
-to the endpoint. Therefore, subtracting the even terms twice,
+to the endpoint (the Fubini--Tonelli theorem for sums and integrals).
+Directly: for $0\le x\le1$ the terms $x^{k-1}/k$ decrease in $k$, so by
+the alternating-series bound the remainder after $K$ terms has modulus at
+most $x^K/(K+1)$, whose integral over $[0,1]$ is $1/(K+1)^2\to0$.
+Therefore, subtracting the even terms twice,
 \[
 \int_0^1\frac{\ln(1+x)}x dx
 =\sum_{k\ge1}\frac{(-1)^{k+1}}{k^2}
@@ -824,10 +870,12 @@ to the endpoint. Therefore, subtracting the even terms twice,
 =\zeta(2)-\frac24\zeta(2)
 =\boxed{\frac12\zeta(2)}.
 \]
-(b) For $a<1$, the logarithm series
+(b) For $0<a<1$, the logarithm series
 $\ln(1-x)/x=-\sum_{k\ge1}x^{k-1}/k$ is uniformly convergent on
-$[0,a]$ (its terms are bounded by $a^{k-1}/k$), after removing the
-harmless limit at zero. Since $\int_0^ax^{k-1}dx/k=a^k/k^2$, termwise
+$[0,a]$ by the Weierstrass M-test, since its terms are bounded by
+$a^{k-1}/k$ and $\sum_ka^{k-1}/k<\infty$; at $x=0$ the quotient is given
+its limiting value $-1$, which is also the sum of the series there.
+Since $\int_0^ax^{k-1}dx/k=a^k/k^2$, termwise
 integration gives
 \[
 \int_0^a\frac{\ln(1-x)}x dx
@@ -916,7 +964,8 @@ precomputed logarithm value.
 \end{enumerate}
 \solution
 (a) Separate the first term of the arctangent series, then pair the rest
-($-1/3+1/5$, $-1/7+1/9$, \ldots):
+($-1/3+1/5$, $-1/7+1/9$, \ldots); as in Exercise 12.4.6, grouping terms
+of a convergent series does not change its sum:
 \[
 \frac\pi4=1+\sum_{p=1}^\infty
 \left(-\frac1{4p-1}+\frac1{4p+1}\right)
@@ -948,7 +997,7 @@ For $n=6$ the bound is below $10^{-8}$. Summing the six terms
 $4^{-2s}\zeta(2s)$, $s=1,\ldots,6$, gives the finite part, and the bound is
 evaluated with $\zeta(14)$:
 \[
-S_6=0.7853981713451978431\ldots,\qquad
+S_6=0.7853981713451978430\ldots,\qquad
 R_6\le\tfrac{32}{15}4^{-14}\zeta(14)=7.9477727265\times10^{-9}.
 \]
 Thus $0.7853981633974\ldots=S_6-\tfrac{32}{15}4^{-14}\zeta(14)\le\pi/4<S_6$,
@@ -1213,9 +1262,19 @@ Write the $r$th factor as $1+a_r$ with $u=x/r$:
 &=1-u+\frac{u^2}{2}-\frac{u^3}{6}+u-u^2+\frac{u^3}{2}+O(u^4)\\
 &=1-\frac{u^2}{2}+\frac{u^3}{3}+O(u^4).
 \end{align*}
+More precisely, for $k\ge1$ the coefficient of $u^k$ in $(1+u)e^{-u}$ is
+$(-1)^k/k!+(-1)^{k-1}/(k-1)!=(-1)^{k-1}(k-1)/k!$, which vanishes for
+$k=1$, so
+\[
+a_r=\sum_{k\ge2}\frac{(-1)^{k-1}(k-1)}{k!}u^k,\qquad
+|a_r|\le|u|^2\sum_{k\ge2}\frac{k-1}{k!}=|u|^2\quad(|u|\le1),
+\]
+because $\sum_{k\ge2}(k-1)/k!=\sum_{k\ge2}1/(k-1)!-\sum_{k\ge2}1/k!
+=(e-1)-(e-2)=1$.
 Hence $a_r=-x^2/(2r^2)+O(r^{-3})$ for fixed finite complex $x$,
-and $\sum|a_r|<\infty$ by comparison with $\sum r^{-2}$. Once
-$|a_r|<1/2$, the convergent logarithm series has the bound
+and $|a_r|\le|x|^2/r^2$ for $r\ge|x|$, so $\sum|a_r|<\infty$ by
+comparison with $\sum r^{-2}$. Once $|a_r|<1/2$, which holds for
+$r>\sqrt2\,|x|$, the convergent logarithm series has the bound
 \[
 |\log(1+a_r)|
 \le\sum_{k\ge1}\frac{|a_r|^k}{k}\le|a_r|\sum_{k\ge0}|a_r|^k
@@ -1225,9 +1284,10 @@ The logarithmic tail therefore converges absolutely, proving a finite
 nonzero product whenever no factor vanishes. The exceptional points
 are exactly $x=-1,-2,\ldots$, since exponentials never vanish.
 
-The estimate is uniform for $|x|\le R$ after finitely many factors:
-$|a_r|\le C_R/r^2$. Thus the product even defines an entire function
-by locally uniform convergence.
+The estimate is uniform for $|x|\le R$: $|a_r|\le R^2/r^2$ for $r\ge R$,
+and hence $|\log(1+a_r)|\le2R^2/r^2$ for $r>\sqrt2\,R$. By the
+Weierstrass M-test the logarithmic tail converges uniformly on
+$|x|\le R$, so the product even defines an entire function.
 \erratum{At the excluded points it still converges as a sequence of
 partial products, with value zero; they are excluded only from the
 convention of a nonzero convergent infinite product.}
