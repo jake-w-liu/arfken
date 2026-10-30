@@ -1375,7 +1375,8 @@ $(gf)(\mathbf r)=f(g^{-1}\mathbf r)$ as in 17.4.4, for instance
 $(rx)(x,y)=y$ because $r^{-1}(x,y)=(y,-x)$, they act as
 $r x=y$, $r y=-x$,
 $s x=x$, $s y=-y$, and $d x=y$, $d y=x$.
-In the ordered basis $(x,y)$ their coefficient matrices are
+In the ordered basis $(x,y)$ their coefficient matrices, whose $j$th
+column gives the image of the $j$th basis function as in 17.4.5, are
 \[
 D(r)=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\quad
 D(r^2)=-I_2,\quad
@@ -1420,8 +1421,9 @@ so the eigenvalues are $(1,-1,1,-1)$.
 Under $d$ the variables $x_i,y_i$ are exchanged, so
 $x_1x_2\leftrightarrow y_1y_2$ and $x_1y_2\leftrightarrow y_1x_2$,
 giving $(1,-1,-1,1)$.
-Every element of $C_{4v}$ is a product $r^js^k$ (and $d=rs$, since
-$D(r)D(s)=D(d)$), so each combination spans an invariant line, and
+Every element of $C_{4v}$ is a product $r^js^k$ (and $d=rs$: $s$
+followed by $r$ sends $(x,y)\to(x,-y)\to(y,x)$, which is the
+reflection $d$), so each combination spans an invariant line, and
 $r^2$ has eigenvalue $(\pm1)^2=1$ on it. The eigenvalues on the
 classes $2C_4$, $2\sigma_v$, $2\sigma_d$ are those of $r$, $s$, $d$,
 and they reproduce the rows $A_1$, $A_2$, $B_1$, $B_2$ of the table.
@@ -1439,7 +1441,7 @@ combinations span the full four-dimensional tensor-product space.
 \begin{enumerate}
 \item[(a)] The objects $(abcd)$ are permuted to $(dacb)$. Write out a
 $4\times4$ matrix representation of this one permutation.
-\par\emph{Hint:}~Compare with Exercise~17.4.2.
+\par\emph{Hint.}~Compare with Exercise~17.4.2.
 \item[(b)] Is the permutation $(abdc)\to(dacb)$ odd or even?
 \item[(c)] Is \erratum{either of the permutations in (a) and (b)} a possible member of the $D_{4}$
 group, which was the subject of Exercise~17.4.3? Why or why not?
@@ -1487,7 +1489,7 @@ inversions, also giving $(-1)^3=-1$.
 $\boxed{\text{no}}$: its order is three, while $D_4$ has only
 elements of orders one, two, and four (its classes $I$, $2C_4$,
 $C_2$, $2C_2'$, $2C_2''$ of 17.4.3 consist of the identity, two
-quarter-turns, and five half-turns). Equivalently, by Lagrange's
+quarter-turns, and five half-turns). Alternatively, by Lagrange's
 theorem the order of every element divides $|D_4|=8$, and $3\nmid8$.
 
 \erratum{For the literal permutation of (b), the answer depends on
@@ -1496,10 +1498,15 @@ statement does not specify.}
 With slots $1,2,3,4$ placed in that cyclic order around the square,
 $Q$ is not a symmetry: it sends the adjacent pair $(1,2)$ to
 $(2,4)$, a diagonal pair, whereas every symmetry of the square maps
-adjacent vertices to adjacent vertices. But a four-cycle is compatible with
-an abstract $D_4$ embedding. If the cyclic order of vertices is
-chosen to be $1,2,4,3$, then $Q=(1\,2\,4\,3)$ is a quarter-turn.
-This distinction resolves the ambiguity.
+adjacent vertices to adjacent vertices. If instead the slots are
+placed in the cyclic order $1,2,4,3$, then $Q=(1\,2\,4\,3)$ is a
+quarter-turn. In the arrangement $(abdc)$ the slots $1,2,4,3$ hold
+$a,b,c,d$, so this is the placement with the objects in alphabetical
+order around the square, and $Q$ moves $a$ to the former place of
+$b$, $b$ to that of $c$, $c$ to that of $d$, and $d$ to that of $a$.
+Thus the permutation of (b) is a member of $D_4$ (a quarter-turn) if
+$a,b,c,d$ sit in this order around the square, but not if the
+slots $1,2,3,4$ do.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1539,7 +1546,7 @@ they form a subgroup of the full permutation group $S_4$
 
 \textbf{(b)} The representation must be reducible because every
 irreducible representation of the cyclic group $C_4$ is
-one-dimensional (Exercise 17.2.5). Equivalently, the squared
+one-dimensional (Exercise~17.2.5). Alternatively, the squared
 dimensions of the inequivalent irreducible representations sum to the
 group order $4$, so none has dimension four ($4^2=16>4$).
 Explicitly, the vector $(1,1,1,1)^T$ is fixed by all
@@ -1619,8 +1626,9 @@ A cycle of length $k$ is a product of $k-1$ transpositions, so
 the signs of the five classes are $(1,-1,1,1,-1)$.
 These give the $A_1,A_2$ rows below.
 
-\textbf{(c)} There are five irreducibles. The known dimensions
-$1,1,2$ account for $1+1+4=6$ of the squared-dimension sum.
+\textbf{(c)} There are as many irreducibles as classes, namely five,
+and the squares of their dimensions sum to the group order $24$.
+The known dimensions $1,1,2$ account for $1+1+4=6$ of this sum.
 The other dimensions $d,e$ obey
 $d^2+e^2=24-6=18$. Trying $d=1,2,3,4$ gives $e^2=17,14,9,2$,
 of which only $9$ is a square, so the only positive integer
@@ -1795,7 +1803,7 @@ If $U,V\in SU(n)$, then
 so the product is in $SU(n)$. The identity has determinant one,
 and $\det U^{-1}=(\det U)^{-1}=1$, so the inverse is in $SU(n)$.
 Associativity is inherited from $U(n)$.
-Hence \(\boxed{SU(n)\le U(n)}\).
+Hence \(\boxed{SU(n)\text{ is a subgroup of }U(n)}\).
 For comparison, unitarity alone gives
 $|\det U|^2=\det(U^\dagger U)=1$; restricting this unit-modulus
 determinant to the value one is precisely the special-unitary condition.
@@ -1849,11 +1857,12 @@ e^{-i(\alpha+\gamma)/2}\cos(\beta/2)
 \end{pmatrix}}.
 \]
 Its determinant is $c^2+s^2=1$ and its columns are orthonormal,
-so it is in $SU(2)$. This specifies the lift obtained from the
-stated exponential product. Changing a single Euler angle by
-$2\pi$ changes its sign; the two matrices $U,-U$ correspond
-to the same spatial rotation, consistent with the double cover
-of $SO(3)$ by $SU(2)$.
+so it is in $SU(2)$. The rotation determines its $SU(2)$ matrix
+only up to sign, and the stated exponential product fixes that sign.
+Changing a single Euler angle by $2\pi$, which leaves the rotation
+unchanged, changes the sign of $U$; the two matrices $U,-U$
+correspond to the same spatial rotation, consistent with the double
+cover of $SO(3)$ by $SU(2)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1936,21 +1945,33 @@ I_3&Y&\text{state}\\\hline
 0&-2&sss
 \end{array}}.
 \]
-To derive every coefficient, a symmetric word sum with occupations
-$n_a$ has $N=3!/(n_u!n_d!n_s!)$ distinct words.
-A root operator changing $a$ into $b$ produces each target word
-$n_b+1$ times. The ratio of target and source word counts is
-$N'/N=n_a/(n_b+1)$. Therefore its action on normalized sums is
+To derive every coefficient, let $\mathcal S$ be the sum of the
+$N=3!/(n_u!\,n_d!\,n_s!)$ distinct words with occupations
+$(n_u,n_d,n_s)$, as in $\mathcal S(uud)$ above, and
+$D_{n_u,n_d,n_s}=\mathcal S/\sqrt N$ the normalized sum. It is also
+labeled by any word with these occupations, e.g.\
+$D_{uud}=D_{2,1,0}$ and $D_{uss}=D_{ssu}$.
+A root operator $T_{b\leftarrow a}$ changing $a$ into $b$ produces
+each target word $n_b+1$ times, once from each of its $n_b+1$
+letters $b$ (changing that letter back into $a$ recovers a source
+word). Thus $T_{b\leftarrow a}\mathcal S=(n_b+1)\mathcal S'$, where
+$\mathcal S'$ is the sum of the $N'$ words with occupations
+$n_a-1$ and $n_b+1$ in place of $n_a$ and $n_b$, and the formula for
+$N$ gives $N'/N=n_a!\,n_b!/[(n_a-1)!\,(n_b+1)!]=n_a/(n_b+1)$.
+With $D'=\mathcal S'/\sqrt{N'}$, the action on normalized sums is
+therefore
 \[
 T_{b\leftarrow a}D_{n_u,n_d,n_s}
-=\sqrt{n_a(n_b+1)}\,D_{\text{new occupations}}.
+=\frac{(n_b+1)\,\mathcal S'}{\sqrt N}
+=(n_b+1)\sqrt{\frac{N'}{N}}\,D'
+=\sqrt{n_a(n_b+1)}\,D'.
 \]
 For example $I_-uuu=duu+udu+uud=\sqrt3D_{uud}$, and
 \[
-I_-\mathcal S(uud)=(dud+udd)+(ddu+udd)+(ddu+dud)=2\,\mathcal S(udd),
+I_-\mathcal S(uud)=(dud+udd)+(ddu+udd)+(ddu+dud)=2\,\mathcal S(ddu),
 \]
 each target word arising once from each of its two $d$'s; since
-$D_{uud}=\mathcal S(uud)/\sqrt3$ and $D_{udd}=\mathcal S(udd)/\sqrt3$,
+$D_{uud}=\mathcal S(uud)/\sqrt3$ and $D_{udd}=\mathcal S(ddu)/\sqrt3$,
 this is $I_-D_{uud}=2D_{udd}$, in agreement with
 $\sqrt{n_u(n_d+1)}=\sqrt{2\cdot2}$.
 Successive $I_-$ operations down the top row have coefficients
@@ -1966,7 +1987,6 @@ I_-D_{uss}&=D_{dss},&
 V_-D_{uss}&=\sqrt3D_{sss}.
 \end{aligned}
 \]
-Here the subscript denotes occupations, so $D_{uss}=D_{ssu}$.
 These paths reach all ten states listed. The root actions preserve
 complete permutation symmetry; the symmetric three-quark space
 has $\binom{3+3-1}{3}=10$ occupation states, so none is omitted.
@@ -2064,8 +2084,8 @@ One orthonormal zero-weight pair is
 \]
 Indeed the second numerator is orthogonal to $Z_1$ and has
 norm squared $4(4)+4-4(2)=12$.
-The six distinct nonzero weights and these two independent zero
-weights supply exactly eight states.
+The six states at the six distinct nonzero weights and these two
+independent zero-weight states make exactly eight states.
 
 \textbf{(e) Independence of the second octet.}
 Interchange slots 1 and 2, calling this unitary operation $P_{12}$.
@@ -2132,8 +2152,9 @@ symmetric combinations $uu$, $dd$, $ss$, $ud+du$, $us+su$, $ds+sd$,
 and the third slot any of three quarks. (Likewise the three
 antisymmetric pairs $ud-du$, $us-su$, $ds-sd$ give the
 $3\cdot3=9$-dimensional slot-antisymmetric space.)
-Its completely symmetric decuplet
-takes ten dimensions, leaving eight. This orthogonal complement
+The eighteen-dimensional slot-symmetric subspace contains the
+completely symmetric decuplet, which takes ten dimensions, leaving
+eight. This orthogonal complement
 is invariant under $SU(3)$, because both the slot exchange and
 full symmetrization commute with $U\otimes U\otimes U$.
 The second construction supplies eight independent vectors there
@@ -2172,8 +2193,18 @@ sum and zero dot products with the vectors $Z_1,Z_2,T_1,T_2$
 listed above, and squared norm one.
 
 Finally this is an invariant state, not merely an unused vector:
-it is the fully antisymmetric tensor. Under $U\otimes U\otimes U$
-it is multiplied by $\det U=1$ for $U\in SU(3)$.
+it is the fully antisymmetric tensor
+$\psi_{\mathbf1}=\frac1{\sqrt6}\sum_{a,b,c}\varepsilon_{abc}\,q_aq_bq_c$,
+where $(q_1,q_2,q_3)=(u,d,s)$. A matrix $U$ acts by
+$Uq_a=\sum_iU_{ia}q_i$, so
+\[
+(U\otimes U\otimes U)\psi_{\mathbf1}
+=\frac1{\sqrt6}\sum_{i,j,k}\Bigl(\sum_{a,b,c}\varepsilon_{abc}
+U_{ia}U_{jb}U_{kc}\Bigr)q_iq_jq_k=\det U\,\psi_{\mathbf1}
+\]
+by the Levi-Civita expansion of the determinant,
+$\sum_{a,b,c}\varepsilon_{abc}U_{ia}U_{jb}U_{kc}=\varepsilon_{ijk}\det U$;
+for $U\in SU(3)$ this is $\psi_{\mathbf1}$ itself.
 Equivalently each root operator produces pairs of opposite terms
 and annihilates it. Thus it spans the trivial representation.
 The first octet starts orthogonal to this invariant singlet and
@@ -2182,10 +2213,16 @@ the eight-dimensional complement of the singlet within the
 nine-dimensional slot-antisymmetric space.
 
 One can also verify irreducibility directly from the displayed
-states. In either octet all nonzero outer weights other than the
-starting state have a nonzero raising image: use $I_+$ on $B,C$,
-$V_+$ on $D$, $U_+$ on $E,F$. At zero weight the replacement
-rules give
+states. In either octet every state at a nonzero weight other than
+the starting state has a nonzero raising image: use $I_+$ on $B,C$,
+$V_+$ on $D$, $U_+$ on $E,F$. In the first octet
+$I_+B=(uud+udu)-(uud+duu)=A$ and $U_+F=duu-udu=-A$, while
+$I_+C=Z_1-Z_2$, $V_+D=Z_1$, and $U_+E=-Z_2$ are rows of the table
+in (d). In the second octet write $A_2=2uud-udu-duu$ for its highest
+state and $F_2=usu+suu-2uus$ for its state at $(1,0)$; the same five
+operators applied to its rows at $(-\tfrac12,1)$, $(-1,0)$,
+$(-\tfrac12,-1)$, $(\tfrac12,-1)$, $(1,0)$ give $A_2$, $T_1-T_2$,
+$T_1$, $-T_2$, and $-A_2$. At zero weight the replacement rules give
 $I_+Z_1=suu+uus-usu-uus=F$, $I_+Z_2=usu+uus-suu-uus=-F$,
 $V_+Z_1=(udu+udu)-(duu+duu)=2A$, and
 $V_+Z_2=uud+udu-uud-duu=A$; hence
@@ -2195,8 +2232,8 @@ V_+(aZ_1+bZ_2)=(2a+b)A.
 \]
 Both vanish only if $a=b$ and $2a+b=0$, that is, $a=b=0$.
 The same equations hold with
-$Z_j$ replaced by $T_j$ and $A,F$ by the second-octet states
-$2uud-udu-duu$ and $usu+suu-2uus$.
+$Z_j$ replaced by $T_j$ and $A,F$ by $A_2,F_2$, since
+$I_+T_1=-I_+T_2=F_2$ and $V_+T_1=2V_+T_2=2A_2$.
 Thus the common kernel of $I_+,U_+,V_+$ in each octet is exactly
 its one-dimensional highest-state line. In the decuplet the
 occupation formula shows that any $d$ can be raised by $I_+$
@@ -2225,7 +2262,7 @@ The dimensions and the explicit independent states give
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{17.8.1}\quad Show that in $3+1$ dimensions (this
-means three spatial dimension plus time), a boost in the $xy$ plane
+means three spatial dimensions plus time), a boost in the $xy$ plane
 at an angle $\theta$ from the $x$ direction has, in coordinates
 $(x^{0},x^{1},x^{2},x^{3})$, the generator
 \[
@@ -2236,7 +2273,7 @@ $(x^{0},x^{1},x^{2},x^{3})$, the generator
 0 & 0 & 0 & 0
 \end{pmatrix}.
 \]
-\par\erratum{Use $x^0=ct$, metric $\operatorname{diag}(1,-1,-1,-1)$, and $U(\rho)=e^{i\rho S}$ for the passive boost.}
+\par\erratum{Use $x^0=ct$, metric $\operatorname{diag}(1,-1,-1,-1)$, and $U(\rho)=e^{i\rho\mathsf S}$ for the passive boost. The exercise does not restate these conventions, and the form of $\mathsf S$ depends on them; for example, the active boost, or $U=e^{-i\rho\mathsf S}$, would give $-\mathsf S$.}
 \solution
 Let $x^0=ct$ and
 $\mathbf n=(\cos\theta,\sin\theta,0)$.
@@ -2280,7 +2317,10 @@ Comparing first-order coefficients, $iS=-B$, so
 \]
 which is the requested generator. With
 $\eta=\operatorname{diag}(1,-1,-1,-1)$ one also checks
-$B^T\eta+\eta B=0$, the infinitesimal Lorentz condition.
+$B^T\eta+\eta B=0$, the infinitesimal Lorentz condition: it is the
+first-order part of $U^T\eta U=\eta$ for $U=I_4-\delta\rho\,B$, since
+$(I_4-\delta\rho\,B^T)\eta(I_4-\delta\rho\,B)
+=\eta-\delta\rho\,(B^T\eta+\eta B)+O(\delta\rho^2)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2342,11 +2382,26 @@ C&-c_\theta H&-s_\theta H&0\\
 \]
 For example the $xx$ entry is
 $1+c_\theta^2(C-1)=s_\theta^2+c_\theta^2C$.
-The matrix is symmetric. Along the time and $\mathbf n$ directions
-it is the $2\times2$ block $\begin{pmatrix}C&-H\\-H&C\end{pmatrix}$;
-on the two perpendicular directions it is the identity.
-The relation $C^2-H^2=1$ consequently gives both
-$U^T\eta U=\eta$ and $\det U=1$.
+The matrix is symmetric. Let $\mathbf e_0=(1,0,0,0)^T$,
+$\mathbf e_3=(0,0,0,1)^T$, $N=(0,c_\theta,s_\theta,0)^T$, and
+$N_\perp=(0,-s_\theta,c_\theta,0)^T$. Direct multiplication gives
+$B\mathbf e_0=N$, $BN=\mathbf e_0$, and $BN_\perp=B\mathbf e_3=0$, so
+the expression $U=I_4-BH+B^2(C-1)$ yields
+$U\mathbf e_0=C\mathbf e_0-HN$, $UN=-H\mathbf e_0+CN$,
+$UN_\perp=N_\perp$, and $U\mathbf e_3=\mathbf e_3$.
+Thus along the time and $\mathbf n$ directions $U$ is the
+$2\times2$ block $M=\begin{pmatrix}C&-H\\-H&C\end{pmatrix}$, and on
+the two perpendicular directions it is the identity.
+The basis $(\mathbf e_0,N,N_\perp,\mathbf e_3)$ is obtained from the
+standard one by a spatial rotation, so $\eta$ keeps the form
+$\operatorname{diag}(1,-1,-1,-1)$ in it, and $U^T\eta U=\eta$
+reduces to
+\[
+M^T\begin{pmatrix}1&0\\0&-1\end{pmatrix}M
+=\begin{pmatrix}C^2-H^2&0\\0&H^2-C^2\end{pmatrix}
+=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\]
+while $\det U=\det M=C^2-H^2=1$.
 
 \textbf{(b)} Rotate the spatial coordinates so that $\mathbf n$
 becomes the $x$ direction:
@@ -2370,9 +2425,10 @@ C&-Hc_\theta&-Hs_\theta&0\\
 \end{pmatrix}.
 \]
 Left multiplication by $R^T$ forms
-$c_\theta$ times row 2 minus $s_\theta$ times row 3 for
-the new $x$ row, and $s_\theta$ times row 2 plus $c_\theta$
-times row 3 for the new $y$ row:
+$c_\theta$ times the $x$ row (the second row) of $U_xR$ minus
+$s_\theta$ times its $y$ row (the third row) for the new $x$ row,
+and $s_\theta$ times the $x$ row plus $c_\theta$ times the $y$ row
+for the new $y$ row:
 \[
 \begin{aligned}
 &c_\theta(-H,Cc_\theta,Cs_\theta,0)-s_\theta(0,-s_\theta,c_\theta,0)
@@ -2435,7 +2491,6 @@ If both vanish, the result is the identity.}
 Eq.~(17.80) to $F^{\mu\lambda}$ as given in Eq.~(17.79). Verify that
 the result is a matrix $F'$ whose elements confirm the results given
 in Eqs.~(17.82) and (17.83).
-\par\erratum{Take a real boost velocity $|v|<c$, with the metric and passive convention of Exercise~17.8.1.}
 \solution
 Factor out the common $\varepsilon_0$ in Eq.~(17.79) and use
 $\beta=v/c$, $\gamma=(1-\beta^2)^{-1/2}>0$, so $\gamma^2(1-\beta^2)=1$.
@@ -2530,7 +2585,7 @@ These are precisely Eqs.~(17.82) and (17.83), including their signs.
 \par\bigskip
 \noindent\textbf{17.9.2}\quad Confirm that the generalization of
 Eqs.~(17.82) and (17.83) to a boost corresponding to an arbitrary
-velocity \erratum{$\mathbf v$ with $|\mathbf v|<c$} is properly given by Eq.~(17.84).
+velocity $\mathbf v$ is properly given by Eq.~(17.84).
 \par\erratum{At $\mathbf v=0$, interpret the direction-dependent projections through the continuous zero-velocity limit.}
 \solution
 For $0<|\mathbf v|<c$, put
@@ -2601,5 +2656,15 @@ Thus, for all $|\mathbf v|<c$, including zero,
 \end{aligned}}
 \]
 Both the longitudinal invariance and the $z$-boost component
-formulas follow immediately from this expression.
+formulas follow from this expression. Since
+$\mathbf v\cdot(\mathbf v\times\mathbf B)=0$ and
+$\gamma^2v^2/c^2=\gamma^2-1$,
+\[
+\mathbf v\cdot\mathbf E'=\gamma\,\mathbf v\cdot\mathbf E
+-\frac{\gamma^2-1}{\gamma+1}\,\mathbf v\cdot\mathbf E
+=[\gamma-(\gamma-1)]\,\mathbf v\cdot\mathbf E=\mathbf v\cdot\mathbf E,
+\]
+and likewise $\mathbf v\cdot\mathbf B'=\mathbf v\cdot\mathbf B$. For
+$\mathbf v=v\hat{\mathbf z}$ the last terms change only the $z$
+components, so the $x,y$ components are those of 17.9.1.
 
