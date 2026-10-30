@@ -1639,7 +1639,8 @@ Agreement on every vector proves
 \]
 Terms with $\lambda_n=0$ vanish, but including the corresponding right
 vectors makes the expansion of an arbitrary $y$ complete.
-For nonzero $\lambda_n$, a unit right vector has a unit left vector
+For nonzero $\lambda_n$, which is real by Exercise 6.5.11(c), so that
+$|\lambda_n|^2=\lambda_n^2$, a unit right vector has a unit left vector
 when the paired equations hold: $g_n=Af_n/\lambda_n$, $(Af_n)^\dagger
 =f_n^\dagger A^{\mathsf T}$ for real $A$, and
 $A^{\mathsf T}Af_n=\lambda_n^2f_n$ by Exercise 6.5.11(a), so
@@ -1836,7 +1837,8 @@ related by
 \mathsf{U}=e^{ia\mathsf{H}},
 \]
 with $a$ real. \erratum{For the converses in (b) and (d), the stated
-property is required for every $a$ in an interval about $0$, with $H$ fixed.}
+property is required for every $a$ in an interval about $0$, with
+$\mathsf{H}$ fixed.}
 \begin{enumerate}
 \item[(a)] If $\mathsf{H}$ is Hermitian, show that $\mathsf{U}$ is unitary.
 \item[(b)] If $\mathsf{U}$ is unitary, show that $\mathsf{H}$ is Hermitian.
@@ -1846,14 +1848,15 @@ property is required for every $a$ in an interval about $0$, with $H$ fixed.}
 \item[(d)] If $\det\mathsf{U}=+1$, show that
   $\mathrm{trace}\,\mathsf{H}=0$.
 \end{enumerate}
-\emph{Hint.}~\erratum{When $H$ is Hermitian, it can be diagonalized
+\emph{Hint.}~\erratum{When $\mathsf{H}$ is Hermitian, it can be diagonalized
 unitarily;} then $\mathsf{U}$ is also diagonal in that basis. The corresponding eigenvalues are given by
 $u_{j}=\exp(iah_{j})$.
 \solution
 \erratum{Parts (b) and (d) require the indicated property of
 $U(a)=e^{iaH}$ for every real $a$ in an interval about $0$, with the
-same fixed matrix $H$. Either converse is false for only one fixed
-value of $a$.}
+same fixed matrix $H$. Either converse can fail when the property is
+assumed for only one fixed value of $a$; see the counterexample at the
+end of this solution.}
 
 (a) The matrix exponential is defined by its convergent power series.
 Taking its adjoint term by term, with
@@ -1997,8 +2000,19 @@ normal), let them be the columns of $S$. Then $BS=S\operatorname{diag}(e^{A_i})$
 so $B=S\operatorname{diag}(e^{A_i})S^{-1}$, and by the similarity
 invariance of the characteristic polynomial (Exercise 6.4.1) the
 $e^{A_i}$ are all $n$ eigenvalues of $B$, counted with multiplicity.
+The same holds for defective $A$. By Schur's theorem, $A=QTQ^\dagger$
+with $Q$ unitary and $T$ upper triangular with the eigenvalues $A_i$ on
+its diagonal. A product of upper triangular matrices is upper
+triangular, with the products of the diagonal entries on its diagonal,
+so $A^k=QT^kQ^\dagger$ (since $Q^\dagger Q=I$) with $T^k$ upper
+triangular with diagonal entries $A_i^k$. Summing the series,
+$B=Qe^TQ^\dagger$, where $e^T$ is upper triangular with diagonal entries
+$e^{A_i}$. Hence, by Exercise 6.4.1 and because the determinant of a
+triangular matrix is the product of its diagonal entries,
+$\det(B-\lambda I)=\det(e^T-\lambda I)=\prod_i(e^{A_i}-\lambda)$.
 
-\erratum{``The same eigenvectors'' should mean this forward implication;
+\erratum{The textbook's wording, that $\mathsf B$ has ``the same
+eigenvectors'' as $\mathsf A$, should mean this forward implication;
 $e^A$ can have additional eigendirections when different eigenvalues
 of $A$ have the same exponential.} For example, the powers of a
 diagonal matrix are diagonal with the powers of its entries, so
@@ -2042,7 +2056,8 @@ Hence
 \qquad\boxed{\rho_\lambda\in\{0,1\}.}
 \]
 The interpretation is direct. If $v$ lies in the range of $P$, say
-$v=Pw$, then $Pv=P^2w=Pw=v$. If it lies in the kernel, $Pv=0$.
+$v=Pw$, then $Pv=P^2w=Pw=v$; conversely, if $Pv=v$, then $v=Pv$ lies in
+the range. If $v$ lies in the kernel, $Pv=0$.
 Every vector decomposes as
 $w=Pw+(I-P)w$, with the first part in the range and the second in the
 kernel because $P(I-P)=P-P^2=0$. So the range is the eigenspace for
@@ -2073,9 +2088,9 @@ $|\delta_{i}|\ll1$.
 \emph{Hint.}~The $n$ vectors $|x_{i}\rangle$ form a complete orthogonal set
 spanning the $n$-dimensional (complex) space.
 \solution
-First allow the mutually orthogonal eigenvectors to have arbitrary
-nonzero norms $s_i=\langle x_i|x_i\rangle>0$, so that
-$\langle x_i|x_j\rangle=s_i\delta_{ij}$. Write the given expansion as
+First allow the mutually orthogonal eigenvectors, with
+$\langle x_i|x_j\rangle=0$ for $i\ne j$, to have arbitrary nonzero
+squared norms $s_i=\langle x_i|x_i\rangle>0$. Write the given expansion as
 $|x\rangle=\sum_{i=1}^nc_i|x_i\rangle$ with $c_1=1$ and $c_i=\delta_i$
 for $i\ge2$; then $A|x\rangle=\sum_jc_j\lambda_j|x_j\rangle$ and
 $\langle x|=\sum_ic_i^*\langle x_i|$, so
@@ -2090,8 +2105,8 @@ $\langle x|=\sum_ic_i^*\langle x_i|$, so
 \end{align*}
 There are no linear terms in $\delta_i$ because every such term contains
 an inner product of two distinct eigenvectors. Subtract the Rayleigh
-quotient $R(x)$ from $\lambda_1$, combining the terms over a common
-denominator:
+quotient $R(x)=\langle x|A|x\rangle/\langle x|x\rangle$ from
+$\lambda_1$, combining the terms over a common denominator:
 \begin{align*}
 \lambda_1-R(x)
 &=\frac{\lambda_1\bigl(s_1+\sum_{i=2}^n|\delta_i|^2s_i\bigr)
@@ -2174,9 +2189,13 @@ m\ddot{\boldsymbol x}+k
 \]
 (b) Seek a normal mode
 $\boldsymbol x(t)=\boldsymbol X e^{i\omega t}$ and use
-$\ddot{\boldsymbol x}=-\omega^2\boldsymbol x$. The matrix equation
-becomes $-m\omega^2\boldsymbol X+k\begin{pmatrix}2&-1\\-1&2\end{pmatrix}
-\boldsymbol X=0$; dividing by $k$,
+$\ddot{\boldsymbol x}=-\omega^2\boldsymbol x$. After cancelling the
+nonzero common factor $e^{i\omega t}$, the matrix equation becomes
+\[
+-m\omega^2\boldsymbol X+k\begin{pmatrix}2&-1\\-1&2\end{pmatrix}
+\boldsymbol X=0;
+\]
+dividing by $k$ and moving the first term to the right,
 \[
 \begin{pmatrix}2&-1\\-1&2\end{pmatrix}\boldsymbol X
 =\lambda\boldsymbol X,
@@ -2353,9 +2372,10 @@ $2^3\det(U-\lambda I)$, along its first row:
 &=(2-2\lambda-8\lambda^3)+(6+2\lambda)
 =8(1-\lambda^3).
 \end{align*}
-Thus
+Thus $\lambda^3=1$. Since $1-\lambda^3=(1-\lambda)(1+\lambda+\lambda^2)$,
+the roots are $\lambda=1$ and the two roots of $\lambda^2+\lambda+1=0$,
+which by the quadratic formula are $\lambda=(-1\pm\sqrt{1-4})/2$:
 \[
-\lambda^3=1,\qquad
 \boxed{\lambda_0=1,\quad
 \lambda_\pm=\frac{-1\pm i\sqrt3}{2}=e^{\pm2\pi i/3}.}
 \]
@@ -2411,7 +2431,8 @@ orthonormal.
 The rotation axis is the line through the origin parallel to
 $(\sqrt2,0,1)$, the direction left fixed by $U$. A rotation through an
 angle $\varphi$ about this axis turns the plane perpendicular to it
-through $\varphi$, so its other two eigenvalues are $e^{\pm i\varphi}$;
+through $\varphi$, so by Exercise 6.5.4(b) its other two eigenvalues
+are $e^{\pm i\varphi}$;
 comparison with $\lambda_\pm=e^{\pm2\pi i/3}$ gives the unsigned angle
 $2\pi/3=120^\circ$.
 The sign can be fixed, rather than inferred only from a conjugate pair
@@ -2429,9 +2450,16 @@ U-U^{\mathsf T}
 \]
 An active right-handed rotation through $\varphi$ about the unit
 vector $n$ has the Rodrigues form
-$R=\cos\varphi\,I+\sin\varphi\,[n]_\times+(1-\cos\varphi)\,nn^{\mathsf T}$,
-in which the first and third terms are symmetric and
-$[n]_\times^{\mathsf T}=-[n]_\times$. Hence, using
+$R=\cos\varphi\,I+\sin\varphi\,[n]_\times+(1-\cos\varphi)\,nn^{\mathsf T}$.
+Indeed, $Rn=n$ because $[n]_\times n=n\times n=0$ and
+$nn^{\mathsf T}n=n$; for $v\perp n$, $nn^{\mathsf T}v=0$ gives
+$Rv=\cos\varphi\,v+\sin\varphi\,n\times v$. Here $n\times v$ is
+perpendicular to $n$ and $v$, has the length of $v$, and satisfies
+$v\times(n\times v)=n(v\cdot v)-v(v\cdot n)=|v|^2n$ by the BAC--CAB
+rule, so $R$ turns the plane perpendicular to
+$n$ through $\varphi$ from $v$ toward $n\times v$, counterclockwise as
+seen from the tip of $n$. In $R$ the first and third terms are
+symmetric and $[n]_\times^{\mathsf T}=-[n]_\times$. Hence, using
 $\operatorname{tr}[n]_\times=0$ and $\operatorname{tr}(nn^{\mathsf T})=1$,
 \[
 R-R^{\mathsf T}=2\sin\varphi\,[n]_\times,\qquad
@@ -2443,9 +2471,13 @@ $\sin\varphi=\sqrt3/2$. Thus active application of $U$ to a column
 vector is a rotation by $\varphi=+120^\circ$ about $n$.
 \erratum{Equation (3.37) is a passive coordinate transformation: the
 new coordinates are $x'=Ux$, so the new axes, the rows of $U$, are
-$e'_i=U^{\mathsf T}e_i$, and $U^{\mathsf T}$, whose antisymmetric part
-$U^{\mathsf T}-U=-\sqrt3\,[n]_\times$ has the opposite sign, is the
-rotation by $-120^\circ$ about $n$. The corresponding rotation of the
+$e'_i=U^{\mathsf T}e_i$, and $U^{\mathsf T}=U^{-1}$, the inverse of the
+rotation by $+120^\circ$ about $n$, is the rotation by $-120^\circ$
+about $n$ (in the comparison above, $\operatorname{tr}U^{\mathsf T}=0$
+is unchanged, while
+$U^{\mathsf T}-(U^{\mathsf T})^{\mathsf T}=U^{\mathsf T}-U
+=-\sqrt3\,[n]_\times$ reverses the sign of $\sin\varphi$). The
+corresponding rotation of the
 coordinate axes is therefore $-120^\circ$ about $n$, equivalently
 $+120^\circ$ about $-n$. The directed angle must be paired with the
 chosen direction of the axis.}
