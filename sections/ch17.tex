@@ -156,8 +156,8 @@ For $h,k\in\mathcal H$,
 \]
 because $hk\in\mathcal H$. This proves closure.
 Associativity is inherited from multiplication in $\mathcal G$;
-explicitly both associations of three elements reduce to
-$x(hk\ell)x^{-1}$.
+explicitly, for $h,k,\ell\in\mathcal H$, both associations of
+$(xhx^{-1})(xkx^{-1})(x\ell x^{-1})$ reduce to $x(hk\ell)x^{-1}$.
 
 The identity is $xIx^{-1}=I$, which belongs to $\mathcal K$.
 The inverse of $xhx^{-1}$ is $xh^{-1}x^{-1}\in\mathcal K$:
@@ -347,6 +347,13 @@ The $60^\circ$ and $120^\circ$ rotations about the origin are
 symmetries by part (b); they carry these two families onto the axes
 in the remaining four directions ($0^\circ\to60^\circ,120^\circ$ and
 $90^\circ\to150^\circ,30^\circ$), preserving their kind.
+Conversely, let $\sigma$ be a reflection symmetry in a line $\ell$ of
+one of these four directions, and let $\rho$ be the rotation about the
+origin through $60^\circ$ or $120^\circ$ for which $\rho^{-1}\ell$ is
+horizontal or vertical. Then $\rho^{-1}\sigma\rho$ is a symmetry that
+fixes every point of $\rho^{-1}\ell$, namely the reflection in
+$\rho^{-1}\ell$, so $\rho^{-1}\ell$ is one of the axes found above and
+$\ell$ is its image under $\rho$.
 No additional offsets or directions are possible.
 
 \begin{center}
@@ -668,6 +675,9 @@ ru=\frac{-\varphi_1+2\varphi_2-\varphi_3}{\sqrt6}
 rv=\frac{\varphi_3-\varphi_1}{\sqrt2}
 =-\frac{\sqrt3}{2}u-\frac12v.
 \]
+Both images again have zero coefficient sum (a permutation of the
+$\varphi_j$ does not change the sum), so they lie in the plane of
+zero-sum combinations spanned by $u$ and $v$.
 The coefficient vectors $(2,-1,-1)/\sqrt6$ and $(0,1,-1)/\sqrt2$ of
 $u$ and $v$ are orthonormal, so each coefficient here is an inner
 product of coefficient vectors; for example, the coefficient of $v$
@@ -787,7 +797,22 @@ vertex 3, position 2 holds $a$, and position 3 holds $b$, so it sends
 the column of labels at fixed positions from $(a,b,c)$ to $(c,a,b)$.
 The displayed matrix instead gives $(b,c,a)$, the inverse reordering.
 We retain the displayed matrix for this exercise; using the printed
-motion would interchange the labels $C_3$ and $C_3^2$.}
+motion would interchange the labels $C_3$ and $C_3^2$ and, through
+$C_2C_3=C_2'$, also the labels $C_2'$ and $C_2''$.}
+Alternatively, the column can be read as listing the positions now
+occupied by vertices 1, 2, 3; read so, the printed motion does give
+$(b,c,a)$. But then the matrix of a motion $\sigma$ replaces entry
+$j$ by entry $\sigma(j)$, and such matrices multiply in the reverse
+order, $U(g)U(h)=U(hg)$; for
+instance, $SR$ of part (a) would be the matrix of $C_3C_2$ rather than
+of $C_2C_3$. Only the reading by labels at fixed positions gives a
+representation.
+The printed motion, vertex action $(123)$, is the counterclockwise
+$C_3$ of Exercise~17.1.2(c); hence, with the vertices numbered as
+there, the $C_3$, $C_2'$, $C_2''$ of this exercise are the $C_3^2$,
+$C_2''$, $C_2'$ of 17.1.2(c). For example, $U(C_2')=SR$ below
+interchanges the first two entries, so it is the turn about the axis
+through vertex~3.
 
 \textbf{(a)} Put
 \[
@@ -892,11 +917,26 @@ Its classes are
 Indeed, with $sr^j=r^{-j}s$ from 17.2.6, conjugation by $r$ gives
 $rsr^{-1}=r^2s$ and $r(rs)r^{-1}=r^3s$, conjugation by $s$ gives
 $srs^{-1}=r^{-1}=r^3$, and $r^2$ commutes with every element.
+No element of one set is conjugate to an element of another: the
+conjugates of $r^j$ are $r^{\pm j}$, while $r^i(r^js)r^{-i}=r^{j+2i}s$
+and $(r^is)(r^js)(r^is)^{-1}=r^{2i-j}s$ keep the parity of $j$.
+By 17.2.6, $s$ and $r^2s$ (matrices $\operatorname{diag}(1,-1)$ and
+$\operatorname{diag}(-1,1)$) are the turns about the $x$ and $y$ axes,
+and $rs$, $r^3s$ (matrices
+$\pm\bigl(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\bigr)$) are
+those about the diagonals $y=\pm x$. With $C_2'=(x\to-x,\,y\to y)$
+and $C_2''=(x\to y,\,y\to x)$ as in Exercise~17.4.4, the five sets
+are therefore the classes $I,2C_4,C_2,2C_2',2C_2''$, in that order.
 In one dimension, $a=U(r)$ and $b=U(s)$ are scalars.
 The relation $bab=a^{-1}$ and $b^2=1$ imply $a=a^{-1}$,
 so $a,b=\pm1$. The class characters are therefore
 $(1,a,1,b,ab)$, since $\chi(r^2)=a^2=1$ and $\chi(rs)=ab$.
 Their four choices give the first four rows below.
+The route suggested in the statement gives the same rows: with all
+one-dimensional characters $\pm1$ and $\chi(C_2)=\chi(C_4)^2=1$, a row
+other than $A_1$ has the form $(1,a,1,b,c)$, and its orthogonality to
+$A_1$ with class weights $(1,2,1,2,2)$ requires $2+2(a+b+c)=0$, i.e.\
+$a+b+c=-1$; so exactly two of $a,b,c$ equal $-1$, which gives three rows.
 
 For the remaining representation, $\chi_E(I)=2$.
 Column orthogonality between a nonidentity column $g$ and the
@@ -944,7 +984,8 @@ Manual's eight-dimensional answer describes a different, formal permutation
 space whose eight signed labels are treated as independent.
 We give both interpretations explicitly.}
 
-For the actual cubic functions take the independent basis
+For the space $\mathcal P_3$ of actual cubic functions (homogeneous
+cubic polynomials in $x,y$) take the independent basis
 \[
 f_1=x^3,\quad f_2=x^2y,\quad f_3=xy^2,\quad f_4=y^3.
 \]
@@ -953,7 +994,9 @@ $r:(x,y)\mapsto(y,-x)$, that is, $(rf)(\mathbf r)=f(R^{-1}\mathbf r)$
 for the counterclockwise $90^\circ$ rotation $R$. The opposite
 convention, $f(R\mathbf r)$, assigns to each operation the matrix of
 its inverse; it gives the same characters, because every element of
-$D_4$ is conjugate to its inverse. The transformed basis is
+$D_4$ is conjugate to its inverse ($r^{-1}=r^3$ lies in the class
+$\{r,r^3\}$ found in Exercise~17.4.3, and every other element is its
+own inverse). The transformed basis is
 \[
 r(f_1,f_2,f_3,f_4)=\bigl(y^3,\,y^2(-x),\,y(-x)^2,\,(-x)^3\bigr)
 =(f_4,-f_3,f_2,-f_1).
@@ -973,7 +1016,8 @@ $f_2\leftrightarrow f_3$, again with trace zero. Therefore
 \]
 Only $I$ and $C_2$ have nonzero characters, and every
 one-dimensional representation has $\chi(C_2)=1$, so the
-multiplicity formula $n_K=8^{-1}\sum_{\rm classes}|C|\chi_K^*\chi$ gives
+multiplicity formula $n_K=8^{-1}\sum_{\rm classes}|C|\chi_K^*\chi$, where
+$|C|$ is the number of elements in the class $C$, gives
 \[
 n_{A_1}=n_{A_2}=n_{B_1}=n_{B_2}=\frac{4-4}{8}=0,\qquad
 n_E=\frac{4\cdot2+(-4)(-2)}8=2.
@@ -992,7 +1036,8 @@ $s(x^3-iy^3)=-(x^3+iy^3)$ and $s(x^2y+ixy^2)=x^2y-ixy^2$.
 Hence neither pair has an invariant line, and each copy is irreducible.
 
 For the formal eight-label interpretation, introduce independent
-symbols $e_{j,+},e_{j,-}$ representing the labels $+f_j,-f_j$.
+symbols $e_{j,+},e_{j,-}$ representing the labels $+f_j,-f_j$; they
+span an eight-dimensional space $\mathcal V_{\rm formal}$.
 A group operation permutes these eight symbols, so its character
 counts fixed labels. The identity fixes eight. The quarter-turn
 and diagonal reflection fix none. The half-turn exchanges
@@ -1014,13 +1059,16 @@ The map $e_{j,\pm}\mapsto\pm f_j$ commutes with the group action
 and maps onto the cubic space; its kernel is spanned by the four
 vectors $e_{j,+}+e_{j,-}$. Each operation permutes these kernel
 vectors without signs (an operation taking $f_j$ to $\pm f_k$ sends
-$e_{j,+}+e_{j,-}$ to $e_{k,+}+e_{k,-}$), so the kernel has characters
-$\chi_{\rm formal}-\chi_{\rm cubic}=(4,0,4,4,0)$; the same
+$e_{j,+}+e_{j,-}$ to $e_{k,+}+e_{k,-}$), so on the kernel the
+character of an operation is the number of $j$ with
+$f_j\mapsto\pm f_j$. By the transformation lists above this is
+$(4,0,4,4,0)$, which equals $\chi_{\rm formal}-\chi_{\rm cubic}$, as
+it must, since the cubic space is the quotient by the kernel. The same
 multiplicity formula gives $(4+4+2\cdot4)/8=2$ for $A_1,B_1$ and
-zero for the others, i.e.\ the kernel is $2A_1\oplus2B_1$.
-The quotient by the kernel is the actual cubic function space
-$E\oplus E$. This explains why the two legitimate spaces have
-different characters and dimensions.
+zero for the others, i.e.\ the kernel is $2A_1\oplus2B_1$, and
+$\mathcal V_{\rm formal}$ is the direct sum of this kernel and a copy
+of $\mathcal P_3=E\oplus E$. This explains why the two legitimate
+spaces have different characters and dimensions.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1098,7 +1146,8 @@ n_{A_1}=n_{B_1}=\frac{4+2(2)}8=1,\qquad
 n_{A_2}=n_{B_2}=\frac{4-2(2)}8=0,\qquad
 n_E=\frac{2(4)}8=1.
 \]
-Thus \(\boxed{\Gamma=A_1\oplus B_1\oplus E}\).
+Thus, writing $\Gamma$ for the $p_z$ representation,
+\(\boxed{\Gamma=A_1\oplus B_1\oplus E}\).
 
 \textbf{(c)} Suitable combinations are
 \[
@@ -1195,7 +1244,7 @@ so, class by class,
 
 \textbf{(b)} Only the identity contributes to the multiplicity sum:
 $n_K=8^{-1}(8)\chi_K(I)=\dim K$.
-Therefore
+Therefore, writing $\Gamma$ for the representation with matrices $D(g)$,
 \[
 \boxed{\Gamma=A_1\oplus A_2\oplus B_1\oplus B_2\oplus E\oplus E},
 \]
