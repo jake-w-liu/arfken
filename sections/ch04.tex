@@ -1412,7 +1412,9 @@ If $f_u(0,0)\ne0$, it would give a $C^1$ function with $u=G(v)$, that
 is, $G(x^3)=x^2$, so $G(v)=|v|^{2/3}$, whose difference quotient
 $|v|^{2/3}/v$ at zero is unbounded. The singular relation
 $v^2-u^3=0$, with $f_u=-3u^2$ and $f_v=2v$ both zero at the origin,
-does exist, illustrating why a regularity statement is needed.
+does exist. So at a critical point a vanishing cross product may yield
+only a singular relation, which is why the converse in part (a) is
+restricted to points where $\nabla u$ or $\nabla v$ is nonzero.
 
 (b) If the functions are independent of $z$, write their gradients as
 $(u_x,u_y,0)$ and $(v_x,v_y,0)$. Expanding the cross product gives
@@ -1440,9 +1442,9 @@ J\equiv\frac{\partial(x,y)}{\partial(q_{1},q_{2})}
 equation.
 \solution
 \erratum{The orientation-independent statement is
-$|J|=h_1h_2$. The printed positive sign assumes an orientation-preserving
-coordinate chart; the orthogonal chart $x=q_1$, $y=-q_2$ checked below
-has $J=-h_1h_2$.}
+$|J|=h_1h_2$. The textbook prints $J=h_1h_2$, whose positive sign
+assumes an orientation-preserving coordinate chart; the orthogonal
+chart $x=q_1$, $y=-q_2$ checked below has $J=-h_1h_2$.}
 
 At a given point set
 \[
@@ -1519,7 +1521,7 @@ It is nonzero on the admissible domain. The chain rule makes the
 Jacobian matrices of a map and its inverse mutually inverse, and the
 determinant of a product of matrices is the product of their
 determinants, so
-$\dfrac{\partial(x,y)}{\partial(u,v)}\,\dfrac{\partial(u,v)}{\partial(x,y)}=1$,
+$\bigl[\partial(x,y)/\partial(u,v)\bigr]\bigl[\partial(u,v)/\partial(x,y)\bigr]=1$,
 and with $y=u/(v+1)$,
 \[
 J=-\frac{y^2}{u}
@@ -1540,7 +1542,7 @@ all linearly independent differential forms in Minkowski space.
 \erratum{In the rule on p.~236, count the negative metric factors in the
 input form being starred, rather than in its complement.}
 \solution
-Use the oriented coframe
+Use the ordered basis of 1-forms
 \[
 e^0=dt,\quad e^1=dx_1,\quad e^2=dx_2,\quad e^3=dx_3,
 \qquad \eta=\operatorname{diag}(1,-1,-1,-1),
@@ -1644,10 +1646,12 @@ The table thus gives exactly
 \end{gather*}
 As an independent sign check, apply the boxed rule twice to a $p$-form:
 $*e^I=(-1)^{N_I+m_I}e^J$ and $*e^J=(-1)^{N_J+m_J}e^I$, where $N_J$
-counts the inversions of $(J,I)$. Each of the $p(4-p)$ pairs made of one
-index from $I$ and one from $J$ is an inversion in exactly one of the
-orders $(I,J)$ and $(J,I)$, so $N_I+N_J=p(4-p)$; and $m_I+m_J=3$, the
-total number of spatial indices. Hence
+counts the inversions of $(J,I)$. Since $I$ and $J$ are both listed in
+increasing order, no two indices from the same set form an inversion,
+while each of the $p(4-p)$ pairs made of one index from $I$ and one
+from $J$ is an inversion in exactly one of the orders $(I,J)$ and
+$(J,I)$; so $N_I+N_J=p(4-p)$. Also $m_I+m_J=3$, the total number of
+spatial indices. Hence
 \[
 {*}{*}\omega_p=(-1)^{p(4-p)+3}\omega_p,
 \]
@@ -1661,8 +1665,10 @@ particle from the origin to $(3,0,0)$ requires $a$ units of work, from
 $(-1,-1,0)$ to $(-1,1,0)$ takes $b$ units of work, and from $(0,0,4)$ to
 $(0,0,5)$ $c$ units of work, find the 1-form of the work.
 \solution
-A constant force $\mathbf F=(F_x,F_y,F_z)$ has work 1-form
-$\omega=F_x\,dx+F_y\,dy+F_z\,dz$. Its work between two points is
+Let $\mathbf F=(F_x,F_y,F_z)$ be the constant force that does the quoted
+work (if the work is done against the field, $\mathbf F$ is minus the
+field's force). Its work 1-form is
+$\omega=F_x\,dx+F_y\,dy+F_z\,dz$, and its work between two points is
 $\mathbf F\cdot\Delta\mathbf r$, because each force component can be
 taken outside the line integral. The three given displacements are
 \[
@@ -1714,7 +1720,10 @@ d\omega_2
 \end{align*}
 
 (c) The nonzero result is a constant-coefficient 2-form. Applying $d$
-again, and using the minus sign appropriate to a first-degree factor,
+again, and using the product rule
+$d(\alpha\wedge\beta)=d\alpha\wedge\beta+(-1)^p\,\alpha\wedge d\beta$
+for a $p$-form $\alpha$ (here $\alpha=dx$ with $p=1$, hence the minus
+sign),
 \[
 d(d\omega_2)
 =2\,d(dx\wedge dy)
@@ -1792,7 +1801,8 @@ d(\omega_2\wedge\omega_3)
 =\boxed{4xy\,dx\wedge dy\wedge dz}.
 \end{align*}
 
-(b) Since $\omega_2$ is a 1-form, the product rule has a minus sign:
+(b) Since $\omega_2$ is a 1-form, the product rule quoted in
+Exercise 4.6.1(c) has a minus sign:
 \[
 d(\omega_2\wedge\omega_3)
 =d\omega_2\wedge\omega_3-\omega_2\wedge d\omega_3.
@@ -1974,16 +1984,21 @@ d\omega=dA\wedge dx+dB\wedge dy
 =(B_x-A_y)\,dx\wedge dy.
 \]
 Thus closedness means $B_x=A_y$. A globally exact form $\omega=d\Phi$
-is closed, because $A_y=\Phi_{xy}=\Phi_{yx}=B_x$ ($\Phi$ is $C^2$ since
+is closed, because $A_y=\Phi_{xy}=\Phi_{yx}=B_x$ (equality of mixed
+partial derivatives, Schwarz's theorem; $\Phi$ is $C^2$ since
 its first derivatives $A,B$ are $C^1$), and it has zero integral around
-every closed curve, because $\int_Cd\Phi$ is the difference of the
-values of $\Phi$ at the endpoints of $C$. We use
+every closed curve $\Gamma$, because $\int_\Gamma d\Phi$ is the
+difference of the values of $\Phi$ at the endpoints of $\Gamma$, which
+coincide. We use
 $\Phi$ for a potential to distinguish it from the last question's $f$.
 
 \erratum{Exactness depends on the domain. In particular the angular
 form below is only locally exact on the punctured plane. For the last
-form, closedness requires holomorphic $f$, and global exactness requires
-a single-valued primitive on its domain.}
+form, closedness is equivalent to holomorphy of $f$, and a closed
+$f\,dz$ is globally exact exactly when $\oint_\Gamma f\,dz=0$ for every
+closed curve $\Gamma$ in the domain, which holds on every simply
+connected domain but not in general ($dz/z$ on
+$\mathbb C\setminus\{0\}$ is a counterexample).}
 
 \emph{First form.} For $\omega=y\,dx+x\,dy$, $A_y=B_x=1$, so the
 form is closed. Integrate $\Phi_x=y$ with respect to $x$:
@@ -2083,13 +2098,17 @@ $f_y=if_x$. With $f=u+iv$ this reads $u_y+iv_y=iu_x-v_x$, that is,
 $u_x=v_y$ and $u_y=-v_x$: the Cauchy--Riemann conditions
 (Section 11.2) for $f$ to be holomorphic.
 Under that condition it is locally exact. One can construct a primitive
-on a small rectangle, without presupposing a complex antiderivative:
+on a small rectangle with sides parallel to the axes, centred at a point
+$(x_0,y_0)$ and contained in the domain, without presupposing a complex
+antiderivative. For $(x,y)$ in the rectangle, the horizontal segment
+from $(x_0,y_0)$ to $(x,y_0)$ and the vertical segment from $(x,y_0)$
+to $(x,y)$ stay inside it, so both integrals in
 \[
 \Phi(x,y)=\int_{x_0}^{x}f(s,y_0)\,ds
-          +i\int_{y_0}^{y}f(x,t)\,dt.
+          +i\int_{y_0}^{y}f(x,t)\,dt
 \]
-Only the second integral depends on $y$, so the fundamental theorem of
-calculus gives $\Phi_y$. For $\Phi_x$, differentiate the second
+are defined. Only the second integral depends on $y$, so the
+fundamental theorem of calculus gives $\Phi_y$. For $\Phi_x$, differentiate the second
 integral under the integral sign (allowed for $C^1$ $f$), then use
 $if_x=f_y$ and the fundamental theorem in $t$:
 \[
@@ -2098,11 +2117,13 @@ $if_x=f_y$ and the fundamental theorem in $t$:
 =f(x,y_0)+\int_{y_0}^{y}f_y(x,t)\,dt=f(x,y).
 \]
 Hence $d\Phi=\Phi_x\,dx+\Phi_y\,dy=f\,(dx+i\,dy)=f\,dz$. On a simply
-connected complex domain, every closed curve is contractible (it can be
-shrunk continuously to a point without leaving the domain), and
-Stokes' theorem for the closed form gives zero integral around it (this
-is Cauchy's integral theorem, Section 11.3). Two paths with the same
-endpoints together form a closed curve, so they have equal integrals.
+connected complex domain, every closed curve $\Gamma$ is contractible
+(it can be shrunk continuously to a point without leaving the domain).
+The shrinking sweeps out a surface $S$ in the domain whose boundary is
+$\Gamma$, and $d(f\,dz)=0$ on $S$, so Stokes' theorem gives
+$\oint_\Gamma f\,dz=\int_Sd(f\,dz)=0$ (this is Cauchy's integral
+theorem, Section 11.3). Two paths with the same endpoints together
+form a closed curve, so they have equal integrals.
 The local primitives thus give a global primitive
 \[
 \boxed{F(z)=\int_{z_0}^{z}f(\zeta)\,d\zeta+C,\qquad dF=f(z)\,dz},
@@ -2118,8 +2139,8 @@ F(z)=F(z_1)+\int_{z_1}^{z}d\Phi=F(z_1)+\Phi(z)-\Phi(z_1).
 \]
 So near $z_1$, $F$ differs from $\Phi$ by a constant, and
 $dF=d\Phi=f\,dz$. More generally, this formula defines a global
-primitive precisely when $\oint_Cf(z)\,dz=0$ for every closed curve $C$
-in the domain. The domain condition cannot be omitted:
+primitive precisely when $\oint_\Gamma f(z)\,dz=0$ for every closed
+curve $\Gamma$ in the domain. The domain condition cannot be omitted:
 $f(z)=1/z$ is holomorphic on $\mathbb C\setminus\{0\}$, but on
 $z=Re^{it}$, $0\le t\le2\pi$, where $dz=iRe^{it}\,dt$,
 \[
