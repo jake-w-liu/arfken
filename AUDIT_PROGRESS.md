@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 0 of 54 parts done (audited and verified); 12 audited and awaiting verification.
+Progress: 0 of 54 parts done (audited and verified); 13 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -125,7 +125,7 @@ Progress: 0 of 54 parts done (audited and verified); 12 audited and awaiting ver
 | ch18-p4 | 18.6.16–18.8.6 | pending |
 | ch19-p1 | 19.1.1–19.2.14 | pending |
 | ch19-p2 | 19.2.15–19.3.3 | pending |
-| ch20-p1 | 20.2.1–20.3.6 | pending |
+| ch20-p1 | 20.2.1–20.3.6 | audited |
 | ch20-p2 | 20.4.1–20.7.8 | pending |
 | ch20-p3 | 20.8.1–20.8.24 | pending |
 | ch20-p4 | 20.9.1–20.10.13 | pending |
@@ -154,3 +154,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch13-p1** (13.1.1–13.2.14) — audit: no mathematical errors found. Steps added in 34 of 37 exercises (e.g. the general term of the printed series and where it ends for odd $n$ in 13.1.13, the sign and endpoint behavior of $\Gamma$ on $(-N,-N+1)$ in 13.1.9, the circle bound and reflection step in 13.1.23, the polygamma values at 3, $\Gamma'''$ and the order-by-order collection in 13.2.12, now with the closed-form and numerical $q^3$ coefficient). Cleanups: part labels in 13.1.11, 13.1.12, 13.1.14; a justification ($\alpha\simeq1/137.036$) for the 13.2.12 statement erratum; the convergence remark of 13.1.4 made precise. No script references or production remarks were present.
 - **ch15-p1** (15.1.1–15.2.19) — audit: no mathematical errors found; every result and quoted number re-verified (including all 56 entries of the 15.2.19 table). Steps added in 36 of 37 exercises (all but 15.1.18), e.g. both triangular back substitutions in 15.1.5, the factorial ratio in 15.1.3, the gamma and power-of-two bookkeeping in 15.1.15–15.1.17 and 15.2.14, and in 15.2.16 the axis Poisson kernel via 15.1.6, the derivative giving $\sigma(0)=\sqrt2\varepsilon_0V_0/a$ and a derivation of the exterior Poisson integral; partial sums and the tail estimate added in 15.2.8(c). Cleanups: the "supplied transcription" remark in 15.1.15 deleted (the printed $2n!/(2n+1)!!$ is correct, so its red marking was dropped); the nonexistent "numerical verification" in 15.2.19 replaced by a Coulomb-integral check (64-point trapezoidal rule, maximum deviation $4.5\times10^{-6}$ at $R=1.5$); "the manual" → "the Instructor's Manual" (15.1.4, 15.1.7, 15.2.8); "the source" → "the textbook" or "Example 15.2.3".
 - **ch14-p1** (14.1.1–14.1.28) — audit: no mathematical errors found (all quoted zeros, crossovers, plot vertices and the 83.8% fraction re-verified). Steps added in 26 of 28 exercises (e.g. the coefficient algebra of 14.1.8, now without the ratio $a_s/a_{s-1}$ that is undefined at negative integer order; the product-rule primitive, the $s=xt/2$ substitution and the new limits of the Fourier forms in 14.1.15; the series bound in 14.1.23; the higher-$p$ exclusions and closed-form crossovers in 14.1.27). Cleanups: a transcription remark removed from 14.1.15; "the manual" → "the Instructor's Manual" (14.1.14, 14.1.22, 14.1.25, 14.1.26); a stray "$I(0)/I(0)=1$" dropped in 14.1.22; the 14.1.14 erratum moved to part (a), which it concerns.
+- **ch20-p1** (20.2.1–20.3.6) — audit: no mathematical errors found. Steps added in all 22 exercises (e.g. the explicit Fourier pairing behind the delta-sequence limits in 20.2.5–20.2.6, the Jacobi–Anger evaluation of the $J_n$ integral in 20.2.11, the cosine-inversion proof of the $K_0$ transform from Exercise 14.5.13 in 20.2.10(c), the principal-value value $1/2$ at $t=0$ in 20.2.9). Cleanups: "the manual" → "the Instructor's Manual" (20.2.9, 20.2.13, 20.3.1); part labels added in 20.2.3 and 20.2.13; a speculative "deliberately" removed in 20.2.9.

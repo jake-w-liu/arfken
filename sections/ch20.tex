@@ -27,23 +27,29 @@ f(x)e^{i\omega x}dx,\qquad
 f(x)=\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}
 g(\omega)e^{-i\omega x}d\omega.
 \]
-Conjugating the first formula shows
+Conjugating the first formula, with
+$(e^{i\omega x})^*=e^{-i\omega x}$, shows
 \[
 g^*(\omega)=\frac1{\sqrt{2\pi}}\int f^*(x)e^{-i\omega x}dx
 =\mathcal F[f^*](-\omega).
 \]
-(a) If $f=f^*$, this is $g(-\omega)$. Conversely, if
+(a) If $f=f^*$, the right side is $\mathcal F[f](-\omega)=g(-\omega)$,
+so $g(-\omega)=g^*(\omega)$. Conversely, if
 $g(-\omega)=g^*(\omega)$, conjugate the inverse transform and
-put $u=-\omega$:
+put $u=-\omega$ (reversing the limits absorbs the sign of
+$d\omega=-du$):
 \begin{align*}
 f^*(x)&=\frac1{\sqrt{2\pi}}\int g^*(\omega)e^{i\omega x}d\omega\\
 &=\frac1{\sqrt{2\pi}}\int g(-\omega)e^{i\omega x}d\omega
 =\frac1{\sqrt{2\pi}}\int g(u)e^{-iux}du=f(x).
 \end{align*}
 (b) Purely imaginary means $f^*=-f$. The conjugated forward
-formula then gives $g^*(\omega)=-g(-\omega)$. Conversely this
-last condition, inserted in the preceding inverse calculation,
-gives $f^*(x)=-f(x)$.
+formula then gives
+$g^*(\omega)=\mathcal F[-f](-\omega)=-g(-\omega)$, i.e.,
+$g(-\omega)=-g^*(\omega)$. Conversely, if
+$g^*(\omega)=-g(-\omega)$, the first two steps of the preceding
+inverse calculation give
+$f^*(x)=-(2\pi)^{-1/2}\int g(-\omega)e^{i\omega x}d\omega=-f(x)$.
 \erratum{For $L^1$ or $L^2$ transforms the recovered function is
 determined almost everywhere; these reality assertions have that
 meaning. They hold at every point for continuous representatives.
@@ -82,7 +88,7 @@ f(x)=\frac{2}{\pi}\int_{0}^{\infty}
 (a) The unitary cosine transform is
 \[
 g_c(\omega)=\sqrt{\frac2\pi}\int_0^\infty f(x)\cos\omega x\,dx
-=\sqrt{\frac2\pi}\int_0^1\cos\omega x\,dx
+=\sqrt{\frac2\pi}\left[\frac{\sin\omega x}{\omega}\right]_0^1
 =\boxed{\sqrt{\frac2\pi}\frac{\sin\omega}{\omega}}.
 \]
 At zero its continuous value is $\sqrt{2/\pi}$.
@@ -94,23 +100,41 @@ f(x)=\sqrt{\frac2\pi}\int_0^\infty g_c(\omega)\cos\omega x\,d\omega
 At a jump, inversion gives the mean of the two one-sided limits,
 so its value at $x=\pm1$ is $1/2$.
 
-(c) To evaluate the integral directly, first note that
+(c) By (b), the integral equals $(\pi/2)f(x)$: it is $\pi/2$ for
+$|x|<1$ and $0$ for $|x|>1$, and the midpoint value $1/2$ at
+$x=\pm1$ gives $(\pi/2)(1/2)=\pi/4$. To confirm these values,
+including the edge value, evaluate the integral directly. For
+$\epsilon>0$ first note that
 \[
 D_\epsilon(b)=\int_0^\infty e^{-\epsilon u}\frac{\sin bu}{u}du,
 \qquad D_\epsilon'(b)=\int_0^\infty e^{-\epsilon u}\cos bu\,du
 =\frac{\epsilon}{\epsilon^2+b^2}.
 \]
+Differentiation under the integral sign is allowed because the
+$b$-derivative $e^{-\epsilon u}\cos bu$ of the integrand is bounded
+by the integrable $e^{-\epsilon u}$; the last integral is $C$ of
+Exercise~20.2.3 with $a=\epsilon$, $\omega=b$.
 Since $D_\epsilon(0)=0$, integration in $b$ gives
-$D_\epsilon(b)=\arctan(b/\epsilon)$. Thus
-$D(b)=(\pi/2)\operatorname{sgn}b$ for $b\ne0$, while
-$D(0)=0$. Dirichlet convergence makes this Abel limit equal to
-the ordinary improper integral. Now use
+\[
+D_\epsilon(b)=\int_0^b\frac{\epsilon\,ds}{\epsilon^2+s^2}
+=\arctan\frac b\epsilon.
+\]
+As $\epsilon\downarrow0$, $b/\epsilon\to\pm\infty$ for $b\gtrless0$.
+Thus $D(b)=\lim_{\epsilon\downarrow0}D_\epsilon(b)
+=(\pi/2)\operatorname{sgn}b$ for $b\ne0$, while
+$D(0)=0$. The improper integral
+$\int_0^\infty(\sin bu/u)\,du$ converges by Dirichlet's test, so
+Abel's theorem makes it equal to this limit $D(b)$. Now use
 \[
 \sin\omega\cos\omega x
 =\tfrac12\{\sin[(1+x)\omega]+\sin[(1-x)\omega]\}.
 \]
-The answer is
-$\frac\pi4[\operatorname{sgn}(1+x)+\operatorname{sgn}(1-x)]$,
+Dividing by $\omega$ and integrating term by term,
+\[
+\int_0^\infty\frac{\sin\omega\cos\omega x}{\omega}d\omega
+=\tfrac12[D(1+x)+D(1-x)]
+=\frac\pi4[\operatorname{sgn}(1+x)+\operatorname{sgn}(1-x)],
+\]
 with $\operatorname{sgn}0=0$. For $|x|<1$ both signs are
 positive; for $|x|>1$ they cancel; at $|x|=1$ just one is
 positive. These are exactly the three stated values.
@@ -141,24 +165,34 @@ These results can also be obtained by contour integration
 \par\erratum{Assume $a>0$.}
 \solution
 \erratum{Take $a>0$ for the ordinary exponentially decaying
-transforms and the answers as printed.} Put
+transforms and the answers as printed.}
+
+(a) Put
 \[
 C=\int_0^\infty e^{-at}\cos\omega t\,dt,\qquad
 S=\int_0^\infty e^{-at}\sin\omega t\,dt.
 \]
 Integrate by parts using an antiderivative $-e^{-at}/a$ of the
-exponential. The endpoint terms give
-\[
-C=\frac1a-\frac\omega aS,\qquad S=\frac\omega aC.
-\]
-Substitute the second into the first:
+exponential. The upper-limit terms vanish because $a>0$, so
+\begin{align*}
+C&=\left[-\frac{e^{-at}}a\cos\omega t\right]_0^\infty
+-\frac\omega a\int_0^\infty e^{-at}\sin\omega t\,dt
+=\frac1a-\frac\omega aS,\\
+S&=\left[-\frac{e^{-at}}a\sin\omega t\right]_0^\infty
++\frac\omega a\int_0^\infty e^{-at}\cos\omega t\,dt
+=\frac\omega aC.
+\end{align*}
+Substitute the second into the first and multiply by $a^2$:
 $a^2C=a-\omega^2C$, hence
 \[
 C=\frac a{a^2+\omega^2},\qquad
 S=\frac\omega{a^2+\omega^2}.
 \]
 Multiplication by $\sqrt{2/\pi}$ gives $g_c$ and $g_s$.
-For $x>0$, the cosine and sine inversion formulas therefore read
+(b) For $x>0$, the inversion formulas
+$f(x)=\sqrt{2/\pi}\int_0^\infty g_c(\omega)\cos\omega x\,d\omega$
+and $f(x)=\sqrt{2/\pi}\int_0^\infty g_s(\omega)\sin\omega x\,d\omega$,
+with $\sqrt{2/\pi}\sqrt{2/\pi}=2/\pi$, therefore read
 \[
 e^{-ax}=\frac{2a}{\pi}\int_0^\infty
 \frac{\cos\omega x}{a^2+\omega^2}d\omega,
@@ -166,7 +200,8 @@ e^{-ax}=\frac{2a}{\pi}\int_0^\infty
 e^{-ax}=\frac2\pi\int_0^\infty
 \frac{\omega\sin\omega x}{a^2+\omega^2}d\omega.
 \]
-Solving these equations for the two integrals proves (b).
+Multiplying the first by $\pi/(2a)$ and the second by $\pi/2$
+gives the two integrals of (b).
 The cosine integral is absolutely convergent. The sine integral
 converges conditionally for $x>0$; it follows from inversion of
 the odd extension of $e^{-at}$ on $t>0$. At $x=0$ that odd
@@ -193,31 +228,43 @@ width.} Evenness eliminates the sine part:
 g(\omega)=\frac{2h}{\sqrt{2\pi}}
 \int_0^{1/a}(1-ax)\cos\omega x\,dx.
 \]
-For $\omega\ne0$, use
+For $\omega\ne0$, use $\int\cos\omega x\,dx=\sin\omega x/\omega$
+and, integrating by parts,
 \[
 \int x\cos\omega x\,dx
 =\frac{x\sin\omega x}{\omega}+\frac{\cos\omega x}{\omega^2}.
 \]
-The terms proportional to $\sin(\omega/a)$ cancel, giving
+Between the limits $0$ and $1/a$ the terms proportional to
+$\sin(\omega/a)$ cancel; then $1-\cos\theta=2\sin^2(\theta/2)$ gives
 \begin{align*}
 \int_0^{1/a}(1-ax)\cos\omega x\,dx
-&=\frac{a[1-\cos(\omega/a)]}{\omega^2}\\
+&=\frac{\sin(\omega/a)}\omega-a\left[\frac{\sin(\omega/a)}{a\omega}
++\frac{\cos(\omega/a)-1}{\omega^2}\right]\\
+&=\frac{a[1-\cos(\omega/a)]}{\omega^2}
+=\frac{2a\sin^2(\omega/2a)}{\omega^2}\\
 &=\frac1{2a}\left[\frac{\sin(\omega/2a)}{\omega/2a}\right]^2.
 \end{align*}
-Thus
+Multiplying by $2h/\sqrt{2\pi}$,
 \[
 \boxed{g(\omega)=\frac{h}{a\sqrt{2\pi}}
 \left[\frac{\sin(\omega/2a)}{\omega/2a}\right]^2},
 \qquad g(0)=\frac{h}{a\sqrt{2\pi}}.
 \]
-The area of the pulse is $h/a$. With $h=a$, substitute $u=ax$
-in its action on a continuous test function $\eta$:
+The area of the pulse, a triangle of base $2/a$ and height $h$,
+is $h/a$, and $g(0)$ is $(2\pi)^{-1/2}$ times this area. With
+$h=a$ the area is one; substitute $u=ax$, $dx=du/a$, in the
+action of $f_a(x)=a(1-a|x|)$ on a continuous test function $\eta$:
 \[
 \int f_a(x)\eta(x)dx=\int_{-1}^1(1-|u|)\eta(u/a)du
-\longrightarrow\eta(0)\int_{-1}^1(1-|u|)du=\eta(0).
+\longrightarrow\eta(0)\int_{-1}^1(1-|u|)du=\eta(0),
 \]
+because $\eta(u/a)\to\eta(0)$ uniformly for $|u|\le1$ by the
+continuity of $\eta$ at $0$.
 This proves the delta-sequence claim, not merely a pointwise
-concentration of the graph.
+concentration of the graph. Correspondingly, for $h=a$ the
+transform $g(\omega)=(2\pi)^{-1/2}[\sin(\omega/2a)/(\omega/2a)]^2$
+tends, for every $\omega$, to $(2\pi)^{-1/2}$, the transform of
+$\delta(x)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -239,25 +286,48 @@ Finally, show that we may write
 \solution
 The forward transform is
 \begin{align*}
-g_n(k)&=\frac n{\sqrt{2\pi}}\int_{-1/(2n)}^{1/(2n)}e^{ikx}dx\\
-&=\frac1{\sqrt{2\pi}}\frac{\sin(k/2n)}{k/2n}.
+g_n(k)&=\frac n{\sqrt{2\pi}}\int_{-1/(2n)}^{1/(2n)}e^{ikx}dx
+=\frac n{\sqrt{2\pi}}\,\frac{e^{ik/2n}-e^{-ik/2n}}{ik}\\
+&=\frac n{\sqrt{2\pi}}\,\frac{2\sin(k/2n)}{k}
+=\frac1{\sqrt{2\pi}}\frac{\sin(k/2n)}{k/2n}.
 \end{align*}
-Fourier inversion consequently gives
+Fourier inversion,
+$\delta_n(x)=(2\pi)^{-1/2}\int g_n(k)e^{-ikx}dk$, consequently gives
 \[
 \boxed{\delta_n(x)=\frac1{2\pi}\int_{-\infty}^{\infty}
 \frac{\sin(k/2n)}{k/2n}e^{-ikx}dk},
 \]
 with the midpoint value $n/2$ at either edge of the rectangle.
 Those two point values do not affect any integral.
-For a smooth rapidly decreasing test function $\eta$,
+For a smooth rapidly decreasing test function $\eta$, the mean
+value theorem for integrals gives a point $\xi_n$ with
+$|\xi_n|\le1/(2n)$ such that
 \[
 \int\delta_n(x)\eta(x)dx
-=n\int_{-1/(2n)}^{1/(2n)}\eta(x)dx\longrightarrow\eta(0).
+=n\int_{-1/(2n)}^{1/(2n)}\eta(x)dx=\eta(\xi_n)
+\longrightarrow\eta(0).
 \]
-Also $|\sin u/u|\le1$ for real $u$, and the Fourier transform
-of $\eta$ is integrable. Hence dominated convergence permits the
-limit of the multiplier after pairing with $\eta$. Since this
-multiplier tends to one, the limiting identity is
+To take the same limit in the Fourier integral, let
+$\tilde\eta(k)=(2\pi)^{-1/2}\int\eta(x)e^{ikx}dx$; it is
+integrable, and $\eta(x)=(2\pi)^{-1/2}\int\tilde\eta(k)e^{-ikx}dk$.
+Insert this in $\int\delta_n\eta\,dx$ and interchange the
+absolutely convergent integrations. Since $g_n$ is even,
+$\int\delta_n(x)e^{-ikx}dx=\sqrt{2\pi}\,g_n(-k)
+=\sin(k/2n)/(k/2n)$, so
+\[
+\int\delta_n(x)\eta(x)dx
+=\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+\frac{\sin(k/2n)}{k/2n}\,\tilde\eta(k)\,dk
+\longrightarrow\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+\tilde\eta(k)\,dk=\eta(0).
+\]
+The limit follows from dominated convergence: the multiplier
+tends to one, and $|\sin u/u|\le1$ for real $u$. The last step
+is the inversion formula at $x=0$. Written out, the limit is
+$(2\pi)^{-1}\int dk\int\eta(x)e^{ikx}dx
+=(2\pi)^{-1}\int dk\int\eta(x)e^{-ikx}dx$ ($k\to-k$),
+the action on $\eta$ of the kernel $(2\pi)^{-1}\int e^{-ikx}dk$.
+Hence the limiting identity is
 \[
 \boxed{\delta(x)=\frac1{2\pi}\int_{-\infty}^{\infty}e^{-ikx}dk}.
 \]
@@ -285,34 +355,53 @@ The exponent completes to a square as
 -n^2x^2+ikx=-n^2\left(x-\frac{ik}{2n^2}\right)^2
 -\frac{k^2}{4n^2}.
 \]
-Set $z=x-ik/(2n^2)$. The horizontal integration line can be
-shifted back to the real axis: on its two vertical end segments
-$z=\pm R+iv$, the modulus is $e^{-n^2R^2+n^2v^2}$, with $v$
+Set $z=x-ik/(2n^2)$; as $x$ runs over $\mathbb R$, $z$ runs
+along the horizontal line $\Im z=-k/(2n^2)$. This line can be
+shifted back to the real axis: $e^{-n^2z^2}$ is entire, so by
+Cauchy's theorem its integral around the rectangle with vertical
+sides $z=\pm R+iv$ ($v$ between $0$ and $-k/(2n^2)$) vanishes, and
+on those vertical sides the modulus is
+$|e^{-n^2(\pm R+iv)^2}|=e^{-n^2R^2+n^2v^2}$, with $v$
 in a fixed bounded interval, so those integrals tend to zero.
 Consequently the remaining Gaussian integral is
 $\int_{\mathbb R}e^{-n^2z^2}dz=\sqrt\pi/n$, and
 \begin{align*}
 g_n(k)&=\frac1{\sqrt{2\pi}}\frac n{\sqrt\pi}
-\int_{-\infty}^{\infty}e^{-n^2x^2+ikx}dx\\
+\int_{-\infty}^{\infty}e^{-n^2x^2+ikx}dx
+=\frac1{\sqrt{2\pi}}\frac n{\sqrt\pi}\,e^{-k^2/(4n^2)}
+\frac{\sqrt\pi}n\\
 &=\frac1{\sqrt{2\pi}}e^{-k^2/(4n^2)}.
 \end{align*}
-The inverse is therefore the explicit regularized identity
+The inverse
+$\delta_n(x)=(2\pi)^{-1/2}\int g_n(k)e^{-ikx}dk$ is therefore the
+explicit regularized identity
 \[
 \frac n{\sqrt\pi}e^{-n^2x^2}
 =\frac1{2\pi}\int_{-\infty}^{\infty}
 e^{-k^2/(4n^2)}e^{-ikx}dk.
 \]
-For a bounded continuous test function $\eta$, put $u=nx$:
+For a bounded continuous test function $\eta$, put $u=nx$,
+$dx=du/n$:
 \[
 \int\frac n{\sqrt\pi}e^{-n^2x^2}\eta(x)dx
 =\frac1{\sqrt\pi}\int e^{-u^2}\eta(u/n)du
-\longrightarrow\eta(0).
+\longrightarrow\frac{\eta(0)}{\sqrt\pi}\int e^{-u^2}du=\eta(0).
 \]
-The Gaussian is an integrable majorant. For a Schwartz test
-function one can likewise pass to the limit in the Fourier
-pairing because $0<e^{-k^2/(4n^2)}\le1$ and its transform is
-integrable. This gives the required delta identity with the
-factor $1/(2\pi)$.
+Dominated convergence applies, with the integrable majorant
+$e^{-u^2}\sup|\eta|$. For a Schwartz test function $\eta$, with
+transform $\tilde\eta$, the pairing argument of Exercise~20.2.5
+gives likewise
+\[
+\int\frac n{\sqrt\pi}e^{-n^2x^2}\eta(x)dx
+=\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+e^{-k^2/(4n^2)}\tilde\eta(k)\,dk
+\longrightarrow\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}
+\tilde\eta(k)\,dk=\eta(0),
+\]
+because $0<e^{-k^2/(4n^2)}\le1$, the multiplier tends to one, and
+$\tilde\eta$ is integrable. As there, the limit is the action of
+the kernel $(2\pi)^{-1}\int e^{-ikx}dk$ on $\eta$. This gives the
+required delta identity with the factor $1/(2\pi)$.
 \erratum{The unregularized exponential integral is understood
 in this weak, distributional sense; removing the Gaussian does
 not make it an ordinary improper integral.}
@@ -336,8 +425,14 @@ $\displaystyle\frac{2}{\pi}\int_{0}^{\infty}
 \cos\omega t\cos\omega x\,d\omega$.
 \par\erratum{The two half-line answers below mean distributions for $x,t>0$. On the full line they require reflected delta terms, as derived in the solution.}
 \solution
-On a finite interval $(0,L)$ the normalized Dirichlet
-and Neumann eigenfunctions give, for interior $x,t$,
+On a finite interval $(0,L)$ the orthonormal Dirichlet
+eigenfunctions are $\sqrt{2/L}\sin(n\pi x/L)$, $n\ge1$, and the
+orthonormal Neumann eigenfunctions are $1/\sqrt L$ and
+$\sqrt{2/L}\cos(n\pi x/L)$, $n\ge1$; indeed
+$\int_0^L\sin^2(n\pi x/L)dx=\int_0^L\cos^2(n\pi x/L)dx=L/2$.
+With $\varphi_n$ denoting either orthonormal set, the completeness
+relations $\sum_n\varphi_n(t)\varphi_n(x)=\delta(t-x)$ give, for
+interior $x,t$,
 \[
 \delta(t-x)=\frac2L\sum_{n=1}^\infty
 \sin\frac{n\pi t}L\sin\frac{n\pi x}L,
@@ -346,19 +441,31 @@ and Neumann eigenfunctions give, for interior $x,t$,
 \delta(t-x)=\frac1L+\frac2L\sum_{n=1}^\infty
 \cos\frac{n\pi t}L\cos\frac{n\pi x}L.
 \]
-Set $\omega_n=n\pi/L$, so $\Delta\omega=\pi/L$.
-The factor $2/L=(2/\pi)\Delta\omega$ turns the sums into
-integrals as $L\to\infty$; the constant Neumann term $1/L$
-vanishes. In the weak sense this gives the two quoted kernels.
+Set $\omega_n=n\pi/L$, so $\Delta\omega=\omega_{n+1}-\omega_n=\pi/L$.
+The factor $2/L=(2/\pi)\Delta\omega$ turns the sums into the
+Riemann sums
+$(2/\pi)\sum_n\sin\omega_nt\sin\omega_nx\,\Delta\omega$ and
+$(2/\pi)\sum_n\cos\omega_nt\cos\omega_nx\,\Delta\omega$, which become
+integrals over $0<\omega<\infty$ as $L\to\infty$; the constant
+Neumann term $1/L$ vanishes. In the weak sense this gives the two
+quoted kernels.
 
-Their domains can be checked directly from product-to-sum:
+Their domains can be checked directly from the product-to-sum
+formulas
+$\sin\omega t\sin\omega x=\frac12[\cos\omega(t-x)-\cos\omega(t+x)]$
+and
+$\cos\omega t\cos\omega x=\frac12[\cos\omega(t-x)+\cos\omega(t+x)]$:
 \begin{align*}
 \frac2\pi\int_0^\infty\sin\omega t\sin\omega x\,d\omega
 &=\delta(t-x)-\delta(t+x),\\
 \frac2\pi\int_0^\infty\cos\omega t\cos\omega x\,d\omega
 &=\delta(t-x)+\delta(t+x).
 \end{align*}
-Here $\delta(u)=\pi^{-1}\int_0^\infty\cos\omega u\,d\omega$.
+Here $\delta(u)=\pi^{-1}\int_0^\infty\cos\omega u\,d\omega$, which is
+the given exponential representation with $t-x$ replaced by $u$:
+in $(2\pi)^{-1}\int_{-\infty}^\infty(\cos\omega u+i\sin\omega u)\,d\omega$
+the odd sine term integrates to zero, and the even cosine term
+gives twice its integral over $(0,\infty)$.
 \erratum{The stated sine and cosine answers represent
 $\delta(t-x)$ on the positive half-line, with $x,t>0$.
 On the whole real line they contain the reflected source
@@ -390,15 +497,23 @@ $a^{*}(\omega)a(\omega)=\dfrac{\erratum{|A_{0}|^{2}}}{2\pi}\,
 \par\erratum{Take $\omega_0>0$, $Q>0$. The amplitude $A_0$ may be complex, so its squared modulus is required in the answer.}
 \solution
 Put $\gamma=\omega_0/(2Q)>0$, the amplitude decay
-rate. Direct transformation of the causal signal gives
+rate. In the direct transformation of the causal signal the
+kernel $e^{i\omega t}$ combines with $e^{-\gamma t-i\omega_0t}$
+into a single exponential, and its value at the upper limit
+vanishes because
+$|e^{-[\gamma-i(\omega-\omega_0)]t}|=e^{-\gamma t}\to0$:
 \begin{align*}
 a(\omega)&=\frac{A_0}{\sqrt{2\pi}}\int_0^\infty
- e^{-[\gamma-i(\omega-\omega_0)]t}dt\\
+ e^{-[\gamma-i(\omega-\omega_0)]t}dt
+=\frac{A_0}{\sqrt{2\pi}}\left[
+-\frac{e^{-[\gamma-i(\omega-\omega_0)]t}}{\gamma-i(\omega-\omega_0)}
+\right]_0^\infty\\
 &=\frac{A_0}{\sqrt{2\pi}}
 \frac1{\gamma-i(\omega-\omega_0)}.
 \end{align*}
-The conjugate denominator is $\gamma+i(\omega-\omega_0)$,
-so their product is $\gamma^2+(\omega-\omega_0)^2$. Hence
+The conjugate $a^*(\omega)$ has the denominator
+$\gamma+i(\omega-\omega_0)$, and the product of the two
+denominators is $\gamma^2+(\omega-\omega_0)^2$. Hence
 \[
 \boxed{|a(\omega)|^2=\frac{|A_0|^2}{2\pi}
 \frac1{(\omega-\omega_0)^2+(\omega_0/2Q)^2}.}
@@ -406,13 +521,18 @@ so their product is $\gamma^2+(\omega-\omega_0)^2$. Hence
 \erratum{The printed numerator $A_0^2$ presumes a real initial
 amplitude; for a complex amplitude it is $|A_0|^2$. Decay requires
 $\omega_0/Q>0$, conventionally $\omega_0>0$, $Q>0$.}
-The peak is at $\omega_0$. Half its height occurs at
+The peak is at $\omega_0$, where the last factor equals
+$1/\gamma^2$. Half its height, $1/(2\gamma^2)$, occurs where
+$(\omega-\omega_0)^2=\gamma^2$, i.e., at
 $|\omega-\omega_0|=\gamma$, so the full width at half maximum
 is $2\gamma=\omega_0/Q$. Increasing $Q$ narrows the line.
-As a normalization check,
+As a normalization check (Parseval's theorem), use
+$\int_{-\infty}^{\infty}d\omega/[(\omega-\omega_0)^2+\gamma^2]=\pi/\gamma$
+and $\int_0^\infty e^{-2\gamma t}dt=1/(2\gamma)$:
 \[
 \int_{-\infty}^{\infty}|a(\omega)|^2d\omega
-=\frac{|A_0|^2}{2\gamma}
+=\frac{|A_0|^2}{2\pi}\,\frac\pi\gamma=\frac{|A_0|^2}{2\gamma}
+=|A_0|^2\int_0^\infty e^{-2\gamma t}dt
 =\int_0^\infty|A(t)|^2dt.
 \]
 
@@ -439,32 +559,47 @@ Let
 \omega_p=\frac{E_0-i\Gamma/2}{\hbar},\qquad
 \hbar>0,\quad E_0\in\mathbb R,\quad\Gamma>0.
 \]
-Then the integral is
+Since $E_0-i\Gamma/2-\hbar\omega=-\hbar(\omega-\omega_p)$, the
+factor $\hbar$ cancels and the integral is
 \[
 I(t)=-\frac1{2\pi i}\int_{-\infty}^{\infty}
 \frac{e^{-i\omega t}}{\omega-\omega_p}d\omega.
 \]
-The pole lies below the real axis. If $t>0$, write
-$\omega=u+iv$; the modulus of the exponential is $e^{vt}$,
+The pole lies below the real axis: $\Im\omega_p=-\Gamma/(2\hbar)<0$.
+If $t>0$, write $\omega=u+iv$; the modulus of the exponential is
+$|e^{-iut}e^{vt}|=e^{vt}$, which decays for $v<0$,
 so close the contour in the lower half-plane. The closure is
-clockwise, and Jordan's lemma makes its arc integral vanish.
-The residue of $e^{-i\omega t}/(\omega-\omega_p)$ is
-$e^{-i\omega_pt}$; consequently
+clockwise, and, because $1/(\omega-\omega_p)\to0$ uniformly on
+large arcs, Jordan's lemma makes its arc integral vanish.
+The residue of $e^{-i\omega t}/(\omega-\omega_p)$ at the simple
+pole is $e^{-i\omega_pt}$; consequently
 \[
 I(t)=-\frac1{2\pi i}(-2\pi i)e^{-i\omega_pt}
+=e^{-i(E_0-i\Gamma/2)t/\hbar}
 =e^{-\Gamma t/(2\hbar)}e^{-iE_0t/\hbar}.
 \]
-If $t<0$, close above instead. There is no pole inside, so the
+If $t<0$, the factor $e^{vt}$ decays for $v>0$, so close above
+instead. There is no pole inside, so the
 integral is zero. This proves both cases, including the sign
 from the contour orientation.
-\erratum{The manual, p.~334, writes $e^{+i\omega_pt}$ in its
+\erratum{The Instructor's Manual, p.~334, writes $e^{+i\omega_pt}$ in its
 residue and final step. The exponent must be negative, as the
 original integrand shows; the positive sign would produce
 growth for $t>0$. The published condition $\Gamma>0$ is
 necessary for the causal contour choice.}
 At $t=0$ the symmetric principal-value inversion gives $1/2$,
-the mean across the jump. The displayed problem deliberately
-states only $t\ne0$. For $\Gamma=0$, a pole prescription would
+the mean across the jump. Indeed, $\omega-\omega_p$ stays in the
+upper half-plane, so along the real axis the principal
+$\ln(\omega-\omega_p)$ is continuous and $\arg(\omega-\omega_p)$
+decreases from $\pi$ to $0$, while
+$\ln|R-\omega_p|-\ln|{-R}-\omega_p|\to0$ as $R\to\infty$; hence
+\[
+I(0)=-\frac1{2\pi i}\lim_{R\to\infty}
+\bigl[\ln(\omega-\omega_p)\bigr]_{-R}^{R}
+=-\frac{-i\pi}{2\pi i}=\frac12.
+\]
+The problem itself states only $t\ne0$.
+For $\Gamma=0$, a pole prescription would
 have to be supplied before the real-axis integral is defined.
 
 \Needspace{5\baselineskip}
@@ -499,20 +634,27 @@ treated equally well as Fourier cosine transforms.
 \solution
 \erratum{Take $a>0$ for these transform pairs.} Since all the displayed functions are even,
 the full unitary transform is
-$\sqrt{2/\pi}\int_0^\infty f(x)\cos(xy)dx$.
+$\sqrt{2/\pi}\int_0^\infty f(x)\cos(xy)dx$: in
+$(2\pi)^{-1/2}\int f(x)(\cos xy+i\sin xy)\,dx$ the odd sine part
+integrates to zero, and the even cosine part gives twice its
+integral over $(0,\infty)$.
 
-(a) The compactly supported member gives
+(a) For the compactly supported member the prefactors give
+$\sqrt{2/\pi}\sqrt{2/\pi}=2/\pi$, so
 \begin{align*}
 \mathcal F f(y)&=\frac2\pi\int_0^a
 \frac{\cos(xy)}{\sqrt{a^2-x^2}}dx\\
 &=\frac2\pi\int_0^1\frac{\cos(ayu)}{\sqrt{1-u^2}}du
 =J_0(ay).
 \end{align*}
-The substitution $x=au$ canceled both factors of $a$.
+The substitution $x=au$ gives $dx=a\,du$ and
+$\sqrt{a^2-x^2}=a\sqrt{1-u^2}$, so both factors of $a$ cancel.
 The last equality is the Poisson representation stated in the
 published erratum.
 
-(b) With the corrected square root, the transform is
+(b) With the corrected square root, the prefactors give $-2/\pi$.
+Since $\cos(xy)=\cos(x|y|)$, the substitution $x=au$
+($dx=a\,du$, $\sqrt{x^2-a^2}=a\sqrt{u^2-1}$) gives
 \[
 \mathcal F f(y)=-\frac2\pi\int_a^\infty
 \frac{\cos(xy)}{\sqrt{x^2-a^2}}dx
@@ -520,27 +662,42 @@ published erratum.
 \frac{\cos(a|y|u)}{\sqrt{u^2-1}}du
 =Y_0(a|y|),\quad y\ne0.
 \]
-This is the real oscillatory representation derived in
-Exercise~14.4.8. Its endpoint singularity is integrable and its
-infinite tail is conditionally convergent for $y\ne0$.
+The last equality is the real oscillatory representation
+$Y_0(z)=-(2/\pi)\int_1^\infty\cos(zt)(t^2-1)^{-1/2}dt$, $z>0$,
+derived in Exercise~14.4.8(b), with $z=a|y|$. Its endpoint
+singularity is integrable and its infinite tail is conditionally
+convergent for $y\ne0$.
 
-(c) The prefactors now multiply to one, giving
+(c) The prefactors now multiply to one,
+$\sqrt{2/\pi}\sqrt{\pi/2}=1$, giving
 \[
 \mathcal F f(y)=\int_0^\infty
 \frac{\cos(xy)}{\sqrt{x^2+a^2}}dx=K_0(a|y|),\quad y\ne0.
 \]
-For completeness, this follows by cosine inversion of
-Exercise~14.5.13:
+To prove the last equality, write Exercise~14.5.13, with its $y$
+replaced by $a$, in the unitary normalization:
 \[
 \frac1{\sqrt{x^2+a^2}}=\frac2\pi\int_0^\infty
-K_0(aq)\cos(xq)dq.
+K_0(aq)\cos(xq)dq
+=\sqrt{\frac2\pi}\int_0^\infty
+\Bigl[\sqrt{\frac2\pi}K_0(aq)\Bigr]\cos(xq)dq.
 \]
-With the unitary cosine normalization this says that the cosine
-transform of $1/\sqrt{x^2+a^2}$ is $\sqrt{2/\pi}K_0(a|y|)$,
-which is precisely the asserted full-transform relation.
-Applying the full transform twice reflects the original function:
-$\mathcal F^2f(x)=f(-x)$. All three members here are even,
-so this also verifies the reverse directions.
+Thus $1/\sqrt{x^2+a^2}$ is the cosine transform of
+$\sqrt{2/\pi}K_0(aq)$, which is integrable on $(0,\infty)$ (its
+singularity at $q=0$ is only logarithmic) and smooth for $q>0$.
+The cosine transform is its own inverse, so for $q>0$
+\[
+\sqrt{\frac2\pi}\int_0^\infty\frac{\cos(xq)}{\sqrt{x^2+a^2}}dx
+=\sqrt{\frac2\pi}K_0(aq).
+\]
+At $q=|y|$, with $\cos(xy)=\cos(x|y|)$, this is precisely the
+asserted full-transform relation.
+Applying the full transform twice reflects the original function,
+$\mathcal F^2f(x)=f(-x)$: by the inversion formula,
+$(2\pi)^{-1/2}\int g(y)e^{ixy}dy$ is the inverse transform of $g$
+evaluated at $-x$, and for $g=\mathcal Ff$ it is $f(-x)$. All
+three members here are even, so this also verifies the reverse
+directions.
 \erratum{The logarithmic singularities in (b) and (c) at
 $y=0$ are not finite point values. Their transform identities
 hold as tempered distributions and as the indicated ordinary
@@ -576,13 +733,16 @@ transform of $T_{n}(x)(1-x^{2})^{-1/2}$ leads to an integral
 representation of $J_{n}(t)$.
 \solution
 Denote the compactly supported right-hand expression
-by $f_n(x)$. Its transform is
+by $f_n(x)$. Its transform, with prefactor
+$(2\pi)^{-1/2}\sqrt{2/\pi}=1/\pi$, is
 \[
 \mathcal Ff_n(t)=\frac1\pi\int_{-1}^1
 \frac{T_n(x)e^{itx}}{\sqrt{1-x^2}}dx.
 \]
-Set $x=\cos\theta$, where $0\le\theta\le\pi$; reversing
-the limits removes the sign of $dx=-\sin\theta\,d\theta$:
+Set $x=\cos\theta$, where $0\le\theta\le\pi$; then
+$\sqrt{1-x^2}=\sin\theta$ and $T_n(x)=\cos n\theta$. Reversing
+the limits removes the sign of $dx=-\sin\theta\,d\theta$, and
+$\sin\theta$ cancels:
 \[
 \mathcal Ff_n(t)=\frac1\pi\int_0^\pi
  e^{it\cos\theta}\cos(n\theta)d\theta.
@@ -590,14 +750,23 @@ the limits removes the sign of $dx=-\sin\theta\,d\theta$:
 For integer $n\ge0$ the integral is half the full-circle
 integral, because reflection $\theta\mapsto2\pi-\theta$ leaves
 both factors unchanged. The sine part of $e^{in\theta}$ integrates
-to zero under the same reflection. The integral representation
-of $J_n$ therefore gives
+to zero under the same reflection, because $\sin n\theta$ changes
+sign. To evaluate the full-circle integral, use the
+Jacobi--Anger expansion of Exercise~14.1.5,
+\[
+e^{it\cos\theta}=\sum_{m=-\infty}^{\infty}i^mJ_m(t)e^{im\theta}.
+\]
+Multiply by $e^{in\theta}$ and integrate term by term; as
+$(2\pi)^{-1}\int_0^{2\pi}e^{i(m+n)\theta}d\theta=\delta_{m,-n}$,
+only $m=-n$ survives. With $J_{-n}=(-1)^nJ_n$ and
+$i^{-n}(-1)^n=i^n$,
 \[
 \frac1\pi\int_0^\pi e^{it\cos\theta}\cos n\theta\,d\theta
 =\frac1{2\pi}\int_0^{2\pi}e^{it\cos\theta+in\theta}d\theta
-=\boxed{i^nJ_n(t)}.
+=i^{-n}J_{-n}(t)=\boxed{i^nJ_n(t)}.
 \]
-To check the direction of the transform, apply it again:
+To check the direction of the transform, apply it again and use
+$\mathcal F^2f(x)=f(-x)$ (Exercise~20.2.10):
 \[
 \mathcal F[i^nJ_n](x)=f_n(-x)=(-1)^nf_n(x),
 \]
@@ -629,9 +798,16 @@ P_n(\mu)e^{i\omega\mu}d\mu.
 \]
 Use Rodrigues' formula
 $P_n(\mu)=(2^nn!)^{-1}d^n(\mu^2-1)^n/d\mu^n$.
-Integrating by parts $n$ times has no endpoint terms: the
-polynomial $(\mu^2-1)^n$ and its first $n-1$ derivatives vanish
-at both endpoints. Hence
+Each integration by parts moves one derivative from
+$(\mu^2-1)^n$ onto $e^{i\omega\mu}$, contributing a factor $-1$
+and, from $de^{i\omega\mu}/d\mu=i\omega e^{i\omega\mu}$, a factor
+$i\omega$. There are no endpoint terms: the polynomial
+$(\mu^2-1)^n=(\mu-1)^n(\mu+1)^n$ has zeros of order $n$ at
+$\mu=\pm1$, so it and its first $n-1$ derivatives vanish
+at both endpoints. After $n$ steps the factor is
+$(-1)^n(i\omega)^n=(-i\omega)^n$; in the second line below,
+$(\mu^2-1)^n=(-1)^n(1-\mu^2)^n$ and $(-1)^n(-i\omega)^n=i^n\omega^n$.
+Hence
 \begin{align*}
 g(\omega)
 &=\frac{(-i\omega)^n}{2^nn!\sqrt{2\pi}}
@@ -644,12 +820,16 @@ The spherical Poisson representation of Exercise~14.7.4 is
 j_n(\omega)=\frac{\omega^n}{2^{n+1}n!}
 \int_{-1}^1(1-\mu^2)^ne^{i\omega\mu}d\mu.
 \]
-Comparison gives
+Multiplied by $2i^n/\sqrt{2\pi}$, its right side becomes the
+second line for $g(\omega)$, since $2/2^{n+1}=1/2^n$. Hence
 \[
 \boxed{g(\omega)=\frac{2i^n}{\sqrt{2\pi}}j_n(\omega)
 =i^n\sqrt{\frac2\pi}\,j_n(\omega)}.
 \]
-The limit at $\omega=0$ is automatic. This derivation verifies
+No division by $\omega$ occurs, so the result holds at $\omega=0$
+as well: there both sides equal $\sqrt{2/\pi}\,\delta_{n0}$, since
+$\int_{-1}^1P_n\,d\mu=2\delta_{n0}$ and $j_n(0)=\delta_{n0}$.
+This derivation verifies
 both the scaling and the transform variable in the marked
 correction; $kr$ is only a possible later choice of $\omega$.
 
@@ -678,13 +858,21 @@ integrals
 \erratum{The differential in the second integral must be
 $dx$: the original textbook, p.~979, prints $ds$.
 Take $t>0$; both displayed integrals then converge conditionally.}
-Introduce positive damping before taking the square-root limit:
+(a) Introduce positive damping before taking the square-root limit:
 \[
 I_\epsilon(t)=\int_0^\infty x^{-1/2}e^{-(\epsilon-it)x}dx
 =\Gamma(1/2)(\epsilon-it)^{-1/2}.
 \]
-The gamma integral applies because $\Re(\epsilon-it)>0$.
-On the principal branch, $\arg(\epsilon-it)\to-\pi/2$, so
+The gamma integral applies because $\Re(\epsilon-it)>0$: for real
+$s>0$ the substitution $u=sx$ gives
+$\int_0^\infty x^{-1/2}e^{-sx}dx=s^{-1/2}\int_0^\infty u^{-1/2}e^{-u}du
+=\Gamma(1/2)s^{-1/2}$, with $\Gamma(1/2)=\sqrt\pi$, and both sides
+are analytic in $s$ for $\Re s>0$, so the identity persists there
+with the principal branch of $s^{-1/2}$.
+As $\epsilon\downarrow0$, $|\epsilon-it|\to t$ and, on the principal
+branch, $\arg(\epsilon-it)\to-\pi/2$, so
+$(\epsilon-it)^{-1/2}\to t^{-1/2}e^{i\pi/4}$ and, with
+$e^{i\pi/4}=(1+i)/\sqrt2$,
 \[
 I(t)=\lim_{\epsilon\downarrow0}I_\epsilon(t)
 =\sqrt\pi\,t^{-1/2}e^{i\pi/4}
@@ -692,17 +880,21 @@ I(t)=\lim_{\epsilon\downarrow0}I_\epsilon(t)
 \]
 The ordinary integrals converge at zero by the exponent $-1/2$
 and at infinity by Dirichlet's test, so Abel convergence identifies
-this limit with their values. Equating real and imaginary parts
-and multiplying by $\sqrt{2/\pi}$ proves both self-reciprocal
-identities.
-\erratum{The manual, p.~336, has two further slips: the change
+this limit with their values:
+$I(t)=\int_0^\infty x^{-1/2}\cos xt\,dx+i\int_0^\infty x^{-1/2}\sin xt\,dx$.
+Equating real and imaginary parts, each of these integrals is
+$\sqrt{\pi/2}\,t^{-1/2}$; multiplying by $\sqrt{2/\pi}$ proves both
+self-reciprocal identities.
+\erratum{The Instructor's Manual, p.~336, has two further slips: the change
 $u=-izt$ maps the positive $z$ axis to the negative imaginary
 axis, and its final factor $t^{1/2}$ must be $t^{-1/2}$.
 The damped gamma calculation above fixes both the phase and
 the scaling without an ambiguous contour rotation.}
 
-For the Fresnel integrals set $x=y^2$ at $t=1$. Then
-$x^{-1/2}dx=2dy$, giving
+(b) For the Fresnel integrals take $t=1$ in
+$\int_0^\infty x^{-1/2}\cos xt\,dx=\int_0^\infty x^{-1/2}\sin xt\,dx
+=\sqrt{\pi/2}\,t^{-1/2}$ and set $x=y^2$. Then $dx=2y\,dy$ and
+$x^{-1/2}dx=2dy$, with the limits $0,\infty$ unchanged, giving
 \[
 2\int_0^\infty\cos(y^2)dy
 =2\int_0^\infty\sin(y^2)dy=\sqrt{\frac\pi2}.
@@ -722,10 +914,13 @@ Let $k=|\mathbf k|>0$ and use a polar axis parallel
 to $\mathbf k$. To make the large-radius integration explicit,
 first multiply $r^{-2}$ by $e^{-\epsilon r}$, $\epsilon>0$.
 Since $d^3r=r^2dr\,d\Omega$, the radial singularity cancels
-against the volume factor. The angular integration is
+against the volume factor. With
+$d\Omega=\sin\theta\,d\theta\,d\phi$ and $u=\cos\theta$, the
+angular integration is
 \[
 \int d\Omega\,e^{ikr\cos\theta}
-=2\pi\int_{-1}^1e^{ikru}du=4\pi\frac{\sin kr}{kr}.
+=2\pi\int_{-1}^1e^{ikru}du
+=2\pi\frac{e^{ikr}-e^{-ikr}}{ikr}=4\pi\frac{\sin kr}{kr}.
 \]
 Thus
 \begin{align*}
@@ -734,8 +929,13 @@ Thus
 \int_0^\infty e^{-\epsilon r}\frac{\sin kr}{r}dr\\
 &=\sqrt{\frac2\pi}\frac1k\arctan\frac{k}{\epsilon}.
 \end{align*}
-The last integral was evaluated in Exercise~20.2.2. Taking
-$\epsilon\downarrow0$ gives
+Here $4\pi/(2\pi)^{3/2}=\sqrt{2/\pi}$, and the last integral is
+$D_\epsilon(k)=\arctan(k/\epsilon)$ of Exercise~20.2.2 (with $b=k$,
+$u=r$). As $\epsilon\downarrow0$, $\arctan(k/\epsilon)\to\pi/2$ and
+$\sqrt{2/\pi}\,\pi/2=\sqrt{\pi/2}$. Both $e^{-\epsilon r}r^{-2}$ and
+the right side are bounded by their locally integrable limits,
+$r^{-2}$ and $\sqrt{\pi/2}/k$, so the limit also holds after
+pairing with test functions. This gives
 \[
 \boxed{\mathcal F[r^{-2}](\mathbf k)
 =\sqrt{\frac\pi2}\frac1k}.
@@ -775,7 +975,8 @@ transforms.
 \solution
 Put $x=r\cos\theta$, $y=r\sin\theta$, and write
 $u=\rho\cos\phi$, $v=\rho\sin\phi$. Then
-$ux+vy=\rho r\cos(\theta-\phi)$ and $dx\,dy=r\,dr\,d\theta$.
+$ux+vy=\rho r(\cos\theta\cos\phi+\sin\theta\sin\phi)
+=\rho r\cos(\theta-\phi)$ and $dx\,dy=r\,dr\,d\theta$.
 The forward transform is consequently
 \begin{align*}
 F(u,v)&=\frac1{2\pi}\int_0^\infty rf(r)dr
@@ -783,14 +984,19 @@ F(u,v)&=\frac1{2\pi}\int_0^\infty rf(r)dr
 &=\int_0^\infty rf(r)J_0(\rho r)dr.
 \end{align*}
 The angular integral is $2\pi J_0(\rho r)$, independent of
-$\phi$, proving that the transform is radial: $F=F(\rho)$.
+$\phi$: the integrand has period $2\pi$ in $\theta$, so the shift
+$\theta-\phi\to\theta$ does not change the integral, and
+$(2\pi)^{-1}\int_0^{2\pi}e^{iz\cos\theta}d\theta=J_0(z)$ is the
+case $n=0$ of the integral evaluated in Exercise~20.2.11. This
+proves that the transform is radial: $F=F(\rho)$.
 For the inverse, use $du\,dv=\rho\,d\rho\,d\phi$:
 \begin{align*}
 f(x,y)&=\frac1{2\pi}\int_0^\infty\rho F(\rho)d\rho
 \int_0^{2\pi}e^{-i\rho r\cos(\theta-\phi)}d\phi\\
 &=\int_0^\infty\rho F(\rho)J_0(\rho r)d\rho,
 \end{align*}
-because $J_0$ is even. This is the claimed inverse Hankel
+because the same steps give $2\pi J_0(-\rho r)$ for the angular
+integral and $J_0$ is even. This is the claimed inverse Hankel
 transform. The factors $r$ and $\rho$ are the two polar Jacobians;
 the Fourier factors $1/(2\pi)$ cancel the angular integrals.
 For example, Schwartz radial functions justify the operations
@@ -811,7 +1017,8 @@ r f(r)\sin kr\,dr.
 \par\erratum{Take $k=|\mathbf k|>0$, and use a continuous limit at $k=0$ when it exists.}
 \solution
 Choose the $z$ axis along $\mathbf k$, with
-$k=|\mathbf k|>0$. In spherical coordinates,
+$k=|\mathbf k|>0$, so that $\mathbf k\cdot\mathbf r=kr\cos\theta$.
+In spherical coordinates,
 \begin{align*}
 \mathcal Ff(\mathbf k)
 &=\frac1{(2\pi)^{3/2}}\int_0^\infty r^2f(r)dr
@@ -822,10 +1029,16 @@ $k=|\mathbf k|>0$. In spherical coordinates,
 r^2f(r)\frac{\sin kr}{kr}dr\\
 &=\boxed{\frac1k\sqrt{\frac2\pi}\int_0^\infty rf(r)\sin kr\,dr}.
 \end{align*}
+In the second line $u=\cos\theta$, $du=-\sin\theta\,d\theta$; in
+the third,
+$\int_{-1}^1e^{ikru}du=(e^{ikr}-e^{-ikr})/(ikr)=2\sin kr/(kr)$;
+in the last, $4\pi/(2\pi)^{3/2}=\sqrt{2/\pi}$ and $r^2/(kr)=r/k$.
 Thus $k\mathcal Ff(k)$ is the unitary sine transform of $rf(r)$.
 The marked volume element must be $d^3r$ over all space, as in
 the published correction. If $\int_0^\infty r^2|f(r)|dr<\infty$,
-the zero-frequency limit follows from $\sin(kr)/(kr)\to1$:
+the zero-frequency limit follows from the third line, since
+$\sin(kr)/(kr)\to1$ with $|\sin(kr)/(kr)|\le1$ (dominated
+convergence):
 \[
 \mathcal Ff(0)=\sqrt{\frac2\pi}\int_0^\infty r^2f(r)dr.
 \]
@@ -852,21 +1065,35 @@ identities are
 \mathcal F[f(-x)](\omega)&=g(-\omega),\\
 \mathcal F[f^*(-x)](\omega)&=g^*(\omega).
 \end{align*}
-For translation set $u=x-X$, so $e^{i\omega x}=e^{i\omega X}e^{i\omega u}$.
-For scaling set $u=\alpha x$: when $\alpha<0$ the integration
-limits reverse, changing $1/\alpha$ into $1/|\alpha|$.
+For translation set $u=x-X$, so $dx=du$ and
+$e^{i\omega x}=e^{i\omega X}e^{i\omega u}$; the factor
+$e^{i\omega X}$ comes out of the integral.
+For scaling set $u=\alpha x$, so $dx=du/\alpha$ and
+$e^{i\omega x}=e^{i(\omega/\alpha)u}$. When $\alpha<0$ the
+integration limits reverse, and restoring their order changes
+$1/\alpha$ into $-1/\alpha=1/|\alpha|$; in either case
+\[
+\mathcal F[f(\alpha x)](\omega)
+=\frac1{|\alpha|}\frac1{\sqrt{2\pi}}\int f(u)e^{i(\omega/\alpha)u}du
+=\frac1{|\alpha|}g(\omega/\alpha).
+\]
 The third identity is the second at $\alpha=-1$.
-For the fourth, set $u=-x$ and obtain
+For the fourth, set $u=-x$ (the reversal of the limits cancels
+the sign of $dx=-du$) and obtain
 \[
 \frac1{\sqrt{2\pi}}\int f^*(-x)e^{i\omega x}dx
-=\frac1{\sqrt{2\pi}}\int f^*(u)e^{-i\omega u}du=g^*(\omega).
+=\frac1{\sqrt{2\pi}}\int f^*(u)e^{-i\omega u}du
+=\left[\frac1{\sqrt{2\pi}}\int f(u)e^{i\omega u}du\right]^*
+=g^*(\omega).
 \]
-Equivalently, $\mathcal F[f^*](\omega)=g^*(-\omega)$.
+Equivalently, applying the third identity to $f^*(-x)$,
+$\mathcal F[f^*](\omega)=g^*(-\omega)$.
 \erratum{A scale-change factor without an absolute value
 presumes a positive scale. The formula above covers either sign;
 $\alpha=0$ is not an invertible change of variables.}
-\erratum{The manual's one-dimensional translation line,
-p.~337, prints $e^{i\omega t}$ for a shift $f(t-a)$.
+\erratum{The one-dimensional translation line of the
+Instructor's Manual, p.~337, prints $e^{i\omega t}$ for a shift
+$f(t-a)$.
 The phase must contain the fixed displacement, $e^{i\omega a}$,
 not the integration variable.}
 
@@ -894,14 +1121,19 @@ e^{i\mathbf k\cdot(\mathbf u+\mathbf R)}d^3u\\
 &=\boxed{e^{i\mathbf k\cdot\mathbf R}g(\mathbf k)}.
 \end{align*}
 (b) For real nonzero $\alpha$, set $\mathbf u=\alpha\mathbf r$.
-The volume element is $d^3r=|\alpha|^{-3}d^3u$, so
-\[
-\boxed{\mathcal F[f(\alpha\mathbf r)](\mathbf k)
-=|\alpha|^{-3}g(\mathbf k/\alpha)}.
-\]
+The volume element is $d^3r=|\alpha|^{-3}d^3u$ (the Jacobian of
+$\mathbf r=\mathbf u/\alpha$ is $|\det(\alpha^{-1}I)|=|\alpha|^{-3}$),
+and $\mathbf k\cdot\mathbf r=(\mathbf k/\alpha)\cdot\mathbf u$, so
+\begin{align*}
+\mathcal F[f(\alpha\mathbf r)](\mathbf k)
+&=\frac{|\alpha|^{-3}}{(2\pi)^{3/2}}\int f(\mathbf u)
+e^{i(\mathbf k/\alpha)\cdot\mathbf u}d^3u\\
+&=\boxed{|\alpha|^{-3}g(\mathbf k/\alpha)}.
+\end{align*}
 In particular, at $\alpha=-1$ this gives
 $\mathcal F[f(-\mathbf r)](\mathbf k)=g(-\mathbf k)$.
-Finally,
+Finally, put $\mathbf u=-\mathbf r$, again with unit Jacobian,
+so that $\mathbf k\cdot\mathbf r=-\mathbf k\cdot\mathbf u$:
 \begin{align*}
 \mathcal F[f^*(-\mathbf r)](\mathbf k)
 &=\frac1{(2\pi)^{3/2}}\int f^*(\mathbf u)e^{-i\mathbf k\cdot\mathbf u}d^3u\\
@@ -918,7 +1150,9 @@ $|\alpha|^{-3}$, as the sign-change case itself confirms.}
 the Fourier transform of $\nabla^{2}f(\mathbf{r})$.
 \solution
 For a sufficiently decaying differentiable function,
-integrate by parts in $r_j$, holding the other coordinates fixed:
+integrate by parts in $r_j$, holding the other coordinates fixed
+($d^2r_\perp$ denotes their area element) and using
+$\partial_je^{i\mathbf k\cdot\mathbf r}=ik_je^{i\mathbf k\cdot\mathbf r}$:
 \begin{align*}
 \mathcal F[\partial_j f](\mathbf k)
 &=\frac1{(2\pi)^{3/2}}\int d^2r_\perp
@@ -926,9 +1160,11 @@ integrate by parts in $r_j$, holding the other coordinates fixed:
 -\int f\,ik_j e^{i\mathbf k\cdot\mathbf r}dr_j\right)\\
 &=-ik_j g(\mathbf k).
 \end{align*}
-The boundary bracket vanishes. Applying the same calculation to
+The boundary bracket vanishes because $f\to0$ as
+$|r_j|\to\infty$. Applying the same calculation to
 $\partial_j f$ gives
-$\mathcal F[\partial_j^2 f]=(-ik_j)^2g=-k_j^2g$.
+$\mathcal F[\partial_j^2 f]=-ik_j\mathcal F[\partial_jf]
+=(-ik_j)^2g=-k_j^2g$.
 Summing the three coordinate equations yields
 \[
 \boxed{\mathcal F[\nabla^2f](\mathbf k)
@@ -944,26 +1180,33 @@ singular sources can also be transformed consistently.
 \noindent\textbf{20.3.4}\quad Verify Eqs.~(20.55) and (20.56), the
 formulas for the derivatives of 1-D Fourier transforms.
 \solution
-Starting from the one-dimensional definition,
+Starting from the one-dimensional definition and integrating by
+parts with $de^{i\omega t}/dt=i\omega e^{i\omega t}$,
 \begin{align*}
 \mathcal F[f'](\omega)
 &=\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}f'(t)e^{i\omega t}dt\\
 &=\frac1{\sqrt{2\pi}}[f(t)e^{i\omega t}]_{-\infty}^{\infty}
 -i\omega\frac1{\sqrt{2\pi}}\int_{-\infty}^{\infty}f(t)e^{i\omega t}dt\\
-&=-i\omega g(\omega).
+&=-i\omega g(\omega),
 \end{align*}
-For $n$ derivatives repeat the operation. Each repetition moves
+since the bracket vanishes when $f(t)\to0$ as $t\to\pm\infty$.
+For $n$ derivatives repeat the operation, applying it to
+$f^{(n-1)},f^{(n-2)},\ldots$. Each repetition moves
 one derivative to the exponential and contributes $-i\omega$:
+$\mathcal F[f^{(n)}]=-i\omega\mathcal F[f^{(n-1)}]=\cdots$, so
 \[
 \boxed{\mathcal F[f^{(n)}](\omega)=(-i\omega)^n g(\omega)}.
 \]
-More explicitly, the finite-interval integration-by-parts identity
-has endpoint terms
-\[
-\sum_{j=0}^{n-1}(-i\omega)^j
-[f^{(n-1-j)}(t)e^{i\omega t}]_{-R}^{R};
-\]
-under the usual decaying-function assumptions each tends to zero
+More explicitly, $n$ integrations by parts on $(-R,R)$ give
+\begin{align*}
+\int_{-R}^{R}f^{(n)}(t)e^{i\omega t}dt
+&=\sum_{j=0}^{n-1}(-i\omega)^j
+[f^{(n-1-j)}(t)e^{i\omega t}]_{-R}^{R}\\
+&\quad+(-i\omega)^n\int_{-R}^{R}f(t)e^{i\omega t}dt;
+\end{align*}
+under the usual decaying-function assumptions ($f,\ldots,f^{(n-1)}$
+tend to zero at $\pm\infty$, and $f$ and $f^{(n)}$ are integrable)
+each endpoint term tends to zero
 as $R\to\infty$. This explains why no initial-value terms occur
 for this two-sided transform, unlike the one-sided Laplace
 transform. For distributional derivatives the identity remains
@@ -979,13 +1222,15 @@ namely that
 \]
 \solution
 Differentiate the forward transform with respect to
-its frequency argument:
+its frequency argument under the integral sign; since
+$\partial e^{i\omega t}/\partial\omega=it\,e^{i\omega t}$,
 \[
 g'(\omega)=\frac1{\sqrt{2\pi}}\int f(t)
 \frac\partial{\partial\omega}e^{i\omega t}dt
+=\frac i{\sqrt{2\pi}}\int tf(t)e^{i\omega t}dt
 =i\,\mathcal F[tf](\omega).
 \]
-After $n$ derivatives,
+After $n$ derivatives, each bringing down another factor $it$,
 \[
 g^{(n)}(\omega)=\frac1{\sqrt{2\pi}}\int (it)^nf(t)e^{i\omega t}dt
 =i^n\mathcal F[t^nf](\omega).
@@ -1019,13 +1264,25 @@ $\varphi(x)=\dfrac{Q}{2KD}\,e^{-|Kx|}$.
 and $K^2>0$, and put $\kappa=\sqrt{K^2}>0$. The printed
 coefficient $1/K$ presumes $K>0$. Decay, or boundedness at both
 infinities, must be part of the boundary specification.}
-The delta transform is $1/\sqrt{2\pi}$ and
-$\mathcal F[\varphi'']=-\omega^2\Phi$. Thus
+Write $\Phi=\mathcal F\varphi$. The delta transform is
+$\mathcal F[\delta](\omega)=(2\pi)^{-1/2}\int\delta(x)e^{i\omega x}dx
+=1/\sqrt{2\pi}$, and
+$\mathcal F[\varphi'']=(-i\omega)^2\Phi=-\omega^2\Phi$ by
+Exercise~20.3.4 with $n=2$. Transforming the equation term by
+term gives $-D(-\omega^2\Phi)+\kappa^2D\Phi=Q/\sqrt{2\pi}$, i.e.,
 \[
 D(\omega^2+\kappa^2)\Phi(\omega)=\frac Q{\sqrt{2\pi}},
 \qquad \Phi(\omega)=\frac{Q}{D\sqrt{2\pi}(\omega^2+\kappa^2)}.
 \]
-Invert, use evenness, and apply Exercise~20.2.3:
+Invert with $\varphi(x)=(2\pi)^{-1/2}\int\Phi(\omega)e^{-i\omega x}d\omega$.
+Because $1/(\omega^2+\kappa^2)$ is even, the odd part
+$-i\sin\omega x$ of $e^{-i\omega x}$ integrates to zero and the
+cosine part gives twice its integral over $(0,\infty)$. The second
+formula of Exercise~20.2.3(b), with $a=\kappa$ and $x$ replaced by
+$|x|$ (the cosine integral is even in $x$, and at $x=0$ it equals
+$\int_0^\infty d\omega/(\omega^2+\kappa^2)=\pi/(2\kappa)$), then gives
+$\int_0^\infty\cos\omega x\,(\omega^2+\kappa^2)^{-1}d\omega
+=(\pi/2\kappa)e^{-\kappa|x|}$:
 \begin{align*}
 \varphi(x)&=\frac{Q}{2\pi D}\int_{-\infty}^{\infty}
 \frac{e^{-i\omega x}}{\omega^2+\kappa^2}d\omega\\
@@ -1033,17 +1290,22 @@ Invert, use evenness, and apply Exercise~20.2.3:
 \frac{\cos\omega x}{\omega^2+\kappa^2}d\omega
 =\boxed{\frac{Q}{2\kappa D}e^{-\kappa|x|}}.
 \end{align*}
-Away from zero, $\varphi''=\kappa^2\varphi$. The derivative
-jump is
+As a check, away from zero $\varphi''=\kappa^2\varphi$. For
+$x\gtrless0$, $\varphi'=\mp\kappa\varphi$, so
+$\varphi'(0^\pm)=\mp Q/(2D)$ and the derivative jump is
 \[
 \varphi'(0^+)-\varphi'(0^-)
-=-\frac{Q}{2D}-\frac{Q}{2D}=-\frac QD,
+=-\frac{Q}{2D}-\frac{Q}{2D}=-\frac QD.
 \]
-so $-D\varphi''$ has exactly the source $Q\delta$.
+As a distribution, therefore,
+$\varphi''=\kappa^2\varphi+[\varphi'(0^+)-\varphi'(0^-)]\delta(x)
+=\kappa^2\varphi-(Q/D)\delta(x)$, so
+$-D\varphi''+\kappa^2D\varphi=Q\delta(x)$ exactly.
 A homogeneous addition is $A e^{\kappa x}+B e^{-\kappa x}$;
 boundedness at both infinities forces $A=B=0$.
 For $K=0$ and nonzero $Q$, the formal fundamental solution is
-$-Q|x|/(2D)$ plus an affine function, and no solution decays at
+$-Q|x|/(2D)$ plus an affine function (since $|x|''=2\delta(x)$),
+and no solution decays at
 both ends. Substituting $K=0$ in the printed formula is invalid.
 
 \Needspace{9\baselineskip}
