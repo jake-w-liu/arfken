@@ -20,8 +20,9 @@ and is not just a consequence of a choice of a coordinate system (as are
 centrifugal and Coriolis forces in Newtonian mechanics).
 \solution
 Let $T$ have $p$ contravariant indices and $q$ covariant indices,
-so its rank is $p+q$. At the same point, two nonsingular coordinate systems
-are related by the tensor transformation law
+so its rank is $p+q$. At a given point, the components in two coordinate
+systems related by a nonsingular change of coordinates obey the tensor
+transformation law
 \[
 T'{}^{i_1\cdots i_p}{}_{j_1\cdots j_q}
 =\frac{\partial x'^{i_1}}{\partial x^{a_1}}\cdots
@@ -41,7 +42,7 @@ region, apply the argument at each point of that region.
 \par\bigskip
 \noindent\textbf{4.1.2}\quad The components of tensor $\mathsf{A}$ are equal
 to the corresponding components of tensor $\mathsf{B}$ in one particular
-coordinate system denoted, by the superscript $0$; that is,
+coordinate system, denoted by the superscript $0$; that is,
 \[
 A_{ij}^{0}=B_{ij}^{0}.
 \]
@@ -87,9 +88,12 @@ between total final and initial four-momenta,
 \Delta P^\mu=(\Delta E/c,\Delta p_x,\Delta p_y,\Delta p_z).
 \]
 Conservation of three-momentum in the two frames supplies the two sets of
-three zero components. The nontrivial mixing of time and space then forces
-$\Delta E=0$, and hence conservation of all four components in every
-Lorentz frame.
+three zero components. Two frames in relative motion satisfy the
+hypothesis on the coefficients: for a boost with velocity $\beta c$
+along $x^1$, $x'^1=\gamma(x^1-\beta x^0)$, so
+$\partial x'^1/\partial x^0=-\gamma\beta\ne0$. The argument above then
+forces $\Delta E=0$, and hence conservation of all four components in
+every Lorentz frame.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -99,7 +103,8 @@ coordinate axes, show that an isotropic second-rank tensor in 3-D space must
 be a multiple of $\delta_{j}^{i}$.
 \solution
 In orthonormal Cartesian coordinates, write the components as a
-$3\times3$ matrix $T$. A rotation $Q$ gives $T'=QTQ^{\mathsf T}$;
+$3\times3$ matrix $T$. A rotation $Q$ gives
+$T'_{ij}=Q_{ia}Q_{jb}T_{ab}$, that is, $T'=QTQ^{\mathsf T}$;
 isotropy means $QTQ^{\mathsf T}=T$ for every proper rotation.
 
 First use the $180^\circ$ rotations
@@ -108,9 +113,11 @@ R_1=\operatorname{diag}(1,-1,-1),\qquad
 R_2=\operatorname{diag}(-1,1,-1).
 \]
 If $R=\operatorname{diag}(s_1,s_2,s_3)$, then
-$(RTR^{\mathsf T})_{ij}=s_i s_jT_{ij}$. Thus $R_1$ changes the signs of
+$(RTR^{\mathsf T})_{ij}=s_i s_jT_{ij}$. For $R_1$,
+$s_1s_2=s_1s_3=-1$ and $s_2s_3=1$, so $R_1$ changes the signs of
 $T_{12},T_{13},T_{21},T_{31}$, and invariance forces each to equal its
-negative, hence to vanish. Similarly $R_2$ forces $T_{23}=T_{32}=0$.
+negative, hence to vanish. For $R_2$, $s_2s_3=-1$, so $R_2$ likewise
+forces $T_{23}=T_{32}=0$.
 We have proved, without assuming symmetry in advance, that
 $T=\operatorname{diag}(a,b,c)$.
 
@@ -119,7 +126,12 @@ Now use $90^\circ$ rotations about the third and first axes:
 Q_3=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&1\end{pmatrix},\qquad
 Q_1=\begin{pmatrix}1&0&0\\0&0&-1\\0&1&0\end{pmatrix}.
 \]
-Direct multiplication gives
+Multiplying first by $Q$ on the left,
+\[
+Q_3T=\begin{pmatrix}0&-b&0\\a&0&0\\0&0&c\end{pmatrix},\qquad
+Q_1T=\begin{pmatrix}a&0&0\\0&0&-c\\0&b&0\end{pmatrix},
+\]
+and then by $Q^{\mathsf T}$ on the right gives
 \[
 Q_3TQ_3^{\mathsf T}=\operatorname{diag}(b,a,c),\qquad
 Q_1TQ_1^{\mathsf T}=\operatorname{diag}(a,c,b).
@@ -175,7 +187,8 @@ If $i$ coincides with one of $k,l,m$, cyclically arrange $i=k$. Then
 R_{iilm}+R_{ilmi}+R_{imil}
 =0-R_{ilim}+R_{ilim}=0,
 \]
-where the last equality uses pair exchange as well as antisymmetry.
+because $R_{ilmi}=-R_{ilim}$ by antisymmetry in the last pair, and
+$R_{imil}=R_{ilim}$ by pair exchange.
 Thus a new restriction is possible only when all four indices differ.
 For the four available indices it is
 \[
@@ -185,20 +198,26 @@ R_{0123}+R_{0231}+R_{0312}=0,
 \]
 All other orderings give this same equation, possibly with the opposite
 sign. To see why, set
-$B_{iklm}=R_{iklm}+R_{ilmk}+R_{imkl}$. Interchanging $k,l$ changes all three terms' signs, because
+$B_{iklm}=R_{iklm}+R_{ilmk}+R_{imkl}$. Interchanging $k,l$ changes all
+three terms' signs, by antisymmetry in the last pair:
 \[
 B_{ilkm}=R_{ilkm}+R_{ikml}+R_{imlk}
 =-R_{ilmk}-R_{iklm}-R_{imkl}=-B_{iklm}.
 \]
 Interchanging $i,k$ gives
 \[
-B_{kilm}=-R_{iklm}-R_{imkl}-R_{ilmk}=-B_{iklm},
+B_{kilm}=R_{kilm}+R_{klmi}+R_{kmil}
+=-R_{iklm}-R_{imkl}-R_{ilmk}=-B_{iklm}.
 \]
-using pair exchange in the last two terms. Together with the cyclic
-symmetry in $k,l,m$, these interchanges make $B$ completely
-antisymmetric. Its only independent entry in four dimensions is
-$B_{0123}$. The displayed relation is nontrivial, so it removes exactly
-one of the 21 parameters. The final number is
+Here $R_{kilm}=-R_{iklm}$, while pair exchange followed by antisymmetry
+gives $R_{klmi}=R_{mikl}=-R_{imkl}$ and $R_{kmil}=R_{ilkm}=-R_{ilmk}$.
+A cyclic permutation of $k,l,m$ merely permutes the three terms of $B$,
+so $B$ is unchanged by it. Together with this cyclic symmetry, the two
+interchanges make $B$ completely antisymmetric. Its only independent
+entry in four dimensions is $B_{0123}$. The displayed relation is
+nontrivial: it links three different entries above the diagonal of the
+symmetric array $C$, which are independent among the 21 parameters. It
+therefore removes exactly one of them. The final number is
 \[
 \boxed{21-1=20.}
 \]
@@ -232,11 +251,15 @@ case $n=0$. In this case the derivative does yield a covariant vector (tensor
 of rank $1$).
 \solution
 A change between orthonormal Cartesian systems has the form
-$x'^i=Q_{ia}x^a+b^i$, where $Q$ is constant and $Q^{\mathsf T}Q=I$.
-Because $x^a=Q_{ia}(x'^i-b^i)$, the chain rule gives
+$x'^i=Q_{ia}x^a+s^i$, where $Q$ and the shift $s^i$ are constant and
+$Q^{\mathsf T}Q=I$. Multiplying by $Q_{ib}$, summing over $i$, and using
+$Q_{ib}Q_{ia}=\delta_{ba}$ gives the inverse map
+$x^b=Q_{ib}(x'^i-s^i)$, so $\partial x^b/\partial x'^j=Q_{jb}$. The
+chain rule then gives
 \[
 \partial'_j\equiv\frac{\partial}{\partial x'^j}
-=Q_{jb}\frac{\partial}{\partial x^b}=Q_{jb}\partial_b.
+=\frac{\partial x^b}{\partial x'^j}\frac{\partial}{\partial x^b}
+=Q_{jb}\partial_b.
 \]
 For a rank-$n$ tensor, its Cartesian component law is
 \[
@@ -252,7 +275,17 @@ produces no derivatives of them:
 There is one transformation factor for each of the original $n$ indices
 and one more for $j$. This is precisely a tensor law of rank $n+1$.
 For general coordinates the Jacobian factors depend on position, and
-differentiating them gives extra terms; a scalar has no such factors,
+differentiating them gives extra terms. For a covariant vector, for
+instance,
+\[
+\partial'_jV'_i
+=\frac{\partial}{\partial x'^j}
+ \Bigl(\frac{\partial x^a}{\partial x'^i}V_a\Bigr)
+=\frac{\partial x^a}{\partial x'^i}\frac{\partial x^b}{\partial x'^j}
+ \partial_bV_a
+ +\frac{\partial^2x^a}{\partial x'^j\partial x'^i}V_a,
+\]
+and the last term spoils the tensor law. A scalar has no such factors,
 so its ordinary first derivative remains a covector in general coordinates.
 
 \Needspace{5\baselineskip}
@@ -274,6 +307,9 @@ D'_{ik\cdots}
 &=Q_{ia}Q_{kc}\cdots\partial_bT_{abc\cdots}
  =Q_{ia}Q_{kc}\cdots D_{ac\cdots}.
 \end{align*}
+The constant $Q$'s were taken outside the derivative, and the fourth line
+uses orthogonality,
+$\sum_jQ_{jd}Q_{jb}=(Q^{\mathsf T}Q)_{db}=\delta_{db}$.
 Differentiation introduces one index and contraction removes two, leaving
 $n+1-2=n-1$ free indices. The displayed law verifies that the result is a
 rank-$(n-1)$ tensor. In the rank-one case the same calculation gives the
@@ -302,13 +338,28 @@ Since $x_4=ict$, differentiation at fixed spatial coordinates gives
 =-\frac{1}{c^2}\frac{\partial^2}{\partial t^2}.
 \]
 Thus $\sum_{a=1}^4\partial_a^2$ is the stated operator. In these complex
-coordinates a Lorentz transformation is represented by a constant
-complex orthogonal matrix $Q$: it preserves
-$x_1^2+x_2^2+x_3^2+x_4^2=\mathbf{x}^2-c^2t^2$, so
-$Q^{\mathsf T}Q=I$. These are complex rotations, not arbitrary real
+coordinates a Lorentz transformation $x'=Qx$ is represented by a
+constant complex orthogonal matrix $Q$: it preserves
+$x_1^2+x_2^2+x_3^2+x_4^2=\mathbf{x}^2-c^2t^2$, that is,
+$x^{\mathsf T}(Q^{\mathsf T}Q-I)x=0$ for every event $x$. The matrix in
+parentheses is symmetric, and a symmetric matrix whose quadratic form
+vanishes identically is zero (polarization, as in Exercise 4.1.10);
+hence $Q^{\mathsf T}Q=I$. For example, the boost $x_1'=\gamma(x_1-\beta ct)$,
+$t'=\gamma(t-\beta x_1/c)$ reads
+\[
+x_1'=\gamma(x_1+i\beta x_4),\quad x_4'=\gamma(x_4-i\beta x_1),
+\qquad
+\begin{pmatrix}Q_{11}&Q_{14}\\Q_{41}&Q_{44}\end{pmatrix}
+=\begin{pmatrix}\gamma&i\beta\gamma\\-i\beta\gamma&\gamma\end{pmatrix},
+\]
+and this block satisfies $Q^{\mathsf T}Q=I$: the diagonal entries of
+the product are $\gamma^2+(i\beta\gamma)^2=\gamma^2(1-\beta^2)=1$, and
+the off-diagonal ones are $i\beta\gamma^2-i\beta\gamma^2=0$.
+These are complex rotations, not arbitrary real
 Euclidean rotations mixing the physical time and space coordinates.
-The chain rule gives $\partial'_a=Q_{ab}\partial_b$. Hence, acting on a
-scalar function,
+Since $x=Q^{\mathsf T}x'$, that is, $x_b=Q_{ab}x'_a$, the chain rule gives
+$\partial'_a=(\partial x_b/\partial x'_a)\partial_b=Q_{ab}\partial_b$.
+Hence, acting on a scalar function,
 \begin{align*}
 \sum_a\partial'^2_a
 &=\sum_{a,b,d}Q_{ab}Q_{ad}\partial_b\partial_d\\
@@ -337,8 +388,9 @@ K_{ij}A_iB_j
 =K'_{pq}Q_{pi}Q_{qj}A_iB_j.
 \]
 Choose $A$ and $B$ successively to be each pair of coordinate unit
-vectors. Because every such choice is permitted, the coefficient of
-each $A_iB_j$ must agree:
+vectors, $A_i=\delta_{im}$ and $B_j=\delta_{jn}$; every such choice is
+permitted. The sums over $i$ and $j$ then collapse, leaving
+$K_{mn}=Q_{pm}Q_{qn}K'_{pq}$ for all $m,n$. Renaming $m,n$ as $i,j$,
 \[
 K_{ij}=Q_{pi}Q_{qj}K'_{pq}.
 \]
@@ -383,9 +435,11 @@ second-rank tensors, show that $K$ is a second-rank tensor also.
 \solution
 Write the contraction as the matrix equation $KA=B$. Under a
 Cartesian rotation $Q$, the two known tensors transform as
-$A'=QAQ^{\mathsf T}$ and $B'=QBQ^{\mathsf T}$. Consequently
+$A'=QAQ^{\mathsf T}$ and $B'=QBQ^{\mathsf T}$. Substituting $B=KA$ and
+inserting $Q^{\mathsf T}Q=I$ between $K$ and $A$,
 \[
 B'=QKAQ^{\mathsf T}
+  =QK(Q^{\mathsf T}Q)AQ^{\mathsf T}
   =(QKQ^{\mathsf T})(QAQ^{\mathsf T})
   =(QKQ^{\mathsf T})A'.
 \]
@@ -424,7 +478,8 @@ another form of the quotient theorem.)
 \erratum{The numerical Levi-Civita symbol in this question uses
 orthonormal Cartesian axes. General curvilinear coordinates require the
 metric-dependent volume tensor, rather than the same numerical symbol.}
-First invert the stated relation. The contraction identity
+First invert the stated relation: multiply it by $\epsilon_{\ell mi}$
+and sum over $i$. The contraction identity
 \[
 \epsilon_{\ell mi}\epsilon_{ijk}
 =\delta_{\ell j}\delta_{mk}-\delta_{\ell k}\delta_{mj}
@@ -436,11 +491,13 @@ gives
 =\frac12(C_{\ell m}-C_{m\ell})=C_{\ell m}.
 \]
 Here antisymmetry was essential in the final step. Thus
-$C_{jk}=\epsilon_{jki}C_i$, in every coordinate system.
+$C_{jk}=\epsilon_{jki}C_i$, in every orthonormal Cartesian system.
 
 For an orthogonal change of Cartesian axes $Q$, put $d=\det Q=\pm1$.
-A pseudovector obeys $C'_i=dQ_{ia}C_a$, while the numerical Levi-Civita
-symbols obey the determinant identity
+A pseudovector obeys $C'_i=dQ_{ia}C_a$. For the numerical Levi-Civita
+symbols, the expansion of a determinant gives
+$Q_{jb}Q_{kc}Q_{i\ell}\epsilon_{bc\ell}=(\det Q)\epsilon_{jki}$;
+multiplying by $d$ and using $d^2=1$ yields
 \[
 \epsilon_{jki}=dQ_{jb}Q_{kc}Q_{i\ell}\epsilon_{bc\ell}.
 \]
@@ -452,7 +509,9 @@ C'_{jk}
 &=Q_{jb}Q_{kc}\delta_{\ell a}\epsilon_{bc\ell}C_a\\
 &=Q_{jb}Q_{kc}C_{bc}.
 \end{align*}
-We used $d^2=1$ and $\sum_iQ_{i\ell}Q_{ia}=\delta_{\ell a}$.
+We used $d^2=1$, $\sum_iQ_{i\ell}Q_{ia}=\delta_{\ell a}$, and, in the
+last line, the inverted relation $\epsilon_{bca}C_a=C_{bc}$ in the
+original axes.
 This is the ordinary second-rank tensor law, including reflections.
 
 \Needspace{5\baselineskip}
@@ -511,6 +570,10 @@ partial derivatives commute. With repeated indices summed,
 \]
 Interchanging the dummy indices $i,j$ changes $\epsilon_{ijk}$ to its
 negative but leaves $\partial_i\partial_jA^k$ unchanged. More explicitly,
+relabeling gives
+$\epsilon_{ijk}\partial_i\partial_jA^k=\epsilon_{jik}\partial_j\partial_iA^k
+=-\epsilon_{ijk}\partial_j\partial_iA^k$, and the average of these two
+forms is
 \[
 \epsilon_{ijk}\partial_i\partial_jA^k
 =\frac12\epsilon_{ijk}
@@ -561,7 +624,14 @@ The same calculation with the indices arranged as in (b) gives
 \qquad
 (\delta^i_l\delta^j_k)'=\delta^i_l\delta^j_k.
 \]
-Since transformation is linear, adding these two equations proves
+The second pairs the indices crosswise; with upper indices $i,j$ and
+lower indices $k,l$ its transformation reads
+\[
+Q_{ia}Q_{jc}Q_{kb}Q_{ld}\delta^a_d\delta^c_b
+=\Bigl(\sum_aQ_{ia}Q_{la}\Bigr)\Bigl(\sum_cQ_{jc}Q_{kc}\Bigr)
+=\delta^i_l\delta^j_k.
+\]
+Since transformation is linear, adding the two invariance equations proves
 $B'{}^{ij}_{kl}=B^{ij}_{kl}$, and subtracting them proves
 $C'{}^{ij}_{kl}=C^{ij}_{kl}$. Thus all three tensors are isotropic.
 The argument in fact also allows orthogonal reflections.
@@ -650,6 +720,9 @@ Multiply the given equation by $\epsilon^{mnk}$ and sum $k$:
 &=\frac12(B^{mn}-B^{nm})\\
 &=\frac12(B^{mn}+B^{mn})=B^{mn}.
 \end{align*}
+The second line is the contraction identity of Exercise 4.2.1 (in
+Cartesian coordinates upper and lower indices are equivalent), and the
+last line uses $B^{nm}=-B^{mn}$.
 This is the stated inverse relation. It also checks the factor $1/2$:
 without it the two antisymmetric terms would produce $2B^{mn}$.
 
@@ -673,16 +746,22 @@ permutations.}
 $\boldsymbol{\varepsilon}^{i}$ define the reciprocal lattice space of
 Example 3.2.1.
 \solution
-The reciprocal basis is defined by
+The reciprocal basis is characterized by
 $\boldsymbol\varepsilon^i\cdot\boldsymbol\varepsilon_\ell
-=\delta^i_\ell$. Let
+=\delta^i_\ell$: with $\boldsymbol\varepsilon^i=\nabla q^i$ and
+$\boldsymbol\varepsilon_\ell=\partial\mathbf r/\partial q^\ell$, the chain
+rule gives
+$\nabla q^i\cdot\partial\mathbf r/\partial q^\ell
+=\partial q^i/\partial q^\ell=\delta^i_\ell$. Let
 \[
 D=(\boldsymbol\varepsilon_1\times\boldsymbol\varepsilon_2)
  \cdot\boldsymbol\varepsilon_3.
 \]
 Linear independence implies $D\ne0$, and the specified right-handedness
-makes $D>0$. Cyclic permutations preserve this scalar triple product.
-For cyclic $(i,j,k)$ define
+makes $D>0$. Cyclic permutations preserve this scalar triple product,
+so for cyclic $(i,j,k)$ the denominator in the formula is
+$(\boldsymbol\varepsilon_j\times\boldsymbol\varepsilon_k)
+\cdot\boldsymbol\varepsilon_i=D$, and the right side of the formula is
 \[
 \mathbf b^i=\frac{\boldsymbol\varepsilon_j\times
                          \boldsymbol\varepsilon_k}{D}.
@@ -718,9 +797,11 @@ Put $h_i=|\boldsymbol\varepsilon_i|>0$. Orthogonality means
 g_{ij}=\boldsymbol\varepsilon_i\cdot\boldsymbol\varepsilon_j
 =\begin{cases}h_i^2,&i=j,\\0,&i\ne j.\end{cases}
 \]
-Thus (a) the covariant metric is diagonal. Its inverse must satisfy
-$\sum_jg^{ij}g_{jk}=\delta^i_k$. For a diagonal matrix this reads
-$g^{ik}h_k^2=\delta^i_k$, so
+Thus (a) the covariant metric is diagonal. The contravariant metric
+$g^{ij}=\boldsymbol\varepsilon^i\cdot\boldsymbol\varepsilon^j$ is its
+inverse, $\sum_jg^{ij}g_{jk}=\delta^i_k$ (Exercise 4.3.3). For a diagonal
+$g_{jk}$ only the term $j=k$ survives, so this reads
+$g^{ik}h_k^2=\delta^i_k$ (no sum), and
 \[
 g^{ik}=0\quad(i\ne k),\qquad
 \boxed{g^{ii}=h_i^{-2}=1/g_{ii}}
@@ -729,7 +810,8 @@ g^{ik}=0\quad(i\ne k),\qquad
 This proves (b). To obtain (c), observe that
 $\boldsymbol\varepsilon_i/h_i^2$ has scalar product $1$ with
 $\boldsymbol\varepsilon_i$ and $0$ with all the other basis vectors.
-It is consequently the reciprocal vector:
+By the uniqueness argument of Exercise 4.3.1, it is consequently the
+reciprocal vector:
 \[
 \boldsymbol\varepsilon^i
 =\frac{\boldsymbol\varepsilon_i}{h_i^2},\qquad
@@ -784,8 +866,10 @@ Commuting the mixed second derivatives of $\mathbf r$ gives
 =\Gamma^m_{kj}\boldsymbol\varepsilon_m.
 \]
 Linear independence of the basis forces equality of each coefficient:
-$\boxed{\Gamma^m_{jk}=\Gamma^m_{kj}}$. Equivalently, dot the equality
-with $\boldsymbol\varepsilon^m$. This is the symmetry of the coordinate
+$\boxed{\Gamma^m_{jk}=\Gamma^m_{kj}}$. Equivalently, take the scalar
+product of both sides with $\boldsymbol\varepsilon^n$ and use
+$\boldsymbol\varepsilon_m\cdot\boldsymbol\varepsilon^n=\delta^n_m$ to
+obtain $\Gamma^n_{jk}=\Gamma^n_{kj}$. This is the symmetry of the coordinate
 Christoffel connection used here; it is not a claim that every possible
 connection has zero torsion.
 
@@ -808,7 +892,11 @@ Its squared lengths are $1,\rho^2,1$. The only potentially nonzero
 off-diagonal scalar product is
 $\boldsymbol\varepsilon_\rho\cdot\boldsymbol\varepsilon_\phi
 =-\rho\cos\phi\sin\phi+\rho\sin\phi\cos\phi=0$;
-the other off-diagonal scalar products also vanish. Therefore
+the other off-diagonal scalar products also vanish, because
+$\boldsymbol\varepsilon_z$ has no $x,y$ components while
+$\boldsymbol\varepsilon_\rho$ and $\boldsymbol\varepsilon_\phi$ have no
+$z$ component. The basis is orthogonal, so by Exercise 4.3.2(b) the
+contravariant metric has the reciprocal diagonal entries. Therefore
 \[
 \boxed{(g_{ij})=\begin{pmatrix}1&0&0\\0&\rho^2&0\\0&0&1\end{pmatrix},
 \qquad
@@ -832,7 +920,10 @@ V_{i;j}\equiv\frac{\partial V_{i}}{\partial q^{j}}-V_{k}\Gamma_{ij}^{k}.
 =\delta_{j}^{i}.
 \]
 \solution
-Differentiate the reciprocal-basis identity with respect to $q^j$:
+Differentiate the reciprocal-basis identity of the hint, written as
+$\boldsymbol\varepsilon^i\cdot\boldsymbol\varepsilon_k=\delta^i_k$, with
+respect to $q^j$, using
+$\partial_j\boldsymbol\varepsilon_k=\Gamma^m_{kj}\boldsymbol\varepsilon_m$:
 \[
 0=\partial_j(\boldsymbol\varepsilon^i\cdot\boldsymbol\varepsilon_k)
 =(\partial_j\boldsymbol\varepsilon^i)\cdot\boldsymbol\varepsilon_k
@@ -841,8 +932,9 @@ Differentiate the reciprocal-basis identity with respect to $q^j$:
 \]
 The last term is $\Gamma^i_{kj}$, so
 $(\partial_j\boldsymbol\varepsilon^i)\cdot\boldsymbol\varepsilon_k
-=-\Gamma^i_{kj}$. Expanding this derivative in the reciprocal basis
-therefore gives
+=-\Gamma^i_{kj}$. Expanding this derivative in the reciprocal basis,
+$\mathbf w=(\mathbf w\cdot\boldsymbol\varepsilon_k)\boldsymbol\varepsilon^k$
+(Exercise 4.3.3), therefore gives
 \[
 \partial_j\boldsymbol\varepsilon^i
 =-\Gamma^i_{kj}\boldsymbol\varepsilon^k.
@@ -857,7 +949,8 @@ $\mathbf V=V_i\boldsymbol\varepsilon^i$. Differentiation gives
   -V_i\Gamma^i_{kj}\boldsymbol\varepsilon^k\\
 &=(\partial_jV_i-V_k\Gamma^k_{ij})\boldsymbol\varepsilon^i.
 \end{align*}
-In the last line the dummy indices in the second term were relabeled.
+In the last line the dummy indices in the second term were relabeled,
+$i\leftrightarrow k$.
 The coefficients of the reciprocal basis are the covariant components
 of the derivative, hence
 \[
@@ -875,7 +968,9 @@ that
 \]
 \solution
 Start from $V_i=g_{ik}V^k$. We first need the derivative of the
-metric. By differentiating its basis-vector definition,
+metric. Differentiate its basis-vector definition with the product rule
+and use
+$\partial_j\boldsymbol\varepsilon_i=\Gamma^m_{ij}\boldsymbol\varepsilon_m$:
 \begin{align*}
 \partial_jg_{ik}
 &=\partial_j(\boldsymbol\varepsilon_i\cdot\boldsymbol\varepsilon_k)\\
@@ -899,8 +994,10 @@ V_{i;j}
 &=g_{ik}\bigl(\partial_jV^k+\Gamma^k_{mj}V^m\bigr)
  =\boxed{g_{ik}V^k{}_{;j}}.
 \end{align*}
-The two terms containing $\Gamma^m_{ij}g_{mk}V^k$ cancel exactly;
-only dummy-index relabeling is used in the last line.
+In the second line $V_\ell=g_{\ell k}V^k$; in the third the dummy
+$\ell$ of the last term was renamed $m$. The two terms containing
+$\Gamma^m_{ij}g_{mk}V^k$ then cancel exactly; only the dummy-index
+relabeling $m\leftrightarrow k$ is used in the last line.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -925,7 +1022,10 @@ only the last derivative can survive, and only when $i=j=\phi$:
 =\frac12g^{\rho\rho}(0+0-\partial_\rho g_{\phi\phi})
 =-\rho.
 \]
-For an upper $\phi$ index, the first or second derivative survives:
+For an upper $\phi$ index the inverse metric selects $\ell=\phi$. The
+last derivative, $\partial_\phi g_{ij}$, is zero; the first survives
+only for $i=\rho$, $j=\phi$, and the second only for $i=\phi$,
+$j=\rho$:
 \[
 \Gamma^\phi_{\rho\phi}
 =\frac12g^{\phi\phi}(\partial_\rho g_{\phi\phi}+0-0)
@@ -940,6 +1040,15 @@ There are no other nonzero possibilities. Thus the complete list is
 \boxed{\Gamma^\rho_{\phi\phi}=-\rho,\qquad
 \Gamma^\phi_{\rho\phi}=\Gamma^\phi_{\phi\rho}=\rho^{-1}.}
 \]
+As a check against the definition
+$\partial_j\boldsymbol\varepsilon_i=\Gamma^k_{ij}\boldsymbol\varepsilon_k$,
+differentiate the basis vectors of Exercise 4.3.5:
+$\partial_\phi\boldsymbol\varepsilon_\phi
+=(-\rho\cos\phi,-\rho\sin\phi,0)=-\rho\,\boldsymbol\varepsilon_\rho$ and
+$\partial_\phi\boldsymbol\varepsilon_\rho
+=\partial_\rho\boldsymbol\varepsilon_\phi
+=(-\sin\phi,\cos\phi,0)=\boldsymbol\varepsilon_\phi/\rho$, while all
+other derivatives vanish.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1003,19 +1112,23 @@ For the inverse metric, differentiate $g^{ia}g_{ab}=\delta^i_b$:
 \[
 (\partial_kg^{ia})g_{ab}+g^{ia}\partial_kg_{ab}=0.
 \]
-Multiply by $g^{bj}$ and sum $b$. This isolates
+Multiply by $g^{bj}$ and sum $b$. Since $g_{ab}g^{bj}=\delta^j_a$, the
+first term becomes $\partial_kg^{ij}$, which is thereby isolated:
 \begin{align*}
 \partial_kg^{ij}
 &=-g^{ia}(\partial_kg_{ab})g^{bj}\\
 &=-g^{ia}(\Gamma^m_{ak}g_{mb}+\Gamma^m_{bk}g_{am})g^{bj}\\
 &=-g^{ia}\Gamma^j_{ak}-\Gamma^i_{bk}g^{bj}.
 \end{align*}
-The contravariant derivative has a plus connection term for each
-upper index. Consequently
-\[
+The last line uses $g_{mb}g^{bj}=\delta^j_m$ and
+$g^{ia}g_{am}=\delta^i_m$. The contravariant derivative has a plus
+connection term for each upper index. Renaming the dummies $a,b$ as $m$,
+\begin{align*}
 g^{ij}{}_{;k}
-=\partial_kg^{ij}+\Gamma^i_{mk}g^{mj}+\Gamma^j_{mk}g^{im}=0.
-\]
+&=\partial_kg^{ij}+\Gamma^i_{mk}g^{mj}+\Gamma^j_{mk}g^{im}\\
+&=-g^{im}\Gamma^j_{mk}-\Gamma^i_{mk}g^{mj}
+  +\Gamma^i_{mk}g^{mj}+\Gamma^j_{mk}g^{im}=0.
+\end{align*}
 Both cancellations rely on the metric-compatible Christoffel
 connection used in this section.
 
@@ -1039,9 +1152,19 @@ For completeness, the contraction in the middle expression satisfies
 =\partial_m\log\sqrt g.
 \]
 The last two derivatives in parentheses cancel after interchanging the
-dummy indices $i,\ell$; the determinant derivative
-$\partial_mg=g\,g^{i\ell}\partial_mg_{\ell i}$ proves the last equality.
-The product rule then gives the first displayed formula.
+dummy indices $i,\ell$ in one of them and using the symmetry of
+$g^{i\ell}$ and $g_{\ell m}$. The last equality is the determinant
+derivative $\partial_mg=g\,g^{i\ell}\partial_mg_{\ell i}$: by the chain
+rule, $\partial_mg$ is the sum over entries of
+$(\partial g/\partial g_{\ell i})\,\partial_mg_{\ell i}$, and
+$\partial g/\partial g_{\ell i}$ is the cofactor of $g_{\ell i}$, which
+equals $g\,g^{i\ell}$ by the cofactor formula for the inverse matrix.
+The product rule then gives the first displayed formula:
+\[
+\frac1{\sqrt g}\partial_i(\sqrt g\,V^i)
+=\partial_iV^i+V^m\partial_m\log\sqrt g
+=\partial_iV^i+\Gamma^i_{mi}V^m.
+\]
 
 In spherical polar coordinates $q^i=(r,\theta,\phi)$,
 \[
@@ -1050,12 +1173,15 @@ g_{ij}=\operatorname{diag}(1,r^2,r^2\sin^2\theta),\qquad
 \]
 on the usual regular chart $r>0$, $0<\theta<\pi$. Let
 $V_r,V_\theta,V_\phi$ denote components along the \emph{unit} vectors.
-The coordinate basis has lengths $1,r,r\sin\theta$, so
+The coordinate basis vectors have lengths $\sqrt{g_{ii}}=1,r,r\sin\theta$,
+so comparing $\mathbf V=V^i\boldsymbol\varepsilon_i$ with the unit-vector
+expansion gives
 \[
 V^r=V_r,\qquad V^\theta=\frac{V_\theta}{r},\qquad
 V^\phi=\frac{V_\phi}{r\sin\theta}.
 \]
-Insert these quantities before differentiating:
+Thus $\sqrt g\,V^r=r^2\sin\theta\,V_r$, $\sqrt g\,V^\theta=r\sin\theta\,V_\theta$,
+and $\sqrt g\,V^\phi=rV_\phi$. Insert these quantities before differentiating:
 \begin{align*}
 \nabla\cdot\mathbf V
 &=\frac1{r^2\sin\theta}
