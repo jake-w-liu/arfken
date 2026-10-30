@@ -1505,47 +1505,66 @@ the behavior of $g(w)$.
 \solution
 \erratum{Infinity corresponds to $w=1/z\to0$, hence to $|z|\to\infty$,
 not to $|z|\to0$ as the printed hint says.} The nature of the
-singularity at infinity is the nature of $f(1/w)$ at zero, whereas its
-residue is
+singularity at infinity is the nature of $f(1/w)$ at zero. For the
+residue, $z=1/w$ gives $dz=-dw/w^2$, so $f(z)\,dz=g(w)\,dw$ with
+$g(w)=-f(1/w)/w^2$, and, as the hint says, the residue at infinity is
+that of $g$ at $w=0$:
 \[
 \operatorname{Res}_{\infty}f
 =\operatorname{Res}_{w=0}\left[-\frac{f(1/w)}{w^2}\right].
 \]
 These are different transformations: the second includes the differential.
 
-\textbf{(a)--(c)} Factor $z^2+a^2=(z-ia)(z+ia)$. For (a), cancellation
-of the vanishing factor gives
+\textbf{(a)--(c)} Factor $z^2+a^2=(z-ia)(z+ia)$. For (a), both poles
+are simple, and evaluating $(z\mp ia)f(z)=1/(z\pm ia)$ at $z=\pm ia$ gives
 \[
 \operatorname{Res}_{ia}\frac1{z^2+a^2}=\frac1{2ia},\qquad
 \operatorname{Res}_{-ia}\frac1{z^2+a^2}=-\frac1{2ia}.
 \]
-Both poles are simple. For (b), they are double, so
+For (b), the poles are double. The double-pole formula
+$\operatorname{Res}_{z_0}f=\frac{d}{dz}[(z-z_0)^2f(z)]_{z=z_0}$, with
+$(z-ia)^2f(z)=(z+ia)^{-2}$ and $(2ia)^3=8i^3a^3=-8ia^3$, gives
 \[
 \operatorname{Res}_{ia}\frac1{(z^2+a^2)^2}
 =\left.\frac{d}{dz}(z+ia)^{-2}\right|_{ia}
 =-\frac2{(2ia)^3}=\frac1{4ia^3}.
 \]
-Replacing $ia$ by $-ia$ gives $-1/(4ia^3)$. For (c), the double-pole
-formula instead gives
+Each of the functions (a)--(c) depends on $a$ only through $a^2$, so
+replacing $a$ by $-a$ interchanges the poles $\pm ia$: the residue at
+$-ia$ is the residue at $ia$ with $a\to-a$. For (b) it is
+$-1/(4ia^3)$. In (c) the numerator $z^2$ equals $-a^2\ne0$ at $\pm ia$,
+so the poles are again double, and the double-pole formula, now with
+$(z-ia)^2f(z)=z^2/(z+ia)^2$, gives
 \[
 \left.\frac{d}{dz}\frac{z^2}{(z+ia)^2}\right|_{ia}
 =\left.\frac{2z(z+ia)-2z^2}{(z+ia)^3}\right|_{ia}
 =\frac{-2a^2}{-8ia^3}=\frac1{4ia}.
 \]
 The residue at $-ia$ is $-1/(4ia)$. At infinity the three functions
-become
+$f(1/w)$ become, after multiplying numerator and denominator by $w^2$
+or $w^4$,
 \[
 \frac{w^2}{1+a^2w^2},\quad
 \frac{w^4}{(1+a^2w^2)^2},\quad
 \frac{w^2}{(1+a^2w^2)^2}.
 \]
 Thus infinity is removable, with a zero of order $2,4,2$, respectively.
-None of the transformed differentials contains $w^{-1}$, so all three
-residues at infinity are zero.
+The transformed differentials $g(w)=-f(1/w)/w^2$,
+\[
+-\frac1{1+a^2w^2},\quad
+-\frac{w^2}{(1+a^2w^2)^2},\quad
+-\frac1{(1+a^2w^2)^2},
+\]
+are analytic at $w=0$, so all three residues at infinity are zero.
+Consistently, in each case the two finite residues add to zero.
 
-\textbf{(d)} Zero is essential, since multiplication of
-$\sin(1/z)$ by a nonzero analytic function cannot remove its infinitely
-many negative Laurent powers. The other finite singularities are simple:
+\textbf{(d)} Zero is an essential singularity: if $f$ had at most a
+pole there, so would $\sin(1/z)=(z^2+a^2)f(z)$, whose Laurent series
+$\sum_{k\ge0}(-1)^kz^{-2k-1}/(2k+1)!$ has infinitely many negative
+powers. The points $\pm ia$ are simple poles; as in (a), the residue
+there is $\sin(1/z)/(z\pm ia)$ evaluated at $z=\pm ia$, where
+$1/(\pm ia)=\mp i/a$ and $\sin(\mp i/a)=\mp i\sinh(1/a)$ (from
+$\sin iy=i\sinh y$):
 \[
 \operatorname{Res}_{ia}f
 =\frac{\sin(-i/a)}{2ia}
@@ -1554,24 +1573,31 @@ many negative Laurent powers. The other finite singularities are simple:
 =\frac{\sin(i/a)}{-2ia}
 =-\frac{\sinh(1/a)}{2a}.
 \]
-To obtain the residue at zero directly, multiply the convergent Laurent
-series on $0<|z|<a$:
+To obtain the residue at zero directly, multiply two series that
+converge absolutely on $0<|z|<a$, the Laurent series of $\sin(1/z)$
+above and the geometric series
+$1/(z^2+a^2)=a^{-2}(1+z^2/a^2)^{-1}=\sum_{j\ge0}(-1)^jz^{2j}/a^{2j+2}$:
 \[
 \frac{\sin(1/z)}{z^2+a^2}
 =\sum_{j,k\ge0}
 \frac{(-1)^{j+k}z^{2j-2k-1}}{a^{2j+2}(2k+1)!}.
 \]
-A term has exponent $-1$ exactly when $j=k$. Consequently
+A term has exponent $2j-2k-1=-1$ exactly when $j=k$, and then
+$(-1)^{j+k}=1$. Consequently
 \[
 \boxed{\operatorname{Res}_{0}f
 =\sum_{k=0}^{\infty}\frac1{a^{2k+2}(2k+1)!}
+=\frac1a\sum_{k=0}^{\infty}\frac{(1/a)^{2k+1}}{(2k+1)!}
 =\frac{\sinh(1/a)}a}.
 \]
 At infinity $f(1/w)=w^2\sin w/(1+a^2w^2)$ has a zero of order three,
-and its residue at infinity is zero.
+since $\sin w=w+O(w^3)$, and $g(w)=-\sin w/(1+a^2w^2)$ is analytic at
+$w=0$, so the residue at infinity is zero. Consistently, the three
+finite residues add to zero.
 
-\textbf{(e)--(g)} If $D$ has a simple zero $p$, the residue of $N/D$
-is $N(p)/D'(p)$. Applying this rule gives
+\textbf{(e)--(g)} If $D$ has a simple zero $p$ and $N$ is analytic at
+$p$, the residue of $N/D$ is $N(p)/D'(p)$, here with $D'(p)=2p$.
+Applying this rule gives
 \[
 \begin{array}{c|c|c|c}
 &\text{finite poles}&\text{residues in the same order}
@@ -1582,16 +1608,22 @@ is $N(p)/D'(p)$. Applying this rule gives
 \end{array}
 \]
 For example, the first two rows follow from
-$p e^{ip}/(2p)=e^{ip}/2$, and the third from $e^{ip}/(2p)$.
-All these finite poles are simple. Each function has an essential
-singularity at infinity, since $e^{i/w}$ remains after multiplication
-by a nonzero rational factor. Nevertheless its residue there is defined.
-The residue theorem on a large circle, together with the definition
-above, gives
+$p e^{ip}/(2p)=e^{ip}/2$ (for $p=\pm ia$ this is $e^{\mp a}/2$), and
+the third from $e^{ip}/(2p)$ with $p=\pm a$.
+All these finite poles are simple, since the numerators do not vanish
+there. Each function has an essential singularity at infinity:
+$f(1/w)$ is $e^{i/w}$ times a rational function of $w$ that is not
+identically zero, so if $f(1/w)$ had at most a pole at $w=0$, so would
+$e^{i/w}=\sum_{m\ge0}i^mw^{-m}/m!$, which has infinitely many negative
+powers. Nevertheless its residue there is defined. Under $z=1/w$ a
+small counterclockwise circle about $w=0$ becomes a large clockwise
+circle $|z|=R$, so
+$\operatorname{Res}_\infty f=-\frac1{2\pi i}\oint_{|z|=R}f\,dz$ with
+the counterclockwise orientation. For $R>a$ the residue theorem gives
 $\operatorname{Res}_{\infty}f=-\sum_{\text{finite }p}\operatorname{Res}_p f$.
-The sums are $(e^{-a}+e^a)/2$, $(e^{ia}+e^{-ia})/2$, and
-$(e^{ia}-e^{-ia})/(2a)$, which yield the displayed answers.
-\erratum{In (d), the manual gives positive residues at $\pm ia$; both must be $-\sinh(1/a)/(2a)$, as the displayed substitution shows. It reverses the paired exponents in (e), giving
+The sums are $(e^{-a}+e^a)/2=\cosh a$, $(e^{ia}+e^{-ia})/2=\cos a$, and
+$(e^{ia}-e^{-ia})/(2a)=i\sin a/a$, which yield the displayed answers.
+\erratum{In (d), the Instructor's Manual gives positive residues at $\pm ia$; both must be $-\sinh(1/a)/(2a)$, as the displayed substitution shows. It reverses the paired exponents in (e), giving
 $e^{\pm a}/2$ at $\pm ia$. Its (f) incorrectly uses poles $\pm ia$
 and residues $-ie^{\mp a}/2$, although the denominator is $z^2-a^2$.
 In (g) it reverses the exponential signs as well. Substitution into
@@ -1599,15 +1631,18 @@ $N(p)/D'(p)$ gives the table above, with each residue paired to its pole.}
 
 \textbf{(h)} The nonintegral power produces branch points at zero and
 infinity: continuation once around zero multiplies $z^{-k}$ by
-$e^{-2\pi i k}$, while $f(1/w)=w^{k+1}/(1+w)$ is also multivalued at
-$w=0$. A rational $k=p/q$ in lowest terms gives $q$ sheets; irrational
-$k$ gives infinitely many. On any local branch at $-1$ there is a
-simple pole with
+$e^{-2\pi i k}\ne1$, while $f(1/w)=w^{-k}\cdot w/(1+w)=w^{k+1}/(1+w)$
+is also multivalued at $w=0$. A rational $k=p/q$ in lowest terms gives
+$q$ sheets; irrational $k$ gives infinitely many. On any local branch
+at $-1$ the numerator is analytic and nonzero, so there is a simple
+pole whose residue is the value of $z^{-k}$ at $-1$ on that branch,
+$e^{-ik\arg(-1)}$ with $\arg(-1)=(2m+1)\pi$:
 \[
 \boxed{\operatorname{Res}_{-1}f=(-1)^{-k}
 =e^{-ik(2m+1)\pi}}.
 \]
-For the branch $0<\arg z<2\pi$, take $m=0$.
+For the branch $0<\arg z<2\pi$, $\arg(-1)=\pi$: take $m=0$, so the
+residue is $e^{-ik\pi}$.
 \erratum{The residue depends on the branch. Ordinary Laurent residues
 at the branch points zero and infinity are not defined.}
 
@@ -1616,14 +1651,19 @@ at the branch points zero and infinity are not defined.}
 \noindent\textbf{11.7.2}\quad Evaluate the residues at $z=0$ and $z=-1$ of
 $\pi\cot\pi z/z(z+1)$.
 \solution
-Use $\pi\cot\pi z=z^{-1}-(\pi^2/3)z+O(z^3)$. At zero,
+From $\cot x=\cos x/\sin x=x^{-1}(1-x^2/2+\cdots)(1-x^2/6+\cdots)^{-1}
+=x^{-1}-x/3+O(x^3)$ with $x=\pi z$,
+$\pi\cot\pi z=z^{-1}-(\pi^2/3)z+O(z^3)$. At zero, divide this by $z$
+and expand $1/(1+z)$ in a geometric series:
 \[
 \frac{\pi\cot\pi z}{z(z+1)}
 =\left(\frac1{z^2}-\frac{\pi^2}{3}+O(z^2)\right)
 (1-z+z^2-\cdots)
 =\frac1{z^2}-\frac1z+O(1).
 \]
-At $z=-1$, put $w=z+1$ and use the period one of $\cot\pi z$:
+At $z=-1$, put $w=z+1$. The period one of $\cot\pi z$ gives
+$\pi\cot\pi z=\pi\cot\pi w=w^{-1}+O(w)$, while $z(z+1)=(w-1)w$ and
+$1/(w-1)=-(1+w+w^2+\cdots)$:
 \[
 \frac{\pi\cot\pi z}{z(z+1)}
 =\frac{w^{-1}+O(w)}{w(w-1)}
@@ -1645,8 +1685,17 @@ integral $\mathrm{Ei}(x)$ for $x>0$ is the Cauchy principal value integral
 where the integration range is cut at $\erratum{t=0}$. Show that this definition yields
 a convergent result for positive $x$.
 \solution
+\erratum{The printed problem says the range is cut at $x=0$; the
+singular point of the integrand is $t=0$, while $x>0$ is the upper
+limit.}
 Fix $x>0$ and choose $0<\delta<x$. Split the negative side at $-x$
-and change $t=-u$ in the interval $[-x,-\delta]$:
+and change $t=-u$, $dt=-du$, in the interval $[-x,-\delta]$:
+\[
+\int_{-x}^{-\delta}\frac{e^t}{t}\,dt
+=\int_{x}^{\delta}\frac{e^{-u}}{-u}\,(-du)
+=-\int_\delta^x\frac{e^{-u}}u\,du.
+\]
+Inserting this after the split,
 \[
 \begin{aligned}
 \int_{-\infty}^{-\delta}\frac{e^t}{t}\,dt+
@@ -1658,9 +1707,12 @@ and change $t=-u$ in the interval $[-x,-\delta]$:
 +\int_\delta^x\frac{e^u-e^{-u}}u\,du.
 \end{aligned}
 \]
-The first integral converges absolutely by exponential decay. In the
-second, $e^u-e^{-u}=2u+O(u^3)$, so the integrand has the finite limit
-$2$ at zero. Therefore
+The first integral converges absolutely, since $|e^t/t|\le e^t/x$ for
+$t\le-x$ and $\int_{-\infty}^{-x}e^t\,dt=e^{-x}$. In the second,
+$e^u-e^{-u}=2u+O(u^3)$, so the integrand has the finite limit $2$ at
+zero; it extends continuously to $[0,x]$, and the integral over
+$[\delta,x]$ tends to the integral over $[0,x]$ as $\delta\to0$.
+Therefore
 \[
 \boxed{\mathrm{Ei}(x)=
 \int_{-\infty}^{-x}\frac{e^t}{t}\,dt+
@@ -1678,7 +1730,7 @@ deal with the singularity at $x=1$, show that, if $0 < p < 1$,
 \]
 \solution
 \erratum{For the printed denominator $x-1$, the answer is
-$+\pi\cot(\pi p)$, not $-\pi\cot(\pi p)$. The manual derives its negative
+$+\pi\cot(\pi p)$, not $-\pi\cot(\pi p)$. The Instructor's Manual derives its negative
 answer for the different denominator $1-x$.}
 Write the intended integral as
 \[
@@ -1690,31 +1742,51 @@ The endpoint estimates are $O(x^{-p})$ at zero and $O(x^{-p-1})$
 at infinity, so $0<p<1$ makes both endpoints integrable. Only $x=1$
 requires a principal value.
 
-Use $F(z)=z^{-p}/(z-1)$ with $0<\arg z<2\pi$ and a keyhole contour
-about the positive real axis. On the upper bank $z^{-p}=x^{-p}$;
-on the lower bank it equals $q x^{-p}$, where $q=e^{-2\pi ip}$.
-The straight portions, directed outward above and inward below, give
-$(1-q)I$. Exclude the boundary pole at $1$ by semicircles into the
-domain. The upper semicircle is clockwise and contributes $-i\pi$;
-the lower is also clockwise and contributes $-i\pi q$. These limits
-follow by substituting $z-1=\delta e^{i\theta}$; the analytic remainder
-has integral $O(\delta)$. The origin circle is $O(\epsilon^{1-p})$
-and the outer circle is $O(R^{-p})$, so both vanish. No pole remains
-inside the indented contour, hence
+Use $F(z)=z^{-p}/(z-1)$ with $z^{-p}=|z|^{-p}e^{-ip\arg z}$,
+$0<\arg z<2\pi$, and a keyhole contour about the positive real axis.
+On the upper bank ($\arg z=0$) $z^{-p}=x^{-p}$; on the lower bank
+($\arg z=2\pi$) it equals $q x^{-p}$, where $q=e^{-2\pi ip}$.
+The upper bank, directed outward, gives $I$; the lower bank, directed
+inward, gives $\int_\infty^0 qx^{-p}(x-1)^{-1}\,dx=-qI$; together they
+give $(1-q)I$. Exclude the boundary pole at $1$ by semicircles of
+radius $\delta$ into the domain. Near $z=1$, $z^{-p}\to1$ on the upper
+bank and $z^{-p}\to q$ on the lower one, so there
+$F(z)=1/(z-1)+O(1)$ and $F(z)=q/(z-1)+O(1)$, respectively. With
+$z-1=\delta e^{i\theta}$, $\int dz/(z-1)=i\int d\theta$, while the
+bounded remainder contributes $O(\delta)$. The upper semicircle runs
+from $\theta=\pi$ to $\theta=0$ (clockwise) and contributes $-i\pi$; the
+lower one runs from $\theta=0$ to $\theta=-\pi$ (also clockwise) and
+contributes $-i\pi q$. On the origin circle
+$|F|\le\epsilon^{-p}/(1-\epsilon)$ and on the outer circle
+$|F|\le R^{-p}/(R-1)$; times the lengths $2\pi\epsilon$ and $2\pi R$,
+these give $O(\epsilon^{1-p})$ and $O(R^{-p})$, so both vanish. No pole
+remains inside the indented contour, hence
 \[
 (1-q)I-i\pi(1+q)=0.
 \]
-Finally
+Finally, factoring out $e^{-\pi ip}$,
 \[
-1+q=2e^{-\pi ip}\cos\pi p,\qquad
+1+q=e^{-\pi ip}(e^{\pi ip}+e^{-\pi ip})=2e^{-\pi ip}\cos\pi p,\qquad
 1-q=2ie^{-\pi ip}\sin\pi p,
 \]
 and therefore
 \[
 \boxed{\PVint_0^\infty\frac{x^{-p}}{x-1}\,dx
-=i\pi\frac{1+q}{1-q}=\pi\cot\pi p}.
+=i\pi\frac{1+q}{1-q}=i\pi\frac{\cos\pi p}{i\sin\pi p}=\pi\cot\pi p}.
 \]
-For example, $p=1/4$ gives $+\pi$, which also distinguishes the two signs.
+An independent check of the sign: $x=1/u$ turns the part beyond
+$1+\delta$ into $\int_0^{1/(1+\delta)}u^{p-1}(1-u)^{-1}\,du$. Its piece
+between $1-\delta$ and $1/(1+\delta)$ has length $\delta^2/(1+\delta)$
+and integrand at most $(1-\delta)^{p-1}(1+\delta)/\delta$, so it
+vanishes as $\delta\to0$. Hence
+\[
+\PVint_0^\infty\frac{x^{-p}}{x-1}\,dx
+=\int_0^1\frac{x^{p-1}-x^{-p}}{1-x}\,dx,
+\]
+an ordinary integral, since the numerator vanishes at $x=1$. For
+$0<p<\frac12$ we have $p-1<-p$, so the integrand is positive on
+$(0,1)$; the integral is positive, like $\pi\cot\pi p$, whereas
+$-\pi\cot\pi p<0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1730,8 +1802,11 @@ g(z)=\begin{cases}\sin z/z,&z\ne0,\\1,&z=0.\end{cases}
 \]
 The Taylor expansion $g(z)=1-z^2/3!+z^4/5!-\cdots$ gives
 $g(0)=1$ and $g'(0)=0$. Its zeros are the nonzero points $\pm n\pi$,
-each simple. To justify the product for this specific function, use
-the cotangent pole expansion (11.81): on $|z|<\pi$,
+each simple. To justify the product for this specific function,
+differentiate $\ln g=\ln\sin z-\ln z$ and use the cotangent pole
+expansion (11.81), together with
+$\frac{d}{dz}\operatorname{Log}[1-z^2/(n^2\pi^2)]
+=[-2z/(n^2\pi^2)]/[1-z^2/(n^2\pi^2)]$: on $|z|<\pi$,
 \[
 \frac{g'(z)}{g(z)}=\cot z-\frac1z
 =\sum_{n=1}^{\infty}\frac{2z}{z^2-n^2\pi^2}
@@ -1748,7 +1823,8 @@ in this disk and $g(0)=1$, integration gives
 \operatorname{Log}\!\left(1-\frac{z^2}{n^2\pi^2}\right).
 \]
 Exponentiating yields the paired product. Equivalently, the canonical
-factors for opposite zeros are
+factors of (11.88) for $g$, with $g(0)=1$, $g'(0)=0$ (so the
+exponential prefactor is $1$) and the opposite zeros $\pm n\pi$, give
 \[
 g(z)=\prod_{n=1}^{\infty}
 \left(1-\frac{z}{n\pi}\right)e^{z/(n\pi)}
@@ -1775,28 +1851,32 @@ above establishes the sine product without this unjustified generalization.}
 \par\bigskip
 \noindent\textbf{11.7.6}\quad Starting from the observations
 \begin{enumerate}
-\item[1.] $f(z)=\erratum{a_n z^n}$ has $n$ zeros \erratum{counted with multiplicity, where $a_n\ne0$ and $n\ge1$,} and
+\item[1.] $f(z)=a_n z^n$ has $n$ zeros \erratum{counted with multiplicity, where $a_n\ne0$ and $n\ge1$,} and
 \item[2.] for sufficiently large $|R|$,
   $\left|\sum_{m=0}^{n-1}a_{m}R^{m}\right| < |a_{n}R^{n}|$,
 \end{enumerate}
 use Rouch\'e's theorem to prove the fundamental theorem of algebra (namely
 that every polynomial of degree $n$ has $n$ roots).
 \solution
-\erratum{The first comparison function must be the monomial $a_nz^n$,
-as in the textbook, not the full polynomial whose zeros are being proved
-to exist. Zeros are counted with multiplicity.}
+\erratum{The monomial $a_nz^n$ has the single zero $z=0$, so it has
+$n$ zeros only when they are counted with multiplicity; and it has
+degree $n\ge1$ only if $a_n\ne0$.}
 Let
 \[
 P(z)=a_nz^n+\sum_{m=0}^{n-1}a_mz^m,\qquad a_n\ne0,
 \quad S=\sum_{m=0}^{n-1}|a_m|.
 \]
-Choose $R>\max(1,S/|a_n|)$. At every point of $|z|=R$,
+Choose $R>\max(1,S/|a_n|)$. At every point of $|z|=R$, the triangle
+inequality, $R^m\le R^{n-1}$ for $m\le n-1$ (as $R>1$), and
+$S<|a_n|R$ give
 \[
 \left|\sum_{m=0}^{n-1}a_mz^m\right|
 \le\sum_{m=0}^{n-1}|a_m|R^m
 \le SR^{n-1}<|a_n|R^n=|a_nz^n|.
 \]
-Rouch\'e's theorem says that $P$ and $a_nz^n$ have the same number
+Rouch\'e's theorem (if $|g|<|f|$ on a closed contour, then $f$ and
+$f+g$ have the same number of zeros inside it), with $f=a_nz^n$ and
+$g=P-a_nz^n$, says that $P$ and $a_nz^n$ have the same number
 of zeros inside this circle. The monomial has its sole zero at zero,
 of multiplicity $n$, so $P$ has exactly $n$ zeros there. The same
 inequality holds for every larger radius. Any additional finite zero
@@ -1809,23 +1889,28 @@ multiplicity.
 \noindent\textbf{11.7.7}\quad Using Rouch\'e's theorem, show that all the
 zeros of $F(z)=z^{6}-4z^{3}+10$ lie between the circles $|z|=1$ and $|z|=2$.
 \solution
-On $|z|=1$ compare $F$ with the constant $10$:
+Rouch\'e's theorem: if $|g|<|f|$ on a closed contour, then $f$ and
+$f+g$ have the same number of zeros inside it.
+On $|z|=1$ compare $F$ with the constant $f=10$, taking
+$g=z^6-4z^3$:
 \[
-|z^6-4z^3|\le1+4=5<10.
+|z^6-4z^3|\le|z|^6+4|z|^3=1+4=5<10.
 \]
-Rouch\'e's theorem gives no zeros in $|z|<1$ and the strict inequality
-also excludes a zero on the circle. On $|z|=2$, compare with $z^6$:
+The constant has no zeros, so Rouch\'e's theorem gives no zeros in
+$|z|<1$; on the circle itself $|F|\ge10-5>0$, so there is no zero
+there either. On $|z|=2$, compare with $f=z^6$, taking $g=-4z^3+10$:
 \[
 |-4z^3+10|\le4(2^3)+10=42<2^6=64.
 \]
-There are therefore six zeros in $|z|<2$, counted with multiplicity,
-and none on its boundary. A degree-six polynomial has exactly these
-six zeros, so all lie in $1<|z|<2$.
+Since $z^6$ has six zeros (at the origin, with multiplicity), there
+are six zeros of $F$ in $|z|<2$, counted with multiplicity, and none
+on its boundary, where $|F|\ge64-42>0$. A degree-six polynomial has
+exactly six zeros, so all lie in $1<|z|<2$.
 As an independent check, setting $w=z^3$ yields
-$w^2-4w+10=0$, hence $w=2\pm i\sqrt6$. Both values have modulus
-$\sqrt{10}$, so every root satisfies $|z|=10^{1/6}$, strictly between
-one and two.
-\erratum{The manual claims $|z^6+10|>|-4z^3|$ for all points inside $|z|=2$. It fails when $z^3=i\sqrt{10}$: the left side is zero and the right side is positive. The comparisons above apply on the two boundary circles, as required by Rouch\'e's theorem.}
+$w^2-4w+10=0$, hence $w=(4\pm\sqrt{16-40})/2=2\pm i\sqrt6$. Both values
+have modulus $\sqrt{4+6}=\sqrt{10}$, so every root satisfies
+$|z|=|w|^{1/3}=10^{1/6}\approx1.468$, strictly between one and two.
+\erratum{The Instructor's Manual claims $|z^6+10|>|-4z^3|$ for all points inside $|z|=2$. It fails when $z^3=i\sqrt{10}$: the left side is zero and the right side is positive. The comparisons above apply on the two boundary circles, as required by Rouch\'e's theorem.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1833,7 +1918,8 @@ one and two.
 $\csc z$ given in Eqs.~(11.82) and (11.83).
 \solution
 A simple pole of $1/h$ at a simple zero $a$ of $h$ has residue
-$1/h'(a)$. Thus, with $a_n=(n+\tfrac12)\pi$,
+$1/h'(a)$. Thus, with $a_n=(n+\tfrac12)\pi$, $(\cos z)'=-\sin z$,
+$\sin(\pm a_n)=\pm(-1)^n$, and $(\sin z)'=\cos z$, $\cos n\pi=(-1)^n$,
 \[
 \operatorname{Res}_{a_n}\sec z=(-1)^{n+1},\quad
 \operatorname{Res}_{-a_n}\sec z=(-1)^n,\qquad
@@ -1843,22 +1929,33 @@ To justify a pole expansion, integrate $F(\zeta)/(\zeta-z)$ on
 expanding rectangles, with $z$ fixed inside. For $\sec\zeta$, use
 vertical sides $\Re\zeta=\pm N\pi$ and horizontal sides
 $\Im\zeta=\pm N\pi$. On a vertical side
-$|\sec(N\pi+iy)|=\operatorname{sech}y$, and
-$|\zeta-z|^{-1}=O(N^{-1})$; its integral is $O(N^{-1})$
-because $\int_{\mathbb R}\operatorname{sech}y\,dy<\infty$.
-On a horizontal side $|\cos(x+iN\pi)|\ge\sinh N\pi$, so its integral
+$\cos(\pm N\pi+iy)=\cos N\pi\cosh y\mp i\sin N\pi\sinh y=(-1)^N\cosh y$,
+so $|\sec\zeta|=\operatorname{sech}y$, and $|\zeta-z|\ge N\pi-|z|$;
+its integral is at most
+$(N\pi-|z|)^{-1}\int_{\mathbb R}\operatorname{sech}y\,dy=\pi/(N\pi-|z|)$,
+which is $O(N^{-1})$.
+On a horizontal side
+$|\cos(x\pm iN\pi)|^2=\cos^2x+\sinh^2N\pi\ge\sinh^2N\pi$, so its
+integral is at most $2N\pi/[(N\pi-|z|)\sinh N\pi]$ and
 tends to zero exponentially. For $\csc\zeta$, choose vertical sides
 $\Re\zeta=\pm(N+\tfrac12)\pi$ and the same horizontal heights.
-There $|\csc(\pm(N+\tfrac12)\pi+iy)|=\operatorname{sech}y$,
-and the estimates are identical.
+There $\sin(\pm(N+\tfrac12)\pi+iy)=\pm(-1)^N\cosh y$, so
+$|\csc\zeta|=\operatorname{sech}y$, while
+$|\sin(x\pm iN\pi)|^2=\sin^2x+\sinh^2N\pi$;
+the estimates are the same.
 
-The residue theorem therefore gives, in the limit,
+Inside the rectangle, $F(\zeta)/(\zeta-z)$ has residue $F(z)$ at
+$\zeta=z$ and residue $\operatorname{Res}_aF/(a-z)$ at each pole $a$
+of $F$. Since the contour integral tends to zero, the residue theorem
+gives, in the limit,
 \[
 0=F(z)+\sum_a\frac{\operatorname{Res}_a F}{a-z},
 \qquad
 F(z)=\sum_a\frac{\operatorname{Res}_a F}{z-a}.
 \]
-For $\sec z$ pair the poles $a_n$ and $-a_n$:
+The $N$th rectangle contains the poles $\pm a_n$, $n<N$, for $\sec$, and
+$0,\pm\pi,\dots,\pm N\pi$ for $\csc$, so the sums are limits of
+symmetric partial sums. For $\sec z$ pair the poles $a_n$ and $-a_n$:
 \[
 \frac{(-1)^{n+1}}{z-a_n}+\frac{(-1)^n}{z+a_n}
 =\frac{2(-1)^na_n}{a_n^2-z^2}.
@@ -1868,7 +1965,8 @@ For $\csc z$ separate the pole at zero and pair $\pm n\pi$:
 \frac{(-1)^n}{z-n\pi}+\frac{(-1)^n}{z+n\pi}
 =\frac{2(-1)^nz}{z^2-n^2\pi^2}.
 \]
-Consequently, off their poles,
+Consequently, using $2a_n=(2n+1)\pi$ and $a_n^2=(n+\tfrac12)^2\pi^2$,
+off their poles,
 \[
 \boxed{\sec z=\pi\sum_{n=0}^{\infty}
 \frac{(-1)^n(2n+1)}{(n+\tfrac12)^2\pi^2-z^2}},\qquad
@@ -1877,8 +1975,8 @@ Consequently, off their poles,
 \]
 The second paired series is absolutely locally uniformly convergent.
 In the first, the leading term is the convergent alternating series
-$2(-1)^n/a_n$, and subtracting that leading term leaves a locally
-uniform $O(n^{-3})$ series. This specifies the pairing and convergence
+$2(-1)^n/a_n$, and subtracting that leading term leaves
+$2(-1)^nz^2/[a_n(a_n^2-z^2)]$, a locally uniform $O(n^{-3})$ series. This specifies the pairing and convergence
 needed for the pole expansion.
 
 \Needspace{5\baselineskip}
@@ -1889,15 +1987,24 @@ $\oint_{C}f'(z)/f(z)\,dz=2\pi i(N_{f}-P_{f})$, where $N_{f}$ and $P_{f}$ are,
 respectively, the numbers of zeros and poles encircled by $C$ (including
 their multiplicities), \erratum{for a simple positively oriented contour avoiding $0,1,2$.}
 \solution
-Factor the numerator and take its logarithmic derivative algebraically:
+Here $f(z)=z-3+2/z=(z-1)(z-2)/z$ and $f'(z)=1-2/z^2=(z^2-2)/z^2$, so
 \[
-f(z)=\frac{(z-1)(z-2)}z,\qquad
+\frac{f'}f=\frac{z^2-2}{z(z-1)(z-2)}
+=\frac Az+\frac B{z-1}+\frac C{z-2}.
+\]
+Multiplying by each linear factor and setting $z$ equal to its root
+gives $A=(-2)/[(-1)(-2)]=-1$, $B=(-1)/[1\cdot(-1)]=1$, and
+$C=2/(2\cdot1)=1$:
+\[
 \frac{f'}f=\frac1{z-1}+\frac1{z-2}-\frac1z.
 \]
 For a positively oriented simple closed contour through none of
-$0,1,2$, each of the first two fractions integrates to $2\pi i$
+$0,1,2$, $\oint_C dz/(z-c)$ equals $2\pi i$ if $c$ is inside (Cauchy's
+integral formula) and zero if $c$ is outside (Cauchy's theorem). So
+each of the first two fractions integrates to $2\pi i$
 if its pole is inside and to zero otherwise. The last contributes
-$-2\pi i$ if zero is inside. Hence
+$-2\pi i$ if zero is inside. The zeros of $f$ are $1,2$ and its only
+pole is $0$, all simple. Hence
 \[
 \boxed{\oint_C\frac{f'}f\,dz
 =2\pi i\bigl(\mathbf1_{\{1\text{ inside}\}}
@@ -1921,15 +2028,23 @@ does not necessarily hold if the integral encircles a pole of higher order.
 
 \emph{Hint.}~Try $f(z)=z^{-2}$.
 \solution
+\erratum{Even for a simple pole the equality holds only in the limit:
+if $f=a_{-1}/(z-z_0)+g$ with $g$ analytic, the semicircle
+$z-z_0=Re^{i\theta}$, $0\le\theta\le\pi$, gives $i\pi a_{-1}+O(R)$,
+which tends to $\frac12(2\pi ia_{-1})$, half the full-circle integral,
+as $R\to0$.}
 Take $f(z)=z^{-2}$ and the upper semicircle $z=Re^{i\theta}$,
-$0\le\theta\le\pi$. Since $dz=iRe^{i\theta}\,d\theta$,
+$0\le\theta\le\pi$. Since $dz=iRe^{i\theta}\,d\theta$, the integrand
+is $iRe^{i\theta}/(R^2e^{2i\theta})\,d\theta=(i/R)e^{-i\theta}\,d\theta$,
+and with the antiderivative $e^{-i\theta}/(-i)$ and $e^{-i\pi}=-1$,
 \[
 \int_{\text{upper arc}}\frac{dz}{z^2}
 =\frac iR\int_0^\pi e^{-i\theta}\,d\theta
-=-\frac1R[e^{-i\theta}]_0^\pi=\frac2R.
+=-\frac1R[e^{-i\theta}]_0^\pi=-\frac1R(-1-1)=\frac2R.
 \]
 On the full circle the same computation gives
-$-R^{-1}[e^{-i\theta}]_0^{2\pi}=0$, equivalently the residue is zero.
+$-R^{-1}[e^{-i\theta}]_0^{2\pi}=0$, since $e^{-2\pi i}=1$; equivalently,
+the residue of $z^{-2}$ at zero is zero.
 Thus $2/R\ne\frac12(0)$ for every $R>0$; the semicircle integral
 even diverges as the radius shrinks. The cancellation on the other
 half of the circle is essential for a pole of order two.
@@ -1961,9 +2076,11 @@ Assume the tails in (a) converge, and choose $h>0$ within the Laurent
 expansion's disk. Put $t=x-x_0$. The singular terms are odd, so for
 $j=1,3$ and every $0<\delta<h$,
 \[
-\int_{-h}^{-\delta}t^{-j}\,dt+\int_\delta^h t^{-j}\,dt=0
+\int_{-h}^{-\delta}t^{-j}\,dt+\int_\delta^h t^{-j}\,dt=0;
 \]
-(the substitution $t=-u$ in the first integral proves the equality).
+indeed, the substitution $t=-u$, $dt=-du$, gives
+$\int_{-h}^{-\delta}t^{-j}\,dt=\int_h^\delta(-u)^{-j}(-du)
+=-\int_\delta^hu^{-j}\,du$ for odd $j$.
 Meanwhile continuity of $g$ gives
 \[
 \lim_{\delta\downarrow0}
@@ -1974,16 +2091,21 @@ Meanwhile continuity of $g$ gives
 Adding the two nonsingular convergent tails proves local principal-value
 existence and thus the qualified statement (a).
 
-On a semicircle set $z-x_0=\delta e^{i\theta}$. Then
+On a semicircle set $z-x_0=\delta e^{i\theta}$, so
+$dz=i\delta e^{i\theta}\,d\theta$ and $dz/(z-x_0)^3
+=i\delta^{-2}e^{-2i\theta}\,d\theta$. Then
 \[
 \int \frac{a_{-3}\,dz}{(z-x_0)^3}
-=ia_{-3}\delta^{-2}\int_{\theta_1}^{\theta_2}e^{-2i\theta}\,d\theta=0,
+=ia_{-3}\delta^{-2}\int_{\theta_1}^{\theta_2}e^{-2i\theta}\,d\theta
+=ia_{-3}\delta^{-2}\left[\frac{e^{-2i\theta}}{-2i}\right]_{\theta_1}^{\theta_2}=0,
 \qquad \theta_2-\theta_1=\pm\pi,
 \]
-because the endpoint values of $e^{-2i\theta}$ are equal. The simple
-pole contributes $ia_{-1}(\theta_2-\theta_1)=\pm i\pi a_{-1}$.
-Finally the analytic part is bounded by
-$\pi\delta\max_{|z-x_0|=\delta}|g(z)|\to0$. Therefore
+because the endpoint values of $e^{-2i\theta}$ are equal
+($e^{\mp2\pi i}=1$). The simple pole contributes
+$a_{-1}\int i\,d\theta=ia_{-1}(\theta_2-\theta_1)=\pm i\pi a_{-1}$.
+Finally, by the ML inequality, the analytic part is bounded by the
+length $\pi\delta$ times $\max_{|z-x_0|=\delta}|g(z)|$, which tends to
+zero. Therefore
 \[
 \boxed{\lim_{\delta\downarrow0}\int_{C_{x_0}}f(z)\,dz
 =\pm i\pi a_{-1}},
@@ -1993,7 +2115,7 @@ with plus for counterclockwise traversal and minus for clockwise traversal.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{11.7.12}\quad The unit step function is defined as (compare
-Exercise 1.15.13)
+Exercise \erratum{1.11.9})
 \[
 u(s-a)=\begin{cases}
 0, & s<a\\
@@ -2014,25 +2136,34 @@ Show that $u(s)$ has the integral representations
 the ordinary oscillatory improper integral exists. At $s=0$ its two
 tails do not converge separately; a symmetric limit assigns $u(0)=1/2$,
 while the problem's definition leaves $u(0)$ unspecified.}
+\erratum{The printed cross-reference, Exercise 1.15.13, does not exist
+in this edition, whose Chapter 1 ends with Section 1.11; the step
+function is introduced in Exercise 1.11.9 as the limit of
+$u_n(x)=\frac12(1+\tanh nx)$.}
 For $s>0$, close the contour in the upper half-plane. The exponential
-has modulus $e^{-s\,\Im z}$, so Jordan's estimate makes the large
-semicircle contribution tend to zero. The sole pole is $z=i\epsilon$
-and has residue $e^{-\epsilon s}$. Thus
+has modulus $|e^{izs}|=e^{-s\,\Im z}\le1$ there, and
+$1/(z-i\epsilon)=O(R^{-1})$ on the arc $|z|=R$, so Jordan's estimate
+makes the large semicircle contribution tend to zero. The sole pole is
+$z=i\epsilon$ and has residue $e^{i(i\epsilon)s}=e^{-\epsilon s}$. Thus
 \[
 \frac1{2\pi i}\int_{\mathbb R}\frac{e^{ixs}}{x-i\epsilon}\,dx
+=\frac{2\pi i\,e^{-\epsilon s}}{2\pi i}
 =e^{-\epsilon s}\longrightarrow1.
 \]
-For $s<0$, close below, where the exponential decays. There are no
-poles and the clockwise contour gives zero. These are exactly the
-two prescribed step values.
+For $s<0$, close below, where $|e^{izs}|=e^{|s|\Im z}\le1$ and Jordan's
+estimate applies again. There are no poles below the real axis, so the
+clockwise contour gives zero. These are exactly the two prescribed step
+values.
 
 For (b), evaluate
-$J(s)=\PVint_{\mathbb R}e^{ixs}/x\,dx$ directly. For $s>0$
+$J(s)=\PVint_{\mathbb R}e^{ixs}/x\,dx$ directly. The integrand
+$e^{izs}/z$ has a simple pole at zero with residue $1$. For $s>0$
 close above and indent the origin into the upper half-plane.
-The small clockwise arc has limit $-i\pi$; the indented domain
+The small clockwise arc has limit $-i\pi\cdot1$; the indented domain
 contains no pole. Hence $J(s)-i\pi=0$. For $s<0$, close below;
 the lower indentation is counterclockwise and contributes $+i\pi$,
-so $J(s)+i\pi=0$. Consequently
+so $J(s)+i\pi=0$. Consequently, with
+$J(s)/(2\pi i)=\frac12\operatorname{sgn}s$,
 \[
 J(s)=i\pi\,\operatorname{sgn}s,\qquad
 \boxed{\frac12+\frac{J(s)}{2\pi i}
@@ -2064,39 +2195,54 @@ is $i\pi$, giving the optional value $1/2$ in both representations.
 \]
 What happens if $|b|>|a|$?
 \solution
-Take $a,b$ real with $a>|b|$, and first consider $a+b\cos\theta$.
+Take $a,b$ real (the condition $a>|b|$ and the final question
+presuppose this) with $a>|b|$, and first consider $a+b\cos\theta$.
 If $b=0$, the integral is $2\pi/a$. Otherwise set
-$z=e^{i\theta}$, $d\theta=dz/(iz)$ and
-$D=\sqrt{a^2-b^2}>0$. Then
+$z=e^{i\theta}$, $d\theta=dz/(iz)$, $\cos\theta=(z+z^{-1})/2$, and
+$D=\sqrt{a^2-b^2}>0$. Then $a+b\cos\theta=(bz^2+2az+b)/(2z)$, so
 \[
-I=\frac2i\oint_{|z|=1}\frac{dz}{bz^2+2az+b}.
+I=\oint_{|z|=1}\frac{2z}{bz^2+2az+b}\,\frac{dz}{iz}
+=\frac2i\oint_{|z|=1}\frac{dz}{bz^2+2az+b}.
 \]
-The roots of the denominator are
+By the quadratic formula the roots of the denominator are $(-a\pm D)/b$;
+multiplying numerator and denominator by $a+D$ and using
+$D^2-a^2=-b^2$,
 \[
 r_+=\frac{-a+D}{b}=-\frac b{a+D},\qquad
-r_-=\frac{-a-D}{b},\qquad r_+r_-=1.
+r_-=\frac{-a-D}{b},\qquad r_+r_-=\frac bb=1.
 \]
-Since $|r_+|=|b|/(a+D)<1$, only $r_+$ is inside. The residue of the
-rational integrand there is
+Since $|r_+|=|b|/(a+D)<1$ and $|r_-|=1/|r_+|>1$, only $r_+$ is inside.
+The residue of the rational integrand there is the reciprocal of the
+derivative $2bz+2a$ of its denominator at $r_+$:
 \[
-\frac1{2br_++2a}=\frac1{2D}.
+\frac1{2br_++2a}=\frac1{2(-a+D)+2a}=\frac1{2D}.
 \]
 The residue theorem gives
 \[
 \boxed{I=\frac2i(2\pi i)\frac1{2D}
 =\frac{2\pi}{\sqrt{a^2-b^2}}}.
 \]
-Changing $b$ to $-b$ leaves the result unchanged. Shifting $\theta$
-by $\pi/2$ turns sine into cosine, and a full-period integral is
-unchanged by that shift, proving the other two formulas.
+The derivation holds for either sign of $b$, so changing $b$ to $-b$
+leaves the result unchanged. Since $\sin\theta=\cos(\theta-\pi/2)$,
+the substitution $\varphi=\theta-\pi/2$ turns the sine integrals into
+cosine integrals over $[-\pi/2,3\pi/2]$, and a full-period integral of
+a $2\pi$-periodic function does not depend on where the period starts,
+proving the other two formulas.
 
-If $|b|>|a|$, the denominator vanishes at angles with
-$\cos\theta=-a/b$ (or the corresponding sine values). Its derivative
-there is nonzero because $|\cos\theta|<1$. Locally the reciprocal
-therefore has the form $c/(\theta-\theta_0)+O(1)$, $c\ne0$.
+If $|b|>|a|$, the denominator vanishes at the angles $\theta_0$ with
+$\cos\theta_0=-a/b$ (or the corresponding sine values), which exist
+because $|a/b|<1$. Its derivative $-b\sin\theta_0$ there is nonzero
+because $|\cos\theta_0|<1$. Locally the reciprocal
+therefore has the form $c/(\theta-\theta_0)+O(1)$, $c\ne0$, which is
+not integrable.
 \erratum{The ordinary improper integrals then do not exist. An analytic
 continuation of the displayed square root is not their value; any
 principal-value prescription must be specified separately.}
+If principal values are taken at both zeros, the roots
+$r_\pm=(-a\pm i\sqrt{b^2-a^2})/b$ lie on $|z|=1$, and each contributes
+$\pi i$ times its residue (half the usual $2\pi i$) to the contour
+integral, namely $\pi i/(2br_\pm+2a)=\pi i/(\pm2i\sqrt{b^2-a^2})$.
+These cancel, so the principal value is zero.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2106,15 +2252,19 @@ principal-value prescription must be specified separately.}
 =\frac{\pi a}{(a^{2}-1)^{3/2}},\quad a>1.
 \]
 \solution
-For $a>1$, Exercise 11.8.1 and the substitution
-$\theta\mapsto2\pi-\theta$ give
+For $a>1$, the substitution $\theta\mapsto2\pi-\theta$, which leaves
+$\cos\theta$ unchanged, maps $[\pi,2\pi]$ onto $[0,\pi]$; so the
+integral over $[0,\pi]$ is half the full-period integral of
+Exercise 11.8.1 with $b=1$:
 \[
 J(a)=\int_0^\pi\frac{d\theta}{a+\cos\theta}
-=\frac{\pi}{\sqrt{a^2-1}}.
+=\frac12\cdot\frac{2\pi}{\sqrt{a^2-1}}=\frac{\pi}{\sqrt{a^2-1}}.
 \]
 On any closed interval of parameters lying in $(1,\infty)$, the
-denominator is bounded away from zero. We may therefore differentiate
-under the finite integral:
+denominator is bounded away from zero, and the $a$-derivative
+$-(a+\cos\theta)^{-2}$ of the integrand is continuous. We may therefore
+differentiate under the finite integral, and by the chain rule
+$\frac{d}{da}(a^2-1)^{-1/2}=-\frac12(a^2-1)^{-3/2}\cdot2a$:
 \[
 J'(a)=-\int_0^\pi\frac{d\theta}{(a+\cos\theta)^2}
 =-\pi a(a^2-1)^{-3/2}.
@@ -2134,18 +2284,20 @@ Multiplying by $-1$ proves
 \]
 What happens if $|t|>1$? What happens if $|t|=1$?
 \solution
-For $t\ne0$ write
+For $t\ne0$ write, with $z=e^{i\theta}$ and $z+1/z=2\cos\theta$,
 \[
-1-2t\cos\theta+t^2=(1-tz)(1-t/z),\qquad z=e^{i\theta}.
+(1-tz)(1-t/z)=1-t(z+1/z)+t^2=1-2t\cos\theta+t^2.
 \]
-Thus
+With $d\theta=dz/(iz)$ and $z(1-t/z)=z-t$,
 \[
-I(t)=\frac1i\oint_{|z|=1}
+I(t)=\oint_{|z|=1}\frac{dz}{iz(1-tz)(1-t/z)}
+=\frac1i\oint_{|z|=1}
 \frac{dz}{(1-tz)(z-t)}.
 \]
 The two poles are $z=t$ and $z=1/t$. If $|t|<1$, only $t$ is inside
-and its residue is $1/(1-t^2)$. If $|t|>1$, only $1/t$ is inside
-and its residue is
+and its residue is $1/(1-t\cdot t)=1/(1-t^2)$, so
+$I=(1/i)(2\pi i)/(1-t^2)$. If $|t|>1$, only $1/t$ is inside; writing
+$1-tz=-t(z-1/t)$, its residue is
 $1/[-t(1/t-t)]=1/(t^2-1)$. Therefore
 \[
 \boxed{I(t)=
@@ -2157,8 +2309,10 @@ The case $t=0$ directly gives $2\pi$, consistent with the first branch.
 These calculations also hold for complex $t$ off the unit circle.
 
 For real $t$ with $|t|=1$, the denominator is
-$4\sin^2(\theta/2)$ at $t=1$ and
-$4\cos^2(\theta/2)$ at $t=-1$. Each has a quadratic zero, and
+$2(1-\cos\theta)=4\sin^2(\theta/2)$ at $t=1$ and
+$2(1+\cos\theta)=4\cos^2(\theta/2)$ at $t=-1$. Each has a quadratic
+zero (at $\theta=0,2\pi$ and at $\theta=\pi$, respectively), near which
+the positive integrand behaves like $(\theta-\theta_0)^{-2}$, and
 the integral diverges to $+\infty$.
 \erratum{If complex $t$ is admitted, the other points $|t|=1$ put
 simple poles on the integration path instead. Those ordinary improper
@@ -2173,18 +2327,22 @@ integrals are also undefined; they need not diverge to positive infinity.}
 \par\nobreak\hfill\emph{ANS.}\enspace $\pi/12$.
 \solution
 Because $\sin3\theta/(5-4\cos\theta)$ changes sign under
-$\theta\mapsto2\pi-\theta$, its integral vanishes. We may thus
-replace $\cos3\theta$ by $e^{3i\theta}$ without changing the desired
-integral. With $z=e^{i\theta}$,
+$\theta\mapsto2\pi-\theta$, which maps $[0,2\pi]$ onto itself, its
+integral equals its own negative and vanishes. We may thus
+replace $\cos3\theta$ by $e^{3i\theta}=\cos3\theta+i\sin3\theta$
+without changing the desired integral. With $z=e^{i\theta}$,
+$e^{3i\theta}=z^3$, $d\theta=dz/(iz)$, and
+$5-4\cos\theta=5-2(z+z^{-1})=(-2z^2+5z-2)/z$, so
 \[
-I=\frac1i\oint_{|z|=1}
+I=\oint_{|z|=1}\frac{z^3\cdot z}{-2z^2+5z-2}\,\frac{dz}{iz}
+=\frac1i\oint_{|z|=1}
 \frac{z^3\,dz}{-2z^2+5z-2}.
 \]
-The denominator is $-2(z-\tfrac12)(z-2)$, so only $z=1/2$ lies
-inside. Its residue is
+The denominator is $-(2z-1)(z-2)=-2(z-\tfrac12)(z-2)$, so only $z=1/2$
+lies inside. Its residue is
 \[
-\left.\frac{z^3}{5-4z}\right|_{z=1/2}
-=\frac{1/8}{3}=\frac1{24}.
+\left.\frac{z^3}{-2(z-2)}\right|_{z=1/2}
+=\frac{1/8}{(-2)(-3/2)}=\frac{1/8}{3}=\frac1{24}.
 \]
 It follows that
 \[
@@ -2204,8 +2362,11 @@ The double factorial notation is defined in Eq.~(1.76).
 \emph{Hint.}~$\cos\theta=\frac{1}{2}(e^{i\theta}+e^{-i\theta})
 =\frac{1}{2}(z+z^{-1})$,\quad $|z|=1$.
 \solution
-The even power has period $\pi$, so twice the required integral is
-its integral over a full period. Set $z=e^{i\theta}$:
+The even power has period $\pi$, since
+$\cos^{2n}(\theta+\pi)=(-\cos\theta)^{2n}=\cos^{2n}\theta$, so twice
+the required integral is its integral over $[0,2\pi]$. Set
+$z=e^{i\theta}$, so that $\cos^{2n}\theta=2^{-2n}(z+z^{-1})^{2n}$,
+$d\theta=dz/(iz)$, and $(z+z^{-1})^{2n}=z^{-2n}(z^2+1)^{2n}$:
 \[
 2I_n=\frac1{i\,2^{2n}}\oint_{|z|=1}
 \frac{(z+z^{-1})^{2n}}z\,dz
@@ -2215,14 +2376,16 @@ its integral over a full period. Set $z=e^{i\theta}$:
 Expand the numerator,
 $(z^2+1)^{2n}=\sum_{j=0}^{2n}\binom{2n}{j}z^{2j}$.
 The $z^{-1}$ term occurs when $2j-(2n+1)=-1$, or $j=n$,
-and has coefficient $\binom{2n}{n}$. Hence
+and has coefficient $\binom{2n}{n}$, which is therefore the residue.
+Hence, by the residue theorem,
 \[
-2I_n=\frac{2\pi}{2^{2n}}\binom{2n}{n},\qquad
+2I_n=\frac{2\pi i}{i\,2^{2n}}\binom{2n}{n}
+=\frac{2\pi}{2^{2n}}\binom{2n}{n},\qquad
 \boxed{I_n=\pi\frac{(2n)!}{2^{2n}(n!)^2}}.
 \]
-Finally $(2n)!!=2^n n!$ and
-$(2n-1)!!=(2n)!/(2^n n!)$, so their ratio equals the factorial
-ratio above. For $n=0$ the empty-product convention
+Finally $(2n)!!=2\cdot4\cdots(2n)=2^n n!$ and
+$(2n-1)!!=(2n)!/(2n)!!=(2n)!/(2^n n!)$, so
+$(2n-1)!!/(2n)!!=(2n)!/(2^{2n}(n!)^2)$, the factorial ratio above. For $n=0$ the empty-product convention
 $(-1)!!=0!!=1$ gives $I_0=\pi$ as required.
 
 \Needspace{5\baselineskip}
@@ -2243,15 +2406,19 @@ Move the second term to the right and use $i^2=-1$:
 (1-q)I=-\frac{2\pi^2}{9}q^{-1}
 +\frac{4\pi^2i}{9\sqrt3}q.
 \]
-Since $q^{-1}=-\tfrac12-i\tfrac{\sqrt3}{2}$, the two terms are
+Since $q^{-1}=-\tfrac12-i\tfrac{\sqrt3}{2}$ and
+$iq=-\tfrac{\sqrt3}{2}-\tfrac i2$, the two terms are
+$-\frac{2\pi^2}{9}q^{-1}$ and
+$\frac{4\pi^2}{9\sqrt3}(iq)$, that is,
 \[
 \frac{\pi^2}{9}+\frac{i\pi^2\sqrt3}{9},
 \qquad
 -\frac{2\pi^2}{9}-\frac{2i\pi^2}{9\sqrt3}.
 \]
-Their sum is
+Since $\sqrt3/9-2/(9\sqrt3)=(3-2)/(9\sqrt3)$, their sum is
 $-\pi^2/9+i\pi^2/(9\sqrt3)
-=-(2\pi^2/27)(\tfrac32-i\tfrac{\sqrt3}{2})$.
+=-(2\pi^2/27)(\tfrac32-i\tfrac{\sqrt3}{2})$, where
+$\sqrt3/27=1/(9\sqrt3)$ was used.
 But $1-q=\tfrac32-i\tfrac{\sqrt3}{2}\ne0$. Canceling this factor gives
 \[
 \boxed{I=-\frac{2\pi^2}{27}},
@@ -2269,12 +2436,13 @@ Use $F(z)=z^p/(1+z^2)$ with $0<\arg z<2\pi$, and let the keyhole
 run outward along the upper bank and inward along the lower bank.
 \erratum{This orientation reverses the incorrectly drawn lower arrows
 in the textbook's Fig.~11.26, as specified in the published errata.}
-On the small circle $|z|=\epsilon<1$,
+On the small circle $|z|=\epsilon<1$, $|z^p|=\epsilon^p$ and
+$|1+z^2|\ge1-\epsilon^2$; with the length $2\pi\epsilon$,
 \[
 \left|\int_{\text{small}}F(z)\,dz\right|
 \le\frac{2\pi\epsilon^{p+1}}{1-\epsilon^2}\longrightarrow0.
 \]
-On the large circle $|z|=R>1$,
+On the large circle $|z|=R>1$, $|z^p|=R^p$ and $|1+z^2|\ge R^2-1$:
 \[
 \left|\int_{\text{large}}F(z)\,dz\right|
 \le\frac{2\pi R^{p+1}}{R^2-1}
@@ -2283,21 +2451,26 @@ On the large circle $|z|=R>1$,
 Thus the two arc contributions vanish for $-1<p<1$, in particular
 for the stated $0<p<1$.
 
-The upper bank contributes $I$ and the lower bank
-$-e^{2\pi ip}I$. The residues at $i$ and $-i$, with arguments
-$\pi/2$ and $3\pi/2$ on this branch, are
+The upper bank ($\arg z=0$, $z^p=x^p$) contributes $I$; on the lower
+bank $z^p=x^pe^{2\pi ip}$ and the direction is inward, so it
+contributes $-e^{2\pi ip}I$. The residues at $i$ and $-i$ are
+$z^p/(z+i)$ at $i$ and $z^p/(z-i)$ at $-i$; with arguments
+$\pi/2$ and $3\pi/2$ on this branch they are
 \[
 \frac{e^{ip\pi/2}}{2i},\qquad
 -\frac{e^{3ip\pi/2}}{2i}.
 \]
-It follows that
+Multiplying their sum by $2\pi i$ and factoring out $e^{ip\pi}$,
 \[
 (1-e^{2\pi ip})I
 =\pi(e^{ip\pi/2}-e^{3ip\pi/2})
+=\pi e^{ip\pi}(e^{-ip\pi/2}-e^{ip\pi/2})
 =-2\pi i e^{ip\pi}\sin(p\pi/2).
 \]
-Also $1-e^{2\pi ip}=-2ie^{ip\pi}\sin p\pi$.
-For $0<p<1$ these factors are nonzero; using
+Also $1-e^{2\pi ip}=e^{ip\pi}(e^{-ip\pi}-e^{ip\pi})
+=-2ie^{ip\pi}\sin p\pi$.
+For $0<p<1$ these factors are nonzero. Dividing,
+$I=\pi\sin(p\pi/2)/\sin p\pi$, and
 $\sin p\pi=2\sin(p\pi/2)\cos(p\pi/2)$ gives
 \[
 \boxed{I=\int_0^\infty\frac{x^p}{1+x^2}\,dx
@@ -2314,18 +2487,25 @@ by continuity or directly from $\int_0^\infty dx/(1+x^2)=\pi/2$.
 \]
 \par\nobreak\hfill\emph{ANS.}\enspace $\pi(a-b)$.
 \solution
-Consider
+Consider $F(z)=(e^{ibz}-e^{iaz})/z^2$. From
+$e^{icz}=1+icz-c^2z^2/2+O(z^3)$,
+$e^{ibz}-e^{iaz}=i(b-a)z+(a^2-b^2)z^2/2+O(z^3)$, so
 \[
 F(z)=\frac{e^{ibz}-e^{iaz}}{z^2}
 =\frac{i(b-a)}z+\frac{a^2-b^2}{2}+O(z).
 \]
 Close the real line above and indent the origin by a small clockwise
-upper semicircle. The large arc is bounded by $2\pi/R$ because
-$|e^{iaz}|,|e^{ibz}|\le1$ there, so it vanishes. The small arc
-contributes $-i\pi[i(b-a)]=\pi(b-a)$. There are no poles inside
+upper semicircle of radius $\epsilon$. On the large arc $|z|=R$,
+$|e^{iaz}|,|e^{ibz}|\le1$ (since $\Im z\ge0$), so $|F|\le2/R^2$ and,
+with the length $\pi R$, the arc integral is bounded by $2\pi/R$ and
+vanishes. On the small arc, $z=\epsilon e^{i\theta}$ with $\theta$ from
+$\pi$ to $0$, the term $i(b-a)/z$ contributes
+$i(b-a)\int_\pi^0i\,d\theta=-i\pi[i(b-a)]=\pi(b-a)$, while the bounded
+remainder contributes $O(\epsilon)$. There are no poles inside
 the indented contour, hence
 \[
-\PVint_{\mathbb R}F(x)\,dx+\pi(b-a)=0.
+\PVint_{\mathbb R}F(x)\,dx+\pi(b-a)=0,\qquad
+\PVint_{\mathbb R}F(x)\,dx=\pi(a-b).
 \]
 Taking real parts removes the simple pole: the real integrand
 $(\cos bx-\cos ax)/x^2$ tends to $(a^2-b^2)/2$ at zero and is
@@ -2345,7 +2525,9 @@ The same proof allows $b=0$, since the large-arc estimate still holds.
 \]
 \emph{Hint.}~$\sin^{2}x=\frac{1}{2}(1-\cos2x)$.
 \solution
-Use $\sin^2x=(1-\cos2x)/2$ and the $b=0$, $a=2$ case just proved:
+Use $\sin^2x=(1-\cos2x)/2$ and the case $b=0$, $a=2$ of
+Exercise 11.8.8, which gives $\int_{\mathbb R}(1-\cos2x)x^{-2}\,dx
+=\pi(2-0)=2\pi$:
 \[
 \int_{\mathbb R}\frac{\sin^2x}{x^2}\,dx
 =\frac12\int_{\mathbb R}\frac{1-\cos2x}{x^2}\,dx
@@ -2354,11 +2536,13 @@ Use $\sin^2x=(1-\cos2x)/2$ and the $b=0$, $a=2$ case just proved:
 The origin is removable with limiting value one, and the tails are
 bounded by $x^{-2}$, so this is an ordinary absolutely convergent
 integral.
-\erratum{The actual textbook prints the limits $-\infty$ to $\infty$
-but gives $\pi/2$. The published errata also state $\pi/2$; that is
-the half-line value $\int_0^\infty(\sin x/x)^2\,dx$. Evenness and the
-contour calculation above prove that the full-line value is $\pi$.}
-\erratum{The manual's worked solution on p.~138 correctly gives $\pi$ for the full line and $\pi/2$ for the half-line. Its separate errata list on p.~3, like the printed textbook answer, incorrectly assigns the half-line value to this full-line question.}
+\erratum{The textbook prints the limits $-\infty$ to $\infty$
+but gives $\pi/2$, and the errata list of the Instructor's Manual
+(p.~3) also states $\pi/2$; that is the half-line value
+$\int_0^\infty(\sin x/x)^2\,dx$. The Instructor's Manual's worked
+solution (p.~138) correctly gives $\pi$ for the full line and $\pi/2$
+for the half-line. Evenness and the contour calculation above prove
+that the full-line value is $\pi$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2368,19 +2552,23 @@ contour calculation above prove that the full-line value is $\pi$.}
 \]
 \solution
 Integrate $F(z)=ze^{iz}/(z^2+1)$ over an upper semicircle.
-Its rational factor is $O(R^{-1})$ on the large arc, and the
-exponential decays in the upper half-plane, so Jordan's estimate
-makes that arc vanish. The only enclosed pole is $i$:
+Its rational factor is bounded by $R/(R^2-1)=O(R^{-1})$ on the large
+arc, and $|e^{iz}|=e^{-\Im z}$ decays in the upper half-plane, so
+Jordan's estimate ($\int_{\text{arc}}|e^{iz}|\,|dz|<\pi$) bounds that
+arc by $\pi R/(R^2-1)$, which vanishes. The only enclosed pole is $i$:
 \[
 \operatorname{Res}_{i}F
-=\left.\frac{ze^{iz}}{z+i}\right|_{z=i}=\frac{e^{-1}}2.
+=\left.\frac{ze^{iz}}{z+i}\right|_{z=i}=\frac{ie^{-1}}{2i}
+=\frac{e^{-1}}2.
 \]
 Therefore
 \[
-\int_{\mathbb R}\frac{xe^{ix}}{x^2+1}\,dx=\frac{\pi i}{e}.
+\int_{\mathbb R}\frac{xe^{ix}}{x^2+1}\,dx=2\pi i\,\frac{e^{-1}}2
+=\frac{\pi i}{e}.
 \]
-The imaginary part $x\sin x/(x^2+1)$ is even, so its full-line
-integral is twice the required one:
+The real part $x\cos x/(x^2+1)$ is odd and integrates to zero over
+$[-R,R]$. The imaginary part $x\sin x/(x^2+1)$ is even, so its
+full-line integral, $\pi/e$, is twice the required one:
 \[
 \boxed{\int_0^\infty\frac{x\sin x}{x^2+1}\,dx=\frac{\pi}{2e}}.
 \]
@@ -2399,8 +2587,10 @@ $f(t,\omega)=2(1-\cos\omega t)/\omega^{2}$. Show that
 \solution
 \erratum{For a general real time parameter the answer is $2\pi|t|$.
 The printed $2\pi t$ assumes $t\ge0$.}
-If $t=0$ the integrand is zero. If $t\ne0$, put $y=|t|\omega$;
-then $d\omega=dy/|t|$ and $\cos\omega t=\cos y$. Thus
+If $t=0$ the integrand is zero. If $t\ne0$, put $y=|t|\omega$, which
+maps $\mathbb R$ onto $\mathbb R$ preserving direction;
+then $d\omega=dy/|t|$, $1/\omega^2=t^2/y^2$, and
+$\cos\omega t=\cos(\pm y)=\cos y$. Thus
 \[
 \begin{aligned}
 \int_{\mathbb R}\frac{2(1-\cos\omega t)}{\omega^2}\,d\omega
@@ -2427,25 +2617,34 @@ in an absolutely convergent integral.
 \solution
 Let $k>0$. Closing above for
 $F(z)=e^{ikz}/(z^2+a^2)$ encloses only $ia$, whose residue is
-$e^{-ka}/(2ia)$. The rational factor is $O(R^{-2})$, so the large
-arc vanishes. Taking real parts gives
+$e^{ik(ia)}/(2ia)=e^{-ka}/(2ia)$. On the large arc
+$|e^{ikz}|=e^{-k\Im z}\le1$ and $|z^2+a^2|\ge R^2-a^2$, so the arc
+integral is at most $\pi R/(R^2-a^2)$ and vanishes. The result
+$2\pi i\,e^{-ka}/(2ia)$ is real, and the imaginary part
+$\int\sin kx/(x^2+a^2)\,dx$ vanishes by oddness; taking real parts gives
 \[
 \int_{\mathbb R}\frac{\cos kx}{x^2+a^2}\,dx
 =2\pi i\frac{e^{-ka}}{2ia}=\frac{\pi}{a}e^{-ka}.
 \]
-Cosine is even in $k$, and $k=0$ gives $\pi/a$ by the elementary
-arctangent integral. Hence
+Cosine is even, so $\cos kx=\cos|k|x$ and $k<0$ gives
+$(\pi/a)e^{-|k|a}$; and $k=0$ gives
+$\int_{\mathbb R}dx/(x^2+a^2)=a^{-1}[\arctan(x/a)]_{-\infty}^{\infty}=\pi/a$.
+Hence
 \[
 \boxed{\text{(a)}\quad
 \int_{\mathbb R}\frac{\cos kx}{x^2+a^2}\,dx
 =\frac{\pi}{a}e^{-a|k|}\qquad(k\in\mathbb R).}
 \]
 
-For (b), integrate $G(z)=ze^{ikz}/(z^2+a^2)$. For $k>0$ Jordan's
-estimate again removes the upper arc, and
-$\operatorname{Res}_{ia}G=e^{-ka}/2$. Taking imaginary parts yields
+For (b), integrate $G(z)=ze^{ikz}/(z^2+a^2)$. For $k>0$ the rational
+factor is only $O(R^{-1})$, but Jordan's estimate
+($\int_{\text{arc}}|e^{ikz}|\,|dz|<\pi/k$) again removes the upper arc,
+and $\operatorname{Res}_{ia}G=ia\,e^{-ka}/(2ia)=e^{-ka}/2$. Thus
+$\int_{\mathbb R}xe^{ikx}/(x^2+a^2)\,dx=2\pi i\,e^{-ka}/2=\pi ie^{-ka}$,
+and taking imaginary parts yields
 $\int_{\mathbb R}x\sin kx/(x^2+a^2)\,dx=\pi e^{-ka}$.
-For $k<0$ the integrand changes sign under $k\mapsto-k$, so
+For $k<0$, $\sin kx=-\sin|k|x$, so the integral changes sign; for
+$k=0$ the integrand is zero. Hence
 \[
 \boxed{\text{(b)}\quad
 \int_{\mathbb R}\frac{x\sin kx}{x^2+a^2}\,dx
@@ -2476,20 +2675,23 @@ $\epsilon$ at zero. Integrate $F(z)=e^{iz}/z$ counterclockwise
 around this indented domain. The pole at zero has been excluded,
 so the contour integral is zero.
 
-On either vertical side, $z=\pm R+iy$, $0\le y\le R$, and
+On either vertical side, $z=\pm R+iy$, $0\le y\le R$, we have
+$|e^{iz}|=e^{-y}$ and $|z|\ge R$, so
 \[
 \left|\int_{\text{side}}F(z)\,dz\right|
 \le\frac1R\int_0^R e^{-y}\,dy\le\frac1R.
 \]
 On the top, $|z|\ge R$, $|e^{iz}|=e^{-R}$ and the length is $2R$,
-so the bound is $2e^{-R}$. All three contributions vanish.
-On the small arc $e^{iz}/z=1/z+i+O(z)$; its integral tends to
-$-i\pi$, since the argument decreases from $\pi$ to zero.
+so the bound is $2R\cdot e^{-R}/R=2e^{-R}$. All three contributions
+vanish. On the small arc, $e^{iz}=1+iz+O(z^2)$ gives
+$e^{iz}/z=1/z+i+O(z)$. With $z=\epsilon e^{i\theta}$, the term $1/z$
+gives $\int_\pi^0 i\,d\theta=-i\pi$, since the argument decreases from
+$\pi$ to zero, while the bounded remainder contributes $O(\epsilon)$.
 Consequently
 \[
 \PVint_{\mathbb R}\frac{e^{ix}}x\,dx-i\pi=0.
 \]
-Taking imaginary parts gives
+Since $e^{ix}/x=\cos x/x+i\sin x/x$, taking imaginary parts gives
 \[
 \boxed{\int_{-\infty}^{\infty}\frac{\sin x}{x}\,dx=\pi}.
 \]
@@ -2520,8 +2722,12 @@ I(p)=\frac1{2i}\left\{
 The pole terms at zero cancel in their difference, because
 $\sin t/t$ is continuous there. For any real nonzero $q$, the
 upper or lower indented contour gives
-$\PVint_{\mathbb R}e^{iqt}/t\,dt=i\pi\,\operatorname{sgn}q$.
+$\PVint_{\mathbb R}e^{iqt}/t\,dt=i\pi\,\operatorname{sgn}q$
+(this is $J(q)$ of Exercise 11.7.12(b)).
 Thus, for $p\ne\pm1$,
+$I(p)=(2i)^{-1}[i\pi\operatorname{sgn}(p+1)-i\pi\operatorname{sgn}(p-1)]$.
+For $|p|<1$ the two signs are $+1$ and $-1$; for $p>1$ both are $+1$,
+and for $p<-1$ both are $-1$. Hence
 \[
 \boxed{I(p)=\frac{\pi}{2}
 \{\operatorname{sgn}(p+1)-\operatorname{sgn}(p-1)\}
@@ -2533,18 +2739,22 @@ integral converges by Dirichlet's test.
 \erratum{At $p=\pm1$ the ordinary improper complex integral does not
 exist: its two imaginary tails diverge logarithmically. A symmetric
 principal value at infinity, or Abel regularization, gives $\pi/2$.}
-Indeed for $p=1$,
+Indeed for $p=1$, using $\sin t\cos t=\frac12\sin2t$,
 \[
 \frac{\sin t}{t}e^{it}
 =\frac{\sin2t}{2t}+i\frac{\sin^2t}{t}.
 \]
-The real part integrates to $\pi/2$. The imaginary part is odd, so
-it cancels on symmetric intervals, but
+The real part integrates to $\pi/2$: with $u=2t$,
+$\int_{\mathbb R}\sin2t/(2t)\,dt=\frac12\int_{\mathbb R}\sin u/u\,du$,
+and Exercise 11.8.13 gives $\pi$ for the last integral. The imaginary
+part is odd, so it cancels on symmetric intervals, but, by
+$\sin^2t=(1-\cos2t)/2$,
 \[
 \int_1^R\frac{\sin^2t}{t}\,dt
 =\frac12\ln R-\frac12\int_1^R\frac{\cos2t}{t}\,dt
 \]
-diverges as $\frac12\ln R$, since the second term has a finite limit.
+diverges as $\frac12\ln R$, since the second term has a finite limit
+as $R\to\infty$ (Dirichlet's test).
 For $p=-1$ its sign is reversed. This proves both the failure of
 ordinary convergence and the symmetric value at the endpoints.
 
@@ -2555,9 +2765,10 @@ ordinary convergence and the symmetric value at the endpoints.
 \int_{0}^{\infty}\frac{dx}{(x^{2}+a^{2})^{2}}=\frac{\pi}{4a^{3}},\quad a>0.
 \]
 \solution
-The function $(z^2+a^2)^{-2}$ is $O(R^{-4})$ on a large upper
-semicircle, so that arc contributes $O(R^{-3})$. Its sole enclosed
-pole is the double pole at $ia$, with residue
+The function $(z^2+a^2)^{-2}$ is bounded by $(R^2-a^2)^{-2}=O(R^{-4})$
+on a large upper semicircle, so that arc, of length $\pi R$,
+contributes $O(R^{-3})$. Its sole enclosed pole is the double pole at
+$ia$, with residue (as in Exercise 11.7.1(b))
 \[
 \left.\frac{d}{dz}(z+ia)^{-2}\right|_{ia}
 =-\frac2{(2ia)^3}=\frac1{4ia^3}.
@@ -2580,16 +2791,19 @@ The integrand is even, giving
 \]
 \par\nobreak\hfill\emph{ANS.}\enspace $\pi/\sqrt{2}$.
 \solution
-The roots of $1+z^4$ are $e^{i\pi/4}$, $e^{3i\pi/4}$,
-$e^{5i\pi/4}$, $e^{7i\pi/4}$. Only the first two lie above the
-real axis. At a root $p$ the residue of $z^2/(1+z^4)$ is
-$p^2/(4p^3)=1/(4p)$. Their sum is
+The roots of $1+z^4$, i.e., of $z^4=-1=e^{i\pi(2m+1)}$, are
+$e^{i\pi/4}$, $e^{3i\pi/4}$, $e^{5i\pi/4}$, $e^{7i\pi/4}$. Only the
+first two lie above the real axis. At a root $p$ the residue of
+$z^2/(1+z^4)$ is, by the rule $N(p)/D'(p)$ for a simple zero of the
+denominator, $p^2/(4p^3)=1/(4p)$; and $1/p=e^{-i\pi/4}$,
+$e^{-3i\pi/4}$ for the two upper roots. Their sum is
 \[
 \frac14\left(e^{-i\pi/4}+e^{-3i\pi/4}\right)
 =\frac14\left(\frac{1-i}{\sqrt2}+\frac{-1-i}{\sqrt2}\right)
 =-\frac{i}{2\sqrt2}.
 \]
-The integrand is $O(R^{-2})$, so its large semicircle integral vanishes.
+On $|z|=R$ the integrand is bounded by $R^2/(R^4-1)=O(R^{-2})$, so its
+large semicircle integral, of length $\pi R$, is $O(R^{-1})$ and vanishes.
 The residue theorem therefore yields
 \[
 \boxed{\int_{\mathbb R}\frac{x^2}{1+x^4}\,dx
@@ -2611,10 +2825,14 @@ J(p)=\int_0^\infty\frac{x^p}{1+x^2}\,dx
 =\frac{\pi}{2\cos(\pi p/2)},\qquad -1<p<1.
 \]
 Fix $p$ in this interval and choose $\eta>0$ so that
-$-1<p-\eta<p+\eta<1$. Near zero the differentiated integrand is
-bounded by $x^{p-\eta}|\ln x|$, and near infinity by
-$x^{p+\eta-2}\ln x$. Both bounds are integrable. Differentiation
-under the integral is therefore valid:
+$-1<p-\eta<p+\eta<1$. The $p$-derivative of the integrand is
+$x^p\ln x/(1+x^2)$, since $\partial_px^p=x^p\ln x$. For every $p'$ with
+$|p'-p|\le\eta$, this derivative is bounded on $0<x<1$ by
+$x^{p-\eta}|\ln x|$ (there $x^{p'}\le x^{p-\eta}$), and on $x>1$ by
+$x^{p+\eta-2}\ln x$ (there $x^{p'}\le x^{p+\eta}$ and $1+x^2>x^2$).
+Both bounds are integrable, because $p-\eta>-1$ and $p+\eta-2<-1$.
+Differentiation under the integral is therefore valid, and
+$\frac{d}{dp}[\cos(\pi p/2)]^{-1}=(\pi/2)\sin(\pi p/2)/\cos^2(\pi p/2)$:
 \[
 \begin{aligned}
 \int_0^\infty\frac{x^p\ln x}{1+x^2}\,dx
@@ -2649,13 +2867,21 @@ $R\to\infty$.
 Let $I$ denote the required integral.
 \textbf{(a)} In its part from one to infinity set $x=1/u$.
 Then $dx=-du/u^2$, $(\ln x)^2=(\ln u)^2$, and
-$1+x^2=(1+u^2)/u^2$, so this part equals the part from zero to one.
-Thus
+$1+x^2=(1+u^2)/u^2$; the limits $x=1,\infty$ become $u=1,0$, so
+\[
+\int_1^\infty\frac{(\ln x)^2}{1+x^2}\,dx
+=\int_1^0\frac{(\ln u)^2u^2}{1+u^2}\left(-\frac{du}{u^2}\right)
+=\int_0^1\frac{(\ln u)^2}{1+u^2}\,du,
+\]
+the part from zero to one. Expanding
+$1/(1+x^2)=\sum_{n\ge0}(-1)^nx^{2n}$ for $0\le x<1$,
 \[
 I=2\int_0^1\frac{(\ln x)^2}{1+x^2}\,dx
 =2\sum_{n=0}^{\infty}(-1)^n\int_0^1x^{2n}(\ln x)^2\,dx.
 \]
-To evaluate the coefficient put $x=e^{-u}$:
+To evaluate the coefficient put $x=e^{-u}$, so $dx=-e^{-u}\,du$,
+$(\ln x)^2=u^2$, $x^{2n}=e^{-2nu}$, and $x=0,1$ correspond to
+$u=\infty,0$:
 \[
 \int_0^1x^{2n}(\ln x)^2\,dx
 =\int_0^\infty u^2e^{-(2n+1)u}\,du
@@ -2681,34 +2907,47 @@ interchange even at the endpoint. Therefore
 \boxed{I=4\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)^3}}.
 \]
 
-\textbf{(b)} Set $x=e^t$. Because
-$e^t/(1+e^{2t})=1/(2\cosh t)$, we have
+\textbf{(b)} Set $x=e^t$, so $dx=e^t\,dt$ and $(\ln x)^2=t^2$, while
+$x=0,\infty$ correspond to $t=-\infty,\infty$. Because
+$e^t/(1+e^{2t})=1/(e^{-t}+e^t)=1/(2\cosh t)$, we have
 \[
 I=\int_{-\infty}^{\infty}\frac{t^2}{2\cosh t}\,dt.
 \]
 Integrate $F(z)=z^2/(2\cosh z)$ around the rectangle with vertices
 $-R,R,R+i\pi,-R+i\pi$, as in Fig.~11.29. On the vertical sides
-$|\cosh(\pm R+iy)|\ge\sinh R$ and $|z|^2\le R^2+\pi^2$;
-their integrals are $O(R^2e^{-R})$. On the top
-$\cosh(t+i\pi)=-\cosh t$, and its direction is from $R$ to $-R$.
-After adding bottom and top and passing to the limit, the contour
-integral is
+$|\cosh(\pm R+iy)|^2=\sinh^2R+\cos^2y\ge\sinh^2R$ and
+$|z|^2\le R^2+\pi^2$; with the length $\pi$,
+their integrals are at most $\pi(R^2+\pi^2)/(2\sinh R)=O(R^2e^{-R})$.
+On the top, $z=t+i\pi$ and
+$\cosh(t+i\pi)=\cosh t\cos\pi+i\sinh t\sin\pi=-\cosh t$, and its
+direction is from $R$ to $-R$, so
+\[
+\int_{\text{top}}F\,dz=\int_R^{-R}\frac{(t+i\pi)^2}{-2\cosh t}\,dt
+=\int_{-R}^{R}\frac{(t+i\pi)^2}{2\cosh t}\,dt.
+\]
+After adding bottom and top, expanding
+$t^2+(t+i\pi)^2=2t^2-\pi^2+2i\pi t$, and passing to the limit, the
+contour integral is
 \[
 \int_{\mathbb R}\frac{t^2+(t+i\pi)^2}{2\cosh t}\,dt
 =2I-\frac{\pi^2}{2}\int_{\mathbb R}\operatorname{sech}t\,dt.
 \]
 The term $2i\pi t$ integrates to zero by oddness. Also, with $u=e^t$,
+$\operatorname{sech}t=2u/(u^2+1)$ and $dt=du/u$, so
 \[
 \int_{\mathbb R}\operatorname{sech}t\,dt
 =2\int_0^\infty\frac{du}{1+u^2}=\pi.
 \]
-The only pole in the rectangle is $z=i\pi/2$, with residue
+The zeros of $\cosh z$ are $z=i(m+\frac12)\pi$, $m\in\mathbb Z$, so
+the only pole in the rectangle is $z=i\pi/2$. By the rule $N/D'$, with
+$(2\cosh z)'=2\sinh z$ and $\sinh(i\pi/2)=i\sin(\pi/2)=i$, its residue is
 \[
 \frac{(i\pi/2)^2}{2\sinh(i\pi/2)}
 =\frac{-\pi^2/4}{2i}=\frac{i\pi^2}{8}.
 \]
-Hence $2I-\pi^3/2=2\pi i(i\pi^2/8)=-\pi^3/4$.
-Solving gives
+Hence $2I-\pi^3/2=2\pi i(i\pi^2/8)=-\pi^3/4$, so
+$2I=\pi^3/2-\pi^3/4=\pi^3/4$.
+Solving, and comparing with (a), which gives the series as $I/4$,
 \[
 \boxed{I=\frac{\pi^3}{8}},\qquad
 \sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)^3}=\frac{\pi^3}{32}.
@@ -2726,19 +2965,26 @@ Use the principal logarithm and consider separately
 F_+(z)=\frac{\operatorname{Log}(z+i)}{z^2+1},\qquad
 F_-(z)=\frac{\operatorname{Log}(z-i)}{z^2+1}.
 \]
-The logarithm in $F_+$ has its cut on the ray
+The logarithm in $F_+$ has its cut where $z+i\le0$, i.e., on the ray
 $\{x-i:x\le0\}$, below the real axis. Close its contour above;
-the pole at $i$ has residue $\operatorname{Log}(2i)/(2i)$.
-The logarithm in $F_-$ has its cut above the real axis; close below,
-clockwise, enclosing the pole at $-i$ with residue
-$\operatorname{Log}(-2i)/(-2i)$. The large arcs in both cases are
-$O((\ln R)/R)$ and vanish. Therefore
+the pole at $i$ has residue $\operatorname{Log}(z+i)/(z+i)$ at $z=i$,
+that is, $\operatorname{Log}(2i)/(2i)$.
+The logarithm in $F_-$ has its cut on $\{x+i:x\le0\}$, above the real
+axis; close below, clockwise, enclosing the pole at $-i$ with residue
+$\operatorname{Log}(-2i)/(-2i)$. On the large arcs
+$|\operatorname{Log}(z\pm i)|\le\ln(R+1)+\pi$ and
+$|z^2+1|\ge R^2-1$; with the length $\pi R$, both arc integrals are
+$O((\ln R)/R)$ and vanish. Therefore, with the factors $2\pi i$ and
+$-2\pi i$ (clockwise),
 \[
-\int_{\mathbb R}F_+(x)\,dx=\pi\operatorname{Log}(2i),\qquad
-\int_{\mathbb R}F_-(x)\,dx=\pi\operatorname{Log}(-2i).
+\int_{\mathbb R}F_+(x)\,dx=2\pi i\frac{\operatorname{Log}(2i)}{2i}
+=\pi\operatorname{Log}(2i),\qquad
+\int_{\mathbb R}F_-(x)\,dx=-2\pi i\frac{\operatorname{Log}(-2i)}{-2i}
+=\pi\operatorname{Log}(-2i).
 \]
-For real $x$, the two logarithms are conjugates, so their sum is
-$\ln(x^2+1)$. Also
+For real $x$, $x-i$ is the conjugate of $x+i$ and neither lies on the
+cut, so the two logarithms are conjugates and their sum is
+$2\ln|x+i|=\ln(x^2+1)$. Also
 $\operatorname{Log}(2i)=\ln2+i\pi/2$ and
 $\operatorname{Log}(-2i)=\ln2-i\pi/2$. Adding the two equations yields
 \[
@@ -2761,23 +3007,30 @@ where $-1 < a < 1$, \erratum{with the quotient interpreted as its limit $1$ at $
 branch point and the positive $x$-axis can be chosen to be a cut line.
 \solution
 For $a\ne0$ use $F(z)=z^a/(1+z)^2$ on $0<\arg z<2\pi$ and a
-keyhole contour about the positive real axis. The small circle is
-bounded by $2\pi\epsilon^{a+1}/(1-\epsilon)^2$, and the large
-circle by $2\pi R^{a+1}/(R-1)^2$. Both vanish exactly when
-$-1<a<1$. The upper and lower banks contribute
+keyhole contour about the positive real axis. Since $|z^a|=|z|^a$,
+$|1+z|\ge1-\epsilon$ on $|z|=\epsilon$, and $|1+z|\ge R-1$ on $|z|=R$,
+the small circle is bounded by $2\pi\epsilon^{a+1}/(1-\epsilon)^2$,
+and the large circle by $2\pi R^{a+1}/(R-1)^2=O(R^{a-1})$. Both vanish
+exactly when $-1<a<1$. The upper bank, where $z^a=x^a$, contributes
+$I$; the lower bank, where $z^a=x^ae^{2\pi ia}$, is traversed inward
+and contributes $-e^{2\pi ia}I$; together they give
 $(1-e^{2\pi ia})I$.
 
-The enclosed pole at $-1$ is double. Since $\arg(-1)=\pi$,
+The enclosed pole at $-1$ is double, so its residue is
+$\frac{d}{dz}[(z+1)^2F(z)]$ at $z=-1$. Since $\arg(-1)=\pi$,
+$(-1)^{a-1}=e^{i\pi(a-1)}$, and
 \[
 \operatorname{Res}_{-1}F
 =\left.\frac{d}{dz}z^a\right|_{-1}
-=a e^{i\pi(a-1)}=-a e^{i\pi a}.
+=a(-1)^{a-1}=a e^{i\pi(a-1)}=-a e^{i\pi a}.
 \]
-It follows that
+It follows from the residue theorem that
 \[
-(1-e^{2\pi ia})I=-2\pi i a e^{i\pi a}.
+(1-e^{2\pi ia})I=2\pi i(-a e^{i\pi a})=-2\pi i a e^{i\pi a}.
 \]
-Using $1-e^{2\pi ia}=-2ie^{i\pi a}\sin\pi a$ gives
+Using $1-e^{2\pi ia}=e^{i\pi a}(e^{-i\pi a}-e^{i\pi a})
+=-2ie^{i\pi a}\sin\pi a$ and dividing,
+$I=-2\pi iae^{i\pi a}/(-2ie^{i\pi a}\sin\pi a)$, which gives
 \[
 \boxed{I=\frac{\pi a}{\sin\pi a}\qquad(-1<a<1,\ a\ne0)}.
 \]
@@ -2804,8 +3057,16 @@ First take $0<\theta<\pi$, $\theta\ne\pi/2$, and factor
 \[
 D(z)=(z^2-e^{2i\theta})(z^2-e^{-2i\theta}).
 \]
-The upper poles are $u=e^{i\theta}$ and $v=-e^{-i\theta}$. Since
-$D'(z)=4z(z^2-\cos2\theta)$,
+Its zeros are $\pm e^{i\theta}$ and $\pm e^{-i\theta}$. Since
+$\Im e^{i\theta}=\Im(-e^{-i\theta})=\sin\theta>0$, the upper poles are
+$u=e^{i\theta}$ and $v=-e^{-i\theta}$; the other two are their
+negatives. Since $\theta\ne\pi/2$, $\sin2\theta=2\sin\theta\cos\theta\ne0$,
+so $e^{2i\theta}\ne e^{-2i\theta}$ and the four zeros are distinct,
+hence simple. Since $D'(z)=4z^3-4z\cos2\theta=4z(z^2-\cos2\theta)$, the
+residue of $z^2/D$ at a simple zero $p$ is
+$p^2/D'(p)=p/[4(p^2-\cos2\theta)]$, and
+$u^2-\cos2\theta=e^{2i\theta}-\cos2\theta=i\sin2\theta$,
+$v^2-\cos2\theta=e^{-2i\theta}-\cos2\theta=-i\sin2\theta$. Hence
 \[
 \operatorname{Res}_{u}\frac{z^2}{D(z)}
 =\frac{u}{4i\sin2\theta},\qquad
@@ -2813,35 +3074,44 @@ $D'(z)=4z(z^2-\cos2\theta)$,
 =-\frac{v}{4i\sin2\theta}
 =\frac{e^{-i\theta}}{4i\sin2\theta}.
 \]
-Their sum simplifies to
+With $e^{i\theta}+e^{-i\theta}=2\cos\theta$ and
+$\sin2\theta=2\sin\theta\cos\theta$, their sum simplifies to
 \[
 \frac{2\cos\theta}{4i(2\sin\theta\cos\theta)}
 =\frac1{4i\sin\theta}.
 \]
 The large upper arc vanishes because the rational function is
-$O(R^{-2})$. Hence
+$O(R^{-2})$ and the arc has length $\pi R$. Hence
 \[
 I=2\pi i\,\frac1{4i\sin\theta}
 =\frac{\pi}{2\sin\theta}.
 \]
-At $\theta=\pi/2$ the poles coalesce, but the integral can be
-evaluated directly:
+At $\theta=\pi/2$ the poles coalesce, since $\cos2\theta=-1$ and
+$D(x)=(x^2+1)^2$, but the integral can be evaluated directly, with
+$\int_{\mathbb R}dx/(x^2+1)=\pi$ and
+$\int_{\mathbb R}dx/(x^2+1)^2=\pi/2$ (Exercise 11.8.15 with $a=1$):
 \[
 \frac{x^2}{(x^2+1)^2}
 =\frac1{x^2+1}-\frac1{(x^2+1)^2},\qquad
 I=\pi-\frac{\pi}{2}=\frac{\pi}{2}.
 \]
 This agrees with the formula. In general the denominator depends on
-$\sin^2\theta$ because
-$D(x)=(x^2-1)^2+4x^2\sin^2\theta$; reducing to
-$0<\theta<\pi$ gives the absolute value. Finally
+$\theta$ only through $\sin^2\theta$, because
+$\cos2\theta=1-2\sin^2\theta$ gives
+$D(x)=(x^2-1)^2+4x^2\sin^2\theta$. For real $\theta\notin\pi\mathbb Z$
+choose $\theta'\in(0,\pi)$ with $\sin\theta'=|\sin\theta|$; then
+$I(\theta)=I(\theta')=\pi/(2\sin\theta')=\pi/(2|\sin\theta|)$. Also
+$1-\cos2\theta=2\sin^2\theta$, so
+$\sqrt2\sqrt{1-\cos2\theta}=2|\sin\theta|$. Finally
 \[
 \boxed{I=\frac{\pi}{2|\sin\theta|}
 =\frac{\pi}{\sqrt2\,\sqrt{1-\cos2\theta}}}.
 \]
-If $\sin\theta=0$, the real poles at $\pm1$ behave like positive
-multiples of $(x\mp1)^{-2}$ and cause divergence. Choosing
-$\theta=\pi/4$ recovers Exercise 11.8.16.
+If $\sin\theta=0$, then $D(x)=(x^2-1)^2=(x-1)^2(x+1)^2$, and the real
+poles at $\pm1$ behave like $\frac14(x\mp1)^{-2}$ and cause divergence.
+Choosing $\theta=\pi/4$, where $\cos2\theta=0$ and
+$\sin\theta=1/\sqrt2$, recovers Exercise 11.8.16:
+$\pi/(2/\sqrt2)=\pi/\sqrt2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2856,32 +3126,42 @@ it is necessary and was omitted from the statement.}
 Choose a branch of $z^n$ with argument in the sector
 $0<\arg z<\alpha=2\pi/n$, and integrate $1/(1+z^n)$ over the
 sector boundary, with small and large circular arcs of radii
-$\epsilon$ and $R$. The small arc is $O(\epsilon)$, and the large
-one is $O(R^{1-n})$, so both vanish for $n>1$.
+$\epsilon$ and $R$. On the small arc $|1+z^n|\ge1-\epsilon^n$ and the
+length is $\alpha\epsilon$, so it is $O(\epsilon)$; on the large one
+$|1+z^n|\ge R^n-1$ and the length is $\alpha R$, so it is
+$O(R^{1-n})$. Both vanish for $n>1$.
 On the outgoing real ray the integral is $I$, while on the incoming
-ray $z=re^{i\alpha}$ it is $-e^{i\alpha}I$, since
-$z^n=r^ne^{2\pi i}=r^n$.
+ray $z=re^{i\alpha}$, $dz=e^{i\alpha}\,dr$, traversed from $r=R$ to
+$r=\epsilon$, it is
+$\int_\infty^0e^{i\alpha}\,dr/(1+r^n)=-e^{i\alpha}I$, since
+$z^n=r^ne^{in\alpha}=r^ne^{2\pi i}=r^n$.
 
-There is one pole in the sector, $z_0=e^{i\pi/n}$, with
+A pole $z=re^{i\varphi}$ in the sector satisfies
+$r^ne^{in\varphi}=-1$ with $0<n\varphi<2\pi$, so $r=1$ and
+$n\varphi=\pi$: there is one pole, $z_0=e^{i\pi/n}$, where
+$z_0^n=e^{i\pi}=-1$. By the rule $N/D'$ with $(1+z^n)'=nz^{n-1}$,
 \[
 \operatorname{Res}_{z_0}\frac1{1+z^n}
 =\frac1{nz_0^{n-1}}
 =\frac{z_0}{nz_0^n}=-\frac{e^{i\pi/n}}n.
 \]
-Thus
+Thus, by the residue theorem, with $e^{i\alpha}=e^{2\pi i/n}$,
 \[
 (1-e^{2\pi i/n})I=-\frac{2\pi i}{n}e^{i\pi/n}.
 \]
-Since $1-e^{2i\beta}=-2ie^{i\beta}\sin\beta$, we obtain
+Since $1-e^{2i\beta}=e^{i\beta}(e^{-i\beta}-e^{i\beta})
+=-2ie^{i\beta}\sin\beta$, with $\beta=\pi/n$ we obtain
 \[
+I=\frac{-(2\pi i/n)e^{i\pi/n}}{-2ie^{i\pi/n}\sin(\pi/n)},\qquad
 \boxed{\int_0^\infty\frac{dx}{1+x^n}
 =\frac{\pi}{n\sin(\pi/n)}\qquad(n>1)}.
 \]
 The branch argument also covers nonintegral real $n>1$; the small
 circle excludes its branch point at zero. For $0<n\le1$ the tail
-is comparable to $x^{-n}$ and diverges; for $n\le0$ it does not
-even tend to zero fast enough to be integrable.
-\erratum{The manual loses a minus sign when replacing $z_0^{1-n}/n$ by an exponential. Since $z_0^n=-1$, the residue is $-z_0/n=-e^{i\pi/n}/n$, not $+e^{i\pi/n}/n$. Its positive final integral agrees with the correctly signed derivation above.}
+is comparable to $x^{-n}$ and diverges; for $n\le0$ the integrand does
+not even tend to zero (it tends to $1$ for $n<0$ and equals $\frac12$
+for $n=0$).
+\erratum{The Instructor's Manual loses a minus sign when replacing $z_0^{1-n}/n$ by an exponential. Since $z_0^n=-1$, the residue is $-z_0/n=-e^{i\pi/n}/n$, not $+e^{i\pi/n}/n$. Its positive final integral agrees with the correctly signed derivation above.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
