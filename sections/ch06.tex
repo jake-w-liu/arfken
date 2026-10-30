@@ -90,10 +90,13 @@ to both.
 $\mathsf{A}=\begin{pmatrix}1&1&0\\1&0&1\\0&1&1\end{pmatrix}$.
 \par\nobreak\hfill\emph{ANS.}\enspace $\lambda=-1,1,2$.
 \solution
-Expansion along the first row gives
+Expansion along the first row (whose third entry is zero) gives
 \begin{align*}
 p(\lambda)
-&=(1-\lambda)\bigl[-\lambda(1-\lambda)-1\bigr]-(1-\lambda)\\
+&=(1-\lambda)\begin{vmatrix}-\lambda&1\\1&1-\lambda\end{vmatrix}
+-1\cdot\begin{vmatrix}1&1\\0&1-\lambda\end{vmatrix}\\
+&=(1-\lambda)\bigl[-\lambda(1-\lambda)-1\bigr]-(1-\lambda)
+=(1-\lambda)\bigl[\lambda^2-\lambda-1-1\bigr]\\
 &=(1-\lambda)(\lambda^2-\lambda-2)
 =(1-\lambda)(\lambda-2)(\lambda+1).
 \end{align*}
@@ -127,10 +130,14 @@ $\mathsf{A}=\begin{pmatrix}1&\sqrt{8}&0\\\sqrt{8}&1&\sqrt{8}\\
 \par\nobreak\hfill\emph{ANS.}\enspace $\lambda=-3,1,5$.
 \solution
 Set $q=1-\lambda$ and note that $\sqrt8=2\sqrt2$.
-The tridiagonal determinant expands to
-\[
-p(\lambda)=q(q^2-8)-8q=q(q^2-16)=q(q-4)(q+4).
-\]
+Expanding the tridiagonal determinant along the first row,
+\begin{align*}
+p(\lambda)
+&=q\begin{vmatrix}q&\sqrt8\\\sqrt8&q\end{vmatrix}
+-\sqrt8\begin{vmatrix}\sqrt8&\sqrt8\\0&q\end{vmatrix}
+=q(q^2-8)-\sqrt8\cdot\sqrt8\,q\\
+&=q(q^2-16)=q(q-4)(q+4).
+\end{align*}
 Thus $q=4,0,-4$, giving $\lambda=-3,1,5$. The component equations are
 \[
 qx+2\sqrt2\,y=0,\quad
@@ -230,11 +237,14 @@ Indeed, for the printed vector $v_{\rm p}$,
 $\mathsf{A}=\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix}$.
 \par\nobreak\hfill\emph{ANS.}\enspace $\lambda=-\sqrt{2},0,\sqrt{2}$.
 \solution
-The determinant is
-\[
-p(\lambda)=(-\lambda)(\lambda^2-1)-(-\lambda)
+Expanding along the first row,
+\begin{align*}
+p(\lambda)
+&=-\lambda\begin{vmatrix}-\lambda&1\\1&-\lambda\end{vmatrix}
+-1\cdot\begin{vmatrix}1&1\\0&-\lambda\end{vmatrix}\\
+&=(-\lambda)(\lambda^2-1)-(-\lambda)
 =-\lambda(\lambda^2-2),
-\]
+\end{align*}
 so $\lambda=0,\pm\sqrt2$. The three equations are
 \[
 y=\lambda x,\qquad x+z=\lambda y,\qquad y=\lambda z.
@@ -264,6 +274,7 @@ $\mathsf{A}=\begin{pmatrix}2&0&0\\0&1&1\\0&1&1\end{pmatrix}$.
 Expansion on the first coordinate gives
 \[
 p(\lambda)=(2-\lambda)\bigl[(1-\lambda)^2-1\bigr]
+=(2-\lambda)\lambda(\lambda-2)
 =-\lambda(\lambda-2)^2.
 \]
 For $\lambda=0$, the equations give $x=0$ and $y+z=0$, hence
@@ -294,11 +305,17 @@ Both eigenvectors for $2$ have zero scalar product with $u_0$.
 $\mathsf{A}=\begin{pmatrix}0&1&1\\1&0&1\\1&1&0\end{pmatrix}$.
 \par\nobreak\hfill\emph{ANS.}\enspace $\lambda=-1,-1,2$.
 \solution
-The determinant expands as
-\[
-p(\lambda)=-\lambda(\lambda^2-1)+(\lambda+1)+(\lambda+1)
-=-\lambda^3+3\lambda+2=(2-\lambda)(\lambda+1)^2.
-\]
+Expanding along the first row,
+\begin{align*}
+p(\lambda)
+&=-\lambda\begin{vmatrix}-\lambda&1\\1&-\lambda\end{vmatrix}
+-\begin{vmatrix}1&1\\1&-\lambda\end{vmatrix}
++\begin{vmatrix}1&-\lambda\\1&1\end{vmatrix}\\
+&=-\lambda(\lambda^2-1)+(\lambda+1)+(\lambda+1)
+=(\lambda+1)\bigl[-\lambda(\lambda-1)+2\bigr]\\
+&=(\lambda+1)(2+\lambda-\lambda^2)=(2-\lambda)(\lambda+1)^2,
+\end{align*}
+since $(2-\lambda)(1+\lambda)=2+\lambda-\lambda^2$.
 To obtain the eigenspaces without repeated elimination, set
 $s=x+y+z$. Then
 \[
@@ -342,10 +359,13 @@ On the line spanned by $w=(1,1,1)^{\mathsf T}$, $Jw=3w$, so
 $Aw=(2-3)w=-w$.
 On the plane $x+y+z=0$, $Jv=0$, so $Av=2v$.
 The line and plane have dimensions one and two and together span the
-whole space, proving that these are all the eigenvalues. In particular,
+whole space. In a basis made of $w$ and two independent vectors of the
+plane, $A$ becomes $\operatorname{diag}(-1,2,2)$. Since
+$\det(A-\lambda I)$ does not depend on the basis (Exercise 6.4.1),
 \[
-p(\lambda)=(-1-\lambda)(2-\lambda)^2.
+p(\lambda)=(-1-\lambda)(2-\lambda)^2,
 \]
+so $-1,2,2$ are all the eigenvalues.
 To orthogonalize the degenerate plane, take
 $a=(1,-1,0)^{\mathsf T}$ and $b=(1,0,-1)^{\mathsf T}$.
 Since $a\cdot b=1$ and $a\cdot a=2$,
@@ -377,7 +397,9 @@ Av=(x+y+z)(1,1,1)^{\mathsf T}.
 The vector $w=(1,1,1)^{\mathsf T}$ satisfies $Aw=3w$.
 Every vector in the plane $x+y+z=0$ is annihilated, so $0$ is an
 eigenvalue with a two-dimensional eigenspace. These dimensions add to
-three; thus
+three, so in a basis made of $w$ and two independent vectors of the
+plane, $A$ becomes $\operatorname{diag}(3,0,0)$. Since $\det(A-\lambda I)$ does
+not depend on the basis (Exercise 6.4.1),
 \[
 p(\lambda)=(3-\lambda)\lambda^2.
 \]
@@ -409,6 +431,7 @@ The middle coordinate decouples, so
 p(\lambda)
 &=(1-\lambda)\bigl[(5-\lambda)(2-\lambda)-4\bigr]\\
 &=(1-\lambda)(\lambda^2-7\lambda+6)
+=(1-\lambda)(\lambda-1)(\lambda-6)
 =(1-\lambda)^2(6-\lambda).
 \end{align*}
 At $\lambda=1$, the first and third equations are $4x+2z=0$ and
@@ -438,6 +461,7 @@ $\mathsf{A}=\begin{pmatrix}1&1&0\\1&1&0\\0&0&0\end{pmatrix}$.
 The third row gives the determinant factor $-\lambda$:
 \[
 p(\lambda)=-\lambda\bigl[(1-\lambda)^2-1\bigr]
+=-\lambda\cdot\lambda(\lambda-2)
 =(2-\lambda)\lambda^2.
 \]
 For $\lambda=0$, the first two equations both reduce to $x+y=0$,
@@ -507,17 +531,26 @@ q=\begin{pmatrix}x&y&z\end{pmatrix}
 Notice first that $q=(x+y)^2+(y+z)^2$. It is nonnegative, but it vanishes
 on the entire line $(x,y,z)=t(1,-1,1)$, not only at the origin.
 Thus the form is positive semidefinite rather than positive definite.
-The characteristic determinant is
+The characteristic determinant, expanded along the first row, is
 \begin{align*}
 \det(B-\lambda I)
+&=(1-\lambda)\begin{vmatrix}2-\lambda&1\\1&1-\lambda\end{vmatrix}
+-1\cdot\begin{vmatrix}1&1\\0&1-\lambda\end{vmatrix}\\
 &=(1-\lambda)\bigl[(2-\lambda)(1-\lambda)-1\bigr]-(1-\lambda)\\
 &=(1-\lambda)(\lambda^2-3\lambda)
 =\lambda(1-\lambda)(\lambda-3).
 \end{align*}
-For $\lambda=0$, the equations are $x+y=0$, $y+z=0$, giving
-$(1,-1,1)$. For $\lambda=1$, they give $y=0$, $x+z=0$, giving
-$(1,0,-1)$. For $\lambda=3$, they give $y=2x$, $z=x$, giving
-$(1,2,1)$. Normalize these mutually perpendicular vectors:
+The equations $(B-\lambda I)v=0$ are
+\[
+(1-\lambda)x+y=0,\qquad x+(2-\lambda)y+z=0,\qquad y+(1-\lambda)z=0.
+\]
+For $\lambda=0$, they are $x+y=0$, $y+z=0$, and their sum
+$x+2y+z=0$, giving $(1,-1,1)$. For $\lambda=1$, the first and third
+give $y=0$ and then the middle gives $x+z=0$, giving $(1,0,-1)$.
+For $\lambda=3$, the first and third give $y=2x$ and $y=2z$, so $z=x$
+(the middle equation $x-y+z=0$ then holds), giving $(1,2,1)$.
+Their pairwise scalar products, $1-1$, $1-2+1$, and $1-1$, vanish.
+Normalizing these mutually perpendicular vectors gives
 \[
 e_1=\frac{(1,0,-1)^{\mathsf T}}{\sqrt2},\qquad
 e_3=\frac{(1,2,1)^{\mathsf T}}{\sqrt6},\qquad
@@ -530,9 +563,16 @@ Their subscripts label the eigenvalues. Define orthogonal coordinates
 \zeta=e_0^{\mathsf T}r=\frac{x-y+z}{\sqrt3}.
 \]
 The inverse relation is $r=\xi e_1+\eta e_3+\zeta e_0$. Because
-$Be_1=e_1$, $Be_3=3e_3$, $Be_0=0$, all mixed products vanish and
+$Be_1=e_1$, $Be_3=3e_3$, $Be_0=0$, we have $Br=\xi e_1+3\eta e_3$, and
+orthonormality removes all mixed products:
 \[
-q=\xi^2+3\eta^2,\qquad\boxed{\xi^2+3\eta^2=1,\quad\zeta\text{ arbitrary}.}
+q=r^{\mathsf T}Br
+=(\xi e_1+\eta e_3+\zeta e_0)^{\mathsf T}(\xi e_1+3\eta e_3)
+=\xi^2+3\eta^2.
+\]
+Hence the surface is
+\[
+\boxed{\xi^2+3\eta^2=1,\quad\zeta\text{ arbitrary}.}
 \]
 This is an \textbf{elliptic cylinder}. Its axis is the line through the
 origin in direction $(1,-1,1)$; its transverse semiaxes have lengths
@@ -580,14 +620,17 @@ Invertibility ensures $y\ne0$, and
 By=S^{-1}AS(S^{-1}x)=S^{-1}Ax
 =\lambda S^{-1}x=\lambda y.
 \]
-Conversely, an eigenvector $y$ of $B$ maps to $x=Sy$ of $A$, with the
-same eigenvalue. Algebraic multiplicities are also preserved, since
+Conversely, since $A=SBS^{-1}$, an eigenvector $y$ of $B$ maps to an
+eigenvector $x=Sy$ of $A$, with the same eigenvalue. Algebraic
+multiplicities are also preserved. Since $S^{-1}(\lambda I)S=\lambda I$
+and the determinant of a product is the product of the determinants,
 \begin{align*}
 \det(B-\lambda I)
 &=\det\bigl[S^{-1}(A-\lambda I)S\bigr]\\
 &=\det(S^{-1})\det(A-\lambda I)\det S
-=\det(A-\lambda I).
+=\det(A-\lambda I),
 \end{align*}
+because $\det(S^{-1})\det S=\det(S^{-1}S)=\det I=1$.
 Thus the entire characteristic polynomial is unchanged.
 
 The determinant follows directly by putting $\lambda=0$:
@@ -601,9 +644,11 @@ assumption:
 =\sum_jA_{jj}=\operatorname{tr}A.
 \]
 These invariances therefore hold even for defective matrices that
-cannot be diagonalized. When a diagonal form exists, its diagonal
-entries are the eigenvalues, immediately giving the sum and product
-interpretations stated in the question.
+cannot be diagonalized. When a diagonal form
+$S^{-1}AS=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)$ exists, its
+diagonal entries are the eigenvalues, so
+$\operatorname{tr}A=\sum_i\lambda_i$ and $\det A=\prod_i\lambda_i$:
+these are the sum and product interpretations stated in the question.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -620,8 +665,11 @@ then the matrix is Hermitian.
 \erratum{The orthonormal eigenvectors must form a complete basis:
 there must be $n$ of them for an $n\times n$ matrix.}
 Let $U$ have those eigenvectors as its columns and set
-$D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)$. Their orthonormality
-and the eigenvalue equations give
+$D=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)$. The $(i,j)$
+element of $U^\dagger U$ is $x_i^\dagger x_j=\delta_{ij}$, so
+$U^\dagger U=I$; since $U$ is square, $U^\dagger$ is then its inverse,
+and also $UU^\dagger=I$. Column $j$ of $AU$ is $Ax_j=\lambda_jx_j$,
+which is column $j$ of $UD$. Hence
 \[
 U^\dagger U=UU^\dagger=I,\qquad AU=UD.
 \]
@@ -655,8 +703,10 @@ For unitary diagonalization it is false without the additional
 hypothesis that the eigenvalues are real.}
 
 First suppose a real orthogonal $Q$ diagonalizes the real matrix $A$:
-$Q^{\mathsf T}AQ=D$. The matrix $D$ is real and diagonal. Recover $A$
-and take its transpose:
+$Q^{\mathsf T}AQ=D$. The matrix $D$ is diagonal, and real because $Q$
+and $A$ are real. Multiplying on the left by $Q$ and on the right by
+$Q^{\mathsf T}$ and using $QQ^{\mathsf T}=I$ recovers $A$; then take
+its transpose, using $D^{\mathsf T}=D$:
 \[
 A=QDQ^{\mathsf T},\qquad
 A^{\mathsf T}=(QDQ^{\mathsf T})^{\mathsf T}
@@ -672,11 +722,14 @@ U=\frac1{\sqrt2}\begin{pmatrix}1&1\\-i&i\end{pmatrix}.
 \]
 Here $A^{\mathsf T}=-A\ne A$, but the columns
 $u_+=(1,-i)^{\mathsf T}/\sqrt2$ and
-$u_-=(1,i)^{\mathsf T}/\sqrt2$ satisfy
+$u_-=(1,i)^{\mathsf T}/\sqrt2$ of $U$ satisfy
 \[
-Au_+=iu_+,\qquad Au_-=-iu_-,\qquad U^\dagger U=I.
+Au_\pm=\frac1{\sqrt2}(\pm i,1)^{\mathsf T}=\pm i\,u_\pm,
 \]
-Consequently $U^\dagger AU=\operatorname{diag}(i,-i)$ is a valid unitary
+and they are orthonormal: $u_\pm^\dagger u_\pm=(1+1)/2=1$ and
+$u_+^\dagger u_-=(1\cdot1+i\cdot i)/2=0$. Thus $U^\dagger U=I$ and
+$AU=U\operatorname{diag}(i,-i)$. Consequently
+$U^\dagger AU=\operatorname{diag}(i,-i)$ is a valid unitary
 diagonalization of a real nonsymmetric matrix.
 
 If one additionally assumes real eigenvalues, a unitary diagonalization
@@ -714,7 +767,7 @@ Thus
 \boxed{\ell=\frac{\|L_xv\|^2+\|L_yv\|^2+\|L_zv\|^2}{\|v\|^2}
 \in[0,\infty).}
 \]
-Equality is possible exactly when all three $L_\alpha v$ vanish.
+The value $\ell=0$ occurs exactly when all three $L_\alpha v$ vanish.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -731,9 +784,11 @@ x_i=\lambda_i A^{-1}x_i,
 \qquad
 \boxed{A^{-1}x_i=\lambda_i^{-1}x_i.}
 \]
-Conversely, multiplying an eigenvalue equation for $A^{-1}$ by $A$
-recovers one for $A$, so the eigendirections are the same in both
-directions. No complete eigenbasis is required for this argument.
+Conversely, if $A^{-1}y=\mu y$ with $y\ne0$, then $\mu\ne0$ by the
+same argument applied to the invertible matrix $A^{-1}$, and
+multiplying by $A$ gives $y=\mu Ay$, that is, $Ay=\mu^{-1}y$. So $A$
+and $A^{-1}$ have exactly the same eigenvectors, with reciprocal
+eigenvalues. No complete eigenbasis is required for this argument.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -758,6 +813,11 @@ singular.
 Write the columns of $A$ as $a_1,\ldots,a_n$.
 
 (a) A zero determinant means that these columns are linearly dependent.
+Indeed, if they were independent, the $n$ columns would form a basis,
+so each unit vector could be written as
+$e_k=\sum_jb_{jk}a_j=Ab_k$, with $b_k=(b_{1k},\ldots,b_{nk})^{\mathsf T}$.
+The matrix $B$ with columns $b_k$ would satisfy $AB=I$, hence
+$\det A\det B=1$, contradicting $\det A=0$.
 Hence there exist coefficients $v_1,\ldots,v_n$, not all zero, such that
 \[
 v_1a_1+\cdots+v_na_n=0.
@@ -766,8 +826,16 @@ For the nonzero column vector $v=(v_1,\ldots,v_n)^{\mathsf T}$, the
 left side is exactly $Av$. Thus $Av=0$.
 
 (b) Conversely, if $Av=0$ with $v\ne0$, expanding the matrix-vector
-product gives precisely such a nontrivial linear dependence among the
-columns. Their determinant is therefore zero, and $A$ is singular.
+product gives precisely such a nontrivial linear dependence
+$\sum_jv_ja_j=0$ among the columns. Choose $r$ with $v_r\ne0$.
+Multiplying column $r$ by $v_r$ multiplies the determinant by $v_r$,
+and then adding $v_j$ times column $j$ to column $r$ for every $j\ne r$
+does not change it. Column $r$ has become $\sum_jv_ja_j=0$, so
+\[
+v_r\det A=\det\Bigl(a_1,\ldots,\sum_jv_ja_j,\ldots,a_n\Bigr)
+=\det(a_1,\ldots,0,\ldots,a_n)=0.
+\]
+Since $v_r\ne0$, $\det A=0$, and $A$ is singular.
 An inverse is impossible: if $A^{-1}$ existed, $Av=0$ would give
 $v=A^{-1}Av=0$, a contradiction.
 
@@ -802,8 +870,12 @@ W^\dagger W=\sum_{i,j}|a_i\rangle
  \underbrace{\langle b_i|b_j\rangle}_{\delta_{ij}}\langle a_j|
 =\sum_i|a_i\rangle\langle a_i|=I,
 \]
-and similarly $WW^\dagger=I$. Thus $W$ is unitary and $Wa_i=b_i$.
-On each basis vector $b_i$,
+the last step being the completeness relation of the orthonormal basis
+$a_i$. In the same way
+$WW^\dagger=\sum_{i,j}|b_i\rangle\langle a_i|a_j\rangle\langle b_j|
+=\sum_i|b_i\rangle\langle b_i|=I$. Thus $W$ is unitary. Moreover
+$Wa_i=\sum_j|b_j\rangle\langle a_j|a_i\rangle=b_i$, and likewise
+$W^\dagger b_i=a_i$. On each basis vector $b_i$,
 \[
 WAW^\dagger b_i=WAa_i=\lambda_iWa_i=\lambda_i b_i=Bb_i.
 \]
@@ -830,10 +902,13 @@ y/\sqrt2=\lambda x,\qquad(x+z)/\sqrt2=\lambda y,
 \qquad y/\sqrt2=\lambda z.
 \]
 If $\lambda=0$, then $y=0$ and $z=-x$. If $\lambda\ne0$, the first
-and third equations give $z=x$, and substitution into the middle gives
+and third equations give $y=\sqrt2\lambda x=\sqrt2\lambda z$, so $z=x$
+(and $x\ne0$ for a nonzero vector). Substitution into the middle
+equation gives $\sqrt2\,x=\lambda y=\sqrt2\lambda^2x$, so
 $\lambda^2=1$. The nonzero-eigenvalue vectors have the form
 $(1,\sqrt2\lambda,1)^{\mathsf T}$, whose squared norm is $4$.
-Therefore
+(Since $\sqrt2M_x$ is the matrix of Exercise 6.2.7, these agree with
+the eigenvectors found there.) Therefore
 \[
 \begin{array}{c|ccc}
 &\lambda=1&\lambda=0&\lambda=-1\\\hline
@@ -846,15 +921,19 @@ Their pairwise inner products vanish, as follows from $1-2+1=0$
 and $1-1=0$.
 
 For $M_y$, use the diagonal unitary matrix
-$D=\operatorname{diag}(1,i,-1)$. Its phases give
+$D=\operatorname{diag}(d_1,d_2,d_3)=\operatorname{diag}(1,i,-1)$.
+Since $(DM_xD^\dagger)_{jk}=d_j(M_x)_{jk}d_k^*$, the $(1,2)$ and
+$(2,3)$ entries of $M_x$ are multiplied by $d_1d_2^*=d_2d_3^*=-i$ and
+the $(2,1)$ and $(3,2)$ entries by $d_2d_1^*=d_3d_2^*=i$:
 \[
 DM_xD^\dagger
 =\frac1{\sqrt2}\begin{pmatrix}0&-i&0\\i&0&-i\\0&i&0\end{pmatrix}=M_y.
 \]
-If $M_xu=\lambda u$, then
+If $M_xu=\lambda u$, then, because $M_yD=DM_xD^\dagger D=DM_x$,
 $M_y(Du)=DM_xu=\lambda(Du)$. Since $D^\dagger D=I$, multiplication
-by $D$ preserves all norms and inner products. Thus an orthonormal
-answer for $M_y$ is
+by $D$ preserves all norms and inner products. Multiplying the
+components of each eigenvector of $M_x$ by $1,i,-1$ therefore gives an
+orthonormal answer for $M_y$:
 \[
 \begin{array}{c|ccc}
 &\lambda=1&\lambda=0&\lambda=-1\\\hline
@@ -908,14 +987,20 @@ All coefficients are real, and $a_{ji}=a_{ij}$.
 a'_{ij}
 &=\langle c\varphi_i-s\varphi_j|A|s\varphi_i+c\varphi_j\rangle\\
 &=cs\,a_{ii}+c^2a_{ij}-s^2a_{ji}-sc\,a_{jj}\\
-&=\frac12(a_{ii}-a_{jj})\sin2\theta+a_{ij}\cos2\theta.
+&=cs\,(a_{ii}-a_{jj})+(c^2-s^2)a_{ij}\\
+&=\frac12(a_{ii}-a_{jj})\sin2\theta+a_{ij}\cos2\theta,
 \end{align*}
+using $a_{ji}=a_{ij}$, $2cs=\sin2\theta$, and $c^2-s^2=\cos2\theta$.
 Setting this to zero gives
+$\frac12(a_{jj}-a_{ii})\sin2\theta=a_{ij}\cos2\theta$. If
+$a_{jj}\ne a_{ii}$, then $\cos2\theta\ne0$ (if $\cos2\theta=0$, the
+equation would force $\sin2\theta=0$ as well, which is impossible),
+and division gives
 \[
-\boxed{\tan2\theta=\frac{2a_{ij}}{a_{jj}-a_{ii}}}
+\boxed{\tan2\theta=\frac{2a_{ij}}{a_{jj}-a_{ii}}}.
 \]
-when the denominator is nonzero, with a branch of $\theta$ satisfying
-the preceding sine-cosine equation.
+Conversely, every $\theta$ with this tangent satisfies the preceding
+sine--cosine equation and so makes $a'_{ij}=0$.
 \erratum{The tangent formula needs its limiting cases: if
 $a_{ii}=a_{jj}$ and $a_{ij}\ne0$, choose $\theta=\pi/4$; if
 $a_{ij}=0$, choose $\theta=0$ and no elimination is needed.}
@@ -941,7 +1026,12 @@ a'_{ii}+a'_{jj}=(c^2+s^2)(a_{ii}+a_{jj})=a_{ii}+a_{jj}.
 Every other diagonal element is unchanged by (b), so the total trace
 is unchanged.
 
-(d) For $\mu\ne i,j$, one of the two basis vectors remains fixed:
+(d) For $\mu\ne i,j$, the basis vector $\varphi_\mu$ is unchanged, so
+\[
+a'_{i\mu}=\langle c\varphi_i-s\varphi_j|A|\varphi_\mu\rangle,\qquad
+a'_{j\mu}=\langle s\varphi_i+c\varphi_j|A|\varphi_\mu\rangle,
+\]
+that is,
 \[
 \boxed{a'_{i\mu}=c\,a_{i\mu}-s\,a_{j\mu},\qquad
        a'_{j\mu}=s\,a_{i\mu}+c\,a_{j\mu}.}
@@ -1030,7 +1120,7 @@ for real orthogonal matrices.
 Let $Uc=\lambda c$ with $c\ne0$. Unitarity means
 $U^\dagger U=I$, so the squared norm is preserved:
 \[
-c^\dagger c=(Uc)^\dagger(Uc)
+c^\dagger c=c^\dagger U^\dagger Uc=(Uc)^\dagger(Uc)
 =(\lambda c)^\dagger(\lambda c)
 =\lambda^*\lambda\,c^\dagger c=|\lambda|^2c^\dagger c.
 \]
@@ -1056,28 +1146,37 @@ matrix can be diagonalized by a unitary transformation.
 Our orthogonal rotation matrix (real elements) has \erratum{generally}
 complex eigenvalues.
 \solution
-(a) Choose an orthonormal basis whose third axis is the fixed
-rotation axis. In this basis the matrix is, up to the sign convention
-for the angle,
+(a) Let $R$ be the rotation matrix, and choose an orthonormal basis
+whose third axis is the fixed rotation axis. In this basis the matrix
+is, up to the sign convention for the angle,
 \[
 R_0=\begin{pmatrix}\cos\varphi&-\sin\varphi&0\\
 \sin\varphi&\cos\varphi&0\\0&0&1\end{pmatrix}.
 \]
 A change of orthonormal basis is a similarity, so the trace is the same
-in the original coordinates. Thus
+in the original coordinates (Exercise 6.4.1). The unitary
+diagonalization $U^\dagger RU=\operatorname{diag}(\lambda_1,\lambda_2,\lambda_3)$
+is also a similarity, so the trace equals the sum of the eigenvalues.
+Thus
 \[
 \boxed{\lambda_1+\lambda_2+\lambda_3
 =\operatorname{tr}R_0=1+2\cos\varphi.}
 \]
 (b) Take $\lambda_1=1$, corresponding to the rotation axis. A proper
-rotation has determinant $1$, so $\lambda_2\lambda_3=1$; part (a)
-gives $\lambda_2+\lambda_3=2\cos\varphi$. Therefore the remaining two
-roots satisfy
+rotation has determinant $1$, and by the same similarity argument the
+determinant is the product $\lambda_1\lambda_2\lambda_3$ of the
+eigenvalues, so $\lambda_2\lambda_3=1$; part (a) gives
+$\lambda_2+\lambda_3=2\cos\varphi$. Therefore $\lambda_2$ and
+$\lambda_3$ are the roots of
 \[
-\lambda^2-2\cos\varphi\,\lambda+1=0.
+(\lambda-\lambda_2)(\lambda-\lambda_3)
+=\lambda^2-(\lambda_2+\lambda_3)\lambda+\lambda_2\lambda_3
+=\lambda^2-2\cos\varphi\,\lambda+1=0.
 \]
 Equivalently the planar block has characteristic determinant
-$(\cos\varphi-\lambda)^2+\sin^2\varphi$. Its roots are
+$(\cos\varphi-\lambda)^2+\sin^2\varphi$. By the quadratic formula,
+since $\cos^2\varphi-1=-\sin^2\varphi$, the roots are
+$\lambda=\cos\varphi\pm\sqrt{\cos^2\varphi-1}=\cos\varphi\pm i\sin\varphi$:
 \[
 \boxed{\lambda_2=\cos\varphi+i\sin\varphi=e^{i\varphi},\qquad
 \lambda_3=\cos\varphi-i\sin\varphi=e^{-i\varphi}.}
@@ -1134,7 +1233,7 @@ For a Hermitian matrix each eigenvalue is real. For a unitary
 matrix Exercise 6.5.3 gives $|\lambda|=1$. Combining these facts yields
 $\lambda=1$ or $\lambda=-1$.
 One may also use both matrix properties directly: $A^\dagger=A$ and
-$A^\dagger A=I$ imply $A^2=I$. Thus for $Av=\lambda v$,
+$A^\dagger A=I$ imply $A^2=A^\dagger A=I$. Thus for $Av=\lambda v$,
 \[
 v=A^2v=\lambda^2v.
 \]
@@ -1153,8 +1252,10 @@ Hermitian, unitary matrices are $4\times4$.
 \solution
 Write the four matrices as $\Gamma_a$, with
 $\Gamma_a\Gamma_b=-\Gamma_b\Gamma_a$ when $a\ne b$.
-Unitarity makes every determinant nonzero. Taking determinants of an
-anticommutation relation gives
+Unitarity makes every determinant nonzero:
+$|\det\Gamma_a|^2=\det(\Gamma_a^\dagger\Gamma_a)=\det I=1$.
+Taking determinants of an anticommutation relation, and using
+$\det(-M)=(-1)^n\det M$ (each of the $n$ rows changes sign), gives
 \[
 \det\Gamma_a\det\Gamma_b
 =\det(-\Gamma_b\Gamma_a)
@@ -1163,9 +1264,14 @@ anticommutation relation gives
 Cancel the nonzero determinants. Then $(-1)^n=1$, so $n$ must be even.
 
 We next exclude $n=2$, not merely odd $n$. Hermiticity and unitarity give
-$\Gamma_a^2=I$ and eigenvalues $\pm1$. The first matrix cannot be $I$
-or $-I$, because anticommuting with either would force every other
-matrix to be zero. Thus a unitary change of basis puts it in the form
+$\Gamma_a^2=\Gamma_a^\dagger\Gamma_a=I$ and, by Exercise 6.5.6,
+eigenvalues $\pm1$. The first matrix cannot be $I$
+or $-I$, because anticommuting with either would give
+$\pm2\Gamma_b=0$ for every other matrix. So $\Gamma_1$ has the
+eigenvalues $1$ and $-1$, and a unitary $V$ diagonalizes it.
+Replacing every $\Gamma_a$ by $V^\dagger\Gamma_aV$ preserves
+Hermiticity, unitarity, and all anticommutation relations, so we may
+take
 \[
 \Gamma_1=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
 \]
@@ -1173,20 +1279,28 @@ Write another Hermitian matrix as
 $B=\begin{pmatrix}a&z\\z^*&d\end{pmatrix}$, with $a,d$ real.
 Its anticommutator with $\Gamma_1$ is
 \[
-\Gamma_1B+B\Gamma_1=\begin{pmatrix}2a&0\\0&-2d\end{pmatrix}.
+\Gamma_1B+B\Gamma_1
+=\begin{pmatrix}a&z\\-z^*&-d\end{pmatrix}
++\begin{pmatrix}a&-z\\z^*&-d\end{pmatrix}
+=\begin{pmatrix}2a&0\\0&-2d\end{pmatrix}.
 \]
 Therefore every remaining matrix must have the form
 \[
 B(z)=\begin{pmatrix}0&z\\z^*&0\end{pmatrix},\qquad
-B(z)^2=|z|^2I,
+B(z)^2=\begin{pmatrix}zz^*&0\\0&z^*z\end{pmatrix}=|z|^2I,
 \]
-and unitarity forces $|z|=1$. For two such matrices,
+and unitarity, $B(z)^\dagger B(z)=B(z)^2=I$, forces $|z|=1$.
+For two such matrices,
 \[
-B(z)B(w)+B(w)B(z)=2\Re(zw^*)I.
+B(z)B(w)+B(w)B(z)
+=\begin{pmatrix}zw^*+wz^*&0\\0&z^*w+w^*z\end{pmatrix}
+=2\Re(zw^*)I.
 \]
-Writing $z=a+ib$ and $w=c+id$ gives $\Re(zw^*)=ac+bd$.
+Writing $z=x_1+iy_1$ and $w=x_2+iy_2$ gives
+$\Re(zw^*)=x_1x_2+y_1y_2$, the scalar product of the real vectors
+$(x_1,y_1)$ and $(x_2,y_2)$.
 Thus the three remaining matrices would require three nonzero,
-mutually orthogonal real vectors $(a,b)$ in a two-dimensional space.
+mutually orthogonal real vectors $(x,y)$ in a two-dimensional space.
 After choosing two independent orthogonal vectors, a vector orthogonal
 to both is zero; this contradicts $|z|=1$. Hence four such $2\times2$
 matrices cannot exist.
@@ -1197,23 +1311,37 @@ To prove that $4\times4$ matrices do exist, define the Pauli matrices
 \sigma_y=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad
 \sigma_z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
 \]
-Each is Hermitian, has square $I_2$, and anticommutes with either of the
-other two, as direct multiplication verifies. Use the four block matrices
+Each is Hermitian and has square $I_2$, and direct multiplication gives
+\[
+\sigma_x\sigma_y=i\sigma_z=-\sigma_y\sigma_x,\quad
+\sigma_y\sigma_z=i\sigma_x=-\sigma_z\sigma_y,\quad
+\sigma_z\sigma_x=i\sigma_y=-\sigma_x\sigma_z,
+\]
+so each anticommutes with either of the other two. Use the four block
+matrices
 \[
 \Gamma_1=\begin{pmatrix}0&I_2\\I_2&0\end{pmatrix},\quad
 \Gamma_2=\begin{pmatrix}0&-iI_2\\iI_2&0\end{pmatrix},\quad
 \Gamma_3=\begin{pmatrix}\sigma_x&0\\0&-\sigma_x\end{pmatrix},\quad
 \Gamma_4=\begin{pmatrix}\sigma_y&0\\0&-\sigma_y\end{pmatrix}.
 \]
-They are Hermitian and their squares are $I_4$. Equivalently,
+They are Hermitian and their squares are $I_4$, so they are also
+unitary: $\Gamma_a^\dagger\Gamma_a=\Gamma_a^2=I_4$. Equivalently, as
+direct products,
 $\Gamma_1=\sigma_x\otimes I_2$, $\Gamma_2=\sigma_y\otimes I_2$,
 $\Gamma_3=\sigma_z\otimes\sigma_x$, and
 $\Gamma_4=\sigma_z\otimes\sigma_y$.
-The first pair anticommutes by the first Pauli factors; either of the
-first two anticommutes with either of the last two because
-$\{\sigma_x,\sigma_z\}=\{\sigma_y,\sigma_z\}=0$; the last pair
-anticommutes because $\sigma_z^2\otimes\{\sigma_x,\sigma_y\}=0$.
-This checks all six pairs. Therefore the smallest possible size is
+By the rule $(P\otimes Q)(P'\otimes Q')=PP'\otimes QQ'$,
+\begin{align*}
+\{\Gamma_1,\Gamma_2\}&=\{\sigma_x,\sigma_y\}\otimes I_2=0,\\
+\{\sigma_\alpha\otimes I_2,\sigma_z\otimes\sigma_\beta\}
+&=\{\sigma_\alpha,\sigma_z\}\otimes\sigma_\beta=0
+\qquad(\alpha,\beta\in\{x,y\}),\\
+\{\Gamma_3,\Gamma_4\}&=\sigma_z^2\otimes\{\sigma_x,\sigma_y\}=0.
+\end{align*}
+The middle line covers the four pairs formed by $\Gamma_1$ or
+$\Gamma_2$ with $\Gamma_3$ or $\Gamma_4$, so all six pairs
+anticommute. Therefore the smallest possible size is
 \[
 \boxed{n=4.}
 \]
@@ -1272,11 +1400,13 @@ second as $(0,-1)^{\mathsf T}$. Therefore
 \[
 \boxed{A=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.}
 \]
-The spectral formula gives the same result explicitly:
+The spectral formula of Exercise 6.5.8 gives the same result
+explicitly:
 \[
 A=|e_1\rangle\langle e_1|-|e_2\rangle\langle e_2|
 =\begin{pmatrix}1&0\\0&0\end{pmatrix}
- -\begin{pmatrix}0&0\\0&1\end{pmatrix}.
+ -\begin{pmatrix}0&0\\0&1\end{pmatrix}
+=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
 \]
 
 \Needspace{5\baselineskip}
@@ -1295,15 +1425,18 @@ not the same eigenvalues. With the consistent pairing
 $A^\dagger v_i=\lambda_i^*v_i$, the condition for the displayed
 orthogonality is $\lambda_i\ne\lambda_j$.}
 The conjugation of the spectrum follows from
+$A^\dagger-\mu I=(A-\overline\mu I)^\dagger$, since transposition does
+not change a determinant and conjugating every entry conjugates it:
 \[
 \det(A^\dagger-\mu I)
-=\overline{\det(A-\overline\mu I)}:
+=\overline{\det(A-\overline\mu I)};
 \]
 its zeros are the complex conjugates of the zeros of the original
 characteristic polynomial, including multiplicities.
 
 Using the corrected pairing, take the adjoint of the second eigenvalue
-equation:
+equation, with $(A^\dagger v_i)^\dagger=v_i^\dagger A$ and
+$(\lambda_i^*v_i)^\dagger=\lambda_iv_i^\dagger$:
 \[
 Au_j=\lambda_j u_j,\qquad
 A^\dagger v_i=\lambda_i^*v_i
@@ -1325,8 +1458,9 @@ Subtracting gives
 If one instead denotes the eigenvalue of $A^\dagger$ by $\mu_i$,
 without pairing it in advance, the same calculation yields
 $(\lambda_j-\mu_i^*)\langle v_i|u_j\rangle=0$.
-This is the consistent version of the condition with a star that appears
-in the original wording. No orthogonality is forced when the two
+This is the textbook's condition $\lambda_i^*\ne\lambda_j$, read with
+$\lambda_i$ denoting the eigenvalue of $A^\dagger$ that belongs to
+$v_i$. No orthogonality is forced when the two
 paired eigenvalues coincide, and the argument does not assume that a
 non-Hermitian matrix has a complete eigenbasis.
 
@@ -1377,17 +1511,20 @@ They are also positive semidefinite. In particular,
 =\frac{f_n^\dagger A^{\mathsf T}Af_n}{f_n^\dagger f_n}
 =\frac{\|Af_n\|^2}{\|f_n\|^2}\ge0,
 \]
-so the eigenvalue $\lambda_n^2$ is real and nonnegative. Since its
-square is nonnegative, $\lambda_n$ itself can be taken real; its
-nonnegative choice is the singular value.
+so the eigenvalue $\lambda_n^2$ is real and nonnegative. A number
+whose square is real and nonnegative is itself real, so $\lambda_n$ is
+real; replacing $g_n$ by $-g_n$ reverses its sign, and its nonnegative
+choice is the singular value.
 
 For distinct squared eigenvalues, symmetry proves orthogonality:
 \[
 \lambda_j^2 f_i^\dagger f_j
 =f_i^\dagger(A^{\mathsf T}A)f_j
 =((A^{\mathsf T}A)f_i)^\dagger f_j
-=\lambda_i^2 f_i^\dagger f_j.
+=\lambda_i^2 f_i^\dagger f_j,
 \]
+where the middle step uses $(A^{\mathsf T}A)^\dagger=A^{\mathsf T}A$
+and the last uses the reality of $\lambda_i^2$.
 Thus $f_i^\dagger f_j=0$ when $\lambda_i^2\ne\lambda_j^2$.
 The identical argument with $AA^{\mathsf T}$ proves the assertion for
 $g_i,g_j$.
@@ -1407,13 +1544,24 @@ g_i^\dagger g_j
 =\frac{f_i^\dagger A^{\mathsf T}Af_j}{\sigma_i\sigma_j}
 =\frac{\sigma_j^2}{\sigma_i\sigma_j}\delta_{ij}=\delta_{ij},
 \qquad
-A^{\mathsf T}g_n=\sigma_nf_n.
+A^{\mathsf T}g_n=\frac{A^{\mathsf T}Af_n}{\sigma_n}
+=\frac{\sigma_n^2f_n}{\sigma_n}=\sigma_nf_n,
 \]
+so both pair equations hold with $\lambda_n=\sigma_n$.
 This also handles repeated positive singular values. For zero singular
-values, choose orthonormal vectors separately in $\ker A$ and
-$\ker A^{\mathsf T}$; for a square matrix these kernels have the same
-dimension and can be paired. This gives the complete orthonormal
-families used in the following exercises.
+values, note that $\ker(A^{\mathsf T}A)=\ker A$, because
+$A^{\mathsf T}Af=0$ implies $\|Af\|^2=f^\dagger A^{\mathsf T}Af=0$;
+likewise $\ker(AA^{\mathsf T})=\ker A^{\mathsf T}$. Choose orthonormal
+vectors $f_n$ in $\ker A$ and $g_n$ in $\ker A^{\mathsf T}$; both pair
+equations then hold with $\lambda_n=0$. For a square $N\times N$ matrix
+these kernels have the same dimension,
+$N-\operatorname{rank}A=N-\operatorname{rank}A^{\mathsf T}$, so they
+can be paired. These $f_n$ are orthogonal to the earlier ones, which
+belong to different eigenvalues of $A^{\mathsf T}A$; these $g_n$ are
+orthogonal to the earlier ones $g_m=Af_m/\sigma_m$, since
+$h\in\ker A^{\mathsf T}$ gives
+$h^\dagger Af_m=(A^{\mathsf T}h)^\dagger f_m=0$. This gives the
+complete orthonormal families used in the following exercises.
 
 \Needspace{5\baselineskip}
 \par\bigskip
