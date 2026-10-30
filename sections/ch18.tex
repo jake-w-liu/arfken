@@ -4806,7 +4806,8 @@ potential) energy $E$ of the electron was negative. Rewrite the
 electron, $E>0$.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $e^{i\alpha r/2}(\alpha r)^{L}M(L+1-in,2L+2,-i\alpha r)$,
-\erratum{regular continuum wave; see the correction below.} This representation provides a powerful alternative
+outgoing wave \erratum{(printed label; this function is the regular
+continuum wave, see the solution)}.  This representation provides a powerful alternative
 technique for the calculation of photoionization and recombination
 coefficients.
 \end{enumerate}
@@ -4880,7 +4881,7 @@ form printed in the question:
 It is regular, $R_{\rm reg}=O(r^L)$, at the origin, because
 $M(a,c,0)=1$.
 
-\erratum{The label ``outgoing wave'' is incorrect for this $M$
+\erratum{The printed label ``outgoing wave'' is incorrect for this $M$
 solution.  It is the regular continuum wave, containing incoming
 and outgoing components.}  For real $n,r$, complex conjugation
 of the boxed expression produces the preceding (unboxed) one, and
@@ -4895,10 +4896,23 @@ outward current.
 For comparison, a purely outgoing radial solution, with time
 factor $e^{-iEt/\hbar}$, is
 \[
-R_{\rm out}(r)\ \propto\
+R_{\rm out}(r)=
  e^{i\alpha r/2}(\alpha r)^L
  U(L+1-in,2L+2,-i\alpha r).
 \]
+It solves the radial equation.  The computation of
+Exercise~18.6.15 holds for every twice-differentiable $f$ and uses
+$i$ only through $i^2=-1$, while the Coulomb equation contains no
+$i$; since $(-i)^2=-1$ as well, it remains valid with $i$ replaced
+by $-i$ throughout.  With $\eta=-n$ and the variable $\rho$, it then
+shows that $u=\rho^{L+1}e^{i\rho}w(-2i\rho)$ is a solution whenever
+$w(z)$ satisfies Kummer's equation $zw''+(c-z)w'-aw=0$ with
+$a=L+1+i\eta=L+1-in$ and $c=2L+2$.  Since
+$e^{i\rho}=e^{i\alpha r/2}$, $-2i\rho=-i\alpha r$ and
+$\rho^{L+1}/r\propto(\alpha r)^L$, the solution $w=M$ gives the
+boxed $R_{\rm reg}$ again, and the second solution $w=U$ of the
+same Kummer equation gives $R_{\rm out}$.
+
 The asymptotic $U(a,c,z)\sim z^{-a}$ holds for
 $|\arg z|\le3\pi/2-\delta$, including this ray $\arg z=-\pi/2$; see
 \href{https://dlmf.nist.gov/13.7.E3}{DLMF 13.7.3}.  Here
@@ -4910,8 +4924,19 @@ R_{\rm out}\sim\frac{(-i)^{-a}}{2k}\,
 \]
 using $e^{i\alpha r/2}=e^{ikr}$ and $(\alpha r)^L=(2kr)^L$.
 The constant $(-i)^{-a}=e^{i\pi a/2}$ is nonzero, and the phase
-$kr+n\ln(2kr)$ is the outward Coulomb phase.  This $U$ solution is generally irregular at the
-origin; regularity and a purely outgoing condition are different
+$kr+n\ln(2kr)$ is the outward Coulomb phase.
+
+This $U$ solution is irregular at the origin.  For $c=2L+2\ge2$,
+$U(a,c,z)\simeq\Gamma(c-1)z^{1-c}/\Gamma(a)$ as $z\to0$
+(\href{https://dlmf.nist.gov/13.2}{DLMF Section 13.2(iii)}; for
+noninteger $c$ this is the dominant term of the connection formula
+in Exercise~18.6.8(b)), and $1/\Gamma(a)\ne0$ because
+$\operatorname{Re}a=L+1>0$.  Hence, near $r=0$,
+\[
+R_{\rm out}\simeq\frac{\Gamma(2L+1)}{\Gamma(a)}\,
+ (\alpha r)^L(-i\alpha r)^{-2L-1}\ \propto\ r^{-L-1}.
+\]
+Regularity and a purely outgoing condition are different
 boundary conditions.
 
 \Needspace{5\baselineskip}
@@ -4929,9 +4954,9 @@ where $2\mu=0,1,2,\ldots$,\quad $k-\mu-\tfrac{1}{2}=0,1,2,\ldots$,
 \quad $a>-2\mu-1$.
 \par\nobreak\hfill\emph{ANS.}\enspace
 (a) $(2\mu)!\,2k$,\quad (b) $(2\mu)!$,\quad (c) $(2\mu)!\,(2k)^{a}$.
-\par\erratum{These printed answers are inconsistent
-with the definition in Eq.~(18.152); the corrected evaluations are
-shown below.}
+\par\erratum{With the definition in Eq.~(18.152), answers (a) and (b)
+hold only for $\mu=0$ or $k=\mu+\frac12$, and (c) even then only at
+$a=0,1$; the corrected evaluations are shown below.}\par\nobreak
 \solution
 Use the definition in Eq.~(18.152), without changing its scale:
 $M_{k\mu}(x)=e^{-x/2}x^{\mu+1/2}M(\mu-k+\tfrac12,2\mu+1,x)$.
@@ -4970,7 +4995,8 @@ $N,q$) gives
  =\boxed{2kB}.
 \]
 \erratum{The printed answers omit the factor
-$N!q!/(N+q)!=1/\binom{N+q}{N}$ in both (a) and (b).}
+$N!q!/(N+q)!=1/\binom{N+q}{N}$ in both (a) and (b); this factor
+equals one only for $N=0$ or $q=0$.}
 For example, $N=q=1$ gives $k=2$, $\mu=1/2$, $M(-1,2,x)=1-x/2$ and
 $M_{2,1/2}=xe^{-x/2}(1-x/2)$.  With
 $\int_0^\infty x^je^{-x}dx=j!$, its two integrals are
@@ -4985,11 +5011,12 @@ rather than the printed $(2\mu)!\,2k=4$ and $(2\mu)!=1$.
 \[
 I_a=A^2\int_0^\infty e^{-x}x^{q+a}[L_N^q(x)]^2dx.
 \]
-The given condition is exact at zero: the Kummer polynomial has
-constant term one, so the original integrand has leading power
-$x^{q+a}$.  Infinity is harmless because of $e^{-x}$.
+The given condition $a>-2\mu-1=-q-1$ is exactly the condition for
+convergence at zero: the Kummer polynomial has constant term one, so
+the original integrand behaves like $x^{q+a}$ there.  Infinity is
+harmless because of $e^{-x}$.
 A useful exact single sum follows by changing the Laguerre parameter.
-Their generating functions satisfy
+The generating functions of $L_N^q$ and of $L_j^{q+a}$ satisfy
 \begin{align*}
 \sum_{N=0}^\infty L_N^q(x)t^N
  &=(1-t)^{-q-1}e^{-xt/(1-t)}\\
@@ -5000,7 +5027,15 @@ Their generating functions satisfy
 The second line uses the same generating function with parameter
 $q+a$, $\sum_jL_j^{q+a}(x)t^j=(1-t)^{-q-a-1}e^{-xt/(1-t)}$; the
 third is the binomial series $(1-t)^a=\sum_r\binom ar(-t)^r$ with
-$(-1)^r\binom ar=(-a)_r/r!$.  The coefficient of $t^N$ on the
+$(-1)^r\binom ar=(-a)_r/r!$.  For noninteger $\nu=q+a$, $L_j^\nu$
+is the polynomial of Exercise~18.3.5(b) with its factorials written
+as gamma functions,
+\[
+L_j^\nu(x)=\sum_{s=0}^j
+ \frac{\Gamma(j+\nu+1)}{(j-s)!\,\Gamma(\nu+s+1)}\,\frac{(-x)^s}{s!},
+\]
+and the derivation of the generating function there holds unchanged
+for every real $\nu>-1$.  The coefficient of $t^N$ on the
 right collects the products with $r+j=N$, giving the finite
 connection formula
 \[
@@ -5008,8 +5043,9 @@ L_N^q(x)=\sum_{j=0}^N
  \frac{(-a)_{N-j}}{(N-j)!}L_j^{q+a}(x).
 \]
 Square it and integrate with weight $e^{-x}x^{q+a}$.
-Since $q+a>-1$, orthogonality applies and all unequal-index
-terms vanish; each diagonal term contributes the norm
+Since $q+a>-1$, orthogonality applies (Exercise~18.3.3, whose
+closing remark extends it to every real parameter above $-1$) and
+all unequal-index terms vanish; each diagonal term contributes the norm
 $\int_0^\infty e^{-x}x^{q+a}[L_j^{q+a}(x)]^2dx=\Gamma(j+q+a+1)/j!$
 (Eq.~(18.71), with $(j+q+a)!$ written as $\Gamma(j+q+a+1)$).  Thus the complete answer is
 \[
@@ -5047,6 +5083,14 @@ Since $(2k)^2=(2N+q+1)^2=4N(N+q+1)+(q+1)^2$, it exceeds
 $(2k)^2B$ by
 $B[2N(N+q+1)+q+1]>0$, so even restoring the missing normalization
 cannot turn all moments into powers of the first moment.
+In fact, when $N=0$ or $q=0$, so that the factor is one, the
+printed (c) holds only at $a=0,1$.  For $a\ne b$ the
+Cauchy--Schwarz inequality, applied to $M_{k\mu}x^{(a-1)/2}$ and
+$M_{k\mu}x^{(b-1)/2}$, which are not proportional, gives
+$I_{(a+b)/2}^2<I_aI_b$.  Hence the continuous function $\ln I_a$ is
+strictly convex in $a$, and it meets the line
+$\ln[(2\mu)!]+a\ln(2k)$, which passes through its values at $a=0$
+and $a=1$, at no other point.
 
 \Needspace{12\baselineskip}
 \subsection*{18.7 Dilogarithm}
@@ -5129,7 +5173,12 @@ dF=-L_1(z)\frac{dz}{z},\qquad L_1(z)=\log(1-z),
 around loops based at $b$ in $\mathbb C\setminus\{0,1\}$.
 Let $A$ encircle zero once counterclockwise and $B$ encircle one
 once counterclockwise.  They generate all closed paths up to
-homotopy.  The two circles below are valid representatives.
+homotopy: every closed path at $b$ in $\mathbb C\setminus\{0,1\}$
+can be deformed there, without passing through $0$ or $1$, into a
+succession of the loops $A^{\pm1}$, $B^{\pm1}$, and by the
+monodromy theorem such a deformation does not change the value
+reached by analytic continuation.  The two circles below are valid
+representatives.
 \begin{center}
 \begin{tikzpicture}[scale=2.1,>=stealth]
 \draw[->,gray] (-.65,0)--(1.65,0);
@@ -5265,8 +5314,9 @@ an equality of ordinary real principal values.
 
 More generally, Eq.~(18.163) holds with principal branches for
 every $w\notin[1,\infty)$.  There $w$, $w/(w-1)$ and $1-w$ avoid
-the cuts $[1,\infty)$, $[1,\infty)$ and $(-\infty,0]$ (if
-$w/(w-1)=t\ge1$, then $w=t/(t-1)>1$), so both sides are analytic
+the cuts $[1,\infty)$, $[1,\infty)$ and $(-\infty,0]$
+($w/(w-1)=1$ is impossible, and if $w/(w-1)=t>1$, then
+$w=t/(t-1)>1$), so both sides are analytic
 in $w$ on this cut plane; they agree for real $w<1$, hence
 everywhere on it by analytic continuation.  Since
 $w=(z+1)/(2z)=t$ gives $z=1/(2t-1)$, which lies in $(0,1]$ for
@@ -5277,16 +5327,25 @@ $z$ off the real segment $[0,1]$.
 independently selected boundary values on the cut.}  For
 $0<z<1$, both dilogarithm arguments exceed one, but a small
 imaginary part of $z$ puts them on opposite sides of their cuts:
-for $z=x+i\varepsilon$, $\operatorname{Im}(1+z^{-1})/2
+for $z=x+i\varepsilon$, $z^{-1}=\bar z/|z|^2$ gives
+$\operatorname{Im}[(1+z^{-1})/2]
 =-\varepsilon/[2(x^2+\varepsilon^2)]<0$, while
-$\operatorname{Im}(1+z)/(1-z)=2\varepsilon/|1-z|^2>0$.
+$(1+z)(1-\bar z)=1-|z|^2+2i\varepsilon$ gives
+\[
+\operatorname{Im}\frac{1+z}{1-z}
+ =\frac{\operatorname{Im}[(1+z)(1-\bar z)]}{|1-z|^2}
+ =\frac{2\varepsilon}{|1-z|^2}>0.
+\]
 For example, at $z=1/3$ the arguments both equal $2$, and the
-logarithm's argument is $(1-3)/2=-1$, with $\ln^2(-1\pm i0)=-\pi^2$;
+logarithm's argument is $(1-3)/2=-1$, with $\log^2(-1\pm i0)=-\pi^2$;
 the identity then demands that the two dilogarithm values add up to
-$\pi^2/2$.  The reflection formula (18.161), applied at the point
-$2\pm i0$, where $\ln(1-(2\pm i0))=\ln(-1\mp i0)=\mp i\pi$,
+$\pi^2/2$.  The reflection formula (18.161) holds with principal
+branches on the plane cut along $(-\infty,0]$ and $[1,\infty)$, by
+the argument just given for (18.163): both sides are analytic there
+and agree for $0<z<1$.  Applied at the point $2\pm i0$, where
+$\log(1-(2\pm i0))=\log(-1\mp i0)=\mp i\pi$,
 together with $\operatorname{Li}_2(-1)=-\pi^2/12$
-(Exercise~18.7.2), gives the boundary values
+(Exercise~18.7.2), it gives the boundary values
 $\operatorname{Li}_2(2\pm i0)=\pi^2/6+\pi^2/12\pm i\pi\ln2
 =\pi^2/4\pm i\pi\ln2$.
 Selecting the same boundary value for both would incorrectly
@@ -5336,6 +5395,10 @@ For a positive variable $\zeta$, denote one summand by
 S(\zeta)=\operatorname{Li}_2(\zeta)-\operatorname{Li}_2(-\zeta)
  +\ln\zeta\log\frac{1-\zeta}{1+\zeta}.
 \]
+Here $\ln$ denotes the real logarithm of a positive number, and
+$\log$ the principal logarithm of an argument, $1-\zeta$ or
+$(1-\zeta)/(1+\zeta)$, that becomes negative for $\zeta>1$ and must
+then be continued.
 Start with $0<\zeta<1$, where all terms are real.  Reflection,
 Eq.~(18.161), and the logarithm of a positive quotient give
 \[
@@ -5360,8 +5423,9 @@ S(\zeta)=\frac{\pi^2}{6}
 \]
 For $\zeta>1$, continue consistently from above, $\zeta+i0$
 (from below, change the sign of every $i\pi$).  Then
-$\log(1-\zeta)=\ln(\zeta-1)-i\pi$, and Eq.~(18.161) gives the
-first display with this value, so that
+$\log(1-\zeta)=\ln(\zeta-1)-i\pi$, and Eq.~(18.161), continued off
+the real axis as in Exercise~18.7.5, gives the first display with
+this value, so that
 $\operatorname{Im}\operatorname{Li}_2(\zeta+i0)=\pi\ln\zeta$.
 The quotient $(1-\zeta)/(1+\zeta)<0$ is approached from below
 (at $\zeta+i\varepsilon$ its imaginary part is
@@ -5411,7 +5475,7 @@ quadrant is
 \[
 a\int_{0}^{\pi/2}(1-m\sin^{2}\theta)^{1/2}\,d\theta=aE(m).
 \]
-\erratum{Take $a\ge b>0$, so $0\le m=(a^2-b^2)/a^2<1$.  The value $m=1$ is the degenerate limit $b\downarrow0$.}
+\erratum{Take $a\ge b>0$, so $0\le m=(a^2-b^2)/a^2<1$.  The value $m=1$ is the degenerate limit $b\downarrow0$.}\par\nobreak
 \solution
 Take $a\ge b>0$, so the given parameter lies in $0\le m<1$.
 Differentiating the parametrization gives
@@ -5469,8 +5533,13 @@ integral
 \[
 \int_0^{\pi/2}\sin^{2n}\theta\,d\theta
  =\frac12B(n+\tfrac12,\tfrac12)
- =\frac\pi2\frac{(2n-1)!!}{(2n)!!}.
+ =\frac{\Gamma(n+\frac12)\,\Gamma(\frac12)}{2\,\Gamma(n+1)}
+ =\frac\pi2\frac{(2n-1)!!}{(2n)!!},
 \]
+using $B(p,q)=\Gamma(p)\Gamma(q)/\Gamma(p+q)$,
+$\Gamma(\tfrac12)=\sqrt\pi$, $\Gamma(n+1)=n!$ and
+$\Gamma(n+\tfrac12)=(2n-1)!!\sqrt\pi/2^n$, so that the gamma
+quotient equals $\pi(2n-1)!!/(2^{n+1}n!)$.
 Integrating termwise, the $m^n$ term is the product of these two
 factors,
 $-\frac\pi2\frac{(2n-3)!!\,(2n-1)!!}{[(2n)!!]^2}m^n$; with
@@ -5608,8 +5677,14 @@ by a limit: the original integral is
 $\int_0^\pi\cos\alpha\,d\alpha/\sqrt{a^2+z^2}=0$, so $A_\varphi=0$
 on the axis.  The formula reproduces this as $\rho\to0$, where
 $k\to0$: by the next exercise the bracket is
-$(m/2)f(m)=\pi m^2/32+O(m^3)$, so
-$A_\varphi\simeq\mu_0Ia^2\rho/(4D^{3/2})\to0$.  At the ideal wire
+$(m/2)f(m)=\pi m^2/32+O(m^3)$, so, with $m^2=k^4$ and
+$k^3=8(a\rho)^{3/2}/D^{3/2}$,
+\[
+A_\varphi\simeq\frac{\mu_0I}{\pi k}\sqrt{\frac a\rho}\,
+ \frac{\pi k^4}{32}
+ =\frac{\mu_0Ik^3}{32}\sqrt{\frac a\rho}
+ =\frac{\mu_0Ia^2\rho}{4D^{3/2}}\to0.
+\]  At the ideal wire
 $k^2=1$, where $K$ diverges logarithmically while $E(1)=1$, the
 singularity is real and is not a removable limit.
 
@@ -5672,13 +5747,17 @@ makes $m\ll1$, with $D\sim r^2$ and $m\sim4a\rho/r^2$.  The
 preceding exercise has
 $A_\varphi=(a\mu_0I/\pi\sqrt D)(2/m)[(1-\tfrac m2)K-E]
 =a\mu_0I f(m)/(\pi\sqrt D)$.
-Consequently, with $\rho=r\sin\theta$, its leading term is
+Consequently, with $\rho=r\sin\vartheta$ ($\vartheta$ the polar
+angle of the field point), its leading term is
 \[
 A_\varphi\simeq\frac{a\mu_0I}{\pi r}\cdot\frac\pi{16}\cdot
  \frac{4a\rho}{r^2}=\frac{\mu_0Ia^2\rho}{4r^3}
- =\frac{\mu_0}{4\pi}\,\frac{(\pi a^2I)\sin\theta}{r^2},
+ =\frac{\mu_0}{4\pi}\,\frac{(\pi a^2I)\sin\vartheta}{r^2},
 \]
-the field of a magnetic dipole of moment $\pi a^2I$.  Large $r/a$ is a sufficient way to
+the vector potential
+$\mathbf A=(\mu_0/4\pi)(\pi a^2I)\,\hat{\mathbf z}\times\hat{\mathbf r}/r^2$
+of a magnetic dipole of moment $\pi a^2I$ along the $z$-axis, since
+$\hat{\mathbf z}\times\hat{\mathbf r}=\sin\vartheta\,\hat{\boldsymbol\varphi}$.  Large $r/a$ is a sufficient way to
 make $m$ small; it is not the only one, since $m\to0$ also
 on approaching the symmetry axis.
 
