@@ -1302,29 +1302,59 @@ is normal with mean zero and variance 1.
 \solution
 Take $n\ge1$ and $\sigma>0$. To track the distribution, use the
 characteristic function, not just its first two moments. For a centered
-normal variable of variance $\sigma^2$, write $\phi(t)=\langle e^{itX}\rangle$.
-Since $xf(x)=-\sigma^2f'(x)$, differentiation followed by integration
-by parts gives
+normal variable of variance $\sigma^2$, with density
+$f(x)=e^{-x^2/(2\sigma^2)}/(\sigma\sqrt{2\pi})$, write
+$\phi(t)=\langle e^{itX}\rangle=\int e^{itx}f(x)\,dx$.
+Since $f'(x)=-xf(x)/\sigma^2$, i.e.\ $xf(x)=-\sigma^2f'(x)$,
+differentiation under the integral sign (allowed because
+$\int|x|f(x)\,dx<\infty$) gives
 \[
 \phi'(t)=i\int xe^{itx}f(x)\,dx
-=-i\sigma^2\int e^{itx}f'(x)\,dx
-=-\sigma^2t\phi(t).
+=-i\sigma^2\int e^{itx}f'(x)\,dx.
 \]
-The boundary term vanishes. With $\phi(0)=1$ this yields
-$\phi(t)=e^{-\sigma^2t^2/2}$; translation by $\bar x$ adds $e^{it\bar x}$.
-Independence therefore gives
+Integration by parts gives
+\[
+\int e^{itx}f'(x)\,dx
+=\Bigl[e^{itx}f(x)\Bigr]_{-\infty}^{\infty}-it\int e^{itx}f(x)\,dx
+=-it\phi(t),
+\]
+since the boundary term vanishes: $|e^{itx}f(x)|=f(x)\to0$ as
+$x\to\pm\infty$. Hence $\phi'(t)=-i\sigma^2(-it)\phi(t)=-\sigma^2t\phi(t)$,
+so that
+$\frac d{dt}\bigl[e^{\sigma^2t^2/2}\phi(t)\bigr]
+=e^{\sigma^2t^2/2}\bigl[\phi'(t)+\sigma^2t\phi(t)\bigr]=0$.
+With $\phi(0)=1$ this yields $\phi(t)=e^{-\sigma^2t^2/2}$.
+Translation by $\bar x$ multiplies the characteristic function by
+$e^{it\bar x}$, because $\langle e^{it(\bar x+X)}\rangle
+=e^{it\bar x}\langle e^{itX}\rangle$; hence
+$\phi_{X_j}(t)=e^{it\bar x-\sigma^2t^2/2}$.
+Now $e^{it\overline X}=\prod_je^{i(t/n)X_j}$, and for independent
+variables the expectation of such a product is the product of the
+expectations (Exercise~23.6.4). Therefore
 \[
 \phi_{\overline X}(t)
 =\prod_{j=1}^n\phi_{X_j}(t/n)
 =\left[e^{it\bar x/n-\sigma^2t^2/(2n^2)}\right]^n
 =e^{it\bar x-\sigma^2t^2/(2n)}.
 \]
-Thus $\overline X=n^{-1}\sum X_j$ is normal with mean $\bar x$
-and variance $\sigma^2/n$. For the requested variable,
+This is the characteristic function of the normal distribution with mean
+$\bar x$ and variance $\sigma^2/n$. A characteristic function determines
+its distribution uniquely (it is $\sqrt{2\pi}$ times the Fourier transform
+of the density, which Fourier inversion recovers), so
+$\overline X=n^{-1}\sum X_j$ is normal with mean $\bar x$
+and variance $\sigma^2/n$. The requested variable is
+$Z=(\overline X-\bar x)/(\sigma/\sqrt n)=c\overline X+d$ with
+$c=\sqrt n/\sigma$ and $d=-\bar x\sqrt n/\sigma$, and the rule
+$\phi_{cY+d}(t)=\langle e^{it(cY+d)}\rangle=e^{itd}\phi_Y(ct)$ gives
 \[
-Z=\frac{\overline X-\bar x}{\sigma/\sqrt n},
-\qquad\phi_Z(t)=e^{-t^2/2},
-\qquad\boxed{Z\sim N(0,1).}
+\phi_Z(t)=e^{-it\bar x\sqrt n/\sigma}\,
+\phi_{\overline X}\!\left(\frac{t\sqrt n}\sigma\right)
+=e^{-it\bar x\sqrt n/\sigma}\,e^{it\bar x\sqrt n/\sigma-t^2/2}
+=e^{-t^2/2},
+\]
+the characteristic function of the standard normal law; thus
+\[
+\boxed{Z\sim N(0,1)}.
 \]
 \erratum{The corrected denominator is $\sigma/\sqrt n$.
 The printed $\sigma\sqrt n$ would give variance $1/n^2$ instead.}
@@ -1338,20 +1368,25 @@ is undefined, so positivity is necessary.
 normal with mean value 29 and standard deviation 3, what can you
 say about the distributions of $2X-1$ and $3X+2$?
 \solution
-For $Y=aX+b$ with $a\ne0$, change variables $x=(y-b)/a$:
+For $Y=aX+b$ with $a\ne0$ the map $x\mapsto ax+b$ is one-to-one, so
+$f_Y(y)=f_X(x)\,|dx/dy|$ with $x=(y-b)/a$ and $|dx/dy|=1/|a|$.
+With $f_X(x)=e^{-(x-29)^2/18}/(3\sqrt{2\pi})$ and
+$((y-b)/a-29)^2=(y-b-29a)^2/a^2$,
 \[
 f_Y(y)=\frac1{|a|}\frac1{3\sqrt{2\pi}}
 \exp\left[-\frac{((y-b)/a-29)^2}{18}\right]
 =\frac1{3|a|\sqrt{2\pi}}
 \exp\left[-\frac{(y-(29a+b))^2}{2(3a)^2}\right].
 \]
-This identifies both full distributions:
+This is the normal density with mean $29a+b$ and standard deviation
+$3|a|$. For $(a,b)=(2,-1)$ and $(3,2)$ it identifies both full
+distributions:
 \[
 \boxed{2X-1\sim N(57,36),\quad\sigma=6;\qquad
-3X+2\sim N(89,81),\quad\sigma=9.}
+3X+2\sim N(89,81),\quad\sigma=9}.
 \]
 The second argument of $N(\mu,\tau^2)$ here denotes variance.
-\erratum{The manual multiplies variance by $a$ and reports
+\erratum{The Instructor's Manual multiplies variance by $a$ and reports
 $3\sqrt2$ and $3\sqrt3$ as standard deviations. The correct
 variance factor is $a^2$, so the standard-deviation factor is $|a|$.}
 
@@ -1363,18 +1398,23 @@ value $m$ and variance $\sigma^{2}$, find the distance $r$ such
 that half the area under the bell shape is between $m-r$ and
 $m+r$. \erratum{Assume $\sigma>0$ and seek $r\ge0$.}
 \solution
-For $\sigma>0$, standardize $z=(x-m)/\sigma$ and use symmetry:
+For $\sigma>0$, standardize $z=(x-m)/\sigma$; with the standard normal
+distribution function $\Phi$ this gives
+$P(m-r\le X\le m+r)=\Phi(r/\sigma)-\Phi(-r/\sigma)$. The symmetry of the
+bell shape gives $\Phi(-z)=1-\Phi(z)$, and
+$\Phi(z)=\frac12\bigl[1+\operatorname{erf}(z/\sqrt2)\bigr]$, so
 \[
 \frac12=P(m-r\le X\le m+r)
 =2\Phi(r/\sigma)-1
 =\operatorname{erf}\left(\frac r{\sigma\sqrt2}\right).
 \]
-Hence $\Phi(r/\sigma)=3/4$, and strict monotonicity gives the unique
-nonnegative answer
+Hence $\Phi(r/\sigma)=3/4$, and strict monotonicity of $\Phi$ gives the
+unique nonnegative answer (the quantile is read from a table of $\Phi$, or
+computed by Newton's method as in Exercise~23.5.5)
 \[
 \boxed{r=\sigma\Phi^{-1}(3/4)
 =\sigma\sqrt2\,\operatorname{erf}^{-1}(1/2)
-=0.6744897502\sigma.}
+=0.6744897502\sigma}.
 \]
 This interval contains the central half of the probability mass.
 
@@ -1386,9 +1426,12 @@ Y\rangle$ are the average values of two independent random
 variables $X$, $Y$, what is the expectation value of the product
 $XY$? \erratum{Assume finite absolute first moments.}
 \solution
-Assume finite absolute first moments. Independence gives the product
-joint measure, and also $\langle|XY|\rangle=\langle|X|\rangle
-\langle|Y|\rangle<\infty$, so the integrals may be separated.
+Assume finite absolute first moments. Independence means that the joint
+law of $(X,Y)$ is the product of the two marginal laws; with densities,
+$p(x,y)=p_X(x)p_Y(y)$. For the nonnegative function $|xy|$, Tonelli's
+theorem then gives $\langle|XY|\rangle=\langle|X|\rangle
+\langle|Y|\rangle<\infty$, so by Fubini's theorem the double integral
+may be computed as iterated integrals and separated.
 When densities exist, this reads
 \[
 \boxed{\begin{aligned}
@@ -1397,16 +1440,17 @@ When densities exist, this reads
  xy\,p_X(x)p_Y(y)\,dx\,dy\\
 &=\left(\int xp_X(x)\,dx\right)
  \left(\int yp_Y(y)\,dy\right)
-=\langle X\rangle\langle Y\rangle.
-\end{aligned}}
+=\langle X\rangle\langle Y\rangle
+\end{aligned}}.
 \]
 For general laws the same calculation uses their product probability
 measure; discrete laws give sums.
-\erratum{The manual omits the factors $xy$, $x$, and $y$ in its
-three integrals. Without them those integrals are normalization
+\erratum{The Instructor's Manual omits the factors $xy$, $x$, and $y$ in
+its three integrals. Without them those integrals are normalization
 integrals equal to 1, not the stated expectations.}
-It follows in
-particular that $\operatorname{cov}(X,Y)=0$ when second moments exist.
+It follows in particular that
+$\operatorname{cov}(X,Y)=\langle XY\rangle-\langle X\rangle\langle Y\rangle
+=0$ when second moments exist.
 
 
 \Needspace{5\baselineskip}
@@ -1424,92 +1468,135 @@ $G=g(X,Y)$ and $H=h(X,Y)$ when the required moments exist.}
 \erratum{The two means alone do not determine $\langle f(X,Y)\rangle$.
 Higher moments are needed. Existence of derivatives of every order
 also does not justify an infinite Taylor expansion or its termwise
-expectation. The manual's weighted integral is not the ordinary
-covariance of the independent variables.}
+expectation. The Instructor's Manual's weighted integral is not the
+ordinary covariance of the independent variables.}
 
 Let $\mu=\langle X\rangle$, $\nu=\langle Y\rangle$,
 $U=X-\mu$, $V=Y-\nu$, and define central moments
 $M_r=\langle U^r\rangle$, $N_s=\langle V^s\rangle$ when finite.
-Then $M_0=N_0=1$, $M_1=N_1=0$, and independence implies
-$\langle U^rV^s\rangle=M_rN_s$. The always valid starting point,
-when $\langle|f(X,Y)|\rangle<\infty$, is
+Then $M_0=N_0=1$, $M_1=N_1=0$, $M_2=\sigma_X^2$, $N_2=\sigma_Y^2$, and
+independence implies $\langle U^rV^s\rangle=M_rN_s$
+(Exercise~23.6.4 applied to $U^r$ and $V^s$). The always valid starting
+point, when $\langle|f(X,Y)|\rangle<\infty$, is
 \[
 \langle f(X,Y)\rangle=\iint f(x,y)p_X(x)p_Y(y)\,dx\,dy.
 \]
-For a finite Taylor order $k$, apply one-variable Taylor's theorem to
-$g(t)=f(\mu+tU,\nu+tV)$ at $t=0$, evaluated at $t=1$.
-The chain rule and binomial theorem give
+For a finite Taylor order $k$, put $F(t)=f(\mu+tU,\nu+tV)$, so that
+$F(0)=f(\mu,\nu)$ and $F(1)=f(X,Y)$, and apply the one-variable Taylor
+theorem with integral remainder at $t=0$, evaluated at $t=1$:
 \[
- g^{(j)}(t)=\sum_{r+s=j}\frac{j!}{r!s!}U^rV^s
+F(1)=\sum_{j=0}^k\frac{F^{(j)}(0)}{j!}
++\frac1{k!}\int_0^1(1-t)^kF^{(k+1)}(t)\,dt.
+\]
+By the chain rule, with $U,V$ fixed, each $t$-derivative acts on $f$ as
+the operator $U\partial_x+V\partial_y$, so
+$F^{(j)}(t)=(U\partial_x+V\partial_y)^jf(\mu+tU,\nu+tV)$. The two
+partial derivatives commute, so the binomial theorem gives, with
+$f_{rs}=\partial_x^r\partial_y^sf$,
+\[
+ F^{(j)}(t)=\sum_{r+s=j}\frac{j!}{r!s!}U^rV^s
  f_{rs}(\mu+tU,\nu+tV).
 \]
-Dividing $g^{(j)}(0)$ by $j!$ gives the following coefficients:
+Dividing $F^{(j)}(0)$ by $j!$ gives the following coefficients:
 \[
 f(X,Y)=\sum_{r+s\le k}\frac{f_{rs}(\mu,\nu)}{r!s!}U^rV^s+R_k,
 \]
 \[
 R_k=\frac1{k!}\int_0^1(1-t)^k
  (U\partial_x+V\partial_y)^{k+1}
- f(\mu+tU,\nu+tV)\,dt,
-\quad f_{rs}=\partial_x^r\partial_y^sf.
+ f(\mu+tU,\nu+tV)\,dt.
 \]
-Assuming integrability of these terms, taking expectations gives the
-rigorous finite form
+Assuming integrability of these terms, taking expectations with
+$\langle U^rV^s\rangle=M_rN_s$ gives the rigorous finite form
 \[
 \boxed{\langle f(X,Y)\rangle
-=\sum_{r+s\le k}\frac{f_{rs}(\mu,\nu)}{r!s!}M_rN_s+\langle R_k\rangle.}
+=\sum_{r+s\le k}\frac{f_{rs}(\mu,\nu)}{r!s!}M_rN_s+\langle R_k\rangle}.
 \]
-For example, through second order,
+For example, through second order ($k=2$), the two first-order terms
+contain $M_1$ or $N_1$ and vanish, and so does the mixed term
+$f_{11}M_1N_1$; with $M_2=\sigma_X^2$ and $N_2=\sigma_Y^2$,
 \[
 \langle f(X,Y)\rangle
 =f(\mu,\nu)+\tfrac12f_{20}(\mu,\nu)\sigma_X^2
 +\tfrac12f_{02}(\mu,\nu)\sigma_Y^2+\langle R_2\rangle.
 \]
-The mixed term is zero because $M_1N_1=0$. If the Taylor series equals
+If the Taylor series equals
 $f$ on the support and is integrable term by term (for example,
 $\sum_{r,s}|f_{rs}(\mu,\nu)|\langle|U|^r\rangle
-\langle|V|^s\rangle/(r!s!)<\infty$), the limit is
+\langle|V|^s\rangle/(r!s!)<\infty$, which allows the expectation and
+the double sum to be interchanged), the limit is
 \[
 \langle f(X,Y)\rangle=\sum_{r,s\ge0}
 \frac{f_{rs}(\mu,\nu)}{r!s!}M_rN_s.
 \]
-Both stated conditions matter. For a counterexample to determination
+Two examples show that both caveats of the erratum above are needed.
+For a counterexample to determination
 by the means, take $f(x,y)=x^2$, independent $Y$ uniform on $[-3,3]$,
 and compare $X$ uniform on $[-1,1]$ with $X$ uniform on $[-2,2]$.
-All means are zero, but the expectations are $1/3$ and $4/3$.
-For a counterexample to smoothness sufficing, the smooth function
-$f(x,y)=e^{-1/x^2}$ for $x\ne0$, extended by 0 at $x=0$, has every
-derivative at $(0,0)$ zero: each derivative is an exponential times
-a polynomial in $1/x$, whose limit is 0. For centered independent
-normal $X,Y$, its expectation is nevertheless strictly positive.
+All means are zero, but for $X$ uniform on $[-a,a]$,
+$\langle X^2\rangle=\int_{-a}^ax^2\,dx/(2a)=a^2/3$, so the expectations
+are $1/3$ and $4/3$.
+For a counterexample to smoothness sufficing, take the smooth function
+$f(x,y)=e^{-1/x^2}$ for $x\ne0$, extended by 0 at $x=0$; it does not
+depend on $y$, so only its $x$-derivatives can be nonzero. By induction,
+for $x\ne0$ its $n$th derivative has the form $P_n(1/x)e^{-1/x^2}$ with
+a polynomial $P_n$, and this tends to 0 as $x\to0$ because $e^{-1/x^2}$
+decays faster than any power of $x$. The difference quotient
+$[f^{(n)}(x)-0]/x$ at $x=0$ has the same form, so every derivative at
+$(0,0)$ exists and is zero: the Taylor series at $(0,0)$ vanishes
+identically, and the infinite expansion would give 0. For centered
+independent normal $X,Y$, however, the expectation is strictly positive,
+because $f>0$ except on the line $x=0$, which has probability zero.
 
 For the variables actually named in the question,
 \[
-\boxed{\operatorname{cov}(X,Y)=M_1N_1=0,\qquad\rho_{XY}=0}
+\boxed{\operatorname{cov}(X,Y)=\langle UV\rangle=M_1N_1=0,
+\qquad\rho_{XY}=0}
 \]
 provided both variances are finite and nonzero; correlation is
 undefined if either variance is zero. For the transformed variables
 $G=g(X,Y)$ and $H=h(X,Y)$,
 write their Taylor coefficients as $g_{rs}/(r!s!)$ and $h_{uv}/(u!v!)$,
 all evaluated at $(\mu,\nu)$. Under convergence and interchange
-conditions for the product as well,
+conditions for the product as well, multiplying the two series and
+using $\langle U^{r+u}V^{s+v}\rangle=M_{r+u}N_{s+v}$ gives
+\[
+\langle GH\rangle=\sum_{r,s,u,v\ge0}
+\frac{g_{rs}h_{uv}}{r!s!u!v!}M_{r+u}N_{s+v},
+\qquad
+\langle G\rangle\langle H\rangle=\sum_{r,s,u,v\ge0}
+\frac{g_{rs}h_{uv}}{r!s!u!v!}M_rN_sM_uN_v.
+\]
+Subtracting,
 \[
 \boxed{\begin{aligned}
 \operatorname{cov}(G,H)=\sum_{r,s,u,v\ge0}
 \frac{g_{rs}h_{uv}}{r!s!u!v!}
-\big[M_{r+u}N_{s+v}-M_rN_sM_uN_v\big].
-\end{aligned}}
+\big[M_{r+u}N_{s+v}-M_rN_sM_uN_v\big]
+\end{aligned}}.
 \]
-This follows by expanding $\langle GH\rangle-\langle G\rangle\langle H\rangle$;
-setting $h=g$ gives the variance. The correlation is this covariance
+Setting $h=g$ gives the variance. The correlation is this covariance
 divided by $\sqrt{\operatorname{Var}G\operatorname{Var}H}$, when positive.
-To lowest order in small fluctuations it becomes
+For small fluctuations keep the lowest order. The bracket vanishes when
+$(r,s)=(0,0)$ or $(u,v)=(0,0)$, because $M_0=N_0=1$. The lowest-order
+surviving terms are therefore the second-order ones with $r+s=u+v=1$:
+the bracket is $M_2=\sigma_X^2$ for
+$(r,s)=(u,v)=(1,0)$, $N_2=\sigma_Y^2$ for $(r,s)=(u,v)=(0,1)$, and
+$M_1N_1-M_1N_0M_0N_1=0$ for the two mixed choices. With $g_x=g_{10}$,
+$g_y=g_{01}$, and likewise for $h$,
 \[
 \operatorname{cov}(G,H)\simeq g_xh_x\sigma_X^2+g_yh_y\sigma_Y^2.
 \]
-Finally the manual's object $\langle UVf(X,Y)\rangle$ would instead
-expand as $\sum f_{rs}M_{r+1}N_{s+1}/(r!s!)$, with leading term
-$f_{11}\sigma_X^2\sigma_Y^2$. It is a weighted mixed moment,
+Finally the Instructor's Manual's object $\langle UVf(X,Y)\rangle$ would
+instead expand as
+\[
+\langle UVf(X,Y)\rangle
+=\sum_{r,s\ge0}\frac{f_{rs}}{r!s!}\langle U^{r+1}V^{s+1}\rangle
+=\sum_{r,s\ge0}\frac{f_{rs}}{r!s!}M_{r+1}N_{s+1}.
+\]
+Its terms with $r=0$ or $s=0$
+contain $M_1$ or $N_1$, respectively, and vanish, so its leading term is
+$f_{11}M_2N_2=f_{11}\sigma_X^2\sigma_Y^2$. It is a weighted mixed moment,
 not a covariance or a normalized correlation of $X,Y$.
 
 
@@ -1531,9 +1618,14 @@ second moments. Since $\langle aX+bY\rangle=a\mu+b\nu$,
 &\quad+2ab\iint(x-\mu)(y-\nu)f\,dx\,dy\\
 &=\boxed{a^2\sigma_X^2+b^2\sigma_Y^2+2ab\operatorname{cov}(X,Y)}.
 \end{align*}
-All integrations are over $\mathbb R^2$. For independent $X,Y$,
-$f(x,y)=p_X(x)p_Y(y)$ makes the final integral the product of two
-zero centered means. Thus $\boxed{\operatorname{Var}(aX+bY)
+All integrations are over $\mathbb R^2$. Integrating $f$ over $y$ gives
+the marginal density $p_X(x)=\int f(x,y)\,dy$ of $X$, so the first
+integral is $\int(x-\mu)^2p_X(x)\,dx=\sigma_X^2$; likewise the second is
+$\sigma_Y^2$, and the third is the definition of $\operatorname{cov}(X,Y)$.
+For independent $X,Y$, $f(x,y)=p_X(x)p_Y(y)$ makes the final integral
+the product of two zero centered means,
+$\int(x-\mu)p_X(x)\,dx\int(y-\nu)p_Y(y)\,dy=0\cdot0$.
+Thus $\boxed{\operatorname{Var}(aX+bY)
 =a^2\sigma_X^2+b^2\sigma_Y^2}$ in that case.
 
 
@@ -1549,9 +1641,11 @@ $\sigma_{1}^{2}+\sigma_{2}^{2}$.
 \solution
 \erratum{The stated answer requires independence, as in the
 addition theorem being used. Normal marginal distributions alone
-are insufficient. The manual's final exponential also omits a factor $1/2$.}
+are insufficient. The Instructor's Manual's final exponential also
+omits a factor $1/2$.}
 Let $X_j\sim N(\mu_j,\sigma_j^2)$ independently. Their characteristic
-functions, derived in Exercise 23.6.1, multiply:
+functions, derived in Exercise~23.6.1, multiply by independence
+(Exercise~23.6.4):
 \begin{align*}
 \phi_Y(t)&=\langle e^{it(X_1+X_2)}\rangle
 =\langle e^{itX_1}\rangle\langle e^{itX_2}\rangle\\
@@ -1559,18 +1653,31 @@ functions, derived in Exercise 23.6.1, multiply:
  e^{it\mu_2-\sigma_2^2t^2/2}
 =e^{it(\mu_1+\mu_2)-(\sigma_1^2+\sigma_2^2)t^2/2}.
 \end{align*}
-The characteristic function identifies the complete distribution:
+This is the characteristic function of the normal law with mean
+$\mu_1+\mu_2$ and variance $\sigma_1^2+\sigma_2^2$, and a characteristic
+function identifies the complete distribution (Exercise~23.6.1):
 \[
-\boxed{Y\sim N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2).}
+\boxed{Y\sim N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2)}.
 \]
-One can also check it directly by convolution. With $S=\sigma_1^2+\sigma_2^2$
-and $h=y-\mu_1-\mu_2$, set $u=x-\mu_1$. Completing the square gives
+One can also check it directly by convolution: for independent
+variables the density of the sum is
+$f_Y(y)=\int f_{X_1}(x)f_{X_2}(y-x)\,dx$.
+With $S=\sigma_1^2+\sigma_2^2$
+and $h=y-\mu_1-\mu_2$, set $u=x-\mu_1$, so that $y-x-\mu_2=h-u$ and
+\[
+f_Y(y)=\frac1{2\pi\sigma_1\sigma_2}\int_{-\infty}^{\infty}
+\exp\left[-\frac12\left(\frac{u^2}{\sigma_1^2}
++\frac{(h-u)^2}{\sigma_2^2}\right)\right]du.
+\]
+Completing the square gives
 \[
 \frac{u^2}{\sigma_1^2}+\frac{(h-u)^2}{\sigma_2^2}
 =\frac S{\sigma_1^2\sigma_2^2}
  \left(u-\frac{\sigma_1^2h}{S}\right)^2+\frac{h^2}S.
 \]
-The Gaussian convolution integral is consequently
+The remaining Gaussian integral is
+$\int\exp[-S(u-\sigma_1^2h/S)^2/(2\sigma_1^2\sigma_2^2)]\,du
+=\sqrt{2\pi\sigma_1^2\sigma_2^2/S}$, so the convolution integral is
 \[
 f_Y(y)=\frac{e^{-h^2/(2S)}}{2\pi\sigma_1\sigma_2}
  \sqrt{\frac{2\pi\sigma_1^2\sigma_2^2}{S}}
@@ -1579,9 +1686,11 @@ f_Y(y)=\frac{e^{-h^2/(2S)}}{2\pi\sigma_1\sigma_2}
 This calculation assumes positive variances; a zero variance just
 adds a constant, and both zero give a point mass.
 Without independence, take $X_1=Z$, $X_2=1+2Z$ for $Z\sim N(0,1)$.
-Then the sum has variance 9, whereas the printed sum of marginal
+Then $X_1+X_2=1+3Z$ has variance 9, whereas the printed sum of marginal
 variances is $1+4=5$. For jointly normal dependent variables the
-correct variance adds $2\operatorname{cov}(X_1,X_2)$.
+correct variance adds $2\operatorname{cov}(X_1,X_2)$
+(Exercise~23.6.6); here $\operatorname{cov}(Z,1+2Z)=2\langle Z^2\rangle=2$
+and $5+2\cdot2=9$.
 
 
 \Needspace{5\baselineskip}
@@ -1592,30 +1701,44 @@ functional form given in Eq.~(23.84).
 \erratum{Take $p,\sigma>0$ and use the book's positive-exponent,
 $1/\sqrt{2\pi}$ Fourier convention.}
 \solution
-For $p>0$, $\sigma>0$, Eq.(23.83) is
+For $p>0$, $\sigma>0$, Eq.~(23.83) is
 \[
 g(y)=\frac{y^{p-1}e^{-y/(2\sigma^2)}}{(2\sigma^2)^p\Gamma(p)},
 \quad y>0,
 \]
 and zero elsewhere. In the book's positive-exponent Fourier convention,
+$\widehat g(t)=(2\pi)^{-1/2}\int g(y)e^{ity}\,dy$; combining the two
+exponentials, $e^{-y/(2\sigma^2)}e^{ity}=e^{-ay}$, gives
 \[
 \widehat g(t)=\frac1{\sqrt{2\pi}(2\sigma^2)^p\Gamma(p)}
  \int_0^\infty y^{p-1}e^{-ay}\,dy,
 \qquad a=\frac1{2\sigma^2}-it.
 \]
-For positive real $a$, $u=ay$ gives the integral $\Gamma(p)a^{-p}$.
+For positive real $a$, the substitution $u=ay$ (limits unchanged,
+$dy=du/a$) gives
+\[
+\int_0^\infty y^{p-1}e^{-ay}\,dy
+=a^{-p}\int_0^\infty u^{p-1}e^{-u}\,du=\Gamma(p)a^{-p}.
+\]
 Both the integral and $a^{-p}$ are holomorphic in $\Re a>0$,
 using the logarithm continued from positive real $a$; exponential
 domination justifies differentiation on its compact subsets.
 The identity theorem extends the formula throughout that half-plane,
-which contains every $a$ above for real $t$. Substitution gives
+which contains every $a$ above for real $t$, since
+$\Re a=1/(2\sigma^2)>0$. Substitution, with
+$(2\sigma^2)^pa^p=(2\sigma^2a)^p$ (valid because $2\sigma^2>0$) and
+$2\sigma^2a=1-2i\sigma^2t$, gives
 \[
 \boxed{\widehat g(t)=\frac1{\sqrt{2\pi}}
- (1-2i\sigma^2t)^{-p}.}
+ (1-2i\sigma^2t)^{-p}}.
 \]
 At $t=0$ it is $1/\sqrt{2\pi}$, confirming normalization.
-The characteristic function is $\sqrt{2\pi}\widehat g(t)$;
-it has value 1 at 0 and gives mean $2p\sigma^2$ on differentiation.
+The characteristic function is
+$\phi(t)=\langle e^{itY}\rangle=\sqrt{2\pi}\,\widehat g(t)
+=(1-2i\sigma^2t)^{-p}$; it has value 1 at 0, and since
+$\phi'(t)=2ip\sigma^2(1-2i\sigma^2t)^{-p-1}$ while
+$\phi'(0)=i\langle Y\rangle$, it gives the mean
+$\langle Y\rangle=2p\sigma^2$.
 
 
 \Needspace{12\baselineskip}
@@ -1638,18 +1761,26 @@ uncorrelated errors, evaluated at nonzero nominal $A,B$.
 Correlations add a cross term, and nonlinear propagation need not
 satisfy this rule exactly.}
 Write the errors as $\delta A$, $\delta B$, with zero means. For the
-product, first-order Taylor expansion gives
+product, $C+\delta C=(A+\delta A)(B+\delta B)
+=AB+B\delta A+A\delta B+\delta A\,\delta B$; dropping the second-order
+term $\delta A\,\delta B$ (first-order Taylor expansion) and dividing by
+$C=AB$ gives
 \[
 \delta C=B\delta A+A\delta B,
 \qquad\frac{\delta C}{C}=\frac{\delta A}{A}+\frac{\delta B}{B}.
 \]
 For the ratio, the two derivatives are $\partial_AC=1/B$ and
-$\partial_BC=-A/B^2$, so
+$\partial_BC=-A/B^2$, so first-order expansion, followed by division
+by $C=A/B$, gives
 \[
 \delta C=\frac{\delta A}{B}-\frac{A\delta B}{B^2},
 \qquad\frac{\delta C}{C}=\frac{\delta A}{A}-\frac{\delta B}{B}.
 \]
-Square each relation and average:
+Squaring gives
+$(\delta C/C)^2=(\delta A/A)^2+(\delta B/B)^2\pm2\,\delta A\,\delta B/(AB)$.
+Average, with $\sigma_A^2=\langle\delta A^2\rangle$,
+$\sigma_B^2=\langle\delta B^2\rangle$, and
+$\operatorname{cov}(A,B)=\langle\delta A\,\delta B\rangle$:
 \[
 \frac{\sigma_C^2}{C^2}\simeq
 \frac{\sigma_A^2}{A^2}+\frac{\sigma_B^2}{B^2}
@@ -1659,16 +1790,25 @@ where $+$ is for the product and $-$ for the ratio. With zero covariance,
 \[
 \boxed{\left(\frac{\sigma_C}{C}\right)^2\simeq
 \left(\frac{\sigma_A}{A}\right)^2+
-\left(\frac{\sigma_B}{B}\right)^2.}
+\left(\frac{\sigma_B}{B}\right)^2}.
 \]
-To see the scope of the approximation, for independent random $A,B$
-with nonzero means $\mu_A,\mu_B$ the exact product formula is
+To see the scope of the approximation, take independent random $A,B$
+with nonzero means $\mu_A,\mu_B$. Then $\langle AB\rangle=\mu_A\mu_B$ and
+$\langle A^2B^2\rangle=\langle A^2\rangle\langle B^2\rangle$
+(Exercise~23.6.4), with $\langle A^2\rangle=\mu_A^2+\sigma_A^2$ and
+$\langle B^2\rangle=\mu_B^2+\sigma_B^2$, so the exact product formula is
 \begin{align*}
 \operatorname{Var}(AB)
 &=\langle A^2\rangle\langle B^2\rangle-\mu_A^2\mu_B^2\\
 &=(\mu_A^2+\sigma_A^2)(\mu_B^2+\sigma_B^2)-\mu_A^2\mu_B^2\\
 &=\mu_B^2\sigma_A^2+\mu_A^2\sigma_B^2+\sigma_A^2\sigma_B^2.
 \end{align*}
+Dividing by $(\mu_A\mu_B)^2$,
+\[
+\frac{\operatorname{Var}(AB)}{(\mu_A\mu_B)^2}
+=\frac{\sigma_A^2}{\mu_A^2}+\frac{\sigma_B^2}{\mu_B^2}
++\frac{\sigma_A^2\sigma_B^2}{\mu_A^2\mu_B^2}.
+\]
 First-order propagation omits the last, higher-order term.
 For a ratio it additionally requires fluctuations small enough that
 the denominator stays away from zero in the regime being approximated.
@@ -1684,13 +1824,14 @@ the mean value and standard deviation?
 \erratum{Use the sample standard deviation with divisor $N-1$;
 state separately the empirical-distribution convention with divisor $N$.}
 \solution
-Use the sample standard deviation of Eq.(23.95), with divisor $N-1$.
+Use the sample standard deviation of Eq.~(23.95), with divisor $N-1$.
 For the five given measurements,
 \[
 \bar x_5=\frac{6.0+6.5+5.9+6.1+6.2}{5}
 =\frac{30.7}{5}=6.14.
 \]
-The squared-deviation sum is
+The deviations $x_j-\bar x_5$ are $-.14$, $.36$, $-.24$, $-.04$, $.06$,
+so the squared-deviation sum is
 \[
 S_5=(-.14)^2+(.36)^2+(-.24)^2+(-.04)^2+(.06)^2
 =.0196+.1296+.0576+.0016+.0036=.212.
@@ -1698,10 +1839,12 @@ S_5=(-.14)^2+(.36)^2+(-.24)^2+(-.04)^2+(.06)^2
 Thus
 \[
 \boxed{\bar x_5=6.14,\quad s_5^2=.212/4=.053,
-\quad s_5=.230217289.}
+\quad s_5=.230217289}.
 \]
-Adding $x_6=6.1$ gives $\bar x_6=36.8/6=92/15=6.133333333$.
-To compute its spread exactly, write the six deviations with denominator 30:
+Adding $x_6=6.1$ gives $\bar x_6=(30.7+6.1)/6=36.8/6=92/15=6.133333333$.
+To compute its spread exactly, note $92/15=184/30$, so
+$x_j-\bar x_6=(30x_j-184)/30$ with $30x_j=180,195,177,183,186,183$.
+The six deviations are therefore
 \[
 \left(-\frac4{30},\frac{11}{30},-\frac7{30},-\frac1{30},
 \frac2{30},-\frac1{30}\right).
@@ -1711,15 +1854,16 @@ $S_6=(16+121+49+1+4+1)/900=192/900=16/75$.
 Therefore
 \[
 \boxed{s_6^2=\frac{16/75}{5}=\frac{16}{375},
-\qquad s_6=.206559112.}
+\qquad s_6=.206559112}.
 \]
-The mean decreases by $1/150=0.006666667$ and the sample standard
-deviation decreases by about $0.0236582$.
+The mean decreases by $6.14-92/15=921/150-920/150=1/150=0.006666667$,
+and the sample standard deviation decreases by
+$.230217289-.206559112\approx0.0236582$.
 If one instead describes the empirical distribution with divisor $N$
-as in Eq.(23.23), its standard deviations are $\sqrt{.212/5}=.205912603$
+as in Eq.~(23.23), its standard deviations are $\sqrt{.212/5}=.205912603$
 and $\sqrt{(16/75)/6}=.188561808$; these are different conventions.
-\erratum{The manual omits the original $x_4=6.1$, computing four
-then five observations. The exercise supplies five then six.}
+\erratum{The Instructor's Manual omits the original $x_4=6.1$, computing
+four then five observations. The exercise supplies five then six.}
 
 
 \Needspace{5\baselineskip}
@@ -1732,9 +1876,9 @@ $t_{i}$ rather than the $y_{i}$.
 and the quoted uncertainties as known standard deviations of independent
 normal time errors.}
 \solution
-\erratum{The actual textbook Example 23.7.2 has $y_3=2.7$.
-The manual substitutes $3.0$ and consequently obtains a different fit.
-Use the textbook data throughout.}
+\erratum{The textbook's Example~23.7.2 has $y_3=2.7$.
+The Instructor's Manual substitutes $3.0$ and consequently obtains a
+different fit. Use the textbook data throughout.}
 With the errors now assigned to time, the exact ordinates are
 $y=(0.8,1.5,2.7)$ and the measured times are $t=(1,2,3)$,
 with independent standard deviations $\sigma=(0.1,0.05,0.2)$.
@@ -1745,55 +1889,77 @@ Fit $t=by$ by minimizing
 +\frac{(2-1.5b)^2}{.05^2}
 +\frac{(3-2.7b)^2}{.2^2}.
 \]
-Differentiate and set the result to zero:
+Differentiate and set the result to zero; the condition is linear
+in $b$:
 \[
 0=-2\sum_j\frac{y_j(t_j-by_j)}{\sigma_j^2},\qquad
 \widehat b=\frac ND,
 \quad N=\sum_j\frac{y_jt_j}{\sigma_j^2},\quad
 D=\sum_j\frac{y_j^2}{\sigma_j^2}.
 \]
-The individual terms give
+With $1/\sigma_j^2=100,400,25$, the individual terms give
 \[
-N=80+1200+202.5=1482.5,\qquad
-D=64+900+182.25=1146.25.
+N=.8\cdot100+3\cdot400+8.1\cdot25=80+1200+202.5=1482.5,
 \]
-Since $\chi^{2\prime\prime}(b)=2D>0$, this is the unique minimum:
+\[
+D=.64\cdot100+2.25\cdot400+7.29\cdot25=64+900+182.25=1146.25.
+\]
+Since $\chi^{2\prime\prime}(b)=2D>0$, this is the unique minimum.
+Multiplying $N$ and $D$ by 4 gives $\widehat b=5930/4585$; cancelling
+the common factor 5, and inverting $t=\widehat by$ for the fitted line,
 \[
 \boxed{\widehat b=\frac{1186}{917}=1.2933478735,
-\qquad y=\frac{917}{1186}t=0.7731871838t.}
+\qquad y=\frac{917}{1186}t=0.7731871838t}.
 \]
-For its uncertainty, differentiate the estimator with respect to each
-time: $\partial\widehat b/\partial t_j=y_j/(D\sigma_j^2)$.
+For its uncertainty, differentiate the estimator $\widehat b=N/D$ with
+respect to each time; only $N$ depends on the $t_j$, so
+$\partial\widehat b/\partial t_j=y_j/(D\sigma_j^2)$.
 Because the estimator is linear, independent-error propagation is exact:
 \[
 \operatorname{Var}\widehat b
 =\sum_j\frac{y_j^2\sigma_j^2}{D^2\sigma_j^4}
+=\frac1{D^2}\sum_j\frac{y_j^2}{\sigma_j^2}
 =\frac1D=\frac4{4585},\qquad
-\boxed{\sigma_b=0.0295365880.}
+\boxed{\sigma_b=0.0295365880}.
 \]
-Completing the quadratic gives
+Write $T=\sum_jt_j^2/\sigma_j^2=100+1600+225=1925$. Expanding the
+squares gives $\chi^2(b)=T-2bN+b^2D$, and completing the square in $b$
+gives
 \[
 \chi^2(b)=\chi^2_{\min}+D(b-\widehat b)^2,
-\quad
-\chi^2_{\min}=\sum_jt_j^2/\sigma_j^2-N^2/D
-=1925-\frac{1482.5^2}{1146.25}
+\qquad
+\chi^2_{\min}=T-\frac{N^2}D,
+\]
+where
+\[
+\chi^2_{\min}=1925-\frac{1482.5^2}{1146.25}
+=1925-\frac{1758245}{917}
 =\frac{6980}{917}=7.6117775354.
 \]
 For independent normal measurement errors with the specified variances,
-write $z_j=t_j/\sigma_j$, $v_j=y_j/\sigma_j$.
-Minimizing $\|z-bv\|^2$ projects $z$ onto the one-dimensional span of
-$v$. An orthogonal rotation taking $v$ to the first coordinate leaves
-the standardized normal errors independent with unit variance. The
-residual squared norm uses the other two coordinates, so it has
-$3-1=2$ degrees of freedom. Its upper-tail probability is
+write $z_j=t_j/\sigma_j$, $v_j=y_j/\sigma_j$, so that
+$\chi^2(b)=\|z-bv\|^2$. If the model holds with true slope $b_0$, then
+$z=b_0v+e$, where the standardized errors $e_j=(t_j-b_0y_j)/\sigma_j$
+are independent $N(0,1)$. Minimizing $\|z-bv\|^2$ projects $z$ onto the
+one-dimensional span of $v$; since $b_0v$ lies in that span, the
+residual $z-\widehat bv$ is the component of $e$ orthogonal to $v$.
+An orthogonal rotation taking $v$ to the first coordinate axis leaves
+the components of $e$ independent with unit variance, because their
+joint density, proportional to $\exp(-\|e\|^2/2)$, is unchanged by
+rotations. The residual squared norm is the sum of the squares of the
+other two coordinates, so $\chi^2_{\min}$ has the $\chi^2$ distribution
+with $3-1=2$ degrees of freedom. That density is $\frac12e^{-x/2}$ for
+$x>0$ (Eq.~(23.83) with $p=1$, $\sigma=1$), so the upper-tail
+probability is
 \[
 \boxed{P(\chi_2^2\ge\chi^2_{\min})
-=e^{-\chi^2_{\min}/2}=0.0222394227.}
+=\int_{\chi^2_{\min}}^\infty\tfrac12e^{-x/2}\,dx
+=e^{-\chi^2_{\min}/2}=0.0222394227}.
 \]
 Thus a residual at least this large occurs about 2.22\% of the time
 under this model and the stated errors. The fit has reduced
-$\chi^2=3.805888768$; this alone does not identify which model assumption
-is responsible for the discrepancy.
+$\chi^2=\chi^2_{\min}/2=3.805888768$; this alone does not identify which
+model assumption is responsible for the discrepancy.
 \begin{center}
 \begin{tikzpicture}[x=1.8cm,y=1.25cm]
 \draw[->](0,0)--(3.6,0) node[right]{$t$};
@@ -1808,13 +1974,21 @@ is responsible for the discrepancy.
 \foreach \y in {1,2,3}{\node[left] at(0,\y){\y};}
 \end{tikzpicture}
 \end{center}
-If a 95\% confidence interval for $b$ is also desired, known normal
-measurement errors give $\widehat b\pm1.959963985\sigma_b$:
+If a 95\% confidence interval for the slope is also desired: with
+known normal measurement errors, $\widehat b$ is a linear combination of
+the independent normal $t_j$, hence exactly normal with mean $b_0$ and
+standard deviation $\sigma_b$. Thus
+$P(|\widehat b-b_0|\le c\,\sigma_b)=2\Phi(c)-1=0.95$ for
+$c=\Phi^{-1}(0.975)=1.959963985$, and with
+$1.959963985\,\sigma_b=0.0578906487$,
 \[
-b\in[1.235457225,1.351238522].
+b_0\in\widehat b\pm1.959963985\,\sigma_b=[1.235457225,1.351238522].
 \]
 Taking reciprocals reverses the positive endpoints, giving
-$dy/dt\in[0.740061790,0.809416935]$.
+\[
+\frac{dy}{dt}=\frac1{b_0}\in\left[\frac1{1.351238522},
+\frac1{1.235457225}\right]=[0.74006179,0.80941693].
+\]
 \erratum{Here $\sigma_b$ already is the estimator's standard deviation;
 it must not be divided by $\sqrt3$. With known individual variances
 there is no additional Student-$t$ factor either.}
@@ -1830,7 +2004,7 @@ with unknown mean and variance.}
 \solution
 Assume the six measurements are an independent sample from a normal
 population with unknown mean $\mu$ and unknown variance $\sigma^2$.
-Exercise 23.7.2 gives
+Exercise~23.7.2 gives
 \[
 N=6,\quad\bar x=\frac{92}{15},\quad
 s^2=\frac1{N-1}\sum_{j=1}^N(x_j-\bar x)^2=\frac{16}{375}.
@@ -1841,46 +2015,82 @@ The standard error of the mean is therefore
 =\sqrt{\frac8{1125}}=0.0843274043.
 \]
 To distinguish sample size from degrees of freedom, standardize the
-six observations by their true $\mu,\sigma$ and rotate their Gaussian
-coordinate vector orthogonally so that its first coordinate is the
-normalized sum. Its density is proportional to $\exp(-\sum z_j^2/2)$,
-which is unchanged by this rotation and factors over the new coordinates.
-Thus
+six observations by their true $\mu,\sigma$, $z_j=(X_j-\mu)/\sigma$,
+and rotate the vector $z$ orthogonally, $w=Oz$, with an orthogonal
+matrix $O$ whose first row is $(1,\ldots,1)/\sqrt N$ (complete it to an
+orthonormal basis, e.g.\ by the Gram--Schmidt process). The density of
+$z$ is proportional to $\exp(-\sum z_j^2/2)$. Since
+$\sum_jw_j^2=\sum_jz_j^2$ and $|\det O|=1$, the density of $w$ is
+proportional to $\exp(-\sum w_j^2/2)$, which factors over the new
+coordinates: $w_1,\ldots,w_N$ are independent $N(0,1)$ variables. Now
+$w_1=\sum_jz_j/\sqrt N=\sqrt N\,\bar z$, and expanding the square with
+$\sum_jz_j=N\bar z$ gives
 \[
-Z=\frac{\sqrt N(\overline X-\mu)}\sigma\sim N(0,1),\qquad
-Q=\frac{(N-1)S^2}{\sigma^2}\sim\chi^2_{N-1}
+\sum_j(z_j-\bar z)^2=\sum_jz_j^2-N\bar z^2=\sum_{j=2}^Nw_j^2.
+\]
+Since $\bar z=(\overline X-\mu)/\sigma$ and
+$z_j-\bar z=(X_j-\overline X)/\sigma$, this shows that
+\[
+Z=\frac{\sqrt N(\overline X-\mu)}\sigma=w_1\sim N(0,1),\qquad
+Q=\frac{(N-1)S^2}{\sigma^2}=\sum_{j=2}^Nw_j^2\sim\chi^2_{N-1}
 \]
 are independent: the residual squared norm uses the other five
-coordinates. Their ratio is
+coordinates. By definition, the ratio of a standard normal variable to
+the square root of an independent $\chi^2_\nu/\nu$ variable has
+Student's $t$ distribution with $\nu$ degrees of freedom. Here
+$\nu=N-1=5$ and $\sqrt{Q/(N-1)}=S/\sigma$, so $\sigma$ cancels:
 \[
 T=\frac{Z}{\sqrt{Q/(N-1)}}
 =\frac{\overline X-\mu}{S/\sqrt N}\sim t_5.
 \]
 Let $c_p$ have $P(T\le c_p)=p$. By symmetry,
-$P(-c_p\le T\le c_p)=2p-1$. Solving these inequalities for $\mu$
-gives the confidence interval $\bar x\pm c_p s/\sqrt N$.
+$P(-c_p\le T\le c_p)=2p-1$. Multiplying these inequalities by
+$S/\sqrt N>0$ and solving them for $\mu$,
+\[
+-c_p\le\frac{\overline X-\mu}{S/\sqrt N}\le c_p
+\iff
+\overline X-c_p\frac S{\sqrt N}\le\mu
+\le\overline X+c_p\frac S{\sqrt N},
+\]
+which gives the confidence interval $\bar x\pm c_p s/\sqrt N$.
 For 90\% and 95\% use respectively $p=.95,.975$:
 \[
 c_{.95}=2.0150483733,\qquad c_{.975}=2.5705818356.
 \]
 They can be obtained by integrating the normalized density
+(with $\Gamma(3)=2$ and $\Gamma(5/2)=3\sqrt\pi/4$)
 \[
 f_5(t)=\frac{\Gamma(3)}{\sqrt{5\pi}\Gamma(5/2)}
-(1+t^2/5)^{-3}
+(1+t^2/5)^{-3}=\frac8{3\pi\sqrt5}(1+t^2/5)^{-3}
 \]
-and solving $\int_{-\infty}^{c_p}f_5(t)\,dt=p$.
-Multiplication by the standard error yields
+and solving $\int_{-\infty}^{c_p}f_5(t)\,dt=p$. The substitution
+$t=\sqrt5\tan\theta$, with $1+t^2/5=\sec^2\theta$ and
+$dt=\sqrt5\sec^2\theta\,d\theta$, turns $f_5(t)\,dt$ into
+$\frac8{3\pi}\cos^4\theta\,d\theta$, and $t\to-\infty$ corresponds to
+$\theta\to-\pi/2$. Integrating
+$\cos^4\theta=\frac38+\frac12\cos2\theta+\frac18\cos4\theta$ gives
+\[
+P(T\le c)=\frac12+\frac1\pi\left[\theta+\frac23\sin2\theta
++\frac1{12}\sin4\theta\right],\qquad\theta=\arctan\frac c{\sqrt5}.
+\]
+Newton's method, $c\to c-[P(T\le c)-p]/f_5(c)$, started at $c=2$ and
+$c=2.5$, reproduces the two values above to ten decimals in three
+iterations.
+Multiplication by the standard error gives the half-widths
+$2.0150483733\times0.0843274043=0.169923799$ and
+$2.5705818356\times0.0843274043=0.216770494$; with the endpoints rounded
+to seven decimals,
 \[
 \boxed{\begin{aligned}
 90\%:&\quad6.133333333\pm0.169923799
- =[5.963409535,6.303257132],\\
+ =[5.9634095,6.3032571],\\
 95\%:&\quad6.133333333\pm0.216770494
- =[5.916562840,6.350103827].
-\end{aligned}}
+ =[5.9165628,6.3501038]
+\end{aligned}}.
 \]
 \erratum{The sample size is 6; the Student distribution has 5 degrees
-of freedom. The manual's use of $\sqrt5$ in the standard error confuses
-these quantities and makes both intervals too wide.}
+of freedom. The Instructor's Manual's use of $\sqrt5$ in the standard
+error confuses these quantities and makes both intervals too wide.}
 The stated coverage is for repeated sampling under the normal-sample
 assumptions, rather than a probability distribution assigned to the
 fixed unknown population mean.
