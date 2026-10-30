@@ -13,7 +13,7 @@
 of the Legendre polynomial recurrence relations. Suggested starting
 point: Eqs.~(15.24) and (15.25).
 \solution
-The two needed recurrences are
+The two needed recurrences, Eqs.~(15.24) and (15.25), are
 \[
 P'_{n-1}=-nP_n+xP'_n,\qquad
 (1-x^2)P'_n=nP_{n-1}-nxP_n.
@@ -23,9 +23,10 @@ Differentiate the second, including both product derivatives:
 (1-x^2)P_n''-2xP_n'
 =nP'_{n-1}-nP_n-nxP_n'.
 \]
-Insert the first recurrence on the right:
+Insert $n$ times the first recurrence for $nP'_{n-1}$ on the right; the
+terms $\pm nxP_n'$ cancel:
 \[
-n(-nP_n+xP_n')-nP_n-nxP_n'=-n(n+1)P_n.
+n(-nP_n+xP_n')-nP_n-nxP_n'=-n^2P_n-nP_n=-n(n+1)P_n.
 \]
 Moving this term to the left gives
 \[
@@ -52,21 +53,36 @@ series converges:
 (1-2xt+t^2)^{-1/2}
 =\sum_{j=0}^\infty\binom{-1/2}{j}(-2xt+t^2)^j.
 \]
-Choose $k$ copies of $t^2$ from the $j$ factors. The other $j-k$
-copies contribute $(-2xt)^{j-k}$, so the resulting term is
+Expand each power by the binomial theorem,
+$(t^2-2xt)^j=\sum_{k=0}^j\binom jk(t^2)^k(-2xt)^{j-k}$: choosing $k$
+copies of $t^2$ from the $j$ factors, the other $j-k$ copies contribute
+$(-2xt)^{j-k}$, so the resulting term is
 \[
 \binom{-1/2}{j}\binom jk(-2x)^{j-k}t^{j+k}.
 \]
+For $2|xt|+|t|^2<1$ this double series converges absolutely (with every
+term replaced by its absolute value it sums to $(1-2|xt|-|t|^2)^{-1/2}$),
+so its terms may be collected by powers of $t$.
 To obtain $t^n$, set $j=n-k$. The condition $0\le k\le j$
-becomes $0\le k\le\lfloor n/2\rfloor$. Therefore
+becomes $2k\le n$, i.e., $0\le k\le\lfloor n/2\rfloor$. Therefore
 \[
 P_n(x)=\sum_{k=0}^{\lfloor n/2\rfloor}
 \binom{-1/2}{n-k}\binom{n-k}{k}(-2x)^{n-2k}.
 \]
 Use
-$\binom{-1/2}{j}=(-1)^j(2j)!/[2^{2j}(j!)^2]$.
+\[
+\binom{-1/2}{j}=\frac{(-\frac12)(-\frac32)\cdots(-\frac{2j-1}2)}{j!}
+=(-1)^j\frac{(2j-1)!!}{2^jj!}=(-1)^j\frac{(2j)!}{2^{2j}(j!)^2}
+\]
+(since $(2j-1)!!=(2j)!/(2^jj!)$) with $j=n-k$, together with
+$\binom{n-k}{k}=(n-k)!/[k!(n-2k)!]$.
 The sign becomes $(-1)^{n-k+n-2k}=(-1)^k$ and the power of two is
-$2^{n-2k-2(n-k)}=2^{-n}$. The remaining factorials give
+$2^{n-2k-2(n-k)}=2^{-n}$. The remaining factorials combine as
+\[
+\frac{(2n-2k)!}{[(n-k)!]^2}\,\frac{(n-k)!}{k!(n-2k)!}
+=\frac{(2n-2k)!}{k!(n-k)!(n-2k)!},
+\]
+so that
 \[
 \boxed{P_n(x)=\sum_{k=0}^{\lfloor n/2\rfloor}
 (-1)^k\frac{(2n-2k)!}{2^nk!(n-k)!(n-2k)!}x^{n-2k}}.
@@ -82,24 +98,33 @@ $P_{n}(x)$ satisfies the Legendre ODE. Note that there is no
 restriction on $x$. We may have any $x$, $-\infty<x<\infty$, and
 indeed any $z$ in the entire finite complex plane.
 \solution
-Write $P_n=\sum_{k=0}^{\lfloor n/2\rfloor}A_kx^{n-2k}$, with $A_k$
-as in Exercise 15.1.2. The Legendre operator acts on a monomial as
+Write $P_n=\sum_{k=0}^{\lfloor n/2\rfloor}A_kx^{n-2k}$, with
+$A_k=(-1)^k(2n-2k)!/[2^nk!(n-k)!(n-2k)!]$
+as in Exercise 15.1.2. The Legendre operator
+$L_n=(1-x^2)D^2-2xD+n(n+1)$ acts on a monomial as
 \[
-L_n[x^j]=j(j-1)x^{j-2}+[n(n+1)-j(j+1)]x^j.
+L_n[x^j]=(1-x^2)j(j-1)x^{j-2}-2jx^j+n(n+1)x^j
+=j(j-1)x^{j-2}+[n(n+1)-j(j+1)]x^j,
 \]
-At power $x^{n-2k}$, the second term comes from $A_k$, while the
-first comes from $A_{k-1}$. Its total coefficient is
+since $-j(j-1)-2j=-j(j+1)$.
+For $1\le k\le\lfloor n/2\rfloor$, the power $x^{n-2k}$ in $L_n[P_n]$
+receives the second term of $L_n[A_kx^{n-2k}]$ and the first term of
+$L_n[A_{k-1}x^{n-2k+2}]$ (with $j=n-2k+2$). Its total coefficient is
 \[
 (n-2k+2)(n-2k+1)A_{k-1}
 +2k(2n-2k+1)A_k,
 \]
 because
-$n(n+1)-(n-2k)(n-2k+1)=2k(2n-2k+1)$.
-Direct cancellation of factorials in the formula for $A_k$ gives
-\[
+$n(n+1)-(n-2k)(n-2k+1)=4kn-4k^2+2k=2k(2n-2k+1)$.
+The ratio of consecutive coefficients is
+\begin{align*}
 \frac{A_k}{A_{k-1}}
-=-\frac{(n-2k+2)(n-2k+1)}{2k(2n-2k+1)}.
-\]
+&=-\frac{(2n-2k)!}{(2n-2k+2)!}\,\frac{(k-1)!}{k!}\,
+\frac{(n-k+1)!}{(n-k)!}\,\frac{(n-2k+2)!}{(n-2k)!}\\
+&=-\frac{(n-k+1)(n-2k+2)(n-2k+1)}{k(2n-2k+2)(2n-2k+1)}
+=-\frac{(n-2k+2)(n-2k+1)}{2k(2n-2k+1)},
+\end{align*}
+where the last step uses $2n-2k+2=2(n-k+1)$.
 Thus every displayed coefficient is zero. The leading coefficient
 ($k=0$) is multiplied by $n(n+1)-n(n+1)=0$.
 At the bottom, the last monomial is either $1$ or $x$, whose second
@@ -137,32 +162,40 @@ integers.
 \par\emph{Hint.}~Look at the closed formula in Exercise~15.1.2.
 \solution
 The listed normalization and signs are obtained by
-$P_n^*(x)=P_n(2x-1)$. Indeed, $y=2x-1$ gives
+$P_n^*(x)=P_n(2x-1)$. Indeed, $y=2x-1$ (so $dx=dy/2$, and $x=0,1$
+become $y=-1,1$) gives
 \[
 \int_0^1P_n^*P_m^*dx
 =\frac12\int_{-1}^1P_n(y)P_m(y)dy
+=\frac12\,\frac{2\delta_{nm}}{2n+1}
 =\frac{\delta_{nm}}{2n+1}.
 \]
-\erratum{The manual's last expression on p.~232 retains an extra
-factor $1/2$. The change of variable contributes $1/2$, but the
+\erratum{The Instructor's Manual's last expression on p.~232 retains an
+extra factor $1/2$. The change of variable contributes $1/2$, but the
 unshifted norm contributes $2/(2n+1)$, leaving $1/(2n+1)$ as stated
 correctly in the textbook.}
 (a) Replace the argument in
-$(n+1)P_{n+1}=(2n+1)yP_n-nP_{n-1}$:
+$(n+1)P_{n+1}(y)=(2n+1)yP_n(y)-nP_{n-1}(y)$ by $y=2x-1$:
 \[
 \boxed{(n+1)P_{n+1}^*(x)
 =(2n+1)(2x-1)P_n^*(x)-nP_{n-1}^*(x)}.
 \]
-The initial polynomials are $P_0^*=1$, $P_1^*=2x-1$.
+The initial polynomials are $P_0^*=1$, $P_1^*=2x-1$. For example,
+$n=1$ gives $2P_2^*=3(2x-1)^2-1=12x^2-12x+2$, i.e.,
+$P_2^*=6x^2-6x+1$, as in the table.
 
 (b) The recurrence alone involves division by $n+1$, so an explicit
 coefficient formula is more useful for proving integrality.
-Transform Rodrigues's formula, using $D_y=\tfrac12D_x$ and
-$y^2-1=4x(x-1)$:
+Transform Rodrigues's formula
+$P_n(y)=D_y^n(y^2-1)^n/(2^nn!)$, using $D_y=\tfrac12D_x$ and
+$y^2-1=4x^2-4x=4x(x-1)$:
 \[
-P_n^*(x)=\frac1{n!}D_x^n[x^n(x-1)^n].
+P_n^*(x)=\frac1{2^nn!}\,\frac1{2^n}D_x^n[4^nx^n(x-1)^n]
+=\frac1{n!}D_x^n[x^n(x-1)^n].
 \]
-Expand $(x-1)^n=\sum_{k=0}^n(-1)^{n-k}\binom nk x^k$ and differentiate:
+Expand $(x-1)^n=\sum_{k=0}^n(-1)^{n-k}\binom nk x^k$, so that
+$x^n(x-1)^n=\sum_{k=0}^n(-1)^{n-k}\binom nk x^{n+k}$, and differentiate
+with $D_x^nx^{n+k}=\frac{(n+k)!}{k!}x^k$:
 \[
 P_n^*(x)=\sum_{k=0}^n(-1)^{n-k}
 \binom nk\frac{(n+k)!}{n!k!}x^k
@@ -209,13 +242,29 @@ $\mathsf B_e$:
 0&0&0&231/16
 \end{pmatrix}}.
 \]
-Solving the triangular equations from the last row upward gives
-\[
-a_6=\frac{16}{231}\alpha_6,\quad
-a_4=\frac8{35}\alpha_4+\frac{24}{77}\alpha_6,\quad
-a_2=\frac23\alpha_2+\frac47\alpha_4+\frac{10}{21}\alpha_6,
-\]
-and $a_0=\alpha_0+\alpha_2/3+\alpha_4/5+\alpha_6/7$.
+The rows of $\boldsymbol\alpha=\mathsf B_e\mathbf a$ read
+\begin{align*}
+\alpha_6&=\tfrac{231}{16}a_6,\qquad
+\alpha_4=\tfrac{35}8a_4-\tfrac{315}{16}a_6,\\
+\alpha_2&=\tfrac32a_2-\tfrac{15}4a_4+\tfrac{105}{16}a_6,\qquad
+\alpha_0=a_0-\tfrac12a_2+\tfrac38a_4-\tfrac5{16}a_6.
+\end{align*}
+Solve them from the last one upward, inserting each result in the next:
+\begin{align*}
+a_6&=\tfrac{16}{231}\alpha_6,\\
+a_4&=\tfrac8{35}\bigl(\alpha_4+\tfrac{315}{16}a_6\bigr)
+=\tfrac8{35}\alpha_4+\tfrac{24}{77}\alpha_6,\\
+a_2&=\tfrac23\bigl(\alpha_2+\tfrac{15}4a_4-\tfrac{105}{16}a_6\bigr)
+=\tfrac23\bigl(\alpha_2+\tfrac67\alpha_4+\tfrac57\alpha_6\bigr)
+=\tfrac23\alpha_2+\tfrac47\alpha_4+\tfrac{10}{21}\alpha_6,\\
+a_0&=\alpha_0+\tfrac12a_2-\tfrac38a_4+\tfrac5{16}a_6
+=\alpha_0+\tfrac13\alpha_2+\tfrac15\alpha_4+\tfrac17\alpha_6.
+\end{align*}
+In $a_2$, the coefficient of $\alpha_6$ is
+$\frac{15}4\cdot\frac{24}{77}-\frac{105}{16}\cdot\frac{16}{231}
+=\frac{90}{77}-\frac{35}{77}=\frac57$; in $a_0$, those of $\alpha_4$ and
+$\alpha_6$ are $\frac27-\frac3{35}=\frac15$ and
+$\frac5{21}-\frac9{77}+\frac5{231}=\frac{33}{231}=\frac17$.
 Thus
 \[
 \boxed{\mathsf A_e=
@@ -226,8 +275,15 @@ Thus
 0&0&0&16/231
 \end{pmatrix}}.
 \]
-The diagonal products are one. The six upper off-diagonal entries of
-$\mathsf A_e\mathsf B_e$ are, explicitly,
+Read by columns, $\mathsf A_e$ gives the Legendre expansions
+$x^2=\frac13P_0+\frac23P_2$, $x^4=\frac15P_0+\frac47P_2+\frac8{35}P_4$,
+and $x^6=\frac17P_0+\frac{10}{21}P_2+\frac{24}{77}P_4+\frac{16}{231}P_6$.
+The diagonal entries of $\mathsf A_e\mathsf B_e$ are products of
+diagonal entries, $1\cdot1$, $\frac23\cdot\frac32$,
+$\frac8{35}\cdot\frac{35}8$, $\frac{16}{231}\cdot\frac{231}{16}$, all
+equal to one. The six upper off-diagonal entries (row $i$ of
+$\mathsf A_e$ times column $j$ of $\mathsf B_e$, $i<j$, in the order
+$(1,2),(1,3),(1,4)$ and $(2,3),(2,4),(3,4)$) are, explicitly,
 \[
 -\tfrac12+\tfrac12,\quad
 \tfrac38-\tfrac54+\tfrac78,\quad
@@ -241,8 +297,28 @@ $\mathsf A_e\mathsf B_e$ are, explicitly,
 All vanish, and entries below the diagonal vanish by triangularity.
 Hence $\mathsf A_e\mathsf B_e=\mathsf1$.
 
-For the odd case use the order $1,3,5,7$. The same coefficient comparison
-and back substitution give
+For the odd case use the order $1,3,5,7$. The coefficients of
+$P_1,P_3,P_5,P_7$ give the columns of $\mathsf B_o$ below, and the same
+back substitution, from
+$\alpha_7=\frac{429}{16}a_7$,
+$\alpha_5=\frac{63}8a_5-\frac{693}{16}a_7$,
+$\alpha_3=\frac52a_3-\frac{35}4a_5+\frac{315}{16}a_7$,
+$\alpha_1=a_1-\frac32a_3+\frac{15}8a_5-\frac{35}{16}a_7$, gives
+\begin{align*}
+a_7&=\tfrac{16}{429}\alpha_7,\qquad
+a_5=\tfrac8{63}\bigl(\alpha_5+\tfrac{693}{16}a_7\bigr)
+=\tfrac8{63}\alpha_5+\tfrac8{39}\alpha_7,\\
+a_3&=\tfrac25\bigl(\alpha_3+\tfrac{35}4a_5-\tfrac{315}{16}a_7\bigr)
+=\tfrac25\bigl(\alpha_3+\tfrac{10}9\alpha_5+\tfrac{35}{33}\alpha_7\bigr)
+=\tfrac25\alpha_3+\tfrac49\alpha_5+\tfrac{14}{33}\alpha_7,\\
+a_1&=\alpha_1+\tfrac32a_3-\tfrac{15}8a_5+\tfrac{35}{16}a_7
+=\alpha_1+\tfrac35\alpha_3+\tfrac37\alpha_5+\tfrac13\alpha_7.
+\end{align*}
+Here $\frac{35}4\cdot\frac8{39}-\frac{315}{16}\cdot\frac{16}{429}
+=\frac{770-315}{429}=\frac{35}{33}$, and in $a_1$ the coefficients of
+$\alpha_5$ and $\alpha_7$ are $\frac23-\frac5{21}=\frac37$ and
+$\frac7{11}-\frac5{13}+\frac{35}{429}=\frac{143}{429}=\frac13$.
+Therefore
 \[
 \boxed{\mathsf B_o=
 \begin{pmatrix}
@@ -259,7 +335,8 @@ and back substitution give
 0&0&0&16/429
 \end{pmatrix}}.
 \]
-Here the six off-diagonal products are
+In the same order as for the even case, the six upper off-diagonal
+entries of $\mathsf A_o\mathsf B_o$ are
 \[
 -\tfrac32+\tfrac32,\quad
 \tfrac{15}8-\tfrac{21}4+\tfrac{27}8,\quad
@@ -270,8 +347,9 @@ Here the six off-diagonal products are
 \tfrac{63}8-\tfrac{77}4+\tfrac{91}8,\quad
 -\tfrac{11}2+\tfrac{11}2,
 \]
-again zero, with diagonal entries one. Therefore
-$\mathsf A_o\mathsf B_o=\mathsf1$. In both cases
+again zero, with diagonal entries $1\cdot1$, $\frac25\cdot\frac52$,
+$\frac8{63}\cdot\frac{63}8$, $\frac{16}{429}\cdot\frac{429}{16}$, all one.
+Therefore $\mathsf A_o\mathsf B_o=\mathsf1$. In both cases
 $\mathbf a=\mathsf A\boldsymbol\alpha$ and
 $\boldsymbol\alpha=\mathsf B\mathbf a$.
 
@@ -292,14 +370,16 @@ Write $D=1-2xt+t^2$ and $g=D^{-1/2}$. Then
 \[
 g_t=-\frac12D^{-3/2}(-2x+2t)=(x-t)D^{-3/2}.
 \]
-Consequently
+Consequently, since $2t(x-t)+D=2xt-2t^2+1-2xt+t^2=1-t^2$,
 \[
 2tg_t+g
 =\frac{2t(x-t)+D}{D^{3/2}}
 =\frac{1-t^2}{(1-2xt+t^2)^{3/2}}.
 \]
-Termwise differentiation of the generating series in its convergence
-disk gives $2tg_t+g=\sum_{n\ge0}(2n+1)P_n(x)t^n$.
+Termwise differentiation of the generating series
+$g=\sum_{n\ge0}P_n(x)t^n$ in its convergence disk gives
+$2tg_t=\sum_{n\ge0}2nP_n(x)t^n$, hence
+$2tg_t+g=\sum_{n\ge0}(2n+1)P_n(x)t^n$.
 Equating the two expressions proves the identity. In particular,
 for real $-1\le x\le1$ it holds for $|t|<1$.
 
@@ -316,8 +396,9 @@ equations in symbolic form analogous to the symbolic forms for
 Eqs.~(15.22) to (15.25).
 \end{enumerate}
 \solution
-(a) Begin with Eq. (15.25) and eliminate $nP_{n-1}$ using the
-three-term recurrence:
+(a) Begin with Eq.~(15.25), $(1-x^2)P_n'=nP_{n-1}-nxP_n$, and
+eliminate $nP_{n-1}$ using the three-term recurrence
+$(2n+1)xP_n=(n+1)P_{n+1}+nP_{n-1}$:
 \[
 nP_{n-1}=(2n+1)xP_n-(n+1)P_{n+1}.
 \]
@@ -328,16 +409,20 @@ It follows that
 \]
 This elimination uses $n\ge1$. For $n=0$, $P_0=1$ and $P_1=x$
 give $0=x-x$ directly, so no $P_{-1}$ is required.
-\erratum{The manual drops the factor $x$ from $(n+1)xP_n$ in its
-last line for part (a), p.~233. The textbook equation and the
-derivation above retain it.}
-(b) To express the result in the same symbolic style as the source,
+\erratum{The Instructor's Manual drops the factor $x$ from
+$(n+1)xP_n$ in its last line for part (a), p.~233. The textbook
+equation and the derivation above retain it.}
+(b) To express the result in the same symbolic style as the textbook,
 use $(15.24)_{n\mapsto n+1}$ and $x(15.23)$:
 \[
 P_n'=-(n+1)P_{n+1}+xP_{n+1}',\qquad
 xP_{n+1}'=(n+1)xP_n+x^2P_n'.
 \]
-Substitute the second equation into the first and collect $P_n'$.
+Substitute the second equation into the first,
+\[
+P_n'=-(n+1)P_{n+1}+(n+1)xP_n+x^2P_n',
+\]
+and move $x^2P_n'$ to the left; this is Eq.~(15.26).
 Thus the indicated combination is
 \[
 \boxed{(15.24)_{n\mapsto n+1}+x(15.23)\ \Longrightarrow\ (15.26)},
@@ -355,8 +440,10 @@ Since $P_n$ is a polynomial, substitute $x=1$ directly into its ODE:
 \[
 (1-1)P_n''(1)-2P_n'(1)+n(n+1)P_n(1)=0.
 \]
+The first term vanishes, so $2P_n'(1)=n(n+1)P_n(1)$.
 The generating function at $x=1$ is
-$(1-t)^{-1}=\sum_{n\ge0}t^n$, so $P_n(1)=1$. Therefore
+$(1-2t+t^2)^{-1/2}=(1-t)^{-1}=\sum_{n\ge0}t^n$ for $|t|<1$, so
+$P_n(1)=1$. Therefore
 \[
 \boxed{P_n'(1)=\frac{n(n+1)}2}.
 \]
@@ -374,9 +461,13 @@ your knowledge of $P_{0}$ and $P_{1}$.
 The base cases are $P_0(-x)=1=P_0(x)$ and
 $P_1(-x)=-x=-P_1(x)$. Assume
 $P_n(-x)=(-1)^nP_n(x)$ and $P_{n-1}(-x)=(-1)^{n-1}P_{n-1}(x)$.
-Evaluate the three-term recurrence at $-x$:
+Evaluate the three-term recurrence
+$(n+1)P_{n+1}(x)=(2n+1)xP_n(x)-nP_{n-1}(x)$ at $-x$ and insert the
+induction hypothesis; then use $-(-1)^n=(-1)^{n+1}$ and
+$(-1)^{n-1}=(-1)^{n+1}$:
 \begin{align*}
 (n+1)P_{n+1}(-x)
+&=(2n+1)(-x)P_n(-x)-nP_{n-1}(-x)\\
 &=-(2n+1)x(-1)^nP_n(x)-n(-1)^{n-1}P_{n-1}(x)\\
 &=(-1)^{n+1}[(2n+1)xP_n(x)-nP_{n-1}(x)]\\
 &=(-1)^{n+1}(n+1)P_{n+1}(x).
@@ -391,18 +482,24 @@ Putting $x=\cos\theta$ gives the requested form.
 coefficient of $t^{2}$ in terms of $\cos n\theta$, $n\le2$. This
 coefficient is $P_{2}(\cos\theta)$.
 \solution
-Equation (15.27) factors the generating function as
+Since $1-2t\cos\theta+t^2=(1-te^{i\theta})(1-te^{-i\theta})$,
+Eq.~(15.27) factors the generating function as
 \[
 (1-te^{i\theta})^{-1/2}(1-te^{-i\theta})^{-1/2}.
 \]
-The coefficient of $t^2$ receives exactly three contributions:
+Each factor has the binomial series
+$(1-u)^{-1/2}=1+\frac12u+\frac38u^2+\cdots$ with $u=te^{\pm i\theta}$.
+The coefficient of $t^2$ in the product therefore receives exactly
+three contributions: the $u^2$ term of either factor times the
+constant $1$ of the other, and the product of the two linear terms:
 \[
 \frac38e^{2i\theta}
 +\left(\frac12e^{i\theta}\right)
  \left(\frac12e^{-i\theta}\right)
 +\frac38e^{-2i\theta}.
 \]
-Since $e^{2i\theta}+e^{-2i\theta}=2\cos2\theta$,
+Since $e^{2i\theta}+e^{-2i\theta}=2\cos2\theta$ and
+$\cos2\theta=2\cos^2\theta-1$,
 \[
 \boxed{P_2(\cos\theta)=\frac14+\frac34\cos2\theta
 =\frac12(3\cos^2\theta-1)}.
@@ -417,20 +514,26 @@ The only angular frequencies are $0$ and $2$.
 \]
 from the Legendre polynomial generating function.
 \solution
-Let $g=(1-2xt+t^2)^{-1/2}=\sum P_n(x)t^n$.
-The generating series of the proposed right-hand side is
+Let $g=(1-2xt+t^2)^{-1/2}=\sum P_n(x)t^n$ and $D=1-2xt+t^2$.
+Termwise differentiation gives $tg_t=\sum_{n\ge0}nP_nt^n$. Put $j=n-1$
+in the first part of the proposed right-hand side and use
+$\sum_{j\ge0}(j+1)P_jt^j=tg_t+g$:
 \begin{align*}
 \sum_{n\ge1}(nP_{n-1}-nxP_n)t^n
 &=t\sum_{j\ge0}(j+1)P_jt^j-xtg_t\\
-&=tg+t(t-x)g_t.
+&=t(tg_t+g)-xtg_t=tg+t(t-x)g_t.
 \end{align*}
-On the other hand, $g_x=tD^{-3/2}$ and $g_t=(x-t)D^{-3/2}$, so
+On the other hand, differentiating $D^{-1/2}$ gives
+$g_x=-\frac12D^{-3/2}(-2t)=tD^{-3/2}$ and
+$g_t=-\frac12D^{-3/2}(2t-2x)=(x-t)D^{-3/2}$. With
+$D-(x-t)^2=1-2xt+t^2-x^2+2xt-t^2=1-x^2$,
 \[
 tg+t(t-x)g_t
 =\frac{t[D-(x-t)^2]}{D^{3/2}}
 =\frac{t(1-x^2)}{D^{3/2}}=(1-x^2)g_x.
 \]
-Compare coefficients of $t^n$:
+Since $(1-x^2)g_x=\sum_{n\ge0}(1-x^2)P_n'(x)t^n$, compare coefficients
+of $t^n$:
 \[
 \boxed{(1-x^2)P_n'=nP_{n-1}-nxP_n},\qquad n\ge1.
 \]
@@ -457,13 +560,24 @@ I_n:=\int_0^1P_n(x)dx
 because both endpoint values at one equal one.
 If $n=2s>0$, both polynomials in the numerator are odd and vanish
 at zero, so $I_{2s}=0$. Separately, $I_0=1$.
-If $n=2s+1$, the recurrence at $x=0$ gives
+If $n=2s+1$, the recurrence $(m+1)P_{m+1}=(2m+1)xP_m-mP_{m-1}$ at
+$x=0$ with $m=2s+1$ gives
 \[
 P_{2s+2}(0)=-\frac{2s+1}{2s+2}P_{2s}(0).
 \]
-Thus $I_{2s+1}=P_{2s}(0)/(2s+2)$. Starting with $P_0(0)=1$
-and repeating the same recurrence yields
-$P_{2s}(0)=(-1)^s(2s-1)!!/(2s)!!$, whence
+Thus
+\[
+I_{2s+1}=\frac{P_{2s}(0)-P_{2s+2}(0)}{4s+3}
+=\frac{P_{2s}(0)}{4s+3}\left(1+\frac{2s+1}{2s+2}\right)
+=\frac{P_{2s}(0)}{2s+2}.
+\]
+Starting with $P_0(0)=1$ and repeating the same recurrence yields
+\[
+P_{2s}(0)=\prod_{j=1}^s\left(-\frac{2j-1}{2j}\right)
+=(-1)^s\frac{1\cdot3\cdots(2s-1)}{2\cdot4\cdots(2s)}
+=(-1)^s\frac{(2s-1)!!}{(2s)!!},
+\]
+whence, with $(2s)!!\,(2s+2)=(2s+2)!!$,
 \[
 \boxed{I_{2s+1}=(-1)^s\frac{(2s-1)!!}{(2s+2)!!}}.
 \]
@@ -483,7 +597,8 @@ vanishes ($r$ and $n$ integral). Here $[n/2]$ is the largest integer
 $\le n/2$.
 \solution
 For every integer $r\ge\lfloor n/2\rfloor+1$, one has $2r>n$,
-so the exponent $d=2n-2r$ satisfies $0\le d<n$ when $r\le n$.
+because $\lfloor n/2\rfloor>n/2-1$; so the exponent $d=2n-2r$
+satisfies $0\le d<n$ when $r\le n$.
 The derivative of a monomial of degree $d$ is zero after $d+1$
 derivatives, and hence
 \[
@@ -504,10 +619,16 @@ Take nonnegative integers $m<n$. Rodrigues's formula gives
 \[
 I=\frac1{2^nn!}\int_{-1}^1x^mD^n(x^2-1)^n\,dx.
 \]
-The polynomial $(x^2-1)^n=(x-1)^n(x+1)^n$ and all its derivatives
-of orders $0,\ldots,n-1$ vanish at both endpoints. Every boundary
-term from $n$ integrations by parts is therefore zero. Moving all
-derivatives onto $x^m$ leaves
+The polynomial $F=(x^2-1)^n=(x-1)^n(x+1)^n$ and all its derivatives
+of orders $0,\ldots,n-1$ vanish at both endpoints. Each integration by
+parts has the form
+\[
+\int_{-1}^1u\,D^kF\,dx=\Bigl[u\,D^{k-1}F\Bigr]_{-1}^1
+-\int_{-1}^1u'\,D^{k-1}F\,dx,\qquad 1\le k\le n,
+\]
+with $u$ a derivative of $x^m$, so every boundary term from the $n$
+integrations by parts is zero. Moving all derivatives onto $x^m$ in
+this way leaves
 \[
 I=\frac{(-1)^n}{2^nn!}\int_{-1}^1(D^nx^m)(x^2-1)^n\,dx=0,
 \]
@@ -517,35 +638,49 @@ because $D^nx^m=0$. This proves the required orthogonality.
 \par\bigskip
 \noindent\textbf{15.1.15}\quad Show that
 \[
-\int_{-1}^{1}x^{n}P_{n}(x)\,dx=\frac{\erratum{2}n!}{(2n+1)!!}.
+\int_{-1}^{1}x^{n}P_{n}(x)\,dx=\frac{2n!}{(2n+1)!!}.
 \]
 \par\emph{Note.}~You are expected to use the Rodrigues formula and
 integrate by parts, but also see if you can get the result from
 Eq.~(15.14) by inspection.
 \solution
-\erratum{The supplied transcription had $2^{n+1}n!/(2n+1)!!$.
-The actual textbook p.~724 has $2n!/(2n+1)!!$, which is the correct
-value; for example the integral at $n=1$ is $2/3$, not $4/3$.}
-Move the $n$ Rodrigues derivatives onto $x^n$ as in Exercise 15.1.14:
+Here $2n!$ means $2\cdot n!$; for example, the integral at $n=1$ is
+$\int_{-1}^1x^2dx=2/3$.
+Move the $n$ Rodrigues derivatives onto $x^n$ as in Exercise 15.1.14,
+using $D^nx^n=n!$ and $(-1)^n(x^2-1)^n=(1-x^2)^n$:
 \[
-I_n=\frac{(-1)^n}{2^nn!}\int_{-1}^1n!(x^2-1)^n\,dx
+I_n=\frac1{2^nn!}\int_{-1}^1x^nD^n(x^2-1)^n\,dx
+=\frac{(-1)^n}{2^nn!}\int_{-1}^1n!(x^2-1)^n\,dx
 =\frac1{2^n}\int_{-1}^1(1-x^2)^n\,dx.
 \]
-Put $u=x^2$ on the positive half of the even integral:
+The integrand is even. Put $u=x^2$ on the positive half, so
+$x=\sqrt u$ and $dx=du/(2\sqrt u)$:
 \[
 \int_{-1}^1(1-x^2)^ndx
+=2\int_0^1(1-x^2)^ndx
 =\int_0^1u^{-1/2}(1-u)^n\,du
-=\frac{\Gamma(1/2)n!}{\Gamma(n+3/2)}.
+=B(\tfrac12,n+1)=\frac{\Gamma(1/2)n!}{\Gamma(n+3/2)}.
 \]
-Using $\Gamma(n+3/2)=(2n+1)!!\sqrt\pi/2^{n+1}$ yields
+Using $\Gamma(1/2)=\sqrt\pi$, $\Gamma(n+3/2)=(2n+1)!!\sqrt\pi/2^{n+1}$,
+and $(2n+1)!=(2n+1)!!\,2^nn!$,
+\[
+\int_{-1}^1(1-x^2)^ndx=\frac{2^{n+1}n!}{(2n+1)!!}
+=\frac{2^{2n+1}(n!)^2}{(2n+1)!}.
+\]
+Dividing by $2^n$ yields
 \[
 \boxed{I_n=\frac{2n!}{(2n+1)!!}
 =\frac{2^{n+1}(n!)^2}{(2n+1)!}}.
 \]
 For the alternative inspection argument, the leading coefficient of
-$P_n$ is $(2n-1)!!/n!$, so
+$P_n$ is $(2n)!/[2^n(n!)^2]=(2n-1)!!/n!$, so
 $x^n=n!P_n/(2n-1)!!+$ a polynomial of degree below $n$.
-Orthogonality and $\int P_n^2=2/(2n+1)$ give the same result.
+The lower-degree polynomial is orthogonal to $P_n$
+(Exercise 15.1.14), and $\int P_n^2dx=2/(2n+1)$ gives the same result:
+\[
+\int_{-1}^1x^nP_n\,dx=\frac{n!}{(2n-1)!!}\,\frac2{2n+1}
+=\frac{2n!}{(2n+1)!!}.
+\]
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -555,28 +690,37 @@ Orthogonality and $\int P_n^2=2/(2n+1)$ give the same result.
 =\frac{2^{2n+1}(2r)!\,(r+n)!}{(2r+2n+1)!\,(r-n)!},\qquad \erratum{r,n\in\mathbb Z,\quad r\ge n\ge0}.
 \]
 \solution
-For integers $r\ge n\ge0$, apply Rodrigues to $P_{2n}$ and integrate
-by parts $2n$ times. The endpoint terms vanish because
-$(x^2-1)^{2n}$ has zeros of order $2n$ at both ends:
+For integers $r\ge n\ge0$, apply Rodrigues,
+$P_{2n}=D^{2n}(x^2-1)^{2n}/[2^{2n}(2n)!]$, and integrate by parts $2n$
+times as in Exercise 15.1.14. The endpoint terms vanish because
+$(x^2-1)^{2n}$ has zeros of order $2n$ at both ends. With
+$D^{2n}x^{2r}=\frac{(2r)!}{(2r-2n)!}x^{2r-2n}$ and
+$(-1)^{2n}(x^2-1)^{2n}=(1-x^2)^{2n}$,
 \[
 I=\frac{(2r)!}{2^{2n}(2n)!(2r-2n)!}
 \int_{-1}^1x^{2r-2n}(1-x^2)^{2n}dx.
 \]
-With $u=x^2$, the even integral becomes
+The integrand is even, so the integral is twice that over $[0,1]$;
+with $u=x^2$, $dx=du/(2\sqrt u)$, it becomes
 \[
-B(r-n+\tfrac12,2n+1)
+\int_0^1u^{r-n-1/2}(1-u)^{2n}du=B(r-n+\tfrac12,2n+1)
 =\frac{\Gamma(r-n+1/2)(2n)!}{\Gamma(r+n+3/2)}.
 \]
 For a nonnegative integer $j$,
-$\Gamma(j+1/2)=(2j)!\sqrt\pi/(4^jj!)$. Substitution gives
+$\Gamma(j+1/2)=(2j)!\sqrt\pi/(4^jj!)$; use it with $j=r-n$ and
+$j=r+n+1$. Substitution, after cancelling $(2n)!$, gives
 \begin{align*}
 I&=\frac{(2r)!}{2^{2n}(2r-2n)!}
 \frac{(2r-2n)!\sqrt\pi}{4^{r-n}(r-n)!}
-\frac{4^{r+n+1}(r+n+1)!}{(2r+2n+2)!\sqrt\pi}\\
+\frac{4^{r+n+1}(r+n+1)!}{(2r+2n+2)!\sqrt\pi}
+=\frac{2^{2n+2}(2r)!(r+n+1)!}{(r-n)!(2r+2n+2)!}\\
 &=\boxed{\frac{2^{2n+1}(2r)!(r+n)!}
 {(2r+2n+1)!(r-n)!}}.
 \end{align*}
-The last step cancels $2(r+n+1)$ against the last factorial factor.
+The powers of two combine as
+$4^{r+n+1}/(2^{2n}4^{r-n})=2^{2n+2}$. The last step uses
+$(2r+2n+2)!=2(r+n+1)(2r+2n+1)!$ and $(r+n+1)!=(r+n+1)(r+n)!$, so the
+factor $2(r+n+1)$ cancels.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -610,20 +754,30 @@ $(4n+1)/2$:
 \]
 
 (b) For clarity, evaluate the odd moment separately. Moving $2n+1$
-Rodrigues derivatives onto $x^{2r+1}$ gives
+Rodrigues derivatives onto $x^{2r+1}$, with
+$D^{2n+1}x^{2r+1}=\frac{(2r+1)!}{(2r-2n)!}x^{2r-2n}$, and substituting
+$u=x^2$ as in Exercise 15.1.16 gives
 \[
 \int_{-1}^1x^{2r+1}P_{2n+1}(x)dx
 =\frac{(2r+1)!}{2^{2n+1}(2n+1)!(2r-2n)!}
  B(r-n+\tfrac12,2n+2).
 \]
-The two signs from integration by parts and $(x^2-1)^{2n+1}$
-cancel. Evaluating the beta function by the same half-integer gamma
-formula as before gives
-\[
+The two signs, $(-1)^{2n+1}$ from integration by parts and
+$(x^2-1)^{2n+1}=-(1-x^2)^{2n+1}$, cancel. Now
+$B(r-n+\frac12,2n+2)=\Gamma(r-n+\frac12)(2n+1)!/\Gamma(r+n+\frac52)$.
+Evaluating both gammas by the same half-integer formula as before
+(with $j=r-n$ and $j=r+n+2$) and cancelling $(2n+1)!$ gives
+\begin{align*}
 \int_{-1}^1x^{2r+1}P_{2n+1}(x)dx
+&=\frac{(2r+1)!}{2^{2n+1}(2r-2n)!}
+\frac{(2r-2n)!\sqrt\pi}{4^{r-n}(r-n)!}
+\frac{4^{r+n+2}(r+n+2)!}{(2r+2n+4)!\sqrt\pi}\\
+&=\frac{2^{2n+3}(2r+1)!(r+n+2)!}{(r-n)!(2r+2n+4)!}
 =\frac{2^{2n+2}(2r+1)!(r+n+1)!}
-{(2r+2n+3)!(r-n)!}.
-\]
+{(2r+2n+3)!(r-n)!},
+\end{align*}
+where $4^{r+n+2}/(2^{2n+1}4^{r-n})=2^{2n+3}$ and the last step cancels
+$2(r+n+2)$ between $(2r+2n+4)!$ and $(r+n+2)!$.
 Multiplication by $(4n+3)/2$ therefore yields
 \[
 \boxed{x^{2r+1}=\sum_{n=0}^r
@@ -668,28 +822,32 @@ $P_{n}(x)$ are orthogonal and that
 \]
 \par\emph{Hint.}~Integrate by parts.
 \solution
-Suppose $m<n$. Rodrigues's formula and $n$ integrations by parts give
+Suppose $m<n$. Rodrigues's formula
+$P_n=D^n(x^2-1)^n/(2^nn!)$ and $n$ integrations by parts, as in
+Exercise 15.1.14, give
 \[
 \int_{-1}^1P_mP_n\,dx
 =\frac{(-1)^n}{2^nn!}\int_{-1}^1P_m^{(n)}(x)(x^2-1)^n\,dx=0.
 \]
 Every boundary term vanishes because $(x^2-1)^n$ and its first $n-1$
-derivatives vanish at $\pm1$; the remaining derivative of $P_m$ is zero.
-Symmetry covers $m>n$.
+derivatives vanish at $\pm1$; the remaining derivative of $P_m$ is zero,
+since $P_m$ has degree $m<n$. Symmetry covers $m>n$.
 
 For $m=n$, the leading coefficient
 $c_n=(2n)!/[2^n(n!)^2]$ gives $P_n^{(n)}=n!c_n$.
 The same integrations by parts yield
 \[
 \int_{-1}^1P_n^2dx
+=\frac{(-1)^n}{2^nn!}\int_{-1}^1n!c_n(x^2-1)^n\,dx
 =\frac{c_n}{2^n}\int_{-1}^1(1-x^2)^n dx.
 \]
 The beta integral in Exercise 15.1.15 is
-$2^{2n+1}(n!)^2/(2n+1)!$. Therefore
+$\int_{-1}^1(1-x^2)^ndx=2^{2n+1}(n!)^2/(2n+1)!$. Therefore
 \[
 \int_{-1}^1P_n^2dx
 =\frac{(2n)!}{2^{2n}(n!)^2}
 \frac{2^{2n+1}(n!)^2}{(2n+1)!}
+=\frac{2\,(2n)!}{(2n+1)!}
 =\boxed{\frac2{2n+1}}.
 \]
 Together these establish $\int P_mP_n=2\delta_{mn}/(2n+1)$.
@@ -712,8 +870,10 @@ Its leading coefficient is one, since every subtracted polynomial has
 degree below $n$. For $n=0$, $g_0=1=P_0$.
 Assume the earlier $g_j$ are proportional to $P_j$.
 Both $g_n$ and $P_n$ are orthogonal to all polynomials of degree
-less than $n$: this follows from the construction for $g_n$ and
-from Rodrigues's formula for $P_n$.
+less than $n$. For $g_n$ this follows from the construction: $g_n$ is
+orthogonal to $g_0,\ldots,g_{n-1}$, which are monic of degrees
+$0,\ldots,n-1$ and hence span the polynomials of degree less than $n$.
+For $P_n$ it follows from Rodrigues's formula (Exercise 15.1.14).
 Put $c_n=(2n)!/[2^n(n!)^2]$, the leading coefficient of $P_n$.
 Then $h=g_n-P_n/c_n$ has degree below $n$ and is orthogonal to all
 such polynomials, including itself. Thus
@@ -747,12 +907,27 @@ $P_{2s}(0)=(-1)^s(2s-1)!!/(2s)!!$:
 \erratum{This is a distributional expansion, not a pointwise function
 series for the delta distribution.}
 To verify it, let $\phi$ be smooth on $[-1,1]$, with Legendre
-coefficients $c_n=(2n+1)\int\phi P_n/2$. Pairing the proposed series
-with $\phi$ gives $\sum c_nP_n(0)=\phi(0)$.
-Here is the convergence justification. Set
-$L=-D[(1-x^2)D]$, so $LP_n=n(n+1)P_n$. For $n\ge1$, transfer
-$L$ from $P_n$ to $\phi$ by two integrations by parts. Both boundary
-terms contain $1-x^2$ and vanish. Repeating this $k$ times gives
+coefficients $c_n=(2n+1)\int\phi P_n/2$, i.e.,
+$\int_{-1}^1\phi P_ndx=2c_n/(2n+1)$. Pairing the proposed series
+with $\phi$ term by term gives
+\[
+\sum_{n=0}^\infty\frac{2n+1}2P_n(0)\int_{-1}^1\phi P_n\,dx
+=\sum_{n=0}^\infty c_nP_n(0)=\phi(0),
+\]
+where the last equality is the Legendre expansion of $\phi$ evaluated
+at $x=0$.
+Here is the convergence justification for that pointwise evaluation.
+Set $L=-D[(1-x^2)D]$, so $LP_n=n(n+1)P_n$ by the Legendre ODE. For
+$n\ge1$, transfer $L$ from $P_n$ to $\phi$ by two integrations by parts:
+\[
+\int_{-1}^1\phi\,LP_n\,dx
+=\Bigl[(1-x^2)(\phi'P_n-\phi P_n')\Bigr]_{-1}^1
++\int_{-1}^1(L\phi)P_n\,dx
+=\int_{-1}^1(L\phi)P_n\,dx,
+\]
+because both boundary terms contain $1-x^2$ and vanish. Hence
+$c_n=\frac{2n+1}{2n(n+1)}\int_{-1}^1(L\phi)P_n\,dx$, and repeating
+this $k$ times gives
 \[
 c_n=\frac{2n+1}{2[n(n+1)]^k}\int_{-1}^1(L^k\phi)(x)P_n(x)\,dx.
 \]
@@ -785,9 +960,12 @@ a_n^{(-)}=\frac{2n+1}{2}P_n(-1)=(-1)^n\frac{2n+1}{2}.
 \]
 Therefore the two proposed expansions follow.
 For a direct distributional verification, expand a smooth test
-function as $\phi=\sum c_nP_n$. Pairing the first series with $\phi$
-gives $\sum c_n=\phi(1)$, while pairing the second gives
-$\sum(-1)^nc_n=\phi(-1)$. These are precisely the actions of
+function as $\phi=\sum c_nP_n$, with
+$c_n=\frac{2n+1}2\int_{-1}^1\phi P_n\,dx$ as in Exercise 15.2.3.
+Pairing the first series with $\phi$ gives
+$\sum c_n=\sum c_nP_n(1)=\phi(1)$, while pairing the second gives
+$\sum(-1)^nc_n=\sum c_nP_n(-1)=\phi(-1)$, since $P_n(1)=1$ and
+$P_n(-1)=(-1)^n$. These are precisely the actions of
 $\delta(1-x)$ and $\delta(1+x)$, respectively. The uniform convergence proved in Exercise 15.2.3
 justifies both endpoint evaluations.
 The endpoint convention matters: inserting a half-weight convention
@@ -807,10 +985,13 @@ the cosine of the angle of deflection of the neutron is
 Show, by expansion of the denominator, that
 $\langle\cos\psi\rangle=2/(3A)$.
 \solution
-Set $x=\cos\theta$, so $\sin\theta\,d\theta=-dx$, and factor out
-$A>1$ from the square root:
+Set $x=\cos\theta$, so $\sin\theta\,d\theta=-dx$; the limits
+$\theta=0,\pi$ become $x=1,-1$, and the minus sign reverses them.
+Then divide numerator and denominator by $A>1$, i.e., factor
+$A$ out of $Ax+1$ and $A$ out of the square root:
 \[
 \langle\cos\psi\rangle
+=\frac12\int_{-1}^1\frac{Ax+1}{(A^2+2Ax+1)^{1/2}}\,dx
 =\frac12\int_{-1}^1(x+A^{-1})
 (1+2x/A+A^{-2})^{-1/2}dx.
 \]
@@ -819,7 +1000,8 @@ The generating function at $t=-1/A$ gives
 (1+2x/A+A^{-2})^{-1/2}
 =\sum_{n=0}^\infty(-A^{-1})^nP_n(x).
 \]
-The series converges uniformly on $[-1,1]$, so it may be integrated
+Since $|P_n(x)|\le1$ and $\sum A^{-n}$ converges, the series converges
+uniformly on $[-1,1]$ (Weierstrass M-test), so it may be integrated
 termwise. As $1=P_0$ and $x=P_1$, orthogonality kills every term
 except $n=0$ in the constant part and $n=1$ in the $x$ part:
 \[
@@ -840,7 +1022,11 @@ In the usual $L^2[-1,1]$ interpretation of a Legendre expansion,
 suppose
 $f=\sum a_nP_n=\sum b_nP_n$, both sums converging in $L^2$.
 Taking the inner product with a fixed $P_m$ is continuous in that
-norm, by the Cauchy--Schwarz inequality. Hence
+norm, by the Cauchy--Schwarz inequality: for the partial sums
+$S_N=\sum_{n\le N}a_nP_n$ with $N\ge m$, orthogonality gives
+$\int_{-1}^1S_NP_m\,dx=2a_m/(2m+1)$, and
+$|\int_{-1}^1(f-S_N)P_m\,dx|\le\|f-S_N\|_2\|P_m\|_2\to0$.
+The same holds for the $b_n$. Hence
 \[
 \int_{-1}^1fP_mdx=\frac{2a_m}{2m+1}
 =\frac{2b_m}{2m+1},
@@ -876,11 +1062,13 @@ For a real square-integrable $f$, its Legendre projections converge
 in $L^2$. One way to establish completeness is that polynomials
 approximate continuous functions uniformly on the compact interval,
 continuous functions are dense in $L^2$, and the $P_n$ span all
-polynomials. Moreover,
+polynomials. Moreover, writing $f^2-S_N^2=(f-S_N)(f+S_N)$ and using
+the Cauchy--Schwarz and triangle inequalities,
 \[
-\left|\int(f^2-S_N^2)\right|
-\le\|f-S_N\|_2(\|f\|_2+\|S_N\|_2)\longrightarrow0.
+\left|\int_{-1}^1(f^2-S_N^2)\,dx\right|
+\le\|f-S_N\|_2(\|f\|_2+\|S_N\|_2)\longrightarrow0,
 \]
+since $\|S_N\|_2\le\|f\|_2+\|f-S_N\|_2$ stays bounded.
 Taking the limit proves
 \[
 \boxed{\int_{-1}^1f^2dx=\sum_{n=0}^\infty\frac{2a_n^2}{2n+1}}.
@@ -911,38 +1099,55 @@ at which the series converges by summing its first 10 terms.
 For $j=2n+1$,
 \[
 a_{2n+1}=\frac{4n+3}{2}\int_{-1}^1\operatorname{sgn}(x)P_{2n+1}(x)dx
-=(4n+3)\int_0^1P_{2n+1}(x)dx.
+=(4n+3)\int_0^1P_{2n+1}(x)dx,
 \]
+because $\operatorname{sgn}(x)P_{2n+1}(x)$ is even.
 Exercise 15.1.12 gives
 $a_{2n+1}=(-1)^n(4n+3)(2n-1)!!/(2n+2)!!$.
-Insert this in Parseval:
+Insert this in Parseval (Exercise 15.2.7), whose $j=2n+1$ term is
+$2a_{2n+1}^2/(4n+3)=2(4n+3)[(2n-1)!!/(2n+2)!!]^2$:
 \[
 \int_{-1}^1f^2dx
 =2\sum_{n=0}^\infty(4n+3)
 \left[\frac{(2n-1)!!}{(2n+2)!!}\right]^2.
 \]
 
-(b) Write
+(b) Since $(2n-1)!!/(2n)!!=(2n)!/[(2n)!!]^2=(2n)!/[4^n(n!)^2]$ and
+$(2n+2)!!=2(n+1)(2n)!!$, write
 \[
 \frac{(2n-1)!!}{(2n+2)!!}
 =\frac1{2(n+1)}\frac{\binom{2n}{n}}{4^n}.
 \]
 Stirling's formula gives $\binom{2n}{n}/4^n\sim(\pi n)^{-1/2}$.
 Thus the entire summand, including its leading factor $2$, is
-asymptotic to $2/(\pi n^2)$. Comparison with $\sum n^{-2}$
+\[
+\frac{2(4n+3)}{4(n+1)^2}\left[\frac{\binom{2n}{n}}{4^n}\right]^2
+\sim\frac{8n}{4n^2}\,\frac1{\pi n}=\frac2{\pi n^2}.
+\]
+Comparison with $\sum n^{-2}$
 proves convergence independently of invoking Parseval.
-It also predicts a tail of order $1/N$.
+It also predicts a tail $\sum_{n\ge N}2/(\pi n^2)\approx2/(\pi N)$,
+of order $1/N$.
 
-(c) The first ten terms ($n=0,\ldots,9$), evaluated by exact rational
+(c) The terms are $\frac32$, $\frac7{32}$, $\frac{11}{128}$,
+$\frac{375}{8192}$, \ldots, and the partial sums $S_N$ of the first $N$
+terms are, for $N=1,\ldots,9$,
+\[
+1.5,\ 1.71875,\ 1.80469,\ 1.85046,\ 1.87888,\ 1.89822,\ 1.91224,\
+1.92287,\ 1.93120.
+\]
+The first ten terms ($n=0,\ldots,9$), evaluated by exact rational
 arithmetic, give
 \[
 \boxed{S_{10}=\frac{66586053015}{34359738368}
 =1.9379091977316420525\ldots}.
 \]
 The missing amount is $2-S_{10}=0.0620908022683579475\ldots$,
-or about $3.105\%$ of the integral. The slow $1/N$ tail is visible
+or about $3.105\%$ of the integral, close to the estimate
+$2/(10\pi)\approx0.064$ of part (b). The slow $1/N$ tail is visible
 even though all terms are positive.
-\erratum{The manual, p.~237, prints $1.943\ldots$ for ten terms.
+\erratum{The Instructor's Manual, p.~237, prints $1.943\ldots$ for ten
+terms.
 That is instead the eleven-term value
 $S_{11}=267102370903/137438953472=1.943425529338128\ldots$.
 The requested ten terms run from $n=0$ through $n=9$.}
@@ -956,22 +1161,26 @@ The requested ten terms run from $n=0$ through $n=9$.}
 +\frac{2n(n+2)(n+1)}{(2n+1)(2n+3)}\,\delta_{m,n+1}.
 \]
 \solution
-Let $I_{nm}$ denote the integral. The boundary term vanishes because
-$x(1-x^2)P_n'P_m$ is zero at $x=\pm1$. Integrating by parts gives
+Let $I_{nm}$ denote the integral. Integrate by parts with
+$u=x(1-x^2)P_n'$ and $dv=P_m'dx$, $v=P_m$. The boundary term vanishes
+because $x(1-x^2)P_n'P_m$ is zero at $x=\pm1$, and
+$u'=(1-x^2)P_n'+x\{(1-x^2)P_n'\}'$, so
 \[
 I_{nm}=-\int_{-1}^1P_m
 \left[(1-x^2)P_n'+x\{(1-x^2)P_n'\}'\right]dx.
 \]
 The ODE says $\{(1-x^2)P_n'\}'=-n(n+1)P_n$.
-Also $(1-x^2)P_n'=nP_{n-1}-nxP_n$. Consequently
+Also $(1-x^2)P_n'=nP_{n-1}-nxP_n$. The bracket is therefore
+$nP_{n-1}-nxP_n-n(n+1)xP_n=nP_{n-1}-n(n+2)xP_n$. Consequently
 \[
 I_{nm}=\int_{-1}^1P_m[n(n+2)xP_n-nP_{n-1}]dx.
 \]
-Replace $xP_n$ by $[(n+1)P_{n+1}+nP_{n-1}]/(2n+1)$.
-The coefficient of $P_{n-1}$ becomes
+Replace $xP_n$ by $[(n+1)P_{n+1}+nP_{n-1}]/(2n+1)$ (the three-term
+recurrence). The coefficient of $P_{n-1}$ becomes
 $n[n(n+2)-(2n+1)]/(2n+1)=n(n^2-1)/(2n+1)$,
 and that of $P_{n+1}$ is $n(n+1)(n+2)/(2n+1)$.
-Orthogonality now yields
+Orthogonality, $\int_{-1}^1P_mP_{n-1}dx=2\delta_{m,n-1}/(2n-1)$ and
+$\int_{-1}^1P_mP_{n+1}dx=2\delta_{m,n+1}/(2n+3)$, now yields
 \[
 \boxed{I_{nm}=\frac{2n(n^2-1)}{(2n-1)(2n+1)}\delta_{m,n-1}
 +\frac{2n(n+1)(n+2)}{(2n+1)(2n+3)}\delta_{m,n+1}}.
@@ -1001,7 +1210,9 @@ The coefficient formula makes this explicit:
 a_{2n}=\frac{4n+1}{2}\int_{-1}^1W(x)P_{2n}(x)dx
 =(4n+1)\int_{-1}^0W(x)P_{2n}(x)dx.
 \]
-Changing back to $\theta$ gives
+The second form holds because $WP_{2n}$ is even.
+Changing back to $\theta$ ($x=\cos\theta$ maps $[\pi/2,\pi]$ onto
+$[0,-1]$, and $dx=-\sin\theta\,d\theta$) gives
 \[
 \boxed{a_{2n}=(4n+1)\int_{\pi/2}^{\pi}
 W(\theta)P_{2n}(\cos\theta)\sin\theta\,d\theta}.
@@ -1027,24 +1238,35 @@ electric field $E$ is the result of superimposing a dipole field on
 the original uniform field.
 \solution
 Choose the $z$ axis along $\mathbf E_0$ and take the initially
-uncharged conductor. The imposed potential is $-E_0r\cos\theta$.
-The decaying dipole harmonic is $A\cos\theta/r^2$, so outside the sphere
+uncharged conductor. The imposed potential is
+$-E_0z=-E_0rP_1(\cos\theta)$. Outside the sphere the potential is a
+sum of terms $(A_lr^l+B_lr^{-l-1})P_l(\cos\theta)$; at large $r$ only
+the imposed $l=1$ term grows, and on the sphere the potential is
+constant. Matching each $P_l$ separately therefore leaves only the
+imposed term and the decaying dipole harmonic $A\cos\theta/r^2$
+(an $l=0$ term $B_0/r$ would carry a net charge, absent for the neutral
+sphere). So outside the sphere
 \[
 V=-E_0r\cos\theta+\frac{A}{r^2}\cos\theta.
 \]
-A conducting surface is equipotential. Its $\cos\theta$ coefficient
-must vanish at $r=r_0$, giving $A=E_0r_0^3$. Therefore
+A conducting surface is equipotential. At $r=r_0$ the coefficient of
+$\cos\theta$, $-E_0r_0+A/r_0^2$, must vanish, giving $A=E_0r_0^3$.
+Therefore
 \[
 E_r=-\partial_rV
+=E_0\cos\theta+\frac{2A}{r^3}\cos\theta
 =E_0\left(1+\frac{2r_0^3}{r^3}\right)\cos\theta.
 \]
 The field inside the conductor is zero, so the normal jump condition
-gives
+gives, with $E_r(r_0)=3E_0\cos\theta$,
 \[
 \boxed{\sigma=\varepsilon_0E_r(r_0)=3\varepsilon_0E_0\cos\theta}.
 \]
-It integrates to zero, as required for induced charge on a neutral sphere.
-The dipole moment has only a $z$ component by axial symmetry:
+It integrates to zero, since $\int_0^\pi\cos\theta\sin\theta\,d\theta=0$,
+as required for induced charge on a neutral sphere.
+The dipole moment has only a $z$ component by axial symmetry; with
+$dA=r_0^2\sin\theta\,d\theta\,d\varphi$ and the $\varphi$ integral
+giving $2\pi$,
 \begin{align*}
 p_z&=\int_{\rm surface}(r_0\cos\theta)\sigma\,dA\\
 &=6\pi\varepsilon_0E_0r_0^3
@@ -1053,7 +1275,9 @@ p_z&=\int_{\rm surface}(r_0\cos\theta)\sigma\,dA\\
 =\boxed{4\pi\varepsilon_0E_0r_0^3}.
 \end{align*}
 The coefficient of the induced potential independently gives the same
-answer, since a dipole has $V_{\rm dip}=p_z\cos\theta/(4\pi\varepsilon_0r^2)$.
+answer: a dipole has $V_{\rm dip}=p_z\cos\theta/(4\pi\varepsilon_0r^2)$,
+and comparison with $A\cos\theta/r^2$ gives
+$p_z=4\pi\varepsilon_0A=4\pi\varepsilon_0E_0r_0^3$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1061,19 +1285,25 @@ answer, since a dipole has $V_{\rm dip}=p_z\cos\theta/(4\pi\varepsilon_0r^2)$.
 electrostatic potential of the circular ring of Example~15.2.3, for
 points $(r,\theta)$ with $r<a$.
 \solution
-Let $C=q/(4\pi\varepsilon_0)$ and $a$ be the ring radius, as in the
-source example. Inside the sphere $r<a$ there is no charge, and the
+Let $C=q/(4\pi\varepsilon_0)$ and $a$ be the ring radius, as in
+Example~15.2.3 (the ring lies in the plane $\theta=\pi/2$, centered on
+the polar axis). Inside the sphere $r<a$ there is no charge, and the
 axisymmetric potential is regular at the origin. Hence it has the form
 $\psi=\sum_{n\ge0}b_nr^nP_n(\cos\theta)$.
-On the positive axis every ring element is the same distance away:
+On the positive axis ($\theta=0$, $r=z$) every ring element is the same
+distance $\sqrt{a^2+z^2}$ away. The binomial series
+$(1+u)^{-1/2}=\sum_s\binom{-1/2}{s}u^s
+=\sum_s(-1)^s\frac{(2s-1)!!}{(2s)!!}u^s$ ($|u|<1$, here $u=z^2/a^2$)
+gives, for $0\le z<a$,
 \[
 \psi(z,0)=\frac{C}{\sqrt{a^2+z^2}}
 =\frac Ca\sum_{s=0}^\infty
 (-1)^s\frac{(2s-1)!!}{(2s)!!}\left(\frac za\right)^{2s}.
 \]
-Since $P_n(1)=1$, equality of these power-series coefficients gives
-$b_{2s}=C(-1)^s(2s-1)!!/[a^{2s+1}(2s)!!]$ and $b_{2s+1}=0$.
-Therefore
+On the other hand, $\psi(z,0)=\sum_nb_nz^n$, since $P_n(1)=1$.
+Equality of these power-series coefficients gives
+$b_{2s}=C(-1)^s(2s-1)!!/[a^{2s+1}(2s)!!]=CP_{2s}(0)/a^{2s+1}$ and
+$b_{2s+1}=0$. Therefore
 \[
 \boxed{\psi(r,\theta)=\frac{q}{4\pi\varepsilon_0a}
 \sum_{s=0}^\infty P_{2s}(0)\left(\frac ra\right)^{2s}
@@ -1094,10 +1324,12 @@ the charged conducting ring of Example~15.2.3 for
 Put $C=q/(4\pi\varepsilon_0)$, $c_s=P_{2s}(0)$, and $x=\cos\theta$.
 There is no azimuthal dependence, so $E_\varphi=0$.
 For any potential $\psi(r,x)$,
-$E_r=-\psi_r$ and $E_\theta=(\sin\theta/r)\psi_x$.
+$E_r=-\psi_r$ and, since $\partial_\theta=-\sin\theta\,\partial_x$,
+$E_\theta=-r^{-1}\partial_\theta\psi=(\sin\theta/r)\psi_x$.
 
-(a) The exterior ring potential is
-$\psi=C\sum c_sa^{2s}r^{-2s-1}P_{2s}(x)$. Termwise differentiation gives
+(a) The exterior ring potential of Example~15.2.3 is
+$\psi=C\sum c_sa^{2s}r^{-2s-1}P_{2s}(x)$. Termwise differentiation,
+with $-\partial_rr^{-2s-1}=(2s+1)r^{-2s-2}$, gives
 \[
 \boxed{E_r=\frac C{r^2}\sum_{s=0}^\infty
 (2s+1)c_s\left(\frac ar\right)^{2s}P_{2s}(x)},
@@ -1107,7 +1339,10 @@ $\psi=C\sum c_sa^{2s}r^{-2s-1}P_{2s}(x)$. Termwise differentiation gives
 c_s\left(\frac ar\right)^{2s}P'_{2s}(x)},\qquad r>a.
 \]
 
-(b) Differentiate the interior result of Exercise 15.2.12:
+(b) Differentiate the interior result of Exercise 15.2.12,
+$\psi=(C/a)\sum c_s(r/a)^{2s}P_{2s}(x)$, using
+$\partial_r(r/a)^{2s}=(2s/a)(r/a)^{2s-1}$ and
+$(1/r)(r/a)^{2s}=(1/a)(r/a)^{2s-1}$:
 \[
 \boxed{E_r=-\frac C{a^2}\sum_{s=1}^\infty
 2s\,c_s\left(\frac ra\right)^{2s-1}P_{2s}(x)},
@@ -1146,24 +1381,36 @@ $d\rho$ carries
 dq=2\sigma(\rho)\,2\pi\rho\,d\rho
 =\frac qa\frac{\rho\,d\rho}{\sqrt{a^2-\rho^2}}.
 \]
-Its integral from zero to $a$ is $q$, confirming the normalization.
-Apply the exterior ring expansion to each annulus:
+Its integral from zero to $a$ is
+$(q/a)\bigl[-\sqrt{a^2-\rho^2}\,\bigr]_0^a=q$, confirming the
+normalization. By Example~15.2.3 with the radius $a$ replaced by $\rho$,
+the annulus produces, for $r>\rho$, the potential
+$(dq/4\pi\varepsilon_0r)\sum_lP_{2l}(0)(\rho/r)^{2l}P_{2l}(\cos\theta)$.
+Adding the annuli gives
 \[
 \psi=\frac1{4\pi\varepsilon_0r}
 \sum_{l=0}^\infty\frac{P_{2l}(0)P_{2l}(\cos\theta)}{r^{2l}}
 \int_0^a\rho^{2l}\,dq.
 \]
-For $r>a$ the geometrically dominated series can be integrated termwise,
+For $r>a$ the series is dominated by $\sum(a/r)^{2l}$ (as
+$|P_{2l}|\le1$), so it can be integrated termwise,
 even with the integrable edge singularity in $\sigma$.
-Using $u=\rho^2/a^2$,
+Using $u=\rho^2/a^2$, so that $\rho^{2l+1}d\rho=\frac12a^{2l+2}u^l\,du$
+and $\sqrt{a^2-\rho^2}=a\sqrt{1-u}$,
 \begin{align*}
 \int_0^a\rho^{2l}\,dq
-&=\frac qa\int_0^a\frac{\rho^{2l+1}}{\sqrt{a^2-\rho^2}}d\rho\\
+&=\frac qa\int_0^a\frac{\rho^{2l+1}}{\sqrt{a^2-\rho^2}}d\rho
+=\frac{qa^{2l}}2\int_0^1u^l(1-u)^{-1/2}du\\
 &=\frac{qa^{2l}}2 B(l+1,\tfrac12)
 =qa^{2l}\frac{2^{2l}(l!)^2}{(2l+1)!}.
 \end{align*}
+The last step uses
+$B(l+1,\frac12)=\Gamma(l+1)\Gamma(\frac12)/\Gamma(l+\frac32)
+=l!\,2^{l+1}/(2l+1)!!=2^{2l+1}(l!)^2/(2l+1)!$, by
+$\Gamma(l+\frac32)=(2l+1)!!\sqrt\pi/2^{l+1}$ and
+$(2l+1)!!=(2l+1)!/(2^ll!)$.
 Multiply by $P_{2l}(0)=(-1)^l(2l)!/[2^{2l}(l!)^2]$; all factors
-cancel except $(-1)^l/(2l+1)$. Hence
+cancel except $(-1)^l(2l)!/(2l+1)!=(-1)^l/(2l+1)$. Hence
 \[
 \boxed{\psi(r,\theta)=\frac{q}{4\pi\varepsilon_0r}
 \sum_{l=0}^\infty\frac{(-1)^l}{2l+1}
@@ -1187,7 +1434,11 @@ V&=V_{0}\sum_{n=0}^{\infty}\frac{4n+3}{2n+2}
 \solution
 Let $x=\cos\theta$. The boundary potential is
 $V(a,x)=V_0\operatorname{sgn}x$, except for the unspecified equatorial
-jump. Its Legendre coefficients are those of Exercise 15.2.8:
+jump. Its Legendre coefficients
+$b_l=\frac{2l+1}2\int_{-1}^1V(a,x)P_l(x)\,dx$ are $V_0$ times those of
+Exercise 15.2.8: for even $l$ the integrand is odd, while for
+$l=2n+1$ it is even, and Exercise 15.1.12 gives the integral over
+$[0,1]$:
 \[
 b_{2n}=0,\qquad
 b_{2n+1}=V_0(4n+3)\int_0^1P_{2n+1}(x)dx
@@ -1201,8 +1452,9 @@ multiply it by $(r/a)^l$. Thus
 \frac{4n+3}{2n+2}P_{2n}(0)
 \left(\frac ra\right)^{2n+1}P_{2n+1}(\cos\theta)}.
 \]
-Substituting the double-factorial value of $P_{2n}(0)$ gives the
-second series in the question. For $r<a$ it converges locally
+Substituting the double-factorial value
+$P_{2n}(0)=(-1)^n(2n-1)!!/(2n)!!$ and using $(2n)!!\,(2n+2)=(2n+2)!!$
+gives the second series in the question. For $r<a$ it converges locally
 uniformly and is harmonic. Its boundary limit is $\pm V_0$ away
 from the equator and the symmetric value zero at the jump.
 This also shows $V(0)=0$ and the reflection antisymmetry.
@@ -1238,10 +1490,13 @@ singularity that produces the infinite ideal capacitance.}
 \frac{(2s-1)!!}{(2s)!!}\erratum{\rho^{2s+3}}P_{2s+1}(\cos\theta).
 \]
 \solution
-(a) The boundary coefficients are
+(a) The boundary data are those of Exercise 15.2.15, so the boundary
+coefficients are
 $b_{2s+1}=V_0(-1)^s(4s+3)(2s-1)!!/(2s+2)!!$ and the even ones
 are zero. The exterior solution that vanishes at infinity uses
-$r^{-l-1}$, so
+$r^{-l-1}$: the term $b_l(a/r)^{l+1}P_l(\cos\theta)$ reduces to
+$b_lP_l(\cos\theta)$ at $r=a$, and $(a/r)^{l+1}=(a/r)^{2s+2}$ for
+$l=2s+1$. So
 \[
 \boxed{V=V_0\sum_{s=0}^\infty(-1)^s(4s+3)
 \frac{(2s-1)!!}{(2s+2)!!}
@@ -1249,12 +1504,15 @@ $r^{-l-1}$, so
 \]
 
 (b) Differentiate first at $r>a$, where this is legitimate:
+$-\partial_r(a/r)^{2s+2}=\frac{2s+2}a(a/r)^{2s+3}$ and
+$(2s+2)/(2s+2)!!=1/(2s)!!$, so
 \[
 E_r=\frac{V_0}{a}\sum_{s=0}^\infty(-1)^s(4s+3)
 \frac{(2s-1)!!}{(2s)!!}
 \left(\frac ar\right)^{2s+3}P_{2s+1}(\cos\theta).
 \]
-Consequently
+Consequently, with $\sigma=\varepsilon_0E_r$ just outside the
+surface and $\rho=a/r$,
 \[
 \boxed{\sigma(\theta)=\frac{\varepsilon_0V_0}{a}
 \lim_{\rho\uparrow1}\sum_{s=0}^\infty(-1)^s(4s+3)
@@ -1266,8 +1524,18 @@ series divergence at the poles does not mean the physical charge
 density is infinite there. The physical singularity and infinite
 capacitance occur at the equatorial potential jump.}
 
-For an explicit pole check, the spherical Poisson kernel from
-Exercise 15.1.6 gives, on the positive axis,
+For an explicit pole check, sum the series on the axis in closed form.
+For axisymmetric boundary data $f(u)$, $u=\cos\theta$, the exterior
+solution is $V=\sum_lb_l\rho^{l+1}P_l(\cos\theta)$ with
+$b_l=\frac{2l+1}2\int_{-1}^1f(u)P_l(u)\,du$. On the positive axis
+$P_l(1)=1$; for $\rho<1$ the sum may be taken under the integral
+($|P_l|\le1$), and Exercise 15.1.6 sums it:
+\[
+V(r,0)=\frac\rho2\int_{-1}^1f(u)\sum_{l=0}^\infty(2l+1)\rho^lP_l(u)\,du
+=\frac{\rho(1-\rho^2)}2\int_{-1}^1
+\frac{f(u)\,du}{(1-2\rho u+\rho^2)^{3/2}}.
+\]
+For $f=V_0\operatorname{sgn}u$ this spherical Poisson kernel gives
 \[
 \frac{V(r,0)}{V_0}
 =\frac{\rho(1-\rho^2)}2\int_{-1}^1
@@ -1275,36 +1543,77 @@ Exercise 15.1.6 gives, on the positive axis,
 =1-\frac{1-\rho^2}{\sqrt{1+\rho^2}},\quad \rho=\frac ar.
 \]
 The antiderivative of the integrand without the sign is
-$[\rho\sqrt{1-2\rho u+\rho^2}]^{-1}$, which gives the last equality.
-Since $-\partial_r=(\rho^2/a)\partial_\rho$, differentiation at
-$\rho=1$ yields
+$[\rho\sqrt{1-2\rho u+\rho^2}]^{-1}$; for $0<\rho<1$ it gives
+\[
+\int_0^1-\int_{-1}^0
+=\frac1\rho\left[\frac1{1-\rho}-\frac2{\sqrt{1+\rho^2}}
++\frac1{1+\rho}\right]
+=\frac2\rho\left[\frac1{1-\rho^2}-\frac1{\sqrt{1+\rho^2}}\right],
+\]
+and multiplication by $\rho(1-\rho^2)/2$ gives the last equality.
+Since $\rho=a/r$, $-\partial_r=(\rho^2/a)\partial_\rho$, and
+\[
+\frac d{d\rho}\left[1-\frac{1-\rho^2}{\sqrt{1+\rho^2}}\right]
+=\frac{2\rho}{\sqrt{1+\rho^2}}+\frac{\rho(1-\rho^2)}{(1+\rho^2)^{3/2}}
+=\frac{\rho(\rho^2+3)}{(1+\rho^2)^{3/2}},
+\]
+which equals $\sqrt2$ at $\rho=1$. With $\sigma=\varepsilon_0E_r$ and
+the antisymmetry $V(r,\pi-\theta)=-V(r,\theta)$ (only odd $P_l$
+occur), this yields
 \[
 \boxed{\sigma(0)=\frac{\sqrt2\varepsilon_0V_0}{a},
 \qquad \sigma(\pi)=-\frac{\sqrt2\varepsilon_0V_0}{a}}.
 \]
 The unsmoothed series has terms of magnitude proportional to $\sqrt s$
-at those poles, so an ordinary termwise boundary sum cannot give these
-finite values.
+at those poles: there $|P_{2s+1}|=1$, and
+$(2s-1)!!/(2s)!!\sim(\pi s)^{-1/2}$ (Exercise 15.2.8(b)) makes the
+coefficient grow like $4\sqrt{s/\pi}$. So an ordinary termwise
+boundary sum cannot give these finite values.
 
 To locate the actual divergence, let $\Omega$ be a unit vector on the
-north hemisphere. Split the boundary data into $V_0$ on the whole
-sphere minus $2V_0$ on the south. Its exterior Poisson integral is
+north hemisphere. The axis formula extends to arbitrary boundary data
+$f(\Omega')$ with the polar axis taken along $\Omega$: average $V$ over
+the rotations about that axis. The average is again harmonic outside
+the sphere and vanishes at infinity; its boundary data are the averages
+of $f$ over the circles $\Omega\cdot\Omega'=u$; and on the axis it
+equals $V$, because these rotations fix the points $r\Omega$. Since
+$\frac12\int_{-1}^1du$ of a circle average equals
+$\frac1{4\pi}\int d\Omega'$, and
+$1-2\rho\,\Omega\cdot\Omega'+\rho^2=|\rho\Omega-\Omega'|^2$, this gives
+the exterior Poisson integral
+\[
+V(r\Omega)=\frac{\rho(1-\rho^2)}{4\pi}
+\int\frac{f(\Omega')\,d\Omega'}{|\rho\Omega-\Omega'|^3}.
+\]
+Split the boundary data into $V_0$ on the whole
+sphere minus $2V_0$ on the south. The constant data $V_0$ give
+$V=V_0a/r=V_0\rho$, so, with
+$J(\rho)=\frac1{2\pi}\int_{\rm south}d\Omega'/|\rho\Omega-\Omega'|^3$,
 \[
 \frac{V}{V_0}=\rho-\frac{\rho(1-\rho^2)}{2\pi}
-\int_{\rm south}\frac{d\Omega'}{|\rho\Omega-\Omega'|^3}.
+\int_{\rm south}\frac{d\Omega'}{|\rho\Omega-\Omega'|^3}
+=\rho-\rho(1-\rho^2)J(\rho).
 \]
-At a point strictly north of the equator the integral and its radial
-derivative remain finite as $\rho\uparrow1$. The derivative of
-$\rho(1-\rho^2)$ is $-2$ there, whereas the coefficient of the
-derivative of the integral is zero. Using
+At a point strictly north of the equator, $|\rho\Omega-\Omega'|$ stays
+away from zero for $\Omega'$ in the south, so $J$ and $J'$ remain
+finite as $\rho\uparrow1$. By the product rule,
+$\frac d{d\rho}[\rho(1-\rho^2)J]=(1-3\rho^2)J+\rho(1-\rho^2)J'$, which
+equals $-2J(1)$ at $\rho=1$. Using
 $-\partial_r=(\rho^2/a)\partial_\rho$ therefore gives
+$\sigma=(\varepsilon_0V_0/a)[1+2J(1)]$, i.e.,
 \[
 \sigma(\Omega)=\frac{\varepsilon_0V_0}{a}
 \left[1+\frac1\pi\int_{\rm south}
 \frac{d\Omega'}{|\Omega-\Omega'|^3}\right].
 \]
+At the north pole, $|\hat{\mathbf e}_z-\Omega'|^2=2-2u$ with
+$u=\cos\theta'$, and
+$\int_{\rm south}d\Omega'/|\hat{\mathbf e}_z-\Omega'|^3
+=2\pi\int_{-1}^0(2-2u)^{-3/2}du=\pi(\sqrt2-1)$, which reproduces
+$\sigma(0)=\sqrt2\varepsilon_0V_0/a$.
 For small angular distance $h>0$ north of the equator, local tangential
-coordinates reduce the leading singular part to
+coordinates reduce the leading singular part to (using
+$\int_{-\infty}^\infty dX/(X^2+b^2)^{3/2}=2/b^2$)
 \[
 \int_0^\infty\int_{-\infty}^{\infty}
 \frac{dX\,dY}{[X^2+(Y+h)^2]^{3/2}}
@@ -1340,8 +1649,14 @@ if $|f\rangle=\sum_{n}a'_{n}|\varphi_{n}\rangle$, then
 \]
 \solution
 The normalization gives
-$\langle\varphi_s,\varphi_n\rangle=\delta_{sn}$.
-For $\Pi_s=|\varphi_s\rangle\langle\varphi_s|$,
+\[
+\langle\varphi_s|\varphi_n\rangle
+=\frac{\sqrt{(2s+1)(2n+1)}}2\int_{-1}^1P_sP_n\,dx
+=\frac{\sqrt{(2s+1)(2n+1)}}2\,\frac{2\delta_{sn}}{2n+1}=\delta_{sn}.
+\]
+For $\Pi_s=|\varphi_s\rangle\langle\varphi_s|$, the scalar product
+$\langle\varphi_s|$ may be taken term by term in the convergent
+expansion of $|f\rangle$ (it is continuous, by the Schwarz inequality):
 \[
 \Pi_s|f\rangle
 =|\varphi_s\rangle\sum_na_n'
@@ -1376,24 +1691,43 @@ integral.
 \solution
 Parity makes every odd coefficient zero. Since $x^8$ has degree eight,
 coefficients above $a_8$ also vanish by Exercise 15.1.14.
-For $m=2n$, $0\le n\le4$, the exact moment formula gives
+For $m=2n$, $0\le n\le4$, the exact moment formula of
+Exercise 15.1.16 with $r=4$ gives (as in Exercise 15.1.17(a))
 \[
 a_{2n}=\frac{4n+1}{2}\int_{-1}^1x^8P_{2n}(x)dx
 =\frac{2^{2n}(4n+1)8!(4+n)!}{(2n+9)!(4-n)!}.
 \]
-Substitute $n=0,1,2,3,4$ and cancel the factorials:
+Substitute $n=0,1,2,3,4$ and cancel the factorials, using
+$8!/(2n+9)!=1/[9\cdot10\cdots(2n+9)]$:
+\begin{align*}
+a_0&=\frac{8!\,4!}{9!\,4!}=\frac19,\qquad
+a_2=\frac{4\cdot5\cdot8!\,5!}{11!\,3!}=\frac{20\cdot20}{9\cdot10\cdot11}
+=\frac{40}{99},\\
+a_4&=\frac{16\cdot9\cdot8!\,6!}{13!\,2!}
+=\frac{144\cdot360}{9\cdot10\cdot11\cdot12\cdot13}=\frac{48}{143},\qquad
+a_6=\frac{64\cdot13\cdot8!\,7!}{15!}
+=\frac{832\cdot5040}{9\cdot10\cdots15}=\frac{64}{495},\\
+a_8&=\frac{256\cdot17\cdot8!\,8!}{17!}
+=\frac{4352\cdot40320}{9\cdot10\cdots17}=\frac{128}{6435}.
+\end{align*}
+In summary,
 \[
 \begin{array}{c|ccccc}
 m&0&2&4&6&8\\\hline
 a_m&1/9&40/99&48/143&64/495&128/6435
 \end{array}
 \]
-Thus
+Over the common denominator $6435=9\cdot715=99\cdot65=143\cdot45
+=495\cdot13$ this is
 \[
 \boxed{x^8=\frac{715P_0+2600P_2+2160P_4+832P_6+128P_8}{6435}}.
 \]
 Expansion of the five polynomials cancels all powers below eight and
-leaves coefficient one on $x^8$, providing a separate exact check.
+leaves coefficient one on $x^8$ (the leading coefficient of $P_8$ is
+$6435/128$), providing a separate exact check.
+Following the hint, Gauss--Legendre quadrature with nine or more nodes
+reproduces these coefficients exactly (apart from rounding), since
+$x^8P_m$ has degree at most $16\le2\cdot9-1$.
 The $x^8$ column of
 \href{https://digital.library.unt.edu/ark:/67531/metadc40302/m1/814/}
 {AMS-55, Table 22.9, p.~798}
@@ -1415,7 +1749,11 @@ For $r/a=2.5$ and $\theta=60^{\circ}$,
 $\psi=0.40272(q/4\pi\varepsilon_{0}\erratum{a})$.
 \solution
 Set $R=r/a$ and report the dimensionless potential
-$F=4\pi\varepsilon_0a\,\psi/q$. The required truncation is
+$F=4\pi\varepsilon_0a\,\psi/q$. The exterior expansion of
+Example~15.2.3,
+$\psi=(q/4\pi\varepsilon_0r)\sum_sP_{2s}(0)(a/r)^{2s}P_{2s}(\cos\theta)$,
+with $P_{2s}(0)=(-1)^s(2s-1)!!/(2s)!!=(-1)^s\binom{2s}{s}/4^s$, gives
+the required truncation
 \[
 F_{22}(R,\theta)=\sum_{s=0}^{11}
 (-1)^s\frac{\binom{2s}{s}}{4^s}
@@ -1423,9 +1761,10 @@ F_{22}(R,\theta)=\sum_{s=0}^{11}
 \]
 For each angle start $P_0=1$, $P_1=\cos\theta$ and use
 $P_{n+1}=[(2n+1)\cos\theta\,P_n-nP_{n-1}]/(n+1)$ up to $P_{22}$.
-Summing the displayed twelve terms at 65-digit working precision gives
-the following values; six decimals describe the truncation, not a
-uniform six-decimal accuracy claim for the exact potential.
+Summing the displayed twelve terms (ordinary double precision suffices)
+gives the following values, rounded to six decimals; the six decimals
+describe the truncated sum $F_{22}$, not a uniform six-decimal accuracy
+claim for the exact potential.
 \begin{center}\small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{r|rrrrrrr}\toprule
@@ -1445,13 +1784,30 @@ $0.40272$ multiplies $q/(4\pi\varepsilon_0a)$, not
 $q/(4\pi\varepsilon_0r)$. With the latter prefactor the coefficient
 is $R F=1.00680381279611\ldots$.}
 A simple rigorous truncation bound follows from $|P_n|\le1$ and
-$\binom{2s}{s}/4^s\le1$:
+$\binom{2s}{s}/4^s\le1$, by summing the geometric series:
 \[
 |F-F_{22}|\le\sum_{s=12}^\infty R^{-2s-1}
 =\frac{R^{-25}}{1-R^{-2}}.
 \]
-The numerical verification also compares every grid point with direct
-Coulomb-ring integration; the bound controls the omitted infinite tail.
+It is $7.1\times10^{-5}$ at $R=1.5$ and $4.0\times10^{-8}$ at $R=2$,
+which explains the four-figure warning of the note for $R=1.5$.
+As an independent check, the exact potential follows from Coulomb's
+law: the ring element $q\,d\varphi'/2\pi$ at
+$(a\cos\varphi',a\sin\varphi',0)$ is at distance
+$a(R^2+1-2R\sin\theta\cos\varphi')^{1/2}$ from the field point
+$(r\sin\theta,0,r\cos\theta)$, so
+\[
+F(R,\theta)=\frac1{2\pi}\int_0^{2\pi}
+\frac{d\varphi'}{(R^2+1-2R\sin\theta\cos\varphi')^{1/2}}.
+\]
+For this smooth periodic integrand the trapezoidal rule with 64 equally
+spaced $\varphi'$ is accurate to about $10^{-12}$ on the whole grid; on
+the axis, $F(R,0)=(1+R^2)^{-1/2}$ exactly. The largest difference
+between $F$ and $F_{22}$ on the grid is at $R=1.5$, $\theta=0^\circ$,
+where
+$F=1/\sqrt{3.25}=0.554700$ exceeds $F_{22}$ by $4.5\times10^{-6}$,
+within the bound; for $R\ge2$ the differences are below
+$4\times10^{-9}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip

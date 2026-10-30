@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 0 of 54 parts done (audited and verified); 10 audited and awaiting verification.
+Progress: 0 of 54 parts done (audited and verified); 11 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -112,7 +112,7 @@ Progress: 0 of 54 parts done (audited and verified); 10 audited and awaiting ver
 | ch14-p2 | 14.1.29–14.3.10 | pending |
 | ch14-p3 | 14.4.1–14.5.16 | pending |
 | ch14-p4 | 14.6.1–14.7.17 | pending |
-| ch15-p1 | 15.1.1–15.2.19 | pending |
+| ch15-p1 | 15.1.1–15.2.19 | audited |
 | ch15-p2 | 15.2.20–15.4.18 | pending |
 | ch15-p3 | 15.4.19–15.6.4 | pending |
 | ch16-p1 | 16.1.1–16.3.7 | pending |
@@ -152,3 +152,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch11-p1** (11.2.1–11.6.11) — audit: no mathematical errors found. Steps added in 42 of 47 exercises (e.g. a Green's-theorem reason, $\oint(x^2-iy^2)dz=2iA(\bar x+\bar y)$, for the equal answers in 11.3.5; the explicit maximum-modulus contradiction in 11.4.5; the log formulas for arctan/arctanh and their derivatives in 11.2.10; why the fractional-power terms cannot cancel, with the circuit multipliers at $0$ and $\infty$, in 11.6.5). Cleanups: the "transcription" remark in 11.6.5 deleted and its statement-level `\erratum` on $z^{-1/4}$ (which the textbook prints) unwrapped; "In the actual figure" → "In Fig. 11.7"; "the manual" → "the Instructor's Manual" in 10 errata; the 11.4.5 erratum now quotes the printed (a), so $M$ is defined; notation clashes in 11.4.5 (contour $C$ vs. a constant, bound $m$ vs. a Taylor index) removed.
 - **ch07-p1** (7.2.1–7.5.10) — audit: no mathematical errors found. Steps added in 33 of 37 exercises (e.g. the partial fractions, sign argument and tanh/coth conversions in 7.2.16, the explicit $z=1/x$ substitutions in 7.4.1–7.4.4, the Gronwall bounds and connectedness argument in 7.5.1, the gamma-function form of the coefficients in 7.5.5 and the reduction-of-order integrand in 7.5.6). Cleanups: "the manual" → "the Instructor's Manual" in the 7.2.16, 7.4.3 and 7.5.1 errata; the arccoth argument in 7.2.16 renamed $w$ (it clashed with $q$); a stray comma removed from the 7.5.3(a) statement; the special-case remark in 7.2.5 reworded.
 - **ch13-p1** (13.1.1–13.2.14) — audit: no mathematical errors found. Steps added in 34 of 37 exercises (e.g. the general term of the printed series and where it ends for odd $n$ in 13.1.13, the sign and endpoint behavior of $\Gamma$ on $(-N,-N+1)$ in 13.1.9, the circle bound and reflection step in 13.1.23, the polygamma values at 3, $\Gamma'''$ and the order-by-order collection in 13.2.12, now with the closed-form and numerical $q^3$ coefficient). Cleanups: part labels in 13.1.11, 13.1.12, 13.1.14; a justification ($\alpha\simeq1/137.036$) for the 13.2.12 statement erratum; the convergence remark of 13.1.4 made precise. No script references or production remarks were present.
+- **ch15-p1** (15.1.1–15.2.19) — audit: no mathematical errors found; every result and quoted number re-verified (including all 56 entries of the 15.2.19 table). Steps added in 36 of 37 exercises (all but 15.1.18), e.g. both triangular back substitutions in 15.1.5, the factorial ratio in 15.1.3, the gamma and power-of-two bookkeeping in 15.1.15–15.1.17 and 15.2.14, and in 15.2.16 the axis Poisson kernel via 15.1.6, the derivative giving $\sigma(0)=\sqrt2\varepsilon_0V_0/a$ and a derivation of the exterior Poisson integral; partial sums and the tail estimate added in 15.2.8(c). Cleanups: the "supplied transcription" remark in 15.1.15 deleted (the printed $2n!/(2n+1)!!$ is correct, so its red marking was dropped); the nonexistent "numerical verification" in 15.2.19 replaced by a Coulomb-integral check (64-point trapezoidal rule, maximum deviation $4.5\times10^{-6}$ at $R=1.5$); "the manual" → "the Instructor's Manual" (15.1.4, 15.1.7, 15.2.8); "the source" → "the textbook" or "Example 15.2.3".
