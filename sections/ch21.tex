@@ -21,11 +21,11 @@ $y=\displaystyle\int_{0}^{x}(x-t)y(t)\,dt-x+1$.
 \end{enumerate}
 Check your results with Eq.~(21.11).
 \solution
-Since $y''=y$, one integration gives
+Integrating $y''(t)=y(t)$ from $t=0$ to $t=u$ gives
 \[
 y'(u)=y'(0)+\int_0^u y(t)\,dt.
 \]
-A second integration gives
+Integrating this from $u=0$ to $u=x$ gives
 \[
 y(x)=y(0)+xy'(0)+\int_0^xdu\int_0^u y(t)\,dt.
 \]
@@ -44,9 +44,15 @@ Inserting the two pairs of initial data yields, respectively,
 \boxed{y(x)=x+\int_0^x(x-t)y(t)\,dt},\qquad
 \boxed{y(x)=1-x+\int_0^x(x-t)y(t)\,dt}.
 \]
-To check Eq.~(21.11), its ODE coefficients are $A=0$, $B=-1$,
-$g=0$, $a=0$. Hence
-$K=(t-x)(B-A')-A=x-t$ and $f=y(0)+xy'(0)$,
+To check with Eq.~(21.11), write the ODE as $y''+A(x)y'+B(x)y=g(x)$
+with initial point $a$: here $A=0$, $B=-1$, $g=0$, $a=0$. Hence
+\[
+\begin{aligned}
+K(x,t)&=(t-x)[B(t)-A'(t)]-A(t)=(t-x)(-1)=x-t,\\
+f(x)&=\int_0^x(x-t)g(t)\,dt+[A(0)y(0)+y'(0)](x-0)+y(0)
+=y(0)+xy'(0),
+\end{aligned}
+\]
 exactly as above. Oriented integrals give the same identities for $x<0$.
 
 
@@ -67,7 +73,8 @@ y'(x)=b+(x-x)y(x)+\int_0^x
 \frac{\partial}{\partial x}\bigl[(x-t)y(t)\bigr]dt
 =b+\int_0^x y(t)\,dt.
 \]
-Differentiate once more:
+Differentiate once more; by the fundamental theorem of calculus,
+$\frac{d}{dx}\int_0^xy(t)\,dt=y(x)$, so
 \[
 \boxed{y''(x)=y(x)}.
 \]
@@ -75,35 +82,43 @@ At $x=0$ both integrals have zero length, so
 \[
 y(0)=a,\qquad y'(0)=b.
 \]
-These are precisely the two original initial conditions. Continuity of
-$y$ in the integral equation gives the differentiability used here.
+For $(a,b)=(0,1)$ this is $y(0)=0$, $y'(0)=1$, and for $(a,b)=(1,-1)$
+it is $y(0)=1$, $y'(0)=-1$: precisely the two original initial
+conditions. The differentiability used here follows from the integral
+equation itself: for continuous $y$ its right-hand side is continuously
+differentiable, hence so is $y$, and then $y'=b+\int_0^xy\,dt$ is
+differentiable again.
 
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{21.1.3}\quad Given
-$\varphi(x)=x-\displaystyle\int_{0}^{x}(t-x)\varphi(t)\,dt$,
-
+\[
+\varphi(x)=x-\int_{0}^{x}(t-x)\varphi(t)\,dt,
+\]
 solve this integral equation by converting it to an ODE (plus
 boundary conditions) and solving the ODE (by inspection).
 \solution
-First account for the sign:
+First account for the sign, $-(t-x)=x-t$:
 \[
 \varphi(x)=x+\int_0^x(x-t)\varphi(t)\,dt.
 \]
-Differentiating, the upper-endpoint term is zero:
+Differentiating by Leibniz's rule, the upper-endpoint term
+$(x-x)\varphi(x)$ is zero; a second differentiation uses the
+fundamental theorem of calculus:
 \[
 \varphi'(x)=1+\int_0^x\varphi(t)\,dt,\qquad
 \varphi''(x)=\varphi(x).
 \]
-The equation and its first derivative at zero give
-$\varphi(0)=0$, $\varphi'(0)=1$. The general solution is
+At $x=0$ the integrals in the equation and in $\varphi'$ have zero
+length, so $\varphi(0)=0$, $\varphi'(0)=1$. The general solution is
 $Ae^x+Be^{-x}$, and therefore
 \[
 A+B=0,\qquad A-B=1,\qquad
 A=\frac12,\quad B=-\frac12.
 \]
-Hence $\boxed{\varphi(x)=\sinh x}$. Directly,
+Hence $\boxed{\varphi(x)=\sinh x}$. Directly, integrating by parts
+with $u=x-t$, $dv=\sinh t\,dt$, $v=\cosh t$, $du=-dt$,
 \[
 \int_0^x(x-t)\sinh t\,dt
 =\left[(x-t)\cosh t\right]_0^x+\int_0^x\cosh t\,dt
@@ -132,9 +147,13 @@ $0\le t\le x\le L$. Put
 M=\max_{0\le t\le x\le L}|K(x,t)|,\qquad
 C=\max_{0\le x\le L}|\psi(x)|.
 \]
-The equation first gives $|\psi(x)|\le C|\lambda|Mx$.
+For $0\le x\le L$ the equation gives
+\[
+|\psi(x)|\le|\lambda|\int_0^x|K(x,t)|\,|\psi(t)|\,dt
+\le|\lambda|\int_0^xMC\,dt=C|\lambda|Mx.
+\]
 Suppose $|\psi(t)|\le C(|\lambda|Mt)^n/n!$. Substituting this
-bound into the same equation gives
+bound into the same estimate gives
 \[
 |\psi(x)|\le|\lambda|M\int_0^x
 C\frac{(|\lambda|Mt)^n}{n!}\,dt
@@ -149,9 +168,19 @@ $|\lambda|Mx/(n+1)\to0$, so the bound tends to zero. Thus
 for every finite $\lambda$. Taking arbitrary finite $L$ covers an
 unbounded interval whenever the kernel is locally bounded and continuous.
 
-For the original textbook's Maclaurin hint, $\psi(0)=0$ follows at once. Repeated
-differentiation gives only integrals involving $\psi$ and endpoint
-terms involving its lower derivatives; induction makes every
+The textbook's hint instead expands $\psi$ in a Maclaurin series.
+If $K$ is smooth, put $k_j(x)=\partial_x^jK(x,t)\big|_{t=x}$.
+Each differentiation of $\int_0^x\partial_x^jK(x,t)\psi(t)\,dt$ by
+Leibniz's rule adds the endpoint term $k_j(x)\psi(x)$, so induction on
+$n$ gives
+\[
+\psi^{(n)}(x)=\lambda\int_0^x\partial_x^nK(x,t)\psi(t)\,dt
++\lambda\sum_{j=0}^{n-1}\frac{d^{\,n-1-j}}{dx^{n-1-j}}
+\bigl[k_j(x)\psi(x)\bigr].
+\]
+At $x=0$ the integral has zero length, and by the product rule the sum
+contains only $\psi(0),\psi'(0),\ldots,\psi^{(n-1)}(0)$. Since
+$\psi(0)=0$ (zero-length integral), induction on $n$ makes every
 $\psi^{(n)}(0)$ zero.
 \erratum{A vanishing Maclaurin series proves the conclusion only if
 $\psi$ is analytic, not merely indefinitely differentiable. For example,
@@ -185,16 +214,18 @@ respectively.
 \erratum{Assume also that the denominator has no real zeros and
 that the quotient in the displayed formula admits Fourier inversion.}
 \solution
-Use the book's symmetric Fourier convention
+Use the textbook's symmetric Fourier convention
 \[
 \widehat g(\omega)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
 g(x)e^{i\omega x}dx,\qquad
 g(x)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
 \widehat g(\omega)e^{-i\omega x}d\omega.
 \]
-Let $\Phi=\widehat\varphi$, $F=\widehat f$, $K=\widehat k$.
-To keep track of normalization, set $u=x-t$ in the transform
-of the convolution:
+Let $\Phi=\widehat\varphi$, $F=\widehat f$, $K=\widehat k$
+(the transform variable is called $\omega$ here and $t$ in the
+statement). To keep track of normalization, set $u=x-t$ for fixed $t$
+in the transform of the convolution, so that $dx=du$ and
+$e^{i\omega x}=e^{i\omega u}e^{i\omega t}$:
 \[
 \begin{aligned}
 \widehat{k*\varphi}(\omega)
@@ -202,21 +233,24 @@ of the convolution:
 k(x-t)\varphi(t)e^{i\omega x}\,dt\,dx\\
 &=\frac1{\sqrt{2\pi}}
 \left(\int_{\mathbb R}k(u)e^{i\omega u}du\right)
-\left(\int_{\mathbb R}\varphi(t)e^{i\omega t}dt\right)
+\left(\int_{\mathbb R}\varphi(t)e^{i\omega t}dt\right)\\
+&=\frac1{\sqrt{2\pi}}\bigl[\sqrt{2\pi}K(\omega)\bigr]
+\bigl[\sqrt{2\pi}\Phi(\omega)\bigr]
 =\sqrt{2\pi}K(\omega)\Phi(\omega).
 \end{aligned}
 \]
-Consequently
+Transforming each term of the integral equation therefore gives
+$\Phi=F+\sqrt{2\pi}\lambda K\Phi$, that is,
 \[
 [1-\sqrt{2\pi}\lambda K(\omega)]\Phi(\omega)=F(\omega).
 \]
-Divide and invert to obtain
+Divide by the bracket and apply the inverse transform to obtain
 \[
 \boxed{\varphi(x)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
 \frac{F(\omega)e^{-i\omega x}}
 {1-\sqrt{2\pi}\lambda K(\omega)}\,d\omega}.
 \]
-\erratum{Existence of the original transforms alone does not justify
+\erratum{Existence of the transforms of $f$ and $k$ alone does not justify
 division: the quotient must belong to the intended inverse-transform
 class. Zeros of the denominator require compatibility with $F$ and may
 permit homogeneous components supported on those zeros in a
@@ -262,24 +296,27 @@ K(s)=\int_0^\infty e^{-sx}k(x)dx,\quad
 \Phi(s)=\int_0^\infty e^{-sx}\varphi(x)dx.
 \]
 In a right half-plane where the integrals can be interchanged,
-put $u=x-t$:
+reverse the order on the region $0\le t\le x<\infty$ (that is,
+$t\ge0$, $x\ge t$) and then put $u=x-t$, $e^{-sx}=e^{-su}e^{-st}$:
 \[
 \begin{aligned}
 \int_0^\infty e^{-sx}\int_0^xk(x-t)\varphi(t)dt\,dx
-&=\int_0^\infty\!\!\int_0^\infty
-e^{-s(u+t)}k(u)\varphi(t)\,du\,dt\\
-&=K(s)\Phi(s).
+&=\int_0^\infty\varphi(t)\left[\int_t^\infty
+e^{-sx}k(x-t)\,dx\right]dt\\
+&=\int_0^\infty\varphi(t)e^{-st}\left[\int_0^\infty
+e^{-su}k(u)\,du\right]dt
+=K(s)\Phi(s).
 \end{aligned}
 \]
-(a) The first-kind equation gives $F=K\Phi$, hence
+(a) Transforming the first-kind equation gives $F=K\Phi$, hence
 \[
 \Phi(s)=\frac{F(s)}{K(s)},\qquad
 \boxed{\varphi(x)=\frac1{2\pi i}
 \int_{\gamma-i\infty}^{\gamma+i\infty}
 \frac{F(s)}{K(s)}e^{sx}ds}.
 \]
-(b) The second-kind equation gives
-$\Phi=F+\lambda K\Phi$, so
+(b) Transforming the second-kind equation gives
+$\Phi=F+\lambda K\Phi$, i.e.\ $(1-\lambda K)\Phi=F$, so
 \[
 \Phi(s)=\frac{F(s)}{1-\lambda K(s)},\qquad
 \boxed{\varphi(x)=\frac1{2\pi i}
@@ -308,8 +345,10 @@ of all quotient singularities and use the ordinary Bromwich inverse.}
 Check your results by substituting back into the original
 integral equations.
 \solution
-Write $k(u)=-u$ in (a), and $k(u)=u$ in (b). Since
-$\mathcal L\{x\}=1/s^2$,
+Both equations have the form of Exercise~21.2.2(b) with $\lambda=1$
+and $f(x)=x$. In (a) the kernel is $t-x=-(x-t)$, so $k(u)=-u$; in (b)
+it is $-(t-x)=x-t$, so $k(u)=u$. Since $\mathcal L\{x\}=1/s^2$, the
+transforms are $F=s^{-2}$ and $K=\mp s^{-2}$:
 \[
 \begin{array}{c|c|c}
 &\text{transformed equation}&\Phi(s)\\ \hline
@@ -317,11 +356,14 @@ $\mathcal L\{x\}=1/s^2$,
 \text{(b)}&\Phi=s^{-2}+s^{-2}\Phi&(s^2-1)^{-1}
 \end{array}
 \]
-The inverses are
+(multiply each transformed equation by $s^2$: $(s^2\pm1)\Phi=1$).
+By the standard transforms $\mathcal L\{\sin x\}=1/(s^2+1)$ and
+$\mathcal L\{\sinh x\}=1/(s^2-1)$, the inverses are
 \[
 \boxed{\varphi_a(x)=\sin x,\qquad\varphi_b(x)=\sinh x}.
 \]
-For an explicit substitution check, integration by parts gives
+For an explicit substitution check, integration by parts
+(differentiate $x-t$, integrate $\sin t$ or $\sinh t$) gives
 \[
 \int_0^x(x-t)\sin t\,dt
 =\left[-(x-t)\cos t\right]_0^x-\int_0^x\cos t\,dt
@@ -333,7 +375,8 @@ and
 =\left[(x-t)\cosh t\right]_0^x+\int_0^x\cosh t\,dt
 =\sinh x-x.
 \]
-Equation (a) therefore reads $x-(x-\sin x)=\sin x$;
+Since $\int_0^x(t-x)\varphi\,dt=-\int_0^x(x-t)\varphi\,dt$,
+equation (a) therefore reads $x-(x-\sin x)=\sin x$;
 (b) reads $x+(\sinh x-x)=\sinh x$.
 
 
@@ -345,14 +388,22 @@ Fourier cosine transforms.
 \erratum{Take the unknown and convolution kernel to be even functions
 on the full line, and retain the reflected kernel in the half-line equation.}
 \solution
-Take $k$ and $\varphi$ even on the full line, so their convolution
-$f$ is even as well. Splitting the full-line equation of
-Example~21.2.1 into positive and negative $t$ gives, for $x\ge0$,
+Take $k$ and $\varphi$ even on the full line. Their convolution
+$f(x)=\int_{\mathbb R}k(x-t)\varphi(t)\,dt$ is even as well: replacing
+$t$ by $-t$ in $f(-x)$ and using $k(-y)=k(y)$, $\varphi(-t)=\varphi(t)$
+gives back $f(x)$. Split the full-line equation of Example~21.2.1 into
+positive and negative $t$, and change the negative half-line by
+$t\mapsto-t$:
+\[
+\int_{-\infty}^0k(x-t)\varphi(t)\,dt
+=\int_0^\infty k(x+t)\varphi(-t)\,dt
+=\int_0^\infty k(x+t)\varphi(t)\,dt.
+\]
+Hence, for $x\ge0$,
 \[
 \boxed{f(x)=\int_0^\infty
 [k(x-t)+k(x+t)]\varphi(t)\,dt}.
 \]
-Here the negative half-line was changed by $t\mapsto-t$.
 \erratum{A half-line cosine formulation requires these even extensions
 and the reflected kernel $k(x+t)$. Simply replacing the full-line limits
 by $0,\infty$ while keeping only $k(x-t)$ does not yield the same
@@ -363,18 +414,34 @@ Define the self-inverse cosine transform
 G_c(\omega)=\sqrt{\frac2\pi}\int_0^\infty
 g(x)\cos(\omega x)dx.
 \]
-For even $g$, this equals its symmetric full-line Fourier transform.
+For even $g$, this equals its symmetric full-line Fourier transform,
+because $g(x)\sin(\omega x)$ is odd and $g(x)\cos(\omega x)$ is even:
+\[
+\frac1{\sqrt{2\pi}}\int_{\mathbb R}g(x)e^{i\omega x}dx
+=\frac1{\sqrt{2\pi}}\int_{\mathbb R}g(x)\cos(\omega x)dx
+=\frac2{\sqrt{2\pi}}\int_0^\infty g(x)\cos(\omega x)dx
+=G_c(\omega).
+\]
 Thus the equations of the example become
 \[
 F_c(\omega)=\sqrt{2\pi}K_c(\omega)\Phi_c(\omega),\qquad
 \Phi_c(\omega)=\frac{F_c(\omega)}{\sqrt{2\pi}K_c(\omega)}.
 \]
-For completeness, inversion of the first relation gives
+Since $G_c$ is even in $\omega$, the same argument applied to the
+inverse transform gives
 \[
-f(x)=2\int_0^\infty K_c(\omega)\Phi_c(\omega)
+g(x)=\sqrt{\frac2\pi}\int_0^\infty G_c(\omega)\cos(\omega x)d\omega,
+\]
+so the cosine transform is its own inverse. For completeness, inversion
+of the first relation gives
+\[
+f(x)=\sqrt{\frac2\pi}\int_0^\infty\sqrt{2\pi}K_c(\omega)\Phi_c(\omega)
+\cos(\omega x)d\omega
+=2\int_0^\infty K_c(\omega)\Phi_c(\omega)
 \cos(\omega x)d\omega.
 \]
-Inverting the second gives the desired half-line solution:
+Inverting the second, with $\sqrt{2/\pi}/\sqrt{2\pi}=1/\pi$, gives the
+desired half-line solution:
 \[
 \boxed{\varphi(x)=\frac1\pi\int_0^\infty
 \frac{F_c(\omega)}{K_c(\omega)}\cos(\omega x)d\omega}.
@@ -395,12 +462,18 @@ e^{-x^{2}}=\int_{-\infty}^{\infty}e^{-(x-t)^{2}}\varphi(t)\,dt,
 apply the Fourier convolution technique of Example~21.2.1 to solve
 for $\varphi(t)$ \erratum{as a tempered distribution}.
 \solution
-The symmetric Fourier transform of $e^{-x^2}$ is
+The symmetric Fourier transform of $e^{-x^2}$ follows by completing the
+square, $-x^2+i\omega x=-(x-i\omega/2)^2-\omega^2/4$, and using
+$\int_{\mathbb R}e^{-(x-i\omega/2)^2}dx=\sqrt\pi$ (the Gaussian integral
+with its contour shifted parallel to the real axis):
 \[
 \frac1{\sqrt{2\pi}}\int_{\mathbb R}
-e^{-x^2+i\omega x}dx=\frac1{\sqrt2}e^{-\omega^2/4}.
+e^{-x^2+i\omega x}dx=\frac{\sqrt\pi}{\sqrt{2\pi}}e^{-\omega^2/4}
+=\frac1{\sqrt2}e^{-\omega^2/4}.
 \]
-The convolution theorem therefore gives
+Here $f(x)=e^{-x^2}$ and the kernel is $k(x-t)$ with $k(u)=e^{-u^2}$,
+so $F=K=e^{-\omega^2/4}/\sqrt2$. The convolution theorem
+$F=\sqrt{2\pi}K\Phi$ therefore gives
 \[
 \frac1{\sqrt2}e^{-\omega^2/4}
 =\sqrt{2\pi}\left(\frac1{\sqrt2}e^{-\omega^2/4}\right)
@@ -408,7 +481,15 @@ The convolution theorem therefore gives
 \]
 The Gaussian factor never vanishes, so
 $\Phi(\omega)=1/\sqrt{2\pi}$. But this is precisely the Fourier
-transform of the unit point mass at zero:
+transform of the unit point mass at zero,
+$(2\pi)^{-1/2}\int_{\mathbb R}\delta(t)e^{i\omega t}dt=1/\sqrt{2\pi}$;
+equivalently, the inverse transform is
+\[
+\varphi(t)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
+\frac1{\sqrt{2\pi}}e^{-i\omega t}d\omega
+=\frac1{2\pi}\int_{\mathbb R}e^{-i\omega t}d\omega,
+\]
+the integral representation of the delta function:
 \[
 \boxed{\varphi(t)=\delta(t)}.
 \]
@@ -446,33 +527,44 @@ recognizing it as a beta function.
 \]
 \solution
 For locally integrable $\varphi$, the singular kernels are integrable
-when $0<\alpha<1$. Multiply the equation by $(z-x)^{\alpha-1}$
-and integrate:
+when $0<\alpha<1$.
+
+(a) Multiply the equation by $(z-x)^{\alpha-1}$
+and integrate over $0\le x\le z$:
 \[
 I(z):=\int_0^z(z-x)^{\alpha-1}f(x)dx
 =\int_0^zdx\int_0^x
 (z-x)^{\alpha-1}(x-t)^{-\alpha}\varphi(t)dt.
 \]
+
+(b) The integration region is the triangle $0\le t\le x\le z$.
 Absolute integrability on this triangle follows from the beta integral
-below applied to $|\varphi|$. Reversing the order,
+below applied to $|\varphi|$. Reversing the order ($t$ from $0$ to $z$,
+then $x$ from $t$ to $z$),
 \[
 I(z)=\int_0^z\varphi(t)\left[
 \int_t^z(z-x)^{\alpha-1}(x-t)^{-\alpha}dx\right]dt.
 \]
-Put $x=t+(z-t)u$. All powers of $z-t$ cancel:
+Put $x=t+(z-t)u$, so $dx=(z-t)du$, $z-x=(z-t)(1-u)$, $x-t=(z-t)u$,
+and $x=t,z$ correspond to $u=0,1$. The powers of $z-t$ cancel, since
+$(\alpha-1)-\alpha+1=0$:
 \[
 \begin{aligned}
 \int_t^z(z-x)^{\alpha-1}(x-t)^{-\alpha}dx
 &=\int_0^1(1-u)^{\alpha-1}u^{-\alpha}du\\
 &=B(1-\alpha,\alpha)
-=\Gamma(1-\alpha)\Gamma(\alpha)
-=\frac{\pi}{\sin\pi\alpha}.
+=\frac{\Gamma(1-\alpha)\Gamma(\alpha)}{\Gamma(1)}
+=\frac{\pi}{\sin\pi\alpha},
 \end{aligned}
 \]
+by the reflection formula $\Gamma(\alpha)\Gamma(1-\alpha)=\pi/\sin\pi\alpha$.
 Hence
 \[
-I(z)=\frac{\pi}{\sin\pi\alpha}\int_0^z\varphi(t)dt,
-\qquad
+I(z)=\frac{\pi}{\sin\pi\alpha}\int_0^z\varphi(t)dt.
+\]
+Differentiating with respect to $z$ (fundamental theorem of calculus)
+and solving for $\varphi$,
+\[
 \boxed{\varphi(z)=\frac{\sin\pi\alpha}{\pi}
 \frac{d}{dz}\int_0^z(z-x)^{\alpha-1}f(x)dx}.
 \]
@@ -480,12 +572,20 @@ The derivative exists almost everywhere under the integral equation's
 local-integrability hypothesis.
 
 If $f$ is continuously differentiable up to zero, remove the apparent
-singular endpoint before differentiating. Integration by parts gives
+singular endpoint before differentiating. Integrate by parts,
+differentiating $f(x)$ and integrating $(z-x)^{\alpha-1}$ to
+$-(z-x)^\alpha/\alpha$; the boundary term vanishes at $x=z$ because
+$\alpha>0$:
 \[
-I(z)=\frac{f(0)z^\alpha}{\alpha}
-+\frac1\alpha\int_0^z(z-x)^\alpha f'(x)dx,
+I(z)=\left[-\frac{f(x)(z-x)^\alpha}{\alpha}\right]_0^z
++\frac1\alpha\int_0^z(z-x)^\alpha f'(x)dx
+=\frac{f(0)z^\alpha}{\alpha}
++\frac1\alpha\int_0^z(z-x)^\alpha f'(x)dx.
 \]
-and thus
+Now differentiate: $\frac{d}{dz}\,f(0)z^\alpha/\alpha=f(0)z^{\alpha-1}$,
+and by Leibniz's rule the upper-endpoint term
+$(z-z)^\alpha f'(z)/\alpha$ vanishes while
+$\partial_z(z-x)^\alpha/\alpha=(z-x)^{\alpha-1}$. Thus
 \[
 \boxed{\varphi(z)=\frac{\sin\pi\alpha}{\pi}
 \left[f(0)z^{\alpha-1}+
@@ -493,7 +593,19 @@ and thus
 \]
 This also proves sufficiency for such $f$: convolving either term with
 $x^{-\alpha}$ and using the same beta integral yields respectively
-$f(0)$ and $\int_0^z f'(x)dx=f(z)-f(0)$.
+$f(0)$ and $\int_0^x f'(y)dy=f(x)-f(0)$. Indeed, with $t=xu$,
+\[
+\int_0^x(x-t)^{-\alpha}t^{\alpha-1}dt=\int_0^1(1-u)^{-\alpha}u^{\alpha-1}du
+=B(\alpha,1-\alpha)=\frac{\pi}{\sin\pi\alpha},
+\]
+and, reversing the order of integration as above,
+\[
+\int_0^x\frac{dt}{(x-t)^\alpha}\int_0^t(t-y)^{\alpha-1}f'(y)\,dy
+=\int_0^xf'(y)\left[\int_y^x\frac{(t-y)^{\alpha-1}}{(x-t)^\alpha}dt\right]dy
+=\frac{\pi}{\sin\pi\alpha}\int_0^xf'(y)\,dy.
+\]
+Multiplying by $\sin\pi\alpha/\pi$ and adding, the two terms give
+$f(0)+f(x)-f(0)=f(x)$.
 
 
 \Needspace{5\baselineskip}
@@ -509,24 +621,30 @@ of the given equation.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $\varphi(t)=\dfrac{\sin\pi\alpha}{\pi}\,t^{\alpha-1}$.
 \solution
-Set $f=1$ in the preceding inversion formula:
+Set $f=1$ in the first inversion formula of Exercise~21.2.6:
 \[
-\int_0^x(x-t)^{\alpha-1}dt=\frac{x^\alpha}{\alpha},
+\int_0^x(x-t)^{\alpha-1}dt=\left[-\frac{(x-t)^\alpha}{\alpha}\right]_0^x
+=\frac{x^\alpha}{\alpha},
 \]
-so
+so, since $\frac{d}{dx}(x^\alpha/\alpha)=x^{\alpha-1}$,
 \[
 \boxed{\varphi(x)=\frac{\sin\pi\alpha}{\pi}x^{\alpha-1}},
 \qquad x>0.
 \]
-Direct substitution, with $t=xu$, yields
+(The second formula of Exercise~21.2.6, with $f(0)=1$ and $f'=0$, gives
+the same result.) Direct substitution, with $t=xu$, $dt=x\,du$,
+$t^{\alpha-1}=x^{\alpha-1}u^{\alpha-1}$, $(x-t)^{-\alpha}=x^{-\alpha}(1-u)^{-\alpha}$,
+yields
 \[
 \begin{aligned}
 \int_0^x\frac{\varphi(t)}{(x-t)^\alpha}dt
 &=\frac{\sin\pi\alpha}{\pi}
 x^{\alpha-1-\alpha+1}
 \int_0^1u^{\alpha-1}(1-u)^{-\alpha}du\\
-&=\frac{\sin\pi\alpha}{\pi}
-\Gamma(\alpha)\Gamma(1-\alpha)=1.
+&=\frac{\sin\pi\alpha}{\pi}B(\alpha,1-\alpha)
+=\frac{\sin\pi\alpha}{\pi}
+\Gamma(\alpha)\Gamma(1-\alpha)
+=\frac{\sin\pi\alpha}{\pi}\,\frac{\pi}{\sin\pi\alpha}=1.
 \end{aligned}
 \]
 Both endpoint singularities in the $u$ integral are integrable.
@@ -557,7 +675,8 @@ e^{-(x-t)^2}=e^{-t^2}e^{2tx-x^2}
 =e^{-t^2}\sum_{n=0}^\infty H_n(t)\frac{x^n}{n!}.
 \]
 Taking the $n$th derivative with respect to $x$ at zero in the
-integral equation gives
+integral equation (only the $x^n$ term of the series survives, giving
+$H_n(t)$; differentiation under the integral is justified below) gives
 \[
 f^{(n)}(0)=\int_{\mathbb R}e^{-t^2}H_n(t)\varphi(t)dt.
 \]
@@ -579,18 +698,27 @@ Consequently
 \frac{f^{(n)}(0)}{2^nn!}H_n(x)}.
 \]
 
-\erratum{The original unrestricted statement needs a function-space and
+\erratum{The textbook's unrestricted statement needs a function-space and
 convergence qualification. If
 $\varphi\in L^2(\mathbb R,e^{-t^2}dt)$, the formula is its convergent
 weighted-$L^2$ Hermite expansion; it is not automatically a pointwise
 series for arbitrary $f$.}
 Here is the convergence justification. Write $z=a+ib$ and
 $\|\varphi\|_w^2=\int e^{-t^2}|\varphi(t)|^2dt$.
-Cauchy--Schwarz gives
+Since $\Re(z-t)^2=(a-t)^2-b^2$,
+\[
+e^{t^2}\bigl|e^{-(z-t)^2}\bigr|^2=e^{t^2-2(a-t)^2+2b^2}
+=e^{-t^2+4at-2\Re(z^2)},\qquad \Re(z^2)=a^2-b^2.
+\]
+Cauchy--Schwarz, applied to the product of $e^{-t^2/2}\varphi(t)$ and
+$e^{t^2/2}e^{-(z-t)^2}$, and
+$\int_{\mathbb R}e^{-t^2+4at}dt=\sqrt\pi\,e^{4a^2}$ (complete the square)
+give
 \begin{align*}
 \left|\int_{\mathbb R}e^{-(z-t)^2}\varphi(t)dt\right|
 &\le\|\varphi\|_w
-\left(\int_{\mathbb R}e^{-t^2+4at-2\Re(z^2)}dt\right)^{1/2}\\
+\left(\int_{\mathbb R}e^{-t^2+4at-2\Re(z^2)}dt\right)^{1/2}
+=\|\varphi\|_w\left(\sqrt\pi\,e^{2a^2+2b^2}\right)^{1/2}\\
 &=\pi^{1/4}e^{|z|^2}\|\varphi\|_w.
 \end{align*}
 Derivatives of the Gaussian add only polynomial factors in $t-z$.
@@ -602,28 +730,37 @@ for the Hermite basis gives
 \[
 \|\varphi\|_w^2=\sum_{n=0}^\infty |a_n|^2\sqrt\pi\,2^nn!.
 \]
-Substituting the coefficients found above gives the necessary condition
+Substituting the coefficients found above,
+$|a_n|^2\sqrt\pi\,2^nn!=|f^{(n)}(0)|^2\sqrt\pi\,2^nn!/(\pi\,4^n(n!)^2)$,
+gives the necessary condition
 \[
 \sum_{n=0}^\infty
 \frac{|f^{(n)}(0)|^2}{\sqrt\pi\,2^nn!}<\infty.
 \]
 Conversely, if $f$ is entire and this condition holds, the orthogonal
-series defines a weighted-$L^2$ function. Its Gaussian convolution
-has the same Taylor coefficients as $f$, and hence equals $f$.
+series defines a weighted-$L^2$ function. By the moment formula above,
+its Gaussian convolution has $n$th derivative
+$\sqrt\pi\,2^nn!\,a_n=f^{(n)}(0)$ at zero, i.e.\ the same Taylor
+coefficients as $f$; being entire, it equals $f$.
 
 The limitation is already visible in Exercise~21.2.5:
-$f(x)=e^{-x^2}$ has distributional solution $\delta$. At $x=0$,
-its proposed even terms are obtained from
-$f^{(2j)}(0)=(-1)^j(2j)!/j!$ and
-$H_{2j}(0)=(-1)^j(2j)!/j!$:
+$f(x)=e^{-x^2}$ has distributional solution $\delta$. Setting $t=0$ in
+the generating function gives $e^{-x^2}=\sum_nH_n(0)x^n/n!$, so
+$f^{(n)}(0)=H_n(0)$; comparing with
+$e^{-x^2}=\sum_j(-1)^jx^{2j}/j!$, both vanish for odd $n$ and
+$f^{(2j)}(0)=H_{2j}(0)=(-1)^j(2j)!/j!$. At $x=0$ the proposed series
+therefore has the even terms
 \[
 \frac1{\sqrt\pi}
 \frac{f^{(2j)}(0)H_{2j}(0)}{2^{2j}(2j)!}
+=\frac1{\sqrt\pi}\frac{[(2j)!]^2}{(j!)^2\,4^j(2j)!}
 =\frac1{\sqrt\pi}\frac{\binom{2j}{j}}{4^j}
-\sim\frac1{\pi\sqrt j}.
+\sim\frac1{\pi\sqrt j},
 \]
-The positive series diverges, so that example cannot be interpreted as
-an ordinary pointwise Hermite solution.
+where Stirling's formula gives $\binom{2j}{j}\sim4^j/\sqrt{\pi j}$.
+By comparison with $\sum_j j^{-1/2}$ the positive series diverges, so
+that example cannot be interpreted as an ordinary pointwise Hermite
+solution.
 
 
 \Needspace{5\baselineskip}
@@ -644,20 +781,27 @@ for the unknown function $\varphi(t)$, \erratum{with $s=0,1,2,\ldots$,} if
 \solution
 Let $N=2s$ in (a) and $N=2s+1$ in (b), with $s=0,1,\ldots$.
 For $|x|<1$, the generating function converges uniformly in
-$t\in[-1,1]$:
+$t\in[-1,1]$ (Weierstrass M-test, since $|P_n(t)x^n|\le|x|^n$ there):
 \[
 (1-2xt+x^2)^{-1/2}=\sum_{n=0}^\infty P_n(t)x^n.
 \]
-The equation with $f(x)=x^N$ therefore requires
+Integrating termwise against $\varphi$,
+\[
+f(x)=\sum_{n=0}^\infty x^n\int_{-1}^1P_n(t)\varphi(t)dt,
+\qquad|x|<1.
+\]
+Comparing the coefficients of this power series with those of
+$f(x)=x^N$ (power series coefficients are unique), the equation requires
 \[
 \int_{-1}^1P_n(t)\varphi(t)dt=\delta_{nN}.
 \]
-If $\varphi=\sum_m a_mP_m$ in $L^2[-1,1]$, orthogonality gives
+If $\varphi=\sum_m a_mP_m$ in $L^2[-1,1]$, orthogonality,
+$\int_{-1}^1P_nP_m\,dt=2\delta_{nm}/(2n+1)$, gives
 \[
 \frac{2a_n}{2n+1}=\delta_{nN},
 \qquad a_n=\frac{2n+1}{2}\delta_{nN}.
 \]
-Thus
+Thus, with $2N+1=4s+1$ in (a) and $4s+3$ in (b),
 \[
 \boxed{\varphi_a(t)=\frac{4s+1}{2}P_{2s}(t)},\qquad
 \boxed{\varphi_b(t)=\frac{4s+3}{2}P_{2s+1}(t)}.
@@ -665,19 +809,22 @@ Thus
 Substitution gives
 \[
 \frac{2N+1}{2}\sum_{n=0}^\infty x^n
-\int_{-1}^1P_n(t)P_N(t)dt=x^N,
+\int_{-1}^1P_n(t)P_N(t)dt=\frac{2N+1}{2}\,\frac{2}{2N+1}\,x^N=x^N,
 \]
 which checks both formulas. Completeness of the Legendre polynomials
-proves uniqueness in $L^2$.
+proves uniqueness in $L^2$: the difference of two solutions has all
+Legendre moments zero, hence vanishes.
 
 The endpoint values follow by a limit of these finite-polynomial
 solutions. For $1/2\le x<1$,
 \[
-1-2xt+x^2=(1-x)^2+2x(1-t)\ge1-t.
+1-2xt+x^2=(1-x)^2+2x(1-t)\ge2x(1-t)\ge1-t.
 \]
-The bounded numerator is consequently dominated by a constant times
-$(1-t)^{-1/2}$, which is integrable. Dominated convergence gives
-$f(1)=1$. Reflection gives $f(-1)=(-1)^N$, so the solutions hold
+The bounded numerator $\varphi(t)$ is consequently dominated, uniformly
+in $x$, by $\max|\varphi|\,(1-t)^{-1/2}$, which is integrable on
+$[-1,1]$. Dominated convergence as $x\to1^-$ gives
+$f(1)=\lim_{x\to1^-}x^N=1$. Reflection ($t\to-t$, with
+$\varphi(-t)=(-1)^N\varphi(t)$) gives $f(-1)=(-1)^N$, so the solutions hold
 at both stated endpoints as improper integrals.
 
 
@@ -694,8 +841,9 @@ The image of the kernel is linear in $x$:
 \int_{-1}^1(t-x)\varphi(t)dt
 =\int_{-1}^1t\varphi(t)dt-x\int_{-1}^1\varphi(t)dt.
 \]
-Every nonzero solution must therefore have the form $A+Bx$.
-The two required moments are
+Every nonzero solution must therefore have the form $A+Bx$, with
+$A=\lambda\int_{-1}^1t\varphi(t)dt$ and $B=-\lambda\int_{-1}^1\varphi(t)dt$.
+The two required moments are (odd integrands drop out)
 \[
 \int_{-1}^1(A+Bt)dt=2A,\qquad
 \int_{-1}^1t(A+Bt)dt=\frac{2B}{3}.
@@ -704,12 +852,14 @@ Equating constant and linear coefficients gives
 \[
 A=\frac{2\lambda}{3}B,\qquad B=-2\lambda A.
 \]
-A nonzero solution has $A\ne0$; eliminating $B$ yields
+A nonzero solution has $A\ne0$, since $A=0$ would force
+$B=-2\lambda A=0$. Eliminating $B$ yields
+$A=\frac{2\lambda}{3}(-2\lambda A)=-\frac43\lambda^2A$, so
 \[
-1=-\frac43\lambda^2,\qquad
+1=-\frac43\lambda^2,\qquad\lambda^2=-\frac34,\qquad
 \boxed{\lambda_\pm=\pm\frac{i\sqrt3}{2}}.
 \]
-Choose $A=1$:
+Choose $A=1$, so $B=-2\lambda_\pm=\mp i\sqrt3$:
 \[
 \boxed{\varphi_+(x)=1-i\sqrt3\,x,\qquad
 \varphi_-(x)=1+i\sqrt3\,x}.
@@ -736,6 +886,13 @@ Use
 \[
 \cos(x-t)=\cos x\cos t+\sin x\sin t.
 \]
+Hence
+\[
+\int_0^{2\pi}\cos(x-t)\varphi(t)\,dt
+=\cos x\int_0^{2\pi}\cos t\,\varphi(t)\,dt
++\sin x\int_0^{2\pi}\sin t\,\varphi(t)\,dt,
+\]
+a combination of $\cos x$ and $\sin x$ with constant coefficients.
 Thus every nonzero solution is $\varphi(x)=A\cos x+B\sin x$.
 Over $[0,2\pi]$,
 \[
@@ -743,7 +900,8 @@ Over $[0,2\pi]$,
 \int_0^{2\pi}\sin^2t\,dt=\pi,\quad
 \int_0^{2\pi}\sin t\cos t\,dt=0.
 \]
-The integral is consequently
+Inserting $\varphi(t)=A\cos t+B\sin t$, the two coefficient integrals
+are $\pi A$ and $\pi B$, so the integral is
 $\pi A\cos x+\pi B\sin x=\pi\varphi(x)$.
 The equation becomes $(1-\lambda\pi)\varphi=0$, so
 \[
@@ -766,14 +924,21 @@ y(x)=\lambda\int_{-1}^{1}(x-t)^{2}y(t)\,dt.
 \par\emph{Hint.}~This problem may be treated by the
 separable-kernel method or by a Legendre expansion.
 \solution
-The kernel has degree two in $x$, so write
-$y(x)=A+Bx+Cx^2$. Its three moments are
+Expanding $(x-t)^2=x^2-2xt+t^2$ and writing
+$m_k=\int_{-1}^1t^ky(t)dt$,
 \[
-\int_{-1}^1y(t)dt=2A+\frac{2C}{3},\quad
-\int_{-1}^1ty(t)dt=\frac{2B}{3},\quad
-\int_{-1}^1t^2y(t)dt=\frac{2A}{3}+\frac{2C}{5}.
+\int_{-1}^1(x-t)^2y(t)\,dt=m_2-2m_1x+m_0x^2,
 \]
-Expanding $(x-t)^2=x^2-2xt+t^2$ gives
+a quadratic polynomial in $x$. So every nonzero solution has the form
+$y(x)=A+Bx+Cx^2$. Its three moments are (odd powers of $t$ integrate
+to zero)
+\[
+m_0=2A+\frac{2C}{3},\quad
+m_1=\frac{2B}{3},\quad
+m_2=\frac{2A}{3}+\frac{2C}{5}.
+\]
+Equating the coefficients of $1,x,x^2$ in $y=\lambda(m_2-2m_1x+m_0x^2)$
+gives $A=\lambda m_2$, $B=-2\lambda m_1$, $C=\lambda m_0$, that is,
 \[
 \begin{pmatrix}A\\B\\C\end{pmatrix}
 =\lambda
@@ -784,18 +949,31 @@ Expanding $(x-t)^2=x^2-2xt+t^2$ gives
 \end{pmatrix}
 \begin{pmatrix}A\\B\\C\end{pmatrix}.
 \]
-The odd equation is $B=-4\lambda B/3$, giving
+The odd equation is $B=-4\lambda B/3$; a solution with $B\ne0$
+requires $1=-4\lambda/3$, giving
 \[
 \boxed{\lambda_0=-\frac34,\qquad y_0(x)=x}.
 \]
-For the even sector, put $\mu=1/\lambda$. Its determinant is
+For the even sector $(A,C)$, put $\mu=1/\lambda$, so that the first and
+last rows read $\mu A=\frac23A+\frac25C$ and $\mu C=2A+\frac23C$.
+A nonzero $(A,C)$ requires the determinant
 \[
 \begin{vmatrix}2/3-\mu&2/5\\2&2/3-\mu\end{vmatrix}
 =(2/3-\mu)^2-\frac45=0,
 \]
-hence $\mu_\pm=2/3\pm2/\sqrt5$. Taking $C=1$,
+hence $2/3-\mu=\mp2/\sqrt5$ and $\mu_\pm=2/3\pm2/\sqrt5$. Taking $C=1$,
 the last row says $2A+2/3=\mu_\pm$, so
-$A=\pm1/\sqrt5$. Therefore
+$A=(\mu_\pm-2/3)/2=\pm1/\sqrt5$. The first row then holds as well:
+$(\mu_\pm-\frac23)A=(\pm\frac2{\sqrt5})(\pm\frac1{\sqrt5})=\frac25$.
+The eigenvalues are $\lambda_\pm=1/\mu_\pm$; rationalizing,
+\[
+\frac1{\frac23\pm\frac2{\sqrt5}}
+=\frac{3\sqrt5}{2\sqrt5\pm6}
+=\frac{3\sqrt5\,(2\sqrt5\mp6)}{20-36}
+=\frac{30\mp18\sqrt5}{-16}
+=\frac{-15\pm9\sqrt5}{8}.
+\]
+Therefore
 \[
 \boxed{\begin{aligned}
 \lambda_+&=\frac{-15+9\sqrt5}{8},&
@@ -804,17 +982,38 @@ y_+(x)&=x^2+\frac1{\sqrt5},\\
 y_-(x)&=x^2-\frac1{\sqrt5}.
 \end{aligned}}
 \]
-For example, rationalizing
-$1/(2/3+2/\sqrt5)$ gives $(-15+9\sqrt5)/8$.
-The matrix substitution verifies all three eigenpairs.
-Since its image contains only quadratic polynomials, the calculation
-exhausts all nonzero finite-characteristic-value solutions.
+All three eigenpairs satisfy every row of the matrix equation.
+Since the image of the integral operator contains only quadratic
+polynomials, the calculation exhausts all nonzero
+finite-characteristic-value solutions.
 
-In the alternative Legendre normalization,
-$y_\pm$ are proportional to $P_0+(4\lambda_\pm/3)P_2$.
-Indeed the latter has constant term $1-2\lambda_\pm/3$ and
-$x^2$ coefficient $2\lambda_\pm$, whose ratio is
-$1/(2\lambda_\pm)-1/3=\pm1/\sqrt5$.
+In the Legendre method of the hint, $x^2=\frac13P_0+\frac23P_2(x)$
+gives
+\[
+(x-t)^2=\frac23+\frac23\bigl[P_2(x)+P_2(t)\bigr]-2P_1(x)P_1(t).
+\]
+For even $y=a_0P_0+a_2P_2$, orthogonality
+($\int_{-1}^1P_n^2dt=2/(2n+1)$) gives
+\[
+\int_{-1}^1(x-t)^2y(t)\,dt=\frac{4a_0}{3}+\frac{4a_2}{15}
++\frac{4a_0}{3}P_2(x),
+\]
+and comparing the coefficients of $P_2$ and $P_0$ in
+$y=\lambda\int_{-1}^1(x-t)^2y(t)\,dt$,
+\[
+a_2=\frac{4\lambda}{3}a_0,\qquad
+a_0=\lambda\left(\frac{4a_0}{3}+\frac{4a_2}{15}\right).
+\]
+With $a_0=1$, $y_\pm$ are proportional to $P_0+(4\lambda_\pm/3)P_2$,
+and the second equation becomes
+$1=\lambda\bigl(\frac43+\frac{16\lambda}{45}\bigr)$, i.e.\
+$16\lambda^2+60\lambda-45=0$, whose roots
+$(-60\pm36\sqrt5)/32$ are again $\lambda_\pm$. The odd function $P_1$
+gives $\int_{-1}^1(x-t)^2P_1(t)\,dt=-\frac43P_1(x)$, i.e.\ $\lambda_0$.
+To compare with the monomial form: since $P_2=(3x^2-1)/2$,
+$P_0+(4\lambda_\pm/3)P_2$ has constant term
+$1-2\lambda_\pm/3$ and $x^2$ coefficient $2\lambda_\pm$, whose ratio is
+$1/(2\lambda_\pm)-1/3=\mu_\pm/2-1/3=\pm1/\sqrt5$, as for $y_\pm$.
 
 
 \Needspace{5\baselineskip}
@@ -837,7 +1036,8 @@ form into the definition of $c$,
 c=\lambda c\int_0^\pi\sin t\cos t\,dt
 =\frac{\lambda c}{2}\,[\sin^2t]_0^\pi=0.
 \]
-Thus $\boxed{\psi=0}$ for every finite $\lambda$.
+Then $\psi(x)=\lambda c\cos x$ vanishes identically: $\boxed{\psi=0}$
+for every finite $\lambda$.
 
 The cancellation also follows from reflection about $\pi/2$:
 $\sin(\pi-t)=\sin t$ and $\cos(\pi-t)=-\cos t$, so the product
@@ -852,13 +1052,17 @@ Its kernel is not symmetric under $x\leftrightarrow t$, so a nonzero
 nilpotent operator is allowed. A nonzero \erratum{real} symmetric rank-one kernel
 $c\,u(x)u(t)$ would instead have nonzero operator eigenvalue
 $c\int u^2$, and hence a nontrivial finite characteristic value.
+(For complex $u$ the qualification matters: $u(x)=e^{2ix}$ gives
+$\int_0^\pi u^2dx=0$, and the symmetric kernel $u(x)u(t)$ is again
+nilpotent.)
 
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{21.2.14}\quad Given
-$\varphi(x)=\lambda\displaystyle\int_{0}^{1}(1+xt)\varphi(t)\,dt$,
-
+\[
+\varphi(x)=\lambda\int_{0}^{1}(1+xt)\varphi(t)\,dt,
+\]
 solve for the eigenvalues and the eigenfunctions by the
 separable-kernel technique.
 \solution
@@ -867,28 +1071,40 @@ Introduce the two moments
 c_0=\int_0^1\varphi(t)dt,\qquad
 c_1=\int_0^1t\varphi(t)dt.
 \]
-The equation is $\varphi(x)=\lambda(c_0+xc_1)$. Inserting it
-into those moment definitions gives
+Since $1+xt$ splits as $1\cdot1+x\cdot t$, the equation is
+$\varphi(x)=\lambda(c_0+xc_1)$. Inserting it
+into those moment definitions, with $\int_0^1dt=1$,
+$\int_0^1t\,dt=\frac12$, $\int_0^1t^2dt=\frac13$, gives
 \[
 c_0=\lambda\left(c_0+\frac{c_1}{2}\right),\qquad
 c_1=\lambda\left(\frac{c_0}{2}+\frac{c_1}{3}\right).
 \]
 A nonzero moment vector requires
 \[
+\begin{aligned}
 0=\begin{vmatrix}1-\lambda&-\lambda/2\\
 -\lambda/2&1-\lambda/3\end{vmatrix}
-=(1-\lambda)(1-\lambda/3)-\lambda^2/4
+&=(1-\lambda)(1-\lambda/3)-\lambda^2/4\\
+&=1-\frac\lambda3-\lambda+\frac{\lambda^2}3-\frac{\lambda^2}4
 =1-\frac43\lambda+\frac1{12}\lambda^2.
+\end{aligned}
 \]
-Thus $\lambda^2-16\lambda+12=0$, giving
+Multiplying by $12$, $\lambda^2-16\lambda+12=0$, and the quadratic
+formula, $\lambda=8\mp\sqrt{64-12}=8\mp\sqrt{52}$, gives
 \[
 \boxed{\lambda_\pm=8\mp2\sqrt{13}}.
 \]
 The constant term of a nonzero eigenfunction cannot vanish: otherwise
-$\varphi=Bx$ would require $0=\lambda B/2$, forcing $B=0$.
+$\varphi=Bx$ would require $0=\lambda c_0=\lambda B/2$, forcing $B=0$.
 Normalize that term to one, writing $\varphi_\pm=1+b_\pm x$.
-The constant equation $1=\lambda(1+b/2)$ yields
-$b=2/\lambda-2$, hence
+Then $c_0=1+b/2$, and the constant equation $1=\lambda(1+b/2)$ yields
+$b=2/\lambda-2$. Rationalizing,
+\[
+\frac2{\lambda_\pm}=\frac{2}{8\mp2\sqrt{13}}
+=\frac{2(8\pm2\sqrt{13})}{64-52}=\frac{4\pm\sqrt{13}}3,
+\qquad b_\pm=\frac{4\pm\sqrt{13}}3-2,
+\]
+hence
 \[
 \boxed{\varphi_\pm(x)=1+\frac{-2\pm\sqrt{13}}3x}.
 \]
@@ -910,7 +1126,8 @@ assume $\varphi(x)$ to have the form $1+bx$. Substitute into the
 integral equation. Integrate and solve for $b$ and $\lambda$.
 \solution
 Substitute the proposed function before making any spectral
-assumption:
+assumption. Since $(1+xt)(1+bt)=1+bt+xt+bxt^2$, integrating term by term
+gives
 \[
 \int_0^1(1+xt)(1+bt)dt
 =1+\frac b2+x\left(\frac12+\frac b3\right).
@@ -921,7 +1138,8 @@ $1+bx=\lambda[1+b/2+x(1/2+b/3)]$ gives
 1=\lambda(1+b/2),\qquad
 b=\lambda(1/2+b/3).
 \]
-The first equation rules out $b=-2$. Eliminating $\lambda$,
+The first equation rules out $b=-2$. Eliminating $\lambda$ (multiply
+the second equation by $1+b/2$ and use the first),
 \[
 b(1+b/2)=1/2+b/3,
 \quad \frac{b^2}{2}+\frac{2b}{3}-\frac12=0,
@@ -930,12 +1148,15 @@ b(1+b/2)=1/2+b/3,
 The quadratic formula therefore gives
 \[
 b_\pm=\frac{-4\pm\sqrt{16+36}}6
+=\frac{-4\pm2\sqrt{13}}6
 =\frac{-2\pm\sqrt{13}}3.
 \]
-Finally,
+Finally, $1+b_\pm/2=(4\pm\sqrt{13})/6$, and rationalizing with
+$(4\pm\sqrt{13})(4\mp\sqrt{13})=16-13=3$,
 \[
 \lambda_\pm=\frac1{1+b_\pm/2}
 =\frac6{4\pm\sqrt{13}}
+=\frac{6(4\mp\sqrt{13})}{3}
 =\boxed{8\mp2\sqrt{13}}.
 \]
 Thus $\boxed{\varphi_\pm(x)=1+b_\pm x}$, with arbitrary
@@ -976,10 +1197,11 @@ moments against every $N_i(x)$}:
 Each $c_i$ is independent of $x$. Hence the equation requires
 \[
 \boxed{f\in\operatorname{span}\{M_1,\ldots,M_n\}},
-\qquad f(x)=\sum_i c_iM_i(x).
+\qquad f(x)=\sum_i c_iM_i(x),
 \]
-This is a necessary condition; the moment equations for the $c_i$
-must also be compatible to obtain a solution.
+i.e.\ the stated form with constants $f_i=c_i=\int_a^bN_i\varphi\,dt$.
+This is a necessary condition; to obtain a solution, the moment
+equations $\int_a^bN_i\varphi\,dt=f_i$ must also be compatible.
 
 (b) If every specified moment of $\psi$ is zero, then
 \[
@@ -989,7 +1211,7 @@ K(\varphi+\psi)(x)
 \]
 Thus every such $\boxed{\varphi+\psi}$ is another solution.
 
-\erratum{The manual adds that $\psi$ must itself be a linear
+\erratum{The Instructor's Manual adds that $\psi$ must itself be a linear
 combination of the $M_i$. That extra restriction is false for this
 first-kind equation. Only the image $f$, not the unknown or its
 nullspace additions, is constrained to that span.}
@@ -1043,8 +1265,16 @@ $a^2\gg\lambda b$. Explain why $a\gg\lambda$ alone is insufficient.}
 \alpha=a\sqrt{k/b}.
 \]
 This choice retains the signs that were suppressed by the squared
-relations. The Jacobian is $dx_1dy_1=(b/k)d\xi_1d\eta_1$,
-and $k\lambda=2\pi$. The equation becomes
+relations. The Jacobian is $dx_1dy_1=(b/k)d\xi_1d\eta_1$, the exponent
+becomes $(k/b)(x_1x_2+y_1y_2)=\xi_1\xi_2+\eta_1\eta_2$, the limits
+$\pm a$ become $\pm\alpha$, and, since $k\lambda=2\pi$, the prefactor
+becomes
+\[
+\frac{-i\gamma e^{ikb}}{\lambda b}\cdot\frac bk
+=\frac{-i\gamma e^{ikb}}{k\lambda}
+=\frac{-i\gamma e^{ikb}}{2\pi}.
+\]
+The equation becomes
 \[
 v(\xi_2,\eta_2)=\frac{-i\gamma e^{ikb}}{2\pi}
 \int_{-\alpha}^{\alpha}\!\!\int_{-\alpha}^{\alpha}
@@ -1056,14 +1286,25 @@ Define
 (\mathcal F_\alpha h)(u)=\frac1{\sqrt{2\pi}}
 \int_{-\alpha}^{\alpha}e^{-ius}h(s)ds.
 \]
-For a separated mode $v(\xi,\eta)=X(\xi)Y(\eta)$ the equation
-is
+For a separated mode $v(\xi,\eta)=X(\xi)Y(\eta)$ the exponential
+factorizes, $e^{-i(\xi_1\xi_2+\eta_1\eta_2)}=e^{-i\xi_1\xi_2}e^{-i\eta_1\eta_2}$,
+so the double integral is the product
+$\sqrt{2\pi}(\mathcal F_\alpha X)(\xi_2)\cdot\sqrt{2\pi}(\mathcal F_\alpha Y)(\eta_2)$
+and the factor $2\pi$ cancels. The equation is
 \[
 XY=-i\gamma e^{ikb}(\mathcal F_\alpha X)
 (\mathcal F_\alpha Y).
 \]
-The quotient in $\xi$ must be constant independently of the quotient
-in $\eta$. Thus the two one-dimensional equations and their consistency
+Where $X(\xi)Y(\eta)\ne0$, divide by $XY$:
+\[
+\frac{(\mathcal F_\alpha X)(\xi)}{X(\xi)}\cdot
+\frac{(\mathcal F_\alpha Y)(\eta)}{Y(\eta)}
+=\frac1{-i\gamma e^{ikb}}.
+\]
+The first quotient depends only on $\xi$ and the second only on $\eta$;
+holding $\eta$ fixed and varying $\xi$ shows that the first is a
+constant $\rho$, and likewise the second is a constant $\sigma$.
+Thus the two one-dimensional equations and their consistency
 condition are
 \[
 \boxed{\mathcal F_\alpha X=\rho X,\qquad
@@ -1073,22 +1314,36 @@ condition are
 These identities also make sense at isolated zeros of $X,Y$ by
 continuity, without dividing there.
 
-(b) \erratum{The original textbook condition $a\gg\lambda$ alone does not imply
+(b) \erratum{The textbook's condition $a\gg\lambda$ alone does not imply
 that $\alpha$ is large: the mirror spacing $b$ also enters. The needed
 large-aperture condition for fixed low-order modes is
 $a^2\gg\lambda b$, equivalently $\alpha^2=2\pi a^2/(\lambda b)\gg1$.}
 For example, $a=10^3\lambda$ and $b=10^9\lambda$ give
-$\alpha^2=2\pi/1000$, much less than one despite $a\gg\lambda$.
+$\alpha^2=2\pi\cdot10^6\lambda^2/(10^9\lambda^2)=2\pi/1000$, much less
+than one despite $a\gg\lambda$.
 
-The replacement by infinite limits is an approximation for modes
-concentrated well inside $(-\alpha,\alpha)$. Its pointwise error obeys
+Let $\mathcal F$ denote $\mathcal F_\alpha$ with $\alpha=\infty$, the
+full Fourier transform with kernel $e^{-ius}$. The replacement by
+infinite limits is an approximation for modes
+concentrated well inside $(-\alpha,\alpha)$. Since $|e^{-ius}|=1$, its
+pointwise error obeys
 \[
 |(\mathcal F-\mathcal F_\alpha)h(u)|
+=\frac1{\sqrt{2\pi}}\left|\int_{|s|>\alpha}e^{-ius}h(s)ds\right|
 \le\frac1{\sqrt{2\pi}}\int_{|s|>\alpha}|h(s)|ds.
 \]
 For a fixed Hermite--Gaussian mode the tail is a polynomial times
 $e^{-s^2/2}$ and becomes exponentially small as $\alpha\to\infty$.
-For the ground Gaussian $h_0(s)=\pi^{-1/4}e^{-s^2/2}$, the
+For the ground Gaussian $h_0(s)=\pi^{-1/4}e^{-s^2/2}$, at $u=0$,
+\[
+\mathcal Fh_0(0)=\frac{\pi^{-1/4}}{\sqrt{2\pi}}
+\int_{\mathbb R}e^{-s^2/2}ds=\pi^{-1/4},\qquad
+(\mathcal F-\mathcal F_\alpha)h_0(0)
+=\frac{2\pi^{-1/4}}{\sqrt{2\pi}}\int_\alpha^\infty e^{-s^2/2}ds
+=\pi^{-1/4}\operatorname{erfc}\frac{\alpha}{\sqrt2},
+\]
+using $\int_\alpha^\infty e^{-s^2/2}ds=\sqrt{\pi/2}\,
+\operatorname{erfc}(\alpha/\sqrt2)$ (put $s=\sqrt2\,w$). So the
 relative error at $u=0$ is exactly
 $\operatorname{erfc}(\alpha/\sqrt2)$. Higher orders require the aperture
 to exceed their characteristic width as well.
@@ -1099,25 +1354,48 @@ Hermite functions are
 h_n(u)=\frac{H_n(u)e^{-u^2/2}}
 {\pi^{1/4}\sqrt{2^nn!}}.
 \]
-The Gaussian transform gives $\mathcal Fh_0=h_0$. To obtain all
-higher orders, use $a^\dagger=(u-d/du)/\sqrt2$ and
-$h_n=(a^\dagger)^nh_0/\sqrt{n!}$. Integration by parts and
-differentiation under the integral give
+The Gaussian transform gives $\mathcal Fh_0=h_0$: completing the
+square, $-s^2/2-ius=-(s+iu)^2/2-u^2/2$, and
+$\int_{\mathbb R}e^{-(s+iu)^2/2}ds=\sqrt{2\pi}$, so
+\[
+\mathcal Fh_0(u)=\frac{\pi^{-1/4}e^{-u^2/2}}{\sqrt{2\pi}}
+\int_{\mathbb R}e^{-(s+iu)^2/2}ds=\pi^{-1/4}e^{-u^2/2}=h_0(u).
+\]
+To obtain all higher orders, use the raising operator $R=(u-d/du)/\sqrt2$
+(applied to functions of the variable $u$, or of $s$ inside $\mathcal F$). The
+Hermite recurrences $H_n'=2nH_{n-1}$ and $H_{n+1}=2uH_n-2nH_{n-1}$ give
+$H_{n+1}=2uH_n-H_n'$, hence $uh_n-h_n'\propto(2uH_n-H_n')e^{-u^2/2}$
+and, with the normalizations,
+$R h_n=\sqrt{n+1}\,h_{n+1}$, i.e.\
+$h_n=R^nh_0/\sqrt{n!}$. Differentiation under the integral
+and integration by parts (boundary terms vanish for decaying $h$) give
+\[
+\frac{d}{du}\mathcal Fh=\frac1{\sqrt{2\pi}}\int_{\mathbb R}(-is)e^{-ius}h(s)ds
+=-i\mathcal F(sh),\qquad
+\mathcal F(h')=-\frac1{\sqrt{2\pi}}\int_{\mathbb R}(-iu)e^{-ius}h(s)ds,
+\]
+that is,
 \[
 \mathcal F(sh)=i\frac{d}{du}\mathcal Fh,\qquad
 \mathcal F(h')=iu\,\mathcal Fh.
 \]
 Therefore
 \[
-\mathcal F(a^\dagger h)
+\mathcal F(R h)
+=\frac1{\sqrt2}\bigl[\mathcal F(sh)-\mathcal F(h')\bigr]
 =\frac{i}{\sqrt2}\left(\frac{d}{du}-u\right)\mathcal Fh
-=-i\,a^\dagger\mathcal Fh,
+=-i\,R\mathcal Fh,
 \]
-and induction yields
+and induction,
+$\mathcal Fh_{n+1}=\mathcal F(R h_n)/\sqrt{n+1}
+=-i\,R(-i)^nh_n/\sqrt{n+1}=(-i)^{n+1}h_{n+1}$, yields
 \[
 \boxed{\mathcal Fh_n=(-i)^nh_n}.
 \]
-A separated two-dimensional mode is consequently
+A separated two-dimensional mode $X=h_n$, $Y=h_m$ thus has
+$\rho=(-i)^n$, $\sigma=(-i)^m$, and the consistency condition
+$1=-i\gamma e^{ikb}(-i)^{n+m}$ gives
+$\gamma=e^{-ikb}/(-i)^{n+m+1}=i^{\,n+m+1}e^{-ikb}$ (since $1/(-i)=i$):
 \[
 \boxed{v_{nm}(\xi,\eta)=C\,h_n(\xi)h_m(\eta),\qquad
 \gamma_{nm}=i^{\,n+m+1}e^{-ikb}}.
