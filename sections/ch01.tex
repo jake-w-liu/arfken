@@ -2741,14 +2741,18 @@ so $\mathbf Q$ and $\mathbf R$ form a second perpendicular pair.
 form but expressing the final result in Cartesian form.
 \solution
 For $z=x+iy\ne0$, set $r=\sqrt{x^2+y^2}$ and
-$z=r(\cos\theta+i\sin\theta)=re^{i\theta}$.
-The reciprocal has magnitude $1/r$ and angle $-\theta$:
+$z=r(\cos\theta+i\sin\theta)=re^{i\theta}$, so that
+$\cos\theta=x/r$ and $\sin\theta=y/r$.
+Since $re^{i\theta}\cdot r^{-1}e^{-i\theta}=e^0=1$, the reciprocal has
+magnitude $1/r$ and angle $-\theta$:
 \[
  \frac1z=r^{-1}e^{-i\theta}
  =\frac1r(\cos\theta-i\sin\theta)
+ =\frac1r\left(\frac xr-i\frac yr\right)
  =\boxed{\frac{x-iy}{x^2+y^2}}.
 \]
-Multiplication by $x+iy$ gives $(x^2+y^2)/(x^2+y^2)=1$,
+Multiplication by $x+iy$ gives $(x-iy)(x+iy)/(x^2+y^2)
+=(x^2+y^2)/(x^2+y^2)=1$,
 checking the result. No reciprocal exists at $x=y=0$.
 
 
@@ -2760,11 +2764,17 @@ roots of $i$?
 \solution
 Write a nonzero complex number as $z=re^{i\theta}$ with $r>0$.
 The two numbers $w_k=\sqrt r\,e^{i(\theta/2+k\pi)}$, $k=0,1$,
-satisfy $w_k^2=re^{i\theta}e^{2\pi ik}=z$. They are opposites and
-are distinct. Conversely, if $w=\rho e^{i\phi}$ satisfies $w^2=z$,
-then $\rho^2=r$ and $2\phi=\theta+2\pi k$, giving precisely these
-two roots. Zero has the single distinct square root zero.
-For $i=e^{i\pi/2}$ this gives
+satisfy $w_k^2=re^{i\theta}e^{2\pi ik}=z$. They are opposites,
+$w_1=e^{i\pi}w_0=-w_0$, and are distinct because $w_0\ne0$.
+Conversely, if $w=\rho e^{i\phi}$ with $\rho>0$ satisfies $w^2=z$,
+then $\rho^2e^{2i\phi}=re^{i\theta}$. Equal moduli give $\rho=\sqrt r$,
+and equal phases give $2\phi=\theta+2\pi k$ with $k$ an integer, that
+is, $\phi=\theta/2+k\pi$; even $k$ gives $w_0$ and odd $k$ gives $w_1$.
+So there are precisely these two roots, and both are again complex
+numbers: the square roots lie in the complex plane.
+Zero has the single square root zero, since $w^2=0$ forces $w=0$.
+For $i=e^{i\pi/2}$ ($r=1$, $\theta=\pi/2$) this gives, with
+$\cos(\pi/4)=\sin(\pi/4)=1/\sqrt2$,
 \[
  \boxed{\sqrt i=\pm e^{i\pi/4}=\pm\frac{1+i}{\sqrt2}}.
 \]
@@ -2782,6 +2792,10 @@ Squaring either value gives $(1+2i-1)/2=i$.
   -\binom{n}{3}\cos^{n-3}\theta\sin^{3}\theta+\cdots.$
 \end{enumerate}
 \solution
+\erratum{The hypotheses added to the statement are those the proof
+uses: for an integer $n\ge0$ the binomial expansion below is a finite
+sum, and for real $\theta$ its real and imaginary parts can be read off
+term by term.}
 For a nonnegative integer $n$, de Moivre's formula and the binomial
 expansion give
 \[
@@ -2790,7 +2804,10 @@ expansion give
  =\sum_{j=0}^n\binom nj\cos^{n-j}\theta\,i^j\sin^j\theta.
 \]
 For $j=2r$, $i^{2r}=(-1)^r$, while for $j=2r+1$,
-$i^{2r+1}=i(-1)^r$. Equating real and imaginary parts therefore yields
+$i^{2r+1}=i(-1)^r$. The terms with even $j$ are therefore real and those
+with odd $j$ are imaginary; the conditions $2r\le n$ and $2r+1\le n$
+give the upper limits $\lfloor n/2\rfloor$ and $\lfloor(n-1)/2\rfloor$.
+Equating real and imaginary parts yields
 \[
  \cos n\theta=\sum_{r=0}^{\lfloor n/2\rfloor}
  (-1)^r\binom n{2r}\cos^{n-2r}\theta\sin^{2r}\theta,
@@ -2799,8 +2816,9 @@ $i^{2r+1}=i(-1)^r$. Equating real and imaginary parts therefore yields
  \sin n\theta=\sum_{r=0}^{\lfloor(n-1)/2\rfloor}
  (-1)^r\binom n{2r+1}\cos^{n-2r-1}\theta\sin^{2r+1}\theta.
 \]
-These are the two requested finite expansions. For $n=0$ the second
-sum is empty and gives zero.
+Their terms $r=0,1,2,\ldots$ are exactly those displayed in (a) and
+(b), so these are the two requested finite expansions. For $n=0$ the
+second sum is empty and gives zero.
 
 
 \Needspace{5\baselineskip}
@@ -2812,21 +2830,33 @@ sum is empty and gives zero.
 \end{enumerate}
 \erratum{Here $N$ is a positive integer and $x$ is real; at $x=2\pi m$, use the continuous limits $N$ and $0$, respectively.} These series occur in the analysis of the multiple-slit diffraction pattern.
 \solution
-For $e^{ix}\ne1$, sum the finite geometric progression:
+\erratum{The parentheses in the statement fix the argument of the last
+factor as $(N-1)x/2$, as derived below; the textbook's typesetting of
+this argument is ambiguous.}
+For $e^{ix}\ne1$, that is, $x\ne2\pi m$ with $m$ an integer, sum the
+finite geometric progression with ratio $e^{ix}$:
 \[
  \sum_{n=0}^{N-1}e^{inx}=\frac{1-e^{iNx}}{1-e^{ix}}.
 \]
-Using $1-e^{it}=-2i e^{it/2}\sin(t/2)$ in numerator and denominator
-reduces this to
+Factoring out the half angle,
+$1-e^{it}=e^{it/2}(e^{-it/2}-e^{it/2})=-2i e^{it/2}\sin(t/2)$.
+Using this with $t=Nx$ in the numerator and $t=x$ in the denominator
+gives
 \[
  \sum_{n=0}^{N-1}e^{inx}
+ =\frac{-2ie^{iNx/2}\sin(Nx/2)}{-2ie^{ix/2}\sin(x/2)}
  =e^{i(N-1)x/2}\frac{\sin(Nx/2)}{\sin(x/2)}.
 \]
-For real $x$ the sine quotient is real, so taking real and imaginary
-parts gives (a) and (b). At $x=2\pi m$ the displayed quotient is
-$0/0$, but the original sums are $N$ and $0$; these values are also
-the continuous limits of the right sides. This supplies the removable
-exception to the formulas.
+For real $x$ the sine quotient is real, while
+$e^{inx}=\cos nx+i\sin nx$ and
+$e^{i(N-1)x/2}=\cos[(N-1)x/2]+i\sin[(N-1)x/2]$; taking real and
+imaginary parts gives (a) and (b). At $x=2\pi m$ the quotient is
+$0/0$, but every $e^{inx}=1$, so the sums are $N$ and $0$. These values
+are also the limits of the right sides: with $x=2\pi m+h$,
+$\sin(Nx/2)=(-1)^{Nm}\sin(Nh/2)$ and $\sin(x/2)=(-1)^m\sin(h/2)$, so
+the quotient tends to $(-1)^{(N-1)m}N$ as $h\to0$, while
+$\cos[(N-1)x/2]\to(-1)^{(N-1)m}$ and $\sin[(N-1)x/2]\to0$. The products
+tend to $N$ and $0$, so the exception at $x=2\pi m$ is removable.
 
 
 \Needspace{5\baselineskip}
@@ -2835,15 +2865,14 @@ exception to the formulas.
 hyperbolic functions are defined for complex argument by the appropriate power
 series. Show that
 \[
-\erratum{i\sin z}=\sinh iz,\quad\sin iz=i\sinh z,
+i\sin z=\sinh iz,\quad\sin iz=i\sinh z,
 \]
 \[
 \cos z=\cosh iz,\quad\cos iz=\cosh z.
 \]
 \solution
-\erratum{The first identity was mistranscribed: the textbook (p.~61)
-has $i\sin z=\sinh(iz)$, not $i\sin(iz)=\sinh(iz)$.}
-Direct substitution into the entire power series gives
+Direct substitution of $iz$ into the entire power series, with
+$i^{2n}=(-1)^n$, $i^{2n+1}=i(-1)^n$ and $(-1)^n(-1)^n=1$, gives
 \[
  \begin{aligned}
  \sinh(iz)&=\sum_{n=0}^\infty\frac{i^{2n+1}z^{2n+1}}{(2n+1)!}
@@ -2875,14 +2904,23 @@ This demonstrates that we may have $|\sin z|$, $|\cos z|>1$ in the complex
 plane.
 \solution
 (a) For real $x,y$, $e^{i(x+iy)}=e^{-y}(\cos x+i\sin x)$ and
-$e^{-i(x+iy)}=e^y(\cos x-i\sin x)$. Substituting these in the
-exponential definitions and collecting terms gives
+$e^{-i(x+iy)}=e^y(\cos x-i\sin x)$. With $z=x+iy$, collecting the
+terms in $\cos x$ and $\sin x$ gives
+\[
+ \begin{aligned}
+ e^{iz}-e^{-iz}&=-(e^y-e^{-y})\cos x+i(e^y+e^{-y})\sin x,\\
+ e^{iz}+e^{-iz}&=(e^y+e^{-y})\cos x-i(e^y-e^{-y})\sin x.
+ \end{aligned}
+\]
+Dividing the first line by $2i$ (note $-1/i=i$) and the second by $2$,
 \[
  \begin{aligned}
  \sin(x+iy)&=\sin x\frac{e^y+e^{-y}}2
        +i\cos x\frac{e^y-e^{-y}}2
        =\sin x\cosh y+i\cos x\sinh y,\\
- \cos(x+iy)&=\cos x\cosh y-i\sin x\sinh y.
+ \cos(x+iy)&=\cos x\frac{e^y+e^{-y}}2
+       -i\sin x\frac{e^y-e^{-y}}2
+       =\cos x\cosh y-i\sin x\sinh y.
  \end{aligned}
 \]
 (b) Add the squares of each expression's real and imaginary parts:
@@ -2892,6 +2930,7 @@ exponential definitions and collecting terms gives
  =\sin^2x+(\sin^2x+\cos^2x)\sinh^2y
  =\sin^2x+\sinh^2y,\\
  |\cos z|^2&=\cos^2x\cosh^2y+\sin^2x\sinh^2y
+ =\cos^2x+(\cos^2x+\sin^2x)\sinh^2y
  =\cos^2x+\sinh^2y.
  \end{aligned}
 \]
@@ -2910,27 +2949,34 @@ show that
   \erratum{$|\cosh z|^{2}=\cosh^{2}x-\sin^{2}y$}.
 \end{enumerate}
 \solution
-(a) Insert $e^{x+iy}=e^x(\cos y+i\sin y)$ and
-$e^{-x-iy}=e^{-x}(\cos y-i\sin y)$ in the definitions of
-$\sinh$ and $\cosh$. Subtracting and adding respectively yields
+(a) By Exercise 1.8.5, $\sin iz=i\sinh z$ and $\cos iz=\cosh z$, so
+$\sinh z=-i\sin(iz)$ and $\cosh z=\cos(iz)$. For $z=x+iy$,
+$iz=-y+ix$ has real part $-y$ and imaginary part $x$. Exercise
+1.8.6(a), with $\sin(-y)=-\sin y$ and $\cos(-y)=\cos y$, then gives
 \[
- \sinh(x+iy)=\sinh x\cos y+i\cosh x\sin y,
- \quad
- \cosh(x+iy)=\cosh x\cos y+i\sinh x\sin y.
+ \begin{aligned}
+ \sinh(x+iy)&=-i[\sin(-y)\cosh x+i\cos(-y)\sinh x]
+            =\sinh x\cos y+i\cosh x\sin y,\\
+ \cosh(x+iy)&=\cos(-y)\cosh x-i\sin(-y)\sinh x
+            =\cosh x\cos y+i\sinh x\sin y.
+ \end{aligned}
 \]
-(b) Consequently
+(b) Consequently, using $\cosh^2x-\sinh^2x=1$ and
+$\cos^2y+\sin^2y=1$,
 \[
  \begin{aligned}
  |\sinh z|^2&=\sinh^2x\cos^2y+\cosh^2x\sin^2y
+             =\sinh^2x\cos^2y+(1+\sinh^2x)\sin^2y
              =\sinh^2x+\sin^2y,\\
  |\cosh z|^2&=\cosh^2x\cos^2y+\sinh^2x\sin^2y
+             =\cosh^2x\cos^2y+(\cosh^2x-1)\sin^2y
              =\cosh^2x-\sin^2y.
  \end{aligned}
 \]
-\erratum{The last sign is minus, correcting an error also present in
-the textbook (p.~61).} At $x=0,y=\pi/2$, $\cosh(i\pi/2)=0$;
-the corrected right side is $1-1=0$, whereas the printed plus sign
-would give $2$. This independently checks the correction.
+\erratum{The textbook (p.~61) prints a plus sign in the last identity;
+the correct sign is minus, as just derived.} As a check, at $x=0$,
+$y=\pi/2$, $\cosh(i\pi/2)=\cos(\pi/2)=0$; the corrected right side is
+$1-1=0$, whereas the printed plus sign would give $2$.
 
 
 \Needspace{5\baselineskip}
@@ -2941,23 +2987,38 @@ would give $2$. This independently checks the correction.
 \item[(b)] $\displaystyle\coth\frac{z}{2}=\frac{\sinh x-i\sin y}{\cosh x-\cos y}$.
 \end{enumerate}
 \solution
-Let $z=x+iy$ with $x,y$ real. From the exponential definitions,
-$\tanh(z/2)=(e^z-1)/(e^z+1)$. Multiply numerator and denominator
-by the conjugate $e^{x-iy}+1$ to obtain
+Let $z=x+iy$ with $x,y$ real, and $\bar z=x-iy$. Multiplying numerator
+and denominator of
+$\tanh(z/2)=(e^{z/2}-e^{-z/2})/(e^{z/2}+e^{-z/2})$ by $e^{z/2}$ gives
+$\tanh(z/2)=(e^z-1)/(e^z+1)$. Now multiply numerator and denominator
+by $e^{\bar z}+1$, the conjugate of $e^z+1$, and use
+\[
+ e^ze^{\bar z}=e^{2x},\qquad
+ e^z-e^{\bar z}=e^x(e^{iy}-e^{-iy})=2ie^x\sin y,\qquad
+ e^z+e^{\bar z}=2e^x\cos y.
+\]
+This gives
 \[
  \tanh\frac z2
+ =\frac{e^{2x}-1+(e^z-e^{\bar z})}{e^{2x}+1+(e^z+e^{\bar z})}
  =\frac{e^{2x}-1+2ie^x\sin y}{e^{2x}+1+2e^x\cos y}
- =\frac{\sinh x+i\sin y}{\cosh x+\cos y}.
+ =\frac{\sinh x+i\sin y}{\cosh x+\cos y},
 \]
-Likewise $\coth(z/2)=(e^z+1)/(e^z-1)$. Multiplication by
-$e^{x-iy}-1$ gives
+the last step dividing numerator and denominator by $2e^x$.
+Likewise $\coth(z/2)=(e^z+1)/(e^z-1)$. Multiplying numerator and
+denominator by $e^{\bar z}-1$ gives
 \[
  \coth\frac z2
+ =\frac{e^{2x}-1-(e^z-e^{\bar z})}{e^{2x}+1-(e^z+e^{\bar z})}
  =\frac{e^{2x}-1-2ie^x\sin y}{e^{2x}+1-2e^x\cos y}
  =\frac{\sinh x-i\sin y}{\cosh x-\cos y}.
 \]
-The divisions exclude the poles: $z=(2m+1)\pi i$ for $\tanh(z/2)$
-and $z=2m\pi i$ for $\coth(z/2)$, $m\in\mathbb Z$.
+The divisions exclude the poles. Since $\cosh x\ge1\ge|\cos y|$, the
+denominator $\cosh x+\cos y$ vanishes only for $x=0$, $\cos y=-1$,
+that is, at $z=(2m+1)\pi i$, the poles of $\tanh(z/2)$; likewise
+$\cosh x-\cos y$ vanishes only at $z=2m\pi i$, the poles of
+$\coth(z/2)$ ($m\in\mathbb Z$). Elsewhere the factors $e^{\bar z}\pm1$
+used above are nonzero.
 
 
 \Needspace{5\baselineskip}
@@ -2965,16 +3026,23 @@ and $z=2m\pi i$ for $\coth(z/2)$, $m\in\mathbb Z$.
 \noindent\textbf{1.8.9}\quad By comparing series expansions, show that
 $\displaystyle\tan^{-1}x=\frac{i}{2}\erratum{\operatorname{Log}}\left(\frac{1-ix}{1+ix}\right)$, \erratum{for real $x$, with the principal inverse tangent and principal logarithm}.
 \solution
-For $|x|<1$, subtract the logarithm series on their branches through
-$\log1=0$:
+For $|x|<1$, use the series
+$\log(1+w)=\sum_{k\ge1}(-1)^{k+1}w^k/k$ ($|w|<1$), on the branch with
+$\log1=0$, at $w=-ix$ and $w=ix$: $\log(1-ix)=-\sum_k(ix)^k/k$ and
+$\log(1+ix)=\sum_k(-1)^{k+1}(ix)^k/k$. Subtracting, the even powers
+cancel and the odd ones double; with $(ix)^{2r+1}=i(-1)^rx^{2r+1}$,
 \[
  \log(1-ix)-\log(1+ix)
  =-2\left(ix+\frac{(ix)^3}3+\frac{(ix)^5}5+\cdots\right)
  =-2i\left(x-\frac{x^3}3+\frac{x^5}5-\cdots\right).
 \]
-Multiplication by $i/2$ gives exactly the Gregory series for $\arctan x$.
-For all real $x$, $(1-ix)/(1+ix)$ has unit modulus and argument
-$-2\arctan x\in(-\pi,\pi)$, so the principal logarithm satisfies
+Multiplication by $i/2$, with $(i/2)(-2i)=1$, gives exactly the Gregory
+series for $\arctan x$.
+For all real $x$, write $1+ix=\sqrt{1+x^2}\,e^{i\alpha}$ with
+$\alpha=\arctan x\in(-\pi/2,\pi/2)$; then $1-ix=\sqrt{1+x^2}\,e^{-i\alpha}$,
+so $(1-ix)/(1+ix)=e^{-2i\alpha}$ has unit modulus and argument
+$-2\alpha\in(-\pi,\pi)$. Hence its principal logarithm is $-2i\alpha$,
+and $(i/2)(-2i\alpha)=\alpha$:
 \[
  \boxed{\arctan x=\frac i2\operatorname{Log}\frac{1-ix}{1+ix}}.
 \]
@@ -2994,20 +3062,25 @@ must be retained.
 \end{enumerate}
 \solution
 (a) Write $-8=8e^{i(\pi+2\pi k)}$. The cube roots have magnitude
-$2$ and arguments $(\pi+2\pi k)/3$, $k=0,1,2$:
+$8^{1/3}=2$ and arguments $(\pi+2\pi k)/3=\pi/3,\pi,5\pi/3$ for
+$k=0,1,2$. Since $2e^{\pm i\pi/3}=2(1/2\pm i\sqrt3/2)$ and
+$2e^{5i\pi/3}=2e^{-i\pi/3}$, they are
 \[
  \boxed{1+i\sqrt3,\quad-2,\quad1-i\sqrt3}.
 \]
-(b) The fourth roots of $i=e^{i(\pi/2+2\pi k)}$ have arguments
-$\pi/8+k\pi/2$, $k=0,1,2,3$. Set
-$A=\sqrt{2+\sqrt2}/2$ and $B=\sqrt{2-\sqrt2}/2$; half-angle
-identities give $\cos(\pi/8)=A$, $\sin(\pi/8)=B$. The four Cartesian
+(b) The fourth roots of $i=e^{i(\pi/2+2\pi k)}$ have unit modulus and
+arguments $\pi/8+k\pi/2$, $k=0,1,2,3$. Set
+$A=\sqrt{2+\sqrt2}/2$ and $B=\sqrt{2-\sqrt2}/2$; the half-angle
+identities $\cos^2(\pi/8)=[1+\cos(\pi/4)]/2=(2+\sqrt2)/4$ and
+$\sin^2(\pi/8)=[1-\cos(\pi/4)]/2=(2-\sqrt2)/4$ give
+$\cos(\pi/8)=A$, $\sin(\pi/8)=B$. Each further root is the previous one
+times $e^{i\pi/2}=i$, and $i(A+iB)=-B+iA$, so the four Cartesian
 values are
 \[
  \boxed{A+iB,\quad-B+iA,\quad-A-iB,\quad B-iA}.
 \]
 (c) The exponential is single-valued:
-$\boxed{e^{i\pi/4}=(1+i)/\sqrt2}$.
+$\boxed{e^{i\pi/4}=\cos(\pi/4)+i\sin(\pi/4)=(1+i)/\sqrt2}$.
 Adding $2\pi$ to its angle reproduces this same value; it does not
 create additional roots. Cubing the values in (a) or taking fourth
 powers in (b) returns the specified original number.
@@ -3021,11 +3094,12 @@ powers in (b) returns the specified original number.
 \item[(b)] $(-1)^{1/5}$.
 \end{enumerate}
 \solution
-(a) Since $1+i=\sqrt2 e^{i\pi/4}$,
+(a) Since $1+i=\sqrt2 e^{i\pi/4}$ and $(\sqrt2)^3=2\sqrt2$,
 \[
  \boxed{(1+i)^3=2\sqrt2 e^{3\pi i/4}}.
 \]
-This is one value, equal to $-2+2i$ in Cartesian form. Its argument
+This is one value, equal to $2\sqrt2(-1+i)/\sqrt2=-2+2i$ in Cartesian
+form; directly, $(1+i)^2=2i$ and $2i(1+i)=-2+2i$. Its argument
 may be written $3\pi/4+2\pi m$, but all such choices represent the
 same complex number.
 
@@ -3061,17 +3135,29 @@ where all the partial derivatives are to be evaluated at the point $(0,0)$.
 \solution
 \erratum{An infinite Taylor expansion represents the function only
 where its remainder tends to zero; analyticity near the origin is a
-sufficient hypothesis. Smoothness alone is not sufficient.}
+sufficient hypothesis. Smoothness alone is not sufficient.} For
+example, $f(x,y)=e^{-1/x^2}$ (with $f=0$ at $x=0$) is infinitely
+differentiable, but all its partial derivatives vanish at the origin,
+so the series sums to $0\ne f(x,y)$ for $x\ne0$.
+
 Fix $x,y$ and define the one-variable function $F(t)=f(tx,ty)$.
-The chain rule gives $F'(t)=(x\partial_x+y\partial_y)f(tx,ty)$.
-Iterating, using commutation of the mixed partial derivatives, yields
+The chain rule gives $F'(t)=(x\partial_x+y\partial_y)f(tx,ty)$:
+differentiation in $t$ acts as the operator $x\partial_x+y\partial_y$
+followed by evaluation at $(tx,ty)$. Applying this to
+$f,(x\partial_x+y\partial_y)f,\ldots$ in turn gives
+$F^{(n)}(t)=[(x\partial_x+y\partial_y)^nf](tx,ty)$. Since $x,y$ are
+constants and the mixed partial derivatives commute, the binomial
+theorem expands the operator power, and at $t=0$
 \[
  F^{(n)}(0)=\sum_{j=0}^n\binom nj x^{n-j}y^j
           \frac{\partial^n f}{\partial x^{n-j}\partial y^j}(0,0).
 \]
-Taylor-expand $F$ about $t=0$ and then set $t=1$:
+Taylor-expand $F$ about $t=0$ and then set $t=1$ (the hypothesis
+ensures that this series converges to $F(1)=f(x,y)$); with
+$\binom nj/n!=1/[(n-j)!\,j!]$,
 \[
- f(x,y)=\sum_{n=0}^\infty\sum_{j=0}^n
+ f(x,y)=\sum_{n=0}^\infty\frac{F^{(n)}(0)}{n!}
+ =\sum_{n=0}^\infty\sum_{j=0}^n
  \frac{x^{n-j}y^j}{(n-j)!j!}
  \frac{\partial^n f}{\partial x^{n-j}\partial y^j}(0,0).
 \]
@@ -3096,20 +3182,35 @@ f(x_{1},\ldots,x_{m})
 \]
 where in the right-hand side we have made the substitutions $x_{j}=\alpha_{j}t$.
 \solution
-Define $F(t)=f(\alpha_1t,\ldots,\alpha_mt)$ with fixed $\alpha_i$.
-The chain rule and induction give
+Define $F(t)=f(\alpha_1t,\ldots,\alpha_mt)$ with fixed $\alpha_i$, and
+write $D=\sum_{i=1}^m\alpha_i\partial_{x_i}$. For any differentiable
+$g$ the chain rule gives
+$\frac{d}{dt}g(\alpha_1t,\ldots,\alpha_mt)
+=\sum_i\alpha_i(\partial_{x_i}g)(\alpha_1t,\ldots,\alpha_mt)
+=(Dg)(\alpha_1t,\ldots,\alpha_mt)$.
+Applying this to $g=f,Df,D^2f,\ldots$ in turn gives, by induction,
 \[
- F^{(n)}(t)=\left(\sum_{i=1}^m\alpha_i\partial_{x_i}\right)^n
- f(\alpha_1t,\ldots,\alpha_mt).
+ F^{(n)}(t)=\left[\left(\sum_{i=1}^m\alpha_i\partial_{x_i}\right)^n
+ f(\mathbf x)\right]_{\mathbf x=(\alpha_1t,\ldots,\alpha_mt)}.
 \]
-Therefore Taylor's formula in $t$ is
+Therefore Taylor's formula in $t$ about $t=0$,
+$F(t)=\sum_nF^{(n)}(0)\,t^n/n!$, is
 \[
  F(t)=\sum_{n=0}^\infty\frac{t^n}{n!}
  \left[\left(\sum_{i=1}^m\alpha_i\partial_{x_i}\right)^n
  f(\mathbf x)\right]_{\mathbf x=0}.
 \]
-\erratum{The book's symbolic $D^nf(0)$ means that derivatives act on $f$ before evaluation at zero; the brackets in the corrected statement make this order explicit. Differentiating the constant $f(0)$ would instead give zero for $n>0$.} Since $x_i=\alpha_it$, this is the required symbolic
-form. Explicitly the multinomial theorem gives
+\erratum{The book's symbolic $D^nf(0)$ means that derivatives act on $f$ before evaluation at zero; the brackets in the corrected statement make this order explicit. Differentiating the constant $f(0)$ would instead give zero for $n>0$.} Since $x_i=\alpha_it$, $F(t)=f(x_1,\ldots,x_m)$, and this is the
+required symbolic form. Explicitly, since the $\partial_{x_i}$ commute,
+the multinomial theorem gives
+\[
+ D^n=\sum_{r_1+\cdots+r_m=n}\frac{n!}{r_1!\cdots r_m!}\,
+ \alpha_1^{r_1}\cdots\alpha_m^{r_m}\,
+ \partial_{x_1}^{r_1}\cdots\partial_{x_m}^{r_m},
+\]
+and with $(\alpha_it)^{r_i}=x_i^{r_i}$ the $n$th term
+$t^n[D^nf]_{\mathbf x=0}/n!$ becomes the sum of the terms with
+$r_1+\cdots+r_m=n$ in
 \[
  f(\mathbf x)=\sum_{r_1,\ldots,r_m\ge0}
  \frac{x_1^{r_1}\cdots x_m^{r_m}}{r_1!\cdots r_m!}
@@ -3131,7 +3232,8 @@ positive integers $n$, $\Gamma(n)=(n-1)!$.
 Evaluate the integrals in Exercises 1.10.2 through 1.10.9.
 \solution
 Start from $\Gamma(n)=\int_0^\infty t^{n-1}e^{-t}dt$ for $n>0$.
-For an integer $n\ge1$, integration by parts gives
+For an integer $n\ge1$, integration by parts with $u=t^n$,
+$dv=e^{-t}dt$, $v=-e^{-t}$ gives
 \[
  \Gamma(n+1)=\int_0^\infty t^n e^{-t}dt
  =[-t^n e^{-t}]_0^\infty+n\int_0^\infty t^{n-1}e^{-t}dt
@@ -3140,7 +3242,8 @@ For an integer $n\ge1$, integration by parts gives
 The boundary term vanishes because the exponential dominates any fixed
 power at infinity and $t^n\to0$ at zero. The initial value is
 $\Gamma(1)=\int_0^\infty e^{-t}dt=1$. Repeated application of the
-recurrence yields $\Gamma(n)=(n-1)(n-2)\cdots1\,\Gamma(1)
+recurrence, $\Gamma(n)=(n-1)\Gamma(n-1)=(n-1)(n-2)\Gamma(n-2)=\cdots$,
+yields (by induction on $n$) $\Gamma(n)=(n-1)(n-2)\cdots1\,\Gamma(1)
 =\boxed{(n-1)!}$, including $n=1$ with $0!=1$.
 
 
@@ -3150,19 +3253,29 @@ recurrence yields $\Gamma(n)=(n-1)(n-2)\cdots1\,\Gamma(1)
 
 \emph{Hint.}~Multiply integrand by $e^{-ax}$ and take the limit $\erratum{a\downarrow0}$.
 \solution
+\erratum{The limit in the hint is one-sided because the damped
+integral diverges for $a<0$.}
 For $a>0$ define $I(a)=\int_0^\infty e^{-ax}\sin x\,dx/x$.
-Exponential decay permits differentiation under the integral:
+For $a\ge a_0>0$ the $a$-derivative of the integrand,
+$-e^{-ax}\sin x$, is bounded by the integrable function $e^{-a_0x}$,
+which permits differentiation under the integral:
 \[
- I'(a)=-\int_0^\infty e^{-ax}\sin x\,dx
-       =-\operatorname{Im}\frac1{a-i}=-\frac1{1+a^2}.
+ \begin{aligned}
+ I'(a)&=-\int_0^\infty e^{-ax}\sin x\,dx
+       =-\operatorname{Im}\int_0^\infty e^{-(a-i)x}dx\\
+      &=-\operatorname{Im}\frac1{a-i}
+       =-\operatorname{Im}\frac{a+i}{a^2+1}=-\frac1{1+a^2}.
+ \end{aligned}
 \]
-Also $|I(a)|\le\int_0^\infty e^{-ax}dx=1/a$, so $I(a)\to0$
-as $a\to\infty$. Integrating this derivative from $a$ to infinity gives
+Also $|\sin x/x|\le1$ gives $|I(a)|\le\int_0^\infty e^{-ax}dx=1/a$,
+so $I(a)\to0$ as $a\to\infty$. Integrating the derivative from $a$ to
+infinity therefore gives $0-I(a)=\int_a^\infty I'(t)\,dt$, that is,
 \[
  I(a)=\int_a^\infty\frac{dt}{1+t^2}=\frac\pi2-\arctan a.
 \]
-It remains to justify removing the damping. For $a\ge0$ the decreasing
-function $g(x)=e^{-ax}/x$ satisfies $g'\le0$. On $[R,T]$,
+It remains to justify removing the damping. For $a\ge0$ the function
+$g(x)=e^{-ax}/x$ is decreasing on $x>0$, so $g'\le0$. Integrating by
+parts on $[R,T]$, $0<R<T$,
 \[
  \int_R^T g(x)\sin x\,dx=[-g(x)\cos x]_R^T+
                               \int_R^T g'(x)\cos x\,dx.
@@ -3170,10 +3283,19 @@ function $g(x)=e^{-ax}/x$ satisfies $g'\le0$. On $[R,T]$,
 Its absolute value is at most
 $g(R)+g(T)+\int_R^T|g'(x)|dx
 =g(R)+g(T)+g(R)-g(T)=2g(R)\le2/R$.
-Taking $T\to\infty$ proves the same bound for the tail.
-This tail bound is uniform in $a$, and the integral on $[0,R]$ tends
-to its undamped value by dominated convergence. Thus the ordinary
-improper integral equals $\lim_{a\downarrow0}I(a)$:
+Applied on any $[T_1,T_2]$, the same bound $2/T_1\to0$ shows by the
+Cauchy criterion that $\int_R^\infty g(x)\sin x\,dx$ converges, also
+for the undamped $a=0$; letting $T\to\infty$ above, its absolute value
+is at most $2/R$ for every $a\ge0$. Let
+$I(0)=\int_0^\infty\sin x\,dx/x$. Splitting at $R$ and using
+$|\sin x/x|\le1$ and $0\le1-e^{-ax}\le ax$ on $[0,R]$,
+\[
+ |I(0)-I(a)|\le\int_0^R(1-e^{-ax})\,dx+\frac2R+\frac2R
+ \le\frac{aR^2}2+\frac4R.
+\]
+Choosing $R$ large and then $a$ small makes this arbitrarily small, so
+the ordinary improper integral equals
+$\lim_{a\downarrow0}I(a)=\lim_{a\downarrow0}(\pi/2-\arctan a)$:
 \[
  \boxed{\int_0^\infty\frac{\sin x}{x}dx=\frac\pi2}.
 \]
@@ -3187,21 +3309,31 @@ an Abel-summed value to the expression.
 
 \emph{Hint.}~\erratum{Expand the integrand using $e^{-x}$ for $x>0$, and control the integrated remainder at $x=0$.}
 \solution
-For $x>0$,
+Since $\cosh x=e^x(1+e^{-2x})/2$, and the finite geometric sum
+$1/(1+q)=\sum_{n=0}^N(-q)^n+(-q)^{N+1}/(1+q)$ holds for $q=e^{-2x}$,
+for $x>0$
 \[
  \frac1{\cosh x}=\frac{2e^{-x}}{1+e^{-2x}}
  =2\sum_{n=0}^N(-1)^ne^{-(2n+1)x}
   +\frac{2(-1)^{N+1}e^{-(2N+3)x}}{1+e^{-2x}}.
 \]
-The integral of the last term has absolute value at most $2/(2N+3)$,
-so integrating and taking the limit is justified even though the
-geometric series itself does not converge at $x=0$. \erratum{Thus the original hint's claim of series convergence at every relevant $x$ needs this endpoint qualification.} Therefore
+Each term integrates to $\int_0^\infty e^{-(2n+1)x}dx=1/(2n+1)$, and
+since $1+e^{-2x}\ge1$, the integral of the last term has absolute
+value at most $2\int_0^\infty e^{-(2N+3)x}dx=2/(2N+3)\to0$. So
+integrating and taking the limit $N\to\infty$ is justified even though
+the geometric series itself does not converge at $x=0$, where it reads
+$2(1-1+1-\cdots)$. \erratum{The textbook's hint asks for an expansion
+that converges for all relevant $x$; this one diverges at the endpoint
+$x=0$, which is why the hint in the statement adds the remainder
+estimate.} Therefore, by Leibniz's series
+$1-\frac13+\frac15-\cdots=\pi/4$ (the Gregory series at $x=1$),
 \[
  \int_0^\infty\frac{dx}{\cosh x}
  =2\sum_{n=0}^\infty\frac{(-1)^n}{2n+1}=\boxed{\frac\pi2}.
 \]
-An independent substitution $t=e^{-x}$ gives
-$2\int_0^1dt/(1+t^2)=2[\arctan t]_0^1=\pi/2$.
+An independent substitution $t=e^{-x}$, $dx=-dt/t$, turns the
+integrand $2e^{-x}dx/(1+e^{-2x})$ into $-2\,dt/(1+t^2)$, with limits
+$t=1$ to $t=0$; this gives $2\int_0^1dt/(1+t^2)=2[\arctan t]_0^1=\pi/2$.
 
 
 \Needspace{5\baselineskip}
@@ -3209,18 +3341,24 @@ $2\int_0^1dt/(1+t^2)=2[\arctan t]_0^1=\pi/2$.
 \noindent\textbf{1.10.4}\quad
 $\displaystyle\int_{0}^{\infty}\frac{dx}{e^{ax}+1}$, for $a>0$.
 \solution
-Set $u=e^{-ax}$ for $a>0$. Then $dx=-du/(au)$,
-$e^{ax}=1/u$, and the limits $x=0,\infty$ become $u=1,0$.
-Consequently
+Set $u=e^{-ax}$ for $a>0$. Then $du=-au\,dx$, so $dx=-du/(au)$;
+$e^{ax}=1/u$, so $1/(e^{ax}+1)=u/(1+u)$; and the limits $x=0,\infty$
+become $u=1,0$. The integrand becomes
+$[u/(1+u)][-du/(au)]=-du/[a(1+u)]$, and reversing the limits,
 \[
  \int_0^\infty\frac{dx}{e^{ax}+1}
  =\frac1a\int_0^1\frac{du}{1+u}
+ =\frac1a[\ln(1+u)]_0^1
  =\boxed{\frac{\ln2}{a}}.
 \]
-As a series check, for $x>0$ the integrand is
-$e^{-ax}-e^{-2ax}+e^{-3ax}-\cdots$; integrating its finite geometric
-remainder gives an error at most $1/[a(N+1)]$. Hence its integral is
-$(1/a)\sum_{n\ge1}(-1)^{n-1}/n=(\ln2)/a$ as well.
+As a series check, for $x>0$ write
+$1/(e^{ax}+1)=e^{-ax}/(1+e^{-ax})
+=\sum_{n=1}^N(-1)^{n-1}e^{-nax}+(-1)^Ne^{-(N+1)ax}/(1+e^{-ax})$.
+The terms integrate to $(-1)^{n-1}/(na)$, and the integral of the
+remainder is at most $\int_0^\infty e^{-(N+1)ax}dx=1/[a(N+1)]\to0$
+in absolute value. Hence the integral is
+$(1/a)\sum_{n\ge1}(-1)^{n-1}/n=(\ln2)/a$ as well, by the alternating
+harmonic series.
 
 
 \Needspace{5\baselineskip}
@@ -3228,22 +3366,30 @@ $(1/a)\sum_{n\ge1}(-1)^{n-1}/n=(\ln2)/a$ as well.
 \noindent\textbf{1.10.5}\quad
 $\displaystyle\int_{\pi}^{\infty}\frac{\sin x}{x^{2}}\,dx$.
 \solution
-Differentiate $\sin x/x$ to obtain
+Differentiating $\sin x/x$ gives
+$d(\sin x/x)/dx=\cos x/x-\sin x/x^2$, so
 $\sin x/x^2=\cos x/x-d(\sin x/x)/dx$. On a finite interval $[\pi,R]$,
 \[
  \int_\pi^R\frac{\sin x}{x^2}dx
  =\int_\pi^R\frac{\cos x}{x}dx-\left[\frac{\sin x}{x}\right]_\pi^R.
 \]
-The boundary term tends to zero because $\sin\pi=0$ and
-$|\sin R/R|\le1/R$. With the convention
-$\operatorname{Ci}(z)=-\int_z^\infty\cos t\,dt/t$ for $z>0$,
+The boundary term $\sin R/R-\sin\pi/\pi=\sin R/R$ tends to zero
+because $|\sin R/R|\le1/R$. With the convention
+$\operatorname{Ci}(z)=-\int_z^\infty\cos t\,dt/t$ for $z>0$, the limit
+$R\to\infty$ gives
 \[
  \boxed{\int_\pi^\infty\frac{\sin x}{x^2}dx
- =-\operatorname{Ci}(\pi)=-0.0736679120464255\ldots}.
+ =-\operatorname{Ci}(\pi)=-0.073667912046425\ldots}.
 \]
 The negative sign is consistent with the negative first lobe on
 $(\pi,2\pi)$ and the decreasing weights of subsequent lobes.
-The verification script checks the result by oscillatory quadrature.
+The number follows from the convergent series
+$\operatorname{Ci}(x)=\gamma+\ln x+\sum_{k=1}^\infty(-1)^kx^{2k}/[2k\,(2k)!]$,
+whose derivative is $\cos x/x$, as it must be; here
+$\gamma=0.5772156649015328\ldots$. At $x=\pi$ the terms of the sum alternate
+in sign and decrease in magnitude from $k=1$ on, so stopping after
+$k=13$ leaves an error smaller than the first omitted term,
+$\pi^{28}/(28\cdot28!)<10^{-17}$.
 
 
 \Needspace{5\baselineskip}
@@ -3256,13 +3402,20 @@ Use $I(a)$ derived in Exercise 1.10.2:
  I(a)=\int_0^\infty\frac{e^{-ax}\sin x}{x}dx
      =\frac\pi2-\arctan a\quad(a>0).
 \]
-At $a=1$, this gives $\boxed{I(1)=\pi/4}$.
-For a direct check, write $\sin x/x=\int_0^1\cos(tx)dt$;
-absolute integrability of the exponentially damped double integral
-permits interchanging integrals, giving
+At $a=1$, this gives $\boxed{I(1)=\pi/2-\pi/4=\pi/4}$.
+For a direct check, write $\sin x/x=\int_0^1\cos(tx)\,dt$ (a
+$t$-antiderivative of $\cos(tx)$ is $\sin(tx)/x$). Absolute
+integrability of the exponentially damped double integral,
+$\int_0^1dt\int_0^\infty e^{-x}|\cos tx|\,dx\le1$, permits
+interchanging the integrals. Since
+\[
+ \int_0^\infty e^{-x}\cos(tx)\,dx=\operatorname{Re}\int_0^\infty
+ e^{-(1-it)x}dx=\operatorname{Re}\frac1{1-it}=\frac1{1+t^2},
+\]
+the interchanged integral is
 \[
  \int_0^1dt\int_0^\infty e^{-x}\cos(tx)dx
- =\int_0^1\frac{dt}{1+t^2}=\frac\pi4.
+ =\int_0^1\frac{dt}{1+t^2}=\arctan1=\frac\pi4.
 \]
 
 
@@ -3272,13 +3425,18 @@ permits interchanging integrals, giving
 
 The result can be expressed in terms of special functions in Table 1.2.
 \solution
-From the definition of the error function,
-$\operatorname{erf}'(t)=2e^{-t^2}/\sqrt\pi$. Integration by parts gives
+From the definition
+$\operatorname{erf}(t)=(2/\sqrt\pi)\int_0^te^{-u^2}du$,
+$\operatorname{erf}'(t)=2e^{-t^2}/\sqrt\pi$. Integration by parts,
+differentiating $\operatorname{erf}(t)$ and integrating $dt$ to $t$, and
+then
+$\int_0^xte^{-t^2}dt=[-e^{-t^2}/2]_0^x=(1-e^{-x^2})/2$ give
 \[
  \begin{aligned}
  \int_0^x\operatorname{erf}(t)dt
  &=[t\operatorname{erf}(t)]_0^x
-   -\frac2{\sqrt\pi}\int_0^x t e^{-t^2}dt\\
+   -\frac2{\sqrt\pi}\int_0^x t e^{-t^2}dt
+ =x\operatorname{erf}(x)-\frac{1-e^{-x^2}}{\sqrt\pi}\\
  &=\boxed{x\operatorname{erf}(x)+\frac{e^{-x^2}-1}{\sqrt\pi}}.
  \end{aligned}
 \]
@@ -3293,8 +3451,13 @@ at $x=0$ the answer is zero. Both checks fix the additive constant.
 
 Obtain a result in which the only special function is $E_{1}$, \erratum{for real $x>0$}.
 \solution
+\erratum{The restriction $x>0$ keeps the interval between $1$ and $x$
+inside $t>0$, where $E_1(t)$ is defined by the integral below; $E_1$
+has a logarithmic singularity at $t=0$.}
 For $t>0$, $E_1(t)=\int_t^\infty e^{-u}du/u$ and hence
-$E_1'(t)=-e^{-t}/t$. Integration by parts now gives
+$E_1'(t)=-e^{-t}/t$. Integration by parts, differentiating $E_1(t)$
+and integrating $dt$ to $t$, then $tE_1'(t)=-e^{-t}$ and
+$\int_1^xe^{-t}dt=e^{-1}-e^{-x}$, give
 \[
  \begin{aligned}
  \int_1^x E_1(t)dt
@@ -3313,16 +3476,24 @@ and the prescribed lower-limit constant.
 \noindent\textbf{1.10.9}\quad
 $\displaystyle\int_{0}^{\infty}\frac{e^{-x}}{x+1}\,dx$.
 \solution
-Set $u=x+1$, so $e^{-x}=e\,e^{-u}$ and $dx=du$. The limits are
-$u=1$ and $u=\infty$, and therefore
+Set $u=x+1$, so $e^{-x}=e^{1-u}=e\,e^{-u}$ and $dx=du$. The limits are
+$u=1$ and $u=\infty$, and therefore, by the definition
+$E_1(z)=\int_z^\infty e^{-u}du/u$ used in Exercise 1.10.8,
 \[
  \int_0^\infty\frac{e^{-x}}{x+1}dx
  =e\int_1^\infty\frac{e^{-u}}u du
  =\boxed{eE_1(1)=0.596347362323194\ldots}.
 \]
 The integral is convergent because its integrand is bounded at zero
-and bounded above by $e^{-x}$ for $x\ge0$. Direct positive-integrand
-quadrature in the supplementary script checks the numerical value.
+and bounded above by $e^{-x}$ for $x\ge0$. The number follows from the
+convergent series
+$E_1(x)=-\gamma-\ln x-\sum_{k=1}^\infty(-x)^k/(k\,k!)$ (its derivative
+is $-e^{-x}/x$, as it must be), which at $x=1$ gives
+$E_1(1)=-\gamma+1-\frac14+\frac1{18}-\frac1{96}+\cdots
+=0.2193839343955202\ldots$, with $\gamma=0.5772156649015328\ldots$.
+The terms alternate and decrease, so stopping after $k=17$ leaves an
+error below $1/(18\cdot18!)<10^{-17}$; multiplying by
+$e=2.718281828459045\ldots$ gives the boxed value.
 
 
 \Needspace{5\baselineskip}
@@ -3334,18 +3505,23 @@ $\displaystyle\int_{0}^{\infty}\left(\frac{\tan^{-1}x}{x}\right)^{2}dx
 \emph{Hint.}~Integrate by parts, to linearize in $\tan^{-1}$. Then replace
 $\tan^{-1}x$ by $\tan^{-1}ax$ and evaluate for $a=1$.
 \solution
-Integrate by parts with $u=(\arctan x)^2$ and $dv=dx/x^2$:
+Integrate by parts with $u=(\arctan x)^2$, $du=2\arctan x\,dx/(1+x^2)$,
+and $dv=dx/x^2$, $v=-1/x$:
 \[
  I=\left[-\frac{(\arctan x)^2}{x}\right]_0^\infty
        +2\int_0^\infty\frac{\arctan x}{x(1+x^2)}dx.
 \]
-The boundary term vanishes: near zero its magnitude is $O(x)$, and
-at infinity it is $O(1/x)$. Define, for $a\ge0$,
+The boundary term vanishes: near zero $|\arctan x|\le|x|$ makes its
+magnitude at most $x$, and at infinity it is at most
+$(\pi/2)^2/x$. Define, for $a\ge0$,
 \[
  J(a)=2\int_0^\infty\frac{\arctan(ax)}{x(1+x^2)}dx,
  \qquad I=J(1),\qquad J(0)=0.
 \]
-Differentiation is dominated by $2/(1+x^2)$ and yields
+Since $\partial_a\arctan(ax)=x/(1+a^2x^2)$, the $a$-derivative of the
+integrand is $2/[(1+x^2)(1+a^2x^2)]\le2/(1+x^2)$, an integrable bound
+independent of $a$; differentiation under the integral is therefore
+allowed and yields
 \[
  J'(a)=2\int_0^\infty\frac{dx}{(1+x^2)(1+a^2x^2)}.
 \]
@@ -3354,9 +3530,17 @@ For $a>0$, $a\ne1$, partial fractions give
  \frac1{(1+x^2)(1+a^2x^2)}
  =\frac1{1-a^2}\left(\frac1{1+x^2}-\frac{a^2}{1+a^2x^2}\right),
 \]
-so $J'(a)=2(\pi/2-a\pi/2)/(1-a^2)=\pi/(1+a)$.
-Continuity of the integral extends this to $a=0,1$.
-Integrating from $0$ to $a$ gives $J(a)=\pi\ln(1+a)$, and hence
+as recombining the bracket over the common denominator confirms
+($1+a^2x^2-a^2(1+x^2)=1-a^2$). Here $\int_0^\infty dx/(1+x^2)=\pi/2$,
+and the substitution $y=ax$ gives
+$\int_0^\infty a^2dx/(1+a^2x^2)=a\int_0^\infty dy/(1+y^2)=a\pi/2$, so
+\[
+ J'(a)=\frac{2}{1-a^2}\left(\frac\pi2-\frac{a\pi}2\right)
+ =\frac{\pi(1-a)}{(1-a)(1+a)}=\frac\pi{1+a}.
+\]
+The integral $J'(a)$ is continuous in $a$ (by the same dominating
+bound), which extends this to $a=0,1$. Integrating from $0$ to $a$ with
+$J(0)=0$ gives $J(a)=\int_0^a\pi\,db/(1+b)=\pi\ln(1+a)$, and hence
 $\boxed{I=\pi\ln2}$.
 
 
@@ -3368,13 +3552,17 @@ find the area of the ellipse with \erratum{positive semiaxes $a,b$}, defined by
 \frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1.
 \]
 \solution
-Take $a,b>0$. In the first quadrant the ellipse has upper boundary
-$y=b\sqrt{1-x^2/a^2}$, $0\le x\le a$. Reflection symmetry gives
+Take $a,b>0$ (the equation involves only $a^2,b^2$; for semiaxes of
+either sign the area is $\pi|ab|$). In the first quadrant the ellipse
+has upper boundary
+$y=b\sqrt{1-x^2/a^2}$, $0\le x\le a$. Reflection symmetry in both axes
+gives
 \[
  A=4b\int_0^a\sqrt{1-x^2/a^2}\,dx.
 \]
 Use $x=a\sin\theta$, $dx=a\cos\theta\,d\theta$, with
-$0\le\theta\le\pi/2$:
+$0\le\theta\le\pi/2$, where $\sqrt{1-\sin^2\theta}=\cos\theta\ge0$;
+then $\cos^2\theta=(1+\cos2\theta)/2$ gives
 \[
  A=4ab\int_0^{\pi/2}\cos^2\theta\,d\theta
   =2ab\left[\theta+\frac12\sin2\theta\right]_0^{\pi/2}
@@ -3392,21 +3580,28 @@ By evaluating a suitable integral, find the area of the smaller piece thereby
 produced. Then use simple geometric considerations to verify your answer.
 \solution
 Rotate coordinates so that the cutting line is $x=1/2$ in the unit
-circle $x^2+y^2=1$. The smaller cap has vertical extent
-$2\sqrt{1-x^2}$, so
+circle $x^2+y^2=1$. The smaller cap, $1/2\le x\le1$, has vertical
+extent $2\sqrt{1-x^2}$. An antiderivative of $2\sqrt{1-x^2}$ is
+$x\sqrt{1-x^2}+\arcsin x$, since its derivative is
+$\sqrt{1-x^2}-x^2/\sqrt{1-x^2}+1/\sqrt{1-x^2}=2\sqrt{1-x^2}$ (it also
+follows from $x=\sin\theta$ as in Exercise 1.10.11). With
+$\arcsin1=\pi/2$ and $\arcsin\frac12=\pi/6$,
 \[
  \begin{aligned}
  A&=2\int_{1/2}^1\sqrt{1-x^2}\,dx\\
   &=\left[x\sqrt{1-x^2}+\arcsin x\right]_{1/2}^1
    =\frac\pi2-\left(\frac{\sqrt3}4+\frac\pi6\right)
-   =\boxed{\frac\pi3-\frac{\sqrt3}4}.
+   =\boxed{\frac\pi3-\frac{\sqrt3}4}\approx0.614,
  \end{aligned}
 \]
-For the geometric check, the chord's endpoints make angles $\pm\pi/3$
-with the positive $x$ axis. The sector between them has angle $2\pi/3$
-and area $(1/2)(2\pi/3)=\pi/3$. The triangle cut off from that sector
-has base $\sqrt3$ and altitude $1/2$, hence area $\sqrt3/4$.
-Subtracting gives the same cap area.
+less than half of the area $\pi$ of the circle, as it should be.
+For the geometric check, the chord's endpoints $(1/2,\pm\sqrt3/2)$
+make angles $\pm\pi/3$ with the positive $x$ axis. The sector between
+them has angle $2\pi/3$ and, the radius being $1$, area
+$\frac12\cdot1^2\cdot\frac{2\pi}3=\frac\pi3$. The triangle
+formed by the center and the chord has base $\sqrt3$ and altitude
+$1/2$, hence area $\sqrt3/4$. Subtracting it from the sector leaves
+the cap, with the same area $\pi/3-\sqrt3/4$.
 
 
 \Needspace{9\baselineskip}
@@ -3428,13 +3623,19 @@ Show that
 \]
 assuming that $f(x)$ is \erratum{locally integrable and} continuous at $x=0$.
 \solution
-The rectangle has width $1/n$ and height $n$, so its integral is $1$.
-Subtracting $f(0)$ under the integral gives the useful explicit bound
+\erratum{Local integrability is assumed so that the integrals exist;
+continuity at the single point $x=0$ does not guarantee it.}
+The rectangle has width $1/n$ and height $n$, so its integral is $1$,
+and $f(0)=n\int_{-1/(2n)}^{1/(2n)}f(0)\,dx$.
+Subtracting this under the integral, and bounding the integrand by its
+supremum over an interval of length $1/n$, gives the useful explicit
+bound
 \[
  \begin{aligned}
  \left|\int_{\mathbb R}f(x)\delta_n(x)dx-f(0)\right|
  &=\left|n\int_{-1/(2n)}^{1/(2n)}[f(x)-f(0)]dx\right|\\
- &\le\sup_{|x|\le1/(2n)}|f(x)-f(0)|.
+ &\le n\cdot\frac1n\sup_{|x|\le1/(2n)}|f(x)-f(0)|
+ =\sup_{|x|\le1/(2n)}|f(x)-f(0)|.
  \end{aligned}
 \]
 Continuity at zero makes the supremum tend to zero: for each
@@ -3454,7 +3655,8 @@ show that
 \int_{-\infty}^{\infty}\delta_{n}(x)\,dx=1.
 \]
 \solution
-For $n>0$ use $u=nx$, so $dx=du/n$. Then
+For $n>0$ use $u=nx$, so $dx=du/n$ and the limits stay
+$\mp\infty$. Then
 \[
  \int_{-\infty}^\infty\delta_n(x)dx
  =\frac1\pi\int_{-\infty}^\infty\frac{du}{1+u^2}
@@ -3467,7 +3669,7 @@ It also displays why the numerator must contain the factor $n$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{1.11.3}\quad Fejer's method of summing series is associated
+\noindent\textbf{1.11.3}\quad Fej\'er's method of summing series is associated
 with the function
 \[
 \delta_{n}(t)=\frac{1}{2\pi n}\left[\frac{\sin(nt/2)}{\sin(t/2)}\right]^{2}.
@@ -3482,32 +3684,48 @@ Show that $\delta_{n}(t)$ is a delta distribution \erratum{on one period, for co
 $\int_{-\pi}^{\pi} f(t)\delta_n(t)dt\to f(0)$ for continuous $f$.
 On the whole real line the distributional limit is instead the comb
 $\sum_{m\in\mathbb Z}\delta(t-2\pi m)$.}
-For integer $n\ge1$, the finite geometric sum gives
+For integer $n\ge1$, the geometric sum of Exercise 1.8.4 gives
+$\bigl|\sum_{j=0}^{n-1}e^{ijt}\bigr|=|\sin(nt/2)/\sin(t/2)|$, since
+the phase factor $e^{i(n-1)t/2}$ has modulus $1$. Expanding the
+modulus square as a double sum, and noting that exactly $n-|k|$ pairs
+$(j,l)$ with $0\le j,l\le n-1$ have $j-l=k$,
 \[
  \delta_n(t)=\frac1{2\pi n}\left|\sum_{j=0}^{n-1}e^{ijt}\right|^2
+ =\frac1{2\pi n}\sum_{j,l=0}^{n-1}e^{i(j-l)t}
  =\frac1{2\pi}\sum_{k=-(n-1)}^{n-1}
                   \left(1-\frac{|k|}{n}\right)e^{ikt}.
 \]
-The modulus-square expression proves positivity; integrating the finite
-Fourier sum over $[-\pi,\pi]$ leaves only its constant term, giving
-$\int_{-\pi}^{\pi}\delta_n(t)dt=1$.
+The modulus-square expression proves $\delta_n\ge0$; integrating the
+finite Fourier sum over $[-\pi,\pi]$, where
+$\int_{-\pi}^{\pi}e^{ikt}dt=0$ for $k\ne0$, leaves only its constant
+term, giving $\int_{-\pi}^{\pi}\delta_n(t)dt=1$.
 For any $0<\eta<\pi$, if $\eta\le|t|\le\pi$ then
+$\sin^2(t/2)\ge\sin^2(\eta/2)$ and $\sin^2(nt/2)\le1$, so, the region
+having length less than $2\pi$,
 \[
  0\le\delta_n(t)\le\frac1{2\pi n\sin^2(\eta/2)},\qquad
  \int_{\eta\le|t|\le\pi}\delta_n(t)dt
        \le\frac1{n\sin^2(\eta/2)}\to0.
 \]
-Subtract $f(0)$ and split the integral into $|t|<\eta$ and its
-complement. The first part is at most
-$\sup_{|t|<\eta}|f(t)-f(0)|$, which continuity makes arbitrarily small.
-For bounded continuous $f$ the second is at most
-$2\|f\|_\infty/[n\sin^2(\eta/2)]\to0$. This proves the one-period result.
+By the normalization,
+$\int_{-\pi}^{\pi}f(t)\delta_n(t)dt-f(0)
+=\int_{-\pi}^{\pi}[f(t)-f(0)]\delta_n(t)dt$. Split this integral into
+$|t|<\eta$ and its complement. Since $\delta_n\ge0$ has total integral
+$1$, the first part is at most $\sup_{|t|<\eta}|f(t)-f(0)|$, which
+continuity at $0$ makes smaller than any given $\epsilon>0$ once $\eta$
+is small enough. A function continuous on $[-\pi,\pi]$ is bounded, say
+$|f|\le M$, so for this $\eta$ the second part is at most
+$2M/[n\sin^2(\eta/2)]$, which is below $\epsilon$ for all large $n$.
+This proves the one-period result.
 For a smooth compactly supported test function on the whole line,
-partition its support into periods and use $2\pi$-periodicity of
-$\delta_n$. The same argument gives
+split $\mathbb R$ into the periods $[(2m-1)\pi,(2m+1)\pi]$ and use the
+$2\pi$-periodicity of $\delta_n$; the one-period result, applied to
+each continuous function $s\mapsto f(s+2\pi m)$ on $[-\pi,\pi]$, gives
 \[
- \lim_{n\to\infty}\int_{\mathbb R} f(t)\delta_n(t)dt
-       =\sum_{m\in\mathbb Z} f(2\pi m).
+ \int_{\mathbb R} f(t)\delta_n(t)dt
+ =\sum_{m\in\mathbb Z}\int_{-\pi}^{\pi}f(s+2\pi m)\delta_n(s)\,ds
+ \;\longrightarrow\;\sum_{m\in\mathbb Z} f(2\pi m)
+ \quad(n\to\infty).
 \]
 Only finitely many terms occur for such a test function. Choosing it
 supported near $2\pi$, with $f(2\pi)=1$ and $f(0)=0$, directly
@@ -3522,18 +3740,29 @@ contradicts the original claim and verifies the correction.
 \]
 \emph{Note.}~\erratum{The absolute value is required for all real nonzero $a$, including negative $a$.}
 \solution
-\erratum{For every real $a\ne0$ the factor is $1/|a|$; evenness is
-not an optional extra convention for the Dirac distribution.}
+\erratum{For every real $a\ne0$ the factor is $1/|a|$, as computed
+below, so the textbook's $1/a$ is wrong for $a<0$; the evenness of
+$\delta$, $\int\phi(x)\delta(-x)\,dx=\phi(0)$, is a property of the
+Dirac distribution, not an optional convention.}
 Test the identity against a smooth compactly supported $\phi$ and
-make the change of variable $u=a(x-x_1)$. The orientation of the
-integration limits changes when $a<0$, producing the absolute Jacobian:
+make the change of variable $u=a(x-x_1)$, so $x=x_1+u/a$ and
+$dx=du/a$. For $a>0$ the limits $x=\mp\infty$ become $u=\mp\infty$:
 \[
- \int_{\mathbb R}\phi(x)\delta(a(x-x_1))dx
- =\frac1{|a|}\int_{\mathbb R}\phi(x_1+u/a)\delta(u)du
+ \int_{-\infty}^{\infty}\phi(x)\delta(a(x-x_1))dx
+ =\frac1a\int_{-\infty}^{\infty}\phi(x_1+u/a)\delta(u)du
+ =\frac{\phi(x_1)}a.
+\]
+For $a<0$ they become $u=\pm\infty$, and restoring their order costs a
+sign:
+\[
+ \int_{-\infty}^{\infty}\phi(x)\delta(a(x-x_1))dx
+ =\frac1a\int_{\infty}^{-\infty}\phi(x_1+u/a)\delta(u)du
+ =-\frac1a\int_{-\infty}^{\infty}\phi(x_1+u/a)\delta(u)du
  =\frac{\phi(x_1)}{|a|}.
 \]
-This equals the action of $\delta(x-x_1)/|a|$, proving the distribution
-identity. For $a>0$ it reduces to the printed factor $1/a$.
+In both cases the result is $\phi(x_1)/|a|$, the action of
+$\delta(x-x_1)/|a|$, proving the distribution identity. For $a>0$ it
+reduces to the printed factor $1/a$.
 The value $a=0$ is excluded because $\delta(0)$ is not a distribution
 obtained by this change of variable.
 
@@ -3547,21 +3776,30 @@ obtained by this change of variable.
 \]
 \emph{Hint.}~Try using Exercise 1.11.4.
 \solution
-\erratum{Assume distinct real roots $x_1\ne x_2$.}
-Let $g(x)=(x-x_1)(x-x_2)$. Near either simple root, use the local
-variable $u=g(x)$, with $dx=du/|g'(x)|$ in a real integral.
-Since
+\erratum{The roots must be real and distinct: for $x_1=x_2$ the right
+side has the zero denominator $|x_1-x_2|$ (see the end of the
+solution).}
+Let $g(x)=(x-x_1)(x-x_2)$, so that
 \[
  g'(x)=2x-x_1-x_2,\quad
- g'(x_1)=x_1-x_2,\quad g'(x_2)=x_2-x_1,
+ g'(x_1)=x_1-x_2,\quad g'(x_2)=x_2-x_1.
 \]
-a test function $\phi$ has integral
+Since $g'$ vanishes only at the midpoint $(x_1+x_2)/2$, each root
+$x_i$ has a neighborhood $U_i$ on which $g$ is strictly monotone, with
+an inverse $x=x_i(u)$ and $dx=du/g'(x_i(u))$. Let $\phi$ be a test
+function. On the rest of its support $g$ has no zeros, so $|g|$ is
+bounded away from zero there and $\delta(g(x))$ contributes nothing.
+On $U_i$ substitute $u=g(x)$: as in Exercise 1.11.4, the limits are
+reversed when $g'(x_i)<0$, and in either case
+$\int_{U_i}\phi(x)\delta(g(x))dx
+=\int\phi(x_i(u))\delta(u)\,du/|g'(x_i(u))|=\phi(x_i)/|g'(x_i)|$.
+Adding the two contributions,
 \[
  \int_{\mathbb R}\phi(x)\delta(g(x))dx
  =\frac{\phi(x_1)}{|x_1-x_2|}+\frac{\phi(x_2)}{|x_2-x_1|}.
 \]
-There is no contribution away from the roots, where $g$ stays away
-from zero locally. Recognizing the two evaluation functionals proves
+Exactly one of $g'(x_1)$, $g'(x_2)$ is negative, so the absolute values
+are essential. Recognizing the two evaluation functionals proves
 \[
  \delta((x-x_1)(x-x_2))
  =\frac{\delta(x-x_1)+\delta(x-x_2)}{|x_1-x_2|}.
@@ -3575,33 +3813,39 @@ apply; its singular denominator cannot simply be assigned a value.
 \noindent\textbf{1.11.6}\quad Using the Gauss error curve delta sequence
 $\delta_{n}=\dfrac{n}{\sqrt{\pi}}e^{-n^{2}x^{2}}$, show that
 \[
-\erratum{x\frac{d}{dx}\delta(x)}=-\delta(x),
+x\frac{d}{dx}\delta(x)=-\delta(x),
 \]
 treating $\delta(x)$ and its derivative as in Eq.~(1.157).
 \solution
-\erratum{The textbook (p.~81) asks for $x\delta'(x)=-\delta(x)$.
-The transcribed derivative of the product is incorrect:
-$(x\delta(x))'=0$, since $x\delta(x)=0$.}
+With the delta sequence, the claim means that
+$\lim_{n\to\infty}\int x\delta_n'(x)\phi(x)dx=-\phi(0)$ for every smooth
+compactly supported test function $\phi$.
 For the specified Gaussian sequence,
 \[
- \delta_n'(x)=-\frac{2n^3x}{\sqrt\pi}e^{-n^2x^2}.
+ \delta_n'(x)=\frac n{\sqrt\pi}(-2n^2x)e^{-n^2x^2}
+ =-\frac{2n^3x}{\sqrt\pi}e^{-n^2x^2}.
 \]
-Against a smooth compactly supported test function $\phi$, substitute
-$y=nx$ to obtain
+Substitute $y=nx$, so $x^2=y^2/n^2$ and $dx=dy/n$; the powers of $n$
+cancel ($n^3\cdot n^{-2}\cdot n^{-1}=1$), giving
 \[
  \int_{\mathbb R}x\delta_n'(x)\phi(x)dx
+ =-\frac2{\sqrt\pi}\int_{\mathbb R}x^2n^3e^{-n^2x^2}\phi(x)dx
  =-\frac2{\sqrt\pi}\int_{\mathbb R}y^2e^{-y^2}\phi(y/n)dy.
 \]
-Dominated convergence is justified by the integrable bound
-$\|\phi\|_\infty y^2e^{-y^2}$. Integration by parts gives
+As $n\to\infty$, $\phi(y/n)\to\phi(0)$ for every $y$, and dominated
+convergence, with the integrable bound $\|\phi\|_\infty y^2e^{-y^2}$,
+lets the limit pass inside the integral. Integration by parts with
+$u=y$, $dv=ye^{-y^2}dy$, $v=-e^{-y^2}/2$ gives
 \[
  \int_{\mathbb R}y^2e^{-y^2}dy
  =-\frac12[y e^{-y^2}]_{-\infty}^\infty
        +\frac12\int_{\mathbb R}e^{-y^2}dy=\frac{\sqrt\pi}{2}.
 \]
-Hence the limit is $-\phi(0)$, exactly the action of $-\delta$.
-This proves $x\delta'=-\delta$. The product rule then gives
-$(x\delta)'=\delta+x\delta'=0$, an independent consistency check.
+Hence the limit is $-(2/\sqrt\pi)(\sqrt\pi/2)\phi(0)=-\phi(0)$, exactly
+the action of $-\delta$. This proves $x\delta'=-\delta$. As an
+independent check, $x\delta(x)=0$, since its action on $\phi$ is
+$[x\phi(x)]_{x=0}=0$; the product rule then gives
+$0=(x\delta)'=\delta+x\delta'$.
 
 
 \Needspace{5\baselineskip}
@@ -3618,55 +3862,69 @@ $\langle T',f\rangle=-\langle T,f'\rangle$. Taking $T=\delta$ gives
  \boxed{\int_{\mathbb R}\delta'(x)f(x)dx=-f'(0)}.
 \]
 To check this from regular functions, use a smooth delta sequence
-$\delta_n$ and a smooth compactly supported $f$. Ordinary integration
-by parts gives
+$\delta_n$ and a continuously differentiable $f$ that vanishes outside
+a bounded interval. Ordinary integration by parts gives
 \[
  \int_{\mathbb R}\delta_n'(x)f(x)dx
  =[\delta_n(x)f(x)]_{-\infty}^\infty
     -\int_{\mathbb R}\delta_n(x)f'(x)dx
  =-\int_{\mathbb R}\delta_n(x)f'(x)dx.
 \]
-The boundary term vanishes by compact support. Continuity of $f'$ at
-zero then makes the last integral tend to $-f'(0)$, reproducing the
-distributional definition and fixing the minus sign.
-Only the values near zero matter: multiply any locally $C^1$ function
-by a smooth cutoff equal to $1$ there. Since $\delta'$ is supported
-at zero, this leaves its action unchanged. The identity therefore
-extends to the local regularity stated in the question without imposing
-any behavior on $f$ at infinity.
+The boundary term vanishes because $f$ vanishes outside a bounded
+interval. Since $f'$ is continuous at zero (and bounded), the
+delta-sequence property makes the last integral tend to $-f'(0)$,
+reproducing the distributional definition and fixing the minus sign.
+Only the values near zero matter. If $f$ is continuously
+differentiable near zero, multiply it by a smooth cutoff $\chi$ that
+equals $1$ near zero and vanishes outside a small interval; then
+$\chi f$ is of the kind just treated, and $(\chi f)'(0)=f'(0)$ because
+$\chi'(0)=0$ and $\chi(0)=1$. Since $\delta'$ is supported at zero,
+the cutoff leaves its action unchanged. The identity therefore needs
+only this regularity of $f$ near $x=0$ and imposes no behavior on $f$
+at infinity.
 
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{1.11.8}\quad Prove that
 \[
-\delta(f(x))=\erratum{\frac{1}{|f\prime(x_0)|}}\delta(x-x_{0}),
+\delta(f(x))=\erratum{\frac{1}{|f'(x_0)|}}\delta(x-x_{0}),
 \]
-where \erratum{$f$ is real and $C^1$, and $x_0$ is its unique simple real zero, so $f(x_0)=0$ and $f\prime(x_0)\ne0$}.
+where \erratum{$f$ is real and $C^1$, and $x_0$ is its unique simple real zero, so $f(x_0)=0$ and $f'(x_0)\ne0$}.
 
-\emph{Hint.}~\erratum{Use the local variable $u=f(x)$ and the absolute Jacobian $1/|f\prime(x_0)|$ at each simple zero.}
+\emph{Hint.}~\erratum{Use the local variable $u=f(x)$ and the absolute Jacobian $1/|f'(x_0)|$ at each simple zero.}
 \solution
 \erratum{For a unique simple real zero $x_0$, the factor must be
-$1/|f'(x_0)|$. For multiple simple zeros, add their contributions.}
+$1/|f'(x_0)|$, as computed below; the textbook's factor without the
+absolute value has the wrong sign when $f'(x_0)<0$. For several simple
+zeros, their contributions add.}
 Let $f$ be a real $C^1$ function on the domain under consideration,
-with $f'(x_i)\ne0$ at every zero $x_i$. The inverse function theorem supplies a local
-inverse $x=x_i(u)$ for $u=f(x)$. Restricting a test function $\phi$
-to this neighborhood and changing variables gives
+with $f'(x_i)\ne0$ at every zero $x_i$. By continuity, $f'$ keeps the
+sign of $f'(x_i)$ on a neighborhood $U_i$ of $x_i$, so $u=f(x)$ is
+strictly monotone there, with a local inverse $x=x_i(u)$ (the inverse
+function theorem) and $dx=du/f'(x_i(u))$. Restricting a test function
+$\phi$ to this neighborhood and changing variables gives
 \[
- \int\phi(x)\delta(f(x))dx
+ \int_{U_i}\phi(x)\delta(f(x))dx
  =\int\frac{\phi(x_i(u))}{|f'(x_i(u))|}\delta(u)du
- =\frac{\phi(x_i)}{|f'(x_i)|}.
+ =\frac{\phi(x_i)}{|f'(x_i)|};
 \]
-A partition into neighborhoods of the zeros (only finitely many in a
-compact test support) therefore yields
+for $f'(x_i)<0$ the substitution reverses the limits, and restoring
+their order turns $1/f'$ into $1/|f'|$, as in Exercise 1.11.4.
+Simple zeros are isolated, so the compact support of $\phi$ contains
+only finitely many of them; on the rest of the support $f$ has no
+zeros, so $|f|$ is bounded away from zero and $\delta(f(x))$
+contributes nothing. Adding the contributions of the zeros yields
 \[
  \boxed{\delta(f(x))=\sum_{i:f(x_i)=0}
                   \frac{\delta(x-x_i)}{|f'(x_i)|}}.
 \]
-The printed single-root formula is recovered only with the additional
-positive-derivative assumption. A negative derivative reverses limits,
-which is why the absolute value is necessary. A repeated zero has
-$f'(x_i)=0$ and lies outside this formula's hypotheses.
+For the unique simple zero $x_0$ of the statement the sum has the
+single term $\delta(x-x_0)/|f'(x_0)|$, as claimed. Without the
+absolute value the formula holds only when $f'(x_0)>0$; a negative
+derivative reverses the limits, which is why the absolute value is
+necessary. A repeated zero has $f'(x_i)=0$ and lies outside this
+formula's hypotheses.
 
 
 \Needspace{5\baselineskip}
@@ -3690,13 +3948,17 @@ $f'(x_i)=0$ and lies outside this formula's hypotheses.
   This is the Heaviside unit step function (Fig.~1.23).
 \end{enumerate}
 \solution
-(a) For $n>0$, substitute $u=nx$:
+(a) For $n>0$, substitute $u=nx$, $du=n\,dx$, with the limits
+unchanged; since $d(\tanh u)/du=\operatorname{sech}^2u$ and
+$\tanh u\to\pm1$ as $u\to\pm\infty$,
 \[
  \int_{-\infty}^\infty\frac{n}{2\cosh^2(nx)}dx
  =\frac12\int_{-\infty}^\infty\operatorname{sech}^2u\,du
- =\frac12[\tanh u]_{-\infty}^\infty=1.
+ =\frac12[\tanh u]_{-\infty}^\infty=\frac12[1-(-1)]=1.
 \]
-(b) \erratum{Use a separate dummy variable in the integral.} Since
+(b) \erratum{The statement uses the dummy variable $t$, because $x$ is
+the upper limit of the integral and cannot also be the variable of
+integration.} Since
 $d(\tanh nt)/dt=n\operatorname{sech}^2(nt)$,
 \[
  u_n(x)=\int_{-\infty}^x\delta_n(t)dt
