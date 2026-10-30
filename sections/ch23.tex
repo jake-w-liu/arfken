@@ -1328,9 +1328,13 @@ Translation by $\bar x$ multiplies the characteristic function by
 $e^{it\bar x}$, because $\langle e^{it(\bar x+X)}\rangle
 =e^{it\bar x}\langle e^{itX}\rangle$; hence
 $\phi_{X_j}(t)=e^{it\bar x-\sigma^2t^2/2}$.
-Now $e^{it\overline X}=\prod_je^{i(t/n)X_j}$, and for independent
+Now let $\overline X=n^{-1}\sum_{j=1}^nX_j$. Then
+$e^{it\overline X}=\prod_je^{i(t/n)X_j}$, and for independent
 variables the expectation of such a product is the product of the
-expectations (Exercise~23.6.4). Therefore
+expectations, as in Exercise~23.6.4: against the product density
+$\prod_jp_{X_j}(x_j)$, the $n$-fold integral of
+$\prod_je^{i(t/n)x_j}$, absolutely convergent because each factor has
+modulus 1, separates into $n$ one-dimensional integrals. Therefore
 \[
 \phi_{\overline X}(t)
 =\prod_{j=1}^n\phi_{X_j}(t/n)
@@ -1341,7 +1345,7 @@ This is the characteristic function of the normal distribution with mean
 $\bar x$ and variance $\sigma^2/n$. A characteristic function determines
 its distribution uniquely (it is $\sqrt{2\pi}$ times the Fourier transform
 of the density, which Fourier inversion recovers), so
-$\overline X=n^{-1}\sum X_j$ is normal with mean $\bar x$
+$\overline X$ is normal with mean $\bar x$
 and variance $\sigma^2/n$. The requested variable is
 $Z=(\overline X-\bar x)/(\sigma/\sqrt n)=c\overline X+d$ with
 $c=\sqrt n/\sigma$ and $d=-\bar x\sqrt n/\sigma$, and the rule
@@ -1540,8 +1544,14 @@ For a counterexample to smoothness sufficing, take the smooth function
 $f(x,y)=e^{-1/x^2}$ for $x\ne0$, extended by 0 at $x=0$; it does not
 depend on $y$, so only its $x$-derivatives can be nonzero. By induction,
 for $x\ne0$ its $n$th derivative has the form $P_n(1/x)e^{-1/x^2}$ with
-a polynomial $P_n$, and this tends to 0 as $x\to0$ because $e^{-1/x^2}$
-decays faster than any power of $x$. The difference quotient
+a polynomial $P_n$: $P_0=1$, and
+\[
+\frac d{dx}\Bigl[P_n(1/x)e^{-1/x^2}\Bigr]
+=\Bigl[2x^{-3}P_n(1/x)-x^{-2}P_n'(1/x)\Bigr]e^{-1/x^2},
+\]
+so $P_{n+1}(u)=2u^3P_n(u)-u^2P_n'(u)$. Each $f^{(n)}(x)$ tends to 0 as
+$x\to0$, because with $q=1/x^2\to\infty$ each of its terms obeys
+$|x|^{-m}e^{-1/x^2}=q^{m/2}e^{-q}\to0$. The difference quotient
 $[f^{(n)}(x)-0]/x$ at $x=0$ has the same form, so every derivative at
 $(0,0)$ exists and is zero: the Taylor series at $(0,0)$ vanishes
 identically, and the infinite expansion would give 0. For centered
@@ -1586,6 +1596,14 @@ $M_1N_1-M_1N_0M_0N_1=0$ for the two mixed choices. With $g_x=g_{10}$,
 $g_y=g_{01}$, and likewise for $h$,
 \[
 \operatorname{cov}(G,H)\simeq g_xh_x\sigma_X^2+g_yh_y\sigma_Y^2.
+\]
+With $h=g$ this approximation gives
+$\operatorname{Var}G\simeq g_x^2\sigma_X^2+g_y^2\sigma_Y^2$, and with
+$g=h$ it gives $\operatorname{Var}H\simeq h_x^2\sigma_X^2+h_y^2\sigma_Y^2$;
+so to the same order, when both are positive,
+\[
+\rho_{GH}\simeq\frac{g_xh_x\sigma_X^2+g_yh_y\sigma_Y^2}
+{\sqrt{(g_x^2\sigma_X^2+g_y^2\sigma_Y^2)(h_x^2\sigma_X^2+h_y^2\sigma_Y^2)}}.
 \]
 Finally the Instructor's Manual's object $\langle UVf(X,Y)\rangle$ would
 instead expand as
@@ -1669,7 +1687,13 @@ f_Y(y)=\frac1{2\pi\sigma_1\sigma_2}\int_{-\infty}^{\infty}
 \exp\left[-\frac12\left(\frac{u^2}{\sigma_1^2}
 +\frac{(h-u)^2}{\sigma_2^2}\right)\right]du.
 \]
-Completing the square gives
+Expanding $(h-u)^2$, the expression in parentheses has $u^2$-coefficient
+$1/\sigma_1^2+1/\sigma_2^2=S/(\sigma_1^2\sigma_2^2)$, $u$-coefficient
+$-2h/\sigma_2^2=-2\,[S/(\sigma_1^2\sigma_2^2)]\,(\sigma_1^2h/S)$, and
+constant term $h^2/\sigma_2^2$. Completing the square subtracts
+$[S/(\sigma_1^2\sigma_2^2)](\sigma_1^2h/S)^2=\sigma_1^2h^2/(\sigma_2^2S)$
+from that constant, leaving $h^2(S-\sigma_1^2)/(\sigma_2^2S)=h^2/S$
+because $S-\sigma_1^2=\sigma_2^2$:
 \[
 \frac{u^2}{\sigma_1^2}+\frac{(h-u)^2}{\sigma_2^2}
 =\frac S{\sigma_1^2\sigma_2^2}
@@ -1720,13 +1744,19 @@ $dy=du/a$) gives
 \int_0^\infty y^{p-1}e^{-ay}\,dy
 =a^{-p}\int_0^\infty u^{p-1}e^{-u}\,du=\Gamma(p)a^{-p}.
 \]
-Both the integral and $a^{-p}$ are holomorphic in $\Re a>0$,
-using the logarithm continued from positive real $a$; exponential
-domination justifies differentiation on its compact subsets.
+Both sides are holomorphic in $\Re a>0$. On the right,
+$a^{-p}=e^{-p\operatorname{Log}a}$ with the principal logarithm, which
+is real for $a>0$. On the left, $|e^{-ay}|=e^{-y\Re a}$, so on each
+half-plane $\Re a\ge\delta>0$ the integrand $y^{p-1}e^{-ay}$ and its
+$a$-derivative $-y^pe^{-ay}$ are bounded in modulus by
+$y^{p-1}e^{-\delta y}$ and $y^pe^{-\delta y}$, which are integrable over
+$y>0$ and independent of $a$; hence the integral may be differentiated
+with respect to $a$ under the integral sign.
 The identity theorem extends the formula throughout that half-plane,
 which contains every $a$ above for real $t$, since
 $\Re a=1/(2\sigma^2)>0$. Substitution, with
-$(2\sigma^2)^pa^p=(2\sigma^2a)^p$ (valid because $2\sigma^2>0$) and
+$(2\sigma^2)^pa^p=(2\sigma^2a)^p$ (valid for principal powers because
+$2\sigma^2>0$) and
 $2\sigma^2a=1-2i\sigma^2t$, gives
 \[
 \boxed{\widehat g(t)=\frac1{\sqrt{2\pi}}
@@ -1904,7 +1934,7 @@ N=.8\cdot100+3\cdot400+8.1\cdot25=80+1200+202.5=1482.5,
 \[
 D=.64\cdot100+2.25\cdot400+7.29\cdot25=64+900+182.25=1146.25.
 \]
-Since $\chi^{2\prime\prime}(b)=2D>0$, this is the unique minimum.
+Since $d^2\chi^2/db^2=2D>0$, this is the unique minimum.
 Multiplying $N$ and $D$ by 4 gives $\widehat b=5930/4585$; cancelling
 the common factor 5, and inverting $t=\widehat by$ for the fitted line,
 \[
@@ -1930,7 +1960,8 @@ gives
 \qquad
 \chi^2_{\min}=T-\frac{N^2}D,
 \]
-where
+where, since $N^2/D=N\widehat b=1482.5\cdot1186/917=1758245/917$ and
+$1925=1765225/917$,
 \[
 \chi^2_{\min}=1925-\frac{1482.5^2}{1146.25}
 =1925-\frac{1758245}{917}
@@ -1943,14 +1974,20 @@ $z=b_0v+e$, where the standardized errors $e_j=(t_j-b_0y_j)/\sigma_j$
 are independent $N(0,1)$. Minimizing $\|z-bv\|^2$ projects $z$ onto the
 one-dimensional span of $v$; since $b_0v$ lies in that span, the
 residual $z-\widehat bv$ is the component of $e$ orthogonal to $v$.
-An orthogonal rotation taking $v$ to the first coordinate axis leaves
-the components of $e$ independent with unit variance, because their
-joint density, proportional to $\exp(-\|e\|^2/2)$, is unchanged by
-rotations. The residual squared norm is the sum of the squares of the
-other two coordinates, so $\chi^2_{\min}$ has the $\chi^2$ distribution
-with $3-1=2$ degrees of freedom. That density is $\frac12e^{-x/2}$ for
-$x>0$ (Eq.~(23.83) with $p=1$, $\sigma=1$), so the upper-tail
-probability is
+An orthogonal rotation $w=Oe$ taking $v$ to the first coordinate axis
+leaves the components $w_1,w_2,w_3$ independent with unit variance,
+because the joint density of $e$, proportional to $\exp(-\|e\|^2/2)$, is
+unchanged by rotations. The residual squared norm is the sum
+$w_2^2+w_3^2$ of the squares of the other two coordinates, so
+$\chi^2_{\min}$ has the
+$\chi^2$ distribution with $3-1=2$ degrees of freedom. That density is
+$\frac12e^{-x/2}$ for $x>0$: a sum of $\nu$ squares of independent
+$N(0,1)$ variables has the density of Eq.~(23.83) with $\sigma=1$ and
+$p=\nu/2$, here $p=1$. Directly, polar coordinates in the
+$(w_2,w_3)$-plane give
+$P(w_2^2+w_3^2\ge x)=\frac1{2\pi}\int_0^{2\pi}\!\int_{\sqrt x}^\infty
+e^{-r^2/2}\,r\,dr\,d\varphi=e^{-x/2}$, whose negative $x$-derivative is
+$\frac12e^{-x/2}$. The upper-tail probability is therefore
 \[
 \boxed{P(\chi_2^2\ge\chi^2_{\min})
 =\int_{\chi^2_{\min}}^\infty\tfrac12e^{-x/2}\,dx
@@ -1960,6 +1997,8 @@ Thus a residual at least this large occurs about 2.22\% of the time
 under this model and the stated errors. The fit has reduced
 $\chi^2=\chi^2_{\min}/2=3.805888768$; this alone does not identify which
 model assumption is responsible for the discrepancy.
+The figure shows the three data points with their horizontal (time)
+error bars and the fitted line $y=0.7731871838\,t$.
 \begin{center}
 \begin{tikzpicture}[x=1.8cm,y=1.25cm]
 \draw[->](0,0)--(3.6,0) node[right]{$t$};
@@ -1975,12 +2014,19 @@ model assumption is responsible for the discrepancy.
 \end{tikzpicture}
 \end{center}
 If a 95\% confidence interval for the slope is also desired: with
-known normal measurement errors, $\widehat b$ is a linear combination of
-the independent normal $t_j$, hence exactly normal with mean $b_0$ and
-standard deviation $\sigma_b$. Thus
+known normal measurement errors,
+$\widehat b=N/D=\sum_jy_jt_j/(D\sigma_j^2)$ is a linear combination of
+the independent normal $t_j$, hence exactly normal (each term is normal
+by the rule $\phi_{cY+d}(t)=e^{itd}\phi_Y(ct)$ of Exercise~23.6.1, and a
+sum of three independent normal variables is normal by
+Exercise~23.6.7, applied twice). Since
+$\langle t_j\rangle=b_0y_j$, its mean is
+$\sum_jy_j\langle t_j\rangle/(D\sigma_j^2)
+=b_0\sum_jy_j^2/(D\sigma_j^2)=b_0$, and its standard deviation is
+$\sigma_b$. Thus
 $P(|\widehat b-b_0|\le c\,\sigma_b)=2\Phi(c)-1=0.95$ for
 $c=\Phi^{-1}(0.975)=1.959963985$, and with
-$1.959963985\,\sigma_b=0.0578906487$,
+$1.959963985\,\sigma_b=0.0578906488$,
 \[
 b_0\in\widehat b\pm1.959963985\,\sigma_b=[1.235457225,1.351238522].
 \]
@@ -2009,7 +2055,12 @@ Exercise~23.7.2 gives
 N=6,\quad\bar x=\frac{92}{15},\quad
 s^2=\frac1{N-1}\sum_{j=1}^N(x_j-\bar x)^2=\frac{16}{375}.
 \]
-The standard error of the mean is therefore
+Let $X_1,\ldots,X_N$ be the random observations, with sample mean
+$\overline X=N^{-1}\sum_jX_j$ and sample variance
+$S^2=(N-1)^{-1}\sum_j(X_j-\overline X)^2$; their observed values are
+$\bar x$ and $s^2$. The mean of $N$ independent observations has
+standard deviation $\sigma/\sqrt N$ (Exercise~23.6.1); replacing the
+unknown $\sigma$ by $s$ gives the standard error of the mean
 \[
 \frac{s}{\sqrt N}=\sqrt{\frac{16}{375\cdot6}}
 =\sqrt{\frac8{1125}}=0.0843274043.
@@ -2057,8 +2108,13 @@ For 90\% and 95\% use respectively $p=.95,.975$:
 \[
 c_{.95}=2.0150483733,\qquad c_{.975}=2.5705818356.
 \]
-They can be obtained by integrating the normalized density
-(with $\Gamma(3)=2$ and $\Gamma(5/2)=3\sqrt\pi/4$)
+They can be obtained by integrating the normalized density of $T$,
+Student's density with $\nu$ degrees of freedom,
+\[
+f_\nu(t)=\frac{\Gamma(\frac{\nu+1}2)}{\sqrt{\nu\pi}\,\Gamma(\frac\nu2)}
+\Bigl(1+\frac{t^2}\nu\Bigr)^{-(\nu+1)/2},
+\]
+which for $\nu=5$ (with $\Gamma(3)=2$ and $\Gamma(5/2)=3\sqrt\pi/4$) is
 \[
 f_5(t)=\frac{\Gamma(3)}{\sqrt{5\pi}\Gamma(5/2)}
 (1+t^2/5)^{-3}=\frac8{3\pi\sqrt5}(1+t^2/5)^{-3}
@@ -2067,8 +2123,12 @@ and solving $\int_{-\infty}^{c_p}f_5(t)\,dt=p$. The substitution
 $t=\sqrt5\tan\theta$, with $1+t^2/5=\sec^2\theta$ and
 $dt=\sqrt5\sec^2\theta\,d\theta$, turns $f_5(t)\,dt$ into
 $\frac8{3\pi}\cos^4\theta\,d\theta$, and $t\to-\infty$ corresponds to
-$\theta\to-\pi/2$. Integrating
-$\cos^4\theta=\frac38+\frac12\cos2\theta+\frac18\cos4\theta$ gives
+$\theta\to-\pi/2$. Applying $\cos^2x=\frac12(1+\cos2x)$ twice gives
+$\cos^4\theta=\frac14(1+\cos2\theta)^2
+=\frac38+\frac12\cos2\theta+\frac18\cos4\theta$, with antiderivative
+$\frac38\theta+\frac14\sin2\theta+\frac1{32}\sin4\theta$, which
+equals $-3\pi/16$ at $\theta=-\pi/2$. Multiplying by $\frac8{3\pi}$,
+with $\frac8{3\pi}\cdot\frac{3\pi}{16}=\frac12$,
 \[
 P(T\le c)=\frac12+\frac1\pi\left[\theta+\frac23\sin2\theta
 +\frac1{12}\sin4\theta\right],\qquad\theta=\arctan\frac c{\sqrt5}.
