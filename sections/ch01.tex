@@ -2783,7 +2783,7 @@ Squaring either value gives $(1+2i-1)/2=i$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{1.8.3}\quad \erratum{For a nonnegative integer $n$ and real $\theta$,} show that
+\noindent\textbf{1.8.3}\quad \erratum{For a nonnegative integer $n$,} show that
 \begin{enumerate}
 \item[(a)] $\displaystyle\cos n\theta=\cos^{n}\theta-\binom{n}{2}
   \cos^{n-2}\theta\sin^{2}\theta+\binom{n}{4}\cos^{n-4}\theta\sin^{4}\theta
@@ -2792,10 +2792,10 @@ Squaring either value gives $(1+2i-1)/2=i$.
   -\binom{n}{3}\cos^{n-3}\theta\sin^{3}\theta+\cdots.$
 \end{enumerate}
 \solution
-\erratum{The hypotheses added to the statement are those the proof
-uses: for an integer $n\ge0$ the binomial expansion below is a finite
-sum, and for real $\theta$ its real and imaginary parts can be read off
-term by term.}
+\erratum{The added hypothesis is needed: only for an integer $n\ge0$
+is the binomial expansion below a finite sum; for other $n$ the
+expansions (a) and (b) become infinite series, which diverge when
+$|\tan\theta|>1$.}
 For a nonnegative integer $n$, de Moivre's formula and the binomial
 expansion give
 \[
@@ -2804,8 +2804,9 @@ expansion give
  =\sum_{j=0}^n\binom nj\cos^{n-j}\theta\,i^j\sin^j\theta.
 \]
 For $j=2r$, $i^{2r}=(-1)^r$, while for $j=2r+1$,
-$i^{2r+1}=i(-1)^r$. The terms with even $j$ are therefore real and those
-with odd $j$ are imaginary; the conditions $2r\le n$ and $2r+1\le n$
+$i^{2r+1}=i(-1)^r$. For real $\theta$ the terms with even $j$ are
+therefore real and those with odd $j$ are imaginary; the conditions
+$2r\le n$ and $2r+1\le n$
 give the upper limits $\lfloor n/2\rfloor$ and $\lfloor(n-1)/2\rfloor$.
 Equating real and imaginary parts yields
 \[
@@ -2820,6 +2821,17 @@ Their terms $r=0,1,2,\ldots$ are exactly those displayed in (a) and
 (b), so these are the two requested finite expansions. For $n=0$ the
 second sum is empty and gives zero.
 
+The identities hold for complex $\theta$ as well. Euler's formula
+$e^{iz}=\cos z+i\sin z$, obtained by comparing power series, holds for
+every complex $z$, and $\cos$ is even and $\sin$ odd; hence
+$(\cos\theta\pm i\sin\theta)^n=e^{\pm in\theta}
+=\cos n\theta\pm i\sin n\theta$ for complex $\theta$. The binomial
+expansion of $(\cos\theta-i\sin\theta)^n$ has $(-i)^j$ in place of
+$i^j$. Since $[i^j+(-i)^j]/2$ is $(-1)^r$ for $j=2r$ and $0$ for odd
+$j$, while $[i^j-(-i)^j]/(2i)$ is $(-1)^r$ for $j=2r+1$ and $0$ for
+even $j$, half the sum and $1/(2i)$ times the difference of the two
+expansions give the same two sums.
+
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2828,7 +2840,7 @@ second sum is empty and gives zero.
 \item[(a)] $\displaystyle\sum_{n=0}^{N-1}\cos nx=\erratum{\frac{\sin(Nx/2)}{\sin(x/2)}\cos\!\left(\frac{(N-1)x}{2}\right)}$,
 \item[(b)] $\displaystyle\sum_{n=0}^{N-1}\sin nx=\erratum{\frac{\sin(Nx/2)}{\sin(x/2)}\sin\!\left(\frac{(N-1)x}{2}\right)}$.
 \end{enumerate}
-\erratum{Here $N$ is a positive integer and $x$ is real; at $x=2\pi m$, use the continuous limits $N$ and $0$, respectively.} These series occur in the analysis of the multiple-slit diffraction pattern.
+\erratum{Here $N$ is a positive integer; at $x=2\pi m$, use the continuous limits $N$ and $0$, respectively.} These series occur in the analysis of the multiple-slit diffraction pattern.
 \solution
 \erratum{The parentheses in the statement fix the argument of the last
 factor as $(N-1)x/2$, as derived below; the textbook's typesetting of
@@ -2857,6 +2869,16 @@ $\sin(Nx/2)=(-1)^{Nm}\sin(Nh/2)$ and $\sin(x/2)=(-1)^m\sin(h/2)$, so
 the quotient tends to $(-1)^{(N-1)m}N$ as $h\to0$, while
 $\cos[(N-1)x/2]\to(-1)^{(N-1)m}$ and $\sin[(N-1)x/2]\to0$. The products
 tend to $N$ and $0$, so the exception at $x=2\pi m$ is removable.
+
+The formulas hold for complex $x\ne2\pi m$ as well. The sine quotient
+is unchanged when $x$ is replaced by $-x$, so
+\[
+ \sum_{n=0}^{N-1}e^{-inx}=e^{-i(N-1)x/2}\frac{\sin(Nx/2)}{\sin(x/2)},
+\]
+and since $\cos z=(e^{iz}+e^{-iz})/2$ and
+$\sin z=(e^{iz}-e^{-iz})/(2i)$ for complex $z$, half the sum and
+$1/(2i)$ times the difference of the two geometric sums give (a) and
+(b).
 
 
 \Needspace{5\baselineskip}
@@ -2934,8 +2956,9 @@ Dividing the first line by $2i$ (note $-1/i=i$) and the second by $2$,
  =\cos^2x+\sinh^2y.
  \end{aligned}
 \]
-Here $\cosh^2y=1+\sinh^2y$ was used. For example
-$|\cos(iy)|=\cosh y>1$ for $y\ne0$.
+Here $\cosh^2y=1+\sinh^2y$ was used. For example, for $y\ne0$, (b)
+gives $|\cos(iy)|^2=1+\sinh^2y=\cosh^2y>1$ and
+$|\sin(\pi/2+iy)|^2=1+\sinh^2y=\cosh^2y>1$.
 
 
 \Needspace{5\baselineskip}
@@ -3038,6 +3061,15 @@ cancel and the odd ones double; with $(ix)^{2r+1}=i(-1)^rx^{2r+1}$,
 \]
 Multiplication by $i/2$, with $(i/2)(-2i)=1$, gives exactly the Gregory
 series for $\arctan x$.
+This branch is the principal one: the series is a logarithm of $1+w$
+that varies continuously on $|w|<1$ and vanishes at $w=0$, and since
+$\operatorname{Re}(1+w)>0$ there, its imaginary part, an argument of
+$1+w$, stays in $(-\pi/2,\pi/2)$. So the left side above is
+$\operatorname{Log}(1-ix)-\operatorname{Log}(1+ix)=-2i\arctan x$, a
+logarithm of $(1-ix)/(1+ix)$ whose imaginary part $-2\arctan x$ lies in
+$(-\pi/2,\pi/2)$; hence it is $\operatorname{Log}[(1-ix)/(1+ix)]$, which
+proves the identity for $|x|<1$.
+
 For all real $x$, write $1+ix=\sqrt{1+x^2}\,e^{i\alpha}$ with
 $\alpha=\arctan x\in(-\pi/2,\pi/2)$; then $1-ix=\sqrt{1+x^2}\,e^{-i\alpha}$,
 so $(1-ix)/(1+ix)=e^{-2i\alpha}$ has unit modulus and argument
@@ -3138,7 +3170,12 @@ where its remainder tends to zero; analyticity near the origin is a
 sufficient hypothesis. Smoothness alone is not sufficient.} For
 example, $f(x,y)=e^{-1/x^2}$ (with $f=0$ at $x=0$) is infinitely
 differentiable, but all its partial derivatives vanish at the origin,
-so the series sums to $0\ne f(x,y)$ for $x\ne0$.
+so the series sums to $0\ne f(x,y)$ for $x\ne0$. Indeed, $f$ does not
+depend on $y$, and for $x\ne0$ each $x$-derivative has the form
+$P(1/x)\,e^{-1/x^2}$ with $P$ a polynomial; since $e^{-1/x^2}$ tends
+to zero faster than any power of $x$, each derivative, and each
+difference quotient $P(1/h)\,e^{-1/h^2}/h$ at $x=0$, tends to zero, so
+by induction every $x$-derivative exists at $x=0$ and is zero there.
 
 Fix $x,y$ and define the one-variable function $F(t)=f(tx,ty)$.
 The chain rule gives $F'(t)=(x\partial_x+y\partial_y)f(tx,ty)$:
@@ -3152,9 +3189,14 @@ theorem expands the operator power, and at $t=0$
  F^{(n)}(0)=\sum_{j=0}^n\binom nj x^{n-j}y^j
           \frac{\partial^n f}{\partial x^{n-j}\partial y^j}(0,0).
 \]
-Taylor-expand $F$ about $t=0$ and then set $t=1$ (the hypothesis
-ensures that this series converges to $F(1)=f(x,y)$); with
-$\binom nj/n!=1/[(n-j)!\,j!]$,
+Taylor-expand $F$ about $t=0$ and then set $t=1$. The hypothesis
+ensures that this series converges to $F(1)=f(x,y)$: if the Maclaurin
+series $\sum_{j,k}c_{jk}X^jY^k$ converges absolutely to $f$ on a disk
+about the origin containing $(x,y)$, then
+$F(t)=\sum_{j,k}c_{jk}x^jy^kt^{j+k}$ for $|t|\le1$; grouping the terms
+by total degree $j+k=n$ gives a power series in $t$ that converges to
+$F(t)$ there, and a convergent power series is the Taylor series of its
+sum. With $\binom nj/n!=1/[(n-j)!\,j!]$,
 \[
  f(x,y)=\sum_{n=0}^\infty\frac{F^{(n)}(0)}{n!}
  =\sum_{n=0}^\infty\sum_{j=0}^n
@@ -3228,8 +3270,6 @@ under consideration, or retain a finite Taylor remainder.}
 \par\bigskip
 \noindent\textbf{1.10.1}\quad Use a recursive method to show that, for all
 positive integers $n$, $\Gamma(n)=(n-1)!$.
-
-Evaluate the integrals in Exercises 1.10.2 through 1.10.9.
 \solution
 Start from $\Gamma(n)=\int_0^\infty t^{n-1}e^{-t}dt$ for $n>0$.
 For an integer $n\ge1$, integration by parts with $u=t^n$,
@@ -3246,6 +3286,10 @@ recurrence, $\Gamma(n)=(n-1)\Gamma(n-1)=(n-1)(n-2)\Gamma(n-2)=\cdots$,
 yields (by induction on $n$) $\Gamma(n)=(n-1)(n-2)\cdots1\,\Gamma(1)
 =\boxed{(n-1)!}$, including $n=1$ with $0!=1$.
 
+
+\Needspace{8\baselineskip}
+\par\bigskip
+\noindent Evaluate the integrals in Exercises 1.10.2 through 1.10.9.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3307,7 +3351,7 @@ an Abel-summed value to the expression.
 \par\bigskip
 \noindent\textbf{1.10.3}\quad $\displaystyle\int_{0}^{\infty}\frac{dx}{\cosh x}$.
 
-\emph{Hint.}~\erratum{Expand the integrand using $e^{-x}$ for $x>0$, and control the integrated remainder at $x=0$.}
+\emph{Hint.}~Expand the denominator in a way that converges for all relevant $x$.
 \solution
 Since $\cosh x=e^x(1+e^{-2x})/2$, and the finite geometric sum
 $1/(1+q)=\sum_{n=0}^N(-q)^n+(-q)^{N+1}/(1+q)$ holds for $q=e^{-2x}$,
@@ -3319,13 +3363,12 @@ for $x>0$
 \]
 Each term integrates to $\int_0^\infty e^{-(2n+1)x}dx=1/(2n+1)$, and
 since $1+e^{-2x}\ge1$, the integral of the last term has absolute
-value at most $2\int_0^\infty e^{-(2N+3)x}dx=2/(2N+3)\to0$. So
-integrating and taking the limit $N\to\infty$ is justified even though
-the geometric series itself does not converge at $x=0$, where it reads
-$2(1-1+1-\cdots)$. \erratum{The textbook's hint asks for an expansion
-that converges for all relevant $x$; this one diverges at the endpoint
-$x=0$, which is why the hint in the statement adds the remainder
-estimate.} Therefore, by Leibniz's series
+value at most $2\int_0^\infty e^{-(2N+3)x}dx=2/(2N+3)\to0$. The
+expansion converges for every $x>0$, as the hint requires, and diverges
+only at the single point $x=0$, where it reads $2(1-1+1-\cdots)$; that
+point does not affect the integral, and the remainder bound justifies
+integrating term by term and taking the limit $N\to\infty$. Therefore,
+by Leibniz's series
 $1-\frac13+\frac15-\cdots=\pi/4$ (the Gregory series at $x=1$),
 \[
  \int_0^\infty\frac{dx}{\cosh x}
@@ -3384,9 +3427,12 @@ $R\to\infty$ gives
 The negative sign is consistent with the negative first lobe on
 $(\pi,2\pi)$ and the decreasing weights of subsequent lobes.
 The number follows from the convergent series
-$\operatorname{Ci}(x)=\gamma+\ln x+\sum_{k=1}^\infty(-1)^kx^{2k}/[2k\,(2k)!]$,
-whose derivative is $\cos x/x$, as it must be; here
-$\gamma=0.5772156649015328\ldots$. At $x=\pi$ the terms of the sum alternate
+$\operatorname{Ci}(x)=\gamma+\ln x+\sum_{k=1}^\infty(-1)^kx^{2k}/[2k\,(2k)!]$
+of Exercise 13.6.13(b), where $\gamma=0.57721566490153286\ldots$ is the
+Euler-Mascheroni constant of Eq.~(1.13). Its derivative is $\cos x/x$,
+as it must be; this check fixes the series only up to an additive
+constant, which the derivation in Exercise 13.6.13(b) shows to be
+$\gamma$. At $x=\pi$ the terms of the sum alternate
 in sign and decrease in magnitude from $k=1$ on, so stopping after
 $k=13$ leaves an error smaller than the first omitted term,
 $\pi^{28}/(28\cdot28!)<10^{-17}$.
@@ -3454,7 +3500,8 @@ Obtain a result in which the only special function is $E_{1}$, \erratum{for real
 \erratum{The restriction $x>0$ keeps the interval between $1$ and $x$
 inside $t>0$, where $E_1(t)$ is defined by the integral below; $E_1$
 has a logarithmic singularity at $t=0$.}
-For $t>0$, $E_1(t)=\int_t^\infty e^{-u}du/u$ and hence
+For $t>0$, $E_1(t)=\int_1^\infty e^{-ts}\,ds/s=\int_t^\infty e^{-u}\,du/u$
+(substitute $u=ts$, so $ds/s=du/u$ and $s=1$ becomes $u=t$), and hence
 $E_1'(t)=-e^{-t}/t$. Integration by parts, differentiating $E_1(t)$
 and integrating $dt$ to $t$, then $tE_1'(t)=-e^{-t}$ and
 $\int_1^xe^{-t}dt=e^{-1}-e^{-x}$, give
@@ -3487,10 +3534,13 @@ $E_1(z)=\int_z^\infty e^{-u}du/u$ used in Exercise 1.10.8,
 The integral is convergent because its integrand is bounded at zero
 and bounded above by $e^{-x}$ for $x\ge0$. The number follows from the
 convergent series
-$E_1(x)=-\gamma-\ln x-\sum_{k=1}^\infty(-x)^k/(k\,k!)$ (its derivative
-is $-e^{-x}/x$, as it must be), which at $x=1$ gives
+$E_1(x)=-\gamma-\ln x-\sum_{k=1}^\infty(-x)^k/(k\,k!)$ of Exercise
+13.6.9 (its derivative is $-e^{-x}/x$, as it must be; this check fixes
+the series only up to an additive constant, and that exercise derives
+the constant $-\gamma$ from $\Gamma'(1)=-\gamma$), which at $x=1$ gives
 $E_1(1)=-\gamma+1-\frac14+\frac1{18}-\frac1{96}+\cdots
-=0.2193839343955202\ldots$, with $\gamma=0.5772156649015328\ldots$.
+=0.2193839343955202\ldots$, with $\gamma=0.57721566490153286\ldots$ as
+in Exercise 1.10.5.
 The terms alternate and decrease, so stopping after $k=17$ leaves an
 error below $1/(18\cdot18!)<10^{-17}$; multiplying by
 $e=2.718281828459045\ldots$ gives the boxed value.
@@ -3738,7 +3788,7 @@ contradicts the original claim and verifies the correction.
 \[
 \delta[a(x-x_{1})]=\erratum{\frac{1}{|a|}}\,\delta(x-x_{1}),\qquad \erratum{a\ne0}.
 \]
-\emph{Note.}~\erratum{The absolute value is required for all real nonzero $a$, including negative $a$.}
+\emph{Note.}~\erratum{With the absolute value the relation holds for every real $a\ne0$; the factor $1/a$ is correct only for $a>0$.}
 \solution
 \erratum{For every real $a\ne0$ the factor is $1/|a|$, as computed
 below, so the textbook's $1/a$ is wrong for $a<0$; the evenness of
@@ -3763,8 +3813,10 @@ sign:
 In both cases the result is $\phi(x_1)/|a|$, the action of
 $\delta(x-x_1)/|a|$, proving the distribution identity. For $a>0$ it
 reduces to the printed factor $1/a$.
-The value $a=0$ is excluded because $\delta(0)$ is not a distribution
-obtained by this change of variable.
+The value $a=0$ is excluded: then $a(x-x_1)=0$ for every $x$, the
+substitution $u=a(x-x_1)$ cannot be inverted, and $\delta(a(x-x_1))$
+would be the meaningless constant $\delta(0)$; correspondingly, $1/|a|$
+is undefined.
 
 
 \Needspace{5\baselineskip}
@@ -3776,9 +3828,11 @@ obtained by this change of variable.
 \]
 \emph{Hint.}~Try using Exercise 1.11.4.
 \solution
-\erratum{The roots must be real and distinct: for $x_1=x_2$ the right
-side has the zero denominator $|x_1-x_2|$ (see the end of the
-solution).}
+\erratum{The roots must be real, since $\delta(x-x_i)$ is defined only
+for real $x_i$ (for complex conjugate roots
+$(x-x_1)(x-x_2)=|x-x_1|^2>0$ for real $x$, so the left side is zero),
+and distinct, since for $x_1=x_2$ the right side has the zero
+denominator $|x_1-x_2|$ (see the end of the solution).}
 Let $g(x)=(x-x_1)(x-x_2)$, so that
 \[
  g'(x)=2x-x_1-x_2,\quad
@@ -3833,7 +3887,8 @@ cancel ($n^3\cdot n^{-2}\cdot n^{-1}=1$), giving
  =-\frac2{\sqrt\pi}\int_{\mathbb R}y^2e^{-y^2}\phi(y/n)dy.
 \]
 As $n\to\infty$, $\phi(y/n)\to\phi(0)$ for every $y$, and dominated
-convergence, with the integrable bound $\|\phi\|_\infty y^2e^{-y^2}$,
+convergence, with the integrable bound $My^2e^{-y^2}$, where
+$M=\max_x|\phi(x)|$,
 lets the limit pass inside the integral. Integration by parts with
 $u=y$, $dv=ye^{-y^2}dy$, $v=-e^{-y^2}/2$ gives
 \[
@@ -3857,7 +3912,12 @@ $0=(x\delta)'=\delta+x\delta'$.
 Here we assume that $f'(x)$ is continuous at $x=0$.
 \solution
 A distributional derivative is defined by its action on test functions,
-$\langle T',f\rangle=-\langle T,f'\rangle$. Taking $T=\delta$ gives
+$\langle T',f\rangle=-\langle T,f'\rangle$, where $\langle T,f\rangle$
+stands for $\int_{\mathbb R}T(x)f(x)\,dx$, the action of $T$ on $f$ (not
+an average), so that $\langle\delta,f\rangle=f(0)$; for a
+differentiable function $T$ this definition is ordinary integration by
+parts. Taking $T=\delta$, so that $-\langle\delta,f'\rangle=-f'(0)$,
+gives
 \[
  \boxed{\int_{\mathbb R}\delta'(x)f(x)dx=-f'(0)}.
 \]
@@ -3894,10 +3954,10 @@ where \erratum{$f$ is real and $C^1$, and $x_0$ is its unique simple real zero, 
 
 \emph{Hint.}~\erratum{Use the local variable $u=f(x)$ and the absolute Jacobian $1/|f'(x_0)|$ at each simple zero.}
 \solution
-\erratum{For a unique simple real zero $x_0$, the factor must be
-$1/|f'(x_0)|$, as computed below; the textbook's factor without the
-absolute value has the wrong sign when $f'(x_0)<0$. For several simple
-zeros, their contributions add.}
+\erratum{For a unique simple real zero $x_0$, the factor is
+$1/|f'(x_0)|$, as computed below; a factor $1/f'(x_0)$ without the
+absolute value would have the wrong sign when $f'(x_0)<0$. For several
+simple zeros, their contributions add.}
 Let $f$ be a real $C^1$ function on the domain under consideration,
 with $f'(x_i)\ne0$ at every zero $x_i$. By continuity, $f'$ keeps the
 sign of $f'(x_i)$ on a neighborhood $U_i$ of $x_i$, so $u=f(x)$ is
