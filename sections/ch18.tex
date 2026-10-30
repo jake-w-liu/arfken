@@ -67,6 +67,7 @@ formal power series.  With $2n/n!=2/(n-1)!$ and $m=n-1$,
 (b) Holding $t$ fixed,
 $\partial_x(e^{-2tx}g)=e^{-2tx}(\partial_xg-2tg)=0$, so $e^{-2tx}g$
 depends on $t$ alone, say $f(t)$, and $g(x,t)=e^{2tx}f(t)$.
+
 (c) At $x=0$, the known values are
 $H_{2m}(0)=(-1)^m(2m)!/m!$ and $H_{2m+1}(0)=0$.  Therefore
 \[
@@ -170,6 +171,16 @@ g_{xx}-2xg_x+2tg_t
 \]
 Since $t\,\partial_t(t^n/n!)=nt^n/n!$, the $t^n/n!$ coefficient of this
 equation is $H_n''-2xH_n'+2nH_n=0$.
+These coefficients are polynomials of degree $n$ with leading
+coefficient $2^n$, as the uniqueness argument in
+\textit{ODE $\longrightarrow$ Rodrigues} requires: multiplying
+$e^{2xt}=\sum_j(2x)^jt^j/j!$ by $e^{-t^2}=\sum_k(-1)^kt^{2k}/k!$ and
+collecting the terms with $j+2k=n$ give the coefficient of $t^n/n!$,
+\[
+H_n(x)=n!\sum_{k=0}^{\lfloor n/2\rfloor}
+ \frac{(-1)^k(2x)^{n-2k}}{k!\,(n-2k)!},
+\]
+whose highest term, from $k=0$, is $(2x)^n$.
 This closes the first four starting points.
 
 \textit{Rodrigues $\longleftrightarrow$ Gram--Schmidt.}
@@ -330,6 +341,7 @@ c_n=\frac1{2^nn!\sqrt\pi}\,\frac{m!}{(2j)!}\,
  =\frac{m!}{2^mn!j!},\qquad n=m-2j,
 \]
 and $c_n=0$ when $m-n$ is odd.
+
 (a) Take $m=2r$; only even $n=2k$ contribute, with $j=r-k$:
 \[
 \boxed{x^{2r}=\frac{(2r)!}{2^{2r}}
@@ -401,11 +413,17 @@ $e^{R^2}e^{-x^2/2+2R|x|}$.
  &=2t\sqrt{2\pi}\,e^{t^2}
  =\sqrt{2\pi}\sum_{k=0}^\infty\frac{2t^{2k+1}}{k!}.
 \end{align*}
+The interchange of sum and integral is justified as in (a): for
+$|t|\le R$ the partial sums are now bounded by
+$|x|e^{R^2}e^{-x^2/2+2R|x|}$, which is still integrable.
 The odd Gaussian moment $\int ye^{-y^2/2}dy$ is zero, and
 $2t\int e^{-y^2/2}dy=2t\sqrt{2\pi}$.  The right side has only odd
-powers, and $2t^{2k+1}/k!=[2(2k+1)!/k!]\,t^{2k+1}/(2k+1)!$.  Thus even
-$n$ give zero, and for $n=2k+1$ the answer is $\sqrt{2\pi}\,2(2k+1)!/k!$.
-Since $2(2k+1)!/k!=(2k+2)(2k+1)!/[(k+1)k!]=(2k+2)!/(k+1)!$, this is
+powers, and
+\[
+\frac{2t^{2k+1}}{k!}=\frac{2(2k+1)!}{k!}\,\frac{t^{2k+1}}{(2k+1)!}.
+\]
+Thus even $n$ give zero, and for $n=2k+1$ the answer is
+$\sqrt{2\pi}\,2(2k+1)!/k!$.  Since $2(2k+1)!/k!=(2k+2)(2k+1)!/[(k+1)k!]=(2k+2)!/(k+1)!$, this is
 \[
 \boxed{\int_{-\infty}^{\infty}xe^{-x^2/2}H_n(x)\,dx
  =\begin{cases}0,&n\text{ even},\\[3pt]
@@ -635,8 +653,8 @@ Multiplication by $e^{-x^2}H_m$ and integration therefore gives
  &=\boxed{\begin{aligned}
  &\sqrt\pi2^{n-1}(2n+1)n!\,\delta_{mn}\\
  &{}+\sqrt\pi2^n(n+2)!\,\delta_{m,n+2}
-   +\sqrt\pi2^{n-2}n!\,\delta_{m,n-2}.
- \end{aligned}}
+   +\sqrt\pi2^{n-2}n!\,\delta_{m,n-2}
+ \end{aligned}}.
 \end{align*}
 The orthogonality integral gives each line, and the box uses
 $\tfrac14\,2^{n+2}=2^n$, $\tfrac{2n+1}{2}\,2^n=2^{n-1}(2n+1)$ and
@@ -668,7 +686,7 @@ $xH_j=H_{j+1}/2+jH_{j-1}$.  Iterating this relation $r$ times gives
 x^rH_n=2^{-r}H_{n+r}
        +\text{a polynomial of degree at most }n+r-2.
 \]
-To see why the highest coefficient is exactly $2^{-r}$, the only
+To see why the highest coefficient is exactly $2^{-r}$, note that the only
 way to reach index $n+r$ in $r$ steps is to raise the index at every
 step; each contributes $1/2$.  Any lowering step decreases the final
 index by two relative to that highest index.  This also follows by
@@ -714,13 +732,15 @@ $\psi_{n}(x)$ is known.
 \solution
 \erratum{The Instructor's Manual's two reduced ladder expressions also
 need $e^{-x^2/2}$, the factor carried by $\psi_n$, in place of
-$e^{-x^2}$; its recurrence uses $2xH_n-2nH_{n-1}=H_{n+1}$.}\par
+$e^{-x^2}$, and its recurrence lacks the index $n-1$; it must read
+$2xH_n-2nH_{n-1}=H_{n+1}$.}\par
 
 In the stated dimensionless variables $p=-iD$, with $D=d/dx$, so
 $ip=D$.
 Thus $a=(x+D)/\sqrt2$ and $a^\dagger=(x-D)/\sqrt2$.
-\erratum{These are the corrected signs and operator actions in the
-published erratum.}  Set $N_n=(2^nn!\sqrt\pi)^{-1/2}$, so
+\erratum{These are the signs of the published correction: since
+$ip=d/dx$, they make $(x\pm ip)/\sqrt2$ agree with the printed
+$(x\pm d/dx)/\sqrt2$.}  Set $N_n=(2^nn!\sqrt\pi)^{-1/2}$, so
 $\psi_n=N_ne^{-x^2/2}H_n$.  The product rule gives
 \[
 D\psi_n=N_ne^{-x^2/2}(H_n'-xH_n).
@@ -837,9 +857,12 @@ L_n(x)=\frac{e^x}{n!}D^n(x^ne^{-x}).
 \]
 Leibniz's formula assigns $j$ derivatives to $x^n$ and $n-j$ to
 the exponential.  Since
-$D^jx^n=n!x^{n-j}/(n-j)!$ and
-$D^{n-j}e^{-x}=(-1)^{n-j}e^{-x}$, it gives, with
-$\frac1{n!}\binom nj\frac{n!}{(n-j)!}=\frac{n!}{j!\,[(n-j)!]^2}$,
+\[
+D^jx^n=\frac{n!}{(n-j)!}x^{n-j},\qquad
+D^{n-j}e^{-x}=(-1)^{n-j}e^{-x},\qquad
+\frac1{n!}\binom nj\frac{n!}{(n-j)!}=\frac{n!}{j!\,[(n-j)!]^2},
+\]
+it gives
 \begin{align*}
 L_n(x)
  &=\frac{e^x}{n!}\sum_{j=0}^n\binom nj
@@ -915,7 +938,7 @@ No explicit polynomial series has been used in this second proof.
 Eq.~(18.71) for the associated Laguerre polynomials, thereby also
 confirming Eq.~(18.55) for the $L_{n}$.
 \solution
-For fixed nonnegative integer $k$, Rodrigues's formula is
+For fixed nonnegative integer $k$ and $D=d/dx$, Rodrigues's formula is
 \[
 e^{-x}x^kL_n^k(x)=\frac1{n!}D^n(e^{-x}x^{n+k}).
 \]
@@ -1030,22 +1053,37 @@ e^{-x/2}L_n(x)
 \]
 Indeed $|e^{i\sqrt{2x}\,y}|=1$, and without the phase the integral of
 the nonnegative function $e^{-y^2}H_n^2$ is the Hermite norm
-$2^nn!\sqrt\pi$, so the right side has modulus at most one.  To verify
-this identity independently, multiply two Hermite generators and
-integrate with $e^{-y^2+icy}$.  Completion of the square,
-$-y^2+(2u+2v+ic)y=-(y-u-v-ic/2)^2+(u+v+ic/2)^2$, gives
+$2^nn!\sqrt\pi$, so the right side has modulus at most one.  To prove
+this identity, multiply two Hermite generators and integrate with
+$e^{-y^2+icy}$, $c$ real.  Completion of the square,
+$-y^2+(2u+2v+ic)y=-(y-w)^2+w^2$ with $w=u+v+ic/2$, gives
 \[
 \int_{\mathbb R}e^{-y^2+icy}e^{-u^2+2uy}e^{-v^2+2vy}\,dy
- =\sqrt\pi\,e^{(u+v+ic/2)^2-u^2-v^2}
+ =\sqrt\pi\,e^{w^2-u^2-v^2}
  =\sqrt\pi\,e^{2uv+ic(u+v)-c^2/4}.
 \]
-On the left the coefficient of $u^nv^n$ is
-$(n!)^{-2}\int e^{-y^2+icy}H_n^2\,dy$.  On the right the terms
-$(2uv)^i/i!$ of $e^{2uv}$ and $(icu)^{n-i}(icv)^{n-i}/[(n-i)!]^2$ of
-$e^{icu}e^{icv}$ give the coefficient
-$\sqrt\pi e^{-c^2/4}\sum_i2^i(-c^2)^{n-i}/(i![(n-i)!]^2)$.
+Here $\int_{\mathbb R}e^{-(y-w)^2}dy=\sqrt\pi$ also for complex $w$,
+since its value at $w=0$ is $\sqrt\pi$ and its derivative with respect
+to $w$ vanishes:
+\[
+\int_{\mathbb R}2(y-w)e^{-(y-w)^2}dy
+ =-\Bigl[e^{-(y-w)^2}\Bigr]_{-\infty}^{\infty}=0.
+\]
+On the left, expand both generators and integrate termwise.  This is
+justified for $|u|,|v|\le R$: the double series of absolute values is
+at most $\bigl(\sum_n|H_n(y)|R^n/n!\bigr)^2\le e^{4R|y|+2R^2}$ by the
+bound of Exercise 18.1.6, and $e^{-y^2+4R|y|}$ is integrable.  The
+coefficient of $u^nv^n$ on the left is therefore
+$(n!)^{-2}\int e^{-y^2+icy}H_n^2\,dy$.  On the right
+the terms $(2uv)^\ell/\ell!$ of $e^{2uv}$ and
+$(icu)^{n-\ell}(icv)^{n-\ell}/[(n-\ell)!]^2$ of $e^{icu}e^{icv}$ give
+the coefficient
+\[
+\sqrt\pi\,e^{-c^2/4}\sum_{\ell=0}^n
+ \frac{2^\ell(-c^2)^{n-\ell}}{\ell!\,[(n-\ell)!]^2}.
+\]
 Multiplying both by $(n!)^2/(2^nn!\sqrt\pi)$, i.e., dividing the
-integral by the Hermite norm, and putting $j=n-i$ give
+integral by the Hermite norm, and putting $j=n-\ell$ give
 \[
 \frac{\int e^{-y^2+icy}H_n^2\,dy}{2^nn!\sqrt\pi}
  =e^{-c^2/4}\sum_{j=0}^n
@@ -1061,9 +1099,11 @@ $(1-t)^{-k}=\sum_i\binom{i+k-1}{k-1}t^i$, the coefficient of $t^n$ gives
 L_n^k(x)=\sum_{j=0}^n\binom{n-j+k-1}{k-1}L_j(x).
 \]
 The coefficients are positive, and their sum
-$\sum_{i=0}^n\binom{i+k-1}{k-1}=\binom{n+k}{n}$ is the coefficient of
-$t^n$ in $(1-t)^{-k}(1-t)^{-1}=(1-t)^{-k-1}$.  Since each
-$|L_j(x)|\le e^{x/2}$, this proves the bound.  Consequently, for
+\[
+\sum_{i=0}^n\binom{i+k-1}{k-1}=\binom{n+k}{n}
+\]
+is the coefficient of $t^n$ in $(1-t)^{-k}(1-t)^{-1}=(1-t)^{-k-1}$.
+Since each $|L_j(x)|\le e^{x/2}$, this proves the bound.  Consequently, for
 $0\le x\le A$, using $\binom{n+k}{n}/\Gamma(n+k+1)=1/(n!\,k!)$,
 \[
 |c_nL_n^k(x)|\le
@@ -1071,8 +1111,9 @@ $0\le x\le A$, using $\binom{n+k}{n}/\Gamma(n+k+1)=1/(n!\,k!)$,
 \]
 For noninteger $r>0$, the last ratio is
 $|\Gamma(n-r)/[\Gamma(-r)\Gamma(n+1)]|=O(n^{-r-1})$, since
-$\Gamma(n-r)/\Gamma(n+1)\sim n^{-r-1}$; this is summable.  For integer
-$r$ it terminates.
+$\Gamma(n-r)/\Gamma(n+1)\sim n^{-r-1}$ (Exercise 13.4.6 with $a=-r-1$,
+$b=0$); this is summable, so the Weierstrass M-test gives absolute and
+uniform convergence on $0\le x\le A$.  For integer $r$ it terminates.
 
 To identify the sum, the Laguerre polynomials are complete in
 $L^2((0,\infty),x^ke^{-x}dx)$.  A brief proof is to take a function
@@ -1084,9 +1125,29 @@ identity theorem makes it zero throughout
 that half-plane.  Fourier uniqueness on $z=i\xi$ then gives $f=0$
 almost everywhere.  Thus the computed orthogonal expansion converges
 to $x^r$ in this norm whenever $x^r$ lies in the space, i.e.\
-whenever $\int_0^\infty x^{2r+k}e^{-x}dx<\infty$, or $r>-(k+1)/2$.  For $r>0$ the locally
-uniform convergence already proved identifies its continuous sum at
-every $x\ge0$.  The case $r=0$ is the single term $L_0^k=1$.
+whenever $\int_0^\infty x^{2r+k}e^{-x}dx<\infty$, or $r>-(k+1)/2$.
+Conversely, for $-k-1<r\le-(k+1)/2$ it does not converge in this norm:
+by orthogonality the $N$th partial sum has squared norm
+$\sum_{n\le N}|c_n|^2h_n$, and, with $(-r)_n=\Gamma(n-r)/\Gamma(-r)$,
+\begin{align*}
+|c_n|^2h_n
+ &=\frac{\Gamma(r+k+1)^2[(-r)_n]^2}{n!\,\Gamma(n+k+1)}
+ =\left[\frac{\Gamma(r+k+1)}{\Gamma(-r)}\right]^2
+ \frac{\Gamma(n-r)}{\Gamma(n+1)}\,\frac{\Gamma(n-r)}{\Gamma(n+k+1)}\\
+ &\sim\left[\frac{\Gamma(r+k+1)}{\Gamma(-r)}\right]^2n^{-2r-k-2},
+\end{align*}
+because, by Exercise 13.4.6, the two gamma quotients behave as
+$n^{-r-1}$ and $n^{-r-k-1}$.  The exponent $-2r-k-2$ is at least $-1$,
+so these norms are unbounded.
+
+For $r>0$ the partial sums $S_N$ converge uniformly on each $[0,A]$
+to a continuous sum $S$, so
+$\int_0^A|S_N-S|^2x^ke^{-x}dx\le k!\,\max_{[0,A]}|S_N-S|^2\to0$.
+They also converge to $x^r$ in the weighted norm, hence in the norm
+over $(0,A)$.  Limits in this norm are unique, so $S=x^r$ almost
+everywhere on $[0,A]$, and, both functions being continuous,
+$S(x)=x^r$ at every $x\ge0$.  The case $r=0$ is the single term
+$L_0^k=1$.
 
 For completeness, negative powers have a precise extension.
 Put $r=-\beta$ with $0<\beta<k+1$ and $x>0$.  The same coefficients
@@ -1097,9 +1158,11 @@ x^{-\beta}=\lim_{q\uparrow1}\sum_{n=0}^\infty c_nq^nL_n^k(x).
 To prove it rather than assume ordinary pointwise convergence, write
 $c_n=\Gamma(k+1-\beta)(\beta)_n/\Gamma(n+k+1)$ with
 $(\beta)_n=\Gamma(\beta+n)/\Gamma(\beta)$.  The beta integral
-$\int_0^1u^{\beta+n-1}(1-u)^{k-\beta}du
-=\Gamma(\beta+n)\Gamma(k+1-\beta)/\Gamma(n+k+1)$ gives
-$c_n=\Gamma(\beta)^{-1}\int_0^1u^{\beta+n-1}(1-u)^{k-\beta}du$.
+\[
+\int_0^1u^{\beta+n-1}(1-u)^{k-\beta}du
+=\frac{\Gamma(\beta+n)\Gamma(k+1-\beta)}{\Gamma(n+k+1)}
+\]
+gives $c_n=\Gamma(\beta)^{-1}\int_0^1u^{\beta+n-1}(1-u)^{k-\beta}du$.
 Inserting this and summing the generating function
 $\sum_n(qu)^nL_n^k(x)=(1-qu)^{-k-1}e^{-xqu/(1-qu)}$ under the integral
 give, for $0\le q<1$,
@@ -1112,9 +1175,11 @@ give, for $0\le q<1$,
 The series interchange is uniform because $|qu|\le q<1$: by the bound
 above, $\sum_n|L_n^k(x)|(qu)^n\le e^{x/2}(1-q)^{-k-1}$.
 For $q\ge1/2$ and $u\ge1/2$, put $\sigma=qu/(1-qu)\ge1/3$; then
-$(1-qu)^{-k-1}e^{-x\sigma}=(1+\sigma)^{k+1}e^{-x\sigma}$ is bounded by
-$\max_{\sigma\ge0}(1+\sigma)^{k+1}e^{-x\sigma}<\infty$, so the
-exponential bounds the inverse power uniformly; on $u\le1/2$ the
+\[
+(1-qu)^{-k-1}e^{-x\sigma}=(1+\sigma)^{k+1}e^{-x\sigma}
+\le\max_{\sigma\ge0}(1+\sigma)^{k+1}e^{-x\sigma}<\infty,
+\]
+so the exponential bounds the inverse power uniformly; on $u\le1/2$ the
 denominator satisfies $1-qu\ge1/2$ directly.  Thus an integrable
 constant multiple of the beta weight $u^{\beta-1}(1-u)^{k-\beta}$
 dominates the integrand.  Dominated convergence and the substitution
@@ -1162,7 +1227,10 @@ c_n=\frac{n!}{\Gamma(n+k+1)}
 Rodrigues's formula, $x^ke^{-x}L_n^k=D^n(e^{-x}x^{n+k})/n!$, followed by
 $n$ integrations by parts, as in Exercise 18.3.3, with
 $D^ne^{-ax}=(-a)^ne^{-ax}$ and, for $\Re(1+a)>0$,
-$\int_0^\infty e^{-(1+a)x}x^{n+k}dx=\Gamma(n+k+1)/(1+a)^{n+k+1}$, gives
+\[
+\int_0^\infty e^{-(1+a)x}x^{n+k}dx=\frac{\Gamma(n+k+1)}{(1+a)^{n+k+1}},
+\]
+gives
 \begin{align*}
 c_n
  &=\frac1{\Gamma(n+k+1)}\int_0^\infty
@@ -1187,8 +1255,11 @@ L_n^k(x)
    \frac{(n+k)!}{(k+j)!}x^{k+j}(-1)^je^{-x}\\
  &=\sum_{j=0}^n\binom{n+k}{n-j}\frac{(-x)^j}{j!},
 \end{align*}
-since $\frac1{n!}\binom nj\frac{(n+k)!}{(k+j)!}
-=\frac{(n+k)!}{j!\,(n-j)!\,(k+j)!}=\binom{n+k}{n-j}\frac1{j!}$.
+since
+\[
+\frac1{n!}\binom nj\frac{(n+k)!}{(k+j)!}
+=\frac{(n+k)!}{j!\,(n-j)!\,(k+j)!}=\binom{n+k}{n-j}\frac1{j!}.
+\]
 Put $n=j+m$ in the generating sum, so that
 $\binom{n+k}{n-j}=\binom{m+j+k}{m}$.  The binomial series
 $\sum_m\binom{m+N}{m}t^m=(1-t)^{-N-1}$, with $N=j+k$, then yields
@@ -1225,7 +1296,7 @@ L_{n}^{k}(x)L_{n}^{k}(x)\,dx
 \par\emph{Hint.}~Note that
 $xL_{n}^{k}=(2n+k+1)L_{n}^{k}-(n+k)L_{n-1}^{k}-(n+1)L_{n+1}^{k}$.
 \solution
-Let $h_n=(n+k)!/n!$.  Multiply the supplied recurrence by
+Let $h_n=(n+k)!/n!$.  Multiply the recurrence of the hint by
 $x^ke^{-x}L_n^k$ and integrate:
 \begin{align*}
 \int_0^\infty x^{k+1}e^{-x}(L_n^k)^2\,dx
@@ -1420,8 +1491,9 @@ Consequently, with $n\alpha=2Z/a_0$,
  =\frac{3n^2-L(L+1)}{n\alpha}
  =\boxed{\frac{a_0}{2Z}[3n^2-L(L+1)]}.
 \]
-At $n=1,L=0$ these become $3a_0/(2Z)$ and $Z/a_0$;
-setting $Z=1$ gives the two textbook answers.
+At $n=1$, $L=0$ these become $3a_0/(2Z)$ and $Z/a_0$.  Setting
+$Z=1$ in the two boxed results gives the printed answers
+$\frac{a_0}2[3n^2-L(L+1)]$ and $1/(n^2a_0)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1463,9 +1535,10 @@ M_j=\frac{\int_0^\infty\rho^ju^2d\rho}
           {\int_0^\infty u^2d\rho}
     =\alpha^j\langle r^j\rangle.
 \]
-The radial function may be chosen real.  It behaves as
-$u=O(\rho^{L+1})$ near zero and as an exponential times a polynomial
-at infinity.
+The radial function may be chosen real.  By Eq.~(18.84), $u$ is a
+constant times $\rho^{L+1}e^{-\rho/2}L_{n-L-1}^{2L+1}(\rho)$, so near zero
+$u=O(\rho^{L+1})$ and $u'=O(\rho^L)$, while at infinity $u$ and $u'$
+are $e^{-\rho/2}$ times polynomials.
 
 Put $f=\rho^{s+2}$ and $g=-c\rho^{s+1}$.  Multiply $u''-Qu=0$ by
 $fu'+gu=fu'-c\rho^{s+1}u$ and integrate first on a finite interval:
@@ -1500,8 +1573,10 @@ Adding these three identities and multiplying by two yields
 0=\left[fu'^2-f'uu'+\frac{f''}2u^2-fQu^2\right]_0^\infty
  +\int_0^\infty\left(2f'Q+fQ'-\frac{f'''}2\right)u^2d\rho.
 \]
-The zero-endpoint boundary bracket is $O(\rho^{s+2L+2})$;
-it vanishes under the given condition $s\ge-2L-1$.
+Since $f'=(s+2)\rho^{s+1}$, $f''=(s+1)(s+2)\rho^s$ and, near zero,
+$Q=O(\rho^{-2})$, each of $fu'^2$, $f'uu'$, $f''u^2$ and $fQu^2$ is
+$O(\rho^{s+2L+2})$ there.  Hence the zero-endpoint boundary bracket is
+$O(\rho^{s+2L+2})$; it vanishes under the given condition $s\ge-2L-1$.
 The lowest moment integrand has order $\rho^{s+2L+1}$ and is
 integrable there.  The upper endpoint vanishes exponentially.
 These estimates justify taking the limits after the finite-interval
@@ -1536,8 +1611,8 @@ $\alpha a_0/(2n)=1/n^2$ and $a_0/(2n\alpha)=a_0^2/4$, so
 &\frac{s+2}{n^2}\langle r^{s+1}\rangle
  -(2s+3)a_0\langle r^s\rangle\\
 &\quad+\frac{s+1}{4}\bigl[(2L+1)^2-(s+1)^2\bigr]
- a_0^2\langle r^{s-1}\rangle=0.
-\end{aligned}}
+ a_0^2\langle r^{s-1}\rangle=0
+\end{aligned}}.
 \]
 For $s=-1$ the last term vanishes and $\langle r^0\rangle=1$, so
 $1/n^2-a_0\langle r^{-1}\rangle=0$, i.e.\
@@ -1585,8 +1660,9 @@ $n!\,(-1)^j2^{n-2j}y^{n-2j}(2n-2j)!\sqrt\pi
  \frac{(-1)^j(2n-2j)!}{j!(n-j)!(n-2j)!}y^{n-2j}.
 \]
 To identify the polynomial, expand the Legendre Rodrigues formula by
-the binomial theorem, $(y^2-1)^n=\sum_j\binom nj(-1)^jy^{2n-2j}$, and use
-$D_y^ny^{2n-2j}=\frac{(2n-2j)!}{(n-2j)!}y^{n-2j}$ for $2j\le n$:
+the binomial theorem, $(y^2-1)^n=\sum_j\binom nj(-1)^jy^{2n-2j}$, and use,
+with $D_y=d/dy$, $D_y^ny^{2n-2j}=\frac{(2n-2j)!}{(n-2j)!}y^{n-2j}$ for
+$2j\le n$:
 \begin{align*}
 P_n(y)
  &=\frac1{2^nn!}D_y^n(y^2-1)^n\\
@@ -1595,9 +1671,11 @@ P_n(y)
  \frac{(-1)^j(2n-2j)!}{j!(n-j)!(n-2j)!}y^{n-2j}.
 \end{align*}
 Terms with $2n-2j<n$, i.e.\ $j>n/2$, vanish upon differentiation, and
-$\frac1{2^nn!}\binom nj\frac{(2n-2j)!}{(n-2j)!}
-=\frac1{2^n}\frac{(2n-2j)!}{j!(n-j)!(n-2j)!}$.  Comparing the
-two finite sums proves
+\[
+\frac1{2^nn!}\binom nj\frac{(2n-2j)!}{(n-2j)!}
+=\frac1{2^n}\frac{(2n-2j)!}{j!(n-j)!(n-2j)!}.
+\]
+Comparing the two finite sums proves
 \[
 \boxed{\int_{-\infty}^{\infty}x^ne^{-x^2}H_n(xy)dx
        =\sqrt\pi\,n!P_n(y)}.
