@@ -47,8 +47,8 @@ f^*(x)&=\frac1{\sqrt{2\pi}}\int g^*(\omega)e^{i\omega x}d\omega\\
 formula then gives
 $g^*(\omega)=\mathcal F[-f](-\omega)=-g(-\omega)$, i.e.,
 $g(-\omega)=-g^*(\omega)$. Conversely, if
-$g^*(\omega)=-g(-\omega)$, the first two steps of the preceding
-inverse calculation give
+$g^*(\omega)=-g(-\omega)$, the steps of the preceding inverse
+calculation (conjugation, the hypothesis, then $u=-\omega$) give
 $f^*(x)=-(2\pi)^{-1/2}\int g(-\omega)e^{i\omega x}d\omega=-f(x)$.
 \erratum{For $L^1$ or $L^2$ transforms the recovered function is
 determined almost everywhere; these reality assertions have that
@@ -124,7 +124,21 @@ Thus $D(b)=\lim_{\epsilon\downarrow0}D_\epsilon(b)
 =(\pi/2)\operatorname{sgn}b$ for $b\ne0$, while
 $D(0)=0$. The improper integral
 $\int_0^\infty(\sin bu/u)\,du$ converges by Dirichlet's test, so
-Abel's theorem makes it equal to this limit $D(b)$. Now use
+Abel's theorem for integrals makes it equal to this limit $D(b)$:
+if $\int_0^\infty h\,du$ converges, then
+$\int_0^\infty e^{-\epsilon u}h\,du\to\int_0^\infty h\,du$ as
+$\epsilon\downarrow0$. To prove it, put $H(u)=\int_u^\infty h\,dv$;
+then $H'=-h$, $H(0)=\int_0^\infty h\,du$, and $H$ is continuous with
+$H(u)\to0$ as $u\to\infty$, hence bounded. Integration by parts gives
+\begin{align*}
+\int_0^\infty e^{-\epsilon u}h\,du
+&=-\bigl[e^{-\epsilon u}H\bigr]_0^\infty
+-\epsilon\int_0^\infty e^{-\epsilon u}H\,du\\
+&=H(0)-\epsilon\int_0^\infty e^{-\epsilon u}H\,du.
+\end{align*}
+Splitting the last integral at any $U>0$ bounds the last term by
+$\epsilon U\sup|H|+\sup_{u\ge U}|H(u)|$, which is arbitrarily small
+when $U$ is chosen large and then $\epsilon$ small. Now use
 \[
 \sin\omega\cos\omega x
 =\tfrac12\{\sin[(1+x)\omega]+\sin[(1-x)\omega]\}.
@@ -299,14 +313,15 @@ $\delta_n(x)=(2\pi)^{-1/2}\int g_n(k)e^{-ikx}dk$, consequently gives
 \]
 with the midpoint value $n/2$ at either edge of the rectangle.
 Those two point values do not affect any integral.
-For a smooth rapidly decreasing test function $\eta$, the mean
-value theorem for integrals gives a point $\xi_n$ with
-$|\xi_n|\le1/(2n)$ such that
-\[
-\int\delta_n(x)\eta(x)dx
-=n\int_{-1/(2n)}^{1/(2n)}\eta(x)dx=\eta(\xi_n)
-\longrightarrow\eta(0).
-\]
+For a smooth rapidly decreasing test function $\eta$ (real or
+complex), the interval $|x|<1/(2n)$ on which $\delta_n=n$ has
+length $1/n$, so $\eta(0)=n\int_{-1/(2n)}^{1/(2n)}\eta(0)\,dx$ and
+\begin{align*}
+\Bigl|\int\delta_n(x)\eta(x)dx-\eta(0)\Bigr|
+&=\Bigl|n\int_{-1/(2n)}^{1/(2n)}[\eta(x)-\eta(0)]\,dx\Bigr|\\
+&\le\max_{|x|\le1/(2n)}|\eta(x)-\eta(0)|\longrightarrow0
+\end{align*}
+by the continuity of $\eta$ at $0$.
 To take the same limit in the Fourier integral, let
 $\tilde\eta(k)=(2\pi)^{-1/2}\int\eta(x)e^{ikx}dx$; it is
 integrable, and $\eta(x)=(2\pi)^{-1/2}\int\tilde\eta(k)e^{-ikx}dk$.
@@ -423,7 +438,7 @@ $\displaystyle\frac{2}{\pi}\int_{0}^{\infty}
 \sin\omega t\sin\omega x\,d\omega$,\quad
 $\displaystyle\frac{2}{\pi}\int_{0}^{\infty}
 \cos\omega t\cos\omega x\,d\omega$.
-\par\erratum{The two half-line answers below mean distributions for $x,t>0$. On the full line they require reflected delta terms, as derived in the solution.}
+\par\erratum{The two half-line answers above mean distributions for $x,t>0$. On the full line they require reflected delta terms, as derived in the solution.}
 \solution
 On a finite interval $(0,L)$ the orthonormal Dirichlet
 eigenfunctions are $\sqrt{2/L}\sin(n\pi x/L)$, $n\ge1$, and the
@@ -471,9 +486,10 @@ $\delta(t-x)$ on the positive half-line, with $x,t>0$.
 On the whole real line they contain the reflected source
 $\mp\delta(t+x)$ shown above. Endpoint values at zero require
 the corresponding half-line boundary convention.}
-For a test function supported inside $(0,\infty)$ and fixed
-$x>0$, the reflected source has no support, which proves exactly
-the needed positive-half-line identities.
+For fixed $x>0$ the reflected source $\delta(t+x)$ is concentrated
+at $t=-x<0$, outside the support of any test function supported
+inside $(0,\infty)$, so it contributes nothing there; this proves
+exactly the needed positive-half-line identities.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -704,7 +720,10 @@ hold as tempered distributions and as the indicated ordinary
 improper integrals away from zero; values at the support edges
 in (a),(b) are likewise singular.}
 
-(d) For $a>0$, $I_0(ay)\sim e^{a|y|}/\sqrt{2\pi a|y|}$.
+(d) For $a>0$, the asymptotic form $I_0(z)\sim e^z/\sqrt{2\pi z}$ as
+$z\to+\infty$ (Section~14.6), together with the evenness of $I_0$
+(its series contains only even powers of $z$), gives
+$I_0(ay)\sim e^{a|y|}/\sqrt{2\pi a|y|}$ as $|y|\to\infty$.
 It therefore has neither an ordinary Fourier integral nor a
 Fourier transform as a tempered distribution represented by this
 function. This exponential growth is the obstruction to an
@@ -714,7 +733,7 @@ $\sqrt{2\pi}\delta$, a separate degenerate case.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{20.2.11}\quad \erratum{Show that the right-hand expression has the left-hand expression as its forward Fourier transform, and determine the reverse forward transform:}
+\noindent\textbf{20.2.11}\quad \erratum{Show that the left-hand expression is the forward Fourier transform of the right-hand expression, and find the forward transform of the left-hand expression:}
 \[
 i^{n}J_{n}(t)\qquad\text{and}\qquad
 \begin{cases}
@@ -856,7 +875,7 @@ integrals
 \par\erratum{In part (a), take $t>0$.}
 \solution
 \erratum{The differential in the second integral must be
-$dx$: the original textbook, p.~979, prints $ds$.
+$dx$: the textbook, p.~979, prints $ds$.
 Take $t>0$; both displayed integrals then converge conditionally.}
 (a) Introduce positive damping before taking the square-root limit:
 \[
@@ -879,15 +898,17 @@ I(t)=\lim_{\epsilon\downarrow0}I_\epsilon(t)
 =\sqrt{\frac\pi2}\,t^{-1/2}(1+i).
 \]
 The ordinary integrals converge at zero by the exponent $-1/2$
-and at infinity by Dirichlet's test, so Abel convergence identifies
+and at infinity by Dirichlet's test, so Abel's theorem for integrals
+(Exercise~20.2.2(c), here with $h(x)=x^{-1/2}e^{ixt}$) identifies
 this limit with their values:
 $I(t)=\int_0^\infty x^{-1/2}\cos xt\,dx+i\int_0^\infty x^{-1/2}\sin xt\,dx$.
 Equating real and imaginary parts, each of these integrals is
 $\sqrt{\pi/2}\,t^{-1/2}$; multiplying by $\sqrt{2/\pi}$ proves both
 self-reciprocal identities.
 \erratum{The Instructor's Manual, p.~336, has two further slips: the change
-$u=-izt$ maps the positive $z$ axis to the negative imaginary
-axis, and its final factor $t^{1/2}$ must be $t^{-1/2}$.
+$u=-izt$ (its integration variable $z$ is our $x$) maps the
+positive real $z$ axis to the negative imaginary $u$ axis, and
+its final factor $t^{1/2}$ must be $t^{-1/2}$.
 The damped gamma calculation above fixes both the phase and
 the scaling without an ambiguous contour rotation.}
 
@@ -932,10 +953,29 @@ Thus
 Here $4\pi/(2\pi)^{3/2}=\sqrt{2/\pi}$, and the last integral is
 $D_\epsilon(k)=\arctan(k/\epsilon)$ of Exercise~20.2.2 (with $b=k$,
 $u=r$). As $\epsilon\downarrow0$, $\arctan(k/\epsilon)\to\pi/2$ and
-$\sqrt{2/\pi}\,\pi/2=\sqrt{\pi/2}$. Both $e^{-\epsilon r}r^{-2}$ and
-the right side are bounded by their locally integrable limits,
-$r^{-2}$ and $\sqrt{\pi/2}/k$, so the limit also holds after
-pairing with test functions. This gives
+$\sqrt{2/\pi}\,\pi/2=\sqrt{\pi/2}$. The limit also holds after
+pairing with a Schwartz test function $\eta(\mathbf k)$. Put
+$\tilde\eta(\mathbf r)=(2\pi)^{-3/2}\int\eta(\mathbf k)
+e^{i\mathbf k\cdot\mathbf r}d^3k$, again a Schwartz function. Since
+$\eta$ and $e^{-\epsilon r}r^{-2}$ are integrable
+($\int e^{-\epsilon r}r^{-2}d^3r=4\pi\int_0^\infty e^{-\epsilon r}dr
+=4\pi/\epsilon$), the order of integration may be interchanged:
+\[
+\int\mathcal F\Bigl[\frac{e^{-\epsilon r}}{r^2}\Bigr](\mathbf k)\,
+\eta(\mathbf k)\,d^3k
+=\int\frac{e^{-\epsilon r}}{r^2}\,\tilde\eta(\mathbf r)\,d^3r.
+\]
+As $\epsilon\downarrow0$, dominated convergence takes the left side
+to $\int\sqrt{\pi/2}\,k^{-1}\eta\,d^3k$ (majorant
+$\sqrt{\pi/2}\,k^{-1}|\eta|$, since $0<\arctan(k/\epsilon)<\pi/2$)
+and the right side to $\int r^{-2}\tilde\eta\,d^3r$ (majorant
+$r^{-2}|\tilde\eta|$). Both majorants are integrable, because
+$k^{-1}$ and $r^{-2}$ are locally integrable in three dimensions
+($d^3k=k^2dk\,d\Omega$, $d^3r=r^2dr\,d\Omega$) and $\eta$,
+$\tilde\eta$ decrease rapidly. The transform of the distribution
+$r^{-2}$ is defined by this pairing rule,
+$\int\mathcal F[r^{-2}]\,\eta\,d^3k=\int r^{-2}\tilde\eta\,d^3r$, so
+the equality of the two limits for every $\eta$ states that
 \[
 \boxed{\mathcal F[r^{-2}](\mathbf k)
 =\sqrt{\frac\pi2}\frac1k}.
@@ -944,9 +984,7 @@ pairing with test functions. This gives
 vector. The formula is for $k>0$, or is a tempered-distribution
 identity on all of three-dimensional momentum space. Its value
 at $k=0$ is singular, and the original spatial integral is not
-absolutely convergent at infinity.} Both $r^{-2}$ in three
-dimensions and $k^{-1}$ in three dimensions are locally
-integrable, so this distributional interpretation is well-defined.
+absolutely convergent at infinity.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -999,9 +1037,13 @@ because the same steps give $2\pi J_0(-\rho r)$ for the angular
 integral and $J_0$ is even. This is the claimed inverse Hankel
 transform. The factors $r$ and $\rho$ are the two polar Jacobians;
 the Fourier factors $1/(2\pi)$ cancel the angular integrals.
-For example, Schwartz radial functions justify the operations
-directly; the unitary extension acts in the radial spaces with
-measures $r\,dr$ and $\rho\,d\rho$.
+For radial Schwartz functions these operations (polar coordinates
+and the order of integration) are justified directly. By Parseval's
+theorem, $\iint|f|^2dx\,dy=\iint|F|^2du\,dv$; in polar coordinates
+both sides carry the factor $2\pi$ of the angular integration, so
+$\int_0^\infty|f(r)|^2r\,dr=\int_0^\infty|F(\rho)|^2\rho\,d\rho$.
+The Hankel pair therefore extends, as the Fourier transform does,
+to all radial $f$ with $\int_0^\infty|f(r)|^2r\,dr<\infty$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1209,8 +1251,15 @@ tend to zero at $\pm\infty$, and $f$ and $f^{(n)}$ are integrable)
 each endpoint term tends to zero
 as $R\to\infty$. This explains why no initial-value terms occur
 for this two-sided transform, unlike the one-sided Laplace
-transform. For distributional derivatives the identity remains
-valid without incorrectly discarding jump contributions.
+transform. If $f$ has a jump at $t_0$, integrating by parts
+separately on each side of $t_0$ leaves the extra endpoint term
+$-[f(t_0^+)-f(t_0^-)]e^{i\omega t_0}/\sqrt{2\pi}$ in the transform
+of the pointwise derivative, so that derivative alone violates the
+identity. The identity still holds when $f'$ is the distributional
+derivative, which contains the term
+$[f(t_0^+)-f(t_0^-)]\,\delta(t-t_0)$; its transform
+$[f(t_0^+)-f(t_0^-)]e^{i\omega t_0}/\sqrt{2\pi}$ cancels the endpoint
+term. Jumps of $f',\ldots,f^{(n-1)}$ are treated in the same way.
 
 \Needspace{5\baselineskip}
 \par\bigskip

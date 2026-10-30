@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 5 of 54 parts done (audited and verified); 9 audited and awaiting verification.
+Progress: 6 of 54 parts done (audited and verified); 8 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -125,7 +125,7 @@ Progress: 5 of 54 parts done (audited and verified); 9 audited and awaiting veri
 | ch18-p4 | 18.6.16–18.8.6 | pending |
 | ch19-p1 | 19.1.1–19.2.14 | pending |
 | ch19-p2 | 19.2.15–19.3.3 | pending |
-| ch20-p1 | 20.2.1–20.3.6 | audited |
+| ch20-p1 | 20.2.1–20.3.6 | done |
 | ch20-p2 | 20.4.1–20.7.8 | pending |
 | ch20-p3 | 20.8.1–20.8.24 | pending |
 | ch20-p4 | 20.9.1–20.10.13 | pending |
@@ -160,4 +160,5 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch15-p1** (15.1.1–15.2.19) — audit: no mathematical errors found; every result and quoted number re-verified (including all 56 entries of the 15.2.19 table). Steps added in 36 of 37 exercises (all but 15.1.18), e.g. both triangular back substitutions in 15.1.5, the factorial ratio in 15.1.3, the gamma and power-of-two bookkeeping in 15.1.15–15.1.17 and 15.2.14, and in 15.2.16 the axis Poisson kernel via 15.1.6, the derivative giving $\sigma(0)=\sqrt2\varepsilon_0V_0/a$ and a derivation of the exterior Poisson integral; partial sums and the tail estimate added in 15.2.8(c). Cleanups: the "supplied transcription" remark in 15.1.15 deleted (the printed $2n!/(2n+1)!!$ is correct, so its red marking was dropped); the nonexistent "numerical verification" in 15.2.19 replaced by a Coulomb-integral check (64-point trapezoidal rule, maximum deviation $4.5\times10^{-6}$ at $R=1.5$); "the manual" → "the Instructor's Manual" (15.1.4, 15.1.7, 15.2.8); "the source" → "the textbook" or "Example 15.2.3".
 - **ch14-p1** (14.1.1–14.1.28) — audit: no mathematical errors found (all quoted zeros, crossovers, plot vertices and the 83.8% fraction re-verified). Steps added in 26 of 28 exercises (e.g. the coefficient algebra of 14.1.8, now without the ratio $a_s/a_{s-1}$ that is undefined at negative integer order; the product-rule primitive, the $s=xt/2$ substitution and the new limits of the Fourier forms in 14.1.15; the series bound in 14.1.23; the higher-$p$ exclusions and closed-form crossovers in 14.1.27). Cleanups: a transcription remark removed from 14.1.15; "the manual" → "the Instructor's Manual" (14.1.14, 14.1.22, 14.1.25, 14.1.26); a stray "$I(0)/I(0)=1$" dropped in 14.1.22; the 14.1.14 erratum moved to part (a), which it concerns.
 - **ch20-p1** (20.2.1–20.3.6) — audit: no mathematical errors found. Steps added in all 22 exercises (e.g. the explicit Fourier pairing behind the delta-sequence limits in 20.2.5–20.2.6, the Jacobi–Anger evaluation of the $J_n$ integral in 20.2.11, the cosine-inversion proof of the $K_0$ transform from Exercise 14.5.13 in 20.2.10(c), the principal-value value $1/2$ at $t=0$ in 20.2.9). Cleanups: "the manual" → "the Instructor's Manual" (20.2.9, 20.2.13, 20.3.1); part labels added in 20.2.3 and 20.2.13; a speculative "deliberately" removed in 20.2.9.
+  - verification (3 independent reviews): 20 findings applied (13 distinct; error fixed: in 20.2.5 the mean value theorem for integrals, false for complex test functions, replaced by a direct continuity bound; other: Abel's theorem for integrals stated and proved in 20.2.2(c) and cited in 20.2.13, the distributional pairing argument written out in 20.2.14, the jump term of the distributional derivative made explicit in 20.3.4, the source and limit of the $I_0$ asymptotic form given in 20.2.10(d); wording and references corrected in 20.2.1, 20.2.7, 20.2.11 (statement erratum), 20.2.13, 20.2.15), 0 rejected.
 - **ch18-p1** (18.1.1–18.3.10) — audit: no mathematical errors found (all results, ANS values, the 18.3.4 convergence claims and Kramers' relation in 18.3.9 re-derived and checked numerically). Steps added in all 25 exercises (e.g. the transformation of Eq. (18.80) and the full integration-by-parts bookkeeping in 18.3.9, the $u^nv^n$ coefficient extraction and hockey-stick sum behind the Laguerre bound in 18.3.4, the $w^{(n+1)},w^{(n+2)}$ computation and uniqueness argument in 18.1.2, the Frobenius coefficient product identifying $L_n^k$ in 18.3.7; a concrete dominating function in 18.1.6). Cleanups: "the manual" → "the Instructor's Manual" in five errata; a justification added to the 18.1.1 erratum and to the 18.2.6 hint erratum ($r$ applications); ambiguous $2n!/(2\pi i)$ in 18.1.7 and $(n-j)!^2$ in 18.3.1 rewritten; $D=d/dx$ defined where used.
