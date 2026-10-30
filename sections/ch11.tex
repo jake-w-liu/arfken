@@ -3294,7 +3294,8 @@ $2\pi\epsilon^{1-a}/(1-\epsilon)$; on the large circle
 $|z^{-a}|=R^{-a}$ and $|1+z|\ge R-1$, giving the bound
 $2\pi R^{1-a}/(R-1)$. The first tends to zero if $a<1$ and
 the second if $a>0$. On the upper bank ($\arg z\to0$) $z^{-a}=x^{-a}$,
-which gives $I$; on the lower bank ($\arg z\to2\pi$)
+which gives the desired integral $I=\int_0^\infty x^{-a}\,dx/(1+x)$;
+on the lower bank ($\arg z\to2\pi$)
 $z^{-a}=x^{-a}e^{-2\pi ia}$, and the inward direction gives
 $\int_\infty^0e^{-2\pi ia}x^{-a}\,dx/(1+x)=-e^{-2\pi ia}I$. The two
 straight banks therefore give $(1-e^{-2\pi ia})I$. The only pole,
@@ -3323,12 +3324,12 @@ $x^{-1-a}$, integrable at infinity because $a>0$.
 \noindent\textbf{11.8.25}\quad Show that
 \[
 \int_{0}^{\infty}\frac{\cosh bx}{\cosh x}\,dx
-=\frac{\pi}{2\cos(\pi b/2)},\quad|b| < 1,\quad\erratum{b\in\mathbb R}.
+=\frac{\pi}{2\cos(\pi b/2)},\quad|b| < 1.
 \]
 \emph{Hint.}~Choose a contour that encloses one \erratum{zero of $\cosh z$, hence one pole of $1/\cosh z$.}
 \solution
-For real $|b|<1$, integrate $F(z)=e^{bz}/\cosh z$ around the
-rectangle $-R,R,R+i\pi,-R+i\pi$. From
+First let $b$ be real, $|b|<1$, and integrate $F(z)=e^{bz}/\cosh z$
+around the rectangle $-R,R,R+i\pi,-R+i\pi$. From
 $\cosh(x+iy)=\cosh x\cos y+i\sinh x\sin y$,
 \[
 |\cosh(x+iy)|^2=\cosh^2x\cos^2y+\sinh^2x\sin^2y
@@ -3374,6 +3375,14 @@ Thus
 \boxed{\int_0^\infty\frac{\cosh bx}{\cosh x}\,dx
 =\frac{\pi}{2\cos(\pi b/2)}}.
 \]
+The same argument holds for complex $b$ with $|b|<1$, as printed,
+because then $|\Re b|\le|b|<1$. On the vertical sides, where
+$z=\pm R+iy$ with $0\le y\le\pi$,
+$|e^{bz}|=e^{\Re(bz)}=e^{\pm R\Re b-y\Im b}\le e^{|\Re b|R+\pi|\Im b|}$,
+so each side contributes $O(e^{-(1-|\Re b|)R})$; $J$ converges
+absolutely because $|e^{bx}|=e^{x\Re b}$; and $\cos(\pi b/2)\ne0$,
+because it vanishes only when $b$ is an odd integer. Every other step
+is unchanged.
 \erratum{The printed hint calls this a pole of $\cosh z$. That function is entire; its simple zero at $i\pi/2$ produces the pole of the reciprocal used here.}
 
 \Needspace{5\baselineskip}
@@ -3391,24 +3400,25 @@ as the upper limit. For the general case of a varying upper limit, asymptotic
 expansions of the Fresnel integrals are the topic of Exercise 12.6.1.
 \solution
 Integrate the entire function $e^{iz^2}$ around the sector
-$0\le\arg z\le\pi/4$, $|z|\le R$. The real segment contributes
+$0\le\arg z\le\pi/4$, $|z|\le R$ (Fig.~11.30 with opening angle
+$\theta=\pi/4$). The real segment contributes
 $I_R=\int_0^R e^{it^2}\,dt$. On the returning ray put
 $z=e^{i\pi/4}t$; then $dz=e^{i\pi/4}\,dt$, $iz^2=i\cdot it^2=-t^2$,
 and $t$ runs from $R$ to $0$, so its contribution is
 $-e^{i\pi/4}\int_0^R e^{-t^2}\,dt$.
-On the circular arc $z=Re^{i\theta}$, $0\le\theta\le\pi/4$,
-$iz^2=iR^2(\cos2\theta+i\sin2\theta)$ has real part
-$-R^2\sin2\theta$, so
+On the circular arc $z=Re^{i\varphi}$, $0\le\varphi\le\pi/4$,
+$iz^2=iR^2(\cos2\varphi+i\sin2\varphi)$ has real part
+$-R^2\sin2\varphi$, so
 \[
-|e^{iz^2}|=e^{-R^2\sin2\theta}.
+|e^{iz^2}|=e^{-R^2\sin2\varphi}.
 \]
 Sine is concave on $[0,\pi/2]$, so it lies above its chord there:
-$\sin\psi\ge2\psi/\pi$. With $\psi=2\theta$ this gives
-$\sin2\theta\ge4\theta/\pi$ for $0\le\theta\le\pi/4$, and with
-$|dz|=R\,d\theta$,
+$\sin\psi\ge2\psi/\pi$. With $\psi=2\varphi$ this gives
+$\sin2\varphi\ge4\varphi/\pi$ for $0\le\varphi\le\pi/4$, and with
+$|dz|=R\,d\varphi$,
 \[
 \left|\int_{\text{arc}}e^{iz^2}\,dz\right|
-\le R\int_0^{\pi/4}e^{-4R^2\theta/\pi}\,d\theta
+\le R\int_0^{\pi/4}e^{-4R^2\varphi/\pi}\,d\varphi
 =\frac{\pi}{4R}\bigl(1-e^{-R^2}\bigr)
 \le\frac{\pi}{4R}\longrightarrow0.
 \]
@@ -3420,12 +3430,12 @@ and letting $R\to\infty$,
 =e^{i\pi/4}\int_0^\infty e^{-t^2}\,dt.
 \]
 The Gaussian value follows by squaring its integral
-and using polar coordinates $x=r\cos\theta$, $y=r\sin\theta$,
-$dx\,dy=r\,dr\,d\theta$, in the first quadrant:
+and using polar coordinates $x=r\cos\varphi$, $y=r\sin\varphi$,
+$dx\,dy=r\,dr\,d\varphi$, in the first quadrant:
 \[
 \left(\int_0^\infty e^{-t^2}\,dt\right)^2
 =\int_0^\infty\!\!\int_0^\infty e^{-(x^2+y^2)}\,dx\,dy
-=\int_0^{\pi/2}\int_0^\infty e^{-r^2}r\,dr\,d\theta
+=\int_0^{\pi/2}\int_0^\infty e^{-r^2}r\,dr\,d\varphi
 =\frac{\pi}{2}\cdot\frac12=\frac{\pi}{4}.
 \]
 The integral is positive, so it is $\sqrt\pi/2$.
@@ -3456,7 +3466,9 @@ F(z)=\frac{e^{i\pi/3}}{z}
 \]
 where the power in parentheses uses its principal logarithm.
 The map $1-1/z$ meets the nonpositive real axis exactly on the
-removed segment, so this branch is analytic on the contour's domain.
+removed segment: the equation $1-1/z=-s$ with $s\ge0$ has the single
+solution $z=1/(1+s)$, and these points fill $(0,1]$ as $s$ runs over
+$[0,\infty)$. So this branch is analytic on $\mathbb C\setminus[0,1]$.
 It satisfies
 $F(z)^3=e^{i\pi}z^{-3}\bigl((z-1)/z\bigr)^{-1}=-1/[z^2(z-1)]
 =1/[z^2(1-z)]$, and hence $|F(z)|=|z|^{-2/3}|z-1|^{-1/3}$.
@@ -3475,21 +3487,30 @@ that is,
 F_+(x)=x^{-2/3}(1-x)^{-1/3},\qquad
 F_-(x)=e^{2\pi i/3}F_+(x).
 \]
-Orient the outer circle counterclockwise; the inner dogbone then
-goes from zero to one above the cut and from one to zero below it.
-By the modulus formula, $|F|$ is about $\epsilon^{-2/3}$ on a circle
-of radius $\epsilon$ about zero and about $\epsilon^{-1/3}$ on one
-about one; with the length $2\pi\epsilon$, the endpoint circles
-contribute $O(\epsilon^{1/3})$ and $O(\epsilon^{2/3})$, hence vanish.
+The dogbone consists of the two banks of the cut from $\epsilon$ to
+$1-\epsilon$, joined by the circles $|z|=\epsilon$ and
+$|z-1|=\epsilon$. Enclose it in a circle $|z|=R$ with $R>1$; $F$ is
+analytic in the region between the two curves. Orient this outer
+circle counterclockwise; the dogbone, as the inner boundary of that
+region, then goes from zero to one above the cut and from one to
+zero below it. On $|z|=\epsilon$ we have $|z-1|\ge1-\epsilon$, and on
+$|z-1|=\epsilon$ we have $|z|\ge1-\epsilon$, so by the modulus formula
+\[
+|F|\le\epsilon^{-2/3}(1-\epsilon)^{-1/3}\ \text{on }|z|=\epsilon,
+\qquad
+|F|\le(1-\epsilon)^{-2/3}\epsilon^{-1/3}\ \text{on }|z-1|=\epsilon.
+\]
+With lengths at most $2\pi\epsilon$, the endpoint circles contribute
+$O(\epsilon^{1/3})$ and $O(\epsilon^{2/3})$, hence vanish.
 If $I$ is the desired integral, the upper bank gives
 $\int_0^1F_+\,dx=I$ and the lower bank
 $\int_1^0F_-\,dx=-e^{2\pi i/3}I$, together $(1-e^{2\pi i/3})I$.
 At infinity, the binomial series
 $(1-1/z)^{-1/3}=1+1/(3z)+O(z^{-2})$ gives
 $F(z)=e^{i\pi/3}/z+O(z^{-2})$; the remainder contributes $O(R^{-1})$
-on the circle $|z|=R$ of length $2\pi R$, so the outer circle tends to
-$e^{i\pi/3}\oint dz/z=2\pi i e^{i\pi/3}$. There are no poles in the
-remaining domain, and Cauchy's theorem gives
+on the outer circle, of length $2\pi R$, so the outer circle tends to
+$e^{i\pi/3}\oint dz/z=2\pi i e^{i\pi/3}$. Since $F$ is analytic
+between the two curves, Cauchy's theorem gives
 \[
 (1-e^{2\pi i/3})I+2\pi i e^{i\pi/3}=0.
 \]
@@ -3538,9 +3559,14 @@ that is, on $z=iy$, $y\ge1/a$; similarly $\operatorname{Log}(1-iaz)$
 is cut on $z=iy$, $y\le-1/a$, outside the upper half-plane.
 Use the upper contour of Fig.~11.32, with the slit from $i/a$ to
 $i\infty$ excluded. The assumption $ab<1$ places the pole $ib$
-below the branch point $i/a$. The small circle of radius $\rho$
-around $i/a$, where $1/[z(z^2+b^2)]$ is bounded because
-$b^2-1/a^2\ne0$, has integral $O(\rho|\ln\rho|)\to0$. On the large
+below the branch point $i/a$. On the small circle of radius $\rho$
+around $i/a$, $1+iaz=ia(z-i/a)$ has modulus $a\rho$, so
+$|\operatorname{Log}(1+iaz)|\le|\ln(a\rho)|+\pi$, while
+$1-iaz=2-ia(z-i/a)$ stays near $2$, so $\operatorname{Log}(1-iaz)$
+is bounded; and $1/[z(z^2+b^2)]$ is bounded there because
+$z^2+b^2=b^2-1/a^2\ne0$ at $z=i/a$. Hence $|F|=O(|\ln\rho|)$ on this
+circle, and with its length at most $2\pi\rho$ its integral is
+$O(\rho|\ln\rho|)\to0$. On the large
 arc $|z|=R$, $|1+iaz|/|1-iaz|=|z-i/a|/|z+i/a|\to1$ and the arguments
 are bounded by $\pi$, so $A(z)$ stays bounded, while
 $|z(z^2+b^2)|\ge R(R^2-b^2)$; with the length at most $\pi R$, the
@@ -3673,7 +3699,8 @@ $\{|x|\le\pi/2,\ |y|\le\delta,\ |z|\ge d\}$ is compact and
 contains no zero of $\sin z$. The continuous quotient
 $\cos z/\sin z$ is therefore bounded there too. Thus $\cot z$ is
 uniformly bounded away from fixed neighborhoods of its poles.
-\erratum{Here \emph{order one} means $O(1)$, not a nonzero lower bound:
+\erratum{The textbook's \emph{order one}, written $O(1)$ in the
+statement, means boundedness, not a nonzero lower bound:
 $\cot z$ has zeros at $(n+\tfrac12)\pi$ even for arbitrarily large
 $|z|$. The exclusion of the poles must have a fixed positive width.}
 
@@ -3692,8 +3719,10 @@ $R_N\max_{C_N}|f(z)|\to0$, the estimation lemma gives
 |I_N|=\left|\oint_{C_N}f(z)\pi\cot\pi z\,dz\right|
 \le2\pi R_NM\max_{C_N}|f(z)|\longrightarrow0.
 \]
-\erratum{The decay of $zf(z)$ used here is uniform on the contours.
-Directional or pointwise decay alone does not supply this bound.}
+\erratum{Since $|z|=R_N$ on $C_N$, the hypothesis of the statement
+is $\max_{C_N}|zf(z)|\to0$: the decay of $zf(z)$ used here is uniform
+on the contours. Directional or pointwise decay alone does not supply
+this bound.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3712,8 +3741,8 @@ Dividing the second value by the factor four in the first identity gives
 \boxed{1-\frac1{3^3}+\frac1{5^3}-\cdots=\frac{\pi^3}{32}}.
 \]
 That earlier derivation justified the series interchange by absolute
-integrability and evaluated the integral by the specified rectangular
-contour, so no unproved summation formula is needed here.
+integrability and evaluated the integral with the rectangular contour
+of Fig.~11.29.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3851,6 +3880,7 @@ Thus
 \[
 \boxed{\sum_{n=0}^{\infty}\frac1{(2n+1)^2}=\frac{\pi^2}{8}}.
 \]
+\erratum{The discussion on textbook p.~545 assigns residue $+1$ to $\pi\tan(\pi z)$. The quotient calculation above shows that each residue is $-1$; this sign is required in the contour sum.}
 
 \textbf{(b)} Split the defining zeta series into its odd and even parts:
 \[
@@ -3861,7 +3891,6 @@ Thus
 The odd sum is $(3/4)\zeta(2)$. Using $\zeta(2)=\pi^2/6$
 gives $(3/4)(\pi^2/6)=\pi^2/8$, in agreement with the contour result;
 conversely that result supplies the same value of $\zeta(2)$.
-\erratum{The discussion on textbook p.~545 assigns residue $+1$ to $\pi\tan(\pi z)$. The quotient calculation above shows that each residue is $-1$; this sign is required in the contour sum.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3993,9 +4022,13 @@ because
 $\int_0^\pi(\pi-t)t\,dt=[\pi t^2/2-t^3/3]_0^\pi=\pi^3/6$.
 The bounded argument justifies dominated convergence in both integrals
 (the single point $t=\pi$, where the limit is not $t/2$, does not
-matter). Since
-$|S(\varphi)-S_r(\varphi)|\le\sum_n(1-r^n)/n^3\to0$ (each term is at
-most $1/n^3$ and tends to zero), $S_r\to S$ uniformly, and with
+matter). Since $0\le1-r^n=(1-r)(1+r+\cdots+r^{n-1})\le n(1-r)$,
+\[
+|S(\varphi)-S_r(\varphi)|\le\sum_{n=1}^{\infty}\frac{1-r^n}{n^3}
+\le(1-r)\sum_{n=1}^{\infty}\frac1{n^2}=(1-r)\frac{\pi^2}{6}\to0,
+\]
+so $S_r\to S$ uniformly. Letting $r\uparrow1$ in the formula for
+$S_r(\varphi)$, with
 $\int_0^\varphi(\varphi-t)t\,dt=\varphi^3/2-\varphi^3/3=\varphi^3/6$,
 \[
 S(\varphi)=-\frac{\pi^2\varphi}{12}
@@ -4025,10 +4058,11 @@ conditions for the Schwarz reflection principle. Show that
 Under those conditions ($f$ analytic in a connected domain symmetric
 about the real axis that contains a real interval on which $f$ is
 real), the Schwarz reflection principle gives
-$f(\bar z)=\overline{f(z)}$ throughout that domain.
-Writing $z=x+iy$, so that $\bar z=x-iy$,
-$f(\bar z)=u(x,-y)+iv(x,-y)$ and
-$\overline{f(z)}=u(x,y)-iv(x,y)$; hence
+$f(z^*)=f^*(z)$ throughout that domain, where $f^*(z)$ denotes the
+complex conjugate $[f(z)]^*$.
+Writing $z=x+iy$, so that $z^*=x-iy$,
+$f(z^*)=u(x,-y)+iv(x,-y)$ and
+$f^*(z)=u(x,y)-iv(x,y)$; hence
 \[
 u(x,-y)+iv(x,-y)=u(x,y)-iv(x,y),
 \]
@@ -4061,36 +4095,41 @@ On the Laurent series' annulus of convergence,
 f(z)=\sum_{n=-\infty}^{\infty}a_nz^n,\qquad a_n\in\mathbb R.
 \]
 The annulus is invariant under complex conjugation. Conjugating its
-convergent partial sums and then taking the limit gives
+convergent partial sums and then taking the limit gives, with
+$f^*(z)=[f(z)]^*$,
 \[
-\overline{f(z)}
-=\sum_{n=-\infty}^{\infty}\overline{a_n}\,\bar z^{\,n}
-=\sum_{n=-\infty}^{\infty}a_n\bar z^{\,n}
-=f(\bar z).
+f^*(z)
+=\sum_{n=-\infty}^{\infty}a_n^*\,(z^*)^n
+=\sum_{n=-\infty}^{\infty}a_n(z^*)^n
+=f(z^*).
 \]
-For $f(z)=z^n$ this follows directly from conjugation of products
-if $n\ge0$ and of reciprocals if $n<0$ (the latter require $z\ne0$).
-Explicitly, with $z=\rho e^{i\phi}$, $\bar z=\rho e^{-i\phi}$,
+
+\textbf{(a)} For $f(z)=z^n$ this follows directly from conjugation
+of products if $n\ge0$ and of reciprocals if $n<0$ (the latter
+require $z\ne0$). Explicitly, with $z=\rho e^{i\phi}$,
+$z^*=\rho e^{-i\phi}$,
 \[
-\overline{z^n}=\overline{\rho^ne^{in\phi}}=\rho^ne^{-in\phi}
-=(\rho e^{-i\phi})^n=\bar z^{\,n}.
+(z^n)^*=(\rho^ne^{in\phi})^*=\rho^ne^{-in\phi}
+=(\rho e^{-i\phi})^n=(z^*)^n.
 \]
-For the sine function, the addition formula with $\cos iy=\cosh y$
-and $\sin iy=i\sinh y$ gives
+
+\textbf{(b)} For the sine function, the addition formula with
+$\cos iy=\cosh y$ and $\sin iy=i\sinh y$ gives
 \[
 \sin(x+iy)=\sin x\cosh y+i\cos x\sinh y.
 \]
 Replacing $y$ by $-y$ changes only the sign of its imaginary part,
 since $\cosh$ is even and $\sinh$ odd, so
-$\sin(\bar z)=\sin x\cosh y-i\cos x\sinh y=\overline{\sin z}$
+$\sin(z^*)=\sin x\cosh y-i\cos x\sinh y=(\sin z)^*$
 explicitly.
+\erratum{The Instructor's Manual's sine series omits both alternating signs and the odd powers. The correct series is $\sin z=\sum_{n=0}^\infty(-1)^nz^{2n+1}/(2n+1)!$, whose real coefficients agree with the direct Cartesian verification above.}
+
 In contrast, for $f(z)=iz$,
 \[
-\overline{f(z)}=-i\bar z,\qquad f(\bar z)=i\bar z.
+f^*(z)=(iz)^*=-iz^*,\qquad f(z^*)=iz^*.
 \]
 They disagree for every $z\ne0$, showing why the reality of the
 coefficients is essential.
-\erratum{The Instructor's Manual's sine series omits both alternating signs and the odd powers. The correct series is $\sin z=\sum_{n=0}^\infty(-1)^nz^{2n+1}/(2n+1)!$, whose real coefficients agree with the direct Cartesian verification above.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4110,26 +4149,27 @@ imaginary.
 \textbf{(a)} Define $g(z)=-if(z)$, analytic in the same domain. If
 $f(x)=i\beta(x)$ with $\beta(x)$ real on the real interval, then
 $g(x)=\beta(x)$ is real there. Schwarz reflection gives
-$g(\bar z)=\overline{g(z)}$; since $g(\bar z)=-if(\bar z)$ and
-$\overline{g(z)}=\overline{(-i)}\,\overline{f(z)}=i\,\overline{f(z)}$,
+$g(z^*)=[g(z)]^*$; since $g(z^*)=-if(z^*)$ and
+$[g(z)]^*=(-i)^*[f(z)]^*=i[f(z)]^*$,
 \[
--if(\bar z)=i\,\overline{f(z)}.
+-if(z^*)=i[f(z)]^*.
 \]
 Dividing by $-i$ proves
 \[
-\boxed{f(\bar z)=-\overline{f(z)}}.
+\boxed{f(z^*)=-[f(z)]^*}.
 \]
-\erratum{This identity is understood on the reflected continuation,
-or on a conjugation-invariant connected domain containing the real
-interval. For an arbitrary nonsymmetric original domain, one can assert
-it on the common component connected to that interval; $f(\bar z)$
-need not even be defined at every $z$ of the original domain.}
+\erratum{The domain conditions of the statement are needed because
+$f(z^*)$ must be defined wherever the identity is asserted, and the
+identity theorem behind Schwarz reflection needs a connected domain
+containing the real interval. For a domain $D$ not symmetric about
+the real axis, the identity is guaranteed only on the connected
+component of $D\cap\{z^*:z\in D\}$ that contains the interval.}
 
 \textbf{(b)} Compute the three expressions separately from $z=x+iy$:
 \[
 f(z)=i(x+iy)=-y+ix,\qquad
-f(\bar z)=i(x-iy)=y+ix,\qquad
-\overline{f(z)}=-y-ix.
+f(z^*)=i(x-iy)=y+ix,\qquad
+f^*(z)=-y-ix.
 \]
 The second is the negative of the third, directly confirming (a)
 without invoking it.
@@ -4231,7 +4271,8 @@ $|w|<1$ is attained, since $w=1$ is not in the open disk.
 \erratum{Inversion maps a circle through the origin to a straight line.
 The claimed circle-to-circle form requires $a^2+b^2-r^2\ne0$;
 the origin itself is excluded from the map.}
-Because $z=1/w=\bar w/|w|^2=(u-iv)/(u^2+v^2)$,
+
+\textbf{(a)} Because $z=1/w=w^*/|w|^2=(u-iv)/(u^2+v^2)$,
 \[
 x=\frac{u}{u^2+v^2},\qquad
 y=-\frac{v}{u^2+v^2},\qquad
@@ -4257,6 +4298,7 @@ Therefore
 \[
 \boxed{A=\frac aD,\qquad B=-\frac bD,\qquad R=\frac r{|D|}}.
 \]
+\erratum{The Instructor's Manual writes the signed quantity $r/(r^2-a^2-b^2)$ for the radius. Its square gives the correct circle equation, but the geometric radius must be nonnegative: $R=r/|r^2-a^2-b^2|$.}
 Every step is reversible for $w\ne0$, and $w=0$ is not on this
 circle, because $A^2+B^2-R^2=(a^2+b^2-r^2)/D^2=1/D\ne0$; so the image
 is the whole circle.
@@ -4264,7 +4306,7 @@ If $D=0$, the equation is instead the line
 $\boxed{2au-2bv=1}$, which does not contain $w=0$; each of its points
 is the image of a point of the circle other than zero.
 
-For (b), when $a+ib\ne0$ the image of the original center is
+\textbf{(b)} When $a+ib\ne0$, the image of the original center is
 \[
 \frac1{a+ib}=\frac{a-ib}{a^2+b^2},
 \]
@@ -4275,7 +4317,6 @@ are nonzero while the denominators differ by $r^2$. If the original
 center is zero, its image is undefined even though the image circle
 has center zero.
 Thus a circle's center does not in general map to its image's center.
-\erratum{The Instructor's Manual writes the signed quantity $r/(r^2-a^2-b^2)$ for the radius. Its square gives the correct circle equation, but the geometric radius must be nonnegative: $R=r/|r^2-a^2-b^2|$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
