@@ -30,7 +30,8 @@ p(x)=xe^{-x},\quad w(x)=e^{-x}.
 Thus $A y=-w^{-1}(py')'=-e^{x}(xe^{-x}y')'=-xy''-(1-x)y'$, and the
 equation reads $Ay=ny$: the eigenvalue is $n$.
 For functions in a common domain, write $w\,Av=-(pv')'$ and integrate
-once by parts in each scalar product ($p$ and $w$ are real):
+once by parts in each scalar product
+$\langle u,v\rangle_w=\int_a^b u^*v\,e^{-x}\,dx$ ($p$ and $w$ are real):
 \begin{align*}
 \langle u,Av\rangle_w
 &=-\int_a^b u^*(pv')'\,dx
@@ -42,13 +43,12 @@ once by parts in each scalar product ($p$ and $w$ are real):
 Subtracting cancels the identical integrals and gives
 \[
 \langle u,Av\rangle_w-\langle Au,v\rangle_w
-=-\bigl[p(u^*v'-u'^*v)\bigr]_a^b,\qquad
-\langle u,v\rangle_w=\int_a^b u^*v\,e^{-x}\,dx.
+=-\bigl[p(u^*v'-u'^*v)\bigr]_a^b.
 \]
 This is the required weighted self-adjoint differential form; vanishing
 of the displayed boundary form makes the operator Hermitian on that domain.
 For polynomial solutions on $[0,\infty)$, both endpoint terms vanish,
-as checked in Exercise 8.2.4.
+as checked in Exercise 8.2.4(d).
 
 
 \Needspace{5\baselineskip}
@@ -163,7 +163,13 @@ term zero.  The norm exists because $w=(1-x^2)^{-1/2}$ is integrable
 magnitude by $C(1+|x|^N)$ for suitable $C,N$, and
 $|x|^Ne^{-x^2}\to0$ as $x\to\pm\infty$.
 Thus both boundary terms vanish, and the weighted norms converge
-because $\int_{-\infty}^{\infty}|x|^ke^{-x^2}\,dx=\Gamma((k+1)/2)$
+because, by symmetry and the substitution $t=x^2$, $dx=dt/(2\sqrt t)$,
+\[
+\int_{-\infty}^{\infty}|x|^ke^{-x^2}\,dx
+=2\int_0^\infty x^ke^{-x^2}\,dx
+=\int_0^\infty t^{(k-1)/2}e^{-t}\,dt
+=\Gamma\Bigl(\frac{k+1}2\Bigr)
+\]
 is finite for every $k\ge0$.
 \item[(d)] Laguerre: $p=xe^{-x}$ and $w=e^{-x}$.
 At $0$, the factor $x$ multiplies a bounded polynomial; at $\infty$,
@@ -173,8 +179,10 @@ vanish, and the weighted norms on $[0,\infty)$ converge because
 $\int_0^\infty x^ke^{-x}\,dx=k!$.
 \end{enumerate}
 These conclusions use the polynomial hypothesis.  The same intervals
-alone do not make arbitrary singular solutions satisfy the boundary
-conditions, as Exercises 8.2.6 and 8.2.7 demonstrate.
+alone do not make arbitrary nonpolynomial solutions satisfy the
+boundary conditions, as Exercises 8.2.6 and 8.2.7 demonstrate:
+$Q_0$ is unbounded at $x=\pm1$, while $V_1=\sqrt{1-x^2}$ is bounded
+but has an unbounded derivative there.
 
 
 \Needspace{5\baselineskip}
@@ -268,7 +276,8 @@ and integration over $(-1,1)$ gives, in agreement with (a),
 =(2-0)\int_{-1}^{1}P_1Q\,dx=2.
 \]
 Although $Q$ is square integrable (near $x=\pm1$, $Q^2$ grows only
-like $\frac14\ln^2(1\mp x)$, and $\int_0^1\ln^2t\,dt=2$), it is
+like $\frac14\ln^2(1\mp x)$, and $t=e^{-u}$ gives
+$\int_0^1\ln^2t\,dt=\int_0^\infty u^2e^{-u}\,du=2$), it is
 singular at the endpoints and
 does not belong to the same boundary-condition domain as the Legendre
 polynomials.  The Hermitian orthogonality theorem thus does not apply
@@ -344,9 +353,10 @@ orthogonality.  Thus the additional sufficient boundary condition is
 which yields $\int_a^b p\,u_m'^*u_n'\,dx=0$.
 This holds, for example, under common Dirichlet conditions, common
 Neumann conditions, or a common choice of Dirichlet or Neumann
-condition at each endpoint.  It also holds for periodic values of $u$
-and $pu'$, when the endpoint products cancel, or when $p\to0$ and
-the products $u_m^*u_n'$ remain bounded.
+condition at each endpoint.  It also holds under periodic conditions
+$u(a)=u(b)$, $p(a)u'(a)=p(b)u'(b)$, since the two endpoint products
+are then equal and cancel.  An endpoint where $p\to0$ while
+$u_m^*u_n'$ remains bounded contributes nothing.
 
 The vanishing of the antisymmetrized boundary form alone need not
 suffice.  Under real Robin conditions $u'(a)=h_a u(a)$ and
@@ -354,9 +364,17 @@ $u'(b)=h_bu(b)$ that form vanishes, but the boundary term here is
 \[
 p(b)h_bu_m^*(b)u_n(b)-p(a)h_au_m^*(a)u_n(a),
 \]
-which requires a separate check.  For normalized eigenfunctions and
-the stronger vanishing condition, the same calculation with $m=n$
-also gives $\int_a^b p|u_n'|^2\,dx=\lambda_n$.
+which requires a separate check.  For example, $u''+\lambda u=0$ on
+$[0,1]$ ($p=w=1$) with $u'(0)=0$ and $u'(1)=-u(1)$ ($h_a=0$,
+$h_b=-1$) has the eigenfunctions $u=\cos kx$, $\lambda=k^2$, for which
+$u'(1)=-u(1)$ reads $k\sin k=\cos k$, i.e., $k\tan k=1$.  The two
+lowest, $u_1$ and $u_2$ with $k_1\approx0.8603$ and $k_2\approx3.4256$,
+are orthogonal, but by the boxed identity $\int_0^1u_1'u_2'\,dx$
+equals the displayed term, $-\cos k_1\cos k_2\approx0.626\ne0$.
+
+For a normalized eigenfunction with $[p\,u_n^*u_n']_a^b=0$ (the
+condition above with $m=n$), the boxed identity with $m=n$ also gives
+$\int_a^b p|u_n'|^2\,dx=\lambda_n$.
 
 
 \Needspace{5\baselineskip}
@@ -409,10 +427,11 @@ $C_{n}^{(\alpha)}(x)$ are solutions of the differential equation
 \erratum{Take real $\alpha>-1/2$. At $\alpha=0$, use nonzero
 limiting normalizations for degrees $n\ge1$.}
 \solution
-\erratum{For a positive integrable weight supporting all degrees,
-assume real $\alpha>-\tfrac12$.  Eigenfunctions must be nonzero;
-at $\alpha=0$ use the nonzero Chebyshev limits rather than the
-identically zero standard $C_n^{(0)}$ for $n\ge1$.}
+\erratum{For the weight $(1-x^2)^{\alpha-1/2}$ to be positive and
+integrable on $(-1,1)$, so that polynomials of every degree have
+finite norm, assume real $\alpha>-\tfrac12$ (see (b)).  Eigenfunctions
+must be nonzero; at $\alpha=0$ use the nonzero Chebyshev limits rather
+than the identically zero standard $C_n^{(0)}$ for $n\ge1$.}
 
 \textbf{(a)} If $w$ is the multiplier and $p=(1-x^2)w$, the
 coefficient of $y'$ must be $p'=-(2\alpha+1)xw$ (the condition
@@ -606,16 +625,25 @@ Consequently
 =\Bigl(1+\frac1k\Bigr)\Bigl(1-\frac1k+O(k^{-2})\Bigr)
 =1+O(k^{-2}).
 \]
-Let $b_k=kc_k$.  The ratios $b_{k+1}/b_k$ tend to $1$, so they are
-positive for $k\ge k_0$, and
+Let $b_k=kc_k$.  For real $n$ the ratios $b_{k+1}/b_k$ are real and
+tend to $1$, so they are positive for $k\ge k_0$ (with $k_0\ge2$), and
 \[
 b_k=b_{k_0}\prod_{i=k_0}^{k-1}\frac{b_{i+1}}{b_i},\qquad
-\ln\frac{b_{i+1}}{b_i}=O(i^{-2})
+\ell_i=\ln\frac{b_{i+1}}{b_i}=O(i^{-2})
 \]
 by $\ln(1+z)=O(z)$.  These logarithms have an absolutely convergent
 sum, so the product has a finite nonzero limit and $b_k\to C\ne0$.
-The tail of the sum has size $O(\sum_{i\ge k}i^{-2})=O(k^{-1})$;
-hence $b_k=C[1+O(k^{-1})]$ and
+Choose $M$ with $|\ell_i|\le M/i^2$.  Since
+$b_k=b_{k_0}\exp\sum_{i=k_0}^{k-1}\ell_i$ and
+$C=b_{k_0}\exp\sum_{i=k_0}^{\infty}\ell_i$, only the tail of the sum
+remains in their quotient:
+\[
+\frac{b_k}{C}=\exp\Bigl(-\sum_{i\ge k}\ell_i\Bigr),\qquad
+\Bigl|\sum_{i\ge k}\ell_i\Bigr|\le M\sum_{i\ge k}\frac1{i^2}
+\le M\int_{k-1}^{\infty}\frac{dt}{t^2}=\frac M{k-1}.
+\]
+Since $e^z=1+O(z)$ for bounded $z$, this gives $b_k=C[1+O(k^{-1})]$,
+and
 \[
 c_k=\frac Ck+O(k^{-2}),\qquad C\ne0.
 \]
@@ -635,7 +663,8 @@ supplies the necessary endpoint argument.}
 satisfies $(r-n)(r+n+1)=0$.  With the conventional representative
 $n\ge0$, this means $n=r$: even nonnegative $n$ truncates the even
 branch, and odd positive $n$ truncates the odd branch.  The other
-branch remains nonterminating and singular at the endpoints.
+branch remains nonterminating, so by (d) its series diverges at
+$x=\pm1$.
 \erratum{If negative parameters are allowed, $n=-r-1$ produces the
 same eigenvalue $n(n+1)=r(r+1)$ and the same polynomial; restricting
 to $n\ge0$ removes this duplicate labeling.}
@@ -684,7 +713,9 @@ For polynomials $u,v$, the Gaussian defeats every power of $|x|$
 so both endpoint limits are zero as $a\to-\infty$, $b\to\infty$.
 All displayed integrals converge.  The identity
 $\langle u,Av\rangle_w=\langle Au,v\rangle_w$ follows on the
-invariant domain of finite linear combinations of these polynomials.
+domain of finite linear combinations of these polynomials, which $A$
+maps into itself ($Ax^N=2Nx^N-N(N-1)x^{N-2}$ does not raise the
+degree).
 More generally it holds on any common operator domain where the
 integrals exist and the same boundary form vanishes.
 
@@ -925,7 +956,8 @@ Terminating branches also converge there.  Hence
 \[
 \boxed{\text{endpoint convergence imposes no restriction on }n.}
 \]
-For an independent check, set $x=\sin t$ with $|t|<\pi/2$.
+As a consistency check, which also identifies the sums, set
+$x=\sin t$ with $|t|<\pi/2$.
 Writing $Y(t)=y(\sin t)$, the chain rule gives
 \[
 Y'=y'\cos t,\qquad
@@ -940,8 +972,15 @@ y_e=\cos(n\arcsin x),\qquad
 y_o=\begin{cases}\sin(n\arcsin x)/n,&n\ne0,\\\arcsin x,&n=0.
 \end{cases}
 \]
-Their endpoint values, $y_e(\pm1)=\cos(n\pi/2)$ and
-$y_o(\pm1)=\pm\sin(n\pi/2)/n$ ($\pm\pi/2$ if $n=0$), are finite.
+These closed forms hold for $|x|<1$.  Since the series converge at
+$x=\pm1$, Abel's theorem (a power series is continuous up to an
+endpoint at which it converges) makes their sums there equal to the
+limits of the closed forms as $x\to\pm1$, where $\arcsin x\to\pm\pi/2$:
+$y_e(\pm1)=\cos(n\pi/2)$ and $y_o(\pm1)=\pm\sin(n\pi/2)/n$
+($\pm\pi/2$ if $n=0$).  Finite limits alone would not prove
+convergence: $1/(1+x)=\sum_{j\ge0}(-x)^j\to\frac12$ as $x\to1^-$, but
+the series diverges at $x=1$.
+
 Polynomial solutions instead
 require $n^2=N^2$, $N$ a nonnegative integer, and selection of the
 branch of parity $N$.  Endpoint convergence and polynomial
