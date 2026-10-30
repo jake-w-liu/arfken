@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 51 of 54 parts done (audited and verified); 2 audited and awaiting verification.
+Progress: 51 of 54 parts done (audited and verified); 3 audited and awaiting verification.
 
 `main.pdf` last rebuilt: from commit ad85ad4 (31 of 54 parts done; 1063 pages).
 
@@ -111,7 +111,7 @@ Progress: 51 of 54 parts done (audited and verified); 2 audited and awaiting ver
 | ch14-p1 | 14.1.1–14.1.28 | done |
 | ch14-p2 | 14.1.29–14.3.10 | done |
 | ch14-p3 | 14.4.1–14.5.16 | done |
-| ch14-p4 | 14.6.1–14.7.17 | pending |
+| ch14-p4 | 14.6.1–14.7.17 | audited |
 | ch15-p1 | 15.1.1–15.2.19 | done |
 | ch15-p2 | 15.2.20–15.4.18 | done |
 | ch15-p3 | 15.4.19–15.6.4 | done |
@@ -253,3 +253,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch23-p2** (23.6.1–23.7.4) — audit: no mathematical errors found; every quoted number re-verified. Wording slip fixed in 23.6.1 (translation *multiplies* the characteristic function by $e^{it\bar x}$); rounding of the interval endpoints in 23.7.3 and 23.7.4 made consistent with the displayed values.
   Steps added in all 12 exercises, e.g. the integration by parts, integrating factor and affine rule for $\phi_Z$ in 23.6.1; Taylor's theorem with integral remainder and the term analysis of the lowest-order $\operatorname{cov}(G,H)$ in 23.6.5; the projection argument and $\chi^2_2$ tail integral in 23.7.3; the explicit orthogonal rotation giving $Z=w_1$, $Q=\sum_{j\ge2}w_j^2$ and the closed-form $t_5$ distribution function with Newton's method in 23.7.4.
   Cleanups: "the manual" → "the Instructor's Manual" (8 places); `Eq.~`/`Exercise~` ties; box punctuation moved outside `\boxed`.
+- **ch14-p4** (14.6.1–14.7.17) — audit: no mathematical errors found (all 210 partial sums, the error table and both grid thresholds of 14.6.13; the Wronskians of 14.6.7; the $H^{(2)}$ contour integral of 14.6.11 along an explicit steepest path; the integrals of 14.7.10–14.7.14; the root $ka=2.0815759778\ldots$, $\nu_{\min}$ and $\lambda_{\max}$ of 14.7.15 re-verified numerically). Steps added in 27 of 30 exercises (e.g. the deformation of $C$ into the unit circle plus the two banks of the cut in 14.6.1, showing that the saddle $t=-1$ contributes only $O(e^{-x})$; the descent path $r=\tan(\theta/2)$ derived from $\Im w=t$ in 14.6.12; why the terminating series of 14.7.1 is exact; the finite $k_n$ formula derived from $k_n(x)=-i^nh_n^{(1)}(ix)$ in 14.7.16). Cleanups: "the manual" → "the Instructor's Manual" (14.6.1, 14.6.8, 14.7.12); "originally printed", "the actual textbook" and "the supplied answer" restated as textbook discrepancies (14.6.8, 14.6.12, 14.7.3, 14.6.13); "Numerical solution gives" in 14.7.15 replaced by the Newton iteration that reproduces the root; the vague least-term remark of 14.6.13 replaced by the exact term-ratio argument. No script references were present.

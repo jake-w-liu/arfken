@@ -4602,11 +4602,22 @@ exponent is $w(t)=x(t+t^{-1})/2$, with
 w'(t)=\frac x2(1-t^{-2}),\qquad w''(t)=xt^{-3}.
 \]
 Thus the saddles are $t=\pm1$, not $\pm x$.
-\erratum{The manual, p.~219, prints $t=\pm x$ in identifying
-the saddles; the differentiated exponent gives $t=\pm1$.}
+\erratum{The Instructor's Manual, p.~219, prints $t=\pm x$ in
+identifying the saddles; the differentiated exponent gives $t=\pm1$.}
 Their exponential factors are $e^x$ and $e^{-x}$, so the positive
 saddle supplies the dominant positive-real-axis asymptotic form.
-Near it, put $t=1+iu$ along the upward local descent direction:
+To see this, deform $C$ into the lower bank of the negative axis
+from $-\infty$ to $-1$, the unit circle $t=e^{i\theta}$,
+$-\pi<\theta<\pi$, and the upper bank from $-1$ back to $-\infty$.
+On the two banks $t=-s$ with $s\ge1$, so
+$w=-x(s+s^{-1})/2\le-x$, and these two pieces are $O(e^{-x})$.
+On the circle $w(e^{i\theta})=x\cos\theta$ is real, so the circle
+is a path of constant $\Im w$ through $t=1$. Along it $|e^w|$ is
+largest, $e^x$, at $\theta=0$ and falls to $e^{-x}$ at the
+other saddle $t=-1$ ($\theta=\pm\pi$). At $\theta=0$ the circle
+runs upward: $dt=ie^{i\theta}d\theta=i\,d\theta$ there.
+Near $t=1$, put $t=1+iu$ along this upward local descent direction.
+Since $1/(1+iu)=1-iu-u^2+O(u^3)$, we have $t+t^{-1}=2-u^2+O(u^3)$ and
 \[
 w(1+iu)=x-\frac{x u^2}{2}+O(xu^3),\quad
 t^{-\nu-1}=1+O(u),\quad dt=i\,du.
@@ -4638,15 +4649,18 @@ For $x\to+\infty$ and fixed $\nu$, write the given integral as
 K_\nu(x)=\frac12\int_0^\infty e^{w(s)}s^{\nu-1}ds,
 \qquad w(s)=-\frac x2(s+s^{-1}).
 \]
-Since $s+s^{-1}\ge2$ for positive $s$, its unique real maximum
-is at $s=1$. In detail,
+Since $w(s)+x=-x(s-1)^2/(2s)\le0$ for positive $s$, with
+equality only at $s=1$, the unique real maximum of $w$ is at
+$s=1$. In detail,
 \[
-w'(s)=-\frac x2(1-s^{-2}),\quad w''(1)=-x,
-\quad w(1)=-x.
+w'(s)=-\frac x2(1-s^{-2}),\quad w''(s)=-xs^{-3},\quad
+w''(1)=-x,\quad w(1)=-x.
 \]
-Put $s=1+u$. Then
-$w=-x-xu^2/2+O(xu^3)$ and $s^{\nu-1}=1+O(u)$.
-Only a neighborhood of width $x^{-1/2}$ contributes at leading
+Put $s=1+u$. Then $(s-1)^2/s=u^2(1-u+\cdots)$ gives
+$w=-x-xu^2/2+O(xu^3)$, and $s^{\nu-1}=1+O(u)$.
+Outside a fixed interval $|u|<\delta$, $w+x$ stays below a negative
+multiple of $x$, so those parts are exponentially smaller than the
+peak. Only a neighborhood of width $x^{-1/2}$ contributes at leading
 order, so the endpoints can be extended to the full Gaussian
 line in the local variable:
 \begin{align*}
@@ -4676,7 +4690,13 @@ $c(t)=\cos nt$. Direct differentiation gives
 f''=(-z\cos t+z^2\sin^2t)f,
 \qquad c''=-n^2c.
 \]
-Here primes on $f,c$ denote $t$ derivatives. Applying the
+Here primes on $f,c$ denote $t$ derivatives. The $z$ derivatives
+are $\partial_zf=\cos t\,f$ and $\partial_z^2f=\cos^2t\,f$, so
+\[
+(z^2\partial_z^2+z\partial_z-z^2)f
+=(z^2\cos^2t+z\cos t-z^2)f=(z\cos t-z^2\sin^2t)f=-f'',
+\]
+while $-n^2c=c''$. Applying the
 modified Bessel operator with respect to $z$ under the integral
 therefore gives
 \begin{align*}
@@ -4691,7 +4711,13 @@ the boundary terms.
 
 For the $K$ integral use $f(t)=e^{-z\cosh t}$,
 $c(t)=\cosh\nu t$. Now
-$f''=(-z\cosh t+z^2\sinh^2t)f$ and $c''=\nu^2c$, so
+$f''=(-z\cosh t+z^2\sinh^2t)f$ and $c''=\nu^2c$, while
+$\partial_zf=-\cosh t\,f$ and $\partial_z^2f=\cosh^2t\,f$ give
+\[
+(z^2\partial_z^2+z\partial_z-z^2)f
+=(z^2\cosh^2t-z\cosh t-z^2)f=(z^2\sinh^2t-z\cosh t)f=f''.
+\]
+Since $-\nu^2c=-c''$,
 \begin{align*}
 (z^2\partial_z^2+z\partial_z-z^2-\nu^2)K_\nu
 &=\int_0^\infty[f''c-fc'']dt\\
@@ -4701,20 +4727,33 @@ At zero both first derivatives vanish. At infinity, $\Re z>0$
 gives double-exponential damping, stronger than the fixed-order
 factors $\cosh\nu t$ and $\sinh\nu t$.
 
-To check normalization, for integer $n\ge1$ the first nonzero
+To check normalization, note first that each integral is a
+solution, so only its multiple of a standard solution is in
+question. The $I$ integral is an entire function of $z$, while the
+second solution $K_n$ has a logarithmic singularity at $z=0$;
+hence the integral is a constant multiple of $I_n$, and comparing
+the lowest power of $z$ fixes that constant. Expand
+$e^{z\cos t}=\sum_kz^k\cos^kt/k!$. For $k<n$, $\cos^kt$ is a
+combination of $\cos jt$ with $j\le k<n$, each orthogonal to
+$\cos nt$ on $[0,\pi]$; so for integer $n\ge1$ the first nonzero
 term of the $I$ integral comes from $z^n\cos^nt/n!$.
-The coefficient of $\cos nt$ in $\cos^nt$ is $2^{1-n}$,
+Writing $\cos^nt=2^{-n}(e^{it}+e^{-it})^n$, the terms $e^{\pm int}$
+show that the coefficient of $\cos nt$ in $\cos^nt$ is $2^{1-n}$,
 and $\int_0^\pi\cos^2nt\,dt=\pi/2$. Thus the leading term is
-$z^n/(2^nn!)$, exactly the defining $I_n$ coefficient.
+$\pi^{-1}(z^n/n!)\,2^{1-n}(\pi/2)=z^n/(2^nn!)$, exactly the
+defining $I_n$ coefficient.
 For $n=0$ its value at zero is one; negative orders agree by
-$I_{-n}=I_n$. For $K$, the dominant large-positive-$z$ region
+$I_{-n}=I_n$. For $K$, the integral decays as $z\to+\infty$,
+so it contains no multiple of $I_\nu$, which grows like
+$e^z/\sqrt{2\pi z}$. The dominant large-positive-$z$ region
 is $t=0$, where $\cosh t=1+t^2/2+\cdots$ and
 $\cosh\nu t=1+\cdots$. Hence
 \[
 K_\nu(z)\sim e^{-z}\int_0^\infty e^{-zt^2/2}dt
 =\sqrt{\frac\pi{2z}}e^{-z},
 \]
-which fixes the standard decaying normalization.
+which is the leading term of Eq.~(14.133) with coefficient one and
+so fixes the standard decaying normalization.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4731,7 +4770,12 @@ defined by Eq.~(14.128) has the correct normalization.
 \end{enumerate}
 \par\erratum{To identify the full $K_0$ solution, also determine the constant $C$ or require decay at infinity; the logarithmic coefficient alone permits addition of $I_0$.}
 \solution
-(a) The two instances of Eq.~(14.128) are
+(a) Equation~(14.128) reads
+$K_\nu(z)=\sqrt\pi(z/2)^\nu\Gamma(\nu+\tfrac12)^{-1}
+\int_1^\infty e^{-zp}(p^2-1)^{\nu-1/2}dp$. Its prefactor is
+$\sqrt\pi/\Gamma(\frac12)=1$ for $\nu=0$ and
+$\sqrt\pi(z/2)/\Gamma(\frac32)=z$ for $\nu=1$, so the two
+instances are
 \[
 K_0(z)=\int_1^\infty\frac{e^{-zp}}{\sqrt{p^2-1}}dp,
 \qquad K_1(z)=z\int_1^\infty e^{-zp}\sqrt{p^2-1}\,dp.
@@ -4750,10 +4794,12 @@ The boundary bracket vanishes at both ends.
 \[
 K_1(z)=\frac1z\int_z^\infty e^{-u}\sqrt{u^2-z^2}\,du.
 \]
-As $z\downarrow0$, the integrand is bounded by $ue^{-u}$
-and tends to it; its integral tends to $\Gamma(2)=1$.
+As $z\downarrow0$, the integrand (taken as zero on $0<u<z$) is
+bounded by $ue^{-u}$ and tends to it; by dominated convergence
+its integral tends to $\int_0^\infty ue^{-u}du=\Gamma(2)=1$.
 Thus $K_1(z)\sim1/z$ and an antiderivative of $-K_1$ has
-leading logarithmic term $-\ln z$.
+leading logarithmic term $-\ln z$. By (a), $K_0$ itself is such an
+antiderivative.
 \erratum{That leading coefficient fixes the scale of the singular
 solution but does not by itself exclude adding a multiple of
 $I_0$. To identify the full normalization, fix the constant or
@@ -4764,11 +4810,18 @@ K_0(z)=\int_1^\infty\frac{e^{-zp}}pdp
 +\int_1^\infty e^{-zp}
 \left(\frac1{\sqrt{p^2-1}}-\frac1p\right)dp.
 \]
-The first integral is $E_1(z)=-\ln z-\gamma+o(1)$.
-The second tends, by absolute integrability, to
+With $u=zp$ the first integral is the exponential integral
+$E_1(z)=\int_z^\infty e^{-u}du/u$, whose series
+$E_1(z)=-\gamma-\ln z-\sum_{k\ge1}(-z)^k/(k\,k!)$ gives
+$E_1(z)=-\ln z-\gamma+o(1)$.
+In the second, the factor multiplying $e^{-zp}$ is positive and
+integrable: it behaves like $[2(p-1)]^{-1/2}$ near $p=1$ and like
+$1/(2p^3)$ at infinity. By dominated convergence the second integral
+therefore tends, using $\operatorname{arcosh}R=\ln(R+\sqrt{R^2-1})$, to
 \[
 \int_1^\infty\left(\frac1{\sqrt{p^2-1}}-\frac1p\right)dp
-=\lim_{R\to\infty}(\operatorname{arcosh}R-\ln R)=\ln2.
+=\lim_{R\to\infty}(\operatorname{arcosh}R-\ln R)
+=\lim_{R\to\infty}\ln\frac{R+\sqrt{R^2-1}}R=\ln2.
 \]
 Therefore
 \[
@@ -4786,8 +4839,18 @@ The coefficient of $(2z)^{-r}/r!$ in Eq.~(14.132) is
 \[
 \frac{\Gamma(\nu+r+1/2)}{\Gamma(\nu-r+1/2)}.
 \]
-For $r\ge1$, apply the gamma recurrence $2r$ times and pair
-factors equidistant from $\nu$:
+For $r\ge1$, apply the gamma recurrence $\Gamma(a+1)=a\Gamma(a)$
+$2r$ times, starting from $a=\nu-r+\frac12$:
+\[
+\Gamma(\nu+r+\tfrac12)
+=(\nu+r-\tfrac12)(\nu+r-\tfrac32)\cdots(\nu-r+\tfrac12)\,
+\Gamma(\nu-r+\tfrac12).
+\]
+The $2r$ factors are $\nu+k-\frac12$, $k=1-r,\dots,r$. Pair
+$k=j$ with $k=1-j$ ($j=1,\dots,r$), i.e., factors equidistant from
+$\nu$, and use
+$(\nu+j-\frac12)(\nu-j+\frac12)=\nu^2-(j-\frac12)^2
+=\frac14[4\nu^2-(2j-1)^2]$:
 \begin{align*}
 \frac{\Gamma(\nu+r+1/2)}{\Gamma(\nu-r+1/2)}
 &=\prod_{j=1}^r
@@ -4836,15 +4899,25 @@ so $y=z^\nu F$. The product rule gives
 y'=\nu z^{\nu-1}F+z^\nu F',\qquad
 y''=\nu(\nu-1)z^{\nu-2}F+2\nu z^{\nu-1}F'+z^\nu F''.
 \]
-Substitution cancels the terms proportional to $\nu^2F$:
+In the substitution the terms proportional to $z^\nu F$ cancel,
+their coefficient being $\nu(\nu-1)+\nu-\nu^2=0$. Differentiating
+under the integral,
+$F'=-\int_Ct\,e^{-zt}(t^2-1)^{\nu-1/2}dt$ and
+$F''=\int_Ct^2e^{-zt}(t^2-1)^{\nu-1/2}dt$, so $F''-F$ carries the
+factor $t^2-1$. Hence
 \begin{align*}
 z^2y''+zy'-(z^2+\nu^2)y
 &=z^{\nu+2}(F''-F)+(2\nu+1)z^{\nu+1}F'\\
 &=z^{\nu+1}\int_C e^{-zt}(t^2-1)^{\nu-1/2}
 [z(t^2-1)-(2\nu+1)t]dt\\
 &=-z^{\nu+1}\int_C\frac d{dt}
-[e^{-zt}(t^2-1)^{\nu+1/2}]dt.
+[e^{-zt}(t^2-1)^{\nu+1/2}]dt,
 \end{align*}
+because
+\[
+\frac d{dt}[e^{-zt}(t^2-1)^{\nu+1/2}]
+=e^{-zt}(t^2-1)^{\nu-1/2}[(2\nu+1)t-z(t^2-1)].
+\]
 Thus matching the two endpoint values of the bracket makes the
 ODE residual zero. Differentiation under the integral requires a
 fixed contour with convergent derivatives, as in the examples
@@ -4897,19 +4970,34 @@ $J_{-\nu-1}=J_{-\nu}'-\nu J_{-\nu}/x$,
 $J_{\nu+1}=\nu J_\nu/x-J_\nu'$,
 $Y_{\nu+1}=\nu Y_\nu/x-Y_\nu'$, and
 $H_{\nu-1}^{(2)}=H_\nu^{(2)\prime}+\nu H_\nu^{(2)}/x$.
-The $\nu/x$ products cancel in each pair, leaving
+These are the recurrences $Z_{\mu-1}=Z_\mu'+\mu Z_\mu/x$ and
+$Z_{\mu+1}=\mu Z_\mu/x-Z_\mu'$, valid for every cylinder function
+$Z_\mu$ (with $\mu=-\nu$ for $J_{-\nu-1}$). The $\nu/x$ products
+cancel in each pair; for example, in (a)
+\[
+J_\nu\Bigl(J_{-\nu}'-\frac\nu xJ_{-\nu}\Bigr)
++J_{-\nu}\Bigl(\frac\nu xJ_\nu-J_\nu'\Bigr)
+=J_\nu J_{-\nu}'-J_\nu'J_{-\nu}.
+\]
+This leaves
 \[
 \text{(a)}\ W[J_\nu,J_{-\nu}],\qquad
 \text{(b)}\ -W[J_\nu,Y_\nu],\qquad
 \text{(c)}\ W[J_\nu,H_\nu^{(2)}].
 \]
-Part (d) is already a Wronskian and (e) is its negative. Abel's identity makes each exactly a constant divided
+Part (d) is already a Wronskian and (e) is its negative.
+For two solutions of $y''+y'/x+(\pm1-\nu^2/x^2)y=0$ (Bessel's
+equation or the modified one), Abel's identity gives
+$W'=-W/x$, so each Wronskian is exactly a constant divided
 by $x$. Thus computing its leading coefficient at infinity
 determines the exact identity, not just an approximation.
 
 (a) The phases for orders $-\nu$, $-\nu-1$, and $\nu+1$
 are $\chi+\nu\pi$, $\chi+\nu\pi+\pi/2$, and
-$\chi-\pi/2$. Consequently
+$\chi-\pi/2$; thus $J_{-\nu-1}\sim-A\sin(\chi+\nu\pi)$ and
+$J_{\nu+1}\sim A\sin\chi$. Consequently, by
+$\sin a\cos b-\cos a\sin b=\sin(a-b)$ with $a=\chi$,
+$b=\chi+\nu\pi$,
 \begin{align*}
 J_\nu J_{-\nu-1}+J_{-\nu}J_{\nu+1}
 &\sim A^2[-\cos\chi\sin(\chi+\nu\pi)
@@ -4926,13 +5014,17 @@ J_\nu Y_{\nu+1}-J_{\nu+1}Y_\nu
 The $Y$ notation here is the published correction to $N$.
 
 (c) The order-$\nu-1$ phase is $\chi+\pi/2$, so
+$H_{\nu-1}^{(2)}\sim Ae^{-i\chi}e^{-i\pi/2}=-iAe^{-i\chi}$ and
+$J_{\nu-1}\sim A\cos(\chi+\pi/2)=-A\sin\chi$. Since
+$-i\cos\chi+\sin\chi=-i(\cos\chi+i\sin\chi)=-ie^{i\chi}$,
 \begin{align*}
 J_\nu H_{\nu-1}^{(2)}-J_{\nu-1}H_\nu^{(2)}
 &\sim A^2e^{-i\chi}[-i\cos\chi+\sin\chi]\\
 &=-iA^2=\boxed{\frac2{i\pi x}}.
 \end{align*}
 (d) The product of the two leading modified functions is
-$I_\nu K_\nu\sim1/(2x)$. Therefore
+$I_\nu K_\nu\sim(e^x/\sqrt{2\pi x})\sqrt{\pi/(2x)}\,e^{-x}=1/(2x)$.
+Therefore
 \[
 I_\nu K_\nu'-I_\nu'K_\nu\sim-2I_\nu K_\nu
 =\boxed{-\frac1x}.
@@ -4957,37 +5049,44 @@ G(\boldsymbol{\rho}_{1},\boldsymbol{\rho}_{2})
 solution to the homogeneous Helmholtz equation.
 \par\erratum{Use $k>0$, time dependence $e^{-i\omega t}$, and $(\nabla^2+k^2)G=+\delta^{(2)}$. The displayed minus sign uses this positive-source convention.}
 \solution
-\erratum{The originally printed $+iH_0^{(1)}/4$ has source $-\delta^{(2)}$.
-With the book's Chapter~10 convention $LG=+\delta$, the coefficient
-must instead be $-i/4$; the manual, p.~223, derives this minus
-sign. Both conventions are common, so the source sign must be
-stated explicitly.}
+\erratum{The textbook prints $+iH_0^{(1)}/4$, which has source
+$-\delta^{(2)}$. With the book's Chapter~10 convention $LG=+\delta$,
+the coefficient must instead be $-i/4$; the Instructor's Manual,
+p.~223, derives this minus sign. Both conventions are common, so the
+source sign must be stated explicitly.}
 Let $r=|\boldsymbol\rho_1-\boldsymbol\rho_2|$, $k>0$, and
-$G=C H_0^{(1)}(kr)$. For $r>0$, the radial Helmholtz equation
-is Bessel's equation, so $(\nabla^2+k^2)G=0$ there.
-Near the source,
+$G=C H_0^{(1)}(kr)$. For $r>0$, $G$ depends on $r$ alone, so
+$\nabla^2G=G''+G'/r$, and $(\nabla^2+k^2)G=0$ is Bessel's equation
+of order zero in $kr$, which $H_0^{(1)}(kr)$ satisfies.
+Near the source, $J_0(kr)=1+O(r^2)$ and
+$Y_0(kr)=(2/\pi)[\ln(kr/2)+\gamma]+O(r^2\ln r)$ give
 \[
 H_0^{(1)}(kr)=1+\frac{2i}{\pi}
 [\ln(kr/2)+\gamma]+O(r^2\ln r),
 \quad G'(r)=\frac{2iC}{\pi r}+O(r\ln r).
 \]
 Integrate the operator over a disk of radius $\epsilon$ and use
-the divergence theorem:
+the divergence theorem; the flux of $\nabla G$ through the circle
+$r=\epsilon$ is $2\pi\epsilon\,G'(\epsilon)$:
 \begin{align*}
 \int_{r<\epsilon}(\nabla^2+k^2)G\,d^2r
 &=2\pi\epsilon G'(\epsilon)
 +2\pi k^2\int_0^\epsilon G(r)r\,dr\\
 &\longrightarrow4iC.
 \end{align*}
-The last integral tends to zero as $O(\epsilon^2|\ln\epsilon|)$.
+Here $2\pi\epsilon G'(\epsilon)=2\pi\epsilon\cdot2iC/(\pi\epsilon)
++O(\epsilon^2|\ln\epsilon|)=4iC+O(\epsilon^2|\ln\epsilon|)$, and,
+since $|G|=O(|\ln r|)$, the last integral tends to zero as
+$O(\epsilon^2|\ln\epsilon|)$.
 A unit positive delta source therefore requires $4iC=1$:
 \[
 \boxed{G_+(\boldsymbol\rho_1,\boldsymbol\rho_2)
 =-\frac i4H_0^{(1)}(kr),\qquad
 (\nabla^2+k^2)G_+=\delta^{(2)}(\boldsymbol\rho_1-\boldsymbol\rho_2)}.
 \]
-Changing the sign gives the expression originally printed in the question and a
-negative unit source. Finally the large-$r$ form
+Changing the sign gives the textbook's $+iH_0^{(1)}/4$, whose
+source is the negative unit source $-\delta^{(2)}$. Finally the
+large-$r$ form
 $H_0^{(1)}(kr)\sim\sqrt{2/(\pi kr)}e^{i(kr-\pi/4)}$
 satisfies $(\partial_r-ik)G=O(r^{-3/2})$, the outgoing condition
 for time dependence $e^{-i\omega t}$.
@@ -4998,7 +5097,8 @@ for time dependence $e^{-i\omega t}$.
 Eq.~(14.134), derive the asymptotic form of $H_{\nu}^{(1)}(z)$,
 Eq.~(14.138). Note particularly the phase, $(\nu+\frac{1}{2})\pi/2$.
 \solution
-The definition gives
+The definition $K_\nu(x)=(\pi/2)i^{\nu+1}H_\nu^{(1)}(ix)$, taken at
+$x=-iz$ (so that $ix=z$), gives
 $H_\nu^{(1)}(z)=(2/\pi)i^{-\nu-1}K_\nu(-iz)$.
 Take $z>0$ first and rotate clockwise to
 $-iz=ze^{-i\pi/2}$, fixing the square-root and power branches.
@@ -5008,7 +5108,9 @@ K_\nu(-iz)\sim\sqrt{\frac\pi{2(-iz)}}e^{iz}
 [P_\nu(z)+iQ_\nu(z)],
 \]
 because $i(-iz)=z$. On this branch
-$(-iz)^{-1/2}=z^{-1/2}e^{i\pi/4}$. Combining the prefactors,
+$(-iz)^{-1/2}=z^{-1/2}e^{i\pi/4}$. Combining the prefactors, with
+$(2/\pi)\sqrt{\pi/2}=\sqrt{2/\pi}$ and
+$i^{-\nu-1}=e^{-i(\nu+1)\pi/2}$,
 \[
 \frac2\pi i^{-\nu-1}\sqrt{\frac\pi{2z}}e^{i\pi/4}
 =\sqrt{\frac2{\pi z}}
@@ -5055,8 +5157,14 @@ $a_{0}$.
 F'=x^{-1/2}y'-\tfrac12x^{-3/2}y,\qquad
 F''=x^{-1/2}y''-x^{-3/2}y'+\tfrac34x^{-5/2}y.
 \]
-Substituting in $x^2F''+xF'+(x^2-\nu^2)F=0$ cancels
-the $y'$ terms and gives
+Hence
+\begin{align*}
+x^2F''&=x^{3/2}y''-x^{1/2}y'+\tfrac34x^{-1/2}y,\\
+xF'&=x^{1/2}y'-\tfrac12x^{-1/2}y,\\
+(x^2-\nu^2)F&=x^{3/2}y-\nu^2x^{-1/2}y.
+\end{align*}
+Adding these in $x^2F''+xF'+(x^2-\nu^2)F=0$ cancels
+the $y'$ terms, and $\frac34-\frac12=\frac14$, so
 \[
 x^{3/2}y''+x^{3/2}y+(1/4-\nu^2)x^{-1/2}y=0.
 \]
@@ -5064,29 +5172,38 @@ After division by $x^{3/2}$,
 $\boxed{y''+[1-(\nu^2-1/4)/x^2]y=0}$.
 
 (b) Write $y=e^{ix}h$, $h\sim\sum_{n\ge0}a_nx^{-n}$,
-and put $\mu=\nu^2-1/4$. Since
-$y''+y=e^{ix}(h''+2ih')$, the equation becomes
+and put $\mu=\nu^2-1/4$. Since $y'=e^{ix}(h'+ih)$ and
+$y''=e^{ix}(h''+2ih'-h)$, we have
+$y''+y=e^{ix}(h''+2ih')$, and the equation becomes
 \[
 h''+2ih'-\mu x^{-2}h=0.
 \]
-The coefficient of $x^{-n-2}$ is
+Termwise, $h''=\sum_{n\ge0}n(n+1)a_nx^{-n-2}$ and, since the
+$n=0$ term of $h'$ vanishes, $h'=-\sum_{n\ge1}na_nx^{-n-1}
+=-\sum_{n\ge0}(n+1)a_{n+1}x^{-n-2}$. So the coefficient of
+$x^{-n-2}$ is
 \[
 [n(n+1)-\mu]a_n-2i(n+1)a_{n+1}=0.
 \]
-Thus
+With $\mu-n(n+1)=\nu^2-(n+\frac12)^2=\frac14[4\nu^2-(2n+1)^2]$,
+solving gives $a_{n+1}=i[\mu-n(n+1)]a_n/[2(n+1)]$, that is,
 \[
 \boxed{a_{n+1}=\frac{i[4\nu^2-(2n+1)^2]}{8(n+1)}a_n},
 \qquad
 a_n=a_0\frac{i^n}{8^nn!}
 \prod_{j=1}^n[4\nu^2-(2j-1)^2].
 \]
+The second formula follows by iterating the first from $a_0$.
 Even $n=2r$ have factor $i^{2r}=(-1)^r$ and build $P_\nu$;
 odd $n=2r+1$ have $i^{2r+1}=i(-1)^r$ and build $iQ_\nu$.
-This reproduces Eq.~(14.138) term by term.
+Hence $y\sim a_0e^{ix}[P_\nu(x)+iQ_\nu(x)]$, and $x^{-1/2}y$
+reproduces Eq.~(14.138) term by term once $a_0$ is fixed in (c).
 
 (c) The leading Hankel form is
 $H_\nu^{(1)}(x)\sim\sqrt{2/(\pi x)}
-e^{i(x-\nu\pi/2-\pi/4)}$. Since $H=x^{-1/2}y$,
+e^{i(x-\nu\pi/2-\pi/4)}$. Since $H=x^{-1/2}y$, the leading term
+$a_0e^{ix}$ of $y$ must equal
+$x^{1/2}\sqrt{2/(\pi x)}\,e^{ix}e^{-i(\nu\pi/2+\pi/4)}$, so
 \[
 \boxed{a_0=\sqrt{\frac2\pi}
 e^{-i(\nu+1/2)\pi/2}}.
@@ -5113,15 +5230,24 @@ $w(z)=t(z-z^{-1})/2$, $g(z)=z^{-\nu-1}$, and
 \[
 w'(z)=\frac t2(1+z^{-2}),\qquad w''(z)=-tz^{-3}.
 \]
+The saddles solve $z^2=-1$, so $z=\pm i$.
 The lower contour goes through $z_0=-i$, where
-$w(z_0)=-it$ and $w''(z_0)=it$. Its oriented descent direction
-is $e^{i\pi/4}$: writing $z=-i+e^{i\pi/4}u$ gives
+$w(z_0)=(t/2)(-i-1/(-i))=(t/2)(-2i)=-it$ and, since $(-i)^3=i$,
+$w''(z_0)=-t/i=it$. The contour $C_2$ runs from $-\infty$ on the
+lower bank ($\arg z=-\pi$) to the origin, which it approaches from
+the right half-plane, where $e^{-t/(2z)}$ decays; so it crosses the
+lower half-plane from left to right. Its oriented descent direction
+is therefore $e^{i\pi/4}$ rather than $-e^{i\pi/4}$: writing
+$z=-i+e^{i\pi/4}u$ gives
+$\frac12w''(z_0)(z-z_0)^2=\frac12(it)(iu^2)=-tu^2/2$, so
 \[
 w(z)=-it-\frac{tu^2}{2}+O(tu^3),\qquad
 dz=e^{i\pi/4}du.
 \]
 On the lower branch $\arg(-i)=-\pi/2$, so
-$g(-i)=e^{i(\nu+1)\pi/2}$. The Gaussian approximation is
+$g(-i)=e^{i(\nu+1)\pi/2}$. With
+$\int_{-\infty}^\infty e^{-tu^2/2}du=\sqrt{2\pi/t}$, the Gaussian
+approximation is
 \begin{align*}
 H_\nu^{(2)}(t)
 &\sim\frac1{\pi i}e^{i(\nu+1)\pi/2}e^{-it}
@@ -5129,8 +5255,11 @@ e^{i\pi/4}\sqrt{\frac{2\pi}{t}}\\
 &=\boxed{\sqrt{\frac2{\pi t}}
 e^{-i(t-\nu\pi/2-\pi/4)}}.
 \end{align*}
-The factor $1/i=e^{-i\pi/2}$ was included in the last phase
-simplification. This is the incoming-wave counterpart of the
+In the last step
+$\frac1{\pi i}\sqrt{2\pi/t}=e^{-i\pi/2}\sqrt{2/(\pi t)}$,
+and the phases add to
+$-\frac\pi2+\frac{(\nu+1)\pi}2+\frac\pi4-t=-(t-\frac{\nu\pi}2-\frac\pi4)$.
+This is the incoming-wave counterpart of the
 upper-contour asymptotic expression.
 
 \Needspace{5\baselineskip}
@@ -5169,13 +5298,19 @@ imaginary parts gives
 \boxed{\Re w=\frac t2(r-r^{-1})\cos\theta,\qquad
 \Im w=\frac t2(r+r^{-1})\sin\theta}.
 \]
-(a) An explicit upper descent contour is
+(a) At the saddle, $w(i)=(t/2)(i-1/i)=it$. A steepest path through
+it keeps $\Im w=t$, that is, $(r+r^{-1})\sin\theta=2$, or
+$r^2\sin\theta-2r+\sin\theta=0$. Its roots are
+$r=(1\mp\cos\theta)/\sin\theta$, namely $\tan(\theta/2)$ and
+$\cot(\theta/2)$; the second is the path of steepest ascent
+($\Re w=t\cos^2\theta/\sin\theta\ge0$ on it). The first gives an
+explicit upper descent contour,
 \[
 r=\tan(\theta/2),\qquad0<\theta<\pi.
 \]
 It starts at $0^+$, passes through $i$, and ends at infinity on
-the upper bank of the negative axis. Since
-$r+r^{-1}=2/\sin\theta$ and $r-r^{-1}=-2\cot\theta$,
+the upper bank of the negative axis. Since, by the half-angle
+formulas, $r+r^{-1}=2/\sin\theta$ and $r-r^{-1}=-2\cot\theta$,
 \[
 \Im w=t,\qquad
 \Re w=-\frac{t\cos^2\theta}{\sin\theta}\le0.
@@ -5189,8 +5324,10 @@ $\Re w>0$ precisely in the left half-plane,
 $\pi/2<\theta\le\pi$ or $-\pi\le\theta<-\pi/2$.
 If $r>1$, that factor is positive, so $\Re w>0$ in the
 right half-plane $-\pi/2<\theta<\pi/2$.
-\erratum{The original second inequality printed $\Re w<0$; it is corrected to $\Re w>0$ in the statement. The lower angular endpoint in the first
-pair must also be $-\pi/2$, as marked in the statement.
+\erratum{The textbook prints $\Re w<0$ in the second inequality;
+it is corrected to $\Re w>0$ in the statement. The endpoint
+$-\pi/2$ of the lower range in the first case, as marked in the
+statement, is likewise a corrected sign.
 Both corrected signs agree with Fig.~14.15.}
 The remaining open regions have $\Re w<0$; the unit circle
 and imaginary axis have $\Re w=0$.
@@ -5227,6 +5364,12 @@ For order zero define the exact coefficients recursively by
 \[
 a_0=1,\qquad a_{j+1}=-\frac{(2j+1)^2}{8(j+1)}a_j.
 \]
+These are the values at $\nu=0$ of the coefficients
+$\prod_{l=1}^j[4\nu^2-(2l-1)^2]/(j!\,8^j)$ of Eqs.~(14.135) and
+(14.136) (compare Exercise~14.7.1), since each factor becomes
+$-(2l-1)^2$; those equations give $P_0$ the even-index terms
+$(-1)^ra_{2r}x^{-2r}$ and $Q_0$ the odd-index terms
+$(-1)^ra_{2r+1}x^{-2r-1}$.
 The $N$-term partial sums requested are
 \[
 P_N(x)=\sum_{r=0}^{N-1}\frac{(-1)^ra_{2r}}{x^{2r}},\qquad
@@ -5291,9 +5434,13 @@ Q(x)=\sqrt{\frac{\pi x}{2}}
 [Y_0(x)\cos\chi-J_0(x)\sin\chi].
 \]
 These formulas invert the $J_0,Y_0$ amplitude-phase formulas
+$J_0=\sqrt{2/(\pi x)}(P\cos\chi-Q\sin\chi)$,
+$Y_0=\sqrt{2/(\pi x)}(P\sin\chi+Q\cos\chi)$
 and provide references independent of truncating the asymptotic
-series. Minimizing the absolute error separately among the
-fifteen sums gives:
+series. With $J_0(x)$ and $Y_0(x)$ evaluated to 20 significant
+digits (for example from their ascending series in
+extended-precision arithmetic), minimizing the absolute error
+separately among the fifteen sums gives:
 \begin{center}\small
 \begin{tabular}{r r r r r r}
 \toprule
@@ -5310,13 +5457,20 @@ $x$ & best $N_P$ & $|P_{N_P}-P|$ & best $N_Q$ & $|Q_{N_Q}-Q|$ & relative $Q$ err
 \end{tabular}\normalsize
 \end{center}
 The optimum is $N_P=x+1$, $N_Q=x$ for these seven integer
-arguments. Extra terms eventually make the errors larger: the
-coefficient ratio grows quadratically in the order before division
-by the index, so at fixed $x$ the term magnitudes eventually grow.
-The least-term region is near coefficient index $j\simeq2x$,
-which explains the observed truncation counts.
+arguments. Extra terms eventually make the errors larger:
+successive terms $a_jx^{-j}$ have the modulus ratio
+\[
+\frac{|a_{j+1}|x^{-j-1}}{|a_j|x^{-j}}=\frac{(2j+1)^2}{8(j+1)x},
+\]
+which grows like $j/(2x)$. The convex quadratic
+$(2j+1)^2-8(j+1)x$ equals $1-8x<0$ at both $j=0$ and $j=2x-1$,
+and $+1$ at $j=2x$; so for integer $x$ the ratio is below one for
+$j\le2x-1$ and above one for $j\ge2x$. For each $x$ of the
+table the smallest term therefore has index $j=2x$: the optimal
+$P_{x+1}$ stops at that term ($j=2r\le2x$), and $Q_x$ stops just
+before it ($j=2r+1\le2x-1$).
 
-\erratum{The supplied answer $x_{\min}=6$ uses absolute errors
+\erratum{The textbook's answer $x_{\min}=6$ uses absolute errors
 in both $P$ and $Q$, and the integer grid specified in the question.
 If ``error'' means relative error in both amplitude functions,
 the corresponding minimum on this grid is $8$, because $Q$ is
@@ -5341,8 +5495,11 @@ starting from Eq.~(14.161).
 Put $\nu=n+\tfrac12$ in Eq.~(14.161). The coefficient of
 $i^s/x^s$ in $P_\nu(x)+iQ_\nu(x)$ is
 \[
-a_s=\frac{\prod_{j=1}^s[4\nu^2-(2j-1)^2]}{s!8^s}.
+a_s=\frac{\prod_{j=1}^s[4\nu^2-(2j-1)^2]}{s!8^s},
 \]
+because $P_\nu$ contains the even orders $s=2r$ with sign
+$(-1)^r=i^{2r}$ and $Q_\nu$ the odd orders $s=2r+1$ with sign
+$(-1)^r$, which $iQ_\nu$ turns into $i^{2r+1}$.
 For this half-integer order each factor is
 \[
 (2n+1)^2-(2j-1)^2=4(n+j)(n-j+1).
@@ -5352,11 +5509,16 @@ For $0\le s\le n$ the two products are
 \prod_{j=1}^s(n+j)=\frac{(n+s)!}{n!},\qquad
 \prod_{j=1}^s(n-j+1)=\frac{n!}{(n-s)!},
 \]
-and the factor at $j=n+1$ is zero. Thus the expansion terminates:
+and the factor at $j=n+1$ is zero. Hence
+$a_s=4^s(n+s)!/[(n-s)!\,s!\,8^s]=(n+s)!/[s!\,2^s(n-s)!]$
+for $s\le n$ and $a_s=0$ for $s>n$, so the expansion terminates:
 \[
 P_{n+1/2}(x)+iQ_{n+1/2}(x)
 =\sum_{s=0}^n\frac{i^s(n+s)!}{s!(2x)^s(n-s)!}.
 \]
+For $\nu=n+\frac12$ the Hankel phase $(\nu+\frac12)\pi/2$ is
+$(n+1)\pi/2$, and the prefactor of $h_n^{(1)}$ is
+$\sqrt{\pi/(2x)}\sqrt{2/(\pi x)}=1/x$.
 Since $e^{-i(n+1)\pi/2}=(-i)^{n+1}$, Eq.~(14.161) becomes
 \[
 \boxed{h_n^{(1)}(x)=(-i)^{n+1}\frac{e^{ix}}x
@@ -5369,10 +5531,21 @@ Finally, $(2r)!!=2^r r!$ gives
 \]
 Consequently the same sum is
 $\sum_{s=0}^n i^s(2n+2s)!!/[s!(8x)^s(2n-2s)!!]$,
-the other form in Eq.~(14.162). The finite expression satisfies the
-spherical Bessel equation and has the outgoing normalization
-$(-i)^{n+1}e^{ix}/x$; it is exact for $x\ne0$, not merely a
-large-$x$ approximation.
+the other form in Eq.~(14.162). The finite expression is exact for
+$x\ne0$, not merely a large-$x$ approximation. Indeed, for
+$\nu=n+\frac12$ the constant $\nu^2-\frac14$ of Exercise~14.6.10
+equals $n(n+1)$, so the recurrence there gives a zero coefficient
+at order $n+1$ and hence at every higher order: $e^{ix}$ times the
+terminating sum solves the equation of Exercise~14.6.10(a) exactly.
+Dividing such a solution $y$ by $x$ gives
+$x^{-1/2}(x^{-1/2}y)$, a solution of the spherical Bessel
+equation; so the finite sum $S$ (the boxed right side) solves it
+exactly, and for real $x$ so does
+$\overline S\sim i^{n+1}e^{-ix}/x$, which is independent of $S$.
+Thus $h_n^{(1)}-S=AS+B\overline S$ for constants $A,B$. By
+Eq.~(14.161) this difference is $o(1/x)$, whereas
+$x(AS+B\overline S)=A(-i)^{n+1}e^{ix}+Bi^{n+1}e^{-ix}+O(1/x)$
+tends to zero only if $A=B=0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5421,7 +5594,9 @@ y_{n}(z)=\frac{(-1)^{n+1}}{z}\cos\left(z+\frac{n\pi}{2}\right)
 \end{align*}
 \solution
 Separate the even and odd indices in the finite sum of
-Exercise~14.7.1. Write
+Exercise~14.7.1: the terms $s=2k$ carry $i^{2k}=(-1)^k$ and the
+terms $s=2k+1$ carry $i^{2k+1}=i(-1)^k$, so the sum is $P+iQ$ with
+(renaming $k$ as $s$)
 \begin{align*}
 P&=\sum_{s=0}^{\lfloor n/2\rfloor}
 \frac{(-1)^s(n+2s)!}{(2s)!(2z)^{2s}(n-2s)!},\\
@@ -5430,7 +5605,9 @@ Q&=\sum_{s=0}^{\lfloor(n-1)/2\rfloor}
 \end{align*}
 An empty sum is zero, so $Q=0$ when $n=0$. With
 $\chi=z-n\pi/2$ the prefactor is
-$(-i)^{n+1}e^{iz}=\sin\chi-i\cos\chi$. Therefore
+$(-i)^{n+1}e^{iz}=e^{i[z-(n+1)\pi/2]}=e^{i(\chi-\pi/2)}=-ie^{i\chi}
+=\sin\chi-i\cos\chi$. Multiplying out
+$(\sin\chi-i\cos\chi)(P+iQ)$ gives
 \[
 h_n^{(1)}(z)=\frac1z
 \{P\sin\chi+Q\cos\chi+i[-P\cos\chi+Q\sin\chi]\}.
@@ -5442,7 +5619,8 @@ separating its two parts gives
  y_n=\frac{-P\cos\chi+Q\sin\chi}{z}.}
 \]
 These finite analytic identities then extend to complex $z\ne0$.
-To put the second one in the question's phase convention, use
+To put the second one in the question's phase convention, shift
+the angle by $n\pi$, $\chi=(z+n\pi/2)-n\pi$:
 \[
 \cos\chi=(-1)^n\cos(z+n\pi/2),\qquad
 \sin\chi=(-1)^n\sin(z+n\pi/2).
@@ -5455,7 +5633,7 @@ Thus
 \erratum{There are two corrections to the printed formulas. The
 power in the odd sum for $j_n$ is $2s+1$, as in the published
 errata. In the displayed phase convention for $y_n$, the sign
-before its second sum must be minus. The actual textbook,
+before its second sum must be minus; the textbook,
 p.~710, prints plus. For $n=1$, $P=1$, $Q=1/z$; the correct
 answer is $y_1=-\sin z/z-\cos z/z^2$. The printed plus would
 change the last sign and fail the spherical Bessel equation.}
@@ -5479,17 +5657,22 @@ j_{1}(x)=\frac{\sin x}{x^{2}}-\frac{\cos x}{x}.
 \]
 \solution
 Insert $\nu=n+\tfrac12$ and multiply by
-$\sqrt{\pi/(2x)}$. Since $\Gamma(n+1)=n!$,
+$\sqrt{\pi/(2x)}$. Since $\Gamma(n+1)=n!$ and
+$\sqrt{\pi/(2x)}\,(x/2)^{n+1/2}/\sqrt\pi=x^n/2^{n+1}$,
 \[
 j_n(x)=\frac{x^n}{2^{n+1}n!}
 \int_{-1}^1e^{ixp}(1-p^2)^n\,dp.
 \]
-Expand the polynomial and introduce
+Expand $(1-p^2)^n=\sum_{r=0}^n\binom nr(-1)^rp^{2r}$ and introduce
 \[
-S(x)=\int_{-1}^1e^{ixp}dp=\frac{2\sin x}{x}.
+S(x)=\int_{-1}^1e^{ixp}dp=\frac{e^{ix}-e^{-ix}}{ix}
+=\frac{2\sin x}{x}.
 \]
 Differentiation under this finite-interval integral gives
-$S^{(2r)}(x)=(-1)^r\int_{-1}^1p^{2r}e^{ixp}dp$.
+\[
+S^{(2r)}(x)=\int_{-1}^1(ip)^{2r}e^{ixp}dp
+=(-1)^r\int_{-1}^1p^{2r}e^{ixp}dp.
+\]
 The two factors $(-1)^r$ cancel in the binomial expansion, so
 \[
 \boxed{j_n(x)=\frac{x^n}{2^{n+1}n!}
@@ -5502,12 +5685,12 @@ $n$. In particular,
 \[
 j_0=S/2=\frac{\sin x}{x}.
 \]
-For $n=1$,
+For $n=1$, differentiating $S'=2\cos x/x-2\sin x/x^2$ once more,
 \[
 S''=-\frac{2\sin x}{x}-\frac{4\cos x}{x^2}
 +\frac{4\sin x}{x^3},
 \]
-whence
+so that $S+S''=4\sin x/x^3-4\cos x/x^2$, whence
 \[
 j_1=\frac x4(S+S'')=\frac{\sin x}{x^2}-\frac{\cos x}{x}.
 \]
@@ -5534,14 +5717,17 @@ x^{2}f''_{n}(x)+2xf'_{n}(x)+\big[x^{2}-n(n+1)\big]f_{n}(x)=0.
 \end{enumerate}
 \solution
 (a) For any cylindrical solution $F_\nu$, set
-$f_n=\sqrt{\pi/(2x)}F_{n+1/2}$. Its two cylindrical recurrences
+$f_n=\sqrt{\pi/(2x)}F_{n+1/2}$. Its two cylindrical recurrences,
+$F_{\nu-1}+F_{\nu+1}=(2\nu/x)F_\nu$ and $F_{\nu-1}-F_{\nu+1}=2F_\nu'$
+at $\nu=n+\frac12$, multiplied by $\sqrt{\pi/(2x)}$,
 give, respectively,
 \[
 f_{n-1}+f_{n+1}=\frac{2n+1}{x}f_n,
 \qquad
 f_n'=\frac12(f_{n-1}-f_{n+1})-\frac{f_n}{2x}.
 \]
-The last term arises from differentiating $x^{-1/2}$.
+The last term arises from differentiating $x^{-1/2}$:
+$f_n'=\sqrt{\pi/(2x)}F_{n+1/2}'-f_n/(2x)$.
 Replace $f_n/x$ by $(f_{n-1}+f_{n+1})/(2n+1)$:
 \begin{align*}
 (2n+1)f_n'
@@ -5549,7 +5735,13 @@ Replace $f_n/x$ by $(f_{n-1}+f_{n+1})/(2n+1)$:
 -\frac12(f_{n-1}+f_{n+1})\\
 &=nf_{n-1}-(n+1)f_{n+1}.
 \end{align*}
-This also yields the useful equivalent pair
+Eliminating $f_{n+1}$, respectively $f_{n-1}$, from the right side
+with the first recurrence gives
+\[
+(2n+1)f_n'=(2n+1)f_{n-1}-\frac{(n+1)(2n+1)}xf_n
+=\frac{n(2n+1)}xf_n-(2n+1)f_{n+1},
+\]
+that is, the useful equivalent pair
 \[
 f_n'=f_{n-1}-\frac{n+1}{x}f_n
 =\frac nxf_n-f_{n+1}.
@@ -5561,12 +5753,15 @@ linearity from their cylindrical counterparts.
 \[
 f_{n+1}'=\frac nx f_n'-\frac n{x^2}f_n-f_n''.
 \]
-Use the first equivalent derivative identity at order $n+1$:
+Use the first equivalent derivative identity at order $n+1$, and
+then substitute $f_{n+1}=nf_n/x-f_n'$ once more:
 \[
 f_{n+1}'=f_n-\frac{n+2}{x}f_{n+1}
 =f_n-\frac{n(n+2)}{x^2}f_n+\frac{n+2}{x}f_n'.
 \]
-Equating the right sides and moving all terms to one side gives
+Equate the right sides and move all terms to one side. The $f_n'$
+terms combine to $[(n+2)-n]f_n'/x=2f_n'/x$, and the $f_n$ terms to
+$[1-n(n+2)/x^2+n/x^2]f_n=[1-n(n+1)/x^2]f_n$; so
 \[
 f_n''+\frac2x f_n'+\left(1-\frac{n(n+1)}{x^2}\right)f_n=0.
 \]
@@ -5584,12 +5779,13 @@ for $n$, an arbitrary nonnegative integer.
 \solution
 Let $D=x^{-1}d/dx$. The assertion is true for $n=0$
 because $j_0=\sin x/x$. Assume it is true at $n$. The derivative
-recurrence in Exercise~14.7.5 gives
+recurrence in Exercise~14.7.5 and the product rule give
 \[
 j_{n+1}=\frac nxj_n-j_n'
 =-x^n\frac d{dx}(x^{-n}j_n).
 \]
-Insert the induction hypothesis before differentiating:
+Insert the induction hypothesis, $x^{-n}j_n=(-1)^nD^nj_0$, before
+differentiating, and write $x^n\,d/dx=x^{n+1}D$:
 \begin{align*}
 j_{n+1}
 &=-x^n\frac d{dx}\{(-1)^nD^nj_0\}\\
@@ -5623,18 +5819,23 @@ j_n(x^2y_n')'-y_n(x^2j_n')'
 Thus $x^2W$ is a constant. To determine it, use the leading
 series at the origin,
 \[
-j_n\sim\frac{x^n}{(2n+1)!!},\qquad
-y_n\sim-(2n-1)!!\,x^{-n-1},
+j_n=\frac{x^n+O(x^{n+2})}{(2n+1)!!},\qquad
+y_n=-(2n-1)!!\,[x^{-n-1}+O(x^{-n+1})],
 \]
-where $(-1)!!=1$. Their leading contribution to the Wronskian is
+where $(-1)!!=1$. Differentiating termwise,
+$j_n'=[nx^{n-1}+O(x^{n+1})]/(2n+1)!!$ and
+$y_n'=(2n-1)!!\,[(n+1)x^{-n-2}+O(x^{-n})]$.
+Hence $j_ny_n'$ and $-j_n'y_n$ equal the two terms below up to
+errors $O(1)$, so
 \begin{align*}
 W&\sim\frac{(n+1)(2n-1)!!}{(2n+1)!!}\frac1{x^2}
 +\frac{n(2n-1)!!}{(2n+1)!!}\frac1{x^2}\\
 &=\frac{(2n+1)(2n-1)!!}{(2n+1)!!}\frac1{x^2}
 =\frac1{x^2}.
 \end{align*}
-Because $x^2W$ is exactly constant, the asymptotic computation
-fixes the exact result $\boxed{W[j_n,y_n]=x^{-2}}$.
+Thus $x^2W=1+O(x^2)$; because $x^2W$ is exactly constant, the
+small-$x$ computation fixes the exact result
+$\boxed{W[j_n,y_n]=x^{-2}}$.
 \erratum{The second function is $y_n$, correcting the printed
 $n_n$ in accordance with the published errata.}
 
@@ -5666,7 +5867,9 @@ j_{n}(z)=\frac{z^{n}}{2^{n+1}n!}\int_{0}^{\pi}\cos(z\cos\theta)
 \sin^{2n+1}\theta\,d\theta.
 \]
 \solution
-Expand the cosine; its series is uniformly convergent
+Expand the cosine,
+$\cos(z\cos\theta)=\sum_r(-1)^rz^{2r}\cos^{2r}\theta/(2r)!$; this
+series is uniformly convergent
 on the finite $\theta$ interval for every fixed complex $z$.
 Its $r$th term requires
 \begin{align*}
@@ -5675,8 +5878,12 @@ Its $r$th term requires
 &=\int_0^1u^{r-1/2}(1-u)^n du\\
 &=\frac{\Gamma(r+1/2)n!}{\Gamma(n+r+3/2)}.
 \end{align*}
-In the second line $u=p^2$ was used after doubling the integral
-on $0<p<1$. Since
+In the first line $p=\cos\theta$, $dp=-\sin\theta\,d\theta$, and
+$\sin^{2n}\theta=(1-p^2)^n$. In the second, the even integrand was
+doubled on $0<p<1$ and $u=p^2$, $dp=du/(2\sqrt u)$, was used. The
+third is the beta integral
+$B(r+\frac12,n+1)=\Gamma(r+\frac12)\Gamma(n+1)/\Gamma(n+r+\frac32)$.
+Since
 $\Gamma(r+1/2)=\sqrt\pi(2r)!/(4^rr!)$, the proposed right side
 becomes
 \begin{align*}
@@ -5687,8 +5894,12 @@ becomes
 \sum_{r=0}^\infty\frac{(-1)^rz^{2r}}{4^rr!\Gamma(n+r+3/2)}\\
 &=\sqrt{\frac\pi{2z}}J_{n+1/2}(z)=j_n(z).
 \end{align*}
-This proves the formula. At $z=0$ it has its regular limiting
-value, $1$ for $n=0$ and $0$ for $n>0$.
+The last step is the ascending series
+$J_{n+1/2}(z)=\sum_r(-1)^r(z/2)^{n+2r+1/2}/[r!\,\Gamma(n+r+\frac32)]$
+multiplied by $\sqrt{\pi/(2z)}$, because
+$\sqrt{\pi/(2z)}\,(z/2)^{n+1/2}=\sqrt\pi z^n/2^{n+1}$ and
+$(z/2)^{2r}=z^{2r}/4^r$. This proves the formula. At $z=0$ it has
+its regular limiting value, $1$ for $n=0$ and $0$ for $n>0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5709,14 +5920,20 @@ The book uses
 \[
 k_n(x)=\sqrt{\frac{2}{\pi x}}K_{n+1/2}(x),
 \]
-so its normalization differs from that of $j_n$. Inserting
-$\nu=n+\tfrac12$ in the given integral gives
+so its normalization differs from that of $j_n$. Insert
+$\nu=n+\tfrac12$ in the given integral: then $\Gamma(\nu+\frac12)=n!$,
+$(t^2+1)^{\nu+1/2}=(1+t^2)^{n+1}$, and the prefactor times
+$\sqrt{2/(\pi x)}$ is
+$\sqrt{2/(\pi x)}\;2^{n+1/2}n!/(\sqrt\pi x^{n+1/2})
+=2^{n+1}n!/(\pi x^{n+1})$. Hence
 \[
 k_n(x)=\frac{2^{n+1}n!}{\pi x^{n+1}}
 \int_0^\infty\frac{\cos(xt)}{(1+t^2)^{n+1}}dt.
 \]
 Integrate this last integral by parts, taking the cosine as the
-derivative of $\sin(xt)/x$:
+derivative of $\sin(xt)/x$ and using
+$d(1+t^2)^{-n-1}/dt=-2(n+1)t(1+t^2)^{-n-2}$; in the last step
+$t\sin(xt)/x=t^2\sin(xt)/(xt)=t^2j_0(xt)$:
 \begin{align*}
 \int_0^\infty\frac{\cos(xt)}{(1+t^2)^{n+1}}dt
 &=\left[\frac{\sin(xt)}{x(1+t^2)^{n+1}}\right]_0^\infty
@@ -5725,8 +5942,10 @@ derivative of $\sin(xt)/x$:
 &=2(n+1)\int_0^\infty
 \frac{t^2j_0(xt)}{(1+t^2)^{n+2}}dt.
 \end{align*}
-The boundary term is zero at both ends for $x>0$, $n\ge0$.
-Multiplying the prefactor by $2(n+1)$ and renaming $t$ as $k$
+The boundary term is zero at both ends for $x>0$, $n\ge0$: it
+contains $\sin0=0$ at $t=0$ and decays like $t^{-2n-2}$ at
+infinity. Multiplying the prefactor by $2(n+1)$, with
+$2^{n+1}n!\cdot2(n+1)=2^{n+2}(n+1)!$, and renaming $t$ as $k$
 gives exactly
 \[
 \boxed{k_n(x)=\frac{2^{n+2}(n+1)!}{\pi x^{n+1}}
@@ -5750,13 +5969,24 @@ equations in self-adjoint form are
 (xJ_\alpha')'+\left(x-\frac{\alpha^2}{x}\right)J_\alpha=0.
 \]
 Multiply the $\mu$ equation by $J_\nu$, the $\nu$ equation by
-$J_\mu$, and subtract. The result is
+$J_\mu$, and subtract. The terms $xJ_\mu J_\nu$ cancel, and
+$J_\nu(xJ_\mu')'-J_\mu(xJ_\nu')'
+=\frac d{dx}\{x(J_\nu J_\mu'-J_\nu'J_\mu)\}$ because the two
+products $xJ_\nu'J_\mu'$ cancel. The result is
 \[
 \frac d{dx}\{x(J_\nu J_\mu'-J_\nu'J_\mu)\}
 =\frac{\mu^2-\nu^2}{x}J_\mu J_\nu.
 \]
-Integrate on $[\epsilon,R]$. At the lower endpoint the bracket
-is $O(\epsilon^{\mu+\nu})$, which tends to zero; when a leading
+Integrate on $[\epsilon,R]$:
+\[
+(\mu^2-\nu^2)\int_\epsilon^RJ_\mu J_\nu\frac{dx}x
+=\Bigl[x(J_\nu J_\mu'-J_\nu'J_\mu)\Bigr]_\epsilon^R.
+\]
+At the lower endpoint, $J_\alpha=(x/2)^\alpha[1+O(x^2)]/\Gamma(\alpha+1)$
+makes the bracket
+$(\mu-\nu)(\epsilon/2)^{\mu+\nu}[1+O(\epsilon^2)]/
+[\Gamma(\mu+1)\Gamma(\nu+1)]=O(\epsilon^{\mu+\nu})$,
+which tends to zero; when a leading
 coefficient vanishes at a negative integer order, the actual
 power only improves this estimate. At the upper endpoint put
 $\chi_\alpha=x-\alpha\pi/2-\pi/4$ and use
@@ -5769,8 +5999,10 @@ It follows that
 x(J_\nu J_\mu'-J_\nu'J_\mu)
 &=\frac2\pi[-\cos\chi_\nu\sin\chi_\mu
 +\sin\chi_\nu\cos\chi_\mu]+O(x^{-1})\\
-&\longrightarrow\frac2\pi\sin\frac{(\mu-\nu)\pi}{2}.
+&\longrightarrow\frac2\pi\sin\frac{(\mu-\nu)\pi}{2},
 \end{align*}
+since the bracket is $\sin(\chi_\nu-\chi_\mu)$ and
+$\chi_\nu-\chi_\mu=(\mu-\nu)\pi/2$.
 The integrand is integrable at zero and $O(x^{-2})$ at infinity,
 so both limiting operations are justified. For $\mu^2\ne\nu^2$,
 \[
@@ -5794,13 +6026,16 @@ positive $\nu$, using the same origin and infinity bounds.
 \begin{cases}m\neq n,\\m,n\ge0.\end{cases}
 \]
 \solution
-The power series gives $j_n(-x)=(-1)^n j_n(x)$.
+The power series of $j_n$ (Exercise~14.7.9), $x^n$ times a series
+in $x^2$, gives $j_n(-x)=(-1)^n j_n(x)$.
 The product is integrable at the origin and decays as $O(x^{-2})$
 at infinity. If $m+n$ is odd, its integral over the whole real
 line therefore vanishes by oddness.
 
 If $m+n$ is even, the product is even. On the positive half-line,
-use Exercise~14.7.11 with $\mu=m+\tfrac12$, $\nu=n+\tfrac12$:
+$j_mj_n=[\pi/(2x)]J_{m+1/2}J_{n+1/2}$; use Exercise~14.7.11 with
+$\mu=m+\tfrac12$, $\nu=n+\tfrac12$ (so $\mu+\nu=m+n+1>0$) and
+$(m+\frac12)^2-(n+\frac12)^2=(m-n)(m+n+1)$:
 \begin{align*}
 \int_0^\infty j_m(x)j_n(x)dx
 &=\frac\pi2\int_0^\infty
@@ -5812,7 +6047,8 @@ For distinct nonnegative integers of the same parity, $m-n$ is a
 nonzero even integer: the numerator is zero and the denominator
 is nonzero. Doubling this zero proves the whole-line result.
 \erratum{The denominator in this half-line intermediate formula
-is $(m-n)(m+n+1)$, not $m^2-n^2$ as in the manual, p.~228.
+is $(m-n)(m+n+1)$, not $m^2-n^2$ as in the Instructor's Manual,
+p.~228.
 The final orthogonality conclusion is unaffected.}
 
 \Needspace{5\baselineskip}
@@ -5896,19 +6132,38 @@ E_N(s)=\sqrt s\sum_{n=0}^Nj_{2n}(s)
 O_N(s)=\sqrt s\sum_{n=0}^Nj_{2n+1}(s)
 =\sqrt{\frac\pi2}\sum_{n=0}^NJ_{2n+3/2}(s).
 \]
-Use $2J_\alpha'=J_{\alpha-1}-J_{\alpha+1}$. Consecutive
-terms cancel, leaving the explicit terminal terms
+Use $2J_\alpha'=J_{\alpha-1}-J_{\alpha+1}$. For example,
+\[
+E_N'(s)=\frac12\sqrt{\frac\pi2}\sum_{n=0}^N
+[J_{2n-1/2}(s)-J_{2n+3/2}(s)],
+\]
+and since $2(n+1)-\frac12=2n+\frac32$ the second member of each
+term cancels the first member of the next. Consecutive
+terms cancel in this way, leaving the explicit terminal terms
 \begin{align*}
 E_N'(s)&=\frac12\sqrt{\frac\pi2}
 [J_{-1/2}(s)-J_{2N+3/2}(s)],\\
 O_N'(s)&=\frac12\sqrt{\frac\pi2}
 [J_{1/2}(s)-J_{2N+5/2}(s)].
 \end{align*}
-The series for $J_\alpha$ bounds the terminal term on $0\le s\le R$
-by $(R/2)^\alpha e^{R^2/4}/\Gamma(\alpha+1)$ for these positive
-orders, which tends to zero. Integrate these finite identities
-from zero to $s$; both sums vanish at zero. Their limits are
-therefore $F(s)$ and $H(s)$, respectively. This establishes
+With $J_{-1/2}(s)=\sqrt{2/(\pi s)}\cos s$ and
+$J_{1/2}(s)=\sqrt{2/(\pi s)}\sin s$, the first terms are
+$\frac12\sqrt{\pi/2}\,J_{-1/2}(s)=\cos s/(2\sqrt s)=F'(s)$ and
+$\frac12\sqrt{\pi/2}\,J_{1/2}(s)=\sin s/(2\sqrt s)=H'(s)$.
+For $\alpha\ge0$ we have $\Gamma(k+\alpha+1)\ge\Gamma(\alpha+1)$, so the series
+$J_\alpha(s)=\sum_k(-1)^k(s/2)^{2k+\alpha}/[k!\,\Gamma(k+\alpha+1)]$
+bounds the terminal term on $0\le s\le R$
+by $(R/2)^\alpha e^{R^2/4}/\Gamma(\alpha+1)$, which tends to zero
+as $\alpha=2N+\frac32$ or $2N+\frac52$ grows. Integrate these finite
+identities from zero to $s$; both sums vanish at zero, as do $F$
+and $H$:
+\begin{align*}
+E_N(s)&=F(s)-\frac12\sqrt{\frac\pi2}\int_0^sJ_{2N+3/2}(u)\,du,\\
+O_N(s)&=H(s)-\frac12\sqrt{\frac\pi2}\int_0^sJ_{2N+5/2}(u)\,du.
+\end{align*}
+The remaining integrals are at most $s$ times the bound above, so
+the limits of $E_N$ and $O_N$ are $F(s)$ and $H(s)$, respectively.
+This establishes
 \[
 \boxed{F(s)=\sqrt s\sum_{n=0}^\infty j_{2n}(s),\qquad
 H(s)=\sqrt s\sum_{n=0}^\infty j_{2n+1}(s).}
@@ -5961,7 +6216,10 @@ F'=2x\sin x+(x^2-2)\cos x+2\cos x-2x\sin x=x^2\cos x.
 \]
 Thus $F$ increases from $F(0)=0$ to $x=\pi/2$, then decreases
 strictly to $F(\pi)=-2\pi<0$. It has exactly one zero in
-$(\pi/2,\pi)$ and none earlier. Numerical solution gives
+$(\pi/2,\pi)$ and none earlier. Newton's iteration
+$x\mapsto x-F(x)/F'(x)=x-F(x)/(x^2\cos x)$, started at $x=2$,
+converges to it in five steps (bisection of $F$ on $(\pi/2,\pi)$
+works as well):
 \[
 x_1=ka=2.0815759778181006\ldots.
 \]
@@ -5970,7 +6228,12 @@ first consider $l=0$. The derivative numerator is
 $x\cos x-\sin x$, with derivative $-x\sin x<0$ on $(0,\pi)$.
 It starts at zero, hence $j_0'$ has no positive root below $\pi$.
 For every $l\ge2$, multiply the radial equation by $\overline R_l$
-and integrate, using the regular origin and Neumann endpoint:
+and integrate over $0<r<a$. By parts,
+$\int_0^a\overline R_l(r^2R_l')'dr
+=[r^2\overline R_lR_l']_0^a-\int_0^ar^2|R_l'|^2dr$, and the
+boundary term vanishes: $r^2\to0$ at the regular origin and
+$R_l'(a)=0$ at the wall. Solving for $k^2$ and then using
+$r^2\le a^2$ in the denominator,
 \[
 k^2=\frac{\int_0^a[r^2|R_l'|^2+l(l+1)|R_l|^2]dr}
 {\int_0^a r^2|R_l|^2dr}
@@ -6003,13 +6266,27 @@ i_n(x)=\sqrt{\frac\pi{2x}}I_{n+1/2}(x)
 =\frac{\sqrt\pi x^n}{2^{n+1}}
 \sum_{s=0}^\infty\frac{x^{2s}}{4^ss!\Gamma(n+s+3/2)}.
 \]
+Here $I_{n+1/2}(x)=\sum_s(x/2)^{n+2s+1/2}/[s!\,\Gamma(n+s+\frac32)]$
+and $\sqrt{\pi/(2x)}\,(x/2)^{n+1/2}=\sqrt\pi x^n/2^{n+1}$.
 The series after $x^n$ contains only even powers and is entire.
 Hence $i_n(-x)=(-1)^ni_n(x)$. This argument also handles the
 square-root branches: their product has the displayed integer
 power series, which supplies the continuation through the origin.
 
-(b) The finite half-integer $K$ formula, with the book's
-normalization, is
+(b) Use $K_\nu(x)=(\pi/2)i^{\nu+1}H_\nu^{(1)}(ix)$ and
+$H_{n+1/2}^{(1)}(ix)=\sqrt{2ix/\pi}\,h_n^{(1)}(ix)$, with
+$(ix)^{1/2}=x^{1/2}e^{i\pi/4}$. For $x>0$ the book's normalization
+gives
+\[
+k_n(x)=\sqrt{\frac2{\pi x}}\,\frac\pi2\,i^{n+3/2}
+\sqrt{\frac{2x}\pi}\,e^{i\pi/4}h_n^{(1)}(ix)
+=i^{n+3/2}e^{i\pi/4}h_n^{(1)}(ix)=-i^nh_n^{(1)}(ix),
+\]
+since $i^{3/2}e^{i\pi/4}=e^{3i\pi/4}e^{i\pi/4}=-1$.
+In the finite sum of Exercise~14.7.1 at argument $ix$,
+$e^{i(ix)}=e^{-x}$, $i^s/(2ix)^s=1/(2x)^s$, and the constant
+factors combine to $-i^n(-i)^{n+1}/i=1$. Hence the finite
+half-integer $K$ formula, with the book's normalization, is
 \[
 k_n(x)=\frac{e^{-x}}x\sum_{s=0}^n
 \frac{(n+s)!}{s!(2x)^s(n-s)!}.
@@ -6047,8 +6324,10 @@ i_nk_n'-i_n'k_n
 &=ab(I_\nu K_\nu'-I_\nu'K_\nu)
 +(ab'-a'b)I_\nu K_\nu.
 \end{align*}
-Here $a'/a=b'/b=-1/(2x)$, so the last coefficient is zero,
-and $ab=1/x$. Exercise~14.5.11 supplies
+Both $a$ and $b$ are constants times $x^{-1/2}$, so
+$a'/a=b'/b=-1/(2x)$ and the last coefficient,
+$ab'-a'b=ab(b'/b-a'/a)$, is zero; also
+$ab=\sqrt{\pi/(2x)}\sqrt{2/(\pi x)}=1/x$. Exercise~14.5.11 supplies
 $W[I_\nu,K_\nu]=-1/x$. Consequently
 \[
 \boxed{W[i_n,k_n]=\frac1x\left(-\frac1x\right)=-\frac1{x^2}.}
