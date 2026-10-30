@@ -3286,7 +3286,9 @@ maps to $s=e^{i(\pi-\theta)}$, so that arc is also unchanged as
 a set but traversed backwards. Thus the entire transformed
 contour is $C_1$ with reversed orientation.
 
-On this branch, $\log t=i\pi-\log s$. Since $t=-1/s$, we have
+On this branch, $\log t=i\pi-\log s$: on $C_1$, $0\le\arg t\le\pi$,
+and $\arg s=\pi-\arg t$ lies in the same range, so
+$\log s=-\ln|t|+i(\pi-\arg t)=i\pi-\log t$. Since $t=-1/s$, we have
 $t^{-1}=-s$ and $dt=s^{-2}ds$, while
 $t^{-\nu-1}=e^{-(\nu+1)(i\pi-\log s)}=-e^{-i\pi\nu}s^{\nu+1}$.
 Hence
@@ -3339,7 +3341,8 @@ Exercise~14.1.15(a). Since $1/(\pi i)=2/(2\pi i)$,
 \]
 Exercise~14.4.3 gives $A_\nu=e^{-i\pi\nu}A_{-\nu}$, that is,
 $A_{-\nu}=e^{i\pi\nu}A_\nu$. The same inversion on the lower
-contour, now with $t=e^{-i\pi}/s$ and $\log t=-i\pi-\log s$, gives
+contour, now with $t=e^{-i\pi}/s$ and $\log t=-i\pi-\log s$ (on
+$C_2$, $-\pi\le\arg t\le0$ and $\arg s=-\pi-\arg t$), gives
 $t^{-\nu-1}dt=-e^{i\pi\nu}s^{\nu-1}ds$ and exchanges the endpoints
 $\infty e^{-i\pi}$ and $0^+$. As there, the minus sign cancels the
 reversed orientation, so $B_\nu=e^{i\pi\nu}B_{-\nu}$, that is,
@@ -3541,7 +3544,28 @@ This last result is a Fourier sine transform.
 formula cannot be extended to $x<0$ unchanged, since its right
 side is odd in $x$ whereas $J_0$ is even. At $x=0$ the limit
 must be taken after integration.}
-For $x>0$, write the prefactor as $2/(i\pi)=-2i/\pi$ and expand
+First, for $x>0$ the given real-axis formula holds with an ordinary
+improper integral (Exercise~14.4.6 used contours whose end has
+positive height). For $R>0$ and $0<\eta\le\pi/2$, the path from $0$
+along the real axis to $R$, up to $R+i\eta$, and then along the ray
+of height $\eta$ is admissible in Exercise~14.4.6(c), so the
+integral of $e^{ix\cosh s}$ along it is $(i\pi/2)H_0^{(1)}(x)$. On
+the vertical segment $|e^{ix\cosh(R+i\tau)}|=e^{-x\sinh R\sin\tau}$,
+as in Exercise~14.4.6(c), and $\sin\tau\ge2\tau/\pi$ for
+$0\le\tau\le\pi/2$ (sine is concave there), so this segment
+contributes at most
+\[
+\int_0^\eta e^{-x\sinh R\sin\tau}d\tau
+\le\int_0^\infty e^{-2x\tau\sinh R/\pi}d\tau
+=\frac{\pi}{2x\sinh R}\longrightarrow0
+\quad(R\to\infty).
+\]
+The ray beyond $R+i\eta$ contributes the tail of an absolutely
+convergent integral, which also tends to zero. Hence
+$\int_0^Re^{ix\cosh s}ds\to(i\pi/2)H_0^{(1)}(x)$ as $R\to\infty$:
+the formula holds, and the real and imaginary parts used below
+converge as ordinary improper integrals.
+Now write the prefactor as $2/(i\pi)=-2i/\pi$ and expand
 the exponential, $e^{ix\cosh s}=\cos(x\cosh s)+i\sin(x\cosh s)$.
 Since $-(2i/\pi)\,i=2/\pi$,
 \begin{align*}
@@ -3564,11 +3588,12 @@ $dt=\sinh s\,ds=\sqrt{t^2-1}\,ds$. Thus
 \boxed{J_0(x)=\frac2\pi\int_1^\infty
 \frac{\sin(xt)}{\sqrt{t^2-1}}dt}.
 \]
-The singularity at $t=1$ is integrable, since
-$1/\sqrt{t^2-1}\sim1/\sqrt{2(t-1)}$ there. The tail converges by
-Dirichlet's test: $|\int_2^T\sin(xt)dt|\le2/x$ for every $T$, and
-$1/\sqrt{t^2-1}$ decreases monotonically to zero. These facts
-also identify the ordinary improper integral with its Abel limit.
+The convergence of this $t$ integral, which follows from that of
+the $s$ integral, can also be checked directly. The singularity at
+$t=1$ is integrable, since $1/\sqrt{t^2-1}\sim1/\sqrt{2(t-1)}$
+there. The tail converges by Dirichlet's test:
+$|\int_2^T\sin(xt)dt|\le2/x$ for every $T$, and $1/\sqrt{t^2-1}$
+decreases monotonically to zero.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3585,7 +3610,9 @@ These are the integral representations in Eq.~(14.63). This last
 result is a Fourier cosine transform.
 \par\erratum{Take $x>0$ for both ordinary oscillatory integrals.}
 \solution
-For $x>0$, multiplication by $2/(i\pi)=-2i/\pi$ gives
+For $x>0$ the real-axis formula holds with an ordinary improper
+integral whose real and imaginary parts converge separately
+(Exercise~14.4.7). Multiplication by $2/(i\pi)=-2i/\pi$ gives
 \[
 H_0^{(1)}(x)=\frac2\pi\int_0^\infty\sin(x\cosh s)ds
 -\frac{2i}{\pi}\int_0^\infty\cos(x\cosh s)ds.
@@ -3606,11 +3633,8 @@ As in Exercise~14.4.7, the finite endpoint is integrable and the
 tail converges conditionally for $x>0$; at $x=0$ the integral
 $\int_1^\infty dt/\sqrt{t^2-1}$ diverges, in accordance with the
 logarithmic singularity of $Y_0$, which is why the qualification
-requires $x>0$. Thus taking the imaginary part of
-the Abel boundary value is consistent with the displayed
-ordinary improper integrals. In particular the prefactor changes
-the cosine integral's sign; omitting $1/i$ would interchange the
-first- and second-kind identifications.
+requires $x>0$. The minus sign in (a) and (b) comes from the
+factor $1/i=-i$ of the prefactor.
 
 \Needspace{9\baselineskip}
 \subsection*{14.5 Modified Bessel Functions, $I_{\nu}(x)$ and $K_{\nu}(x)$}
@@ -3672,18 +3696,15 @@ while for $n=2j$, $i^{2j}+i^{-2j}=2(-1)^j$. Hence
 \[
 \boxed{e^x=I_0+2\sum_{n\ge1}I_n}.
 \]
-
 (c) Put $t=-1$; each pair is $2(-1)^n$, giving
 \[
 \boxed{e^{-x}=I_0+2\sum_{n\ge1}(-1)^nI_n}.
 \]
-
 (d) Add (b) and (c) and divide by two. Odd orders cancel and
 even orders double, so
 \[
 \boxed{\cosh x=I_0+2\sum_{n\ge1}I_{2n}}.
 \]
-
 (e) Subtract (c) from (b) and divide by two. The constant and
 even orders cancel, giving
 \[
@@ -3703,7 +3724,7 @@ I_{n}(x)=\frac{1}{2\pi i}\oint e^{(x/2)(t+1/t)}\frac{dt}{t^{n+1}}.
 \item[(b)] For $n=\nu$, not an integer, show that the preceding
 integral representation may be generalized to
 \[
-I_{\nu}(x)=\frac{1}{2\pi i}\erratum{\int}_{C}e^{(x/2)(t+1/t)}
+I_{\nu}(x)=\frac{1}{2\pi i}\mathop{\erratum{\int_{C}}}e^{(x/2)(t+1/t)}
 \frac{dt}{t^{\nu+1}}.
 \]
 The contour $C$ is the same as that for $J_{\nu}(x)$ (Fig.~14.5).
@@ -3831,7 +3852,13 @@ representation replaces $e^{\pm z\cos\theta}$ by
 $\cosh(z\cos\theta)$. Since $\cosh(z\cos(\pi-\theta))
 =\cosh(z\cos\theta)$, its integral over $[0,\pi]$ is twice its
 integral over $[0,\pi/2]$. This proves the third form.
-All factors $z^\nu$ use the same branch as $I_\nu(z)$.
+All factors $z^\nu$ use the same branch as $I_\nu(z)$, since the
+identity was proved term by term with the common factor
+$(z/2)^\nu$. At $z=0$, a branch point of $z^\nu$ for noninteger
+$\nu$, both sides are understood as limits; by the $r=0$ term of
+the series both behave like $(z/2)^\nu/\Gamma(\nu+1)$, so the limit
+is $0$ for $\nu>0$ and $1$ for $\nu=0$, while for $-1/2<\nu<0$ no
+finite limit exists.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4022,9 +4049,11 @@ K_{\nu-1}+K_{\nu+1}
  -(I_{\nu-1}+I_{\nu+1})]\\
 &=-2c(I_{-\nu}'-I_\nu')=\boxed{-2K_\nu'}.
 \end{align*}
-Taking order limits gives the same relations for integer $\nu$,
-since $K_\nu$ and $K_\nu'$ are continuous in the order
-(Exercise~14.5.6).
+Taking order limits gives the same relations for integer $\nu$:
+$K_\nu(x)=\frac\pi2i^{\nu+1}[J_\nu(ix)+iY_\nu(ix)]$, like $Y_\nu$
+(Exercise~14.3.1), depends analytically on $\nu$ and $x$ jointly,
+so both $K_\nu$ and $K_\nu'$ are continuous in the order
+(Exercise~14.5.6 shows this for $K_\nu$ itself).
 The opposite signs relative to the $I$ recurrences arise from the
 sign reversal of $\sin\pi\nu$, not from a change in the ODE.
 
@@ -4121,11 +4150,15 @@ powers of $p$, so $G$ may be differentiated under the integral:
 $G'=-\int_1^\infty pe^{-zp}(p^2-1)^{\nu-1/2}dp$ and
 $G''=\int_1^\infty p^2e^{-zp}(p^2-1)^{\nu-1/2}dp$. From
 $F'=c(\nu z^{\nu-1}G+z^\nu G')$ and
-$F''=c[\nu(\nu-1)z^{\nu-2}G+2\nu z^{\nu-1}G'+z^\nu G'']$, the terms
-in $\nu^2G$ and $\nu G$ cancel, and
-\[
-z^2F''+zF'-(z^2+\nu^2)F=cz^\nu[z^2G''+(2\nu+1)zG'-z^2G].
-\]
+$F''=c[\nu(\nu-1)z^{\nu-2}G+2\nu z^{\nu-1}G'+z^\nu G'']$, collect
+the terms in $G$, $G'$, $G''$; those in $\nu^2G$ and $\nu G$
+cancel:
+\begin{align*}
+z^2F''+zF'-(z^2+\nu^2)F
+&=c\bigl[\nu(\nu-1)+\nu-\nu^2\bigr]z^\nu G
++c(2\nu+1)z^{\nu+1}G'+cz^{\nu+2}(G''-G)\\
+&=cz^\nu[z^2G''+(2\nu+1)zG'-z^2G].
+\end{align*}
 Inserting the integrals for $G$, $G'$, $G''$,
 \begin{align*}
 z^2F''+zF'-(z^2+\nu^2)F
@@ -4178,13 +4211,17 @@ e^{i(iz-\pi\nu/2-\pi/4)}
 =\sqrt{\frac\pi{2z}}e^{-z}.
 \]
 Here the leading Hankel asymptotic form, established independently
-in Section~14.6, is used only to fix the multiplicative constant.
+in Section~14.6, is used only for the behavior of the $K$ functions
+as $z\to\infty$.
 Two decaying modified-Bessel solutions are proportional: by Abel's
 formula the Wronskian of two solutions of
 $y''+y'/z-(1+\nu^2/z^2)y=0$ is $A/z$ with a constant $A$. For $F$
 and $K_\nu$ the functions and their derivatives are
 $O(z^{-1/2}e^{-z})$ (for $F'$ apply the substitution above to the
-integral for $G'$), so $A=zW\to0$ as $z\to\infty$. Hence $A=0$,
+integral for $G'$; for $K_\nu'$ use
+$K_\nu'=-\frac12(K_{\nu-1}+K_{\nu+1})$ from Exercise~14.5.7 and the
+leading form $K_\mu\sim\sqrt{\pi/(2z)}\,e^{-z}$ just derived, which
+holds for every order $\mu$), so $A=zW\to0$ as $z\to\infty$. Hence $A=0$,
 $W\equiv0$, and $F=\lambda K_\nu$; the common leading coefficient
 then gives $\lambda=1$, $F=K_\nu$.
 
@@ -4393,9 +4430,23 @@ in the hint.
 The published qualification that $n$ is an integer is necessary:
 noninteger order has an additional branch-cut contribution, so
 an ordinary closed-circle coefficient extraction is unavailable.
-Splitting the open contour of Exercise~14.5.3(b) into the unit
-circle and the two banks $t=e^{u\mp i\pi}$, on which
-$t+t^{-1}=-2\cosh u$, exactly as in Exercise~14.1.16, gives
+Split the open contour of Exercise~14.5.3(b), as in
+Exercise~14.1.16, into the lower bank $t=e^{u-i\pi}$
+($u:\infty\to0$), the unit circle, and the upper bank
+$t=e^{u+i\pi}$ ($u:0\to\infty$). On both banks $t=-e^u$, so
+$t+t^{-1}=-2\cosh u$, and $t^{-\nu-1}dt=t^{-\nu}\,dt/t
+=e^{-\nu u}e^{\pm i\pi\nu}du$, with the upper sign on the lower
+bank. Reversing the limits on the lower bank, the banks contribute
+\[
+\frac{e^{-i\pi\nu}-e^{i\pi\nu}}{2\pi i}
+\int_0^\infty e^{-x\cosh u-\nu u}du
+=-\frac{\sin\nu\pi}{\pi}\int_0^\infty e^{-x\cosh u-\nu u}du.
+\]
+On the circle, $-\pi\le\theta\le\pi$ lies on the branch, so the
+computation above with $n$ replaced by $\nu$ (including the parity
+argument) gives
+$\pi^{-1}\int_0^\pi e^{x\cos\theta}\cos\nu\theta\,d\theta$.
+Together,
 \[
 I_\nu(x)=\frac1\pi\int_0^\pi e^{x\cos\theta}\cos\nu\theta\,d\theta
 -\frac{\sin\nu\pi}\pi\int_0^\infty e^{-x\cosh u-\nu u}du.
@@ -4519,10 +4570,13 @@ $\rho/a\backslash z/h$ & $0.1$ & $0.2$ & $0.3$ & $0.4$ & $0.5$\\
 \end{center}
 The wall row uses the prescribed boundary values. The interior
 entries sum the modes through $n=160$; comparison with $n=100$
-changes them by less than $10^{-14}$. The series is evaluated
-through the ratio of the two $I_0$ values, which prevents a large
-coefficient and a small normalizing factor from being stored
-separately. The requested check is
+changes them by less than $10^{-14}$. Each term is evaluated
+through the ratio $I_0(n\pi r/2)/I_0(n\pi/2)\le1$ ($I_0$ increases
+on the positive axis), which decays roughly like
+$e^{-n\pi(1-r)/2}$, rather than as the product of the tiny
+$b_{0n}=B_n/I_0(n\pi/2)$ and the huge $I_0(n\pi r/2)$: for
+$n=159$, the last nonzero mode, $I_0(159\pi/2)\approx7.4\times10^{106}$.
+The requested check is
 $\Phi(0.8,0.3)=26.3955684295\ldots\simeq26.396$, and the symmetry
 $\Phi(r,1-s)=\Phi(r,s)$ determines the other half of the cylinder.
 
