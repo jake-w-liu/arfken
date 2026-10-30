@@ -3216,19 +3216,23 @@ for $n=0$).
 \end{enumerate}
 Exercise 11.8.22 ($n=4$) is a special case of this result.
 \solution
-\textbf{(a)} Since $2\cos2\theta=e^{2i\theta}+e^{-2i\theta}$,
+\textbf{(a)} Since $2\cos2\theta=e^{2i\theta}+e^{-2i\theta}$ and
+$e^{2i\theta}e^{-2i\theta}=1$,
 \[
 \begin{aligned}
 z^4-2z^2\cos2\theta+1
-&=(z^2-e^{2i\theta})(z^2-e^{-2i\theta})\\
+&=z^4-(e^{2i\theta}+e^{-2i\theta})z^2+e^{2i\theta}e^{-2i\theta}
+=(z^2-e^{2i\theta})(z^2-e^{-2i\theta})\\
 &=(z-e^{i\theta})(z+e^{i\theta})
-(z-e^{-i\theta})(z+e^{-i\theta}).
+(z-e^{-i\theta})(z+e^{-i\theta}),
 \end{aligned}
 \]
+the last step by $z^2-c^2=(z-c)(z+c)$ with $c=e^{\pm i\theta}$.
 The four listed numbers are exactly the zeros, with repetitions
 counted when they coincide.
 
-\textbf{(b)} On the positive half-line put $x=1/u$. Then
+\textbf{(b)} On the positive half-line put $x=1/u$, so that
+$x=0,\infty$ correspond to $u=\infty,0$. Then
 \[
 dx=-\frac{du}{u^2},\qquad
 x^4-2x^2\cos2\theta+1
@@ -3236,11 +3240,24 @@ x^4-2x^2\cos2\theta+1
 \]
 so
 \[
+\begin{aligned}
 \int_0^\infty\frac{dx}{x^4-2x^2\cos2\theta+1}
-=\int_0^\infty\frac{u^2\,du}{u^4-2u^2\cos2\theta+1}.
+&=\int_\infty^0\frac{u^4}{u^4-2u^2\cos2\theta+1}
+\left(-\frac{du}{u^2}\right)\\
+&=\int_0^\infty\frac{u^2\,du}{u^4-2u^2\cos2\theta+1}.
+\end{aligned}
 \]
-Both integrands are even, and Exercise 11.8.21 evaluates twice
-the latter integral. Consequently
+Both integrands are even, so each integral over $\mathbb R$ is twice
+the corresponding half-line integral, and Exercise 11.8.21 gives
+$\int_{\mathbb R}u^2\,du/(u^4-2u^2\cos2\theta+1)=\pi/(2|\sin\theta|)$.
+Consequently
+\[
+\int_{\mathbb R}\frac{dx}{x^4-2x^2\cos2\theta+1}
+=2\int_0^\infty\frac{u^2\,du}{u^4-2u^2\cos2\theta+1}
+=\int_{\mathbb R}\frac{u^2\,du}{u^4-2u^2\cos2\theta+1},
+\]
+and, with $1-\cos2\theta=2\sin^2\theta$, so that
+$\sqrt2\,\sqrt{1-\cos2\theta}=2|\sin\theta|$,
 \[
 \boxed{\int_{\mathbb R}\frac{dx}{x^4-2x^2\cos2\theta+1}
 =\frac{\pi}{2|\sin\theta|}
@@ -3248,8 +3265,11 @@ the latter integral. Consequently
 \]
 \erratum{As in 11.8.21, the printed expression without the absolute
 value requires $\sin\theta>0$, and $\sin\theta=0$ is divergent.}
-At $\theta=\pi/4$, the half-line value is $\pi/(2\sqrt2)$, the
-$n=4$ case of Exercise 11.8.22.
+At $\theta=\pi/4$ we have $\cos2\theta=0$ and $\sin\theta=1/\sqrt2$,
+so the integrand is $1/(x^4+1)$, the integral over $\mathbb R$ is
+$\pi/(2/\sqrt2)=\pi/\sqrt2$, and the half-line value is
+$\pi/(2\sqrt2)$. This is the $n=4$ case of Exercise 11.8.22,
+$(\pi/4)/\sin(\pi/4)=\pi/(2\sqrt2)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3262,26 +3282,41 @@ where $0 < a < 1$.
 \emph{Hint.}~You have a branch point and you will need a cut line. Try the
 contour shown in Fig.~11.26.
 \solution
-Use $F(z)=z^{-a}/(1+z)$ with $0<\arg z<2\pi$. On a keyhole
-contour, the small-circle bound is
-$2\pi\epsilon^{1-a}/(1-\epsilon)$ and the large-circle bound is
+Use $F(z)=z^{-a}/(1+z)$ with
+$z^{-a}=|z|^{-a}e^{-ia\arg z}$, $0<\arg z<2\pi$, so that the cut lies
+along the positive real axis. The keyhole contour of Fig.~11.26
+consists of the upper bank from $\epsilon$ to $R$, the circle $|z|=R$
+counterclockwise, the lower bank from $R$ to $\epsilon$, and the
+circle $|z|=\epsilon$ clockwise ($0<\epsilon<1<R$). On the small
+circle $|z^{-a}|=\epsilon^{-a}$, $|1+z|\ge1-\epsilon$, and the length
+is $2\pi\epsilon$, so its integral is bounded by
+$2\pi\epsilon^{1-a}/(1-\epsilon)$; on the large circle
+$|z^{-a}|=R^{-a}$ and $|1+z|\ge R-1$, giving the bound
 $2\pi R^{1-a}/(R-1)$. The first tends to zero if $a<1$ and
-the second if $a>0$. The two straight banks give
-$(1-e^{-2\pi ia})I$. At the only pole, $z=-1$,
+the second if $a>0$. On the upper bank ($\arg z\to0$) $z^{-a}=x^{-a}$,
+which gives $I$; on the lower bank ($\arg z\to2\pi$)
+$z^{-a}=x^{-a}e^{-2\pi ia}$, and the inward direction gives
+$\int_\infty^0e^{-2\pi ia}x^{-a}\,dx/(1+x)=-e^{-2\pi ia}I$. The two
+straight banks therefore give $(1-e^{-2\pi ia})I$. The only pole,
+$z=-1=e^{i\pi}$, is simple, and its residue is the numerator there:
 \[
-\operatorname{Res}_{-1}F=e^{-i\pi a}.
+\operatorname{Res}_{-1}F=(e^{i\pi})^{-a}=e^{-i\pi a}.
 \]
-Therefore
+Therefore, by the residue theorem in the limit $\epsilon\to0$,
+$R\to\infty$,
 \[
 (1-e^{-2\pi ia})I=2\pi i e^{-i\pi a}.
 \]
-Using $1-e^{-2\pi ia}=2ie^{-i\pi a}\sin\pi a$ yields
+Using $1-e^{-2\pi ia}=e^{-i\pi a}(e^{i\pi a}-e^{-i\pi a})
+=2ie^{-i\pi a}\sin\pi a$ yields
+$I=2\pi ie^{-i\pi a}/(2ie^{-i\pi a}\sin\pi a)$, that is,
 \[
 \boxed{\int_0^\infty\frac{x^{-a}}{1+x}\,dx
 =\frac{\pi}{\sin\pi a}\qquad(0<a<1)}.
 \]
-The same inequalities also prove ordinary convergence at both
-real endpoints.
+The real integral converges at both endpoints: the integrand is at
+most $x^{-a}$, integrable at zero because $a<1$, and at most
+$x^{-1-a}$, integrable at infinity because $a>0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3293,25 +3328,43 @@ real endpoints.
 \emph{Hint.}~Choose a contour that encloses one \erratum{zero of $\cosh z$, hence one pole of $1/\cosh z$.}
 \solution
 For real $|b|<1$, integrate $F(z)=e^{bz}/\cosh z$ around the
-rectangle $-R,R,R+i\pi,-R+i\pi$. On either vertical side,
-$|\cosh(\pm R+iy)|\ge\sinh R$, so the contributions are
-$O(e^{-(1-|b|)R})$. Let
+rectangle $-R,R,R+i\pi,-R+i\pi$. From
+$\cosh(x+iy)=\cosh x\cos y+i\sinh x\sin y$,
 \[
-J=\int_{\mathbb R}\frac{e^{bx}}{\cosh x}\,dx.
+|\cosh(x+iy)|^2=\cosh^2x\cos^2y+\sinh^2x\sin^2y
+=\sinh^2x+\cos^2y\ge\sinh^2x .
 \]
-On the top, $F(x+i\pi)=-e^{i\pi b}F(x)$; the reversed direction
-therefore gives $+e^{i\pi b}J$. The one pole inside is $i\pi/2$:
+On either vertical side $|e^{bz}|=e^{\pm bR}\le e^{|b|R}$ and
+$|\cosh(\pm R+iy)|\ge\sinh R$, so with the length $\pi$ each side
+contributes at most $\pi e^{|b|R}/\sinh R=O(e^{-(1-|b|)R})$, which
+tends to zero. Let
+\[
+J=\int_{\mathbb R}\frac{e^{bx}}{\cosh x}\,dx,
+\]
+which converges absolutely because
+$e^{bx}/\cosh x\le2e^{|b||x|-|x|}$.
+On the top, $z=x+i\pi$, where $\cosh(x+i\pi)=-\cosh x$ and
+$e^{b(x+i\pi)}=e^{i\pi b}e^{bx}$, so $F(x+i\pi)=-e^{i\pi b}F(x)$.
+The top is traversed from $R+i\pi$ to $-R+i\pi$, so it gives
+$\int_R^{-R}(-e^{i\pi b})F(x)\,dx=e^{i\pi b}\int_{-R}^RF(x)\,dx
+\to e^{i\pi b}J$, while the bottom gives $J$.
+The zeros of $\cosh z$ are $z=i(m+\frac12)\pi$, $m\in\mathbb Z$, so
+the one pole inside is $i\pi/2$. It is simple, and the rule $N/D'$,
+with $(\cosh z)'=\sinh z$ and $\sinh(i\pi/2)=i\sin(\pi/2)=i$, gives
 \[
 \operatorname{Res}_{i\pi/2}F
 =\frac{e^{i\pi b/2}}{\sinh(i\pi/2)}
 =\frac{e^{i\pi b/2}}i.
 \]
-The residue theorem gives
+The residue theorem, in the limit $R\to\infty$, gives
+$(1+e^{i\pi b})J=2\pi i\,e^{i\pi b/2}/i$, that is,
 \[
 (1+e^{i\pi b})J=2\pi e^{i\pi b/2}.
 \]
-Now $1+e^{i\pi b}=2e^{i\pi b/2}\cos(\pi b/2)$, so
-$J=\pi/\cos(\pi b/2)$. Pairing $x$ with $-x$ in $J$,
+Now $1+e^{i\pi b}=e^{i\pi b/2}(e^{-i\pi b/2}+e^{i\pi b/2})
+=2e^{i\pi b/2}\cos(\pi b/2)$, so
+$J=\pi/\cos(\pi b/2)$. Pairing $x$ with $-x$ in $J$ (substitute
+$x\to-x$ on $(-\infty,0)$ and use $\cosh(-x)=\cosh x$),
 \[
 J=\int_0^\infty\frac{e^{bx}+e^{-bx}}{\cosh x}\,dx
 =2\int_0^\infty\frac{\cosh bx}{\cosh x}\,dx.
@@ -3340,33 +3393,44 @@ expansions of the Fresnel integrals are the topic of Exercise 12.6.1.
 Integrate the entire function $e^{iz^2}$ around the sector
 $0\le\arg z\le\pi/4$, $|z|\le R$. The real segment contributes
 $I_R=\int_0^R e^{it^2}\,dt$. On the returning ray put
-$z=e^{i\pi/4}t$; then $iz^2=-t^2$ and its contribution is
+$z=e^{i\pi/4}t$; then $dz=e^{i\pi/4}\,dt$, $iz^2=i\cdot it^2=-t^2$,
+and $t$ runs from $R$ to $0$, so its contribution is
 $-e^{i\pi/4}\int_0^R e^{-t^2}\,dt$.
-On the circular arc $z=Re^{i\theta}$,
+On the circular arc $z=Re^{i\theta}$, $0\le\theta\le\pi/4$,
+$iz^2=iR^2(\cos2\theta+i\sin2\theta)$ has real part
+$-R^2\sin2\theta$, so
 \[
 |e^{iz^2}|=e^{-R^2\sin2\theta}.
 \]
-For $0\le\theta\le\pi/4$, concavity of sine gives
-$\sin2\theta\ge4\theta/\pi$, so
+Sine is concave on $[0,\pi/2]$, so it lies above its chord there:
+$\sin\psi\ge2\psi/\pi$. With $\psi=2\theta$ this gives
+$\sin2\theta\ge4\theta/\pi$ for $0\le\theta\le\pi/4$, and with
+$|dz|=R\,d\theta$,
 \[
 \left|\int_{\text{arc}}e^{iz^2}\,dz\right|
 \le R\int_0^{\pi/4}e^{-4R^2\theta/\pi}\,d\theta
+=\frac{\pi}{4R}\bigl(1-e^{-R^2}\bigr)
 \le\frac{\pi}{4R}\longrightarrow0.
 \]
-Cauchy's theorem now implies
+Since $e^{iz^2}$ is entire, Cauchy's theorem gives
+$I_R+\int_{\text{arc}}e^{iz^2}\,dz-e^{i\pi/4}\int_0^Re^{-t^2}\,dt=0$,
+and letting $R\to\infty$,
 \[
 \lim_{R\to\infty} I_R
 =e^{i\pi/4}\int_0^\infty e^{-t^2}\,dt.
 \]
-For clarity, the Gaussian value follows by squaring its integral
-and using polar coordinates in the first quadrant:
+The Gaussian value follows by squaring its integral
+and using polar coordinates $x=r\cos\theta$, $y=r\sin\theta$,
+$dx\,dy=r\,dr\,d\theta$, in the first quadrant:
 \[
 \left(\int_0^\infty e^{-t^2}\,dt\right)^2
+=\int_0^\infty\!\!\int_0^\infty e^{-(x^2+y^2)}\,dx\,dy
 =\int_0^{\pi/2}\int_0^\infty e^{-r^2}r\,dr\,d\theta
 =\frac{\pi}{2}\cdot\frac12=\frac{\pi}{4}.
 \]
 The integral is positive, so it is $\sqrt\pi/2$.
-Since $e^{i\pi/4}=(1+i)/\sqrt2$, taking real and imaginary parts gives
+Since $e^{i\pi/4}=(1+i)/\sqrt2$, the limit is
+$(1+i)\sqrt\pi/(2\sqrt2)$, and taking real and imaginary parts gives
 \[
 \boxed{\int_0^\infty\cos(t^2)\,dt
 =\int_0^\infty\sin(t^2)\,dt=\frac{\sqrt\pi}{2\sqrt2}}.
@@ -3393,33 +3457,54 @@ F(z)=\frac{e^{i\pi/3}}{z}
 where the power in parentheses uses its principal logarithm.
 The map $1-1/z$ meets the nonpositive real axis exactly on the
 removed segment, so this branch is analytic on the contour's domain.
-It satisfies $F(z)^3=1/[z^2(1-z)]$.
+It satisfies
+$F(z)^3=e^{i\pi}z^{-3}\bigl((z-1)/z\bigr)^{-1}=-1/[z^2(z-1)]
+=1/[z^2(1-z)]$, and hence $|F(z)|=|z|^{-2/3}|z-1|^{-1/3}$.
 
-For $0<x<1$, approaching from above makes
+For $0<x<1$, $1-1/x=-(1-x)/x<0$. Approaching from above,
+$z=x+i\eta$ with $\eta\downarrow0$, the number
+$1-1/z=1-(x-i\eta)/(x^2+\eta^2)$ has positive imaginary part, so
 $\arg(1-1/z)\to\pi$, whereas approaching from below makes it
-tend to $-\pi$. Thus
+tend to $-\pi$. With $|1-1/x|=(1-x)/x$, the two boundary values are
+\[
+F_\pm(x)=\frac{e^{i\pi/3}}{x}\left(\frac{1-x}{x}\right)^{-1/3}
+e^{\mp i\pi/3},
+\]
+that is,
 \[
 F_+(x)=x^{-2/3}(1-x)^{-1/3},\qquad
 F_-(x)=e^{2\pi i/3}F_+(x).
 \]
 Orient the outer circle counterclockwise; the inner dogbone then
 goes from zero to one above the cut and from one to zero below it.
-The endpoint circles contribute $O(\epsilon^{1/3})$ at zero and
-$O(\epsilon^{2/3})$ at one, hence vanish. If $I$ is the desired
-integral, the two banks contribute $(1-e^{2\pi i/3})I$.
-At infinity,
-$F(z)=e^{i\pi/3}/z+O(z^{-2})$, so the outer circle tends to
-$2\pi i e^{i\pi/3}$. There are no poles in the remaining domain,
-and Cauchy's theorem gives
+By the modulus formula, $|F|$ is about $\epsilon^{-2/3}$ on a circle
+of radius $\epsilon$ about zero and about $\epsilon^{-1/3}$ on one
+about one; with the length $2\pi\epsilon$, the endpoint circles
+contribute $O(\epsilon^{1/3})$ and $O(\epsilon^{2/3})$, hence vanish.
+If $I$ is the desired integral, the upper bank gives
+$\int_0^1F_+\,dx=I$ and the lower bank
+$\int_1^0F_-\,dx=-e^{2\pi i/3}I$, together $(1-e^{2\pi i/3})I$.
+At infinity, the binomial series
+$(1-1/z)^{-1/3}=1+1/(3z)+O(z^{-2})$ gives
+$F(z)=e^{i\pi/3}/z+O(z^{-2})$; the remainder contributes $O(R^{-1})$
+on the circle $|z|=R$ of length $2\pi R$, so the outer circle tends to
+$e^{i\pi/3}\oint dz/z=2\pi i e^{i\pi/3}$. There are no poles in the
+remaining domain, and Cauchy's theorem gives
 \[
 (1-e^{2\pi i/3})I+2\pi i e^{i\pi/3}=0.
 \]
-Since $1-e^{2\pi i/3}=-i\sqrt3\,e^{i\pi/3}$,
+Since $1-e^{2\pi i/3}=e^{i\pi/3}(e^{-i\pi/3}-e^{i\pi/3})
+=-2i\sin(\pi/3)\,e^{i\pi/3}=-i\sqrt3\,e^{i\pi/3}$, we get
+$I=-2\pi ie^{i\pi/3}/(-i\sqrt3\,e^{i\pi/3})$:
 \[
 \boxed{I=\frac{2\pi}{\sqrt3}}.
 \]
-Independently, $x=t/(1+t)$ transforms $I$ into
-$\int_0^\infty t^{-2/3}/(1+t)\,dt$, the $a=2/3$ case of 11.8.24.
+Independently, $x=t/(1+t)$ maps $0<t<\infty$ onto $0<x<1$, with
+$dx=dt/(1+t)^2$, $x^{-2/3}=t^{-2/3}(1+t)^{2/3}$, and
+$(1-x)^{-1/3}=(1+t)^{1/3}$. It transforms $I$ into
+$\int_0^\infty t^{-2/3}(1+t)^{2/3+1/3-2}\,dt
+=\int_0^\infty t^{-2/3}/(1+t)\,dt$, the $a=2/3$ case of 11.8.24,
+$\pi/\sin(2\pi/3)=2\pi/\sqrt3$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3441,49 +3526,79 @@ A(z)=\arctan(az)
 -\operatorname{Log}(1-iaz)\},\qquad
 F(z)=\frac{A(z)}{z(z^2+b^2)},
 \]
-using the branches continued from $A(0)=0$.
-The Taylor expansion $A(z)=az+O(z^3)$ gives
-$F(z)=a/b^2+O(z^2)$ at zero, so the apparent singularity is
-removable.
+using the principal logarithms, so that $A(0)=0$. For real $x$ the
+numbers $1\pm iax$ are conjugate with positive real part, so
+$A(x)=\frac1{2i}\cdot2i\operatorname{Arg}(1+iax)=\tan^{-1}ax$, the
+real integrand. The Taylor expansion $A(z)=az+O(z^3)$ gives
+$A(z)/z=a+O(z^2)$ and $F(z)=a/b^2+O(z^2)$ at zero, so the apparent
+singularity is removable: the integrand tends to $a/b^2$ at $x=0$.
 
+The principal $\operatorname{Log}(1+iaz)$ is cut where $1+iaz\le0$,
+that is, on $z=iy$, $y\ge1/a$; similarly $\operatorname{Log}(1-iaz)$
+is cut on $z=iy$, $y\le-1/a$, outside the upper half-plane.
 Use the upper contour of Fig.~11.32, with the slit from $i/a$ to
 $i\infty$ excluded. The assumption $ab<1$ places the pole $ib$
-below the branch point. The small circle around $i/a$ has integral
-$O(\rho|\ln\rho|)\to0$, and the large arc vanishes because
-$A(z)$ is bounded at large $|z|$ on each bank and
-$F(z)=O(|z|^{-3})$. The enclosed residue is
+below the branch point $i/a$. The small circle of radius $\rho$
+around $i/a$, where $1/[z(z^2+b^2)]$ is bounded because
+$b^2-1/a^2\ne0$, has integral $O(\rho|\ln\rho|)\to0$. On the large
+arc $|z|=R$, $|1+iaz|/|1-iaz|=|z-i/a|/|z+i/a|\to1$ and the arguments
+are bounded by $\pi$, so $A(z)$ stays bounded, while
+$|z(z^2+b^2)|\ge R(R^2-b^2)$; with the length at most $\pi R$, the
+arc integral is $O(R^{-2})$ and vanishes. The enclosed pole $ib$ is
+simple, and $(z-ib)F(z)=A(z)/[z(z+ib)]$ at $z=ib$ gives
 \[
 \operatorname{Res}_{ib}F
-=\frac{A(ib)}{(ib)(2ib)}
+=\frac{A(ib)}{(ib)(2ib)}=-\frac{A(ib)}{2b^2}
 =-\frac{i}{4b^2}\ln\frac{1+ab}{1-ab},
 \]
-where
-$A(ib)=\tfrac i2\ln[(1+ab)/(1-ab)]$ follows by substituting
-$z=ib$ into the logarithms.
-
-For $z=iy$, $y>1/a$, the first logarithm has arguments $+\pi$
-on the right bank and $-\pi$ on the left bank, while the second
-has no jump. Hence $A_{\rm right}-A_{\rm left}=\pi$.
-The right bank is traversed downward and the left bank upward,
-so their combined contribution is
+where, since $1+ia(ib)=1-ab$, $1-ia(ib)=1+ab$, and $1/(2i)=-i/2$,
 \[
--i\int_{1/a}^\infty
+A(ib)=\frac1{2i}\left[\ln(1-ab)-\ln(1+ab)\right]
+=\frac i2\ln\frac{1+ab}{1-ab}.
+\]
+
+For $z=iy$, $y>1/a$, we have $1+iaz=1-ay<0$ and $1-iaz=1+ay>0$.
+Just right of the slit, $z=iy+\delta$ with small $\delta>0$, so
+$1+iaz=1-ay+ia\delta$ lies in the upper half-plane and its argument
+tends to $+\pi$; just left of it the argument tends to $-\pi$. The
+second logarithm has no jump. Hence
+$A_{\rm right}-A_{\rm left}=\frac1{2i}(i\pi+i\pi)=\pi$.
+The right bank is traversed downward and the left bank upward; with
+$z=iy$, $dz=i\,dy$, and $z(z^2+b^2)=iy(b^2-y^2)$, their combined
+contribution is
+\[
+\begin{aligned}
+\int_\infty^{1/a}\frac{A_{\rm right}\,i\,dy}{iy(b^2-y^2)}
++\int_{1/a}^\infty\frac{A_{\rm left}\,i\,dy}{iy(b^2-y^2)}
+&=-i\int_{1/a}^\infty
+\frac{(A_{\rm right}-A_{\rm left})\,dy}{iy(b^2-y^2)}\\
+&=-i\int_{1/a}^\infty
 \frac{\pi\,dy}{iy(b^2-y^2)}
 =\pi\int_{1/a}^\infty\frac{dy}{y(y^2-b^2)}.
+\end{aligned}
 \]
 The elementary antiderivative is
 \[
 \int\frac{dy}{y(y^2-b^2)}
 =\frac1{2b^2}\ln\left(1-\frac{b^2}{y^2}\right),
 \]
-as direct differentiation verifies. Its definite value is
+as direct differentiation verifies:
+\[
+\frac{d}{dy}\,\frac1{2b^2}\ln\left(1-\frac{b^2}{y^2}\right)
+=\frac1{2b^2}\cdot\frac{2b^2/y^3}{1-b^2/y^2}
+=\frac1{y(y^2-b^2)}.
+\]
+The antiderivative tends to $\ln1=0$ as $y\to\infty$ and equals
+$\ln(1-a^2b^2)/(2b^2)$ at $y=1/a$, so its definite value is
 $-\ln(1-a^2b^2)/(2b^2)$. Calling the real-axis integral $I$,
-the residue theorem gives
+the residue theorem, with $2\pi i\cdot(-i)=2\pi$ in
+$2\pi i\operatorname{Res}_{ib}F$, gives
 \[
 I-\frac{\pi}{2b^2}\ln(1-a^2b^2)
 =\frac{\pi}{2b^2}\ln\frac{1+ab}{1-ab}.
 \]
-Combine the logarithms, whose arguments are positive under $ab<1$:
+Combine the logarithms, whose arguments are positive under $ab<1$,
+and use $1-a^2b^2=(1-ab)(1+ab)$:
 \[
 \boxed{I=\frac{\pi}{2b^2}
 \ln\left[\frac{1+ab}{1-ab}(1-a^2b^2)\right]
@@ -3506,12 +3621,14 @@ Write the Taylor and Laurent expansions, respectively:
 f(z)=f(z_0)+f'(z_0)(z-z_0)+O((z-z_0)^2),\qquad
 g(z)=\frac{b_0}{z-z_0}+b_1+O(z-z_0).
 \]
-Multiplication gives
+Multiplication gives, since the cross term
+$f'(z_0)(z-z_0)\cdot b_0/(z-z_0)=f'(z_0)b_0$ is a constant,
 \[
 f(z)g(z)=\frac{f(z_0)b_0}{z-z_0}
 +\{f(z_0)b_1+f'(z_0)b_0\}+O(z-z_0).
 \]
-The coefficient of $(z-z_0)^{-1}$ is therefore
+No power below $(z-z_0)^{-1}$ occurs, so $fg$ has at most a simple
+pole at $z_0$. The coefficient of $(z-z_0)^{-1}$ is therefore
 \[
 \boxed{\operatorname{Res}_{z_0}(fg)=f(z_0)b_0}.
 \]
@@ -3528,13 +3645,16 @@ $I_N=\oint_{C_N}f(z)\pi\cot(\pi z)\,dz\to0$ on
 $C_N:|z|=N+\tfrac12$ if
 $(N+\tfrac12)\max_{C_N}|f(z)|\to0$.}
 \solution
-For $z=x+iy$, the identities
+For $z=x+iy$, the addition formulas with $\cos iy=\cosh y$ and
+$\sin iy=i\sinh y$ give
+$\sin z=\sin x\cosh y+i\cos x\sinh y$ and
+$\cos z=\cos x\cosh y-i\sin x\sinh y$; with $\cosh^2y=1+\sinh^2y$,
+the identities
 \[
 |\sin z|^2=\sin^2x+\sinh^2y,\qquad
 |\cos z|^2=\cos^2x+\sinh^2y
 \]
-follow by expanding sine and cosine into real and imaginary parts.
-Hence
+follow. Hence
 \[
 |\cot z|^2=
 \frac{\cos^2x+\sinh^2y}{\sin^2x+\sinh^2y}.
@@ -3546,21 +3666,26 @@ If $|y|\ge\delta>0$, then
 \le\coth^2\delta.
 \]
 In the remaining strip $|y|\le\delta$, impose a fixed positive
-distance from the poles $\pi\mathbb Z$. Periodicity reduces $x$
-to $[-\pi/2,\pi/2]$; the resulting closed set is compact and
-contains no zero of $\sin z$. The continuous quotient is therefore
-bounded there too. Thus $\cot z$ is uniformly bounded away from
-fixed neighborhoods of its poles.
+distance $d\le\pi/2$ from the poles $\pi\mathbb Z$. The period $\pi$
+of $\cot z$ reduces $x$ to $[-\pi/2,\pi/2]$, where the only pole is
+$z=0$; the resulting set
+$\{|x|\le\pi/2,\ |y|\le\delta,\ |z|\ge d\}$ is compact and
+contains no zero of $\sin z$. The continuous quotient
+$\cos z/\sin z$ is therefore bounded there too. Thus $\cot z$ is
+uniformly bounded away from fixed neighborhoods of its poles.
 \erratum{Here \emph{order one} means $O(1)$, not a nonzero lower bound:
 $\cot z$ has zeros at $(n+\tfrac12)\pi$ even for arbitrarily large
 $|z|$. The exclusion of the poles must have a fixed positive width.}
 
 For the text's circles $C_N$, with radius $R_N=N+\tfrac12$,
 \[
-|z-n|\ge\bigl||z|-|n|\bigr|\ge\tfrac12
-\qquad(z\in C_N,\ n\in\mathbb Z).
+|z-n|\ge\bigl||z|-|n|\bigr|=\bigl|N+\tfrac12-|n|\bigr|\ge\tfrac12
+\qquad(z\in C_N,\ n\in\mathbb Z),
 \]
-Consequently $|\pi\cot\pi z|\le M$ on every $C_N$, with one
+because $N+\frac12-|n|$ is an odd multiple of $\frac12$. Thus
+$w=\pi z$ stays at distance at least $\pi/2$ from the poles
+$\pi\mathbb Z$ of $\cot w$, and the bound just proved, with $d=\pi/2$,
+gives $|\pi\cot\pi z|\le M$ on every $C_N$, with one
 constant $M$ independent of $N$. If
 $R_N\max_{C_N}|f(z)|\to0$, the estimation lemma gives
 \[
@@ -3599,10 +3724,12 @@ Resolve the summand into partial fractions:
 \[
 \frac1{n(n+2)}=\frac12\left(\frac1n-\frac1{n+2}\right).
 \]
-For a finite upper limit $N$, every term from $1/3$ through $1/N$
-cancels between the two sums:
+For a finite upper limit $N\ge2$, shift the index of the second sum
+to $m=n+2$; every term from $1/3$ through $1/N$ then occurs in both
+sums and cancels:
 \[
-S_N=\frac12\left(1+\frac12-\frac1{N+1}-\frac1{N+2}\right).
+S_N=\frac12\left(\sum_{n=1}^{N}\frac1n-\sum_{m=3}^{N+2}\frac1m\right)
+=\frac12\left(1+\frac12-\frac1{N+1}-\frac1{N+2}\right).
 \]
 Taking $N\to\infty$ gives
 \[
@@ -3621,22 +3748,39 @@ Integrate
 \[
 F(z)=\frac{\pi\csc\pi z}{(z+a)^2}
 \]
-on expanding rectangles with vertical sides at half-integers and
-horizontal sides at imaginary parts $\pm N$. On a vertical side
+on the expanding rectangles with vertical sides
+$\Re z=\pm(N+\tfrac12)$ and horizontal sides $\Im z=\pm N$, where
+$N>|a|$ is an integer. With the identities of Exercise 11.9.2:
+on a vertical side,
+$\sin(\pi(m+\tfrac12)+i\pi y)=(-1)^m\cosh\pi y$ with $m=N$ or
+$m=-N-1$, so
 $|\csc\pi z|=\operatorname{sech}(\pi\Im z)\le1$; on the horizontal
-sides it decays exponentially. Also $(z+a)^{-2}=O(N^{-2})$ on
-the boundary for fixed real $a$. Thus the boundary integral tends
-to zero. At each integer $n$, the residue is
-$(-1)^n/(n+a)^2$ because the residue of $\pi\csc\pi z$ is $(-1)^n$.
+sides $|\sin\pi z|\ge\sinh\pi N$, so $|\csc\pi z|\le1/\sinh\pi N$
+decays exponentially. Also $|z+a|\ge N-|a|$, so
+$(z+a)^{-2}=O(N^{-2})$ on the boundary, whose length is $8N+2$.
+Thus the boundary integral is $O(N^{-1})$ and tends to zero.
+The poles of $\pi\csc\pi z=\pi/\sin\pi z$ are the simple zeros $n$
+of $\sin\pi z$; the residue of a quotient $p/q$ at a simple zero of
+$q$ is $p/q'$ there, which gives $\pi/(\pi\cos\pi n)=(-1)^n$.
+Since $(z+a)^{-2}$ is analytic at $n$, Exercise 11.9.1 gives the
+residue $(-1)^n/(n+a)^2$ of $F$ there.
 
 Since $a$ is not an integer, the remaining pole at $-a$ is double
-and distinct from all the integer poles. Its residue is
+and distinct from all the integer poles. For a double pole of
+$g(z)/(z+a)^2$ with $g$ analytic at $-a$, the residue is $g'(-a)$;
+here $g(z)=\pi\csc\pi z$, with $(\csc w)'=-\csc w\cot w$, and
+$\csc$, $\cot$ are odd, so
 \[
 \left.\frac{d}{dz}(\pi\csc\pi z)\right|_{z=-a}
 =-\pi^2\csc(-\pi a)\cot(-\pi a)
 =-\pi^2\csc\pi a\cot\pi a.
 \]
-The residue theorem and the vanishing boundary integral give
+For $N>|a|$ the residue theorem gives
+\[
+\oint F\,dz=2\pi i\left[\sum_{n=-N}^{N}\frac{(-1)^n}{(n+a)^2}
+-\pi^2\csc\pi a\cot\pi a\right],
+\]
+and since the boundary integral vanishes as $N\to\infty$,
 \[
 0=\sum_{n\in\mathbb Z}\frac{(-1)^n}{(n+a)^2}
 -\pi^2\csc\pi a\cot\pi a.
@@ -3661,23 +3805,43 @@ ordering does not restrict the meaning of the sum.
 \solution
 \textbf{(a)} Integrate $F(z)=\pi\tan(\pi z)/z^2$ over the square
 with sides $\Re z=\pm N$, $\Im z=\pm N$, where $N$ is a positive
-integer. On the vertical sides
-$\tan(\pi(N+iy))=i\tanh\pi y$, so its modulus is at most one.
-On the horizontal sides its modulus is bounded by $\coth\pi N$.
-Since $|z|\ge N$, the contour integral is $O(N^{-1})$ and vanishes.
+integer. On the vertical sides the period one of $\tan\pi z$ gives
+$\tan(\pi(\pm N+iy))=\tan(i\pi y)=i\tanh\pi y$, so its modulus is at
+most one. On the horizontal sides, by the identities of
+Exercise 11.9.2,
+\[
+|\tan(x+iy)|^2=\frac{\sin^2x+\sinh^2y}{\cos^2x+\sinh^2y}
+\le\frac{1+\sinh^2y}{\sinh^2y}=\coth^2y,
+\]
+so with $y=\pm\pi N$ its modulus is bounded by
+$\coth\pi N\le\coth\pi$. Since $|z|\ge N$ on the square,
+$|F|\le\pi\coth\pi/N^2$ there; with the perimeter $8N$, the contour
+integral is $O(N^{-1})$ and vanishes.
 
-The expansion $\tan\pi z=\pi z+O(z^3)$ gives the residue $\pi^2$
-at zero. Each other pole is $p=n+\tfrac12$, $n\in\mathbb Z$.
-Because
+The expansion $\tan\pi z=\pi z+O(z^3)$ gives
+$F(z)=\pi^2/z+O(z)$, hence the residue $\pi^2$ at zero. The other
+poles are the zeros $p=n+\tfrac12$, $n\in\mathbb Z$, of
+$\cos\pi z$. They are simple, so the residue of
+$\pi\tan\pi z=\pi\sin\pi z/\cos\pi z$ is the numerator divided by
+the derivative of the denominator:
 \[
 \operatorname{Res}_{p}(\pi\tan\pi z)
 =\frac{\pi\sin\pi p}{-\pi\sin\pi p}=-1,
 \]
-the residue of $F$ is $-1/p^2$. Summing residues yields
+and since $1/z^2$ is analytic at $p$, the residue of $F$ is $-1/p^2$
+(Exercise 11.9.1). The square contains zero and the $2N$ poles
+$n+\frac12$ with $-N\le n\le N-1$, so the residue theorem gives
+\[
+\oint F\,dz=2\pi i\left[\pi^2-\sum_{n=-N}^{N-1}
+\frac1{(n+\tfrac12)^2}\right],
+\]
+and letting $N\to\infty$ yields
 \[
 \sum_{n\in\mathbb Z}\frac1{(n+\tfrac12)^2}=\pi^2.
 \]
-Pairing positive and negative half-integers and factoring the two gives
+The substitution $n\to-1-n$ maps $n+\frac12$ to $-(n+\frac12)$, so
+the terms with $n\le-1$ repeat those with $n\ge0$; with
+$1/(n+\frac12)^2=4/(2n+1)^2$ this gives
 \[
 \sum_{n\in\mathbb Z}\frac1{(n+\tfrac12)^2}
 =2\sum_{n=0}^{\infty}\frac4{(2n+1)^2}
@@ -3712,43 +3876,60 @@ S=\sum_{n=0}^{\infty}
 F(z)=\frac1{z\cos z\cosh z}.
 \]
 Integrate $F$ over the square with sides $\Re z=\pm R$,
-$\Im z=\pm R$, choosing $R=N\pi$. On a vertical side,
-$|\cos(\pm R+iy)|=\cosh y$ and
-$|\cosh(\pm R+iy)|\ge\sinh R$, while $|z|\ge R$.
-Its integral is bounded by
+$\Im z=\pm R$, choosing $R=N\pi$ with a positive integer $N$.
+On a vertical side,
+$\cos(\pm N\pi+iy)=\cos(N\pi)\cos iy=(-1)^N\cosh y$ (the term with
+$\sin(\pm N\pi)$ vanishes), so $|\cos z|=\cosh y$; also
+$|\cosh(\pm R+iy)|\ge\sinh R$ (Exercise 11.8.25), while $|z|\ge R$.
+Since $\int_{\mathbb R}\operatorname{sech}y\,dy=\pi$
+(Exercise 11.8.18), the integral over the side is bounded by
 \[
 \frac1{R\sinh R}\int_{-R}^{R}\operatorname{sech}y\,dy
 \le\frac{\pi}{R\sinh R}.
 \]
-On a horizontal side the roles of cosine and hyperbolic cosine
-interchange, giving the same bound. Thus the square integral
-tends to zero.
+On a horizontal side $z=x\pm iR$ the roles of cosine and hyperbolic
+cosine interchange: $|\cos z|^2=\cos^2x+\sinh^2R\ge\sinh^2R$
+(Exercise 11.9.2) and $\cosh(x\pm iN\pi)=(-1)^N\cosh x$, giving the
+same bound. Thus the integral over the square is at most
+$4\pi/(R\sinh R)$ and tends to zero.
 
-The residue at zero is one. Put $a_n=(n+\tfrac12)\pi$, $n\ge0$.
-At the positive real poles,
+Since $\cos z\cosh z=1+O(z^2)$, $F(z)=z^{-1}+O(z)$ and the residue at
+zero is one. Put $a_n=(n+\tfrac12)\pi$, $n\ge0$. The other poles are
+the zeros $\pm a_n$ of $\cos z$ and $\pm ia_n$ of $\cosh z$ (recall
+$\cosh iy=\cos y$); they are simple and distinct. At each, the
+residue is $1/D'$ for $D=z\cos z\cosh z$, and $D'$ reduces to the
+product with the vanishing factor differentiated. At the positive
+real poles, with $(\cos z)'=-\sin z$ and $\sin a_n=(-1)^n$,
 \[
 \operatorname{Res}_{a_n}F
 =\frac1{-a_n\sin a_n\cosh a_n}
 =\frac{(-1)^{n+1}}{a_n\cosh a_n}.
 \]
-The residue at $-a_n$ is the same, as direct substitution shows.
-At the positive imaginary poles,
+At the positive imaginary poles, with $(\cosh z)'=\sinh z$,
+$\cos(ia_n)=\cosh a_n$, and $\sinh(ia_n)=i\sin a_n=i(-1)^n$,
 \[
 \operatorname{Res}_{ia_n}F
 =\frac1{(ia_n)\cos(ia_n)\sinh(ia_n)}
 =\frac1{(ia_n)\cosh a_n\,i(-1)^n}
-=\frac{(-1)^{n+1}}{a_n\cosh a_n},
+=\frac{(-1)^{n+1}}{a_n\cosh a_n}.
 \]
-and again the negative imaginary pole has the same residue.
-The four poles for each $n$ therefore contribute
+Because $F$ is odd, its residue at $-p$ equals its residue $c$ at
+$p$: near $-p$, $F(z)=-F(-z)=-c/(-z-p)+\cdots=c/(z+p)+\cdots$.
+So the poles $-a_n$ and $-ia_n$ have the same residue, and, with
+$1/a_n=2/[(2n+1)\pi]$, the four poles for each $n$ contribute
 \[
 4\frac{(-1)^{n+1}}{a_n\cosh a_n}
 =-\frac8\pi\,
 \frac{(-1)^n}{(2n+1)\cosh((2n+1)\pi/2)}.
 \]
-Their series is absolutely convergent by exponential decay.
-The residue theorem in the limit now gives
-$0=2\pi i(1-8S/\pi)$, and hence
+The square contains zero and the four poles with $a_n<N\pi$, that
+is, $n\le N-1$, so the residue theorem gives
+\[
+\oint F\,dz=2\pi i\left[1-\frac8\pi\sum_{n=0}^{N-1}
+\frac{(-1)^n}{(2n+1)\cosh((2n+1)\pi/2)}\right].
+\]
+The series converges absolutely by exponential decay.
+Letting $N\to\infty$ gives $0=2\pi i(1-8S/\pi)$, and hence
 \[
 \boxed{S=\frac{\pi}{8}}.
 \]
@@ -3766,36 +3947,56 @@ To justify the differentiations, first insert $0<r<1$:
 S_r(\varphi)=\sum_{n=1}^{\infty}
 \frac{(-1)^nr^n\sin n\varphi}{n^3}.
 \]
-The differentiated series are then uniformly convergent, and the
-logarithmic power series gives
+The once and twice differentiated series have terms bounded by
+$r^n/n^2$ and $r^n/n$, so they converge uniformly (Weierstrass
+M-test) and may be differentiated term by term. Since
+$(\sin n\varphi)''=-n^2\sin n\varphi$, differentiating twice gives the
+first series below; the second equality is the imaginary part of the
+logarithmic series
+$\operatorname{Log}(1+w)=\sum_{n\ge1}(-1)^{n+1}w^n/n$, $|w|<1$, at
+$w=re^{i\varphi}$, where $\Im w^n=r^n\sin n\varphi$:
 \[
 S_r''(\varphi)
 =-\sum_{n=1}^{\infty}\frac{(-1)^nr^n\sin n\varphi}{n}
 =\Im\operatorname{Log}(1+re^{i\varphi}).
 \]
-The real part of $1+re^{i\varphi}$ is positive, so this imaginary
-part is bounded in absolute value by $\pi/2$. For
-$-\pi<\varphi<\pi$,
+The real part $1+r\cos\varphi\ge1-r$ of $1+re^{i\varphi}$ is
+positive, so this imaginary part, its principal argument, is bounded
+in absolute value by $\pi/2$. For $-\pi<\varphi<\pi$,
 \[
-1+e^{i\varphi}=2\cos(\varphi/2)e^{i\varphi/2},
-\qquad
+1+e^{i\varphi}=e^{i\varphi/2}(e^{-i\varphi/2}+e^{i\varphi/2})
+=2\cos(\varphi/2)e^{i\varphi/2},
+\]
+with $\cos(\varphi/2)>0$, so its principal argument is $\varphi/2$;
+by continuity of $\operatorname{Log}$ off the negative real axis,
+\[
 \lim_{r\uparrow1}S_r''(\varphi)=\frac{\varphi}{2}.
 \]
-For $0\le\varphi\le\pi$, integrate twice, using $S_r(0)=0$:
+For $0\le\varphi\le\pi$, Taylor's formula with integral remainder,
+$S_r(\varphi)=S_r(0)+S_r'(0)\varphi
++\int_0^\varphi(\varphi-t)S_r''(t)\,dt$, with $S_r(0)=0$ and
+$C_r=S_r'(0)$, gives
 \[
 S_r(\varphi)=C_r\varphi+
 \int_0^\varphi(\varphi-t)\Im\operatorname{Log}(1+re^{it})\,dt.
 \]
-Also $S_r(\pi)=0$, term by term, so
+Also $S_r(\pi)=0$, term by term, since $\sin n\pi=0$; setting
+$\varphi=\pi$ and solving for $C_r$,
 \[
 C_r=-\frac1\pi\int_0^\pi(\pi-t)
 \Im\operatorname{Log}(1+re^{it})\,dt
 \longrightarrow
 -\frac1\pi\int_0^\pi\frac{(\pi-t)t}{2}\,dt
-=-\frac{\pi^2}{12}.
+=-\frac{\pi^2}{12},
 \]
-The bounded argument justifies dominated convergence in both integrals.
-The uniform limit $S_r\to S$ therefore satisfies
+because
+$\int_0^\pi(\pi-t)t\,dt=[\pi t^2/2-t^3/3]_0^\pi=\pi^3/6$.
+The bounded argument justifies dominated convergence in both integrals
+(the single point $t=\pi$, where the limit is not $t/2$, does not
+matter). Since
+$|S(\varphi)-S_r(\varphi)|\le\sum_n(1-r^n)/n^3\to0$ (each term is at
+most $1/n^3$ and tends to zero), $S_r\to S$ uniformly, and with
+$\int_0^\varphi(\varphi-t)t\,dt=\varphi^3/2-\varphi^3/3=\varphi^3/6$,
 \[
 S(\varphi)=-\frac{\pi^2\varphi}{12}
 +\int_0^\varphi\frac{(\varphi-t)t}{2}\,dt
@@ -3821,13 +4022,17 @@ conditions for the Schwarz reflection principle. Show that
 (b) $v$ is an odd function of $y$.
 \end{enumerate}
 \solution
-The Schwarz reflection principle gives
-$f(\bar z)=\overline{f(z)}$ on the reflected domain.
-Writing $z=x+iy$ and equating real and imaginary parts,
+Under those conditions ($f$ analytic in a connected domain symmetric
+about the real axis that contains a real interval on which $f$ is
+real), the Schwarz reflection principle gives
+$f(\bar z)=\overline{f(z)}$ throughout that domain.
+Writing $z=x+iy$, so that $\bar z=x-iy$,
+$f(\bar z)=u(x,-y)+iv(x,-y)$ and
+$\overline{f(z)}=u(x,y)-iv(x,y)$; hence
 \[
-u(x,-y)+iv(x,-y)=u(x,y)-iv(x,y).
+u(x,-y)+iv(x,-y)=u(x,y)-iv(x,y),
 \]
-Thus
+and equating real and imaginary parts gives
 \[
 \boxed{u(x,-y)=u(x,y)},\qquad
 \boxed{v(x,-y)=-v(x,y)}.
@@ -3865,19 +4070,27 @@ convergent partial sums and then taking the limit gives
 \]
 For $f(z)=z^n$ this follows directly from conjugation of products
 if $n\ge0$ and of reciprocals if $n<0$ (the latter require $z\ne0$).
-For the sine function,
+Explicitly, with $z=\rho e^{i\phi}$, $\bar z=\rho e^{-i\phi}$,
+\[
+\overline{z^n}=\overline{\rho^ne^{in\phi}}=\rho^ne^{-in\phi}
+=(\rho e^{-i\phi})^n=\bar z^{\,n}.
+\]
+For the sine function, the addition formula with $\cos iy=\cosh y$
+and $\sin iy=i\sinh y$ gives
 \[
 \sin(x+iy)=\sin x\cosh y+i\cos x\sinh y.
 \]
 Replacing $y$ by $-y$ changes only the sign of its imaginary part,
-so $\sin(\bar z)=\overline{\sin z}$ explicitly.
+since $\cosh$ is even and $\sinh$ odd, so
+$\sin(\bar z)=\sin x\cosh y-i\cos x\sinh y=\overline{\sin z}$
+explicitly.
 In contrast, for $f(z)=iz$,
 \[
 \overline{f(z)}=-i\bar z,\qquad f(\bar z)=i\bar z.
 \]
 They disagree for every $z\ne0$, showing why the reality of the
 coefficients is essential.
-\erratum{The manual's sine series omits both alternating signs and the odd powers. The correct series is $\sin z=\sum_{n=0}^\infty(-1)^nz^{2n+1}/(2n+1)!$, whose real coefficients agree with the direct Cartesian verification above.}
+\erratum{The Instructor's Manual's sine series omits both alternating signs and the odd powers. The correct series is $\sin z=\sum_{n=0}^\infty(-1)^nz^{2n+1}/(2n+1)!$, whose real coefficients agree with the direct Cartesian verification above.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3894,10 +4107,12 @@ imaginary.
   part (a).
 \end{enumerate}
 \solution
-\textbf{(a)} Define $g(z)=-if(z)$. If $f(x)$ is pure imaginary
-on the real axis, then $g(x)$ is real there. Schwarz reflection gives
+\textbf{(a)} Define $g(z)=-if(z)$, analytic in the same domain. If
+$f(x)=i\beta(x)$ with $\beta(x)$ real on the real interval, then
+$g(x)=\beta(x)$ is real there. Schwarz reflection gives
+$g(\bar z)=\overline{g(z)}$; since $g(\bar z)=-if(\bar z)$ and
+$\overline{g(z)}=\overline{(-i)}\,\overline{f(z)}=i\,\overline{f(z)}$,
 \[
-g(\bar z)=\overline{g(z)},\qquad
 -if(\bar z)=i\,\overline{f(z)}.
 \]
 Dividing by $-i$ proves
@@ -3936,7 +4151,9 @@ $z^{-1}=r^{-1}(\cos\theta-i\sin\theta)$.
 u=(r+r^{-1})\cos\theta,\qquad
 v=(r-r^{-1})\sin\theta.
 \]
-If $r\ne1$, eliminate $\theta$ to obtain the ellipse
+If $r\ne1$, then $\cos\theta=u/(r+r^{-1})$ and
+$\sin\theta=v/(r-r^{-1})$, and $\cos^2\theta+\sin^2\theta=1$
+eliminates $\theta$, giving the ellipse
 \[
 \boxed{\frac{u^2}{(r+r^{-1})^2}
 +\frac{v^2}{(r-r^{-1})^2}=1}.
@@ -3956,7 +4173,10 @@ giving the ellipse
 +\frac{v^2}{(r+r^{-1})^2}=1\qquad(r\ne1)}.
 \]
 Here the major axis is vertical.
-As $r\to1$, one semiaxis in each case tends to zero.
+Since $(r+r^{-1})^2-(r-r^{-1})^2=4$, the ellipses of (a) all have
+foci $\pm2$ and those of (b) foci $\pm2i$.
+As $r\to1$, one semiaxis in each case tends to zero, and the ellipses
+collapse onto the segment joining the foci.
 At $r=1$ the parameterizations, rather than the divided equations,
 give $w_1=2\cos\theta$ and $w_2=2i\sin\theta$. The images are
 the segments $[-2,2]$ and $[-2i,2i]$, respectively, each traced twice
@@ -3971,8 +4191,9 @@ interior of the unit circle in the $w$-plane if
 (b) $w=\dfrac{z-i}{z+i}$?
 \end{enumerate}
 \solution
-\textbf{(a)} The condition $|w|<1$ is
-$|z-1|<|z+1|$. Squaring and substituting $z=x+iy$ gives
+\textbf{(a)} For $z\ne-1$, $|w|=|z-1|/|z+1|$, so the condition
+$|w|<1$ is $|z-1|<|z+1|$. Squaring (both sides are nonnegative) and
+substituting $z=x+iy$ gives
 \[
 (x-1)^2+y^2<(x+1)^2+y^2
 \quad\Longleftrightarrow\quad -2x<2x
@@ -3986,12 +4207,14 @@ The pole $z=-1$ is outside it; the imaginary axis maps to its boundary.
 |z-i|<|z+i|
 \quad\Longleftrightarrow\quad
 x^2+(y-1)^2<x^2+(y+1)^2
+\quad\Longleftrightarrow\quad -2y<2y
 \quad\Longleftrightarrow\quad y>0.
 \]
 The disk corresponds to the open upper half-plane. The pole $z=-i$
 lies outside it, and the real axis maps to the boundary.
 The inverse formulas
-$z=(1+w)/(1-w)$ and $z=i(1+w)/(1-w)$ show that every point of
+$z=(1+w)/(1-w)$ and $z=i(1+w)/(1-w)$, obtained by solving
+$w(z+1)=z-1$ and $w(z+i)=z-i$ for $z$, show that every point of
 $|w|<1$ is attained, since $w=1$ is not in the open disk.
 
 \Needspace{5\baselineskip}
@@ -4008,41 +4231,51 @@ $|w|<1$ is attained, since $w=1$ is not in the open disk.
 \erratum{Inversion maps a circle through the origin to a straight line.
 The claimed circle-to-circle form requires $a^2+b^2-r^2\ne0$;
 the origin itself is excluded from the map.}
-Because $z=1/w=(u-iv)/(u^2+v^2)$,
+Because $z=1/w=\bar w/|w|^2=(u-iv)/(u^2+v^2)$,
 \[
 x=\frac{u}{u^2+v^2},\qquad
-y=-\frac{v}{u^2+v^2}.
+y=-\frac{v}{u^2+v^2},\qquad
+x^2+y^2=\frac1{u^2+v^2}.
 \]
 Expand the original circle as
 $x^2+y^2-2ax-2by+a^2+b^2-r^2=0$ and multiply by
-$u^2+v^2$. With $D=a^2+b^2-r^2$, the result is
+$u^2+v^2$; the terms $x^2+y^2$, $-2ax$, $-2by$ become $1$, $-2au$,
+$+2bv$. With $D=a^2+b^2-r^2$, the result is
 \[
 1-2au+2bv+D(u^2+v^2)=0.
 \]
-If $D\ne0$, divide by $D$ and complete both squares:
+If $D\ne0$, divide by $D$,
+$u^2-2(a/D)u+v^2+2(b/D)v+1/D=0$, and complete both squares:
 \[
 \left(u-\frac aD\right)^2+
 \left(v+\frac bD\right)^2
 =\frac{a^2+b^2}{D^2}-\frac1D
+=\frac{a^2+b^2-D}{D^2}
 =\frac{r^2}{D^2}.
 \]
 Therefore
 \[
 \boxed{A=\frac aD,\qquad B=-\frac bD,\qquad R=\frac r{|D|}}.
 \]
+Every step is reversible for $w\ne0$, and $w=0$ is not on this
+circle, because $A^2+B^2-R^2=(a^2+b^2-r^2)/D^2=1/D\ne0$; so the image
+is the whole circle.
 If $D=0$, the equation is instead the line
-$\boxed{2au-2bv=1}$.
+$\boxed{2au-2bv=1}$, which does not contain $w=0$; each of its points
+is the image of a point of the circle other than zero.
 
 For (b), when $a+ib\ne0$ the image of the original center is
 \[
 \frac1{a+ib}=\frac{a-ib}{a^2+b^2},
 \]
 whereas the center of the image circle is
-$(a-ib)/(a^2+b^2-r^2)$. For a genuine circle $r>0$ these are
-different whenever both are defined. If the original center is zero,
-its image is undefined even though the image circle has center zero.
+$A+iB=(a-ib)/(a^2+b^2-r^2)$. For a genuine circle $r>0$ these are
+different whenever both are defined, since the numerators agree and
+are nonzero while the denominators differ by $r^2$. If the original
+center is zero, its image is undefined even though the image circle
+has center zero.
 Thus a circle's center does not in general map to its image's center.
-\erratum{The manual writes the signed quantity $r/(r^2-a^2-b^2)$ for the radius. Its square gives the correct circle equation, but the geometric radius must be nonnegative: $R=r/|r^2-a^2-b^2|$.}
+\erratum{The Instructor's Manual writes the signed quantity $r/(r^2-a^2-b^2)$ for the radius. Its square gives the correct circle equation, but the geometric radius must be nonnegative: $R=r/|r^2-a^2-b^2|$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
