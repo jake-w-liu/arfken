@@ -1383,35 +1383,47 @@ Use the unitary half-line transforms, for example
 $F_s(s)=\sqrt{2/\pi}\int_0^\infty f(u)\sin(su)du$,
 with the identical normalization in the inverse.
 
-(a) Extend $f$ oddly. Its inverse sine representation and the
-identity $\sin(A+B)+\sin(A-B)=2\sin A\cos B$ give
+(a) Extend $f$ oddly. Its inverse sine representation
+\[
+f(u)=\sqrt{\frac2\pi}\int_0^\infty F_s(s)\sin(su)\,ds
+\]
+then holds for all real $u$, since both sides are odd in $u$.
+Apply it at $u=y+x$ and $u=y-x$, and use the identity
+$\sin(A+B)+\sin(A-B)=2\sin A\cos B$ with $A=sy$, $B=sx$:
 \[
 f(y+x)+f(y-x)=2\sqrt{\frac2\pi}\int_0^\infty
 F_s(s)\sin(sy)\cos(sx)ds.
 \]
-Multiply by $g(y)/2$ and integrate on $y>0$:
+Multiply by $g(y)/2$, integrate on $y>0$, and interchange the
+order of integration:
 \begin{align*}
 \frac12\int_0^\infty g(y)[f(y+x)+f(y-x)]dy
 &=\sqrt{\frac2\pi}\int_0^\infty F_s(s)\cos(sx)
 \left[\int_0^\infty g(y)\sin(sy)dy\right]ds\\
 &=\int_0^\infty F_s(s)G_s(s)\cos(sx)ds.
 \end{align*}
-The factors $\sqrt{2/\pi}$ and $\sqrt{\pi/2}$ cancel.
+By the definition of $G_s$ the bracket is
+$\sqrt{\pi/2}\,G_s(s)$, and the factors $\sqrt{2/\pi}$ and
+$\sqrt{\pi/2}$ cancel.
 
-(b) Extend $f$ evenly. Since $f(x-y)=f(y-x)$, the cosine
-addition identity similarly gives
+(b) Extend $f$ evenly; then
+$f(u)=\sqrt{2/\pi}\int_0^\infty F_c(s)\cos(su)\,ds$ for all
+real $u$. Since $f(x-y)=f(y-x)$, the identity
+$\cos(A+B)+\cos(A-B)=2\cos A\cos B$, again with $A=sy$,
+$B=sx$, gives
 \[
 f(y+x)+f(x-y)=2\sqrt{\frac2\pi}\int_0^\infty
 F_c(s)\cos(sy)\cos(sx)ds.
 \]
 The same multiplication and integration replace the inner
-integral by $\sqrt{\pi/2}G_c(s)$, giving exactly the second
+integral $\int_0^\infty g(y)\cos(sy)dy$ by $\sqrt{\pi/2}\,G_c(s)$,
+giving exactly the second
 formula. The calculation is justified first for sufficiently
 regular decaying transforms, and then by the $L^2$ pairing
 limit where appropriate; odd/even extensions are essential for
 arguments that become negative.
-\erratum{The manual's intermediate two-delta kernels on
-p.~339 omit reflected sources. For example, the sine kernel
+\erratum{The Instructor's Manual's intermediate two-delta
+kernels on p.~339 omit reflected sources. For example, the sine kernel
 on the full range of its arguments is}
 \[
 \erratum{\begin{aligned}
@@ -1421,7 +1433,18 @@ on the full range of its arguments is}
 \end{aligned}}
 \]
 \erratum{This follows by applying the product identity and
-the reflected-source formula in Exercise~20.2.7. The cosine
+the reflected-source formula in Exercise~20.2.7.}
+Indeed, $\sin(sy)\sin(st)=\frac12[\cos s(t-y)-\cos s(t+y)]$,
+and multiplying each cosine by $\cos(sx)$ with
+$\cos\alpha\cos\beta=\frac12[\cos(\alpha+\beta)+\cos(\alpha-\beta)]$
+turns the integrand into
+\[
+\tfrac14\big[\cos s(t-y+x)+\cos s(t-y-x)
+-\cos s(t+y+x)-\cos s(t+y-x)\big];
+\]
+each term is then integrated with
+$\int_0^\infty\cos(su)\,ds=\pi\delta(u)$ (Exercise~20.2.7).
+\erratum{The cosine
 kernel has the same four delta arguments with all plus signs.
 The reflected terms cannot all be discarded on $t,y>0$ when
 $x$ is arbitrary; the odd/even extensions above include them.}
@@ -1445,7 +1468,16 @@ Thus in both cases
 \]
 The same result follows by inserting the inverse transform of
 $f$ into the left-hand side and identifying the transform of
-$g$; all normalization factors cancel. For $L^2$ functions,
+$g$; for the sine case,
+\begin{align*}
+\int_0^\infty f(y)g(y)dy
+&=\int_0^\infty g(y)\sqrt{\frac2\pi}\int_0^\infty F(s)\sin(sy)\,ds\,dy\\
+&=\int_0^\infty F(s)\left[\sqrt{\frac2\pi}\int_0^\infty
+g(y)\sin(sy)\,dy\right]ds
+=\int_0^\infty F(s)G(s)\,ds,
+\end{align*}
+and the cosine case is identical with $\cos(sy)$; all
+normalization factors cancel. For $L^2$ functions,
 Cauchy--Schwarz controls both pairings and permits approximation
 by regular functions. This displayed version is bilinear and is
 valid also for complex functions. To obtain the norm form set
@@ -1483,12 +1515,17 @@ residues (Exercise~11.8.9).
 \solution
 (a) For $a>0$, direct integration gives
 \begin{align*}
-F(t)&=\frac1{\sqrt{2\pi}}\int_{-a}^{a}e^{itx}dx\\
-&=\frac1{\sqrt{2\pi}}\frac{e^{iat}-e^{-iat}}{it}
-=\boxed{\sqrt{\frac2\pi}\frac{\sin at}{t}}.
+F(t)&=\frac1{\sqrt{2\pi}}\int_{-a}^{a}e^{itx}dx
+=\frac1{\sqrt{2\pi}}\frac{e^{iat}-e^{-iat}}{it}\\
+&=\frac1{\sqrt{2\pi}}\frac{2\sin at}{t}
+=\boxed{\sqrt{\frac2\pi}\frac{\sin at}{t}},
 \end{align*}
-At $t=0$ take the limit $F(0)=a\sqrt{2/\pi}$.
-(b) Unitary Parseval gives
+using $e^{i\theta}-e^{-i\theta}=2i\sin\theta$ and
+$2/\sqrt{2\pi}=\sqrt{2/\pi}$.
+At $t=0$ take the limit $F(0)=a\sqrt{2/\pi}$, since
+$\sin at/t\to a$.
+(b) Parseval's relation in the unitary form
+$\int|f(x)|^2dx=\int|F(t)|^2dt$ gives
 \[
 2a=\int_{-a}^a1\,dx
 =\int_{-\infty}^{\infty}|F(t)|^2dt
@@ -1515,28 +1552,48 @@ equation. Solve for the Fourier transform of $\psi(\mathbf{r})$.
 \par\erratum{Seek the free-space solution that vanishes at infinity, for sufficiently localized charge. Without this boundary condition, harmonic additions are possible.}
 \solution
 (a) Let $\widehat\psi$ and $\widehat\rho$ denote
-unitary three-dimensional transforms. The transformed equation is
+unitary three-dimensional transforms. By Exercise~20.3.3,
+$\mathcal F[\nabla^2\psi]=-k^2\widehat\psi$, so the transformed
+equation is
 \[
 -k^2\widehat\psi(\mathbf k)=-\frac{\widehat\rho(\mathbf k)}{\varepsilon_0},
 \qquad
 \widehat\psi(\mathbf k)=\frac{\widehat\rho(\mathbf k)}{\varepsilon_0k^2}.
 \]
 (b) To invert the multiplier, first evaluate the absolutely
-convergent regulated radial transform, $\eta>0$:
+convergent regulated radial transform, $\eta>0$, with the radial
+formula of Exercise~20.2.16 (here $rf(r)=e^{-\eta r}$) and the
+integral $S$ of Exercise~20.2.3 (with $a=\eta$, $\omega=k$):
 \begin{align*}
 \mathcal F\left[\frac{e^{-\eta r}}r\right](\mathbf k)
-&=\sqrt{\frac2\pi}\frac1k\int_0^\infty e^{-\eta r}\sin kr\,dr\\
+&=\sqrt{\frac2\pi}\frac1k\int_0^\infty e^{-\eta r}\sin kr\,dr
+=\sqrt{\frac2\pi}\frac1k\,\frac{k}{k^2+\eta^2}\\
 &=\sqrt{\frac2\pi}\frac1{k^2+\eta^2}.
 \end{align*}
-Letting $\eta\downarrow0$ in distributions shows that the
+Letting $\eta\downarrow0$ in distributions gives
+$\mathcal F[1/r]=\sqrt{2/\pi}/k^2$, so by Fourier inversion
+$\mathcal F^{-1}[\sqrt{2/\pi}/k^2]=1/r$: the
 inverse transform of $k^{-2}$ is $\sqrt{\pi/2}/r$.
-For our normalization,
+For our normalization, if $A=\mathcal Fa$ and $B=\mathcal Fb$, the
+convolution theorem reads
 \[
 \mathcal F^{-1}[AB](\mathbf r)
 =(2\pi)^{-3/2}\int a(\mathbf u)b(\mathbf r-\mathbf u)d^3u.
 \]
-Use $a=\rho$ and $b=\sqrt{\pi/2}/r$. Since
-$\sqrt{\pi/2}/(2\pi)^{3/2}=1/(4\pi)$,
+Indeed, transforming the right-hand side and substituting
+$\mathbf r=\mathbf u+\mathbf v$ factorizes it into
+$(2\pi)^{-3}\int a(\mathbf u)e^{i\mathbf k\cdot\mathbf u}d^3u
+\int b(\mathbf v)e^{i\mathbf k\cdot\mathbf v}d^3v=AB$.
+Use $a=\rho$ and $b=\sqrt{\pi/2}/r$, so that $B=k^{-2}$:
+\[
+\psi(\mathbf r)=\frac1{\varepsilon_0}\,
+\mathcal F^{-1}\!\left[\frac{\widehat\rho}{k^2}\right]
+=\frac1{\varepsilon_0}\,\frac{\sqrt{\pi/2}}{(2\pi)^{3/2}}
+\int\frac{\rho(\mathbf u)}{|\mathbf r-\mathbf u|}d^3u.
+\]
+Since
+$\sqrt{\pi/2}/(2\pi)^{3/2}=\sqrt\pi/(\sqrt2\cdot2\sqrt2\,\pi^{3/2})
+=1/(4\pi)$,
 \[
 \boxed{\psi(\mathbf r)=\frac1{4\pi\varepsilon_0}
 \int\frac{\rho(\mathbf u)}{|\mathbf r-\mathbf u|}d^3u}.
@@ -1568,16 +1625,26 @@ F(t)=\sqrt{\frac{2}{\pi}}\left(\frac{\sin t}{t}\right)^{2}.
 (a) Let $q(x)$ equal one on $[-1,1]$ and zero
 elsewhere. In this solution $*$ denotes the unnormalized
 convolution integral, so the Fourier convolution theorem includes
-its factor $\sqrt{2\pi}$. The overlap length of the two intervals in
-$(q*q)(x)=\int q(y)q(x-y)dy$ is $2-|x|$ for $|x|\le2$
-and zero outside. Thus $f=(q*q)/2$.
-From Exercise~20.4.3, $Q(t)=\sqrt{2/\pi}\sin t/t$.
-The unitary convolution theorem gives
+its factor $\sqrt{2\pi}$. In
+$(q*q)(x)=\int q(y)q(x-y)dy$ the integrand is one exactly when
+$y\in[-1,1]$ and $y\in[x-1,x+1]$. For $0\le x\le2$ the overlap
+of the two intervals is $[x-1,1]$, of length $2-x$; for
+$-2\le x\le0$ it is $[-1,x+1]$, of length $2+x$; for $|x|>2$
+the intervals do not overlap. Hence $(q*q)(x)=2-|x|$ for
+$|x|\le2$ and zero outside, and $f=(q*q)/2$.
+From Exercise~20.4.3 with $a=1$, $Q(t)=\sqrt{2/\pi}\sin t/t$.
+The unitary convolution theorem reads
+$\mathcal F[q*q]=\sqrt{2\pi}\,Q^2$: substituting $x=y+z$ in the
+transform of $q*q$ gives
+$(2\pi)^{-1/2}\int q(y)e^{ity}dy\int q(z)e^{itz}dz
+=(2\pi)^{-1/2}(\sqrt{2\pi}\,Q)^2$. Therefore
 \[
 F(t)=\frac12\sqrt{2\pi}\,Q(t)^2
+=\frac12\sqrt{2\pi}\,\frac2\pi\left(\frac{\sin t}{t}\right)^2
 =\boxed{\sqrt{\frac2\pi}\left(\frac{\sin t}{t}\right)^2}.
 \]
-(b) The direct-space squared norm is
+(b) The direct-space squared norm is, since $f$ is even and with
+$u=1-x/2$, $dx=-2\,du$,
 \[
 \int|f(x)|^2dx=2\int_0^2(1-x/2)^2dx
 =4\int_0^1u^2du=\frac43.
@@ -1589,7 +1656,7 @@ In transform space it is
 \]
 Equating the norms yields the value
 $\boxed{(\pi/2)(4/3)=2\pi/3}$.
-\erratum{The manual's Parseval line on p.~341 prints
+\erratum{The Instructor's Manual's Parseval line on p.~341 prints
 $(\sin t/t)^2$ where it must print $(\sin t/t)^4$:
 the already squared amplitude $F(t)$ is squared again to
 form $|F(t)|^2$. The integration differential there is $dt$.}
@@ -1617,9 +1684,11 @@ cross terms explicitly,
 \[
 |f-g|^2=|f|^2+|g|^2-f\overline g-\overline f g.
 \]
-The unitary inner-product identity sends each of these four
-integrals respectively to $|F|^2$, $|G|^2$, $F\overline G$,
-and $\overline F G$, whose sum is $|F-G|^2$.
+The unitary inner-product identity
+$\int u\overline v\,dx=\int U\overline V\,dt$ sends each of these
+four integrals respectively to the integrals of $|F|^2$, $|G|^2$,
+$F\overline G$, and $\overline F G$, and with the same signs
+$|F|^2+|G|^2-F\overline G-\overline FG=|F-G|^2$.
 \erratum{The finite mean-square statement requires $f-g\in L^2$
 and its $L^2$ transform; for example $f,g\in L^2$ suffice.
 It is an equality of integrated squared errors, not pointwise
@@ -1646,22 +1715,30 @@ to $f(x)=e^{-ax}$. Its direct squared norm is
 \[
 \int_0^\infty e^{-2ax}dx=\frac1{2a}.
 \]
-(a) From the cosine transform in Exercise~20.2.3,
+(a) The cosine transform of Exercise~20.2.3 is
+$g_c(\omega)=\sqrt{2/\pi}\,a/(\omega^2+a^2)$, so Parseval's
+relation of Exercise~20.4.2 with $g=f$ gives
 \[
-\frac1{2a}=\frac2\pi\int_0^\infty
+\frac1{2a}=\int_0^\infty g_c(\omega)^2d\omega
+=\frac2\pi\int_0^\infty
 \frac{a^2}{(\omega^2+a^2)^2}d\omega.
 \]
-Divide by $2a^2/\pi$ and double the half-line integral:
+Dividing by $2a^2/\pi$ gives
+$\int_0^\infty d\omega/(\omega^2+a^2)^2=\pi/(4a^3)$. The
+integrand is even, so doubling the half-line integral gives
 \[
 \boxed{\int_{-\infty}^{\infty}\frac{d\omega}{(\omega^2+a^2)^2}
 =\frac\pi{2a^3}}.
 \]
-(b) Using the sine transform instead,
+(b) Using the sine transform
+$g_s(\omega)=\sqrt{2/\pi}\,\omega/(\omega^2+a^2)$ instead,
 \[
-\frac1{2a}=\frac2\pi\int_0^\infty
+\frac1{2a}=\int_0^\infty g_s(\omega)^2d\omega
+=\frac2\pi\int_0^\infty
 \frac{\omega^2}{(\omega^2+a^2)^2}d\omega,
 \]
-so the whole-line answer is $\boxed{\pi/(2a)}$.
+so the half-line integral is $\pi/(4a)$ and, the integrand being
+even, the whole-line answer is $\boxed{\pi/(2a)}$.
 \erratum{If $a$ is allowed to be negative, the integrands are
 unchanged and the answers contain $|a|^3$ and $|a|$, respectively.
 At $a=0$ both integrals diverge. The printed forms use $a>0$.}
@@ -1688,7 +1765,9 @@ Assume $a>0$ first. Rewrite the measured transform as
 \[
 F(\mathbf k)=\frac{a^2}{(2\pi)^{3/2}}\frac1{k^2+a^2}.
 \]
-The radial formula of Exercise~20.2.16 gives
+The radial formula of Exercise~20.2.16, with $rf(r)=e^{-ar}$ and
+$\int_0^\infty e^{-ar}\sin kr\,dr=k/(k^2+a^2)$ (the integral $S$
+of Exercise~20.2.3 with $\omega=k$), gives
 \[
 \mathcal F\left[\frac{e^{-ar}}r\right](\mathbf k)
 =\sqrt{\frac2\pi}\frac1k\int_0^\infty e^{-ar}\sin kr\,dr
@@ -1696,16 +1775,18 @@ The radial formula of Exercise~20.2.16 gives
 \]
 Therefore multiplication by $a^2/(4\pi)$ produces the given
 $F$, because $(4\pi)^{-1}\sqrt{2/\pi}=(2\pi)^{-3/2}$.
-The charge distribution is
+Since a function is determined by its Fourier transform (the
+inversion theorem), the charge distribution is
 \[
 \boxed{\rho(r)=\frac{a^2}{4\pi}\frac{e^{-ar}}r}.
 \]
 Its total charge is
 \[
 4\pi\int_0^\infty r^2\rho(r)dr
-=a^2\int_0^\infty re^{-ar}dr=1,
+=a^2\int_0^\infty re^{-ar}dr=a^2\cdot\frac1{a^2}=1,
 \]
-in agreement with $(2\pi)^{3/2}F(0)=1$. The $1/r$ origin
+in agreement with $\int\rho\,d^3r=(2\pi)^{3/2}F(0)=1$ (put
+$\mathbf k=0$ in the definition of $F$). The $1/r$ origin
 singularity is integrable with the volume element.
 \erratum{The scale in the printed decaying exponential is the
 positive root. For nonzero real $a$ of either sign use
@@ -1735,9 +1816,19 @@ Putting $\mathbf u=\mathbf r-\mathbf A$ identifies a convolution:
 \frac{\rho(\mathbf u)}{|\mathbf C-\mathbf A-\mathbf u|}d^3u}.
 \]
 If $R(\mathbf k)=\mathcal F\rho(\mathbf k)$, then
-$\mathcal FH=\sqrt{2/\pi}/k^2$ and
-$\mathcal F(\rho*H)=(2\pi)^{3/2}R\mathcal FH=4\pi R/k^2$.
-Inverting yields the equivalent transform-space integral
+$\mathcal FH=\sqrt{2/\pi}/k^2$ (Exercise~20.4.4), and the
+convolution theorem of Exercise~20.4.4, in the form
+$\mathcal F(\rho*H)=(2\pi)^{3/2}R\,\mathcal FH$, gives
+$\mathcal F(\rho*H)=4\pi R/k^2$, because
+$(2\pi)^{3/2}\sqrt{2/\pi}=2^{3/2}\pi^{3/2}2^{1/2}\pi^{-1/2}=4\pi$.
+Inverting,
+\[
+(\rho*H)(\mathbf v)=\frac1{(2\pi)^{3/2}}
+\int\frac{4\pi R(\mathbf k)}{k^2}e^{-i\mathbf k\cdot\mathbf v}d^3k,
+\]
+and multiplying by $1/(4\pi\varepsilon_0)$ at
+$\mathbf v=\mathbf C-\mathbf A$ yields the equivalent
+transform-space integral
 \[
 \boxed{U=\frac1{\varepsilon_0(2\pi)^{3/2}}
 \int\frac{R(\mathbf k)}{k^2}
@@ -1745,7 +1836,9 @@ e^{-i\mathbf k\cdot(\mathbf C-\mathbf A)}d^3k}.
 \]
 Both formulas show that only the relative displacement enters.
 For real charge the frequency-domain integrand has conjugate
-symmetry, so $U$ is real. These formulas assume the potential
+symmetry ($R(-\mathbf k)=R(\mathbf k)^*$, so its value at
+$-\mathbf k$ is the complex conjugate of its value at
+$\mathbf k$), so $U$ is real. These formulas assume the potential
 integral exists; point-charge singularities are understood through
 the corresponding distributions. There is no factor $1/2$ in
 the mutual energy of these two specified charge distributions.
@@ -1792,18 +1885,23 @@ in the erratum, whose forward exponential has a negative sign:
 \nabla_p e^{-i\mathbf r\cdot\mathbf p/\hbar}
 =-\frac{i\mathbf r}{\hbar}e^{-i\mathbf r\cdot\mathbf p/\hbar}.
 \]
-Move the derivative under the integral and multiply by $i\hbar$:
+Move the derivative under the integral and multiply by $i\hbar$;
+since $i\hbar(-i\mathbf r/\hbar)=\mathbf r$,
 \[
 \boxed{i\hbar\nabla_p\varphi
 =\frac1{(2\pi\hbar)^{3/2}}\int
 \mathbf r\psi(\mathbf r)e^{-i\mathbf r\cdot\mathbf p/\hbar}d^3r}.
 \]
-(b) Apply another component derivative and sum over components:
+(b) Apply another component derivative: differentiating twice
+with respect to $p_j$ brings down
+$(-ir_j/\hbar)^2=-r_j^2/\hbar^2$. Summing over $j=x,y,z$,
 \[
 \nabla_p^2 e^{-i\mathbf r\cdot\mathbf p/\hbar}
 =-\frac{r_x^2+r_y^2+r_z^2}{\hbar^2}e^{-i\mathbf r\cdot\mathbf p/\hbar}.
 \]
-Since $(i\hbar\nabla_p)^2=-\hbar^2\nabla_p^2$, this proves
+Since $(i\hbar\nabla_p)^2=-\hbar^2\nabla_p^2$ and
+$-\hbar^2(-r^2/\hbar^2)=r^2$, differentiating under the integral
+proves
 \[
 \boxed{(i\hbar\nabla_p)^2\varphi
 =\frac1{(2\pi\hbar)^{3/2}}\int r^2\psi(\mathbf r)
@@ -1843,22 +1941,40 @@ $\mathbf{r}$.
 Transform with the negative-exponent momentum
 convention of Exercise~20.4.10. The time derivative commutes
 with the spatial transform, producing $i\hbar\partial_t\varphi$.
-Integrating the spatial Laplacian by parts twice gives
+For the Laplacian, integrate by parts in $x$; the boundary terms
+vanish because $\psi\to0$ at infinity, and
+$\partial_xe^{-i\mathbf r\cdot\mathbf p/\hbar}
+=-(ip_x/\hbar)e^{-i\mathbf r\cdot\mathbf p/\hbar}$, so
+\[
+\mathcal F_p\Big[\frac{\partial\psi}{\partial x}\Big]
+=-\frac1{(2\pi\hbar)^{3/2}}\int\psi\,
+\frac{\partial}{\partial x}e^{-i\mathbf r\cdot\mathbf p/\hbar}d^3r
+=\frac{ip_x}\hbar\varphi.
+\]
+Applying this twice in each coordinate and summing
+$(ip_j/\hbar)^2=-p_j^2/\hbar^2$ over $j=x,y,z$ gives
 \[
 \mathcal F_p[\nabla_r^2\psi]
 =-\frac{p^2}{\hbar^2}\varphi,
 \]
-so the kinetic term becomes $p^2\varphi/(2m)$.
+so the kinetic term becomes
+$-(\hbar^2/2m)(-p^2/\hbar^2)\varphi=p^2\varphi/(2m)$.
 Write a convergent coordinate expansion with multi-index
-$\alpha=(\alpha_x,\alpha_y,\alpha_z)$:
+$\alpha=(\alpha_x,\alpha_y,\alpha_z)$,
+$\mathbf r^\alpha=x^{\alpha_x}y^{\alpha_y}z^{\alpha_z}$ and
+$|\alpha|=\alpha_x+\alpha_y+\alpha_z$:
 \[
 V(\mathbf r)=\sum_\alpha v_\alpha\mathbf r^\alpha.
 \]
-Exercise~20.4.10, applied component by component, gives
+Exercise~20.4.10(a), applied component by component, gives
+$\mathcal F_p[x\chi]=i\hbar\,\partial_{p_x}\mathcal F_p[\chi]$
+for any admissible $\chi$; applying it to
+$\chi=\psi,x\psi,x^2\psi,\ldots$ and likewise for $y$ and $z$,
 \[
 \mathcal F_p[\mathbf r^\alpha\psi]
 =(i\hbar)^{|\alpha|}\partial_{p_x}^{\alpha_x}
-\partial_{p_y}^{\alpha_y}\partial_{p_z}^{\alpha_z}\varphi.
+\partial_{p_y}^{\alpha_y}\partial_{p_z}^{\alpha_z}\varphi
+\equiv(i\hbar\nabla_p)^\alpha\varphi.
 \]
 Consequently
 \[
@@ -1882,7 +1998,13 @@ the rigorous replacement is the momentum convolution
 =\frac1{(2\pi\hbar)^{3/2}}\int
 \widetilde V(\mathbf p-\mathbf q)\varphi(\mathbf q)d^3q,
 \]
-whenever this convolution, possibly distributional, is defined.
+where $\widetilde V=\mathcal F_pV$ with the same convention; it
+follows by inserting
+$\psi(\mathbf r)=(2\pi\hbar)^{-3/2}\int\varphi(\mathbf q)
+e^{i\mathbf r\cdot\mathbf q/\hbar}d^3q$ into $\mathcal F_p[V\psi]$
+and doing the $\mathbf r$ integral first, which produces
+$\widetilde V(\mathbf p-\mathbf q)$. This holds
+whenever the convolution, possibly distributional, is defined.
 The differential expression is its polynomial or convergent-series
 form.
 
@@ -1900,12 +2022,13 @@ The left circuit has a series resistor $R$ and a capacitor $C$
 across the output terminals. With the $e^{i\omega t}$ phasor
 convention used in Section~20.5, $Z_C=1/(i\omega C)$. The
 current is $I=V_{\rm in}/(R+Z_C)$, and $V_{\rm out}=IZ_C$.
-Therefore
+Therefore, dividing numerator and denominator by $Z_C$ and using
+$R/Z_C=i\omega RC$,
 \[
 \boxed{\varphi(\omega)=\frac{V_{\rm out}}{V_{\rm in}}
 =\frac{Z_C}{R+Z_C}=\frac1{1+i\omega RC}}.
 \]
-For positive $R,C$,
+For positive $R,C$, since $|1+i\omega RC|^2=1+\omega^2R^2C^2$,
 \[
 |\varphi|^2=\frac1{1+\omega^2R^2C^2},\qquad
 \arg\varphi=-\tan^{-1}(\omega RC)\quad(\omega\ge0).
@@ -1939,7 +2062,9 @@ Dividing gives
 \boxed{\varphi(\omega)=\frac{R}{R+i\omega L}
 =\frac1{1+i\omega L/R}}.
 \]
-Its power gain is $[1+(\omega L/R)^2]^{-1}$, so it is a
+Its power gain is $|\varphi|^2=[1+(\omega L/R)^2]^{-1}$, which
+decreases from $1$ at $\omega=0$ to $0$ as $\omega\to\infty$ and
+equals $1/2$ at $\omega L/R=1$; so it is a
 low-pass filter with half-power frequency $R/L$, for positive
 $R,L$.
 
@@ -1966,13 +2091,17 @@ first then gives
 V_1=(1+pR_2C_2)V_{\rm out},\qquad
 I_1=\frac{1+pR_2C_2}{R_1}V_{\rm out}.
 \]
-Substitute these currents into the input relation and multiply
+Hence
+$I_1+I_2=[(1+pR_2C_2)/R_1+pC_2]V_{\rm out}$. Substitute $V_1$
+and $I_1+I_2$ into the input relation and multiply
 by $pR_1C_1$:
 \[
 pR_1C_1V_{\rm in}
 =\big[pR_1C_1(1+pR_2C_2)+1+pR_2C_2+pR_1C_2\big]V_{\rm out}.
 \]
-Thus
+The bracket expands to
+$1+p(R_1C_1+R_1C_2+R_2C_2)+p^2R_1R_2C_1C_2$, and
+$p^2=-\omega^2$. Thus
 \[
 \boxed{\varphi(\omega)=
 \frac{i\omega R_1C_1}
@@ -1980,15 +2109,22 @@ Thus
 \]
 To check the filter type, write $A=R_1C_1$,
 $B=R_1R_2C_1C_2$, and $D=R_1C_1+R_1C_2+R_2C_2$, all
-positive. Then
+positive. The denominator of $\varphi$ is $(1-B\omega^2)+iD\omega$,
+so
 \[
 |\varphi|^2=\frac{A^2\omega^2}{(1-B\omega^2)^2+D^2\omega^2}
-=\frac{A^2}{\omega^{-2}+B^2\omega^2+D^2-2B}.
+=\frac{A^2}{\omega^{-2}+B^2\omega^2+D^2-2B},
 \]
+where the second form divides numerator and denominator by
+$\omega^2$ and expands $(1-B\omega^2)^2=1-2B\omega^2+B^2\omega^4$.
 It vanishes as $\omega\to0$ and $\omega\to\infty$. Its
-maximum occurs when
-$-2\omega^{-3}+2B^2\omega=0$, namely
-$\omega=1/\sqrt B$, where $|\varphi|=A/D$.
+maximum occurs where the denominator is smallest. By the
+inequality of arithmetic and geometric means,
+$\omega^{-2}+B^2\omega^2\ge2\sqrt{\omega^{-2}B^2\omega^2}=2B$,
+with equality exactly when $\omega^{-2}=B^2\omega^2$ (equivalently
+$-2\omega^{-3}+2B^2\omega=0$), namely
+$\omega=1/\sqrt B$. There the denominator is
+$2B+D^2-2B=D^2$, so the maximum gain is $|\varphi|=A/D$.
 It therefore passes an intermediate band of frequencies.
 
 \Needspace{5\baselineskip}
@@ -1998,7 +2134,7 @@ Exercise~20.5.3 correspond to the successive transfer functions
 shown in Fig.~20.12. Explain why the transfer function for this
 exercise \erratum{is uniformly approximated by the product of the
 individual unloaded transfer functions when $R_2\gg R_1$}.
-\erratum{Explain the loading correction; the original word
+\erratum{Explain the loading correction; the textbook's word
 ``only'' does not give a necessary condition at each frequency.}
 \solution
 Taken separately with unloaded outputs, the high-pass
@@ -2022,8 +2158,10 @@ is $I_1+I_2$, not $I_1$. Quantitatively,
 =\frac{R_1}{\sqrt{R_2^2+1/(\omega^2C_2^2)}}\le\frac{R_1}{R_2}.
 \]
 Hence $R_2\gg R_1$ makes the load current small at every real
-frequency. More explicitly, if
-$D_0=(1+pR_1C_1)(1+pR_2C_2)$, then
+frequency. More explicitly, let
+$D_0=(1+pR_1C_1)(1+pR_2C_2)=1+p(R_1C_1+R_2C_2)+p^2R_1R_2C_1C_2$,
+so that $\varphi_1\varphi_2=pR_1C_1/D_0$. The denominator of
+$\varphi$ is $D_0+pR_1C_2=D_0(1+\eta)$, hence
 \[
 \varphi=\frac{\varphi_1\varphi_2}{1+\eta},\qquad
 \eta=\frac{pR_1C_2}{D_0},\qquad |\eta|\le R_1/R_2.
@@ -2040,9 +2178,12 @@ For $\delta=R_1/R_2<1$, the relative discrepancy, wherever
 the product is nonzero, therefore satisfies
 \[
 \left|\frac{\varphi}{\varphi_1\varphi_2}-1\right|
+=\left|\frac1{1+\eta}-1\right|
 =\frac{|\eta|}{|1+\eta|}\le\frac{|\eta|}{1-|\eta|}
-\le\frac{\delta}{1-\delta}.
+\le\frac{\delta}{1-\delta},
 \]
+by the reverse triangle inequality $|1+\eta|\ge1-|\eta|$ and
+because $x/(1-x)$ increases on $0\le x<1$.
 \erratum{The quoted limit is a sufficient condition for a
 uniformly accurate product approximation, not a necessary
 condition at each frequency. At low frequency the loading may
@@ -2086,28 +2227,36 @@ For integers $m$ define the discrete selector
 \Delta_N(m)=\begin{cases}1,&m\equiv0\pmod N,\\0,&\text{otherwise}.
 \end{cases}
 \]
-The geometric series, including its $e^{2\pi im/N}=1$ case,
-gives
+With $r=e^{2\pi im/N}$ the finite geometric series gives
 \[
-\sum_{k=0}^{N-1}e^{2\pi imk/N}=N\Delta_N(m).
+\sum_{k=0}^{N-1}e^{2\pi imk/N}=\sum_{k=0}^{N-1}r^k=N\Delta_N(m):
 \]
-Its imaginary part is zero and its real part is
-$N\Delta_N(m)$. Applying the product identities gives, with
-$\theta_k=2\pi k/N$,
+if $m\equiv0\pmod N$, every term is $r^k=1$; otherwise $r\ne1$
+and the sum is $(1-r^N)/(1-r)=0$, because
+$r^N=e^{2\pi im}=1$. Its imaginary part
+$\sum_k\sin(2\pi mk/N)$ is therefore zero and its real part
+$\sum_k\cos(2\pi mk/N)$ is $N\Delta_N(m)$. With
+$\theta_k=2\pi k/N$, the product identities
+$\cos A\sin B=\frac12[\sin(B+A)+\sin(B-A)]$ and
+$\cos A\cos B,\ \sin A\sin B=\frac12[\cos(A-B)\pm\cos(A+B)]$
+then give
 \begin{align*}
 \sum_k\cos(p\theta_k)\sin(q\theta_k)
 &=\frac12\sum_k\{\sin[(q+p)\theta_k]+\sin[(q-p)\theta_k]\}=0,\\
 \sum_k\cos(p\theta_k)\cos(q\theta_k)
+&=\frac12\sum_k\{\cos[(p-q)\theta_k]+\cos[(p+q)\theta_k]\}\\
 &=\frac N2\{\Delta_N(p-q)+\Delta_N(p+q)\},\\
 \sum_k\sin(p\theta_k)\sin(q\theta_k)
+&=\frac12\sum_k\{\cos[(p-q)\theta_k]-\cos[(p+q)\theta_k]\}\\
 &=\frac N2\{\Delta_N(p-q)-\Delta_N(p+q)\}.
 \end{align*}
 These formulas hold for all integer $p,q$ and positive integer
 $N$. \erratum{The displayed piecewise formulas in the question
 use the representative range $0\le p,q<N$. Without that range,
 congruences modulo $N$ must replace the equalities.}
-In this range $\Delta_N(p-q)=1$ exactly when $p=q$.
-Also $\Delta_N(p+q)=1$ when $p+q=0$ or $N$.
+In this range $|p-q|<N$, so $\Delta_N(p-q)=1$ exactly when $p=q$.
+Also $0\le p+q\le2N-2<2N$, so $\Delta_N(p+q)=1$ exactly when
+$p+q=0$ or $N$.
 Both selectors equal $1$ for $p=q=0$, and also for
 $p=q=N/2$ when $N$ is even. The cosine sum is then $N$,
 whereas the sine sum is zero. When exactly one selector is
@@ -2115,8 +2264,8 @@ $1$, the cosine sum is $N/2$; the sine sum is $N/2$ for
 $p=q$ and $-N/2$ for $p+q=N$ with $p\ne q$.
 When neither selector is $1$, both sums vanish. These cases
 prove the corrected formulas, including $N=1$ and $N=2$.
-\erratum{The final product-to-sum line in the manual's proof
-on p.~344 has a cosine--cosine product on its left. It must
+\erratum{The final product-to-sum line in the Instructor's
+Manual's proof on p.~344 has a cosine--cosine product on its left. It must
 be a sine--sine product to agree with the difference of cosines
 on its right. The selector derivation above gives that identity
 directly.}
@@ -2142,7 +2291,9 @@ f_je^{2\pi ipj/N}e^{-2\pi ipk/N}\\
 \sum_{p=0}^{N-1}e^{2\pi ip(j-k)/N}.
 \end{align*}
 The inner sum is $N\Delta_N(j-k)$ by the finite geometric
-series. For $0\le j,k<N$, the only surviving index is $j=k$.
+series of Exercise~20.6.1 (with $m=j-k$). For $0\le j,k<N$ we
+have $|j-k|<N$, so the only surviving index is $j=k$, and its
+factor $N$ cancels the $1/N$.
 Thus the expression is $f_k$, which proves
 \[
 \boxed{f_k=\frac1{\sqrt N}\sum_{p=0}^{N-1}F_pe^{-2\pi ipk/N}}.
@@ -2178,8 +2329,9 @@ F_{N-p}^{*}
  e^{-2\pi i(N-p)k/N}\\
 &=\frac1{\sqrt N}\sum_{k=0}^{N-1}f_k^*
  e^{-2\pi ik}e^{2\pi ipk/N}
-=\frac1{\sqrt N}\sum_{k=0}^{N-1}f_k^*e^{2\pi ipk/N}.
+=\frac1{\sqrt N}\sum_{k=0}^{N-1}f_k^*e^{2\pi ipk/N},
 \end{align*}
+since $e^{-2\pi ik}=1$ for integer $k$.
 If $f_k$ is real, $f_k^*=f_k$, so $F_{N-p}^*=F_p$.
 If $f_k$ is purely imaginary, $f_k^*=-f_k$, so
 $F_{N-p}^*=-F_p$. These are precisely (a) and (b).
@@ -2208,21 +2360,26 @@ $F(t)=\displaystyle\sum_{n=0}^{\infty}a_{n}t^{n}$.
 A sufficient hypothesis is that $F$ has the finite right limit
 $F(0+)$, is locally integrable, and has an exponential bound
 $|F(t)|\le M e^{ct}$ for $t\ge0$.}
-In the defining integral put $u=st$:
+In the defining integral put $u=st$, so $dt=du/s$ and, for
+$s>0$, the limits stay $0$ and $\infty$:
 \[
 sf(s)=s\int_0^\infty e^{-st}F(t)dt
 =\int_0^\infty e^{-u}F(u/s)du.
 \]
-For each fixed $u>0$, $F(u/s)\to F(0+)$. For sufficiently
-large $s$, $c/s\le1/2$, and
-$|e^{-u}F(u/s)|\le M e^{-u/2}$, which is integrable.
+For each fixed $u>0$, $u/s\to0^+$ and so $F(u/s)\to F(0+)$.
+For sufficiently large $s$, $c/s\le1/2$, and
+$|e^{-u}F(u/s)|\le Me^{-u}e^{cu/s}\le M e^{-u/2}$, which is
+integrable (if $c\le0$, the bound $Me^{-u}$ holds for every
+$s>0$).
 Dominated convergence therefore gives
 \[
 \lim_{s\to+\infty}sf(s)
 =F(0+)\int_0^\infty e^{-u}du=\boxed{F(0+)}.
 \]
 The hint also describes the coefficients: if a Taylor expansion
-can be integrated termwise, then
+can be integrated termwise, then, with
+$\int_0^\infty e^{-st}t^ndt=\Gamma(n+1)/s^{n+1}$ (substitute
+$u=st$ as above; see also Exercise~20.7.7),
 \[
 f(s)=\sum_{n\ge0}\frac{a_n\Gamma(n+1)}{s^{n+1}},\qquad
 sf(s)=a_0+\frac{a_1}{s}+\frac{2a_2}{s^2}+\cdots.
@@ -2238,7 +2395,7 @@ withdrawn exercise:}
 \erratum{\frac1\pi\lim_{s\downarrow0}L_t\{\cos xt\}(s)=\delta(x)
 \quad\text{as distributions in }x.}
 \]
-\par\erratum{The original formula left the transform variable,
+\par\erratum{The textbook's formula left the transform variable,
 approach to zero, and meaning of convergence unspecified; the
 published errata therefore say to disregard it.}
 \solution
@@ -2247,22 +2404,25 @@ ill-defined. It has a useful, precise replacement: let $s$
 approach zero through positive real values, take the Laplace
 transform in $t$, and interpret convergence as convergence of
 distributions in $x$.}
-For $s>0$, direct integration of $e^{-(s-ix)t}$ gives
+For $s>0$ and real $x$, write $\cos xt=\Re e^{ixt}$; direct
+integration of $e^{-(s-ix)t}$ over $0<t<\infty$ gives $1/(s-ix)$,
+so
 \[
-L_t\{\cos xt\}(s)=\Re\frac1{s-ix}=\frac{s}{s^2+x^2}.
+L_t\{\cos xt\}(s)=\Re\frac1{s-ix}=\Re\frac{s+ix}{s^2+x^2}
+=\frac{s}{s^2+x^2}.
 \]
 The resulting functions do not converge to an ordinary
 function representing a delta: they approach zero at every
 $x\ne0$ and diverge at $x=0$. To prove the correct weak limit,
 take a smooth test function $\phi$ with compact support and
-substitute $x=su$:
+substitute $x=su$, so $dx=s\,du$ and $s^2+x^2=s^2(1+u^2)$:
 \[
 \int_{-\infty}^{\infty}\frac{s\phi(x)}{\pi(s^2+x^2)}dx
 =\frac1\pi\int_{-\infty}^{\infty}\frac{\phi(su)}{1+u^2}du.
 \]
-The integrand is bounded by
-$\|\phi\|_\infty/(1+u^2)$, and $\phi(su)\to\phi(0)$.
-Consequently the limit is
+The integrand is bounded by the integrable
+$\|\phi\|_\infty/(1+u^2)$, and $\phi(su)\to\phi(0)$ for each $u$
+by continuity. Consequently, by dominated convergence, the limit is
 \[
 \frac{\phi(0)}\pi[\tan^{-1}u]_{-\infty}^{\infty}=\phi(0).
 \]
@@ -2282,9 +2442,12 @@ L\left\{\frac{\cos at-\cos bt}{b^{2}-a^{2}}\right\}
 =\frac{s}{(s^{2}+a^{2})(s^{2}+b^{2})},\qquad a^{2}\ne b^{2}.
 \]
 \solution
-For real $a,b$ and $\Re s>0$,
+For real $a,b$ and $\Re s>0$, write
+$\cos at=\frac12(e^{iat}+e^{-iat})$ and use
+$L\{e^{\pm iat}\}=\int_0^\infty e^{-(s\mp ia)t}dt=1/(s\mp ia)$:
 \[
 L\{\cos at\}=\frac12\left(\frac1{s-ia}+\frac1{s+ia}\right)
+=\frac12\,\frac{(s+ia)+(s-ia)}{s^2+a^2}
 =\frac{s}{s^2+a^2}.
 \]
 Linearity and a common denominator now yield
@@ -2312,14 +2475,16 @@ show that
 \solution
 (a) Set $1/[(s+a)(s+b)]=A/(s+a)+B/(s+b)$.
 After multiplication by the denominator,
-$1=A(s+b)+B(s+a)$. Setting $s=-a$ and $s=-b$ gives
-$A=1/(b-a)$ and $B=1/(a-b)$. Since
+$1=A(s+b)+B(s+a)$. Setting $s=-a$ gives $1=A(b-a)$ and
+setting $s=-b$ gives $1=B(a-b)$, so
+$A=1/(b-a)$ and $B=1/(a-b)=-1/(b-a)$. Since
 $L\{e^{-at}\}=1/(s+a)$,
 \[
 \boxed{L^{-1}\left\{\frac1{(s+a)(s+b)}\right\}
 =\frac{e^{-at}-e^{-bt}}{b-a}}.
 \]
 (b) Now $s=A(s+b)+B(s+a)$, so the same substitutions give
+$-a=A(b-a)$ and $-b=B(a-b)$, i.e.,
 $A=a/(a-b)$, $B=-b/(a-b)$. Hence
 \[
 \boxed{L^{-1}\left\{\frac{s}{(s+a)(s+b)}\right\}
@@ -2327,12 +2492,17 @@ $A=a/(a-b)$, $B=-b/(a-b)$. Hence
 \]
 The defining transforms converge for
 $\Re s>\max(-\Re a,-\Re b)$. Although excluded in the
-question, the equal-parameter limits are regular:
-\[
-b\to a:\qquad t e^{-at},\qquad (1-at)e^{-at},
-\]
-respectively, obtained by differentiating the numerators with
-respect to $b$ and the denominators with respect to $b$.
+question, the equal-parameter limits are regular. By
+l'H\^opital's rule in $b$ (differentiate numerator and
+denominator with respect to $b$, then let $b\to a$),
+\begin{align*}
+\lim_{b\to a}\frac{e^{-at}-e^{-bt}}{b-a}
+&=\lim_{b\to a}\frac{te^{-bt}}1=te^{-at},\\
+\lim_{b\to a}\frac{ae^{-at}-be^{-bt}}{a-b}
+&=\lim_{b\to a}\frac{-e^{-bt}+bte^{-bt}}{-1}=(1-at)e^{-at};
+\end{align*}
+these are the inverse transforms of $1/(s+a)^2$ and
+$s/(s+a)^2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2349,19 +2519,28 @@ show that for $a^{2}\ne b^{2}$,
 \solution
 For real parameters use
 $L\{\sin at/a\}=1/(s^2+a^2)$ in $\Re s>0$.
-(a) Equating coefficients in
+Write the transforms as $A/(s^2+a^2)+B/(s^2+b^2)$ and
+multiply by $(s^2+a^2)(s^2+b^2)$.
+(a) Equating coefficients of $s^2$ and $s^0$ in
 \[
 1=A(s^2+b^2)+B(s^2+a^2)
 \]
-gives $A+B=0$, $Ab^2+Ba^2=1$. Thus
+gives $A+B=0$, $Ab^2+Ba^2=1$. Substituting $B=-A$ into the
+second equation gives $A(b^2-a^2)=1$. Thus
 $A=1/(b^2-a^2)$ and $B=-A$, and inversion gives
 \[
-\boxed{\frac1{b^2-a^2}\left(\frac{\sin at}{a}-\frac{\sin bt}{b}\right)}.
+\boxed{\frac1{b^2-a^2}\left(\frac{\sin at}{a}-\frac{\sin bt}{b}\right)}
+=-\frac1{a^2-b^2}\left(\frac{\sin at}{a}-\frac{\sin bt}{b}\right),
 \]
+the printed form.
 (b) Equating coefficients in
 $s^2=A(s^2+b^2)+B(s^2+a^2)$ gives
-$A+B=1$, $Ab^2+Ba^2=0$. Solving,
-$A=a^2/(a^2-b^2)$, $B=-b^2/(a^2-b^2)$. Therefore
+$A+B=1$, $Ab^2+Ba^2=0$. Substituting $B=1-A$ into the second
+equation gives $A(b^2-a^2)+a^2=0$, so
+$A=a^2/(a^2-b^2)$ and $B=1-A=-b^2/(a^2-b^2)$. Inverting
+$A/(s^2+a^2)+B/(s^2+b^2)$ gives
+$A\sin(at)/a+B\sin(bt)/b$, in which $a^2\sin(at)/a=a\sin at$
+and $b^2\sin(bt)/b=b\sin bt$. Therefore
 \[
 \boxed{L^{-1}\left\{\frac{s^2}{(s^2+a^2)(s^2+b^2)}\right\}
 =\frac{a\sin at-b\sin bt}{a^2-b^2}}.
@@ -2397,11 +2576,24 @@ x^{-\nu}=\frac1{\Gamma(\nu)}\int_0^\infty
 u^{\nu-1}e^{-ux}du.
 \]
 Insert a convergence factor $e^{-\epsilon x}$, $\epsilon>0$,
-before changing the order of integration. In the ranges stated
-in the question the resulting double integral is absolutely
+before changing the order of integration: let
+\[
+C_\epsilon=\int_0^\infty e^{-\epsilon x}x^{-\nu}\cos x\,dx,
+\qquad
+S_\epsilon=\int_0^\infty e^{-\epsilon x}x^{-\nu}\sin x\,dx,
+\]
+and substitute the representation of $x^{-\nu}$. In the ranges
+stated in the question the resulting double integral is absolutely
 integrable: after integrating its absolute value in $u$, it is
 $\int_0^\infty e^{-\epsilon x}x^{-\nu}|\cos x|dx$ or its sine
-counterpart. Thus
+counterpart, finite because $|\cos x|\le1$ and $|\sin x|\le x$
+near $x=0$. Hence the order may be interchanged, and the inner
+$x$ integrals are those of Exercise~20.2.3 with $a=u+\epsilon$,
+$\omega=1$:
+$\int_0^\infty e^{-(u+\epsilon)x}\cos x\,dx=(u+\epsilon)/[(u+\epsilon)^2+1]$
+and
+$\int_0^\infty e^{-(u+\epsilon)x}\sin x\,dx=1/[(u+\epsilon)^2+1]$.
+Thus
 \begin{align*}
 C_\epsilon
 &=\frac1{\Gamma(\nu)}\int_0^\infty
@@ -2411,22 +2603,35 @@ S_\epsilon
 \frac{u^{\nu-1}}{(u+\epsilon)^2+1}du.
 \end{align*}
 For $0<\epsilon\le1$, on $0<u<1$ both integrands are bounded
-by a constant times $u^{\nu-1}$; for $u\ge1$ the bounds are
-$2u^{\nu-2}$ and $u^{\nu-3}$, respectively. Dominated
-convergence gives
+by $2u^{\nu-1}$, since $(u+\epsilon)/[(u+\epsilon)^2+1]\le
+u+\epsilon<2$ and $1/[(u+\epsilon)^2+1]\le1$. For $u\ge1$,
+since $(u+\epsilon)/[(u+\epsilon)^2+1]<1/(u+\epsilon)\le1/u$
+and $1/[(u+\epsilon)^2+1]<1/u^2$, the bounds are
+$u^{\nu-2}$ and $u^{\nu-3}$, respectively. These dominating
+functions are integrable because $\nu>0$ (at $u=0$) and
+$\nu<1$, respectively $\nu<2$ (at $u=\infty$). Dominated
+convergence as $\epsilon\downarrow0$ gives
 \[
 C_0=\frac1{\Gamma(\nu)}\int_0^\infty\frac{u^\nu}{1+u^2}du,
 \qquad
 S_0=\frac1{\Gamma(\nu)}\int_0^\infty\frac{u^{\nu-1}}{1+u^2}du.
 \]
-For $0<q<2$, put $v=u^2$ and use the beta integral:
+For $0<q<2$, put $v=u^2$, so $u^{q-1}du=\frac12v^{q/2-1}dv$,
+and use the beta integral
+$\int_0^\infty v^{\alpha-1}(1+v)^{-\alpha-\beta}dv
+=B(\alpha,\beta)=\Gamma(\alpha)\Gamma(\beta)/\Gamma(\alpha+\beta)$
+(Section~13.3) with $\alpha=q/2$, $\beta=1-q/2$, followed by the
+reflection formula $\Gamma(z)\Gamma(1-z)=\pi/\sin\pi z$:
 \[
 \int_0^\infty\frac{u^{q-1}}{1+u^2}du
 =\frac12\int_0^\infty\frac{v^{q/2-1}}{1+v}dv
 =\frac12\Gamma(q/2)\Gamma(1-q/2)
 =\frac\pi{2\sin(\pi q/2)}.
 \]
-Take $q=\nu+1$ for the cosine and $q=\nu$ for the sine:
+Take $q=\nu+1$ for the cosine, with
+$\sin[\pi(\nu+1)/2]=\cos(\pi\nu/2)$, and $q=\nu$ for the sine;
+the condition $0<q<2$ is then $-1<\nu<1$, respectively
+$0<\nu<2$:
 \[
 \boxed{C_0=\frac\pi{2\Gamma(\nu)\cos(\pi\nu/2)}},\quad0<\nu<1;
 \qquad
@@ -2436,8 +2641,11 @@ At the origin the cosine integrand behaves as $x^{-\nu}$,
 requiring $\nu<1$, whereas the sine integrand behaves as
 $x^{1-\nu}$, requiring $\nu<2$. At infinity Dirichlet's test
 applies for $\nu>0$; for $\nu\le0$ the ordinary oscillatory
-improper integral fails to converge. Abel's limiting theorem
-therefore identifies the regulated limits above with the
+improper integral fails to converge. Abel's theorem for
+integrals (Exercise~20.2.2(c), with $h(x)=x^{-\nu}\cos x$ or
+$x^{-\nu}\sin x$) therefore identifies the regulated limits
+$C_0=\lim_{\epsilon\downarrow0}C_\epsilon$ and
+$S_0=\lim_{\epsilon\downarrow0}S_\epsilon$ above with the
 ordinary improper integrals in precisely the stated ranges.
 The gamma notation in the corrected statement accommodates
 noninteger $\nu$.
@@ -2460,12 +2668,14 @@ powers of $s$ greater than $s^{-1}$. Check your result by
 calculating $L\{\delta(t)\}$, and comment on this fiasco.
 \par\erratum{For the impulse comparison use the causal convention in which a delta at $t=0$ has full unit mass.}
 \solution
-Whenever termwise integration is justified, $u=st$ gives
+Whenever termwise integration is justified, $u=st$ (so
+$dt=du/s$ and $t^n=u^n/s^n$) gives
 \[
 \int_0^\infty e^{-st}t^n dt
 =\frac1{s^{n+1}}\int_0^\infty e^{-u}u^n du
-=\frac{n!}{s^{n+1}},\qquad s>0.
+=\frac{n!}{s^{n+1}},\qquad s>0,
 \]
+since $\int_0^\infty e^{-u}u^ndu=\Gamma(n+1)=n!$.
 Thus
 \[
 \boxed{f(s)=\sum_{n=0}^\infty\frac{a_n n!}{s^{n+1}}},
@@ -2478,16 +2688,24 @@ near zero and a Laplace transform for $s>0$, but the resulting
 formal series $\sum_{n\ge0}(-1)^n n!/s^{n+1}$ diverges for
 every finite $s$. It is an asymptotic expansion at infinity,
 not a convergent identity.}
+(The Maclaurin series $\sum(-1)^nt^n$ converges only for
+$|t|<1$, and in the formal series the ratio of consecutive terms
+has modulus $(n+1)/s\to\infty$, so its terms do not even tend to
+zero.)
 With the causal Laplace convention in which a delta impulse
 at $0$ has unit mass, the distributional pairing gives
 \[
-L\{\delta(t)\}(s)=\langle\delta,e^{-st}\rangle=1.
+L\{\delta(t)\}(s)=\langle\delta,e^{-st}\rangle=e^{-s\cdot0}=1.
 \]
-This constant is no contradiction: a delta distribution is
+This $1=s^0$ is a higher power than $s^{-1}$, but it is no
+contradiction: a delta distribution is
 not an ordinary function with a Maclaurin series. Its
 transform lies outside the hypotheses of the argument. The
 same distinction permits $L\{\delta^{(n)}\}=s^n$ for causal
-distributions. \erratum{The convention at the lower endpoint
+distributions, since
+$\langle\delta^{(n)},e^{-st}\rangle
+=(-1)^n\,d^ne^{-st}/dt^n\big|_{t=0}=(-1)^n(-s)^n=s^n$.
+\erratum{The convention at the lower endpoint
 must be specified: integrating a symmetric regularization
 over $[0,\infty)$ assigns half the mass, whereas the causal
 $0^-$ convention used here assigns the full mass.}
@@ -2506,13 +2724,22 @@ Use the defining confluent hypergeometric series
 \[
 M(a,c,t)=\sum_{n=0}^\infty\frac{(a)_n}{(c)_n}\frac{t^n}{n!}.
 \]
+Each term is integrated with
+$\int_0^\infty e^{-st}t^ndt=n!/s^{n+1}$, $\Re s>0$ (Exercise~20.7.7
+for real $s$; both sides are analytic in $s$ for $\Re s>0$, so
+the identity extends to that half-plane).
 For $\Re s>1$ the series may be integrated absolutely:
-the sum of the integrals of the absolute terms is
+since $|e^{-st}|=e^{-t\Re s}$, the sum of the integrals of the
+absolute terms is
 \[
-\frac1{\Re s}\sum_{n=0}^\infty
+\sum_{n=0}^\infty\left|\frac{(a)_n}{(c)_n}\right|
+\frac1{n!}\frac{n!}{(\Re s)^{n+1}}
+=\frac1{\Re s}\sum_{n=0}^\infty
 \left|\frac{(a)_n}{(c)_n}\right|(\Re s)^{-n},
 \]
-which converges by the ratio test (or terminates). Hence
+which converges by the ratio test (or terminates): the ratio
+of consecutive terms is $|(a+n)/(c+n)|/\Re s\to1/\Re s<1$.
+Hence termwise integration is allowed and
 \begin{align*}
 L\{M(a,c,t)\}(s)
 &=\sum_{n=0}^\infty\frac{(a)_n}{(c)_n n!}
