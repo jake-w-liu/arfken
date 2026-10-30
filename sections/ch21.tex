@@ -35,6 +35,12 @@ $0\le t\le u\le x$. Reverse the order:
 \int_0^x y(t)\left(\int_t^xdu\right)dt
 =\int_0^x(x-t)y(t)\,dt.
 \]
+For $x<0$ the identity
+$\int_0^xdu\int_0^uy(t)\,dt=\int_0^x(x-t)y(t)\,dt$ still holds: both
+sides vanish at $x=0$, and both have $x$-derivative $\int_0^xy(t)\,dt$
+(the left side by the fundamental theorem of calculus, the right side by
+Leibniz's rule, whose endpoint term $(x-x)y(x)$ vanishes), so they agree
+for every $x$.
 Thus the general initial-value formula is
 \[
 y(x)=y(0)+xy'(0)+\int_0^x(x-t)y(t)\,dt.
@@ -53,7 +59,7 @@ f(x)&=\int_0^x(x-t)g(t)\,dt+[A(0)y(0)+y'(0)](x-0)+y(0)
 =y(0)+xy'(0),
 \end{aligned}
 \]
-exactly as above. Oriented integrals give the same identities for $x<0$.
+exactly as above.
 
 
 \Needspace{5\baselineskip}
@@ -223,9 +229,11 @@ g(x)=\frac1{\sqrt{2\pi}}\int_{\mathbb R}
 \]
 Let $\Phi=\widehat\varphi$, $F=\widehat f$, $K=\widehat k$
 (the transform variable is called $\omega$ here and $t$ in the
-statement). To keep track of normalization, set $u=x-t$ for fixed $t$
-in the transform of the convolution, so that $dx=du$ and
-$e^{i\omega x}=e^{i\omega u}e^{i\omega t}$:
+statement), and write
+$(k*\varphi)(x)=\int_{\mathbb R}k(x-t)\varphi(t)\,dt$ for the integral
+in the equation (no factor $1/\sqrt{2\pi}$). To keep track of
+normalization, set $u=x-t$ for fixed $t$ in its transform, so that
+$dx=du$ and $e^{i\omega x}=e^{i\omega u}e^{i\omega t}$:
 \[
 \begin{aligned}
 \widehat{k*\varphi}(\omega)
@@ -256,6 +264,16 @@ class. Zeros of the denominator require compatibility with $F$ and may
 permit homogeneous components supported on those zeros in a
 distributional setting. The displayed formula applies when these
 obstructions are absent.}
+For an example of such a homogeneous component, suppose
+$\sqrt{2\pi}\lambda K(\omega_0)=1$ at a real $\omega_0$. Then
+$e^{-i\omega_0x}$ solves the homogeneous equation: with $u=x-t$,
+\[
+\lambda\int_{\mathbb R}k(x-t)e^{-i\omega_0t}dt
+=\lambda e^{-i\omega_0x}\int_{\mathbb R}k(u)e^{i\omega_0u}du
+=\sqrt{2\pi}\lambda K(\omega_0)e^{-i\omega_0x}=e^{-i\omega_0x}.
+\]
+Its transform $\sqrt{2\pi}\,\delta(\omega-\omega_0)$ is supported at
+that zero, and it may be added to any solution $\varphi$.
 
 
 \Needspace{5\baselineskip}
@@ -325,9 +343,11 @@ $\Phi=F+\lambda K\Phi$, i.e.\ $(1-\lambda K)\Phi=F$, so
 \]
 \erratum{In each case the quotient must be an admissible Laplace
 transform; its singularities determine the inversion line
-$\Re s=\gamma$. An uncancelled zero of a divisor cannot be ignored.
-When classical inversion hypotheses hold, choose $\gamma$ to the right
-of all quotient singularities and use the ordinary Bromwich inverse.}
+$\Re s=\gamma$. A zero of the divisor ($K(s)$ in (a), $1-\lambda K(s)$
+in (b)) that is not cancelled by a zero of $F(s)$ is such a singularity,
+since the quotient is unbounded near it. When classical inversion
+hypotheses hold, choose $\gamma$ to the right of all quotient
+singularities and use the ordinary Bromwich inverse.}
 
 
 \Needspace{5\baselineskip}
@@ -447,9 +467,12 @@ desired half-line solution:
 \frac{F_c(\omega)}{K_c(\omega)}\cos(\omega x)d\omega}.
 \]
 The quotient and inversion need the same existence conditions as in
-Exercise~21.2.1. If a half-line kernel is instead defined as one half of
-the reflected sum, the corresponding convolution multiplier is one half
-as large; the normalization must be adjusted accordingly.
+Exercise~21.2.1. If the half-line equation is instead written with one
+half of the reflected sum,
+$f(x)=\frac12\int_0^\infty[k(x-t)+k(x+t)]\varphi(t)\,dt$, then $f$ is
+one half of the full-line convolution, so $F_c=\sqrt{\pi/2}\,K_c\Phi_c$,
+and the factor $1/\pi$ in the solution becomes
+$\sqrt{2/\pi}/\sqrt{\pi/2}=2/\pi$.
 
 
 \Needspace{5\baselineskip}
@@ -501,7 +524,12 @@ Indeed, the original equation is checked without transforms:
 solution, since its Fourier transform would tend to zero at infinity;
 nor an $L^2(\mathbb R)$ solution, since a nonzero constant transform is
 not square integrable. In the tempered-distribution class the nonzero
-Gaussian multiplier makes the solution unique.}
+Gaussian multiplier makes the solution unique: the transform $\Psi$ of
+the difference of two solutions satisfies $e^{-\omega^2/4}\Psi=0$, so
+$\langle\Psi,\chi\rangle
+=\langle e^{-\omega^2/4}\Psi,\,e^{\omega^2/4}\chi\rangle=0$ for every
+smooth compactly supported $\chi$ (since $e^{\omega^2/4}\chi$ is again
+such a function), and therefore $\Psi=0$.}
 
 
 \Needspace{5\baselineskip}
@@ -568,8 +596,10 @@ and solving for $\varphi$,
 \boxed{\varphi(z)=\frac{\sin\pi\alpha}{\pi}
 \frac{d}{dz}\int_0^z(z-x)^{\alpha-1}f(x)dx}.
 \]
-The derivative exists almost everywhere under the integral equation's
-local-integrability hypothesis.
+For merely locally integrable $\varphi$, $I(z)$ is $\pi/\sin\pi\alpha$
+times the indefinite integral $\int_0^z\varphi(t)\,dt$, so by the
+Lebesgue differentiation theorem $I'(z)=(\pi/\sin\pi\alpha)\varphi(z)$
+for almost every $z$.
 
 If $f$ is continuously differentiable up to zero, remove the apparent
 singular endpoint before differentiating. Integrate by parts,
@@ -602,9 +632,14 @@ and, reversing the order of integration as above,
 \[
 \int_0^x\frac{dt}{(x-t)^\alpha}\int_0^t(t-y)^{\alpha-1}f'(y)\,dy
 =\int_0^xf'(y)\left[\int_y^x\frac{(t-y)^{\alpha-1}}{(x-t)^\alpha}dt\right]dy
-=\frac{\pi}{\sin\pi\alpha}\int_0^xf'(y)\,dy.
+=\frac{\pi}{\sin\pi\alpha}\int_0^xf'(y)\,dy,
 \]
-Multiplying by $\sin\pi\alpha/\pi$ and adding, the two terms give
+because the inner integral is the first one shifted: with
+$t=y+(x-y)u$, $dt=(x-y)du$, $t-y=(x-y)u$, $x-t=(x-y)(1-u)$, the powers
+of $x-y$ cancel and it again equals
+$\int_0^1u^{\alpha-1}(1-u)^{-\alpha}du=\pi/\sin\pi\alpha$.
+Multiplying the first result by $f(0)\sin\pi\alpha/\pi$ and the second
+by $\sin\pi\alpha/\pi$, and adding, the two terms give
 $f(0)+f(x)-f(0)=f(x)$.
 
 
@@ -781,7 +816,8 @@ for the unknown function $\varphi(t)$, \erratum{with $s=0,1,2,\ldots$,} if
 \solution
 Let $N=2s$ in (a) and $N=2s+1$ in (b), with $s=0,1,\ldots$.
 For $|x|<1$, the generating function converges uniformly in
-$t\in[-1,1]$ (Weierstrass M-test, since $|P_n(t)x^n|\le|x|^n$ there):
+$t\in[-1,1]$ (Weierstrass M-test: $|P_n(t)|\le1$ for $-1\le t\le1$, so
+$|P_n(t)x^n|\le|x|^n$ there):
 \[
 (1-2xt+x^2)^{-1/2}=\sum_{n=0}^\infty P_n(t)x^n.
 \]
@@ -820,9 +856,10 @@ solutions. For $1/2\le x<1$,
 \[
 1-2xt+x^2=(1-x)^2+2x(1-t)\ge2x(1-t)\ge1-t.
 \]
-The bounded numerator $\varphi(t)$ is consequently dominated, uniformly
-in $x$, by $\max|\varphi|\,(1-t)^{-1/2}$, which is integrable on
-$[-1,1]$. Dominated convergence as $x\to1^-$ gives
+Since the numerator $\varphi(t)$ is bounded, the integrand
+$\varphi(t)(1-2xt+x^2)^{-1/2}$ is consequently dominated in absolute
+value, uniformly in $x$, by $\max|\varphi|\,(1-t)^{-1/2}$, which is
+integrable on $[-1,1]$. Dominated convergence as $x\to1^-$ gives
 $f(1)=\lim_{x\to1^-}x^N=1$. Reflection ($t\to-t$, with
 $\varphi(-t)=(-1)^N\varphi(t)$) gives $f(-1)=(-1)^N$, so the solutions hold
 at both stated endpoints as improper integrals.
@@ -1111,8 +1148,17 @@ hence
 Numerically the pairs are
 $(0.7888974491,\ 1+0.5351837585x)$ and
 $(15.2111025509,\ 1-1.8685170918x)$.
-Both equations for the moments are satisfied, and the image of $K$
-is two-dimensional, so these are all the nontrivial eigenspaces.
+The $x$ coefficient of the equation,
+$b=\lambda c_1=\lambda\bigl(\frac12+\frac b3\bigr)$, holds as well. With
+$b=2/\lambda-2$ its right side is
+\[
+\frac\lambda2+\frac\lambda3\left(\frac2\lambda-2\right)
+=\frac23-\frac\lambda6,
+\]
+and $2/\lambda-2=2/3-\lambda/6$ becomes, after multiplication by
+$6\lambda$, $12-12\lambda=4\lambda-\lambda^2$, i.e.\
+$\lambda^2-16\lambda+12=0$, which $\lambda_\pm$ satisfy. Since the image
+of $K$ is two-dimensional, these are all the nontrivial eigenspaces.
 
 
 \Needspace{5\baselineskip}
@@ -1222,8 +1268,13 @@ $f=1$, $\varphi=1$, and $\psi(t)=t-\tfrac12$. Then
 \int_0^1[1+\psi(t)]dt=1,
 \]
 although $\psi$ is not in the span of the constant $M_1=1$.
-The displayed zero moments in the problem are the precise conditions
-used here; with complex functions they are bilinear moments as written.
+The displayed conditions $\int_a^bN_i\psi\,dx=0$ are exactly what the
+calculation uses. They are called bilinear because no complex conjugate
+is taken: for complex $N_i$ they differ from Hermitian orthogonality,
+$\int_a^bN_i^*\psi\,dx=0$, which would not make the sum
+$\sum_iM_i\int_a^bN_i\psi\,dt$ vanish. For example, on $[0,2\pi]$,
+$N_1=e^{it}$ and $\psi=e^{-it}$ give $\int_0^{2\pi}N_1^*\psi\,dt
+=\int_0^{2\pi}e^{-2it}dt=0$ but $\int_0^{2\pi}N_1\psi\,dt=2\pi$.
 
 
 \Needspace{5\baselineskip}
@@ -1343,7 +1394,8 @@ For the ground Gaussian $h_0(s)=\pi^{-1/4}e^{-s^2/2}$, at $u=0$,
 =\pi^{-1/4}\operatorname{erfc}\frac{\alpha}{\sqrt2},
 \]
 using $\int_\alpha^\infty e^{-s^2/2}ds=\sqrt{\pi/2}\,
-\operatorname{erfc}(\alpha/\sqrt2)$ (put $s=\sqrt2\,w$). So the
+\operatorname{erfc}(\alpha/\sqrt2)$ (put $s=\sqrt2\,w$ and use
+$\operatorname{erfc}z=\frac2{\sqrt\pi}\int_z^\infty e^{-w^2}dw$). So the
 relative error at $u=0$ is exactly
 $\operatorname{erfc}(\alpha/\sqrt2)$. Higher orders require the aperture
 to exceed their characteristic width as well.
@@ -1364,9 +1416,15 @@ $\int_{\mathbb R}e^{-(s+iu)^2/2}ds=\sqrt{2\pi}$, so
 To obtain all higher orders, use the raising operator $R=(u-d/du)/\sqrt2$
 (applied to functions of the variable $u$, or of $s$ inside $\mathcal F$). The
 Hermite recurrences $H_n'=2nH_{n-1}$ and $H_{n+1}=2uH_n-2nH_{n-1}$ give
-$H_{n+1}=2uH_n-H_n'$, hence $uh_n-h_n'\propto(2uH_n-H_n')e^{-u^2/2}$
-and, with the normalizations,
-$R h_n=\sqrt{n+1}\,h_{n+1}$, i.e.\
+$H_{n+1}=2uH_n-H_n'$. Write $h_n=c_nH_ne^{-u^2/2}$, where
+$c_n=(\pi^{1/4}\sqrt{2^nn!})^{-1}$; by the product rule
+$h_n'=c_n(H_n'-uH_n)e^{-u^2/2}$, so
+\[
+uh_n-h_n'=c_n(2uH_n-H_n')e^{-u^2/2}=c_nH_{n+1}e^{-u^2/2}
+=\frac{c_n}{c_{n+1}}\,h_{n+1}=\sqrt{2(n+1)}\,h_{n+1},
+\]
+since $c_n/c_{n+1}=\sqrt{2^{n+1}(n+1)!/(2^nn!)}=\sqrt{2(n+1)}$.
+Dividing by $\sqrt2$ gives $R h_n=\sqrt{n+1}\,h_{n+1}$, i.e.\
 $h_n=R^nh_0/\sqrt{n!}$. Differentiation under the integral
 and integration by parts (boundary terms vanish for decaying $h$) give
 \[
