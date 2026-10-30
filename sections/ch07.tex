@@ -1777,32 +1777,48 @@ Determine the coefficients $b_{1}$ and $b_{2}$.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $b_{1}=\dfrac{1}{8}$,\quad$b_{2}=\dfrac{9}{128}$.
 \solution
-Write $I_0=Ef$, where $E=e^x/\sqrt{2\pi x}$. The derivatives of the
+Write $I_0=Ef$, where $E=e^x/\sqrt{2\pi x}$. Since
+$\ln E=x-\frac12\ln x-\frac12\ln(2\pi)$, the derivatives of the
 prefactor satisfy
 \[
 \frac{E'}E=1-\frac1{2x},\qquad
-\frac{E''}E=1-\frac1x+\frac3{4x^2}.
+\frac{E''}E=\left(\frac{E'}E\right)'+\left(\frac{E'}E\right)^2
+=1-\frac1x+\frac3{4x^2},
 \]
+because $(E'/E)'=1/(2x^2)$ and $(E'/E)^2=1-1/x+1/(4x^2)$.
 Since $I_0'=E'f+Ef'$ and $I_0''=E''f+2E'f'+Ef''$,
-substitution into $x^2I_0''+xI_0'-x^2I_0=0$ cancels the terms in
-$x^2f$ and $xf$, leaving
+substitution into $x^2I_0''+xI_0'-x^2I_0=0$ and division by $E$ give
+\[
+x^2f''+\left(2x^2\frac{E'}E+x\right)f'
++\left(x^2\frac{E''}E+x\frac{E'}E-x^2\right)f=0.
+\]
+The coefficient of $f'$ is $(2x^2-x)+x=2x^2$, and that of $f$ is
+$(x^2-x+\frac34)+(x-\frac12)-x^2=\frac14$: the terms in $x^2f$ and
+$xf$ cancel, leaving
 \[
 \boxed{x^2f''+2x^2f'+\frac14f=0}.
 \]
-Set $f\sim\sum_{j\ge0}b_jx^{-j}$, $b_0=1$.
-At power $x^{-j}$ the equation is
+Set $f\sim\sum_{j\ge0}b_jx^{-j}$, $b_0=1$. Termwise,
+\[
+x^2f''=\sum_{j\ge0}j(j+1)b_jx^{-j},\qquad
+2x^2f'=-\sum_{j\ge1}2jb_jx^{1-j}=-\sum_{j\ge0}2(j+1)b_{j+1}x^{-j},
+\]
+the last sum after replacing $j$ by $j+1$. Since
+$j(j+1)+\frac14=(j+\frac12)^2$, the coefficient of $x^{-j}$ gives
 \[
 [j(j+1)+\tfrac14]b_j-2(j+1)b_{j+1}=0,
 \quad b_{j+1}=\frac{(j+1/2)^2}{2(j+1)}b_j.
 \]
-Therefore
+Therefore ($j=0$ and $j=1$)
 \[
 \boxed{b_1=\frac{1/4}{2}=\frac18},\qquad
 \boxed{b_2=\frac{9/4}{4}\frac18=\frac9{128}}.
 \]
-These are asymptotic coefficients for large positive $x$, not a
+These are asymptotic coefficients for large positive $x$ (hence the
+qualification $x\to+\infty$ in the statement), not a
 convergent series at fixed $x$: the ratio of successive inverse-power
-terms eventually behaves as $j/(2x)$ and grows beyond one. Truncation
+terms, $b_{j+1}x^{-j-1}/(b_jx^{-j})=(j+\frac12)^2/[2(j+1)x]$, behaves as
+$j/(2x)$ for large $j$ and grows beyond one. Truncation
 must be understood in the asymptotic sense.
 
 \Needspace{5\baselineskip}
@@ -1817,10 +1833,13 @@ Also, write out the individual term corresponding to each of these powers.
 $x=0.99$ or divergence at $x=1.00$, but perhaps you can see the difference in
 the behavior of the sequence of partial sums for these two values of $x$.
 \solution
-For $n=1/2$, Legendre's equation is
+For $n=1/2$, $n(n+1)=\frac34$ and Legendre's equation is
 $(1-x^2)y''-2xy'+\tfrac34y=0$.
 Insert the even series $y=\sum_{j\ge0}a_{2j}x^{2j}$ with $a_0=1$.
-The coefficient of $x^{2j}$ gives
+The coefficient of $x^{2j}$ receives $(2j+2)(2j+1)a_{2j+2}$ from $y''$
+(the term $a_{2j+2}x^{2j+2}$ differentiated twice), $-2j(2j-1)a_{2j}$
+from $-x^2y''$, $-4ja_{2j}$ from $-2xy'$, and $\frac34a_{2j}$ from
+$\frac34y$. Since $2j(2j-1)+4j=2j(2j+1)$, it gives
 \[
 (2j+2)(2j+1)a_{2j+2}
 +[\tfrac34-2j(2j+1)]a_{2j}=0,
@@ -1830,7 +1849,8 @@ so
 \boxed{a_{2j+2}=
 \frac{2j(2j+1)-3/4}{(2j+2)(2j+1)}a_{2j}}.
 \]
-For example $a_2=-3/8$ and $a_4=-21/128$.
+For example $j=0$ gives $a_2=(-\frac34)/2=-3/8$, and $j=1$ gives
+$a_4=\frac{6-3/4}{12}a_2=\frac7{16}\left(-\frac38\right)=-21/128$.
 For each specified $x$, update the term and sum without repeatedly
 forming large powers:
 \[
@@ -1840,8 +1860,11 @@ S_{j+1}=S_j+T_{j+1}.
 \]
 The first table gives $S_J=\sum_{j=0}^Ja_{2j}x^{2j}$ through the power
 $N=2J$. The second gives the individual term $T_J=a_Nx^N$ at that
-same power. Calculations used 70 decimal digits before rounding; an
-independent 90-digit Pochhammer-coefficient sum checked every entry.
+same power. The entries are rounded to seven significant digits, a
+final zero not being printed ($0.147621$ stands for $0.1476210$). The
+recursion is numerically benign: ordinary double-precision arithmetic
+reproduces every entry, and so does a high-precision sum of the
+closed-form coefficients $a_{2j}$ given below.
 
 \begin{center}\scriptsize
 Partial sums $S_J$\par\smallskip
@@ -1878,18 +1901,34 @@ $N$&$x=0.95$&$0.96$&$0.97$&$0.98$&$0.99$&$1.00$\\\midrule
 \bottomrule\end{tabular}\end{center}
 
 The convergence distinction can also be proved rather than inferred
-from these tables. The exact coefficients are
+from these tables. Since $2j(2j+1)-\frac34=4(j-\frac14)(j+\frac34)$ and
+$(2j+2)(2j+1)=4(j+\frac12)(j+1)$, the recursion reads
+\[
+\frac{a_{2j+2}}{a_{2j}}=\frac{(j-\frac14)(j+\frac34)}{(j+\frac12)(j+1)},
+\]
+and because the Pochhammer symbol satisfies $(c)_{j+1}=(c)_j(c+j)$,
+$(c)_0=1$, the exact coefficients are
 \[
 a_{2j}=\frac{(-1/4)_j(3/4)_j}{(1/2)_j j!}.
 \]
-Their ratio gives absolute convergence for $|x|<1$. Gamma-function
-ratios give
+The ratio of consecutive terms, $a_{2j+2}x^{2j+2}/(a_{2j}x^{2j})$,
+tends to $x^2$, so the ratio test gives absolute convergence for
+$|x|<1$. For $x=1$ write $(c)_j=\Gamma(c+j)/\Gamma(c)$ and use
+$\Gamma(j+a)/\Gamma(j+b)\sim j^{a-b}$ as $j\to\infty$ (Stirling's formula):
 \[
-a_{2j}\sim \frac{\Gamma(1/2)}{\Gamma(-1/4)\Gamma(3/4)}\frac1j
-=-\frac{\sqrt\pi}{4\Gamma(3/4)^2}\frac1j.
+a_{2j}=\frac{\Gamma(1/2)}{\Gamma(-1/4)\Gamma(3/4)}
+\frac{\Gamma(j-\frac14)}{\Gamma(j+\frac12)}
+\frac{\Gamma(j+\frac34)}{\Gamma(j+1)}
+\sim \frac{\Gamma(1/2)}{\Gamma(-1/4)\Gamma(3/4)}\,j^{-3/4}j^{-1/4}
+=-\frac{\sqrt\pi}{4\Gamma(3/4)^2}\frac1j,
 \]
-All coefficients after $a_0$ are negative, and the nonzero negative
-constant multiplying $1/j$ implies divergence to $-\infty$ at $x=1$.
+where $\Gamma(-\frac14)=\Gamma(\frac34)/(-\frac14)=-4\Gamma(\frac34)$
+by $\Gamma(z+1)=z\Gamma(z)$; the constant is $-0.29509$. (The last-term
+table agrees: for $x=1$ and $N=2000$ it gives $1000\,T_{1000}=-0.2951$.)
+All coefficients after $a_0$ are negative, since $a_2=-3/8$ and every
+later ratio ($j\ge1$ above) is positive. By limit comparison with the
+harmonic series $\sum1/j$, the series therefore diverges to $-\infty$
+at $x=1$.
 For every listed $x<1$, the additional factor $x^{2j}$ instead makes
 the terms exponentially small. The finite numerical sequences alone
 would not establish either conclusion.
@@ -1911,14 +1950,22 @@ would not establish either conclusion.
 \end{enumerate}
 \solution
 (a) For $\alpha=0$, Hermite's equation is $y''-2xy'=0$.
-The normalized odd solution has $y(0)=0$, $y'(0)=1$.
-Substituting $y=\sum_{k\ge0}c_kx^{2k+1}$ gives
+The odd solution with leading coefficient $a_0=1$ has $y(0)=0$,
+$y'(0)=1$. Substitute $y=\sum_{k\ge0}c_kx^{2k+1}$, $c_0=1$; after the
+shift $k\to k+1$ in the second derivative,
+\[
+y''=\sum_{k\ge0}(2k+3)(2k+2)c_{k+1}x^{2k+1},\qquad
+2xy'=\sum_{k\ge0}2(2k+1)c_kx^{2k+1},
+\]
+and matching the coefficients of $x^{2k+1}$ gives
 \[
 (2k+3)(2k+2)c_{k+1}=2(2k+1)c_k,
 \qquad c_0=1.
 \]
-Induction verifies $c_k=1/[k!(2k+1)]$, since its consecutive ratio is
-$(2k+1)/[(k+1)(2k+3)]$. Thus
+Since $2/(2k+2)=1/(k+1)$, this says
+$c_{k+1}/c_k=(2k+1)/[(k+1)(2k+3)]$, which is also the ratio of
+consecutive values of $1/[k!(2k+1)]$; induction therefore gives
+$c_k=1/[k!(2k+1)]$. Thus
 \[
 \boxed{y(x)=\sum_{k=0}^\infty\frac{x^{2k+1}}{k!(2k+1)}}.
 \]
@@ -1928,12 +1975,18 @@ The iteration uses
 \frac{t_{k+1}}{t_k}=\frac{x^2(2k+1)}{(k+1)(2k+3)},\qquad
 S_K=\sum_{k=0}^Kt_k.
 \]
+The ratio decreases with $k$, and it exceeds one while
+$(k+1)(2k+3)<x^2(2k+1)$; so the largest term is $t_0=1$ for $x=1$,
+$t_2=3.2$ for $x=2$, and $t_7=3^{15}/(7!\cdot15)=189.80$ for $x=3$.
 Stop at the first $K$ for which $t_K\le10^{-6}\max_{j\le K}t_j$.
 For every subsequent ratio,
-$t_{j+1}/t_j<x^2/(j+1)\le q:=x^2/(K+2)$ when $j\ge K+1$.
-The cutoffs below have $q<1$, so the omitted tail has the rigorous bound
+$t_{j+1}/t_j<x^2/(j+1)\le q:=x^2/(K+2)$ when $j\ge K+1$, the first
+inequality because $(2j+1)/(2j+3)<1$. Hence $t_{K+1+i}\le q^it_{K+1}$,
+and the cutoffs below have $q=\frac1{11},\frac4{19},\frac3{10}<1$, so
+summing the geometric series gives the rigorous bound
 \[
-\boxed{0<y-S_K\le B_K:=\frac{t_{K+1}}{1-x^2/(K+2)}}.
+\boxed{0<y-S_K\le B_K:=t_{K+1}\sum_{i\ge0}q^i
+=\frac{t_{K+1}}{1-x^2/(K+2)}}.
 \]
 This bounds the entire remaining sum, rather than assuming that the
 last calculated term is itself an error bound. The tabulated bounds are
@@ -1943,32 +1996,35 @@ rounded upward; the sums and last terms are rounded to nearest.
 \begin{tabular}{rrrrr}\toprule
 $x$&$K$&$S_K$&$t_K$&$B_K$\\\midrule
 1&9&$1.4626517316055$&$1.450385\times10^{-7}$&$1.443479\times10^{-8}$\\
-2&17&$16.452627042558$&$2.760027\times10^{-6}$&$\erratum{7.349021\times10^{-7}}$\\
+2&17&$16.452627042558$&$2.760027\times10^{-6}$&$7.349021\times10^{-7}$\\
 3&28&$1444.5450849204$&$9.034328\times10^{-5}$&$3.869592\times10^{-5}$\\
 \bottomrule\end{tabular}\end{center}
 
-(b) \erratum{The original integral reused $x$ as its integration variable
-and upper limit. The dummy variable $t$ makes its intended meaning explicit.} Since the exponential series converges uniformly
+(b) \erratum{The textbook prints the integral as $\int_0^x\exp(x^2)\,dx$,
+reusing $x$ as integration variable and upper limit; the dummy variable
+$t$ makes its intended meaning explicit.} Since the exponential series
+$e^{t^2}=\sum_{k\ge0}t^{2k}/k!$ converges uniformly
 on every finite integration interval, termwise integration is valid:
 \[
 \int_0^xe^{t^2}dt
 =\sum_{k=0}^\infty\frac1{k!}\int_0^xt^{2k}dt
 =\sum_{k=0}^\infty\frac{x^{2k+1}}{k!(2k+1)}=y(x).
 \]
-Alternatively $y'=e^{x^2}$ directly gives $y''=2xy'$ and the correct
-initial data.
+Alternatively $y'=e^{x^2}$ directly gives $y''=2xe^{x^2}=2xy'$ and the
+correct initial data $y(0)=0$, $y'(0)=1$.
 
-(c) Independent quadrature, also checked against
+(c) Numerical quadrature of $e^{t^2}$, checked against the closed form
 $(\sqrt\pi/2)\operatorname{erfi}(x)$, gives
 \[
 \begin{aligned}
-\int_0^1e^{t^2}dt&=1.462651745907181609\ldots,\\
+\int_0^1e^{t^2}dt&=1.462651745907181608\ldots,\\
 \int_0^2e^{t^2}dt&=16.45262776550723022\ldots,\\
 \int_0^3e^{t^2}dt&=1444.5451228927141547\ldots.
 \end{aligned}
 \]
-The differences from the finite sums in (a) are positive and smaller
-than the displayed bounds, as an independent numerical check.
+The differences from the finite sums in (a), $1.430\times10^{-8}$,
+$7.229\times10^{-7}$ and $3.797\times10^{-5}$, are positive and smaller
+than the bounds $B_K$, as an independent numerical check.
 
 \Needspace{8\baselineskip}
 \subsection*{7.6 Other Solutions}
@@ -2020,8 +2076,11 @@ Expansion down the first column gives
 \det[A\ B\ C]
 &=A_1(B_2C_3-B_3C_2)-A_2(B_1C_3-B_3C_1)\\
 &\quad+A_3(B_1C_2-B_2C_1)
-=\mathbf A\cdot(\mathbf B\times\mathbf C).
+=\mathbf A\cdot(\mathbf B\times\mathbf C),
 \end{align*}
+because the three brackets, with the middle sign absorbed, are the
+components $(B_2C_3-B_3C_2,\ B_3C_1-B_1C_3,\ B_1C_2-B_2C_1)$ of
+$\mathbf B\times\mathbf C$.
 Therefore
 \[
 \boxed{\mathbf A,\mathbf B,\mathbf C\text{ independent}
@@ -2035,15 +2094,13 @@ there is a nontrivial relation; this proves the converse as well.
 \noindent\textbf{7.6.3}\quad Using the Wronskian determinant, show that the
 set of functions
 \[
-\left\{\erratum{1},\frac{x^{n}}{n!},(n=1,2,\ldots,N)\right\}
+\left\{1,\frac{x^{n}}{n!},(n=1,2,\ldots,N)\right\}
 \]
 is linearly independent.
 \solution
-\erratum{The source exercise (textbook p.~370) includes the constant
-function $1$; it was omitted in the transcription. The corrected set is
-$\{1,x,x^2/2!,\ldots,x^N/N!\}$.}
-For columns indexed by $n=0,\ldots,N$ and rows by derivative order
-$j=0,\ldots,N$,
+The set is $\{1,x,x^2/2!,\ldots,x^N/N!\}$, that is, $x^n/n!$ for
+$n=0,\ldots,N$. For columns indexed by $n=0,\ldots,N$ and rows by
+derivative order $j=0,\ldots,N$,
 \[
 \frac{d^j}{dx^j}\frac{x^n}{n!}
 =\begin{cases}x^{n-j}/(n-j)!,&j\le n,\\0,&j>n.\end{cases}
@@ -2061,16 +2118,23 @@ If a constant linear combination of the functions were zero, its first
 $N$ derivatives would be zero too. Invertibility of this matrix would
 then force every coefficient to vanish.
 
-The transcribed set without $1$ is also independent, but its Wronskian
-is different. The determinant of the falling-factorial coefficient
-matrix is the Vandermonde product of the distinct exponents $1,\ldots,N$:
+Without the constant function, the set $\{x,x^2/2!,\ldots,x^N/N!\}$
+is still independent, but its Wronskian is no longer constant. With rows
+$j=0,\ldots,N-1$, the entry of column $n=1,\ldots,N$ is
+$n(n-1)\cdots(n-j+1)x^{n-j}/n!$. Taking $x^n/n!$ out of column $n$ and
+$x^{-j}$ out of row $j$ leaves the matrix of falling factorials
+$n(n-1)\cdots(n-j+1)$. Each is $n^j$ plus lower powers of $n$ with
+coefficients independent of $n$, so subtracting multiples of earlier
+rows turns this matrix into the Vandermonde matrix $[n^j]$, of
+determinant $\prod_{1\le i<k\le N}(k-i)=\prod_{k=2}^N(k-1)!$. Hence
 \[
 W\{x,x^2/2!,\ldots,x^N/N!\}
-=\frac{\prod_{1\le i<j\le N}(j-i)}{\prod_{n=1}^Nn!}
+=\frac{\prod_{k=1}^{N-1}k!}{\prod_{n=1}^Nn!}\,
  x^{\sum_{n=1}^Nn-\sum_{j=0}^{N-1}j}
-=\boxed{\frac{x^N}{N!}}.
+=\boxed{\frac{x^N}{N!}},
 \]
-Here the product in the numerator is $\prod_{j=1}^{N-1}j!$.
+since the two exponent sums are $N(N+1)/2$ and $N(N-1)/2$. (For $N=2$:
+$x\cdot x-1\cdot x^2/2=x^2/2$.)
 This Wronskian is nonzero at every $x\ne0$, enough to prove independence;
 its isolated zero at zero does not imply dependence.
 
@@ -2117,8 +2181,9 @@ functions are linearly dependent.
 containing these points, or that they solve the same normalized
 second-order ODE with continuous coefficients there.}
 \solution
-\erratum{The original statement is false for general differentiable, or even
-infinitely differentiable, functions. It needs analyticity on a connected
+\erratum{The textbook's statement is false for general differentiable, or even
+infinitely differentiable, functions, as the counterexample below
+shows. It needs analyticity on a connected
 interval, or a common regular second-order ODE.}
 A smooth counterexample on $\mathbb R$ is
 \[
@@ -2126,9 +2191,12 @@ y_1(x)=1,\qquad
 y_2(x)=\begin{cases}0,&x\le1,\\e^{-1/(x-1)^2},&x>1.\end{cases}
 \]
 To check smoothness at $1$, set $u=1/(x-1)$ on the right.
-Since $d/dx=-u^2d/du$, induction shows that every derivative has the
-form $p(u)e^{-u^2}$ for a polynomial $p$. Each tends to zero as
-$u\to+\infty$, matching every derivative of the zero branch. Thus
+Since $du/dx=-u^2$, so that $d/dx=-u^2\,d/du$, induction shows that
+every derivative has the form $p(u)e^{-u^2}$ for a polynomial $p$
+(differentiating $p(u)e^{-u^2}$ gives $-u^2[p'(u)-2up(u)]e^{-u^2}$).
+Each tends to zero as $u\to+\infty$, i.e.\ as $x\to1^+$; by the mean
+value theorem the right-hand derivatives of every order at $1$ are then
+zero, matching every derivative of the zero branch. Thus
 $y_2$ is smooth.
 Its Wronskian with $1$ is
 \[
@@ -2139,11 +2207,12 @@ It vanishes in every sufficiently small interval around $x_0=0$, but
 not for $x>1$. The functions are independent: a relation $a+by_2=0$
 first forces $a=0$ on $x\le1$, then $b=0$ on $x>1$.
 
-Under the repaired analytic hypothesis, $W$ is analytic. Its vanishing
-on a nonempty interval makes all its Taylor coefficients there zero;
-the analytic identity theorem propagates $W=0$ through the connected
-domain. If, say, $y_2$ is not identically zero, choose a small interval
-where it is nonzero. Exercise 7.6.4 gives $y_1=cy_2$ there, and the
+Under the added analytic hypothesis, $W=y_1y_2'-y_1'y_2$ is analytic.
+Its vanishing on a nonempty interval makes all its Taylor coefficients
+there zero; the analytic identity theorem propagates $W=0$ through the
+connected domain. If, say, $y_2$ is not identically zero, its zeros are
+isolated (identity theorem again), so choose a small interval where it
+is nonzero. Exercise 7.6.4 gives $y_1=cy_2$ there, and the
 analytic identity theorem applied to $y_1-cy_2$ extends that relation
 throughout the domain. An identically zero member gives dependence
 immediately.
@@ -2151,9 +2220,13 @@ immediately.
 Alternatively, for two solutions of the same normalized ODE with
 continuous $P,Q$, Abel's identity gives
 $W(x)=W(x_*)e^{-\int_{x_*}^xP(t)dt}$. A single zero then makes $W$
-identically zero, and initial-value uniqueness gives linear dependence.
-The ODE or analytic assumption is the missing reason local information
-can be extended globally.
+identically zero. At any point $x_*$ the Wronskian matrix
+$\bigl(\begin{smallmatrix}y_1&y_2\\y_1'&y_2'\end{smallmatrix}\bigr)$
+is then singular, so it has a null vector $(a,b)\ne(0,0)$, and
+$u=ay_1+by_2$ solves the ODE with $u(x_*)=u'(x_*)=0$; initial-value
+uniqueness gives $u\equiv0$, which is linear dependence. The ODE or
+analytic assumption is the missing reason local information can be
+extended globally.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2171,7 +2244,14 @@ W=\det\begin{pmatrix}
 \end{pmatrix}.
 \]
 Factor $e^x$ and $e^{-x}$ from the last two columns; their product is
-one. Expanding the remaining determinant along its first row gives
+one. Expanding the remaining determinant
+\[
+\det\begin{pmatrix}
+\sin x&1&1\\\cos x&1&-1\\-\sin x&1&1
+\end{pmatrix}
+\]
+along its first row, with the $2\times2$ minors $1-(-1)=2$,
+$\cos x-\sin x$ and $\cos x+\sin x$, gives
 \[
 W=2\sin x-(\cos x-\sin x)+(\cos x+\sin x)
 =\boxed{4\sin x}.
@@ -2224,7 +2304,8 @@ Differentiation gives $2(a/2+b)e^{2x}=0$, hence $a/2+b=0$;
 the original relation then gives $a/2=0$ and $b=0$. Thus they are
 linearly independent. Their Wronskian checks this directly:
 \[
-W(\cosh x,e^x)=e^x(\cosh x-\sinh x)=1.
+W(\cosh x,e^x)=\cosh x\,e^x-\sinh x\,e^x=e^x(\cosh x-\sinh x)
+=e^xe^{-x}=1.
 \]
 They nevertheless satisfy the nonlinear relation
 \[
@@ -2253,12 +2334,14 @@ $x=\pm1$. Differentiate so the cross terms cancel:
 W'=u'v'+uv''-u''v-u'v'=uv''-u''v.
 \]
 The normalized Legendre equation gives
-$y''=2xy'/(1-x^2)-n(n+1)y/(1-x^2)$. Substitution yields
+$y''=2xy'/(1-x^2)-n(n+1)y/(1-x^2)$. Substitution for $u''$ and $v''$
+yields
 \[
-W'=\frac{2x}{1-x^2}(uv'-u'v)=\frac{2x}{1-x^2}W.
+W'=\frac{2x(uv'-u'v)-n(n+1)(uv-uv)}{1-x^2}=\frac{2x}{1-x^2}W.
 \]
 Equivalently,
-$[(1-x^2)W]'=-2xW+(1-x^2)W'=0$. Integrating directly gives
+$[(1-x^2)W]'=-2xW+(1-x^2)W'=0$. Integrating gives $(1-x^2)W=A_n$, a
+constant, that is,
 \[
 \boxed{W(P_n,Q_n)=\frac{A_n}{1-x^2}},
 \]
@@ -2331,7 +2414,8 @@ from $y_1$ times the second. The terms involving $r$ cancel:
 \[
 p(y_1y_2''-y_1''y_2)+p'(y_1y_2'-y_1'y_2)=0.
 \]
-Thus $pW'+p'W=(pW)'=0$, and
+Since $W=y_1y_2'-y_1'y_2$ has $W'=y_1y_2''-y_1''y_2$ (the terms
+$y_1'y_2'$ cancel), this is $pW'+p'W=(pW)'=0$, and
 \[
 \boxed{W=C/p}.
 \]
@@ -2370,9 +2454,11 @@ q(x)=Q(x)-\frac{1}{2}P'(x)-\frac{1}{4}P^{2}(x).
 \emph{Note.}~This substitution can be derived by the technique of
 Exercise 7.6.25.
 \solution
-Set $E(x)=\exp[-\tfrac12\int^xP(t)dt]$, so $y=Ez$ and
+Set $E(x)=\exp[-\tfrac12\int^xP(t)dt]$, so $y=Ez$ and, differentiating
+$E'=-PE/2$ once more,
 \[
-E'=-\frac P2E,\qquad E''=\left(-\frac{P'}2+\frac{P^2}4\right)E.
+E'=-\frac P2E,\qquad E''=-\frac{P'}2E-\frac P2E'
+=\left(-\frac{P'}2+\frac{P^2}4\right)E.
 \]
 The product rule gives
 \[
@@ -2406,19 +2492,26 @@ The radial part of the spherical Laplacian is
 =\varphi''+\frac2r\varphi',\qquad r>0.
 \]
 Thus $P(r)=2/r$ and the factor in 7.6.12 is
-$\exp[-\tfrac12\int(2/r)dr]=1/r$, up to a constant.
+$\exp[-\tfrac12\int(2/r)dr]=e^{-\ln r}=1/r$, up to a constant.
 The new dependent variable is therefore $u=r\varphi$, or
 $\varphi=u/r$. Direct differentiation confirms the cancellation:
 \[
 \varphi'=\frac{u'}r-\frac u{r^2},\qquad
 \varphi''=\frac{u''}r-\frac{2u'}{r^2}+\frac{2u}{r^3},
 \]
+so that
 \[
+\varphi''+\frac2r\varphi'
+=\frac{u''}r-\frac{2u'}{r^2}+\frac{2u}{r^3}+\frac{2u'}{r^2}-\frac{2u}{r^3},
+\qquad
 \boxed{\varphi''+\frac2r\varphi'=\frac{u''}r}.
 \]
 The potential correction from the substitution also vanishes:
-$-P'/2-P^2/4=1/r^2-1/r^2=0$.
-If angular dependence is present, it is unaffected:
+$-P'/2-P^2/4=1/r^2-1/r^2=0$, so $q=Q$ in 7.6.12.
+If angular dependence is present, it is unaffected: writing
+$\nabla^2=r^{-2}\partial_r(r^2\partial_r)+r^{-2}\Delta_\Omega$, where
+$\Delta_\Omega$ is the angular operator in $\theta$ and the azimuth
+(it does not act on $r$),
 $\nabla^2(u/r)=u_{rr}/r+\Delta_\Omega u/r^3$.
 The eliminated derivative is the first \emph{radial} derivative; the
 origin requires its separate regularity condition.
@@ -2451,7 +2544,9 @@ On an interval where $y_1\ne0$, abbreviate
 E=e^{-\int^xP(t)dt},\qquad h=E/y_1^2,\qquad
 J=\int^xh(s)ds,
 \]
-so $E'=-PE$, $J'=h$, and $y_2=y_1J$. Differentiate explicitly:
+so $E'=-PE$, $J'=h$ (the Leibniz formula of the note, with only the
+upper limit depending on $x$), and $y_2=y_1J$. Differentiate
+explicitly; $h'=E'/y_1^2-2Ey_1'/y_1^3$ and the product rule give
 \[
 h'=-Ph-2\frac{y_1'}{y_1}h,
 \quad y_2'=y_1'J+y_1h,
@@ -2497,9 +2592,11 @@ For another inner lower limit $b$,
 \int_a^sP=\int_b^sP-\int_b^aP,\qquad
 E_a(s)=K E_b(s),\quad K=\exp\left(\int_b^aP(t)dt\right)\ne0.
 \]
-Changing the outer lower limit from $c$ to $d$ then gives
+Changing the outer lower limit from $c$ to $d$, with
+$\int_c^x=\int_d^x-\int_d^c$, then gives
 \begin{align*}
 Y_{a,c}
+&=K y_1\int_c^x\frac{E_b(s)}{y_1(s)^2}ds\\
 &=K y_1\left[\int_d^x\frac{E_b(s)}{y_1(s)^2}ds
               -\int_d^c\frac{E_b(s)}{y_1(s)^2}ds\right]\\
 &=\boxed{K Y_{b,d}+D y_1},\qquad
@@ -2525,12 +2622,13 @@ With $R_1=r^m$, reduction of order gives
 R_2=r^m\int^r\frac{ds/s}{s^{2m}}
 =r^m\int^rs^{-2m-1}ds.
 \]
-For $m\ne0$,
+For $m\ne0$, $\int^rs^{-2m-1}ds=-r^{-2m}/(2m)$, so
 \[
 R_2=-\frac1{2m}r^{-m},
 \]
-so rescaling yields the requested independent solution
-$\boxed{R_2=r^{-m}}$. Direct substitution gives
+and rescaling yields the requested independent solution
+$\boxed{R_2=r^{-m}}$. With $R_2'=-mr^{-m-1}$ and
+$R_2''=m(m+1)r^{-m-2}$, direct substitution gives
 $m(m+1)r^{-m-2}-mr^{-m-2}-m^2r^{-m-2}=0$.
 \erratum{When $m=0$, $r^m=r^{-m}=1$ does not provide two independent
 solutions. The integral becomes $\int ds/s$, and the second solution
@@ -2547,7 +2645,8 @@ proceeds through Eq.~(7.81) and show that in that equation $c_{n}=0$, so that
 in this case the second solution does not contain a logarithmic term.
 \solution
 The given first solution is $y_1=\sin x=xA(x^2)$ with
-$A(0)=1$; the oscillator equation has $P=0$.
+$A(w)=\sum_{m\ge0}(-1)^mw^m/(2m+1)!$, so $A(0)=1$; the oscillator
+equation $y''+y=0$ has $P=0$, so $e^{-\int P\,dx}=1$.
 Its reduction-of-order integrand is
 \[
 \frac1{y_1^2}=\frac1{x^2}\frac1{A(x^2)^2}
@@ -2558,12 +2657,15 @@ The reciprocal series exists near zero because $A(0)\ne0$.
 A logarithm can arise on termwise integration only from a power
 $x^{-1}$. But $2j-2=-1$ would require $j=1/2$, not an integer.
 Thus the logarithm coefficient denoted $c_n$ in the referenced analysis
-is zero. Indeed,
+is zero: the indicial roots of $y''+y=0$ at $x=0$ are $1$ and $0$, so
+$n=1$, the integrand is $x^{-2}(1+c_1x+c_2x^2+\cdots)$, and $c_1$, the
+coefficient of $x$ in the even series $1/A(x^2)^2$, vanishes. Indeed,
 \[
 y_2=\sin x\int^x\frac{ds}{\sin^2s}
 =\sin x(-\cot x)=-\cos x,
 \]
-up to a multiple of $\sin x$. The Taylor series
+since $(\cot s)'=-1/\sin^2s$; the integration constant adds a multiple
+of $\sin x$. The Taylor series
 $-1+x^2/2!-x^4/4!+\cdots$ contains no logarithm and verifies the
 coefficient argument directly.
 
@@ -2574,12 +2676,16 @@ ODE, Eq.~(7.40), the second solution of Bessel's equation, obtained from
 Eq.~(7.67), does not contain a logarithmic term.
 \solution
 For a real noninteger order set $\nu=|n|$; for a complex noninteger
-order the same proof works with $\nu=n$. Bessel's equation depends on
-$n^2$, and the Frobenius solution with exponent $\nu$ has the form
+order the same proof works with $\nu=n$. Bessel's equation
+$x^2y''+xy'+(x^2-n^2)y=0$ depends only on $n^2=\nu^2$. Substituting
+$y=\sum_{j\ge0}a_jx^{\nu+j}$ gives $[(\nu+j)^2-\nu^2]a_j+a_{j-2}=0$,
+that is, $j(2\nu+j)a_j=-a_{j-2}$, with $a_{-1}=a_{-2}=0$. Here
+$2\nu+j\ne0$ for $j\ge1$, so $a_1=0$ and every odd coefficient
+vanishes: the Frobenius solution with exponent $\nu$ has the form
 \[
-y_1=x^\nu A(x^2),\qquad A(0)\ne0,
+y_1=x^\nu A(x^2),\qquad A(0)=a_0\ne0.
 \]
-with only even increments in its Frobenius series. Since $P=1/x$,
+Since $P=1/x$ and $e^{-\int P\,dx}=1/x$,
 \[
 \frac{e^{-\int Pdx}}{y_1^2}
 =x^{-2\nu-1}\frac1{A(x^2)^2}
@@ -2626,7 +2732,17 @@ For Hermite's equation $P=-2x$, so $e^{-\int Pdx}=e^{x^2}$.
 \]
 The exponential series converges uniformly on finite intervals,
 justifying its termwise integral. This is the normalized odd solution:
-$y_2(0)=0$, $y_2'(0)=1$, and $y_2''-2xy_2'=0$ directly.
+$y_2(0)=0$, $y_2'(0)=1$, and $y_2''-2xy_2'=0$ directly. To compare
+with Exercise 8.3.3, substitute $y=\sum_ja_jx^j$ into Hermite's
+equation: $(j+2)(j+1)a_{j+2}-2ja_j+2\alpha a_j=0$, so
+\[
+a_{j+2}=\frac{2(j-\alpha)}{(j+2)(j+1)}a_j.
+\]
+For $\alpha=0$ and $j=2k+1$ this gives
+$a_{2k+3}/a_{2k+1}=(2k+1)/[(k+1)(2k+3)]$, the ratio of consecutive
+coefficients $1/[k!(2k+1)]$ above (as in Exercise 7.5.13); with the
+same leading coefficient the two odd series coincide:
+$x+x^3/3+x^5/10+\cdots$.
 
 (b) With $\alpha=1$ and $y_1=x$, reduction of order gives
 $x\int^xe^{t^2}/t^2\,dt$. Differentiate $e^{t^2}/t$:
@@ -2641,7 +2757,8 @@ its sign to normalize the even solution to one:
 \[
 \boxed{y_{\rm even}=e^{x^2}-2x\int_0^xe^{t^2}dt}.
 \]
-Its series is
+Its series follows from $e^{x^2}=\sum_kx^{2k}/k!$ and the series of
+part (a), with $k\to k-1$ in the second sum:
 \begin{align*}
 y_{\rm even}
 &=\sum_{k\ge0}\frac{x^{2k}}{k!}
@@ -2649,10 +2766,19 @@ y_{\rm even}
 &=1+\sum_{k\ge1}\left[\frac1{k!}
  -\frac2{(k-1)!(2k-1)}\right]x^{2k}\\
 &=1-\sum_{k\ge1}\frac{x^{2k}}{k!(2k-1)}
-=1-x^2-\frac{x^4}{6}-\frac{x^6}{30}-\cdots.
+=1-x^2-\frac{x^4}{6}-\frac{x^6}{30}-\cdots,
 \end{align*}
-This is the even Hermite series at $\alpha=1$. Setting
-$J=\int_0^xe^{t^2}dt$ gives $y'=-2J$, $y''=-2e^{x^2}$, and
+because $2/(k-1)!=2k/k!$ and
+\[
+\frac1{k!}-\frac{2k}{k!(2k-1)}=\frac{(2k-1)-2k}{k!(2k-1)}
+=-\frac1{k!(2k-1)}.
+\]
+This is the even Hermite series at $\alpha=1$: the recursion of part (a)
+with $\alpha=1$, $j=2k$, gives $a_2=-a_0$ and, for $k\ge1$,
+$a_{2k+2}/a_{2k}=(2k-1)/[(k+1)(2k+1)]$, which is exactly the ratio of
+consecutive coefficients $-1/[k!(2k-1)]$. Setting
+$J=\int_0^xe^{t^2}dt$, so $J'=e^{x^2}$, gives
+$y'=2xe^{x^2}-2J-2xe^{x^2}=-2J$, $y''=-2e^{x^2}$, and
 $y''-2xy'+2y=-2e^{x^2}+4xJ+2(e^{x^2}-2xJ)=0$.
 The integral construction is initially used on $x\ne0$; the displayed
 even function extends smoothly through zero.
@@ -2667,11 +2793,12 @@ for $n=0$ is $y_{1}(x)=1$. Using Eq.~(7.67), develop a second, linearly
 independent solution. Exhibit the logarithmic term explicitly.
 \solution
 Normalize the $n=0$ equation to $y''+(1/x-1)y'=0$ on $x\ne0$.
-Since $y_1=1$,
+Since $\int(1/x-1)dx=\ln|x|-x$,
 \[
-e^{-\int(1/x-1)dx}=\frac{e^x}{x}
+e^{-\int(1/x-1)dx}=\frac{e^x}{|x|}=\pm\frac{e^x}{x}
 \]
-up to a nonzero constant on either real half-line. Hence
+on either real half-line; the constant sign is dropped. With $y_1=1$,
+$y_1^2=1$, Eq.~(7.67) gives
 \[
 y_2=\int^x\frac{e^s}{s}ds.
 \]
@@ -2715,17 +2842,25 @@ gives $y_2''=e^x/x-e^x/x^2$. Consequently
 xy_2''+(1-x)y_2'
 =e^x-\frac{e^x}x+\frac{e^x}x-e^x=0.
 \]
-(c) Differentiate the series explicitly:
+(c) Differentiate the series explicitly, using
+$[x^k/(k\,k!)]'=x^{k-1}/k!$:
 \[
 y_2'=\frac1x+\sum_{k\ge1}\frac{x^{k-1}}{k!},\qquad
 y_2''=-\frac1{x^2}+\sum_{k\ge1}\frac{(k-1)x^{k-2}}{k!}.
 \]
-Then
+Hence
+\[
+xy_2''=-\frac1x+\sum_{k\ge1}\frac{(k-1)x^{k-1}}{k!},\qquad
+(1-x)y_2'=\frac1x-1+\sum_{k\ge1}\frac{x^{k-1}}{k!}
+ -\sum_{k\ge1}\frac{x^k}{k!}.
+\]
+Adding, the $1/x$ terms cancel and $(k-1)+1=k$, so
 \begin{align*}
 xy_2''+(1-x)y_2'
 &=-1+\sum_{k\ge1}\frac{kx^{k-1}}{k!}
       -\sum_{k\ge1}\frac{x^k}{k!}\\
-&=-1+e^x-(e^x-1)=0.
+&=-1+\sum_{k\ge1}\frac{x^{k-1}}{(k-1)!}-(e^x-1)
+=-1+e^x-(e^x-1)=0.
 \end{align*}
 This verifies the series independently of recognizing it as the integral.
 
@@ -2749,9 +2884,10 @@ solution given in Section 18.4.
 \erratum{under the nonzero-$n$ convention of Section 18.4}.
 \solution
 Work on $-1<x<1$. (a) The normalized coefficient is
-$P=-x/(1-x^2)$, so
+$P=-x/(1-x^2)$; with $w=1-x^2$, $dw=-2x\,dx$,
 \[
-\int Pdx=\tfrac12\ln(1-x^2),\qquad e^{-\int Pdx}=(1-x^2)^{-1/2}.
+\int Pdx=\int\frac{dw}{2w}=\tfrac12\ln(1-x^2),\qquad
+e^{-\int Pdx}=(1-x^2)^{-1/2}.
 \]
 Since $y_1=1$, reduction of order yields
 \[
@@ -2788,28 +2924,38 @@ for $n=1$ is $y_{1}(x)=x$. Set up the Wronskian double integral solution and
 derive a second solution, $y_{2}(x)$.
 \par\nobreak\hfill\emph{ANS.}\enspace $y_{2}=-(1-x^{2})^{1/2}$.
 \solution
-On $-1<x<1$, use $P=-x/(1-x^2)$ and $y_1=x$. Reduction of order gives,
-initially on either side of zero,
+On $-1<x<1$, use $P=-x/(1-x^2)$ and $y_1=x$. As in Exercise 7.6.22,
+the inner integral is $\exp[-\int^sP(t)dt]=(1-s^2)^{-1/2}$, so the
+Wronskian double integral gives, initially on either side of zero,
 \[
 y_2=x\int^x\frac{\exp[-\int^s(-t/(1-t^2))dt]}{s^2}ds
 =x\int^x\frac{ds}{s^2\sqrt{1-s^2}}.
 \]
-The antiderivative follows directly from the product rule:
+The antiderivative follows directly from the product rule, since
+$(\sqrt{1-s^2})'=-s/\sqrt{1-s^2}$:
 \[
 \frac d{ds}\left(-\frac{\sqrt{1-s^2}}s\right)
 =\frac1{\sqrt{1-s^2}}+\frac{\sqrt{1-s^2}}{s^2}
+=\frac{s^2+(1-s^2)}{s^2\sqrt{1-s^2}}
 =\frac1{s^2\sqrt{1-s^2}}.
 \]
-Thus
+Thus $y_2=x\cdot(-\sqrt{1-x^2}/x)$, that is,
 \[
 \boxed{y_2=-\sqrt{1-x^2}},
 \]
-up to a multiple of $x$. Its derivatives are
-$y_2'=x/\sqrt{1-x^2}$ and $y_2''=(1-x^2)^{-3/2}$.
-Substitution gives
-$(1-x^2)y_2''-xy_2'+y_2
-=(1-x^2)/\sqrt{1-x^2}-\sqrt{1-x^2}=0$.
-Finally $W(x,y_2)=1/\sqrt{1-x^2}\ne0$. Although the reduction
+up to a multiple of $x$ from the integration constant. Its derivatives
+are, by the quotient rule,
+\[
+y_2'=\frac x{\sqrt{1-x^2}},\qquad
+y_2''=\frac{\sqrt{1-x^2}+x^2/\sqrt{1-x^2}}{1-x^2}=(1-x^2)^{-3/2},
+\]
+so substitution gives
+\[
+(1-x^2)y_2''-xy_2'+y_2
+=\frac{1-x^2}{\sqrt{1-x^2}}-\sqrt{1-x^2}=0.
+\]
+Finally $W(x,y_2)=xy_2'-y_2=x^2/\sqrt{1-x^2}+\sqrt{1-x^2}
+=1/\sqrt{1-x^2}\ne0$. Although the reduction
 integrand was singular at zero, the final solution and this Wronskian
 extend there regularly.
 
@@ -2835,21 +2981,28 @@ approaching a nonzero constant for $l=0$.}
 \end{enumerate}
 \solution
 Let $\kappa=2m/\hbar^2$ and take the physical $l=0,1,2,\ldots$.
-The equation is
+Multiplying by $-\kappa$ and collecting all terms on the left, the
+equation becomes
 \[
 y''-\frac{l(l+1)}{r^2}y+\kappa[E-V(r)]y=0.
 \]
-(a) The potential has at most a simple pole, so the leading
-$r^{s-2}$ coefficient of a Frobenius trial is
+(a) Insert a Frobenius trial $y=\sum_{j\ge0}a_jr^{s+j}$, $a_0\ne0$.
+The potential has at most a simple pole, so $\kappa(E-V)y$ begins at
+$r^{s-1}$, and the lowest power $r^{s-2}$ comes only from
+$y''-l(l+1)y/r^2$, with coefficient
 \[
 [s(s-1)-l(l+1)]a_0=(s-l-1)(s+l)a_0=0.
 \]
 The roots are $l+1$ and $-l$. For $s=l+1$, the coefficient of $a_j$
 in the recurrence is
 \[
-(s+j)(s+j-1)-l(l+1)=j(2l+j+1)>0\quad(j\ge1).
+(s+j)(s+j-1)-l(l+1)=(l+j+1)(l+j)-l(l+1)=j(2l+j+1)>0\quad(j\ge1).
 \]
-In detail, with negative-index coefficients zero,
+In detail, the coefficient of $r^{s+j-2}$ also receives
+$\kappa Ea_{j-2}$ from $\kappa Ey$ and, since
+$Vy=\sum_q\sum_ib_qa_ir^{s+i+q}$, the terms $-\kappa b_qa_i$ with
+$i+q=j-2$ from $-\kappa Vy$. With negative-index coefficients zero,
+this gives
 \[
 j(2l+j+1)a_j
 =\kappa\left[\sum_{q=-1}^{j-2}b_q a_{j-2-q}-Ea_{j-2}\right].
@@ -2858,20 +3011,24 @@ Thus an arbitrary nonzero $a_0$ determines every following coefficient;
 for example $a_1=\kappa b_{-1}a_0/[2(l+1)]$. The regular solution is
 $\boxed{y_1=a_0r^{l+1}[1+O(r)]}$.
 
-(b) There is no first derivative, so reduction of order is
-$y_2=y_1\int^rds/y_1(s)^2$. Its leading terms are
+(b) There is no first derivative ($P=0$, $e^{-\int P}=1$), so
+reduction of order is $y_2=y_1\int^rds/y_1(s)^2$. Its leading terms are
 \[
 \frac1{y_1(s)^2}=a_0^{-2}s^{-2l-2}[1+O(s)],
 \quad
 \int^r\frac{ds}{y_1(s)^2}
-\sim-\frac{a_0^{-2}}{2l+1}r^{-2l-1}.
+\sim-\frac{a_0^{-2}}{2l+1}r^{-2l-1}:
 \]
-Multiplying gives
+integrating termwise, $s^{-2l-2}$ gives $r^{-2l-1}/(-2l-1)$, while the
+higher terms give the higher powers $r^{-2l},r^{-2l+1},\ldots$ and
+possibly $\ln r$ (from an $s^{-1}$ term), all smaller as $r\to0$.
+Multiplying by $y_1=a_0r^{l+1}[1+O(r)]$ gives
 \[
 \boxed{y_2(r)\sim-\frac1{a_0(2l+1)}r^{-l}}.
 \]
-\erratum{For $l\ge1$ this diverges, as stated. For $l=0$, however,
-$y_2$ tends to a nonzero constant; it does not diverge. The physical
+\erratum{The textbook states that $y_2$ diverges at the origin as
+$r^{-l}$. For $l\ge1$ it does; for $l=0$, however,
+$y_2$ tends to a nonzero constant and does not diverge. The physical
 radial function $R=y/r$ still behaves as $1/r$ and is irregular.}
 For $l=0$ the next terms may contain $r\ln r$, which still tend to zero
 and do not change the constant leading behavior.
@@ -2909,15 +3066,17 @@ g'+\left(2\frac{y_1'}{y_1}+P\right)g=0,
 \qquad
 \frac{g'}g=-2\frac{y_1'}{y_1}-P.
 \]
-Integrating and exponentiating gives
-$g=C e^{-\int Pdx}/y_1^2$, and a second integration gives
+Integrating gives $\ln|g|=-2\ln|y_1|-\int^xP\,dt+c$ on an interval
+where $g\ne0$; exponentiating, with the constant sign of $g$ absorbed,
+gives $g=C e^{-\int Pdx}/y_1^2$, and a second integration gives
 \[
 \boxed{f=D+C\int^x\frac{e^{-\int^sP(t)dt}}{y_1(s)^2}ds}.
 \]
 Here $C=0$ recovers the constant-$f$ branch excluded by division by $g$.
 For an independent second solution choose $C\ne0$, and omit the
 $D y_1$ contribution. Taking $C=1,D=0$ gives exactly the formula in
-the question; its Wronskian is $e^{-\int Pdx}\ne0$.
+the question; its Wronskian is
+$y_1(y_1'f+y_1f')-y_1'y_1f=y_1^2f'=e^{-\int Pdx}\ne0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2952,7 +3111,9 @@ Take $x>0$ and $a_0\ne0$. (a) For a trial $y=a_0x^s$,
 y''+\frac{1-\alpha^2}{4x^2}y
 =a_0x^{s-2}\left[s(s-1)+\frac{1-\alpha^2}{4}\right].
 \]
-The quadratic factors as
+The quadratic is
+$s^2-s+\frac14-\frac{\alpha^2}4=(s-\frac12)^2-(\frac\alpha2)^2$, which
+factors as
 $[s-(1+\alpha)/2][s-(1-\alpha)/2]$, so both stated powers solve
 the equation. Their Wronskian is
 \[
@@ -2969,27 +3130,41 @@ u_1\int^x\frac{ds}{u_1(s)^2}
 =a_0\sqrt x\int^x\frac{ds}{a_0^2s}
 =\frac1{a_0}\sqrt x\ln x.
 \]
-An arbitrary nonzero rescaling gives
-$\boxed{u_2=a_0\sqrt x\ln x}$. Explicitly,
+An arbitrary nonzero rescaling (by $a_0^2$) gives
+$\boxed{u_2=a_0\sqrt x\ln x}$. Explicitly, by the product rule,
 \[
-u_2'=a_0x^{-1/2}(1+\tfrac12\ln x),\qquad
-u_2''=-\frac{a_0}{4}x^{-3/2}\ln x,
+u_2'=a_0\left(\frac{\ln x}{2\sqrt x}+\frac{\sqrt x}x\right)
+=a_0x^{-1/2}(1+\tfrac12\ln x),
 \]
-so $u_2''+u_2/(4x^2)=0$.
-Also $W(u_1,u_2)=a_0^2\ne0$.
+\[
+u_2''=a_0\left[-\tfrac12x^{-3/2}(1+\tfrac12\ln x)
++x^{-1/2}\frac1{2x}\right]
+=-\frac{a_0}{4}x^{-3/2}\ln x,
+\]
+so
+\[
+u_2''+\frac{u_2}{4x^2}=-\frac{a_0}4x^{-3/2}\ln x+\frac{a_0}4x^{-3/2}\ln x=0.
+\]
+Also $W(u_1,u_2)=u_1u_2'-u_1'u_2
+=a_0^2(1+\tfrac12\ln x)-\tfrac12a_0^2\ln x=a_0^2\ne0$.
 
-(c) Write the powers as exponentials:
+(c) Write the powers as exponentials, using
+$x^{(1\pm\alpha)/2}=\sqrt x\,e^{\pm(\alpha/2)\ln x}$:
 \[
 \frac{y_1-y_2}{\alpha}
 =a_0\sqrt x\frac{e^{(\alpha/2)\ln x}-e^{-(\alpha/2)\ln x}}\alpha.
 \]
-Since $e^{hL}=1+hL+\tfrac12h^2L^2+O(h^3)$, the equal quadratic terms cancel and the numerator is
-$\alpha\ln x+O(\alpha^3)$, and hence
+Since $e^{hL}=1+hL+\tfrac12h^2L^2+O(h^3)$, applied with $L=\ln x$ and
+$h=\pm\alpha/2$, the constant and the equal quadratic terms cancel and
+the numerator is $\alpha\ln x+O(\alpha^3)$ (the odd terms double), and
+hence
 \[
 \boxed{\lim_{\alpha\to0}\frac{y_1-y_2}{\alpha}
 =a_0\sqrt x\ln x=u_2}.
 \]
-\erratum{The manual drops $a_0$ and gives an extra factor $1/2$ in this limit. The explicit expansion above retains $a_0$ and shows that no extra $1/2$ is present.}
+\erratum{The Instructor's Manual drops $a_0$ and gives an extra factor
+$1/2$ in this limit. The explicit expansion above retains $a_0$ and
+shows that no extra $1/2$ is present.}
 
 \Needspace{8\baselineskip}
 \subsection*{7.7 Inhomogeneous Linear ODEs}
@@ -3014,11 +3189,16 @@ with $W\{y_{1}(x),y_{2}(x)\}$ the Wronskian of $y_{1}(s)$ and $y_{2}(s)$.
 \erratum{For fixed independent homogeneous solutions, the general solution
 is $y=C_1y_1+C_2y_2+y_p$; the two arbitrary coefficients must be explicit.}
 Write the normalized equation as $L[y]=y''+Py'+Qy=F$ and seek
-$y_p=u_1y_1+u_2y_2$. Impose the auxiliary condition
-$u_1'y_1+u_2'y_2=0$. Then
+$y_p=u_1y_1+u_2y_2$. Then
+$y_p'=u_1y_1'+u_2y_2'+(u_1'y_1+u_2'y_2)$; impose the auxiliary condition
+$u_1'y_1+u_2'y_2=0$, so that
 \[
 y_p'=u_1y_1'+u_2y_2',\qquad
 y_p''=u_1y_1''+u_2y_2''+u_1'y_1'+u_2'y_2'.
+\]
+Collecting the terms multiplied by $u_1$ and by $u_2$,
+\[
+L[y_p]=u_1L[y_1]+u_2L[y_2]+u_1'y_1'+u_2'y_2'.
 \]
 Because $L[y_1]=L[y_2]=0$, the remaining equation is
 $u_1'y_1'+u_2'y_2'=F$. Thus
@@ -3027,10 +3207,16 @@ $u_1'y_1'+u_2'y_2'=F$. Thus
 \begin{pmatrix}u_1'\\u_2'\end{pmatrix}
 =\begin{pmatrix}0\\F\end{pmatrix}.
 \]
-Its determinant is $W=y_1y_2'-y_1'y_2$, nonzero on the regular interval.
-Cramer's rule gives
+Its determinant is $W=y_1y_2'-y_1'y_2$, nonzero on the regular interval:
+if $W(x_0)=0$, a null vector $(a,b)\ne(0,0)$ of this matrix at $x_0$
+would make $ay_1+by_2$ a homogeneous solution with zero value and slope
+at $x_0$, hence identically zero by initial-value uniqueness (as in
+Exercise 7.6.5), contradicting independence. Cramer's rule gives
 \[
-u_1'=-\frac{y_2F}{W},\qquad u_2'=\frac{y_1F}{W}.
+u_1'=\frac1W\det\begin{pmatrix}0&y_2\\F&y_2'\end{pmatrix}
+=-\frac{y_2F}{W},\qquad
+u_2'=\frac1W\det\begin{pmatrix}y_1&0\\y_1'&F\end{pmatrix}
+=\frac{y_1F}{W}.
 \]
 Integrate and substitute:
 \[
@@ -3041,7 +3227,10 @@ Constants in the integrals contribute only multiples of $y_1,y_2$.
 The calculation of $L[y_p]$ above gives
 $u_1'y_1'+u_2'y_2'=F$, checking the formula directly.
 Finally any other solution minus this particular solution satisfies the
-homogeneous equation, proving that $C_1y_1+C_2y_2+y_p$ is the general
+homogeneous equation, and every homogeneous solution $y_h$ is a
+combination $C_1y_1+C_2y_2$: by Exercise 7.6.10, $y_h,y_1,y_2$ satisfy
+a nontrivial relation $cy_h+ay_1+by_2=0$, and $c\ne0$ because $y_1,y_2$
+are independent. This proves that $C_1y_1+C_2y_2+y_p$ is the general
 solution.
 
 \Needspace{8\baselineskip}
@@ -3052,26 +3241,27 @@ Find the general solutions to the following inhomogeneous ODEs:
 \par\bigskip
 \noindent\textbf{7.7.2}\quad $y''+y=1$.
 \solution
-The homogeneous characteristic equation is $r^2+1=0$, giving
-$y_h=C_1\cos x+C_2\sin x$. For a constant particular solution $y_p=A$,
-the equation requires $0+A=1$, so $A=1$. Therefore
+The homogeneous characteristic equation is $r^2+1=0$, with roots
+$r=\pm i$, giving $y_h=C_1\cos x+C_2\sin x$. For a constant particular
+solution $y_p=A$, the equation requires $0+A=1$, so $A=1$. Therefore
 \[
 \boxed{y=C_1\cos x+C_2\sin x+1}.
 \]
 For a variation-of-parameters check, take $y_1=\cos x$, $y_2=\sin x$,
-$W=1$, $F=1$. Then
-$u_1'=-\sin x$, $u_2'=\cos x$, so one choice is
+$W=\cos x\cos x-(-\sin x)\sin x=1$, $F=1$. Then, by Exercise 7.7.1,
+$u_1'=-y_2F/W=-\sin x$, $u_2'=y_1F/W=\cos x$, so one choice is
 $u_1=\cos x$, $u_2=\sin x$. Their combination is
-$y_p=\cos^2x+\sin^2x=1$, agreeing with the constant trial.
-\erratum{The manual labels both derivatives $u_1'$ in the next sentence
-of its calculation; the second must be $u_2'=\cos x$, as the two equations above show.}
+$y_p=u_1y_1+u_2y_2=\cos^2x+\sin^2x=1$, agreeing with the constant trial.
+\erratum{The Instructor's Manual labels both derivatives $u_1'$ in its
+variation-of-parameters calculation; the second must be
+$u_2'=\cos x$, as Cramer's rule above shows.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{7.7.3}\quad $y''+4y=e^{x}$.
 \solution
-The homogeneous roots satisfy $r^2+4=0$, so the real homogeneous
-solution is $C_1\cos2x+C_2\sin2x$. Try $y_p=Ae^x$; then
+The homogeneous roots satisfy $r^2+4=0$, so $r=\pm2i$ and the real
+homogeneous solution is $C_1\cos2x+C_2\sin2x$. Try $y_p=Ae^x$; then
 \[
 y_p''+4y_p=(A+4A)e^x=5Ae^x.
 \]
@@ -3079,11 +3269,31 @@ Matching the right side sets $A=1/5$. Thus
 \[
 \boxed{y=C_1\cos2x+C_2\sin2x+\frac15e^x}.
 \]
-The homogeneous Wronskian is $2$, so the two constants are independent.
-Differentiating the displayed solution twice verifies that its
-trigonometric contributions cancel and its exponential contribution
+The homogeneous Wronskian is
+$W(\cos2x,\sin2x)=2\cos^22x+2\sin^22x=2$, so the two constants are
+independent. Differentiating the displayed solution twice verifies that
+its trigonometric contributions cancel and its exponential contribution
 is exactly $e^x$.
-\erratum{In the manual's variation-of-parameters calculation, $u_2'=e^x\cos(2x)/2$, not $e^x\sin(2x)/2$: Cramer's rule gives $y_1F/W=\cos(2x)e^x/2$. Its printed antiderivative and final answer agree with this corrected derivative.}
+
+Variation of parameters (Exercise 7.7.1) gives the same particular
+solution: with $y_1=\cos2x$, $y_2=\sin2x$, $W=2$, $F=e^x$,
+\[
+u_1'=-\frac{y_2F}W=-\frac{e^x\sin2x}2,\qquad
+u_2'=\frac{y_1F}W=\frac{e^x\cos2x}2.
+\]
+The real and imaginary parts of
+$\int e^{(1+2i)x}dx=e^{(1+2i)x}/(1+2i)=e^x(\cos2x+i\sin2x)(1-2i)/5$
+give $\int e^x\cos2x\,dx=e^x(\cos2x+2\sin2x)/5$ and
+$\int e^x\sin2x\,dx=e^x(\sin2x-2\cos2x)/5$, so
+\[
+u_1=\frac{e^x(2\cos2x-\sin2x)}{10},\qquad
+u_2=\frac{e^x(\cos2x+2\sin2x)}{10},
+\]
+and $y_p=u_1\cos2x+u_2\sin2x=e^x(2\cos^22x+2\sin^22x)/10=e^x/5$.
+\erratum{In the Instructor's Manual's variation-of-parameters
+calculation, $u_2'=e^x\cos(2x)/2$, not $e^x\sin(2x)/2$: Cramer's rule
+gives $y_1F/W=\cos(2x)e^x/2$. Its printed antiderivative and final
+answer agree with this corrected derivative.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3095,7 +3305,8 @@ For $y_p=A\sin x+B\cos x$,
 \[
 y_p'=A\cos x-B\sin x,\qquad y_p''=-A\sin x-B\cos x.
 \]
-Hence
+Hence, collecting $\sin x$ terms ($-A+3B+2A$) and $\cos x$ terms
+($-B-3A+2B$),
 \[
 y_p''-3y_p'+2y_p=(A+3B)\sin x+(B-3A)\cos x.
 \]
@@ -3119,24 +3330,27 @@ $xe^x-(1+x)e^x+e^x=0$. Their Wronskian is
 W=(x+1)e^x-e^x=xe^x,
 \]
 nonzero on either interval $x>0$ or $x<0$.
-After division by $x$, the source term for variation of parameters is
-$F=x$, not $x^2$. Therefore
+After division by $x$ the equation reads
+$y''-\frac{1+x}xy'+\frac1xy=x$, so the source term for variation of
+parameters is $F=x$, not $x^2$. Therefore
 \[
-u_1'=-\frac{e^x x}{xe^x}=-1,\qquad
-u_2'=\frac{(x+1)x}{xe^x}=(x+1)e^{-x}.
+u_1'=-\frac{y_2F}W=-\frac{e^x x}{xe^x}=-1,\qquad
+u_2'=\frac{y_1F}W=\frac{(x+1)x}{xe^x}=(x+1)e^{-x}.
 \]
-One choice of antiderivatives is
+Integration by parts gives
+$\int(x+1)e^{-x}dx=-(x+1)e^{-x}+\int e^{-x}dx=-(x+2)e^{-x}$, so one
+choice of antiderivatives is
 $u_1=-x$, $u_2=-(x+2)e^{-x}$, giving
 \[
-y_p=-x(x+1)-(x+2)=-x^2-2x-2.
+y_p=u_1y_1+u_2y_2=-x(x+1)-(x+2)=-x^2-2x-2.
 \]
 Since $-2(x+1)$ is homogeneous, it can be absorbed into its arbitrary
 coefficient; take simply $y_p=-x^2$. Thus
 \[
 \boxed{y=C_1(x+1)+C_2e^x-x^2}.
 \]
-The direct check for the particular solution is
-$x(-2)-(1+x)(-2x)-x^2=x^2$.
+The direct check for the particular solution, with $y_p'=-2x$ and
+$y_p''=-2$, is $x(-2)-(1+x)(-2x)-x^2=-2x+2x+2x^2-x^2=x^2$.
 The formula extends smoothly through zero, although the normalized ODE
 and the Wronskian argument are applied on intervals away from zero.
 It also describes every $C^2$ solution across zero: write the formula
@@ -3160,21 +3374,24 @@ u'=(2+u)^2-(2+u)-2=u^2+3u.
 The branch $u=0$ gives the original solution $y=2$. For $u\ne0$,
 put $v=1/u$; then
 \[
-v'=-\frac{u'}{u^2}=-1-3v,\qquad
-(e^{3x}v)'=-e^{3x}.
+v'=-\frac{u'}{u^2}=-\frac{u^2+3u}{u^2}=-1-3v,\qquad
+(e^{3x}v)'=e^{3x}(v'+3v)=-e^{3x},
 \]
-Integrating gives $v=Ce^{-3x}-1/3$. Renaming $3C$ as $K$,
+the second form after multiplying by the integrating factor $e^{3x}$.
+Integrating gives $e^{3x}v=-\frac13e^{3x}+C$, so $v=Ce^{-3x}-1/3$ and
+$u=1/v=3/(3Ce^{-3x}-1)$. Renaming $3C$ as $K$,
 \[
 \boxed{y=2+\frac3{Ke^{-3x}-1}},\qquad \boxed{y\equiv2}.
 \]
 The constant solution $y=-1$ is already included at $K=0$.
 Every nonconstant expression is used on a maximal interval where its
-denominator is nonzero. To check it, write $D=Ke^{-3x}-1$:
-$u'=9Ke^{-3x}/D^2$, while
-$u^2+3u=9(1+D)/D^2=9Ke^{-3x}/D^2$.
+denominator is nonzero. To check it, write $D=Ke^{-3x}-1$, so $u=3/D$
+and $D'=-3Ke^{-3x}$:
+$u'=-3D'/D^2=9Ke^{-3x}/D^2$, while
+$u^2+3u=(9+9D)/D^2=9(1+D)/D^2=9Ke^{-3x}/D^2$.
 \erratum{The integrating-constant formula for $v$ must have the particular
-term $-1/3$; the manual's intermediate $+1/3$ does not satisfy
-$v'+3v=-1$.}
+term $-1/3$; the Instructor's Manual's intermediate $+1/3$ does not
+satisfy $v'+3v=-1$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3188,22 +3405,29 @@ Work on $x\ne0$ and set $y=x^2+u$. Expanding every term gives
 =2x+\frac ux+\frac{u^2}{x^3}.
 \]
 Thus $u'=u/x+u^2/x^3$. The branch $u=0$ is $y=x^2$.
-For $u\ne0$, let $v=1/u$:
+For $u\ne0$, let $v=1/u$; then $v'=-u'/u^2=-1/(xu)-1/x^3$, that is,
 \[
 v'=-\frac vx-\frac1{x^3},\qquad
-v'+\frac vx=-\frac1{x^3},\qquad (xv)'=-\frac1{x^2}.
+v'+\frac vx=-\frac1{x^3},\qquad (xv)'=-\frac1{x^2},
 \]
-Integrating gives $xv=1/x+C$ and $v=(1+Cx)/x^2$. Therefore
+the last form after multiplying by the integrating factor
+$e^{\int dx/x}=x$ (up to sign).
+Integrating gives $xv=1/x+C$, so $v=(1+Cx)/x^2$ and
+$u=1/v=x^2/(1+Cx)$. Therefore
 \[
 \boxed{y=x^2+\frac{x^2}{1+Cx}},\qquad \boxed{y=x^2}.
 \]
 The first family is valid where $x\ne0$ and $1+Cx\ne0$; the second is
 the lost $u=0$ branch. For a check,
-$u=x^2/(1+Cx)$ gives
-$u'=(2x+Cx^2)/(1+Cx)^2=u/x+u^2/x^3$.
-\erratum{The manual's intermediate linear equation is missing the factor
-$1/x$ multiplying $v$; its displayed final solution agrees with the
-corrected equation derived here.}
+$u=x^2/(1+Cx)$ gives, by the quotient rule,
+\[
+u'=\frac{2x(1+Cx)-Cx^2}{(1+Cx)^2}=\frac{2x+Cx^2}{(1+Cx)^2},\qquad
+\frac ux+\frac{u^2}{x^3}=\frac x{1+Cx}+\frac x{(1+Cx)^2}
+=\frac{2x+Cx^2}{(1+Cx)^2}.
+\]
+\erratum{The Instructor's Manual's intermediate linear equation is
+missing the factor $1/x$ multiplying $v$; its displayed final solution
+agrees with the corrected equation derived here.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3214,7 +3438,8 @@ For a nonzero solution set $u=y^{-2}$. Then
 \[
 u'=-2y^{-3}y'=-2y^{-3}(xy^3-xy)=-2x+2xu.
 \]
-Thus
+Thus, multiplying the linear equation by the integrating factor
+$e^{-x^2}$,
 \[
 u'-2xu=-2x,\qquad (e^{-x^2}u)'=-2xe^{-x^2}=(e^{-x^2})'.
 \]
@@ -3227,9 +3452,17 @@ The real solutions are
 \erratum{Both signs and the zero solution are needed; taking only the
 positive square root loses real solutions.} Choose a connected interval
 where $1+Ce^{x^2}>0$ and a fixed sign. In particular $C=0$ gives
-$y=\pm1$. Differentiation gives
-$y'=-xCe^{x^2}y/(1+Ce^{x^2})$, whereas
-$xy^3-xy=xy[(1+Ce^{x^2})^{-1}-1]$ is the same expression.
+$y=\pm1$. Differentiation of $y=\pm(1+Ce^{x^2})^{-1/2}$ gives the
+first line below, and the right side of the equation, written as
+$y'=xy^3-xy$, gives the same expression:
+\[
+\begin{aligned}
+y'&=\mp\tfrac12(1+Ce^{x^2})^{-3/2}\,2xCe^{x^2}
+=-\frac{xCe^{x^2}y}{1+Ce^{x^2}},\\
+xy^3-xy&=xy\left[\frac1{1+Ce^{x^2}}-1\right]
+=-\frac{xCe^{x^2}y}{1+Ce^{x^2}}.
+\end{aligned}
+\]
 
 \Needspace{5\baselineskip}
 \par\bigskip
