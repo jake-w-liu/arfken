@@ -1631,8 +1631,9 @@ $N(p)/D'(p)$ gives the table above, with each residue paired to its pole.}
 
 \textbf{(h)} The nonintegral power produces branch points at zero and
 infinity: continuation once around zero multiplies $z^{-k}$ by
-$e^{-2\pi i k}\ne1$, while $f(1/w)=w^{-k}\cdot w/(1+w)=w^{k+1}/(1+w)$
-is also multivalued at $w=0$. A rational $k=p/q$ in lowest terms gives
+$e^{-2\pi i k}\ne1$, while
+$f(1/w)=(1/w)^{-k}/(1/w+1)=w^{k}\cdot w/(1+w)=w^{k+1}/(1+w)$
+is also multivalued at $w=0$. A rational $k=r/q$ in lowest terms gives
 $q$ sheets; irrational $k$ gives infinitely many. On any local branch
 at $-1$ the numerator is analytic and nonzero, so there is a simple
 pole whose residue is the value of $z^{-k}$ at $-1$ on that branch,
@@ -1743,7 +1744,8 @@ at infinity, so $0<p<1$ makes both endpoints integrable. Only $x=1$
 requires a principal value.
 
 Use $F(z)=z^{-p}/(z-1)$ with $z^{-p}=|z|^{-p}e^{-ip\arg z}$,
-$0<\arg z<2\pi$, and a keyhole contour about the positive real axis.
+$0<\arg z<2\pi$, and a keyhole contour about the positive real axis,
+with an origin circle $|z|=\epsilon<1$ and an outer circle $|z|=R>1$.
 On the upper bank ($\arg z=0$) $z^{-p}=x^{-p}$; on the lower bank
 ($\arg z=2\pi$) it equals $q x^{-p}$, where $q=e^{-2\pi ip}$.
 The upper bank, directed outward, gives $I$; the lower bank, directed
@@ -1774,10 +1776,20 @@ and therefore
 \boxed{\PVint_0^\infty\frac{x^{-p}}{x-1}\,dx
 =i\pi\frac{1+q}{1-q}=i\pi\frac{\cos\pi p}{i\sin\pi p}=\pi\cot\pi p}.
 \]
-An independent check of the sign: $x=1/u$ turns the part beyond
-$1+\delta$ into $\int_0^{1/(1+\delta)}u^{p-1}(1-u)^{-1}\,du$. Its piece
-between $1-\delta$ and $1/(1+\delta)$ has length $\delta^2/(1+\delta)$
-and integrand at most $(1-\delta)^{p-1}(1+\delta)/\delta$, so it
+An independent check of the sign: $x=1/u$ gives $dx=-du/u^2$,
+$x^{-p}=u^p$ and $x-1=(1-u)/u$, so
+$x^{-p}\,dx/(x-1)=-u^{p-1}\,du/(1-u)$, while $x=1+\delta,\infty$
+become $u=1/(1+\delta),0$. Thus the part beyond $1+\delta$ becomes
+$\int_0^{1/(1+\delta)}u^{p-1}(1-u)^{-1}\,du$. Writing the part below
+$1-\delta$ as $-\int_0^{1-\delta}x^{-p}(1-x)^{-1}\,dx$, splitting the
+$u$-integral at $1-\delta$, and renaming $u$ as $x$ in its first piece,
+the two integrals in the definition of $I$ add up to
+\[
+\int_0^{1-\delta}\frac{x^{p-1}-x^{-p}}{1-x}\,dx
++\int_{1-\delta}^{1/(1+\delta)}\frac{u^{p-1}}{1-u}\,du.
+\]
+The last integral runs over an interval of length $\delta^2/(1+\delta)$,
+with integrand at most $(1-\delta)^{p-1}(1+\delta)/\delta$, so it
 vanishes as $\delta\to0$. Hence
 \[
 \PVint_0^\infty\frac{x^{-p}}{x-1}\,dx
@@ -1933,7 +1945,9 @@ $\cos(\pm N\pi+iy)=\cos N\pi\cosh y\mp i\sin N\pi\sinh y=(-1)^N\cosh y$,
 so $|\sec\zeta|=\operatorname{sech}y$, and $|\zeta-z|\ge N\pi-|z|$;
 its integral is at most
 $(N\pi-|z|)^{-1}\int_{\mathbb R}\operatorname{sech}y\,dy=\pi/(N\pi-|z|)$,
-which is $O(N^{-1})$.
+which is $O(N^{-1})$; here $u=e^y$ gives
+$\operatorname{sech}y=2u/(u^2+1)$ and $dy=du/u$, so
+$\int_{\mathbb R}\operatorname{sech}y\,dy=2\int_0^\infty du/(1+u^2)=\pi$.
 On a horizontal side
 $|\cos(x\pm iN\pi)|^2=\cos^2x+\sinh^2N\pi\ge\sinh^2N\pi$, so its
 integral is at most $2N\pi/[(N\pi-|z|)\sinh N\pi]$ and
@@ -2004,7 +2018,8 @@ integral formula) and zero if $c$ is outside (Cauchy's theorem). So
 each of the first two fractions integrates to $2\pi i$
 if its pole is inside and to zero otherwise. The last contributes
 $-2\pi i$ if zero is inside. The zeros of $f$ are $1,2$ and its only
-pole is $0$, all simple. Hence
+pole is $0$, all simple. Hence, writing $\mathbf1_{\{c\text{ inside}\}}$
+for $1$ if $c$ is inside $C$ and $0$ otherwise,
 \[
 \boxed{\oint_C\frac{f'}f\,dz
 =2\pi i\bigl(\mathbf1_{\{1\text{ inside}\}}
@@ -2017,9 +2032,11 @@ positively oriented contour avoiding all zeros and poles.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{11.7.10}\quad \erratum{For a shrinking semicircle about a simple pole,
-the limiting contribution is one-half the full-circle integral, with
-compatible orientation.} Show, by a specific example, that
+\noindent\textbf{11.7.10}\quad The statement that the integral halfway
+around a singular point is equal to one-half the integral all the way
+around was limited to the case of a simple pole \erratum{(and, even then,
+holds only in the limit of a shrinking semicircle traversed in the same
+sense as the circle)}. Show, by a specific example, that
 \[
 \int_{\text{Semicircle}}f(z)\,dz
 =\frac{1}{2}\oint_{\text{Circle}}f(z)\,dz
@@ -2162,10 +2179,9 @@ close above and indent the origin into the upper half-plane.
 The small clockwise arc has limit $-i\pi\cdot1$; the indented domain
 contains no pole. Hence $J(s)-i\pi=0$. For $s<0$, close below;
 the lower indentation is counterclockwise and contributes $+i\pi$,
-so $J(s)+i\pi=0$. Consequently, with
-$J(s)/(2\pi i)=\frac12\operatorname{sgn}s$,
+so $J(s)+i\pi=0$. Consequently $J(s)=i\pi\operatorname{sgn}s$ for
+$s\ne0$, that is, $J(s)/(2\pi i)=\frac12\operatorname{sgn}s$, and
 \[
-J(s)=i\pi\,\operatorname{sgn}s,\qquad
 \boxed{\frac12+\frac{J(s)}{2\pi i}
 =\frac{1+\operatorname{sgn}s}{2}=u(s)\quad(s\ne0)}.
 \]
@@ -2177,10 +2193,23 @@ For completeness the connection between the prescriptions is visible in
 \]
 The second term has integral $i\pi$ in the limit: put
 $x=\epsilon t$, then use dominated convergence with $(1+t^2)^{-1}$.
-The first tends to the principal-value term (pair the two sides near
-zero and use oscillatory convergence in the tails). At $s=0$,
+The first tends to the principal-value term: the difference
+$x/(x^2+\epsilon^2)-1/x=-\epsilon^2/[x(x^2+\epsilon^2)]$ is odd, so
+pairing $x$ with $-x$ cancels its product with $\cos xs$ and doubles
+that with $i\sin xs$; then $x=\epsilon t$ gives
+\[
+\begin{aligned}
+\int_{\mathbb R}\frac{x\,e^{ixs}}{x^2+\epsilon^2}\,dx-J(s)
+&=-2i\int_0^\infty\frac{\epsilon^2\sin xs}{x(x^2+\epsilon^2)}\,dx\\
+&=-2i\int_0^\infty\frac{\sin(\epsilon ts)}{t(1+t^2)}\,dt,
+\end{aligned}
+\]
+whose modulus is at most
+$2\epsilon|s|\int_0^\infty dt/(1+t^2)=\pi\epsilon|s|$, by
+$|\sin y|\le|y|$. At $s=0$,
 the symmetric integral of the first term is zero and that of the second
-is $i\pi$, giving the optional value $1/2$ in both representations.
+is $i\pi$, giving $u(0)=1/2$, the value of the symmetric convention, in
+both representations.
 
 \Needspace{12\baselineskip}
 \subsection*{11.8 Evaluation of Definite Integrals}
@@ -2393,7 +2422,7 @@ $(-1)!!=0!!=1$ gives $I_0=\pi$ as required.
 \noindent\textbf{11.8.6}\quad Verify that simplification of the expression in
 Eq.~(11.112) yields the result given in Eq.~(11.113).
 \solution
-In the cited example,
+In the textbook example that contains Eqs.~(11.112) and (11.113),
 $I=\int_0^\infty\ln x/(1+x^3)\,dx$. Put
 $q=e^{2\pi i/3}=-\tfrac12+i\tfrac{\sqrt3}{2}$.
 Equation (11.112), as printed in the textbook, reads
@@ -2469,15 +2498,17 @@ Multiplying their sum by $2\pi i$ and factoring out $e^{ip\pi}$,
 \]
 Also $1-e^{2\pi ip}=e^{ip\pi}(e^{-ip\pi}-e^{ip\pi})
 =-2ie^{ip\pi}\sin p\pi$.
-For $0<p<1$ these factors are nonzero. Dividing,
+For $0<|p|<1$ these factors are nonzero, and so is $\sin(p\pi/2)$.
+Dividing,
 $I=\pi\sin(p\pi/2)/\sin p\pi$, and
 $\sin p\pi=2\sin(p\pi/2)\cos(p\pi/2)$ gives
 \[
 \boxed{I=\int_0^\infty\frac{x^p}{1+x^2}\,dx
 =\frac{\pi}{2\cos(p\pi/2)}}.
 \]
-The same result extends throughout $-1<p<1$, with $p=0$ obtained
-by continuity or directly from $\int_0^\infty dx/(1+x^2)=\pi/2$.
+Since the arc estimates hold for $-1<p<1$, this proves the result for
+$0<|p|<1$; $p=0$ follows by continuity or directly from
+$\int_0^\infty dx/(1+x^2)=\pi/2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2615,6 +2646,9 @@ in an absolutely convergent integral.
   How is the right side modified if $\sin x$ is replaced by $\sin kx$?
 \end{enumerate}
 \solution
+\erratum{The statement leaves $k$ unspecified; it must be real, since
+for $\Im k\ne0$ the factors $\cos kx$ and $\sin kx$ grow like
+$\frac12e^{|\Im k|\,|x|}$ and both integrals diverge.}
 Let $k>0$. Closing above for
 $F(z)=e^{ikz}/(z^2+a^2)$ encloses only $ia$, whose residue is
 $e^{ik(ia)}/(2ia)=e^{-ka}/(2ia)$. On the large arc
