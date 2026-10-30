@@ -35,7 +35,8 @@ The last series converges by the integral test, because $\int_N^\infty x^{-p}dx
 =N^{1-p}/(p-1)<\infty$ for $p>1$. Adding finitely many initial terms proves absolute
 convergence. This also covers $A=0$.
 
-(b) If $nu_n\to A>0$, choose $N$ so that $nu_n>A/2$ for $n\ge N$.
+(b) If $nu_n\to A>0$, choose $N$ so that $nu_n>A/2$ for $n\ge N$
+(if $A=+\infty$, choose $N$ so that $nu_n>1$, and read $1$ for $A/2$ below).
 Then $\sum_{n=N}^M u_n\ge(A/2)\sum_{n=N}^M n^{-1}\to+\infty$,
 because the harmonic series diverges.
 When $A=0$, both $u_n=n^{-2}$ (convergent) and
@@ -57,7 +58,8 @@ $b_{n}''=\dfrac{2b_{n}}{K}$.
 \erratum{The limit-comparison statement requires eventually positive
 terms (as in the positive-series tests of this section).}
 Take $\epsilon=K/2$ in the definition of the limit. For sufficiently
-large $n$, $a_n>0$ and $|b_n/a_n-K|<K/2$; multiplying by $a_n>0$ gives
+large $n$, $a_n>0$ and $|b_n/a_n-K|<K/2$, which is the first inequality
+below; multiplying it by $a_n>0$ gives the second:
 \[
  \frac K2<\frac{b_n}{a_n}<\frac{3K}{2},\qquad
  \frac K2 a_n<b_n<\frac{3K}{2}a_n.
@@ -106,19 +108,21 @@ antiderivative $-1/\ln x$ from (a),
 \[
  S_N+\frac1{\ln(N+1)}<S<S_N+\frac1{\ln N}.
 \]
-Summing the $99{,}999$ terms $n=2,\ldots,100{,}000$ directly (double
-precision suffices) gives
+Summing the $99{,}999$ terms $n=2,\ldots,100{,}000$ directly in double
+precision, adding the smallest terms ($n=100{,}000$ downward) first, gives
 \[
  S_{100000}=2.022883942578507\ldots.
 \]
+(Summing upward from $n=2$ instead changes the last two digits shown
+here and the last digit of each bound below.)
 Consequently, with $1/\ln 100{,}001=0.0868588209\ldots$ and
-$1/\ln 100{,}000=0.0868588964\ldots$,
+$1/\ln 100{,}000=0.0868588963\ldots$,
 \[
  2.10974276351492<S<2.10974283895916.
 \]
 Both bounds round to $\boxed{2.1097}$ (five significant figures).
-Even an uncertainty of $5\times10^{-6}$ in the supplied rounded partial
-sum leaves this five-significant-figure conclusion unchanged.
+Using instead the rounded value $2.02288\pm0.000005$ given in the
+problem yields $2.1097338<S<2.1097439$, which also rounds to $2.1097$.
 
 
 \Needspace{5\baselineskip}
@@ -128,12 +132,14 @@ of the ratio
 \[
 \frac{u_{n}}{u_{n+1}}=\frac{n^{2}+a_{1}n+a_{0}}{n^{2}+b_{1}n+b_{0}}.
 \]
-\erratum{Assume the sequence is eventually positive and nonzero, and the displayed ratio is defined for all sufficiently large $n$.} For what values of the parameters $a_{1}$ and $b_{1}$ is there convergence?
+\erratum{Assume $u_n\ne0$ for all sufficiently large $n$, so that the ratio is defined.} For what values of the parameters $a_{1}$ and $b_{1}$ is there convergence?
 divergence?
 \par\nobreak\hfill\emph{ANS.}\enspace Convergent for $a_{1}-b_{1}>1$, divergent
 for $a_{1}-b_{1}\leq1$.
 \solution
-For an eventually positive nonzero sequence put $d=a_1-b_1$. Dividing
+The right side tends to $1$, so it is positive for large $n$: the $u_n$
+eventually have one sign, and replacing $u_n$ by $-u_n$ if necessary we
+may take $u_n>0$ for large $n$. Put $d=a_1-b_1$. Dividing
 numerator and denominator by $n^2$ and using
 $(1+z)^{-1}=1-z+O(z^2)$ with $z=b_1/n+b_0/n^2$ gives
 \[
@@ -142,9 +148,16 @@ $(1+z)^{-1}=1-z+O(z^2)$ with $z=b_1/n+b_0/n^2$ gives
   \Bigl(1-\frac{b_1}n+O(n^{-2})\Bigr)
  =1+\frac d n+O(n^{-2}).
 \]
-This is the form required by Gauss' test with $h=d$; indeed, the exact
-remainder is $B(n)/n^2$ with
-$B(n)\to a_0-b_0-b_1d$, a bounded function. To see directly why $d$
+This is the form required by Gauss' test with $h=d$; indeed,
+\[
+ \frac{u_n}{u_{n+1}}-1=\frac{dn+a_0-b_0}{n^2+b_1n+b_0},
+\]
+so the exact remainder is $B(n)/n^2$ with
+\[
+ B(n)=n^2\Bigl(\frac{u_n}{u_{n+1}}-1-\frac dn\Bigr)
+ =\frac{n[(a_0-b_0-b_1d)n-b_0d]}{n^2+b_1n+b_0}\longrightarrow a_0-b_0-b_1d,
+\]
+a bounded function. To see directly why $d$
 decides, use $\log(1+y)=y+O(y^2)$:
 \[
  \log\frac{u_{n+1}}{u_n}=-\log\frac{u_n}{u_{n+1}}=-\frac d n+O(n^{-2}).
@@ -237,7 +250,8 @@ $\begin{cases}p<1,\ \text{all }q,\\ p=1,\ q\leq1.\end{cases}$
 Let $p,q$ be real. We use the elementary fact that, for every
 $\epsilon>0$ and fixed real $q$, $(\ln n)^{|q|}<n^\epsilon$ for
 all sufficiently large $n$; taking logarithms reduces it to
-$|q|\ln\ln n<\epsilon\ln n$.
+$|q|\ln\ln n<\epsilon\ln n$, which holds for all large $n$ because
+$(\ln y)/y\to0$ as $y=\ln n\to\infty$.
 If $p>1$, take $\epsilon=(p-1)/2$. Eventually
 \[
  \frac1{n^p(\ln n)^q}\le\frac{(\ln n)^{|q|}}{n^p}
@@ -286,7 +300,7 @@ so both approach the same constant $\gamma$. Consequently
 \[
  H_N-\ln(N+1)<\gamma<H_N-\ln N.
 \]
-For $N=1000$, direct summation gives $H_{1000}=7.485470860550345\ldots$,
+For $N=1000$, direct summation gives $H_{1000}=7.48547086055034\ldots$,
 and the bounds are
 \[
  0.57671608123512<\gamma<0.57771558156821.
@@ -312,12 +326,16 @@ by successive shells, with $0<\omega_0\le4\pi$.}
 Let $f=\omega_0/(4\pi)$. For a fixed direction the probability of
 remaining unobscured after $n-1$ independent shells is $(1-f)^{n-1}$.
 The probability that shell $n$ supplies its first visible star is
-therefore $f(1-f)^{n-1}$. Integrating this indicator probability over
-all directions gives the expected visible solid angle of shell $n$:
+therefore $f(1-f)^{n-1}$. The solid angle $\Delta\Omega_n$ in which
+shell $n$ supplies the first visible star is the integral over all
+directions of the indicator of this event; taking the expectation inside
+the integral replaces the indicator by this probability, so
 \[
  \mathbb E[\Delta\Omega_n]=4\pi f(1-f)^{n-1}.
 \]
-For $0<f<1$ the finite geometric sum is
+For $0<f<1$, the solid angle covered by the first $N$ shells,
+$\Omega_N=\sum_{n=1}^N\Delta\Omega_n$, has expectation given by the finite
+geometric sum
 \[
  \mathbb E[\Omega_N]=4\pi f\frac{1-(1-f)^N}{1-(1-f)}
          =4\pi[1-(1-f)^N]\longrightarrow4\pi.
@@ -403,7 +421,8 @@ $\int_e^M(\ln x)/x\,dx=[(\ln x)^2/2]_e^M=[(\ln M)^2-1]/2\to\infty$.
  \sum_{k=0}^\infty(-1)^k b_k,
  \qquad b_k=\frac1{2k+1}+\frac1{2k+2}.
 \]
-Both summands decrease, and $b_k\to0$, so the grouped series converges.
+Both summands decrease, so $b_k$ decreases, and $b_k\to0$; the grouped
+series therefore converges by the alternating-series (Leibniz) test.
 An unpaired last term is at most $1/(2k+1)\to0$; hence the original
 partial sums have the same limit. Removing signs gives the harmonic
 series, so convergence is conditional.
@@ -480,7 +499,7 @@ interval is $0.91596556308<G<0.91596562466$. Thus to six decimal places
 As an independent check, integrating
 $\arctan t/t=\sum_{k\ge0}(-1)^kt^{2k}/(2k+1)$ termwise gives
 $G=\int_0^1(\arctan t/t)\,dt$; numerical quadrature of this integral
-(e.g., Simpson's rule) gives $0.9159655942\ldots$, inside the interval.
+(e.g., Simpson's rule) gives $0.9159655941\ldots$, inside the interval.
 
 
 \Needspace{5\baselineskip}
@@ -492,7 +511,8 @@ obtain a series converging as $n^{-4}$.
 \emph{Note.}~$\zeta(2)$ has the known value $\pi^{2}/6$. See Eq.~(12.66).
 \solution
 Use $\alpha_1=\sum[n(n+1)]^{-1}=1$ and
-$\alpha_2=\sum[n(n+1)(n+2)]^{-1}=1/4$. With undetermined $c_1,c_2$,
+$\alpha_2=\sum[n(n+1)(n+2)]^{-1}=1/4$, the cases $p=1,2$ of
+Eq.~(1.26), $\alpha_p=1/(p\,p!)$. With undetermined $c_1,c_2$,
 \[
  \frac1{n^2}-\frac{c_1}{n(n+1)}-\frac{c_2}{n(n+1)(n+2)}
  =\frac{(1-c_1)n^2+(3-2c_1-c_2)n+2}{n^2(n+1)(n+2)}.
@@ -523,16 +543,20 @@ decimal places.
 Separate the even terms of $\zeta(3)$: since
 $\sum_{n\ge1}(2n)^{-3}=2^{-3}\zeta(3)$,
 $\lambda(3)=\zeta(3)-2^{-3}\zeta(3)=7\zeta(3)/8$.
-To accelerate the evaluation, define, for $n\ge4$,
+To accelerate the evaluation, define (for $n\ge2$, $n\ge3$, and $n\ge4$,
+respectively, where the denominators are positive)
 \[
  A_2(n)=\frac1{n(n^2-1)},\quad
  A_4(n)=\frac1{n(n^2-1)(n^2-4)},\quad
  A_6(n)=\frac1{n(n^2-1)(n^2-4)(n^2-9)}.
 \]
 Use the common denominator
-$D=n^3(n^2-1)(n^2-4)(n^2-9)$. With $z=n^2$, $D/n^3=(z-1)(z-4)(z-9)$,
-$DA_2=z(z-4)(z-9)$, $DA_4=z(z-9)$, and $DA_6=z$, so the
-numerator of $n^{-3}-A_2(n)+A_4(n)-4A_6(n)$ becomes
+$D=n^3(n^2-1)(n^2-4)(n^2-9)$. With $z=n^2$,
+\[
+ \frac D{n^3}=(z-1)(z-4)(z-9),\quad DA_2=z(z-4)(z-9),\quad
+ DA_4=z(z-9),\quad DA_6=z,
+\]
+so the numerator of $n^{-3}-A_2(n)+A_4(n)-4A_6(n)$ becomes
 \[
  \begin{aligned}
  &(z-1)(z-4)(z-9)-z(z-4)(z-9)+z(z-9)-4z\\
@@ -540,7 +564,7 @@ numerator of $n^{-3}-A_2(n)+A_4(n)-4A_6(n)$ becomes
  &\quad=(-z^2+13z-36)+(z^2-9z)-4z=-36.
  \end{aligned}
 \]
-Rearranging therefore gives the exact identity
+Rearranging therefore gives the exact identity, valid for $n\ge4$,
 \[
  \frac1{n^3}=A_2(n)-A_4(n)+4A_6(n)
  -\frac{36}{n^3(n^2-1)(n^2-4)(n^2-9)}.
@@ -598,7 +622,7 @@ $\sum_{n=2}^{\infty}[\zeta(n)-1]=1$, (b)
 $\sum_{n=2}^{\infty}(-1)^{n}[\zeta(n)-1]=\frac{1}{2}$, where $\zeta(n)$ is the
 Riemann zeta function.
 \solution
-Since $\zeta(n)-1=\sum_{k=2}^\infty k^{-n}$, the nonnegative double
+(a) Since $\zeta(n)-1=\sum_{k=2}^\infty k^{-n}$, the nonnegative double
 series can first be summed over $n$:
 \[
  \sum_{n=2}^\infty[\zeta(n)-1]
@@ -608,8 +632,10 @@ series can first be summed over $n$:
  =\sum_{k=2}^\infty\left(\frac1{k-1}-\frac1k\right)=1.
 \]
 The inner sum is geometric with first term $k^{-2}$ and ratio $1/k$.
-This also proves absolute convergence of the signed double series in
-(b), so its order may be exchanged:
+
+(b) The absolute values $k^{-n}$ of the terms of the signed double series
+are the terms summed in (a), so it converges absolutely and its order
+may be exchanged:
 \[
  \sum_{n=2}^\infty(-1)^n[\zeta(n)-1]
  =\sum_{k=2}^\infty\sum_{n=2}^\infty(-k^{-1})^n
@@ -696,12 +722,13 @@ three tails are
 \]
 Requiring each to be at most $5\times10^{-7}$ gives $N^2\ge10^6$,
 $N^4\ge5\times10^5$, and $N^6\ge\frac43\times10^6$, i.e., $N\ge1000$,
-$N\ge27$, and $N\ge11$. The exact positive tails, obtained as the
-difference between each truncated sum and
+$N\ge27$, and $N\ge11$ (since $26^4=456{,}976<5\times10^5<27^4=531{,}441$
+and $10^6<\frac43\times10^6<11^6=1{,}771{,}561$). The exact positive
+tails, obtained as the difference between each truncated sum and
 $\zeta(3)=1.2020569031595942\ldots$, confirm these cutoffs:
 \[
 \begin{array}{c|rr|rr}
- &N&\text{error}&N_{\min}&\text{error}\\ \hline
+ &N_{\min}-1&\text{error}&N_{\min}&\text{error}\\ \hline
  \sum n^{-3}&999&5.0050025\times10^{-7}&1000&4.9950025\times10^{-7}\\
  \text{(a)}&26&5.0681999\times10^{-7}&27&4.3703254\times10^{-7}\\
  \text{(b)}&10&5.0671099\times10^{-7}&11&2.9266119\times10^{-7}
@@ -769,8 +796,8 @@ For $|x|<1$ the finite-sum identity gives the exact remainder
 \]
 If $|x|\le s<1$, then $|1-x|\ge1-|x|\ge1-s$, so its absolute value is
 at most $s^{N+1}/(1-s)$, which tends to zero independently of $x$. Thus the series is uniformly
-convergent on every $[-s,s]$, $s<1$, or more generally any set bounded
-away from both endpoints $\pm1$. If a set has points with $|x|$
+convergent on every $[-s,s]$, $s<1$, or more generally any subset of
+$(-1,1)$ bounded away from both endpoints $\pm1$. If a set has points with $|x|$
 arbitrarily close to $1$, then $\sup|x^n|=1$ and the necessary uniform
 term test fails. The full interval $(-1,1)$ is therefore not a range
 of uniform convergence, though it is the range of pointwise convergence.
@@ -849,10 +876,12 @@ Hence the ratio test proves
 absolute convergence for $|x|<1$ and divergence for $|x|>1$.
 At $x=\pm1$, the ratio is eventually positive, and its reciprocal is
 \[
+ \begin{aligned}
  \frac{(2r+2)(2r+3)}{(2r+1)(2r+2)-l(l+1)}
- =\frac{4r^2+10r+6}{4r^2+6r+2-l(l+1)}
- =1+\frac{4r+4+l(l+1)}{4r^2+6r+2-l(l+1)}
+ &=\frac{4r^2+10r+6}{4r^2+6r+2-l(l+1)}\\
+ &=1+\frac{4r+4+l(l+1)}{4r^2+6r+2-l(l+1)}
  =1+\frac1r+O(r^{-2}).
+ \end{aligned}
 \]
 This is Exercise 1.1.4 with $a_1-b_1=\frac52-\frac32=1$ (divide
 numerator and denominator by $4$), or Gauss' test with $h=1$: the terms
@@ -924,8 +953,9 @@ and at either endpoint its reciprocal is
 \]
 since $1/m=1/(2r+k)=1/(2r)+O(r^{-2})$. This is Gauss' test with
 $h=3/2-\alpha$.
-Thus $|a_{2r}|\sim C r^{\alpha-3/2}$ in a nonzero nonterminating
-branch. The $p$-series criterion requires $3/2-\alpha>1$, or
+By the product/logarithm argument of Exercise 1.1.4 (with
+$d=3/2-\alpha$), $|a_{2r}|\sim C r^{\alpha-3/2}$ in a nonzero
+nonterminating branch. The $p$-series criterion requires $3/2-\alpha>1$, or
 $\alpha<1/2$. At equality the tail is harmonic, and larger $\alpha$
 also diverges. Since the parity is fixed, replacing $1$ by $-1$ only
 multiplies the whole branch by $(-1)^k$; it cannot produce alternating
@@ -982,8 +1012,8 @@ the zeros of the denominator, $\sin x$.
 \solution
 Sine is odd and cosine is even, so write
 $\cot x=x^{-1}+a_1x+a_3x^3+a_5x^5+\cdots$.
-Multiply by $\sin x=x-x^3/6+x^5/120-x^7/5040+\cdots$ and equate
-the result to $\cos x=1-x^2/2+x^4/24-x^6/720+\cdots$:
+Multiply by $\sin x=x-x^3/6+x^5/120-x^7/5040+x^9/362880-\cdots$ and
+equate the result to $\cos x=1-x^2/2+x^4/24-x^6/720+x^8/40320-\cdots$:
 \[
  \begin{aligned}
  x^2:&\quad a_1-\tfrac16=-\tfrac12 &&\Rightarrow a_1=-\tfrac13,\\
@@ -996,6 +1026,17 @@ the result to $\cos x=1-x^2/2+x^4/24-x^6/720+\cdots$:
        &&\Rightarrow a_7=-\tfrac1{4725}.
  \end{aligned}
 \]
+Solving each line with the previous values, over common denominators,
+\[
+ \begin{aligned}
+ a_3&=\tfrac1{24}-\tfrac1{120}-\tfrac1{18}=\tfrac{15-3-20}{360}=-\tfrac1{45},\\
+ a_5&=-\tfrac1{720}+\tfrac1{5040}-\tfrac1{270}+\tfrac1{360}
+     =\tfrac{-21+3-56+42}{15120}=-\tfrac2{945},\\
+ a_7&=\bigl(\tfrac1{40320}-\tfrac1{362880}\bigr)-\tfrac1{2835}+\tfrac1{5400}-\tfrac1{15120}
+     =\tfrac{5-80+42-15}{226800}=-\tfrac1{4725},
+ \end{aligned}
+\]
+where $\tfrac1{40320}-\tfrac1{362880}=\tfrac8{362880}=\tfrac1{45360}$.
 Consequently
 \[
  \cot x=\frac1x-\frac x3-\frac{x^3}{45}-\frac{2x^5}{945}
@@ -1039,7 +1080,10 @@ Since $d\coth y/dy=1-\coth^2y$, for $|\eta|>1$
 \]
 Integrating termwise from $\eta_0>1$ to $\infty$, where $\coth^{-1}$
 vanishes, gives
-$\coth^{-1}\eta_0=\sum_{n\ge0}\eta_0^{-2n-1}/(2n+1)=t+t^3/3+t^5/5+\cdots$;
+\[
+ \coth^{-1}\eta_0=\sum_{n\ge0}\frac{\eta_0^{-2n-1}}{2n+1}
+ =t+\frac{t^3}3+\frac{t^5}5+\cdots;
+\]
 both sides are odd in $\eta_0$, which covers $\eta_0<-1$. The two series
 agree term by term, proving the identity.
 As a direct check without series, set the left side equal to $y$.
@@ -1056,12 +1100,17 @@ For complex arguments a consistent logarithm branch is required.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{1.2.11}\quad Show that $f(x)=x^{1/2}$ (a) has no Maclaurin
-expansion but (b) has a Taylor expansion about any point \erratum{$x_0>0$ for the real-valued square root (or any nonzero complex point with a chosen local branch)}. Find
+expansion but (b) has a Taylor expansion about any point $x_0\ne0$ \erratum{(for the real-valued square root, $x_0>0$; at a complex $x_0\ne0$, with a chosen local branch)}. Find
 the range of convergence of the Taylor expansion about $x=x_{0}$.
 \solution
-(a) For real $x>0$, $f'(x)=1/(2\sqrt x)$ diverges as $x\downarrow0$.
-A convergent Maclaurin power series would have a finite first derivative
-at its center, so none represents $\sqrt x$ near zero.
+(a) A Maclaurin expansion requires the coefficient $f'(0)$. But
+$f(0)=0$, and the difference quotient $[f(x)-f(0)]/x=x^{-1/2}$ tends to
+$\infty$ as $x\downarrow0$, so $f'(0)$ does not exist. More strongly, no
+power series $P(x)=\sum_na_nx^n$ can equal $\sqrt x$ for $0<x<\epsilon$:
+its derivative $P'(x)=\sum_nna_nx^{n-1}$ is again a power series
+convergent near $0$ (Exercise 1.2.16), hence continuous at $0$, so
+$P'(x)\to a_1$ as $x\downarrow0$, whereas
+$(\sqrt x)'=1/(2\sqrt x)\to\infty$.
 
 (b) \erratum{For a real-valued square root, take $x_0>0$.
 At a complex $x_0\ne0$, choose a local branch.}
@@ -1075,10 +1124,14 @@ with general coefficient
 $\binom{1/2}{m}=(1/2)(1/2-1)\cdots(1/2-m+1)/m!$.
 The ratio test gives radius $|h|<1$, or $|x-x_0|<|x_0|$;
 the branch point at zero prevents a larger radius.
-For real $x_0>0$, the two endpoints also converge absolutely: the
-absolute coefficient ratio is $(m-1/2)/(m+1)=1-3/(2m)+O(m^{-2})$,
-so (Gauss' test with parameter $3/2>1$, as in Exercise 1.2.6) the
-coefficients are $O(m^{-3/2})$. By Abel's theorem (a power series is continuous up to
+For real $x_0>0$, the two endpoints $h=\pm1$ also converge absolutely: the
+absolute coefficient ratio is
+$|\binom{1/2}{m+1}/\binom{1/2}{m}|=(m-1/2)/(m+1)$, whose reciprocal is
+$(m+1)/(m-1/2)=1+3/(2m)+O(m^{-2})$, so Gauss' test with parameter
+$3/2>1$ proves that $\sum_m|\binom{1/2}{m}|$ converges. (As in
+Exercise 1.2.6, the argument of Exercise 1.1.4 shows more precisely
+that the coefficients are of order $m^{-3/2}$.)
+By Abel's theorem (a power series is continuous up to
 an endpoint at which it converges) their sums are
 $0$ at $x=0$ and $\sqrt{2x_0}$ at $x=2x_0$.
 Thus the real convergence interval is $[0,2x_0]$, with analyticity
@@ -1188,7 +1241,7 @@ $2h^2$, confirming the coefficient $24/12=2$ and the stated sign
 convention.
 \erratum{The printed answer is the leading error, not generally the
 whole error. For $\psi(x)=x^6$ at $x=0$, the displayed fourth derivative
-vanishes, but $D_h\psi-\psi''(0)=2h^4\ne0$. This verifies why the
+vanishes, but $D_h\psi-\psi''(0)=2h^4\ne0$. This shows why the
 remainder term must be retained.}
 
 
@@ -1199,7 +1252,13 @@ $\displaystyle\lim_{x\to0}\left[\frac{\sin(\tan x)-\tan(\sin x)}{x^{7}}\right]$.
 \par\nobreak\hfill\emph{ANS.}\enspace $-\dfrac{1}{30}$.
 \solution
 Put $t=\tan x=x+x^3/3+2x^5/15+17x^7/315+O(x^9)$ and
-$s=\sin x=x-x^3/6+x^5/120-x^7/5040+O(x^9)$. Multiplication gives
+$s=\sin x=x-x^3/6+x^5/120-x^7/5040+O(x^9)$. The tangent series follows
+from Exercise 1.2.9 and $\tan x=\cot x-2\cot2x$ (because
+$\cot x-\tan x=(\cos^2x-\sin^2x)/(\sin x\cos x)=2\cot2x$): the $1/x$
+terms cancel, and its coefficients of $x,x^3,x^5,x^7$ are
+$-\frac13+\frac43=1$, $-\frac1{45}+\frac{16}{45}=\frac13$,
+$-\frac2{945}+\frac{128}{945}=\frac2{15}$, and
+$-\frac1{4725}+\frac{256}{4725}=\frac{17}{315}$. Multiplication gives
 \[
 \begin{array}{ll}
  t^3=x^3+x^5+\frac{11}{15}x^7+O(x^9),&
@@ -1208,6 +1267,13 @@ $s=\sin x=x-x^3/6+x^5/120-x^7/5040+O(x^9)$. Multiplication gives
  s^5=x^5-\frac56x^7+O(x^9).
 \end{array}
 \]
+(For instance, the $x^7$ coefficient of $t^3$ collects
+$3\cdot\frac2{15}$ from the three orderings of $x\cdot x\cdot\frac{2x^5}{15}$
+and $3\cdot\frac19$ from those of $x\cdot\frac{x^3}3\cdot\frac{x^3}3$,
+total $\frac{11}{15}$; that of $s^3$ is
+$3\cdot\frac1{120}+3\cdot\frac1{36}=\frac{13}{120}$; those of $t^5,s^5$
+are $5\cdot\frac13$ and $5\cdot(-\frac16)$, from the five places of the
+single cubic factor.)
 Also $t^7=s^7=x^7+O(x^9)$. Substituting into the outer series,
 \[
  \begin{aligned}
