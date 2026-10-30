@@ -74,6 +74,10 @@ arbitrary real constant gives
 \]
 This includes $f=0$. Indeed,
 $f'=-As(1+s^2)^{-3/2}$, so $(1+s^2)f'=-As(1+s^2)^{-1/2}=-sf$.
+Conversely, every solution has this form, even one that vanishes
+somewhere (where the logarithm fails): by the product rule,
+$d\bigl[\sqrt{1+s^2}\,f\bigr]/ds=\bigl[(1+s^2)f'+sf\bigr]/\sqrt{1+s^2}=0$,
+so $\sqrt{1+s^2}\,f$ is a constant $A$.
 The ODE alone does not determine $A$. If the intended transform is
 specifically that of $J_0$, the initial-value theorem of the Laplace
 transform, $\lim_{s\to+\infty}sf(s)=J_0(0)=1$, together with
@@ -113,8 +117,11 @@ Hence $1/N(t)=1/N_0+kt=(1+kN_0t)/N_0$, and taking the reciprocal gives
 Direct differentiation yields $N'=-kN_0^2/(1+kN_0t)^2=-kN^2$.
 The initial-value solution with positive population has mathematical
 interval $t> -\tau_0$ and a pole at its left endpoint; physical decay
-uses $t\ge0$. The pole is a backward extrapolation of the model, not an
-attained infinite population at a finite time within its solution interval.
+uses $t\ge0$. The textbook's closing remark that this implies an
+infinite population at $t=-\tau_0$, qualified by the red note in the
+statement, should be read accordingly: the pole is a backward
+extrapolation of the model, not an attained infinite population at a
+finite time within its solution interval.
 If $N_0=0$, the separate solution is $N\equiv0$; if $k=0$, $N\equiv N_0$.
 
 \Needspace{5\baselineskip}
@@ -141,8 +148,13 @@ concentrations and $\alpha\ge0$.
 \]
 as recombining the right side over the common denominator shows.
 Separate the variables, $dC/[(A_0-C)(B_0-C)]=\alpha\,dt$, and integrate
-from $0$ to $t$. Since $C=\min(A_0,B_0)$ is an equilibrium, the solution
-starting at $C(0)=0$ stays in $0\le C<\min(A_0,B_0)$, where
+from $0$ to $t$. The constant $C=\min(A_0,B_0)$ is an equilibrium
+solution. The right side $\alpha(A_0-C)(B_0-C)$ is a polynomial in $C$,
+so by the uniqueness theorem for $C'=f(C)$ with continuously
+differentiable $f$ two solutions cannot take the same value at the same
+time; hence the solution starting at $C(0)=0$ never reaches the
+equilibrium. Below it both factors are positive, so $C'\ge0$ and $C$
+cannot fall below $C(0)=0$. Thus $0\le C<\min(A_0,B_0)$, where
 \[
 \int_0^C\frac{du}{A_0-u}=\ln\frac{A_0}{A_0-C},\qquad
 \int_0^C\frac{du}{B_0-u}=\ln\frac{B_0}{B_0-C}.
@@ -168,10 +180,15 @@ It starts at zero and approaches $\min(A_0,B_0)$ for $\alpha>0$: if
 $B_0>A_0$ the exponential tends to $0$ and $C\to A_0B_0/B_0=A_0$; if
 $B_0<A_0$ it grows without bound, and $C\to A_0B_0/A_0=B_0$.
 To check the result, put $\lambda=\alpha(B_0-A_0)$ and
-$D=B_0-A_0e^{-\lambda t}$. Then
+$D=B_0-A_0e^{-\lambda t}$, so $C=A_0B_0(1-e^{-\lambda t})/D$. Then
 $A_0-C=A_0(B_0-A_0)e^{-\lambda t}/D$ and $B_0-C=B_0(B_0-A_0)/D$, so
-both $\alpha(A_0-C)(B_0-C)$ and, by the quotient rule, $C'$ equal
-$\alpha A_0B_0(B_0-A_0)^2e^{-\lambda t}/D^2$.
+$\alpha(A_0-C)(B_0-C)=\alpha A_0B_0(B_0-A_0)^2e^{-\lambda t}/D^2$.
+Since $D'=\lambda A_0e^{-\lambda t}$, the quotient rule gives
+\[
+C'=\frac{A_0B_0\lambda e^{-\lambda t}\bigl[D-A_0(1-e^{-\lambda t})\bigr]}{D^2}
+=\frac{A_0B_0\lambda e^{-\lambda t}(B_0-A_0)}{D^2},
+\]
+the same expression because $\lambda=\alpha(B_0-A_0)$.
 If either concentration is zero, $C(t)=0$ directly; the formula also
 reduces to that value when $A_0\ne B_0$.
 
@@ -235,7 +252,9 @@ gives $v(t)=(v_0^{-1}+\gamma t)^{-1}=v_0/(1+\gamma v_0t)$.
 Differentiating the two integrated identities,
 $d[v^{1-n}/(1-n)]/dt=v^{-n}v'=-\gamma$ and
 $d[v^{2-n}/(2-n)]/dx=v^{1-n}\,dv/dx=-\gamma$, checks both equations
-without choosing special $n$.
+for every $n\ne1$ and every $n\ne2$, respectively; the exponentials
+satisfy $v'=-\gamma v$ ($n=1$) and $v\,dv/dx=-\gamma v^2$ ($n=2$)
+directly.
 
 For $n<1$ the bracket in $v(t)$ decreases to zero, so the positive-speed
 branch reaches zero at $t_*=v_0^{1-n}/[(1-n)\gamma]$; likewise, for $n<2$
@@ -244,8 +263,9 @@ $x_*=v_0^{2-n}/[(2-n)\gamma]$. For $n>1$ the bracket in $v(t)$ grows
 without bound, so $v\to0$ only as $t\to\infty$ (as for the exponential
 at $n=1$): stopping takes infinite time. In the same way, for $n\ge2$ the
 speed $v(x)$ is positive at every $x$, so the traveled distance is
-unbounded (were $x$ bounded by some $L$, the speed would stay above
-$v(L)>0$).
+unbounded: were $x(t)\le L$ for all $t$, then, since
+$dv/dx=-\gamma v^{n-1}<0$, the speed would stay at least $v(L)>0$, so
+$x(t)\ge v(L)\,t$ would exceed $L$ for $t>L/v(L)$, a contradiction.
 \erratum{The positive-speed drag model does not authorize continuing a
 fractional or negative power through $v=0$. At or after stopping an
 appropriate force law must be specified; the formulas above state their
@@ -649,11 +669,13 @@ gives the equilibrium $v(t)=v_T$, which the boxed formula also includes.
 For every $v_i\ge0$ and $t\ge0$, $-1\le q<1$, so its denominator is
 positive. It gives $v(0)=v_i$ and approaches $v_T$. For the example's
 $m=70\ \mathrm{kg}$, $b=700\ \mathrm{kg/m}$, $g=9.8\ \mathrm{m/s^2}$,
+and with $1\ \mathrm{mi/h}=1609.344\ \mathrm m/3600\ \mathrm s
+=0.44704\ \mathrm{m/s}$,
 \[
 \begin{aligned}
 v_i&=60(0.44704)=26.8224\ \mathrm{m/s},\\
-v_T&=\sqrt{0.98}=0.9899494937\ldots\ \mathrm{m/s},\\
-T&=1/\sqrt{98}=0.1010152545\ldots\ \mathrm s.
+v_T&=\sqrt{0.98}=0.9899494936\ldots\ \mathrm{m/s},\\
+T&=1/\sqrt{98}=0.1010152544\ldots\ \mathrm s.
 \end{aligned}
 \]
 \erratum{Here $v_i>v_T$. The Instructor's Manual's real expression
@@ -674,7 +696,15 @@ $mv'=mg-bv^2$ divided by $m$; e.g., $\operatorname{csch}^2=\coth^2-1$ and
 $v_T/T=g$ give
 $v'=-(v_T/T)\operatorname{csch}^2(u+\phi)=g(1-v^2/v_T^2)$. The
 speed initially decreases, as it must when the parachute opens above
-terminal speed.
+terminal speed. Numerically, $v_i/v_T=27.0947\ldots$, so
+$\phi=\frac12\ln[(v_i/v_T+1)/(v_i/v_T-1)]=0.0369243\ldots$, and
+$1/T=\sqrt{98}\ \mathrm{s^{-1}}=9.89949\ldots\ \mathrm{s^{-1}}$; with $t$
+in seconds,
+\[
+v(t)\approx0.989949\coth(9.89949\,t+0.0369243)\ \mathrm{m/s}.
+\]
+For example, $v(0.1\ \mathrm s)=1.2812\ldots\ \mathrm{m/s}$, already
+within $0.3\ \mathrm{m/s}$ of $v_T$.
 
 (b) With the free-fall drag coefficient $b=0.25\ \mathrm{kg/m}$,
 \[
@@ -1015,8 +1045,9 @@ t(t-1)u_{tt}+[(1+a+b)t-c]u_t+ab\,u=0,
 \qquad t=\frac{1-x}{2},\quad y(x)=u(t).
 \]
 \erratum{The coefficient is $(1+a+b)t-c$, as in Exercise 7.5.5.
-Table 7.1 of the textbook prints $+c$ in this sign convention; that
-sign does not give Legendre's equation under the stated substitution.}
+Table 7.1 of the textbook prints $+c$ in this sign convention; with it
+the coefficient of $u_t$ would be $2t+1=2-x$, and the steps below would
+give $(1-x^2)y''+(4-2x)y'+l(l+1)y=0$, which is not Legendre's equation.}
 Since $x=1-2t$, $dx/dt=-2$, and the chain rule gives $u_t=-2y'$ and
 $u_{tt}=4y''$. Also $t-1=-(1+x)/2$, so
 $t(t-1)=-(1-x)(1+x)/4=(x^2-1)/4$. With $a=-l$, $b=l+1$, $c=1$,
@@ -1049,8 +1080,9 @@ and $x_0$ is an ordinary point.}
 \emph{Hint.}~Assume a second solution satisfying these conditions and compare
 the Taylor series expansions.
 \solution
-\erratum{Uniqueness requires an ordinary initial point, with continuous
-normalized coefficients near it. The hint using Taylor series additionally
+\erratum{Uniqueness is guaranteed when the normalized coefficients are
+continuous near the initial point (in particular at an ordinary point);
+at a singular point it can fail. The hint using Taylor series additionally
 requires analytic coefficients. The unqualified claim, and the
 Instructor's Manual's extension to regular singular points, are false.}
 For example, $xy''-y'=0$ (regular singular at $0$) has the family
@@ -1059,7 +1091,8 @@ they differ elsewhere.
 
 For the Taylor proof, write $y''+P(x)y'+Q(x)y=0$, with $P,Q$ analytic
 at $x_0$. If $y$ and $\widetilde y$ share the initial data, their
-difference $u=y-\widetilde y$ has $u(x_0)=u'(x_0)=0$. The equation gives
+difference $u=y-\widetilde y$ solves the same equation (it is linear and
+homogeneous) and has $u(x_0)=u'(x_0)=0$. The equation gives
 $u''(x_0)=-P(x_0)u'(x_0)-Q(x_0)u(x_0)=0$.
 Differentiating $k$ times and applying the product rule gives
 \[
@@ -1069,11 +1102,15 @@ u^{(k+2)}=-\sum_{j=0}^k\binom kj
 The right side involves derivatives of $u$ only up to order $k+1$ (the
 term $j=0$). If all derivatives through order $k+1$ vanish at $x_0$, the
 right side vanishes there, and so does $u^{(k+2)}(x_0)$. Induction on $k$
-therefore makes every Taylor coefficient of $u$ zero. At an ordinary
-point with analytic coefficients every solution is analytic, given by its
-convergent Taylor series (Section 7.5), so $u=0$ in a neighborhood of
-$x_0$. The same argument applies at every point of the connected ordinary
-interval: the set where $u=u'=0$ is closed (by continuity) and open (by
+therefore makes every Taylor coefficient of $u$ zero. The hint
+presupposes that $u$, like the series solutions constructed in
+Section~7.5, is analytic at the ordinary point $x_0$, i.e., equal to its
+convergent Taylor series there. This is true, but Section~7.5 only
+constructs series solutions; that \emph{every} solution is analytic is
+normally derived from the uniqueness theorem itself, so the integral
+estimate below is the self-contained proof. Granting the hint's
+assumption, $u=0$ in a neighborhood of $x_0$. The same argument
+applies at every point of the connected ordinary interval: the set where $u=u'=0$ is closed (by continuity) and open (by
 this argument), and it contains $x_0$, so it is the whole interval. This
 proves uniqueness throughout it.
 
@@ -1084,8 +1121,9 @@ $u''=-Pu'-Qu$ from $x_0$ gives
 u(x)=\int_{x_0}^xu'(t)dt,\qquad
 u'(x)=-\int_{x_0}^x[P(t)u'(t)+Q(t)u(t)]dt.
 \]
-On a compact interval $[x_0,x_1]$ to the right, choose a constant
-$K\ge1+|P(t)|+|Q(t)|$ and put
+On a compact interval $[x_0,x_1]$ to the right, $P$ and $Q$ are
+continuous, hence bounded, so we can choose a constant $K$ with
+$K\ge1+|P(t)|+|Q(t)|$ for all $t\in[x_0,x_1]$, and put
 $F(x)=\int_{x_0}^x(|u|+|u'|)dt$. The two integrals give
 $|u(x)|\le F(x)$ and
 $|u'(x)|\le\int_{x_0}^x(|P||u'|+|Q||u|)dt\le(K-1)F(x)$, so
@@ -1287,13 +1325,18 @@ A branch of the fractional power is fixed when complex $x$ is used.
 At integer $c$, one cannot automatically assert two independent solutions
 of these exact forms.} A valid first series always comes from the root
 $s=0$ if $c\ge1$ and $s=1-c$ if $c\le0$: its recurrence denominators
-do not vanish. Lower-root resonance may require a logarithm. To construct its companion,
+do not vanish. When $c$ is an integer, the roots $0$ and $1-c$ coincide
+($c=1$) or differ by a nonzero integer; then the lower root either
+repeats the first series or its recurrence meets a zero denominator (at
+$j=c-2$ if $c\ge2$, at $j=-c$ if $c\le0$), so the second solution may
+require a logarithm. To construct it,
 normalize the equation and split the first-derivative coefficient:
 \[
 P(x)=\frac{c-(a+b+1)x}{x(1-x)}
 =\frac cx+\frac{c-a-b-1}{1-x}.
 \]
-Consequently $e^{-\int Pdx}=x^{-c}(1-x)^{c-a-b-1}$, and
+Consequently $e^{-\int Pdx}=x^{-c}(1-x)^{c-a-b-1}$, and reduction of
+order (the second-solution formula, Eq.~(7.67) of Section~7.6) gives
 \[
 y_2=y_1\int^x\frac{t^{-c}(1-t)^{c-a-b-1}}{y_1(t)^2}\,dt.
 \]
@@ -1301,9 +1344,13 @@ Expand the analytic factors and integrate each power near zero; a
 $t^{-1}$ term produces $\ln t$. On a branch avoiding $0,1$ and zeros
 of $y_1$, its Wronskian is
 $W(y_1,y_2)=y_1^2\,(y_2/y_1)'=x^{-c}(1-x)^{c-a-b-1}\ne0$.
-This supplies the missing independent solution, including resonances. If a numerator terminates the
-recurrence before an obstructing denominator, the terminating polynomial
-is interpreted directly through the original recurrence.
+This supplies the missing independent solution in every integer-$c$
+case. If a numerator factor $s+j+a$ or $s+j+b$ vanishes at some $j$
+before a denominator factor does, then $A_{j+1}=0$ and the series
+terminates; the resulting polynomial (times $x^s$) is a solution,
+because the undivided recurrence
+$(s+j+1)(s+j+c)A_{j+1}=(s+j+a)(s+j+b)A_j$ then holds for every $j$,
+reading $0=0$ beyond the termination, including at a zero denominator.
 
 For a nonterminating series, its successive terms satisfy
 \[
@@ -1318,7 +1365,18 @@ $(q)_j=\Gamma(j+q)/\Gamma(q)$, the coefficients of $y_1$ are
 A_j=\frac{\Gamma(c)}{\Gamma(a)\Gamma(b)}\,
 \frac{\Gamma(j+a)}{\Gamma(j+1)}\,\frac{\Gamma(j+b)}{\Gamma(j+c)}.
 \]
-Using $\Gamma(j+u)/\Gamma(j+v)=j^{u-v}[1+O(j^{-1})]$, this gives, in a
+For large $j$ use Stirling's series (Section~13.4) with
+$\Gamma(z+1)=z\Gamma(z)$:
+$\ln\Gamma(z)=(z-\frac12)\ln z-z+\frac12\ln2\pi+O(z^{-1})$. For fixed $u$,
+$\ln(j+u)=\ln j+u/j+O(j^{-2})$, so
+$(j+u-\frac12)\ln(j+u)=(j+u-\frac12)\ln j+u+O(j^{-1})$ and
+\[
+\ln\Gamma(j+u)=(j+u-\tfrac12)\ln j-j+\tfrac12\ln2\pi+O(j^{-1}).
+\]
+Subtracting the same expansion with $v$ leaves $(u-v)\ln j+O(j^{-1})$,
+and exponentiating gives
+$\Gamma(j+u)/\Gamma(j+v)=j^{u-v}[1+O(j^{-1})]$. With $(u,v)=(a,1)$ and
+$(b,c)$ this gives, in a
 nonterminating generic case ($a,b,c$ not zero or negative integers),
 \[
 A_j=Kj^{(a-1)+(b-c)}[1+O(j^{-1})]=Kj^{-\sigma-1}[1+O(j^{-1})],
@@ -1328,11 +1386,23 @@ Therefore at $x=1$
 convergence holds precisely when $\operatorname{Re}\sigma>0$.
 Indeed, absolute convergence is then comparison with
 $j^{-1-\operatorname{Re}\sigma}$. If $-1<\operatorname{Re}\sigma\le0$,
-summing the leading powers $Kj^{-\sigma-1}$ up to $j=N$ gives, by
-comparison with $\int_1^Nt^{-\sigma-1}dt=(N^{-\sigma}-1)/(-\sigma)$, a
-term proportional to
-$N^{-\sigma}$, or $\ln N$ when $\sigma=0$, with no limit; the
-$O(j^{-\sigma-2})$ correction is summable. For
+compare the leading powers $Kj^{-\sigma-1}$ with
+$\int_1^Nt^{-\sigma-1}dt=(N^{-\sigma}-1)/(-\sigma)$, or $\ln N$ when
+$\sigma=0$. Since
+$|d(t^{-\sigma-1})/dt|=|\sigma+1|\,t^{-\operatorname{Re}\sigma-2}$, for
+$j\le t\le j+1$ we have
+$|j^{-\sigma-1}-t^{-\sigma-1}|\le|\sigma+1|\,j^{-\operatorname{Re}\sigma-2}$,
+which is summable. Splitting the integral at the integers,
+\[
+\sum_{j=1}^{N-1}j^{-\sigma-1}-\int_1^Nt^{-\sigma-1}dt
+=\sum_{j=1}^{N-1}\int_j^{j+1}\bigl(j^{-\sigma-1}-t^{-\sigma-1}\bigr)dt
+\]
+therefore tends to a finite limit. The partial sums thus contain a term
+proportional to $N^{-\sigma}$, or $\ln N$, with no limit:
+$|N^{-\sigma}|=N^{-\operatorname{Re}\sigma}\to\infty$ if
+$\operatorname{Re}\sigma<0$, while $N^{-i\tau}=e^{-i\tau\ln N}$ keeps
+circling the unit circle if $\sigma=i\tau\ne0$. The
+$O(j^{-\operatorname{Re}\sigma-2})$ correction is summable. For
 $\operatorname{Re}\sigma\le-1$ even the individual terms fail to tend
 to zero. At $x=-1$, put $p=\sigma+1$. When $\operatorname{Re}p>0$,
 $j^{-p}\to0$ and
@@ -1516,8 +1586,8 @@ equation
 +\beta\eta^{2}u=0.
 \]
 Develop a power-series solution for $u(\eta)$. Evaluate the first three
-\erratum{allowed coefficients in terms of $a_0$; special parameter values
-may make some of them zero.}
+\erratum{coefficients not forced to vanish by parity ($a_0,a_2,a_4$) in
+terms of $a_0$; special parameter values may make some of them zero.}
 \par\nobreak\hfill\emph{ANS.}\enspace
 Indicial equation $s(s-1)=0$,\par
 \nobreak\hfill
@@ -1528,14 +1598,16 @@ $u_{k=1}=a_{0}\eta\left[1+\dfrac{2-\alpha}{6}\eta^{2}
 Expanding the differential operator gives
 $(1-\eta^2)u''-2\eta u'+\alpha u+\beta\eta^2u=0$.
 For $u=\sum_{j\ge0}a_j\eta^{s+j}$, the terms $-\eta^2u''$, $-2\eta u'$,
-$\alpha u$, $\beta\eta^2u$ start at $\eta^s$, so the two lowest powers
+$\alpha u$ start at $\eta^s$ and $\beta\eta^2u$ at $\eta^{s+2}$, so the
+two lowest powers
 $\eta^{s-2},\eta^{s-1}$ come from $u''$ alone; their coefficients are
 \[
 s(s-1)a_0=0,\qquad s(s+1)a_1=0.
 \]
-Thus $s=0,1$; take $a_1=0$ in each branch to separate the even and odd
-solutions (as in 7.5.4, the odd part of the $s=0$ series is the $s=1$
-solution). At $\eta^{s+j}$, $u''$ contributes
+Thus $s=0,1$. For $s=1$ the second equation, $2a_1=0$, forces $a_1=0$;
+for $s=0$ it leaves $a_1$ free, and we take $a_1=0$ to separate the even
+and odd solutions (as in 7.5.4, the odd part of the $s=0$ series is the
+$s=1$ solution). At $\eta^{s+j}$, $u''$ contributes
 $(s+j+2)(s+j+1)a_{j+2}$, the terms $-\eta^2u''-2\eta u'+\alpha u$
 contribute $[-(s+j)(s+j-1)-2(s+j)+\alpha]a_j=[\alpha-(s+j)(s+j+1)]a_j$,
 and $\beta\eta^2u$ contributes $\beta a_{j-2}$. Equating the
@@ -1543,7 +1615,7 @@ coefficients of $\eta^{s+j}$ to zero then gives
 \[
 \boxed{a_{j+2}=
 \frac{[(s+j)(s+j+1)-\alpha]a_j-\beta a_{j-2}}
-{(s+j+2)(s+j+1)}},\qquad a_{-2}=0.
+{(s+j+2)(s+j+1)}},\qquad a_{-2}=a_{-1}=0.
 \]
 For $s=1$, $j=0$ has $(s+j)(s+j+1)=2$ over the denominator
 $3\cdot2=6$, and $j=2$ has $3\cdot4=12$ over $5\cdot4=20$:
@@ -1570,8 +1642,14 @@ u_{\rm odd}&=\eta\left[1+\frac{2-\alpha}{6}\eta^2
 \end{align*}
 The initial values $(u,u')=(1,0)$ and $(0,1)$ at zero establish
 independence. Their linear combination is the general local solution;
-both series converge at least for $|\eta|<1$, the disk up to the nearest
-singular coefficients. \erratum{At special parameter values some displayed coefficients can vanish, so these are the first three allowed coefficients, not necessarily three nonzero numbers.}
+both series converge at least for $|\eta|<1$, because a power-series
+solution about an ordinary point converges in every disk about it in
+which the normalized coefficients are analytic, and here
+$P=-2\eta/(1-\eta^2)$ and $Q=(\alpha+\beta\eta^2)/(1-\eta^2)$ are
+analytic for $|\eta|<1$ ($P$ has poles at $\eta=\pm1$).
+\erratum{At special parameter values some displayed coefficients can
+vanish, so these are the first three coefficients not forced to vanish
+by parity, not necessarily three nonzero numbers.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1631,6 +1709,10 @@ The same coefficients follow by substituting
 $e^{-ax}/x=x^{-1}-a+(a^2/2)x+\cdots$ and equating the constant and
 linear terms of the differential equation. The other branch may have a
 logarithm; the displayed series is the regular branch requested here.
+\erratum{The qualification in the statement only makes the claim
+precise: the series is determined here through $x^3$, and its displayed
+coefficients need not be nonzero ($a_1=A'a_0/2$ vanishes when $A'=0$,
+and $a_2$ when $E'=A'^2/2-aA'$).}
 
 \Needspace{5\baselineskip}
 \par\bigskip
