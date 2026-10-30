@@ -3155,8 +3155,9 @@ $\lambda_{j+1}-\lambda_j\to\pi$.
 \end{enumerate}
 \solution
 Write $J=J_\nu$, $Y=Y_\nu$,
-$H^{(1)}=J+iY$, $H^{(2)}=J-iY$, and
-$W[J,Y]=JY'-J'Y=2/(\pi x)$. Expand each requested expression:
+$H^{(1)}=J+iY$, $H^{(2)}=J-iY$, $W[f,g]=fg'-f'g$, and
+$W[J,Y]=JY'-J'Y=2/(\pi x)$ (Exercise~14.3.5). Expand each
+requested expression; the products $JJ'$ and $YY'$ always cancel:
 \begin{align*}
 \text{(a)}\quad W[J,H^{(1)}]
 &=J(J'+iY')-J'(J+iY)=iW[J,Y]=\frac{2i}{\pi x},\\
@@ -3165,26 +3166,40 @@ $W[J,Y]=JY'-J'Y=2/(\pi x)$. Expand each requested expression:
 \text{(c)}\quad W[Y,H^{(1)}]
 &=YJ'-Y'J+i(YY'-Y'Y)=-W[J,Y]=-\frac2{\pi x},\\
 \text{(d)}\quad W[Y,H^{(2)}]
-&=YJ'-Y'J-i(YY'-Y'Y)=-\frac2{\pi x},\\
+&=YJ'-Y'J-i(YY'-Y'Y)=-W[J,Y]=-\frac2{\pi x},\\
 \text{(e)}\quad W[H^{(1)},H^{(2)}]
 &=(J+iY)(J'-iY')-(J'+iY')(J-iY)\\
+&=(JJ'+YY'-iJY'+iJ'Y)-(JJ'+YY'+iJY'-iJ'Y)\\
 &=-2i(JY'-J'Y)=-\frac{4i}{\pi x}.
 \end{align*}
-For (f), the derivative recurrence gives
-$H_{\nu+1}^{(j)}=\nu H_\nu^{(j)}/x-H_\nu^{(j)\prime}$.
-Substitute in the left side; its two $\nu/x$ products cancel:
+For (f) and (g) note that $J_\nu$ and $Y_\nu$ satisfy the
+recurrences (14.7) and (14.8) for every order (Exercise~14.3.1),
+and so do
+$H_\nu^{(1,2)}=J_\nu\pm iY_\nu$, whose coefficients do not depend
+on $\nu$. Half the sum and half the difference of these
+recurrences give, for each such function $Z_\nu$,
+\[
+Z_{\nu-1}=Z_\nu'+\frac\nu xZ_\nu,\qquad
+Z_{\nu+1}=\frac\nu xZ_\nu-Z_\nu'.
+\]
+For (f), substitute the second form in the left side; its two
+$\nu/x$ products cancel:
 \begin{align*}
 H_\nu^{(2)}H_{\nu+1}^{(1)}-H_\nu^{(1)}H_{\nu+1}^{(2)}
-&=-H_\nu^{(2)}H_\nu^{(1)\prime}
-+H_\nu^{(1)}H_\nu^{(2)\prime}\\
-&=W[H^{(1)},H^{(2)}]=-\frac{4i}{\pi x}
-=\frac4{i\pi x}.
+&=H_\nu^{(2)}\Bigl(\frac\nu xH_\nu^{(1)}-H_\nu^{(1)\prime}\Bigr)
+-H_\nu^{(1)}\Bigl(\frac\nu xH_\nu^{(2)}-H_\nu^{(2)\prime}\Bigr)\\
+&=H_\nu^{(1)}H_\nu^{(2)\prime}-H_\nu^{(1)\prime}H_\nu^{(2)}
+=W[H^{(1)},H^{(2)}]=-\frac{4i}{\pi x}
+=\frac4{i\pi x},
 \end{align*}
-For (g), use $J_{\nu-1}=J_\nu'+\nu J_\nu/x$ and
-$H_{\nu-1}^{(1)}=H_\nu^{(1)\prime}+\nu H_\nu^{(1)}/x$:
+by (e) and $-i=1/i$. For (g), use the first form for
+$J_{\nu-1}=J_\nu'+\nu J_\nu/x$ and
+$H_{\nu-1}^{(1)}=H_\nu^{(1)\prime}+\nu H_\nu^{(1)}/x$; again the
+$\nu/x$ products cancel, and (a) gives
 \[
 J_{\nu-1}H_\nu^{(1)}-J_\nu H_{\nu-1}^{(1)}
 =J_\nu'H_\nu^{(1)}-J_\nu H_\nu^{(1)\prime}
+=-W[J,H^{(1)}]
 =-\frac{2i}{\pi x}=\frac2{i\pi x}.
 \]
 This verifies all seven signs with the same Wronskian convention.
@@ -3207,7 +3222,9 @@ Fig.~14.10.
 Take $x>0$ and the branch $-\pi<\arg t<\pi$, with limiting
 values on either bank of the negative axis. Put
 $f=e^{x(t-t^{-1})/2}t^{-\nu-1}$. The computation in
-Exercise~14.1.15 gives the exact identity
+Exercise~14.1.15(a) (there $f_x=\frac12(t-t^{-1})f$,
+$f_{xx}=\frac14(t-t^{-1})^2f$, and the product rule is applied to
+$Q$ below) gives the exact identity
 \[
 (x^2\partial_x^2+x\partial_x+x^2-\nu^2)f
 =\frac{\partial}{\partial t}Q(t,x),
@@ -3219,19 +3236,31 @@ Q(t,x)=e^{x(t-t^{-1})/2}t^{-\nu}
 We now check the different endpoints of these contours.
 On the positive axis as $t\downarrow0$, the exponential is
 $e^{-x/(2t)+O(t)}$; it dominates every power of $t^{-1}$ and
-makes $Q\to0$. On either bank $t=Re^{\pm i\pi}$ as
-$R\to\infty$, it is $e^{-xR/2+O(R^{-1})}$ and again
-$Q\to0$. These estimates also justify differentiation under
-the integrals on compact positive $x$ intervals.
+makes $Q\to0$. On either bank $t=Re^{\pm i\pi}=-R$ as
+$R\to\infty$, $t-t^{-1}=-R+R^{-1}$, so the exponential is
+$e^{-xR/2+O(R^{-1})}$; it dominates the powers of $R$ in $Q$, and
+again $Q\to0$. The same estimates bound $f$, $f_x$ and $f_{xx}$
+uniformly for $x$ in compact positive intervals, which justifies
+differentiation under the integrals. They also explain the
+qualification in the statement: for $x>0$ the factor
+$e^{-x/(2t)}$ decays as $t\to0$ only with $\Re t>0$, and $e^{xt/2}$
+decays as $|t|\to\infty$ only with $\Re t<0$, so the endpoints must
+be approached as stated.
 
-(a) Integrating the identity from $0^+$ along $C_1$ to the upper
-negative-real infinity gives $[Q]_{0^+}^{\infty e^{i\pi}}=0$.
-After multiplication by $1/(\pi i)$, the first integral therefore
-satisfies Bessel's equation.
+(a) Let $F(x)=(\pi i)^{-1}\int_{C_1}f\,dt$. Differentiating under
+the integral and integrating the identity from $0^+$ along $C_1$
+to the upper negative-real infinity gives
+\[
+x^2F''+xF'+(x^2-\nu^2)F=\frac1{\pi i}\int_{C_1}
+\frac{\partial Q}{\partial t}dt
+=\frac1{\pi i}[Q]_{0^+}^{\infty e^{i\pi}}=0,
+\]
+so the first integral satisfies Bessel's equation.
 
 (b) Along $C_2$ the orientation is from the lower negative-real
-infinity to $0^+$. Both endpoint values still vanish, so the second
-integral satisfies the same equation. These endpoint estimates
+infinity to $0^+$. Both endpoint values still vanish,
+$[Q]_{\infty e^{-i\pi}}^{0^+}=0$, so the second integral satisfies
+the same equation. These endpoint estimates
 establish the ODE, while Exercises~14.4.3--14.4.4 establish that
 their normalizations are precisely $J_\nu\pm iY_\nu$.
 
@@ -3257,19 +3286,27 @@ maps to $s=e^{i(\pi-\theta)}$, so that arc is also unchanged as
 a set but traversed backwards. Thus the entire transformed
 contour is $C_1$ with reversed orientation.
 
-On this branch, $\log t=i\pi-\log s$, so
+On this branch, $\log t=i\pi-\log s$. Since $t=-1/s$, we have
+$t^{-1}=-s$ and $dt=s^{-2}ds$, while
+$t^{-\nu-1}=e^{-(\nu+1)(i\pi-\log s)}=-e^{-i\pi\nu}s^{\nu+1}$.
+Hence
 \[
 t-t^{-1}=s-s^{-1},\qquad
 t^{-\nu-1}dt=-e^{-i\pi\nu}s^{\nu-1}ds.
 \]
-The minus sign from the differential cancels the reversed contour.
-Therefore
+Write $-C_1$ for $C_1$ traversed backwards. The minus sign from the
+differential cancels the reversed orientation:
 \begin{align*}
 H_\nu^{(1)}(x)
+&=\frac1{\pi i}\int_{-C_1}e^{x(s-s^{-1})/2}
+\bigl(-e^{-i\pi\nu}\bigr)s^{\nu-1}ds\\
 &=\frac{e^{-i\pi\nu}}{\pi i}\int_{C_1}
-e^{x(s-s^{-1})/2}s^{\nu-1}ds\\
-&=\boxed{e^{-i\pi\nu}H_{-\nu}^{(1)}(x)}.
+e^{x(s-s^{-1})/2}s^{\nu-1}ds
+=\boxed{e^{-i\pi\nu}H_{-\nu}^{(1)}(x)},
 \end{align*}
+because $s^{\nu-1}=s^{-(-\nu)-1}$: the last integral is
+Eq.~(14.90) with $\nu$ replaced by $-\nu$. Equivalently,
+$H_{-\nu}^{(1)}(x)=e^{i\pi\nu}H_\nu^{(1)}(x)$.
 For any other admissible representative, ``the same contour'' means
 the same deformable contour class with the same branch and endpoints;
 the representative just chosen makes the reversal explicit.
@@ -3282,34 +3319,53 @@ Exercise~14.4.2, show that
 \frac{1}{2i}\big[H_{\nu}^{(1)}(x)-H_{\nu}^{(2)}(x)\big]=Y_{\nu}(x).
 \]
 \solution
-Temporarily denote the two contour integrals by $A_\nu$ and
-$B_\nu$, without using their algebraic Hankel definitions. Joining
-$C_2$ to $C_1$ gives the Schlaefli contour: the paths approaching
-the positive origin can be joined through the exponentially
-decaying region. Its prefactor is half the Hankel prefactor, so
+Temporarily denote the two contour integrals of Exercise~14.4.2 by
+$A_\nu$ (along $C_1$) and $B_\nu$ (along $C_2$), without using their
+algebraic Hankel definitions. For $C_1$ take the representative of
+Exercise~14.4.3: the segment $0<t\le1$, the upper unit semicircle,
+and the upper bank from $-1$ to $-\infty$. For $C_2$ take its mirror
+image, traversed from $-\infty$ along the lower bank to $-1$, along
+the lower unit semicircle to $1$, and then to $0^+$. In
+$A_\nu+B_\nu$ the segment $(0,1]$ is traversed once in each
+direction, so its two contributions cancel. What remains runs from
+$-\infty$ below the cut to $-1$, once counterclockwise around the
+unit circle, and back to $-\infty$ above the cut. This is the
+contour $C$ of Fig.~14.5 in the Schlaefli integral
+$J_\nu=(2\pi i)^{-1}\int_Ce^{x(t-t^{-1})/2}t^{-\nu-1}dt$ of
+Exercise~14.1.15(a). Since $1/(\pi i)=2/(2\pi i)$,
 \[
 2J_\nu=A_\nu+B_\nu.
 \tag{1}
 \]
-Exercise~14.4.3 gives $A_{-\nu}=e^{i\pi\nu}A_\nu$.
-The same inversion on the lower contour, now with
-$t=e^{-i\pi}/s$, gives $B_{-\nu}=e^{-i\pi\nu}B_\nu$.
+Exercise~14.4.3 gives $A_\nu=e^{-i\pi\nu}A_{-\nu}$, that is,
+$A_{-\nu}=e^{i\pi\nu}A_\nu$. The same inversion on the lower
+contour, now with $t=e^{-i\pi}/s$ and $\log t=-i\pi-\log s$, gives
+$t^{-\nu-1}dt=-e^{i\pi\nu}s^{\nu-1}ds$ and exchanges the endpoints
+$\infty e^{-i\pi}$ and $0^+$. As there, the minus sign cancels the
+reversed orientation, so $B_\nu=e^{i\pi\nu}B_{-\nu}$, that is,
+$B_{-\nu}=e^{-i\pi\nu}B_\nu$.
 Applying (1) at order $-\nu$ therefore yields
 \[
 2J_{-\nu}=e^{i\pi\nu}A_\nu+e^{-i\pi\nu}B_\nu.
 \tag{2}
 \]
-For noninteger $\nu$, insert these into the definition of $Y_\nu$:
+For noninteger $\nu$, insert (1) and (2) into the definition
+$Y_\nu=(\cos\pi\nu\,J_\nu-J_{-\nu})/\sin\pi\nu$ and use
+$\cos\pi\nu-e^{\pm i\pi\nu}=\mp i\sin\pi\nu$:
 \begin{align*}
 Y_\nu
 &=\frac{\cos\pi\nu\,(A_\nu+B_\nu)
 -e^{i\pi\nu}A_\nu-e^{-i\pi\nu}B_\nu}{2\sin\pi\nu}\\
 &=\frac{-i\sin\pi\nu\,A_\nu
 +i\sin\pi\nu\,B_\nu}{2\sin\pi\nu}
+=\frac{-i(A_\nu-B_\nu)}2
 =\boxed{\frac{A_\nu-B_\nu}{2i}}.
 \end{align*}
-The limit in order proves the integer case. Combining this result
-with (1) gives $A_\nu=J_\nu+iY_\nu$ and
+For integer $\nu=n$, $Y_n$ is the limit of $Y_\nu$ as $\nu\to n$,
+and $A_\nu$, $B_\nu$ are continuous in $\nu$ (on a fixed
+representative the integrals converge uniformly for $\nu$ in
+bounded sets), so the result persists in the limit. Combining
+this result with (1) gives $A_\nu=J_\nu+iY_\nu$ and
 $B_\nu=J_\nu-iY_\nu$, verifying both identifications from the
 contours themselves.
 
@@ -3337,19 +3393,32 @@ The transformed integrand is consequently
 e^{x(t-t^{-1})/2}t^{-\nu-1}dt
 =e^{x\sinh\gamma-\nu\gamma}d\gamma.
 \]
-(a) For $C_1$, positive $t\downarrow0$ corresponds to
-$\gamma\to-\infty$ on the real axis, and the upper negative ray
-corresponds to $\gamma\to+\infty+i\pi$. A representative is
+Here $\gamma=\ln|t|+i\arg t$ with $-\pi\le\arg t\le\pi$, the
+branch of Exercise~14.4.2; as the statement's qualification
+requires, this branch fixes the heights $\pm\pi$ of the images of
+the two banks, and the orientations of $C_1$, $C_2$ fix the
+directions of $C_3$, $C_4$.
+
+(a) Use the representative of $C_1$ from Exercise~14.4.3. The
+segment $0<t\le1$ maps to the real axis $-\infty<\gamma\le0$, so
+positive $t\downarrow0$ corresponds to $\gamma\to-\infty$; the upper
+semicircle $t=e^{i\theta}$, $0\le\theta\le\pi$, maps to the segment
+$\gamma=i\theta$ from $0$ to $i\pi$; and the upper bank
+$t=Re^{i\pi}$, $R\ge1$, maps to $\gamma=\ln R+i\pi$, which tends to
+$+\infty+i\pi$. Thus the image of $C_1$ is
 \[
 C_3:\quad -\infty\ \longrightarrow\ 0\
-\longrightarrow\ i\pi\ \longrightarrow\ +\infty+i\pi.
+\longrightarrow\ i\pi\ \longrightarrow\ +\infty+i\pi,
 \]
-Thus $H_\nu^{(1)}=(\pi i)^{-1}\int_{C_3}
+and $H_\nu^{(1)}=(\pi i)^{-1}\int_{C_3}
 e^{x\sinh\gamma-\nu\gamma}d\gamma$.
 
-(b) The lower negative ray of $C_2$ begins at
-$\gamma=+\infty-i\pi$, and the positive-origin endpoint is
-$\gamma=-\infty$. Its orientation is
+(b) Likewise the lower bank $t=Re^{-i\pi}$ of $C_2$, traversed
+from $R=\infty$ to $R=1$, maps to $\gamma=\ln R-i\pi$, from
+$+\infty-i\pi$ to $-i\pi$; the lower semicircle
+$t=e^{i\theta}$, $\theta:-\pi\to0$, maps to $\gamma=i\theta$; and
+the final segment $t:1\to0^+$ maps to $\gamma:0\to-\infty$. With
+this orientation,
 \[
 C_4:\quad +\infty-i\pi\ \longrightarrow\ -i\pi\
 \longrightarrow\ 0\ \longrightarrow\ -\infty.
@@ -3357,9 +3426,11 @@ C_4:\quad +\infty-i\pi\ \longrightarrow\ -i\pi\
 This gives the second requested integral with its stated sign.
 The integrand is entire in $\gamma$, so these piecewise paths may
 be smoothed to those in Fig.~14.11. For $x>0$, it decays at
-$\Re\gamma\to-\infty$ on height zero and at
-$\Re\gamma\to+\infty$ on heights $\pm\pi$, validating the
-endpoint deformations.
+$\Re\gamma\to-\infty$ on height zero, where
+$\sinh\gamma\to-\infty$, and at $\Re\gamma=u\to+\infty$ on heights
+$\pm\pi$, where $\sinh(u\pm i\pi)=-\sinh u\to-\infty$; in both
+cases the factor $e^{x\sinh\gamma}$ overwhelms $e^{-\nu\gamma}$,
+validating the endpoint deformations.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3383,40 +3454,67 @@ by $ia\pi/2$ and take the limit $a\to0$.)
 \end{enumerate}
 \par\erratum{Take $x>0$ and keep a positive imaginary contour height, or a positive imaginary part of $x$, during differentiation. Take the damping limit only afterward.}
 \solution
-(a) In the order-zero contour formula set
-$t=ie^s=e^{s+i\pi/2}$. Directly,
+(a) In the order-zero formula, Eq.~(14.90) with $\nu=0$,
 \[
-t-t^{-1}=i(e^s+e^{-s})=2i\cosh s,\qquad dt/t=ds.
+H_0^{(1)}(x)=\frac1{\pi i}\int_{C_1}e^{x(t-t^{-1})/2}\frac{dt}t,
 \]
-The initial positive-origin endpoint maps to $s=-\infty-i\pi/2$,
-the point $t=i$ maps to $s=0$, and the final upper negative
-infinity maps to $s=+\infty+i\pi/2$. Therefore
+set $t=ie^s=e^{s+i\pi/2}$, that is, $s=\log t-i\pi/2$. Since
+$1/i=-i$,
+\[
+t-t^{-1}=ie^s-(-i)e^{-s}=i(e^s+e^{-s})=2i\cosh s,\qquad dt/t=ds,
+\]
+so the exponent becomes $(x/2)(2i\cosh s)=ix\cosh s$.
+The initial positive-origin endpoint ($\arg t=0$, $|t|\to0$) maps
+to $s=-\infty-i\pi/2$, the point $t=i$ maps to $s=0$, and the
+final upper negative infinity ($\arg t=\pi$, $|t|\to\infty$) maps
+to $s=+\infty+i\pi/2$. Therefore
 \[
 \boxed{H_0^{(1)}(x)=\frac1{\pi i}\int_Ce^{ix\cosh s}ds}.
 \]
-(b) Choose the contour to consist of a path $C_+$ from $0$ to
-$\infty+i\pi/2$ and its reflected path from
-$-\infty-i\pi/2$ to $0$. On the reflected half put $u=-s$.
-Because $\cosh(-u)=\cosh u$, reversing its limits cancels
-$ds=-du$, so its integral equals the integral on $C_+$. Hence
+(b) The integrand is entire, so only the two ends of $C$ matter.
+Choose the contour to consist of a path $C_+$ from $0$ to
+$\infty+i\pi/2$ and its reflected path $s=-u$, $u\in C_+$, from
+$-\infty-i\pi/2$ to $0$. On the reflected half,
+$\cosh s=\cosh(-u)=\cosh u$ and $ds=-du$, and reversing the
+limits removes the minus sign:
+\[
+\int_{-\infty-i\pi/2}^{0}e^{ix\cosh s}ds
+=\int_{\infty+i\pi/2}^{0}e^{ix\cosh u}(-du)
+=\int_0^{\infty+i\pi/2}e^{ix\cosh u}du.
+\]
+So the reflected half contributes as much as $C_+$. Hence
 \[
 \boxed{H_0^{(1)}(x)=\frac2{\pi i}
 \int_0^{\infty+i\pi/2}e^{ix\cosh s}ds}.
 \]
-(c) For $x>0$, choose a contour whose final ray has fixed height
-$\eta$, $0<\eta\le\pi/2$. On that ray
+(c) For $x>0$, choose a contour from $0$ whose final ray
+$s=R+i\eta$, $R\to\infty$, has fixed height $\eta$,
+$0<\eta\le\pi/2$. Since
+$\cosh(R+i\tau)=\cosh R\cos\tau+i\sinh R\sin\tau$,
 \[
-|e^{ix\cosh(R+i\eta)}|=e^{-x\sinh R\sin\eta},
+|e^{ix\cosh(R+i\tau)}|=e^{-x\sinh R\sin\tau}.
 \]
-which decays faster than the hyperbolic factors from any two
-derivatives. Differentiation under the integral is now legitimate:
+For $\tau$ between $\eta$ and $\pi/2$ this is at most
+$e^{-x\sinh R\sin\eta}\to0$, so the vertical segment joining the
+two heights at $\Re s=R$ contributes nothing as $R\to\infty$: the
+end of the contour may be moved from height $\pi/2$ to $\eta$. On
+the ray this bound decays faster than the factors $\cosh s$ and
+$\cosh^2s$ produced by two $x$ derivatives grow, uniformly for $x$
+in compact positive intervals, so differentiation under the
+integral is legitimate. With
+$\partial_xe^{ix\cosh s}=i\cosh s\,e^{ix\cosh s}$,
+$\partial_x^2e^{ix\cosh s}=-\cosh^2s\,e^{ix\cosh s}$, and
+$\cosh^2s-1=\sinh^2s$,
 \begin{align*}
 (x^2\partial_x^2+x\partial_x+x^2)e^{ix\cosh s}
 &=[-x^2\sinh^2s+ix\cosh s]e^{ix\cosh s}\\
-&=\frac d{ds}[ix\sinh s\,e^{ix\cosh s}].
+&=\frac d{ds}[ix\sinh s\,e^{ix\cosh s}],
 \end{align*}
-The lower boundary is zero since $\sinh0=0$; the upper is zero
-by the damping estimate. Thus the integral solves the Bessel ODE.
+by the product rule, since $\frac d{ds}e^{ix\cosh s}
+=ix\sinh s\,e^{ix\cosh s}$. Integrating along the contour, the
+lower boundary term is zero since $\sinh0=0$; the upper one is at
+most $x|\sinh(R+i\eta)|e^{-x\sinh R\sin\eta}\to0$. Thus the
+integral solves the Bessel ODE of order zero.
 \erratum{The real-axis form is a boundary limit, not a license to
 discard an undamped boundary term after differentiating. Take
 $\eta\downarrow0$ only after the convergent-contour calculation,
@@ -3443,7 +3541,9 @@ This last result is a Fourier sine transform.
 formula cannot be extended to $x<0$ unchanged, since its right
 side is odd in $x$ whereas $J_0$ is even. At $x=0$ the limit
 must be taken after integration.}
-For $x>0$, expand the exponential and retain its prefactor:
+For $x>0$, write the prefactor as $2/(i\pi)=-2i/\pi$ and expand
+the exponential, $e^{ix\cosh s}=\cos(x\cosh s)+i\sin(x\cosh s)$.
+Since $-(2i/\pi)\,i=2/\pi$,
 \begin{align*}
 H_0^{(1)}(x)
 &=-\frac{2i}{\pi}\int_0^\infty
@@ -3451,19 +3551,23 @@ H_0^{(1)}(x)
 &=\frac2\pi\int_0^\infty\sin(x\cosh s)ds
 -\frac{2i}{\pi}\int_0^\infty\cos(x\cosh s)ds.
 \end{align*}
-(a) Since $H_0^{(1)}=J_0+iY_0$ and both $J_0,Y_0$ are real
-on the positive axis, its real part is
+(a) Here $H_0^{(1)}=J_0+iY_0$, where $J_0$ and $Y_0$ are real on the
+positive axis (their series, Eq.~(14.61) for $Y_0$, have real
+coefficients), and both integrals are real. Comparing real parts,
 \[
 \boxed{J_0(x)=\frac2\pi\int_0^\infty\sin(x\cosh s)ds}.
 \]
-(b) Put $t=\cosh s$. The limits become $1,\infty$, and
+(b) Put $t=\cosh s$. The limits become $1,\infty$, and, since
+$\sinh s=+\sqrt{\cosh^2s-1}$ for $s\ge0$,
 $dt=\sinh s\,ds=\sqrt{t^2-1}\,ds$. Thus
 \[
 \boxed{J_0(x)=\frac2\pi\int_1^\infty
 \frac{\sin(xt)}{\sqrt{t^2-1}}dt}.
 \]
-The square-root singularity at $t=1$ is integrable and the
-oscillatory $1/t$ tail converges by Dirichlet's test. These facts
+The singularity at $t=1$ is integrable, since
+$1/\sqrt{t^2-1}\sim1/\sqrt{2(t-1)}$ there. The tail converges by
+Dirichlet's test: $|\int_2^T\sin(xt)dt|\le2/x$ for every $T$, and
+$1/\sqrt{t^2-1}$ decreases monotonically to zero. These facts
 also identify the ordinary improper integral with its Abel limit.
 
 \Needspace{5\baselineskip}
@@ -3486,18 +3590,23 @@ For $x>0$, multiplication by $2/(i\pi)=-2i/\pi$ gives
 H_0^{(1)}(x)=\frac2\pi\int_0^\infty\sin(x\cosh s)ds
 -\frac{2i}{\pi}\int_0^\infty\cos(x\cosh s)ds.
 \]
-(a) Equating imaginary parts with $J_0+iY_0$ therefore yields
+(a) Both integrals are real, and so are $J_0$ and $Y_0$ on the
+positive axis (Exercise~14.4.7). Equating imaginary parts with
+$J_0+iY_0$ therefore yields
 \[
 \boxed{Y_0(x)=-\frac2\pi\int_0^\infty\cos(x\cosh s)ds}.
 \]
-(b) With $t=\cosh s$, use $ds=dt/\sqrt{t^2-1}$ and the
-limits $t=1,\infty$:
+(b) With $t=\cosh s$, use $ds=dt/\sqrt{t^2-1}$ (as in
+Exercise~14.4.7) and the limits $t=1,\infty$:
 \[
 \boxed{Y_0(x)=-\frac2\pi\int_1^\infty
 \frac{\cos(xt)}{\sqrt{t^2-1}}dt}.
 \]
 As in Exercise~14.4.7, the finite endpoint is integrable and the
-tail converges conditionally. Thus taking the imaginary part of
+tail converges conditionally for $x>0$; at $x=0$ the integral
+$\int_1^\infty dt/\sqrt{t^2-1}$ diverges, in accordance with the
+logarithmic singularity of $Y_0$, which is why the qualification
+requires $x>0$. Thus taking the imaginary part of
 the Abel boundary value is consistent with the displayed
 ordinary improper integrals. In particular the prefactor changes
 the cosine integral's sign; omitting $1/i$ would interchange the
@@ -3512,9 +3621,12 @@ first- and second-kind identifications.
 $e^{(x/2)(t+1/t)}=\displaystyle\sum_{n=-\infty}^{\infty}I_{n}(x)t^{n}$,
 thus generating modified Bessel functions, $I_{n}(x)$.
 \solution
-Start from
-$\exp[X(T-T^{-1})/2]=\sum_{n\in\mathbb Z}J_n(X)T^n$ and
-put $X=ix$, $T=-it$. Since $T^{-1}=i/t$,
+Start from the Bessel generating function
+$\exp[X(T-T^{-1})/2]=\sum_{n\in\mathbb Z}J_n(X)T^n$, valid for all
+complex $X$ and $T\ne0$, and put $X=ix$, $T=-it$. Since
+$T^{-1}=1/(-it)=i/t$, we have $T-T^{-1}=-it-i/t$, and since
+$(-i)^n=i^{-n}$ for every integer $n$, the definition
+$I_n(x)=i^{-n}J_n(ix)$ gives
 \[
 \frac{ix}{2}(-it-i/t)=\frac x2(t+t^{-1}),\qquad
 J_n(ix)(-it)^n=i^{-n}J_n(ix)t^n=I_n(x)t^n.
@@ -3523,7 +3635,6 @@ Thus, for $t\ne0$,
 \[
 \boxed{e^{x(t+t^{-1})/2}=\sum_{n=-\infty}^{\infty}I_n(x)t^n}.
 \]
-The equality $(-i)^n=i^{-n}$ holds for all integers $n$.
 Absolute convergence on compact annuli follows either from the
 original generating series or from the product of the two
 exponential series $e^{xt/2}e^{x/(2t)}$.
@@ -3542,14 +3653,18 @@ I_{2n}(x)$,
 \item[(e)] $\sinh x=2\displaystyle\sum_{n=1}^{\infty}I_{2n-1}(x)$.
 \end{enumerate}
 \solution
-Invariance of the generating function under $t\mapsto1/t$
-gives $I_{-n}=I_n$. Pair positive and negative orders:
+The generating function of Exercise~14.5.1 is invariant under
+$t\mapsto1/t$, so
+$\sum_nI_nt^n=\sum_nI_nt^{-n}=\sum_nI_{-n}t^n$; uniqueness of
+Laurent coefficients gives $I_{-n}=I_n$. Pair positive and
+negative orders:
 \[
 e^{x(t+t^{-1})/2}=I_0+
 \sum_{n=1}^\infty I_n(t^n+t^{-n}).
 \]
-(a) Put $t=i$. Odd-$n$ pairs cancel, while for $n=2j$,
-$i^{2j}+i^{-2j}=2(-1)^j$. Since $i+i^{-1}=0$,
+(a) Put $t=i$. Since $i+i^{-1}=i-i=0$, the left side is $e^0=1$.
+On the right, $i^n+i^{-n}=i^n+(-i)^n$, so odd-$n$ pairs cancel,
+while for $n=2j$, $i^{2j}+i^{-2j}=2(-1)^j$. Hence
 \[
 \boxed{1=I_0+2\sum_{j=1}^\infty(-1)^jI_{2j}}.
 \]
@@ -3597,8 +3712,9 @@ The contour $C$ is the same as that for $J_{\nu}(x)$ (Fig.~14.5).
 \solution
 (a) Divide the Laurent expansion from Exercise~14.5.1 by
 $t^{n+1}$ and integrate counterclockwise around any circle centered
-at zero. The integral of $t^{m-n-1}$ is $2\pi i$ if $m=n$ and
-zero otherwise. Thus coefficient extraction gives
+at zero; the series converges uniformly on the circle, so it may be
+integrated term by term. The integral of $t^{m-n-1}$ is $2\pi i$ if
+$m=n$ and zero otherwise. Thus coefficient extraction gives
 \[
 \boxed{I_n(x)=\frac1{2\pi i}\oint
 e^{x(t+t^{-1})/2}t^{-n-1}dt}.
@@ -3607,17 +3723,30 @@ The exponential has an essential singularity at zero, but its
 Laurent coefficient is extracted exactly as for any isolated
 singularity.
 
-\erratum{For noninteger order in (b), the contour is the open
-Hankel contour of Fig.~14.5, not an ordinary closed circle. Use
+(b) \erratum{For noninteger order the contour is the open
+Hankel contour of Fig.~14.5, not an ordinary closed circle,
+because $t^{-\nu-1}$ is then not single valued around zero. Use
 the two banks of the negative-real cut and a fixed circle about
 zero, with $-\pi<\arg t<\pi$; take $x>0$ initially.}
-Put $s=xt/2$. The proposed integral becomes
+Put $s=xt/2$, i.e., $t=2s/x$ and $dt=(2/x)ds$. Then
+\[
+\frac x2(t+t^{-1})=s+\frac{x^2}{4s},\qquad
+t^{-\nu-1}dt=\left(\frac{2s}x\right)^{-\nu-1}\frac2x\,ds
+=\left(\frac x2\right)^\nu s^{-\nu-1}ds.
+\]
+A positive dilation changes neither the cut nor the winding about
+zero, so the image is again a Hankel contour $C$ (as in
+Exercise~14.1.15(a)), and the proposed integral becomes
 \[
 \frac{(x/2)^\nu}{2\pi i}\int_C
 e^{s+x^2/(4s)}s^{-\nu-1}ds.
 \]
-Expand only the second exponential and use the reciprocal-gamma
-Hankel integral:
+Expand only the second exponential,
+$e^{x^2/(4s)}=\sum_r(x^2/4)^rs^{-r}/r!$, and use the
+reciprocal-gamma Hankel integral
+$(2\pi i)^{-1}\int_Ce^ss^{-z}ds=1/\Gamma(z)$ (quoted in
+Exercise~14.1.15(a)) with $z=\nu+r+1$; also
+$(x/2)^\nu(x^2/4)^r=(x/2)^{\nu+2r}$:
 \begin{align*}
 \frac{(x/2)^\nu}{2\pi i}\sum_{r=0}^\infty
 \frac{(x^2/4)^r}{r!}\int_Ce^ss^{-\nu-r-1}ds
@@ -3625,6 +3754,9 @@ Hankel integral:
 \frac{(x/2)^{\nu+2r}}{r!\Gamma(\nu+r+1)}\\
 &=\boxed{I_\nu(x)}.
 \end{align*}
+The last sum is the series of $I_\nu$: by $I_\nu(x)=i^{-\nu}J_\nu(ix)$
+and $(ix/2)^{\nu+2r}=i^\nu(-1)^r(x/2)^{\nu+2r}$, the factors
+$(-1)^r$ of the $J_\nu$ series are cancelled.
 A fixed-radius contour stays away from zero, so the expanded
 factor is uniformly bounded; its tails have the decaying factor
 $e^s$. This justifies termwise integration. The equality then
@@ -3647,18 +3779,33 @@ I_{\nu}(z)&=\frac{1}{\pi^{1/2}\Gamma(\nu+\frac{1}{2})}
 \end{align*}
 \par\erratum{Use one consistent branch of $z^\nu$ and of $I_\nu(z)$; at zero use an existing limit.}
 \solution
-For $\nu>-1/2$ the endpoint weight is integrable. Expand
-$e^{z\cos\theta}$ in its uniformly convergent series. Reflection
-$\theta\mapsto\pi-\theta$ cancels every odd power of
-$\cos\theta$, leaving
+For $\nu>-1/2$ the endpoint weight $\sin^{2\nu}\theta$ is
+integrable, since $2\nu>-1$. Expand
+$e^{z\cos\theta}=\sum_kz^k\cos^k\theta/k!$; the sum of the absolute
+values of its terms is at most $e^{|z|}$, so dominated convergence
+permits termwise integration. Under the reflection
+$\theta\mapsto\pi-\theta$, $\cos\theta\mapsto-\cos\theta$ and
+$\sin\theta\mapsto\sin\theta$. Hence the integral over $[0,\pi]$ of
+an odd power of $\cos\theta$ times $\sin^{2\nu}\theta$ vanishes,
+and that of an even power is twice the integral over $[0,\pi/2]$.
+This leaves
 \[
 \int_0^\pi e^{z\cos\theta}\sin^{2\nu}\theta d\theta
 =\sum_{r=0}^\infty\frac{z^{2r}}{(2r)!}
 \int_0^\pi\cos^{2r}\theta\sin^{2\nu}\theta d\theta.
 \]
-The remaining integral is
-$B(r+1/2,\nu+1/2)$, so multiplication by the prescribed
-prefactor gives
+With $u=\sin^2\theta$ on $[0,\pi/2]$, as in Exercise~13.3.10, the
+remaining integral is a beta function:
+\begin{align*}
+\int_0^\pi\cos^{2r}\theta\sin^{2\nu}\theta\,d\theta
+&=2\int_0^{\pi/2}\cos^{2r}\theta\sin^{2\nu}\theta\,d\theta
+=B\left(r+\tfrac12,\nu+\tfrac12\right)\\
+&=\frac{\Gamma(r+1/2)\Gamma(\nu+1/2)}{\Gamma(r+\nu+1)}.
+\end{align*}
+Multiplication by the prescribed prefactor cancels
+$\Gamma(\nu+1/2)$. With $\Gamma(r+1/2)/[\sqrt\pi(2r)!]=1/(4^rr!)$
+(Exercise~13.3.10) and $(z/2)^\nu z^{2r}/4^r=(z/2)^{\nu+2r}$ it
+gives
 \begin{align*}
 \frac{(z/2)^\nu}{\sqrt\pi\Gamma(\nu+1/2)}
 \sum_{r=0}^\infty\frac{z^{2r}}{(2r)!}
@@ -3667,18 +3814,23 @@ prefactor gives
 \frac{(z/2)^{\nu+2r}}{r!\Gamma(r+\nu+1)}\\
 &=I_\nu(z),
 \end{align*}
-where $\Gamma(r+1/2)/[\sqrt\pi(2r)!]=1/(4^rr!)$.
+the series of $I_\nu$ found in Exercise~14.5.3.
 Changing $z$ to $-z$ inside the exponential does not change any
 surviving even term, proving both signs in the first integral.
 
-With $p=\cos\theta$, $dp=-\sin\theta d\theta$, and hence
+With $p=\cos\theta$, $dp=-\sin\theta d\theta$, and
+$\sin\theta=(1-p^2)^{1/2}\ge0$ on $[0,\pi]$; hence
 \[
-\sin^{2\nu}\theta d\theta=-(1-p^2)^{\nu-1/2}dp.
+\sin^{2\nu}\theta d\theta=\sin^{2\nu-1}\theta\,\sin\theta d\theta
+=-(1-p^2)^{\nu-1/2}dp.
 \]
-Reversing the limits gives the second representation. Finally the
-reflection symmetry averages the two exponentials to
-$\cosh(z\cos\theta)$, whose integral over $[0,\pi]$ is twice
-its integral over $[0,\pi/2]$. This proves the third form.
+As $\theta$ runs from $0$ to $\pi$, $p$ runs from $1$ to $-1$;
+reversing the limits removes the minus sign and gives the second
+representation. Finally, averaging the two signs of the first
+representation replaces $e^{\pm z\cos\theta}$ by
+$\cosh(z\cos\theta)$. Since $\cosh(z\cos(\pi-\theta))
+=\cosh(z\cos\theta)$, its integral over $[0,\pi]$ is twice its
+integral over $[0,\pi/2]$. This proves the third form.
 All factors $z^\nu$ use the same branch as $I_\nu(z)$.
 
 \Needspace{5\baselineskip}
@@ -3708,35 +3860,61 @@ where $k_{n}=n\pi/h$.
 orthogonality of the trigonometric functions.
 \par\erratum{Set $a_{0n}=0$ by convention, since the zero angular sine contributes nothing.}
 \solution
-(a) Set $\Phi=P(\rho)F(\varphi)Z(z)$ in Laplace's equation.
-The separated angular and axial equations and boundary conditions
-give
+(a) Set $\Phi=P(\rho)F(\varphi)Z(z)$ in Laplace's equation
+$\rho^{-1}(\rho\Phi_\rho)_\rho+\rho^{-2}\Phi_{\varphi\varphi}
++\Phi_{zz}=0$ and divide by $PFZ$:
 \[
-F''+m^2F=0,\quad F= a\sin m\varphi+b\cos m\varphi,
-\quad m=0,1,\ldots,
+\frac{(\rho P')'}{\rho P}+\frac{F''}{\rho^2F}+\frac{Z''}{Z}=0.
 \]
+Only the last term depends on $z$, so $Z''/Z$ is a constant
+$\lambda$. With $Z(0)=Z(h)=0$, $\lambda=0$ ($Z=A+Bz$) and
+$\lambda>0$ ($Z=A\sinh\sqrt\lambda z+B\cosh\sqrt\lambda z$) allow
+only $Z\equiv0$. Hence $\lambda=-k^2<0$, $Z=\sin kz$ with
+$\sin kh=0$:
 \[
 Z''+k_n^2Z=0,\quad Z(0)=Z(h)=0,
 \quad Z=\sin k_nz,\quad k_n=n\pi/h,
 \quad n\ge1.
 \]
-The radial equation is then
+Multiplying the remaining equation by $\rho^2$ isolates $F''/F$,
+which must therefore be a constant; single-valuedness in $\varphi$
+(period $2\pi$) makes it $-m^2$ with $m$ an integer, and $m\ge0$
+suffices:
 \[
-\rho^2P''+\rho P'-(k_n^2\rho^2+m^2)P=0.
+F''+m^2F=0,\quad F= a\sin m\varphi+b\cos m\varphi,
+\quad m=0,1,\ldots.
 \]
-Its regular solution is $I_m(k_n\rho)$; $K_m$ is singular at
-the axis. Adding all separated solutions gives precisely the
-double series in part (a).
+The radial equation is then $\rho(\rho P')'-(k_n^2\rho^2+m^2)P=0$,
+that is,
+\[
+\rho^2P''+\rho P'-(k_n^2\rho^2+m^2)P=0,
+\]
+the modified Bessel equation of order $m$ in the variable
+$k_n\rho$. Its regular solution is $I_m(k_n\rho)$; $K_m$ is
+singular at the axis. Adding all separated solutions gives
+precisely the double series in part (a).
 
-(b) Evaluate it at $\rho=a$, multiply by the desired sine or
-cosine in $\varphi$ and by $\sin k_nz$, and integrate over the
-wall. Distinct indices vanish by orthogonality. The axial norm is
+(b) At $\rho=a$ the series must reproduce the wall potential:
 \[
-\int_0^h\sin^2(n\pi z/h)dz=h/2.
+V(\varphi,z)=\sum_{m=0}^\infty\sum_{n=1}^\infty I_m(k_na)
+(a_{mn}\sin m\varphi+b_{mn}\cos m\varphi)\sin k_nz.
 \]
-For $m>0$ both angular norms are $\pi$; for $m=0$ the constant
-cosine has norm $2\pi$. Dividing by the product of norms and
-by $I_m(k_na)$ gives
+Multiply by $\sin m'\varphi$ or $\cos m'\varphi$ and by
+$\sin k_{n'}z$, and integrate over the wall, $0\le\varphi\le2\pi$,
+$0\le z\le h$. The orthogonality relations ($m,m'\ge0$)
+\begin{gather*}
+\int_0^{2\pi}\sin m\varphi\cos m'\varphi\,d\varphi=0,\qquad
+\int_0^{2\pi}\sin m\varphi\sin m'\varphi\,d\varphi
+=\pi\delta_{mm'}\quad(m\ge1),\\
+\int_0^{2\pi}\cos m\varphi\cos m'\varphi\,d\varphi
+=\pi(1+\delta_{m0})\delta_{mm'},\qquad
+\int_0^h\sin k_nz\sin k_{n'}z\,dz=\frac h2\delta_{nn'}
+\end{gather*}
+remove every term except $m=m'$, $n=n'$. For $m>0$ the surviving
+product of norms is $\pi\cdot h/2$; for $m=0$ (cosine only) it is
+$2\pi\cdot h/2=\pi h$. In both cases its reciprocal is
+$(2-\delta_{m0})/(\pi h)$. Dividing also by $I_m(k_na)$, which is
+positive because every term of its series is positive, gives
 \[
 \boxed{\begin{pmatrix}a_{mn}\\b_{mn}\end{pmatrix}
 =\frac{2-\delta_{m0}}{\pi h I_m(k_na)}
@@ -3764,28 +3942,39 @@ K_{\nu}(x)=K_{-\nu}(x).
 \par\erratum{Take $x>0$ initially; at integer order interpret the quotient by its removable order limit.}
 \solution
 For noninteger $\nu$, put $S=\sin\pi\nu$ and
-$C=\cos\pi\nu$. The definitions imply
+$C=\cos\pi\nu$. The definitions $H_\nu^{(1)}=J_\nu+iY_\nu$ and
+$Y_\nu=(CJ_\nu-J_{-\nu})/S$ imply
 \begin{align*}
 H_\nu^{(1)}(ix)
-&=J_\nu(ix)+i\frac{CJ_\nu(ix)-J_{-\nu}(ix)}S\\
+&=J_\nu(ix)+i\frac{CJ_\nu(ix)-J_{-\nu}(ix)}S
+=\frac{(S+iC)J_\nu(ix)-iJ_{-\nu}(ix)}S\\
 &=\frac{i}{S}[e^{-i\pi\nu}J_\nu(ix)-J_{-\nu}(ix)],
 \end{align*}
-because $S+iC=i e^{-i\pi\nu}$. Using the branch-compatible
-relations $J_\nu(ix)=i^\nu I_\nu(x)$ and
-$J_{-\nu}(ix)=i^{-\nu}I_{-\nu}(x)$,
+because $S+iC=i(C-iS)=i e^{-i\pi\nu}$. Using the
+branch-compatible relations $J_\nu(ix)=i^\nu I_\nu(x)$ and
+$J_{-\nu}(ix)=i^{-\nu}I_{-\nu}(x)$, which restate
+$I_{\pm\nu}(x)=i^{\mp\nu}J_{\pm\nu}(ix)$ with $i^\nu=e^{i\pi\nu/2}$,
+we get $i^{\nu+1}\cdot i\cdot i^\nu=i^{2\nu+2}$ and
+$i^{\nu+1}\cdot i\cdot i^{-\nu}=i^2$, so
 \begin{align*}
-K_\nu(x)&=\frac\pi2i^{\nu+1}H_\nu^{(1)}(ix)\\
-&=\frac\pi{2S}
-\left[i^{2\nu+2}e^{-i\pi\nu}I_\nu-i^2I_{-\nu}\right]
-=\boxed{\frac\pi2\frac{I_{-\nu}-I_\nu}{\sin\pi\nu}}.
+K_\nu(x)&=\frac\pi2i^{\nu+1}H_\nu^{(1)}(ix)
+=\frac\pi{2S}
+\left[i^{2\nu+2}e^{-i\pi\nu}I_\nu-i^2I_{-\nu}\right]\\
+&=\frac\pi{2S}\left[-I_\nu+I_{-\nu}\right]
+=\boxed{\frac\pi2\frac{I_{-\nu}-I_\nu}{\sin\pi\nu}},
 \end{align*}
+since $i^{2\nu+2}=e^{i\pi(\nu+1)}=-e^{i\pi\nu}$ and $i^2=-1$.
 Changing $\nu$ to $-\nu$ reverses the signs of both numerator
 and denominator, so
 \[
 \boxed{K_{-\nu}=K_\nu}.
 \]
-At integer order both quotients are understood through their
-removable limits in $\nu$, which preserves the same equality.
+At integer order $n$, where $I_{-n}=I_n$ and $\sin n\pi=0$ make the
+quotient $0/0$, both quotients are understood through their
+removable limits in $\nu$. The definition (14.106) is continuous
+in $\nu$, because $Y_\nu\to Y_n$, so $K_n=\lim_{\nu\to n}K_\nu$ is the
+limit of the quotient, and
+$K_{-n}=\lim_{\nu\to n}K_{-\nu}=\lim_{\nu\to n}K_\nu=K_n$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3798,14 +3987,25 @@ K_{\nu-1}(x)+K_{\nu+1}(x)&=-2K'_{\nu}(x).
 \par\emph{Note.}~These differ from the recurrence relations for
 $I_{\nu}$.
 \solution
-Let $c=\pi/(2\sin\pi\nu)$ and first take noninteger $\nu$.
-Since the sine changes sign when the order changes by one,
+Let $c=\pi/(2\sin\pi\nu)$ and first take noninteger $\nu$, so that
+$K_\nu=c(I_{-\nu}-I_\nu)$ by Exercise~14.5.6. Since
+$\sin\pi(\nu\pm1)=-\sin\pi\nu$, the same formula at orders
+$\nu\mp1$ gives
 \[
 K_{\nu-1}=-c(I_{-\nu+1}-I_{\nu-1}),\qquad
 K_{\nu+1}=-c(I_{-\nu-1}-I_{\nu+1}).
 \]
-For the difference, the $I$ recurrence at orders $\nu$ and
-$-\nu$ gives
+The modified functions satisfy
+\[
+I_{\mu-1}-I_{\mu+1}=\frac{2\mu}xI_\mu,\qquad
+I_{\mu-1}+I_{\mu+1}=2I_\mu'
+\]
+for every order $\mu$: the derivation in Exercise~14.1.14 uses
+only Eqs.~(14.7), (14.8) at argument $ix$ and
+$i^{-(\mu+1)}=-i^{1-\mu}$, which hold for any $\mu$. At $\mu=-\nu$
+the first reads $I_{-\nu-1}-I_{-\nu+1}=-(2\nu/x)I_{-\nu}$, that is,
+$I_{-\nu+1}-I_{-\nu-1}=(2\nu/x)I_{-\nu}$. Hence, for the
+difference,
 \begin{align*}
 K_{\nu-1}-K_{\nu+1}
 &=-c[(I_{-\nu+1}-I_{-\nu-1})
@@ -3814,14 +4014,17 @@ K_{\nu-1}-K_{\nu+1}
 -\frac{2\nu}{x}I_\nu\right]
 =\boxed{-\frac{2\nu}{x}K_\nu}.
 \end{align*}
-For the sum, use $I_{\mu-1}+I_{\mu+1}=2I_\mu'$:
+For the sum, use the second recurrence at $\mu=-\nu$ and
+$\mu=\nu$:
 \begin{align*}
 K_{\nu-1}+K_{\nu+1}
 &=-c[(I_{-\nu+1}+I_{-\nu-1})
  -(I_{\nu-1}+I_{\nu+1})]\\
 &=-2c(I_{-\nu}'-I_\nu')=\boxed{-2K_\nu'}.
 \end{align*}
-Taking order limits gives the same relations for integer $\nu$.
+Taking order limits gives the same relations for integer $\nu$,
+since $K_\nu$ and $K_\nu'$ are continuous in the order
+(Exercise~14.5.6).
 The opposite signs relative to the $I$ recurrences arise from the
 sign reversal of $\sin\pi\nu$, not from a change in the ODE.
 
@@ -3833,8 +4036,8 @@ as $I_{\nu}$.
 \solution
 The neighboring phase factors satisfy
 $e^{i\pi(\nu-1)}=e^{i\pi(\nu+1)}=-e^{i\pi\nu}$.
-Multiplying the $K$ recurrences by this common negative phase
-therefore gives
+Multiplying the $K$ recurrences of Exercise~14.5.7 by
+$-e^{i\pi\nu}$, which is this common phase, therefore gives
 \begin{align*}
 \mathcal K_{\nu-1}-\mathcal K_{\nu+1}
 &=-e^{i\pi\nu}(K_{\nu-1}-K_{\nu+1})
@@ -3855,28 +4058,37 @@ for $I_\nu$.
 its series expansion about $x=0$, the formula given as Eq.~(14.110)
 only follows if a specific branch of its logarithmic term is chosen.
 \solution
-For positive $x$, the small-argument Hankel expansion is
+By Eq.~(14.61) with $n=0$ and $\psi(1)=-\gamma$ (as in
+Exercise~14.3.7),
+$Y_0(z)=(2/\pi)J_0(z)\ln(z/2)+2\gamma/\pi+O(z^2)$, where $\ln$ is
+whichever branch of the logarithm is used in the series, and
+$J_0(z)=1+O(z^2)$. Hence the small-argument Hankel expansion is
 \[
-H_0^{(1)}(z)=1+\frac{2i}{\pi}[\ln(z/2)+\gamma]
+H_0^{(1)}(z)=J_0(z)+iY_0(z)=1+\frac{2i}{\pi}[\ln(z/2)+\gamma]
 +O(z^2\ln z).
 \]
-Insert $z=ix$ in $K_0(x)=(\pi i/2)H_0^{(1)}(ix)$:
+Insert $z=ix$, $x>0$, in $K_0(x)=(\pi i/2)H_0^{(1)}(ix)$
+(Eq.~(14.106) with $\nu=0$). Since $(\pi i/2)(2i/\pi)=-1$,
 \begin{align*}
 K_0(x)&=\frac{\pi i}{2}-\ln(ix/2)-\gamma
 +O(x^2\ln x)\\
 &=-\ln(x/2)-\gamma-2\pi i k+O(x^2\ln x),
 \end{align*}
-where $\ln(ix/2)=\ln(x/2)+i\pi/2+2\pi ik$.
-Thus the real expression in Eq.~(14.110) requires
+where $\ln(ix/2)=\ln(x/2)+i\pi/2+2\pi ik$ with an integer $k$
+labeling the branch. Thus the real expression in Eq.~(14.110)
+requires
 \[
 \boxed{\arg(ix)=\pi/2,\qquad k=0}.
 \]
 On this branch the $+\pi i/2$ prefactor contribution cancels the
 imaginary part of the logarithm, leaving
 $K_0=-\ln x-\gamma+\ln2+\cdots$.
-The full logarithmic series has coefficient $-I_0(x)$; selecting
-another logarithm branch changes the full function by
-$-2\pi ikI_0(x)$, not merely its leading constant. This is why
+In the full series the only logarithm is
+$(2/\pi)J_0(z)\ln(z/2)$ in $Y_0$; at $z=ix$ it contributes
+$(\pi i/2)\,i\,(2/\pi)J_0(ix)\ln(ix/2)=-I_0(x)\ln(ix/2)$ to $K_0$,
+because $J_0(ix)=I_0(x)$. So the logarithm has coefficient
+$-I_0(x)$, and selecting another branch changes the full function
+by $-2\pi ikI_0(x)$, not merely its leading constant. This is why
 the branch is part of the definition of the real positive-axis
 function $K_0$.
 
@@ -3896,13 +4108,25 @@ K_{\nu}(z)&=\frac{\pi^{1/2}}{\Gamma(\nu+\frac{1}{2})}
 \solution
 Let $\nu>-1/2$ and initially $z>0$. Denote the second proposed
 expression by $F(z)$, and put
-$c=\sqrt\pi/[2^\nu\Gamma(\nu+1/2)]$. Thus
+$c=\sqrt\pi/[2^\nu\Gamma(\nu+1/2)]$, so that
+$cz^\nu=\sqrt\pi(z/2)^\nu/\Gamma(\nu+1/2)$. Thus
 \[
-F(z)=c z^\nu\int_1^\infty e^{-zp}(p^2-1)^{\nu-1/2}dp.
+F(z)=c z^\nu G(z),\qquad
+G(z)=\int_1^\infty e^{-zp}(p^2-1)^{\nu-1/2}dp.
 \]
-Both endpoints are integrable: at $p=1$ the power is
-$\nu-1/2>-1$, and at infinity the exponential dominates.
-Differentiation under the integral gives
+Both endpoints are integrable: at $p=1$, where
+$p^2-1\approx2(p-1)$, the power is $\nu-1/2>-1$, and at infinity
+the exponential dominates. The same holds after multiplication by
+powers of $p$, so $G$ may be differentiated under the integral:
+$G'=-\int_1^\infty pe^{-zp}(p^2-1)^{\nu-1/2}dp$ and
+$G''=\int_1^\infty p^2e^{-zp}(p^2-1)^{\nu-1/2}dp$. From
+$F'=c(\nu z^{\nu-1}G+z^\nu G')$ and
+$F''=c[\nu(\nu-1)z^{\nu-2}G+2\nu z^{\nu-1}G'+z^\nu G'']$, the terms
+in $\nu^2G$ and $\nu G$ cancel, and
+\[
+z^2F''+zF'-(z^2+\nu^2)F=cz^\nu[z^2G''+(2\nu+1)zG'-z^2G].
+\]
+Inserting the integrals for $G$, $G'$, $G''$,
 \begin{align*}
 z^2F''+zF'-(z^2+\nu^2)F
 &=cz^\nu\int_1^\infty e^{-zp}(p^2-1)^{\nu-1/2}
@@ -3910,36 +4134,65 @@ z^2F''+zF'-(z^2+\nu^2)F
 &=-cz^{\nu+1}\int_1^\infty\frac d{dp}
 [e^{-zp}(p^2-1)^{\nu+1/2}]dp=0.
 \end{align*}
-The boundary at $p=1$ vanishes because $\nu+1/2>0$.
+The second line uses the product rule,
+\[
+\frac d{dp}[e^{-zp}(p^2-1)^{\nu+1/2}]
+=e^{-zp}(p^2-1)^{\nu-1/2}[-z(p^2-1)+(2\nu+1)p].
+\]
+The boundary term vanishes at infinity because of $e^{-zp}$, and
+at $p=1$ because $\nu+1/2>0$.
 Thus $F$ solves the modified Bessel equation.
 
 Its scale is fixed by the large-positive-$z$ limit. Put
-$p=1+u/z$; after collecting powers,
+$p=1+u/z$, $dp=du/z$. Then $e^{-zp}=e^{-z}e^{-u}$ and
+$p^2-1=(p-1)(p+1)=(2u/z)[1+u/(2z)]$, so
+\[
+F(z)=cz^\nu e^{-z}\left(\frac2z\right)^{\nu-1/2}\frac1z
+\int_0^\infty e^{-u}u^{\nu-1/2}
+\left(1+\frac{u}{2z}\right)^{\nu-1/2}du.
+\]
+The powers of $z$ combine to $z^{-1/2}$, and
+$c\,2^{\nu-1/2}=\sqrt{\pi/2}/\Gamma(\nu+1/2)$; hence
 \[
 F(z)=\sqrt{\frac\pi{2z}}\frac{e^{-z}}{\Gamma(\nu+1/2)}
 \int_0^\infty e^{-u}u^{\nu-1/2}
 \left(1+\frac{u}{2z}\right)^{\nu-1/2}du.
 \]
-Dominated convergence makes the integral tend to
-$\Gamma(\nu+1/2)$, so
+As $z\to\infty$ the last factor tends to one. It is at most one if
+$\nu\le1/2$, and at most $(1+u)^{\nu-1/2}$ for $z\ge1/2$ if
+$\nu>1/2$. Dominated convergence therefore makes the integral tend
+to $\int_0^\infty e^{-u}u^{\nu-1/2}du=\Gamma(\nu+1/2)$, so
 $F(z)\sim\sqrt{\pi/(2z)}e^{-z}$.
-This is the normalization of $K_\nu$ from its Hankel definition:
+This is the normalization of $K_\nu$ from its Hankel definition.
+Insert the leading form
+$H_\nu^{(1)}(w)\sim\sqrt{2/(\pi w)}\,e^{i(w-\pi\nu/2-\pi/4)}$ at
+$w=iz$ in Eq.~(14.106), with $i^{\nu+1}=ie^{i\pi\nu/2}$ and
+$(iz)^{-1/2}=e^{-i\pi/4}z^{-1/2}$. The factors $e^{\pm i\pi\nu/2}$
+cancel, and so do the remaining phases, since
+$i\,e^{-i\pi/4}e^{-i\pi/4}=ie^{-i\pi/2}=1$:
 \[
 \frac\pi2i^{\nu+1}
 \sqrt{\frac2{\pi iz}}
 e^{i(iz-\pi\nu/2-\pi/4)}
+=\frac\pi2\sqrt{\frac2{\pi z}}e^{-z}
 =\sqrt{\frac\pi{2z}}e^{-z}.
 \]
 Here the leading Hankel asymptotic form, established independently
 in Section~14.6, is used only to fix the multiplicative constant.
-Two decaying modified-Bessel solutions are proportional: their
-Wronskian is $A/z$, and exponential decay of the functions and
-their derivatives forces $A=0$. The common leading coefficient
-then gives $F=K_\nu$.
+Two decaying modified-Bessel solutions are proportional: by Abel's
+formula the Wronskian of two solutions of
+$y''+y'/z-(1+\nu^2/z^2)y=0$ is $A/z$ with a constant $A$. For $F$
+and $K_\nu$ the functions and their derivatives are
+$O(z^{-1/2}e^{-z})$ (for $F'$ apply the substitution above to the
+integral for $G'$), so $A=zW\to0$ as $z\to\infty$. Hence $A=0$,
+$W\equiv0$, and $F=\lambda K_\nu$; the common leading coefficient
+then gives $\lambda=1$, $F=K_\nu$.
 
-Finally, substitute $p=\cosh t$, $dp=\sinh t\,dt$:
+Finally, substitute $p=\cosh t$, $dp=\sinh t\,dt$, with limits
+$t=0,\infty$; since $p^2-1=\sinh^2t$,
 \[
-(p^2-1)^{\nu-1/2}dp=\sinh^{2\nu}t\,dt,
+(p^2-1)^{\nu-1/2}dp=\sinh^{2\nu-1}t\,\sinh t\,dt
+=\sinh^{2\nu}t\,dt,
 \]
 which gives the first representation. Absolute convergence and
 analyticity extend both formulas to $\Re z>0$, equivalently
@@ -3959,7 +4212,10 @@ I_\nu(x)=i^{-\nu}J_\nu(w),\qquad
 K_\nu(x)=\frac\pi2i^{\nu+1}H_\nu^{(1)}(w).
 \]
 Each $x$ derivative supplies an additional factor $i$ from
-$dw/dx=i$. Thus
+$dw/dx=i$. The constant factors combine to
+$i^{-\nu}i^{\nu+1}i=i^2=-1$, and the bracket is the Wronskian of
+Exercise~14.4.1(a), $2i/(\pi w)$; that identity between analytic
+functions continues from $w>0$ to complex $w$ off the cut. Thus
 \begin{align*}
 I_\nu K_\nu'-I_\nu'K_\nu
 &=\frac\pi2 i^{-\nu}i^{\nu+1}i
@@ -3984,39 +4240,67 @@ delta functions. Equation~(14.116) must have
 $\delta(\rho_1-\rho_2)/\rho_1$ on its right, not the unweighted
 delta function printed there.}
 Indeed the cylindrical volume element is
-$\rho_1d\rho_1d\varphi_1dz_1$, so a unit point source is
+$\rho_1d\rho_1d\varphi_1dz_1$, so a unit point source (one whose
+integral over this volume element is one) is
 $\delta(\rho_1-\rho_2)\delta(\varphi_1-\varphi_2)
 \delta(z_1-z_2)/\rho_1$.
-After the angular and axial expansions, put $r=\rho_1$,
-$b=\rho_2>0$. The correct radial equation is
+Expand $G$ and $\delta(\varphi_1-\varphi_2)\delta(z_1-z_2)$ in the
+same functions $e^{im(\varphi_1-\varphi_2)}\cos k(z_1-z_2)$, with
+the same constant factors; acting on $e^{im\varphi_1}\cos kz_1$,
+the Laplacian contributes $-m^2/\rho_1^2-k^2$. Put $r=\rho_1$,
+$b=\rho_2>0$. For $\nabla_1^2G=\delta(\mathbf r_1-\mathbf r_2)$
+the correct radial equation is therefore
 \[
 \left[\frac{d^2}{dr^2}+\frac1r\frac d{dr}
 -\frac{m^2}{r^2}-k^2\right]g(r,b)=\frac{\delta(r-b)}r,
 \qquad k>0.
 \]
-Write a continuous candidate
-$g=A I_m(kr_<)K_m(kr_>)$. Its derivative jump is
+Away from $r=b$ this is the modified Bessel equation of order $m$
+in $kr$. Write a continuous candidate
+$g=A I_m(kr_<)K_m(kr_>)$, regular at the axis and decaying at
+infinity. For $r>b$, $g=AI_m(kb)K_m(kr)$; for $r<b$,
+$g=AI_m(kr)K_m(kb)$. With the Wronskian of Exercise~14.5.11 at
+$x=kb$, the derivative jump is
 \begin{align*}
 g'(b^+)-g'(b^-)
 &=Ak[I_m(kb)K_m'(kb)-I_m'(kb)K_m(kb)]\\
 &=Ak\left(-\frac1{kb}\right)=-\frac Ab.
 \end{align*}
-Multiplying the ODE by $r$ and integrating across $b$ requires
-$[rg']_{b^-}^{b^+}=1$, so $-A=1$. Hence
+Multiplied by $r$, the ODE reads
+$(rg')'-(m^2/r+k^2r)g=\delta(r-b)$. Integrating it from $b-\epsilon$
+to $b+\epsilon$ and letting $\epsilon\to0$, the bounded $g$ terms
+drop out, so $[rg']_{b^-}^{b^+}=1$, i.e., $b(-A/b)=-A=1$. Hence
 \[
 \boxed{g(r,b)=-I_m(kr_<)K_m(kr_>)}.
 \]
-It is regular at the axis and decays at infinity. If one instead
-uses the literally printed unweighted radial delta, the jump must
-be one and the coefficient would be $A=-b$, not $-1$.
-The printed $\rho_1^{-2}$ source would require $A=-1/b$.
+If one instead uses the literally printed unweighted radial delta,
+the right side after multiplication by $r$ is
+$r\delta(r-b)=b\delta(r-b)$, so the jump $g'(b^+)-g'(b^-)$ must be
+one and the coefficient would be $A=-b$, not $-1$. The printed
+$\rho_1^{-2}$ source, $\delta(r-b)/r^2$, would give
+$[rg']_{b^-}^{b^+}=1/b$ and require $A=-1/b$.
 
-The proof uses $k>0$. For integer $|m|>0$, its $k\downarrow0$
-limit is $-(r_</r_>)^{|m|}/(2|m|)$. For $m=0$ the limit has
-an additive logarithmic divergence; the zero-wave-number radial
-equation has no solution both regular at the axis and decaying
-at infinity. It must be handled as a limiting Fourier component,
-not by substituting $I_0(0)K_0(0)$ into the formula.
+The proof uses $k>0$. For integer $|m|>0$ (the radial equation
+contains only $m^2$, so $m$ may be replaced by $|m|$), the
+$k\downarrow0$ limit follows from the leading small-argument forms.
+By its series, $I_m(w)=(w/2)^m/m!\,[1+O(w^2)]$. In Eq.~(14.61) the
+dominant term of $Y_m(w)$ is $-(m-1)!(w/2)^{-m}/\pi$; inserted in
+$K_m(w)=(\pi/2)i^{m+1}[J_m(iw)+iY_m(iw)]$ it gives
+$K_m(w)\simeq-\frac12i^{m+2}(m-1)!\,i^{-m}(2/w)^m
+=\frac12(m-1)!(2/w)^m$. Hence
+\[
+I_m(kr_<)K_m(kr_>)\longrightarrow
+\frac{r_<^m}{2^mm!}\,\frac{(m-1)!\,2^m}{2r_>^m}
+=\frac1{2m}\left(\frac{r_<}{r_>}\right)^m,
+\]
+and $g\to-(r_</r_>)^{|m|}/(2|m|)$. For $m=0$, since $I_0(0)=1$ and
+$K_0(w)=-\ln(w/2)-\gamma+o(1)$ (Exercise~14.5.9),
+$g=\ln(kr_>/2)+\gamma+o(1)$: the limit has an additive logarithmic
+divergence. Indeed the zero-wave-number radial equation with $m=0$
+has the solutions $1$ and $\ln r$, none both regular at the axis
+and decaying at infinity. This component must be handled as a
+limiting Fourier component, not by substituting $I_0(0)K_0(0)$
+into the formula.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4027,31 +4311,44 @@ not by substituting $I_0(0)K_0(0)$ into the formula.
 This is a Fourier cosine transform of $K_{0}$.
 \par\erratum{Take real $x$ and $y>0$. For negative $y$, use $K_0(|y|t)$; $y=0$ is only a limit.}
 \solution
-\erratum{For the ordinary real integral take $y>0$ and real $x$.
-If negative $y$ is to be allowed, replace $K_0(yt)$ by
-$K_0(|y|t)$. The case $y=0$ is a limit of the transform, not a
-pointwise-defined integral of $K_0(0)$.}
+\erratum{For the ordinary real integral take $y>0$ and real $x$,
+since $K_0$ is complex on the negative axis (its cut) and
+infinite at zero. If negative $y$ is to be allowed, replace
+$K_0(yt)$ by $K_0(|y|t)$. The case $y=0$ is a limit of the
+transform, not a pointwise-defined integral of $K_0(0)$.}
 Insert the convergent representation
-$K_0(yt)=\int_0^\infty e^{-yt\cosh u}du$:
+$K_0(yt)=\int_0^\infty e^{-yt\cosh u}du$ (Exercise~14.5.15, valid
+for $yt>0$):
 \[
 \int_0^\infty\cos(xt)K_0(yt)dt
 =\int_0^\infty\int_0^\infty
 \cos(xt)e^{-yt\cosh u}\,dt\,du.
 \]
 The absolute double integral is bounded by
-$\int_0^\infty du/(y\cosh u)=\pi/(2y)$, so changing the
-order is justified. The inner elementary Laplace integral is
 \[
-\int_0^\infty e^{-yt\cosh u}\cos(xt)dt
+\int_0^\infty\!\!\int_0^\infty e^{-yt\cosh u}\,dt\,du
+=\int_0^\infty\frac{du}{y\cosh u}
+=\frac1y\Bigl[2\arctan e^u\Bigr]_0^\infty=\frac\pi{2y},
+\]
+because $\frac d{du}2\arctan e^u=2e^u/(1+e^{2u})=1/\cosh u$; so
+changing the order is justified (Fubini). With $a=y\cosh u>0$,
+the inner elementary Laplace integral is
+\[
+\int_0^\infty e^{-at}\cos(xt)dt
+=\Re\int_0^\infty e^{-(a-ix)t}dt=\Re\frac1{a-ix}
+=\frac{a}{a^2+x^2}
 =\frac{y\cosh u}{y^2\cosh^2u+x^2}.
 \]
-Now put $v=\sinh u$, $dv=\cosh u\,du$:
+Now put $v=\sinh u$, $dv=\cosh u\,du$, $\cosh^2u=1+v^2$, and use
+$r=\sqrt{x^2+y^2}$; since
+$\frac d{dv}\arctan(yv/r)=yr/(y^2v^2+r^2)$,
 \begin{align*}
 \int_0^\infty\cos(xt)K_0(yt)dt
-&=y\int_0^\infty\frac{dv}{y^2v^2+x^2+y^2}\\
-&=\frac1{\sqrt{x^2+y^2}}
-\left[\arctan\frac{yv}{\sqrt{x^2+y^2}}\right]_0^\infty\\
-&=\frac\pi{2\sqrt{x^2+y^2}}.
+&=y\int_0^\infty\frac{dv}{y^2(1+v^2)+x^2}
+=y\int_0^\infty\frac{dv}{y^2v^2+r^2}\\
+&=\frac1r
+\left[\arctan\frac{yv}r\right]_0^\infty
+=\frac\pi{2r}.
 \end{align*}
 Multiplying by $2/\pi$ proves the formula. For $x\ne0$,
 the limit $y\downarrow0$ of this evaluated transform is $1/|x|$.
@@ -4068,9 +4365,11 @@ I_{n}(x)=\frac{1}{\pi}\int_{0}^{\pi}e^{x\cos\theta}
 of $J_{n}(x)$. Equation (14.112) is a special case of this
 representation.
 \solution
-For integer $n$, take the coefficient-extraction contour from
-Exercise~14.5.3 to be the unit circle $t=e^{i\theta}$,
-$-\pi\le\theta\le\pi$. Since $dt/t=i\,d\theta$,
+For integer $n$, take the coefficient-extraction contour of
+Exercise~14.5.3(a) to be the unit circle $t=e^{i\theta}$,
+$-\pi\le\theta\le\pi$. Then $(x/2)(t+t^{-1})=x\cos\theta$ and
+$t^{-n-1}dt=t^{-n}\,dt/t=ie^{-in\theta}d\theta$, whose factor $i$
+cancels that of $2\pi i$:
 \begin{align*}
 I_n(x)
 &=\frac1{2\pi}\int_{-\pi}^{\pi}
@@ -4078,17 +4377,31 @@ e^{x\cos\theta}e^{-in\theta}d\theta\\
 &=\frac1{2\pi}\int_{-\pi}^{\pi}
 e^{x\cos\theta}[\cos n\theta-i\sin n\theta]d\theta.
 \end{align*}
-The sine term is odd and integrates to zero; the cosine term is
-even. Therefore
+Since $e^{x\cos\theta}$ is even in $\theta$, the sine term is odd
+and integrates to zero over $[-\pi,\pi]$, while the cosine term is
+even and gives twice its integral over $[0,\pi]$. Therefore
 \[
 \boxed{I_n(x)=\frac1\pi\int_0^\pi
 e^{x\cos\theta}\cos(n\theta)d\theta}.
 \]
 This holds for negative integers too, because both $I_{-n}=I_n$
-and $\cos(-n\theta)=\cos(n\theta)$.
+and $\cos(-n\theta)=\cos(n\theta)$. For $n=0$ it gives
+$I_0(x)=\pi^{-1}\int_0^\pi e^{x\cos\theta}d\theta
+=\pi^{-1}\int_0^\pi\cosh(x\cos\theta)d\theta$ (average the
+integrand over $\theta$ and $\pi-\theta$), the special case cited
+in the hint.
 The published qualification that $n$ is an integer is necessary:
-noninteger order has the additional branch-cut contribution, so
+noninteger order has an additional branch-cut contribution, so
 an ordinary closed-circle coefficient extraction is unavailable.
+Splitting the open contour of Exercise~14.5.3(b) into the unit
+circle and the two banks $t=e^{u\mp i\pi}$, on which
+$t+t^{-1}=-2\cosh u$, exactly as in Exercise~14.1.16, gives
+\[
+I_\nu(x)=\frac1\pi\int_0^\pi e^{x\cos\theta}\cos\nu\theta\,d\theta
+-\frac{\sin\nu\pi}\pi\int_0^\infty e^{-x\cosh u-\nu u}du.
+\]
+For noninteger $\nu$ and $x>0$ the last term is nonzero, since
+$\sin\nu\pi\ne0$ and its integrand is positive.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4101,19 +4414,27 @@ this form is linearly independent of $I_{0}(z)$?
 \par\erratum{Take $\Re z>0$ for the integral and its differentiated forms.}
 \solution
 Take $\Re z>0$, which ensures absolute convergence and allows
-two derivatives under the integral. With
-$F(z)=\int_0^\infty e^{-z\cosh t}dt$,
+two derivatives under the integral, since
+$|e^{-z\cosh t}|=e^{-\Re z\cosh t}$ dominates the factors $\cosh t$
+and $\cosh^2t$ they produce. With
+$F(z)=\int_0^\infty e^{-z\cosh t}dt$, we have
+$F'=-\int_0^\infty\cosh t\,e^{-z\cosh t}dt$ and
+$F''=\int_0^\infty\cosh^2t\,e^{-z\cosh t}dt$; using
+$z^2\cosh^2t-z^2=z^2\sinh^2t$,
 \begin{align*}
 z^2F''+zF'-z^2F
 &=\int_0^\infty[z^2\sinh^2t-z\cosh t]e^{-z\cosh t}dt\\
 &=-\int_0^\infty\frac d{dt}
-[z\sinh t\,e^{-z\cosh t}]dt=0.
+[z\sinh t\,e^{-z\cosh t}]dt=0,
 \end{align*}
+because, by the product rule,
+$\frac d{dt}[z\sinh t\,e^{-z\cosh t}]
+=[z\cosh t-z^2\sinh^2t]e^{-z\cosh t}$.
 At zero the bracket vanishes because $\sinh0=0$; at infinity
 the exponential dominates the hyperbolic factor. Hence $F$ solves
 the order-zero modified Bessel equation. Exercise~14.5.10 at
-$\nu=0$ has prefactor one and identifies its normalization as
-$F=K_0$.
+$\nu=0$ has prefactor $\sqrt\pi(z/2)^0/\Gamma(1/2)=1$ and
+identifies its normalization as $F=K_0$.
 
 To prove independence from $I_0$, take positive real $z$ and fix
 any $T>0$. Positivity gives
@@ -4121,14 +4442,19 @@ any $T>0$. Positivity gives
 F(z)\ge\int_0^T e^{-z\cosh t}dt\longrightarrow T
 \quad(z\downarrow0).
 \]
-Since $T$ is arbitrary, $F(z)\to\infty$, whereas
-$I_0(z)=1+O(z^2)$. No constant multiple of $I_0$ can therefore
-equal $F$, so the two solutions are linearly independent.
+The limit holds because the integrand tends to one uniformly on
+$[0,T]$. Since $T$ is arbitrary, $F(z)\to\infty$, whereas
+$I_0(z)=1+O(z^2)$. If $\alpha F+\beta I_0\equiv0$ with $\alpha\ne0$,
+then $F=-(\beta/\alpha)I_0$ would stay bounded as $z\downarrow0$;
+so $\alpha=0$, and then $\beta=0$ because $I_0\not\equiv0$. The two
+solutions are therefore linearly independent. Equivalently, their
+Wronskian $I_0K_0'-I_0'K_0=-1/z$ (Exercise~14.5.11) never
+vanishes.
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{14.5.16}\quad The cylindrical cavity of
-Exercise~14.5.5 has along the cylinder walls the potential walls:
+Exercise~14.5.5 has along the cylinder walls the potential
 \[
 V(z)=\begin{cases}
 100\,\dfrac{z}{h}, & 0\le\dfrac{z}{h}\le1/2,\\[8pt]
@@ -4141,15 +4467,24 @@ $z/h=0.1(0.1)0.5$ and $\rho/a=0.0(0.2)1.0$.
 For $z/h=0.3$ and $\rho/a=0.8$, $V=26.396$.
 \solution
 The boundary data are independent of $\varphi$, so only the
-$m=0$ cosine modes of Exercise~14.5.5 survive. Put
-$r=\rho/a$, $s=z/h$. Write the wall data as
-$V(s)=\sum_{n\ge1}B_n\sin n\pi s$, where
+$m=0$ cosine modes of Exercise~14.5.5 survive: for $m\ge1$,
+$\int_0^{2\pi}\sin m\varphi\,d\varphi=\int_0^{2\pi}\cos m\varphi\,
+d\varphi=0$ makes $a_{mn}=b_{mn}=0$. Put $r=\rho/a$, $s=z/h$. For
+$m=0$ the formula of Exercise~14.5.5(b), with the $\varphi$
+integral equal to $2\pi$ and $z=hs$, gives
 \[
-B_n=2\int_0^1V(s)\sin n\pi s\,ds.
+b_{0n}I_0(k_na)=\frac{2\pi}{\pi h}\int_0^hV\sin k_nz\,dz
+=2\int_0^1V(s)\sin n\pi s\,ds\equiv B_n,
 \]
+the Fourier sine coefficient of the wall data,
+$V(s)=\sum_{n\ge1}B_n\sin n\pi s$.
 Reflection $s\mapsto1-s$ leaves $V$ unchanged and multiplies the
-sine by $(-1)^{n+1}$. Therefore even-$n$ coefficients vanish.
-For odd $n$ the two halves add, and integration by parts gives
+sine by $(-1)^{n+1}$, because
+$\sin(n\pi-n\pi s)=-\cos n\pi\,\sin n\pi s$. Therefore even-$n$
+coefficients vanish. For odd $n$ the two halves add, so
+$B_n=2\cdot2\int_0^{1/2}100s\sin n\pi s\,ds$. Integrating by parts
+with $u=s$, $dv=\sin n\pi s\,ds$, $v=-\cos(n\pi s)/(n\pi)$, and
+using $\cos(n\pi/2)=0$ for odd $n$,
 \begin{align*}
 B_n&=400\int_0^{1/2}s\sin n\pi s\,ds\\
 &=400\left[-\frac{s\cos n\pi s}{n\pi}
@@ -4157,7 +4492,9 @@ B_n&=400\int_0^{1/2}s\sin n\pi s\,ds\\
 =\frac{400\sin(n\pi/2)}{n^2\pi^2}.
 \end{align*}
 The final expression also gives zero for even $n$. Since $a/h=1/2$,
-the potential is
+$k_n\rho=n\pi(\rho/a)(a/h)=n\pi r/2$ and $k_na=n\pi/2$, so
+$b_{0n}I_0(k_n\rho)=B_nI_0(n\pi r/2)/I_0(n\pi/2)$ and the potential
+is
 \[
 \boxed{\Phi(r,s)=\frac{400}{\pi^2}\sum_{n=1}^{\infty}
 \frac{\sin(n\pi/2)\sin(n\pi s)}{n^2}
