@@ -1749,7 +1749,12 @@ leading to Stirling's formula.
 \solution
 For the stated admissible $a,b$, every denominator is nonzero
 and the summands are $O(n^{-2})$, so the series converges
-absolutely.  Subtract the two convergent digamma representations:
+absolutely.  Write the digamma representation of
+Exercise 13.2.10,
+$\psi(1+z)=-\gamma+\sum_{n=1}^{\infty}[1/n-1/(n+z)]$, at $z=b$
+and at $z=a$, and subtract the two convergent series term by
+term; the terms $-\gamma$ and $1/n$ cancel.  Since
+$1/(n+a)-1/(n+b)=[(n+b)-(n+a)]/[(n+a)(n+b)]$,
 \begin{align*}
 \psi(1+b)-\psi(1+a)
 &=\sum_{n=1}^{\infty}
@@ -1761,14 +1766,22 @@ Division by $b-a$ proves
 \boxed{\sum_{n=1}^{\infty}\frac1{(n+a)(n+b)}
 =\frac{\psi(1+b)-\psi(1+a)}{b-a}}.
 \]
-The removable case $b=a$ is
-$\sum_{n=1}^{\infty}(n+a)^{-2}=\psi^{(1)}(1+a)$.
+For $b=a$ the summand is $(n+a)^{-2}$, and the right side has
+the removable value
+$\lim_{b\to a}[\psi(1+b)-\psi(1+a)]/(b-a)=\psi^{(1)}(1+a)$; this
+agrees with $\sum_{n=1}^{\infty}(n+a)^{-2}=\psi^{(1)}(1+a)$ from
+Exercise 13.2.10.
 
 \erratum{The accompanying real improper integral requires
 stronger conditions, for example real $a,b>-1$.  Merely excluding
 negative integers does not prevent an interior pole: $a=-3/2$,
 $b=0$ gives one at $x=3/2$.}
-Under $a,b>-1$, partial fractions give
+Under $a,b>-1$ both factors $x+a$ and $x+b$ are positive on
+$[1,\infty)$, and the partial fractions
+\[
+\frac1{(x+a)(x+b)}=\frac1{b-a}\left(\frac1{x+a}-\frac1{x+b}\right)
+\]
+give
 \begin{align*}
 \int_1^R\frac{dx}{(x+a)(x+b)}
 &=\frac1{b-a}
@@ -1776,9 +1789,14 @@ Under $a,b>-1$, partial fractions give
 &=\frac1{b-a}\left[\ln\frac{R+a}{R+b}
 +\ln(1+b)-\ln(1+a)\right].
 \end{align*}
-The first logarithm tends to zero, proving the quoted integral.
-When $b\to a>-1$, its value tends to $1/(1+a)$, whereas the
-series tends to the trigamma value above.
+As $R\to\infty$, $(R+a)/(R+b)\to1$, so the first logarithm tends
+to zero, proving the quoted integral.  When $b\to a>-1$, its value
+tends to $1/(1+a)$, the derivative of $\ln(1+a)$, whereas the
+series tends to the trigamma value above.  The sum always exceeds
+the integral: the summand $f(x)=1/[(x+a)(x+b)]$ decreases on
+$[1,\infty)$, so $f(n)>\int_n^{n+1}f\,dx$ for every $n\ge1$.  For
+example, $a=0$, $b=1$ gives the sum $\psi(2)-\psi(1)=1$ of
+Exercise 13.2.14(a) but the integral $\ln2=0.693$.
 
 
 \Needspace{9\baselineskip}
@@ -1797,13 +1815,19 @@ series tends to the trigamma value above.
 Start where the beta integrals converge; in part (c) take
 $\Re b>1$ as well as $\Re a>0$.  The results then extend as
 meromorphic identities wherever the displayed values are defined.
+Parts (b)--(d) use the gamma form
+$B(a,b)=\Gamma(a)\Gamma(b)/\Gamma(a+b)$ and the recurrence
+$\Gamma(s+1)=s\Gamma(s)$.
 
-\textbf{(a)} Insert $1=t+(1-t)$ into the defining integral:
+\textbf{(a)} Insert $1=t+(1-t)$ into the defining integral and
+split it:
 \begin{align*}
 B(a,b)&=\int_0^1 t^{a-1}(1-t)^{b-1}[t+(1-t)]dt\\
+&=\int_0^1 t^{a}(1-t)^{b-1}dt+\int_0^1 t^{a-1}(1-t)^{b}dt\\
 &=\boxed{B(a+1,b)+B(a,b+1)}.
 \end{align*}
-\textbf{(b)} Gamma recurrence gives
+\textbf{(b)} The recurrence, applied to $\Gamma(b+1)$ and to
+$\Gamma(a+b+1)$, gives
 \[
 B(a,b+1)=\frac{\Gamma(a)b\Gamma(b)}{(a+b)\Gamma(a+b)}
 =\frac b{a+b}B(a,b),
@@ -1816,7 +1840,8 @@ $\Gamma(b-1)=\Gamma(b)/(b-1)$:
 B(a+1,b-1)=\frac{a\Gamma(a)\Gamma(b)}{(b-1)\Gamma(a+b)}
 =\frac a{b-1}B(a,b).
 \]
-Rearranging gives the requested identity.  When one of the
+Multiplying by $(b-1)/a$ gives
+$\boxed{B(a,b)=\dfrac{b-1}{a}B(a+1,b-1)}$.  When one of the
 separated factors has a pole, an equivalent continued identity
 must be interpreted by a limit, not by multiplying undefined values.
 
@@ -1853,26 +1878,41 @@ B(a,b)B(a+b,c)
 \end{enumerate}
 \solution
 Both integrands are even.  In twice the integral from zero to one,
-put $u=x^2$, so $2\,dx=u^{-1/2}du$.
+put $u=x^2$, so $x^{2n}=u^n$, $1-x^2=1-u$ and
+$2\,dx=u^{-1/2}du$; the limits remain zero and one.  Repeated use of
+$\Gamma(s+1)=s\Gamma(s)$ gives the half-integer values
+\[
+\Gamma\left(n+\frac12\right)
+=\left(n-\frac12\right)\left(n-\frac32\right)\cdots\frac12\,
+\Gamma\left(\frac12\right)
+=\frac{(2n-1)!!\sqrt\pi}{2^n},
+\]
+because each of the $n$ factors is an odd integer divided by two
+and $\Gamma(1/2)=\sqrt\pi$.
 \textbf{(a)} This gives
 \begin{align*}
 \int_{-1}^1(1-x^2)^{1/2}x^{2n}dx
-&=\int_0^1u^{n-1/2}(1-u)^{1/2}du\\
+&=2\int_0^1(1-x^2)^{1/2}x^{2n}dx
+=\int_0^1u^{n-1/2}(1-u)^{1/2}du\\
 &=B\left(n+\frac12,\frac32\right)
 =\frac{\Gamma(n+1/2)\Gamma(3/2)}{\Gamma(n+2)}\\
 &=\frac{[(2n-1)!!\sqrt\pi/2^n](\sqrt\pi/2)}{(n+1)!}
-=\boxed{\pi\frac{(2n-1)!!}{(2n+2)!!}}.
+=\frac{\pi(2n-1)!!}{2^{n+1}(n+1)!}\\
+&=\boxed{\pi\frac{(2n-1)!!}{(2n+2)!!}}.
 \end{align*}
-Here $(2n+2)!!=2^{n+1}(n+1)!$.  With $(-1)!!=1$ this
+Here $\Gamma(3/2)=\frac12\Gamma(\frac12)=\sqrt\pi/2$ and
+$(2n+2)!!=2^{n+1}(n+1)!$.  With $(-1)!!=1$ this
 includes $n=0$, giving $\pi/2$.
 
 \textbf{(b)} The same substitution changes the second integral to
 \begin{align*}
-B\left(n+\frac12,\frac12\right)
-&=\frac{\Gamma(n+1/2)\Gamma(1/2)}{\Gamma(n+1)}\\
+\int_0^1u^{n-1/2}(1-u)^{-1/2}du
+&=B\left(n+\frac12,\frac12\right)
+=\frac{\Gamma(n+1/2)\Gamma(1/2)}{\Gamma(n+1)}\\
 &=\frac{(2n-1)!!\pi}{2^nn!}
-=\boxed{\pi\frac{(2n-1)!!}{(2n)!!}}.
+=\boxed{\pi\frac{(2n-1)!!}{(2n)!!}},
 \end{align*}
+since $(2n)!!=2^nn!$.
 This also includes $n=0$, because $0!!=1$.  The endpoint powers
 $\pm1/2$ are greater than $-1$, so both improper integrals exist.
 
@@ -1891,12 +1931,16 @@ Evenness followed by $u=x^2$ yields
 =\int_0^1u^{-1/2}(1-u)^n du
 =B\left(\frac12,n+1\right).
 \]
-Now $\Gamma(n+3/2)=(2n+1)!!\sqrt\pi/2^{n+1}$, so
+Now $\Gamma(1/2)=\sqrt\pi$, $\Gamma(n+1)=n!$, and the
+half-integer formula of Exercise 13.3.2 with $n+1$ in place of
+$n$ gives $\Gamma(n+3/2)=(2n+1)!!\sqrt\pi/2^{n+1}$, so
 \[
 B\left(\frac12,n+1\right)
 =\frac{\sqrt\pi\,n!}{(2n+1)!!\sqrt\pi/2^{n+1}}
-=\boxed{\frac{2(2n)!!}{(2n+1)!!}}.
+=\frac{2\cdot2^nn!}{(2n+1)!!}
+=\boxed{\frac{2(2n)!!}{(2n+1)!!}},
 \]
+by $(2n)!!=2^nn!$.
 At $n=0$ this is two, the length of the interval, checking the
 empty-product convention.
 
@@ -1911,12 +1955,15 @@ function.
 \erratum{Require $\Re a,\Re b>-1$ for this improper integral.}
 \solution
 \erratum{The improper integral requires $\Re a>-1$ and
-$\Re b>-1$; the bases inside the interval are positive.}
+$\Re b>-1$: near $x=-1$ the integrand behaves like
+$2^b(1+x)^a$, and near $x=1$ like $2^a(1-x)^b$.  The bases
+inside the interval are positive.}
 Put $u=(1+x)/2$, so $x=2u-1$, $dx=2du$,
 $1+x=2u$ and $1-x=2(1-u)$.  The limits $x=-1,1$ become
 $u=0,1$.  Therefore
 \begin{align*}
 \int_{-1}^1(1+x)^a(1-x)^b dx
+&=\int_0^1(2u)^a[2(1-u)]^b\,2\,du\\
 &=2^{a+b+1}\int_0^1u^a(1-u)^bdu\\
 &=\boxed{2^{a+b+1}B(a+1,b+1)}\\
 &=2^{a+b+1}\frac{\Gamma(a+1)\Gamma(b+1)}{\Gamma(a+b+2)}.
@@ -1937,23 +1984,28 @@ convergent improper integral.
 \par\smallskip
 \erratum{Take real $t<z$.}
 \solution
-\erratum{Take real $t<z$ for the displayed real integral.}
-Set $u=(x-t)/(z-t)$.  Then
+\erratum{Take real $t<z$ for the displayed real integral; for
+$t>z$ both bases $z-x$ and $x-t$ are negative between the limits.}
+Set $u=(x-t)/(z-t)$, which runs from $0$ to $1$ as $x$ runs from
+$t$ to $z$.  Then
 \[
 x-t=(z-t)u,\quad z-x=(z-t)(1-u),\quad dx=(z-t)du.
 \]
 The denominator has total power $(1-\alpha)+\alpha=1$, so
+$(z-x)^{1-\alpha}(x-t)^\alpha=(z-t)(1-u)^{1-\alpha}u^\alpha$, and
 its factor $z-t$ cancels the Jacobian.  Hence
 \begin{align*}
 \int_t^z\frac{dx}{(z-x)^{1-\alpha}(x-t)^\alpha}
 &=\int_0^1u^{-\alpha}(1-u)^{\alpha-1}du\\
 &=B(1-\alpha,\alpha)
-=\Gamma(1-\alpha)\Gamma(\alpha)\\
+=\frac{\Gamma(1-\alpha)\Gamma(\alpha)}{\Gamma(1)}\\
 &=\boxed{\frac\pi{\sin\pi\alpha}}.
 \end{align*}
 The conditions $1-\alpha>0$ and $\alpha>0$ are exactly the
-two endpoint convergence requirements.  Reflection gives the
-last equality; the interval length has canceled completely.
+two endpoint convergence requirements.  The last equality uses
+$\Gamma(1)=1$ and the reflection formula
+$\Gamma(\alpha)\Gamma(1-\alpha)=\pi/\sin\pi\alpha$; the interval
+length has canceled completely.
 
 
 \Needspace{5\baselineskip}
@@ -1967,10 +2019,13 @@ and $y$-axes and the line $x+y=1$.
 \par\smallskip
 \erratum{The integral requires $\Re p,\Re q>-1$; factorials outside nonnegative integers mean gamma functions.}
 \solution
-\erratum{The integral converges for $\Re p,\Re q>-1$;
-ordinary integer factorials correspond to $p,q\ge0$.}
+\erratum{The integral converges for $\Re p,\Re q>-1$: the inner
+integral below needs $\Re q>-1$ at $y=0$, and the outer one
+$\Re p>-1$ at $x=0$.  Ordinary integer factorials correspond to
+$p,q\ge0$.}
 Describe the triangle by $0\le x\le1$ and $0\le y\le1-x$.
-Integrate with respect to $y$ first:
+Integrate with respect to $y$ first, using
+$\int_0^{1-x}y^q\,dy=(1-x)^{q+1}/(q+1)$:
 \begin{align*}
 \int_0^1\int_0^{1-x}x^py^q\,dy\,dx
 &=\frac1{q+1}\int_0^1x^p(1-x)^{q+1}dx\\
@@ -1979,12 +2034,14 @@ Integrate with respect to $y$ first:
 &=\boxed{\frac{\Gamma(p+1)\Gamma(q+1)}{\Gamma(p+q+3)}}.
 \end{align*}
 Since $\Gamma(q+2)=(q+1)\Gamma(q+1)$, the inner-integral
-factor has canceled.  Recurrence in the remaining denominator
+factor has canceled.  The recurrence
+$\Gamma(p+q+3)=(p+q+2)\Gamma(p+q+2)$ in the remaining denominator
 gives
 \[
 \frac{\Gamma(p+1)\Gamma(q+1)}{\Gamma(p+q+3)}
+=\frac{\Gamma(p+1)\Gamma(q+1)}{(p+q+2)\Gamma(p+q+2)}
 =\boxed{\frac{B(p+1,q+1)}{p+q+2}}
-=\frac{p!q!}{(p+q+2)!}
+=\frac{p!\,q!}{(p+q+2)!}
 \]
 for nonnegative integers.  At $p=q=0$ the value is $1/2$, the
 area of the triangle.
@@ -2001,16 +2058,29 @@ What are the limits on $\theta$?
 
 \emph{Hint.}~Consider oblique $xy$-coordinates.
 \par\nobreak\hfill\emph{ANS.}\enspace
-\erratum{$-\pi<\theta<\pi$ for the unreduced formula, with value $1/2$ at $\theta=0$ by continuity. The integral itself converges for every real $\theta$ except odd multiples of $\pi$.}
+$-\pi<\theta<\pi$ \erratum{for the unreduced formula, with value $1/2$ at $\theta=0$ by continuity. The integral itself converges for every real $\theta$ except odd multiples of $\pi$.}
 \solution
 First take $0<\theta<\pi$.  Introduce Cartesian variables
 \[
 X=x+y\cos\theta,\qquad Y=y\sin\theta.
 \]
-Then $X^2+Y^2=x^2+y^2+2xy\cos\theta$ and
-$\partial(X,Y)/\partial(x,y)=\sin\theta>0$.  The original
-positive quadrant maps onto the sector between the positive
-$X$-axis ($y=0$) and the ray at angle $\theta$ ($x=0$).
+Then
+\[
+X^2+Y^2=x^2+2xy\cos\theta+y^2(\cos^2\theta+\sin^2\theta)
+=x^2+y^2+2xy\cos\theta
+\]
+and
+\[
+\frac{\partial(X,Y)}{\partial(x,y)}
+=\begin{vmatrix}1&\cos\theta\\0&\sin\theta\end{vmatrix}
+=\sin\theta>0,
+\qquad dx\,dy=\frac{dX\,dY}{\sin\theta}.
+\]
+The linear map sends the positive quadrant, the set of
+combinations $x(1,0)+y(0,1)$ with $x,y\ge0$, onto the
+combinations $x(1,0)+y(\cos\theta,\sin\theta)$ with $x,y\ge0$:
+the sector between the positive $X$-axis ($y=0$) and the ray at
+angle $\theta$ ($x=0$).
 
 \begin{center}
 \begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
@@ -2024,7 +2094,8 @@ $X$-axis ($y=0$) and the ray at angle $\theta$ ($x=0$).
 \draw[dashed] (0,0)--(27.5:2.5) node[above right] {$R$};
 \end{tikzpicture}
 \end{center}
-In polar coordinates $X=R\cos\phi$, $Y=R\sin\phi$,
+In polar coordinates $X=R\cos\phi$, $Y=R\sin\phi$, the sector
+is $0\le\phi\le\theta$, $R\ge0$, and $dX\,dY=R\,dR\,d\phi$, so
 \begin{align*}
 I(\theta)&=\frac1{\sin\theta}
 \int_0^\theta d\phi\int_0^\infty e^{-R^2}R\,dR\\
@@ -2032,14 +2103,17 @@ I(\theta)&=\frac1{\sin\theta}
 \left[-\frac12e^{-R^2}\right]_0^\infty
 =\boxed{\frac\theta{2\sin\theta}}.
 \end{align*}
-Both the original integral and this quotient are even in $\theta$,
-so the result extends to $-\pi<\theta<0$.  At zero use
-$u=x+y$, $v=x$, where $0\le v\le u$:
+The original integral depends on $\theta$ only through
+$\cos\theta$, and $\theta/\sin\theta$ is even, so the result
+extends to $-\pi<\theta<0$.  At zero the exponent is
+$-(x+y)^2$; use $u=x+y$, $v=x$ (Jacobian of absolute value one),
+which maps the quadrant onto $0\le v\le u$:
 \[
 I(0)=\int_0^\infty e^{-u^2}\int_0^u dv\,du
 =\int_0^\infty ue^{-u^2}du=\frac12,
 \]
-the removable limit of the formula.
+the removable limit of the formula, since
+$\theta/\sin\theta\to1$.
 
 \erratum{The stated interval $-\pi<\theta<\pi$ is the range
 for the unreduced formula $\theta/(2\sin\theta)$, including its
@@ -2047,8 +2121,11 @@ removable value at zero.  For unrestricted real $\theta$, the
 integral is periodic and converges except at odd multiples of
 $\pi$.}
 Indeed, if $c=\cos\theta>-1$, the quadratic form on $x,y\ge0$
-is at least $\min(1,1+c)(x^2+y^2)$, so a convergent Gaussian
-dominates it.  If $c=-1$, the integrand is $e^{-(x-y)^2}$;
+is at least $\min(1,1+c)(x^2+y^2)$: for $c\ge0$ drop
+$2cxy\ge0$, and for $-1<c<0$ write the form as
+$(1+c)(x^2+y^2)-c(x-y)^2$.  Hence the integrand is at most
+$e^{-\min(1,1+c)(x^2+y^2)}$, an integrable Gaussian.
+If $c=-1$, the integrand is $e^{-(x-y)^2}$;
 on $x\ge1$, $x\le y\le x+1$ it is at least $e^{-1}$, giving
 infinite integral.  In general reduce to
 $\vartheta=\arccos(\cos\theta)\in[0,\pi]$ and use
@@ -2077,44 +2154,58 @@ For $u=\sin^2\theta$, the limits become zero and one and
 \[
 du=2\sin\theta\cos\theta\,d\theta,\qquad
 d\theta=\frac{du}{2\sqrt{u(1-u)}},\qquad
-\cos^n\theta=(1-u)^{n/2}.
+\cos^n\theta=(1-u)^{n/2},
 \]
-Thus the common form is
-\[
+because $\sin\theta=\sqrt u$ and $\cos\theta=\sqrt{1-u}$ are
+nonnegative on $[0,\pi/2]$.  Since
+$(1-u)^{n/2}(1-u)^{-1/2}=(1-u)^{(n-1)/2}$, the common form is
+\begin{align*}
 I_n=\int_0^{\pi/2}\cos^n\theta\,d\theta
-=\frac12\int_0^1u^{-1/2}(1-u)^{(n-1)/2}du
-=\frac{\sqrt\pi\,\Gamma((n+1)/2)}{2\Gamma((n+2)/2)}.
-\]
-\erratum{This integral formula requires $\Re n>-1$; the odd/even
-factorial forms below use nonnegative integer $n$.}
+&=\frac12\int_0^1u^{-1/2}(1-u)^{(n-1)/2}du
+=\frac12B\left(\frac12,\frac{n+1}2\right)\\
+&=\frac{\sqrt\pi\,\Gamma((n+1)/2)}{2\Gamma((n+2)/2)},
+\end{align*}
+with $\Gamma(1/2)=\sqrt\pi$ and $\frac12+\frac{n+1}2=\frac{n+2}2$.
+\erratum{This integral formula requires $\Re n>-1$, since
+$\cos^n\theta$ behaves like $(\pi/2-\theta)^n$ near $\theta=\pi/2$;
+the odd/even factorial forms below use nonnegative integer $n$.}
 Replacing $\theta$ by $\pi/2-\theta$ proves the same value for
 $\int_0^{\pi/2}\sin^n\theta\,d\theta$.
 
 \textbf{(a)} At $n=1/2$,
 $I_{1/2}=\sqrt\pi\,\Gamma(3/4)/[2\Gamma(5/4)]$.
-Reflection and recurrence give
+Reflection, with $\sin(\pi/4)=1/\sqrt2$, and recurrence give
 \[
-\Gamma(1/4)\Gamma(3/4)=\pi\sqrt2,
+\Gamma(1/4)\Gamma(3/4)=\frac{\pi}{\sin(\pi/4)}=\pi\sqrt2,
 \qquad\Gamma(1/4)=4\Gamma(5/4).
 \]
-Thus
+Hence $\Gamma(3/4)=\pi\sqrt2/\Gamma(1/4)=\pi\sqrt2/[4\Gamma(5/4)]$,
+and
 \[
-\boxed{I_{1/2}=\frac{\pi\sqrt{2\pi}}{8[\Gamma(5/4)]^2}
-=\frac{(2\pi)^{3/2}}{16[\Gamma(5/4)]^2}}.
+\boxed{I_{1/2}=\frac{\sqrt\pi\,\pi\sqrt2}{8[\Gamma(5/4)]^2}
+=\frac{\pi\sqrt{2\pi}}{8[\Gamma(5/4)]^2}
+=\frac{(2\pi)^{3/2}}{16[\Gamma(5/4)]^2}},
 \]
-\textbf{(b)} The gamma expression is precisely
-$\sqrt\pi\,[(n-1)/2]!/[2(n/2)!]$.  For $n=2m+1$,
+where the last step uses $(2\pi)^{3/2}=2\pi\sqrt{2\pi}$.
+
+\textbf{(b)} Since $\Gamma((n+1)/2)=[(n-1)/2]!$ and
+$\Gamma((n+2)/2)=(n/2)!$, the gamma expression is precisely
+$\sqrt\pi\,[(n-1)/2]!/[2(n/2)!]$.  For $n=2m+1$, use
+$\Gamma(m+3/2)=(2m+1)!!\sqrt\pi/2^{m+1}$
+(Exercise 13.3.2 with $m+1$ in place of $n$):
 \[
 I_{2m+1}=\frac{\sqrt\pi\,m!}{2\Gamma(m+3/2)}
+=\frac{\sqrt\pi\,m!\,2^{m+1}}{2(2m+1)!!\sqrt\pi}
 =\frac{2^mm!}{(2m+1)!!}
 =\boxed{\frac{(2m)!!}{(2m+1)!!}}.
 \]
-For $n=2m$,
+For $n=2m$, use $\Gamma(m+1/2)=(2m-1)!!\sqrt\pi/2^m$:
 \[
-I_{2m}=\frac{\sqrt\pi\,\Gamma(m+1/2)}{2m!}
+I_{2m}=\frac{\sqrt\pi\,\Gamma(m+1/2)}{2\,m!}
 =\frac\pi2\frac{(2m-1)!!}{2^mm!}
 =\boxed{\frac\pi2\frac{(2m-1)!!}{(2m)!!}}.
 \]
+Both boxed forms use $(2m)!!=2^mm!$.
 The case $m=0$ in the even formula gives $I_0=\pi/2$.
 
 
@@ -2125,23 +2216,32 @@ $\displaystyle\int_{0}^{1}(1-x^{4})^{-1/2}\,dx$ as a beta function.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $\dfrac{[\Gamma(5/4)]^{2}\cdot4}{(2\pi)^{1/2}}=1.311028777$.
 \solution
-Put $u=x^4$, so $dx=\tfrac14u^{-3/4}du$.  The endpoint
+Put $u=x^4$, so $x=u^{1/4}$, $dx=\tfrac14u^{-3/4}du$ and
+$1-x^4=1-u$; the limits remain zero and one.  The endpoint
 exponents $-3/4$ and $-1/2$ are both integrable, and
 \[
 I=\frac14\int_0^1u^{-3/4}(1-u)^{-1/2}du
 =\boxed{\frac14B\left(\frac14,\frac12\right)}
 =\frac{\Gamma(1/4)\sqrt\pi}{4\Gamma(3/4)}.
 \]
-Use $\Gamma(1/4)\Gamma(3/4)=\pi\sqrt2$ to remove
-$\Gamma(3/4)$, then $\Gamma(1/4)=4\Gamma(5/4)$:
+Use $\Gamma(1/4)\Gamma(3/4)=\pi\sqrt2$ (reflection, as in
+Exercise 13.3.8(a)) to replace $\Gamma(3/4)$ by
+$\pi\sqrt2/\Gamma(1/4)$, then $\Gamma(1/4)=4\Gamma(5/4)$:
 \[
-I=\frac{[\Gamma(1/4)]^2}{4\sqrt{2\pi}}
+I=\frac{[\Gamma(1/4)]^2\sqrt\pi}{4\pi\sqrt2}
+=\frac{[\Gamma(1/4)]^2}{4\sqrt{2\pi}}
 =\boxed{\frac{4[\Gamma(5/4)]^2}{\sqrt{2\pi}}}
-=1.311028777146\ldots.
+=1.311028777146\ldots,
 \]
+with $\Gamma(5/4)=0.9064024770554\ldots$.
 For an independent numerical quadrature one can also put
-$x=\sin\phi$; cancellation of $\cos\phi$ gives the nonsingular
-integral $\int_0^{\pi/2}(1+\sin^2\phi)^{-1/2}d\phi$.
+$x=\sin\phi$: then $1-x^4=(1-x^2)(1+x^2)=\cos^2\phi\,(1+\sin^2\phi)$
+and $dx=\cos\phi\,d\phi$, and cancellation of $\cos\phi$ gives the
+nonsingular integral $\int_0^{\pi/2}(1+\sin^2\phi)^{-1/2}d\phi$.
+Its integrand is smooth, has period $\pi$ and is even about both
+endpoints, so the trapezoidal rule converges very fast: eight
+equal subintervals already give
+$1.311028777146$ (error $2\times10^{-13}$).
 
 
 \Needspace{5\baselineskip}
@@ -2167,11 +2267,15 @@ throughout:
 \cos(z\cos\theta)=\sum_{s=0}^{\infty}
 \frac{(-1)^s z^{2s}\cos^{2s}\theta}{(2s)!}.
 \]
-For fixed $z$, the absolute sum is bounded by $e^{|z|}$.
+For fixed $z$, since $|\cos\theta|\le1$, the sum of the absolute
+values of the terms is at most
+$\sum_s|z|^{2s}/(2s)!=\cosh|z|\le e^{|z|}$.
 The remaining weight has magnitude $\sin^{2\Re\nu}\theta$,
 which is integrable at zero exactly when $\Re\nu>-1/2$.
 Dominated convergence therefore permits integration term by term.
-The beta integral for each term is
+For each term put $u=\sin^2\theta$ as in Exercise 13.3.8, so that
+$\sin^{2\nu}\theta\cos^{2s}\theta\,d\theta
+=\frac12u^{\nu-1/2}(1-u)^{s-1/2}du$; the beta integral is
 \[
 \int_0^{\pi/2}\sin^{2\nu}\theta\cos^{2s}\theta\,d\theta
 =\frac12B\left(\nu+\frac12,s+\frac12\right)
@@ -2184,14 +2288,18 @@ J_\nu(z)=\left(\frac z2\right)^\nu
 \sum_{s=0}^{\infty}\frac{(-1)^sz^{2s}}{\sqrt\pi(2s)!}
 \frac{\Gamma(s+1/2)}{\Gamma(s+\nu+1)}.
 \]
-Finally,
+Finally, removing the even factors $(2s)!!=2^ss!$ from $(2s)!$
+gives $(2s-1)!!=(2s)!/(2^ss!)$, so the half-integer formula of
+Exercise 13.3.2 becomes
 \[
 \Gamma\left(s+\frac12\right)
+=\frac{(2s-1)!!\sqrt\pi}{2^s}
 =\frac{(2s)!\sqrt\pi}{4^ss!},
 \qquad
 \frac{\Gamma(s+1/2)}{\sqrt\pi(2s)!}=\frac1{4^ss!}.
 \]
-Thus
+Thus, with $z^{2s}/4^s=(z/2)^{2s}$ and
+$(z/2)^\nu(z/2)^{2s}=(z/2)^{2s+\nu}$,
 \[
 \boxed{J_\nu(z)=\sum_{s=0}^{\infty}
 \frac{(-1)^s}{s!\Gamma(s+\nu+1)}
@@ -2219,7 +2327,7 @@ show that
 \solution
 Square the stated expression:
 $[P_m^m(x)]^2=[(2m-1)!!]^2(1-x^2)^m$.
-\textbf{(a)} Exercise 13.3.3 gives
+\textbf{(a)} Exercise 13.3.3 with $n=m$ gives
 \begin{align*}
 \int_{-1}^1[P_m^m(x)]^2dx
 &=[(2m-1)!!]^2\frac{2(2m)!!}{(2m+1)!!}\\
@@ -2227,16 +2335,19 @@ $[P_m^m(x)]^2=[(2m-1)!!]^2(1-x^2)^m$.
 =\boxed{\frac{2(2m)!}{2m+1}}.
 \end{align*}
 We used $(2m+1)!!=(2m+1)(2m-1)!!$ and
-$(2m-1)!!(2m)!!=(2m)!$.  The case $m=0$ gives two.
+$(2m-1)!!(2m)!!=(2m)!$, the product of all odd and all even
+factors up to $2m$.  The case $m=0$ gives two.
 
 \textbf{(b)} Division by $1-x^2$ reduces the exponent to $m-1$.
-For $m\ge1$ the same beta evaluation yields
+For $m\ge1$, Exercise 13.3.3 with $n=m-1$ gives
+$\int_{-1}^1(1-x^2)^{m-1}dx=2(2m-2)!!/(2m-1)!!$, so
 \begin{align*}
 \int_{-1}^1[P_m^m(x)]^2\frac{dx}{1-x^2}
 &=[(2m-1)!!]^2\frac{2(2m-2)!!}{(2m-1)!!}\\
 &=2(2m-1)!!(2m-2)!!
-=\boxed{2(2m-1)!}.
+=\boxed{2(2m-1)!},
 \end{align*}
+where now the odd and even factors up to $2m-1$ combine.
 At $m=0$ the second integral diverges at both endpoints,
 explaining its different lower limit on $m$.  An alternative
 associated-Legendre convention introduces $(-1)^m$, which has
@@ -2258,24 +2369,31 @@ no effect on either squared integral.
 \erratum{For the stated integer parameters, require $p\ge0$
 in (a), and $p,q\ge0$ in (b).  Negative integer values produce
 nonintegrable endpoint powers.}
-Use $u=x^2$, $dx=du/(2\sqrt u)$.
+Use $u=x^2$, $dx=du/(2\sqrt u)$; the limits remain zero and one,
+and the half-integer gamma values come from the formula
+$\Gamma(k+1/2)=(2k-1)!!\sqrt\pi/2^k$ of Exercise 13.3.2.
 \textbf{(a)} Since $x^{2p+1}dx=u^pdu/2$,
 \begin{align*}
 \int_0^1x^{2p+1}(1-x^2)^{-1/2}dx
-&=\frac12 B\left(p+1,\frac12\right)
-=\frac{p!\sqrt\pi}{2\Gamma(p+3/2)}\\
-&=\frac{p!\sqrt\pi\,2^{p+1}}{2(2p+1)!!\sqrt\pi}
+&=\frac12\int_0^1u^p(1-u)^{-1/2}du
+=\frac12 B\left(p+1,\frac12\right)\\
+&=\frac{p!\sqrt\pi}{2\Gamma(p+3/2)}
+=\frac{p!\sqrt\pi\,2^{p+1}}{2(2p+1)!!\sqrt\pi}\\
+&=\frac{2^pp!}{(2p+1)!!}
 =\boxed{\frac{(2p)!!}{(2p+1)!!}}.
 \end{align*}
 \textbf{(b)} Here $x^{2p}dx=u^{p-1/2}du/2$, so
 \begin{align*}
 \int_0^1x^{2p}(1-x^2)^qdx
-&=\frac12 B\left(p+\frac12,q+1\right)
-=\frac{\Gamma(p+1/2)q!}{2\Gamma(p+q+3/2)}\\
-&=\frac{[(2p-1)!!\sqrt\pi/2^p]q!}
+&=\frac12\int_0^1u^{p-1/2}(1-u)^qdu
+=\frac12 B\left(p+\frac12,q+1\right)\\
+&=\frac{\Gamma(p+1/2)q!}{2\Gamma(p+q+3/2)}
+=\frac{[(2p-1)!!\sqrt\pi/2^p]q!}
  {2[(2p+2q+1)!!\sqrt\pi/2^{p+q+1}]}\\
-&=\boxed{\frac{(2p-1)!!(2q)!!}{(2p+2q+1)!!}}.
+&=\frac{(2p-1)!!\,2^qq!}{(2p+2q+1)!!}
+=\boxed{\frac{(2p-1)!!(2q)!!}{(2p+2q+1)!!}},
 \end{align*}
+since $2^{p+q+1}/(2\cdot2^p)=2^q$ and $2^qq!=(2q)!!$.
 These formulas include $p=0$ or $q=0$ with the usual empty
 products $(-1)!!=0!!=1$.
 
@@ -2307,27 +2425,39 @@ On the outward quarter-cycle, energy conservation gives
 \frac{dx}{dt}=\sqrt{\frac2m}\sqrt{E-Ax^n},
 \qquad
 \frac\tau4=\sqrt{\frac m2}\int_0^{x_{\max}}
-\frac{dx}{\sqrt{E-Ax^n}},
+\frac{dx}{\sqrt{E-Ax^n}}.
 \]
-which explains the factor in the question.  Set
+Because $V(-x)=V(x)$, the legs $0\to x_{\max}\to0\to-x_{\max}\to0$
+of one period take equal times, and $4\sqrt{m/2}=2\sqrt{2m}$; this
+explains the factor in the question.  Set
 $u=Ax^n/E=(x/x_{\max})^n$.  Then
 \[
 x=x_{\max}u^{1/n},\quad
  dx=\frac{x_{\max}}n u^{1/n-1}du,\quad
 (E-Ax^n)^{-1/2}=E^{-1/2}(1-u)^{-1/2}.
 \]
-Both endpoints become zero and one, respectively.  Consequently
+Both endpoints become zero and one, respectively.  The constant
+factors combine as
+\[
+2\sqrt{2m}\,\frac{x_{\max}}n\,E^{-1/2}
+=\frac2n\sqrt{\frac{2m}E}\left(\frac EA\right)^{1/n}.
+\]
+Consequently
 \begin{align*}
 \tau&=\frac2n\sqrt{\frac{2m}E}\left(\frac EA\right)^{1/n}
 \int_0^1u^{1/n-1}(1-u)^{-1/2}du\\
 &=\frac2n\sqrt{\frac{2m}E}\left(\frac EA\right)^{1/n}
-B\left(\frac1n,\frac12\right)\\
+B\left(\frac1n,\frac12\right)
+=\frac2n\sqrt{\frac{2m}E}\left(\frac EA\right)^{1/n}
+\frac{\Gamma(1/n)\sqrt\pi}{\Gamma(1/n+1/2)}\\
 &=\boxed{\frac2n\sqrt{\frac{2\pi m}E}\left(\frac EA\right)^{1/n}
 \frac{\Gamma(1/n)}{\Gamma(1/n+1/2)}}.
 \end{align*}
-As a check, $n=2$ and $A=m\omega^2/2$ give
-$\tau=\pi\sqrt{2m/A}=2\pi/\omega$, the harmonic-oscillator
-period, independent of $E$.
+As a check, $n=2$ gives
+$\tau=\sqrt{2\pi m/E}\,\sqrt{E/A}\,\Gamma(1/2)/\Gamma(1)
+=\pi\sqrt{2m/A}$; with $A=m\omega^2/2$, $\sqrt{2m/A}=2/\omega$
+and $\tau=2\pi/\omega$, the harmonic-oscillator period,
+independent of $E$.
 
 
 \Needspace{5\baselineskip}
@@ -2348,16 +2478,20 @@ period, independent of $E$.
 \par\smallskip
 \erratum{For a dimensionful family, write $V_n(x)=A(|x|/L)^n$ with fixed $A,L>0$; the displayed formula uses length units $L=1$.}
 \solution
-\textbf{(a)} Use the recurrence before taking the limit:
+\textbf{(a)} Use the recurrence $(1/n)\Gamma(1/n)=\Gamma(1+1/n)$
+before taking the limit; by continuity of $\Gamma$ at $1$ and $1/2$,
 \[
 \frac{\Gamma(1/n)}{n\Gamma(1/n+1/2)}
 =\frac{\Gamma(1+1/n)}{\Gamma(1/n+1/2)}
 \longrightarrow\frac{\Gamma(1)}{\Gamma(1/2)}=\frac1{\sqrt\pi}.
 \]
 Also $(E/A)^{1/n}\to1$ for fixed positive numerical $E/A$.
-Hence the period written in the question tends to
+Hence the period written in the question,
+$2\sqrt{2\pi m/E}\,(E/A)^{1/n}\,\Gamma(1/n)/[n\Gamma(1/n+1/2)]$,
+tends to
 \[
-\boxed{\tau_\infty=2\sqrt{\frac{2m}E}}.
+\tau_\infty=2\sqrt{\frac{2\pi m}E}\cdot\frac1{\sqrt\pi}
+=\boxed{2\sqrt{\frac{2m}E}}.
 \]
 \erratum{When comparing dimensionful potentials at different
 $n$, fix a length $L$ and write $V_n(x)=A(|x|/L)^n$ with fixed
@@ -2365,9 +2499,12 @@ energy scale $A$.  The question uses length units with $L=1$;
 the dimensionful limiting period is $2L\sqrt{2m/E}$.}
 
 \textbf{(b)} To justify passing to the limit despite the moving
-turning point, set $x=x_{\max}u$:
+turning point, set $x=x_{\max}u$, where
+$x_{\max}=L(E/A)^{1/n}$ solves $V_n(x_{\max})=E$.  Then
+$E-V_n(x)=E-Ex_{\max}^{-n}x^n=E(1-u^n)$ and $dx=x_{\max}du$, so
 \[
-\tau_n=2\sqrt{\frac{2m}E}\,x_{\max}
+\tau_n=2\sqrt{2m}\int_0^{x_{\max}}\frac{dx}{\sqrt{E-V_n(x)}}
+=2\sqrt{\frac{2m}E}\,x_{\max}
 \int_0^1(1-u^n)^{-1/2}du.
 \]
 For $0\le u<1$, this integrand tends to one.  For $n\ge1$,
@@ -2385,7 +2522,8 @@ $V_n(x)\to\infty$.  The limiting motion is free flight between
 reflecting walls at $\pm L$, with speed $v=\sqrt{2E/m}$.
 A round trip covers distance $4L$, so
 \[
-\boxed{\tau_\infty=\frac{4L}{v}=2L\sqrt{\frac{2m}E}}.
+\boxed{\tau_\infty=\frac{4L}{v}=4L\sqrt{\frac m{2E}}
+=2L\sqrt{\frac{2m}E}}.
 \]
 The isolated value $V_n(\pm L)=A$ does not affect the limiting
 travel time derived in (b).
@@ -2402,28 +2540,41 @@ travel time derived in (b).
 \emph{Hint.}~Let $\sinh^{2}x=u$.
 \solution
 The endpoint behavior explains the given restrictions: near zero
+$\sinh x\sim x$ and $\cosh x\to1$, so
 $\sinh^\alpha x/\cosh^\beta x\sim x^\alpha$, whereas at infinity
-it is asymptotic to $2^{\beta-\alpha}e^{(\alpha-\beta)x}$.
+$\sinh x\sim\cosh x\sim e^x/2$, so the integrand is asymptotic to
+$(e^x/2)^{\alpha-\beta}=2^{\beta-\alpha}e^{(\alpha-\beta)x}$.
 Thus for real parameters convergence requires $\alpha>-1$ and
 $\beta>\alpha$.
 
-Set $u=\sinh^2x$.  Since $\cosh^2x=1+u$,
+Set $u=\sinh^2x$, which runs from $0$ to $\infty$.  Since
+$\cosh^2x=1+u$ and $\sinh x,\cosh x\ge0$ for $x\ge0$,
 \[
-du=2\sinh x\cosh x\,dx=2\sqrt{u(1+u)}\,dx.
+du=2\sinh x\cosh x\,dx=2\sqrt{u(1+u)}\,dx,
+\qquad\sinh^\alpha x=u^{\alpha/2},\qquad\cosh^\beta x=(1+u)^{\beta/2}.
 \]
-It follows that
+Since $dx=\frac12u^{-1/2}(1+u)^{-1/2}du$ lowers both exponents by
+one half, it follows that
 \begin{align*}
 \int_0^\infty\frac{\sinh^\alpha x}{\cosh^\beta x}dx
 &=\frac12\int_0^\infty
 u^{(\alpha-1)/2}(1+u)^{-(\beta+1)/2}du.
 \end{align*}
-To recognize the beta integral, put $v=u/(1+u)$,
-$du=dv/(1-v)^2$.  In general this shows
+To recognize the beta integral, put $v=u/(1+u)$, which runs from
+$0$ to $1$; then $u=v/(1-v)$, $1+u=1/(1-v)$ and
+$du=dv/(1-v)^2$, so
+\[
+u^{p-1}(1+u)^{-p-q}du
+=v^{p-1}(1-v)^{1-p}(1-v)^{p+q}(1-v)^{-2}dv
+=v^{p-1}(1-v)^{q-1}dv.
+\]
+In general this shows
 \[
 \int_0^\infty u^{p-1}(1+u)^{-p-q}du
 =\int_0^1v^{p-1}(1-v)^{q-1}dv=B(p,q).
 \]
-Here $p=(\alpha+1)/2$, $q=(\beta-\alpha)/2$, both positive.
+Matching $p-1=(\alpha-1)/2$ and $p+q=(\beta+1)/2$ gives
+$p=(\alpha+1)/2$, $q=(\beta-\alpha)/2$, both positive.
 Therefore
 \[
 \boxed{\int_0^\infty\frac{\sinh^\alpha x}{\cosh^\beta x}dx
@@ -2454,14 +2605,18 @@ with $x$ restricted to the interval $(0,1)$. Show that
 \solution
 \erratum{A beta probability density requires real
 $\alpha,\beta>0$.}
-Its prefactor is $1/B(\alpha,\beta)$.  Consequently
-\[
+Its prefactor is
+$\Gamma(\alpha+\beta)/[\Gamma(\alpha)\Gamma(\beta)]=1/B(\alpha,\beta)$.
+Consequently, for $\Re q>-\alpha$,
+\begin{align*}
 \langle x^q\rangle
-=\frac{B(\alpha+q,\beta)}{B(\alpha,\beta)}
+&=\frac1{B(\alpha,\beta)}\int_0^1x^{\alpha+q-1}(1-x)^{\beta-1}dx
+=\frac{B(\alpha+q,\beta)}{B(\alpha,\beta)}\\
+&=\frac{\Gamma(\alpha+q)\Gamma(\beta)}{\Gamma(\alpha+\beta+q)}
+\cdot\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)}
 =\frac{\Gamma(\alpha+q)\Gamma(\alpha+\beta)}
-{\Gamma(\alpha)\Gamma(\alpha+\beta+q)},
-\qquad\Re q>-\alpha.
-\]
+{\Gamma(\alpha)\Gamma(\alpha+\beta+q)}.
+\end{align*}
 At $q=0$ this equals one and verifies normalization.
 \textbf{(a)} For $q=1$, apply gamma recurrence to numerator and
 denominator:
@@ -2471,7 +2626,10 @@ denominator:
 {\Gamma(\alpha)[(\alpha+\beta)\Gamma(\alpha+\beta)]}
 =\boxed{\frac\alpha{\alpha+\beta}}.
 \]
-\textbf{(b)} For $q=2$ the same cancellation gives
+\textbf{(b)} For $q=2$, the recurrence applied twice gives
+$\Gamma(\alpha+2)=(\alpha+1)\alpha\Gamma(\alpha)$ and
+$\Gamma(\alpha+\beta+2)=(\alpha+\beta+1)(\alpha+\beta)\Gamma(\alpha+\beta)$,
+and the same cancellation gives
 \[
 \langle x^2\rangle
 =\frac{\alpha(\alpha+1)\Gamma(\alpha)\Gamma(\alpha+\beta)}
@@ -2504,7 +2662,8 @@ derive the Wallis formula for $\pi$:
 \]
 \solution
 Write $I_k=\int_0^{\pi/2}\sin^k\theta\,d\theta$.
-Exercise 13.3.8 gives
+Exercise 13.3.8(b), where the sine and cosine integrals are
+equal, gives
 \[
 I_{2n}=\frac\pi2\frac{(2n-1)!!}{(2n)!!},
 \qquad I_{2n+1}=\frac{(2n)!!}{(2n+1)!!}.
@@ -2517,10 +2676,13 @@ Therefore
 Define the finite product
 \[
 P_n=\prod_{j=1}^n\frac{(2j)^2}{(2j-1)(2j+1)}
-=\frac{[(2n)!!]^2}{(2n-1)!!(2n+1)!!}.
+=\frac{[(2n)!!]^2}{(2n-1)!!(2n+1)!!};
 \]
-The previous ratio is $(\pi/2)/P_n$.  Taking its stated limit
-of one gives
+its numerators multiply to $[2\cdot4\cdots(2n)]^2=[(2n)!!]^2$, and
+its denominators to $[1\cdot3\cdots(2n-1)][3\cdot5\cdots(2n+1)]
+=(2n-1)!!(2n+1)!!$.  The previous ratio is $(\pi/2)/P_n$, so
+$P_n=(\pi/2)\,I_{2n+1}/I_{2n}$.  Taking the stated limit
+$I_{2n}/I_{2n+1}\to1$ gives
 \[
 \boxed{\frac\pi2=\lim_{n\to\infty}P_n
 =\frac{2\cdot2}{1\cdot3}\frac{4\cdot4}{3\cdot5}
@@ -2528,8 +2690,15 @@ of one gives
 \]
 For completeness, the limit used here also follows without a
 gamma asymptotic formula: since $0\le\sin\theta\le1$,
+$\sin^{k+1}\theta\le\sin^k\theta$ and so
 $I_{2n+1}\le I_{2n}\le I_{2n-1}$.  The already evaluated
-odd integrals satisfy $I_{2n-1}/I_{2n+1}=(2n+1)/(2n)$, so
+odd integrals satisfy
+\[
+\frac{I_{2n-1}}{I_{2n+1}}
+=\frac{(2n-2)!!}{(2n-1)!!}\cdot\frac{(2n+1)!!}{(2n)!!}
+=\frac{2n+1}{2n},
+\]
+so dividing the inequalities by $I_{2n+1}$ gives
 \[
 1\le\frac{I_{2n}}{I_{2n+1}}\le1+\frac1{2n}\longrightarrow1.
 \]
@@ -2552,20 +2721,30 @@ $\Gamma(z+1)\erratum{\sim}\sqrt{2\pi}\,z^{z+1/2}e^{-z}
 \solution
 Use Stirling's logarithmic expansion on the positive real axis,
 or on a fixed closed sector $|\arg z|\le\pi-\delta$ with a
-consistent logarithm branch:
+consistent logarithm branch; its correction terms
+$B_{2n}/[2n(2n-1)z^{2n-1}]$ with $B_2=1/6$, $B_4=-1/30$ give
 \[
-\log\Gamma(z+1)=\frac12\log(2\pi)+\left(z+\frac12\right)\log z-z
+\ln\Gamma(z+1)=\frac12\ln(2\pi)+\left(z+\frac12\right)\ln z-z
 +\frac1{12z}-\frac1{360z^3}+O(z^{-5}).
 \]
-Let $u=1/(12z)-1/(360z^3)+O(z^{-5})$ and exponentiate.
-Through order $z^{-3}$,
+The first three terms exponentiate to
+$\sqrt{2\pi}\,z^{z+1/2}e^{-z}$.  Let
+$u=1/(12z)-1/(360z^3)+O(z^{-5})$ and exponentiate the rest.
+Since $u=O(z^{-1})$,
+\[
+u^2=\frac1{144z^2}+O(z^{-4}),\qquad
+u^3=\frac1{1728z^3}+O(z^{-5}),\qquad
+u^k=O(z^{-4})\quad(k\ge4),
+\]
+so through order $z^{-3}$,
 \begin{align*}
 e^u&=1+u+\frac{u^2}{2}+\frac{u^3}{6}+O(z^{-4})\\
 &=1+\frac1{12z}+\frac1{2\cdot12^2z^2}
 +\left(-\frac1{360}+\frac1{6\cdot12^3}\right)z^{-3}
 +O(z^{-4}).
 \end{align*}
-The cubic coefficient is
+Here $2\cdot12^2=288$ and $6\cdot12^3=10368$; with
+$51840=144\cdot360=5\cdot10368$ the cubic coefficient is
 $-1/360+1/10368=(-144+5)/51840=-139/51840$.
 Thus
 \[
@@ -2589,7 +2768,8 @@ The leading Stirling estimate is
 \[
 52!\approx\sqrt{2\pi\cdot52}\left(\frac{52}{e}\right)^{52}.
 \]
-Compute its logarithm first:
+Compute its logarithm first; the powers of $52$ contribute
+$\frac12\ln52+52\ln52=\frac{105}2\ln52$, so
 \[
 L_0=\frac12\ln(2\pi)+\frac{105}{2}\ln52-52
 =156.3592337587296\ldots.
@@ -2605,10 +2785,16 @@ e^{L_0+1/(12\cdot52)}=8.06581767642\times10^{67}.
 \]
 For comparison, direct integer multiplication $1\cdot2\cdots52$
 gives $52!=8.065817517094\ldots\times10^{67}$.  The leading
-estimate has relative error $-0.00160126096\ldots$, about
-$-0.1601\%$; including $1/(12\cdot52)$ reduces the relative
+estimate has relative error $(e^{L_0}-52!)/52!=-0.00160126096\ldots$,
+about $-0.1601\%$; including $1/(12\cdot52)$ reduces the relative
 error to $1.97534\times10^{-8}$.  The size and sign are consistent
-with the next logarithmic term $-1/(360\cdot52^3)$.
+with the omitted next logarithmic term
+$-1/(360\cdot52^3)=-1.97555\times10^{-8}$: since
+$e^\delta-1\approx\delta$ for small $\delta$, leaving out this term
+makes the estimate too large by about $1.97555\times10^{-8}$ of
+its value.  Including it leaves a relative error of
+$-2.1\times10^{-12}$, the size of the following term
+$1/(1260\cdot52^5)$.
 
 
 \Needspace{5\baselineskip}
@@ -2621,22 +2807,43 @@ formula \erratum{and that of the recurrence formula}.
 Let $F(z)=\ln\Gamma(z+1)$ for large positive $z$.  Before the
 constants are determined, the integrated expansion is
 \[
-F(z)=C_2+\left(z+\frac12\right)\ln z+(C_1-1)z+O(z^{-1}).
+F(z)=C_2+\left(z+\frac12\right)\ln z+(C_1-1)z+O(z^{-1});
 \]
-The recurrence gives $F(z)-F(z-1)=\ln z$.  Substituting and
-canceling $C_2$ and the common linear terms yields
+it is the integral of the digamma expansion
+$\psi(z+1)=F'(z)=C_1+\ln z+1/(2z)+O(z^{-2})$, since
+$\int\ln z\,dz=z\ln z-z$.
+The recurrence $\Gamma(z+1)=z\Gamma(z)$ gives
+$F(z)-F(z-1)=\ln z$.  Substitute the expansion at $z$ and at
+$z-1$ (whose remainder $O((z-1)^{-1})$ is again $O(z^{-1})$): the
+constants $C_2$ cancel and the linear terms leave
+$(C_1-1)[z-(z-1)]=C_1-1$, so
+\[
+\left(z+\frac12\right)\ln z-\left(z-\frac12\right)\ln(z-1)+C_1-1
+=\ln z+O(z^{-1}).
+\]
+Moving $\ln z$ to the left yields
 \[
 0=\left(z-\frac12\right)\ln\frac z{z-1}+C_1-1+O(z^{-1}).
 \]
 Since $\ln[z/(z-1)]=-\ln(1-1/z)=1/z+O(z^{-2})$,
-the first term tends to one.  Therefore $\boxed{C_1=0}$.
+the first term is $1+O(z^{-1})$.  Letting $z\to\infty$ gives
+$\boxed{C_1=0}$.
 
-Now use duplication in the form
+Now use duplication.  Multiply the Legendre duplication formula
+$\Gamma(z)\Gamma(z+\frac12)=2^{1-2z}\sqrt\pi\,\Gamma(2z)$ by $z$;
+since $z\Gamma(z)=\Gamma(z+1)$ and $z\Gamma(2z)=\frac12\Gamma(2z+1)$,
+\[
+\Gamma(z+1)\Gamma\left(z+\frac12\right)
+=2^{-2z}\sqrt\pi\,\Gamma(2z+1).
+\]
+Its logarithm, with $\ln\Gamma(z+\frac12)=F(z-\frac12)$, is
 \[
 F(z)+F\left(z-\frac12\right)
 =\frac12\ln\pi-2z\ln2+F(2z).
 \]
-The needed shifted expansion is
+The needed shifted expansion (with $C_1=0$, and
+$(z-\frac12)+\frac12=z$) follows from
+$\ln(z-\frac12)=\ln z+\ln(1-\frac1{2z})$:
 \begin{align*}
 F\left(z-\frac12\right)
 &=C_2+z\ln\left(z-\frac12\right)-z+\frac12+O(z^{-1})\\
@@ -2645,17 +2852,22 @@ F\left(z-\frac12\right)
 &=C_2+z\ln z-z+O(z^{-1}).
 \end{align*}
 Consequently the left side of duplication is
-$2C_2+(2z+1/2)\ln z-2z+O(z^{-1})$, while its right side is
+$2C_2+(2z+1/2)\ln z-2z+O(z^{-1})$.  On the right side,
+$F(2z)=C_2+(2z+\frac12)\ln(2z)-2z+O(z^{-1})$ with
+$(2z+\frac12)\ln(2z)=(2z+\frac12)\ln z+2z\ln2+\frac12\ln2$; the
+terms $\pm2z\ln2$ cancel, so the right side is
 \[
 C_2+\left(2z+\frac12\right)\ln z-2z
 +\frac12\ln\pi+\frac12\ln2+O(z^{-1}).
 \]
-Canceling the common terms and taking the limit gives
+Canceling the common terms and letting $z\to\infty$ gives
+$2C_2=C_2+\frac12\ln\pi+\frac12\ln2$, that is,
 \[
 \boxed{C_2=\frac12\ln(2\pi)}.
 \]
-The corrected instruction supplies the recurrence needed to
-fix $C_1$, in addition to the duplication formula used for $C_2$.
+The recurrence added to the instruction is needed: with $C_1$ left
+free, the same comparison of the duplication formula gives only
+the single relation $C_2=\frac12\ln(2\pi)+\frac12C_1$.
 
 
 \Needspace{5\baselineskip}
@@ -2670,32 +2882,43 @@ approximation for Stirling's series.
 \solution
 The logarithm is strictly increasing.
 \textbf{(a)} On each interval $[j,j+1]$,
-$\ln x>\ln j$ except at its left endpoint.  Integrating over a
-unit interval and summing $j=1,\ldots,n$ gives
+$\ln x>\ln j$ except at its left endpoint.  Integrating this
+continuous inequality over the unit interval gives
+$\int_j^{j+1}\ln x\,dx>\ln j$, and summing $j=1,\ldots,n$ gives
 \[
 \boxed{\ln(n!)=\sum_{j=1}^n\ln j
 <\sum_{j=1}^n\int_j^{j+1}\ln x\,dx
 =\int_1^{n+1}\ln x\,dx}.
 \]
 \textbf{(b)} On $[j-1,j]$ for $j=2,\ldots,n$,
-$\ln x<\ln j$ except at the right endpoint.  Therefore
+$\ln x<\ln j$ except at the right endpoint, so
+$\int_{j-1}^j\ln x\,dx<\ln j$.  Summing, and using $\ln1=0$ in
+$\ln(n!)$, gives
 \[
 \boxed{\int_1^n\ln x\,dx
 =\sum_{j=2}^n\int_{j-1}^j\ln x\,dx
 <\sum_{j=2}^n\ln j=\ln(n!)}.
 \]
-Evaluating the elementary antiderivative $x\ln x-x$ gives the
+Evaluating the elementary antiderivative $x\ln x-x$,
+$\int_1^n\ln x\,dx=n\ln n-n+1$ and
+$\int_1^{n+1}\ln x\,dx=(n+1)\ln(n+1)-(n+1)+1$, gives the
 explicit two-sided bound
 \[
 n\ln n-n+1<\ln(n!)<(n+1)\ln(n+1)-n.
 \]
-The arithmetic mean of these bounds is
+Since $(n+1)\ln(n+1)=(n+1)\ln n+(n+1)\ln(1+1/n)
+=(n+1)\ln n+1+O(n^{-1})$, the arithmetic mean of these bounds is
 \[
 \frac{n\ln n+(n+1)\ln(n+1)-2n+1}{2}
 =\left(n+\frac12\right)\ln n-n+1+O(n^{-1}),
 \]
 which reproduces Stirling's growing terms without assuming that
-formula.  It does not determine Stirling's exact constant term.
+formula.  It does not determine Stirling's exact constant term:
+Stirling's series has $\frac12\ln(2\pi)=0.9189\ldots$ in place of
+$1$, so the mean exceeds $\ln(n!)$ by
+$1-\frac12\ln(2\pi)+O(n^{-1})=0.0811+O(n^{-1})$ (for example
+$0.0969$ at $n=10$), a bounded error that is small compared with
+$\ln(n!)$.
 
 
 \Needspace{5\baselineskip}
@@ -2714,25 +2937,37 @@ Let
 a_p=\left[\frac{\Gamma(p+1/2)}{\Gamma(p+1)}\right]^2
 \frac{2p+1}{2p+2}>0.
 \]
-Stirling's formula gives the gamma quotient
+Stirling's formula, in the form of Exercise 13.4.6 with $x=p$,
+$a=-1/2$ and $b=0$, gives the gamma quotient: there
+$x^{b-a}\Gamma(x+a+1)/\Gamma(x+b+1)=p^{1/2}\Gamma(p+1/2)/\Gamma(p+1)$,
+and its logarithm is $(a-b)(a+b+1)/(2x)+O(x^{-2})
+=-1/(8p)+O(p^{-2})$, so, exponentiating,
 \[
 \frac{\Gamma(p+1/2)}{\Gamma(p+1)}
 =p^{-1/2}\left[1-\frac1{8p}+O(p^{-2})\right].
 \]
-This is also the $a=-1/2$, $b=0$ specialization of the detailed
-quotient expansion in Exercise 13.4.6.  Since
-$(2p+1)/(2p+2)\to1$, it follows that
+Since also $(2p+1)/(2p+2)\to1$, it follows that
 \[
-\lim_{p\to\infty}p\,a_p=1.
+p\,a_p=\left[p^{1/2}\frac{\Gamma(p+1/2)}{\Gamma(p+1)}\right]^2
+\frac{2p+1}{2p+2}\longrightarrow1.
 \]
-By limit comparison with $\sum_{p=1}^\infty1/p$,
+By limit comparison with $\sum_{p=1}^\infty1/p$ (for all large $p$,
+$a_p>1/(2p)$, and the harmonic series diverges),
 \[
 \boxed{\sum_{p=0}^{\infty}a_p\text{ diverges to }+\infty}.
 \]
-The finite $p=0$ term is $\pi/2$ and does not alter convergence.
-For the second form, use
-$\Gamma(p+1/2)/p!=\sqrt\pi(2p-1)!!/(2p)!!$ and absorb
-$(2p+1)/(2p+2)$ into the corresponding double factorials.
+The finite $p=0$ term is $[\Gamma(1/2)]^2/2=\pi/2$ and does not
+alter convergence.
+For the second form, $\Gamma(p+1/2)=(2p-1)!!\sqrt\pi/2^p$
+(Exercise 13.3.2) and $p!=(2p)!!/2^p$ give
+$\Gamma(p+1/2)/p!=\sqrt\pi(2p-1)!!/(2p)!!$; then absorb the factors
+$2p+1$ and $2p+2$ into the double factorials:
+\begin{align*}
+\left[\frac{\Gamma(p+1/2)}{p!}\right]^2\frac{2p+1}{2p+2}
+&=\pi\,\frac{(2p-1)!!}{(2p)!!}\cdot
+\frac{(2p-1)!!\,(2p+1)}{(2p)!!\,(2p+2)}\\
+&=\pi\,\frac{(2p-1)!!\,(2p+1)!!}{(2p)!!\,(2p+2)!!}.
+\end{align*}
 This proves that it is the same positive series.  A ratio tending
 to one alone would not establish its divergence; the harmonic
 comparison above does.
@@ -2745,28 +2980,38 @@ $\displaystyle\lim_{x\to\infty}x^{b-a}\frac{\Gamma(x+a+1)}{\Gamma(x+b+1)}=1$.
 \solution
 Take fixed $a,b$ and $x\to+\infty$.  Complex $a,b$ are also
 allowed with logarithms continued in the large right half-plane.
-For either fixed parameter $c$, Stirling's formula gives
+For either fixed parameter $c$, Stirling's series (as in
+Exercise 13.4.1, with $z=x+c$) gives
 \[
-\log\Gamma(x+c+1)
-=\left(x+c+\frac12\right)\log(x+c)-(x+c)
-+\frac12\log(2\pi)+\frac1{12(x+c)}+O(x^{-3}).
+\ln\Gamma(x+c+1)
+=\left(x+c+\frac12\right)\ln(x+c)-(x+c)
++\frac12\ln(2\pi)+\frac1{12(x+c)}+O(x^{-3}).
 \]
-Expand $\log(x+c)=\log x+c/x-c^2/(2x^2)+O(x^{-3})$.
-Multiplication by $x+c+1/2$ and cancellation of the constant $c$
-against $-(x+c)$ gives
+Expand $\ln(x+c)=\ln x+\ln(1+c/x)=\ln x+c/x-c^2/(2x^2)+O(x^{-3})$.
+Multiplication by $x+c+\frac12$ gives
+$(x+c+\frac12)\ln x$ plus
+\[
+\left(x+c+\frac12\right)\left(\frac cx-\frac{c^2}{2x^2}\right)
++O(x^{-2})
+=c+\frac{c(c+\frac12)-\frac12c^2}{x}+O(x^{-2})
+=c+\frac{c(c+1)}{2x}+O(x^{-2}).
+\]
+With $1/[12(x+c)]=1/(12x)+O(x^{-2})$ and cancellation of the
+constant $c$ against $-(x+c)$, this gives
 \begin{align*}
-\log\Gamma(x+c+1)
-={}&\left(x+\frac12\right)\log x-x+\frac12\log(2\pi)
-+c\log x\\
+\ln\Gamma(x+c+1)
+={}&\left(x+\frac12\right)\ln x-x+\frac12\ln(2\pi)
++c\ln x\\
 &+\frac{c(c+1)/2+1/12}{x}+O(x^{-2}).
 \end{align*}
-Subtract the $c=b$ expression from the $c=a$ expression and
-add $(b-a)\log x$:
+Subtract the $c=b$ expression from the $c=a$ expression: the
+terms without $c$ cancel, $a(a+1)-b(b+1)=(a-b)(a+b+1)$, and adding
+$(b-a)\ln x$ removes $(a-b)\ln x$:
 \[
-\log\left[x^{b-a}\frac{\Gamma(x+a+1)}{\Gamma(x+b+1)}\right]
+\ln\left[x^{b-a}\frac{\Gamma(x+a+1)}{\Gamma(x+b+1)}\right]
 =\frac{(a-b)(a+b+1)}{2x}+O(x^{-2})\longrightarrow0.
 \]
-Exponentiating proves
+Exponentiating (the exponential is continuous at zero) proves
 \[
 \boxed{\lim_{x\to\infty}x^{b-a}
 \frac{\Gamma(x+a+1)}{\Gamma(x+b+1)}=1}.
@@ -2780,7 +3025,9 @@ $(a-b)(a+b+1)/(2x)$, useful for checking the rate of approach.
 \noindent\textbf{13.4.7}\quad Show that
 $\displaystyle\lim_{n\to\infty}\frac{(2n-1)!!}{(2n)!!}n^{1/2}=\pi^{-1/2}$.
 \solution
-Express the double factorials in gamma form:
+Express the double factorials in gamma form, using
+$\Gamma(n+1/2)=(2n-1)!!\sqrt\pi/2^n$ (Exercise 13.3.2) and
+$(2n)!!=2\cdot4\cdots(2n)=2^nn!$:
 \[
 (2n-1)!!=\frac{2^n\Gamma(n+1/2)}{\sqrt\pi},
 \qquad (2n)!!=2^n\Gamma(n+1).
@@ -2791,13 +3038,15 @@ Their normalized ratio is consequently
 =\frac1{\sqrt\pi}\,
  n^{1/2}\frac{\Gamma(n+1/2)}{\Gamma(n+1)}.
 \]
-Exercise 13.4.6 with $a=-1/2$ and $b=0$ shows that the final
-factor tends to one, so
+Exercise 13.4.6 with $x=n$, $a=-1/2$ and $b=0$ (so that
+$x^{b-a}=n^{1/2}$) shows that the final factor tends to one, so
 \[
 \boxed{\lim_{n\to\infty}\frac{(2n-1)!!}{(2n)!!}\sqrt n
 =\pi^{-1/2}}.
 \]
-More precisely it equals
+More precisely, the logarithm of the final factor is
+$(a-b)(a+b+1)/(2n)+O(n^{-2})=-1/(8n)+O(n^{-2})$ by the same
+exercise, so the ratio equals
 $\pi^{-1/2}[1-1/(8n)+O(n^{-2})]$, approaching the limit from
 below for sufficiently large $n$.
 
@@ -2831,13 +3080,19 @@ statistics.
 \solution
 Use $0!=1$ and $0\ln0=0$ for unoccupied states.
 \textbf{(a)} With fixed $M$ and fixed fractions $p_i$,
-$\sum_i n_i=N$ and $n_i=Np_i$.  The leading Stirling terms give
+$\sum_i n_i=N$ and $n_i=Np_i$.  The leading Stirling terms,
+$\ln n!=n\ln n-n+O(\ln n)$ for each occupied $n_i\to\infty$ (an
+unoccupied state contributes $\ln0!=0=0\ln0-0$), give
 \begin{align*}
 \frac Sk&=\ln N!-\sum_i\ln n_i!\\
 &=N\ln N-N-\sum_i(n_i\ln n_i-n_i)+O(\ln N)\\
 &=N\ln N-\sum_iNp_i(\ln N+\ln p_i)+O(\ln N)\\
 &=-N\sum_i p_i\ln p_i+O(\ln N).
 \end{align*}
+From the second to the third line, $-N+\sum_in_i=0$ and
+$\ln n_i=\ln N+\ln p_i$; in the last line, $\sum_ip_i=1$ cancels
+$N\ln N$.  The error terms, one for each of the fixed number $M$
+of states, are each $O(\ln N)$.
 Thus
 \[
 \boxed{S\sim-Nk\sum_{i=1}^M p_i\ln p_i}
@@ -2847,7 +3102,13 @@ additive estimate in the preceding line includes the zero-entropy
 case.  This leading term is extensive.
 
 If $q$ fractions are positive, retaining the half-logarithm terms
-makes the finite-size correction explicit:
+of $\ln n!=n\ln n-n+\frac12\ln(2\pi n)+O(n^{-1})$ for $N$ and for
+the $q$ occupied $n_i=Np_i$ adds
+\[
+\frac12\ln(2\pi N)-\frac12\sum_{p_i>0}\ln(2\pi Np_i)
+=-\frac{q-1}{2}\ln(2\pi N)-\frac12\sum_{p_i>0}\ln p_i,
+\]
+which makes the finite-size correction explicit:
 \[
 \frac Sk=-N\sum_{p_i>0}p_i\ln p_i
 -\frac{q-1}{2}\ln(2\pi N)-\frac12\sum_{p_i>0}\ln p_i
@@ -2870,19 +3131,30 @@ introduce $\mathcal L=H-\lambda(\sum_i p_i-1)$.  Then
 =-\ln p_i-1-\lambda=0,
 \qquad p_i=e^{-1-\lambda}.
 \]
-All probabilities are equal, and normalization gives
+All probabilities are equal, and normalization
+$Me^{-1-\lambda}=1$ gives $p_i=1/M$.  Then
+$H=-M\cdot\frac1M\ln\frac1M=\ln M$, so
 \[
 \boxed{p_i=\frac1M\quad(i=1,\ldots,M)},\qquad
 \boxed{S_{\max}=Nk\ln M+O(\ln N)}.
 \]
-The Hessian of $H$ is $-\operatorname{diag}(1/p_i)$, strictly
-negative on every nonzero tangent displacement, so this is the
-unique maximum.  A boundary with only $q<M$ occupied states has
-maximum $\ln q<\ln M$ and cannot improve it.
+The Hessian of $H$ is
+$\partial^2H/\partial p_i\partial p_j=-\delta_{ij}/p_i$, so for
+every nonzero tangent displacement $\delta$ ($\sum_i\delta_i=0$)
+the quadratic form $-\sum_i\delta_i^2/p_i$ is strictly negative.
+Thus $H$ is strictly concave on the simplex, and this critical
+point is the unique maximum.  A boundary with only $q<M$ occupied
+states has, by the same argument, maximum $\ln q<\ln M$ and cannot
+improve it.
 
 For a finite integer assignment, if $n_i\ge n_j+2$, moving one
 particle from $i$ to $j$ changes the multiplicity by
-$W_{\rm new}/W_{\rm old}=n_i/(n_j+1)>1$.  Thus the exact
+\[
+\frac{W_{\rm new}}{W_{\rm old}}
+=\frac{n_i!\,n_j!}{(n_i-1)!\,(n_j+1)!}
+=\frac{n_i}{n_j+1}>1.
+\]
+Thus the exact
 maximizing counts differ by at most one; they are exactly uniform
 when $M$ divides $N$, and tend to the probabilities above otherwise.
 
