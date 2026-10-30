@@ -1426,21 +1426,27 @@ These integrals appear in the analysis of a knife-edge diffraction pattern.
 \solution
 Take $x\to+\infty$ and write $S(x)=s(x)$ for the sine integral in the
 question. Put $\theta=\pi x^2/2$. Rotating the Gaussian integration
-ray through $\pi/4$ gives
+ray through $\pi/4$, i.e.\ substituting $u=e^{i\pi/4}t$, so that
+$i\pi u^2/2=-\pi t^2/2$, gives
 \[
 \int_0^\infty e^{i\pi u^2/2}du
 =e^{i\pi/4}\int_0^\infty e^{-\pi t^2/2}dt
-=\frac{1+i}{2}.
+=\frac{1+i}{\sqrt2}\cdot\frac1{\sqrt2}
+=\frac{1+i}{2},
 \]
-The rotation is justified by an arc estimate: on $u=Re^{i\phi}$,
-$|e^{i\pi u^2/2}|=e^{-\pi R^2\sin(2\phi)/2}$; its integral over
-$0\le\phi\le\pi/4$, including the small region next to $\phi=0$,
-is bounded using $\sin2\phi\ge4\phi/\pi$:
+by $\int_0^\infty e^{-\alpha t^2}dt=\frac12\sqrt{\pi/\alpha}$ with
+$\alpha=\pi/2$. The rotation is justified by Cauchy's theorem: the
+integrand is entire, so its integrals over $[0,R]$, over the arc
+$u=Re^{i\phi}$, $0\le\phi\le\pi/4$, and back along the ray
+$\arg u=\pi/4$ add to zero, and the arc contribution tends to zero.
+Indeed, on the arc $|e^{i\pi u^2/2}|=e^{-\pi R^2\sin(2\phi)/2}$ and
+$|du|=R\,d\phi$, and Jordan's inequality $\sin2\phi\ge4\phi/\pi$
+($0\le2\phi\le\pi/2$) gives
 \[
 R\int_0^{\pi/4}e^{-\pi R^2\sin(2\phi)/2}d\phi
 \le R\int_0^\infty e^{-2R^2\phi}d\phi=\frac1{2R}.
 \]
-Therefore
+Therefore, since $\int_0^x=\int_0^\infty-\int_x^\infty$,
 \[
 C(x)+iS(x)=\frac{1+i}{2}-T_0(x),\qquad
 T_m(x)=\int_x^\infty u^{-2m}e^{i\pi u^2/2}du.
@@ -1453,39 +1459,56 @@ T_m&=\left[\frac{e^{i\pi u^2/2}}{i\pi u^{2m+1}}\right]_x^\infty
 &=\frac{i e^{i\theta}}{\pi x^{2m+1}}
  -\frac{i(2m+1)}\pi T_{m+1}.
 \end{align*}
-Repeated substitution therefore gives the finite identity
+Substitute the formula for $T_1$ into that for $T_0$, then the one for
+$T_2$, and so on. After $k$ steps the coefficient of $T_k$ is
+$\prod_{m=0}^{k-1}[-i(2m+1)/\pi]=(-i)^k(2k-1)!!/\pi^k$, and it
+multiplies the boundary term $ie^{i\theta}/(\pi x^{2k+1})$ of $T_k$.
+This gives the finite identity
 \[
 T_0=\frac{i e^{i\theta}}{\pi x}
 \sum_{k=0}^{N-1}\frac{(-i)^k(2k-1)!!}{(\pi x^2)^k}
 +\frac{(-i)^N(2N-1)!!}{\pi^N}T_N,
 \]
-where $(-1)!!=1$. The same integration-by-parts identity, followed by
-an absolute bound on $T_{N+1}$, gives
+where $(-1)!!=1$. The same integration-by-parts identity with $m=N$,
+together with the absolute bound
+$|T_{N+1}|\le\int_x^\infty u^{-2N-2}du=x^{-2N-1}/(2N+1)$, gives
 \[
 |T_N|\le\frac1{\pi x^{2N+1}}
 +\frac{2N+1}{\pi}\int_x^\infty u^{-2N-2}du
 =\frac2{\pi x^{2N+1}}.
 \]
-Thus the remainder is of the order of the next inverse power for every
-fixed $N$, proving asymptotic validity.
+Thus the remainder $(-i)^N(2N-1)!!\,T_N/\pi^N$ has modulus at most
+$2(2N-1)!!/(\pi^{N+1}x^{2N+1})$, the order of the first omitted term
+($k=N$), for every fixed $N$; this proves asymptotic validity.
 
-Separate the even and odd $k$ contributions by defining
+In the sum, the factor $i(-i)^k$ equals $i(-1)^j$ for $k=2j$ and
+$(-1)^j$ for $k=2j+1$. Separate the even and odd $k$ contributions
+accordingly by defining
 \begin{align*}
 f(x)&\sim\frac1{\pi x}\left[1-\frac3{\pi^2x^4}
- +\frac{105}{\pi^4x^8}-\cdots\right],\\
+ +\frac{105}{\pi^4x^8}-\cdots\right]
+ =\sum_{j\ge0}\frac{(-1)^j(4j-1)!!}{\pi^{2j+1}x^{4j+1}},\\
 g(x)&\sim\frac1{\pi^2x^3}\left[1-\frac{15}{\pi^2x^4}
- +\frac{945}{\pi^4x^8}-\cdots\right].
+ +\frac{945}{\pi^4x^8}-\cdots\right]
+ =\sum_{j\ge0}\frac{(-1)^j(4j+1)!!}{\pi^{2j+2}x^{4j+3}}.
 \end{align*}
-Then $T_0\sim e^{i\theta}(g+if)$, so the requested real expansions are
+Then $T_0\sim e^{i\theta}(g+if)$, and
 \[
-\boxed{C(x)\sim\frac12+f(x)\sin\theta-g(x)\cos\theta},
+\frac{1+i}2-(\cos\theta+i\sin\theta)(g+if)
+=\Bigl(\frac12-g\cos\theta+f\sin\theta\Bigr)
++i\Bigl(\frac12-f\cos\theta-g\sin\theta\Bigr),
+\]
+so the requested real expansions are
+\[
+\text{(a)}\ \boxed{C(x)\sim\frac12+f(x)\sin\theta-g(x)\cos\theta},
 \qquad
-\boxed{S(x)\sim\frac12-f(x)\cos\theta-g(x)\sin\theta}.
+\text{(b)}\ \boxed{S(x)\sim\frac12-f(x)\cos\theta-g(x)\sin\theta}.
 \]
 For example $C=1/2+\sin\theta/(\pi x)-\cos\theta/(\pi^2x^3)
-+O(x^{-5})$, with the corresponding sine-integral formula obtained
-from the second box. For large negative $x$, use the oddness of both
-integrals rather than the positive-infinity constants $1/2$.
++O(x^{-5})$ and $S=1/2-\cos\theta/(\pi x)-\sin\theta/(\pi^2x^3)
++O(x^{-5})$. For large negative $x$, use the oddness of both integrals
+(their integrands are even), $C(-x)=-C(x)$, $S(-x)=-S(x)$, rather than
+the positive-infinity constants $1/2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1495,8 +1518,11 @@ $\mathrm{Ci}(x)$ and $\mathrm{si}(x)$ \erratum{as $x\to+\infty$} by repeated int
 \emph{Hint.}~$\mathrm{Ci}(x)+i\,\mathrm{si}(x)
 =-\displaystyle\int_{x}^{\infty}\frac{e^{it}}{t}\,dt$.
 \solution
-Use the definitions in the hint, so $\mathrm{si}(x)=\mathrm{Si}(x)-\pi/2$,
-and take $x\to+\infty$. Set
+Use the definitions in the hint, $\mathrm{Ci}(x)=-\int_x^\infty\cos t\,dt/t$
+and $\mathrm{si}(x)=-\int_x^\infty\sin t\,dt/t=\mathrm{Si}(x)-\pi/2$
+(because $\int_0^\infty\sin t\,dt/t=\pi/2$), and take $x\to+\infty$; for
+$x<0$ the hint's integral would run through the singularity of
+$e^{it}/t$ at $t=0$. Set
 \[
 J_m(x)=\int_x^\infty\frac{e^{it}}{t^{m+1}}dt.
 \]
@@ -1506,25 +1532,34 @@ J_m=\left[\frac{e^{it}}{it^{m+1}}\right]_x^\infty
  +\frac{m+1}{i}J_{m+1}
 =\frac{i e^{ix}}{x^{m+1}}-i(m+1)J_{m+1}.
 \]
-Consequently
+Substituting repeatedly, after $k$ steps the coefficient of $J_k$ is
+$\prod_{m=0}^{k-1}[-i(m+1)]=(-i)^kk!$, and it multiplies the boundary
+term $ie^{ix}/x^{k+1}$ of $J_k$. Consequently
 \[
 \mathrm{Ci}(x)+i\,\mathrm{si}(x)=-J_0
 =-\frac{i e^{ix}}x\sum_{k=0}^{N-1}\frac{(-i)^kk!}{x^k}
 -(-i)^NN!J_N.
 \]
-A further integration by parts bounds the remainder integral by
+The recurrence with $m=N$ and the bound
+$|J_{N+1}|\le\int_x^\infty t^{-N-2}dt=x^{-N-1}/(N+1)$ bound the
+remainder integral by
 \[
 |J_N|\le x^{-N-1}+(N+1)\int_x^\infty t^{-N-2}dt
 =2x^{-N-1}.
 \]
-The residual after $N$ displayed terms is therefore $O(x^{-N-1})$.
-Collect the real even/odd subsequences:
-\[
-A(x)\sim1-\frac{2!}{x^2}+\frac{4!}{x^4}-\cdots,\qquad
-B(x)\sim1-\frac{3!}{x^2}+\frac{5!}{x^4}-\cdots.
-\]
+The residual $(-i)^NN!J_N$ after $N$ displayed terms is therefore at
+most $2N!/x^{N+1}$, of the order of the first omitted term.
+In the sum, $-i(-i)^k$ equals $-i(-1)^j$ for $k=2j$ and $-(-1)^j$ for
+$k=2j+1$. Collect the real even/odd subsequences:
+\begin{align*}
+A(x)&\sim\sum_{j\ge0}\frac{(-1)^j(2j)!}{x^{2j}}
+=1-\frac{2!}{x^2}+\frac{4!}{x^4}-\cdots,\\
+B(x)&\sim\sum_{j\ge0}\frac{(-1)^j(2j+1)!}{x^{2j}}
+=1-\frac{3!}{x^2}+\frac{5!}{x^4}-\cdots.
+\end{align*}
 Since $-J_0\sim e^{ix}[-iA/x-B/x^2]$, multiplication by
-$\cos x+i\sin x$ yields
+$\cos x+i\sin x$ gives the real part $A\sin x/x-B\cos x/x^2$ and the
+imaginary part $-A\cos x/x-B\sin x/x^2$, which yields
 \[
 \boxed{\mathrm{Ci}(x)\sim\frac{\sin x}{x}A(x)
 -\frac{\cos x}{x^2}B(x)},
@@ -1565,14 +1600,25 @@ I_m=\left[-\frac{e^{-t^2}}{2t^{2m+1}}\right]_x^\infty
 -\frac{2m+1}{2}\int_x^\infty t^{-2m-2}e^{-t^2}dt
 =\frac{e^{-x^2}}{2x^{2m+1}}-\frac{2m+1}{2}I_{m+1}.
 \]
-After $N$ repetitions,
+After $k$ repetitions the coefficient of $I_k$ is
+$\prod_{m=0}^{k-1}[-(2m+1)/2]=(-1)^k(2k-1)!!/2^k$, and it multiplies
+the boundary term $e^{-x^2}/(2x^{2k+1})$ of $I_k$. After $N$
+repetitions, therefore,
 \[
 I_0=\frac{e^{-x^2}}{2x}
 \sum_{k=0}^{N-1}\frac{(-1)^k(2k-1)!!}{2^kx^{2k}}
 +\frac{(-1)^N(2N-1)!!}{2^N}I_N.
 \]
-All $I_m$ are positive, and the recurrence implies
-$0<I_N<e^{-x^2}/(2x^{2N+1})$. The remainder in $\mathrm{erfc}$
+All $I_m$ are positive, so the recurrence with $m=N$,
+$I_N=e^{-x^2}/(2x^{2N+1})-\frac{2N+1}2I_{N+1}$, implies
+$0<I_N<e^{-x^2}/(2x^{2N+1})$. Multiplying the finite identity by
+$2/\sqrt\pi$,
+\[
+\mathrm{erfc}(x)=\frac{e^{-x^2}}{\sqrt\pi x}
+\sum_{k=0}^{N-1}\frac{(-1)^k(2k-1)!!}{2^kx^{2k}}+R_N,\qquad
+R_N=\frac2{\sqrt\pi}\,\frac{(-1)^N(2N-1)!!}{2^N}I_N.
+\]
+So the remainder $R_N$ in $\mathrm{erfc}$
 has sign $(-1)^N$ and magnitude less than its first omitted term:
 \[
 |R_N|<\frac{e^{-x^2}}{\sqrt\pi x}
@@ -1604,10 +1650,10 @@ divergent cases. Then specify a complex sector of validity.}
 \solution
 \erratum{Divergence at fixed $z$ does not by itself prove that a series
 is asymptotic to a particular function. Also, for half-integer $\nu$ the
-products terminate, so the blanket divergence argument in the manual
-has exceptions. We first prove the asymptotic statement for fixed real
-$\nu$ and $z=x\to+\infty$, then give its complex extension on a specified
-sector.}
+products terminate, so the blanket divergence argument in the
+Instructor's Manual has exceptions. We first prove the asymptotic
+statement for fixed real $\nu$ and $z=x\to+\infty$, then give its
+complex extension on a specified sector.}
 Put
 \[
 \mu=\nu^2-\frac14,\qquad
@@ -1618,79 +1664,105 @@ The outgoing Bessel solution in Section 14.6 is written
 H_\nu^{(1)}(x)=\sqrt{\frac2{\pi x}}
  e^{i(x-\nu\pi/2-\pi/4)}w(x),\qquad w=P_\nu+iQ_\nu.
 \]
-Substituting $H=x^{-1/2}e^{ix}$ times a constant times $w$ into
-$x^2H''+xH'+(x^2-\nu^2)H=0$ gives
+Substituting $H=x^{-1/2}U$ into $x^2H''+xH'+(x^2-\nu^2)H=0$, the
+first-derivative terms cancel and the equation becomes
+$x^{3/2}[U''+(1-\mu/x^2)U]=0$. Then $U=e^{ix}w$ (up to a constant
+factor) has $U''=e^{ix}(w''+2iw'-w)$, so
 \[
 w''+2iw'-\frac\mu{x^2}w=0,\qquad w(x)\to1.
 \]
 Only the leading outgoing normalization $w\to1$ from Section 14.6
 is used here; the higher coefficients and their remainder will be proved.
-For $w\sim\sum_{k\ge0}c_kx^{-k}$, the coefficient of $x^{-k-2}$ is
+For $w\sim\sum_{k\ge0}c_kx^{-k}$, termwise
+$w''=\sum_{k\ge0}k(k+1)c_kx^{-k-2}$ and, shifting the index ($w'$ has
+no $k=0$ term),
+$2iw'=-\sum_{k\ge0}2i(k+1)c_{k+1}x^{-k-2}$. So the coefficient of
+$x^{-k-2}$ is
 \[
 [k(k+1)-\mu]c_k-2i(k+1)c_{k+1}=0.
 \]
-Hence
+Since $k(k+1)-\mu=(k+\frac12)^2-\nu^2=[(2k+1)^2-4\nu^2]/4$ and
+$1/(2i)=-i/2$, this gives, with $c_0=1$,
 \[
 c_{k+1}=\frac{i[4\nu^2-(2k+1)^2]}{8(k+1)}c_k,\qquad
 c_k=i^kA_k.
 \]
-The real even powers and imaginary odd powers are exactly the two
-series in the question, including their signs.
+Because $i^{2n}=(-1)^n$, $i^{2n-1}=i(-1)^{n+1}$ and
+$A_kz^{-k}=\prod_{s=1}^k[4\nu^2-(2s-1)^2]/(k!(8z)^k)$, the real even
+powers and the imaginary odd powers (divided by $i$) are exactly the
+two series in the question, including their signs.
 
 Here is a remainder argument. For an integrable forcing $f$, define
 \[
 (Kf)(x)=\frac1{2i}\int_x^\infty[e^{2i(t-x)}-1]f(t)\,dt.
 \]
-Differentiating under the integral (the boundary kernel is zero) gives
+Differentiating with Leibniz's rule (the boundary term of the first
+derivative vanishes because the kernel is zero at $t=x$; that of the
+second derivative is $+f(x)$) gives
 \[
 (Kf)'=-\int_x^\infty e^{2i(t-x)}f(t)\,dt,\qquad
 (Kf)''=f(x)+2i\int_x^\infty e^{2i(t-x)}f(t)\,dt.
 \]
-Thus $(Kf)''+2i(Kf)'=f$, and $Kf\to0$ at infinity.
+Thus $(Kf)''+2i(Kf)'=f$, and $Kf\to0$ at infinity, since
+$|Kf(x)|\le\int_x^\infty|f|\,dt$.
 Apply this to $f=\mu w/x^2$, which is integrable because $w\to1$.
-The difference $w-1-Kf$ solves $d''+2id'=0$, so $d=A+Be^{-2ix}$.
+Since $w''+2iw'=f$ as well, the difference $d=w-1-Kf$ solves
+$d''+2id'=0$, so $d=A+Be^{-2ix}$.
 Since $d\to0$ on the positive axis, $A=B=0$.
 This proves the Volterra equation
 \[
 w(x)=1+\frac\mu{2i}\int_x^\infty
- [e^{2i(t-x)}-1]\frac{w(t)}{t^2}dt.
+ [e^{2i(t-x)}-1]\frac{w(t)}{t^2}dt\equiv1+T[w](x).
 \]
-Its kernel has absolute value at most $1$ after division by $2i$.
-On $x\ge R>|\mu|$, its operator $T$ has sup-norm at most
+Its kernel has absolute value at most $1$ after division by $2i$, so
+$|T[w](x)|\le|\mu|\sup|w|\int_x^\infty t^{-2}dt=|\mu|\sup|w|/x$.
+On $x\ge R>|\mu|$, the operator $T$ therefore has sup-norm at most
 $|\mu|/R<1$, so the bounded outgoing solution is uniquely obtained by
-successive substitution. Let $S_N=\sum_{k=0}^{N-1}c_kx^{-k}$.
-The recurrence cancels every lower power, leaving precisely
+successive substitution. Let $S_N=\sum_{k=0}^{N-1}c_kx^{-k}$, $N\ge1$.
+In $S_N''+2iS_N'-\mu S_N/x^2$, the coefficient of $x^{-k-2}$ is the
+left side of the recurrence for $k\le N-2$, hence zero; for $k=N-1$
+the term $c_N$ is absent. This leaves precisely
 \[
 r_N:=S_N''+2iS_N'-\mu S_N/x^2
 =[N(N-1)-\mu]c_{N-1}x^{-N-1}.
 \]
-Then $E_N=w-S_N$ satisfies
+Then $E_N=w-S_N$ satisfies $E_N''+2iE_N'=\mu E_N/x^2-r_N$ and
+$E_N\to0$, so the argument that gave the Volterra equation gives
 \[
 E_N=T[E_N]-\frac1{2i}\int_x^\infty[e^{2i(t-x)}-1]r_N(t)dt.
 \]
-The explicit last integral is $O(x^{-N})$. In the weighted norm
+The explicit last integral is at most
+$\int_x^\infty|r_N|\,dt=|[N(N-1)-\mu]c_{N-1}|\,x^{-N}/N$, i.e.\
+$O(x^{-N})$. In the weighted norm
 $\|E\|_N=\sup_{x\ge R}x^N|E(x)|$,
 \[
 x^N|T[E](x)|
 \le |\mu|\|E\|_Nx^N\int_x^\infty t^{-N-2}dt
 \le\frac{|\mu|}{(N+1)R}\|E\|_N.
 \]
-The same contraction argument constructs $E_N=O(x^{-N})$; uniqueness
-identifies $S_N+E_N$ with $w$. This is the required asymptotic remainder
-estimate for every fixed truncation. Taking real and imaginary parts
-proves the $P_\nu,Q_\nu$ expansions; retaining one extra term when
-necessary gives the next even or odd inverse-power remainder.
+So the map $E\mapsto T[E]-(\text{last integral})$ is a contraction
+both in the sup norm and in $\|\cdot\|_N$. Its fixed point with
+$\|E\|_N<\infty$ is bounded, so by uniqueness of the bounded fixed point
+it equals $E_N=w-S_N$; hence $E_N=O(x^{-N})$. This is the required
+asymptotic remainder estimate for every fixed truncation. Taking real
+and imaginary parts proves the $P_\nu,Q_\nu$ expansions (for real $\nu$,
+$H^{(2)}_\nu(x)=\overline{H^{(1)}_\nu(x)}$ makes $P_\nu,Q_\nu$ real on
+the axis); retaining one extra term when necessary gives the next even
+or odd inverse-power remainder.
 
 For nonterminating cases the ratio of two consecutive $P$ terms is
 \[
 \left|\frac{[4\nu^2-(4n+1)^2][4\nu^2-(4n+3)^2]}
-{(2n+1)(2n+2)(8x)^2}\right|\sim\frac{n^2}{x^2},
+{(2n+1)(2n+2)(8x)^2}\right|\sim\frac{(16n^2)^2}{4n^2\cdot64x^2}
+=\frac{n^2}{x^2},
 \]
-and the $Q$ ratio has the same growth. Thus they diverge for fixed $x$,
-while their finite truncations have the proved large-$x$ meaning.
-If $\nu=\pm(j+1/2)$, $j=0,1,\ldots$, a numerator factor vanishes at $s=j+1$ and
-all later coefficients are zero; the resulting finite expansions remain
-valid, and in fact solve the transformed equation exactly.
+and the $Q$ ratio has the same growth. Thus they diverge for fixed $x$
+(ratio test), while their finite truncations have the proved large-$x$
+meaning. If $\nu=\pm(j+1/2)$, $j=0,1,\ldots$, a numerator factor
+vanishes at $s=j+1$ and all later coefficients are zero; the resulting
+finite expansions remain valid, and in fact solve the transformed
+equation exactly: for $N=j+1$,
+$N(N-1)-\mu=j(j+1)-[(j+\frac12)^2-\frac14]=0$, so $r_N=0$.
 \erratum{These terminating cases satisfy the usual fixed-order remainder
 definition. They are excluded only if one imposes the textbook's extra
 divergence convention, Eq. (12.98); see Exercise 12.6.5.}
@@ -1700,10 +1772,14 @@ expansion on the real axis automatically extends to all directions.
 For $\Re z\ge0$, integrate along $t=z+u$, $u\ge0$. Then
 \[
 |e^{2iu}-1|\le2,\qquad
-|z+u|\ge (|z|+u)/\sqrt2.
+|z+u|\ge (|z|+u)/\sqrt2,
 \]
-Thus the unweighted operator norm on $|z|\ge R$ is at most
-$2|\mu|/R$. In the weighted norm its bound is
+the latter because $|z+u|^2=|z|^2+2u\Re z+u^2\ge|z|^2+u^2
+\ge(|z|+u)^2/2$. Also $|z+u|\ge|z|$, so the path $z+u$ stays in the
+region $\Re z\ge0$, $|z|\ge R$, and
+$\int_0^\infty2\,du/(|z|+u)^2=2/|z|$; hence the unweighted operator norm
+on that region is at most $2|\mu|/R$. In the weighted norm, using
+$|z+u|^{-N-2}\le2^{(N+2)/2}(|z|+u)^{-N-2}$, its bound is
 \[
 \frac{|\mu|\,2^{(N+2)/2}}{(N+1)R},
 \]
@@ -1713,11 +1789,13 @@ Taking $R$ sufficiently large gives the same contraction and
 $O(|z|^{-N})$ remainder, uniformly in this closed right half-plane.
 The incoming solution obeys $w_-''-2iw_-'-\mu w_-/z^2=0$; its kernel
 uses $e^{-2iu}-1$, with the same bound, and its coefficients are
-$(-i)^kA_k$. Therefore $P=(w+w_-)/2$ selects the even terms and
-$Q=(w-w_-)/(2i)$ selects the odd terms. These analytic solutions agree
-with the Hankel normalizations on the positive axis and hence throughout
-the sector. This argument also works for each fixed complex $\nu$,
-since only $|\mu|$ enters the bounds. Wider continuation sectors require
+$(-i)^kA_k$ (replace $i$ by $-i$ throughout, since $H^{(2)}_\nu$
+carries the factor $e^{-iz}$). Therefore $P=(w+w_-)/2$ selects the even
+terms and $Q=(w-w_-)/(2i)$ selects the odd terms, because
+$i^k+(-i)^k$ vanishes for odd $k$ and $i^k-(-i)^k$ for even $k$.
+These analytic solutions agree with the Hankel normalizations on the
+positive axis and hence throughout the sector. This argument also works
+for each fixed complex $\nu$, since only $|\mu|$ enters the bounds. Wider continuation sectors require
 the corresponding Hankel branches; no expansion across an unspecified
 branch or Stokes boundary is being asserted.
 
@@ -1733,8 +1811,13 @@ The answer depends on the stated convention. With the textbook's partial
 sum through $x^{-m}$, $m\ge1$, finite geometric summation gives
 \[
 s_m(x)=\sum_{k=1}^m(-1)^{k-1}x^{-k}
-=\frac{1-(-1/x)^m}{1+x},\qquad
-R_m(x)=\frac{(-1)^m}{x^m(1+x)}.
+=\frac1x\,\frac{1-(-1/x)^m}{1+1/x}
+=\frac{1-(-1/x)^m}{1+x},
+\]
+so the remainder is
+\[
+R_m(x)=\frac1{1+x}-s_m(x)=\frac{(-1/x)^m}{1+x}
+=\frac{(-1)^m}{x^m(1+x)}.
 \]
 Consequently
 \[
@@ -1747,15 +1830,15 @@ Thus the extra requirement in Eq. (12.98) is not met:
 \[
 \boxed{\text{not an asymptotic series under the textbook's convention}.}
 \]
-This agrees with the manual. Its convergence follows independently from
-the geometric ratio $|-1/x|<1$.
+This agrees with the Instructor's Manual. Its convergence follows
+independently from the geometric ratio $|-1/x|<1$.
 
 \erratum{Terminology qualification: the usual Poincar\'e definition uses
 the fixed-order condition (12.97) without the additional divergence
-requirement (12.98). The book itself acknowledges this alternative in
-footnote 5 on p.583. Under that definition the same series is both
-convergent and asymptotic; the manual's answer is correct under the
-book's explicitly stricter convention.}
+requirement (12.98). The textbook itself acknowledges this alternative in
+footnote 5 on p.~583. Under that definition the same series is both
+convergent and asymptotic; the Instructor's Manual's answer is correct
+under the textbook's explicitly stricter convention.}
 In that usual notation,
 \[
 \frac1{1+x}\sim\frac1x-\frac1{x^2}+\frac1{x^3}-\cdots,\qquad x\to+\infty.
@@ -1776,19 +1859,29 @@ Here $n$ plays the role of $x$.
 \emph{Hint.}~Apply the Euler-Maclaurin integration formula to $f(x)=x^{-1}$
 over the interval $[1,n]$ for $N=1,2,\ldots$.
 \solution
-Write $H_n=\sum_{s=1}^n1/s$. Applying Euler--Maclaurin to the finite
-tail $\sum_{s=n+1}^M1/s$, with
-$f^{(2k-1)}(x)=-(2k-1)!x^{-2k}$, gives
+Write $H_n=\sum_{s=1}^n1/s$. Apply the Euler--Maclaurin formula to
+$f(x)=1/x$ on $[n,M]$ (equivalently, apply it on $[1,n]$ and on
+$[1,M]$, as in the hint, and subtract):
+\begin{align*}
+\sum_{s=n}^Mf(s)={}&\int_n^Mf\,dx+\frac{f(n)+f(M)}2\\
+&+\sum_{k=1}^N\frac{B_{2k}}{(2k)!}
+ \bigl[f^{(2k-1)}(M)-f^{(2k-1)}(n)\bigr]+\text{remainder}.
+\end{align*}
+Here the left side is $H_M-H_n+1/n$, the integral is $\ln(M/n)$, and
+$f^{(2k-1)}(x)=-(2k-1)!x^{-2k}$ turns the $k$th correction into
+$(B_{2k}/2k)(n^{-2k}-M^{-2k})$. Hence
 \[
 H_M-H_n=\ln(M/n)+\frac1{2M}-\frac1{2n}
 +\sum_{k=1}^N\frac{B_{2k}}{2k}
  (n^{-2k}-M^{-2k})+\text{remainder}.
 \]
-Let $M\to\infty$ and use the definition of $\gamma$. This produces
+Let $M\to\infty$ and use the definition of $\gamma$,
+$H_M-\ln M\to\gamma$. This produces
 \[
 \gamma=H_n-\ln n-\frac1{2n}
-+\sum_{k=1}^N\frac{B_{2k}}{2k\,n^{2k}}+R_{n,N}.
++\sum_{k=1}^N\frac{B_{2k}}{2k\,n^{2k}}+R_{n,N},
 \]
+which defines the remainder $R_{n,N}$.
 To prove the asymptotic nature, rather than merely write formal
 corrections, we now derive a signed bound for $R_{n,N}$.
 Define
@@ -1796,47 +1889,76 @@ Define
 K(n)=\int_0^\infty e^{-nt}
  \left[\frac1t-\frac1{e^t-1}\right]dt.
 \]
-This integral is finite: the bracket tends to $1/2$ at zero and is
-$O(1/t)$ at infinity. Its consecutive difference is
+This integral is finite: the bracket tends to $1/2$ at zero (since
+$e^t-1=t+t^2/2+O(t^3)$) and is $O(1/t)$ at infinity. Its consecutive
+difference is
 \begin{align*}
 K(n)-K(n+1)
 &=\int_0^\infty\frac{e^{-nt}-e^{-(n+1)t}}t dt
  -\int_0^\infty e^{-(n+1)t}dt\\
 &=\ln(1+1/n)-\frac1{n+1}.
 \end{align*}
-The first equality used $(1-e^{-t})/(e^t-1)=e^{-t}$;
-the logarithmic integral follows by integrating
-$\int_n^{n+1}e^{-at}da$ first in $t$. This is also the consecutive
-difference of $H_n-\ln n-\gamma$. The bracket in $K(n)$ is bounded,
-say by $C$, so $|K(n)|\le C\int_0^\infty e^{-nt}dt=C/n\to0$.
-Both sequences therefore tend to zero as $n\to\infty$,
-so they are equal. Thus, with
-$q(t)=1/(e^t-1)-1/t+1/2$,
+The first equality used $e^{-nt}(1-e^{-t})/(e^t-1)=e^{-(n+1)t}$,
+because $(1-e^{-t})/(e^t-1)=e^{-t}$. For the logarithmic integral write
+$(e^{-nt}-e^{-(n+1)t})/t=\int_n^{n+1}e^{-at}da$ and integrate first in
+$t$ (all terms are positive): $\int_n^{n+1}da/a=\ln(1+1/n)$. This is
+also the consecutive difference of $H_n-\ln n-\gamma$, because
+$(H_n-\ln n)-(H_{n+1}-\ln(n+1))=\ln(1+1/n)-1/(n+1)$. The bracket in
+$K(n)$ is bounded (it is continuous for $t>0$ with finite limits at
+both ends), say by $C$, so
+$|K(n)|\le C\int_0^\infty e^{-nt}dt=C/n\to0$, while
+$H_n-\ln n-\gamma\to0$ by the definition of $\gamma$. The two
+sequences have equal consecutive differences, so they differ by a
+constant, and that constant tends to zero; hence
+$K(n)=H_n-\ln n-\gamma$. The bracket in $K(n)$ equals $\frac12-q(t)$,
+with $q(t)=1/(e^t-1)-1/t+1/2$, and $\int_0^\infty e^{-nt}dt/2=1/(2n)$;
+thus
 \[
 \gamma=H_n-\ln n-\frac1{2n}+\int_0^\infty e^{-nt}q(t)dt.
 \]
-The cotangent partial fractions, evaluated at $it/2$, give
+Now $\frac1{e^t-1}+\frac12=\frac{e^t+1}{2(e^t-1)}=\frac12\coth\frac t2$.
+The cotangent partial fractions of Exercise 12.5.10, evaluated at $iz$,
+give $\coth z=i\cot(iz)=\frac1z+\sum_{j\ge1}\frac{2z}{z^2+j^2\pi^2}$;
+with $z=t/2$,
 \[
 q(t)=\frac12\coth(t/2)-\frac1t
 =2t\sum_{j=1}^{\infty}\frac1{(2\pi j)^2+t^2}.
 \]
-Expand each denominator by a \emph{finite} geometric identity through
-$t^{2N-2}$. With $a_j=2\pi j$, this yields
+Expand each denominator by the \emph{finite} geometric identity
+\[
+\frac1{a^2+t^2}=\sum_{k=1}^N\frac{(-1)^{k-1}t^{2k-2}}{a^{2k}}
++\frac{(-1)^Nt^{2N}}{a^{2N}(a^2+t^2)},\qquad a=a_j=2\pi j.
+\]
+Since
+$2\sum_{j\ge1}(-1)^{k-1}a_j^{-2k}=2(-1)^{k-1}\zeta(2k)/(2\pi)^{2k}
+=B_{2k}/(2k)!$ by Eq.~(12.38) (Exercise 12.5.10), this yields
 \[
 q(t)=\sum_{k=1}^N\frac{B_{2k}}{(2k)!}t^{2k-1}
 +(-1)^N2t^{2N+1}\sum_{j=1}^{\infty}
 \frac1{a_j^{2N}(a_j^2+t^2)}.
 \]
-The coefficients follow from the zeta/Bernoulli identity, and the last
-sum is positive. Since $\int_0^\infty e^{-nt}t^m dt=m!/n^{m+1}$,
-integration gives the stated correction terms and the rigorous bound
+The last sum is positive. Multiply by $e^{-nt}$ and integrate. Since
+$\int_0^\infty e^{-nt}t^m dt=m!/n^{m+1}$, the $k$th term gives
+$\frac{B_{2k}}{(2k)!}\cdot\frac{(2k-1)!}{n^{2k}}=\frac{B_{2k}}{2k\,n^{2k}}$,
+the stated correction, and therefore (the $j$ sum and the integral may
+be interchanged because all terms are positive)
+\[
+R_{n,N}=(-1)^N2\sum_{j=1}^{\infty}a_j^{-2N}
+\int_0^\infty\frac{e^{-nt}t^{2N+1}}{a_j^2+t^2}dt.
+\]
+This gives the rigorous bound
 \[
 \boxed{0<(-1)^N R_{n,N}
 <\frac{|B_{2N+2}|}{(2N+2)n^{2N+2}}}.
 \]
-Indeed, replace $(a_j^2+t^2)^{-1}$ by $a_j^{-2}$ in the positive
-remainder and use
-$2(2N+1)!\zeta(2N+2)/(2\pi)^{2N+2}=|B_{2N+2}|/(2N+2)$.
+Indeed, replacing $(a_j^2+t^2)^{-1}$ by the larger $a_j^{-2}$ gives
+\[
+(-1)^NR_{n,N}<\frac{2(2N+1)!}{n^{2N+2}}\sum_{j\ge1}a_j^{-2N-2}
+=\frac{2(2N+1)!\,\zeta(2N+2)}{(2\pi)^{2N+2}n^{2N+2}}
+=\frac{|B_{2N+2}|}{(2N+2)n^{2N+2}}
+\]
+by Eq.~(12.38). Since $B_{2N+2}$ has the sign $(-1)^N$, the remainder
+has the sign of the first omitted term and is smaller in magnitude.
 For each fixed $N$ this remainder is smaller by two powers of $n$
 than the last correction, proving the requested asymptotic series.
 The coefficients grow factorially, so taking infinitely many terms at
@@ -1857,7 +1979,8 @@ $\dfrac{1}{x}-\dfrac{2!}{x^{3}}+\dfrac{4!}{x^{5}}-\cdots
 textbook p.~585) replace the original denominator $(1+v^2)^2$ by
 $1+v^2$. The corrected integral in the question now matches its printed
 answer. We give both versions below to make the change explicit.}
-For the corrected integral $I(x)$, use the exact finite identity
+For the corrected integral $I(x)$, use the exact finite geometric
+identity $\sum_{k=0}^N(-w)^k=[1-(-w)^{N+1}]/(1+w)$ with $w=v^2$:
 \[
 \frac1{1+v^2}=\sum_{k=0}^N(-1)^kv^{2k}
 +\frac{(-1)^{N+1}v^{2N+2}}{1+v^2}.
@@ -1878,8 +2001,10 @@ The actual remainder after $k=N$ is
 \[
 R_N=(-1)^{N+1}\int_0^\infty
  \frac{e^{-xv}v^{2N+2}}{1+v^2}dv,\qquad
-0<(-1)^{N+1}R_N<\frac{(2N+2)!}{x^{2N+3}}.
+0<(-1)^{N+1}R_N<\frac{(2N+2)!}{x^{2N+3}},
 \]
+because $0<v^{2N+2}/(1+v^2)<v^{2N+2}$ for $v>0$ and
+$\int_0^\infty e^{-xv}v^{2N+2}dv=(2N+2)!/x^{2N+3}$.
 This proves the asymptotic statement without interchanging an infinite
 geometric series outside its disk of convergence.
 
@@ -1890,11 +2015,21 @@ For comparison, the \emph{original} squared-denominator integral has
 \frac{(-1)^k(k+1)(2k)!}{x^{2k+1}}}
 =\frac1x-\frac{4}{x^3}+\frac{72}{x^5}-\cdots.
 \]
-Its coefficients follow from $(1+w)^{-2}=\sum(-1)^k(k+1)w^k$.
-More precisely, the finite remainder is
-$(-1)^{N+1}w^{N+1}[(N+2)+(N+1)w]/(1+w)^2$.
-For $w=v^2\ge0$ its magnitude is at most $(N+2)v^{2N+2}$,
-so integration bounds the original integral's remainder by
+Its coefficients follow from $(1+w)^{-2}=\sum(-1)^k(k+1)w^k$ with
+$w=v^2$, the $k$th term integrating to $(-1)^k(k+1)(2k)!/x^{2k+1}$
+($2\cdot2!=4$, $3\cdot4!=72$).
+More precisely, differentiating the finite geometric identity
+$1/(1+w)=\sum_{k=0}^{N+1}(-w)^k+(-w)^{N+2}/(1+w)$ with respect to $w$
+and changing sign gives
+\[
+\frac1{(1+w)^2}=\sum_{k=0}^N(-1)^k(k+1)w^k
++(-1)^{N+1}\frac{w^{N+1}[(N+2)+(N+1)w]}{(1+w)^2},
+\]
+since
+$\frac d{dw}\frac{w^{N+2}}{1+w}=\frac{w^{N+1}[(N+2)+(N+1)w]}{(1+w)^2}$.
+For $w=v^2\ge0$, $(N+2)+(N+1)w\le(N+2)(1+w)$, so the magnitude of the
+finite remainder is at most $(N+2)v^{2N+2}$,
+and integration bounds the original integral's remainder by
 $(N+2)(2N+2)!/x^{2N+3}$. The factor $k+1$ shows exactly why the
 original problem and printed answer were inconsistent.
 
@@ -1917,14 +2052,16 @@ if $F$ never vanishes, it has no interior modulus extremum.}
 \erratum{Both the asserted mean-value identity for $|F|^2$ and the
 unqualified absence of minima are false. For $F(z)=z$ at $z_0=0$,
 the circle average is $r^2$, whereas $|F(0)|^2=0$ is a minimum.
-The nonconstant, nonzero case used in the preceding text needs a
-corrected argument.}
+The nonconstant, nonzero case used in the textbook's discussion of
+saddle points needs a corrected argument.}
 Expand in a disk about $z_0$ lying in the analytic region:
 \[
-F(z_0+re^{i\theta})=\sum_{n=0}^{\infty}a_nr^ne^{in\theta}.
+F(z_0+re^{i\theta})=\sum_{n=0}^{\infty}a_nr^ne^{in\theta},\qquad
+a_0=F(z_0).
 \]
-Uniform convergence on a smaller circle permits multiplication and
-integration term by term. Since
+Then $|F|^2=F\overline F=\sum_{n,m\ge0}a_n\overline{a_m}r^{n+m}
+e^{i(n-m)\theta}$; uniform convergence on a smaller circle permits
+this multiplication and integration term by term. Since
 $(2\pi)^{-1}\int_0^{2\pi}e^{i(n-m)\theta}d\theta=\delta_{nm}$,
 \begin{align*}
 \frac1{2\pi}\int_0^{2\pi}|F(z_0+re^{i\theta})|^2d\theta
@@ -1933,9 +2070,11 @@ $(2\pi)^{-1}\int_0^{2\pi}e^{i(n-m)\theta}d\theta=\delta_{nm}$,
 \end{align*}
 At least one $a_n$, $n\ge1$, is nonzero: otherwise the Taylor series
 would make $F$ constant near $z_0$, and the identity theorem would make
-it constant throughout the connected region. Thus the mean strictly exceeds the center value on every
-sufficiently small circle. A local maximum would make every value on
-that circle no larger than the center, a contradiction. Therefore
+it constant throughout the connected region. Thus
+$\sum_{n\ge1}|a_n|^2r^{2n}>0$ for $r>0$, and the mean strictly exceeds
+the center value on every sufficiently small circle. A local maximum
+would make every value on that circle no larger than the center, a
+contradiction. Therefore
 $|F|$ has no interior local maximum unless $F$ is constant.
 
 If $F(z_0)\ne0$, continuity gives a smaller disk where $F$ never
@@ -1946,11 +2085,17 @@ function has no positive interior local minimum; zeros are allowed
 minima. A constant function is the usual exception to both statements.
 
 For comparison, the true mean-value identities are
-$\langle F\rangle=F(z_0)$, and, on a zero-free disk,
-$\langle\log|F|\rangle=\log|F(z_0)|$. The latter follows by taking
-the real part of the mean-value formula for a local analytic logarithm.
-It directly proves the no-extremum assertion in the zero-free setting
-relevant to the saddle-point discussion.
+$\langle F\rangle=F(z_0)$ (Cauchy's integral formula on the circle
+$z=z_0+re^{i\theta}$, $dz=ire^{i\theta}d\theta$), and, on a zero-free
+disk, $\langle\log|F|\rangle=\log|F(z_0)|$. The latter follows by taking
+the real part of the mean-value formula for a local analytic logarithm
+of $F$. It gives a second proof of the no-extremum assertion in the
+zero-free setting relevant to the saddle-point discussion: if
+$\log|F|\le\log|F(z_0)|$ (or $\ge$) near $z_0$, then on each small
+circle the continuous function $\log|F|$ lies on one side of its mean
+$\log|F(z_0)|$ and hence equals it, so $|F|=|F(z_0)|$ near $z_0$; then
+the boxed identity gives $\sum_{n\ge1}|a_n|^2r^{2n}=0$, and $F$ is
+constant.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1961,7 +2106,7 @@ $\displaystyle\int_{0}^{s}\sin x^{2}\,dx$.
 
 \emph{Hint.}~Use $\displaystyle\int_{0}^{1}e^{itz^{2}}\,dz$.
 \solution
-Put $t=s^2>0$ and scale $x=sz$:
+Put $t=s^2>0$ and scale $x=sz$ (so $dx=s\,dz$ and $x^2=tz^2$):
 \[
 \int_0^s e^{ix^2}dx=sJ(t),\qquad J(t)=\int_0^1e^{itz^2}dz.
 \]
@@ -1975,27 +2120,45 @@ The endpoint $z=1$ has a descending constant-phase path
 z=\sqrt{1+iv},\quad 0\le v<\infty,\qquad
 it z^2=it-tv,\quad dz=\frac{i\,dv}{2\sqrt{1+iv}}.
 \]
-Both paths approach the same direction at infinity. Deforming the finite
-interval to their difference is legitimate because the integrand is
-entire and the joining segment at infinity has exponentially vanishing
-integral. Hence the exact contour decomposition is
+Both paths approach the same direction at infinity, since
+$\sqrt{1+iv}\sim e^{i\pi/4}\sqrt v$ as $v\to\infty$. Deforming the
+finite interval to their difference is legitimate: the integrand is
+entire, so by Cauchy's theorem the integral over $[0,1]$ equals the
+integral along the ray $z=re^{i\pi/4}$ ($dz=e^{i\pi/4}dr$,
+$itz^2=-tr^2$) for $0\le r\le\sqrt V$, minus the integral along the
+endpoint path for $0\le v\le V$, minus the integral over the segment
+$z^2=\sigma+iV$, $0\le\sigma\le1$, joining their far ends. On that
+segment $|e^{itz^2}|=e^{-tV}$ and $|dz|=d\sigma/(2|z|)\le
+d\sigma/(2\sqrt V)$, so its integral vanishes as $V\to\infty$.
+Hence the exact contour decomposition is
 \[
 J(t)=e^{i\pi/4}\int_0^\infty e^{-tr^2}dr
 -\frac i2e^{it}\int_0^\infty\frac{e^{-tv}}{\sqrt{1+iv}}dv.
 \]
 The first integral is the endpoint half-Gaussian
-$\sqrt\pi/(2\sqrt t)$. For the second,
-$(1+iv)^{-1/2}=1-iv/2-3v^2/8+O(v^3)$ near zero.
-Termwise integration of any finite Taylor truncation gives
+$\frac12\sqrt{\pi/t}=\sqrt\pi/(2\sqrt t)$. For the second, Taylor's
+theorem with integral remainder gives, for all $v\ge0$,
+\[
+(1+iv)^{-1/2}=1-\frac{iv}2+\rho(v),\qquad |\rho(v)|\le\frac38v^2,
+\]
+because the second derivative $-\frac34(1+iv)^{-5/2}$ has modulus at
+most $3/4$ ($|1+iv|\ge1$). With $\int_0^\infty e^{-tv}dv=1/t$,
+$\int_0^\infty ve^{-tv}dv=1/t^2$ and $\int_0^\infty v^2e^{-tv}dv=2/t^3$,
+\[
+-\frac i2e^{it}\int_0^\infty\frac{e^{-tv}}{\sqrt{1+iv}}dv
+=-\frac i2e^{it}\left[\frac1t-\frac i{2t^2}\right]+\eta,\qquad
+|\eta|\le\frac12\cdot\frac38\cdot\frac2{t^3}=\frac3{8t^3}.
+\]
+Therefore
 \[
 J(t)=\frac{e^{i\pi/4}\sqrt\pi}{2\sqrt t}
 -\frac{ie^{it}}{2t}-\frac{e^{it}}{4t^2}+O(t^{-3}).
 \]
-To justify the error, split the Laplace integral at a fixed small
-$v=\delta$: its Taylor remainder contributes $O(\int_0^\infty
-v^2e^{-tv}dv)=O(t^{-3})$ at the order displayed, and its remote tail
-is exponentially small.
-Multiplying by $s$ and taking real and imaginary parts yields
+Multiply by $s$, with $t=s^2$: the terms become
+$e^{i\pi/4}\sqrt\pi/2=(1+i)\sqrt{\pi/8}$, $-ie^{is^2}/(2s)$,
+$-e^{is^2}/(4s^3)$ and $s\,O(s^{-6})=O(s^{-5})$. Since
+$\Re(-ie^{i\alpha})=\sin\alpha$ and $\Im(-ie^{i\alpha})=-\cos\alpha$,
+taking real and imaginary parts yields
 \begin{align*}
 \boxed{\int_0^s\cos x^2dx}
 &\boxed{=\sqrt{\frac\pi8}+\frac{\sin s^2}{2s}
@@ -2004,9 +2167,11 @@ Multiplying by $s$ and taking real and imaginary parts yields
 &\boxed{=\sqrt{\frac\pi8}-\frac{\cos s^2}{2s}
 -\frac{\sin s^2}{4s^3}+O(s^{-5}).}
 \end{align*}
+Both integrals are odd in $s$, so for $s\to-\infty$ the constants
+become $-\sqrt{\pi/8}$.
 \erratum{The saddle is an endpoint, so it contributes half of a full
-Gaussian integral. The manual's limiting value is twice the correct
-$\sqrt{\pi/8}$.}
+Gaussian integral. The Instructor's Manual's limiting value is twice
+the correct $\sqrt{\pi/8}$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2019,20 +2184,26 @@ holds for complex values of $s$ (with $\Re(s)$ large and positive).
 \emph{Hint.}~This involves assigning a phase to $s$ and then demanding that
 $\Im[sf(z)]$ be constant in the vicinity of the saddle point.
 \solution
-Use the principal $\operatorname{Log}s$ for $\Re s>0$.
+Use the principal $\operatorname{Log}s$ for $\Re s>0$, and write
+$s=\rho e^{i\phi}$, $|\phi|<\pi/2$.
 Starting with $\Gamma(1+s)=\int_0^\infty e^{-u}u^sdu$, set $u=sz$.
-The resulting ray can be rotated to the positive $z$ axis: the rotation
-stays inside $|\arg u|<\pi/2$, the exponential decays at infinity,
-and $u^s$ is integrable at zero since $\Re s>0$.
-Along the deformed rays $\operatorname{Log}u=\operatorname{Log}s+
-\operatorname{Log}z$, so $u^s=s^sz^s$ with consistent branches. Thus
+As $u$ runs over $(0,\infty)$, $z$ runs along the ray $\arg z=-\phi$;
+this ray can be rotated to the positive $z$ axis, i.e.\ the $u$ path to
+the ray $\arg u=\phi$. By Cauchy's theorem this only requires the arcs
+$|u|=\varrho$ between the two rays to contribute nothing as
+$\varrho\to\infty$ and as $\varrho\to0$. On such an arc
+$|e^{-u}u^s|\le e^{-\varrho\cos\phi}\varrho^{\Re s}e^{|\phi\,\Im s|}$
+and the length is $\varrho|\phi|$; the product tends to zero in both
+limits because $\cos\phi>0$ and $\Re s>0$.
+On the rotated path $z>0$, so $\operatorname{Log}u=\operatorname{Log}s+
+\ln z$ and $u^s=s^sz^s$ with principal branches; also $du=s\,dz$. Thus
 \[
 \Gamma(1+s)=s^{s+1}\int_0^\infty e^{s f(z)}dz,\qquad
 f(z)=\operatorname{Log}z-z.
 \]
 The saddle is $z_0=1$, because $f'=1/z-1$; there
-$f(1)=-1$ and $f''(1)=-1$. Write $s=\rho e^{i\phi}$.
-Near the saddle,
+$f(1)=-1$, $f''(1)=-1/z^2|_{z=1}=-1$ and $f'''(1)=2/z^3|_{z=1}=2$.
+Near the saddle, Taylor's formula gives
 \[
 sf(z)=-s-\frac s2(z-1)^2+\frac s3(z-1)^3+\cdots.
 \]
@@ -2040,6 +2211,9 @@ To make the quadratic decrement real and negative, choose
 \[
 z-1=e^{-i\phi/2}\frac{v}{\sqrt\rho}=\frac v{\sqrt s},\qquad v\in\mathbb R.
 \]
+Then $\frac s2(z-1)^2=\frac{v^2}2$, so
+$sf(z)=-s-\frac{v^2}2+\frac{v^3}{3\sqrt s}+\cdots$, whose imaginary
+part is $-\Im s$ up to the cubic term.
 This is the local steepest path and keeps $\Im[sf(z)]$ constant to
 quadratic order. Since $dz=dv/\sqrt s$, its leading Gaussian
 contribution is
@@ -2057,13 +2231,16 @@ Gaussian width by $1/\sqrt{|s|}$ would lose that phase.
 
 For completeness, the approximation remains valid throughout the
 stated limit $\Re s\to+\infty$, even if the phase changes with $s$.
-A useful uniform remainder follows from Euler--Maclaurin. The Euler
-limit for $\Gamma(s)$ gives
+A useful uniform remainder follows from Euler--Maclaurin. Euler's
+limit (Section 13.1),
+$\Gamma(s)=\lim_{M\to\infty}M!\,M^s/[s(s+1)\cdots(s+M)]$, gives
+a logarithm of $\Gamma(s)$ (the limit below exists, as shown next):
 \[
 \log\Gamma(s)=\lim_{M\to\infty}
 \left[\log M!+s\log M-\sum_{k=0}^M\operatorname{Log}(s+k)\right].
 \]
-Apply Euler--Maclaurin to $h(t)=\operatorname{Log}(s+t)$:
+Apply the Euler--Maclaurin formula with one Bernoulli correction
+($B_2=1/6$) to $h(t)=\operatorname{Log}(s+t)$:
 \[
 \sum_{k=0}^Mh(k)=\int_0^Mh(t)dt+\frac{h(0)+h(M)}2
 +\frac{h'(M)-h'(0)}{12}
@@ -2079,24 +2256,29 @@ $\int h=(s+t)\operatorname{Log}(s+t)-(s+t)$, the finite sum is
  +\frac1{12(s+M)}-\frac1{12s}\\
 &+\frac12\int_0^M\frac{\widetilde B_2(t)}{(s+t)^2}dt.
 \end{align*}
-The real Gaussian calculation gives
+Stirling's formula for real arguments (the case of real $s$ above;
+Section 13.4) gives
 $\log M!=(M+\tfrac12)\log M-M+\tfrac12\log(2\pi)+o(1)$.
-After inserting both formulas in the Euler limit, the remaining
-$M$-dependent logarithms are
+After inserting both formulas in the Euler limit, the terms $-M$ and
+$+M$ cancel, and the remaining $M$-dependent logarithms are
 \[
 (M+s+\tfrac12)\bigl[\log M-\operatorname{Log}(M+s)\bigr]
 =-(M+s+\tfrac12)\operatorname{Log}(1+s/M)\longrightarrow-s
 \]
-for each fixed $s$ with $\Re s>0$; also $1/(M+s)\to0$.
-Adding $\operatorname{Log}s$ to pass from $\Gamma(s)$ to $\Gamma(1+s)$
-therefore yields
+for each fixed $s$ with $\Re s>0$, because
+$\operatorname{Log}(1+s/M)=s/M+O(M^{-2})$ makes the product
+$-s+O(1/M)$; also $1/(M+s)\to0$, and the last integral converges
+absolutely as $M\to\infty$. Adding $\operatorname{Log}s$ to pass from
+$\Gamma(s)$ to $\Gamma(1+s)=s\Gamma(s)$ therefore yields
 \[
 \log\Gamma(1+s)=(s+\tfrac12)\operatorname{Log}s-s
 +\tfrac12\ln2\pi+R(s),\qquad
 R(s)=\frac1{12s}-\frac12\int_0^\infty
 \frac{\widetilde B_2(t)}{(s+t)^2}dt.
 \]
-Since $|\widetilde B_2|\le1/6$ and $|s+t|\ge\Re s+t$,
+Since $B_2(x)=x^2-x+\frac16$ takes values in $[-\frac1{12},\frac16]$
+for $0\le x\le1$, $|\widetilde B_2|\le1/6$; with $|s+t|\ge\Re s+t$,
+$\int_0^\infty dt/(\Re s+t)^2=1/\Re s$ and $|s|\ge\Re s$,
 \[
 |R(s)|\le\frac1{12|s|}+\frac1{12\Re s}
 \le\frac1{6\Re s}\longrightarrow0.
@@ -2116,9 +2298,9 @@ reflection principle, Eq.~(11.127). Show that $f(z)$ is identically zero.
 \solution
 The dispersion assumptions are analyticity in the upper half-plane and
 across the real axis, with sufficient decay for the large arc to vanish.
-On the real axis the additional reflection condition gives
+On the real axis ($z=z^*=x$) the additional reflection condition gives
 $f(x)=f(x)^*$, so $v(x)=\Im f(x)=0$.
-The first Hilbert-transform equation is
+The first Hilbert-transform equation, the first of Eqs.~(12.118), is
 \[
 u(x_0)=\frac1\pi\operatorname{PV}\int_{-\infty}^{\infty}
 \frac{v(x)}{x-x_0}dx.
@@ -2147,7 +2329,7 @@ f(x_{0})=\frac{1}{2\pi i}\left\{
 Here we take $C$ to be a small semicircle about $x_{0}$ in the lower
 half-plane. Show that \erratum{as $\delta\downarrow0$} the formula for $f(x_{0})$ reduces to
 \[
-f(x_{0})=\frac{1}{\pi i}\erratum{\operatorname{PV}}\int_{-\infty}^{\infty}\frac{f(x)}{x-x_{0}}\,dx,
+f(x_{0})=\frac{1}{\pi i}\PVint_{-\infty}^{\infty}\frac{f(x)}{x-x_{0}}\,dx,
 \]
 which is Eq.~(12.117).
 \solution
@@ -2162,9 +2344,13 @@ circle, so
 \[
 \int_C\frac{f(z)}{z-x_0}dz
 =i\int_{-\pi}^0f(x_0+\delta e^{i\theta})d\theta
-\longrightarrow i\pi f(x_0).
+\longrightarrow i\pi f(x_0),
 \]
-The two real integrals together tend to their Cauchy principal value.
+because $f$ is continuous at $x_0$: the difference from $i\pi f(x_0)$
+is at most $\pi\max_{|z-x_0|=\delta}|f(z)-f(x_0)|\to0$.
+The two real integrals together tend, by definition, to the Cauchy
+principal value; the limit exists because every other term of the
+formula has a limit.
 Taking $\delta\to0$ in the formula in the question therefore gives
 \[
 f(x_0)=\frac1{2\pi i}\operatorname{PV}\int_{-\infty}^{\infty}
@@ -2175,9 +2361,9 @@ Subtract the half contribution and multiply by two:
 \boxed{f(x_0)=\frac1{\pi i}\operatorname{PV}
 \int_{-\infty}^{\infty}\frac{f(x)}{x-x_0}dx}.
 \]
-\erratum{The real-axis integral in the requested formula must be read as
-a Cauchy principal value; an ordinary improper integral at the pole
-need not exist. The source uses a cut integral sign for this convention.}
+The cut integral sign $\PVint$ in the requested formula denotes this
+Cauchy principal value, written $\operatorname{PV}\int$ here; an
+ordinary improper integral at the pole need not exist.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2190,19 +2376,23 @@ need not exist. The source uses a cut integral sign for this convention.}
   relations, Eq.~(12.117) or Eqs.~(12.118).
 \end{enumerate}
 \solution
-\erratum{The printed lower endpoint \texttt{a} is $0$: the contour is the
-upper semicircle $0\le\arg z\le\pi$.}
+\erratum{The textbook prints the first endpoint as the letter $a$; it is
+$0$, since on the upper semicircle the range of $\arg z$ is
+$0\le\arg z\le\pi$.}
 (a) For $z_0$ fixed in the upper half-plane, put $z=Re^{i\theta}$ on
-the large semicircle, $0\le\theta\le\pi$. Then
+the large semicircle, $0\le\theta\le\pi$, with $R>|z_0|$. Since
+$|e^{iz}|=e^{-R\sin\theta}$, $|z-z_0|\ge R-|z_0|$ and $|dz|=R\,d\theta$,
 \[
 \left|\int_{\rm arc}\frac{e^{iz}}{z-z_0}dz\right|
 \le\frac R{R-|z_0|}\int_0^\pi e^{-R\sin\theta}d\theta.
 \]
-On $0\le\theta\le\pi/2$, $\sin\theta\ge2\theta/\pi$; symmetry
-therefore bounds the last integral by
-$2\int_0^{\pi/2}e^{-2R\theta/\pi}d\theta\le\pi/R$.
+On $0\le\theta\le\pi/2$, $\sin\theta\ge2\theta/\pi$; the symmetry
+$\sin(\pi-\theta)=\sin\theta$ therefore bounds the last integral by
+$2\int_0^{\pi/2}e^{-2R\theta/\pi}d\theta=(\pi/R)(1-e^{-R})\le\pi/R$
+(this is Jordan's lemma, Eq.~(11.102)).
 The arc contribution is at most $\pi/(R-|z_0|)\to0$, despite the
-nonvanishing endpoint values. Cauchy's formula consequently gives
+nonvanishing endpoint values. Cauchy's formula for the closed half-disk
+consequently gives, as $R\to\infty$,
 \[
 \boxed{e^{iz_0}=\frac1{2\pi i}\int_{-\infty}^{\infty}
 \frac{e^{ix}}{x-z_0}dx},\qquad\Im z_0>0.
@@ -2214,21 +2404,34 @@ nonvanishing endpoint values. Cauchy's formula consequently gives
 =e^{ix_0}\left[\operatorname{PV}\int_{-\infty}^{\infty}
 \frac{\cos t}{t}dt+i\int_{-\infty}^{\infty}\frac{\sin t}{t}dt\right].
 \]
-The cosine integral is zero by oddness. To evaluate the sine integral,
+The cosine integral is zero by oddness: the contributions of $[\delta,L]$
+and $[-L,-\delta]$ cancel. To evaluate the sine integral,
 first insert $e^{-\epsilon t}$ on $t>0$. If
-$A(b)=\int_0^\infty e^{-\epsilon t}\sin(bt)dt/t$, then
-$A'(b)=\epsilon/(\epsilon^2+b^2)$ and $A(0)=0$, so
-$A(1)=\arctan(1/\epsilon)\to\pi/2$.
-The damping can be removed uniformly in the tail: integration by parts
-against a bounded primitive of $\sin t$ gives
-$|\int_A^\infty e^{-\epsilon t}\sin t\,dt/t|\le2/A$ for every
-$\epsilon\ge0$. On $[0,A]$, dominated convergence applies.
-Thus the whole-line sine integral is $\pi$, and
+$A(b)=\int_0^\infty e^{-\epsilon t}\sin(bt)dt/t$, then differentiation
+under the integral (allowed for $\epsilon>0$) gives
+$A'(b)=\int_0^\infty e^{-\epsilon t}\cos(bt)\,dt
+=\Re\frac1{\epsilon-ib}=\epsilon/(\epsilon^2+b^2)$, and $A(0)=0$, so
+$A(1)=\int_0^1\epsilon\,db/(\epsilon^2+b^2)=\arctan(1/\epsilon)\to\pi/2$
+as $\epsilon\to0$.
+The damping can be removed uniformly in the tail: with
+$g(t)=e^{-\epsilon t}/t$, positive and decreasing, integration by parts
+against the bounded primitive $-\cos t$ of $\sin t$ gives
+\[
+\int_L^\infty g(t)\sin t\,dt=g(L)\cos L+\int_L^\infty g'(t)\cos t\,dt,
+\qquad
+\left|\int_L^\infty g(t)\sin t\,dt\right|\le2g(L)\le\frac2L
+\]
+for every $\epsilon\ge0$, since $\int_L^\infty|g'|\,dt=g(L)$. On
+$[0,L]$, dominated convergence (the integrand is bounded by $1$) gives
+the limit $\epsilon\to0$. Since $L$ is arbitrary,
+$\int_0^\infty\sin t\,dt/t=\lim_{\epsilon\to0}A(1)=\pi/2$,
+and by evenness the whole-line sine integral is $\pi$. Hence
 \[
 \operatorname{PV}\int_{-\infty}^{\infty}\frac{e^{ix}}{x-x_0}dx
-=i\pi e^{ix_0}.
+=i\pi e^{ix_0}=-\pi\sin x_0+i\pi\cos x_0.
 \]
-Dividing by $i\pi$ verifies Eq. (12.117). Separating components also gives
+Dividing by $i\pi$ verifies Eq. (12.117). Separating the imaginary and
+real parts also gives
 \[
 \frac1\pi\operatorname{PV}\int\frac{\sin x}{x-x_0}dx=\cos x_0,\qquad
 -\frac1\pi\operatorname{PV}\int\frac{\cos x}{x-x_0}dx=\sin x_0,
@@ -2251,9 +2454,18 @@ with $0<\epsilon<1$.} Show that as $x_0\to+\infty$,
 \end{enumerate}
 In quantum mechanics relations of this form are often called \emph{sum rules}.
 \solution
-The crossing condition implies $u(-x)=u(x)$ and $v(-x)=-v(x)$.
-Split the Hilbert integrals into positive and negative halves, substitute
-$x\mapsto-x$ on the latter, and combine denominators. With $a=x_0>0$,
+The crossing condition $u(x)+iv(x)=f(x)=f^*(-x)=u(-x)-iv(-x)$ implies
+$u(-x)=u(x)$ and $v(-x)=-v(x)$.
+Split the Hilbert integrals, Eqs.~(12.118), into positive and negative
+halves, substitute $x\mapsto-x$ on the latter, and combine
+denominators. For example,
+\[
+\int_{-\infty}^0\frac{v(x)\,dx}{x-a}=\int_0^\infty\frac{v(-x)\,dx}{-x-a}
+=\int_0^\infty\frac{v(x)\,dx}{x+a},\qquad
+\frac1{x-a}+\frac1{x+a}=\frac{2x}{x^2-a^2};
+\]
+for $v$, the evenness of $u$ leads instead to
+$1/(x-a)-1/(x+a)=2a/(x^2-a^2)$. With $a=x_0>0$,
 \[
 u(a)=\frac2\pi\operatorname{PV}\int_0^\infty
 \frac{xv(x)}{x^2-a^2}dx,\qquad
@@ -2264,17 +2476,26 @@ v(a)=-\frac{2a}\pi\operatorname{PV}\int_0^\infty
 additional decay/tail control. Crossing and the ordinary dispersion
 assumptions alone do not suffice. Also, a zero leading moment gives a
 little-$o$ conclusion, not an equivalence to zero.}
-For example $f(z)=1/(1-iz)$ is analytic above the real axis, decays,
-and satisfies crossing, but $v(x)=x/(1+x^2)$ makes
-$\int_0^\infty xv(x)dx$ divergent.
+For example $f(z)=1/(1-iz)$ (pole at $z=-i$) is analytic above the
+real axis, decays, and satisfies crossing,
+$f^*(-x)=1/(1-ix)=f(x)$, but on the axis
+$f(x)=(1+ix)/(1+x^2)$, so $v(x)=x/(1+x^2)$ makes
+$\int_0^\infty xv(x)dx=\int_0^\infty x^2dx/(1+x^2)$ divergent.
 
 Here are sufficient assumptions and a justified expansion. For (a),
 assume $v,v'$ are continuous and, for some $0<\epsilon<1$,
 $v^{(j)}(x)=O(x^{-2-\epsilon-j})$, $j=0,1$.
 For (b), assume instead
 $u^{(j)}(x)=O(x^{-1-\epsilon-j})$, $j=0,1$.
-Each condition is imposed on the function in its corresponding integral.
-The exact kernel decompositions give
+Each condition is imposed on the function in its corresponding integral;
+it makes the moment $\int_0^\infty xv\,dx$, respectively
+$\int_0^\infty u\,dx$, absolutely convergent.
+The exact kernel decompositions
+\[
+\frac x{x^2-a^2}=-\frac x{a^2}+\frac{x^3}{a^2(x^2-a^2)},\qquad
+\frac1{x^2-a^2}=-\frac1{a^2}+\frac{x^2}{a^2(x^2-a^2)}
+\]
+give
 \begin{align*}
 u(a)&=-\frac2{\pi a^2}\int_0^\infty xv(x)dx
  +\frac2{\pi a^2}\operatorname{PV}\int_0^\infty
@@ -2284,21 +2505,29 @@ v(a)&=\frac2{\pi a}\int_0^\infty u(x)dx
        \frac{x^2u(x)}{x^2-a^2}dx.
 \end{align*}
 Both final integrals tend to zero. To see the control near the moving
-pole, put $h=x^3v$ in (a) or $h=x^2u$ in (b), and split the range
-at $a/2,3a/2$. On the middle interval write
-$g(x)=h(x)/(x+a)$, so the principal value is
+pole, put $h=x^3v$ in (a) or $h=x^2u$ in (b). In both cases $h$ is
+$C^1$ and the assumptions give $h(x)=O(x^{1-\epsilon})$ and
+$h'(x)=O(x^{-\epsilon})$ at large $x$ (e.g.\ $h'=3x^2v+x^3v'$ in (a),
+$h'=2xu+x^2u'$ in (b)). Split the range at $a/2,3a/2$. On the middle
+interval write $g(x)=h(x)/(x+a)$, so the principal value is
 \[
 \operatorname{PV}\int_{a/2}^{3a/2}\frac{g(x)}{x-a}dx
 =\int_{a/2}^{3a/2}\frac{g(x)-g(a)}{x-a}dx.
 \]
-The constant term cancels by symmetry; $g'=O(a^{-1-\epsilon})$
-bounds this integral by $O(a^{-\epsilon})$.
-On the lower interval, $|x^2-a^2|\ge3a^2/4$ and
-$h(x)=O(x^{1-\epsilon})$ at large $x$, so its contribution is
-$O(a^{-\epsilon})+O(a^{-2})$. On the upper interval the denominator
-is bounded below by a constant times $x^2$, giving
+The constant term cancels because
+$\operatorname{PV}\int_{a/2}^{3a/2}dx/(x-a)=0$ by symmetry about $a$.
+There $g'=h'/(x+a)-h/(x+a)^2=O(a^{-1-\epsilon})$, so by the mean value
+theorem the last integrand is $O(a^{-1-\epsilon})$, and the integral
+over an interval of length $a$ is $O(a^{-\epsilon})$.
+On the lower interval, $|x^2-a^2|\ge3a^2/4$ and, since $h$ is bounded on
+$[0,1]$ and $O(x^{1-\epsilon})$ beyond,
+$\int_0^{a/2}|h|\,dx\le C_0+C_1a^{2-\epsilon}$ for constants
+$C_0,C_1$; so its contribution is $O(a^{-2})+O(a^{-\epsilon})$. On
+the upper interval $x^2-a^2\ge x^2-\frac49x^2=\frac59x^2$, giving
 $O(\int_{3a/2}^\infty x^{-1-\epsilon}dx)=O(a^{-\epsilon})$.
-It follows that
+After multiplication by $2/(\pi a^2)$, respectively $2/(\pi a)$, the
+second terms are $O(a^{-2-\epsilon})=o(a^{-2})$ and
+$O(a^{-1-\epsilon})=o(a^{-1})$. It follows that
 \[
 \boxed{u(a)=-\frac2{\pi a^2}\int_0^\infty xv(x)dx+o(a^{-2})},
 \]
@@ -2316,7 +2545,7 @@ needed to find the first nonzero term.
 \item[(a)] Given the integral equation (valid for all real $x_{0}$)
   \[
   \frac{1}{1+x_{0}^{2}}
-  =\frac{1}{\pi}\erratum{\operatorname{PV}}\int_{-\infty}^{\infty}\frac{u(x)}{x-x_{0}}\,dx,
+  =\frac{1}{\pi}\PVint_{-\infty}^{\infty}\frac{u(x)}{x-x_{0}}\,dx,
   \]
   use Hilbert transforms to determine $u(x_{0})$.
 \item[(b)] Verify that the $u(x_{0})$ found as your answer to part (a)
@@ -2330,25 +2559,30 @@ needed to find the first nonzero term.
 (a) $u(x_{0})=\dfrac{x_{0}}{1+x_{0}^{2}}$,\quad
 (c) $f(z)=(z+i)^{-1}$.
 \solution
-\erratum{The principal-value symbol restores the cut integral sign
-in the source; it is necessary at $x=x_0$.} All integrals below have
-that meaning. Use the convention
+The cut integral sign denotes a Cauchy principal value, written
+$\operatorname{PV}\int$ below; it is necessary at $x=x_0$. All integrals
+below have that meaning. Use the convention of Eqs.~(12.118),
 \[
 (Hg)(a)=\frac1\pi\operatorname{PV}\int_{-\infty}^{\infty}
 \frac{g(x)}{x-a}dx,\qquad u=Hv,\quad v=-Hu.
 \]
 (a) The given equation is $Hu=1/(1+a^2)$, so
 $v(a)=-1/(1+a^2)$ and $u=Hv$. To evaluate the latter transform, use
+the partial fractions (check by recombining: $(1+x^2)-(x+a)(x-a)=1+a^2$)
 \[
 \frac1{(1+x^2)(x-a)}
 =\frac1{1+a^2}\left[\frac1{x-a}-\frac{x+a}{1+x^2}\right].
 \]
-The principal value of $1/(x-a)$ on the whole real line is zero;
-$x/(1+x^2)$ contributes zero by symmetric odd integration; and
-$\int dx/(1+x^2)=\pi$. Therefore
+Integrate each piece over $[-L,L]$ and let $L\to\infty$; this
+symmetric cutoff is legitimate because the combined integrand is
+$O(x^{-2})$. The principal value of $1/(x-a)$ is
+$\ln[(L-a)/(L+a)]\to0$; $x/(1+x^2)$ contributes zero by symmetric odd
+integration; and $\int dx/(1+x^2)=\pi$. Therefore
 \[
 u(a)=-\frac1\pi\operatorname{PV}\int
-\frac{dx}{(1+x^2)(x-a)}=\boxed{\frac a{1+a^2}}.
+\frac{dx}{(1+x^2)(x-a)}
+=-\frac1\pi\cdot\frac{-a\pi}{1+a^2}
+=\boxed{\frac a{1+a^2}}.
 \]
 Within the decaying Hilbert-transform class, inversion $H^2=-1$
 fixes this solution uniquely.
@@ -2358,7 +2592,8 @@ fixes this solution uniquely.
 \frac{x}{(1+x^2)(x-a)}
 =\frac1{1+a^2}\left[\frac a{x-a}+\frac{1-ax}{1+x^2}\right].
 \]
-Its integral is $\pi/(1+a^2)$ by the same three evaluations. Division
+By the same three evaluations its integral is
+$[a\cdot0+\pi-a\cdot0]/(1+a^2)=\pi/(1+a^2)$. Division
 by $\pi$ reproduces the given equation, including its positive sign.
 
 (c) On the real axis,
@@ -2431,7 +2666,8 @@ $\displaystyle\int_{-\infty}^{\infty}|u(x)|^{2}\,dx
 =\int_{-\infty}^{\infty}|v(x)|^{2}\,dx=\frac{\pi}{2}$.
 \solution
 Use $x=\tan\theta$, $dx=\sec^2\theta\,d\theta$, with
-$-\pi/2<\theta<\pi/2$. For the real functions in the question,
+$-\pi/2<\theta<\pi/2$, so that $x^2+1=\sec^2\theta$. For the real
+functions in the question,
 \[
 \int_{-\infty}^{\infty}|u|^2dx
 =\int_{-\pi/2}^{\pi/2}
@@ -2445,8 +2681,10 @@ $-\pi/2<\theta<\pi/2$. For the real functions in the question,
 =\int_{-\pi/2}^{\pi/2}\cos^2\theta\,d\theta.
 \]
 With $\sin^2\theta=(1-\cos2\theta)/2$ and
-$\cos^2\theta=(1+\cos2\theta)/2$, the oscillatory endpoint term
-$\sin2\theta/4$ vanishes at both limits. Each integral is therefore
+$\cos^2\theta=(1+\cos2\theta)/2$, the antiderivatives are
+$\theta/2\mp\sin2\theta/4$, and the oscillatory endpoint term
+$\sin2\theta/4$ vanishes at both limits $\theta=\pm\pi/2$. Each
+integral is therefore $[\theta/2]_{-\pi/2}^{\pi/2}$, i.e.
 \[
 \boxed{\pi/2}.
 \]
@@ -2477,32 +2715,57 @@ $\epsilon\downarrow0$ against smooth compactly supported test functions.}
 \erratum{These formulas are distributional kernel identities. They are
 not ordinary improper integrals, nor does the pointwise principal value
 at coincident poles exist. A consistent regularization is essential.}
-With $u(x)=\delta(x)$, the second Hilbert relation gives
+(a) With $u(x)=\delta(x)$, the second Hilbert relation gives, since the
+delta function evaluates $1/(x-y)$ at $x=0$,
 \[
 v(y)=-\frac1\pi\operatorname{PV}\int\frac{\delta(x)}{x-y}dx
 =\frac1\pi\operatorname{PV}\frac1y.
 \]
 The first relation $u=Hv$ therefore formally gives the expression in
-(a). To specify and prove its meaning, regularize both kernels by the
+(a):
+\[
+\delta(w)=u(w)=\frac1\pi\int\frac{v(y)\,dy}{y-w}
+=\frac1{\pi^2}\int\frac{dy}{y(y-w)}.
+\]
+To specify and prove its meaning, regularize both kernels by the
 same positive $\epsilon$ and define
 \[
 D_\epsilon(w)=\frac1{\pi^2}\int_{-\infty}^{\infty}
 \frac{y(y-w)}{(y^2+\epsilon^2)((y-w)^2+\epsilon^2)}dy.
 \]
 For real $w\ne0$, close the rational integrand in the upper half-plane.
-The arc vanishes as $O(1/R)$, and the two residues before division by
-$\pi^2$ are
+It is $O(y^{-2})$, so the arc vanishes as $O(1/R)$. Its poles are
+$y=\pm i\epsilon$ and $y=w\pm i\epsilon$; the upper ones are
+$i\epsilon$ and $w+i\epsilon$. Using
+$y^2+\epsilon^2=(y-i\epsilon)(y+i\epsilon)$,
+$(i\epsilon-w)^2+\epsilon^2=w(w-2i\epsilon)$ and
+$(w+i\epsilon)^2+\epsilon^2=w(w+2i\epsilon)$, the two residues before
+division by $\pi^2$ are
 \[
-\frac{-w+i\epsilon}{2w(w-2i\epsilon)},\qquad
-\frac{w+i\epsilon}{2w(w+2i\epsilon)}.
+\frac{i\epsilon(i\epsilon-w)}{2i\epsilon\,w(w-2i\epsilon)}
+=\frac{-w+i\epsilon}{2w(w-2i\epsilon)},\qquad
+\frac{(w+i\epsilon)\,i\epsilon}{w(w+2i\epsilon)\,2i\epsilon}
+=\frac{w+i\epsilon}{2w(w+2i\epsilon)}.
 \]
-Their sum is $-i\epsilon/(w^2+4\epsilon^2)$, so
+Over the common denominator $2w(w^2+4\epsilon^2)$ the numerator of
+their sum is
+$(-w+i\epsilon)(w+2i\epsilon)+(w+i\epsilon)(w-2i\epsilon)=-2i\epsilon w$,
+so the sum is $-i\epsilon/(w^2+4\epsilon^2)$. Multiplying by
+$2\pi i/\pi^2$,
 \[
 \boxed{D_\epsilon(w)=\frac{2\epsilon}{\pi(w^2+4\epsilon^2)}}.
 \]
-The formula extends to $w=0$ by continuity; directly the integral there
-is $1/(2\pi\epsilon)$, the same value. For every smooth compactly
-supported test function $\varphi$, substitute $w=2\epsilon t$:
+The formula extends to $w=0$ by continuity; directly, with
+$y=\epsilon\tan\phi$,
+\[
+D_\epsilon(0)=\frac1{\pi^2}\int_{-\infty}^{\infty}
+\frac{y^2\,dy}{(y^2+\epsilon^2)^2}
+=\frac1{\pi^2\epsilon}\int_{-\pi/2}^{\pi/2}\sin^2\phi\,d\phi
+=\frac1{2\pi\epsilon},
+\]
+the same value. For every smooth compactly
+supported test function $\varphi$, substitute $w=2\epsilon t$, so that
+$dw=2\epsilon\,dt$ and $D_\epsilon(2\epsilon t)=1/[2\pi\epsilon(1+t^2)]$:
 \[
 \int_{-\infty}^{\infty}D_\epsilon(w)\varphi(w)dw
 =\int_{-\infty}^{\infty}\frac{\varphi(2\epsilon t)}{\pi(1+t^2)}dt
@@ -2515,7 +2778,8 @@ the distributional sense, establishing the precise meaning of
 \boxed{\delta(w)=\frac1{\pi^2}\int\frac{dy}{y(y-w)}}.
 \]
 For $w\ne0$ the separately interpreted principal values would give
-zero, while at $w=0$ the integral of $1/y^2$ diverges; this is why a
+zero, because $1/(y(y-w))=[1/(y-w)-1/y]/w$ and each principal value
+vanishes, while at $w=0$ the integral of $1/y^2$ diverges; this is why a
 pointwise calculation cannot replace the distributional limit.
 
 (b) Set $w=s-t$ and $x=s-y$. Then $y=s-x$, $y-w=t-x$, and
