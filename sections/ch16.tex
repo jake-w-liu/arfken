@@ -1935,9 +1935,13 @@ V(R,\Theta)=-\frac{e}{4\pi\varepsilon_0}
 \erratum{The Instructor's Manual's potential (printed p.~265) lacks
 the overall factor $-e$ required by the given electron charge density;
 the boxed result includes the charge with its negative sign.}
-For integer $n$, repeated integration by parts gives the elementary
-forms
-$\Gamma(n,q)=(n-1)!\,e^{-q}\sum_{k=0}^{n-1}q^k/k!$ and
+For integer $n$, integrating by parts with $u=t^{n-1}$ and
+$dv=e^{-t}dt$ (the boundary term is $q^{n-1}e^{-q}$ from $t=q$ and
+zero at $t=\infty$) gives
+$\Gamma(n,q)=q^{n-1}e^{-q}+(n-1)\Gamma(n-1,q)$. Repeating this down
+to $\Gamma(1,q)=e^{-q}$ gives the elementary form
+$\Gamma(n,q)=(n-1)!\,e^{-q}\sum_{k=0}^{n-1}q^k/k!$, and
+$\gamma(n,q)+\Gamma(n,q)=\Gamma(n)=(n-1)!$ gives
 $\gamma(n,q)=(n-1)!-\Gamma(n,q)$. As a check, for $R\gg a$ the
 $\Gamma$ terms decay exponentially while $\gamma(5,q)\to4!$ and
 $\gamma(7,q)\to6!$, so
@@ -1974,7 +1978,7 @@ U=\int\rho\,\frac{e}{4\pi\varepsilon_0 r}\,d^3r
 since the angular integral of $1-P_2$ is again $4\pi$, the factor
 $r^2/r=r$ of $d^3r/r$ turns $r^2e^{-r/a}$ into $r^3e^{-r/a}$, and
 $\int_0^\infty r^3e^{-r/a}dr=3!\,a^4=6a^4$.
-In the Coulomb units used in the question's $a_0=\hbar^2/(me^2)$,
+In the Gaussian units used in the question's $a_0=\hbar^2/(me^2)$,
 set $1/(4\pi\varepsilon_0)=1$: the energy is $-e^2/(4a_0)$.
 This is the electrostatic interaction energy; the kinetic energy
 is not part of the stated electrostatic calculation.
@@ -2021,9 +2025,9 @@ f(\Omega_2)\,d\Omega_2
 This is precisely the defining action of
 $\delta(\Omega_1-\Omega_2)$, proving (a) in the distributional sense.
 It is the closure relation (5.27),
-$\delta(x-t)=\sum_j\varphi_j(x)\varphi_j^*(t)$, for the orthonormal
-set $\varphi_j=Y_l^m$ on the sphere, with $x=\Omega_1$ and
-$t=\Omega_2$.
+$\delta(x-t)=\sum_j\psi_j(x)\psi_j^*(t)$, for the orthonormal
+set $\psi_j=Y_l^m$ on the sphere ($j$ running over the pairs
+$l,m$), with $x=\Omega_1$ and $t=\Omega_2$.
 \erratum{The Instructor's Manual (printed p.~266) says that
 reconstructing the arbitrary test function yields $Y_l^m(\Omega_1)$.
 Its preceding sum instead yields $f(\Omega_1)$, as the delta's
@@ -2071,6 +2075,21 @@ $(\sin\theta_i\cos\varphi_i,\sin\theta_i\sin\varphi_i,\cos\theta_i)$,
 Summing these kernels over $l$ and using (a) gives the stated
 Legendre representation of the delta distribution.
 
+The Legendre representation also follows without the boxed identity,
+which is what makes the term-by-term identification below an
+alternate derivation. The proof of (a) used only the orthonormality
+and completeness of the harmonics, so (a) holds equally with the
+harmonics of rotated axes; and the delta distribution does not
+depend on the axes, because $d\Omega$ is rotation invariant. With
+$\Omega_2$ on the new polar axis, the pole values above leave only
+the $m=0$ terms:
+\[
+\delta(\Omega_1-\Omega_2)
+=\sum_{l,m}Y_l^m(\Omega_2')^*\,Y_l^m(\Omega_1')
+=\sum_{l=0}^\infty Y_l^0(0,\varphi)^*\,Y_l^0(\gamma,0)
+=\sum_{l=0}^\infty\frac{2l+1}{4\pi}P_l(\cos\gamma).
+\]
+
 The boxed identity is the addition theorem. The term-by-term
 identification of the two delta representations is justified by
 orthogonal projection, rather than by subtracting two infinite sums.
@@ -2080,13 +2099,16 @@ with $\Omega_2$ on the polar axis,
 $P_k(\cos\gamma)=\sqrt{4\pi/(2k+1)}\,Y_k^0(\Omega_1')$, and
 Eq.~(16.52) re-expresses this within degree $k$ in the original axes.
 Apply the degree-$l$ projector in $\Omega_1$,
-$f\mapsto\sum_mY_l^m(\Omega_1)\int Y_l^{m*}f\,d\Omega_1$.
+$f(\Omega_1)\mapsto\sum_mY_l^m(\Omega_1)
+\int Y_l^{m*}(\Omega)f(\Omega)\,d\Omega$.
 It annihilates every degree-$k$ function with $k\ne l$, since
 $\int Y_l^{m*}Y_k^q\,d\Omega=\delta_{lk}\delta_{mq}$, and leaves
-degree-$l$ functions unchanged. Applied to
-$\sum_kK_k=\sum_k\frac{2k+1}{4\pi}P_k(\cos\gamma)$ it gives
+degree-$l$ functions unchanged. Applied to the equality
+$\sum_kK_k=\sum_k\frac{2k+1}{4\pi}P_k(\cos\gamma)$ of the two
+independently obtained representations, it gives
 $K_l=\frac{2l+1}{4\pi}P_l(\cos\gamma)$ for each $l$ separately:
-each degree block is uniquely determined.
+each degree block is uniquely determined. This is the alternate
+derivation of the addition theorem referred to in the problem.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2327,7 +2349,7 @@ x\varphi_{n}=a_{n+1}\varphi_{n+1}+a_{n}\varphi_{n}
 +a_{n-1}\varphi_{n-1}.
 \]
 \solution
-Since the Legendre polynomials of degrees $0,\ldots,n+1$ form a
+\textbf{(a)} Since the Legendre polynomials of degrees $0,\ldots,n+1$ form a
 basis of the polynomials of degree at most $n+1$, the expansion of
 $xP_n$ is finite and $a_s=0$ for $s>n+1$.
 Multiplying the expansion by $P_s$ and integrating, with
@@ -2341,7 +2363,7 @@ The bracket has degree $s+1<n$. It is a combination of
 $P_0,\ldots,P_{n-1}$, each orthogonal to $P_n$; hence $a_s=0$.
 Only degrees $n-1,n,n+1$ can occur.
 
-The middle coefficient vanishes because
+\textbf{(b)} The middle coefficient vanishes because
 $x[P_n(x)]^2$ is odd:
 \[
 a_n=\frac{2n+1}{2}\int_{-1}^1x[P_n(x)]^2dx=0.
@@ -2374,8 +2396,9 @@ Therefore
 \]
 For $n=0$ the separate identity is $xP_0=P_1$.
 
-The same degree and inner-product argument works for orthogonal
-polynomials with any positive weight on their interval: multiplication
+For the general form in the Note, the same degree and inner-product
+argument works for orthogonal polynomials with any positive weight on
+their interval: multiplication
 by $x$ is symmetric in that inner product,
 $\langle x\varphi_n,\varphi_s\rangle=\langle\varphi_n,x\varphi_s\rangle
 =0$ for $s+1<n$, so only the neighboring
@@ -2395,7 +2418,7 @@ $\mathbf Y_{JLM}$: \erratum{the first index is total angular momentum,
 and the second is orbital angular momentum}.
 \par\nobreak\hfill\emph{ANS.}\enspace
 $\mathbf{Y}_{010}=-\hat{\mathbf{r}}(4\pi)^{-1/2}$\par\nobreak\hfill
-$\erratum{\mathbf{Y}_{000}=\mathbf{0}\quad\text{(formal zero only)}}$\par\nobreak\hfill
+$\mathbf{Y}_{000}=\mathbf{0}\quad\erratum{\text{(formal zero only)}}$\par\nobreak\hfill
 $\mathbf{Y}_{120}=-\hat{\mathbf{r}}(2\pi)^{-1/2}\cos\theta
 -\hat{\boldsymbol{\theta}}(8\pi)^{-1/2}\sin\theta$\par\nobreak\hfill
 $\mathbf{Y}_{110}=\hat{\boldsymbol{\varphi}}\,
@@ -2597,9 +2620,13 @@ Applying this to the three orbital degrees $L+1,L,L-1$ gives
 \mathbf Y_{L,L-1,M}(-\hat{\mathbf r})&=(-1)^{L+1}\mathbf Y_{L,L-1,M}.
 \end{aligned}}
 \]
-The last case is present only when $L\ge1$.
+The last two cases are present only when $L\ge1$: for $L=0$ the
+triangle condition excludes $\mathbf Y_{000}$ (see 16.4.1), and there
+is no orbital degree $-1$.
 The $M$ dependence disappears because the two scalar parity factors
-contain $2m$, an even integer.
+$(-1)^{l+m}$ and $(-1)^m$ multiply to $(-1)^{l+2m}=(-1)^l$, with $2m$
+even, while the Clebsch--Gordan coefficients and the fixed
+$\mathbf e_q$ are unaffected by the inversion.
 
 This is the argument-parity convention in the question: the
 Cartesian component functions are evaluated at $-\hat{\mathbf r}$.
@@ -2743,6 +2770,17 @@ $i$, the $j$th component of the difference is
 \end{aligned}
 \]
 Taking the $x-i y$ combination proves the stated lowering identity.
+These $S_i$ are the spin-one operators used above:
+$(S_i\mathbf v)_j=-i\sum_k\epsilon_{ijk}v_k$ says
+$S_i\mathbf v=i\,\mathbf e_i\times\mathbf v$, so, for example,
+$S_z\mathbf e_\pm=i\,\mathbf e_z\times\mathbf e_\pm=\pm\mathbf e_\pm$
+and $S_+\mathbf e_0=i(\mathbf e_x+i\mathbf e_y)\times\mathbf e_z
+=-\mathbf e_x-i\mathbf e_y=\sqrt2\,\mathbf e_+$. The same cross
+products give $S_z\mathbf e_q=q\,\mathbf e_q$ and
+$S_\pm\mathbf e_q=\sqrt{(1\mp q)(2\pm q)}\,\mathbf e_{q\pm1}$ for
+every $q$, the standard spin-one ladder actions; hence this $J_-$ is
+the lowering operator that generates the coefficients of
+Eq.~(16.88).
 With $f=Y_L^M$ and
 $L_-Y_L^M=\sqrt{(L+M)(L-M+1)}\,Y_L^{M-1}$, it follows that lowering
 the displayed $M$ expression gives
