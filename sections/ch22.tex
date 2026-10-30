@@ -72,7 +72,8 @@ f\big(y(x,\alpha),y_{x}(x,\alpha),x\big)\,dx
 \]
 in powers of $\alpha$.
 \erratum{Keep both endpoint values fixed and assume $f$ is $C^3$
-near the smooth trial curves, so the stated Taylor remainder is valid.}
+near the smooth trial curves, so that the expansion through order
+$\alpha^2$ has an $O(\alpha^3)$ remainder.}
 \par\emph{Note.}~The stationary condition is
 $\partial J(\alpha)/\partial\alpha=0$, evaluated at $\alpha=0$.
 The terms quadratic in $\alpha$ may be useful in establishing the
@@ -269,8 +270,9 @@ stationarity condition is the algebraic equation
 \erratum{This is a condition along the selected curve. It does not
 force $f(x,y)$ to be independent of $y$, and absence of derivative
 dependence does not rule out meaningful, smooth minimizing solutions.
-The original textbook conclusion in part (a) and the following no-solution
-statement are false.}
+The printed part (a), which concludes that $f(x,y)$ is independent of
+$y$, and the printed remark that there is then no continuous,
+differentiable solution, are both false.}
 
 For an explicit smooth counterexample take
 \[
@@ -386,7 +388,7 @@ $x_{0c}=u_cc_c$:
 c_c=0.552434124530883,\quad
 x_{0c}=0.662743419349182}.
 \]
-\erratum{The Instructor's Manual's $c_c=0.5523434$ transposes digits;
+\erratum{The Instructor's Manual's $c_c=0.5523434$ is a misprint;
 substituting $c_c=\operatorname{sech}u_c$ gives the value above, which
 agrees with the textbook's rounded $0.5524$.}
 
@@ -494,7 +496,7 @@ Its left-minus-right side $g(u)=2u-1-e^{-2u}$ has $g(0)=-2$,
 $g(u)\to\infty$ as $u\to\infty$, and $g'(u)=2+2e^{-2u}>0$, so it has
 exactly one positive root. Since $g(0.6)=-0.101<0<g(0.7)=0.153$,
 bisection on $(0.6,0.7)$, or Newton iteration
-$u_{j+1}=u_j-g(u_j)/g'(u_j)$ from $u_0=0.6$, gives
+$u_{j+1}=u_j-g(u_j)/g'(u_j)$ from the starting value $0.6$, gives
 \[
 u=0.639232271380537,\qquad
 c=\operatorname{sech}u=0.825517453652511
@@ -649,6 +651,15 @@ Euler's equation in Exercise~22.1.1 with $f_x=0$) holds:
 f-y'f_{y'}=n(y)\,\frac{(1+y'^2)-y'^2}{\sqrt{1+y'^2}}
 =\frac{n(y)}{\sqrt{1+y'^2}}=C.
 \]
+Conversely, a solution of this first integral satisfies Euler's
+equation wherever $y'\ne0$ (Exercise~22.1.1), but not necessarily
+where $y'=0$. On an interval where $y$ is constant, $f_{y'}=0$ and
+Euler's expression $f_y-df_{y'}/dx$ reduces to $f_y=n'(y)$, which is
+$e^y>0$ in (a) and $a>0$ in (b). So a ray contains no horizontal
+segment. In particular, the constant path $y\equiv1$ satisfies the
+first integral, with $C=n(1)$, and meets both endpoint conditions, but
+it is not a ray. The rays found below have $y'=0$ only at $x=0$, so
+Euler's equation holds for $x\ne0$ and, by continuity, at $x=0$ as well.
 
 (a) For $n=e^y$ this gives $y'^2=e^{2y}/C^2-1$, with $C>0$. Separate
 variables and put $t=Ce^{-y}\in(0,1]$, so that
@@ -726,8 +737,8 @@ Exercise~22.1.6 shows that the maximum of the right side is
 $0.662743419349182$, at $w=u_c$. Consequently regular stationary curves
 exist only for
 \[
-H\ge\frac1{0.662743419349182}=1.50887956153832
-\quad\hbox{or}\quad y_0\le-0.50887956153832.
+H\ge\frac1{0.662743419349182}=1.50887956153832,
+\quad\hbox{i.e.}\quad y_0\le-0.50887956153832.
 \]
 Above that threshold there are two branches. Scaling both coordinates
 by $H$, $X=x/H$ and $Y=u/H$ (so $dY/dX=u'$), gives
@@ -737,9 +748,10 @@ by $H$, $X=x/H$ and $Y=u/H$ (so $dY/dX=u'$), gives
 \]
 the catenoid problem of Exercise~22.1.6 with unit-ring half-separation
 $1/H$. The scaled catenary $Y=(c/H)\cosh[X/(c/H)]$ has neck $c/H$, so
-its $u_0$ is $(1/H)/(c/H)=w$. Hence the smaller-$w$, larger-$c$ branch
-($w<u_c$) has positive second variation and is the locally minimizing
-one.
+its endpoint parameter (half-separation over neck radius, called $u_0$
+in Exercise~22.1.6) is $(1/H)/(c/H)=w$. Hence the smaller-$w$,
+larger-$c$ branch ($w<u_c$) has positive second variation and is the
+locally minimizing one.
 
 \erratum{Part (b) has no single smooth minimizing ray for arbitrary
 $y_0<1$. Also, Fermat's variational statement is generally stationarity;
@@ -760,14 +772,24 @@ and since $c^2/H^2=\operatorname{sech}^2w$,
 \]
 To see the competing boundary cost, descend vertically from $H$
 to a small $\delta>0$, travel the horizontal distance $2$ at that
-height, and ascend to $H$. On the vertical segments $ds=du$. This
+height, and ascend to $H$. On the vertical segments $ds=|du|$. This
 piecewise path has
 \[
  J_\delta=a\left(2\int_\delta^H u\,du+2\delta\right)
  =a(H^2-\delta^2+2\delta)\longrightarrow aH^2.
 \]
-Steep smooth endpoint layers approximate its vertical portions,
-so the same limit is available within positive smooth graphs.
+Smooth positive graphs approach the same limit. Let $u$ fall smoothly and
+monotonically from $H$ to $\delta$ on $[-1,-1+\epsilon]$, equal
+$\delta$ on $[-1+\epsilon,1-\epsilon]$, and rise likewise back to $H$
+on $[1-\epsilon,1]$. Then $\int_{-1}^1u\,dx\le2\epsilon H+2\delta$,
+since $u\le H$ on the two layers. Moreover $\sqrt{1+u'^2}\le1+|u'|$,
+and on each monotone layer
+$\int u|u'|\,dx=\int_\delta^Hu\,du=\tfrac12(H^2-\delta^2)$, so
+\[
+\frac Ja\le\int_{-1}^1u\,dx+\int_{-1}^1u|u'|\,dx
+\le2\epsilon H+2\delta+H^2-\delta^2\longrightarrow H^2
+\quad(\epsilon,\delta\to0).
+\]
 Equality of the catenary cost with this limit,
 $w\operatorname{sech}^2w+\tanh w=1$, becomes after multiplication by
 $2\cosh^2w$ the equation $2w+\sinh2w=2\cosh^2w$ of Exercise~22.1.7,
@@ -779,8 +801,10 @@ On the shallow branch the ratio
 $w\operatorname{sech}^2w+\tanh w$ has derivative
 $2\operatorname{sech}^2w\,(1-w\tanh w)>0$, while
 $H=\cosh w/w$ decreases as $w$ increases. So the ratio is below $1$
-exactly when $w<0.639232\ldots$, i.e., when $H$ exceeds
-$1/0.527697396962572$: the shallow catenary beats that boundary limit
+exactly when $w<0.639232\ldots$, i.e., when $H$ exceeds its value
+$\cosh w/w=1/(w\operatorname{sech}w)=1/0.527697396962572$ at that root
+(there $w\operatorname{sech}w$ is the half-separation $x_0$ of
+Exercise~22.1.7): the shallow catenary beats that boundary limit
 only for
 \[
 H>1.89502545541442.
@@ -823,9 +847,14 @@ $B>H^2$ throughout. For larger $H$ there are two critical points:
 $B'>0$ near $d=0$, $B'<0$ between them (where
 $d\operatorname{arcosh}(H/d)>1$), and $B'>0$ beyond. So the smaller $d$
 is a local maximum of $B$ and the larger $d$ is its local minimum. At
-that minimum $d\operatorname{arcosh}(H/d)=1$, exactly the
-shallow-catenary endpoint equation $c\cosh(1/c)=H$ with $d=c$; equality
-in the preceding bound holds for that catenary, since there
+both critical points $d\operatorname{arcosh}(H/d)=1$, i.e.,
+$H/d=\cosh(1/d)$: this is the catenary endpoint equation
+$c\cosh(1/c)=H$ with $d=c$, and $w=\operatorname{arcosh}(H/d)=1/d$.
+The two roots of $Hw\operatorname{sech}w=1$ lie on either side of $u_c$
+(Exercise~22.1.6), and $d=H\operatorname{sech}w$ decreases as $w$
+increases. So the larger root $d$, the minimum of $B$, has $w<u_c$: it
+is the neck $c$ of the shallow catenary. Equality in the preceding bound
+holds for that catenary, since there
 $c+c\sinh^2(x/c)=c\cosh^2(x/c)=u\sqrt{1+u'^2}$. The endpoint $d=H$
 cannot minimize $B$, since $B'(H^-)=2$. Thus, for
 $H>1.50887956\ldots$, the global lower bound is
@@ -876,7 +905,9 @@ For details see P.~W.~Cooper, \emph{Am.~J.~Phys.} \textbf{34}: 68
 (1966); G.~Veneziano, et al., \textbf{34}: 701 (1966).
 \solution
 Inside a uniform sphere only the mass within radius $r$, the fraction
-$r^3/R^3$ of the total, attracts the particle, so the surface force
+$r^3/R^3$ of the total, attracts the particle (Newton's shell theorem:
+the uniform shell outside radius $r$ exerts no net force, and the inner
+ball attracts as if its mass were at the center), so the surface force
 $mg$ is multiplied by $(r^3/R^3)(R^2/r^2)=r/R$: the inward
 gravitational force is $F_r=-mgr/R$. Thus
 \[
@@ -886,7 +917,8 @@ U(r)-U(R)=-\int_R^rF_r\,dr'=\frac{mg}{R}\int_R^rr'\,dr'
 \erratum{The positive quantity in the printed hint is the
 \emph{decrease} in potential energy from the surface, and hence the
 kinetic energy gained. It is not the potential energy itself with
-surface value zero. Its opposite sign would give an outward force.}
+surface value zero: taken as $U(r)$, it would give the outward force
+$-dU/dr=+mgr/R$.}
 Energy conservation for release from rest gives
 \[
 \frac12mv^2=U(R)-U(r)=\frac{mg}{2R}(R^2-r^2),\qquad
@@ -947,8 +979,10 @@ r^2=|z|^2&=(R-\rho)^2+\rho^2+2\rho(R-\rho)\cos\delta\\
 \end{aligned}
 \]
 and differentiating, $2r\,dr/du=-2\rho(R-\rho)\sin\delta\,(R/\rho)$. For the
-polar angle $\theta=\arg z$, $d\theta/du=\operatorname{Im}(\bar z\,z')/|z|^2$,
-where $z'=dz/du=i(R-\rho)(e^{iu}-e^{-i(R-\rho)u/\rho})$. Multiplying out,
+polar angle $\theta=\arg z$, write $z=re^{i\theta}$; then
+$z'=dz/du=(r'+ir\theta')e^{i\theta}$ and $\bar z\,z'=rr'+ir^2\theta'$, so
+$d\theta/du=\operatorname{Im}(\bar z\,z')/|z|^2$. Here
+$z'=i(R-\rho)(e^{iu}-e^{-i(R-\rho)u/\rho})$. Multiplying out,
 \[
 \bar z\,z'=i(R-\rho)\left[(R-\rho)(1-e^{-i\delta})+\rho(e^{i\delta}-1)\right],
 \]
@@ -1232,7 +1266,7 @@ Newton's update is
 v_{j+1}=v_j-\frac{v_j-c_3-\coth v_j}
 {1+\operatorname{csch}^2v_j}.
 \]
-Starting with $v_0=1.6$ yields
+Starting with $v_0=1.6$, three steps give all the digits shown:
 \[
 v=1.62926936306647,\qquad
 c=\operatorname{sech}v=0.377627833193942,
@@ -1292,8 +1326,12 @@ and at $u=c_3$ because $w'(c_3)=0$. So
 Q[\eta]=\int_{c_3}^{v}pw^2z'^2\,du>0\qquad(\eta\ne0),
 \]
 since $z'\equiv0$ and $z(v)=0$ would force $\eta\equiv0$.
-To pass from this quadratic test to a local minimum, note that
-$z(v)=0$ implies $z(u)=-\int_u^v z'(s)ds$, so
+To pass from this quadratic test to a local minimum, recall that the
+first variation vanishes for these variations, by the interior Euler
+equation and the $120^\circ$ junction condition (Exercise~22.1.13(b)).
+So $A[y+\eta]-A[y]=\tfrac12\delta^2A+R=2\pi Q[\eta]+R$, with $R$ the
+Taylor remainder. Next, note that $z(v)=0$ implies
+$z(u)=-\int_u^v z'(s)ds$, so
 $z(u)^2\le(v-c_3)\int_{c_3}^vz'^2ds$ by Cauchy--Schwarz, and
 $\int z^2\le(v-c_3)^2\int z'^2$.
 On $[c_3,v]$ put $m=\min pw^2>0$ and $M=\max(w^2+2w'^2,2w^2)$. Since
@@ -1303,10 +1341,11 @@ $\eta^2+\eta'^2=w^2z^2+(w'z+wz')^2\le M(z^2+z'^2)$,
 \le\frac{M[1+(v-c_3)^2]}{m}\,Q[\eta],
 \]
 that is, $Q[\eta]\ge\kappa\int(\eta^2+\eta'^2)du$
-with $\kappa=m/\{M[1+(v-c_3)^2]\}>0$. The Taylor remainder is smaller
-than this bound for sufficiently small $\|\eta\|_{C^1}$, by uniform
+with $\kappa=m/\{M[1+(v-c_3)^2]\}>0$. For $\eta\ne0$ with sufficiently
+small $\|\eta\|_{C^1}$, the remainder satisfies
+$|R|<2\pi\kappa\int(\eta^2+\eta'^2)du\le2\pi Q[\eta]$, by uniform
 continuity of the integrand's Hessian (the disk term is exactly
-quadratic). This proves strict local minimality on
+quadratic), so $A[y+\eta]>A[y]$. This proves strict local minimality on
 the shallow branch in the stated class. At $v=v_c$, $\eta=w$ is a
 zero mode; the second variation alone does not classify higher orders.
 
@@ -1330,8 +1369,10 @@ because $Q$ changes little when $\eta$ and $\eta'$ change little in
 mean square. The deep branch is unstable even in this restricted class.
 
 The area comparison in Exercise~22.1.13 also needs its branch specified.
-Write the simple catenoid of Exercise~22.1.6, with its parameter
-renamed $\mu=x_0/c$, as $x_0=\mu\operatorname{sech}\mu$; by
+Write the simple catenoid of Exercise~22.1.6 as
+$x_0=\mu\operatorname{sech}\mu$, where $\mu$ is the parameter called
+$u$ there: the ratio of $x_0$ to that catenoid's own neck radius
+$\operatorname{sech}\mu$, not to the three-film $c$ above. By
 Exercise~22.1.7 its area is
 $A_s=\pi\operatorname{sech}^2\mu\,(2\sinh\mu\cosh\mu+2\mu)
 =2\pi(\tanh\mu+\mu\operatorname{sech}^2\mu)$. Take its shallow
@@ -1499,11 +1540,17 @@ second. Consequently, since $2gy=4gA\sin^2(\varphi/2)$,
 |\nabla S|^2=\frac{1+\cot^2(\varphi/2)}{4gA}
 =\frac{\csc^2(\varphi/2)}{4gA}=\frac1{2gy}.
 \]
-Also $S\to0$ as $(x,y)\to(0,0)$: eliminating $A$ with
-$y=2A\sin^2(\varphi/2)$ gives $S\le\pi\sqrt{y/(2g)}$ when
-$\varphi\le\pi$, and eliminating it with
-$x=A(\varphi-\sin\varphi)\ge\pi A$ gives $S\le2\sqrt{\pi x/g}$ when
-$\varphi\ge\pi$.
+Also $S\to0$ as $(x,y)\to(0,0)$, by the following two bounds. When
+$\varphi\le\pi$, eliminating $A$ with $y=2A\sin^2(\varphi/2)$ gives
+\[
+S=\frac{\varphi}{\sin(\varphi/2)}\sqrt{\frac y{2g}}
+\le\pi\sqrt{\frac y{2g}},
+\]
+because $\sin(\varphi/2)\ge\varphi/\pi$: the sine is concave on
+$[0,\pi/2]$, so there its graph lies above the chord $2t/\pi$ from
+$(0,0)$ to $(\pi/2,1)$; take $t=\varphi/2$. When $\pi\le\varphi<2\pi$, $\sin\varphi\le0$ gives
+$x=A(\varphi-\sin\varphi)\ge\pi A$, so
+$S=\varphi\sqrt{A/g}<2\pi\sqrt{x/(\pi g)}=2\sqrt{\pi x/g}$.
 
 For any joining path in $y>0$, Cauchy--Schwarz gives
 $dS=\nabla S\cdot d\mathbf r\le|\nabla S|\,ds=ds/\sqrt{2gy}=dt$;
