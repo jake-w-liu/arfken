@@ -3285,10 +3285,19 @@ $\pi^{-z/2}\pi^{z-1/2}=\pi^{-(1-z)/2}$, yields
 =\Gamma\left(\frac{1-z}{2}\right)\pi^{-(1-z)/2}\zeta(1-z)}.
 \]
 Both sides are meromorphic in $z$ and agree off the discrete
-set of excluded points, so by the identity theorem they are the
-same meromorphic function; at an excluded point the identity
-holds between the limits of the two sides, not between the
-canceled zero and pole factors taken separately.
+set of excluded points (the integers), so by the identity theorem
+they are the same meromorphic function.  At an excluded point the
+two sides therefore have the same Laurent expansion, an identity
+between the full products, not between the canceled zero and pole
+factors taken separately.  Being one function, both sides are
+finite at the integers other than $0$ and $1$: the left side
+visibly is for $z\ge2$, and the right side for $z\le-1$, where
+$1-z\ge2$.  At $z=0$ and $z=1$ both have simple poles with
+equal residues: using
+$\Gamma(w/2)=\Gamma(1+w/2)/(w/2)=2/w+O(1)$ as $w\to0$,
+$\Gamma(\frac12)\pi^{-1/2}=1$, $\zeta(0)=-\frac12$ and the
+residue $1$ of $\zeta$ at $1$ (Exercise 13.5.10), each side is
+$-1/z+O(1)$ near $z=0$ and $1/(z-1)+O(1)$ near $z=1$.
 
 
 \Needspace{5\baselineskip}
@@ -3497,7 +3506,8 @@ $x^3dx=t^3dt/m^4$ with unchanged limits:
 =\boxed{3!\zeta(4)}=\frac{\pi^4}{15}.
 \end{align*}
 Here $\int_0^\infty t^3e^{-t}dt=\Gamma(4)=3!=6$ and
-$\zeta(4)=\pi^4/90$, so $3!\zeta(4)=6\pi^4/90=\pi^4/15$.
+$\zeta(4)=(2\pi)^4|B_4|/(2\cdot4!)=\pi^4/90$ (Exercise 12.4.1(b),
+with $B_4=-1/30$), so $3!\zeta(4)=6\pi^4/90=\pi^4/15$.
 Substitution gives
 \[
 u=\frac{8\pi k^4T^4}{c^3h^3}\cdot\frac{\pi^4}{15},\qquad
@@ -3636,7 +3646,8 @@ $x^3dx=(kT)^4t^3dt$, and the limits $0,\infty$ are unchanged.  Then
 \rho_\nu=\frac{4\pi(kT)^4}{h^3}
 \int_0^\infty\frac{t^3}{e^t+1}dt.
 \]
-At $s=3$ the preceding exercise gives
+At $s=3$ the preceding exercise, with $\zeta(4)=\pi^4/90$
+(Exercise 13.5.5), gives
 \[
 \int_0^\infty\frac{t^3}{e^t+1}dt
 =3!(1-2^{-3})\zeta(4)
@@ -3686,7 +3697,9 @@ Therefore
 The second equality is the scaled gamma integral
 $\int_0^\infty t^ne^{-wt}dt=n!/w^{n+1}$ for $\Re w>0$, here with
 $w=z+p$.  The last is the differentiated digamma series: from
-$\psi(z)=-\gamma+\sum_{p=0}^{\infty}[(p+1)^{-1}-(z+p)^{-1}]$,
+$\psi(z)=-\gamma+\sum_{p=0}^{\infty}[(p+1)^{-1}-(z+p)^{-1}]$
+(the series $\psi(1+z)=-\gamma+\sum_{k\ge1}[k^{-1}-(k+z)^{-1}]$
+of Exercise 13.2.10 with $z-1$ in place of $z$ and $k=p+1$),
 which converges uniformly on compact subsets of $\Re z>0$ and may
 be differentiated term by term, and
 $d^n[-(z+p)^{-1}]/dz^n=(-1)^{n+1}n!\,(z+p)^{-n-1}$,
@@ -3809,8 +3822,9 @@ throughout $\Re s>0$ apart from $s=1$: the denominator
 $1-2^{1-s}$ vanishes also at $s=1+2\pi i k/\ln2$ for nonzero
 integers $k$, where $2^{1-s}=e^{-2\pi ik}=1$.  Cancellation at
 those points must be justified.}
-The entire-contour argument above establishes that all such
-points are regular and leaves only the pole at one.
+The contour argument above, in which $H$ is entire, establishes
+that all such points are regular and leaves only the pole at
+$s=1$.
 
 
 \Needspace{9\baselineskip}
@@ -3963,8 +3977,9 @@ $\Gamma(b+1)=b\Gamma(b)$,
 =e^x(a-1)(a-2)\cdots(a-m)\gamma(a-m,x)
 =e^x\frac{\Gamma(a)}{\Gamma(a-m)}\gamma(a-m,x)}.
 \]
-\erratum{Outside the initial integral domain, the entire product
-on the right must be interpreted by meromorphic continuation.
+\erratum{Outside the initial integral domain, the whole product
+$(a-1)\cdots(a-m)\gamma(a-m,x)$ on the right must be interpreted
+by meromorphic continuation.
 A zero coefficient cannot be multiplied literally by a pole of
 $\gamma(a-m,x)$.}  For example, when $a=m=1$ the left side is
 $d(e^x-1)/dx=e^x$, not zero.  The continued product has precisely
@@ -4049,9 +4064,12 @@ After $N$ steps this is the exact identity
 +c_N(a)\Gamma(a-N,x),
 \qquad c_n(a)=\prod_{j=1}^n(a-j),\quad c_0=1.
 \]
-Indeed, the first step applied to $\Gamma(a-N,x)$ gives
-$c_N\Gamma(a-N,x)=x^{a-1}e^{-x}c_N/x^N+c_{N+1}\Gamma(a-N-1,x)$,
-since $c_N(a-N-1)=c_{N+1}$; this advances $N$ by one.
+Indeed, the first step with $a-N$ in place of $a$, multiplied by
+$c_N(a)$, gives
+$c_N(a)\Gamma(a-N,x)=x^{a-1}e^{-x}c_N(a)/x^N
++c_{N+1}(a)\Gamma(a-N-1,x)$,
+since $x^{a-N-1}=x^{a-1}/x^N$ and $c_N(a)\,(a-N-1)=c_{N+1}(a)$;
+this advances $N$ by one.
 The remainder has the required order: putting $t=x+u$,
 so that $t^{a-N-1}=x^{a-N-1}(1+u/x)^{a-N-1}$,
 $e^{-t}=e^{-x}e^{-u}$ and the limits become $u=0,\infty$,
@@ -4068,14 +4086,15 @@ $\int_0^\infty e^{-u}(1+u)^{\max(\Re a-N-1,0)}du<\infty$.
 Thus the remainder is $O(e^{-x}x^{\Re a-N-1})$, the order of the
 first omitted term $c_Nx^{a-1-N}e^{-x}$; relative to the prefactor
 $x^{a-1}e^{-x}$ it is $O(x^{-N})$ for every $N$.  This establishes
-the asymptotic expansion without integrating term by term the
-binomial series of $(1+u/x)^{a-1}$ in the case $N=0$ above, which
-would not be justified because, unless $a$ is a positive integer,
-that series converges only for $u<x$:
+the asymptotic expansion
 \[
 \boxed{\Gamma(a,x)\sim x^{a-1}e^{-x}
 \sum_{n=0}^{\infty}\frac{c_n(a)}{x^n}}.
 \]
+The proof avoids integrating term by term the binomial series of
+$(1+u/x)^{a-1}$ in the case $N=0$ above.  Unless $a$ is a positive
+integer, that would not be justified: the series diverges for
+$u>x$, while the integral runs over all $u>0$.
 The gamma recurrence applied $n$ times,
 $\Gamma(a)=(a-1)\Gamma(a-1)=\cdots=(a-1)(a-2)\cdots(a-n)\Gamma(a-n)$,
 and reversal of the finite product give
