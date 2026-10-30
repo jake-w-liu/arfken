@@ -88,6 +88,11 @@ product are
 \mathbf Q\cdot\mathbf P=\cos(\theta+\varphi),\qquad
 (\mathbf Q\times\mathbf P)_z=\sin(\theta+\varphi).
 \]
+Here $|\mathbf Q\times\mathbf P|=|\sin(\theta+\varphi)|$, the sine of
+the angle between the unit vectors, and by the right-hand rule
+$\mathbf Q\times\mathbf P$ points along $+\hat{\mathbf e}_z$ exactly when
+the shorter turn from $\mathbf Q$ to $\mathbf P$ is counterclockwise,
+i.e.\ when $\sin(\theta+\varphi)>0$; this fixes the sign.
 Evaluation from their Cartesian components gives
 \[
 \mathbf Q\cdot\mathbf P=\cos\varphi\cos\theta-\sin\varphi\sin\theta,
@@ -179,10 +184,12 @@ Divide each expression by the nonzero product $ABC$:
 =\frac{\sin\gamma}{C}=\frac{2\Delta}{ABC}}.
 \]
 This also follows by dropping the altitude from the vertex of angle
-$\gamma$ onto side $C$: computed from either of the other two sides,
-its length is $h=A\sin\beta=B\sin\alpha$, so
-$\sin\alpha/A=\sin\beta/B$. The altitude from the vertex of angle
-$\alpha$ gives $C\sin\beta=B\sin\gamma$, i.e.\
+$\gamma$ onto the line of side $C$: computed from either of the other
+two sides, its length is $h=A\sin\beta=B\sin\alpha$, so
+$\sin\alpha/A=\sin\beta/B$. (If $\alpha$ or $\beta$ is obtuse, the foot
+lies on the extension of $C$, and the right triangle contains the
+supplementary angle, which has the same sine.) The altitude from the
+vertex of angle $\alpha$ gives $C\sin\beta=B\sin\gamma$, i.e.\
 $\sin\beta/B=\sin\gamma/C$, in the same way.
 
 \Needspace{5\baselineskip}
@@ -336,9 +343,7 @@ If $\mathbf B,\mathbf C$ are dependent, their cross product is zero, so
 the triple product vanishes; and all three vectors lie in a plane
 containing $\mathbf A$ and the common line of $\mathbf B,\mathbf C$, so
 they are coplanar. Both conditions hold, and again they are equivalent.
-Conversely any three vectors in a plane have one
-normal perpendicular to all of them, so the triple product vanishes.
-The argument also covers collinear triples.
+Collinear triples are included in this second case.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -401,8 +406,15 @@ Their sum is $(0,0,0)$, as required by Jacobi's identity
 -(\mathbf{A}\cdot\mathbf{D})(\mathbf{B}\cdot\mathbf{C}).
 \]
 \solution
-Write components using $\varepsilon_{ijk}$. Summing every repeated
-index from $1$ to $3$ and using the contraction of two Levi-Civita symbols,
+Write components using $\varepsilon_{ijk}$, summing every repeated
+index from $1$ to $3$. After the cyclic shifts
+$\varepsilon_{ijk}=\varepsilon_{jki}$ and
+$\varepsilon_{i\ell m}=\varepsilon_{\ell mi}$, the contraction identity
+$\sum_k\varepsilon_{ijk}\varepsilon_{pqk}
+=\delta_{ip}\delta_{jq}-\delta_{iq}\delta_{jp}$ of Exercise 2.1.9, with
+$(i,j,k,p,q)$ renamed $(j,k,i,\ell,m)$, reads
+$\varepsilon_{ijk}\varepsilon_{i\ell m}
+=\delta_{j\ell}\delta_{km}-\delta_{jm}\delta_{k\ell}$. Hence
 \[
 \begin{aligned}
 (\mathbf A\times\mathbf B)\cdot(\mathbf C\times\mathbf D)
@@ -497,6 +509,10 @@ Thus
 $\mathbf F_1+\mathbf F_2
 =K[\mathbf v_1(\mathbf v_2\cdot\hat{\mathbf r})
 -\mathbf v_2(\mathbf v_1\cdot\hat{\mathbf r})]$, generally nonzero.
+For example, if $\mathbf v_1=v\hat{\mathbf r}$ with $v\ne0$ and
+$\mathbf v_2\ne0$ is perpendicular to $\hat{\mathbf r}$, then
+$\mathbf F_2=0$ (because $\mathbf v_1\times\hat{\mathbf r}=0$), whereas
+$\mathbf F_1=-Kv\,\mathbf v_2\ne0$; so $\mathbf F_1\ne-\mathbf F_2$.
 This concerns the magnetic forces on the particles; it is not a claim
 that particle-plus-field momentum fails to be conserved.
 
@@ -671,9 +687,21 @@ The cross product after transformation is
 =(-1.00,2.80,0.40).
 \end{aligned}
 \]
-This is expected: for orthogonal $S$,
+This is expected: the cross product of two vectors is a pseudovector
+(Section 3.3), i.e.\ for orthogonal $S$,
 $(S\mathbf a)\times(S\mathbf b)=(\det S)S(\mathbf a\times\mathbf b)$,
 and here $\det S=1$.
+To verify this law, note that
+$\sum_{ijk}\varepsilon_{ijk}S_{i\ell}S_{jm}S_{kn}$ is the determinant of
+the matrix whose columns are columns $\ell,m,n$ of $S$, which is
+$(\det S)\varepsilon_{\ell mn}$: it vanishes when two columns coincide
+and changes sign under each interchange of columns. Hence
+\[
+\bigl(S^T[(S\mathbf a)\times(S\mathbf b)]\bigr)_\ell
+=\sum_{ijkmn}\varepsilon_{ijk}S_{i\ell}S_{jm}S_{kn}a_mb_n
+=(\det S)(\mathbf a\times\mathbf b)_\ell ,
+\]
+and multiplying by $S$, with $SS^T=I$, gives the law.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -760,7 +788,13 @@ since $S(2,11,-2)=(1.20+0-1.60,\ -1.28-6.60-0.96,\ -0.96+8.80-0.72)$.
 (d) an ordinary vector. A pseudovector acquires the extra factor
 $\det S$, and a pseudoscalar changes sign under this improper rotation.
 
-\erratum{The solutions manual, p.~36, prints $S_{32}=-0.80$ in its matrices; the textbook has $+0.80$, as used here. Its listed transformed vectors also require the positive sign. For example, $b'_z=0.80(2)+0.36(-1)=1.24$, whereas the negative sign gives $-1.96$.}
+\erratum{The Instructor's Manual, p.~36, prints $S_{32}=-0.80$ in its
+matrices; the textbook has $+0.80$, as used here. With $+0.80$ the rows
+of $S$ are orthonormal; with $-0.80$ the second and third rows would
+have scalar product $(-0.64)(-0.48)+(-0.60)(-0.80)+0.48(0.36)=0.96\ne0$,
+so $S$ would not be orthogonal. The transformed vectors listed in the
+Instructor's Manual also require the positive sign. For example,
+$b'_z=0.80(2)+0.36(-1)=1.24$, whereas the negative sign gives $-1.96$.}
 
 \Needspace{12\baselineskip}
 \subsection*{3.4 Rotations in \texorpdfstring{$\mathbb{R}^{3}$}{R3}}
@@ -800,6 +834,13 @@ The alternative set, whose second rotation is about $x'_1$, is likewise
 $Z(\psi)X(\theta)Z(\varphi)$.
 For the quarter turns, $c_{\pm\pi/2}=0$ and $s_{\pm\pi/2}=\pm1$, so
 \[
+Z(-\pi/2)=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&1\end{pmatrix},\qquad
+Z(\pi/2)=\begin{pmatrix}0&1&0\\-1&0&0\\0&0&1\end{pmatrix}.
+\]
+Multiplying $Y(\theta)$ on the right by $Z(-\pi/2)$ replaces its
+columns $(\mathbf k_1,\mathbf k_2,\mathbf k_3)$ by
+$(\mathbf k_2,-\mathbf k_1,\mathbf k_3)$:
+\[
 Y(\theta)Z(-\pi/2)
 =\begin{pmatrix}0&-c_\theta&-s_\theta\\1&0&0\\0&-s_\theta&c_\theta
 \end{pmatrix},
@@ -824,7 +865,7 @@ S&=Z(\psi+\pi/2)Y(\theta)Z(\varphi-\pi/2)\\
 The matrices, and therefore the final frames, coincide.
 For use below, the explicit product $Z(\gamma)Y(\beta)Z(\alpha)$, the
 textbook's Eq.~(3.37), is
-\begin{equation}\label{ch03:euler}
+\begin{equation}\tag{3.37}\label{ch03:euler}
 S=\begin{pmatrix}
 c_\gamma c_\beta c_\alpha-s_\gamma s_\alpha&
 c_\gamma c_\beta s_\alpha+s_\gamma c_\alpha&-c_\gamma s_\beta\\
@@ -853,7 +894,7 @@ and longitude system) and the $10^{\circ}$ west meridian points due south
 \erratum{A longitude reference for the Cartesian axes is needed.
 The printed matrix is consistent with the $+y$-axis through Greenwich
 and the $+x$-axis through $90^\circ$ west; use that convention here.}
-East longitude $\lambda$ then has azimuth $\alpha=90^\circ+\lambda$,
+East longitude $\lambda$ then has azimuth $90^\circ+\lambda$,
 measured from $+x$ toward $+y$.
 
 \textbf{(a)} The rows of $S$ are the new unit vectors expressed in the
@@ -875,16 +916,23 @@ s_\beta c_\alpha&s_\beta s_\alpha&c_\beta
 The first row is the spherical unit vector $\mathbf e_\theta$ at the
 new pole (polar angle $\beta$, azimuth $\alpha$), which points due
 south; the second row is $\mathbf e_\varphi$ there, which points east.
-The last rotation, through $\gamma$ about the new $z$-axis, gives the
-final equatorial axes
+Indeed, the first row is $\partial/\partial\beta$ of the third row
+$(s_\beta c_\alpha,s_\beta s_\alpha,c_\beta)$, the direction in which
+the colatitude increases, and the second row is
+$(1/s_\beta)\,\partial/\partial\alpha$ of it, the direction in which the
+longitude increases.
+The last rotation, through $\gamma$ about the new $z$-axis, multiplies
+on the left by $Z(\gamma)$; its rows $(c_\gamma,s_\gamma,0)$ and
+$(-s_\gamma,c_\gamma,0)$ recombine the first two rows into the final
+equatorial axes
 \[
 \mathbf e'_1=\cos\gamma\,\mathbf e_\theta+\sin\gamma\,\mathbf e_\varphi,
 \qquad
 \mathbf e'_2=-\sin\gamma\,\mathbf e_\theta+\cos\gamma\,\mathbf e_\varphi.
 \]
-By the same rule $\alpha=90^\circ+\lambda$ in the rotated system, the
-body's $10^\circ$ west meridian has azimuth $90^\circ-10^\circ=80^\circ$
-measured from its $x$-axis. A meridian of azimuth $a$ leaves the pole
+By the same rule (azimuth $90^\circ+\lambda$), applied to the rotated
+axes, the body's $10^\circ$ west meridian has azimuth
+$90^\circ-10^\circ=80^\circ$ measured from its $x$-axis. A meridian of azimuth $a$ leaves the pole
 along $\cos a\,\mathbf e'_1+\sin a\,\mathbf e'_2$, so by the addition
 formulas this tangent is
 \[
@@ -900,11 +948,12 @@ Thus
 \boxed{(\alpha,\beta,\gamma)=(70^\circ,60^\circ,-80^\circ)}.
 \]
 \textbf{(b)} The direction cosines are the elements of $S$. Substitute
-$c_\alpha=\cos70^\circ=0.3420$, $s_\alpha=0.9397$, $c_\beta=1/2$,
-$s_\beta=\sqrt3/2$, $c_\gamma=\cos80^\circ=0.1736$,
-$s_\gamma=-\sin80^\circ=-0.9848$ into \eqref{ch03:euler}; for example
-$S_{11}=c_\gamma c_\beta c_\alpha-s_\gamma s_\alpha=0.0297+0.9254=0.9551$.
-In all,
+$c_\alpha=\cos70^\circ=0.342020$, $s_\alpha=0.939693$, $c_\beta=1/2$,
+$s_\beta=\sqrt3/2=0.866025$, $c_\gamma=\cos80^\circ=0.173648$,
+$s_\gamma=-\sin80^\circ=-0.984808$ into \eqref{ch03:euler}; for example
+$S_{11}=c_\gamma c_\beta c_\alpha-s_\gamma s_\alpha
+=0.029696+0.925417=0.955113$.
+In all, computing with unrounded sines and cosines,
 \[
 \boxed{S=\begin{pmatrix}
 0.95511217&-0.25523613&-0.15038373\\
@@ -912,11 +961,14 @@ In all,
 0.29619813&0.81379768&0.50000000
 \end{pmatrix}},
 \]
-before rounding to the four places printed.
+which rounds to the printed four-place matrix.
 The third row is the pole direction and its $z$-component is
 $\sin30^\circ=1/2$, providing a direct geometric check.
-If instead $+x$ is Greenwich and $+y$ is $90^\circ$ east, the same
-physical orientation has Euler angles $(-20^\circ,60^\circ,10^\circ)$;
+If instead $+x$ is Greenwich and $+y$ is $90^\circ$ east, the azimuth
+is $\lambda$ itself: the pole gives $\alpha=-20^\circ$, $\beta=60^\circ$,
+and the $10^\circ$ west meridian has azimuth $-10^\circ$, so the
+condition becomes $\cos(\gamma-10^\circ)=1$. The same physical
+orientation thus has Euler angles $(-20^\circ,60^\circ,10^\circ)$;
 its numerical matrix changes because the reference axes change.
 
 \Needspace{5\baselineskip}
@@ -956,7 +1008,8 @@ $\mathsf{S}(\alpha,\beta,\gamma)$ satisfies the following relations:
   =\mathsf{S}(-\gamma,-\beta,-\alpha)$.
 \end{enumerate}
 \solution
-\textbf{(a)} For each elementary matrix,
+\textbf{(a)} Recall from Exercise 3.4.1 that
+$S=Z(\gamma)Y(\beta)Z(\alpha)$. For each elementary matrix,
 $Z(t)^T=Z(-t)=Z(t)^{-1}$ and $Y(t)^T=Y(-t)=Y(t)^{-1}$;
 multiplying the $2\times2$ blocks verifies these using
 $\cos^2t+\sin^2t=1$.
@@ -965,7 +1018,8 @@ Therefore
 S^TS=
 Z(\alpha)^TY(\beta)^TZ(\gamma)^TZ(\gamma)Y(\beta)Z(\alpha)=I,
 \]
-after canceling the three adjacent inverse pairs. Hence $S^{-1}=S^T$.
+after canceling the three adjacent inverse pairs. Hence $S^{-1}=S^T$,
+the transpose, which the statement writes $\tilde{\mathsf S}$.
 \textbf{(b)} Inverting a product reverses the order of its factors:
 \[
 S^{-1}=Z(\alpha)^{-1}Y(\beta)^{-1}Z(\gamma)^{-1}
@@ -1352,10 +1406,11 @@ L_xL_yf&=-(y\partial_z-z\partial_y)(zf_x-xf_z),\\
 L_yL_xf&=-(z\partial_x-x\partial_z)(yf_z-zf_y).
 \end{aligned}
 \]
-The product rule matters only where a derivative meets a coordinate
-factor: $y\partial_z(zf_x)=yf_x+yzf_{xz}$ and
-$-x\partial_z(-zf_y)=xf_y+xzf_{yz}$; every other term differentiates
-$f$ alone. Thus
+The product rule gives an extra term only where a derivative acts on a
+factor of its own coordinate ($\partial_z$ on $z$):
+$y\partial_z(zf_x)=yf_x+yzf_{xz}$ and
+$-x\partial_z(-zf_y)=xf_y+xzf_{yz}$; in every other term the coordinate
+factor is constant for that derivative, which acts on $f$ alone. Thus
 \[
 \begin{aligned}
 L_xL_yf&=-\{y f_x+yzf_{xz}-xyf_{zz}-z^2f_{xy}+xz f_{yz}\},\\
@@ -1377,7 +1432,7 @@ Thus
 Unlike ordinary numbers, the components here do not commute, so a
 vector operator need not have zero cross product with itself.
 
-\erratum{In the manual's last line on p.~39, the coefficient of $\partial_x$ is misprinted as $-u$; it is $-y$, as the preceding subtraction shows.}
+\erratum{In the last line on p.~39 of the Instructor's Manual, the coefficient of $\partial_x$ is misprinted as $-u$; it is $-y$, as the preceding subtraction shows.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1411,7 +1466,7 @@ $\sum_{ij}\varepsilon_{kij}a_ib_j=(\mathbf a\times\mathbf b)_k$.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{3.5.13}\quad Prove that the stream lines of $\mathbf{b}$
-\erratum{in} Example 3.5.7 \erratum{with nonzero distance from the $z$-axis} are counterclockwise circles; \erratum{points on the $z$-axis are stationary}.
+in Example 3.5.7 \erratum{with nonzero distance from the $z$-axis} are counterclockwise circles; \erratum{points on the $z$-axis are stationary}.
 \solution
 Example 3.5.7 defines $\mathbf b=(-y,x,0)$.
 A streamline is a curve everywhere tangent to $\mathbf b$; parametrized
@@ -1422,8 +1477,8 @@ Therefore
 \frac d{ds}(x^2+y^2)=2x\frac{dx}{ds}+2y\frac{dy}{ds}
 =2x(-y)+2yx=0,\qquad z=z_0.
 \]
-Its nonconstant curves are circles $x^2+y^2=R^2$ in planes
-$z=z_0$. Explicitly $x=R\cos(s+s_0)$,
+The streamlines through points off the $z$-axis are therefore circles
+$x^2+y^2=R^2$, $R>0$, in planes $z=z_0$. Explicitly $x=R\cos(s+s_0)$,
 $y=R\sin(s+s_0)$; increasing $s$ is counterclockwise as viewed
 from $+z$. At $(R,0)$ the velocity is $(0,R)$, confirming the sense.
 \erratum{On the $z$-axis the field vanishes, so these are stationary
