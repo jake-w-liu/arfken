@@ -1714,8 +1714,9 @@ and quicker to evaluate, and is much more accurate. Taking the
 difference of two terms in the expression on the left leads to a large
 relative error.
 \solution
-Set $A=\alpha_{0n}>0$, so $J_0(A)=0$. First use
-$[yJ_1(y)]'=yJ_0(y)$:
+Set $A=\alpha_{0n}>0$, so $J_0(A)=0$. By Exercise~14.1.4(a) with
+$n=1$, $[yJ_1(y)]'=yJ_0(y)$. Integrate by parts with
+$u=1-y/A$, $du=-dy/A$, and $dv=yJ_0(y)dy$, $v=yJ_1(y)$:
 \begin{align*}
 \int_0^A(1-y/A)yJ_0(y)dy
 &=\left[(1-y/A)yJ_1(y)\right]_0^A
@@ -1723,8 +1724,9 @@ $[yJ_1(y)]'=yJ_0(y)$:
 &=\frac1A\int_0^A yJ_1(y)dy.
 \end{align*}
 The upper boundary vanishes because $1-A/A=0$, and the lower
-boundary because $yJ_1(y)=O(y^2)$. Now $J_1=-J_0'$ and a second
-integration by parts gives
+boundary because $yJ_1(y)=O(y^2)$. Now $J_1=-J_0'$ (Exercise~14.1.4(b)
+with $n=0$), and a second integration by parts, with $u=y$ and
+$v=J_0(y)$, gives
 \begin{align*}
 \frac1A\int_0^A yJ_1(y)dy
 &=-\frac1A[yJ_0(y)]_0^A+\frac1A\int_0^A J_0(y)dy\\
@@ -1758,23 +1760,34 @@ integrals.
 \par\erratum{Take real $\nu>-1$, $a>0$, and $k,k'>0$. The first displayed quotient requires $k^2\ne k'^2$; its coincident limit is the second integral.}
 \solution
 Let $y(x)=J_\nu(kx)$ and $z(x)=J_\nu(k'x)$, initially with
-$k,k'>0$, $k^2\ne k'^2$. Their equations in self-adjoint form are
+$k,k'>0$, $k^2\ne k'^2$. Bessel's equation for $J_\nu(kx)$,
+$x^2y''+xy'+(k^2x^2-\nu^2)y=0$, divided by $x$, gives the
+self-adjoint forms
 \[
 (xy')'+(k^2x-\nu^2/x)y=0,\qquad
 (xz')'+(k'^2x-\nu^2/x)z=0.
 \]
-Multiply the second by $y$, the first by $z$, and subtract:
+Multiply the second by $y$, the first by $z$, and subtract. Since
+$\frac d{dx}\{x(yz'-y'z)\}=y(xz')'-z(xy')'$ (the terms $xy'z'$
+cancel),
 \[
 \frac d{dx}\{x(yz'-y'z)\}=(k^2-k'^2)xyz.
 \]
 Integrate first from $\epsilon>0$ to $a$, so no individually
 divergent origin terms have been introduced. To take $\epsilon\to0$,
-write
+write the first two terms of the series as
 \[
-y=A x^\nu\left[1-\frac{k^2x^2}{4(\nu+1)}+O(x^4)\right],\quad
-z=B x^\nu\left[1-\frac{k'^2x^2}{4(\nu+1)}+O(x^4)\right].
+y=A x^\nu\left[1-px^2+O(x^4)\right],\quad
+z=B x^\nu\left[1-qx^2+O(x^4)\right],
 \]
-The leading powers cancel in the bracket, leaving
+with $A=(k/2)^\nu/\Gamma(\nu+1)$, $B=(k'/2)^\nu/\Gamma(\nu+1)$,
+$p=k^2/[4(\nu+1)]$, and $q=k'^2/[4(\nu+1)]$. Then
+\begin{align*}
+yz'-y'z&=ABx^{2\nu-1}\bigl[(1-px^2)(\nu-(\nu+2)qx^2)\\
+&\qquad-(\nu-(\nu+2)px^2)(1-qx^2)+O(x^4)\bigr]\\
+&=ABx^{2\nu-1}[2(p-q)x^2+O(x^4)]:
+\end{align*}
+the leading powers cancel in the bracket, leaving
 \[
 x(yz'-y'z)=\frac{AB(k^2-k'^2)}{2(\nu+1)}x^{2\nu+2}
 +O(x^{2\nu+4})\longrightarrow0\qquad(\nu>-1).
@@ -1786,8 +1799,19 @@ $z'=k'J_\nu'(k'a)$. Hence
 \frac{a[k'J_\nu(ka)J_\nu'(k'a)-kJ_\nu'(ka)J_\nu(k'a)]}
 {k^2-k'^2}}.
 \]
-For the second integral let $k'\to k$ and apply l'H\^opital's rule.
-Writing $J=J_\nu(ka)$ and using primes for argument derivatives,
+For the second integral let $k'\to k$. The left side is continuous
+in $k'$: for $k'$ in a closed interval about $k$ inside $(0,\infty)$,
+the integrand is bounded by a constant times $x^{2\nu+1}$, since
+$J_\nu(w)w^{-\nu}$ is bounded for bounded $w>0$; and $x^{2\nu+1}$ is integrable for
+$\nu>-1$, so dominated convergence applies. On the right, numerator
+and denominator both vanish at $k'=k$; their $k'$ derivatives are
+\[
+a[J_\nu(ka)J_\nu'(k'a)+k'aJ_\nu(ka)J_\nu''(k'a)
+-kaJ_\nu'(ka)J_\nu'(k'a)]
+\quad\text{and}\quad -2k'.
+\]
+By l'H\^opital's rule, writing $J=J_\nu(ka)$ and using primes for
+argument derivatives,
 \[
 \int_0^a xJ_\nu(kx)^2dx
 =\frac{a[J(J'+kaJ'')-ka(J')^2]}{-2k}.
@@ -1804,10 +1828,6 @@ which gives
 =\frac{a^2}{2}\left[J_\nu'(ka)^2+
 \left(1-\frac{\nu^2}{k^2a^2}\right)J_\nu(ka)^2\right]}.
 \]
-The condition $\nu>-1$ also makes the integrand
-$O(x^{2\nu+1})$ integrable. Coincident wave numbers use the second
-formula; any zero-parameter value must be taken as an existing
-limit, not inserted into the displayed denominators.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1848,7 +1868,10 @@ J_\nu(\beta_{\nu m})^2}.
 \]
 The origin terms vanish for $\nu>-1$ by the calculation in
 Exercise~14.2.1. The integral defining $N_{\nu m}$ is positive,
-so this also implies $\beta_{\nu m}>|\nu|$ for every positive
+because its integrand $\rho J_\nu(\beta_{\nu m}\rho/a)^2$ is
+nonnegative and not identically zero. Hence
+$(1-\nu^2/\beta_{\nu m}^2)J_\nu(\beta_{\nu m})^2>0$, which forces
+$\beta_{\nu m}^2>\nu^2$: $\beta_{\nu m}>|\nu|$ for every positive
 derivative zero under consideration.
 \erratum{For $\nu=0$ the Neumann problem has the additional
 constant mode $J_0(0\rho/a)=1$, of norm $a^2/2$. It is not one
@@ -1882,20 +1905,27 @@ The series begin
 J_\nu(k\rho)=\frac{(k/2)^\nu}{\Gamma(\nu+1)}\rho^\nu
 \left[1-\frac{k^2\rho^2}{4(\nu+1)}+O(\rho^4)\right].
 \]
+This is the form used in Exercise~14.2.1, with
+$J_\nu(k\rho)=A\rho^\nu[\ldots]$, $J_\nu(k'\rho)=B\rho^\nu[\ldots]$,
+$A=(k/2)^\nu/\Gamma(\nu+1)$, and $B=(k'/2)^\nu/\Gamma(\nu+1)$.
 In the boundary expression
 $\rho[J_\nu(k\rho)\partial_\rho J_\nu(k'\rho)
--\partial_\rho J_\nu(k\rho)J_\nu(k'\rho)]$, the terms of order
-$\rho^{2\nu}$ cancel exactly. The next term is
+-\partial_\rho J_\nu(k\rho)J_\nu(k'\rho)]$ (the bracket of
+Eq.~(14.43), up to sign), both products begin with $\nu AB\rho^{2\nu}$, so the terms of order
+$\rho^{2\nu}$ cancel exactly. The next term, computed in
+Exercise~14.2.1, is $AB(k^2-k'^2)\rho^{2\nu+2}/[2(\nu+1)]$, that is,
 \[
 \frac{(kk'/4)^\nu(k^2-k'^2)}
 {2(\nu+1)\Gamma(\nu+1)^2}\rho^{2\nu+2},
 \]
-which vanishes for precisely the stated range $\nu>-1$.
+which tends to zero as $\rho\to0$ for precisely the stated range $\nu>-1$.
 At $\rho=a$ both function values vanish for distinct Dirichlet
-roots, so the first Lommel formula gives orthogonality. For a
-repeated root, the second formula reduces to
+roots, so the first Lommel formula gives orthogonality. For $m=n$,
+the second Lommel integral of Exercise~14.2.1 with
+$k=\alpha_{\nu n}/a$ and $J_\nu(\alpha_{\nu n})=0$ reduces to
 $a^2J_\nu'(\alpha_{\nu n})^2/2$. The recurrence
-$J_\nu'=\nu J_\nu/x-J_{\nu+1}$ yields
+$J_\nu'=\nu J_\nu/x-J_{\nu+1}$ (from Eqs.~(14.7) and (14.8), valid
+for any order) yields
 $J_\nu'(\alpha_{\nu n})=-J_{\nu+1}(\alpha_{\nu n})$, proving
 normalization. All relevant integrals converge because their
 origin integrands behave as $\rho^{2\nu+1}$.
@@ -1927,23 +1957,38 @@ is positive, because $(-1)^r(iy)^{2r}=y^{2r}$ and all gamma
 arguments $\nu+r+1$ are positive. Thus $F_\nu(iy)>0$, excluding
 nonzero pure imaginary roots.
 
-(b) The series coefficients are real, so if $z_0$ is a root then
-$z_0^*$ is also a root. Suppose both its real and imaginary parts
-are nonzero. Then $z_0^2\ne(z_0^*)^2$. Apply the first Lommel
-identity on $0\le x\le1$ with $k=z_0$, $k'=z_0^*$.
-The upper boundary term vanishes because both arguments are roots;
-the lower boundary vanishes by the same $x^{2\nu+2}$ estimate as
-before. With conjugate branches for the two factors, this says
+(b) For $z\ne0$, $J_\nu(z)=0$ exactly when $F_\nu(z)=0$, on any
+branch of $z^\nu$. The series coefficients of $F_\nu$ are real, so
+$F_\nu(z^*)=F_\nu(z)^*$, and if $z_0$ is a root then $z_0^*$ is also
+a root. Suppose both its real and imaginary parts are nonzero. Then
+$z_0^2-(z_0^*)^2=4i\,\Re z_0\,\Im z_0\ne0$.
+For complex $k$ and $0<x\le1$ put $u_k(x)=x^\nu F_\nu(kx)$, with the
+real power $x^\nu$. For $k>0$ this is a constant multiple of
+$J_\nu(kx)$; its series contains only $k^2$, so the termwise check
+of Bessel's equation is the same for complex $k$, and
+$(xu_k')'+(k^2x-\nu^2/x)u_k=0$. Hence the derivation of the first
+Lommel identity in Exercise~14.2.1 (the derivation of
+Eqs.~(14.43)--(14.44)) applies to $y=u_{z_0}$ and $w=u_{z_0^*}$:
 \[
-0=\int_0^1 xJ_\nu(z_0x)J_\nu(z_0^*x)dx
-=\int_0^1 x|J_\nu(z_0x)|^2dx.
+\frac d{dx}\{x(yw'-y'w)\}=(z_0^2-z_0^{*2})\,xyw.
 \]
-But the integrand is nonnegative and the series shows that the
-function is not identically zero on $(0,1)$, so the integral is
-strictly positive. This contradiction excludes every remaining
-nonreal possibility. Therefore all nonzero zeros are real.
-The corrected reference is Eq.~(14.44), the orthogonality identity;
-the original reference to (11.49) is unrelated.
+Integrate from $0$ to $1$. At $x=1$ the bracket vanishes, because
+$y(1)=F_\nu(z_0)=0$ and $w(1)=F_\nu(z_0^*)=0$. As $x\to0$ it is
+$O(x^{2\nu+2})$ by the expansion in Exercise~14.2.1 (with $A=B=1$;
+the algebra is unchanged for complex $k,k'$). For real $x$,
+$w(x)=y(x)^*$, so
+\[
+0=(z_0^2-z_0^{*2})\int_0^1xyw\,dx
+=(z_0^2-z_0^{*2})\int_0^1x^{2\nu+1}|F_\nu(z_0x)|^2dx.
+\]
+The first factor is nonzero. But the integrand is nonnegative,
+continuous on $(0,1]$, and positive near $x=0$, where
+$F_\nu(z_0x)\to F_\nu(0)=1$; so the integral is strictly positive.
+This contradiction excludes every remaining nonreal possibility.
+Therefore all nonzero zeros are real.
+The printed statement cites Eq.~(11.49), an unrelated equation of
+Chapter~11; the intended reference is the orthogonality relation,
+Eq.~(14.44), whose derivation is used above.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1980,11 +2025,16 @@ d_{\nu m}=\frac{2}{a^{2}(1-\nu^{2}/\beta_{\nu m}^{2})
 Use the weighted inner product
 $\langle g,h\rangle=\int_0^a g(\rho)^*h(\rho)\rho\,d\rho$.
 The coefficient formulas hold whenever the stated expansions
-converge in this weighted $L^2$ space.
+converge in this weighted $L^2$ space: then the inner product of
+the series with a fixed function $\phi$ may be taken term by term,
+because the partial sums $S_N$ satisfy
+$|\langle\phi,f-S_N\rangle|\le\|\phi\|\,\|f-S_N\|\to0$ (Cauchy--Schwarz).
 
 (a) Multiply the Dirichlet expansion by
-$J_\nu(\alpha_{\nu n}\rho/a)\rho$ and integrate. Orthogonality
-removes every term except $m=n$:
+$J_\nu(\alpha_{\nu n}\rho/a)\rho$ and integrate. Orthogonality,
+Eq.~(14.44), removes every term except $m=n$, whose integral is
+given by the normalization, Eq.~(14.46) (both valid for $\nu>-1$ by
+Exercise~14.2.3):
 \[
 \int_0^a f(\rho)J_\nu(\alpha_{\nu n}\rho/a)\rho d\rho
 =c_{\nu n}\frac{a^2}{2}J_{\nu+1}(\alpha_{\nu n})^2.
@@ -2013,10 +2063,12 @@ positive-root terms.}
 Here is a direct check of the latter qualification. For $-1<\nu<0$,
 $I_\nu(x)>0$ by its series, its derivative is negative near zero
 ($I_\nu\sim(x/2)^\nu/\Gamma(\nu+1)$), and positive for large
-$x$. Thus it has a positive derivative zero. If
-$w=xI_\nu'/I_\nu$, the modified Bessel equation gives
-$xw'=x^2+\nu^2-w^2$. At every zero of $w$ its derivative is
-positive, so it crosses zero only once. The corresponding radial
+$x$ (where $I_\nu$ grows like $e^x/\sqrt{2\pi x}$). Thus it has a
+positive derivative zero. Put $w=xI_\nu'/I_\nu$, which has the sign
+of $I_\nu'$. Differentiating, $xw'=w+x^2I_\nu''/I_\nu-w^2$, and the
+modified Bessel equation $x^2I_\nu''=(x^2+\nu^2)I_\nu-xI_\nu'$ turns
+this into $xw'=x^2+\nu^2-w^2$. At every zero of $w$ its derivative
+is positive, so it crosses zero only once. The corresponding radial
 function has eigenvalue $-\kappa^2/a^2$ and is orthogonal to all
 positive-eigenvalue modes by the same boundary-bracket argument.
 For clarity, derive its norm rather than assuming a modified Lommel
@@ -2035,9 +2087,12 @@ Near zero, the leading $x^{2\nu}$ contributions cancel in $F$,
 so $F=O(x^{2\nu+2})\to0$ for $\nu>-1$.
 Now set $x=\kappa\rho/a$ and use $I_\nu^\prime(\kappa)=0$:
 \[
-N_-=\frac{a^2}{\kappa^2}\int_0^\kappa xI_\nu(x)^2\,dx
+N_-=\int_0^aI_\nu(\kappa\rho/a)^2\rho\,d\rho
+=\frac{a^2}{\kappa^2}\int_0^\kappa xI_\nu(x)^2\,dx
 =\frac{a^2}{\kappa^2}[F(\kappa)-F(0)].
 \]
+Here $F(0)$ means the limit $0$ found above, and $y'(\kappa)=0$ gives
+$F(\kappa)=\frac12(\kappa^2+\nu^2)I_\nu(\kappa)^2$.
 Thus its norm is
 \[
 N_-=\frac{a^2}{2}\left(1+\frac{\nu^2}{\kappa^2}\right)
@@ -2063,10 +2118,19 @@ dependence to exploit the symmetry of your potential.
 Let the cylinder have radius $a$ and length $l$, with its ends
 at $z=\pm l/2$. Denote the sought interior potential by $V$ and
 the identical prescribed end potential by $\psi(\rho,\varphi)$.
-Separation of $\nabla^2V=0$ gives the angular factors $e^{im\varphi}$,
-regular radial factors $J_{|m|}(k\rho)$, and axial equation
-$Z''-k^2Z=0$. The side condition forces
-$k=\alpha_{|m|n}/a$, where $J_{|m|}(\alpha_{|m|n})=0$.
+Substituting $V=R(\rho)e^{im\varphi}Z(z)$, $m\in\mathbb Z$, in
+$\nabla^2V=0$ and separating with the constant $k^2$ gives
+\[
+Z''-k^2Z=0,\qquad \rho^2R''+\rho R'+(k^2\rho^2-m^2)R=0,
+\]
+Bessel's equation of order $|m|$ in $k\rho$. Regularity on the axis
+selects $R=J_{|m|}(k\rho)$, since $Y_{|m|}$ is unbounded at
+$\rho=0$. The side condition forces
+$k=\alpha_{|m|n}/a$, where $J_{|m|}(\alpha_{|m|n})=0$. (A negative
+separation constant $-\kappa^2$ would give the regular radial factor
+$I_{|m|}(\kappa\rho)$, which is positive for $\rho>0$ and cannot
+vanish at $\rho=a$; a zero constant gives $\rho^{|m|}$, which
+cannot either.)
 Identical end data are even in $z$; hence use $\cosh(kz)$ rather
 than the odd $\sinh(kz)$. Normalize the axial factor to one on
 both ends:
@@ -2080,8 +2144,12 @@ e^{im\varphi}
 At either end this is the double Fourier--Bessel expansion of
 $\psi$. Multiply it by
 $e^{-im\varphi}J_{|m|}(\alpha_{|m|n}\rho/a)\rho$ and integrate
-over the disk. The angular norm is $2\pi$ and the radial norm is
-$a^2J_{|m|+1}(\alpha_{|m|n})^2/2$. Therefore
+over the disk. Write the summation indices of the series as $m',n'$.
+Since $\int_0^{2\pi}e^{i(m'-m)\varphi}d\varphi
+=2\pi\delta_{mm'}$, only terms with $m'=m$ survive, and among these
+the radial orthogonality, Eq.~(14.44) of order $|m|$, keeps only
+$n'=n$. The angular norm is $2\pi$ and the radial norm, Eq.~(14.46),
+is $a^2J_{|m|+1}(\alpha_{|m|n})^2/2$. Therefore
 \[
 \boxed{A_{mn}=\frac{\displaystyle\int_0^{2\pi}\!\int_0^a
 \psi(\rho,\varphi)e^{-im\varphi}
@@ -2143,11 +2211,14 @@ then using orthogonality and the Dirichlet norm, gives
 \erratum{To pass to an infinite series, the expansion must converge
 to $f$ in $L^2((0,1),x\,dx)$; merely writing a formal series does
 not justify Parseval's equality.}
-Under that assumption, the Cauchy--Schwarz inequality gives
+Under that assumption, write $f^2-S_N^2=(f-S_N)(f+S_N)$; the
+Cauchy--Schwarz inequality gives
 \[
 \left|\int_0^1(f^2-S_N^2)x\,dx\right|
-\le\|f-S_N\|\,\|f+S_N\|\longrightarrow0.
+\le\|f-S_N\|\,\|f+S_N\|\longrightarrow0,
 \]
+because $\|f-S_N\|\to0$ while $\|f+S_N\|\le2\|f\|+\|S_N-f\|$ stays
+bounded.
 The finite identity therefore tends to the formula in the question.
 For real $f$ and coefficients this is the usual Parseval identity.
 For complex functions, the norm version is
@@ -2171,12 +2242,16 @@ Parseval relation.
 \solution
 Expand $f(x)=x^m$ on $0<x<1$ in the Dirichlet Bessel basis.
 For $m>-1$, $\int_0^1|x^m|^2x\,dx=1/[2(m+1)]$ is finite.
-The coefficient formula gives
+The coefficient formula of Exercise~14.2.5(a), with $a=1$ and
+$\nu=m$, gives
 \[
 a_n=\frac{2}{J_{m+1}(\alpha_{mn})^2}
 \int_0^1x^{m+1}J_m(\alpha_{mn}x)dx.
 \]
-Set $\alpha=\alpha_{mn}$. The recurrence implies
+Set $\alpha=\alpha_{mn}$. The recurrence
+$d[u^{m+1}J_{m+1}(u)]/du=u^{m+1}J_m(u)$ (Exercise~14.1.4(a) with
+$n=m+1$, valid for any order), with $u=\alpha x$ and
+$x^{m+1}J_{m+1}(\alpha x)=\alpha^{-m-1}u^{m+1}J_{m+1}(u)$, implies
 \[
 \frac d{dx}[x^{m+1}J_{m+1}(\alpha x)]
 =\alpha x^{m+1}J_m(\alpha x).
@@ -2231,9 +2306,17 @@ slow, 20 terms giving only 98.4 rather than 100.
 \par\nobreak\hfill\emph{Check value.}\enspace
 For $\rho/a=0.4$ and $z/l=0.3$, $\psi=\erratum{24.559}$.
 \solution
-The end data are independent of $\varphi$, so only $m=0$ remains
-in Exercise~14.2.6. Put $r=\rho/a$, $s=z/l$, and
-$\alpha_n=\alpha_{0n}$. Since $l/(2a)=1$,
+The end data are independent of $\varphi$, so
+$\int_0^{2\pi}e^{-im\varphi}d\varphi=0$ for $m\ne0$ and only $m=0$
+remains in Exercise~14.2.6. Put $r=\rho/a$, $s=z/l$, and
+$\alpha_n=\alpha_{0n}$. Then $z/a=(z/l)(l/a)=2s$ and $l/(2a)=1$,
+so the axial factor is $\cosh(2\alpha_ns)/\cosh\alpha_n$. With
+$\rho=ar$, the coefficient formula of Exercise~14.2.6 becomes
+\[
+A_n=\frac{2\pi\cdot100\,a^2\int_0^1(1-r)J_0(\alpha_nr)r\,dr}
+{\pi a^2J_1(\alpha_n)^2}.
+\]
+Hence
 \[
 \boxed{V(r,s)=\sum_{n=1}^{\infty}A_nJ_0(\alpha_n r)
 \frac{\cosh(2\alpha_n s)}{\cosh\alpha_n}},
@@ -2270,9 +2353,16 @@ $\rho/a\backslash z/l$ & $0.0$ & $0.1$ & $0.2$ & $0.3$ & $0.4$ & $0.5$\\
 \end{tabular}
 \end{center}
 The last column is the prescribed boundary value $100(1-r)$;
-the last row is the grounded side. For the interior entries, the
-integrals were accumulated between consecutive zeros of $J_0$,
-and 120 modes were summed. Comparing 80 and 120 modes changed
+the last row is the grounded side. For $s<1/2$ the series converges
+exponentially: $|J_0|\le1$ and
+$\cosh(2\alpha_ns)/\cosh\alpha_n\le e^{2\alpha_ns}/(e^{\alpha_n}/2)
+=2e^{-\alpha_n(1-2s)}$, with $\alpha_n\approx(n-\frac14)\pi$; for
+$s\le0.4$ this factor is at most $2e^{-0.2\alpha_n}$. At $s=1/2$ it
+equals one and only the algebraic decay of the $A_n$ remains, which
+is the slow convergence mentioned in the Note. For the interior
+entries, the integrals $\int_0^{\alpha_n}J_0(y)dy$ were accumulated
+as sums of quadratures over the intervals between consecutive zeros
+of $J_0$, and 120 modes were summed. Comparing 80 and 120 modes changed
 every interior entry by less than $10^{-20}$, comfortably below
 the $0.001$ displayed precision. This convergence comparison is a
 numerical check, not a universal truncation-error theorem.
@@ -2306,15 +2396,23 @@ Since $\cos\pi(\nu\pm1)=-C$ and $\sin\pi(\nu\pm1)=-S$,
 Y_{\nu-1}=\frac{CJ_{\nu-1}+J_{-\nu+1}}S,\qquad
 Y_{\nu+1}=\frac{CJ_{\nu+1}+J_{-\nu-1}}S.
 \]
-Add these and apply the $J$ recurrence at both orders $\nu$ and
-$-\nu$:
+The recurrences (14.7) and (14.8) hold for every order; at the
+orders $\nu$ and $-\nu$ they read
+\begin{align*}
+J_{\nu-1}+J_{\nu+1}&=\frac{2\nu}xJ_\nu,&
+J_{\nu-1}-J_{\nu+1}&=2J_\nu',\\
+J_{-\nu-1}+J_{-\nu+1}&=-\frac{2\nu}xJ_{-\nu},&
+J_{-\nu-1}-J_{-\nu+1}&=2J_{-\nu}'.
+\end{align*}
+Add the two expressions for $Y_{\nu\mp1}$ and use the first column:
 \begin{align*}
 Y_{\nu-1}+Y_{\nu+1}
 &=\frac{C(2\nu J_\nu/x)-2\nu J_{-\nu}/x}S
 =\frac{2\nu}{x}\frac{CJ_\nu-J_{-\nu}}S
 =\frac{2\nu}{x}Y_\nu.
 \end{align*}
-Subtracting instead gives
+Subtracting instead and using the second column, together with
+$Y_\nu'=(CJ_\nu'-J_{-\nu}')/S$, gives
 \begin{align*}
 Y_{\nu-1}-Y_{\nu+1}
 &=\frac{C(J_{\nu-1}-J_{\nu+1})
@@ -2322,10 +2420,11 @@ Y_{\nu-1}-Y_{\nu+1}
 &=\frac{2CJ_\nu'-2J_{-\nu}'}S=2Y_\nu'.
 \end{align*}
 Now let $\nu\to n$. The defining removable limits give
-$Y_\nu\to Y_n$, $Y_{\nu\pm1}\to Y_{n\pm1}$, and the same
-limits hold after $x$ differentiation away from the branch point
-$x=0$. Both recurrences therefore hold for integer $n$, with no
-division by $\sin\pi n=0$.
+$Y_\nu\to Y_n$ and $Y_{\nu\pm1}\to Y_{n\pm1}$. Because $Y_\nu(x)$,
+with these limits inserted at the integers, depends analytically on
+$\nu$ and on $x>0$ jointly, the limit may also be taken after the
+$x$ differentiation: $Y_\nu'\to Y_n'$. Both recurrences therefore
+hold for integer $n$, with no division by $\sin\pi n=0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2339,15 +2438,21 @@ first-kind function:
 \[
 J_{-\nu}=\cos\pi\nu\,J_\nu-\sin\pi\nu\,Y_\nu.
 \]
-Apply the definition once more with order $-\nu$:
+Apply the definition once more with order $-\nu$, using
+$\cos(-\pi\nu)=\cos\pi\nu$, $\sin(-\pi\nu)=-\sin\pi\nu$, and then
+$\cos^2\pi\nu-1=-\sin^2\pi\nu$:
 \begin{align*}
 Y_{-\nu}
 &=\frac{\cos\pi\nu\,J_{-\nu}-J_\nu}{-\sin\pi\nu}\\
 &=\frac{(\cos^2\pi\nu-1)J_\nu
 -\cos\pi\nu\sin\pi\nu\,Y_\nu}{-\sin\pi\nu}\\
+&=\frac{-\sin^2\pi\nu\,J_\nu
+-\cos\pi\nu\sin\pi\nu\,Y_\nu}{-\sin\pi\nu}\\
 &=\sin\pi\nu\,J_\nu+\cos\pi\nu\,Y_\nu.
 \end{align*}
-Taking the removable limit $\nu\to n\in\mathbb Z$ gives
+As $\nu\to n\in\mathbb Z$, $\sin\pi\nu\to0$ while $J_\nu\to J_n$
+stays finite, $\cos\pi\nu\to(-1)^n$, and $Y_{\pm\nu}\to Y_{\pm n}$
+by the defining removable limits. This gives
 \[
 \boxed{Y_{-n}(x)=(-1)^nY_n(x)}.
 \]
@@ -2360,7 +2465,7 @@ This also includes $n=0$, where the equality is immediate.
 Y'_{0}(x)=-Y_{1}(x).
 \]
 \solution
-Set $n=0$ in the derivative recurrence:
+Set $n=0$ in the derivative recurrence of Exercise~14.3.1:
 \[
 2Y_0'=Y_{-1}-Y_1.
 \]
@@ -2368,7 +2473,7 @@ Exercise~14.3.2 gives $Y_{-1}=-Y_1$, and hence
 \[
 2Y_0'=-2Y_1,\qquad\boxed{Y_0'=-Y_1}.
 \]
-\erratum{The manual's last equation in this exercise, p.~209,
+\erratum{The Instructor's Manual's last equation in this exercise, p.~209,
 prints $J_1,J_0'$ where $Y_1,Y_0'$ are required. The latter are
 the functions used in the recurrence above.}
 
@@ -2387,7 +2492,8 @@ containing $x=0$. Differentiation cancels the mixed terms:
 \[
 W'=X_\nu Z_\nu''-X_\nu''Z_\nu.
 \]
-Both functions satisfy
+Both functions satisfy Bessel's equation
+$x^2y''+xy'+(x^2-\nu^2)y=0$, that is (dividing by $x^2$),
 $y''=-y'/x-(1-\nu^2/x^2)y$. Substitution therefore gives
 \begin{align*}
 W'&=X_\nu\left[-\frac{Z_\nu'}x-
@@ -2412,41 +2518,59 @@ J_{\nu}(x)J_{-\nu+1}(x)+J_{-\nu}(x)J_{\nu-1}(x)
 J_{\nu}(x)Y'_{\nu}(x)-J'_{\nu}(x)Y_{\nu}(x)&=\frac{2}{\pi x}.
 \end{align*}
 \solution
-For noninteger $\nu$, the derivative recurrences give
+For noninteger $\nu$, use the derivative recurrences
+$J_{\mu-1}=J_\mu'+(\mu/x)J_\mu$ and $J_{\mu+1}=-J_\mu'+(\mu/x)J_\mu$
+(half the sum and half the difference of Eqs.~(14.7) and (14.8),
+valid for any order; see Exercise~14.1.4). The second with $\mu=-\nu$
+and the first with $\mu=\nu$ give
 \[
 J_{1-\nu}=-J_{-\nu}'-\frac\nu xJ_{-\nu},\qquad
 J_{\nu-1}=J_\nu'+\frac\nu xJ_\nu.
 \]
-Multiplying and adding cancels the terms proportional to $\nu/x$:
+Multiply the first by $J_\nu$ and the second by $J_{-\nu}$ and add;
+the terms proportional to $\nu/x$ cancel:
 \[
 J_\nu J_{1-\nu}+J_{-\nu}J_{\nu-1}
 =-J_\nu J_{-\nu}'+J_\nu'J_{-\nu}
 =-W[J_\nu,J_{-\nu}].
 \]
-\erratum{The manual's corresponding line on p.~209 has a minus
+\erratum{The Instructor's Manual's corresponding line on p.~209 has a minus
 sign before the second product; it must be plus, as the cancellation
 above shows.}
-By Exercise~14.3.4, $W=A/x$. The leading series terms are
+By Exercise~14.3.4, $W[J_\nu,J_{-\nu}]=J_\nu J_{-\nu}'-J_\nu'J_{-\nu}
+=A/x$ with a constant $A$. The leading series terms are
 \[
 J_\nu=\frac{(x/2)^\nu}{\Gamma(\nu+1)}[1+O(x^2)],\qquad
 J_{-\nu}=\frac{(x/2)^{-\nu}}{\Gamma(1-\nu)}[1+O(x^2)].
 \]
-Their derivatives give
+Differentiating, $J_{\pm\nu}'=\pm(\nu/x)J_{\pm\nu}[1+O(x^2)]$, and
+the powers $(x/2)^{\pm\nu}$ cancel in each product:
+\[
+J_\nu J_{-\nu}'=-\frac{\nu}{x}\,
+\frac{1+O(x^2)}{\Gamma(\nu+1)\Gamma(1-\nu)},\qquad
+J_\nu'J_{-\nu}=\frac{\nu}{x}\,
+\frac{1+O(x^2)}{\Gamma(\nu+1)\Gamma(1-\nu)}.
+\]
+Since $A=xW=x(J_\nu J_{-\nu}'-J_\nu'J_{-\nu})$ is constant, let
+$x\to0$; then use $\Gamma(\nu+1)=\nu\Gamma(\nu)$ and the reflection
+formula $\Gamma(\nu)\Gamma(1-\nu)=\pi/\sin\pi\nu$:
 \[
 A=-\frac{2\nu}{\Gamma(\nu+1)\Gamma(1-\nu)}
 =-\frac{2}{\Gamma(\nu)\Gamma(1-\nu)}
 =-\frac{2\sin\pi\nu}{\pi}.
 \]
-Therefore
+Therefore, since the left side of the first formula equals
+$-W[J_\nu,J_{-\nu}]=-A/x$,
 \[
 \boxed{J_\nu J_{1-\nu}+J_{-\nu}J_{\nu-1}
 =\frac{2\sin\pi\nu}{\pi x}}.
 \]
 Finally $Y_\nu=(\cos\pi\nu\,J_\nu-J_{-\nu})/\sin\pi\nu$,
-so bilinearity of the Wronskian gives
+so bilinearity of the Wronskian and $W[J_\nu,J_\nu]=0$ give
 \[
-W[J_\nu,Y_\nu]=-
-\frac{W[J_\nu,J_{-\nu}]}{\sin\pi\nu}
+W[J_\nu,Y_\nu]
+=\frac{\cos\pi\nu\,W[J_\nu,J_\nu]-W[J_\nu,J_{-\nu}]}{\sin\pi\nu}
+=\frac{2\sin\pi\nu/(\pi x)}{\sin\pi\nu}
 =\boxed{\frac2{\pi x}}.
 \]
 Both formulas extend to integer orders by their removable order
@@ -2465,34 +2589,45 @@ $J_{\nu}(x)J'_{-\nu}(x)-J'_{\nu}(x)J_{-\nu}(x)$ are each zero.
 \solution
 For noninteger $\nu$, write the first two series terms as
 \[
-J_\nu=A x^\nu(1-ax^2+O(x^4)),\quad
-J_{-\nu}=B x^{-\nu}(1-bx^2+O(x^4)),
+J_\nu=c\,x^\nu(1-ax^2+O(x^4)),\quad
+J_{-\nu}=d\,x^{-\nu}(1-bx^2+O(x^4)),
 \]
 where
 \[
-A=\frac{2^{-\nu}}{\Gamma(\nu+1)},\quad
-B=\frac{2^\nu}{\Gamma(1-\nu)},\quad
-a=\frac1{4(\nu+1)},\quad b=\frac1{4(1-\nu)}.
+c=\frac{2^{-\nu}}{\Gamma(\nu+1)},\quad
+d=\frac{2^\nu}{\Gamma(1-\nu)},\quad
+a=\frac1{4(\nu+1)},\quad b=\frac1{4(1-\nu)}
 \]
-All powers in either product $J_\nu J_{-\nu}'$ or
-$J_\nu'J_{-\nu}$ are $x^{2r-1}$ with integer $r\ge0$.
+(the letters $c,d$ avoid a clash with the Wronskian constant
+$A_\nu$). Here $J_\nu$ is $x^\nu$ times a power series in $x^2$ and
+$J_{-\nu}'$ is $x^{-\nu-1}$ times a power series in $x^2$, so all
+powers in $J_\nu J_{-\nu}'$, and likewise in $J_\nu'J_{-\nu}$, are
+$x^{2r-1}$ with integer $r\ge0$.
 Consequently an $x^0$ term cannot occur. For $x^1$, differentiate
-the two displayed series and multiply:
+the two displayed series,
+\begin{align*}
+J_\nu'&=c\,[\nu x^{\nu-1}-a(\nu+2)x^{\nu+1}+O(x^{\nu+3})],\\
+J_{-\nu}'&=d\,[-\nu x^{-\nu-1}-b(2-\nu)x^{1-\nu}+O(x^{3-\nu})],
+\end{align*}
+and multiply:
 \begin{align*}
 J_\nu J_{-\nu}'
-&=AB\left[-\frac\nu x+
+&=cd\left[-\frac\nu x+
 \{a\nu-b(2-\nu)\}x+O(x^3)\right],\\
 J_\nu'J_{-\nu}
-&=AB\left[\frac\nu x+
+&=cd\left[\frac\nu x+
 \{-b\nu-a(\nu+2)\}x+O(x^3)\right].
 \end{align*}
 Subtracting, the $x$ coefficient is
-\[
-2AB[(\nu+1)a+(\nu-1)b]
-=2AB\left[\frac14-\frac14\right]=0.
-\]
+\begin{align*}
+cd[a\nu-b(2-\nu)+b\nu+a(\nu+2)]
+&=2cd[(\nu+1)a+(\nu-1)b]\\
+&=2cd\left[\frac14-\frac14\right]=0.
+\end{align*}
 Thus both requested coefficients vanish, leaving
-$-2\nu AB/x+O(x^3)$ at this order. At integer $\nu=n$ the
+$-2\nu cd/x+O(x^3)$ at this order; that is,
+$A_\nu=-2\nu cd=-2/[\Gamma(\nu)\Gamma(1-\nu)]=-2\sin(\pi\nu)/\pi$,
+as in Exercise~14.3.5. At integer $\nu=n$ the
 negative-order relation makes the entire Wronskian identically
 zero, so the same coefficient conclusion holds there without
 using intermediate gamma factors at their poles.
@@ -2517,63 +2652,100 @@ $Y_{0}(x)=-\dfrac{2}{\pi}\displaystyle\int_{0}^{\infty}
 Its formal $x$ derivatives are not convergent ordinary improper
 integrals, and the proposed boundary term
 $x\sin(x\cosh t)\sinh t$ does not vanish as $t\to\infty$.
-The manual's unregularized integration by parts on p.~211 therefore
-needs the limiting argument below.}
+The Instructor's Manual's unregularized integration by parts on
+p.~211 therefore needs the limiting argument below.}
 
 (a) Begin in the upper half-plane, with
 \[
 H(z)=\int_0^\infty e^{iz\cosh t}dt,\qquad\Im z>0.
 \]
-The factor $e^{-\Im z\cosh t}$ makes the integral and all local
-$z$ derivatives absolutely convergent. Direct differentiation gives
+The factor $|e^{iz\cosh t}|=e^{-\Im z\cosh t}$ makes the integral
+and all local $z$ derivatives absolutely convergent, so
+$H'=\int_0^\infty i\cosh t\,e^{iz\cosh t}dt$ and
+$H''=-\int_0^\infty\cosh^2t\,e^{iz\cosh t}dt$. With
+$\cosh^2t-1=\sinh^2t$,
 \begin{align*}
 z^2H''+zH'+z^2H
 &=\int_0^\infty[-z^2\sinh^2t+iz\cosh t]e^{iz\cosh t}dt\\
 &=\int_0^\infty\frac d{dt}
-\left[iz\sinh t\,e^{iz\cosh t}\right]dt=0.
+\left[iz\sinh t\,e^{iz\cosh t}\right]dt=0,
 \end{align*}
+since the product rule gives
+$\frac d{dt}[iz\sinh t\,e^{iz\cosh t}]
+=(iz\cosh t-z^2\sinh^2t)e^{iz\cosh t}$.
 At $t=0$ the bracket is zero, and at infinity exponential damping
-overcomes $\sinh t$. Thus $H$ solves the order-zero Bessel equation.
-Its coefficients are analytic near every positive real $x$, so its
-solutions continue analytically across that regular part of the
-axis. Equivalently, write $H$ locally as a linear combination of
-the analytic solutions $J_0$ and $Y_0$ and continue those functions.
-
-Now put $u=\cosh t$. The real part of the boundary value is
+overcomes $\sinh t$. Thus $H$ solves the order-zero Bessel equation
+in the upper half-plane. There $J_0$ and $Y_0$ are analytic
+solutions with Wronskian $2/(\pi z)\ne0$ (Exercise~14.3.5, continued
+analytically), so $H=c_1J_0+c_2Y_0$ with constants $c_1,c_2$. Both
+functions are continuous up to each $x>0$ and real there; hence
 \[
+\lim_{\epsilon\downarrow0}\Re H(x+i\epsilon)
+=(\Re c_1)J_0(x)+(\Re c_2)Y_0(x).
+\]
+
+Now put $u=\cosh t$, $du=\sinh t\,dt=\sqrt{u^2-1}\,dt$. Then
+\[
+\Re H(x+i\epsilon)=\int_1^\infty
+\frac{\cos(xu)\,e^{-\epsilon u}}{\sqrt{u^2-1}}du,\qquad
 F(x)=\int_1^\infty\frac{\cos(xu)}{\sqrt{u^2-1}}du
 =\int_0^\infty\cos(x\cosh t)dt.
 \]
-The singularity at $u=1$ is integrable and the tail converges by
-Dirichlet's test. Abel convergence therefore identifies it with
-$\lim_{\epsilon\downarrow0}\Re H(x+i\epsilon)$. The analytic
-continuation just established makes this limit a smooth solution:
+The singularity at $u=1$ is integrable, and the tail of $F$
+converges by Dirichlet's test: $1/\sqrt{u^2-1}$ decreases to zero
+and $|\int_1^U\cos(xu)du|\le2/x$. Abel's theorem for integrals then
+gives $\lim_{\epsilon\downarrow0}\Re H(x+i\epsilon)=F(x)$. Indeed,
+$G(u)=\int_u^\infty\cos(xv)(v^2-1)^{-1/2}dv$ is continuous and
+bounded on $[1,\infty)$ with $G(1)=F(x)$ and $G(\infty)=0$, and
+integration by parts gives
+\[
+\Re H(x+i\epsilon)=G(1)e^{-\epsilon}
+-\epsilon\int_1^\infty G(u)e^{-\epsilon u}du
+\longrightarrow G(1),
+\]
+because for every $R>1$ the last term is at most
+$\epsilon\int_1^R|G|\,du+\sup_{u\ge R}|G(u)|$ in absolute value.
+Therefore $F=(\Re c_1)J_0+(\Re c_2)Y_0$ is a solution:
 \[
 \boxed{x^2F''+xF'+x^2F=0\quad(x>0)}.
 \]
 
-(b) To compare it with $J_0$, split off an elementary logarithmic
-integral:
+(b) To compare it with $J_0$, find the behavior of $F$ as
+$x\downarrow0$. Split off an elementary logarithmic integral:
 \[
 F(x)=\int_1^\infty\frac{\cos(xu)}u\,du
 +\int_1^\infty\cos(xu)
 \left(\frac1{\sqrt{u^2-1}}-\frac1u\right)du.
 \]
-The first is $-\operatorname{Ci}(x)=-\gamma-\ln x+o(1)$.
-The difference in parentheses is absolutely integrable; dominated
-convergence gives for the second integral
+In the first, put $t=xu$: it equals
+$\int_x^\infty t^{-1}\cos t\,dt=-\operatorname{Ci}(x)$, and
+$\operatorname{Ci}(x)=\gamma+\ln x+\int_0^x t^{-1}(\cos t-1)dt
+=\gamma+\ln x+O(x^2)$. The difference in parentheses is positive,
+$O((u-1)^{-1/2})$ as $u\to1$ and $O(u^{-3})$ as $u\to\infty$, hence
+integrable; since $|\cos(xu)|\le1$, dominated convergence gives for
+the second integral the limit
 \[
-\lim_{R\to\infty}[\operatorname{arcosh}R-\ln R]=\ln2.
+\int_1^\infty\!\left(\frac1{\sqrt{u^2-1}}-\frac1u\right)du
+=\lim_{R\to\infty}[\operatorname{arcosh}R-\ln R]
+=\lim_{R\to\infty}\ln\frac{R+\sqrt{R^2-1}}R=\ln2.
 \]
-Consequently
+Consequently $F(x)=-\ln x-\gamma+\ln2+o(1)$, that is,
 \[
 -\frac2\pi F(x)=\frac2\pi[\ln(x/2)+\gamma]+o(1).
 \]
 This diverges logarithmically as $x\downarrow0$, whereas $J_0(x)$
-tends to one. They are linearly independent. The logarithmic
-coefficient and constant also agree with the defining series of
-$Y_0$; a difference of two such solutions would be a multiple of
-$J_0$ tending to zero, so that multiple is zero. Hence
+tends to one. If $k_1J_0+k_2F\equiv0$, then $k_2=0$ (otherwise $F$
+would be bounded near zero) and then $k_1=0$: they are linearly
+independent. The normalization also agrees with $Y_0$: Eq.~(14.61)
+with $n=0$ and $\psi(1)=-\gamma$ gives
+\[
+Y_0(x)=\frac2\pi J_0(x)\ln(x/2)+\frac{2\gamma}\pi+O(x^2)
+=\frac2\pi[\ln(x/2)+\gamma]+o(1).
+\]
+Hence $D=-2F/\pi-Y_0$ is a
+solution tending to zero as $x\downarrow0$. Writing
+$D=d_1J_0+d_2Y_0$, the logarithm forces $d_2=0$, and then
+$d_1=\lim_{x\to0}D=0$. Hence
 $Y_0(x)=-2F(x)/\pi$ with the stated normalization.
 
 \Needspace{5\baselineskip}
@@ -2596,16 +2768,22 @@ Y_n=\frac1\pi\left[
 \left.\partial_\nu J_\nu\right|_n
 -(-1)^n\left.\partial_\nu J_{-\nu}\right|_n\right].
 \]
-The first order derivative of the series is
+Differentiate the series
+$J_\nu=\sum_{r\ge0}(-1)^r(x/2)^{\nu+2r}/[r!\,\Gamma(\nu+r+1)]$ term by
+term: $\partial_\nu(x/2)^{\nu+2r}=L\,(x/2)^{\nu+2r}$ and
+$\partial_\nu[1/\Gamma(\nu+r+1)]=-\psi(\nu+r+1)/\Gamma(\nu+r+1)$.
+At $\nu=n$, where $\Gamma(n+r+1)=(n+r)!$,
 \[
 \left.\partial_\nu J_\nu\right|_n
 =J_nL-\sum_{r=0}^\infty
 \frac{(-1)^r(x/2)^{n+2r}\psi(n+r+1)}{r!(n+r)!}.
 \tag{1}
 \]
-For the second, the power $(x/2)^{-\nu}$ contributes $-L$, while
-the derivative of $1/\Gamma(r-\nu+1)$ contributes
-$+\psi(r-\nu+1)/\Gamma(r-\nu+1)$. Thus
+For the second, use
+$J_{-\nu}=\sum_{r\ge0}(-1)^r(x/2)^{2r-\nu}/[r!\,\Gamma(r-\nu+1)]$.
+The power $(x/2)^{-\nu}$ contributes $-L$, while by the chain rule
+($d(r-\nu+1)/d\nu=-1$) the derivative of $1/\Gamma(r-\nu+1)$
+contributes $+\psi(r-\nu+1)/\Gamma(r-\nu+1)$. Thus
 \[
 \left.\partial_\nu J_{-\nu}\right|_n
 =-J_{-n}L+\sum_{r=0}^\infty
@@ -2614,13 +2792,17 @@ $+\psi(r-\nu+1)/\Gamma(r-\nu+1)$. Thus
 \tag{2}
 \]
 The values at gamma poles are limits. To derive them, set
-$z=-q+\epsilon$, $q=0,1,\ldots$. The simple pole of gamma gives
+$z=-q+\epsilon$, $q=0,1,\ldots$. Gamma has a simple pole at $-q$
+with residue $(-1)^q/q!$, so $\Gamma(-q+\epsilon)=(-1)^q/(q!\,\epsilon)
++O(1)$. Hence the entire function $1/\Gamma$ has a simple zero there;
+with $\psi/\Gamma=\Gamma'/\Gamma^2=-(1/\Gamma)'$,
 \[
 \frac1{\Gamma(-q+\epsilon)}=(-1)^q q!\epsilon+O(\epsilon^2),
 \quad
-\frac\psi\Gamma=-\left(\frac1\Gamma\right)'
+\frac\psi\Gamma(-q+\epsilon)=-\left(\frac1\Gamma\right)'(-q+\epsilon)
 \longrightarrow(-1)^{q+1}q!.
 \]
+For $q\ge1$ this is the identity quoted in the hint.
 Split (2) at $r=n$. For $r<n$, $q=n-r-1$, and its summands
 become $(-1)^n(n-r-1)!(x/2)^{2r-n}/r!$. For $r\ge n$,
 put $r=n+k$ and use $\Gamma(k+1)=k!$. Since
@@ -2632,8 +2814,12 @@ $J_{-n}=(-1)^nJ_n$, this yields
 &+(-1)^n\sum_{k=0}^\infty
 \frac{(-1)^k(x/2)^{n+2k}\psi(k+1)}{k!(n+k)!}.
 \end{align*}
-Substitute this and (1) into the order-limit formula. The logarithms
-add, and both sums are subtracted:
+Substitute this and (1), with its summation index renamed $k$, into
+the order-limit formula. In the bracket, $J_nL$ from (1) and
+$-(-1)^n(-1)^{n+1}J_nL=J_nL$ add to $2J_nL$; the finite sum enters
+with a minus sign; and the two infinite sums, both with a minus
+sign, combine into one with $\psi(k+1)+\psi(n+k+1)$. Dividing by
+$\pi$,
 \begin{align*}
 \boxed{Y_n(x)={}}&\boxed{\frac2\pi J_n(x)\ln(x/2)
 -\frac1\pi\sum_{r=0}^{n-1}\frac{(n-r-1)!}{r!}(x/2)^{2r-n}}\\
@@ -2660,10 +2846,14 @@ Bessel's ODE.
 \solution
 Denote the Bessel operator by
 $L_\nu=x^2\partial_x^2+x\partial_x+x^2-\nu^2$.
-Differentiate $L_\nu J_\nu=0$ with respect to order:
+Differentiate $L_\nu J_\nu=0$ with respect to the order. The
+$\nu$-derivative commutes with the $x$-derivatives in $L_\nu$
+($J_\nu(x)$ is analytic in $\nu$ and in $x>0$), and
+$\partial_\nu L_\nu=-2\nu$, so the product rule gives
 \[
-L_\nu(\partial_\nu J_\nu)-2\nu J_\nu=0.
+L_\nu(\partial_\nu J_\nu)-2\nu J_\nu=0,
 \]
+which is the equation of the statement.
 Because $J_{-\nu}$ satisfies the same equation with the same
 $\nu^2$, differentiating $L_\nu J_{-\nu}=0$ likewise gives
 \[
@@ -2676,8 +2866,9 @@ L_nY_n
 \left.\partial_\nu J_\nu\right|_n
 -(-1)^n\left.\partial_\nu J_{-\nu}\right|_n\right]\\
 &=\frac{2n}{\pi}[J_n-(-1)^nJ_{-n}]\\
-&=\frac{2n}{\pi}[J_n-(-1)^{2n}J_n]=0.
+&=\frac{2n}{\pi}[J_n-(-1)^{2n}J_n]=0,
 \end{align*}
+where the last step uses $J_{-n}=(-1)^nJ_n$.
 Thus $\boxed{x^2Y_n''+xY_n'+(x^2-n^2)Y_n=0}$, including
 $n=0$, for which both inhomogeneous terms already vanish.
 
@@ -2767,13 +2958,24 @@ outside $[-6,6]$ are clipped. Red points mark the first three roots.
 \fill[red] (9.41820754,0) circle[radius=1.6pt];
 \end{tikzpicture}
 \end{center}
-The grid brackets them in $(3.1,3.2)$, $(6.2,6.3)$, and
-$(9.4,9.5)$, but root finding should use the continuous determinant
+The poles of $f$ are the zeros of $Y_0(x)$, at
+$x=0.8936$, $3.9577$, $7.0861$, and of $Y_0(2x)$, at
+$x=0.4468$, $1.9788$, $3.5430$, $5.1112$, $6.6805$, $8.2505$,
+$9.8207$ (half the zeros of $Y_0$). Every sign change of the table
+in an interval containing one of these is a pole, not a root. The
+remaining sign changes bracket the roots in $(3.1,3.2)$,
+$(6.2,6.3)$, and $(9.4,9.5)$, but root finding should use the
+continuous determinant
 \[
 g(x)=J_0(x)Y_0(2x)-J_0(2x)Y_0(x),\qquad
 f(x)=-\frac{g(x)}{Y_0(x)Y_0(2x)}.
 \]
-(b) Solving $g(x)=0$ inside those intervals gives
+No pole lies in these three intervals, so $g$ changes sign in each
+of them.
+
+(b) Solving $g(x)=0$ inside those intervals, for example by
+bisection (34 halvings of an interval of length $0.1$ reduce it below
+$10^{-11}$), gives
 \[
 \boxed{\lambda_1=3.1230309196,\qquad
 \lambda_2=6.2734357140,\qquad
@@ -2793,24 +2995,35 @@ $g(0^+)=2\ln2/\pi\ne0$, although $f(0^+)=0$ because each
 $Y_0$ grows logarithmically.
 
 For large $x$, substitute
-$J_0(x)\sim\sqrt{2/(\pi x)}\cos(x-\pi/4)$ and
-$Y_0(x)\sim\sqrt{2/(\pi x)}\sin(x-\pi/4)$. The sine subtraction
-identity gives
+$J_0(x)=\sqrt{2/(\pi x)}[\cos(x-\pi/4)+O(x^{-1})]$ and
+$Y_0(x)=\sqrt{2/(\pi x)}[\sin(x-\pi/4)+O(x^{-1})]$.
+The products carry the factor
+$\sqrt{2/(\pi x)}\sqrt{2/(2\pi x)}=\sqrt2/(\pi x)$, and the sine
+subtraction identity
+$\sin A\cos B-\cos A\sin B=\sin(A-B)$, with $A=2x-\pi/4$ and
+$B=x-\pi/4$, gives
 \[
 g(x)=\frac{\sqrt2}{\pi x}
 \{\sin[(2x-\pi/4)-(x-\pi/4)]+O(x^{-1})\}
 =\frac{\sqrt2}{\pi x}\{\sin x+O(x^{-1})\}.
 \]
 To justify the ordering of the roots as well as the spacing, set
-$u(\rho)=\sqrt{\rho}\,R(\rho)$. Differentiating
-$R=\rho^{-1/2}u$ in $R''+\rho^{-1}R'+\lambda^2R=0$ gives
+$u(\rho)=\sqrt{\rho}\,R(\rho)$. Differentiating $R=\rho^{-1/2}u$
+gives $R'=\rho^{-1/2}u'-\frac12\rho^{-3/2}u$ and
+$R''=\rho^{-1/2}u''-\rho^{-3/2}u'+\frac34\rho^{-5/2}u$, so
+$R''+\rho^{-1}R'=\rho^{-1/2}[u''+u/(4\rho^2)]$, and
+$R''+\rho^{-1}R'+\lambda^2R=0$ becomes
 \[
 -u''-\frac{u}{4\rho^2}=\lambda^2u,\qquad u(1)=u(2)=0.
 \]
-On $[1,2]$, $-1/4\le-1/(4\rho^2)\le-1/16$.
-Compare its Rayleigh quotient with that of $-u''$, whose
-Dirichlet eigenvalues on an interval of length one are $(j\pi)^2$.
-The minimum--maximum characterization therefore gives, for every $j\ge1$,
+On $[1,2]$, $-1/4\le-1/(4\rho^2)\le-1/16$. Hence for every
+$u\ne0$ with $u(1)=u(2)=0$ the Rayleigh quotient
+$Q[u]=\int_1^2[u'^2-u^2/(4\rho^2)]d\rho\big/\!\int_1^2u^2d\rho$
+satisfies $Q_0[u]-\frac14\le Q[u]\le Q_0[u]-\frac1{16}$, where
+$Q_0[u]=\int_1^2u'^2d\rho/\!\int_1^2u^2d\rho$ is the quotient of
+$-u''$, whose Dirichlet eigenvalues on an interval of length one are
+$(j\pi)^2$. The minimum--maximum characterization of the $j$th
+eigenvalue therefore gives, for every $j\ge1$,
 \[
 \sqrt{(j\pi)^2-\tfrac14}\le\lambda_j
 \le\sqrt{(j\pi)^2-\tfrac1{16}}.
