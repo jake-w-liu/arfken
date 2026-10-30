@@ -1618,11 +1618,13 @@ basis, as chosen in Exercise 6.5.11; unit norms alone are insufficient.}
 Expand an arbitrary vector using that basis:
 \[
 |y\rangle=\sum_n c_n|f_n\rangle,
-\qquad c_n=\langle f_n|y\rangle.
+\qquad c_n=\langle f_n|y\rangle;
 \]
-The paired equation $A|f_n\rangle=\lambda_n|g_n\rangle$ gives
+the coefficient formula follows by applying $\langle f_n|$ to the
+expansion and using $\langle f_n|f_j\rangle=\delta_{nj}$.
+By linearity and the paired equation $A|f_n\rangle=\lambda_n|g_n\rangle$,
 \[
-A|y\rangle=\sum_n c_n\lambda_n|g_n\rangle.
+A|y\rangle=\sum_n c_nA|f_n\rangle=\sum_n c_n\lambda_n|g_n\rangle.
 \]
 For the proposed expression, orthonormality gives
 \begin{align*}
@@ -1638,10 +1640,14 @@ Agreement on every vector proves
 Terms with $\lambda_n=0$ vanish, but including the corresponding right
 vectors makes the expansion of an arbitrary $y$ complete.
 For nonzero $\lambda_n$, a unit right vector has a unit left vector
-when the paired equations hold:
+when the paired equations hold: $g_n=Af_n/\lambda_n$, $(Af_n)^\dagger
+=f_n^\dagger A^{\mathsf T}$ for real $A$, and
+$A^{\mathsf T}Af_n=\lambda_n^2f_n$ by Exercise 6.5.11(a), so
 \[
 \|g_n\|^2
+=\frac{(Af_n)^\dagger Af_n}{\lambda_n^2}
 =\frac{f_n^\dagger A^{\mathsf T}Af_n}{\lambda_n^2}
+=\frac{\lambda_n^2f_n^\dagger f_n}{\lambda_n^2}
 =\|f_n\|^2=1.
 \]
 The nonnegative choices of $\lambda_n$ give the usual singular-value
@@ -1649,9 +1655,13 @@ decomposition; a negative real factor may instead be absorbed by
 reversing the sign of its $g_n$.
 
 The unit-normalized but nonorthogonal example in Exercise 6.5.11 shows
-why the qualification matters: it would give
+why the qualification matters. There $A=I_2$, $f_1=g_1=(1,0)^{\mathsf T}$,
+$f_2=g_2=(1,1)^{\mathsf T}/\sqrt2$ and $\lambda_1=\lambda_2=1$, so the
+formula would give
 \[
 |f_1\rangle\langle f_1|+|f_2\rangle\langle f_2|
+=\begin{pmatrix}1&0\\0&0\end{pmatrix}
+ +\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}
 =\begin{pmatrix}3/2&1/2\\1/2&1/2\end{pmatrix}\ne I_2,
 \]
 even though both paired factors are $1$ and the actual matrix is $I_2$.
@@ -1660,7 +1670,7 @@ even though both paired factors are $1$ and the actual matrix is $I_2$.
 \par\bigskip
 \noindent\textbf{6.5.13}\quad Given
 \[
-\mathsf{A}=\frac{1}{\sqrt{5}}\begin{pmatrix}\erratum{2}&2\\\erratum{1}&-4\end{pmatrix},
+\mathsf{A}=\frac{1}{\sqrt{5}}\begin{pmatrix}2&2\\1&-4\end{pmatrix},
 \]
 \begin{enumerate}
 \item[(a)] Construct the transpose $\tilde{\mathsf{A}}$ and the symmetric
@@ -1677,12 +1687,11 @@ even though both paired factors are $1$ and the actual matrix is $I_2$.
   $\mathsf{A}=\sum_{n}\lambda_{n}|g_{n}\rangle\langle f_{n}|$.
 \end{enumerate}
 \solution
-\erratum{The matrix's first column is $(2,1)^{\mathsf T}/\sqrt5$
-in the textbook, p.~326; the earlier transcription reversed these two
-entries. Also, the right side in part (c) must contain $f_n$, not $g_n$.
-The corrections are marked in the question.}
+\erratum{The right side in part (c) must contain $f_n$, not $g_n$,
+because by Exercise 6.5.11(a) the $f_n$ are the eigenvectors of
+$\tilde{\mathsf A}\mathsf A$. The correction is marked in the question.}
 
-(a) For the corrected matrix,
+(a) The matrix and its transpose are
 \[
 A=\frac1{\sqrt5}\begin{pmatrix}2&2\\1&-4\end{pmatrix},\qquad
 A^{\mathsf T}=\frac1{\sqrt5}\begin{pmatrix}2&1\\2&-4\end{pmatrix}.
@@ -1704,23 +1713,29 @@ AA^{\mathsf T}
 \end{align*}
 (b) Write $\mu=\lambda^2$. The characteristic determinant for
 $AA^{\mathsf T}$ is
-\[
+\begin{align*}
 \det(AA^{\mathsf T}-\mu I)
-=\frac{(8-5\mu)(17-5\mu)-36}{25}
+&=\frac{1}{25}\begin{vmatrix}8-5\mu&-6\\-6&17-5\mu\end{vmatrix}
+=\frac{(8-5\mu)(17-5\mu)-36}{25}\\
+&=\frac{25\mu^2-125\mu+100}{25}
 =\mu^2-5\mu+4=(\mu-1)(\mu-4).
-\]
+\end{align*}
 Thus the nonnegative singular values are $\lambda_1=1$, $\lambda_2=2$.
-For $\mu=1$, the first row of the eigenvector equation gives
-$3g_x-6g_y=0$, so $g_x=2g_y$.
-For $\mu=4$, it gives $-12g_x-6g_y=0$, so $g_y=-2g_x$.
-The two raw vectors have squared length $5$ and scalar product
-$2-2=0$, giving
+For $g=(g_x,g_y)^{\mathsf T}$, the first row of
+$5(AA^{\mathsf T}-\mu I)g=0$ reads $(8-5\mu)g_x-6g_y=0$.
+For $\mu=1$ it gives $3g_x-6g_y=0$, so $g_x=2g_y$.
+For $\mu=4$ it gives $-12g_x-6g_y=0$, so $g_y=-2g_x$.
+Taking $g_y=1$ in the first case and $g_x=1$ in the second, the raw
+vectors $(2,1)^{\mathsf T}$ and $(1,-2)^{\mathsf T}$ have squared
+length $5$ and scalar product $2-2=0$, giving
 \[
 g_1=\frac{(2,1)^{\mathsf T}}{\sqrt5},\qquad
  g_2=\frac{(1,-2)^{\mathsf T}}{\sqrt5}.
 \]
 (c) The matrix $A^{\mathsf T}A=\operatorname{diag}(1,4)$ is already
-diagonal, so the matching orthonormal right vectors are
+diagonal. Its eigenvalues $\mu=1,4$ are those of (b), so again
+$\lambda_1=1$, $\lambda_2=2$, and the matching orthonormal right vectors
+are the coordinate vectors
 \[
 f_1=(1,0)^{\mathsf T},\qquad f_2=(0,1)^{\mathsf T}.
 \]
@@ -1735,7 +1750,9 @@ A^{\mathsf T}g_1
 &=\frac15\begin{pmatrix}2\cdot1+1\cdot(-2)\\2\cdot1-4\cdot(-2)\end{pmatrix}
 =\begin{pmatrix}0\\2\end{pmatrix}=2f_2.
 \end{align*}
-(e) Finally, form the two outer products:
+(e) Finally, form the two outer products. Since $f_n$ is the $n$th
+coordinate vector, $g_nf_n^{\mathsf T}$ has the column $g_n$ in
+column $n$ and zeros elsewhere:
 \[
 \lambda_1g_1f_1^{\mathsf T}+\lambda_2g_2f_2^{\mathsf T}
 =\frac1{\sqrt5}\begin{pmatrix}2&0\\1&0\end{pmatrix}
@@ -1771,7 +1788,8 @@ the Instructor's Manual, p.~86, says to disregard it.}
 
 (a) Both given families are orthonormal: the $f_n$ are coordinate
 vectors, while $g_1^\dagger g_2=(1-1)/2=0$ and each $g_n$ has norm one.
-Use Exercise 6.5.12:
+Use Exercise 6.5.12; as in Exercise 6.5.13(e), $g_nf_n^{\mathsf T}$
+has the column $g_n$ in column $n$ and zeros elsewhere:
 \begin{align*}
 A&=g_1f_1^{\mathsf T}-g_2f_2^{\mathsf T}\\
 &=\frac1{\sqrt2}\begin{pmatrix}1&0\\1&0\end{pmatrix}
@@ -1792,14 +1810,22 @@ A^{\mathsf T}g_1=\frac12\begin{pmatrix}1+1\\-1+1\end{pmatrix}=f_1,
 \qquad
 A^{\mathsf T}g_2=\frac12\begin{pmatrix}1-1\\-1-1\end{pmatrix}=-f_2.
 \]
-All paired equations hold with the supplied signs. To check explicitly
-why the original terminology fails,
+All paired equations hold with the given signs. To check explicitly
+why the textbook's terms ``eigenvalues'' and ``eigenvectors'' do not
+apply, compute the characteristic polynomial of $A$:
 \[
-\det(A-\mu I)=\mu^2-\sqrt2\mu+1,
-\qquad \mu=\frac{1\pm i}{\sqrt2}.
+\det(A-\mu I)
+=\Bigl(\frac1{\sqrt2}-\mu\Bigr)^2+\frac12
+=\mu^2-\sqrt2\mu+1,
+\qquad \mu=\frac{\sqrt2\pm\sqrt{2-4}}{2}=\frac{1\pm i}{\sqrt2}.
 \]
 These are the actual eigenvalues of $A$, and neither equals $1$ or $-1$.
-Its ordinary singular values are $1,1$, since $A^{\mathsf T}A=I$;
+Its ordinary singular values are $1,1$, since
+\[
+A^{\mathsf T}A=\frac12\begin{pmatrix}1&1\\-1&1\end{pmatrix}
+\begin{pmatrix}1&-1\\1&1\end{pmatrix}
+=\frac12\begin{pmatrix}2&0\\0&2\end{pmatrix}=I;
+\]
 replacing $g_2$ by $-g_2$ converts the second paired factor to $+1$.
 
 \Needspace{5\baselineskip}
@@ -1830,7 +1856,9 @@ same fixed matrix $H$. Either converse is false for only one fixed
 value of $a$.}
 
 (a) The matrix exponential is defined by its convergent power series.
-Taking its adjoint term by term, and using real $a$ and $H^\dagger=H$,
+Taking its adjoint term by term, with
+$\bigl((ia)^kH^k\bigr)^\dagger=(-ia)^k(H^\dagger)^k$ for real $a$, and
+using $H^\dagger=H$,
 \[
 U(a)^\dagger
 =\sum_{k=0}^\infty\frac{(-ia)^k(H^\dagger)^k}{k!}
@@ -1840,28 +1868,53 @@ The last equality follows because $iaH$ and $-iaH$ commute, so the
 product of their exponentials is $e^0=I$. Thus $U(a)$ is unitary.
 
 (b) Suppose now that $U(a)^\dagger U(a)=I$ throughout an interval
-about zero. The power series gives
+about zero. The power series and its adjoint (as in (a), now without
+assuming $H^\dagger=H$) begin
+\[
+U(a)=I+iaH+O(a^2),\qquad U(a)^\dagger=I-iaH^\dagger+O(a^2),
+\]
+so
 \[
 U(0)=I,\qquad U'(0)=iH,\qquad
 \left.\frac{dU^\dagger}{da}\right|_{a=0}=-iH^\dagger.
 \]
-Differentiate the unitary identity and evaluate at zero:
+Differentiate the unitary identity by the product rule,
+$(U^\dagger U)'=(U^\dagger)'U+U^\dagger U'$, and evaluate at zero:
 \[
 0=\left.\frac{d}{da}(U^\dagger U)\right|_{0}
 =(-iH^\dagger)I+I(iH)=i(H-H^\dagger).
 \]
 Therefore $\boxed{H=H^\dagger}$.
 
-For parts (c) and (d) we first establish a determinant identity valid
-for every finite square matrix $H$, whether or not it is diagonalizable.
-Let $F(a)=\det U(a)$. The exponential is invertible and
-$U'=iHU$. If $C_{ij}$ denotes the cofactor of entry $U_{ij}$,
-differentiation of the determinant and the inverse-cofactor formula give
+For Hermitian $H$ the hint settles (c) at once: in the eigenbasis of
+$H$, $\det U=\prod_je^{iah_j}=e^{ia\sum_jh_j}=e^{ia\operatorname{tr}H}$.
+But in (c) and (d) $H$ need not be Hermitian or even diagonalizable,
+which is why the hint is restricted:
+$H=\bigl(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\bigr)$ has only
+the eigenvalue $0$, so a diagonal $S^{-1}HS$, whose diagonal entries
+are the eigenvalues of $H$ (Exercise 6.4.1), would have to be $0$,
+giving $H=S\,0\,S^{-1}=0$, which is false. We therefore establish the
+same determinant identity for every finite square matrix $H$, whether
+or not it is diagonalizable.
+Let $F(a)=\det U(a)$. The exponential is invertible, with inverse
+$e^{-iaH}$ (as in (a), the exponentials of the commuting matrices $iaH$
+and $-iaH$ multiply to $e^0=I$), and termwise differentiation of its
+series gives
+\[
+U'(a)=\sum_{k=1}^\infty\frac{k\,i^ka^{k-1}H^k}{k!}
+=iH\sum_{k=1}^\infty\frac{(iaH)^{k-1}}{(k-1)!}=iHU(a).
+\]
+Let $C_{ij}$ denote the cofactor of entry $U_{ij}$. The Laplace
+expansion along row $i$, $F=\sum_kU_{ik}C_{ik}$, contains $U_{ij}$ only
+in the term $U_{ij}C_{ij}$, because no cofactor $C_{ik}$ involves
+row $i$; hence $\partial F/\partial U_{ij}=C_{ij}$. The chain rule and
+the inverse-cofactor formula $U^{-1}=\operatorname{adj}U/F$, with
+$(\operatorname{adj}U)_{ji}=C_{ij}$, then give
 \[
  F'=\sum_{i,j}C_{ij}U'_{ij},\qquad
  C_{ij}=F(U^{-1})_{ji}.
 \]
-Consequently
+Consequently, since $\sum_i(U^{-1})_{ji}U'_{ij}=(U^{-1}U')_{jj}$,
 \[
  F'=F\sum_{i,j}(U^{-1})_{ji}U'_{ij}
    =F\operatorname{tr}(U^{-1}U'),
@@ -1869,10 +1922,18 @@ Consequently
 which is Jacobi's formula with all indices accounted for. Hence
 \[
 F'=i\operatorname{tr}(U^{-1}HU)F=i(\operatorname{tr}H)F,
-\qquad F(0)=1,
+\qquad F(0)=\det I=1,
 \]
 where trace invariance was proved in Exercise 6.4.1. Solving this scalar
-constant-coefficient equation yields
+constant-coefficient equation with the integrating factor
+$e^{-ia\operatorname{tr}H}$,
+\[
+\frac{d}{da}\bigl[e^{-ia\operatorname{tr}H}F(a)\bigr]
+=e^{-ia\operatorname{tr}H}\bigl[F'-i(\operatorname{tr}H)F\bigr]=0,
+\qquad
+e^{-ia\operatorname{tr}H}F(a)=F(0)=1,
+\]
+yields
 \[
 \boxed{\det U(a)=e^{ia\operatorname{tr}H}.}
 \]
@@ -1897,8 +1958,9 @@ P=\begin{pmatrix}0&1\\0&1\end{pmatrix},\qquad P^2=P,
 \qquad H=2\pi P,
 \qquad a_0=1.
 \]
-This $H$ is not Hermitian and has trace $2\pi$. Nevertheless the
-idempotence allows its exponential to be summed exactly:
+This $H$ is not Hermitian ($P^\dagger=P^{\mathsf T}\ne P$) and has
+trace $2\pi$. Nevertheless the idempotence, which gives $P^k=P$ for
+every $k\ge1$ by induction, allows its exponential to be summed exactly:
 \[
 e^{iH}=I+\sum_{k=1}^\infty\frac{(2\pi i)^k}{k!}P
 =I+(e^{2\pi i}-1)P=I.
@@ -1929,17 +1991,26 @@ e^Av=\sum_{k=0}^\infty\frac{A^kv}{k!}
 Thus every eigenvector of $A$ remains an eigenvector of $B=e^A$, with
 its eigenvalue exponentiated. In the question's notation,
 $\boxed{B_i=e^{A_i}}$. The proof works for each eigenvector even if
-$A$ is defective and lacks a complete eigenbasis.
+$A$ is defective and lacks a complete eigenbasis. When $A$ does have
+$n$ linearly independent eigenvectors $v_i$ (for instance, when $A$ is
+normal), let them be the columns of $S$. Then $BS=S\operatorname{diag}(e^{A_i})$,
+so $B=S\operatorname{diag}(e^{A_i})S^{-1}$, and by the similarity
+invariance of the characteristic polynomial (Exercise 6.4.1) the
+$e^{A_i}$ are all $n$ eigenvalues of $B$, counted with multiplicity.
 
 \erratum{``The same eigenvectors'' should mean this forward implication;
 $e^A$ can have additional eigendirections when different eigenvalues
-of $A$ have the same exponential.} For example,
+of $A$ have the same exponential.} For example, the powers of a
+diagonal matrix are diagonal with the powers of its entries, so
 \[
-A=\operatorname{diag}(0,2\pi i),\qquad e^A=I_2.
+A=\operatorname{diag}(0,2\pi i),\qquad
+e^A=\operatorname{diag}(e^0,e^{2\pi i})=I_2.
 \]
 The vector $(1,1)^{\mathsf T}$ is an eigenvector of $e^A$ but not of
-$A$. This also explains why exponentiating eigenvalues need not preserve
-the multiplicities of distinct eigenspaces.
+$A$, since $A(1,1)^{\mathsf T}=(0,2\pi i)^{\mathsf T}$ is not a multiple
+of $(1,1)^{\mathsf T}$. The distinct eigenvalues $0$ and $2\pi i$ of
+$A$, each with a one-dimensional eigenspace, have the same exponential
+$1$, whose eigenspace for $e^A$ is the whole plane.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1962,7 +2033,9 @@ P^2v=P(\rho_\lambda v)=\rho_\lambda Pv
 \]
 Thus the eigenvalue of $P^2$ on this same vector is
 $(\rho^2)_\lambda=(\rho_\lambda)^2$.
-But $P^2=P$, so it is also $\rho_\lambda$:
+But $P^2=P$, so it is also $\rho_\lambda$: indeed
+$\bigl[(\rho_\lambda)^2-\rho_\lambda\bigr]v=P^2v-Pv=0$ with $v\ne0$.
+Hence
 \[
 (\rho_\lambda)^2=\rho_\lambda,
 \qquad\rho_\lambda(\rho_\lambda-1)=0,
@@ -1972,7 +2045,9 @@ The interpretation is direct. If $v$ lies in the range of $P$, say
 $v=Pw$, then $Pv=P^2w=Pw=v$. If it lies in the kernel, $Pv=0$.
 Every vector decomposes as
 $w=Pw+(I-P)w$, with the first part in the range and the second in the
-kernel because $P(I-P)=0$.
+kernel because $P(I-P)=P-P^2=0$. So the range is the eigenspace for
+$1$, the kernel is the eigenspace for $0$, and together they span the
+whole space.
 \erratum{The eigenvalues belong to $\{0,1\}$; both need not occur.
 For example, $P=0$ has only eigenvalue $0$, and $P=I$ has only eigenvalue $1$.}
 
@@ -1999,14 +2074,19 @@ $|\delta_{i}|\ll1$.
 spanning the $n$-dimensional (complex) space.
 \solution
 First allow the mutually orthogonal eigenvectors to have arbitrary
-nonzero norms $s_i=\langle x_i|x_i\rangle>0$.
-Inserting the given expansion and using
-$\langle x_i|x_j\rangle=0$ for $i\ne j$ gives
+nonzero norms $s_i=\langle x_i|x_i\rangle>0$, so that
+$\langle x_i|x_j\rangle=s_i\delta_{ij}$. Write the given expansion as
+$|x\rangle=\sum_{i=1}^nc_i|x_i\rangle$ with $c_1=1$ and $c_i=\delta_i$
+for $i\ge2$; then $A|x\rangle=\sum_jc_j\lambda_j|x_j\rangle$ and
+$\langle x|=\sum_ic_i^*\langle x_i|$, so
 \begin{align*}
 \langle x|x\rangle
-&=s_1+\sum_{i=2}^n|\delta_i|^2s_i,\\
+&=\sum_{i,j}c_i^*c_j\langle x_i|x_j\rangle
+=\sum_i|c_i|^2s_i
+=s_1+\sum_{i=2}^n|\delta_i|^2s_i,\\
 \langle x|A|x\rangle
-&=\lambda_1s_1+\sum_{i=2}^n\lambda_i|\delta_i|^2s_i.
+&=\sum_{i,j}c_i^*c_j\lambda_j\langle x_i|x_j\rangle
+=\lambda_1s_1+\sum_{i=2}^n\lambda_i|\delta_i|^2s_i.
 \end{align*}
 There are no linear terms in $\delta_i$ because every such term contains
 an inner product of two distinct eigenvectors. Subtract the Rayleigh
@@ -2025,9 +2105,12 @@ positive. Thus $R(x)\le\lambda_1$, with equality exactly when every
 $\delta_i=0$ under the distinct-eigenvalue assumption.
 
 For an orthonormal choice, all $s_i=1$. Put
-$S=\sum_{i=2}^n|\delta_i|^2$ and
+$S=\sum_{i=2}^n|\delta_i|^2=\|\delta\|^2$ and
 $N=\sum_{i=2}^n(\lambda_1-\lambda_i)|\delta_i|^2$. The exact deficit is
-$N/(1+S)$. Since $S$ and $N$ are both of second order,
+$N/(1+S)$. Both are of second order: if $\lambda_{\min}$ is the
+smallest eigenvalue, $0\le N\le(\lambda_1-\lambda_{\min})S$, so
+$NS=O(\|\delta\|^4)$. With the geometric series
+$1/(1+S)=1-S+O(S^2)$,
 \[
 \lambda_1-R(x)=N(1-S+O(S^2))
 =\sum_{i=2}^n(\lambda_1-\lambda_i)|\delta_i|^2
@@ -2072,8 +2155,8 @@ on a horizontal line.
 \item[(c)] Determine the eigenvectors and thus the normal modes of motion.
 \end{enumerate}
 \solution
-The source figure has three springs with the same constant $k$ and
-two masses of the same mass $m$. Take $m,k>0$ and measure both
+In Fig.~6.5 the three springs have the same constant $k$, and the two
+masses the same mass $m$. Take $m,k>0$ and measure both
 displacements to the right from equilibrium.
 
 (a) The left outer spring exerts $-kx_1$ on mass 1. The middle spring's
@@ -2091,7 +2174,9 @@ m\ddot{\boldsymbol x}+k
 \]
 (b) Seek a normal mode
 $\boldsymbol x(t)=\boldsymbol X e^{i\omega t}$ and use
-$\ddot{\boldsymbol x}=-\omega^2\boldsymbol x$. Then
+$\ddot{\boldsymbol x}=-\omega^2\boldsymbol x$. The matrix equation
+becomes $-m\omega^2\boldsymbol X+k\begin{pmatrix}2&-1\\-1&2\end{pmatrix}
+\boldsymbol X=0$; dividing by $k$,
 \[
 \begin{pmatrix}2&-1\\-1&2\end{pmatrix}\boldsymbol X
 =\lambda\boldsymbol X,
@@ -2103,17 +2188,20 @@ The secular equation is
 =(2-\lambda)^2-1
 =\lambda^2-4\lambda+3=(\lambda-1)(\lambda-3).
 \]
-Thus
+Thus $\lambda=1$ or $3$, and $\omega=\sqrt{\lambda k/m}$ gives
 \[
 \boxed{\omega_+=\sqrt{k/m},\qquad\omega_-=\sqrt{3k/m}.}
 \]
-\erratum{Part (b) asks for eigenvectors in the source; the secular
+(The subscripts refer to the symmetric and antisymmetric modes found in
+(c).)
+\erratum{Part (b) asks for eigenvectors in the textbook; the secular
 equation determines the eigenvalues. The eigenvectors are then found
 in part (c), as follows.}
 
-(c) For $\lambda=1$, the first row is $X_1-X_2=0$; choose the
-unit vector $u_+=(1,1)^{\mathsf T}/\sqrt2$. The masses move in phase
-with equal displacement, so the middle spring has no changing extension.
+(c) For $\lambda=1$, the first row, $(2-\lambda)X_1-X_2=0$, is
+$X_1-X_2=0$; choose the unit vector $u_+=(1,1)^{\mathsf T}/\sqrt2$.
+The masses move in phase with equal displacement, so the middle spring
+has no changing extension.
 For $\lambda=3$, the first row is $-X_1-X_2=0$; choose
 $u_-=(1,-1)^{\mathsf T}/\sqrt2$. The masses move with equal amplitudes
 and opposite signs, stretching and compressing the middle spring.
@@ -2125,8 +2213,17 @@ Q_+=\frac{x_1+x_2}{\sqrt2},\qquad Q_-=\frac{x_1-x_2}{\sqrt2}.
 \]
 Adding and subtracting the Newton equations gives
 \[
+m(\ddot x_1+\ddot x_2)=-k(x_1+x_2),\qquad
+m(\ddot x_1-\ddot x_2)=-3k(x_1-x_2),
+\]
+and dividing by $\sqrt2$,
+\[
 m\ddot Q_++kQ_+=0,\qquad m\ddot Q_-+3kQ_-=0.
 \]
+Each normal coordinate oscillates harmonically,
+$Q_\pm=C_\pm\cos(\omega_\pm t+\delta_\pm)$, and
+$\boldsymbol x=Q_+u_++Q_-u_-$, because $u_\pm$ are orthonormal and
+$Q_\pm=u_\pm^{\mathsf T}\boldsymbol x$.
 Therefore the general real motion can be written
 \[
 \boxed{\boldsymbol x(t)
@@ -2146,7 +2243,10 @@ $(\mathsf{A}-\mathsf{A}^{\dagger})/2i$ has eigenvalues $\Im(\lambda_{j})$.
 \solution
 First show that a right eigenvector of a normal matrix is also an
 eigenvector of its adjoint with the conjugate eigenvalue. If
-$Ax_j=\lambda_jx_j$, put $B=A-\lambda_jI$. It is normal because
+$Ax_j=\lambda_jx_j$, put $B=A-\lambda_jI$, so that
+$B^\dagger=A^\dagger-\lambda_j^*I$. It is normal because the terms
+$-\lambda_j^*A-\lambda_jA^\dagger+|\lambda_j|^2I$ occur in both products
+and cancel:
 \[
 BB^\dagger-B^\dagger B=AA^\dagger-A^\dagger A=0.
 \]
@@ -2170,9 +2270,13 @@ Now add and subtract the two eigenvalue equations:
 =\frac{\lambda_j-\lambda_j^*}{2i}x_j
 =\boxed{\Im(\lambda_j)x_j}.
 \]
-Thus the adjoint and both Hermitian parts share the original
-orthonormal eigenbasis; the indicated eigenvalues follow on each basis
-vector, including degenerate eigenspaces.
+Thus every eigenvector of $A$ is an eigenvector of the adjoint and of
+both Hermitian parts. A normal matrix has a complete orthonormal set of
+eigenvectors $x_j$ (Section~6.5; see Exercise 6.5.8), so each of the
+three matrices is diagonal in that basis, with diagonal entries
+$\lambda_j^*$, $\Re(\lambda_j)$, and $\Im(\lambda_j)$, respectively.
+These are therefore all of their eigenvalues, counted with
+multiplicity, including degenerate eigenspaces.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2188,9 +2292,16 @@ $\alpha=\pi/4$, $\beta=\pi/2$, $\gamma=5\pi/4$.
 \emph{Note.}~This technique provides a representation of rotations alternative
 to the Euler angles.
 \solution
-(a) Equation (3.37), verified against textbook p.~141, uses
-$U=S_3(\gamma)S_2(\beta)S_1(\alpha)$, where the rotations act on
-coordinates. Set $c=1/\sqrt2$. The specified angles give
+(a) Equation (3.37), reproduced in Exercise 3.4.1, is the product
+$U=S_3(\gamma)S_2(\beta)S_1(\alpha)$ of rotations of the coordinate axes,
+\[
+S_1(\alpha)=\begin{pmatrix}\cos\alpha&\sin\alpha&0\\
+-\sin\alpha&\cos\alpha&0\\0&0&1\end{pmatrix},\quad
+S_2(\beta)=\begin{pmatrix}\cos\beta&0&-\sin\beta\\
+0&1&0\\\sin\beta&0&\cos\beta\end{pmatrix},
+\]
+and $S_3(\gamma)$ of the same form as $S_1$, with $\gamma$ in place of
+$\alpha$. Set $c=1/\sqrt2$. The specified angles give
 \[
 \cos\alpha=\sin\alpha=c,\quad
 \cos\beta=0,\quad\sin\beta=1,\quad
@@ -2203,9 +2314,17 @@ S_2=\begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix},\quad
 S_3=\begin{pmatrix}-c&-c&0\\c&-c&0\\0&0&1\end{pmatrix},
 \]
 \[
-S_2S_1=\begin{pmatrix}0&0&-1\\-c&c&0\\c&c&0\end{pmatrix}.
+S_2S_1=\begin{pmatrix}0&0&-1\\-c&c&0\\c&c&0\end{pmatrix};
 \]
-Multiplying by $S_3$ on the left gives
+its rows are minus the third row, the second row, and the first row
+of $S_1$. Multiplying by $S_3$ on the left: if $r_1,r_2,r_3$ denote the
+rows of $S_2S_1$, the rows of $U$ are
+\[
+-c(r_1+r_2)=(c^2,-c^2,c),\qquad
+c(r_1-r_2)=(c^2,-c^2,-c),\qquad
+r_3=(c,c,0).
+\]
+With $c^2=1/2$,
 \[
 \boxed{U=\begin{pmatrix}
 1/2&-1/2&1/\sqrt2\\
@@ -2218,16 +2337,21 @@ determinant is $1$, as also follows from the three proper-rotation
 factors.
 
 (b) To display the characteristic calculation without fractions,
-expand the determinant of $2(U-\lambda I)$:
+expand the determinant of $2(U-\lambda I)$, which equals
+$2^3\det(U-\lambda I)$, along its first row:
 \begin{align*}
 8\det(U-\lambda I)
 &=\begin{vmatrix}
 1-2\lambda&-1&\sqrt2\\1&-1-2\lambda&-\sqrt2\\
 \sqrt2&\sqrt2&-2\lambda
 \end{vmatrix}\\
+&=(1-2\lambda)\bigl[(1+2\lambda)2\lambda+2\bigr]
+ +\bigl[-2\lambda+2\bigr]
+ +\sqrt2\bigl[\sqrt2+(1+2\lambda)\sqrt2\bigr]\\
 &=(1-2\lambda)(4\lambda^2+2\lambda+2)
   +(2-2\lambda)+4(1+\lambda)\\
-&=8(1-\lambda^3).
+&=(2-2\lambda-8\lambda^3)+(6+2\lambda)
+=8(1-\lambda^3).
 \end{align*}
 Thus
 \[
@@ -2235,52 +2359,93 @@ Thus
 \boxed{\lambda_0=1,\quad
 \lambda_\pm=\frac{-1\pm i\sqrt3}{2}=e^{\pm2\pi i/3}.}
 \]
-For an eigenvector $(x,y,z)^{\mathsf T}$, adding the first two rows of
-the eigenvalue equation and retaining the third gives
+For an eigenvector $(x,y,z)^{\mathsf T}$, the rows of
+$2(U-\lambda I)(x,y,z)^{\mathsf T}=0$ are
+\[
+(1-2\lambda)x-y+\sqrt2z=0,\qquad
+x-(1+2\lambda)y-\sqrt2z=0,\qquad
+\sqrt2x+\sqrt2y-2\lambda z=0.
+\]
+Adding the first two rows and dividing by $2$, and dividing the third
+by $\sqrt2$, gives
 \[
 (1-\lambda)x-(1+\lambda)y=0,\qquad
 x+y=\sqrt2\lambda z.
 \]
+Once these hold, the first row implies the second, because the sum
+of the two is satisfied.
 At $\lambda=1$ the first equation gives $y=0$ and the second gives
-$x=\sqrt2 z$. The remaining row also holds. Normalizing yields the
-fixed-axis vector
+$x=\sqrt2 z$. The first row, $-x+\sqrt2z=0$, also holds. Normalizing
+yields the fixed-axis vector
 \[
 \boxed{n=\frac{(\sqrt2,0,1)^{\mathsf T}}{\sqrt3}.}
 \]
 For $\lambda=\lambda_\pm$, substitute
 $y=\sqrt2\lambda z-x$ into the first equation:
 \[
-2x-\sqrt2\lambda(1+\lambda)z=0.
+(1-\lambda)x+(1+\lambda)x-\sqrt2\lambda(1+\lambda)z
+=2x-\sqrt2\lambda(1+\lambda)z=0.
 \]
-Since $\lambda^2+\lambda+1=0$, this gives $x=-z/\sqrt2$ and then
+Since $\lambda^2+\lambda+1=0$, we have $\lambda(1+\lambda)=-1$, so
+$2x+\sqrt2z=0$, i.e.\ $x=-z/\sqrt2$, and then, with
+$1+2\lambda_\pm=\pm i\sqrt3$,
 \[
-y=\frac{1+2\lambda}{\sqrt2}z
+y=\sqrt2\lambda z+\frac{z}{\sqrt2}
+=\frac{1+2\lambda}{\sqrt2}z
 =\pm i\sqrt{\frac32}\,z.
 \]
-For $z=1$ the squared Hermitian norm is $1/2+3/2+1=3$, so
+The first row then holds as well:
+$(1-2\lambda)x-y+\sqrt2z
+=\bigl[-(1-2\lambda)-(1+2\lambda)+2\bigr]z/\sqrt2=0$, so
+$Uu_\pm=\lambda_\pm u_\pm$ for the normalized vectors below.
+For $z=1$ the squared Hermitian norm is
+$|x|^2+|y|^2+|z|^2=1/2+3/2+1=3$, so
 \[
 \boxed{u_\pm=
 \begin{pmatrix}-1/\sqrt6\\ \pm i/\sqrt2\\1/\sqrt3\end{pmatrix}.}
 \]
-Substitution into the unused row gives $Uu_\pm=\lambda_\pm u_\pm$.
 Also $n^\dagger u_\pm=-1/3+1/3=0$ and
 $u_+^\dagger u_-=1/6-1/2+1/3=0$, so these three vectors are
 orthonormal.
 
 The rotation axis is the line through the origin parallel to
-$(\sqrt2,0,1)$, and its unsigned angle is $2\pi/3=120^\circ$.
+$(\sqrt2,0,1)$, the direction left fixed by $U$. A rotation through an
+angle $\varphi$ about this axis turns the plane perpendicular to it
+through $\varphi$, so its other two eigenvalues are $e^{\pm i\varphi}$;
+comparison with $\lambda_\pm=e^{\pm2\pi i/3}$ gives the unsigned angle
+$2\pi/3=120^\circ$.
 The sign can be fixed, rather than inferred only from a conjugate pair
-of eigenvalues. Define $[n]_\times v=n\times v$. Direct subtraction gives
+of eigenvalues. Define $[n]_\times v=n\times v$; for
+$n=(n_1,n_2,n_3)^{\mathsf T}$,
+\[
+[n]_\times=\begin{pmatrix}0&-n_3&n_2\\n_3&0&-n_1\\-n_2&n_1&0\end{pmatrix}.
+\]
+Direct subtraction, and this form with $\sqrt3\,n=(\sqrt2,0,1)^{\mathsf T}$,
+give
 \[
 U-U^{\mathsf T}
 =\begin{pmatrix}0&-1&0\\1&0&-\sqrt2\\0&\sqrt2&0\end{pmatrix}
 =\sqrt3\,[n]_\times.
 \]
-For an active right-handed rotation, $R-R^{\mathsf T}
-=2\sin\varphi[n]_\times$, while
-$\operatorname{tr}U=0=1+2\cos\varphi$. Thus active application of $U$
-to a column vector is a rotation by $+120^\circ$ about $n$.
-\erratum{Equation (3.37) is a passive coordinate transformation.
-The corresponding rotation of the coordinate axes is therefore
-$-120^\circ$ about $n$, equivalently $+120^\circ$ about $-n$.
-The directed angle must be paired with the chosen direction of the axis.}
+An active right-handed rotation through $\varphi$ about the unit
+vector $n$ has the Rodrigues form
+$R=\cos\varphi\,I+\sin\varphi\,[n]_\times+(1-\cos\varphi)\,nn^{\mathsf T}$,
+in which the first and third terms are symmetric and
+$[n]_\times^{\mathsf T}=-[n]_\times$. Hence, using
+$\operatorname{tr}[n]_\times=0$ and $\operatorname{tr}(nn^{\mathsf T})=1$,
+\[
+R-R^{\mathsf T}=2\sin\varphi\,[n]_\times,\qquad
+\operatorname{tr}R=3\cos\varphi+(1-\cos\varphi)=1+2\cos\varphi.
+\]
+For $U$, $\operatorname{tr}U=\tfrac12-\tfrac12+0=0$ gives
+$\cos\varphi=-\tfrac12$, and $U-U^{\mathsf T}=\sqrt3\,[n]_\times$ gives
+$\sin\varphi=\sqrt3/2$. Thus active application of $U$ to a column
+vector is a rotation by $\varphi=+120^\circ$ about $n$.
+\erratum{Equation (3.37) is a passive coordinate transformation: the
+new coordinates are $x'=Ux$, so the new axes, the rows of $U$, are
+$e'_i=U^{\mathsf T}e_i$, and $U^{\mathsf T}$, whose antisymmetric part
+$U^{\mathsf T}-U=-\sqrt3\,[n]_\times$ has the opposite sign, is the
+rotation by $-120^\circ$ about $n$. The corresponding rotation of the
+coordinate axes is therefore $-120^\circ$ about $n$, equivalently
+$+120^\circ$ about $-n$. The directed angle must be paired with the
+chosen direction of the axis.}
