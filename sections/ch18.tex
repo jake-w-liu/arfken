@@ -1702,8 +1702,8 @@ G_T(x,t)=\frac{1-t^2}{1-2xt+t^2}
        =T_0(x)+2\sum_{n=1}^\infty T_n(x)t^n,\qquad |t|<1.
 \]
 At $x=\pm1$ the denominator is $(1\mp t)^2$, and its factor $1\mp t$
-cancels against $1-t^2=(1-t)(1+t)$.  Writing each quotient as
-$2/(\text{denominator})-1$ and expanding geometrically, with
+cancels against $1-t^2=(1-t)(1+t)$.  Writing each reduced quotient as
+$2/(\text{its denominator})-1$ and expanding geometrically, with
 $2\sum_{n\ge0}t^n-1=1+2\sum_{n\ge1}t^n$, gives at the three requested
 arguments
 \begin{align*}
@@ -1867,7 +1867,8 @@ y''=\frac{y_{\theta\theta}}{\sin^2\theta}
 (1-x^2)y''-xy'+n^2y=y_{\theta\theta}+n^2y,
 \]
 the two $\cot\theta\,y_\theta$ terms cancelling.  At $n=0$ the
-equation is $d^2y/d\theta^2=0$, whose general solution is $A+B\theta$.  The missing independent solution is
+equation is $d^2y/d\theta^2=0$, whose general solution is
+$A+B\theta$.  The missing independent solution is
 therefore $\arccos x$, equivalently $\arcsin x$ up to a constant
 and a sign.  It also follows from
 $\lim_{n\to0}\sin(n\arccos x)/n=\arccos x$, treating the order
@@ -2290,7 +2291,7 @@ I_{mn}=\sum_{j=0}^m c_j
 \]
 since no index $j$ equals $n$.
 
-(b) Every power $x^{n-2m}$ in the finite series (18.114) has the
+(b) Every power $x^{n-2k}$ in the finite series (18.114) has the
 parity of $n$, so $T_n(-x)=(-1)^nT_n(x)$.
 Changing $x$ to $-u$ in the integral, which leaves the interval and
 the weight unchanged, thus gives
@@ -2557,8 +2558,9 @@ A_{mn}&=\int_{-1}^1\frac{T_mV_n}{\sqrt{1-x^2}}dx
 For $m+n$ even, $n\pm m$ are both even; for $m+n$ odd, both are odd,
 and $\frac12[2/(n+m)+2/(n-m)]=[(n-m)+(n+m)]/(n^2-m^2)=2n/(n^2-m^2)$.
 The odd-parity case cannot have $m=n$, so its denominator is
-nonzero.  For example $A_{0,1}=\int_0^\pi\sin\theta\,d\theta=2$.  Thus the two families are not
-mutually orthogonal, although all pairs of equal parity are.
+nonzero.  For example $A_{0,1}=\int_0^\pi\sin\theta\,d\theta=2$.
+Thus the two families are not mutually orthogonal, although all
+pairs of equal parity are.
 
 (b) The weight cancels the two sine denominators in $U_mW_n$, as in
 Exercise 18.4.19, and
