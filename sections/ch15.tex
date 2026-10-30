@@ -100,7 +100,7 @@ indeed any $z$ in the entire finite complex plane.
 \solution
 Write $P_n=\sum_{k=0}^{\lfloor n/2\rfloor}A_kx^{n-2k}$, with
 $A_k=(-1)^k(2n-2k)!/[2^nk!(n-k)!(n-2k)!]$
-as in Exercise 15.1.2. The Legendre operator
+as in Exercise 15.1.2. With $D=d/dx$, the Legendre operator
 $L_n=(1-x^2)D^2-2xD+n(n+1)$ acts on a monomial as
 \[
 L_n[x^j]=(1-x^2)j(j-1)x^{j-2}-2jx^j+n(n+1)x^j
@@ -187,7 +187,8 @@ $P_2^*=6x^2-6x+1$, as in the table.
 (b) The recurrence alone involves division by $n+1$, so an explicit
 coefficient formula is more useful for proving integrality.
 Transform Rodrigues's formula
-$P_n(y)=D_y^n(y^2-1)^n/(2^nn!)$, using $D_y=\tfrac12D_x$ and
+$P_n(y)=D_y^n(y^2-1)^n/(2^nn!)$, where $D_y=d/dy$, using
+$D_y=\tfrac12D_x$ (with $D_x=d/dx$, since $dy=2\,dx$) and
 $y^2-1=4x^2-4x=4x(x-1)$:
 \[
 P_n^*(x)=\frac1{2^nn!}\,\frac1{2^n}D_x^n[4^nx^n(x-1)^n]
@@ -260,7 +261,7 @@ a_2&=\tfrac23\bigl(\alpha_2+\tfrac{15}4a_4-\tfrac{105}{16}a_6\bigr)
 a_0&=\alpha_0+\tfrac12a_2-\tfrac38a_4+\tfrac5{16}a_6
 =\alpha_0+\tfrac13\alpha_2+\tfrac15\alpha_4+\tfrac17\alpha_6.
 \end{align*}
-In $a_2$, the coefficient of $\alpha_6$ is
+Inside the parentheses of $a_2$, the coefficient of $\alpha_6$ is
 $\frac{15}4\cdot\frac{24}{77}-\frac{105}{16}\cdot\frac{16}{231}
 =\frac{90}{77}-\frac{35}{77}=\frac57$; in $a_0$, those of $\alpha_4$ and
 $\alpha_6$ are $\frac27-\frac3{35}=\frac15$ and
@@ -314,7 +315,8 @@ a_3&=\tfrac25\bigl(\alpha_3+\tfrac{35}4a_5-\tfrac{315}{16}a_7\bigr)
 a_1&=\alpha_1+\tfrac32a_3-\tfrac{15}8a_5+\tfrac{35}{16}a_7
 =\alpha_1+\tfrac35\alpha_3+\tfrac37\alpha_5+\tfrac13\alpha_7.
 \end{align*}
-Here $\frac{35}4\cdot\frac8{39}-\frac{315}{16}\cdot\frac{16}{429}
+Inside the parentheses of $a_3$, the coefficient of $\alpha_7$ is
+$\frac{35}4\cdot\frac8{39}-\frac{315}{16}\cdot\frac{16}{429}
 =\frac{770-315}{429}=\frac{35}{33}$, and in $a_1$ the coefficients of
 $\alpha_5$ and $\alpha_7$ are $\frac23-\frac5{21}=\frac37$ and
 $\frac7{11}-\frac5{13}+\frac{35}{429}=\frac{143}{429}=\frac13$.
@@ -366,14 +368,14 @@ Taylor disk (in particular, for $-1\le x\le1$ and $|t|<1$)}
 This result is useful in calculating the charge induced on a grounded
 metal sphere by a nearby point charge.
 \solution
-Write $D=1-2xt+t^2$ and $g=D^{-1/2}$. Then
+Write $Q=1-2xt+t^2$ and $g=Q^{-1/2}$. Then
 \[
-g_t=-\frac12D^{-3/2}(-2x+2t)=(x-t)D^{-3/2}.
+g_t=-\frac12Q^{-3/2}(-2x+2t)=(x-t)Q^{-3/2}.
 \]
-Consequently, since $2t(x-t)+D=2xt-2t^2+1-2xt+t^2=1-t^2$,
+Consequently, since $2t(x-t)+Q=2xt-2t^2+1-2xt+t^2=1-t^2$,
 \[
 2tg_t+g
-=\frac{2t(x-t)+D}{D^{3/2}}
+=\frac{2t(x-t)+Q}{Q^{3/2}}
 =\frac{1-t^2}{(1-2xt+t^2)^{3/2}}.
 \]
 Termwise differentiation of the generating series
@@ -381,7 +383,9 @@ $g=\sum_{n\ge0}P_n(x)t^n$ in its convergence disk gives
 $2tg_t=\sum_{n\ge0}2nP_n(x)t^n$, hence
 $2tg_t+g=\sum_{n\ge0}(2n+1)P_n(x)t^n$.
 Equating the two expressions proves the identity. In particular,
-for real $-1\le x\le1$ it holds for $|t|<1$.
+for real $-1\le x\le1$ the zeros $t=x\pm i\sqrt{1-x^2}$ of $Q$ have
+$|t|^2=x^2+(1-x^2)=1$, so $g$ is analytic in $|t|<1$, its Taylor
+series converges there, and the identity holds for $|t|<1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -514,7 +518,7 @@ The only angular frequencies are $0$ and $2$.
 \]
 from the Legendre polynomial generating function.
 \solution
-Let $g=(1-2xt+t^2)^{-1/2}=\sum P_n(x)t^n$ and $D=1-2xt+t^2$.
+Let $g=(1-2xt+t^2)^{-1/2}=\sum P_n(x)t^n$ and $Q=1-2xt+t^2$.
 Termwise differentiation gives $tg_t=\sum_{n\ge0}nP_nt^n$. Put $j=n-1$
 in the first part of the proposed right-hand side and use
 $\sum_{j\ge0}(j+1)P_jt^j=tg_t+g$:
@@ -523,14 +527,14 @@ $\sum_{j\ge0}(j+1)P_jt^j=tg_t+g$:
 &=t\sum_{j\ge0}(j+1)P_jt^j-xtg_t\\
 &=t(tg_t+g)-xtg_t=tg+t(t-x)g_t.
 \end{align*}
-On the other hand, differentiating $D^{-1/2}$ gives
-$g_x=-\frac12D^{-3/2}(-2t)=tD^{-3/2}$ and
-$g_t=-\frac12D^{-3/2}(2t-2x)=(x-t)D^{-3/2}$. With
-$D-(x-t)^2=1-2xt+t^2-x^2+2xt-t^2=1-x^2$,
+On the other hand, differentiating $Q^{-1/2}$ gives
+$g_x=-\frac12Q^{-3/2}(-2t)=tQ^{-3/2}$ and
+$g_t=-\frac12Q^{-3/2}(2t-2x)=(x-t)Q^{-3/2}$. With
+$Q-(x-t)^2=1-2xt+t^2-x^2+2xt-t^2=1-x^2$,
 \[
 tg+t(t-x)g_t
-=\frac{t[D-(x-t)^2]}{D^{3/2}}
-=\frac{t(1-x^2)}{D^{3/2}}=(1-x^2)g_x.
+=\frac{t[Q-(x-t)^2]}{Q^{3/2}}
+=\frac{t(1-x^2)}{Q^{3/2}}=(1-x^2)g_x.
 \]
 Since $(1-x^2)g_x=\sum_{n\ge0}(1-x^2)P_n'(x)t^n$, compare coefficients
 of $t^n$:
@@ -600,7 +604,7 @@ For every integer $r\ge\lfloor n/2\rfloor+1$, one has $2r>n$,
 because $\lfloor n/2\rfloor>n/2-1$; so the exponent $d=2n-2r$
 satisfies $0\le d<n$ when $r\le n$.
 The derivative of a monomial of degree $d$ is zero after $d+1$
-derivatives, and hence
+derivatives, and hence, with $D=d/dx$,
 \[
 D^nx^{2n-2r}=0.
 \]
@@ -615,7 +619,8 @@ $\displaystyle\int_{-1}^{1}x^{m}P_{n}(x)\,dx=0$ when \erratum{$m,n$ are integers
 \par\emph{Hint.}~Use Rodrigues formula or expand $x^{m}$ in Legendre
 polynomials.
 \solution
-Take nonnegative integers $m<n$. Rodrigues's formula gives
+Take nonnegative integers $m<n$. Rodrigues's formula,
+$P_n=D^n(x^2-1)^n/(2^nn!)$ with $D=d/dx$, gives
 \[
 I=\frac1{2^nn!}\int_{-1}^1x^mD^n(x^2-1)^n\,dx.
 \]
@@ -644,8 +649,10 @@ because $D^nx^m=0$. This proves the required orthogonality.
 integrate by parts, but also see if you can get the result from
 Eq.~(15.14) by inspection.
 \solution
-Here $2n!$ means $2\cdot n!$; for example, the integral at $n=1$ is
-$\int_{-1}^1x^2dx=2/3$.
+Here $2n!$ means $2\cdot n!$, not $(2n)!$: for example, at $n=2$ the
+integral is $\int_{-1}^1x^2\cdot\frac12(3x^2-1)\,dx=\frac35-\frac13
+=\frac4{15}=2\cdot2!/5!!$, whereas $(2n)!/(2n+1)!!$ would give
+$\frac{24}{15}$.
 Move the $n$ Rodrigues derivatives onto $x^n$ as in Exercise 15.1.14,
 using $D^nx^n=n!$ and $(-1)^n(x^2-1)^n=(1-x^2)^n$:
 \[
@@ -673,7 +680,8 @@ Dividing by $2^n$ yields
 =\frac{2^{n+1}(n!)^2}{(2n+1)!}}.
 \]
 For the alternative inspection argument, the leading coefficient of
-$P_n$ is $(2n)!/[2^n(n!)^2]=(2n-1)!!/n!$, so
+$P_n$ (the $k=0$ term of Exercise 15.1.2) is
+$(2n)!/[2^n(n!)^2]=(2n-1)!!/n!$, so
 $x^n=n!P_n/(2n-1)!!+$ a polynomial of degree below $n$.
 The lower-degree polynomial is orthogonal to $P_n$
 (Exercise 15.1.14), and $\int P_n^2dx=2/(2n+1)$ gives the same result:
@@ -823,7 +831,8 @@ $P_{n}(x)$ are orthogonal and that
 \par\emph{Hint.}~Integrate by parts.
 \solution
 Suppose $m<n$. Rodrigues's formula
-$P_n=D^n(x^2-1)^n/(2^nn!)$ and $n$ integrations by parts, as in
+$P_n=D^n(x^2-1)^n/(2^nn!)$, with $D=d/dx$, and $n$ integrations by
+parts, as in
 Exercise 15.1.14, give
 \[
 \int_{-1}^1P_mP_n\,dx
@@ -834,7 +843,8 @@ derivatives vanish at $\pm1$; the remaining derivative of $P_m$ is zero,
 since $P_m$ has degree $m<n$. Symmetry covers $m>n$.
 
 For $m=n$, the leading coefficient
-$c_n=(2n)!/[2^n(n!)^2]$ gives $P_n^{(n)}=n!c_n$.
+$c_n=(2n)!/[2^n(n!)^2]$ of $P_n$ (the $k=0$ term of Exercise 15.1.2)
+gives $P_n^{(n)}=n!c_n$.
 The same integrations by parts yield
 \[
 \int_{-1}^1P_n^2dx
@@ -870,11 +880,22 @@ Its leading coefficient is one, since every subtracted polynomial has
 degree below $n$. For $n=0$, $g_0=1=P_0$.
 Assume the earlier $g_j$ are proportional to $P_j$.
 Both $g_n$ and $P_n$ are orthogonal to all polynomials of degree
-less than $n$. For $g_n$ this follows from the construction: $g_n$ is
-orthogonal to $g_0,\ldots,g_{n-1}$, which are monic of degrees
-$0,\ldots,n-1$ and hence span the polynomials of degree less than $n$.
+less than $n$. For $g_n$ this follows from the construction and the
+induction hypothesis: $g_0,\ldots,g_{n-1}$ are proportional to
+$P_0,\ldots,P_{n-1}$ and hence mutually orthogonal (Exercise 15.2.1),
+so for $k<n$ only the term $j=k$ of the sum survives in
+\[
+\langle g_k,g_n\rangle=\langle g_k,x^n\rangle-\sum_{j=0}^{n-1}
+\frac{\langle g_j,x^n\rangle}{\langle g_j,g_j\rangle}
+\langle g_k,g_j\rangle
+=\langle g_k,x^n\rangle-\langle g_k,x^n\rangle=0.
+\]
+Thus $g_n$ is orthogonal to $g_0,\ldots,g_{n-1}$, which are monic of
+degrees $0,\ldots,n-1$ and hence span the polynomials of degree less
+than $n$.
 For $P_n$ it follows from Rodrigues's formula (Exercise 15.1.14).
-Put $c_n=(2n)!/[2^n(n!)^2]$, the leading coefficient of $P_n$.
+Put $c_n=(2n)!/[2^n(n!)^2]$, the leading coefficient of $P_n$ (the
+$k=0$ term of Exercise 15.1.2).
 Then $h=g_n-P_n/c_n$ has degree below $n$ and is orthogonal to all
 such polynomials, including itself. Thus
 $\int_{-1}^1h(x)^2dx=0$, so the continuous polynomial $h$ is zero.
@@ -917,7 +938,8 @@ with $\phi$ term by term gives
 where the last equality is the Legendre expansion of $\phi$ evaluated
 at $x=0$.
 Here is the convergence justification for that pointwise evaluation.
-Set $L=-D[(1-x^2)D]$, so $LP_n=n(n+1)P_n$ by the Legendre ODE. For
+Set $L=-D[(1-x^2)D]$, with $D=d/dx$, so $LP_n=n(n+1)P_n$ by the
+Legendre ODE. For
 $n\ge1$, transfer $L$ from $P_n$ to $\phi$ by two integrations by parts:
 \[
 \int_{-1}^1\phi\,LP_n\,dx
@@ -931,9 +953,14 @@ this $k$ times gives
 \[
 c_n=\frac{2n+1}{2[n(n+1)]^k}\int_{-1}^1(L^k\phi)(x)P_n(x)\,dx.
 \]
-Since $|P_n(x)|\le1$ on this interval,
-$|c_n|\le(2n+1)\|L^k\phi\|_\infty/[n(n+1)]^k
-=O(n^{1-2k})$. Taking $k=2$ makes $\sum|c_n|$ converge, so
+Since $|P_n(x)|\le1$ on this interval, with
+$\|L^k\phi\|_\infty=\max_{-1\le x\le1}|L^k\phi(x)|$,
+\[
+\Bigl|\int_{-1}^1(L^k\phi)P_n\,dx\Bigr|\le2\|L^k\phi\|_\infty,
+\qquad\text{hence}\qquad
+|c_n|\le\frac{(2n+1)\|L^k\phi\|_\infty}{[n(n+1)]^k}=O(n^{1-2k}).
+\]
+Taking $k=2$ makes $\sum|c_n|$ converge, so
 $\sum c_nP_n$ converges uniformly. Its $L^2$ limit is $\phi$ by
 polynomial completeness, and continuity then gives equality at every
 point. Evaluation at zero therefore proves the required delta action.
@@ -1025,7 +1052,8 @@ Taking the inner product with a fixed $P_m$ is continuous in that
 norm, by the Cauchy--Schwarz inequality: for the partial sums
 $S_N=\sum_{n\le N}a_nP_n$ with $N\ge m$, orthogonality gives
 $\int_{-1}^1S_NP_m\,dx=2a_m/(2m+1)$, and
-$|\int_{-1}^1(f-S_N)P_m\,dx|\le\|f-S_N\|_2\|P_m\|_2\to0$.
+$|\int_{-1}^1(f-S_N)P_m\,dx|\le\|f-S_N\|_2\|P_m\|_2\to0$, where
+$\|g\|_2=(\int_{-1}^1|g|^2dx)^{1/2}$.
 The same holds for the $b_n$. Hence
 \[
 \int_{-1}^1fP_mdx=\frac{2a_m}{2m+1}
@@ -1062,7 +1090,18 @@ For a real square-integrable $f$, its Legendre projections converge
 in $L^2$. One way to establish completeness is that polynomials
 approximate continuous functions uniformly on the compact interval,
 continuous functions are dense in $L^2$, and the $P_n$ span all
-polynomials. Moreover, writing $f^2-S_N^2=(f-S_N)(f+S_N)$ and using
+polynomials. Density gives convergence of the $S_N$ because $S_N$ is
+the best approximation to $f$ among the polynomials $p$ of degree at
+most $N$. By the coefficient formula of Exercise 15.2.6,
+$\int_{-1}^1(f-S_N)P_m\,dx=\int_{-1}^1fP_m\,dx-2a_m/(2m+1)=0$ for
+$m\le N$, so $f-S_N$ is orthogonal to $P_0,\ldots,P_N$ and hence to
+$S_N-p$, and
+\[
+\|f-p\|_2^2=\|f-S_N\|_2^2+\|S_N-p\|_2^2\ge\|f-S_N\|_2^2.
+\]
+Given $\varepsilon>0$, choose a polynomial $p$ with
+$\|f-p\|_2<\varepsilon$; then $\|f-S_N\|_2<\varepsilon$ for every
+$N\ge\deg p$. Moreover, writing $f^2-S_N^2=(f-S_N)(f+S_N)$ and using
 the Cauchy--Schwarz and triangle inequalities,
 \[
 \left|\int_{-1}^1(f^2-S_N^2)\,dx\right|
@@ -1240,12 +1279,14 @@ the original uniform field.
 Choose the $z$ axis along $\mathbf E_0$ and take the initially
 uncharged conductor. The imposed potential is
 $-E_0z=-E_0rP_1(\cos\theta)$. Outside the sphere the potential is a
-sum of terms $(A_lr^l+B_lr^{-l-1})P_l(\cos\theta)$; at large $r$ only
-the imposed $l=1$ term grows, and on the sphere the potential is
-constant. Matching each $P_l$ separately therefore leaves only the
-imposed term and the decaying dipole harmonic $A\cos\theta/r^2$
-(an $l=0$ term $B_0/r$ would carry a net charge, absent for the neutral
-sphere). So outside the sphere
+sum of terms $(a_lr^l+b_lr^{-l-1})P_l(\cos\theta)$. Far away $V$ must
+approach the imposed potential, $V+E_0z\to0$ (this also fixes the
+additive constant), so $a_1=-E_0$ and all other $a_l$ vanish, including
+the constant $a_0$; and on the sphere the potential is constant.
+Matching each $P_l$ separately therefore leaves only the
+imposed term and the decaying dipole harmonic $A\cos\theta/r^2$, with
+$A=b_1$ (an $l=0$ term $b_0/r$ would carry a net charge, absent for the
+neutral sphere). So outside the sphere
 \[
 V=-E_0r\cos\theta+\frac{A}{r^2}\cos\theta.
 \]
@@ -1352,8 +1393,10 @@ $(1/r)(r/a)^{2s}=(1/a)(r/a)^{2s-1}$:
 c_s\left(\frac ra\right)^{2s-1}P'_{2s}(x)},\qquad r<a.
 \]
 The $s=0$ term is a constant and contributes no field.
-Both interior components approach zero at the origin, interpreted
-as the single Cartesian field $\mathbf E(0)=0$.
+Both interior series begin at $s=1$ with terms proportional to $r/a$,
+and the later terms carry higher powers of $r/a$, so $E_r$ and
+$E_\theta$ tend to zero as $r\to0$ from every direction: the field at
+the center of the ring is $\mathbf E(0)=0$, as symmetry requires.
 Uniform convergence on compact subregions justifies the derivatives;
 the singular charged ring itself is excluded.
 
@@ -1570,16 +1613,44 @@ $(2s-1)!!/(2s)!!\sim(\pi s)^{-1/2}$ (Exercise 15.2.8(b)) makes the
 coefficient grow like $4\sqrt{s/\pi}$. So an ordinary termwise
 boundary sum cannot give these finite values.
 
-To locate the actual divergence, let $\Omega$ be a unit vector on the
-north hemisphere. The axis formula extends to arbitrary boundary data
-$f(\Omega')$ with the polar axis taken along $\Omega$: average $V$ over
-the rotations about that axis. The average is again harmonic outside
-the sphere and vanishes at infinity; its boundary data are the averages
-of $f$ over the circles $\Omega\cdot\Omega'=u$; and on the axis it
-equals $V$, because these rotations fix the points $r\Omega$. Since
-$\frac12\int_{-1}^1du$ of a circle average equals
-$\frac1{4\pi}\int d\Omega'$, and
-$1-2\rho\,\Omega\cdot\Omega'+\rho^2=|\rho\Omega-\Omega'|^2$, this gives
+The poles are not special in this respect. For fixed $0<\theta<\pi$,
+the standard large-$n$ asymptotic form
+\[
+P_n(\cos\theta)\approx\Bigl(\frac2{\pi n\sin\theta}\Bigr)^{1/2}
+\cos\Bigl[\Bigl(n+\frac12\Bigr)\theta-\frac\pi4\Bigr],
+\]
+with $n=2s+1$, gives terms of magnitude about
+$4(\pi\sqrt{\sin\theta})^{-1}|\cos\beta_s|$, where
+$\beta_s=(2s+\frac32)\theta-\frac\pi4$, since
+$4\sqrt{s/\pi}\,[2/(\pi(2s+1)\sin\theta)]^{1/2}
+\to4/(\pi\sqrt{\sin\theta})$. If $\cos\beta_s$ tended to zero, the
+$\beta_s$ would approach odd multiples of $\pi/2$, so their constant
+step $\beta_{s+1}-\beta_s=2\theta$ would be a multiple of $\pi$; for
+$0<\theta<\pi$ this happens only on the equator, $\theta=\pi/2$, where
+indeed every $P_{2s+1}(0)=0$. Hence the termwise boundary series
+diverges at every angle off the equator, and the radial limit in the
+boxed $\sigma$ is needed everywhere, not only at the poles.
+
+To locate the actual singularity of $\sigma$, let $\Omega$ be a unit
+vector on the north hemisphere. The axis formula extends to arbitrary
+boundary data $f(\Omega')$ with the polar axis taken along $\Omega$:
+average $V$ over the rotations about that axis. The average is again
+harmonic outside the sphere and vanishes at infinity; its boundary data
+are the averages of $f$ over the circles $\Omega\cdot\Omega'=u$; and on
+the axis it equals $V$, because these rotations fix the points
+$r\Omega$. In spherical coordinates $(u,\varphi')$ about $\Omega$, with
+$u=\Omega\cdot\Omega'$ the cosine of the polar angle, the averaged data
+are $\bar f(u)=\frac1{2\pi}\int_0^{2\pi}f\,d\varphi'$. Apply the axis
+formula to $\bar f$; its kernel depends on $u$ only, so it may be taken
+inside the $\varphi'$ integral:
+\begin{align*}
+V(r\Omega)&=\frac{\rho(1-\rho^2)}2\int_{-1}^1
+\frac{\bar f(u)\,du}{(1-2\rho u+\rho^2)^{3/2}}\\
+&=\frac{\rho(1-\rho^2)}{4\pi}\int_{-1}^1\!\int_0^{2\pi}
+\frac{f\,d\varphi'\,du}{(1-2\rho u+\rho^2)^{3/2}}.
+\end{align*}
+Since $d\varphi'\,du$ is the solid-angle element $d\Omega'$ and
+$1-2\rho\,\Omega\cdot\Omega'+\rho^2=|\rho\Omega-\Omega'|^2$, this is
 the exterior Poisson integral
 \[
 V(r\Omega)=\frac{\rho(1-\rho^2)}{4\pi}
@@ -1611,9 +1682,14 @@ $u=\cos\theta'$, and
 $\int_{\rm south}d\Omega'/|\hat{\mathbf e}_z-\Omega'|^3
 =2\pi\int_{-1}^0(2-2u)^{-3/2}du=\pi(\sqrt2-1)$, which reproduces
 $\sigma(0)=\sqrt2\varepsilon_0V_0/a$.
-For small angular distance $h>0$ north of the equator, local tangential
-coordinates reduce the leading singular part to (using
-$\int_{-\infty}^\infty dX/(X^2+b^2)^{3/2}=2/b^2$)
+Now let $\Omega$ lie at a small angular distance $h>0$ north of the
+equator. Near the equatorial point closest to $\Omega$, describe
+$\Omega'$ by its longitude $X$ measured from that point and its angular
+distance $Y\ge0$ south of the equator. For small $X$, $Y$, $h$ the
+sphere is locally flat: $|\Omega-\Omega'|^2\approx X^2+(Y+h)^2$ and
+$d\Omega'=\cos Y\,dX\,dY\approx dX\,dY$. The south hemisphere becomes
+the half-plane $Y>0$, and the leading singular part of the integral is
+(using $\int_{-\infty}^\infty dX/(X^2+b^2)^{3/2}=2/b^2$)
 \[
 \int_0^\infty\int_{-\infty}^{\infty}
 \frac{dX\,dY}{[X^2+(Y+h)^2]^{3/2}}
