@@ -2862,7 +2862,7 @@ acceleration $a$, away from the mass. Using Laplace transforms,
 (a) $x=\dfrac{1}{2}at^{2}-\dfrac{a}{\omega^{2}}(1-\cos\omega t)$,
 $\omega^{2}=\dfrac{k}{m}$,\par\nobreak\hfill
 (b) $x=\dfrac{a\omega^{2}}{4!}\,t^{4}$, $\omega t\ll1$.
-\par\erratum{Use the initially resting preparation $x(0)=x'(0)=0$, with the driven end initially at rest and $m,k>0$.}
+\par\erratum{Use the initially resting preparation $x(0)=x'(0)=0$, with the driven end initially at rest and $m,k>0$; the textbook states no initial conditions, and its answer (a) presumes these.}
 \solution
 (a) Measure $x$ from the initial mass position, positive in
 the direction of the acceleration $a$, and subtract
@@ -3047,6 +3047,15 @@ $N_0(1-e^{-\lambda_2t})$.
 \erratum{The positive exponent printed for $N_2$ in this
 case must be negative. A positive exponent would violate both
 the rate equation and $0\le N_2\le N_0$.}
+The final $N_3$ stays accurate even while $N_3$ itself is
+still small. By $N_3=N_0-N_1-N_2$ and part (a), it exceeds
+the exact $N_3$ by
+$N_1+N_2-N_0e^{-\lambda_2t}=N_0(e^{-\lambda_2t}-e^{-\lambda_1t})
+[\lambda_1/(\lambda_1-\lambda_2)-1]$, that is, by
+$N_0\lambda_2(e^{-\lambda_2t}-e^{-\lambda_1t})/(\lambda_1-\lambda_2)$.
+Relative to $N_0(1-e^{-\lambda_2t})$ this is at most
+$[\lambda_2/(\lambda_1-\lambda_2)]/(e^{\lambda_2t}-1)
+\le1/[(\lambda_1-\lambda_2)t]\ll1$, by $e^x-1\ge x$.
 
 (c2) If $\lambda_1\ll\lambda_2$ and $\lambda_2t\gg1$,
 discard $e^{-\lambda_2t}$ instead, by the same argument with
@@ -3139,7 +3148,8 @@ N_2(T)=\frac Ab\left(1-e^{-bT}\right)
 =(2.85510\times10^{16})(0.0432201)
 =\boxed{1.2340\times10^{15}}.
 \]
-This is $1.2\times10^{15}$ at the precision of the source data.
+To the precision of the given data (two significant figures
+in $\lambda_2$) this is $1.2\times10^{15}$.
 The parent ${}^{153}$Eu is stable, so it is consumed only by
 neutron absorption: $N_1'=-\varphi\sigma_1N_1$ and
 $N_1(T)=N_1(0)e^{-\varphi\sigma_1T}$. The depletion rate is
@@ -3149,8 +3159,9 @@ $\varphi\sigma_1T=1.26144\times10^{-5}$, so the fraction consumed is
 1-e^{-\varphi\sigma_1T}=1.26143\times10^{-5}
 =0.00126143\%.
 \]
-Thus treating $N_1$ as constant is accurate to about thirteen
-parts per million over this interval. The calculation uses
+Thus the assumption is justified: treating $N_1$ as constant
+is accurate to about thirteen parts per million over this
+interval. The calculation uses
 the same number or concentration units as $N_1(0)$.
 
 \Needspace{5\baselineskip}
@@ -3188,10 +3199,11 @@ $\varphi$ and the product $\sigma_{f}N_{\mathrm{U}}$.
 \item[(b)] Find $N_{\mathrm{Xe}}(t\to\infty)$.
 \item[(c)] After $N_{\mathrm{Xe}}$ has reached equilibrium, the
 reactor is shut down: $\varphi=0$. Find $N_{\mathrm{Xe}}(t)$
-following shutdown. \erratum{Determine when $N_{\mathrm{Xe}}$
-increases immediately after shutdown; this depends on the
-pre-shutdown flux.} Such an increase may for a few hours interfere
-with starting the reactor up again.
+following shutdown. Notice the increase in $N_{\mathrm{Xe}}$,
+which may for a few hours interfere with starting the reactor
+up again. \erratum{The increase is not automatic: determine
+when $N_{\mathrm{Xe}}$ increases immediately after shutdown;
+this depends on the pre-shutdown flux.}
 \end{enumerate}
 \par\emph{Hint.}~The half-life $t_{1/2}$ of a radioactive
 isotope is the time required for decay of half of the nuclides in
@@ -3275,8 +3287,11 @@ exponentials in (a) decay, so $X\to X_e$:
 \]
 (c) Reset $t=0$ at shutdown. The initial values are now
 $I_e,X_e$, but production and neutron absorption cease:
-with $\varphi=0$ we have $P=0$ and $\mu=\beta$, so the
+switching off the flux removes the terms $P\gamma_{\rm I}$,
+$P\gamma_{\rm Xe}$ and $\varphi\sigma_{\rm Xe}X$, so the
 equations become $I'=-\alpha I$ and $X'=-\beta X+\alpha I$.
+Below, $\varphi$, $P$ and $\mu$ keep their pre-shutdown values,
+which determine $I_e$ and $X_e$.
 Thus $I=I_e e^{-\alpha t}$, and the second equation, with
 $X(0)=X_e$, transforms into
 \[
@@ -3315,7 +3330,7 @@ Since $\gamma_{\rm Xe}/\gamma_{\rm I}=0.003/0.060=1/20$,
 the threshold is
 \[
 \varphi>\frac{\beta}{20\sigma_{\rm Xe}}
-=2.98977\times10^{11}\ \mathrm{cm}^{-2}\mathrm{s}^{-1}.
+=2.98977\times10^{11}\ \mathrm{cm}^{-2}\,\mathrm{s}^{-1}.
 \]
 For an explicit peak time put $A=\alpha I_e/(\alpha-\beta)>0$.
 Then $X=(X_e+A)e^{-\beta t}-Ae^{-\alpha t}$, and
@@ -3332,6 +3347,14 @@ $e^{\beta t}X'=-\beta(X_e+A)+\alpha Ae^{-(\alpha-\beta)t}$
 decreases in $t$, $X$ then has a single maximum, at
 $t_{\rm peak}$; otherwise $X'<0$ for all $t>0$ and the maximum
 after shutdown is at $t=0$.
+Power reactors operate at thermal fluxes of about $10^{13}$ to
+$10^{14}$ cm$^{-2}$\,s$^{-1}$, some $30$ to $300$ times this
+threshold, so the increase noted in the textbook is the usual
+case. For example, at $\varphi=10^{13}$ cm$^{-2}$\,s$^{-1}$
+($\mu=5.59\times10^{-5}$ s$^{-1}$; $P$ cancels from the ratios)
+the peak-time formula gives $t_{\rm peak}=6.4$ h with
+$X(t_{\rm peak})=1.31X_e$, and solving $X(t)=X_e$ numerically
+shows that $X$ falls back to $X_e$ about $17$ h after shutdown.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3537,8 +3560,9 @@ $q_{0}=$ initial charge of capacitor.
 \par\erratum{Take $R,L,C>0$ and $R^2<4L/C$. Keep the initial branch current $I_{RL}(0)=I_0$ explicit; if the source was connected long enough for DC steady state, use $I_0=q_0/(CR)$.}
 \solution
 The drawing has a series $R,L$ branch in parallel with
-$C$. Define $V_0=q_0/C$, $I(0)=I_0$ for the current through
-that branch, and use the voltage polarities in the hint.
+$C$. Define $V_0=q_0/C$, write $I=I_{RL}$ for the current
+through that branch and $I_0=I(0)$, and use the voltage
+polarities in the hint.
 Kirchhoff's laws, with the hint's $E_C$ differentiated
 ($E_C'=I_C/C$), imply
 \[
@@ -3551,8 +3575,10 @@ E_C(0)=V_0,\quad E_C'(0)=-I_0/C.
 \]
 Put $\alpha=R/(2L)$ and
 $\omega=\sqrt{1/(LC)-\alpha^2}>0$; ``small $R$'' means
-$R^2<4L/C$. With $L\{E_C''\}=s^2\widehat E_C-sV_0+I_0/C$ and
-$L\{E_C'\}=s\widehat E_C-V_0$, transformation and division by
+$R^2<4L/C$. With a hat denoting the Laplace transform, the
+derivative formulas give the transforms
+$s^2\widehat E_C-sV_0+I_0/C$ of $E_C''$ and
+$s\widehat E_C-V_0$ of $E_C'$, so transformation and division by
 $LC$ (note $R/L=2\alpha$) give
 \[
 \Big(s^2+2\alpha s+\frac1{LC}\Big)\widehat E_C
@@ -3565,11 +3591,10 @@ and $s^2+2\alpha s+1/(LC)=(s+\alpha)^2+\omega^2$. Hence
 =V_0\frac{s+\alpha}{(s+\alpha)^2+\omega^2}
 +\frac{\alpha V_0-I_0/C}{(s+\alpha)^2+\omega^2}.
 \]
-The shifted pairs
-$L\{e^{-\alpha t}\cos\omega t\}=(s+\alpha)/[(s+\alpha)^2+\omega^2]$
-and
-$L\{e^{-\alpha t}\sin\omega t\}=\omega/[(s+\alpha)^2+\omega^2]$
-then give
+Since $(s+\alpha)/[(s+\alpha)^2+\omega^2]$ and
+$\omega/[(s+\alpha)^2+\omega^2]$ are the transforms of
+$e^{-\alpha t}\cos\omega t$ and $e^{-\alpha t}\sin\omega t$
+(shift theorem), inversion gives
 \[
 \boxed{E_C=e^{-\alpha t}\left[
 V_0\cos\omega t+\frac{\alpha V_0-I_0/C}{\omega}\sin\omega t
@@ -3626,7 +3651,7 @@ E_L&=-\frac{V_0}{RC\omega}e^{-\alpha t}\sin\omega t.
 These have $E_R(0)=E_C(0)=V_0$, $E_L(0)=0$, as a prior
 DC steady state requires.
 \erratum{The Instructor's Manual instead uses damping $1/(2RC)$ and
-$E_C(0)=q_0=0$. Those are not the equations or initial state
+$E_C(0)=q_0/C=0$. Those are not the equations or initial state
 of the charged-capacitor circuit in Fig.~20.18. Its damping
 is $R/(2L)$. An ideal inductor in series with $R$ does not
 short the capacitor.}
@@ -3690,6 +3715,12 @@ The residue theorem therefore gives
 \]
 The transform extends analytically to $\Re s>0$ with the
 branch whose square root is positive on the positive real axis.
+Indeed, for $s=x+iy$ with $x>0$, $s^2+1=x^2-y^2+1+2ixy$ is real
+only when $y=0$, and then it is positive; so the principal root
+$\sqrt{s^2+1}$ is analytic in $\Re s>0$. The Laplace integral of
+the bounded function $J_0$ is analytic there too, and the two
+agree for $s>0$, hence throughout $\Re s>0$ by the identity
+theorem.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3747,7 +3778,8 @@ leads to the integral
 Show that this integral is equal to $a/(z^{2}+a^{2})^{3/2}$.
 \solution
 \erratum{For an ordinary improper integral the boundary
-$\Re z=0$, which the textbook's printed condition includes, must
+$\Re z=0$, which the textbook's printed condition $\Re(z)\ge0$
+includes, must
 be excluded when $a>0$: the stated
 integrand has oscillations with amplitude growing like
 $\sqrt{k}$. The formula holds ordinarily for $\Re z>0$ and
@@ -3786,11 +3818,16 @@ $z=\epsilon>0$ in the boxed formula, and letting
 $\epsilon\downarrow0$ gives the Abel value $a/(a^2)^{3/2}=1/a^2$.
 For $z=iy$, the analogous limiting formula is singular at
 $y=\pm a$; it is not a finite ordinary value there.
-\erratum{The Instructor's Manual, p.~351, also prints $K_1(ka)$ in its first
-intermediate integral where $J_1(ka)$ is required, and replaces
-the boundary term $[e^{-kz}J_0(ka)]_0^\infty=-1$ by $+1$.
-The latter constant disappears on differentiation, but the
-intermediate equality is incorrect.}
+\erratum{The Instructor's Manual, p.~351, first integrates
+$\int_0^\infty e^{-kz}J_1(ka)\,dk$ by parts, with
+$J_1(ka)=-a^{-1}\,dJ_0(ka)/dk$, and then applies
+$-\partial/\partial z$. In that intermediate integral it prints
+$K_1(ka)$ where $J_1(ka)$ is required, and it replaces the
+boundary term $[e^{-kz}J_0(ka)]_0^\infty=-1$ by $+1$. The
+resulting constant, $-a^{-1}$ times this term, is independent
+of $z$ and disappears on differentiation with respect to $z$,
+but the intermediate equality is incorrect: the integral equals
+$[1-z/\sqrt{z^2+a^2}]/a$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3800,7 +3837,7 @@ L\{I_{0}(at)\}=(s^{2}-a^{2})^{-1/2},\qquad\erratum{a\in\mathbb R,\quad s>|a|}.
 \]
 \solution
 For real $a$ use the angular representation
-(Exercise~14.6.3 with $n=0$)
+(Exercise~14.5.14 with $n=0$; see also Exercise~14.6.3)
 \[
 I_0(at)=\frac1\pi\int_0^\pi e^{at\cos\theta}d\theta.
 \]
@@ -3906,10 +3943,14 @@ $k_0(at)=e^{-at}/(at)$. It also has a nonintegrable $1/(at)$
 singularity at zero, so its ordinary Laplace transform does
 not exist.
 \erratum{The real inverse-trigonometric and inverse-hyperbolic
-forms presume the positive scale and the domains specified
-above. The $a=0$ limits of (a) and (c) are $1/s$; for negative
-$a$ it is safer to use $\tan^{-1}(a/s)/a$ in (a) and the
-continuous logarithmic form in (c), with $s>|a|$.}
+forms are written for the positive scale and the domains
+specified above; the $a=0$ limits of (a) and (c) are $1/s$.
+Negative $a$ leaves $j_0(at)$ and $i_0(at)$ unchanged (they are
+even in $a$). Both forms in (c) are even in $a$ too and remain
+valid for $s>|a|$. In (a), however, $\cot^{-1}(s/a)$ at a
+negative argument depends on the branch (values in $(0,\pi)$
+give the wrong sign), so use $\tan^{-1}(a/s)/a$, which is even
+in $a$ and valid for $s>0$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3950,11 +3991,13 @@ Integrating each logarithmic derivative gives
 \ln f=\ln A+n\ln(s-1)-(n+1)\ln s,
 \qquad f(s)=A\frac{(s-1)^n}{s^{n+1}}.
 \]
-For general $n$, choose the powers by continuation from real
-$s>1$. The initial-value theorem
+For general $n$, take the powers positive for real $s>1$ and
+continue them analytically into the half-plane $\Re s>1$.
+The initial-value theorem (Exercise~20.7.1)
 $\lim_{s\to\infty}sf(s)=F(0)$ gives $A=C$, because
 $sf(s)=A(1-1/s)^n\to A$.
-For $|s|>1$ in this half-plane, expand by the generalized
+In this half-plane $|1/s|\le1/\Re s<1$, so expand by the
+generalized
 binomial theorem,
 $(1-1/s)^n=\sum_j\binom nj(-1/s)^j$, where
 $(-1)^j\binom nj=(-n)(-n+1)\cdots(-n+j-1)/j!=(-n)_j/j!$:
@@ -4265,7 +4308,8 @@ Dividing by $1-e^{-as}$ gives
 The simplification follows from
 $1-e^{-as}=(1-e^{-as/2})(1+e^{-as/2})$.
 For real $s\to\infty$, $sf(s)=1/(1+e^{-as/2})\to1$, which
-matches $F(0+)$ (the initial-value theorem).
+matches $F(0+)$ (the initial-value theorem,
+Exercise~20.7.1).
 For $s\downarrow0$, $sf(s)\to1/(1+1)=1/2$, the average value
 over a period; this is not a pointwise final value of the
 oscillating square wave.
@@ -4397,7 +4441,9 @@ three limits follow from $\sin at/a\to t$ and $\cos at\to1$.
 \[
 L\big\{(t^{2}-k^{2})^{-1/2}u(t-k)\big\}=K_{0}(ks).
 \]
-\par\erratum{(Here $u(t-k)$ is the unit step function.)}
+\par\erratum{(Here $u(t-k)$ is the unit step function.) This
+clarification is from the published errata, which list it
+under the misprinted number 20.8.34.}
 \par\emph{Hint.}~Try transforming an integral representation of
 $K_{0}(ks)$ into the Laplace transform integral.
 \par\erratum{Take $k>0$ and $\Re s>0$; the step restricts the real square root to $t>k$.}
@@ -4405,7 +4451,8 @@ $K_{0}(ks)$ into the Laplace transform integral.
 \erratum{Take $k>0$ and $\Re s>0$. The lower endpoint
 $t=k$ then has an integrable square-root singularity. At
 $k=0$ the kernel is $1/t$ and the ordinary transform diverges.}
-The step function restricts the transform to
+The unit step $u(t-k)$ ($0$ for $t<k$, $1$ for $t>k$)
+restricts the transform to
 \[
 L\{(t^2-k^2)^{-1/2}u(t-k)\}
 =\int_k^\infty\frac{e^{-st}}{\sqrt{t^2-k^2}}dt.
