@@ -1857,12 +1857,13 @@ $f(x)$ that is \erratum{bounded and measurable} in $[-\pi,\pi]$ and continuous
 at $x=0$,
 \[
 \erratum{\lim_{n\to\infty}\lim_{M\to\infty}
-\int_{-\pi}^{\pi}f(x)S_{n,M}(x)\,dx=f(0),}
+\int_{-\pi}^{\pi}f(x)S_{n,M}(x)\,dx=f(0).}
 \]
 \erratum{Here $S_{n,M}$ is the partial sum of the Fourier series of the finite-width pulse $\delta_n$ through the harmonic $\cos Mx$.}
 \solution
 \erratum{The displayed integrals require an integrable test function;
-pointwise finiteness alone does not ensure integrability. A bounded
+the textbook's hypothesis that $f$ be finite in $[-\pi,\pi]$ (pointwise
+finiteness) does not by itself ensure integrability. A bounded
 measurable $f$ continuous at zero suffices. The Fourier expansion must
 first represent the finite-width pulse, followed by the pulse-width
 limit; no unrestricted interchange of two infinite limits is needed.}
@@ -1880,6 +1881,10 @@ $|a_m|\le2n/(\pi m)$ give
 =\pi\sum_{m>M}a_m^2\le\frac{4n^2}{\pi}\sum_{m>M}\frac1{m^2}
 \longrightarrow0\quad(M\to\infty).
 \]
+Parseval's identity (19.1.13) applies here although the series of the
+discontinuous $\delta_n$ does not converge uniformly: by the $L^2$
+completeness of the Fourier basis, noted in 19.1.13(c), it holds for
+every square-integrable function.
 If $|f|\le B$, then $f\in L^2[-\pi,\pi]$ with $\|f\|_2\le B\sqrt{2\pi}$,
 and the Cauchy--Schwarz inequality gives
 \[
@@ -1912,7 +1917,9 @@ at zero. The order of the limits matters: letting $n\to\infty$ first in
 the coefficients would leave
 $\int_{-\pi}^{\pi}f(x)\bigl[1/(2\pi)+\pi^{-1}\sum_{m=1}^M\cos mx\bigr]dx$,
 which is the $M$th Fourier partial sum of $f$ at $x=0$, and that need
-not converge even for a continuous $f$.
+not converge even for a continuous $f$ (du Bois-Reymond constructed a
+continuous periodic function whose Fourier series diverges at a point,
+which a shift moves to $x=0$).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1948,7 +1955,8 @@ $\dfrac{2}{\pi}\displaystyle\sum_{n=1}^{\infty}\dfrac{1}{n}
 \end{enumerate}
 \erratum{The delta expansion is distributional. At $x=a$ the integrated Fourier series has the midpoint value $1/2$.}
 \solution
-\textbf{(a)} The sine functions have half-interval norm
+\textbf{(a)} The sine functions are orthogonal on the half interval
+$(0,L)$, with squared norm $L/2$ ($\delta_{nm}$ is the Kronecker delta):
 \[
 \int_0^L\sin\frac{n\pi x}{L}\sin\frac{m\pi x}{L}\,dx
 =\frac L2\delta_{nm}.
@@ -2146,7 +2154,9 @@ the second by differentiating the limits of integration. $G$ is odd
 about $s=0$ and, being odd with period $2L$, also about $s=L$, so its
 integrals over $(-vt,vt)$ and $(L-vt,L+vt)$ vanish: $y(0,t)=y(L,t)=0$,
 and the clamps hold. For $vt<\min(a,L-a)$ and $0<x<L$, the only source
-that can lie in $(x-vt,x+vt)$ is the one at $s=a$, and it does exactly
+that can lie in $(x-vt,x+vt)$ is the one at $s=a$ (every other source
+lies at $s\le-a$ or $s\ge2L-a$, outside the interval, because
+$x-vt>-vt>-a$ and $x+vt<L+vt<2L-a$), and it does exactly
 when $|x-a|<vt$. Thus, before either pulse reaches an end,
 $y=Lv_0/(2v)$ where $|x-a|<vt$, and zero outside; the moving fronts and
 subsequent reflected images explain the singular velocity. This
@@ -2156,7 +2166,9 @@ confirms the Fourier solution: the sine coefficients of this plateau are
 =\frac{v_0}{vk_n}\bigl[\cos k_n(a-vt)-\cos k_n(a+vt)\bigr]
 =\frac{2v_0L}{\pi v}\,\frac{\sin k_na}{n}\,\sin\Omega_nt,
 \]
-exactly the coefficients $B_n\sin\Omega_nt$ found in (a).
+the last step by $\cos(A-B)-\cos(A+B)=2\sin A\sin B$ (with $A=k_na$,
+$B=k_nvt=\Omega_nt$) and $1/(vk_n)=L/(n\pi v)$. These are exactly the
+coefficients $B_n\sin\Omega_nt$ found in (a).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2188,7 +2200,8 @@ $b_{n}(t)=A_{n}\cos\dfrac{n\pi vt}{L}+B_{n}\sin
 f(x)\sin\frac{n\pi x}{L}\,dx$,\quad
 $B_{n}=\dfrac{2}{n\pi v}\displaystyle\int_{0}^{L}
 g(x)\sin\frac{n\pi x}{L}\,dx$.
-\erratum{Take $L,v>0$ and real initial data. For the finite-energy solution assume $f\in H_0^1(0,L)$ and $g\in L^2(0,L)$; also state the regularity and endpoint qualifications for a classical solution.}
+\par\smallskip
+\erratum{Take $L,v>0$ and real initial data. Because the modal series is differentiated termwise, it gives a classical solution only for data smooth enough and compatible with the clamps; for $f\in H_0^1(0,L)$ and $g\in L^2(0,L)$ (finite initial energy) it gives the finite-energy solution.}
 \solution
 Here $H_0^1(0,L)$ means that $f$ and its weak first derivative are
 square integrable and $f$ has zero endpoint values. Thus the assumptions
@@ -2257,10 +2270,13 @@ u(x,t)=\sum_{n=1}^{\infty}b_{n}(t)\sin\frac{n\pi x}{L}
 \]
 and again determine the coefficients $b_{n}(t)$. Take the initial
 and boundary conditions to be the same as in Exercise~19.2.20.
-\erratum{Take $k\ge0$ and first consider each mode for which
+Assume the damping to be small.
+\erratum{Since damping is small or large only relative to each mode's
+frequency $n\pi v/L$, take $k\ge0$ and first consider each mode for which
 $k<2n\pi v/L$.}
-\item[(b)] \erratum{Repeat for modes with $k>2n\pi v/L$, and include the
-critical case $k=2n\pi v/L$. Explain why finite $k$ cannot overdamp every mode.}
+\item[(b)] Repeat, but assume the damping to be large.
+\erratum{That is, treat the modes with $k>2n\pi v/L$, and include the
+critical case $k=2n\pi v/L$; explain why finite $k$ cannot overdamp every mode.}
 \end{enumerate}
 \par\nobreak\hfill\emph{ANS.}\enspace
 (a) $b_{n}(t)=e^{-kt/2}\big[A_{n}\cos\omega_{n}t
@@ -2364,7 +2380,11 @@ The boundary term vanishes because the clamped displacement is constant
 in time, hence $u_t=0$ at both ends, and the last line uses the equation
 of motion, $u_{tt}-v^2u_{xx}=-ku_t$. For smooth data this is a direct
 calculation; for finite-energy data it follows by limits of finite modal
-sums. It is consistent with the time dependence of every mode.
+sums. It is consistent with the time dependence of every mode: as in
+19.2.20, $E=(L/4)\sum_n[(b_n')^2+\Omega_n^2b_n^2]$, and the mode
+equation $b_n''+\Omega_n^2b_n=-kb_n'$ gives each summand the derivative
+$2b_n'(b_n''+\Omega_n^2b_n)=-2k(b_n')^2$, so
+$E'=-(kL/2)\sum_n(b_n')^2=-k\int_0^Lu_t^2\,dx$, as found above.
 
 \Needspace{12\baselineskip}
 \subsection*{19.3 Gibbs Phenomenon}
@@ -2376,7 +2396,7 @@ techniques of this section, show that at a discontinuity in $f(x)$
 the Fourier series for $f(x)$ takes on the arithmetic mean of the
 right- and left-hand limits:
 \[
-\erratum{\lim_{N\to\infty}s_N(x_{0})}=\tfrac{1}{2}\big[f(x_{0}+0)+f(x_{0}-0)\big].
+\erratum{\lim_{r\to\infty}s_r(x_{0})}=\tfrac{1}{2}\big[f(x_{0}+0)+f(x_{0}-0)\big].
 \]
 In evaluating $\displaystyle\lim_{r\to\infty}s_{r}(x_{0})$, you may
 find it convenient to identify part of the integrand as a Dirac
@@ -2390,7 +2410,14 @@ variation suffices. The existence of a jump alone is not a general
 pointwise-convergence hypothesis. The textbook's Eq. (19.29) also omits
 $n$ from the exponential; the correct finite kernel uses $e^{in(x-t)}$,
 as in Eq. (19.30).}
-Let
+Write $N$ for the textbook's number $r$ of harmonics, so that $s_N$ is
+its $s_r$. The variation of a function $\varphi$ on an interval $J$ is
+$\operatorname{Var}_J\varphi
+=\sup\sum_{i=1}^k|\varphi(t_i)-\varphi(t_{i-1})|$, the supremum over all
+finite chains $t_0<t_1<\dots<t_k$ in $J$, and $f$ has bounded variation
+when its variation over a period is finite. Such an $f$ is a difference
+of two increasing functions (Jordan decomposition), so the one-sided
+limits $f(x_0\pm0)$ exist. Let
 \[
 m=\frac{f(x_0+0)+f(x_0-0)}2,
 \qquad D_N(t)=\frac{\sin((N+1/2)t)}{\sin(t/2)}.
@@ -2452,7 +2479,8 @@ $\cos1+1/z+\int_1^zv^{-2}\,dv=1+\cos1<2$. Hence
 $|\int_0^z\sin v/v\,dv|\le3$ for every $z\ge0$, and consequently
 $|A_N(u)|\le C=6+\int_0^\pi|q(t)|\,dt$, independently of $N,u$.
 
-Since $g$ has bounded variation and $g(0+)=0$, choose a small
+Since $g$ has bounded variation (the variation of a sum is at most the
+sum of the variations) and $g(0+)=0$, choose a small
 $\delta>0$ for which both $|g(\delta)|$ and its variation on
 $(0,\delta]$ are small. Since $dA_N=D_N\,dt$ and the boundary term at
 zero vanishes ($A_N(0)=0$, $g(0+)=0$), Stieltjes integration by parts
@@ -2462,17 +2490,30 @@ gives
 =\left|g(\delta)A_N(\delta)-\int_{(0,\delta]}A_N(t)\,dg(t)\right|
 \le C\bigl(|g(\delta)|+\operatorname{Var}_{(0,\delta]}g\bigr).
 \]
-The variation is the mass of a finite variation measure on $(0,\delta]$;
-these intervals shrink to the empty set, so that mass tends to zero.
+The last step uses $|A_N|\le C$: every Riemann--Stieltjes sum
+$\sum_iA_N(\xi_i)[g(t_i)-g(t_{i-1})]$ of $\int A_N\,dg$ is at most
+$C\sum_i|g(t_i)-g(t_{i-1})|\le C\operatorname{Var}_{(0,\delta]}g$ in
+absolute value.
+The variation $\operatorname{Var}_{(0,\delta]}g$ can only decrease as
+$\delta\downarrow0$, and its limit is zero: if it stayed above some
+$\eta>0$, we could take a chain in $(0,\pi]$ with sum above $\eta/2$,
+starting at some $t_0>0$, then such a chain in $(0,t_0/2]$, and so on;
+joined, $K$ of these chains form one chain in $(0,\pi]$ with sum above
+$K\eta/2$, impossible for large $K$ because $g$ has bounded variation.
 Also $g(\delta)\to0$. Thus the bound tends to zero as
 $\delta\downarrow0$, uniformly in $N$.
 For fixed $\delta$, the remaining integrand on $[\delta,\pi]$ has the
-form $[g(t)/\sin(t/2)]\sin Mt$, with a bracket bounded by
-$\sup|g|/\sin(\delta/2)$, hence integrable. Its integral tends to zero
-as $M\to\infty$ by the Riemann--Lebesgue lemma: approximate the bracket
-in $L^1$ by a step function, whose finitely many sine integrals are
-each $O(1/M)$; the approximation error bounds the integral error
-independently of $M$. Combining the two parts, for every such $\delta$
+form $h(t)\sin Mt$ with $h(t)=g(t)/\sin(t/2)$, which is bounded by
+$\sup|g|/\sin(\delta/2)$ and Riemann integrable (monotone functions are,
+$g$ is a combination of them, and $1/\sin(t/2)$ is continuous there). Its integral
+tends to zero as $M\to\infty$ by the Riemann--Lebesgue lemma: given
+$\epsilon>0$, take a step function $s$ with
+$\int_\delta^\pi|h-s|\,dt<\epsilon$ (a lower Darboux step function of
+$h$ will do). Each of the finitely many sine integrals of $s$ is
+$O(1/M)$, since $|\int_\alpha^\beta\sin Mt\,dt|\le2/M$, while
+$|\int_\delta^\pi(h-s)\sin Mt\,dt|<\epsilon$ for every $M$; hence
+$\limsup_{M\to\infty}|\int_\delta^\pi h(t)\sin Mt\,dt|\le\epsilon$ for
+every $\epsilon>0$. Combining the two parts, for every such $\delta$
 \[
 \limsup_{N\to\infty}|s_N(x_0)-m|
 \le\frac{C}{2\pi}\bigl(|g(\delta)|+\operatorname{Var}_{(0,\delta]}g\bigr),
@@ -2497,7 +2538,8 @@ of the series in Eq.~(19.33) by using
 \item[(b)] $\displaystyle\sum_{p=1}^{n}\cos(2p-1)y
 =\dfrac{\sin 2ny}{2\sin y}$.
 \end{enumerate}
-\erratum{Compare the peak limit with Eqs.~(19.38) and (19.41).}
+\erratum{Compare the peak limit with Eqs.~(19.38) and (19.41) (the
+textbook cites Eq.~(19.40) here; see the solution).}
 \solution
 Equation (19.33) represents levels $\pm h/2$. Its first $n$ nonzero
 harmonics give
@@ -2536,7 +2578,9 @@ s_n(x_n)=\frac h\pi\int_0^\pi
 \frac{t/(2n)}{\sin(t/(2n))}\,dt
 \longrightarrow\frac h\pi\int_0^\pi\frac{\sin t}{t}\,dt.
 \]
-The limit holds because $u/\sin u$ increases on $(0,\pi/2)$, so for
+The limit holds because $u/\sin u$ increases on $(0,\pi/2)$ (its
+derivative is $(\sin u-u\cos u)/\sin^2u$, and $\sin u-u\cos u$ vanishes
+at $u=0$ and has derivative $u\sin u>0$), so for
 $0<t\le\pi$ the last factor lies between $1$ and
 $(\pi/(2n))/\sin(\pi/(2n))$, which tends to $1$; the factor therefore
 tends to $1$ uniformly, and $|\sin t/t|\le1$.
@@ -2572,13 +2616,15 @@ integrated series. This calls for double-precision calculation.
 \textbf{(a)} Define the removable endpoint by $(\sin t/t)|_{t=0}=1$.
 Map the $n$-point Gauss--Legendre rule to $[0,\pi]$: with $t=\pi(1+x)/2$
 the prefactor $2/\pi$ cancels $dt=(\pi/2)\,dx$, so with the Legendre
-nodes $x_j$ (the zeros of $P_n$) and weights $w_j$ on $[-1,1]$,
+nodes $x_j$ (the zeros of $P_n$) and weights
+$w_j=2/[(1-x_j^2)P_n'(x_j)^2]$ on $[-1,1]$,
 \[
 I=\int_{-1}^{1}\frac{\sin t}{t}\,dx
-\approx\sum_{j=1}^nw_j\,\frac{\sin t_j}{t_j},
+\approx Q_n=\sum_{j=1}^nw_j\,\frac{\sin t_j}{t_j},
 \qquad t_j=\frac\pi2(1+x_j).
 \]
-Because the integrand is entire, the error falls very fast with $n$:
+Because the integrand is entire, the error $Q_n-I$ falls very fast
+with $n$:
 it is $-2.9\times10^{-12}$ for $n=6$, $7.5\times10^{-15}$ for $n=7$,
 $-1.5\times10^{-17}$ for $n=8$ and $1.3\times10^{-38}$ for $n=15$.
 Thus $n=7$ in ordinary double precision already gives the requested
