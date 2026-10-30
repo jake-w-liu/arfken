@@ -4484,19 +4484,23 @@ that
 where $f(s)=L\{F(t)\}$.
 \solution
 In the one-sided Laplace convolution, choose $G(t)=1$
-for $t\ge0$. Its transform is $g(s)=1/s$. By definition,
+for $t\ge0$. Its transform is
+$g(s)=\int_0^\infty e^{-st}dt=1/s$ for $\Re s>0$. Since
+$G(t-x)=1$ for $0\le x\le t$, the definition gives
 \[
 (F*G)(t)=\int_0^tF(x)G(t-x)dx=\int_0^tF(x)dx.
 \]
-The convolution theorem therefore yields
+The convolution theorem, $L\{F*G\}=f(s)g(s)$, therefore yields
 \[
 \boxed{L\left\{\int_0^tF(x)dx\right\}(s)
 =f(s)g(s)=\frac{f(s)}s}.
 \]
-For locally integrable functions of exponential order this
-holds in a common right half-plane. Direct differentiation
-also checks the initial term: the primitive has value zero
-at $t=0$, so its derivative transform is $s[f(s)/s]=f(s)$.
+For locally integrable $F$ of exponential order this
+holds in the common half-plane where $\Re s>0$ and the
+integral defining $f(s)$ converges. As a check, the primitive
+$P(t)=\int_0^tF(x)dx$ has $P'=F$ and $P(0)=0$, so the
+derivative formula $L\{P'\}=sL\{P\}-P(0)$ gives
+$f(s)=sL\{P\}$, which is the same result.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4515,32 +4519,41 @@ F*G=t^{a+b+1}\int_{0}^{1}y^{a}(1-y)^{b}\,dy.
 where $B$ is the beta function.
 \end{enumerate}
 \solution
-(a) For $t>0$, substitute $x=ty$ into the convolution:
+(a) For $t>0$, substitute $x=ty$ into the convolution. Then
+$dx=t\,dy$, $x^a=t^ay^a$, $(t-x)^b=t^b(1-y)^b$, and the limits
+$x=0,t$ become $y=0,1$:
 \[
 (F*G)(t)=\int_0^t x^a(t-x)^b dx
 =t^{a+b+1}\int_0^1 y^a(1-y)^bdy.
 \]
-The endpoint conditions $a,b>-1$ make this integral finite.
-Call the remaining constant $B$. Then
-\[
-L\{F*G\}=B\frac{\Gamma(a+b+2)}{s^{a+b+2}},
-\]
-because $a+b+1>-1$.
+The endpoint conditions $a,b>-1$ make this integral finite:
+near $y=0$ the integrand behaves as $y^a$, and near $y=1$ as
+$(1-y)^b$.
 
-(b) The separate gamma integrals give
+(b) Call the integral of (a) $C$. For $\nu>-1$ and $s>0$, the
+substitution $u=st$ in the gamma integral gives
 \[
+L\{t^\nu\}=\int_0^\infty e^{-st}t^\nu dt
+=\frac1{s^{\nu+1}}\int_0^\infty e^{-u}u^\nu du
+=\frac{\Gamma(\nu+1)}{s^{\nu+1}}.
+\]
+With $\nu=a+b+1>-1$, $\nu=a$ and $\nu=b$ in turn,
+\[
+L\{F*G\}=C\frac{\Gamma(a+b+2)}{s^{a+b+2}},\qquad
 f(s)=\frac{\Gamma(a+1)}{s^{a+1}},\qquad
 g(s)=\frac{\Gamma(b+1)}{s^{b+1}}.
 \]
-Equating $L\{F*G\}=fg$ and cancelling $s^{-(a+b+2)}$ yields
+The convolution theorem $L\{F*G\}=fg$ now reads
+$C\,\Gamma(a+b+2)s^{-(a+b+2)}=\Gamma(a+1)\Gamma(b+1)s^{-(a+b+2)}$.
+Cancelling $s^{-(a+b+2)}$ and dividing by $\Gamma(a+b+2)$ yields
 \[
 \boxed{\int_0^1y^a(1-y)^bdy
 =\frac{\Gamma(a+1)\Gamma(b+1)}{\Gamma(a+b+2)}
 =B(a+1,b+1)}.
 \]
-\erratum{For arbitrary real $a,b>-1$, the factorial notation
-in the original question means gamma functions, $a!=\Gamma(a+1)$,
-not only integer factorials.}
+\erratum{The textbook writes this ratio as $a!\,b!/(a+b+1)!$;
+since $a,b>-1$ need not be integers, the factorials mean gamma
+functions, $a!=\Gamma(a+1)$, which is the form displayed above.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4552,14 +4565,21 @@ L^{-1}\left\{\frac{s}{(s^{2}+a^{2})(s^{2}+b^{2})}\right\},
 \]
 \solution
 Factor the transform into
-$[1/(s^2+a^2)]\,[s/(s^2+b^2)]$. The convolution theorem gives
+$[1/(s^2+a^2)]\,[s/(s^2+b^2)]$. For real $b$ and real $a\ne0$,
+the factors are the transforms of $\sin(at)/a$ and $\cos bt$, so
+the convolution theorem gives
 \[
 H(t)=\frac1a\int_0^t\sin(ax)\cos[b(t-x)]dx.
 \]
-Use $\sin u\cos v=[\sin(u+v)+\sin(u-v)]/2$:
+Use $\sin u\cos v=[\sin(u+v)+\sin(u-v)]/2$ with $u=ax$,
+$v=b(t-x)$, so that $u+v=(a-b)x+bt$ and $u-v=(a+b)x-bt$.
+At $x=t$ both arguments equal $at$; at $x=0$ they are $\pm bt$,
+and $\cos(-bt)=\cos bt$. Hence
 \begin{align*}
 H(t)&=\frac1{2a}\int_0^t
 \{\sin[(a-b)x+bt]+\sin[(a+b)x-bt]\}dx\\
+&=\frac1{2a}\left[-\frac{\cos[(a-b)x+bt]}{a-b}
+-\frac{\cos[(a+b)x-bt]}{a+b}\right]_{x=0}^{x=t}\\
 &=\frac1{2a}\left[
 \frac{\cos bt-\cos at}{a-b}
 +\frac{\cos bt-\cos at}{a+b}\right]\\
@@ -4568,8 +4588,11 @@ H(t)&=\frac1{2a}\int_0^t
 &=\boxed{\frac{\cos at-\cos bt}{b^2-a^2}}.
 \end{align*}
 The assumption $a^2\ne b^2$ makes $a\pm b$ nonzero.
-\erratum{If $a=0$, the initial factor $\sin(ax)/a$ means $x$;
-the final formula remains valid by continuity.}
+\erratum{If $a=0$ (allowed when $b\ne0$), the first factor is
+$1/s^2$, the transform of $x$ rather than $\sin(ax)/a$. Then
+the substitution $w=t-x$ and an integration by parts give
+$H(t)=\int_0^t(t-w)\cos bw\,dw=(1-\cos bt)/b^2$, which is the
+boxed formula at $a=0$.}
 This agrees with the independently transformed result of
 Exercise~20.7.3.
 
@@ -4587,43 +4610,79 @@ $X(t)=\dfrac{F_{0}/m}{\omega^{2}-\omega_{0}^{2}}
 \left(\dfrac{\omega}{\omega_{0}}\sin\omega_{0}t-\sin\omega t\right)$.
 \par\erratum{The displayed quotient answer applies for $\omega^2\ne\omega_0^2$.}
 \solution
-Let $\omega_0^2=k/m>0$. The equation and initial data are
+Let $\omega_0^2=k/m>0$. The equation $mX''+kX=F_0\sin\omega t$
+and the initial data, divided by $m$, are
 \[
 X''+\omega_0^2X=\frac{F_0}m\sin\omega t,\qquad X(0)=X'(0)=0.
 \]
-Transformation gives
+With $L\{X''\}=s^2\widehat X-sX(0)-X'(0)=s^2\widehat X$ and
+$L\{\sin\omega t\}=\omega/(s^2+\omega^2)$, transformation gives
+$(s^2+\omega_0^2)\widehat X=(F_0/m)\,\omega/(s^2+\omega^2)$, so
 \[
 \widehat X(s)=\frac{F_0}m\,
 \frac\omega{(s^2+\omega^2)(s^2+\omega_0^2)}.
 \]
-Equivalently, the convolution response is
+Equivalently, since $1/(s^2+\omega_0^2)$ and
+$\omega/(s^2+\omega^2)$ are the transforms of
+$\sin(\omega_0t)/\omega_0$ and $\sin\omega t$, the convolution
+theorem gives the response
 \[
 X(t)=\frac{F_0}{m\omega_0}\int_0^t
 \sin[\omega_0(t-u)]\sin(\omega u)du.
 \]
-For $\omega^2\ne\omega_0^2$, decompose
+Partial fractions evaluate it more quickly. For
+$\omega^2\ne\omega_0^2$,
+$1/(s^2+\omega^2)-1/(s^2+\omega_0^2)
+=(\omega_0^2-\omega^2)/[(s^2+\omega^2)(s^2+\omega_0^2)]$, so
 \[
 \widehat X=\frac{F_0\omega}{m(\omega_0^2-\omega^2)}
 \left(\frac1{s^2+\omega^2}-\frac1{s^2+\omega_0^2}\right).
 \]
-Inverting the two terms yields
+Inverting the two terms by $L^{-1}\{1/(s^2+c^2)\}=\sin(ct)/c$
+yields
+\[
+X(t)=\frac{F_0\omega}{m(\omega_0^2-\omega^2)}
+\left(\frac{\sin\omega t}{\omega}
+-\frac{\sin\omega_0t}{\omega_0}\right),
+\]
+that is, after moving $\omega$ into the bracket and changing
+the sign of both factors,
 \[
 \boxed{X(t)=\frac{F_0/m}{\omega^2-\omega_0^2}
 \left(\frac\omega{\omega_0}\sin\omega_0t-\sin\omega t\right)}.
 \]
-Its value and derivative vanish at zero because the two sine
-slopes cancel.
+Its value vanishes at $t=0$, and so does its derivative, which
+is proportional to $(\omega/\omega_0)\omega_0-\omega=0$ there:
+the two sine slopes cancel.
 \erratum{The printed answer requires a separate resonant
 limit. At $\omega=\omega_0$ it is a removable $0/0$ form and
 cannot be used as written.}
-Apply l'H\^opital's rule to the ratio as $\omega\to\omega_0$.
-The numerator derivative is
-$\sin(\omega_0t)/\omega_0-t\cos(\omega t)$, and the denominator
-derivative is $2\omega$. Thus
+Apply l'H\^opital's rule to the ratio as $\omega\to\omega_0$;
+for every $t$ the numerator
+$(\omega/\omega_0)\sin\omega_0t-\sin\omega t$ and the
+denominator $\omega^2-\omega_0^2$ both vanish at
+$\omega=\omega_0$. Their $\omega$-derivatives are
+$\sin(\omega_0t)/\omega_0-t\cos(\omega t)$ and $2\omega$, whose
+ratio at $\omega=\omega_0$ is
+$(\sin\omega_0t-\omega_0t\cos\omega_0t)/(2\omega_0^2)$. Thus
 \[
 \boxed{X_{\rm res}(t)=\frac{F_0}{2m\omega_0^2}
 (\sin\omega_0t-\omega_0t\cos\omega_0t)}.
 \]
+This limit is indeed the solution at resonance. For
+$\omega=\omega_0$ the transform is
+$\widehat X=(F_0/m)\,\omega_0/(s^2+\omega_0^2)^2$, while the
+rule $L\{tG(t)\}=-g'(s)$ for $g=L\{G\}$ gives
+$L\{t\cos\omega_0t\}=-\frac d{ds}\frac s{s^2+\omega_0^2}
+=\frac{s^2-\omega_0^2}{(s^2+\omega_0^2)^2}$ and hence
+\[
+L\{\sin\omega_0t-\omega_0t\cos\omega_0t\}
+=\frac{\omega_0(s^2+\omega_0^2)-\omega_0(s^2-\omega_0^2)}
+{(s^2+\omega_0^2)^2}
+=\frac{2\omega_0^3}{(s^2+\omega_0^2)^2},
+\]
+so $X_{\rm res}=(F_0/m)\,\omega_0\cdot
+(\sin\omega_0t-\omega_0t\cos\omega_0t)/(2\omega_0^3)$, as above.
 The growing $t\cos\omega_0t$ term is the resonant response;
 it is no longer a sum of two bounded oscillations at distinct
 frequencies. For $\omega=0$ the driving force is identically
@@ -4647,25 +4706,37 @@ where $f(z)$ is analytic for $\Re e\,z\ge\beta$.
 Choose $\beta$ to the right of all singularities of the
 Laplace transform, and fix $\Re s>\beta$. Close the upward
 vertical segment $\beta-iR$ to $\beta+iR$ by a semicircle to
-its right. This closed contour is clockwise. The kernel
-$f(z)/(s-z)$ has residue $-f(s)$ at $z=s$, so Cauchy's formula
-with this orientation gives
+its right. This closed contour is clockwise, and it encloses
+$s$ once $R>|s-\beta|$. The kernel
+$f(z)/(s-z)=-f(z)/(z-s)$ has residue $-f(s)$ at $z=s$, so
+Cauchy's formula with this orientation gives
 \[
 \int_{\beta-iR}^{\beta+iR}\frac{f(z)}{s-z}dz
 +\int_{\text{right arc}}\frac{f(z)}{s-z}dz
 =-2\pi i[-f(s)]=2\pi i f(s).
 \]
-If, for example, $f(z)=O(|z|^{-\epsilon})$ on these arcs for
-some $\epsilon>0$, the arc integral is $O(R^{-\epsilon})$.
+If, for example, $|f(z)|\le M|z|^{-\epsilon}$ on these arcs for
+some $\epsilon>0$, the arc integral is $O(R^{-\epsilon})$: the
+arc $z=\beta+Re^{i\theta}$, $|\theta|\le\pi/2$, has length $\pi R$,
+and on it $|s-z|\ge R-|s-\beta|\ge R/2$ once $R\ge2|s-\beta|$.
 Letting $R\to\infty$ then gives the identity in the hint.
 For each $z$ on the line $\Re z=\beta$,
 \[
 \frac1{s-z}=\int_0^\infty e^{-st}e^{zt}dt,
-\qquad L_s^{-1}\{(s-z)^{-1}\}(t)=e^{zt}.
+\qquad L_s^{-1}\{(s-z)^{-1}\}(t)=e^{zt},
 \]
-Apply this inverse operation to the Cauchy representation,
-with a convergent cutoff or regularization of the vertical
-integral. The result is
+since $|e^{-(s-z)t}|=e^{-(\Re s-\beta)t}$ decays. Insert this
+integral into the Cauchy representation and interchange the
+$z$ and $t$ integrations (formally; see the remarks below):
+\begin{align*}
+f(s)&=\frac1{2\pi i}\lim_{R\to\infty}
+\int_{\beta-iR}^{\beta+iR}f(z)
+\left[\int_0^\infty e^{-st}e^{zt}dt\right]dz\\
+&=\int_0^\infty e^{-st}\left[\frac1{2\pi i}\lim_{R\to\infty}
+\int_{\beta-iR}^{\beta+iR}e^{zt}f(z)dz\right]dt.
+\end{align*}
+Thus $f$ is the Laplace transform of the last bracket, and
+applying $L^{-1}$ (uniqueness of the inverse transform) gives
 \[
 \boxed{F(t)=\frac1{2\pi i}\lim_{R\to\infty}
 \int_{\beta-iR}^{\beta+iR}e^{zt}f(z)dz},\qquad t>0,
@@ -4673,13 +4744,21 @@ integral. The result is
 which is the Bromwich inversion formula at a continuity point
 of $F$.
 \erratum{Analyticity alone is not enough to discard the arc
-or interchange a limiting inverse transform. Decay on the
+or interchange a limiting inverse transform: $f(z)\equiv1$ is
+analytic, yet for real $s>\beta$ (put $z=\beta+i\omega$,
+$c=s-\beta$, so $1/(s-z)=(c+i\omega)/(c^2+\omega^2)$) the right
+side of the hint is
+$(2\pi)^{-1}\lim_{\alpha\to\infty}\int_{-\alpha}^{\alpha}
+(c+i\omega)\,d\omega/(c^2+\omega^2)
+=(2\pi)^{-1}\int_{-\infty}^\infty c\,d\omega/(c^2+\omega^2)
+=1/2$, not $1$ (the odd imaginary part cancels between
+$\pm\omega$). Decay on the
 closing contours and inversion hypotheses are required. A
 standard sufficient setting is a causal, piecewise smooth
 function of exponential order, with the integral interpreted
 by symmetric truncation (or Abel regularization). At a jump
 it recovers the mean of the two one-sided limits.}
-For clarity, writing $z=\beta+i\omega$ turns this into the
+Writing $z=\beta+i\omega$ turns this into the
 Fourier inversion of $e^{-\beta t}F(t)$ extended by zero to
 $t<0$; Exercise~20.10.2 supplies a regularized kernel proof
 of the limiting step.
@@ -4701,39 +4780,69 @@ transform.
 \par\erratum{Use a Bromwich line to the right of the convergence abscissa, and recover $F(t)$ at positive continuity points; interpret the delta integral distributionally.}
 \solution
 Parameterize the line by $s=\beta+i\omega$, so
-$ds=i\,d\omega$. On inserting the Laplace integral, the
+$ds/(2\pi i)=d\omega/(2\pi)$ and
+$e^{st}e^{-sz}=e^{\beta(t-z)}e^{i\omega(t-z)}$. On inserting
+the Laplace integral and interchanging the integrations, the
 proposed inverse becomes formally
 \begin{align*}
 \frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}e^{st}f(s)ds
 &=\int_0^\infty F(z)e^{\beta(t-z)}
 \left[\frac1{2\pi}\int_{-\infty}^{\infty}
 e^{i\omega(t-z)}d\omega\right]dz\\
-&=\int_0^\infty F(z)e^{\beta(t-z)}\delta(t-z)dz.
+&=\int_0^\infty F(z)e^{\beta(t-z)}\delta(t-z)dz=F(t),
+\qquad t>0,
 \end{align*}
+by the Fourier representation
+$\delta(u)=\frac1{2\pi}\int_{-\infty}^\infty e^{i\omega u}d\omega$
+and the sifting property; the factor $e^{\beta(t-z)}$ equals $1$
+at $z=t$.
+
 Here is a precise justification of the delta. Multiply the
 frequency integrand by $e^{-\epsilon\omega^2}$, with
-$\epsilon>0$. Its Fourier integral is
+$\epsilon>0$. Completing the square,
+$-\epsilon\omega^2+i\omega u
+=-\epsilon[\omega-iu/(2\epsilon)]^2-u^2/(4\epsilon)$, and
+$\int_{-\infty}^\infty e^{-\epsilon v^2}dv=\sqrt{\pi/\epsilon}$
+(the shift of the line of integration is allowed by
+Cauchy's theorem) give the Fourier integral
 \[
 K_\epsilon(u)=\frac1{2\pi}\int_{-\infty}^{\infty}
 e^{-\epsilon\omega^2+i\omega u}d\omega
 =\frac{e^{-u^2/(4\epsilon)}}{\sqrt{4\pi\epsilon}}.
 \]
-It has mass $1$, is nonnegative, and its mass outside any
-fixed neighborhood of zero tends to zero. If
+It is positive, even and decreasing in $|u|$, and has mass $1$
+(substitute $u=2\sqrt\epsilon\,v$); for fixed $\delta>0$ both
+$K_\epsilon(\delta)$ and $\int_{|u|\ge\delta}K_\epsilon(u)du$
+tend to zero as $\epsilon\to0$. Let
 $H(z)=e^{-\beta z}F(z)$ for $z\ge0$ and $H(z)=0$ for $z<0$,
-with $H\in L^1$, the regularized inverse is
+with $H\in L^1$ ($\beta$ beyond the abscissa of absolute
+convergence). Since $e^{-\epsilon\omega^2}|H(z)|$ is integrable
+over the $(\omega,z)$ plane, Fubini's theorem justifies the
+interchange in the regularized inverse:
 \[
-e^{\beta t}\int_{-\infty}^{\infty}K_\epsilon(t-z)H(z)dz.
+\frac1{2\pi}\int_{-\infty}^{\infty}e^{-\epsilon\omega^2}
+e^{st}f(s)\,d\omega
+=e^{\beta t}\int_{-\infty}^{\infty}K_\epsilon(t-z)H(z)dz.
 \]
-Continuity of $H$ controls the integral near $z=t$; the
-vanishing Gaussian tails control the remainder. Hence its
-limit is $e^{\beta t}H(t)=F(t)$ at every positive continuity
+Let $t>0$ be a continuity point of $F$, hence of $H$. Given
+$\eta>0$, choose $\delta>0$ with $|H(z)-H(t)|<\eta$ for
+$|z-t|<\delta$. Because $K_\epsilon$ has mass $1$ and
+$K_\epsilon(t-z)\le K_\epsilon(\delta)$ for $|z-t|\ge\delta$,
+\[
+\left|\int_{-\infty}^{\infty}K_\epsilon(t-z)H(z)dz-H(t)\right|
+\le\eta+K_\epsilon(\delta)\int_{-\infty}^\infty|H|\,dz
++|H(t)|\int_{|u|\ge\delta}K_\epsilon(u)du.
+\]
+The last two terms tend to zero as $\epsilon\to0$, and $\eta$
+is arbitrary. Hence the regularized inverse tends to
+$e^{\beta t}H(t)=F(t)$ at every positive continuity
 point. This proves
 \[
 \boxed{F(t)=\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
 e^{st}f(s)ds},\qquad t>0,
 \]
-with the justified inversion prescription.
+with the integral understood as the limit $\epsilon\to0$ of
+its regularized form.
 \erratum{The unsmoothed frequency integral is a distribution,
 not an absolutely convergent integral. At an interior jump
 symmetric inversion gives $[F(t-)+F(t+)]/2$; at $t=0$ it gives
@@ -4748,7 +4857,8 @@ Let $f=L\{F\}$ and $g=L\{G\}$, with both functions
 extended by zero for negative arguments. In a common
 half-plane of convergence choose a Bromwich line $\Re s=\beta$.
 Substitute the defining integral for $g$ into the inverse of
-the product:
+the product, combine $e^{st}e^{-su}=e^{s(t-u)}$, and
+interchange the integrations:
 \begin{align*}
 L^{-1}\{fg\}(t)
 &=\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
@@ -4757,16 +4867,23 @@ e^{st}f(s)\left[\int_0^\infty e^{-su}G(u)du\right]ds\\
 \frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
 e^{s(t-u)}f(s)ds\right]du.
 \end{align*}
-The bracket is the causal inverse $F(t-u)$. It vanishes for
-$u>t$, so for $t\ge0$ the result is
+The bracket is the Bromwich integral of Exercise~20.10.2
+evaluated at the time $t-u$. It therefore equals $F(t-u)$ for
+$u<t$ and vanishes for $u>t$, where $t-u<0$ (the inverse is
+causal). Hence for $t\ge0$ the $u$ integral stops at
+$u=t$, and the result is
 \[
 \boxed{L^{-1}\{f(s)g(s)\}(t)=\int_0^tF(t-u)G(u)du}.
 \]
-Changing variables $x=t-u$ also gives
+Changing variables $x=t-u$ ($du=-dx$; the limits $u=0,t$
+become $x=t,0$) also gives
 $\int_0^tF(x)G(t-x)dx$, the Laplace convolution.
 For a direct rigorous interchange, it suffices that the
 vertical integral of $|f(\beta+i\omega)|$ and
-$\int_0^\infty e^{-\beta u}|G(u)|du$ are finite.
+$\int_0^\infty e^{-\beta u}|G(u)|du$ are finite: on the line
+$|e^{s(t-u)}f(s)G(u)|=e^{\beta t}|f(\beta+i\omega)|\,
+e^{-\beta u}|G(u)|$, so the double integral converges
+absolutely and Fubini's theorem applies.
 For the usual broader class of locally integrable functions
 of exponential order, insert the Gaussian frequency regulator
 of Exercise~20.10.2, interchange the absolutely convergent
@@ -4785,21 +4902,39 @@ L^{-1}\left\{\frac{s}{s^{2}-k^{2}}\right\}
 \item[(b)] Repeat, using the Bromwich integral.
 \end{enumerate}
 \solution
-(a) For $k\ne0$,
+(a) For $k\ne0$, since $(s+k)+(s-k)=2s$,
 \[
 \frac{s}{s^2-k^2}
 =\frac12\left(\frac1{s-k}+\frac1{s+k}\right).
 \]
-Thus
+Thus, by $L\{e^{\pm kt}\}=1/(s\mp k)$,
 \[
 \boxed{L^{-1}\left\{\frac{s}{s^2-k^2}\right\}
 =\frac{e^{kt}+e^{-kt}}2=\cosh kt}.
 \]
 (b) Take $\beta>|k|$ for real $k$. For $t>0$, close the
-Bromwich contour to the left, with positive orientation.
-The exponential suppresses the left arc, with the endpoint
-portions controlled by the usual Jordan estimate for the
-$O(1/s)$ rational factor. The enclosed residues are
+Bromwich segment from $\beta-iT$ to $\beta+iT$ by the arc of
+the circle $|s|=R=\sqrt{\beta^2+T^2}$ to its left; the closed
+contour is positively oriented. The following arc estimate
+is used throughout this section. Suppose the factor $\varphi(s)$
+multiplying $e^{st}$ satisfies $|\varphi(s)|\le M_R$ on the
+arc, with $M_R\to0$ as $R\to\infty$. On the left semicircle
+$s=Re^{i\theta}$, $\pi/2\le\theta\le3\pi/2$, put
+$\theta=\pi/2+\phi$; then $|e^{st}|=e^{-tR\sin\phi}$, and
+Jordan's inequality $\sin\phi\ge2\phi/\pi$ on $[0,\pi/2]$ gives
+\[
+\int|e^{st}|\,|ds|=2R\int_0^{\pi/2}e^{-tR\sin\phi}d\phi
+\le2R\int_0^{\pi/2}e^{-2tR\phi/\pi}d\phi<\frac\pi t.
+\]
+The two remaining pieces (present for $\beta>0$), where
+$0<\Re s<\beta$, have length
+$R\arcsin(\beta/R)\le\pi\beta/2$ each, and there
+$|e^{st}|\le e^{\beta t}$. Hence the arc contributes at most
+$M_R(\pi/t+\pi\beta e^{\beta t})\to0$. Here
+$\varphi(s)=s/(s^2-k^2)$ and $|s^2-k^2|\ge R^2-k^2$, so
+$M_R=R/(R^2-k^2)$. The Bromwich integral therefore equals
+the sum of the residues at the simple poles $s=\pm k$, each
+found by cancelling its factor $s\mp k$ and setting $s=\pm k$:
 \[
 \mathop{\rm Res}_{s=k}\frac{se^{st}}{(s-k)(s+k)}
 =\frac{ke^{kt}}{2k}=\frac{e^{kt}}2,
@@ -4808,10 +4943,10 @@ $O(1/s)$ rational factor. The enclosed residues are
 \mathop{\rm Res}_{s=-k}\frac{se^{st}}{(s-k)(s+k)}
 =\frac{-ke^{-kt}}{-2k}=\frac{e^{-kt}}2.
 \]
-Their sum reproduces $\cosh kt$. At $k=0$ the transform
-reduces directly to $1/s$, with inverse $1$, also the
-continuous limit of the answer. The formula gives the
-right-hand value at $t=0$.
+Their sum $(e^{kt}+e^{-kt})/2$ reproduces $\cosh kt$. At $k=0$
+the transform reduces directly to $1/s$, with inverse $1$, also
+the continuous limit of the answer. At $t=0$ the formula gives
+the right-hand value $F(0+)=\cosh0=1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4827,23 +4962,29 @@ L^{-1}\left\{\frac{k^{2}}{s(s^{2}+k^{2})}\right\}
 \par\nobreak\hfill\emph{ANS.}\enspace$F(t)=1-\cos kt$.
 \solution
 Assume real $k\ne0$ during the algebra.
-(a) The decomposition
+(a) Writing the numerator as $k^2=(s^2+k^2)-s^2$ gives the
+decomposition
 \[
-\frac{k^2}{s(s^2+k^2)}=\frac1s-\frac{s}{s^2+k^2}
+\frac{k^2}{s(s^2+k^2)}=\frac1s-\frac{s}{s^2+k^2},
 \]
-immediately gives $F(t)=1-\cos kt$.
+and the pairs $L\{1\}=1/s$, $L\{\cos kt\}=s/(s^2+k^2)$ give
+$F(t)=1-\cos kt$.
 
 (b) Factor the transform as
 $[1/s]\,[k^2/(s^2+k^2)]$. The inverse factors are $1$ and
 $k\sin kt$, so convolution gives
 \[
-F(t)=\int_0^t k\sin(ku)du=[-\cos(ku)]_0^t=1-\cos kt.
+F(t)=\int_0^t 1\cdot k\sin(ku)du=[-\cos(ku)]_0^t=1-\cos kt.
 \]
 (c) For a Bromwich line to the right of $0$, close to the
-left for $t>0$. The rational factor is $O(s^{-3})$, and
-the closing arc vanishes. At the three simple poles,
+left for $t>0$. The rational factor is $O(s^{-3})$: on
+$|s|=R>|k|$ it is at most $M_R=k^2/[R(R^2-k^2)]$, so the closing
+arc vanishes by the arc estimate of Exercise~20.10.4(b). At
+the three simple poles, cancelling each pole factor and
+evaluating the rest there, with $(ik)(2ik)=(-ik)(-2ik)=-2k^2$,
 \begin{align*}
-\mathop{\rm Res}_{s=0}\frac{k^2e^{st}}{s(s-ik)(s+ik)}&=1,\\
+\mathop{\rm Res}_{s=0}\frac{k^2e^{st}}{s(s-ik)(s+ik)}
+&=\frac{k^2}{(-ik)(ik)}=1,\\
 \mathop{\rm Res}_{s=ik}\frac{k^2e^{st}}{s(s-ik)(s+ik)}
 &=\frac{k^2e^{ikt}}{(ik)(2ik)}=-\frac12e^{ikt},\\
 \mathop{\rm Res}_{s=-ik}\frac{k^2e^{st}}{s(s-ik)(s+ik)}
@@ -4871,26 +5012,38 @@ for the Bromwich integral.
 \solution
 Choose the principal branch
 $s^{-1/2}=|s|^{-1/2}e^{-i\arg(s)/2}$ with
-$-\pi<\arg(s)<\pi$. Deform the Bromwich line to a
-counterclockwise contour hugging the negative real cut.
-The small circle around zero contributes $O(\sqrt\rho)$
-as its radius $\rho\to0$, and for $t>0$ the left outer arc
-vanishes by exponential decay and the Jordan estimate.
+$-\pi<\arg(s)<\pi$. For $t>0$, close the Bromwich segment
+to the left as in Exercise~20.10.4(b), but leave out the cut:
+the closed contour follows the arc down to the upper bank of
+the cut, runs along the upper bank from $-R$ to $-\rho$,
+circles the origin clockwise on $|s|=\rho$, returns along the
+lower bank from $-\rho$ to $-R$, and finishes on the arc. It
+encloses no singularity, so its integral vanishes by Cauchy's
+theorem. On the arc $|f|=R^{-1/2}\to0$, so the arc estimate of
+Exercise~20.10.4(b) applies; on the small circle (length
+$2\pi\rho$) $|e^{st}f|\le e^{\rho t}\rho^{-1/2}$, so it
+contributes $O(\sqrt\rho)$ as $\rho\to0$. Hence the Bromwich
+integral equals the reversed bank integrals: along the lower
+bank from $-\infty$ to $0$ and along the upper bank from $0$
+to $-\infty$, a counterclockwise path around the cut.
 There are no poles; the two banks supply the entire inverse.
-For $r>0$ their values are
+For $r>0$, $\arg s\to\pm\pi$ on the two banks, so
 \[
-f(-r+i0)=-i r^{-1/2},\qquad
-f(-r-i0)=+i r^{-1/2}.
+f(-r+i0)=r^{-1/2}e^{-i\pi/2}=-i r^{-1/2},\qquad
+f(-r-i0)=r^{-1/2}e^{i\pi/2}=+i r^{-1/2}.
 \]
-On the counterclockwise cut contour the upper bank runs
-from $0$ toward $-\infty$, and the lower bank returns.
-With $s=-r$, their sum is therefore
+With $s=-r$, $ds=-dr$, the upper bank ($r$ from $0$ to
+$\infty$) contributes $-\int_0^\infty e^{-rt}f(-r+i0)dr$ and
+the lower bank ($r$ from $\infty$ to $0$) contributes
+$+\int_0^\infty e^{-rt}f(-r-i0)dr$. Their sum is therefore
 \[
 \int_0^\infty e^{-rt}
 \big[f(-r-i0)-f(-r+i0)\big]dr
 =2i\int_0^\infty e^{-rt}r^{-1/2}dr.
 \]
-Dividing by $2\pi i$ and substituting $u=rt$ gives
+Dividing by $2\pi i$ and substituting $u=rt$ (so that
+$r^{-1/2}dr=t^{-1/2}u^{-1/2}du$) gives, with
+$\Gamma(1/2)=\sqrt\pi$,
 \[
 F(t)=\frac1\pi\int_0^\infty e^{-rt}r^{-1/2}dr
 =\frac{\Gamma(1/2)}{\pi\sqrt t}
@@ -4915,32 +5068,59 @@ contour.
 Take a cut along the segment from $-i$ to $i$ and choose
 $D(s)=\sqrt{s^2+1}$ analytic outside this segment with
 $D(s)\sim s$ at infinity and $D(s)>0$ for positive real $s$.
-The endpoint singularities are inverse square roots, so
-small circles of radius $\rho$ contribute $O(\sqrt\rho)$.
-For $t>0$, deformation of the Bromwich line around the cut
-is permitted by the large-arc estimate for $e^{st}/D(s)$.
-On the right bank $s=iy+0$, $-1<y<1$,
+For $s=x+iy$ with $x>0$, the number $s^2+1=x^2-y^2+1+2ixy$
+never lies on $(-\infty,0]$ (a real value needs $xy=0$, so
+$y=0$, and then $s^2+1=x^2+1>0$). Hence the principal root
+$\sqrt{s^2+1}$ is analytic on $\Re s>0$; its ratio to $D$ is a
+continuous function with values $\pm1$ on this connected
+half-plane, so it is constant, and it equals $1$ for $s>0$.
+Thus $D$ is the principal root there. Letting $x\to0+$ gives,
+on the right bank
+$s=iy+0$, $-1<y<1$,
 \[
-D(iy+0)=+\sqrt{1-y^2};
+D(iy+0)=+\sqrt{1-y^2}.
 \]
-on the left bank its sign is reversed. A counterclockwise
-contour travels upward along the right bank and downward
-along the left bank, so
+On the left bank its sign is reversed:
+$-D(-s)$ is also analytic outside the cut, squares to
+$s^2+1$ and behaves as $s$ at infinity, so $D(-s)=-D(s)$ and
+$D(iy-0)=-D(-iy+0)=-\sqrt{1-y^2}$.
+For $t>0$, close the Bromwich segment by the arc of
+Exercise~20.10.4(b). On $|s|=R>1$,
+$|1/D(s)|\le(R^2-1)^{-1/2}\to0$, so the arc contributes
+nothing in the limit. The closed contour encloses the cut,
+and by Cauchy's theorem it may be shrunk onto a
+counterclockwise contour hugging the cut: upward along the
+right bank, around a small circle about $i$, downward along
+the left bank, and around a small circle about $-i$. The
+endpoint singularities are inverse square roots
+($|D(s)|^2=|s-i|\,|s+i|$), so the circles, of radius $\rho$
+and length $2\pi\rho$, contribute $O(\sqrt\rho)$. With
+$s=iy$, $ds=i\,dy$, and
+$1/D_{\rm right}-1/D_{\rm left}=2/\sqrt{1-y^2}$,
 \begin{align*}
 F(t)&=\frac1{2\pi i}
 \int_{-i}^{i}e^{st}\left[\frac1{D(s)_{\rm right}}
--\frac1{D(s)_{\rm left}}\right]ds\\
+-\frac1{D(s)_{\rm left}}\right]ds
+=\frac1{2\pi i}\int_{-1}^1e^{iyt}
+\frac{2\,i\,dy}{\sqrt{1-y^2}}\\
 &=\frac1\pi\int_{-1}^1\frac{e^{iyt}}{\sqrt{1-y^2}}dy
 =\frac2\pi\int_0^1\frac{\cos(yt)}{\sqrt{1-y^2}}dy.
 \end{align*}
-The sine part cancels by oddness. Finally $y=\cos\theta$
-converts the symmetric integral to
+The sine part of $e^{iyt}$ cancels by oddness. Finally
+$y=\cos\theta$ converts the symmetric integral
+$\frac1\pi\int_{-1}^1\cos(yt)(1-y^2)^{-1/2}dy$: here
+$dy=-\sin\theta\,d\theta$, $\sqrt{1-y^2}=\sin\theta\ge0$ on
+$[0,\pi]$, and $y=-1,1$ correspond to $\theta=\pi,0$, so the
+reversed limits absorb the minus sign. By the integral
+representation of Exercise~14.1.17(b) with $\nu=0$,
 \[
 F(t)=\frac1\pi\int_0^\pi\cos(t\cos\theta)d\theta
 =\boxed{J_0(t)}.
 \]
-This also has the right-hand initial value $1$, as follows
-from $\lim_{s\to\infty}s/\sqrt{s^2+1}=1$. The branch must
+This also has the right-hand initial value $J_0(0)=1$, in
+agreement with the initial-value relation
+$F(0+)=\lim_{s\to\infty}sf(s)=\lim_{s\to\infty}s/\sqrt{s^2+1}=1$.
+The branch must
 be continued through the exterior of the chosen cut; taking
 an unrelated square-root sign on the left would spoil the
 jump and the factor of two.
@@ -4961,72 +5141,120 @@ $s=(a/2)(z+z^{-1})$.
 \end{enumerate}
 \solution
 Take $a>0$ and the branch of
-$\sqrt{s^2-a^2}$ asymptotic to $s$, with cut $[-a,a]$.
+$\sqrt{s^2-a^2}$ asymptotic to $s$, with cut $[-a,a]$:
+$D(s)=\sqrt{s-a}\,\sqrt{s+a}$ with principal square roots.
+The first factor changes sign across $(-\infty,a)$ and the
+second across $(-\infty,-a)$; on $(-\infty,-a)$ the two sign
+changes cancel, so $D$ is analytic outside $[-a,a]$, and
+$D(s)=s\sqrt{1-a^2/s^2}\sim s$. Write $f=1/D$.
 The Bromwich line lies at $\Re s=\beta>a$.
 
-(a) For $|s|>a$ on this branch,
+(a) For $|s|>a$ put $w=a^2/s^2$, so $|w|<1$. The binomial
+series $(1-w)^{-1/2}=\sum_n\binom{-1/2}{n}(-w)^n$ has the
+coefficients
 \[
-(s^2-a^2)^{-1/2}
+(-1)^n\binom{-1/2}{n}=\frac{1\cdot3\cdots(2n-1)}{2^nn!}
+=\frac{(2n)!}{4^n(n!)^2},
+\]
+since $1\cdot3\cdots(2n-1)=(2n)!/(2^nn!)$. Hence on this branch
+\[
+(s^2-a^2)^{-1/2}=\frac1s(1-w)^{-1/2}
 =\frac1s\sum_{n=0}^\infty
 \frac{(2n)!}{4^n(n!)^2}\frac{a^{2n}}{s^{2n}}.
 \]
-The inverse of $s^{-2n-1}$ is $t^{2n}/(2n)!$. Thus
+The inverse of $s^{-2n-1}$ is $t^{2n}/(2n)!$, which cancels
+the $(2n)!$, and $a^{2n}t^{2n}/4^n=(at/2)^{2n}$. Thus, by the
+power series of $I_\nu$ at $\nu=0$,
 \[
 F(t)=\sum_{n=0}^\infty
 \frac{(at/2)^{2n}}{(n!)^2}=\boxed{I_0(at)}.
 \]
 The resulting series converges for every finite $t$.
-Moreover, in $\Re s>a$ its absolute terms may be transformed
-and summed, reproducing the convergent binomial expansion.
-This verifies termwise inversion by uniqueness, without
-assuming uniform convergence on an arbitrary Bromwich line.
+To justify the termwise inversion, transform it back. For
+real $s>a$ every term $e^{-st}(at/2)^{2n}/(n!)^2$ is
+nonnegative, so by monotone convergence the series may be
+integrated term by term:
+\[
+L\{I_0(at)\}(s)=\sum_{n=0}^\infty\frac{a^{2n}}{4^n(n!)^2}\,
+\frac{(2n)!}{s^{2n+1}}=(s^2-a^2)^{-1/2},
+\]
+the convergent binomial expansion again. By uniqueness of
+the inverse transform, $F=I_0(at)$; no uniform convergence on
+a Bromwich line is needed.
 
-(b) For $-a<x<a$, the upper and lower bank values are
+(b) For $-a<x<a$, $\sqrt{s+a}\to\sqrt{a+x}>0$ on both banks,
+while $\arg(s-a)\to\pm\pi$ gives $\sqrt{s-a}\to\pm i\sqrt{a-x}$
+on the upper and lower bank. Hence
+$D(x\pm i0)=\pm i\sqrt{a^2-x^2}$, and the bank values of $f$
+are
 \[
 f(x+i0)=-\frac i{\sqrt{a^2-x^2}},\qquad
 f(x-i0)=+\frac i{\sqrt{a^2-x^2}}.
 \]
-The upper bank of a counterclockwise contour runs from $a$
-to $-a$, and the lower bank from $-a$ to $a$. Endpoint circles
-vanish as the square root of their radius. Hence
+For $t>0$, close the Bromwich segment by the arc of
+Exercise~20.10.4(b). On $|s|=R>a$,
+$|f|\le(R^2-a^2)^{-1/2}\to0$, so the arc drops out, and by
+Cauchy's theorem the closed contour may be shrunk onto a
+counterclockwise contour around the cut. Its upper bank runs
+from $a$ to $-a$, and its lower bank from $-a$ to $a$. The
+endpoint circles vanish as the square root of their radius,
+since $|D(s)|^2=|s-a|\,|s+a|$ (as in Exercise~20.10.7).
+Reversing the limits of the upper-bank integral gives
 \begin{align*}
 F(t)&=\frac1{2\pi i}\int_{-a}^a e^{xt}
-\big[f(x-i0)-f(x+i0)\big]dx\\
+\big[f(x-i0)-f(x+i0)\big]dx
+=\frac1{2\pi i}\int_{-a}^a\frac{2i\,e^{xt}}{\sqrt{a^2-x^2}}dx\\
 &=\frac1\pi\int_{-a}^a\frac{e^{xt}}{\sqrt{a^2-x^2}}dx
 =\frac1\pi\int_0^\pi e^{at\cos\theta}d\theta
 =I_0(at).
 \end{align*}
-In the last substitution $x=a\cos\theta$, the reversed
-limits cancel the sign in $dx$.
+In the substitution $x=a\cos\theta$,
+$dx=-a\sin\theta\,d\theta$ and $\sqrt{a^2-x^2}=a\sin\theta$
+for $0\le\theta\le\pi$; the limits $x=-a,a$ become
+$\theta=\pi,0$, and the reversed limits cancel the sign in
+$dx$. The last equality is the integral representation of
+Exercise~14.5.14 with $n=0$.
 
 (c) Set $s=(a/2)(z+z^{-1})$, taking the exterior inverse
-$z=(s+\sqrt{s^2-a^2})/a$. Then
+$z=(s+\sqrt{s^2-a^2})/a$, for which $z\sim2s/a$ at infinity.
+Since $s^2-a^2=\frac{a^2}4(z^2+2+z^{-2}-4)
+=\frac{a^2}4(z-z^{-1})^2$ and $ds=\frac a2(1-z^{-2})dz$,
 \[
 \sqrt{s^2-a^2}=\frac a2(z-z^{-1}),\qquad
 \frac{ds}{\sqrt{s^2-a^2}}
-=\frac{(1-z^{-2})dz}{z-z^{-1}}=\frac{dz}{z}.
+=\frac{(1-z^{-2})dz}{z-z^{-1}}=\frac{dz}{z};
 \]
-Deform the $s$ contour around its cut as in (b). The upper
-bank maps to the upper unit semicircle from $1$ to $-1$,
+the sign of the root is fixed by $\sqrt{s^2-a^2}\sim s\sim az/2$
+at infinity, and $z-z^{-1}=z(1-z^{-2})$. Deform the $s$
+contour around its cut as in (b). For $x=a\cos\theta$,
+$0<\theta<\pi$, the bank values $D(x\pm i0)$ of (b) give
+$z=(x\pm i\sqrt{a^2-x^2})/a=e^{\pm i\theta}$. So the upper
+bank ($x$ from $a$ to $-a$, $\theta$ from $0$ to $\pi$) maps to
+the upper unit semicircle from $1$ to $-1$,
 and the lower bank to the lower semicircle from $-1$ to $1$.
 Their union is one counterclockwise unit circle, giving
 \[
 F(t)=\frac1{2\pi i}\oint_{|z|=1}
-\exp\left[\frac{at}{2}(z+z^{-1})\right]\frac{dz}{z}.
+\exp\left[\frac{at}{2}(z+z^{-1})\right]\frac{dz}{z},
 \]
-Expand the two exponentials on this fixed circle:
+which is Exercise~14.5.3(a) with $n=0$ and $x=at$. Directly,
+expand the two exponentials on this fixed circle:
 \[
 \frac1z\sum_{n,m\ge0}
 \frac{(at/2)^{n+m}}{n!m!}z^{n-m}.
 \]
-Only $n=m$ contributes to the coefficient of $z^{-1}$, so
-the residue is $\sum_{n\ge0}(at/2)^{2n}/(n!)^2=I_0(at)$.
+On $|z|=1$ the double series is dominated by
+$\sum_{n,m}(at/2)^{n+m}/(n!m!)=e^{at}$, so it may be integrated
+term by term, and $\oint z^{n-m-1}dz$ is $2\pi i$ for $n=m$ and
+$0$ otherwise. Only $n=m$ contributes to the coefficient of
+$z^{-1}$, so the residue is
+$\sum_{n\ge0}(at/2)^{2n}/(n!)^2=I_0(at)$.
 \erratum{For $at\ne0$, the singularity at $z=0$ is essential,
-not the simple pole called for in the manual; the residue
-calculation still applies. Also the image of the original
-vertical Bromwich line is a curve, not exactly a vertical
-line in $z$. Mapping the already deformed cut contour avoids
-that unwarranted replacement.}
+not the simple pole called for in the Instructor's Manual; the
+residue calculation still applies. Also the image of the
+undeformed vertical Bromwich line is a curve, not exactly a
+vertical line in $z$. Mapping the already deformed cut contour
+avoids that unwarranted replacement.}
 The answer is even in $a$, so real negative $a$ gives the
 same result with $|a|$. At $a=0$ the transform is $1/s$ and
 its inverse is $1$.
@@ -5039,27 +5267,37 @@ L^{-1}\left\{\frac{\ln s}{s}\right\}=-\ln t-\gamma,
 \]
 where $\gamma=0.5772\ldots$ is the Euler--Mascheroni constant.
 \solution
-For real $q>0$ and $s>0$, the gamma substitution gives
+For real $q>0$ and $s>0$, the gamma substitution $u=st$ gives
 \[
-L\left\{\frac{t^{q-1}}{\Gamma(q)}\right\}(s)=s^{-q}.
+L\left\{\frac{t^{q-1}}{\Gamma(q)}\right\}(s)
+=\frac1{\Gamma(q)}\int_0^\infty e^{-st}t^{q-1}dt
+=\frac{s^{-q}}{\Gamma(q)}\int_0^\infty e^{-u}u^{q-1}du=s^{-q}.
 \]
-Differentiate with respect to $q$ near $q=1$. Exponential
-decay at infinity and local integrability of
-$t^{q-1}|\ln t|$ near zero justify differentiation inside
-the transform:
+Differentiate with respect to $q$ near $q=1$. For
+$|q-1|\le\frac12$ the $q$-derivative of the integrand,
+$e^{-st}t^{q-1}\ln t$, is bounded by
+$e^{-st}(t^{-1/2}+t^{1/2})|\ln t|$, which is integrable on
+$(0,\infty)$ (exponential decay at infinity, an integrable
+singularity at zero), so differentiation inside the transform
+is justified. With
+$\partial_qt^{q-1}=t^{q-1}\ln t$,
+$\partial_q[1/\Gamma(q)]=-\Gamma'(q)/\Gamma(q)^2$ and
+$\partial_qs^{-q}=-(\ln s)s^{-q}$,
 \[
 L\left\{\frac{t^{q-1}}{\Gamma(q)}
 [\ln t-\psi(q)]\right\}(s)=-(\ln s)s^{-q},
 \qquad\psi(q)=\frac{\Gamma'(q)}{\Gamma(q)}.
 \]
-Since $\Gamma(1)=1$ and $\psi(1)=-\gamma$, setting $q=1$
-and multiplying by $-1$ yields
+Since $\Gamma(1)=1$ and $\psi(1)=-\gamma$ (Section~13.2),
+setting $q=1$ gives $L\{\ln t+\gamma\}=-(\ln s)/s$, and
+multiplying by $-1$ yields
 \[
 \boxed{L^{-1}\left\{\frac{\ln s}{s}\right\}(t)
 =-\ln t-\gamma},\qquad t>0.
 \]
 For complex $s$ in $\Re s>0$, take the branch of $\ln s$
-that is real on $s>0$. The logarithmic singularity of the
+that is real on $s>0$; both sides are analytic in $\Re s>0$,
+so the identity extends there. The logarithmic singularity of the
 answer at $t=0$ is integrable, so it causes no failure of the
 ordinary Laplace transform.
 
@@ -5077,26 +5315,41 @@ when $t>0$. The integrand
 \frac{se^{st}}{(s-ia)^2(s+ia)^2}
 \]
 has double poles at $s=\pm ia$ and a rational factor
-$O(s^{-3})$. The closing arc vanishes. At $s=ia$, the residue
-is the derivative of the remaining analytic factor:
+$O(s^{-3})$: on $|s|=R>|a|$ it is at most $R/(R^2-a^2)^2$.
+The closing arc therefore vanishes by the arc estimate of
+Exercise~20.10.4(b). At a double pole $s_0$, the residue of
+$\varphi(s)/(s-s_0)^2$, with $\varphi$ analytic at $s_0$, is
+$\varphi'(s_0)$. At $s=ia$ take $\varphi(s)=se^{st}/(s+ia)^2$;
+the product and quotient rules give
+\[
+\varphi'(s)=e^{st}\left[\frac{1+st}{(s+ia)^2}
+-\frac{2s}{(s+ia)^3}\right].
+\]
+With $(2ia)^2=-4a^2$ and $(2ia)^3=-8ia^3$,
 \begin{align*}
-R_+&=\left.\frac d{ds}\frac{se^{st}}{(s+ia)^2}\right|_{s=ia}\\
+R_+=\varphi'(ia)
 &=e^{iat}\left[\frac{1+iat}{(2ia)^2}
--\frac{2ia}{(2ia)^3}\right]
-=e^{iat}\left[-\frac{1+iat}{4a^2}+\frac1{4a^2}\right]
+-\frac{2ia}{(2ia)^3}\right]\\
+&=e^{iat}\left[-\frac{1+iat}{4a^2}+\frac1{4a^2}\right]
 =-\frac{it}{4a}e^{iat}.
 \end{align*}
-Similarly,
+Similarly, at $s=-ia$ the factor is $se^{st}/(s-ia)^2$, with
+$(s-ia)^2=-4a^2$ and $(s-ia)^3=8ia^3$ there:
 \[
-R_-=\left.\frac d{ds}\frac{se^{st}}{(s-ia)^2}\right|_{s=-ia}
+R_-=e^{-iat}\left[\frac{1-iat}{-4a^2}-\frac{-2ia}{8ia^3}\right]
+=e^{-iat}\left[-\frac{1-iat}{4a^2}+\frac1{4a^2}\right]
 =\frac{it}{4a}e^{-iat}.
 \]
-Summing,
+Summing, with $e^{-iat}-e^{iat}=-2i\sin at$,
 \[
 F(t)=R_++R_-=
 \frac{it}{4a}(e^{-iat}-e^{iat})
 =\boxed{\frac t{2a}\sin at}.
 \]
+As a check, the rule $L\{tG(t)\}=-g'(s)$ for $g=L\{G\}$, with
+$G=\sin at$ and $g=a/(s^2+a^2)$, gives
+$L\{t\sin at\}=2as/(s^2+a^2)^2$, which is $2a$ times the
+given transform.
 \erratum{At $a=0$ the two double poles merge and the reduced
 transform is $s^{-3}$; its inverse is $t^2/2$, the continuous
 limit of the formula above.}
@@ -5117,43 +5370,54 @@ F(t)=L^{-1}\left\{\frac{g(s)}{h(s)}\right\}
 =\sum_{i}\frac{g(s_{i})}{h'(s_{i})}\,e^{s_{i}t}.
 \]
 \par\emph{Hint.}~See Exercise~11.6.3.
-\par\erratum{A sufficient elementary setting is a strictly proper rational transform with finitely many simple poles, for $t>0$. The unqualified analytic-function assertion in the book is false, as the counterexample below shows.}
+\par\erratum{A sufficient elementary setting is a strictly proper rational transform with finitely many simple poles, for $t>0$. The unqualified analytic-function assertion in the textbook is false, as the counterexample below shows.}
 \solution
 At a simple zero $s_i$ of $h$,
 \[
 h(s)=h'(s_i)(s-s_i)+O((s-s_i)^2),\qquad h'(s_i)\ne0.
 \]
-The residue of the inverse-transform integrand is therefore
+The residue of the inverse-transform integrand is therefore,
+since $(s-s_i)/h(s)=(s-s_i)/[h(s)-h(s_i)]\to1/h'(s_i)$
+(this is Exercise~11.6.3 with $f_1=e^{st}g$, $f_2=h$),
 \[
 \mathop{\rm Res}_{s=s_i}\frac{e^{st}g(s)}{h(s)}
 =\lim_{s\to s_i}\frac{(s-s_i)e^{st}g(s)}{h(s)}
 =\frac{g(s_i)}{h'(s_i)}e^{s_it}.
 \]
-If a left closing contour has vanishing contribution and the
-sum of residues converges to the contour limit, the residue
-theorem gives
+Place the Bromwich line to the right of all the $s_i$, and
+close it to the left by contours on which the contribution
+vanishes in the limit. If the residue sums inside these
+contours converge, the residue theorem applied to each closed
+contour gives in the limit
 \[
 \boxed{F(t)=\sum_i\frac{g(s_i)}{h'(s_i)}e^{s_it}},\qquad t>0.
 \]
 A particularly simple sufficient case is a strictly proper
-rational function $g/h$ with finitely many simple poles.
-Zeros cancelled by $g$ have zero residue and contribute
-nothing.
+rational function $g/h$ with finitely many simple poles: then
+$|g/h|\le M/|s|$ on large circles, so the arc estimate of
+Exercise~20.10.4(b) applies, and one large circle encloses all
+the poles. A zero of $h$ at which $g$ also vanishes is a
+removable singularity of $g/h$; its residue is zero, and so is
+its term $g(s_i)/h'(s_i)$.
 \erratum{Analytic $g,h$ and simple zeros of $h$ alone do not
 imply the stated expansion: one must also control the closing
 contour, and an infinite residue sum needs its own convergence
 prescription.}
 For a concrete counterexample satisfying the printed analytic
 conditions, choose $g(s)=e^{-s}$, $h(s)=s+1$. Its only pole
-is $-1$, so the proposed unrestricted sum would be $e^{1-t}$.
-But direct transformation gives
+is $-1$, where $g(-1)/h'(-1)=e$, so the proposed unrestricted
+sum would be $e\cdot e^{-t}=e^{1-t}$. But direct
+transformation, with $v=t-1$, gives
 \[
-\int_1^\infty e^{-st}e^{-(t-1)}dt=\frac{e^{-s}}{s+1},
+\int_1^\infty e^{-st}e^{-(t-1)}dt
+=e^{-s}\int_0^\infty e^{-(s+1)v}dv=\frac{e^{-s}}{s+1},
 \]
-whose causal inverse is $e^{-(t-1)}u(t-1)$, zero for $0<t<1$.
-For these times the factor $e^{s(t-1)}$ grows on a left
-closing arc, explaining exactly why the omitted hypothesis
-fails. A polynomial part of a rational transform likewise
+whose causal inverse is $e^{-(t-1)}u(t-1)$: it equals $e^{1-t}$
+for $t>1$ but is zero for $0<t<1$.
+For these times the integrand $e^{st}g/h=e^{s(t-1)}/(s+1)$ has
+$|e^{s(t-1)}|=e^{(t-1)\Re s}$, which grows as $\Re s\to-\infty$
+on a left closing arc, explaining exactly why the omitted
+hypothesis fails. A polynomial part of a rational transform likewise
 requires impulses at zero rather than this ordinary
 exponential sum.
 
@@ -5164,21 +5428,31 @@ invert $f(s)=s^{-2}e^{-ks}$, \erratum{$k\ge0$}. Express $F(t)=L^{-1}\{f(s)\}$ in
 terms of the (shifted) unit step function $u(t-k)$.
 \par\nobreak\hfill\emph{ANS.}\enspace$F(t)=(t-k)u(t-k)$.
 \solution
-\erratum{For the stated causal Laplace shift take $k\ge0$.}
-The inversion integral is
+\erratum{The restriction $k\ge0$ is needed: for $k<0$ the ramp
+$(t-k)u(t-k)$ does not have the transform $s^{-2}e^{-ks}$, as
+the check at the end shows.}
+Since $e^{st}e^{-ks}=e^{s(t-k)}$, the inversion integral is
 \[
 F(t)=\frac1{2\pi i}\int_{\beta-i\infty}^{\beta+i\infty}
 \frac{e^{s(t-k)}}{s^2}ds,\qquad\beta>0.
 \]
-If $t<k$, close to the right, where the exponential decays.
-No poles are enclosed, so $F(t)=0$. If $t>k$, close to the
-left and enclose the double pole at $s=0$. Its residue is
+Close the segment from $\beta-iT$ to $\beta+iT$ by an arc of
+the circle $|s|=R=\sqrt{\beta^2+T^2}$. If $t<k$, close to the
+right ($\Re s\ge\beta$), where
+$|e^{s(t-k)}|=e^{(t-k)\Re s}\le e^{(t-k)\beta}$. No poles are
+enclosed, so $F(t)=0$. If $t>k$, close to the left
+($\Re s\le\beta$), where again $|e^{s(t-k)}|\le e^{(t-k)\beta}$,
+and enclose the double pole at $s=0$. Its residue is the
+derivative of $e^{s(t-k)}$ at $s=0$ (as for the double poles
+of Exercise~20.10.10):
 \[
 \left.\frac d{ds}e^{s(t-k)}\right|_{s=0}=t-k.
 \]
-Both contours have vanishing arcs because of exponential
-decay and the $s^{-2}$ factor. At $t=k$ the value is zero,
-either by continuity or by the zero residue of $s^{-2}$.
+Both arcs have length at most $2\pi R$, and $|s^{-2}|=R^{-2}$
+on them, so they contribute at most
+$2\pi e^{(t-k)\beta}/R\to0$. At $t=k$ the value is zero,
+either by continuity or because $1/s^2$ has zero residue at
+$s=0$ (the same arc bound applies).
 Thus
 \[
 \boxed{F(t)=(t-k)u(t-k)}.
@@ -5188,9 +5462,11 @@ A forward check with $v=t-k$ gives
 \int_k^\infty e^{-st}(t-k)dt
 =e^{-ks}\int_0^\infty e^{-sv}v\,dv=\frac{e^{-ks}}{s^2}.
 \]
-If $k<0$, integrating the proposed ramp only over $t\ge0$
-instead gives $s^{-2}-k/s$; this confirms the need for the
-nonnegative delay in the one-sided formula.
+If $k<0$, the ramp equals $t-k$ for all $t\ge0$, and its
+one-sided transform is instead
+$\int_0^\infty e^{-st}(t-k)dt=s^{-2}-k/s\ne s^{-2}e^{-ks}$; this
+confirms the need for the nonnegative delay in the one-sided
+formula.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5207,17 +5483,19 @@ Invert this transform by each of three methods:
 \par\nobreak\hfill\emph{ANS.}\enspace
 $F(t)=\dfrac{e^{-bt}-e^{-at}}{a-b}$,\quad$a\ne b$.
 \solution
-(a) Write
+(a) Since $(s+a)-(s+b)=a-b$, write
 \[
 \frac1{(s+a)(s+b)}
 =\frac1{a-b}\left(\frac1{s+b}-\frac1{s+a}\right).
 \]
-The exponential transform pair gives
+The exponential transform pair $L\{e^{-ct}\}=1/(s+c)$ gives
 \[
 F(t)=\frac{e^{-bt}-e^{-at}}{a-b}.
 \]
 (b) The inverse factors are $e^{-at}$ and $e^{-bt}$.
-Their convolution is
+Their convolution, with
+$e^{-au}e^{-b(t-u)}=e^{-bt}e^{-(a-b)u}$ and
+$e^{-bt}e^{-(a-b)t}=e^{-at}$, is
 \begin{align*}
 F(t)&=\int_0^t e^{-au}e^{-b(t-u)}du
 =e^{-bt}\int_0^t e^{-(a-b)u}du\\
@@ -5226,7 +5504,10 @@ F(t)&=\int_0^t e^{-au}e^{-b(t-u)}du
 \end{align*}
 (c) Choose $\beta>\max(-\Re a,-\Re b)$ and close the
 Bromwich line to the left for $t>0$. The rational factor
-is $O(s^{-2})$, so the arc vanishes. The simple residues are
+is $O(s^{-2})$, so the arc vanishes by the arc estimate of
+Exercise~20.10.4(b). The residues at the simple poles, found
+by cancelling each pole factor and setting $s$ to the pole,
+are
 \[
 \mathop{\rm Res}_{s=-a}\frac{e^{st}}{(s+a)(s+b)}
 =\frac{e^{-at}}{b-a},\qquad
@@ -5237,7 +5518,14 @@ Their sum gives the same result:
 \[
 \boxed{F(t)=\frac{e^{-bt}-e^{-at}}{a-b}}.
 \]
-Its initial value is zero and its initial slope is $1$.
+Its initial value is zero and its initial slope is
+$F'(0)=(-b+a)/(a-b)=1$.
 The excluded coincident case has the regular limit
-$t e^{-at}$, also obtained from the double pole
-$1/(s+a)^2$.
+\[
+\frac{e^{-bt}-e^{-at}}{a-b}
+=e^{-at}\,\frac{e^{(a-b)t}-1}{a-b}\to te^{-at}
+\qquad(b\to a),
+\]
+since $(e^{\epsilon t}-1)/\epsilon\to t$ as $\epsilon=a-b\to0$;
+it is also obtained from the double pole of $e^{st}/(s+a)^2$, whose
+residue is $\frac d{ds}e^{st}\big|_{s=-a}=te^{-at}$.
