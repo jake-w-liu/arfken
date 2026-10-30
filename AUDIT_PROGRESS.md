@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 0 of 54 parts done (audited and verified); 7 audited and awaiting verification.
+Progress: 0 of 54 parts done (audited and verified); 8 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -100,7 +100,7 @@ Progress: 0 of 54 parts done (audited and verified); 7 audited and awaiting veri
 | ch08-p1 | 8.2.1–8.4.1 | pending |
 | ch09-p1 | 9.2.1–9.7.4 | pending |
 | ch10-p1 | 10.1.1–10.2.7 | pending |
-| ch11-p1 | 11.2.1–11.6.11 | pending |
+| ch11-p1 | 11.2.1–11.6.11 | audited |
 | ch11-p2 | 11.7.1–11.8.22 | pending |
 | ch11-p3 | 11.8.23–11.10.7 | pending |
 | ch12-p1 | 12.1.1–12.5.10 | audited |
@@ -149,3 +149,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch05-p1** (5.1.1–5.3.4) — audit: no mathematical errors found. Steps added in all 24 exercises (e.g. both integrations by parts in 5.1.8, the Leibniz-rule norm in 5.2.1, the re-expansion of lower-degree terms in 5.3.4). The condition number in 5.1.3 is now computed from the eigenvalues instead of citing a deleted script; "the source" → "the textbook" in two notes.
 - **ch06-p1** (6.2.1–6.5.11) — audit: no mathematical errors found. Steps added in 26 of 35 exercises (e.g. the first-row cofactor expansions and factorizations of the characteristic polynomials in 6.2.3–6.2.15 and the principal-axes substitution in 6.2.15, both determinant facts in 6.4.6, the simultaneous change of basis, $2\times2$ products and direct-product anticommutators in 6.5.7, the pairing of zero singular values in 6.5.11). Cleanups: "the original wording" in 6.5.10 restated as the textbook's condition $\lambda_i^*\ne\lambda_j$; a symbol clash in 6.5.7 ($a,d$ reused in $z=a+ib$, $w=c+id$) removed; cross-references to 6.2.7, 6.4.1, 6.5.6, 6.5.8 added.
 - **ch12-p1** (12.1.1–12.5.10) — audit: no mathematical errors found. Steps added in all 29 exercises (e.g. the arc bounds, residue and negative-axis substitution in 12.4.3(b), Euler–Maclaurin on $[n,M]$ with the $1/n$ shift in 12.3.2, the derivation of the corrected intermediate identities in the 12.1.4 erratum, the cotangent series from the Bernoulli generating function in 12.2.3). Cleanups: the vague double-precision description in 12.3.2 replaced by the explicit computation ($H_{1000}$, $\ln1000$, rounding budget of the $4.5\times10^{-16}$ discrepancy), all numbers re-verified; "it is restored above" (12.3.2) restated as a textbook erratum; "the source's" → "the textbook's" (12.1.4); undefined $R^{\rm bound}$ notation in 12.4.6–12.4.7 replaced by the explicit bounds $2^{-24}\zeta(25)$ and $\frac{32}{15}4^{-14}\zeta(14)$.
+- **ch11-p1** (11.2.1–11.6.11) — audit: no mathematical errors found. Steps added in 42 of 47 exercises (e.g. a Green's-theorem reason, $\oint(x^2-iy^2)dz=2iA(\bar x+\bar y)$, for the equal answers in 11.3.5; the explicit maximum-modulus contradiction in 11.4.5; the log formulas for arctan/arctanh and their derivatives in 11.2.10; why the fractional-power terms cannot cancel, with the circuit multipliers at $0$ and $\infty$, in 11.6.5). Cleanups: the "transcription" remark in 11.6.5 deleted and its statement-level `\erratum` on $z^{-1/4}$ (which the textbook prints) unwrapped; "In the actual figure" → "In Fig. 11.7"; "the manual" → "the Instructor's Manual" in 10 errata; the 11.4.5 erratum now quotes the printed (a), so $M$ is defined; notation clashes in 11.4.5 (contour $C$ vs. a constant, bound $m$ vs. a Taylor index) removed.

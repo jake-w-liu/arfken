@@ -28,23 +28,32 @@ maximum or a minimum in the interior of any region in which $w(z)$ is
 \solution
 \erratum{Exclude the constant case: a constant harmonic function has
 both non-strict maxima and minima everywhere.}
-For nonconstant analytic $w$, expand at an interior point:
+Let $w$ be nonconstant and $z_0$ an interior point. Not all Taylor
+coefficients $a_m$ ($m\ge1$) of $w$ at $z_0$ vanish; otherwise $w$ would be
+constant near $z_0$, hence constant on its connected domain by the
+identity theorem. With $m$ the smallest index of a nonzero one,
 \[
 w(z_0+h)=w(z_0)+a_mh^m+O(h^{m+1}),\qquad a_m\ne0,\quad m\ge1.
 \]
-Writing $a_m=|a_m|e^{i\alpha}$ and $h=re^{i\theta}$ gives
+Writing $a_m=|a_m|e^{i\alpha}$ and $h=re^{i\theta}$, we have
+$a_mh^m=|a_m|r^me^{i(\alpha+m\theta)}$, whose real part gives
 \[
 u(z_0+h)-u(z_0)
 =|a_m|r^m\cos(\alpha+m\theta)+O(r^{m+1}).
 \]
-Choose $\theta=-\alpha/m$ and $(\pi-\alpha)/m$. For small $r>0$
-the leading terms dominate the remainder and have opposite signs.
-Thus nearby values of $u$ lie both above and below $u(z_0)$.
-Choosing $\alpha+m\theta=\pi/2,3\pi/2$ proves the same for $v$.
-If all Taylor coefficients vanish, $w$ is locally constant, hence
-constant on its connected domain by the identity theorem.
-At a stationary point the nonconstant components have saddle
-behavior; at other points they have a nonzero gradient.
+Choose $\theta=-\alpha/m$ and $(\pi-\alpha)/m$, where the cosine is
+$+1$ and $-1$. If the remainder is bounded by $Kr^{m+1}$ for small $r$,
+then for $0<r<|a_m|/K$ the leading term dominates it, so the two differences
+have opposite signs. Thus nearby values of $u$ lie both above and below
+$u(z_0)$, which is neither a maximum nor a minimum.
+For $v$ the imaginary part gives
+$v(z_0+h)-v(z_0)=|a_m|r^m\sin(\alpha+m\theta)+O(r^{m+1})$, and
+$\alpha+m\theta=\pi/2,3\pi/2$ give the two signs.
+A stationary point of $u$ or $v$ is a zero of
+$w'=u_x-iu_y=v_y+iv_x$, i.e., a point with $m\ge2$. There
+$\cos(\alpha+m\theta)$ and $\sin(\alpha+m\theta)$ change sign $2m$
+times as $\theta$ runs around $z_0$: a saddle. At other points the
+gradients are nonzero.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -59,14 +68,15 @@ w(z)=u(x,y)+iv(x,y)
 \solution
 \textbf{(a)} Cauchy--Riemann gives $v_y=u_x=3x^2-3y^2$.
 Integrating in $y$ gives $v=3x^2y-y^3+g(x)$.
-Then $v_x=-u_y=6xy$ forces $g'=0$. Since
+Then $v_x=6xy+g'(x)$ must equal $-u_y=6xy$, which forces $g'=0$,
+i.e., $g=C$, a real constant. Since
 $(x+iy)^3=x^3-3xy^2+i(3x^2y-y^3)$,
 \[
 \boxed{w(z)=z^3+iC,\qquad C\in\mathbb R}.
 \]
 \textbf{(b)} Here $u_x=v_y=-e^{-y}\sin x$, so
-$u=e^{-y}\cos x+g(y)$. The equation
-$u_y=-v_x=-e^{-y}\cos x$ gives $g'=0$. Therefore
+$u=e^{-y}\cos x+g(y)$. Then $u_y=-e^{-y}\cos x+g'(y)$ must equal
+$-v_x=-e^{-y}\cos x$, so $g'=0$ and $g=C$. Therefore
 \[
 \boxed{w(z)=e^{iz}+C,\qquad C\in\mathbb R},
 \]
@@ -81,12 +91,13 @@ prove that $u(x,y)$ and $v(x,y)$ are constants.
 \solution
 For $w_1$, $u_x=v_y$ and $u_y=-v_x$.
 For $w_2=u-iv$, $u_x=-v_y$ and $u_y=v_x$.
-Adding and subtracting yields
-$u_x=u_y=v_x=v_y=0$.
+Adding and subtracting $u_x=v_y$ and $u_x=-v_y$ gives $u_x=0$ and
+$v_y=0$; likewise $u_y=-v_x$ and $u_y=v_x$ give $u_y=0$ and $v_x=0$.
+Hence $u_x=u_y=v_x=v_y=0$.
 Along every path in a connected component, $du=u_xdx+u_ydy=0$
 and $dv=v_xdx+v_ydy=0$, so both functions are constant there.
 The two resulting complex constants are conjugates.
-\erratum{The manual further writes $w_1=w_2$, but equality requires
+\erratum{The Instructor's Manual further writes $w_1=w_2$, but equality requires
 $v=0$. For example, $w_1=1+i$ and $w_2=1-i$ are both analytic
 and satisfy the hypotheses without being equal.}
 
@@ -108,8 +119,9 @@ These partial derivatives are continuous off the origin, proving
 analyticity there. The derivative is
 \[
 f'=u_x+iv_x=\frac{y^2-x^2+2ixy}{D^2}
-=-\frac{(x-iy)^2}{D^2}=\boxed{-z^{-2}}.
+=-\frac{(x-iy)^2}{D^2}=-\frac{(z^*)^2}{(zz^*)^2}=\boxed{-z^{-2}},
 \]
+using $x-iy=z^*$ and $D=zz^*$.
 At zero there is a pole. Products of $1/z$ consequently give analytic
 negative integer powers on $\mathbb C\setminus\{0\}$.
 
@@ -120,8 +132,11 @@ the derivative $f'(z)$ has the same value for $dz=a\,dx+ib\,dy$ (with neither
 $a$ nor $b$ zero) as it has for $dz=dx$.
 \solution
 Assume real differentiability of $u,v$ at the point; continuous
-first partial derivatives nearby are sufficient. For
-$h=a\,dx+ib\,dy$, Cauchy--Riemann gives
+first partial derivatives nearby are sufficient. The increment
+$h=a\,dx+ib\,dy$ has $\Delta x=a\,dx$ and $\Delta y=b\,dy$, so the
+real differential of $f=u+iv$ is the first line below.
+Cauchy--Riemann, $u_y=-v_x$ and $v_y=u_x$, gives the second line, and
+$-v_x+iu_x=i(u_x+iv_x)$ gives the third:
 \[
 \begin{aligned}
 df&=(u_x+iv_x)a\,dx+(u_y+iv_y)b\,dy\\
@@ -163,17 +178,22 @@ polar coordinates become \erratum{on a local patch with $r>0$ and $f\ne0$}
 $\delta z$ tangential.
 \solution
 On a regular polar patch $r>0$, use a differentiable phase for
-$f=Re^{i\Theta}$. A radial displacement gives
+$f=Re^{i\Theta}$. The product rule gives
+$\partial_rf=(R_r+iR\Theta_r)e^{i\Theta}$ and
+$\partial_\theta f=(R_\theta+iR\Theta_\theta)e^{i\Theta}$.
+A radial displacement is $dz=e^{i\theta}dr$, giving
 \[
 f'_r=e^{-i\theta}\partial_r f
 =e^{i(\Theta-\theta)}(R_r+iR\Theta_r).
 \]
-A tangential displacement is $dz=ir e^{i\theta}d\theta$, giving
+A tangential displacement is $dz=ir e^{i\theta}d\theta$, giving, with
+$1/i=-i$,
 \[
 f'_\theta=\frac{e^{-i\theta}}{ir}\partial_\theta f
 =e^{i(\Theta-\theta)}
 \left(\frac{R\Theta_\theta}{r}-i\frac{R_\theta}{r}\right).
 \]
+Analyticity requires $f'_r=f'_\theta$.
 Cancel the common phase and equate real and imaginary parts:
 \[
 \boxed{R_r=\frac Rr\Theta_\theta,\qquad
@@ -194,14 +214,19 @@ it is not generally defined at a zero or at $r=0$.}
 \solution
 \erratum{Use a local nonzero analytic branch, so $R>0$ and a smooth
 single-valued phase $\Theta$ is available.}
-Put $L=\ln R$. The equations in 11.2.7 become
+Put $L=\ln R$, so $L_r=R_r/R$ and $L_\theta=R_\theta/R$. Dividing the
+equations of 11.2.7 by $R$ gives
 $L_r=\Theta_\theta/r$ and $L_\theta=-r\Theta_r$.
-Their mixed derivatives are
+Differentiating the first in $\theta$ and the second in $r$,
 \[
 L_{r\theta}=\Theta_{\theta\theta}/r,\qquad
 L_{\theta r}=-\Theta_r-r\Theta_{rr}.
 \]
-They agree, so division by $r$ gives
+$L$ and $\Theta$ are the real and imaginary parts of the analytic
+function $\ln f=L+i\Theta$, so they have continuous second derivatives
+and the mixed derivatives agree:
+$\Theta_{\theta\theta}/r=-\Theta_r-r\Theta_{rr}$. Moving all terms to
+one side and dividing by $r$ gives
 \[
 \boxed{\Theta_{rr}+\frac1r\Theta_r+
 \frac1{r^2}\Theta_{\theta\theta}=0}.
@@ -237,10 +262,12 @@ listed are in the finite complex plane:
 For (a), $\sin z/z=1-z^2/3!+z^4/5!-\cdots$ gives $f'(0)=0$.
 \erratum{The literal quotient is undefined at zero; the entire
 function is its removable extension.}
-In (b),(c) the denominator zeros do not cancel; (d) has an essential
-singularity at zero. For (f), $\cos z=0$ is equivalent to
-$e^{2iz}=-1$, giving its listed real sequence. For (g),
-$e^{2z}=-1$ gives the listed imaginary sequence.
+In (b),(c) the numerator $1$ cannot cancel the denominator zeros; (d)
+has an essential singularity at zero. For (f),
+$\cos z=(e^{iz}+e^{-iz})/2=0$ is equivalent to
+$e^{2iz}=-1=e^{i(2n+1)\pi}$, i.e., $2iz=(2n+1)\pi i$, giving the
+listed real sequence. For (g), $\cosh z=(e^z+e^{-z})/2=0$ gives
+$e^{2z}=-1$, $2z=(2n+1)\pi i$, the listed imaginary sequence.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -256,7 +283,9 @@ following functions $f(z)$ have a derivative \erratum{after choosing single-valu
 \erratum{These expressions require branches. Derivatives below
 are local analytic derivatives away from branch points; a chosen
 cut is a further boundary of that branch.}
-For the powers choose $-\pi<\arg z<\pi$. On the slit plane,
+For the powers choose $-\pi<\arg z<\pi$, i.e.,
+$z^c=\exp(c\operatorname{Log}z)$. On the slit plane the chain rule and
+$(\operatorname{Log}z)'=1/z$ give $(z^c)'=cz^c/z=cz^{c-1}$, so
 \[
 (z^{3/2})'=\tfrac32z^{1/2},\qquad
 (z^{-3/2})'=-\tfrac32z^{-5/2}.
@@ -266,28 +295,37 @@ point. The origin is a branch point of both powers, and the second
 diverges there.
 \erratum{For (a), the pointwise derivative at zero does exist if a
 single-valued selection is defined with $f(0)=0$: its value is zero.
-The manual's exclusion of that derivative is incorrect; this does
+The Instructor's Manual's exclusion of that derivative is incorrect; this does
 not give analyticity on a neighborhood of the branch point.}
 Indeed $|f(h)/h|=|h|^{1/2}\to0$, independently of the square-root sign.
 
-Near zero choose the inverse-function branches
+Solving $z=\tan w=(e^{2iw}-1)/[i(e^{2iw}+1)]$ for $e^{2iw}$ gives
+$e^{2iw}=(1+iz)/(1-iz)$; similarly
+$z=\tanh w=(e^{2w}-1)/(e^{2w}+1)$ gives $e^{2w}=(1+z)/(1-z)$.
+Near zero we therefore choose the inverse-function branches
 \[
 \arctan z=\frac{\operatorname{Log}(1+iz)-\operatorname{Log}(1-iz)}{2i},\qquad
 \operatorname{arctanh}z=\frac{\operatorname{Log}(1+z)-\operatorname{Log}(1-z)}2.
 \]
-Differentiating the logarithms gives
+Differentiating the logarithms,
+$[\operatorname{Log}(1\pm iz)]'=\pm i/(1\pm iz)$ and
+$[\operatorname{Log}(1\pm z)]'=\pm1/(1\pm z)$, gives
 \[
-(\arctan z)'=\tfrac12\left(\frac1{1+iz}+\frac1{1-iz}\right)
+(\arctan z)'=\frac1{2i}\left(\frac i{1+iz}+\frac i{1-iz}\right)
+=\frac12\,\frac{(1-iz)+(1+iz)}{(1+iz)(1-iz)}
 =\boxed{\frac1{1+z^2}},
 \]
 \[
-(\operatorname{arctanh}z)'=\tfrac12
+(\operatorname{arctanh}z)'=\frac12
 \left(\frac1{1+z}+\frac1{1-z}\right)
+=\frac12\,\frac{(1-z)+(1+z)}{(1+z)(1-z)}
 =\boxed{\frac1{1-z^2}}.
 \]
 Local branches have derivatives away from $\pm i$ and $\pm1$,
-respectively. Standard cuts run outward along the imaginary axis
-from $\pm i$ for (c), and along the real axis from $\pm1$ for (d).
+respectively. The standard cuts are where an argument $1\pm iz$ or
+$1\pm z$ of a logarithm is real and $\le0$: they run outward along the
+imaginary axis from $\pm i$ for (c), and along the real axis from
+$\pm1$ for (d).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -308,7 +346,9 @@ Write $\mathbf V=(u_x,u_y,0)$.
 Since $v_x=-u_y$, $\boxed{f'=V_x-iV_y}$.
 \textbf{(b)} Differentiating $u_x=v_y$ in $x$ and
 $u_y=-v_x$ in $y$ gives
-$u_{xx}+u_{yy}=v_{yx}-v_{xy}=0$. Thus $\nabla\cdot\mathbf V=0$.
+$u_{xx}+u_{yy}=v_{yx}-v_{xy}=0$; the mixed partials are equal because
+the components of an analytic function have continuous partial
+derivatives of all orders. Thus $\nabla\cdot\mathbf V=0$.
 \textbf{(c)} The only possibly nonzero curl component is
 $\partial_xu_y-\partial_yu_x=0$ by equality of mixed derivatives.
 The field is incompressible and irrotational on its analytic region.
@@ -333,19 +373,26 @@ variable from the Wirtinger partial derivative. The latter exists
 and is zero for every analytic $f$. The former can exist at isolated
 critical points, but exists throughout a connected region only for
 a constant function.}
-For the ordinary interpretation examine
+For the ordinary interpretation, divide
+$f(z_0+h)-f(z_0)=f'(z_0)h+o(|h|)$ by $\overline h$, which has
+$|\overline h|=|h|$:
 \[
 \frac{f(z_0+h)-f(z_0)}{\overline h}
 =f'(z_0)\frac h{\overline h}+o(1).
 \]
-Real increments give $f'(z_0)$ and purely imaginary increments give
-$-f'(z_0)$. The limit therefore exists only if $f'(z_0)=0$.
+For real increments $h/\overline h=1$, and for purely imaginary ones
+$h/\overline h=-1$; the quotient then tends to $f'(z_0)$ and
+$-f'(z_0)$, respectively. The limit therefore exists only if $f'(z_0)=0$.
 This condition is also sufficient because the remaining term tends
 to zero. For example $f(z)=z^2$ has this derivative zero at $z_0=0$.
 If the condition holds throughout a connected region, $f'=0$
 there and $f$ is constant.
 
-The chain rule in the hint instead defines the Wirtinger derivative:
+The chain rule in the hint instead defines the Wirtinger derivative.
+Treating $z$ and $\overline z$ as independent variables,
+$x=(z+\overline z)/2$ and $y=(z-\overline z)/2i$ give
+$\partial x/\partial\overline z=\tfrac12$ and
+$\partial y/\partial\overline z=-1/(2i)=i/2$, so
 \[
 \partial_{\overline z}f
 =\tfrac12(\partial_x+i\partial_y)(u+iv)
@@ -363,15 +410,18 @@ $f$ be constant.
 $\displaystyle\int_{z_{1}}^{z_{2}}f(z)\,dz
 =-\int_{z_{2}}^{z_{1}}f(z)\,dz$, \erratum{with the same path traversed in reverse.}
 \solution
-Parametrize the specified path by $\gamma(t)$, $0\le t\le1$,
-from $z_1$ to $z_2$. Its reverse is $\widetilde\gamma(t)=\gamma(1-t)$:
+Parametrize the specified path $C$ by $\gamma(t)$, $0\le t\le1$,
+from $z_1$ to $z_2$. Its reverse $\widetilde C$ is
+$\widetilde\gamma(t)=\gamma(1-t)$, with
+$\widetilde\gamma'(t)=-\gamma'(1-t)$ by the chain rule:
 \[
 \int_{\widetilde C}f\,dz
 =-\int_0^1f(\gamma(1-t))\gamma'(1-t)\,dt
 =-\int_0^1f(\gamma(s))\gamma'(s)\,ds.
 \]
-Here $s=1-t$ reverses the limits. The last member equals
-$-\int_Cf\,dz$, proving the identity.
+In the second step $s=1-t$, $ds=-dt$, maps $t=0,1$ to $s=1,0$; the
+sign of $ds$ and the reversal of the limits cancel. The last member
+equals $-\int_Cf\,dz$, proving the identity.
 \erratum{The reverse integral follows the same geometric path in
 the opposite direction; two different paths need not give this relation.}
 
@@ -384,7 +434,8 @@ the opposite direction; two different paths need not give this relation.}
 where \erratum{$f$ is continuous on the piecewise smooth finite-length contour $C$,} $|f|_{\max}$ is the maximum value of $|f(z)|$ along the contour $C$ and
 $L$ is the length of the contour.
 \solution
-For a piecewise smooth parametrization $\gamma:[a,b]\to C$,
+For a piecewise smooth parametrization $\gamma:[a,b]\to C$, the
+modulus of an integral is at most the integral of the modulus:
 \[
 \left|\int_C f\,dz\right|
 =\left|\int_a^bf(\gamma(t))\gamma'(t)\,dt\right|
@@ -406,27 +457,33 @@ has the same value on the two paths: (a) the straight line connecting the
 integration limits, and (b) an arc on the circle $|z|=5$.
 \solution
 The polynomial has the entire primitive
-$P(z)=4z^3/3-3iz^2/2$. Along each smooth segment,
-$dP(\gamma(t))/dt=(4\gamma(t)^2-3i\gamma(t))\gamma'(t)$.
-Thus the straight path $\gamma(t)=a+t(b-a)$ and any circular
-arc $\gamma(\theta)=5e^{i\theta}$ both give $P(b)-P(a)$,
-where $a=3+4i$, $b=4-3i$.
+$P(z)=4z^3/3-3iz^2/2$, $P'(z)=4z^2-3iz$. Along a smooth path
+$\gamma$ the chain rule gives
+$dP(\gamma(t))/dt=(4\gamma(t)^2-3i\gamma(t))\gamma'(t)$, so by the
+fundamental theorem of calculus (applied to real and imaginary parts)
+the integral equals $P$ at the final point minus $P$ at the initial
+point. Let $a=3+4i$, $b=4-3i$. Since $|a|=|b|=5$, both endpoints lie
+on the circle $|z|=5$, at the angles $\arctan\frac43$ and
+$-\arctan\frac34$. Thus the straight path $\gamma(t)=a+t(b-a)$,
+$0\le t\le1$, and either circular arc $\gamma(\theta)=5e^{i\theta}$
+between these angles both give $P(b)-P(a)$.
 The endpoint powers are
 \[
 a^2=-7+24i,\quad b^2=7-24i,\quad
-a^3=-117+44i,\quad b^3=-44-117i.
+a^3=-117+44i,\quad b^3=-44-117i,
 \]
-Hence
+so $b^3-a^3=73-161i$ and $b^2-a^2=14-48i$. With
+$\tfrac{3i}{2}(14-48i)=72+21i$,
 \[
 \begin{aligned}
 P(b)-P(a)
-&=\tfrac43(73-161i)-\tfrac{3i}{2}(14-48i)\\
-&=\frac{292-644i}{3}-72-21i
+&=\tfrac43(b^3-a^3)-\tfrac{3i}{2}(b^2-a^2)
+=\tfrac43(73-161i)-\tfrac{3i}{2}(14-48i)\\
+&=\frac{292-644i}{3}-(72+21i)
+=\frac{292-216}{3}-\frac{644+63}{3}\,i
 =\boxed{\frac{76-707i}{3}}.
 \end{aligned}
 \]
-The chain rule verifies this evaluation for both requested
-parametrizations, including either choice of connecting circular arc.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -440,8 +497,9 @@ Thus every path gives
 \[
 F(z)=\tfrac12[\sin2z-\sin(2\pi+2\pi i)].
 \]
-At $z=\pi i$, periodicity $\sin(w+2\pi)=\sin w$ makes the
-two terms cancel. Therefore $\boxed{F(\pi i)=0}$, and the
+At $z=\pi i$ the bracket is $\sin2\pi i-\sin(2\pi i+2\pi)$, and
+periodicity $\sin(w+2\pi)=\sin w$ makes the two terms cancel.
+Therefore $\boxed{F(\pi i)=0}$, and the
 primitive proves path independence throughout the plane.
 
 \Needspace{5\baselineskip}
@@ -458,9 +516,11 @@ Expand in real differentials:
 \]
 The real part is $d[(x^3+y^3)/3]$, whose closed integral is zero.
 \textbf{(a)} For clockwise traversal set
-$x=\cos t,y=-\sin t$, $0\le t\le2\pi$.
-The imaginary part becomes $(-\cos^3t+\sin^3t)dt$.
-Each odd power has zero integral over a full period, so the answer is $0$.
+$x=\cos t,y=-\sin t$, $0\le t\le2\pi$, so $dx=-\sin t\,dt$ and
+$dy=-\cos t\,dt$. The imaginary part becomes
+$x^2dy-y^2dx=(-\cos^3t+\sin^3t)dt$.
+Each odd power changes sign under $t\to t+\pi$ and so has zero
+integral over a full period; the answer is $0$.
 \textbf{(b)} Traverse the square counterclockwise from $-1-i$.
 On a horizontal edge $dz=dx$; on a vertical edge $dz=i\,dy$.
 The four contributions are
@@ -474,8 +534,21 @@ I_{\rm left}&=\int_{1}^{-1}(1-iy^2)i\,dy=-\frac23-2i.
 \]
 Opposite edges cancel pairwise, giving $\boxed0$. Reversing the
 orientation reverses all four signs and still gives zero.
-These equal answers follow from symmetry, not analyticity:
-$u_x=2x$, $v_y=-2y$ fail Cauchy--Riemann on every open set.
+
+The results are identical, but not by Cauchy's theorem: $u=x^2$,
+$v=-y^2$ give $u_x=2x$, $v_y=-2y$, so Cauchy--Riemann holds only on
+the line $y=-x$ and fails on every open set. The reason is symmetry.
+The real part is exact, and by Green's theorem the imaginary part is,
+for counterclockwise traversal (clockwise reverses the sign),
+\[
+\oint(x^2dy-y^2dx)=\iint\left[\frac{\partial(x^2)}{\partial x}
+-\frac{\partial(-y^2)}{\partial y}\right]dx\,dy
+=\iint(2x+2y)\,dx\,dy=2A(\bar x+\bar y),
+\]
+where $A$ is the enclosed area and $(\bar x,\bar y)$ its centroid.
+Both the disk and the square are centered at the origin, so both
+integrals vanish; a region whose centroid has $\bar x+\bar y\ne0$
+would give a nonzero value.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -487,18 +560,20 @@ depends on the path by evaluating the integral for the two paths shown in
 Fig.~11.7. Recall that $f(z)=z^{*}$ is not an analytic function of $z$ and
 that Cauchy's integral theorem therefore does not apply.
 \solution
-In the actual figure, path 1 is $0\to1\to1+i$ and path 2 is
-$0\to i\to1+i$. Along path 1,
+In Fig.~11.7, path 1 is $0\to1\to1+i$ and path 2 is
+$0\to i\to1+i$. Along path 1, $z=x$, $z^*=x$, $dz=dx$ on the first
+segment and $z=1+iy$, $z^*=1-iy$, $dz=i\,dy$ on the second:
 \[
 I_1=\int_0^1x\,dx+\int_0^1(1-iy)i\,dy
 =\frac12+i+\frac12=\boxed{1+i}.
 \]
-Along the first segment of path 2, $z=iy$, so $dz=i\,dy$:
+Along the first segment of path 2, $z=iy$, $z^*=-iy$, $dz=i\,dy$; on
+the second, $z=x+i$, $z^*=x-i$, $dz=dx$:
 \[
 I_2=\int_0^1(-iy)i\,dy+\int_0^1(x-i)\,dx
 =\frac12+\frac12-i=\boxed{1-i}.
 \]
-\erratum{The manual's second-path calculation omits the factor $i$
+\erratum{The Instructor's Manual's second-path calculation omits the factor $i$
 in $dz=i\,dy$ and prints an incorrect second value.}
 The difference $2i$ establishes path dependence.
 \begin{center}
@@ -532,11 +607,17 @@ integral may be evaluated by expanding into partial fractions and then
 treating the two terms individually. This yields $0$ for $R>1$ and $2\pi i$
 for $\erratum{0<R<1}$.
 \solution
-Partial fractions give $1/[z(z+1)]=1/z-1/(z+1)$.
-For the positively oriented circle $R>1$, both poles lie inside.
+Partial fractions give $1/[z(z+1)]=1/z-1/(z+1)$, since
+$(z+1)-z=1$. For a counterclockwise circle, $\oint dz/(z-a)=2\pi i$ if
+$a$ lies inside: the circle may be shrunk to $|z-a|=\rho$ without
+crossing the singularity, and $z-a=\rho e^{i\theta}$ gives
+$\int_0^{2\pi}i\,d\theta$. If $a$ lies outside, the integrand is
+analytic on and inside the circle and Cauchy's theorem gives zero.
+For $R>1$, both poles lie inside.
 The two terms therefore contribute $2\pi i$ and $-2\pi i$,
 giving $\boxed0$.
-For $0<R<1$ only the origin lies inside, giving $2\pi i$.
+For $0<R<1$ only the origin lies inside; the term $1/(z+1)$ gives zero,
+so the integral is $2\pi i$.
 At $R=1$ the path hits $-1$, so the ordinary integral is undefined.
 The zero-integral theorem cannot be applied directly over the
 singularities, which is why the decomposition is useful.
@@ -557,7 +638,9 @@ exercises are to be understood as traversed in the mathematically positive
 (with the contour encircling the origin once), is a representation of the
 Kronecker $\delta_{mn}$.
 \solution
-On $z=Re^{i\theta}$, $0\le\theta\le2\pi$,
+On the circle $z=Re^{i\theta}$, $0\le\theta\le2\pi$, we have
+$dz=iRe^{i\theta}d\theta$, so
+$z^{m-n-1}dz=iR^{m-n}e^{i(m-n)\theta}d\theta$ and
 \[
 \frac1{2\pi i}\oint z^{m-n-1}\,dz
 =\frac{R^{m-n}}{2\pi}\int_0^{2\pi}e^{i(m-n)\theta}\,d\theta.
@@ -583,9 +666,11 @@ Using
 \[
 \frac1{z^2-1}=\frac12\left(\frac1{z-1}-\frac1{z+1}\right),
 \]
-the first term contributes $\pi i$ and the second integrates to zero.
+the first term contributes $\tfrac12\cdot2\pi i=\pi i$, since the circle
+encloses $1$ (as in 11.3.7), and the second, analytic on and inside the
+circle, integrates to zero by Cauchy's theorem.
 Therefore $\boxed{\oint_C dz/(z^2-1)=\pi i}$.
-\erratum{The manual's answer $0$ is incorrect for this contour;
+\erratum{The Instructor's Manual's answer $0$ is incorrect for this contour;
 textbook p.~491 confirms $|z-1|=1$, enclosing only one pole.}
 
 \Needspace{5\baselineskip}
@@ -602,8 +687,10 @@ Along the contour, the single-valued function $f(z)/(z-z_0)$ obeys
 d\left(\frac{f(z)}{z-z_0}\right)
 =\left[\frac{f'(z)}{z-z_0}-\frac{f(z)}{(z-z_0)^2}\right]dz.
 \]
-Its closed integral is zero. Moving one term to the opposite side
-proves the stated equality. Both integrals also equal
+Its closed integral is zero: the integral of the derivative of the
+single-valued function $f(z)/(z-z_0)$, analytic on a neighborhood of
+$C$, is the change of that function around the closed path. Moving one
+term to the opposite side proves the stated equality. Both integrals also equal
 $2\pi i f'(z_0)$ by Cauchy's formulas.
 
 \Needspace{5\baselineskip}
@@ -618,9 +705,13 @@ Using mathematical induction (Section 1.4), prove that this expression is
 correct.
 \solution
 The base case $n=0$ is Cauchy's integral formula. Assume the formula
-holds for $n$. The point $z_0$ is a positive distance from $C$;
-on a small neighborhood of $z_0$, denominators stay bounded away
-from zero, allowing differentiation under this finite contour integral.
+holds for $n$ at every point inside $C$. The point $z_0$ has a positive
+distance $\delta$ from $C$. For $|\Delta|<\delta/2$ we have
+$|z-z_0-\Delta|\ge\delta/2$ for $z$ on $C$, and the difference quotient
+$[(z-z_0-\Delta)^{-n-1}-(z-z_0)^{-n-1}]/\Delta$ converges to the
+$z_0$-derivative of $(z-z_0)^{-n-1}$ uniformly for $z$ on $C$ as
+$\Delta\to0$. The limit defining $f^{(n+1)}(z_0)$ may therefore be
+taken under this finite contour integral.
 Since
 \[
 \partial_{z_0}(z-z_0)^{-n-1}
@@ -656,19 +747,31 @@ This is the induction step, proving the result for every $n\ge0$.
   Cite a specific example of an analytic function that behaves this way.
 \end{enumerate}
 \solution
-\erratum{As printed on p.~491, (a) is a maximum-modulus statement
-that does not require $f\ne0$. Thus (b)'s claim that its conclusion
-fails at zeros is false. The hint suggests the intended
-minimum-modulus principle. We resolve both statements.}
-For the \textbf{original upper-bound version}, continuity gives a maximum of $|f|$
-on the closed bounded region. If it exceeded $M$, it would occur
-at an interior point $z_0$. For a nonconstant function write
-$f(z_0+h)=f(z_0)+a_mh^m+O(h^{m+1})$, $a_m\ne0$.
-If $f(z_0)\ne0$, choose the direction of $h$ so that $a_mh^m$
-is a positive real multiple of $f(z_0)$. For small $h$ the modulus
-then increases, a contradiction. If the maximum is attained at a
-zero, its value is zero and the function is identically zero.
-Constants satisfy the boundary bound as well. Hence
+\erratum{As printed on p.~491, (a) reads: if $f(z)\ne0$ within $C$ and
+$|f(z)|\le M$ on $C$, then $|f(z)|\le M$ for all points within $C$.
+This maximum-modulus statement does not require $f\ne0$, so (b)'s
+claim that it fails when $f$ has zeros is false. The hint $w=1/f$
+points to the intended minimum-modulus statement given above. We prove
+both.}
+For the \textbf{original upper-bound version}, continuity gives a
+maximum of $|f|$ on the closed bounded region (the inside of $C$
+together with $C$). Suppose it exceeded $M$. Then it would occur at an
+interior point $z_0$, with $f(z_0)\ne0$ because $|f(z_0)|>M\ge0$.
+A constant $f$ is impossible, since its modulus would equal its
+boundary value, at most $M$. For nonconstant $f$ some Taylor
+coefficient at $z_0$ with $k\ge1$ is nonzero (identity theorem); with
+the smallest such $k$,
+$f(z_0+h)=f(z_0)+a_kh^k+O(h^{k+1})$, $a_k\ne0$.
+Write $f(z_0)=|f(z_0)|e^{i\beta}$, $a_k=|a_k|e^{i\alpha}$, and take
+$h=re^{i\theta}$ with $\theta=(\beta-\alpha)/k$. Then
+$a_kh^k=|a_k|r^ke^{i\beta}$ has the phase of $f(z_0)$, so
+$|f(z_0)+a_kh^k|=|f(z_0)|+|a_k|r^k$. If the remainder is bounded by
+$Kr^{k+1}$ for small $r$,
+\[
+|f(z_0+h)|\ge|f(z_0)|+|a_k|r^k-Kr^{k+1}>|f(z_0)|
+\qquad\text{for }0<r<|a_k|/K,
+\]
+contradicting maximality. Hence
 $\boxed{|f|\le M}$ throughout, whether or not zeros occur.
 
 For the \textbf{corrected lower bound in (a)}, assume $f$ has no zero on
@@ -687,7 +790,8 @@ bound without nonvanishing, while still satisfying the printed upper bound.
 \]
 for the contour a square with sides of length $a>1$, centered at $z=0$.
 \solution
-Let $g=e^{iz}$. The square surrounds zero once, so
+Let $g=e^{iz}$, so $g''=i^2e^{iz}=-e^{iz}$. The square surrounds zero
+once, so Cauchy's formula for the second derivative gives
 \[
 \oint_C\frac{e^{iz}}{z^3}\,dz
 =\frac{2\pi i}{2!}g''(0)
@@ -703,7 +807,7 @@ Any positive side length suffices; $a>1$ is stronger than needed.
 \]
 where the contour encircles the point $z=a$.
 \solution
-Set $g(z)=\sin^2z-z^2$. Then
+Set $g(z)=\sin^2z-z^2$. Then, with $2\sin z\cos z=\sin2z$,
 $g'=\sin2z-2z$ and $g''=2\cos2z-2$.
 Cauchy's derivative formula gives
 \[
@@ -745,18 +849,21 @@ additional singularities would supply additional contributions.}
 Write
 $1/[z(2z+1)^2]=A/z+B/(2z+1)+D/(2z+1)^2$.
 Clearing denominators yields
-$1=A(2z+1)^2+Bz(2z+1)+Dz$.
+$1=A(2z+1)^2+Bz(2z+1)+Dz=(4A+2B)z^2+(4A+B+D)z+A$.
 Constant, quadratic, and linear coefficients give, respectively,
-$A=1$, $4A+2B=0$, $4A+B+D=0$; hence $B=D=-2$.
-Therefore
+$A=1$, $4A+2B=0$, $4A+B+D=0$; hence $B=-2$ and $D=-4-B=-2$.
+Since $2/(2z+1)=1/(z+1/2)$ and $2/(2z+1)^2=\tfrac12/(z+1/2)^2$,
 \[
 \frac{f(z)}{z(2z+1)^2}
 =\frac{f(z)}z-\frac{f(z)}{z+1/2}
 -\frac{f(z)/2}{(z+1/2)^2}.
 \]
-Cauchy's formula for values and first derivatives now gives
+Both points $0$ and $-1/2$ lie inside the unit circle. Cauchy's formula
+$\oint f(z)\,dz/(z-z_0)=2\pi if(z_0)$ and its derivative form
+$\oint f(z)\,dz/(z-z_0)^2=2\pi if'(z_0)$ now give
 \[
-\boxed{2\pi i f(0)-2\pi i f(-1/2)-\pi i f'(-1/2)}.
+2\pi if(0)-2\pi if(-1/2)-\tfrac12\cdot2\pi if'(-1/2)
+=\boxed{2\pi i f(0)-2\pi i f(-1/2)-\pi i f'(-1/2)}.
 \]
 
 \Needspace{12\baselineskip}
@@ -772,7 +879,9 @@ Choose the logarithm analytic near $z=0$ with value zero there.
 For $|z|<1$, the geometric series gives
 $1/(1+z)=\sum_{n=0}^\infty(-1)^nz^n$.
 It converges uniformly on every smaller closed disk, allowing
-termwise integration from zero to $z$:
+termwise integration from zero to $z$ along the segment. Since
+$[\ln(1+z)]'=1/(1+z)$ and $\int_0^z\zeta^n\,d\zeta=z^{n+1}/(n+1)$,
+and with the index shift $n+1\to n$ in the second form,
 \[
 \boxed{\ln(1+z)=\sum_{n=0}^\infty\frac{(-1)^nz^{n+1}}{n+1}
 =\sum_{n=1}^\infty(-1)^{n-1}\frac{z^n}{n}}.
@@ -790,7 +899,9 @@ The nearest singularity is $z=-1$, so the Taylor radius is one.
 for $m$, any real number. The expansion is convergent for $|z|<1$. Why?
 \solution
 Choose $(1+z)^m=\exp[m\operatorname{Log}(1+z)]$ with value $1$
-at zero. Repeated differentiation gives
+at zero. For any real exponent $s$ the chain rule gives
+$\frac{d}{dz}(1+z)^s=\exp[s\operatorname{Log}(1+z)]\,\frac{s}{1+z}
+=s(1+z)^{s-1}$, so repeated differentiation gives
 \[
 \frac{d^n}{dz^n}(1+z)^m
 =m(m-1)\cdots(m-n+1)(1+z)^{m-n}.
@@ -800,10 +911,14 @@ Set $z=0$ and divide by $n!$ to obtain
 \boxed{(1+z)^m=\sum_{n=0}^\infty
 \frac{m(m-1)\cdots(m-n+1)}{n!}z^n}.
 \]
-The empty product for $n=0$ is one. For a nonterminating series,
-the absolute successive-term ratio is
-$|z|\,|m-n|/(n+1)\to|z|$, proving convergence for $|z|<1$.
-The disk also avoids the singularity at $-1$.
+The empty product for $n=0$ is one. For a nonterminating series the
+coefficients $c_n$ have $c_{n+1}/c_n=(m-n)/(n+1)$, so the absolute
+successive-term ratio is $|z|\,|m-n|/(n+1)\to|z|$; by the ratio test
+the series converges for $|z|<1$ and diverges for $|z|>1$.
+The reason is the singularity at $z=-1$, where $1+z=0$: this branch is
+analytic on the open disk $|z|<1$, which reaches up to $-1$, so by
+Taylor's theorem the series converges to $(1+z)^m$ there, and no
+larger disk about $0$ avoids $-1$.
 For nonnegative integer $m$ the series terminates and is valid
 everywhere; for other real $m$ the Taylor radius is one.
 
@@ -824,13 +939,18 @@ The series $f(z)=a_1z+a_2z^2+\cdots$ shows that
 $g(z)=f(z)/z$ extends analytically to zero by $g(0)=a_1$.
 Compactness of the unit circle and the strict hypothesis give
 $|g(\zeta)|=|f(\zeta)|\le M<1$ there.
-For $|z_0|<1$, Cauchy's formula applied to $g^n$ gives
+For $|z_0|<1$, Cauchy's formula applied to the analytic function
+$g^n$ gives the first relation below. On the circle
+$|g(\zeta)^n|\le M^n$ and $|\zeta-z_0|\ge1-|z_0|$, so the bound of
+Exercise 11.3.2, with length $2\pi$, gives the second:
 \[
 g(z_0)^n=\frac1{2\pi i}\oint_{|\zeta|=1}
 \frac{g(\zeta)^n}{\zeta-z_0}\,d\zeta,\qquad
-|g(z_0)|^n\le\frac{M^n}{1-|z_0|}.
+|g(z_0)|^n\le\frac1{2\pi}\cdot2\pi\cdot\frac{M^n}{1-|z_0|}
+=\frac{M^n}{1-|z_0|}.
 \]
-Take $n$th roots and let $n\to\infty$ to get $|g(z_0)|\le M$.
+Taking $n$th roots, $|g(z_0)|\le M(1-|z_0|)^{-1/n}$; letting
+$n\to\infty$ gives $|g(z_0)|\le M$.
 This also holds on the boundary. Thus
 $|f(z)|\le M|z|<|z|$ for nonzero $z$, with equality $0=0$ at zero.
 
@@ -880,6 +1000,8 @@ Uniform convergence there permits termwise integration:
 &=\sum_n a_n\delta_{nk}=a_k.
 \end{aligned}
 \]
+The circle integrals equal $\delta_{nk}$ by Exercise 11.4.1, applied in
+the variable $\zeta-z_0$.
 The second series gives $b_k$ for the identical integral.
 Thus $\boxed{a_k=b_k}$ for every integer $k$.
 The proof also works for an infinite principal part on a common annulus.
@@ -902,13 +1024,15 @@ The annulus is $0<|z|<\infty$. The pole has order two and residue one.
 \noindent\textbf{11.5.7}\quad Obtain the Laurent expansion of
 $ze^{z}/(z-1)$ about $z=1$.
 \solution
-Put $w=z-1$. Then
+Put $w=z-1$, so $z=1+w$ and $e^z=e\,e^w$. Then
 \[
-\frac{ze^z}{z-1}
+\frac{ze^z}{z-1}=\frac{(1+w)\,e\,e^w}{w}
 =e\left(\frac1w+1\right)\sum_{n=0}^\infty\frac{w^n}{n!}.
 \]
-The $w^{-1}$ coefficient is $e$; for $m\ge0$ the $w^m$
-coefficient is $e[1/(m+1)!+1/m!]=e(m+2)/(m+1)!$.
+The $w^{-1}$ coefficient is $e$, from $n=0$ in the product with $1/w$.
+For $m\ge0$ the $w^m$ coefficient comes from $n=m+1$ in the product
+with $1/w$ and from $n=m$ in the product with $1$:
+$e[1/(m+1)!+1/m!]=e[1+(m+1)]/(m+1)!=e(m+2)/(m+1)!$.
 Consequently
 \[
 \boxed{\frac{ze^z}{z-1}
@@ -928,9 +1052,11 @@ Multiplication of the exponential series gives
 =\sum_{n=0}^\infty\frac{z^{1-n}}{n!}
 -\sum_{n=0}^\infty\frac{z^{-n}}{n!}.
 \]
-The leading term is $z$, the constants cancel, and the coefficient
-of $z^{-k}$ for $k\ge1$ is
-$1/(k+1)!-1/k!=-k/(k+1)!$. Thus
+The leading term is $z$ ($n=0$ in the first sum), and the constants
+($n=1$ in the first sum, $n=0$ in the second) cancel. For $k\ge1$ the
+coefficient of $z^{-k}$ comes from $n=k+1$ in the first sum and $n=k$
+in the second:
+$1/(k+1)!-1/k!=[1-(k+1)]/(k+1)!=-k/(k+1)!$. Thus
 \[
 \boxed{(z-1)e^{1/z}
 =z-\sum_{k=1}^\infty\frac{k}{(k+1)!}z^{-k}
@@ -953,7 +1079,8 @@ e^{1/z}=z_{0}
 has an infinite number of solutions.
 \solution
 Write $z_0=\rho e^{i\alpha}$ with $\rho>0$, choosing one argument.
-All solutions of $e^w=z_0$ have
+Since $e^w=e^{w'}$ exactly when $w-w'\in2\pi i\mathbb Z$, all solutions
+of $e^w=z_0=e^{\ln\rho+i\alpha}$ are
 $w=\ln\rho+i(\alpha+2\pi n)$, $n\in\mathbb Z$.
 Therefore
 \[
@@ -961,11 +1088,13 @@ Therefore
 \]
 whenever the denominator is nonzero.
 Substitution gives $e^{1/z_n}=\rho e^{i\alpha}=z_0$.
-At most one integer has a zero denominator, and all remaining
-denominators are distinct. Thus infinitely many distinct solutions
-remain, with $z_n\to0$ as $|n|\to\infty$.
+A zero denominator needs $\ln\rho=0$ and $\alpha+2\pi n=0$, so at most
+one integer has one. All remaining denominators are distinct, since
+their imaginary parts differ by multiples of $2\pi$, so their
+reciprocals are distinct. Thus infinitely many distinct solutions
+remain, with $|z_n|\le1/|\alpha+2\pi n|\to0$ as $|n|\to\infty$.
 For $z_0=1$, simply omit $n=0$.
-\erratum{The manual argues from roots of truncated exponential polynomials. Passing to the limit does not by itself establish distinct roots of the original equation. The explicit logarithmic preimages above supply that missing argument.}
+\erratum{The Instructor's Manual argues from roots of truncated exponential polynomials. Passing to the limit does not by itself establish distinct roots of the original equation. The explicit logarithmic preimages above supply that missing argument.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -977,11 +1106,11 @@ is single-valued if we make branch cuts on the real axis for $\erratum{x\ge1}$ a
 \solution
 Remove both rays including their endpoints:
 $D=\mathbb C\setminus((-\infty,-1]\cup[1,\infty))$.
-For $z=x+iy$, $1-z^2$ is nonpositive real only if $xy=0$
-and $1-x^2+y^2\le0$. The choice $x=0$ gives $1+y^2>0$;
+For $z=x+iy$, $1-z^2=(1-x^2+y^2)-2ixy$ is nonpositive real only if
+$xy=0$ and $1-x^2+y^2\le0$. The choice $x=0$ gives $1+y^2>0$;
 otherwise $y=0$, $|x|\ge1$, exactly the removed rays.
-Thus the principal square root of $1-z^2$ is analytic on $D$,
-and the explicit branch
+The principal square root is analytic off the ray $(-\infty,0]$, so
+$\sqrt{1-z^2}$ is analytic on $D$, and the explicit branch
 \[
 \boxed{w(z)=i\sqrt{1-z^2}}
 \]
@@ -989,7 +1118,7 @@ is single-valued and satisfies $w^2=z^2-1$.
 Its negative is the other branch; one reference value selects its sign.
 \erratum{The branch points $\pm1$ themselves are excluded from
 the analytic domain, not merely the open rays.}
-\erratum{The manual instead discusses a cut joining $-1$ to $1$. That is the different branch domain in Example 11.6.4, not the two outward rays specified here.}
+\erratum{The Instructor's Manual instead discusses a cut joining $-1$ to $1$. That is the different branch domain in Example 11.6.4, not the two outward rays specified here.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1010,8 +1139,9 @@ With $h=z-z_0$, Taylor expansion gives
 f_1(z)=f_1(z_0)+O(h),\quad
 f_2(z)=f'_2(z_0)h[1+O(h)].
 \]
-The last factor has an analytic reciprocal near zero because its
-constant term is one. Hence
+Each $O(h)$ here is a convergent power series in $h$ without constant
+term. The last factor has an analytic reciprocal $1+O(h)$ near zero
+because its constant term is one. Hence
 \[
 f(z)=\frac{f_1(z_0)+O(h)}{f'_2(z_0)h}[1+O(h)]
 =\frac{f_1(z_0)}{f'_2(z_0)}h^{-1}+O(1).
@@ -1030,32 +1160,40 @@ the location of the branch cuts. Identify the portions of the complex plane
 where both these descriptions do and do not agree, and characterize the
 differences.
 \solution
-The segment-cut branch of Example 11.6.4 is positive for real $z>1$.
-At $z=i$, the arguments of $i+1$ and $i-1$ are $\pi/4$ and
-$3\pi/4$ and their moduli are both $\sqrt2$. Its value is
+Write $z-1=\rho_1e^{i\varphi_1}$ and $z+1=\rho_2e^{i\varphi_2}$. The
+segment-cut branch $G$ of Example 11.6.4 is
+$G(z)=(\rho_1\rho_2)^{1/2}e^{i(\varphi_1+\varphi_2)/2}$, positive on
+the real axis $z>1$, where $\varphi_1=\varphi_2=0$.
+At $z=i$, the arguments of $i-1$ and $i+1$ are $3\pi/4$ and
+$\pi/4$ and their moduli are both $\sqrt2$. Its value is
 \[
 (\sqrt2)^{1/2}(\sqrt2)^{1/2}
-e^{i(\pi/4+3\pi/4)/2}=\boxed{i\sqrt2}.
+e^{i(3\pi/4+\pi/4)/2}=\boxed{i\sqrt2}.
 \]
 The outward-cut branch with this value is
-$F(z)=i\sqrt{1-z^2}$ from 11.6.2.
-Since its domain is connected, the reference value fixes its sign.
+$F(z)=i\sqrt{1-z^2}$ from 11.6.2, since $F(i)=i\sqrt{1-i^2}=i\sqrt2$.
+Since its domain is connected, the reference value fixes its sign;
+the other branch, $-F$, has the value $-i\sqrt2$ there.
 
-Call the segment-cut branch $G$. Where both are defined,
+Where both are defined,
 $F^2=G^2=z^2-1$ and neither vanishes; thus $F/G$ is continuous
-and takes only $\pm1$. Their common domain has the upper and
-lower half-planes as its two components.
+and takes only $\pm1$, so it is constant on each connected piece of
+the common domain. The two systems of cuts together cover the real
+axis, so the common domain is the plane minus the real axis, whose
+components are the upper and lower half-planes.
 Equality at $i$ implies $F=G$ in the upper half-plane.
-At $-i$, the segment-cut continuation gives $G(-i)=-i\sqrt2$,
-while $F(-i)=i\sqrt2$; hence $F=-G$ in the lower half-plane.
+At $-i$, continuing $G$ from $z>1$ through the lower half-plane, the
+arguments of $-i-1$ and $-i+1$ are $-3\pi/4$ and $-\pi/4$, so
+$G(-i)=\sqrt2\,e^{-i\pi/2}=-i\sqrt2$, while
+$F(-i)=i\sqrt{1-(-i)^2}=i\sqrt2$. Hence $F=-G$ in the lower half-plane.
 These statements specify precisely their agreement and sign difference.
-\erratum{The manual gives $f(i)=2i$. Each factor contributes modulus $2^{1/4}$, not $\sqrt2$, so their product has modulus $\sqrt2$. Also $(i\sqrt2)^2=-2=i^2-1$, whereas $(2i)^2=-4$.}
+\erratum{The Instructor's Manual gives $f(i)=2i$. Each factor contributes modulus $2^{1/4}$, not $\sqrt2$, so their product has modulus $\sqrt2$. Also $(i\sqrt2)^2=-2=i^2-1$, whereas $(2i)^2=-4$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{11.6.5}\quad Find all singularities of
 \[
-z^{-1/3}+\frac{\erratum{z^{-1/4}}}{(z-3)^{3}}+(z-2)^{1/2},
+z^{-1/3}+\frac{z^{-1/4}}{(z-3)^{3}}+(z-2)^{1/2},
 \]
 and identify their types (e.g., second-order branch point, fifth-order pole,
 \ldots). Include any singularities at the point at infinity.
@@ -1063,28 +1201,37 @@ and identify their types (e.g., second-order branch point, fifth-order pole,
 \emph{Note.}~A branch point is of $n$th order if it requires $n$, but no
 fewer, circuits around the point to restore the original value.
 \solution
-\erratum{The second numerator is $z^{-1/4}$ on textbook p.~507;
-the transcription $z-1/4$ loses the fractional power.}
-At zero,
+At zero, since $(z-3)^3=(-3)^3(1-z/3)^3$,
 \[
 \frac{z^{-1/4}}{(z-3)^3}
-=-\frac1{27}z^{-1/4}(1-z/3)^{-3}.
+=-\frac1{27}z^{-1/4}(1-z/3)^{-3},
 \]
-The first two terms therefore acquire multipliers $e^{-2\pi iN/3}$
-and $e^{-2\pi iN/4}$ after $N$ circuits.
-Their distinct leading fractional powers cannot cancel.
-Both return to their initial values iff $N$ is divisible by $3$ and $4$;
+where $(1-z/3)^{-3}$ and the third term $(z-2)^{1/2}$ are analytic
+near zero. After $N$ circuits about zero the first two terms therefore
+acquire multipliers $e^{-2\pi iN/3}$ and $e^{-2\pi iN/4}$, and the third
+is unchanged. The changes of the first two terms cannot cancel: for
+constants $c_1,c_2$, the term $c_1z^{-1/3}$ of
+$c_1z^{-1/3}+c_2z^{-1/4}(1-z/3)^{-3}$ dominates as $z\to0$ (because
+$-1/3<-1/4$) unless $c_1=0$, so the sum vanishes identically only if
+$c_1=c_2=0$.
+Hence the function returns to its initial value iff both terms do,
+i.e., iff $N$ is divisible by $3$ and $4$;
 the least such positive integer is $12$. Zero is a branch point
 of order $12$ in the question's convention.
-At $3$, the chosen local numerator is analytic and nonzero, giving
-a third-order pole. At $2$, only $(z-2)^{1/2}$ branches, with order $2$.
-For infinity put $w=1/z$:
+At $3$, the chosen local numerator is analytic and nonzero and the
+other two terms are analytic, giving a third-order pole. At $2$, only $(z-2)^{1/2}$ branches, with order $2$.
+For infinity put $w=1/z$; with $(1/w-3)^3=(1-3w)^3/w^3$ and
+$1/w-2=(1-2w)/w$,
 \[
 f(1/w)=w^{1/3}+\frac{w^{13/4}}{(1-3w)^3}
 +w^{-1/2}(1-2w)^{1/2}.
 \]
-The analytic factors have nonzero constant terms, so circuit counts
-must be divisible by $3,4,2$; their least common multiple is $12$.
+The analytic factors $(1-3w)^{-3}$ and $(1-2w)^{1/2}$ have nonzero
+constant terms, so $N$ circuits about $w=0$ multiply the three terms by
+$e^{2\pi iN/3}$, $e^{2\pi i(13N/4)}$ and $e^{-\pi iN}$. As at zero, the
+changes cannot cancel, since the term with the smallest exponent
+($-1/2<1/3<13/4$) dominates as $w\to0$. So $N$ must be divisible by
+$3$, $4$ and $2$; their least common multiple is $12$.
 Infinity is an order-$12$ branch point, not an isolated meromorphic pole.
 There are no other finite singularities.
 
@@ -1095,11 +1242,15 @@ single-valued by straight-line branch cuts from $(x,y)=(0,-1)$ to
 $(-\infty,-1)$ and from $(0,+1)$ to $(0,+\infty)$. See Fig.~11.17. If
 $F(0)=-2\pi i$, find the value of $F(i-2)$.
 \solution
-Factor $z^2+1=(z-i)(z+i)$.
-For the upward cut from $i$, choose
-$-3\pi/2<\arg(z-i)<\pi/2$; for the leftward cut from $-i$,
-choose $-\pi<\arg(z+i)<\pi$.
-At zero these arguments are $-\pi/2,\pi/2$ and both moduli are one.
+Factor $z^2+1=(z-i)(z+i)$, so every branch has the form
+$\ln|z-i|+\ln|z+i|+i[\arg(z-i)+\arg(z+i)]+2\pi ik$.
+The upward cut from $i$ consists of the points with
+$\arg(z-i)=\pi/2$; choosing $-3\pi/2<\arg(z-i)<\pi/2$ makes this
+argument continuous off that cut. The leftward cut from $-i$ consists
+of the points with $\arg(z+i)=\pi$; choosing $-\pi<\arg(z+i)<\pi$
+makes this argument continuous off it.
+At zero, $z-i=-i$ and $z+i=i$ have arguments $-\pi/2,\pi/2$ and both
+moduli are one, so $F(0)=2\pi ik=-2\pi i$ requires $k=-1$.
 The required branch is therefore
 \[
 F(z)=\ln|z-i|+\ln|z+i|
@@ -1109,9 +1260,11 @@ At $z=-2+i$, the factors are $-2$ and $-2+2i$.
 Their arguments in these ranges are $-\pi$ and $3\pi/4$;
 their moduli are $2$ and $2\sqrt2$. Thus
 \[
-\boxed{F(i-2)=\ln(4\sqrt2)-9\pi i/4}.
+F(i-2)=\ln2+\ln(2\sqrt2)+i\left(-\pi+\frac{3\pi}4-2\pi\right)
+=\boxed{\ln(4\sqrt2)-9\pi i/4}.
 \]
-Exponentiation verifies $e^F=4-4i=(-2+i)^2+1$.
+Exponentiation verifies the result:
+$e^F=4\sqrt2\,e^{-9\pi i/4}=4\sqrt2\,e^{-i\pi/4}=4-4i=(-2+i)^2+1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1140,10 +1293,15 @@ Choose $(1+z)^m=\exp[m\operatorname{Log}(1+z)]$ with
 $-\pi<\arg(1+z)<\pi$. The cut is $(-\infty,-1]$ and the
 value at zero is $1$. This analytic branch has the Taylor
 coefficients derived in 11.5.2, and the open unit disk avoids the cut.
-For noninteger real $m$, a circuit about $-1$ multiplies the
-value by $e^{2\pi im}\ne1$. Thus $-1$ is a genuine branch point,
-distance one from the Taylor center. The radius is exactly one;
-the branch point prevents a larger convergence disk.
+For noninteger real $m$, a circuit about $-1$ increases $\arg(1+z)$ by
+$2\pi$ and so multiplies the value by $e^{2\pi im}\ne1$. Thus $-1$ is a
+genuine branch point, distance one from the Taylor center. The radius
+is exactly one: if the series converged on a disk $|z|<\rho$ with
+$\rho>1$, its sum $S$ would be analytic there and equal to the branch
+on $|z|<1$, hence (by analytic continuation) on the disk minus the
+cut. Continuing along a small circle about $-1$ inside the disk would
+then return $S$ to its starting value, contradicting the factor
+$e^{2\pi im}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1160,8 +1318,11 @@ For the same cut, let
 \operatorname{Log}_k(1+z)=\ln|1+z|
 +i\arg(1+z)+2\pi ik,\quad k\in\mathbb Z,
 \]
-where the displayed argument lies in $(-\pi,\pi)$.
-Then $(1+z)^m_k=e^{2\pi imk}(1+z)^m_0$, so
+where the displayed argument lies in $(-\pi,\pi)$; the branch $k$
+assigns $1+z$ the phase $\arg(1+z)+2\pi k$. Then
+$(1+z)^m_k=\exp[m\operatorname{Log}_k(1+z)]
+=e^{2\pi imk}\exp[m\operatorname{Log}_0(1+z)]=e^{2\pi imk}(1+z)^m_0$,
+where $k=0$ is the branch of 11.6.8, so
 \[
 \boxed{(1+z)^m_k=e^{2\pi imk}
 \sum_{n=0}^\infty\binom mn z^n,\qquad |z|<1}.
@@ -1185,22 +1346,25 @@ branches. For irrational $m$, all integer $k$ give distinct ones.
 \emph{Hint.}~Make a partial fraction decomposition of this function and use
 the geometric series.
 \solution
-Put $w=z-1$, so $f=1/[w(1+w)]=1/w-1/(1+w)$.
-\textbf{(a)} For $|w|<1$, geometric expansion gives
+Put $w=z-1$, so $f=1/[w(1+w)]=1/w-1/(1+w)$, since $(1+w)-w=1$.
+\textbf{(a)} For $|w|<1$, the geometric series
+$1/(1+w)=\sum_{n=0}^\infty(-1)^nw^n$ gives
 \[
 \boxed{f=\frac1w-1+w-w^2+\cdots
 =\sum_{n=-1}^\infty(-1)^{n+1}w^n,\qquad0<|w|<1}.
 \]
 The pole at $w=0$ excludes the center; the pole at $w=-1$
 sets the outer radius.
-\textbf{(b)} For $|w|>1$ use inverse powers:
+\textbf{(b)} For $|w|>1$ write $w(1+w)=w^2(1+w^{-1})$ and expand
+$(1+w^{-1})^{-1}=\sum_{n=0}^\infty(-1)^nw^{-n}$, a geometric series in
+$w^{-1}$ with $|w^{-1}|<1$:
 \[
 \boxed{f=w^{-2}(1+w^{-1})^{-1}
 =\sum_{n=0}^\infty(-1)^nw^{-n-2},\qquad |w|>1}.
 \]
 The annuli differ, so uniqueness of Laurent coefficients on a
 fixed annulus is not contradicted.
-\erratum{The manual writes the outer series as $\sum_{n=-2}^{\infty}(-1)^n(z-1)^{-n}$. Its lower index should be $2$; otherwise it begins with growing powers and cannot equal a function that decays as $(z-1)^{-2}$ at infinity.}
+\erratum{The Instructor's Manual writes the outer series as $\sum_{n=-2}^{\infty}(-1)^n(z-1)^{-n}$. Its lower index should be $2$; otherwise it begins with growing powers and cannot equal a function that decays as $(z-1)^{-2}$ at infinity.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1226,16 +1390,21 @@ $|z+i| < 1$.
 \[
 \int_0^Te^{-zt}\,dt=(1-e^{-zT})/z.
 \]
-If $\Re z>0$, the exponential tends to zero; convergence is
-locally uniform, giving analyticity.
-If $\Re z<0$, the exponential grows. If $\Re z=0$, $z\ne0$,
-it oscillates without a limit. For $z=0$, the integral equals $T$.
+Here $|e^{-zT}|=e^{-T\Re z}$. If $\Re z>0$, the exponential tends to
+zero as $T\to\infty$, so $f_1(z)=1/z$, which is analytic there.
+If $\Re z<0$, $|e^{-zT}|$ grows without bound. If $\Re z=0$,
+$z=iy\ne0$, then $e^{-iyT}$ has modulus one and keeps rotating, without
+a limit. For $z=0$, the integral equals $T$.
 Thus ordinary convergence occurs exactly on $\Re z>0$.
-\textbf{(b)} There the limit is $1/z$, whose analytic domain is
-$\mathbb C\setminus\{0\}$.
+\textbf{(b)} By (a), $f_2=1/z$ equals $f_1$ on $\Re z>0$, and $1/z$ is
+analytic on $\mathbb C\setminus\{0\}$. By the identity theorem it is
+the only analytic function on this connected domain that agrees with
+$f_1$ on $\Re z>0$; it is the analytic continuation of $f_1$.
 \erratum{The continuation has no negative-integer singularities;
-the manual's mention of those points is extraneous to this function.}
-\textbf{(c)} Set $w=z+i$, so
+the Instructor's Manual's mention of those points is extraneous to this function.}
+\textbf{(c)} Set $w=z+i$. Then $z=w-i=-i(1+iw)$ and $1/(-i)=i$; the
+geometric series in $-iw$ converges for $|w|<1$, and
+$(-i)^n=i^{-n}$ because $-i=1/i$, so
 \[
 \boxed{\frac1z=\frac i{1+iw}
 =i\sum_{n=0}^\infty(-i)^nw^n
@@ -1243,7 +1412,7 @@ the manual's mention of those points is extraneous to this function.}
 \]
 The pole at zero is distance one from the center $-i$, fixing
 the exact convergence radius.
-\erratum{The manual expands about $+i$ in part (c), while the question requests $-i$. The expansion here uses $z+i$ and has constant coefficient $1/(-i)=i$.}
+\erratum{The Instructor's Manual expands about $+i$ in part (c), while the question requests $-i$. The expansion here uses $z+i$ and has constant coefficient $1/(-i)=i$.}
 
 \Needspace{12\baselineskip}
 \subsection*{11.7 Calculus of Residues}
