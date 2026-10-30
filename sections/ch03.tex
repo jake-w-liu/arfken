@@ -20,11 +20,20 @@ $\hat{\mathbf e}_x\times\hat{\mathbf e}_y=\hat{\mathbf e}_z$,
 $\hat{\mathbf e}_y\times\hat{\mathbf e}_x=-\hat{\mathbf e}_z$, and
 $\hat{\mathbf e}_i\times\hat{\mathbf e}_i=0$:
 \[
+\begin{aligned}
 \mathbf P\times\mathbf Q
-=P_xQ_y\hat{\mathbf e}_z-P_yQ_x\hat{\mathbf e}_z
+&=P_xQ_x(\hat{\mathbf e}_x\times\hat{\mathbf e}_x)
++P_xQ_y(\hat{\mathbf e}_x\times\hat{\mathbf e}_y)
++P_yQ_x(\hat{\mathbf e}_y\times\hat{\mathbf e}_x)
++P_yQ_y(\hat{\mathbf e}_y\times\hat{\mathbf e}_y)\\
+&=P_xQ_y\hat{\mathbf e}_z-P_yQ_x\hat{\mathbf e}_z
 =\boxed{(P_xQ_y-P_yQ_x)\hat{\mathbf e}_z}.
+\end{aligned}
 \]
-The coefficient is nonzero for nonparallel nonzero vectors.
+The coefficient is nonzero: its magnitude is
+$|\mathbf P\times\mathbf Q|=PQ\sin\theta$, where $\theta$ is the angle
+between the vectors, and $\sin\theta\ne0$ because they are neither
+parallel ($\theta=0$) nor antiparallel ($\theta=\pi$).
 Its sign determines whether the direction is $+z$ or $-z$.
 
 \Needspace{5\baselineskip}
@@ -42,10 +51,17 @@ $\mathbf A\cdot\mathbf B=AB\cos\theta$, so
 =\boxed{A^2B^2-(\mathbf A\cdot\mathbf B)^2}.
 \]
 If either vector is zero, both sides are zero directly.
-An algebraic check expands the left side as
-$(A_yB_z-A_zB_y)^2+(A_zB_x-A_xB_z)^2+(A_xB_y-A_yB_x)^2$.
-The squared terms are $\sum_{i\ne j}A_i^2B_j^2$ and the mixed terms
-are $-2\sum_{i<j}A_iA_jB_iB_j$, exactly the expansion of the right side.
+An algebraic check expands both sides in components. The left side is
+$(A_yB_z-A_zB_y)^2+(A_zB_x-A_xB_z)^2+(A_xB_y-A_yB_x)^2$;
+its squared terms are $\sum_{i\ne j}A_i^2B_j^2$ and its mixed terms
+are $-2\sum_{i<j}A_iA_jB_iB_j$. On the right,
+\[
+A^2B^2=\sum_{i,j}A_i^2B_j^2,\qquad
+(\mathbf A\cdot\mathbf B)^2=\sum_iA_i^2B_i^2+2\sum_{i<j}A_iA_jB_iB_j .
+\]
+In the difference the $i=j$ terms cancel, leaving
+$\sum_{i\ne j}A_i^2B_j^2-2\sum_{i<j}A_iA_jB_iB_j$, the same as the
+left side.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -84,6 +100,12 @@ Evaluation from their Cartesian components gives
 Equating the geometric and component expressions proves both identities,
 including their signs. Directed angles extend the argument to all real
 $\theta,\varphi$.
+The vector $\mathbf R$ is not needed here. Since its directed angle is
+$\varphi$, the same steps give
+$\mathbf R\cdot\mathbf P=\cos\varphi\cos\theta+\sin\varphi\sin\theta
+=\cos(\theta-\varphi)$ and
+$(\mathbf R\times\mathbf P)_z=\cos\varphi\sin\theta-\sin\varphi\cos\theta
+=\sin(\theta-\varphi)$, the corresponding difference formulas.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -106,7 +128,12 @@ so $a=0$ and then $b=c$. Thus every common perpendicular is
 \mathbf A=t(0,1,1).
 \]
 A nonzero choice is $(0,1,1)$; the cross product
-$\mathbf U\times\mathbf V=(0,-3,-3)$ gives the same direction.
+\[
+\mathbf U\times\mathbf V
+=\bigl(1\cdot1-(-1)(-1),\ (-1)(1)-2\cdot1,\ 2(-1)-1\cdot1\bigr)
+=(0,-3,-3)
+\]
+gives the same direction.
 \textbf{(b)} Its squared norm is $2t^2$. Unit magnitude requires
 $t=\pm1/\sqrt2$, giving
 \[
@@ -139,7 +166,10 @@ $\lambda\mu(\hat{\mathbf n}\times\hat{\mathbf n})=0$.
 \solution
 Take a nondegenerate triangle with side lengths $A,B,C$ opposite
 $\alpha,\beta,\gamma$. Its area $\Delta$ is half the magnitude of the
-cross product of either pair of adjacent side vectors:
+cross product of the two side vectors that leave any one vertex. At the
+vertex with angle $\alpha$ these two sides have lengths $B$ and $C$
+($A$ is the opposite side), so $2\Delta=BC\sin\alpha$; the other two
+vertices are treated the same way:
 \[
 2\Delta=BC\sin\alpha=CA\sin\beta=AB\sin\gamma.
 \]
@@ -148,8 +178,12 @@ Divide each expression by the nonzero product $ABC$:
 \boxed{\frac{\sin\alpha}{A}=\frac{\sin\beta}{B}
 =\frac{\sin\gamma}{C}=\frac{2\Delta}{ABC}}.
 \]
-This also follows by dropping an altitude: its length is either adjacent
-side times the sine of the opposite angle.
+This also follows by dropping the altitude from the vertex of angle
+$\gamma$ onto side $C$: computed from either of the other two sides,
+its length is $h=A\sin\beta=B\sin\alpha$, so
+$\sin\alpha/A=\sin\beta/B$. The altitude from the vertex of angle
+$\alpha$ gives $C\sin\beta=B\sin\gamma$, i.e.\
+$\sin\beta/B=\sin\gamma/C$, in the same way.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -180,8 +214,10 @@ Put $\mathbf B=(B_x,B_y,B_z)$. The three unit-velocity cross products are
 \hat{\mathbf e}_y\times\mathbf B=(B_z,0,-B_x),\quad
 \hat{\mathbf e}_z\times\mathbf B=(-B_y,B_x,0).
 \]
-The first measurement gives $B_z=4,B_y=2$; the second gives
-$B_z=4,B_x=1$; the third independently gives $B_y=2,B_x=1$.
+Matching components with the measured $\mathbf F/q$: the first
+measurement, $(0,-B_z,B_y)=(0,-4,2)$, gives $B_z=4,B_y=2$; the second,
+$(B_z,0,-B_x)=(4,0,-1)$, gives $B_z=4,B_x=1$; the third,
+$(-B_y,B_x,0)=(-2,1,0)$, independently gives $B_y=2,B_x=1$.
 All are consistent, so
 $\boxed{\mathbf B=\hat{\mathbf e}_x+2\hat{\mathbf e}_y+4\hat{\mathbf e}_z}$.
 
@@ -202,22 +238,30 @@ $\mathbf{B}$, and $\mathbf{C}$,
 \item[(b)] Compute $\mathbf{A}\times(\mathbf{B}\times\mathbf{C})$.
 \end{enumerate}
 \solution
-First compute
+First compute, expanding along the first row,
 \[
 \mathbf B\times\mathbf C
 =\begin{vmatrix}\hat{\mathbf e}_x&\hat{\mathbf e}_y&\hat{\mathbf e}_z\\
-0&1&1\\1&0&-1\end{vmatrix}=(-1,1,-1).
+0&1&1\\1&0&-1\end{vmatrix}
+=\hat{\mathbf e}_x(-1-0)-\hat{\mathbf e}_y(0-1)+\hat{\mathbf e}_z(0-1)
+=(-1,1,-1).
 \]
 \textbf{(a)} $\mathbf A\cdot(\mathbf B\times\mathbf C)
-=(1,1,0)\cdot(-1,1,-1)=0$.
-Since $\mathbf A=\mathbf B+\mathbf C$, the three vectors lie in
-one plane; the parallelepiped they span has zero volume.
+=(1,1,0)\cdot(-1,1,-1)=\boxed{0}$.
+This is forced by $\mathbf A=\mathbf B+\mathbf C$: since
+$\mathbf B\times\mathbf C$ is perpendicular to both $\mathbf B$ and
+$\mathbf C$, $(\mathbf B+\mathbf C)\cdot(\mathbf B\times\mathbf C)=0$.
+Geometrically, the three vectors lie in one plane, so the
+parallelepiped they span has zero volume.
 \textbf{(b)} Direct multiplication gives
 \[
 \mathbf A\times(\mathbf B\times\mathbf C)
-=(1,1,0)\times(-1,1,-1)=\boxed{(-1,1,2)}.
+=(1,1,0)\times(-1,1,-1)
+=\bigl(1(-1)-0\cdot1,\ 0(-1)-1(-1),\ 1\cdot1-1(-1)\bigr)
+=\boxed{(-1,1,2)}.
 \]
-The triple-product identity also gives
+The triple-product identity, with $\mathbf A\cdot\mathbf C=1$ and
+$\mathbf A\cdot\mathbf B=1$, also gives
 $\mathbf B(\mathbf A\cdot\mathbf C)-\mathbf C(\mathbf A\cdot\mathbf B)
 =\mathbf B-\mathbf C=(-1,1,2)$.
 
@@ -256,19 +300,20 @@ $\hat{\mathbf{r}}$ is a unit vector in the radial direction, show that
   \times\mathbf{A})$.
 \end{enumerate}
 \solution
-The radial component must be $\mathbf A_r=a\hat{\mathbf r}$.
+\textbf{(a)} The radial component must be $\mathbf A_r=a\hat{\mathbf r}$.
 The remainder is tangential if
 $0=\hat{\mathbf r}\cdot(\mathbf A-a\hat{\mathbf r})
 =\hat{\mathbf r}\cdot\mathbf A-a$. Thus
 \[
 \boxed{\mathbf A_r=\hat{\mathbf r}(\mathbf A\cdot\hat{\mathbf r})}.
 \]
-The triple-product identity and $\hat{\mathbf r}\cdot\hat{\mathbf r}=1$
-give
+\textbf{(b)} The triple-product identity and
+$\hat{\mathbf r}\cdot\hat{\mathbf r}=1$ give
 \[
 -\hat{\mathbf r}\times(\hat{\mathbf r}\times\mathbf A)
-=-\hat{\mathbf r}(\hat{\mathbf r}\cdot\mathbf A)
-+\mathbf A=\mathbf A-\mathbf A_r=\boxed{\mathbf A_t}.
+=-\bigl[\hat{\mathbf r}(\hat{\mathbf r}\cdot\mathbf A)
+-\mathbf A(\hat{\mathbf r}\cdot\hat{\mathbf r})\bigr]
+=\mathbf A-\mathbf A_r=\boxed{\mathbf A_t}.
 \]
 It is perpendicular to $\hat{\mathbf r}$ and the two parts sum to
 $\mathbf A$, verifying the decomposition.
@@ -287,9 +332,11 @@ nonzero normal to their plane. Consequently
 $\mathbf A\cdot(\mathbf B\times\mathbf C)=0$ says exactly that
 $\mathbf A$ lies in that plane. This proves necessity and sufficiency
 in this case.
-If $\mathbf B,\mathbf C$ are dependent, their cross product is zero,
-and all three vectors lie in a plane containing $\mathbf A$ and
-their common line. Conversely any three vectors in a plane have one
+If $\mathbf B,\mathbf C$ are dependent, their cross product is zero, so
+the triple product vanishes; and all three vectors lie in a plane
+containing $\mathbf A$ and the common line of $\mathbf B,\mathbf C$, so
+they are coplanar. Both conditions hold, and again they are equivalent.
+Conversely any three vectors in a plane have one
 normal perpendicular to all of them, so the triple product vanishes.
 The argument also covers collinear triples.
 
@@ -298,19 +345,22 @@ The argument also covers collinear triples.
 \noindent\textbf{3.2.12}\quad Three vectors $\mathbf{A}$, $\mathbf{B}$, and
 $\mathbf{C}$ are given by
 \[
-\mathbf{A}=3\hat{\mathbf{e}}_{x}-2\hat{\mathbf{e}}_{y}+2\hat{\mathbf{z}},\quad
-\mathbf{B}=6\hat{\mathbf{e}}_{x}+4\hat{\mathbf{e}}_{y}-2\hat{\mathbf{z}},\quad
-\mathbf{C}=-3\hat{\mathbf{e}}_{x}-2\hat{\mathbf{e}}_{y}-4\hat{\mathbf{z}}.
+\mathbf{A}=3\hat{\mathbf{e}}_{x}-2\hat{\mathbf{e}}_{y}+2\hat{\mathbf{e}}_{z},\quad
+\mathbf{B}=6\hat{\mathbf{e}}_{x}+4\hat{\mathbf{e}}_{y}-2\hat{\mathbf{e}}_{z},\quad
+\mathbf{C}=-3\hat{\mathbf{e}}_{x}-2\hat{\mathbf{e}}_{y}-4\hat{\mathbf{e}}_{z}.
 \]
 Compute the values of $\mathbf{A}\cdot\mathbf{B}\times\mathbf{C}$ and
 $\mathbf{A}\times(\mathbf{B}\times\mathbf{C})$,
 $\mathbf{C}\times(\mathbf{A}\times\mathbf{B})$ and
 $\mathbf{B}\times(\mathbf{C}\times\mathbf{A})$.
 \solution
-The needed cross products and dot products are
+The needed cross product, from
+$\mathbf B\times\mathbf C=(B_yC_z-B_zC_y,\ B_zC_x-B_xC_z,\ B_xC_y-B_yC_x)$,
+and dot products are
 \[
 \begin{aligned}
-\mathbf B\times\mathbf C&=(-16+(-4),\ 6+24,\ -12+12)=(-20,30,0),\\
+\mathbf B\times\mathbf C&=\bigl(4(-4)-(-2)(-2),\ (-2)(-3)-6(-4),\
+6(-2)-4(-3)\bigr)=(-20,30,0),\\
 \mathbf A\cdot\mathbf B&=18-8-4=6,\\
 \mathbf A\cdot\mathbf C&=-9+4-8=-13,\qquad
 \mathbf B\cdot\mathbf C=-18-8+8=-18.
@@ -326,14 +376,21 @@ Using $\mathbf X\times(\mathbf Y\times\mathbf Z)
 \[
 \begin{aligned}
 \mathbf A\times(\mathbf B\times\mathbf C)
-&=-13\mathbf B-6\mathbf C=\boxed{(-60,-40,50)},\\
+&=\mathbf B(\mathbf A\cdot\mathbf C)-\mathbf C(\mathbf A\cdot\mathbf B)
+=-13\mathbf B-6\mathbf C\\
+&=(-78+18,\ -52+12,\ 26+24)=\boxed{(-60,-40,50)},\\
 \mathbf C\times(\mathbf A\times\mathbf B)
-&=-18\mathbf A+13\mathbf B=\boxed{(24,88,-62)},\\
+&=\mathbf A(\mathbf C\cdot\mathbf B)-\mathbf B(\mathbf C\cdot\mathbf A)
+=-18\mathbf A+13\mathbf B\\
+&=(-54+78,\ 36+52,\ -36-26)=\boxed{(24,88,-62)},\\
 \mathbf B\times(\mathbf C\times\mathbf A)
-&=6\mathbf C+18\mathbf A=\boxed{(36,-48,12)}.
+&=\mathbf C(\mathbf B\cdot\mathbf A)-\mathbf A(\mathbf B\cdot\mathbf C)
+=6\mathbf C+18\mathbf A\\
+&=(-18+54,\ -12-36,\ -24+36)=\boxed{(36,-48,12)}.
 \end{aligned}
 \]
-Their sum is $(0,0,0)$, as required by Jacobi's identity.
+Their sum is $(0,0,0)$, as required by Jacobi's identity
+(Exercise 3.2.9).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -374,10 +431,15 @@ Apply the triple-product identity with $\mathbf X=\mathbf A\times\mathbf B$:
 =\mathbf C(\mathbf X\cdot\mathbf D)-\mathbf D(\mathbf X\cdot\mathbf C).
 \]
 Cyclicity of the scalar triple product gives
-$(\mathbf A\times\mathbf B)\cdot\mathbf D=\mathbf A\cdot(\mathbf B\times\mathbf D)$
-and the analogous formula with $\mathbf C$. Substitution gives exactly
-the stated result, with the first scalar multiplying $\mathbf C$ and
-the second multiplying $-\mathbf D$.
+$\mathbf X\cdot\mathbf D=(\mathbf A\times\mathbf B)\cdot\mathbf D
+=\mathbf A\cdot(\mathbf B\times\mathbf D)$ and likewise
+$\mathbf X\cdot\mathbf C=\mathbf A\cdot(\mathbf B\times\mathbf C)$.
+Substituting these two scalars,
+\[
+(\mathbf A\times\mathbf B)\times(\mathbf C\times\mathbf D)
+=\boxed{(\mathbf A\cdot\mathbf B\times\mathbf D)\mathbf C
+-(\mathbf A\cdot\mathbf B\times\mathbf C)\mathbf D}.
+\]
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -412,18 +474,22 @@ $\mathbf{F}_{1}=-\mathbf{F}_{2}$, does not hold.\par
 \dfrac{q_{1}q_{2}}{r^{2}}\erratum{(\mathbf v_1\cdot\mathbf v_2)}\hat{\mathbf{r}}=-\mathbf{F}_{2}$.\enspace
 \erratum{Mutual attraction if $q_1q_2(\mathbf v_1\cdot\mathbf v_2)>0$; repulsion if it is negative.}
 \solution
-Set $K=\mu_0q_1q_2/(4\pi r^2)$ and let $\hat{\mathbf r}$ point from
-charge 1 to charge 2. The magnetic Lorentz force is
+\textbf{(a)} Set $K=\mu_0q_1q_2/(4\pi r^2)$ and let $\hat{\mathbf r}$
+point from charge 1 to charge 2. The field of $q_1$ at $q_2$ is
+$\mathbf B_1=(\mu_0/4\pi)q_1\mathbf v_1\times\hat{\mathbf r}/r^2$, so
+the magnetic Lorentz force on $q_2$ is
 \[
 \mathbf F_2=q_2\mathbf v_2\times\mathbf B_1
 =K\mathbf v_2\times(\mathbf v_1\times\hat{\mathbf r})
 =K\{\mathbf v_1(\mathbf v_2\cdot\hat{\mathbf r})
 -\hat{\mathbf r}(\mathbf v_1\cdot\mathbf v_2)\}.
 \]
-For the field of charge 2 evaluated at charge 1, the radial unit vector
-is $-\hat{\mathbf r}$, so
+\textbf{(b)} For the field of charge 2 evaluated at charge 1, the unit
+vector from the source to the field point is $-\hat{\mathbf r}$, so
+$\mathbf B_2=-(\mu_0/4\pi)q_2\mathbf v_2\times\hat{\mathbf r}/r^2$ and
 \[
-\mathbf F_1=-K\mathbf v_1\times(\mathbf v_2\times\hat{\mathbf r})
+\mathbf F_1=q_1\mathbf v_1\times\mathbf B_2
+=-K\mathbf v_1\times(\mathbf v_2\times\hat{\mathbf r})
 =K\{\hat{\mathbf r}(\mathbf v_1\cdot\mathbf v_2)
 -\mathbf v_2(\mathbf v_1\cdot\hat{\mathbf r})\}.
 \]
@@ -434,12 +500,17 @@ $\mathbf F_1+\mathbf F_2
 This concerns the magnetic forces on the particles; it is not a claim
 that particle-plus-field momentum fails to be conserved.
 
-For side-by-side trajectories, both velocities are perpendicular to
-$\hat{\mathbf r}$. Hence
+\textbf{(c)} For side-by-side trajectories, both velocities are
+perpendicular to $\hat{\mathbf r}$:
+$\mathbf v_1\cdot\hat{\mathbf r}=\mathbf v_2\cdot\hat{\mathbf r}=0$.
+The first term of $\mathbf F_2$ and the second term of $\mathbf F_1$
+then vanish, leaving
 \[
 \boxed{\mathbf F_1=K(\mathbf v_1\cdot\mathbf v_2)\hat{\mathbf r}
 =-\mathbf F_2}.
 \]
+Because $\hat{\mathbf r}$ points from charge 1 toward charge 2, the
+charges attract when $K(\mathbf v_1\cdot\mathbf v_2)>0$.
 \erratum{The printed $v^2$ assumes equal velocities.
 Attraction requires $q_1q_2(\mathbf v_1\cdot\mathbf v_2)>0$;
 opposite sign gives repulsion.}
@@ -468,18 +539,24 @@ Z(\varphi)=\begin{pmatrix}
 \cos\varphi&\sin\varphi&0\\-\sin\varphi&\cos\varphi&0\\0&0&1
 \end{pmatrix}.
 \]
-The two successive rotations give $Z(\varphi_2)Z(\varphi_1)$.
-Its upper left block is
+The two successive rotations give $Z(\varphi_2)Z(\varphi_1)$ (the first
+rotation acts first, so its matrix stands on the right).
+Multiplying rows of $Z(\varphi_2)$ into columns of $Z(\varphi_1)$, its
+upper left block is
 \[
 \begin{pmatrix}
 c_2c_1-s_2s_1&c_2s_1+s_2c_1\\
 -s_2c_1-c_2s_1&-s_2s_1+c_2c_1
 \end{pmatrix},
-\qquad c_i=\cos\varphi_i,\ s_i=\sin\varphi_i.
+\qquad c_i=\cos\varphi_i,\ s_i=\sin\varphi_i;
 \]
-The overall rotation is $Z(\varphi_1+\varphi_2)$.
-Equating the $(1,1)$ and $(1,2)$ entries gives the stated cosine
-and sine addition formulas.
+the third row and column are those of the identity.
+Turning the axes through $\varphi_1$ and then through $\varphi_2$ about
+the same axis is a single rotation through $\varphi_1+\varphi_2$, so the
+product equals $Z(\varphi_1+\varphi_2)$, whose $(1,1)$ and $(1,2)$
+entries are $\cos(\varphi_1+\varphi_2)$ and $\sin(\varphi_1+\varphi_2)$.
+Equating these entries gives the stated cosine and sine addition
+formulas.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -491,7 +568,9 @@ parallel to the line of incidence.
 \emph{Hint.}~Consider the effect of a reflection on the components of a vector
 describing the direction of the light ray.
 \solution
-Choose $x,y,z$ perpendicular to the three reflecting planes.
+Choose $x,y,z$ perpendicular to the three reflecting planes, and let
+$\mathbf v=(v_x,v_y,v_z)$ be the propagation direction of the incident
+ray.
 Reflection reverses the normal component of a ray's direction and
 preserves its two tangential components. The three reflection matrices
 are therefore
@@ -500,8 +579,11 @@ R_x=\operatorname{diag}(-1,1,1),\quad
 R_y=\operatorname{diag}(1,-1,1),\quad
 R_z=\operatorname{diag}(1,1,-1).
 \]
-They commute and $R_xR_yR_z=-I_3$. After one reflection from each
-surface, the propagation direction is $-\mathbf v$.
+Being diagonal, they commute, and
+$R_xR_yR_z=\operatorname{diag}\bigl((-1)(1)(1),\,(1)(-1)(1),\,
+(1)(1)(-1)\bigr)=-I_3$. After one reflection from each surface, in any
+order, the propagation direction is
+$-\mathbf v=(-v_x,-v_y,-v_z)$.
 The outgoing line is thus parallel to, and traversed oppositely from,
 the incident line; it can be displaced from that line.
 
@@ -543,23 +625,40 @@ $\mathsf{S}$ and vectors $\mathbf{a}$ and $\mathbf{b}$,
   is expected?
 \end{enumerate}
 \solution
-\textbf{(a)} Expansion along the first row gives
+\textbf{(a)} Expansion along the first row ($S_{13}=0$) gives
 \[
-\det S=0.80(0.64\cdot0.80+0.60\cdot0.48)
--0.60(-0.48\cdot0.80-0.60\cdot0.36)
-=0.80(0.80)-0.60(-0.60)=1.
+\begin{aligned}
+\det S&=0.80(0.64\cdot0.80+0.60\cdot0.48)
+-0.60(-0.48\cdot0.80-0.60\cdot0.36)\\
+&=0.80(0.80)-0.60(-0.60)=0.64+0.36=\boxed{1}.
+\end{aligned}
 \]
-\textbf{(b)} Matrix multiplication gives
+\textbf{(b)} Matrix multiplication (each component is a row of $S$
+dotted into the column vector) gives
 \[
-\mathbf a'=(0.80,0.12,1.16),\quad
-\mathbf b'=(1.20,0.68,-1.76).
+\begin{aligned}
+\mathbf a'&=S\mathbf a=(0.80+0.00,\ -0.48+0.60,\ 0.36+0.80)
+=(0.80,0.12,1.16),\\
+\mathbf b'&=S\mathbf b=\bigl(2(0.60)-0.00,\ 2(0.64)-0.60,\
+2(-0.48)-0.80\bigr)=(1.20,0.68,-1.76).
+\end{aligned}
 \]
-Then $\mathbf a\cdot\mathbf b=-1$, and
-$\mathbf a'\cdot\mathbf b'
-=0.96+0.0816-2.0416=-1$.
-\textbf{(c)} The original cross product is $(-2,1,2)$, so
+Then $\mathbf a\cdot\mathbf b=0+0-1=-1$, and
 \[
-S(\mathbf a\times\mathbf b)=(-1.00,2.80,0.40).
+\mathbf a'\cdot\mathbf b'
+=0.80(1.20)+0.12(0.68)+1.16(-1.76)
+=0.96+0.0816-2.0416=-1,
+\]
+so the dot product is invariant.
+\textbf{(c)} The original cross product and its transform are
+\[
+\begin{aligned}
+\mathbf a\times\mathbf b
+&=(0(-1)-1\cdot2,\ 1\cdot0-1(-1),\ 1\cdot2-0\cdot0)=(-2,1,2),\\
+S(\mathbf a\times\mathbf b)
+&=(-1.60+0.60+0,\ 0.96+0.64+1.20,\ -0.72-0.48+1.60)
+=(-1.00,2.80,0.40).
+\end{aligned}
 \]
 The cross product after transformation is
 \[
@@ -568,7 +667,8 @@ The cross product after transformation is
 &=(0.12(-1.76)-1.16(0.68),\
 1.16(1.20)-0.80(-1.76),\
 0.80(0.68)-0.12(1.20))\\
-&=(-1.00,2.80,0.40).
+&=(-0.2112-0.7888,\ 1.392+1.408,\ 0.544-0.144)
+=(-1.00,2.80,0.40).
 \end{aligned}
 \]
 This is expected: for orthogonal $S$,
@@ -596,34 +696,66 @@ Exercise 3.3.4, but with
   pseudovector, or pseudoscalar.
 \end{enumerate}
 \solution
-Expansion gives
+\textbf{(a)} Expansion along the first row, whose middle entry is zero,
+gives
 \[
-\det S=0.60(-0.60\cdot0.36-0.48\cdot0.80)
-+0.80(-0.64\cdot0.80-(-0.60)(-0.48))
-=-0.36-0.64=-1.
+\begin{aligned}
+\det S&=0.60(-0.60\cdot0.36-0.48\cdot0.80)
++0.80(-0.64\cdot0.80-(-0.60)(-0.48))\\
+&=0.60(-0.60)+0.80(-0.80)=-0.36-0.64=\boxed{-1}.
+\end{aligned}
 \]
-Multiplication of the three columns gives
+Multiplying $S$ into the three column vectors gives
 \[
-\mathbf a'=(1.40,-0.16,-0.12),\quad
-\mathbf b'=(-0.80,-1.68,1.24),\quad
-\mathbf c'=(3.60,-0.44,0.92).
+\begin{aligned}
+\mathbf a'&=(0.60+0.80,\ -0.64+0.48,\ -0.48+0.36)=(1.40,-0.16,-0.12),\\
+\mathbf b'&=(0-0.80,\ -1.20-0.48,\ 1.60-0.36)=(-0.80,-1.68,1.24),\\
+\mathbf c'&=(1.20+0+2.40,\ -1.28-0.60+1.44,\ -0.96+0.80+1.08)
+=(3.60,-0.44,0.92).
+\end{aligned}
 \]
-\textbf{(b)} $\mathbf a\times\mathbf b=(-2,1,2)$, whereas
+\textbf{(b)} With $\mathbf a\times\mathbf b=(-2,1,2)$ from
+Exercise 3.3.4,
 \[
+S(\mathbf a\times\mathbf b)
+=(-1.20+0+1.60,\ 1.28-0.60+0.96,\ 0.96+0.80+0.72)=(0.40,1.64,2.48),
+\]
+whereas
+\[
+\begin{aligned}
 \mathbf a'\times\mathbf b'
-=(-0.40,-1.64,-2.48)=-S(-2,1,2).
+&=\bigl((-0.16)(1.24)-(-0.12)(-1.68),\
+(-0.12)(-0.80)-1.40(1.24),\\
+&\qquad 1.40(-1.68)-(-0.16)(-0.80)\bigr)\\
+&=(-0.1984-0.2016,\ 0.096-1.736,\ -2.352-0.128)\\
+&=(-0.40,-1.64,-2.48)=-S(\mathbf a\times\mathbf b).
+\end{aligned}
 \]
-For example its first component is
-$(-0.16)(1.24)-(-0.12)(-1.68)=-0.40$.
-\textbf{(c)} The original triple product is $-4+1+6=3$; the
-new one is $-1.44+0.7216-2.2816=-3$.
-\textbf{(d)} Since $\mathbf a\cdot\mathbf c=5$ and
+\textbf{(c)} The original triple product is
+$(-2,1,2)\cdot(2,1,3)=-4+1+6=3$; the new one is
+\[
+(\mathbf a'\times\mathbf b')\cdot\mathbf c'
+=(-0.40)(3.60)+(-1.64)(-0.44)+(-2.48)(0.92)
+=-1.44+0.7216-2.2816=-3.
+\]
+\textbf{(d)} Since $\mathbf a\cdot\mathbf c=2+0+3=5$ and
 $\mathbf a\cdot\mathbf b=-1$,
 \[
-\mathbf a\times(\mathbf b\times\mathbf c)=5\mathbf b+\mathbf c=(2,11,-2).
+\mathbf a\times(\mathbf b\times\mathbf c)
+=\mathbf b(\mathbf a\cdot\mathbf c)-\mathbf c(\mathbf a\cdot\mathbf b)
+=5\mathbf b+\mathbf c=(0,10,-5)+(2,1,3)=(2,11,-2).
 \]
-Dot products are unchanged, so the transformed product is
-$5\mathbf b'+\mathbf c'=(-0.40,-8.84,7.12)=S(2,11,-2)$.
+Dot products are unchanged by any orthogonal $S$ (Exercise 3.3.3), so
+the same identity gives for the transformed vectors
+\[
+\begin{aligned}
+\mathbf a'\times(\mathbf b'\times\mathbf c')
+&=5\mathbf b'+\mathbf c'
+=(-4.00+3.60,\ -8.40-0.44,\ 6.20+0.92)\\
+&=(-0.40,-8.84,7.12)=S(2,11,-2),
+\end{aligned}
+\]
+since $S(2,11,-2)=(1.20+0-1.60,\ -1.28-6.60-0.96,\ -0.96+8.80-0.72)$.
 \textbf{(e)} Thus (b) is a pseudovector, (c) a pseudoscalar, and
 (d) an ordinary vector. A pseudovector acquires the extra factor
 $\det S$, and a pseudoscalar changes sign under this improper rotation.
@@ -661,15 +793,27 @@ Y(t)=\begin{pmatrix}c_t&0&-s_t\\0&1&0\\s_t&0&c_t\end{pmatrix},\
 X(t)=\begin{pmatrix}1&0&0\\0&c_t&s_t\\0&-s_t&c_t\end{pmatrix},
 \]
 where $c_t=\cos t,s_t=\sin t$.
-The textbook convention is $S(\alpha,\beta,\gamma)=Z(\gamma)Y(\beta)Z(\alpha)$.
-The alternative is $Z(\psi)X(\theta)Z(\varphi)$.
-Direct multiplication of the two quarter-turn matrices gives
+The textbook convention (rotations about $x_3$, $x'_2$, $x''_3$, each
+later rotation multiplying from the left) is
+$S(\alpha,\beta,\gamma)=Z(\gamma)Y(\beta)Z(\alpha)$.
+The alternative set, whose second rotation is about $x'_1$, is likewise
+$Z(\psi)X(\theta)Z(\varphi)$.
+For the quarter turns, $c_{\pm\pi/2}=0$ and $s_{\pm\pi/2}=\pm1$, so
+\[
+Y(\theta)Z(-\pi/2)
+=\begin{pmatrix}0&-c_\theta&-s_\theta\\1&0&0\\0&-s_\theta&c_\theta
+\end{pmatrix},
+\]
+and multiplying on the left by $Z(\pi/2)$ replaces the rows
+$(\mathbf r_1,\mathbf r_2,\mathbf r_3)$ of this matrix by
+$(\mathbf r_2,-\mathbf r_1,\mathbf r_3)$:
 \[
 Z(\pi/2)Y(\theta)Z(-\pi/2)
 =\begin{pmatrix}1&0&0\\0&c_\theta&s_\theta\\0&-s_\theta&c_\theta\end{pmatrix}
 =X(\theta).
 \]
-Consequently, under the stated substitutions,
+Consequently, under the stated substitutions, and with
+$Z(a+b)=Z(a)Z(b)=Z(b)Z(a)$ (Exercise 3.3.1),
 \[
 \begin{aligned}
 S&=Z(\psi+\pi/2)Y(\theta)Z(\varphi-\pi/2)\\
@@ -678,7 +822,8 @@ S&=Z(\psi+\pi/2)Y(\theta)Z(\varphi-\pi/2)\\
 \end{aligned}
 \]
 The matrices, and therefore the final frames, coincide.
-For use below, the explicit product is
+For use below, the explicit product $Z(\gamma)Y(\beta)Z(\alpha)$, the
+textbook's Eq.~(3.37), is
 \begin{equation}\label{ch03:euler}
 S=\begin{pmatrix}
 c_\gamma c_\beta c_\alpha-s_\gamma s_\alpha&
@@ -708,32 +853,58 @@ and longitude system) and the $10^{\circ}$ west meridian points due south
 \erratum{A longitude reference for the Cartesian axes is needed.
 The printed matrix is consistent with the $+y$-axis through Greenwich
 and the $+x$-axis through $90^\circ$ west; use that convention here.}
-East longitude $\lambda$ then has azimuth $\alpha=90^\circ+\lambda$.
-The new pole has $\lambda=-20^\circ$ and colatitude
-$\beta=90^\circ-30^\circ=60^\circ$, so $\alpha=70^\circ$.
+East longitude $\lambda$ then has azimuth $\alpha=90^\circ+\lambda$,
+measured from $+x$ toward $+y$.
 
-Before the last rotation, let $\mathbf e_\theta$ point due south at
-the new pole and $\mathbf e_\varphi$ point east. The final equatorial
-axes are
+\textbf{(a)} The rows of $S$ are the new unit vectors expressed in the
+original axes. By \eqref{ch03:euler} the third row, the new $z$-axis
+(the new north pole), is
+$(\sin\beta\cos\alpha,\sin\beta\sin\alpha,\cos\beta)$, so $\beta$ is
+the colatitude and $\alpha$ the azimuth of the new pole.
+The new pole has $\lambda=-20^\circ$ and colatitude
+$\beta=90^\circ-30^\circ=60^\circ$, so $\alpha=90^\circ-20^\circ=70^\circ$.
+
+After the first two rotations the axes are the rows of
+\[
+Y(\beta)Z(\alpha)=\begin{pmatrix}
+c_\beta c_\alpha&c_\beta s_\alpha&-s_\beta\\
+-s_\alpha&c_\alpha&0\\
+s_\beta c_\alpha&s_\beta s_\alpha&c_\beta
+\end{pmatrix}.
+\]
+The first row is the spherical unit vector $\mathbf e_\theta$ at the
+new pole (polar angle $\beta$, azimuth $\alpha$), which points due
+south; the second row is $\mathbf e_\varphi$ there, which points east.
+The last rotation, through $\gamma$ about the new $z$-axis, gives the
+final equatorial axes
 \[
 \mathbf e'_1=\cos\gamma\,\mathbf e_\theta+\sin\gamma\,\mathbf e_\varphi,
 \qquad
 \mathbf e'_2=-\sin\gamma\,\mathbf e_\theta+\cos\gamma\,\mathbf e_\varphi.
 \]
-The body's $10^\circ$ west meridian has azimuth $80^\circ$ measured
-from its $x$-axis. Its tangent away from the pole is therefore
+By the same rule $\alpha=90^\circ+\lambda$ in the rotated system, the
+body's $10^\circ$ west meridian has azimuth $90^\circ-10^\circ=80^\circ$
+measured from its $x$-axis. A meridian of azimuth $a$ leaves the pole
+along $\cos a\,\mathbf e'_1+\sin a\,\mathbf e'_2$, so by the addition
+formulas this tangent is
 \[
 \cos80^\circ\,\mathbf e'_1+\sin80^\circ\,\mathbf e'_2
 =\cos(\gamma+80^\circ)\mathbf e_\theta
 +\sin(\gamma+80^\circ)\mathbf e_\varphi.
 \]
-Requiring this tangent to point south gives $\gamma=-80^\circ$
-(equivalently $280^\circ$).
+Requiring this tangent to point due south, i.e.\ to equal
+$+\mathbf e_\theta$, requires $\cos(\gamma+80^\circ)=1$, so
+$\gamma=-80^\circ$ (equivalently $280^\circ$).
 Thus
 \[
 \boxed{(\alpha,\beta,\gamma)=(70^\circ,60^\circ,-80^\circ)}.
 \]
-Substitution into \eqref{ch03:euler} gives
+\textbf{(b)} The direction cosines are the elements of $S$. Substitute
+$c_\alpha=\cos70^\circ=0.3420$, $s_\alpha=0.9397$, $c_\beta=1/2$,
+$s_\beta=\sqrt3/2$, $c_\gamma=\cos80^\circ=0.1736$,
+$s_\gamma=-\sin80^\circ=-0.9848$ into \eqref{ch03:euler}; for example
+$S_{11}=c_\gamma c_\beta c_\alpha-s_\gamma s_\alpha=0.0297+0.9254=0.9551$.
+In all,
 \[
 \boxed{S=\begin{pmatrix}
 0.95511217&-0.25523613&-0.15038373\\
@@ -764,7 +935,11 @@ In \eqref{ch03:euler}, the substitutions give
 \]
 Each term in the upper left $2\times2$ block has either one
 $\alpha$ factor and one $\gamma$ factor, or those two factors times
-$c_\beta$; it acquires two minus signs.
+$c_\beta$; it acquires two minus signs. For example,
+\[
+S_{11}=c_\gamma c_\beta c_\alpha-s_\gamma s_\alpha
+\mapsto(-c_\gamma)c_\beta(-c_\alpha)-(-s_\gamma)(-s_\alpha)=S_{11}.
+\]
 The $(1,3),(2,3)$ entries contain one $\gamma$ factor and $s_\beta$,
 again two signs. The $(3,1),(3,2)$ entries contain one $\alpha$
 factor and $s_\beta$, also two signs. Finally $(3,3)=c_\beta$ is
@@ -791,11 +966,15 @@ S^TS=
 Z(\alpha)^TY(\beta)^TZ(\gamma)^TZ(\gamma)Y(\beta)Z(\alpha)=I,
 \]
 after canceling the three adjacent inverse pairs. Hence $S^{-1}=S^T$.
-\textbf{(b)} Inverting reverses the order:
+\textbf{(b)} Inverting a product reverses the order of its factors:
 \[
-S^{-1}=Z(-\alpha)Y(-\beta)Z(-\gamma)
-=\boxed{S(-\gamma,-\beta,-\alpha)}.
+S^{-1}=Z(\alpha)^{-1}Y(\beta)^{-1}Z(\gamma)^{-1}
+=Z(-\alpha)Y(-\beta)Z(-\gamma)
+=\boxed{S(-\gamma,-\beta,-\alpha)},
 \]
+because $S(\alpha',\beta',\gamma')=Z(\gamma')Y(\beta')Z(\alpha')$ with
+$\alpha'=-\gamma$, $\beta'=-\beta$, $\gamma'=-\alpha$ is exactly this
+product.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -815,29 +994,61 @@ coordinates the radius vector becomes
 \item[(c)] Verify that $r'^{2}=r^{2}$.
 \end{enumerate}
 \solution
-Split $\mathbf r=\mathbf r_\parallel+\mathbf r_\perp$, where
-$\mathbf r_\parallel=\hat{\mathbf n}(\hat{\mathbf n}\cdot\mathbf r)$.
-A passive rotation preserves $\mathbf r_\parallel$ and rotates the
-perpendicular components through $-\Phi$:
+\textbf{(a)} Split $\mathbf r=\mathbf r_\parallel+\mathbf r_\perp$, where
+$\mathbf r_\parallel=\hat{\mathbf n}(\hat{\mathbf n}\cdot\mathbf r)$ lies
+along the axis and $\mathbf r_\perp=\mathbf r-\mathbf r_\parallel$ is
+perpendicular to it.
+Turning the axes counterclockwise through $\Phi$ changes the components
+of a fixed vector exactly as turning the vector clockwise through $\Phi$
+(through $-\Phi$) with the axes held fixed; senses are as seen from the
+tip of $\hat{\mathbf n}$. This preserves $\mathbf r_\parallel$.
+In the plane perpendicular to $\hat{\mathbf n}$, the vectors
+$\mathbf r_\perp$ and $\mathbf r_\perp\times\hat{\mathbf n}$ are
+orthogonal, both have length $|\mathbf r_\perp|$, and
+$\mathbf r_\perp\times\hat{\mathbf n}$ is $\mathbf r_\perp$ turned
+clockwise through $90^\circ$ (for instance
+$\hat{\mathbf e}_x\times\hat{\mathbf e}_z=-\hat{\mathbf e}_y$).
+Turning $\mathbf r_\perp$ clockwise through $\Phi$ therefore gives
+$\mathbf r_\perp\cos\Phi+(\mathbf r_\perp\times\hat{\mathbf n})\sin\Phi$,
+and
 \[
 \mathbf r'=\mathbf r_\parallel
 +\mathbf r_\perp\cos\Phi+(\mathbf r_\perp\times\hat{\mathbf n})\sin\Phi.
 \]
-Here $\mathbf r_\perp\times\hat{\mathbf n}=\mathbf r\times\hat{\mathbf n}$.
-Substitute $\mathbf r_\perp=\mathbf r-\mathbf r_\parallel$ to get
-the required formula.
-
-For $\hat{\mathbf n}=\hat{\mathbf e}_z$,
-$\mathbf r\times\hat{\mathbf e}_z=(y,-x,0)$, so
+Here $\mathbf r_\perp\times\hat{\mathbf n}=\mathbf r\times\hat{\mathbf n}$,
+because $\mathbf r_\parallel\times\hat{\mathbf n}=0$.
+Substituting $\mathbf r_\perp=\mathbf r-\mathbf r_\parallel$ gives the
+required formula:
 \[
-\mathbf r'=(x\cos\Phi+y\sin\Phi,\ -x\sin\Phi+y\cos\Phi,\ z),
+\begin{aligned}
+\mathbf r'&=\mathbf r_\parallel+(\mathbf r-\mathbf r_\parallel)\cos\Phi
++(\mathbf r\times\hat{\mathbf n})\sin\Phi\\
+&=\mathbf r\cos\Phi+\mathbf r\times\hat{\mathbf n}\sin\Phi
++\hat{\mathbf n}(\hat{\mathbf n}\cdot\mathbf r)(1-\cos\Phi).
+\end{aligned}
 \]
-which is $Z(\Phi)\mathbf r$.
-Finally the three terms in the perpendicular decomposition are mutually
-orthogonal, and $|\mathbf r_\perp\times\hat{\mathbf n}|=|\mathbf r_\perp|$.
-Thus
-$|\mathbf r'|^2=|\mathbf r_\parallel|^2+
-|\mathbf r_\perp|^2(\cos^2\Phi+\sin^2\Phi)=|\mathbf r|^2$.
+\textbf{(b)} For $\hat{\mathbf n}=\hat{\mathbf e}_z$,
+$\mathbf r\times\hat{\mathbf e}_z=(y,-x,0)$ and
+$\hat{\mathbf n}(\hat{\mathbf n}\cdot\mathbf r)=(0,0,z)$, so
+\[
+\begin{aligned}
+\mathbf r'&=\bigl(x\cos\Phi+y\sin\Phi,\ y\cos\Phi-x\sin\Phi,\
+z\cos\Phi+z(1-\cos\Phi)\bigr)\\
+&=(x\cos\Phi+y\sin\Phi,\ -x\sin\Phi+y\cos\Phi,\ z),
+\end{aligned}
+\]
+which is $Z(\Phi)\mathbf r$, the matrix form of Eq.~(3.35).
+\textbf{(c)} The three terms $\mathbf r_\parallel$,
+$\mathbf r_\perp\cos\Phi$, $(\mathbf r_\perp\times\hat{\mathbf n})\sin\Phi$
+of the first expression for $\mathbf r'$ are mutually orthogonal, and
+$|\mathbf r_\perp\times\hat{\mathbf n}|=|\mathbf r_\perp|$.
+By Pythagoras, first for $\mathbf r'$ and then for
+$\mathbf r=\mathbf r_\parallel+\mathbf r_\perp$,
+\[
+|\mathbf r'|^2=|\mathbf r_\parallel|^2+
+|\mathbf r_\perp|^2(\cos^2\Phi+\sin^2\Phi)
+=|\mathbf r_\parallel|^2+|\mathbf r_\perp|^2=|\mathbf r|^2.
+\]
 
 \Needspace{12\baselineskip}
 \subsection*{3.5 Differential Vector Operators}
@@ -853,19 +1064,25 @@ $S(x,y,z)=\left(x^{2}+y^{2}+z^{2}\right)^{-3/2}$, find
 \item[(c)] the direction cosines of $\nabla S$ at $(1,2,3)$.
 \end{enumerate}
 \solution
-For $r=(x^2+y^2+z^2)^{1/2}>0$, differentiate by the chain rule:
+\textbf{(a)} For $r=(x^2+y^2+z^2)^{1/2}>0$, differentiate by the chain
+rule:
 \[
 \partial_x S=-\tfrac32(x^2+y^2+z^2)^{-5/2}(2x)
 =-3xr^{-5},
 \]
 and similarly for $y,z$. Hence $\nabla S=-3(x,y,z)/r^5$.
-At $(1,2,3)$, $r^2=14$, giving
+At $(1,2,3)$, $r^2=1+4+9=14$ and $r^5=14^2\sqrt{14}=196\sqrt{14}$,
+giving
 \[
-\boxed{\nabla S=-\frac3{14^{5/2}}(1,2,3)},\qquad
-\boxed{|\nabla S|=\frac{3\sqrt{14}}{14^{5/2}}=\frac3{196}}.
+\boxed{\nabla S=-\frac3{14^{5/2}}(1,2,3)=-\frac{3}{196\sqrt{14}}(1,2,3)}.
 \]
-Divide the vector by its magnitude to obtain the direction cosines
-$\boxed{(-1,-2,-3)/\sqrt{14}}$, whose squares sum to $1$.
+\textbf{(b)} Since $|(1,2,3)|=\sqrt{14}$,
+\[
+\boxed{|\nabla S|=\frac{3\sqrt{14}}{196\sqrt{14}}=\frac3{196}}
+\approx0.0153.
+\]
+\textbf{(c)} Divide the vector by its magnitude to obtain the direction
+cosines $\boxed{(-1,-2,-3)/\sqrt{14}}$, whose squares sum to $1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -884,12 +1101,15 @@ $\boxed{(-1,-2,-3)/\sqrt{14}}$, whose squares sum to $1$.
 +\hat{\mathbf{e}}_{z}\right)/\sqrt{3}$,\quad
 (b)\enspace$x+y+z=3$.
 \solution
-Let $f=x^2+y^2+z^2-3$. A displacement tangent to $f=0$ satisfies
-$df=\nabla f\cdot d\mathbf r=0$, so $\nabla f$ is a normal.
-At $(1,1,1)$, $\nabla f=(2,2,2)$ with length $2\sqrt3$.
+\textbf{(a)} Let $f=x^2+y^2+z^2-3$. A displacement tangent to $f=0$
+satisfies $df=\nabla f\cdot d\mathbf r=0$, so $\nabla f$ is a normal.
+At $(1,1,1)$, $\nabla f=(2x,2y,2z)=(2,2,2)$ with length
+$\sqrt{4+4+4}=2\sqrt3$.
 An outward unit normal is therefore $(1,1,1)/\sqrt3$; its negative
 is the inward unit normal.
-The tangent plane through $\mathbf r_0=(1,1,1)$ satisfies
+\textbf{(b)} The tangent plane through $\mathbf r_0=(1,1,1)$ consists of
+the points $\mathbf r$ for which $\mathbf r-\mathbf r_0$ is
+perpendicular to the normal:
 \[
 (2,2,2)\cdot(\mathbf r-\mathbf r_0)=0,
 \]
@@ -910,9 +1130,14 @@ For separated points $r_{12}>0$,
 \[
 r_{12}=[(x_1-x_2)^2+(y_1-y_2)^2+(z_1-z_2)^2]^{1/2}.
 \]
-Keeping point 2 fixed gives
-$\partial_{x_1}r_{12}=(x_1-x_2)/r_{12}$ and the analogous
-two derivatives. Therefore
+Keeping point 2 fixed, the chain rule applied to
+$r_{12}=(r_{12}^2)^{1/2}$ gives
+\[
+\frac{\partial r_{12}}{\partial x_1}
+=\frac1{2r_{12}}\,\frac{\partial(r_{12}^2)}{\partial x_1}
+=\frac{2(x_1-x_2)}{2r_{12}}=\frac{x_1-x_2}{r_{12}},
+\]
+and analogously for $y_1$ and $z_1$. Therefore
 \[
 \boxed{\nabla_1r_{12}=\frac{(x_1-x_2,y_1-y_2,z_1-z_2)}{r_{12}}
 =\hat{\mathbf r}_{12}}.
@@ -972,18 +1197,23 @@ t$:
 \par\nobreak\hfill\emph{ANS.}\enspace
 (a)\enspace$\hat{\mathbf{e}}_{z}\omega r^{2}$.
 \solution
-Differentiating, with $r,\omega$ constant,
+\textbf{(a)} Differentiating, with $r,\omega$ constant,
 \[
 \dot{\mathbf r}=\omega r(-\sin\omega t,\cos\omega t,0).
 \]
-Thus
+Both vectors lie in the $xy$-plane, so only the $z$-component
+$x\dot y-y\dot x$ of their cross product survives:
 \[
+\begin{aligned}
 \mathbf r\times\dot{\mathbf r}
-=\hat{\mathbf e}_z\omega r^2
+&=\hat{\mathbf e}_z\bigl[(r\cos\omega t)(\omega r\cos\omega t)
+-(r\sin\omega t)(-\omega r\sin\omega t)\bigr]\\
+&=\hat{\mathbf e}_z\omega r^2
 (\cos^2\omega t+\sin^2\omega t)
 =\boxed{\hat{\mathbf e}_z\omega r^2}.
+\end{aligned}
 \]
-One further derivative gives
+\textbf{(b)} One further derivative gives
 $\ddot{\mathbf r}=-\omega^2r(\cos\omega t,\sin\omega t,0)
 =-\omega^2\mathbf r$, proving
 $\boxed{\ddot{\mathbf r}+\omega^2\mathbf r=0}$.
@@ -1020,14 +1250,17 @@ it is not legitimate to omit the second term.
 \end{enumerate}
 just like the derivative of the product of two algebraic functions.
 \solution
-For the dot product, differentiate its component sum:
+\textbf{(a)} Differentiate the component sum of the dot product, using
+the ordinary product rule on each term:
 \[
 \frac d{dt}(\mathbf A\cdot\mathbf B)
 =\sum_i\frac d{dt}(A_iB_i)
 =\sum_i(\dot A_iB_i+A_i\dot B_i)
 =\dot{\mathbf A}\cdot\mathbf B+\mathbf A\cdot\dot{\mathbf B}.
 \]
-For each cross-product component,
+\textbf{(b)} Each component
+$(\mathbf A\times\mathbf B)_i=\sum_{jk}\varepsilon_{ijk}A_jB_k$ has
+constant coefficients $\varepsilon_{ijk}$, so
 \[
 \frac d{dt}(\mathbf A\times\mathbf B)_i
 =\sum_{jk}\varepsilon_{ijk}(\dot A_jB_k+A_j\dot B_k)
@@ -1058,8 +1291,11 @@ Apply the product rule with repeated indices summed:
 -\mathbf a\cdot(\nabla\times\mathbf b)}.
 \end{aligned}
 \]
-The first sign follows from the cyclic permutation $(i,j,k)\to(k,i,j)$;
-the second from swapping $i,j$.
+The first sign follows from the cyclic permutation
+$\varepsilon_{ijk}=\varepsilon_{kij}$; the second from the swap
+$\varepsilon_{ijk}=-\varepsilon_{jik}$. The last line uses
+$(\nabla\times\mathbf a)_k=\varepsilon_{kij}\partial_ia_j$ and
+$(\nabla\times\mathbf b)_j=\varepsilon_{jik}\partial_ib_k$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1085,7 +1321,8 @@ Apply the operator to an arbitrary differentiable scalar $f$:
 x&y&z\\ \partial_xf&\partial_yf&\partial_zf
 \end{vmatrix}.
 \]
-Expanding gives
+Expanding along the first row, with $f_x=\partial f/\partial x$ and so
+on, gives
 $L_xf=-i(yf_z-zf_y)$,
 $L_yf=-i(zf_x-xf_z)$, and
 $L_zf=-i(xf_y-yf_x)$.
@@ -1106,7 +1343,19 @@ and hence
 These commutation relations will be taken later as the defining relations of
 an angular momentum operator.
 \solution
-Let $f$ have commuting mixed second derivatives. The product rule gives
+Let $f$ have commuting mixed second derivatives, and write
+$f_x=\partial f/\partial x$, $f_{xz}=\partial^2f/\partial x\,\partial z$,
+and so on. Since $(-i)^2=-1$,
+\[
+\begin{aligned}
+L_xL_yf&=-(y\partial_z-z\partial_y)(zf_x-xf_z),\\
+L_yL_xf&=-(z\partial_x-x\partial_z)(yf_z-zf_y).
+\end{aligned}
+\]
+The product rule matters only where a derivative meets a coordinate
+factor: $y\partial_z(zf_x)=yf_x+yzf_{xz}$ and
+$-x\partial_z(-zf_y)=xf_y+xzf_{yz}$; every other term differentiates
+$f$ alone. Thus
 \[
 \begin{aligned}
 L_xL_yf&=-\{y f_x+yzf_{xz}-xyf_{zz}-z^2f_{xy}+xz f_{yz}\},\\
@@ -1115,8 +1364,9 @@ L_yL_xf&=-\{zyf_{xz}-z^2f_{xy}-xyf_{zz}+x f_y+xz f_{yz}\}.
 \]
 All second-derivative terms cancel on subtraction, leaving
 \[
-[L_x,L_y]f=xf_y-yf_x=iL_zf.
+[L_x,L_y]f=-(yf_x-xf_y)=xf_y-yf_x=iL_zf,
 \]
+since $iL_zf=i(-i)(xf_y-yf_x)=xf_y-yf_x$.
 Cyclic relabeling of $x,y,z$ in this explicit computation gives
 $[L_y,L_z]=iL_x$ and $[L_z,L_x]=iL_y$.
 Thus
@@ -1140,6 +1390,10 @@ and with $\mathbf{L}$, that is, $[\mathbf{a},\mathbf{b}]=[\mathbf{a},
 =i(\mathbf{a}\times\mathbf{b})\cdot\mathbf{L}.
 \]
 \solution
+Exercise 3.5.11 gives $[L_x,L_y]=iL_z$ and its two cyclic
+permutations. Together with $[L_i,L_i]=0$ and
+$[L_j,L_i]=-[L_i,L_j]$ these are summarized by
+$[L_i,L_j]=i\sum_k\varepsilon_{ijk}L_k$.
 Interpret the commuting hypotheses componentwise. They permit $a_i,b_j$
 to be moved through each other and through every $L_k$:
 \[
@@ -1151,7 +1405,8 @@ to be moved through each other and through every $L_k$:
 =\boxed{i(\mathbf a\times\mathbf b)\cdot\mathbf L}.
 \end{aligned}
 \]
-The last equality uses $\varepsilon_{ijk}=\varepsilon_{kij}$.
+The last equality uses $\varepsilon_{ijk}=\varepsilon_{kij}$, so that
+$\sum_{ij}\varepsilon_{kij}a_ib_j=(\mathbf a\times\mathbf b)_k$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1159,11 +1414,13 @@ The last equality uses $\varepsilon_{ijk}=\varepsilon_{kij}$.
 \erratum{in} Example 3.5.7 \erratum{with nonzero distance from the $z$-axis} are counterclockwise circles; \erratum{points on the $z$-axis are stationary}.
 \solution
 Example 3.5.7 defines $\mathbf b=(-y,x,0)$.
-A streamline parametrized in the flow direction obeys
+A streamline is a curve everywhere tangent to $\mathbf b$; parametrized
+in the flow direction it obeys $d\mathbf r/ds=\mathbf b$, that is,
 $dx/ds=-y$, $dy/ds=x$, $dz/ds=0$.
 Therefore
 \[
-\frac d{ds}(x^2+y^2)=2x(-y)+2yx=0,\qquad z=z_0.
+\frac d{ds}(x^2+y^2)=2x\frac{dx}{ds}+2y\frac{dy}{ds}
+=2x(-y)+2yx=0,\qquad z=z_0.
 \]
 Its nonconstant curves are circles $x^2+y^2=R^2$ in planes
 $z=z_0$. Explicitly $x=R\cos(s+s_0)$,
