@@ -1493,7 +1493,8 @@ points rather than nonzero-radius circular streamlines.}
 solenoidal if $\mathbf{u}$ and $\mathbf{v}$ are each irrotational.
 \solution
 Irrotationality means $\nabla\times\mathbf u=\nabla\times\mathbf v=0$.
-By the product rule proved in 3.5.9,
+By the product rule proved in Exercise 3.5.9, with $\mathbf a=\mathbf u$
+and $\mathbf b=\mathbf v$,
 \[
 \nabla\cdot(\mathbf u\times\mathbf v)
 =\mathbf v\cdot(\nabla\times\mathbf u)
@@ -1507,8 +1508,13 @@ Thus $\mathbf u\times\mathbf v$ is solenoidal.
 $\mathbf{A}\times\mathbf{r}$ is solenoidal.
 \solution
 In Cartesian coordinates $\mathbf r=(x,y,z)$, and each component of
-$\nabla\times\mathbf r$ is a difference of zero cross derivatives.
-Therefore
+$\nabla\times\mathbf r$ is a difference of zero cross derivatives:
+\[
+\nabla\times\mathbf r=(\partial_yz-\partial_zy,\ \partial_zx-\partial_xz,\
+\partial_xy-\partial_yx)=(0,0,0).
+\]
+Therefore, by the product rule of Exercise 3.5.9 with
+$\mathbf a=\mathbf A$ and $\mathbf b=\mathbf r$,
 \[
 \nabla\cdot(\mathbf A\times\mathbf r)
 =\mathbf r\cdot(\nabla\times\mathbf A)
@@ -1528,8 +1534,10 @@ The velocity is $\mathbf v=\boldsymbol\omega\times\mathbf r$, or
 \omega_xy-\omega_yx).
 \]
 Each component is independent of its matching coordinate when
-$\boldsymbol\omega$ is spatially constant. Hence
-$\nabla\cdot\mathbf v=\partial_xv_x+\partial_yv_y+\partial_zv_z=0$.
+$\boldsymbol\omega$ is spatially constant: $v_x$ contains only $y,z$,
+$v_y$ only $z,x$, and $v_z$ only $x,y$. Hence
+$\nabla\cdot\mathbf v=\partial_xv_x+\partial_yv_y+\partial_zv_z
+=0+0+0=0$.
 A spatially uniform translational velocity can be added without changing
 this result.
 
@@ -1544,13 +1552,17 @@ $g\mathbf{V}$ is irrotational, then
 \solution
 \erratum{The integrating factor must be nonzero on the region where
 the conclusion is asserted; allowing $g\equiv0$ makes the statement false.}
-The product rule gives
+The product rule, componentwise
+$\varepsilon_{ijk}\partial_j(gV_k)=\varepsilon_{ijk}(\partial_jg)V_k
++g\,\varepsilon_{ijk}\partial_jV_k$ (repeated indices summed), gives
 \[
 0=\nabla\times(g\mathbf V)=\nabla g\times\mathbf V
 +g\,\nabla\times\mathbf V.
 \]
 Dot with $\mathbf V$. The scalar triple product with two factors
-$\mathbf V$ is zero, so
+$\mathbf V$ is zero,
+$\mathbf V\cdot(\nabla g\times\mathbf V)
+=\nabla g\cdot(\mathbf V\times\mathbf V)=0$, so
 $g\,\mathbf V\cdot(\nabla\times\mathbf V)=0$.
 Where $g\ne0$, division proves
 $\boxed{\mathbf V\cdot(\nabla\times\mathbf V)=0}$.
@@ -1568,7 +1580,14 @@ irrotational when $g=0$.
 -\mathbf{B}(\nabla\cdot\mathbf{A})+\mathbf{A}(\nabla\cdot\mathbf{B}).
 \]
 \solution
-For component $i$, contract the Levi-Civita symbols:
+For component $i$, with repeated indices summed from $1$ to $3$,
+contract the Levi-Civita symbols: by the cyclic shift
+$\varepsilon_{k\ell m}=\varepsilon_{\ell mk}$ and the identity
+$\sum_k\varepsilon_{ijk}\varepsilon_{\ell mk}
+=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$ of Exercise 2.1.9,
+$\varepsilon_{ijk}\varepsilon_{k\ell m}
+=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$.
+Then apply the product rule to each $\partial_j$:
 \[
 \begin{aligned}
 {}[\nabla\times(\mathbf A\times\mathbf B)]_i
@@ -1599,6 +1618,14 @@ Example 3.6.4 show that
 \solution
 The derivatives in $(\mathbf A\times\nabla)\times\mathbf B$
 act on $\mathbf B$ to their right, not on the coefficient $\mathbf A$.
+Sum repeated indices and write
+$(\mathbf A\times\nabla)_j=\varepsilon_{j\ell m}A_\ell\partial_m$. The
+cyclic shifts $\varepsilon_{ijk}=\varepsilon_{kij}$,
+$\varepsilon_{j\ell m}=\varepsilon_{\ell mj}$ and the identity of
+Exercise 2.1.9, $\sum_j\varepsilon_{kij}\varepsilon_{\ell mj}
+=\delta_{k\ell}\delta_{im}-\delta_{km}\delta_{i\ell}$, give
+$\varepsilon_{ijk}\varepsilon_{j\ell m}
+=\delta_{k\ell}\delta_{im}-\delta_{km}\delta_{i\ell}$.
 Thus
 \[
 \begin{aligned}
@@ -1610,11 +1637,17 @@ A_\ell\partial_mB_k\\
 \end{aligned}
 \]
 Interchanging $A,B$ gives
-$B_k\partial_iA_k-B_i\partial_kA_k$.
-Adding the $i$-components of
+$[(\mathbf B\times\nabla)\times\mathbf A]_i
+=B_k\partial_iA_k-B_i\partial_kA_k$.
+Adding the $i$-components $A_i\partial_kB_k+B_i\partial_kA_k$ of
 $\mathbf A(\nabla\cdot\mathbf B)+\mathbf B(\nabla\cdot\mathbf A)$
-cancels the two divergence terms. What remains is
-$A_k\partial_iB_k+B_k\partial_iA_k=\partial_i(A_kB_k)$,
+cancels the two divergence terms:
+\[
+(A_k\partial_iB_k-A_i\partial_kB_k)+(B_k\partial_iA_k-B_i\partial_kA_k)
++A_i\partial_kB_k+B_i\partial_kA_k
+=A_k\partial_iB_k+B_k\partial_iA_k.
+\]
+By the product rule this is $\partial_i(A_kB_k)$,
 the $i$-component of $\nabla(\mathbf A\cdot\mathbf B)$.
 
 \Needspace{5\baselineskip}
@@ -1625,11 +1658,16 @@ the $i$-component of $\nabla(\mathbf A\cdot\mathbf B)$.
 =\frac{1}{2}\nabla(A^{2})-(\mathbf{A}\cdot\nabla)\mathbf{A}.
 \]
 \solution
-For each component,
+For each component, with repeated indices summed and the contraction
+$\varepsilon_{ijk}\varepsilon_{k\ell m}
+=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$ used in
+Exercise 3.6.5,
 \[
 \begin{aligned}
 {}[\mathbf A\times(\nabla\times\mathbf A)]_i
 &=\varepsilon_{ijk}\varepsilon_{k\ell m}A_j\partial_\ell A_m\\
+&=(\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell})
+A_j\partial_\ell A_m\\
 &=A_j\partial_iA_j-A_j\partial_jA_i\\
 &=\tfrac12\partial_i\left(\sum_jA_j^2\right)
 -(\mathbf A\cdot\nabla)A_i.
@@ -1677,7 +1715,10 @@ Directly, the $x$-component of the double curl is
 -(\partial_x^2+\partial_y^2+\partial_z^2)V_x.
 \end{aligned}
 \]
-Cyclic replacement gives
+The second line uses $\partial_y\partial_x=\partial_x\partial_y$ and
+$\partial_z\partial_x=\partial_x\partial_z$; the third adds and
+subtracts $\partial_x^2V_x$.
+Cyclic replacement $x\to y\to z\to x$ gives
 $[\nabla\times(\nabla\times\mathbf V)]_y=\partial_y(\nabla\cdot\mathbf V)-\nabla^2V_y$
 and
 $[\nabla\times(\nabla\times\mathbf V)]_z=\partial_z(\nabla\cdot\mathbf V)-\nabla^2V_z$.
@@ -1689,7 +1730,8 @@ where the Cartesian vector Laplacian acts componentwise.
 \noindent\textbf{3.6.10}\quad Prove that
 $\nabla\times(\varphi\nabla\varphi)=0$.
 \solution
-The product rule gives $\varphi\nabla\varphi=\frac12\nabla(\varphi^2)$.
+The product rule gives $\nabla(\varphi^2)=2\varphi\nabla\varphi$, i.e.\
+$\varphi\nabla\varphi=\frac12\nabla(\varphi^2)$.
 For a $C^2$ scalar $f$, the $i$-component of
 $\nabla\times\nabla f$ is $\varepsilon_{ijk}\partial_j\partial_k f=0$,
 since the derivatives are symmetric and $\varepsilon_{ijk}$ antisymmetric.
@@ -1703,20 +1745,36 @@ differ by (a) a constant and (b) a gradient of a scalar function.
 \solution
 Put $\mathbf H=\mathbf F-\mathbf G$. The hypothesis is
 $\nabla\times\mathbf H=0$.
-A constant vector $\mathbf c$ has zero derivatives, so
+\textbf{(a)} A constant vector $\mathbf c$ has zero derivatives, so
+$\nabla\times\mathbf c=0$ and
 $\mathbf F=\mathbf G+\mathbf c$ has the same curl as $\mathbf G$.
-Likewise $\nabla\times\nabla f=0$, so
+\textbf{(b)} Likewise $\nabla\times\nabla f=0$ for every $C^2$ scalar
+$f$ (Exercise 3.6.10), so
 $\mathbf F=\mathbf G+\nabla f$ has the same curl.
-The constant case is included by $f=\mathbf c\cdot\mathbf r$.
+The constant case is included by $f=\mathbf c\cdot\mathbf r$, since
+$\nabla(\mathbf c\cdot\mathbf r)=\mathbf c$.
 
-\erratum{If one further asserts that every such difference is a
-globally single-valued gradient, a simply connected domain is sufficient
-and topology must be considered.}
-On that domain set $f(\mathbf r)=\int_{\mathbf r_0}^{\mathbf r}\mathbf H\cdot d\boldsymbol\ell$;
-Stokes' theorem makes this path-independent and differentiation gives
-$\nabla f=\mathbf H$. On the punctured plane,
-$\mathbf H=(-y,x,0)/(x^2+y^2)$ has zero curl but circulation $2\pi$,
-so it is not a global single-valued gradient there.
+\erratum{Conversely, every such difference $\mathbf H$ is the gradient
+of a single-valued function when the domain is simply connected, but
+not on every domain.}
+On a simply connected domain set
+$f(\mathbf r)=\int_{\mathbf r_0}^{\mathbf r}\mathbf H\cdot d\boldsymbol\ell$.
+Two paths from $\mathbf r_0$ to $\mathbf r$ together form a closed loop
+that bounds a surface $S$ in the domain, so by Stokes' theorem the two
+path integrals differ by
+$\int_S(\nabla\times\mathbf H)\cdot d\boldsymbol\sigma=0$; thus $f$ is
+well defined. Extending a path by a segment parallel to the $x$-axis
+gives $f(x+h,y,z)-f(x,y,z)=\int_x^{x+h}H_x(s,y,z)\,ds$, so
+$\partial_xf=H_x$; likewise for $y$ and $z$, hence $\nabla f=\mathbf H$.
+With the $z$-axis removed, $\mathbf H=(-y,x,0)/(x^2+y^2)$ has zero curl:
+its $x$- and $y$-components vanish because $H_z=0$ and $\mathbf H$ does
+not depend on $z$, and
+$\partial_xH_y=(y^2-x^2)/(x^2+y^2)^2=\partial_yH_x$.
+On the unit circle $\mathbf r=(\cos\varphi,\sin\varphi,0)$, however,
+$\mathbf H\cdot d\mathbf r=(\sin^2\varphi+\cos^2\varphi)\,d\varphi
+=d\varphi$, so its circulation is $2\pi$, whereas the closed line
+integral of the gradient of a single-valued function vanishes. Hence
+this $\mathbf H$ is not such a gradient there.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1725,20 +1783,28 @@ contains a nonlinear term of the form $(\mathbf{v}\cdot\nabla)\mathbf{v}$.
 Show that the curl of this term may be written as
 $-\nabla\times[\mathbf{v}\times(\nabla\times\mathbf{v})]$.
 \solution
-Exercise 3.6.7 with $\mathbf A=\mathbf v$ gives
+Exercise 3.6.7 with $\mathbf A=\mathbf v$, solved for
+$(\mathbf v\cdot\nabla)\mathbf v$, gives
 \[
 (\mathbf v\cdot\nabla)\mathbf v
 =\tfrac12\nabla(\mathbf v\cdot\mathbf v)
 -\mathbf v\times(\nabla\times\mathbf v).
 \]
-Take the curl. The gradient term has zero curl, so
+Take the curl. The gradient term has zero curl, as shown in
+Exercise 3.6.10, so
 \[
 \boxed{\nabla\times[(\mathbf v\cdot\nabla)\mathbf v]
 =-\nabla\times[\mathbf v\times(\nabla\times\mathbf v)]}.
 \]
 No incompressibility assumption is needed.
 
-\erratum{The manual, p.~41, omits the factor $1/2$ in front of $\nabla(\mathbf v\cdot\mathbf v)$. For $\mathbf v=(x,0,0)$, the correct difference is $(x,0,0)-(x,0,0)=0$; without $1/2$ it is $(x,0,0)$. Taking a curl hides this error because either gradient has zero curl.}
+\erratum{The Instructor's Manual, p.~41, omits the factor $1/2$ in
+front of $\nabla(\mathbf v\cdot\mathbf v)$. For $\mathbf v=(x,0,0)$,
+where $\nabla\times\mathbf v=0$, the identity requires
+$\tfrac12\nabla(\mathbf v\cdot\mathbf v)-(\mathbf v\cdot\nabla)\mathbf v=0$,
+and indeed $(x,0,0)-(x,0,0)=0$; without the $1/2$ this difference would
+be $(2x,0,0)-(x,0,0)=(x,0,0)\ne0$. Taking a curl hides this error
+because either gradient has zero curl.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1747,14 +1813,16 @@ solenoidal, where $u$ and $v$ are \erratum{$C^2$} scalar functions.
 \solution
 \erratum{For a classical pointwise calculation assume $u,v$ are $C^2$,
 so the required mixed derivatives exist and commute.}
-Using 3.5.9,
+Using Exercise 3.5.9 with $\mathbf a=\nabla u$ and $\mathbf b=\nabla v$,
 \[
 \nabla\cdot(\nabla u\times\nabla v)
 =\nabla v\cdot(\nabla\times\nabla u)
 -\nabla u\cdot(\nabla\times\nabla v)=0.
 \]
 Each curl of a gradient vanishes by equality of mixed partial
-derivatives, so the cross product is solenoidal.
+derivatives, $(\nabla\times\nabla u)_i=\sum_{jk}\varepsilon_{ijk}
+\partial_j\partial_ku=0$ (Exercise 3.6.10), so the cross product is
+solenoidal.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1763,7 +1831,8 @@ Laplace's equation, $\nabla^{2}\varphi=0$. Show that $\nabla\varphi$ is both
 solenoidal and irrotational.
 \solution
 For $\mathbf A=\nabla\varphi$,
-$\nabla\cdot\mathbf A=\nabla^2\varphi=0$ by the given equation.
+$\nabla\cdot\mathbf A=\sum_i\partial_i\partial_i\varphi
+=\nabla^2\varphi=0$ by the given equation.
 Also
 \[
 (\nabla\times\mathbf A)_i
@@ -1789,11 +1858,22 @@ and the solenoidal condition
 \emph{Hint.}~Let $\nabla\cdot$ operate on the first equation.
 \erratum{Assume that $k$ is constant and $k\ne0$.}
 \solution
-\erratum{The conclusion requires a constant $k\ne0$.}
-Taking divergence of the first equation gives
-$0-k^2\nabla\cdot\mathbf A=0$, since the divergence of a curl
-vanishes. Division by $k^2$ gives $\nabla\cdot\mathbf A=0$.
-Substitution into the double-curl identity then yields
+\erratum{The conclusion requires a constant $k\ne0$; the example at the
+end shows that it fails for $k=0$.}
+Taking the divergence of the first equation gives
+\[
+\nabla\cdot[\nabla\times(\nabla\times\mathbf A)]-k^2\nabla\cdot\mathbf A
+=0-k^2\nabla\cdot\mathbf A=0.
+\]
+The divergence of any curl vanishes,
+$\nabla\cdot(\nabla\times\mathbf C)
+=\sum_{ijk}\varepsilon_{ijk}\partial_i\partial_jC_k=0$, because the mixed
+derivatives are symmetric in $i,j$ and $\varepsilon_{ijk}$ is antisymmetric;
+here $\mathbf C=\nabla\times\mathbf A$. The constant $k^2$ passes through
+the divergence. Division by $k^2\ne0$ gives $\nabla\cdot\mathbf A=0$.
+Substitution into the double-curl identity (3.70) of Exercise 3.6.9,
+$\nabla\times(\nabla\times\mathbf A)
+=\nabla(\nabla\cdot\mathbf A)-\nabla^2\mathbf A$, then yields
 \[
 0=\nabla(\nabla\cdot\mathbf A)-\nabla^2\mathbf A-k^2\mathbf A
 =-\nabla^2\mathbf A-k^2\mathbf A.
@@ -1850,7 +1930,9 @@ vector with components $\psi_{j}=B_{j}-iE_{j}/c$, $j=x,y,z$. Note that
 $\epsilon_{0}\mu_{0}=1/c^{2}$ and that $\mathbf{1}_{3}$ is the $3\times3$ unit
 matrix.
 \solution
-The matrix differential operator is
+The matrix differential operator
+$\mathsf M\cdot\nabla=\mathsf M_x\partial_x+\mathsf M_y\partial_y
++\mathsf M_z\partial_z$ is
 \[
 \mathsf M\cdot\nabla=
 \begin{pmatrix}
@@ -1859,32 +1941,57 @@ i\partial_z&0&-i\partial_x\\
 -i\partial_y&i\partial_x&0
 \end{pmatrix}.
 \]
-Its action on a column $\boldsymbol\psi$ is $i\nabla\times\boldsymbol\psi$.
+Its action on a column $\boldsymbol\psi$ is, row by row,
+\[
+(\mathsf M\cdot\nabla)\boldsymbol\psi=
+\begin{pmatrix}
+i(\partial_y\psi_z-\partial_z\psi_y)\\
+i(\partial_z\psi_x-\partial_x\psi_z)\\
+i(\partial_x\psi_y-\partial_y\psi_x)
+\end{pmatrix}
+=i\nabla\times\boldsymbol\psi.
+\]
 The given equation is therefore
 $i\nabla\times\boldsymbol\psi+c^{-1}\partial_t\boldsymbol\psi=0$.
-Insert $\boldsymbol\psi=\mathbf B-i\mathbf E/c$ and separate real
-and imaginary parts:
+Insert $\boldsymbol\psi=\mathbf B-i\mathbf E/c$: the two terms become
+$i\nabla\times\mathbf B+c^{-1}\nabla\times\mathbf E$ and
+$c^{-1}\partial_t\mathbf B-ic^{-2}\partial_t\mathbf E$. Separating real
+and imaginary parts,
 \[
 \frac1c(\nabla\times\mathbf E+\partial_t\mathbf B)
 +i\left(\nabla\times\mathbf B-\frac1{c^2}\partial_t\mathbf E\right)=0.
 \]
-For real fields this gives
+For real fields both brackets vanish, which with $1/c^2=\epsilon_0\mu_0$
+gives
 \[
 \boxed{\nabla\times\mathbf E=-\partial_t\mathbf B,\qquad
-\nabla\times\mathbf B=\frac1{c^2}\partial_t\mathbf E}.
+\nabla\times\mathbf B=\frac1{c^2}\partial_t\mathbf E
+=\epsilon_0\mu_0\,\partial_t\mathbf E}.
 \]
 \erratum{The matrix equation supplies the two vacuum curl equations.
 The full vacuum Maxwell system also needs
 $\nabla\cdot\mathbf E=\nabla\cdot\mathbf B=0$ as initial constraints;
 they are not consequences of the matrix equation alone.}
-Taking divergence shows
+Taking the divergence of the matrix equation and using
+$\nabla\cdot(\nabla\times\boldsymbol\psi)=0$ gives
+$c^{-1}\partial_t(\nabla\cdot\boldsymbol\psi)=0$, that is,
+$\partial_t(\nabla\cdot\mathbf B)-ic^{-1}\partial_t(\nabla\cdot\mathbf E)=0$.
+Its real and imaginary parts give
 $\partial_t(\nabla\cdot\mathbf B)=
 \partial_t(\nabla\cdot\mathbf E)=0$, so initial zero divergences are
 preserved. As a counterexample without those initial conditions,
 the static fields $\mathbf B=\mathbf r$, $\mathbf E=0$ solve the
-matrix equation but have $\nabla\cdot\mathbf B=3$.
+matrix equation (both curls vanish, $\nabla\times\mathbf r=0$ as in
+Exercise 3.6.2, and so do both time derivatives) but have
+$\nabla\cdot\mathbf B=3$.
 
-\erratum{The manual, p.~42, labels its full operator matrix $\mathsf M\cdot\nabla$ even though it includes $c^{-1}\partial_t I$. After multiplying that equation by $c$, the imaginary part is $c[\nabla\times\mathbf B-c^{-2}\partial_t\mathbf E]$, so its displayed imaginary bracket is also missing an overall factor $c$. These notation and normalization errors do not change the two zero curl-equation residuals.}
+\erratum{The Instructor's Manual, p.~42, labels its full operator
+matrix $\mathsf M\cdot\nabla$ even though it includes
+$c^{-1}\partial_t I$. After multiplying that equation by $c$, the
+imaginary part is $c[\nabla\times\mathbf B-c^{-2}\partial_t\mathbf E]$,
+so its displayed imaginary bracket is also missing an overall factor
+$c$. These notation and normalization errors do not change the two
+zero curl-equation residuals.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1903,20 +2010,40 @@ Here
 $\mathbf{a}$ and $\mathbf{b}$ are ordinary vectors, and $\mathbf{1}_{2}$ is
 the $2\times2$ unit matrix.
 \solution
-Expand and use the Pauli multiplication law:
+The matrices of Eq.~(2.28) are
+\[
+\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+\sigma_2=\begin{pmatrix}0&-i\\i&0\end{pmatrix},\qquad
+\sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.
+\]
+Direct multiplication gives
+$\sigma_1^2=\sigma_2^2=\sigma_3^2=\mathbf 1_2$ and
+\[
+\sigma_1\sigma_2=\begin{pmatrix}i&0\\0&-i\end{pmatrix}=i\sigma_3,\quad
+\sigma_2\sigma_3=\begin{pmatrix}0&i\\i&0\end{pmatrix}=i\sigma_1,\quad
+\sigma_3\sigma_1=\begin{pmatrix}0&1\\-1&0\end{pmatrix}=i\sigma_2,
+\]
+while the products in reverse order have the opposite sign (for
+example $\sigma_2\sigma_1=-i\sigma_3$). These nine products are
+summarized by the Pauli multiplication law
+$\sigma_i\sigma_j=\delta_{ij}\mathbf 1_2+i\sum_k\varepsilon_{ijk}\sigma_k$.
+The ordinary vector components commute with the Pauli matrices, so we
+may expand and use this law, together with
+$\varepsilon_{ijk}=\varepsilon_{kij}$:
 \[
 \begin{aligned}
 (\boldsymbol\sigma\cdot\mathbf a)(\boldsymbol\sigma\cdot\mathbf b)
 &=\sum_{ij}a_i b_j\sigma_i\sigma_j\\
-&=\sum_{ij}a_ib_j\left(\delta_{ij}I_2+
+&=\sum_{ij}a_ib_j\left(\delta_{ij}\mathbf 1_2+
 i\sum_k\varepsilon_{ijk}\sigma_k\right)\\
-&=\left(\sum_i a_ib_i\right)I_2+
+&=\left(\sum_i a_ib_i\right)\mathbf 1_2+
 i\sum_k\sigma_k\left(\sum_{ij}\varepsilon_{kij}a_ib_j\right)\\
-&=\boxed{(\mathbf a\cdot\mathbf b)I_2+
+&=\boxed{(\mathbf a\cdot\mathbf b)\mathbf 1_2+
 i\boldsymbol\sigma\cdot(\mathbf a\times\mathbf b)}.
 \end{aligned}
 \]
-The ordinary vector components commute with the Pauli matrices.
+The last step uses
+$\sum_{ij}\varepsilon_{kij}a_ib_j=(\mathbf a\times\mathbf b)_k$.
 
 \Needspace{12\baselineskip}
 \subsection*{3.7 Vector Integration}
@@ -1929,17 +2056,31 @@ tetrahedron. Taking the outward direction as positive, calculate the total
 vector area of the four tetrahedral surfaces.
 \solution
 Suppose first $\mathbf A\cdot(\mathbf B\times\mathbf C)>0$.
-The outward vector areas of faces $OAB,OBC,OCA$ are respectively
+The face $OAB$ is a triangle with edges $\mathbf A$, $\mathbf B$ at
+$O$, so its vector area is $\pm\frac12\mathbf A\times\mathbf B$. The
+vertex $C$ not on this face satisfies
+$\mathbf C\cdot(\mathbf A\times\mathbf B)
+=\mathbf A\cdot(\mathbf B\times\mathbf C)>0$ (cyclic triple product), so
+$\mathbf A\times\mathbf B$ points from the face toward $C$, into the
+tetrahedron. The same argument with the opposite vertices $A$ and $B$
+applies to the faces $OBC$ and $OCA$. Hence the outward vector areas of
+faces $OAB,OBC,OCA$ are respectively
 $-\mathbf A\times\mathbf B/2$,
 $-\mathbf B\times\mathbf C/2$,
-$-\mathbf C\times\mathbf A/2$; their negatives would point toward
-the opposite vertex.
-For face $ABC$ the outward vector area is
+$-\mathbf C\times\mathbf A/2$.
+For face $ABC$, with edges $\mathbf B-\mathbf A$ and $\mathbf C-\mathbf A$
+at $A$, expanding and using $\mathbf A\times\mathbf A=0$,
+$-\mathbf B\times\mathbf A=\mathbf A\times\mathbf B$,
+$-\mathbf A\times\mathbf C=\mathbf C\times\mathbf A$,
 \[
 \frac12(\mathbf B-\mathbf A)\times(\mathbf C-\mathbf A)
 =\frac12(\mathbf B\times\mathbf C+\mathbf C\times\mathbf A+
 \mathbf A\times\mathbf B).
 \]
+This is the outward vector area: its scalar product with $\mathbf A$,
+the vector from $O$ to a point of the face, is
+$\frac12\mathbf A\cdot(\mathbf B\times\mathbf C)>0$, so it points away
+from $O$.
 Adding all four cancels every term:
 $\boxed{\sum_{\text{faces}}\boldsymbol{\sigma}=0}$.
 For negative scalar triple product, every outward orientation reverses
@@ -1947,7 +2088,12 @@ relative to these expressions, and the sum remains zero.
 This is the sum of directed areas; the sum of their positive magnitudes
 does not vanish.
 
-\erratum{The manual, p.~42, sums the positive scalar face areas instead of the requested vector areas. For the tetrahedron with vertices $0,\hat{\mathbf e}_x,\hat{\mathbf e}_y,\hat{\mathbf e}_z$, its scalar total is $(3+\sqrt3)/2$, while the outward vector areas still sum to zero.}
+\erratum{The Instructor's Manual, p.~42, sums the positive scalar face
+areas instead of the requested vector areas. For the tetrahedron with
+vertices $0,\hat{\mathbf e}_x,\hat{\mathbf e}_y,\hat{\mathbf e}_z$, its
+scalar total is $3\cdot\frac12+\frac{\sqrt3}{4}(\sqrt2)^2=(3+\sqrt3)/2$
+(three right triangles and an equilateral triangle of side $\sqrt2$),
+while the outward vector areas still sum to zero.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1970,9 +2116,10 @@ $\int_C\mathbf F\cdot d\mathbf r$ is the work done by the field.}
 Parametrize the unit circle by
 $\mathbf r(\varphi)=(\cos\varphi,\sin\varphi,0)$.
 Then
-$\mathbf F=(-\sin\varphi,\cos\varphi,0)$ and
+$\mathbf F=(-\sin\varphi,\cos\varphi,0)$ (because $x^2+y^2=1$) and
 $d\mathbf r=(-\sin\varphi,\cos\varphi,0)d\varphi$, so
-$\mathbf F\cdot d\mathbf r=d\varphi$.
+$\mathbf F\cdot d\mathbf r=(\sin^2\varphi+\cos^2\varphi)\,d\varphi
+=d\varphi$.
 Thus the work by the field is
 \[
 W_F^{(a)}=\int_0^\pi d\varphi=\pi,\qquad
@@ -2000,12 +2147,20 @@ $\mathbf F=(0,2t)$ and $d\mathbf r=(1,1)dt$, giving
 \boxed{W=\int_1^3 2t\,dt=[t^2]_1^3=8}.
 \]
 To exhibit path dependence, instead go horizontally from $(1,1)$
-to $(3,1)$, then vertically to $(3,3)$:
+to $(3,1)$, then vertically to $(3,3)$. On the first leg $y=1$,
+$dy=0$, and $\mathbf F\cdot d\mathbf r=(x-1)\,dx$; on the second $x=3$,
+$dx=0$, and $\mathbf F\cdot d\mathbf r=(3+y)\,dy$. Hence
 \[
-W=\int_1^3(x-1)\,dx+\int_1^3(3+y)\,dy=2+10=12.
+W=\int_1^3(x-1)\,dx+\int_1^3(3+y)\,dy
+=\Bigl[\tfrac12(x-1)^2\Bigr]_1^3+\Bigl[\tfrac12(3+y)^2\Bigr]_1^3
+=2+10=12.
 \]
 The curl is $\hat{\mathbf e}_z[\partial_x(x+y)-\partial_y(x-y)]
 =2\hat{\mathbf e}_z$, consistent with nonconservative behavior.
+Indeed, going out along the second path and back along the first is a
+counterclockwise circuit of the triangle with vertices $(1,1)$, $(3,1)$,
+$(3,3)$, of area $2$; by Stokes' theorem (Section 3.8) its circulation
+is $2\cdot2=4=12-8$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2042,7 +2197,9 @@ Thus
 \boxed{\frac13\oint_S\mathbf r\cdot d\boldsymbol\sigma
 =\frac13(0+0+0+1+1+1)=1}.
 \]
-As a volume check, $\nabla\cdot\mathbf r=3$ and the cube has volume $1$.
+As a volume check (Gauss' theorem, Exercise 3.8.2),
+$\frac13\int_V\nabla\cdot\mathbf r\,d\tau=\frac13\cdot3\cdot1=1$, since
+$\nabla\cdot\mathbf r=3$ and the cube has volume $1$.
 
 \Needspace{12\baselineskip}
 \subsection*{3.8 Integral Theorems}
@@ -2081,8 +2238,9 @@ Apply Gauss' theorem to $\mathbf r=(x,y,z)$:
 =\frac13\int_V(\partial_xx+\partial_yy+\partial_zz)\,d\tau
 =\frac13\int_V3\,d\tau=\boxed V.
 \]
-The result is independent of the position of the origin because adding
-a constant to $\mathbf r$ adds zero flux by 3.8.1.
+The result is independent of the position of the origin: adding a
+constant vector $\mathbf a$ to $\mathbf r$ adds
+$\frac13\mathbf a\cdot\oint_Sd\boldsymbol\sigma=0$ by Exercise 3.8.1.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2095,10 +2253,15 @@ for any closed surface $S$.
 \solution
 \erratum{Assume $\mathbf A$ is a single-valued $C^2$ field on a
 neighborhood of the enclosed region; singular potentials require
-separate treatment.}
+separate treatment. For example, $\mathbf B=\hat{\mathbf r}/r^2$ is the
+curl of the potential of Exercise 3.9.5, which is singular on the
+$z$-axis, and its flux through any sphere centered at the origin is
+$4\pi$.}
 The divergence of its curl is
-$\varepsilon_{ijk}\partial_i\partial_jA_k=0$, since mixed derivatives
-are symmetric in $i,j$. Therefore Gauss' theorem gives
+$\sum_{ijk}\varepsilon_{ijk}\partial_i\partial_jA_k=0$, since mixed
+derivatives are symmetric in $i,j$ while $\varepsilon_{ijk}$ is
+antisymmetric. Therefore Gauss' theorem, applied to the region $V$
+enclosed by $S$, gives
 \[
 \boxed{\oint_S\mathbf B\cdot d\boldsymbol\sigma
 =\int_V\nabla\cdot(\nabla\times\mathbf A)\,d\tau=0}.
@@ -2119,13 +2282,15 @@ $\nabla\cdot\mathbf{E}=\rho/\epsilon_{0}$. You may assume that $\varphi$
 vanishes at large $r$ at least as fast as $r^{-1}$.
 \erratum{Assume both volume integrals converge and $\lim_{R\to\infty}\oint_{r=R}\varphi\mathbf E\cdot d\boldsymbol\sigma=0$. For a regular localized charge distribution, $\varphi=O(R^{-1})$ and $\mathbf E=O(R^{-2})$ suffice for this boundary condition.}
 \solution
-The product rule and the electrostatic equations give
+The product rule and the electrostatic equations
+$\nabla\varphi=-\mathbf E$, $\nabla\cdot\mathbf E=\rho/\epsilon_0$ give
 \[
 \nabla\cdot(\varphi\mathbf E)
 =\nabla\varphi\cdot\mathbf E+\varphi\nabla\cdot\mathbf E
 =-E^2+\frac{\rho\varphi}{\epsilon_0}.
 \]
-Integrate over a ball of radius $R$ and apply Gauss' theorem:
+Integrate over a ball of radius $R$, apply Gauss' theorem to the left
+side, and multiply by $\epsilon_0$:
 \[
 \int_{r<R}\rho\varphi\,d\tau
 =\epsilon_0\int_{r<R}E^2\,d\tau
@@ -2135,8 +2300,13 @@ Integrate over a ball of radius $R$ and apply Gauss' theorem:
 outer surface term. For a localized regular charge distribution,
 $\varphi=O(R^{-1})$ and $\mathbf E=O(R^{-2})$ ensure this; ideal
 point charges have divergent self-energy integrals.}
-Under these conditions the surface term is $O(R^{-1})$ because its
-area is $4\pi R^2$. Taking $R\to\infty$ gives
+Under these conditions the surface term is $O(R^{-1})$:
+\[
+\Bigl|\oint_{r=R}\varphi\mathbf E\cdot d\boldsymbol\sigma\Bigr|
+\le4\pi R^2\max_{r=R}|\varphi|\,|\mathbf E|
+=4\pi R^2\,O(R^{-1})\,O(R^{-2})=O(R^{-1}).
+\]
+Taking $R\to\infty$ gives
 $\boxed{\int\rho\varphi\,d\tau=\epsilon_0\int E^2\,d\tau}$.
 
 \Needspace{5\baselineskip}
@@ -2157,9 +2327,9 @@ For each component,
 \[
 \nabla\cdot(x_i\mathbf J)=
 \sum_j[(\partial_jx_i)J_j+x_i\partial_jJ_j]
-=J_i+x_i\nabla\cdot\mathbf J=J_i.
+=J_i+x_i\nabla\cdot\mathbf J=J_i,
 \]
-Hence
+because $\partial_jx_i=\delta_{ij}$. Hence, by Gauss' theorem,
 $\int_VJ_i\,d\tau=\oint_{\partial V}x_i\mathbf J\cdot d\boldsymbol\sigma=0$
 because $\mathbf J=0$ on the chosen boundary. All three components
 are zero, giving $\boxed{\int_V\mathbf J\,d\tau=0}$.
@@ -2181,17 +2351,21 @@ as viewed from $+z$. Reversing orientation changes the sign; a
 self-intersecting loop gives signed area with multiplicity.}
 For $\mathbf t=(-y,x,0)$,
 \[
-\nabla\times\mathbf t=(0,0,\partial_xx-\partial_y(-y))
-=2\hat{\mathbf e}_z.
+\nabla\times\mathbf t=\bigl(\partial_y0-\partial_zx,\
+\partial_z(-y)-\partial_x0,\ \partial_xx-\partial_y(-y)\bigr)
+=(0,0,2)=2\hat{\mathbf e}_z.
 \]
-Stokes' theorem with upward surface normal gives
+Stokes' theorem, applied to the plane region $S$ enclosed by $C$ with
+upward surface normal ($d\boldsymbol\sigma=\hat{\mathbf e}_z\,dA$),
+gives
 \[
 \frac12\oint_C\mathbf t\cdot d\boldsymbol\lambda
 =\frac12\int_S2\hat{\mathbf e}_z\cdot\hat{\mathbf e}_z\,dA
 =\boxed A.
 \]
-Since $\mathbf t\cdot d\boldsymbol\lambda=x\,dy-y\,dx$,
-this also proves the second displayed expression.
+Since $d\boldsymbol\lambda=(dx,dy,0)$ along the curve,
+$\mathbf t\cdot d\boldsymbol\lambda=-y\,dx+x\,dy$,
+and this also proves the second displayed expression.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2211,9 +2385,11 @@ current loop leads to the line integral
 \end{enumerate}
 \erratum{In (a), take a simple, piecewise smooth loop; in (b), take $a,b>0$.}
 \solution
-\textbf{(a)} In the $xy$-plane,
-$\mathbf r\times d\mathbf r=(x\,dy-y\,dx)\hat{\mathbf e}_z$.
-For a simple positively oriented loop, 3.8.6 gives
+\textbf{(a)} In the $xy$-plane, $\mathbf r=(x,y,0)$ and
+$d\mathbf r=(dx,dy,0)$, so
+$\mathbf r\times d\mathbf r=(y\cdot0-0\cdot dy,\ 0\cdot dx-x\cdot0,\
+x\,dy-y\,dx)=(x\,dy-y\,dx)\hat{\mathbf e}_z$.
+For a simple positively oriented loop, Exercise 3.8.6 gives
 \[
 \oint_C\mathbf r\times d\mathbf r=2A\hat{\mathbf e}_z,
 \]
@@ -2222,8 +2398,14 @@ not its magnitude.
 \textbf{(b)} For the ellipse with $a,b>0$,
 $dx=-a\sin\theta\,d\theta$ and $dy=b\cos\theta\,d\theta$.
 Then
-$x\,dy-y\,dx=ab(\cos^2\theta+\sin^2\theta)d\theta=ab\,d\theta$.
-Integrating $0\le\theta\le2\pi$ gives $2\pi ab=2A$, hence
+\[
+x\,dy-y\,dx=(a\cos\theta)(b\cos\theta\,d\theta)
+-(b\sin\theta)(-a\sin\theta\,d\theta)
+=ab(\cos^2\theta+\sin^2\theta)d\theta=ab\,d\theta.
+\]
+As $\theta$ increases from $0$ to $2\pi$ the ellipse is traversed once
+counterclockwise, so by (a)
+$2A=\oint(x\,dy-y\,dx)=\int_0^{2\pi}ab\,d\theta=2\pi ab$, hence
 $\boxed{A=\pi ab}$.
 
 \Needspace{5\baselineskip}
@@ -2238,14 +2420,21 @@ Take the loop to be entirely in the $xy$-plane.
 \solution
 Take $\mathbf P=\mathbf r$ in the alternate Stokes formula.
 Treat the normal area element as the coefficient of the differential
-operator. Component contraction gives
+operator. The component contraction is that of Exercise 3.6.6 with
+$\mathbf A\to d\boldsymbol\sigma$ (proved for general $\mathbf P$ in
+Exercise 3.8.13); with repeated indices summed,
+$\partial_ir_j=\delta_{ij}$, and $\partial_jr_j=3$, it gives
 \[
 [(d\boldsymbol\sigma\times\nabla)\times\mathbf r]_i
 =d\sigma_j\,\partial_i r_j-d\sigma_i\,\partial_j r_j
 =d\sigma_i-3d\sigma_i=-2d\sigma_i.
 \]
 Thus $\oint d\mathbf r\times\mathbf r=-2\int_Sd\boldsymbol\sigma$.
-Reversing the order of the cross product gives, for upward normal,
+For the plane region $S$ enclosed by the loop, with upward normal
+(counterclockwise traversal), $\int_Sd\boldsymbol\sigma
+=\hat{\mathbf e}_z\int_SdA=A\hat{\mathbf e}_z$, where $A$ is the enclosed
+area. Reversing the order of the cross product,
+$\mathbf r\times d\mathbf r=-d\mathbf r\times\mathbf r$, gives
 \[
 \boxed{\oint\mathbf r\times d\mathbf r=2A\hat{\mathbf e}_z}.
 \]
@@ -2260,14 +2449,17 @@ The sign is reversed for clockwise traversal.
 \]
 \erratum{Assume $u,v$ are single-valued $C^1$ functions along the closed, piecewise smooth path.}
 \solution
-By the product rule,
-$u\nabla v+v\nabla u=\nabla(uv)$.
+By the product rule (Exercise 3.5.5),
+$u\nabla v+v\nabla u=\nabla(uv)$, and
+$\nabla(uv)\cdot d\boldsymbol\lambda=d(uv)$ is the change of $uv$ along
+the line element.
 Its closed line integral is
 \[
 \oint_C(u\nabla v+v\nabla u)\cdot d\boldsymbol\lambda
 =\oint_Cd(uv)=0
 \]
-for single-valued differentiable $u,v$. Move the second integral to
+for single-valued differentiable $u,v$, since $uv$ returns to its
+starting value. Move the second integral to
 the right to obtain the stated integration-by-parts identity.
 
 \Needspace{5\baselineskip}
@@ -2284,13 +2476,20 @@ Apply Stokes' theorem to $u\nabla v$:
 \oint_{\partial S}u\nabla v\cdot d\boldsymbol\lambda
 =\int_S\nabla\times(u\nabla v)\cdot d\boldsymbol\sigma.
 \]
-The product rule gives
+The product rule
+$\nabla\times(g\mathbf V)=\nabla g\times\mathbf V+g\nabla\times\mathbf V$
+(as in Exercise 3.6.4), with $g=u$ and $\mathbf V=\nabla v$, gives
 $\nabla\times(u\nabla v)=\nabla u\times\nabla v+
-u\,\nabla\times\nabla v=\nabla u\times\nabla v$.
+u\,\nabla\times\nabla v=\nabla u\times\nabla v$, because a curl of a
+gradient vanishes (Exercise 3.6.10).
 Substitution proves the result with the compatible boundary orientation.
 The fields must be regular on the spanning surface.
 
-\erratum{The first integral in the manual's displayed derivation on p.~45 must be $2\oint_{\partial S}u\nabla v\cdot d\boldsymbol\lambda$, not $2\int_Su\nabla v\cdot d\boldsymbol\sigma$. Stokes' theorem relates that line integral to the surface integral of its curl.}
+\erratum{The first integral in the Instructor's Manual's displayed
+derivation on p.~45 must be
+$2\oint_{\partial S}u\nabla v\cdot d\boldsymbol\lambda$, not
+$2\int_Su\nabla v\cdot d\boldsymbol\sigma$. Stokes' theorem relates
+that line integral to the surface integral of its curl.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2301,16 +2500,22 @@ The fields must be regular on the spanning surface.
 \]
 \solution
 Take a constant test vector $\mathbf a$. Scalar triple-product
-cyclicity and Gauss' theorem give
+cyclicity,
+$\mathbf a\cdot(d\boldsymbol\sigma\times\mathbf P)
+=d\boldsymbol\sigma\cdot(\mathbf P\times\mathbf a)$, and Gauss' theorem
+give
 \[
 \begin{aligned}
 \mathbf a\cdot\oint_{\partial V}d\boldsymbol\sigma\times\mathbf P
 &=\oint_{\partial V}(\mathbf P\times\mathbf a)\cdot d\boldsymbol\sigma\\
 &=\int_V\nabla\cdot(\mathbf P\times\mathbf a)\,d\tau\\
-&=\int_V\mathbf a\cdot(\nabla\times\mathbf P)\,d\tau,
+&=\int_V\mathbf a\cdot(\nabla\times\mathbf P)\,d\tau.
 \end{aligned}
 \]
-because $\nabla\times\mathbf a=0$. Taking $\mathbf a$ to be each
+The last step is Exercise 3.5.9,
+$\nabla\cdot(\mathbf P\times\mathbf a)
+=\mathbf a\cdot(\nabla\times\mathbf P)-\mathbf P\cdot(\nabla\times\mathbf a)$,
+with $\nabla\times\mathbf a=0$. Taking $\mathbf a$ to be each
 Cartesian unit vector proves the vector identity.
 
 \Needspace{5\baselineskip}
@@ -2321,8 +2526,9 @@ Cartesian unit vector proves the vector identity.
 =\oint_{\partial S}\varphi\,d\mathbf{r}.
 \]
 \solution
-For any constant $\mathbf a$, Stokes' theorem applied to
-$\varphi\mathbf a$ gives
+For any constant $\mathbf a$,
+$\mathbf a\cdot\oint\varphi\,d\mathbf r=\oint(\varphi\mathbf a)\cdot
+d\mathbf r$, and Stokes' theorem applied to $\varphi\mathbf a$ gives
 \[
 \begin{aligned}
 \mathbf a\cdot\oint_{\partial S}\varphi\,d\mathbf r
@@ -2331,7 +2537,12 @@ $\varphi\mathbf a$ gives
 &=\mathbf a\cdot\int_Sd\boldsymbol\sigma\times\nabla\varphi.
 \end{aligned}
 \]
-The last equality is a cyclic scalar triple product.
+The second equality is the product rule
+$\nabla\times(\varphi\mathbf a)=\nabla\varphi\times\mathbf a
++\varphi\nabla\times\mathbf a$ with $\nabla\times\mathbf a=0$; the last
+is the cyclic scalar triple product
+$(\nabla\varphi\times\mathbf a)\cdot d\boldsymbol\sigma
+=\mathbf a\cdot(d\boldsymbol\sigma\times\nabla\varphi)$.
 Equality for all $\mathbf a$ proves the claimed vector equation.
 
 \Needspace{5\baselineskip}
@@ -2342,21 +2553,32 @@ Equality for all $\mathbf a$ proves the claimed vector equation.
 =\oint_{\partial S}d\mathbf{r}\times\mathbf{P}.
 \]
 \solution
-Let $\mathbf a$ be constant. Then
+Let $\mathbf a$ be constant. By the cyclic triple product
+$\mathbf a\cdot(d\mathbf r\times\mathbf P)
+=(\mathbf P\times\mathbf a)\cdot d\mathbf r$ and Stokes' theorem,
 \[
 \mathbf a\cdot\oint_{\partial S}d\mathbf r\times\mathbf P
 =\oint_{\partial S}(\mathbf P\times\mathbf a)\cdot d\mathbf r
 =\int_S[\nabla\times(\mathbf P\times\mathbf a)]\cdot d\boldsymbol\sigma.
 \]
-The curl-product rule reduces the integrand to
+The curl-product rule of Exercise 3.6.5, with $\mathbf A\to\mathbf P$,
+$\mathbf B\to\mathbf a$, and all derivatives of $\mathbf a$ zero, gives
+$\nabla\times(\mathbf P\times\mathbf a)
+=(\mathbf a\cdot\nabla)\mathbf P-\mathbf a(\nabla\cdot\mathbf P)$.
+With repeated indices summed, the integrand is therefore
 $[(\mathbf a\cdot\nabla)\mathbf P-\mathbf a(\nabla\cdot\mathbf P)]
 \cdot d\boldsymbol\sigma
 =a_i[d\sigma_j\partial_iP_j-d\sigma_i\partial_jP_j]$.
-On the other hand, direct Levi-Civita contraction gives
+On the other hand, the Levi-Civita contraction of Exercise 3.6.6, with
+$\mathbf A\to d\boldsymbol\sigma$ (not differentiated) and
+$\mathbf B\to\mathbf P$, gives
 \[
 [(d\boldsymbol\sigma\times\nabla)\times\mathbf P]_i
-=d\sigma_j\partial_iP_j-d\sigma_i\partial_jP_j.
+=\varepsilon_{ijk}\varepsilon_{j\ell m}\,d\sigma_\ell\,\partial_mP_k
+=d\sigma_j\partial_iP_j-d\sigma_i\partial_jP_j,
 \]
+so $\mathbf a\cdot\int_S(d\boldsymbol\sigma\times\nabla)\times\mathbf P
+=\int_Sa_i[d\sigma_j\partial_iP_j-d\sigma_i\partial_jP_j]$ as well.
 Both sides have the same dot product with every constant $\mathbf a$,
 so the vector integrals agree.
 
@@ -2386,17 +2608,26 @@ $\begin{array}{ll}
 \end{array}$
 \erratum{Take $n\in\mathbb R$ and initially work at $r>0$; any extension across the origin requires a separate regularity check.}
 \solution
-Write $\mathbf F=r^{2n}\mathbf r$, with $r>0$.
-\textbf{(a)} Since $\partial_i r=x_i/r$,
+Write $\mathbf F=r^{2n}\mathbf r$, with $r>0$ and
+$r^2=x^2+y^2+z^2=\sum_ix_i^2$.
+\textbf{(a)} Since $\partial_i r=x_i/r$, the chain rule gives
+$\partial_i(r^{2n})=2nr^{2n-1}x_i/r=2nr^{2n-2}x_i$, so
 \[
 \nabla\cdot\mathbf F
+=\sum_i\partial_i(r^{2n}x_i)
 =\sum_i[2n r^{2n-2}x_i^2+r^{2n}]
 =2nr^{2n}+3r^{2n}=\boxed{(2n+3)r^{2n}}.
 \]
-\textbf{(b)} The product curl is
-$\nabla(r^{2n})\times\mathbf r+r^{2n}\nabla\times\mathbf r
-=2nr^{2n-2}\mathbf r\times\mathbf r=0$.
-\textbf{(c)} A radial potential must obey
+\textbf{(b)} By the product rule of Exercise 3.6.4, with
+$\nabla(r^{2n})=2nr^{2n-2}\mathbf r$ from (a) and
+$\nabla\times\mathbf r=0$ (Exercise 3.6.2),
+$\nabla\times\mathbf F=\nabla(r^{2n})\times\mathbf r
++r^{2n}\nabla\times\mathbf r
+=2nr^{2n-2}\mathbf r\times\mathbf r=\boxed0$.
+\textbf{(c)} Since $\mathbf F$ is radial, try $\varphi=\varphi(r)$.
+Then $\nabla\varphi=\varphi'(r)\nabla r=\varphi'(r)\mathbf r/r$, and
+$\mathbf F=-\nabla\varphi$ requires
+$r^{2n}\mathbf r=-\varphi'(r)\mathbf r/r$, that is,
 $-\varphi'(r)=r^{2n+1}$. Integration gives
 \[
 \boxed{\varphi(r)=
@@ -2405,10 +2636,14 @@ $-\varphi'(r)=r^{2n+1}$. Integration gives
 -\ln(r/r_0)+C,&n=-1,
 \end{cases}}
 \]
-where $r_0>0$ fixes the additive reference.
-\textbf{(d)} A positive power of $r$ is finite at zero and divergent
-at infinity; a negative power has the reverse behavior.
-Only the logarithmic case $n=-1$ diverges in magnitude at both ends.
+where $r_0>0$ fixes the additive reference. With $C=0$ (and $r_0=1$
+in the logarithm) these are the textbook's answers.
+\textbf{(d)} For $n\ne-1$, $\varphi-C$ is a constant multiple of
+$r^{2n+2}$. If $2n+2>0$ it tends to $0$ as $r\to0$ and diverges as
+$r\to\infty$; if $2n+2<0$ the reverse holds. For $n=-1$,
+$-\ln(r/r_0)\to+\infty$ as $r\to0$ and $-\ln(r/r_0)\to-\infty$ as
+$r\to\infty$. Hence only the logarithmic case $\boxed{n=-1}$ diverges
+in magnitude at both ends.
 \erratum{These differential formulas hold away from singularities.
 For instance, at $n=-3/2$ the divergence is zero for $r>0$, but
 its distributional extension is $4\pi\delta^{(3)}(\mathbf r)$,
@@ -2422,25 +2657,30 @@ for $0\le r<\infty$.
 \solution
 Let the total charge be $Q$, so the uniform density is
 $\rho_0=3Q/(4\pi a^3)$. Choose $\varphi(\infty)=0$.
-Spherical symmetry and Gauss' law give
+By spherical symmetry $\mathbf E=E_r(r)\hat{\mathbf r}$, and Gauss' law
+for the sphere of radius $r$ gives
 \[
 4\pi r^2 E_r(r)=\frac{Q_{\rm enclosed}(r)}{\epsilon_0},\qquad
 Q_{\rm enclosed}(r)=
-\begin{cases}Q r^3/a^3,&r\le a,\\Q,&r\ge a.\end{cases}
+\begin{cases}\rho_0\cdot\frac43\pi r^3=Q r^3/a^3,&r\le a,\\
+Q,&r\ge a.\end{cases}
 \]
 Thus $E_r=Qr/(4\pi\epsilon_0a^3)$ inside and
 $E_r=Q/(4\pi\epsilon_0r^2)$ outside.
-Integrating inward from infinity,
+Since $E_r=-d\varphi/dr$ and $\varphi(\infty)=0$, integrating inward
+from infinity gives
 \[
 \varphi(r)=\int_r^\infty E_r(s)\,ds
+=\Bigl[-\frac{Q}{4\pi\epsilon_0s}\Bigr]_r^\infty
 =\frac{Q}{4\pi\epsilon_0r}\quad(r\ge a).
 \]
-Inside,
+Inside, using $\int_r^as\,ds=(a^2-r^2)/2$,
 \[
 \begin{aligned}
 \varphi(r)&=\varphi(a)+\int_r^a\frac{Qs}{4\pi\epsilon_0a^3}\,ds\\
 &=\frac{Q}{4\pi\epsilon_0a}
-+\frac{Q(a^2-r^2)}{8\pi\epsilon_0a^3}.
++\frac{Q(a^2-r^2)}{8\pi\epsilon_0a^3}
+=\frac{Q}{8\pi\epsilon_0a}\Bigl(2+1-\frac{r^2}{a^2}\Bigr).
 \end{aligned}
 \]
 Consequently
@@ -2451,8 +2691,9 @@ Consequently
 \dfrac{Q}{4\pi\epsilon_0r},&r\ge a.
 \end{cases}}
 \]
-Both $\varphi$ and $-\varphi'=E_r$ agree at $a$, and $\varphi(0)$
-is finite.
+Both $\varphi$ and $-\varphi'=E_r$ agree at $r=a$ (the two formulas
+give $Q/(4\pi\epsilon_0a)$ and $Q/(4\pi\epsilon_0a^2)$ there), and
+$\varphi(0)=3Q/(8\pi\epsilon_0a)$ is finite.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2479,9 +2720,17 @@ $g=-Kz^2+C$. Thus
 \left(\frac{x^2+y^2}{2}-z^2\right)+C}.
 \]
 Its negative gradient is $(-Kx,-Ky,2Kz)$, exactly the given force.
+With $C=0$ this is the textbook's answer
+$-K(z^2-\frac12x^2-\frac12y^2)$.
 
-\erratum{The manual, p.~46, gives the opposite overall sign for the potential; applying $-\nabla$ to its expression reverses every required force component. Its intermediate expression also includes an extra factor $r^2$ before $(3z^2-r^2)$. The consistent chain is
-$V=-\dfrac{GmM}{2R^3}(3z^2-r^2)=-\dfrac{GmMr^2}{R^3}P_2(\cos\theta)$, as in the textbook answer.}
+\erratum{The Instructor's Manual, p.~46, gives the opposite overall
+sign for the potential; applying $-\nabla$ to its expression reverses
+every required force component. Its intermediate expression also
+includes an extra factor $r^2$ before $(3z^2-r^2)$. The consistent
+chain, with $r^2=x^2+y^2+z^2$ and
+$P_2(\cos\theta)=\frac12(3\cos^2\theta-1)=(3z^2-r^2)/(2r^2)$, is
+$V=-\dfrac{GmM}{2R^3}(3z^2-r^2)=-\dfrac{GmMr^2}{R^3}P_2(\cos\theta)$,
+as in the textbook answer.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2493,7 +2742,7 @@ produces a magnetic induction $\mathbf{B}$ with components
 \]
 Find a magnetic vector potential $\mathbf{A}$.
 \par\nobreak\hfill\emph{ANS.}\enspace
-$\mathbf{A}=-\hat{\mathbf{z}}(\mu_{0}I/4\pi)\ln(x^{2}+y^{2})$.\enspace
+$\mathbf{A}=-\hat{\mathbf{e}}_{z}(\mu_{0}I/4\pi)\ln(x^{2}+y^{2})$.\enspace
 (This solution is not unique.)
 \erratum{Work off the ideal wire, where $x^2+y^2>0$.}
 \solution
@@ -2501,16 +2750,21 @@ Choose $\mathbf A=A_z(x,y)\hat{\mathbf e}_z$.
 Then $\nabla\times\mathbf A=(\partial_yA_z,-\partial_xA_z,0)$.
 With $K=\mu_0I/(2\pi)$, the required $y$-component implies
 $\partial_xA_z=-Kx/(x^2+y^2)$.
-Integration in $x$ gives
+Integration in $x$, using $\partial_x\ln(x^2+y^2)=2x/(x^2+y^2)$, gives
 $A_z=-(K/2)\ln(x^2+y^2)+f(y)$.
-The required $x$-component sets $f'(y)=0$. Equivalently, with
+The required $x$-component,
+$\partial_yA_z=-Ky/(x^2+y^2)+f'(y)=-Ky/(x^2+y^2)$, sets $f'(y)=0$, so
+$f$ is a constant. Equivalently, with
 $\rho=\sqrt{x^2+y^2}>0$ and reference length $\rho_0$,
 \[
 \boxed{\mathbf A=K\ln(\rho_0/\rho)\hat{\mathbf e}_z}.
 \]
 Indeed $\partial_yA_z=-Ky/\rho^2$ and
-$-\partial_xA_z=Kx/\rho^2$. Adding any regular gradient leaves
-the curl unchanged. The ideal-wire axis is excluded.
+$-\partial_xA_z=Kx/\rho^2$. The choice $\rho_0=1$ (in the units used)
+gives $-K\ln\rho=-\frac K2\ln(x^2+y^2)
+=-(\mu_0I/4\pi)\ln(x^2+y^2)$, the textbook's answer. Adding any regular
+gradient leaves the curl unchanged, so the potential is not unique.
+The ideal-wire axis is excluded.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2529,13 +2783,18 @@ $\mathbf{A}=\hat{\mathbf{e}}_{x}\dfrac{yz}{r(x^{2}+y^{2})}
 globally smooth, single-valued potential exists on all of
 $\mathbb R^3\setminus\{0\}$ for this field.}
 Write $\rho=\sqrt{x^2+y^2}$ and $r=\sqrt{\rho^2+z^2}$.
-Then $\mathbf B=(\rho/r^3)\hat{\mathbf e}_\rho+
+Then $\mathbf r=\rho\hat{\mathbf e}_\rho+z\hat{\mathbf e}_z$ and
+$\mathbf B=\mathbf r/r^3=(\rho/r^3)\hat{\mathbf e}_\rho+
 (z/r^3)\hat{\mathbf e}_z$.
 Try $\mathbf A=A_\varphi(\rho,z)\hat{\mathbf e}_\varphi$.
-Its curl has components
-$B_\rho=-\partial_zA_\varphi$ and
+By the curl in cylindrical coordinates (Section 3.10), its curl has
+components $B_\rho=-\partial_zA_\varphi$, $B_\varphi=0$, and
 $B_z=\rho^{-1}\partial_\rho(\rho A_\varphi)$.
-Choosing $A_\varphi=-z/(\rho r)$ gives
+The last condition,
+$\partial_\rho(\rho A_\varphi)=z\rho/(\rho^2+z^2)^{3/2}$, integrates to
+$\rho A_\varphi=-z/r+g(z)$; take $g=0$.
+This choice, $A_\varphi=-z/(\rho r)$, with $\partial_z(1/r)=-z/r^3$,
+$\partial_\rho(1/r)=-\rho/r^3$, and $r^2-z^2=\rho^2$, gives
 \[
 -\partial_zA_\varphi=\frac1\rho\left(\frac1r-\frac{z^2}{r^3}\right)
 =\frac{\rho}{r^3},\qquad
@@ -2545,6 +2804,22 @@ Choosing $A_\varphi=-z/(\rho r)$ gives
 Since $\hat{\mathbf e}_\varphi=(-y/\rho,x/\rho,0)$,
 \[
 \boxed{\mathbf A=\left(\frac{yz}{r\rho^2},-\frac{xz}{r\rho^2},0\right)}.
+\]
+A direct Cartesian check does not need cylindrical coordinates. Since
+$A_z=0$ and $\partial_z(z/r)=1/r-z^2/r^3=\rho^2/r^3$,
+\[
+(\nabla\times\mathbf A)_x=-\partial_zA_y
+=\frac x{\rho^2}\,\partial_z\frac zr=\frac x{r^3},\qquad
+(\nabla\times\mathbf A)_y=\partial_zA_x
+=\frac y{\rho^2}\,\partial_z\frac zr=\frac y{r^3}.
+\]
+For the third component put $f=1/(r\rho^2)$, so that $A_x=yzf$ and
+$A_y=-xzf$. As $f$ depends on $x,y$ only through $\rho$,
+$x\partial_xf+y\partial_yf=\rho\,\partial_\rho f
+=\rho\bigl(-\rho^{-1}r^{-3}-2\rho^{-3}r^{-1}\bigr)=-1/r^3-2f$; hence
+\[
+(\nabla\times\mathbf A)_z=\partial_xA_y-\partial_yA_x
+=-z\bigl(2f+x\partial_xf+y\partial_yf\bigr)=\frac z{r^3}.
 \]
 For the global obstruction, the flux through a sphere is
 $\int r^{-2}dS=4\pi$. If a regular single-valued potential existed
@@ -2562,14 +2837,18 @@ global limitation.
 \]
 is satisfied by any constant magnetic induction $\mathbf{B}$.
 \solution
-Use the curl-product rule with constant $\mathbf B$:
+Use the curl-product rule of Exercise 3.6.5, with $\mathbf A\to\mathbf B$
+and $\mathbf B\to\mathbf r$, for constant $\mathbf B$:
 \[
 \nabla\times(\mathbf B\times\mathbf r)
 =(\mathbf r\cdot\nabla)\mathbf B-(\mathbf B\cdot\nabla)\mathbf r
 -\mathbf r(\nabla\cdot\mathbf B)+\mathbf B(\nabla\cdot\mathbf r).
 \]
-The four terms are $0,-\mathbf B,0,3\mathbf B$,
-because $(\mathbf B\cdot\nabla)(x,y,z)=\mathbf B$.
+The four terms are $0,-\mathbf B,0,3\mathbf B$: the derivatives of the
+constant $\mathbf B$ vanish,
+$(\mathbf B\cdot\nabla)(x,y,z)
+=(B_x\partial_x+B_y\partial_y+B_z\partial_z)(x,y,z)=\mathbf B$, and
+$\nabla\cdot\mathbf r=3$.
 Thus the curl is $2\mathbf B$, and
 $\boxed{\nabla\times[\tfrac12(\mathbf B\times\mathbf r)]=\mathbf B}$.
 
@@ -2593,23 +2872,30 @@ where $u$ and $v$ are \erratum{$C^2$} scalar functions.
   \]
 \end{enumerate}
 \solution
-With commuting mixed derivatives,
+\textbf{(a)} By Exercise 3.5.9 with $\mathbf a=\nabla u$,
+$\mathbf b=\nabla v$, and with commuting mixed derivatives
+($\nabla\times\nabla u=\nabla\times\nabla v=0$, Exercise 3.6.10),
 \[
 \nabla\cdot\mathbf B=
 \nabla v\cdot(\nabla\times\nabla u)
 -\nabla u\cdot(\nabla\times\nabla v)=0.
 \]
-For the proposed potential,
+This is Exercise 3.6.13.
+\textbf{(b)} For the proposed potential, the product rule
+$\nabla\times(g\mathbf V)=\nabla g\times\mathbf V+g\nabla\times\mathbf V$
+gives $\nabla\times(u\nabla v)=\nabla u\times\nabla v+u\,\nabla\times\nabla v
+=\nabla u\times\nabla v$, and likewise
+$\nabla\times(v\nabla u)=\nabla v\times\nabla u$. Hence
 \[
 \begin{aligned}
 2\nabla\times\mathbf A
 &=\nabla\times(u\nabla v)-\nabla\times(v\nabla u)\\
 &=(\nabla u\times\nabla v)-(\nabla v\times\nabla u)\\
-&=2\nabla u\times\nabla v=2\mathbf B.
+&=2\nabla u\times\nabla v=2\mathbf B,
 \end{aligned}
 \]
-The curl-of-gradient terms vanish separately. Thus $\mathbf A$
-is a vector potential and $\mathbf B$ is solenoidal.
+by antisymmetry of the cross product. Thus $\mathbf A$
+is a vector potential for $\mathbf B$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2630,13 +2916,14 @@ $\varphi$ on the relevant surface. Then
 $\mathbf B'=\nabla\times\mathbf A'
 =\mathbf B+\nabla\times\nabla\varphi=\mathbf B$,
 so the flux does not change.
-On the closed boundary,
+On the closed boundary, since $\nabla\varphi\cdot d\mathbf r=d\varphi$,
 \[
 \oint\mathbf A'\cdot d\mathbf r-\oint\mathbf A\cdot d\mathbf r
 =\oint\nabla\varphi\cdot d\mathbf r
 =\varphi(\text{end})-\varphi(\text{start})=0.
 \]
-Single-valuedness makes the final equality valid.
+Single-valuedness makes the final equality valid: the end and start
+points coincide, and so do the values of $\varphi$ there.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2649,30 +2936,52 @@ electric charges on or within the sphere.
 from $P$, and $v=\varphi$. Equation (3.120) will also be useful.
 \solution
 Place $P$ at the origin and let the sphere have radius $a$.
-The potential is harmonic throughout the ball. To avoid applying
-Green's identity through the singularity of $u=1/r$, use the shell
-$\epsilon<r<a$. Both $\nabla^2u$ and $\nabla^2\varphi$ vanish there:
+With no charge on or within the sphere,
+$\nabla^2\varphi=-\rho/\epsilon_0=0$: the potential is harmonic
+throughout the ball. We use Green's theorem in the form
+\[
+\int_V(u\nabla^2v-v\nabla^2u)\,d\tau
+=\oint_{\partial V}(u\nabla v-v\nabla u)\cdot d\boldsymbol\sigma.
+\]
+To avoid applying it through the singularity of $u=1/r$ at $P$, take
+for $V$ the shell $\epsilon<r<a$. Both $\nabla^2u$ and
+$\nabla^2\varphi$ vanish there; for $u$, note that
+$\nabla(1/r)=-\mathbf r/r^3$ is $-\mathbf F$ of Exercise 3.9.1 with
+$n=-3/2$, whose divergence $(2n+3)r^{2n}$ is zero. With $\partial_n$
+the derivative along the outward normal of the shell,
 \[
 0=\oint_{\partial\text{shell}}
 \left(\frac1r\partial_n\varphi-\varphi\partial_n\frac1r\right)dS.
 \]
-On the outer sphere, $\partial_n=\partial_r$, so its contribution is
+On the outer sphere, $\partial_n=\partial_r$ and
+$\partial_r(1/r)=-1/r^2$, so its contribution is
 $a^{-1}\oint_{r=a}\partial_r\varphi\,dS+
 a^{-2}\oint_{r=a}\varphi\,dS$.
-The first integral is zero by Gauss' theorem and harmonicity in the ball.
+The first integral is zero by Gauss' theorem and harmonicity in the
+ball:
+$\oint_{r=a}\partial_r\varphi\,dS
+=\oint_{r=a}\nabla\varphi\cdot d\boldsymbol\sigma
+=\int_{r<a}\nabla^2\varphi\,d\tau=0$.
 On the inner sphere the outward shell normal is $-\hat{\mathbf e}_r$,
-giving
+so $\partial_n=-\partial_r$, giving
 \[
 -\epsilon^{-1}\oint_{r=\epsilon}\partial_r\varphi\,dS
 -\epsilon^{-2}\oint_{r=\epsilon}\varphi\,dS.
 \]
-The first term tends to zero (bounded gradient times area gives
-$O(\epsilon)$); the second tends to $-4\pi\varphi(P)$ by continuity.
+The first term tends to zero: its magnitude is at most
+$\epsilon^{-1}\cdot4\pi\epsilon^2\max|\nabla\varphi|=O(\epsilon)$.
+The second is $-4\pi$ times the mean value of $\varphi$ over the small
+sphere (of area $4\pi\epsilon^2$), which tends to $-4\pi\varphi(P)$ by
+continuity.
 Letting $\epsilon\to0$ gives
-$a^{-2}\oint_{r=a}\varphi\,dS=4\pi\varphi(P)$, or
+$a^{-2}\oint_{r=a}\varphi\,dS-4\pi\varphi(P)=0$, or
 \[
 \boxed{\varphi(P)=\frac1{4\pi a^2}\oint_{r=a}\varphi\,dS}.
 \]
+Using instead $\nabla^2(1/r)=-4\pi\delta(\mathbf r)$ on the whole ball
+gives the same result at once: the left side of Green's theorem is
+then $4\pi\varphi(P)$. The small sphere does the work of the delta
+function.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2687,15 +2996,21 @@ provided we require $\nabla\cdot\mathbf{A}=0$.
 \solution
 \erratum{Use a magnetostatic field in a medium with spatially constant
 scalar permeability $\mu$.}
-Ampere's law is $\nabla\times\mathbf B=\mu\mathbf J$.
-Insert $\mathbf B=\nabla\times\mathbf A$ and expand the double curl:
+For steady currents $\partial\mathbf D/\partial t=0$, so the Maxwell
+equation $\nabla\times\mathbf H=\mathbf J+\partial\mathbf D/\partial t$
+with $\mathbf B=\mu\mathbf H$ gives Amp\`ere's law
+$\nabla\times\mathbf B=\mu\mathbf J$.
+Insert $\mathbf B=\nabla\times\mathbf A$ and expand the double curl by
+Eq.~(3.70) (Exercise 3.6.9):
 \[
 \mu\mathbf J=\nabla(\nabla\cdot\mathbf A)-\nabla^2\mathbf A.
 \]
 The stated gauge condition $\nabla\cdot\mathbf A=0$ removes the
 first term, leaving $\boxed{\nabla^2\mathbf A=-\mu\mathbf J}$.
-Taking the divergence gives $0=-\mu\nabla\cdot\mathbf J$, consistent
-with steady-current conservation.
+Taking the divergence gives
+$-\mu\nabla\cdot\mathbf J=\nabla\cdot\nabla^2\mathbf A
+=\nabla^2(\nabla\cdot\mathbf A)=0$, consistent with steady-current
+conservation.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2707,17 +3022,23 @@ with steady-current conservation.
 \emph{Hint.}~Eq.~(3.70) will be helpful.
 \solution
 Use $\mathbf B=\nabla\times\mathbf A$,
-$\mathbf E=-\nabla\varphi-\partial_t\mathbf A$, and
-$\nabla\times\mathbf B=\mu_0\mathbf J+c^{-2}\partial_t\mathbf E$.
-Substitution yields
+$\mathbf E=-\nabla\varphi-\partial_t\mathbf A$, and the Maxwell equation
+$\nabla\times\mathbf B=\mu_0\mathbf J+c^{-2}\partial_t\mathbf E$
+(with $\epsilon_0\mu_0=1/c^2$). By Eq.~(3.70),
+$\nabla\times\mathbf B=\nabla\times(\nabla\times\mathbf A)
+=\nabla(\nabla\cdot\mathbf A)-\nabla^2\mathbf A$, while
+$c^{-2}\partial_t\mathbf E=-c^{-2}\nabla\partial_t\varphi
+-c^{-2}\partial_t^2\mathbf A$. Substitution yields
 \[
 \nabla(\nabla\cdot\mathbf A)-\nabla^2\mathbf A
 =\mu_0\mathbf J-\frac1{c^2}\nabla\partial_t\varphi
 -\frac1{c^2}\partial_t^2\mathbf A.
 \]
-The Lorenz gauge is
+The Lorentz gauge condition (also called the Lorenz gauge) is
 $\nabla\cdot\mathbf A+c^{-2}\partial_t\varphi=0$.
-It makes the two gradient terms identical on the two sides, so they cancel.
+Its gradient, $\nabla(\nabla\cdot\mathbf A)
+=-c^{-2}\nabla\partial_t\varphi$, makes the two gradient terms
+identical on the two sides, so they cancel.
 Rearrangement gives
 \[
 \boxed{\frac1{c^2}\partial_t^2\mathbf A-\nabla^2\mathbf A
@@ -2738,17 +3059,23 @@ $\mathbf{B}$ can be described as $\mathbf{B}=\nabla\times\mathbf{A}$, with
 \erratum{The construction is valid on a coordinate box, or on a region
 containing all the indicated integration paths with a regular solenoidal
 field. Solenoidality alone does not ensure a global potential on an
-arbitrary punctured domain; see 3.9.5.}
+arbitrary punctured domain; see Exercise 3.9.5.}
 Use distinct dummy variables:
 \[
 A_x=-\int_{y_0}^yB_z(x,\eta,z)\,d\eta,\quad A_y=0,\quad
 A_z=-\int_{x_0}^xB_y(\xi,y_0,z)\,d\xi
 +\int_{y_0}^yB_x(x,\eta,z)\,d\eta.
 \]
-The fundamental theorem of calculus immediately gives
-$(\nabla\times\mathbf A)_x=\partial_yA_z=B_x$ and
-$(\nabla\times\mathbf A)_z=-\partial_yA_x=B_z$.
-For the remaining component, differentiate both integrals:
+Since $A_y=0$, and the first term of $A_z$ does not depend on $y$,
+the fundamental theorem of calculus immediately gives
+$(\nabla\times\mathbf A)_x=\partial_yA_z-\partial_zA_y
+=\partial_yA_z=B_x(x,y,z)$ and
+$(\nabla\times\mathbf A)_z=\partial_xA_y-\partial_yA_x
+=-\partial_yA_x=B_z(x,y,z)$.
+For the remaining component, differentiate both integrals: in $x$ and
+$z$, which are not integration variables, under the integral sign
+($\mathbf B$ is $C^1$), and the upper limit of the $\xi$ integral by the
+fundamental theorem of calculus:
 \[
 \begin{aligned}
 (\nabla\times\mathbf A)_y
@@ -2795,7 +3122,8 @@ and for $u<0$ quadrants II and IV. Their asymptotes are the coordinate
 axes. The surfaces $x^2-y^2=v$ are another family of rectangular
 hyperbolic cylinders, with asymptotes $y=\pm x$; they open along $x$
 for $v>0$ and along $y$ for $v<0$. Constant $z$ gives horizontal planes.
-The zero levels are the corresponding intersecting planes.
+The zero levels are pairs of intersecting planes: $u=0$ gives the
+planes $x=0$ and $y=0$, and $v=0$ the planes $y=x$ and $y=-x$.
 
 \textbf{(b)} Here blue curves have $u=\pm1$ and red curves have
 $v=\pm1.2$. Arrows show increasing coordinates:
@@ -2827,7 +3155,10 @@ $v=\pm1.2$. Arrows show increasing coordinates:
 \textbf{(c)} For $\rho=\sqrt{x^2+y^2}>0$,
 $\nabla u=(y,x,0)$ and $\nabla v=(2x,-2y,0)$.
 They are orthogonal, since their dot product is $2xy-2xy=0$.
-The increasing-coordinate unit vectors are
+A gradient points in the direction in which its function increases, so
+the increasing-coordinate unit vectors are $\nabla u/|\nabla u|$ and
+$\nabla v/|\nabla v|$, with $|\nabla u|=\sqrt{y^2+x^2}=\rho$ and
+$|\nabla v|=2\rho$:
 \[
 \boxed{\hat{\mathbf e}_u=\frac{(y,x,0)}{\rho},\qquad
 \hat{\mathbf e}_v=\frac{(x,-y,0)}{\rho}}.
@@ -2835,10 +3166,14 @@ The increasing-coordinate unit vectors are
 Their $(x,y)$ component signs in quadrants I, II, III, IV are
 respectively $(+,+),(+,-),(-,-),(-,+)$ for $\hat{\mathbf e}_u$
 and $(+,-),(-,-),(-,+),(+,+)$ for $\hat{\mathbf e}_v$.
-\textbf{(d)}
-$\hat{\mathbf e}_u\times\hat{\mathbf e}_v
-=-(x^2+y^2)\hat{\mathbf e}_z/\rho^2=-\hat{\mathbf e}_z$:
-the ordered system $(u,v,z)$ is left-handed.
+\textbf{(d)} The cross product of the unit vectors is
+\[
+\hat{\mathbf e}_u\times\hat{\mathbf e}_v
+=\rho^{-2}(y,x,0)\times(x,-y,0)
+=\rho^{-2}\bigl(0,0,y(-y)-x\cdot x\bigr)
+=-\hat{\mathbf e}_z,
+\]
+so the ordered system $(u,v,z)$ is left-handed.
 \erratum{The chart is singular on the $z$-axis and is only local
 unless a branch is chosen, because $(x,y)$ and $(-x,-y)$ have the
 same $(u,v)$.}
@@ -2848,15 +3183,33 @@ One can also check handedness by the Jacobian. Differentiating the definitions g
 \begin{pmatrix}du\\dv\end{pmatrix}
 =\begin{pmatrix}y&x\\2x&-2y\end{pmatrix}
 \begin{pmatrix}dx\\dy\end{pmatrix},\qquad
-\det\frac{\partial(u,v)}{\partial(x,y)}=-2(x^2+y^2).
+\det\frac{\partial(u,v)}{\partial(x,y)}=-2y^2-2x^2=-2(x^2+y^2).
 \]
-Inverting this $2\times2$ matrix explicitly gives
+The rows of this matrix are $\nabla u$ and $\nabla v$, and
+$\nabla u\times\nabla v=(0,0,-2y^2-2x^2)$ is this determinant times
+$\hat{\mathbf e}_z$; so the negative determinant is the left-handedness
+found in (d).
+Inverting the $2\times2$ matrix with the rule
+\[
+\begin{pmatrix}\alpha&\beta\\\gamma&\delta\end{pmatrix}^{-1}
+=\frac1{\alpha\delta-\beta\gamma}
+\begin{pmatrix}\delta&-\beta\\-\gamma&\alpha\end{pmatrix}
+\]
+gives
 \[
 \frac{\partial(x,y)}{\partial(u,v)}
+=\frac{1}{-2\rho^2}\begin{pmatrix}-2y&-x\\-2x&y\end{pmatrix}
 =\begin{pmatrix}y/\rho^2&x/(2\rho^2)\\x/\rho^2&-y/(2\rho^2)\end{pmatrix},
-\qquad \det\frac{\partial(x,y)}{\partial(u,v)}=-\frac1{2\rho^2}.
 \]
-\erratum{The manual, p.~49, omits the factor $1/2$ in this inverse determinant. Its earlier differential must likewise read $dv=2x\,dx-2y\,dy$, with a minus sign.}
+whose determinant is the reciprocal of the one above,
+\[
+\det\frac{\partial(x,y)}{\partial(u,v)}
+=-\frac{y^2}{2\rho^4}-\frac{x^2}{2\rho^4}=-\frac1{2\rho^2}.
+\]
+\erratum{The Instructor's Manual, p.~49, omits the factor $1/2$ in this
+inverse determinant. Its earlier differential must likewise read
+$dv=2x\,dx-2y\,dy$, with a minus sign, since
+$\partial_y(x^2-y^2)=-2y$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2884,7 +3237,9 @@ and adding gives $1$; dividing by $a^2\cos^2v,a^2\sin^2v$
 and subtracting also gives $1$. Thus it generates both stated families.
 Constant $u>0$ gives ellipses with foci $(\pm a,0)$, and constant
 $v$ gives confocal hyperbolas. In the first quadrant use
-$u>0$, $0<v<\pi/2$.
+$u>0$, $0<v<\pi/2$. The sketch shows the ellipses $u=0.45,0.8,1.15$
+(blue), the hyperbolas $v=20^\circ,45^\circ,70^\circ$ (red), and the
+unit vectors at the point $u=1$, $v=30^\circ$:
 \begin{center}
 \begin{tikzpicture}[scale=2,>=stealth]
 \draw[->] (0,0)--(2.2,0) node[below]{$x/a$};
@@ -2910,7 +3265,22 @@ $u>0$, $0<v<\pi/2$.
 \node[red!65!black,font=\small] at (1.75,1.1){$v=\text{const.}$};
 \end{tikzpicture}
 \end{center}
-Differentiate the position and normalize:
+Differentiate the position:
+\[
+\frac{\partial\mathbf r}{\partial u}
+=a(\sinh u\cos v,\ \cosh u\sin v,\ 0),\qquad
+\frac{\partial\mathbf r}{\partial v}
+=a(-\cosh u\sin v,\ \sinh u\cos v,\ 0).
+\]
+Both have squared length
+\[
+a^2(\sinh^2u\cos^2v+\cosh^2u\sin^2v)
+=a^2[\sinh^2u(1-\sin^2v)+(1+\sinh^2u)\sin^2v]
+=a^2(\sinh^2u+\sin^2v),
+\]
+and their dot product
+$a^2(-\sinh u\cosh u\sin v\cos v+\cosh u\sinh u\sin v\cos v)$ is zero.
+Normalizing,
 \[
 \boxed{\begin{aligned}
 \hat{\mathbf e}_u&=
@@ -2921,12 +3291,16 @@ Differentiate the position and normalize:
 {\sqrt{\sinh^2u+\sin^2v}}.
 \end{aligned}}
 \]
-The common scale factor is $h_u=h_v=a\sqrt{\sinh^2u+\sin^2v}$;
-the dot product of the two numerators is zero.
+The common scale factor is $h_u=h_v=a\sqrt{\sinh^2u+\sin^2v}$.
 The first vector points outward and northeast, the second along an
-ellipse toward increasing $v$ (northwest) in this quadrant.
+ellipse toward increasing $v$ (northwest) in this quadrant, since for
+$u>0$, $0<v<\pi/2$ both $\sinh u\cos v$ and $\cosh u\sin v$ are
+positive.
 At limiting coordinate surfaces where a displayed denominator of the
-implicit equations vanishes, use the parametrization and its limit.
+implicit equations vanishes, use the parametrization and its limit:
+in the $xy$-plane, $u=0$ gives the segment $|x|\le a$ of the $x$-axis,
+$v=0$ and $v=\pi$ give the rays $x\ge a$ and $x\le-a$ of the $x$-axis,
+and $v=\pi/2$ and $v=3\pi/2$ give the positive and negative $y$-axis.
 
 \Needspace{5\baselineskip}
 \par\bigskip

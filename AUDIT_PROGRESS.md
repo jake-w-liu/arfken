@@ -75,7 +75,7 @@ Reader: a student who has read the corresponding section of Arfken, Weber
 
 ## Parts
 
-Progress: 6 of 54 parts done (audited and verified); 8 audited and awaiting verification.
+Progress: 6 of 54 parts done (audited and verified); 9 audited and awaiting verification.
 
 `main.pdf` last rebuilt: before the audit.
 
@@ -87,7 +87,7 @@ Progress: 6 of 54 parts done (audited and verified); 8 audited and awaiting veri
 | ch02-p1 | 2.1.1–2.2.34 | done |
 | ch02-p2 | 2.2.35–2.2.51 | pending |
 | ch03-p1 | 3.2.1–3.5.13 | done |
-| ch03-p2 | 3.6.1–3.10.2 | pending |
+| ch03-p2 | 3.6.1–3.10.2 | audited |
 | ch03-p3 | 3.10.3–3.10.37 | pending |
 | ch04-p1 | 4.1.1–4.3.12 | done |
 | ch04-p2 | 4.4.1–4.7.3 | pending |
@@ -162,3 +162,4 @@ corrected (and how), and a summary of the steps added and other cleanups.
 - **ch20-p1** (20.2.1–20.3.6) — audit: no mathematical errors found. Steps added in all 22 exercises (e.g. the explicit Fourier pairing behind the delta-sequence limits in 20.2.5–20.2.6, the Jacobi–Anger evaluation of the $J_n$ integral in 20.2.11, the cosine-inversion proof of the $K_0$ transform from Exercise 14.5.13 in 20.2.10(c), the principal-value value $1/2$ at $t=0$ in 20.2.9). Cleanups: "the manual" → "the Instructor's Manual" (20.2.9, 20.2.13, 20.3.1); part labels added in 20.2.3 and 20.2.13; a speculative "deliberately" removed in 20.2.9.
   - verification (3 independent reviews): 20 findings applied (13 distinct; error fixed: in 20.2.5 the mean value theorem for integrals, false for complex test functions, replaced by a direct continuity bound; other: Abel's theorem for integrals stated and proved in 20.2.2(c) and cited in 20.2.13, the distributional pairing argument written out in 20.2.14, the jump term of the distributional derivative made explicit in 20.3.4, the source and limit of the $I_0$ asymptotic form given in 20.2.10(d); wording and references corrected in 20.2.1, 20.2.7, 20.2.11 (statement erratum), 20.2.13, 20.2.15), 0 rejected.
 - **ch18-p1** (18.1.1–18.3.10) — audit: no mathematical errors found (all results, ANS values, the 18.3.4 convergence claims and Kramers' relation in 18.3.9 re-derived and checked numerically). Steps added in all 25 exercises (e.g. the transformation of Eq. (18.80) and the full integration-by-parts bookkeeping in 18.3.9, the $u^nv^n$ coefficient extraction and hockey-stick sum behind the Laguerre bound in 18.3.4, the $w^{(n+1)},w^{(n+2)}$ computation and uniqueness argument in 18.1.2, the Frobenius coefficient product identifying $L_n^k$ in 18.3.7; a concrete dominating function in 18.1.6). Cleanups: "the manual" → "the Instructor's Manual" in five errata; a justification added to the 18.1.1 erratum and to the 18.2.6 hint erratum ($r$ applications); ambiguous $2n!/(2\pi i)$ in 18.1.7 and $(n-j)!^2$ in 18.3.1 rewritten; $D=d/dx$ defined where used.
+- **ch03-p2** (3.6.1–3.10.2) — audit: no mathematical errors found. Steps added in 46 of 50 exercises (e.g. the derivation of $A_\varphi$ and a direct Cartesian check of the curl in 3.9.5, Green's theorem with the harmonicity of $1/r$ and both small-sphere limits in 3.9.9, the outwardness of each face normal in 3.7.1, the explicit Pauli products in 3.6.18); Levi-Civita contractions now cite Exercise 2.1.9, and part labels were added in 3.6.11 and 3.9.7. Cleanups: "the manual" → "the Instructor's Manual" (6 errata); the converse remark in 3.6.11 and the check example in the 3.6.12 erratum reworded; reasons added to the 3.6.15 and 3.8.3 errata; $\hat{\mathbf z}$ → $\hat{\mathbf e}_z$ in the 3.9.4 answer; bare exercise numbers made "Exercise N.M.K".
