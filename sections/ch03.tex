@@ -3350,22 +3350,31 @@ involvement of scale factors}.
 \solution
 At a fixed regular point, expand in the local orthonormal basis:
 $\mathbf A=\sum_iA_i\hat{\mathbf e}_i$ and
-$\mathbf B=\sum_jB_j\hat{\mathbf e}_j$. Then
+$\mathbf B=\sum_jB_j\hat{\mathbf e}_j$. Both products are bilinear,
+and the unit vectors of an orthogonal system satisfy
+$\hat{\mathbf e}_i\cdot\hat{\mathbf e}_j=\delta_{ij}$, so
 \[
 \mathbf A\cdot\mathbf B
+=\sum_{ij}A_iB_j\,\hat{\mathbf e}_i\cdot\hat{\mathbf e}_j
 =\sum_{ij}A_iB_j\delta_{ij}=\sum_iA_iB_i.
 \]
 For a right-handed basis,
+$\hat{\mathbf e}_1\times\hat{\mathbf e}_2=\hat{\mathbf e}_3$ and its
+cyclic permutations hold, the reversed products change sign, and
+$\hat{\mathbf e}_i\times\hat{\mathbf e}_i=0$; together,
 $\hat{\mathbf e}_i\times\hat{\mathbf e}_j
 =\sum_k\varepsilon_{ijk}\hat{\mathbf e}_k$, so
 \[
 \mathbf A\times\mathbf B
+=\sum_{ij}A_iB_j\,\hat{\mathbf e}_i\times\hat{\mathbf e}_j
 =\sum_{ijk}\varepsilon_{ijk}A_iB_j\hat{\mathbf e}_k.
 \]
-These are exactly the Cartesian component rules. No differentiation
-of the varying basis is involved.
+These are exactly the Cartesian component rules. Only the values of
+the unit vectors at the one point enter, never their derivatives; the
+scale factors appear only through $ds_i=h_i\,dq_i$ when $\nabla$
+differentiates along the coordinate lines, which these products do not do.
 \erratum{The usual cross-product sign assumes a right-handed unit
-basis; a left-handed ordering, such as $(u,v,z)$ in 3.10.1, contributes
+basis; a left-handed ordering, such as $(u,v,z)$ in Exercise 3.10.1, contributes
 an overall minus sign.}
 Also these formulas use physical components along unit vectors. Components
 along the unnormalized coordinate tangents
@@ -3395,22 +3404,35 @@ opposite $q_i$ faces gives
 \nabla\cdot\mathbf V=\frac1{h_1h_2h_3}
 \sum_i\partial_{q_i}(h_jh_kV_i),\qquad\{i,j,k\}=\{1,2,3\}.
 \]
-For $\mathbf V=\hat{\mathbf e}_1$, $V_1=1,V_2=V_3=0$, so
+For $\mathbf V=\hat{\mathbf e}_1$, $V_1=1,V_2=V_3=0$, so only the
+$i=1$ term survives, $\partial_{q_1}(h_2h_3\cdot1)$, and
 $\boxed{\nabla\cdot\hat{\mathbf e}_1=
 (h_1h_2h_3)^{-1}\partial_{q_1}(h_2h_3)}$.
-For the curl, use $\hat{\mathbf e}_1=h_1\nabla q_1$:
+For the curl, the gradient formula
+$\nabla\psi=\sum_j\hat{\mathbf e}_jh_j^{-1}\partial_{q_j}\psi$ with
+$\psi=q_1$ gives $\nabla q_1=\hat{\mathbf e}_1/h_1$, i.e.\
+$\hat{\mathbf e}_1=h_1\nabla q_1$. By the product rule
+$\nabla\times(g\mathbf V)=\nabla g\times\mathbf V+g\nabla\times\mathbf V$
+(Exercise 3.6.4) and $\nabla\times\nabla q_1=0$ (Exercise 3.6.10),
 \[
 \nabla\times\hat{\mathbf e}_1=\nabla h_1\times\nabla q_1
 =\left(\sum_j\frac{\hat{\mathbf e}_j}{h_j}\partial_{q_j}h_1\right)
 \times\frac{\hat{\mathbf e}_1}{h_1}.
 \]
-The $j=1$ term vanishes. In a right-handed basis the other two terms give
+The $j=1$ term vanishes because $\hat{\mathbf e}_1\times\hat{\mathbf e}_1=0$.
+In a right-handed basis
+$\hat{\mathbf e}_2\times\hat{\mathbf e}_1=-\hat{\mathbf e}_3$ and
+$\hat{\mathbf e}_3\times\hat{\mathbf e}_1=\hat{\mathbf e}_2$, so the
+other two terms give
 \[
 \boxed{\nabla\times\hat{\mathbf e}_1=
 \frac1{h_1}\left[
 \frac{\hat{\mathbf e}_2}{h_3}\partial_{q_3}h_1
 -\frac{\hat{\mathbf e}_3}{h_2}\partial_{q_2}h_1\right]}.
 \]
+For a left-handed ordering both cross products, and hence the result
+of (b), change sign; this is why the note under the statement asks
+for a right-handed chart.
 The basis direction can vary even though its magnitude is fixed.
 
 \Needspace{5\baselineskip}
@@ -3439,48 +3461,67 @@ and
 \erratum{Assume the coordinates form a regular orthogonal chart and $h_i>0$; arbitrary curvilinear coordinates need not be orthogonal.}
 \solution
 On a regular orthogonal chart, the tangent to increasing $q_i$ is
-$\mathbf r_i=\partial_{q_i}\mathbf r$.
-Thus
+$\mathbf r_i=\partial_{q_i}\mathbf r$, and $\partial_i$ below means
+$\partial/\partial q_i$. Since
+$d\mathbf r=\sum_i\mathbf r_i\,dq_i$, the system is orthogonal exactly
+when $\mathbf r_i\cdot\mathbf r_j=0$ for $i\ne j$ (no cross terms in
+$ds^2=d\mathbf r\cdot d\mathbf r$), so the vectors
+$\hat{\mathbf e}_i=\mathbf r_i/h_i$ are mutually orthogonal. Requiring
+$\hat{\mathbf e}_i\cdot\hat{\mathbf e}_i=\mathbf r_i\cdot\mathbf r_i/h_i^2=1$
+gives
 \[
-h_i=|\mathbf r_i|=\sqrt{\sum_{a=x,y,z}(\partial_{q_i}a)^2},
-\qquad \hat{\mathbf e}_i=\mathbf r_i/h_i.
+h_i^2=\mathbf r_i\cdot\mathbf r_i
+=\Bigl(\frac{\partial x}{\partial q_i}\Bigr)^2
++\Bigl(\frac{\partial y}{\partial q_i}\Bigr)^2
++\Bigl(\frac{\partial z}{\partial q_i}\Bigr)^2,
 \]
-The normalization follows because
-$\hat{\mathbf e}_i^2=|\mathbf r_i|^2/h_i^2=1$; orthogonality of
-the coordinate tangents gives $\hat{\mathbf e}_i\cdot\hat{\mathbf e}_j=0$
-for $i\ne j$.
+in agreement with Eq.~(3.131); then
+$ds^2=\sum_ih_i^2dq_i^2$, so these $h_i$ are the scale factors.
 
-To derive the basis derivatives, differentiate
-$\mathbf r_i=h_i\hat{\mathbf e}_i$ and commute mixed partials:
+To derive the basis derivatives, write
+$\mathbf r_{ij}=\partial_j\mathbf r_i=\partial_i\partial_j\mathbf r$,
+which is symmetric in $i,j$ because mixed partials commute.
+Differentiating $\mathbf r_i=h_i\hat{\mathbf e}_i$ gives
+$\mathbf r_{ij}=(\partial_jh_i)\hat{\mathbf e}_i+h_i\partial_j\hat{\mathbf e}_i$,
+so $\mathbf r_{ij}=\mathbf r_{ji}$ reads
 \[
 (\partial_jh_i)\hat{\mathbf e}_i+h_i\partial_j\hat{\mathbf e}_i
 =(\partial_ih_j)\hat{\mathbf e}_j+h_j\partial_i\hat{\mathbf e}_j.
 \tag{*}
 \]
-Normalization gives $\hat{\mathbf e}_i\cdot\partial_j\hat{\mathbf e}_i=0$.
-For three distinct indices $i,j,k$, (*) and differentiated orthogonality
-successively give
+Differentiating $\hat{\mathbf e}_i\cdot\hat{\mathbf e}_i=1$ with
+respect to $q_j$ gives $\hat{\mathbf e}_i\cdot\partial_j\hat{\mathbf e}_i=0$.
+For three distinct indices $i,j,k$, differentiate the orthogonality
+relations $\mathbf r_i\cdot\mathbf r_k=0$, $\mathbf r_i\cdot\mathbf r_j=0$,
+$\mathbf r_j\cdot\mathbf r_k=0$ with respect to $q_j$, $q_k$, $q_i$,
+respectively; for example the first gives
+$\mathbf r_{ij}\cdot\mathbf r_k+\mathbf r_i\cdot\mathbf r_{kj}=0$.
+With the symmetry of $\mathbf r_{ij}$ the three results give, in turn,
 \[
-\begin{aligned}
-h_i\hat{\mathbf e}_k\cdot\partial_j\hat{\mathbf e}_i
-&=h_j\hat{\mathbf e}_k\cdot\partial_i\hat{\mathbf e}_j
-=-h_j\hat{\mathbf e}_j\cdot\partial_i\hat{\mathbf e}_k\\
-&=-h_k\hat{\mathbf e}_j\cdot\partial_k\hat{\mathbf e}_i
-=h_k\hat{\mathbf e}_i\cdot\partial_k\hat{\mathbf e}_j\\
-&=h_i\hat{\mathbf e}_i\cdot\partial_j\hat{\mathbf e}_k
-=-h_i\hat{\mathbf e}_k\cdot\partial_j\hat{\mathbf e}_i.
-\end{aligned}
+\mathbf r_k\cdot\mathbf r_{ij}
+=-\mathbf r_i\cdot\mathbf r_{jk}
+=\mathbf r_j\cdot\mathbf r_{ik}
+=-\mathbf r_k\cdot\mathbf r_{ij},
 \]
-That component is zero. Dotting (*) with $\hat{\mathbf e}_j$ for
-$i\ne j$ gives the only remaining component:
+so $\mathbf r_k\cdot\mathbf r_{ij}=0$. Dotting the expansion of
+$\mathbf r_{ij}$ with $\mathbf r_k=h_k\hat{\mathbf e}_k$ and using
+$\hat{\mathbf e}_k\cdot\hat{\mathbf e}_i=0$ gives
+$\mathbf r_k\cdot\mathbf r_{ij}=h_kh_i\,\hat{\mathbf e}_k\cdot\partial_j\hat{\mathbf e}_i$;
+hence $\hat{\mathbf e}_k\cdot\partial_j\hat{\mathbf e}_i=0$.
+Dotting (*) with $\hat{\mathbf e}_j$ for $i\ne j$, and using
+$\hat{\mathbf e}_j\cdot\hat{\mathbf e}_i=0$ and
+$\hat{\mathbf e}_j\cdot\partial_i\hat{\mathbf e}_j=0$, gives the only
+remaining component:
 $h_i\hat{\mathbf e}_j\cdot\partial_j\hat{\mathbf e}_i=\partial_i h_j$.
 Therefore
 \[
 \boxed{\partial_j\hat{\mathbf e}_i
 =\hat{\mathbf e}_j\,\frac{\partial_i h_j}{h_i}\quad(i\ne j)}.
 \]
-Finally differentiate $\hat{\mathbf e}_i\cdot\hat{\mathbf e}_j=0$
-with respect to $q_i$ and use this formula:
+Finally, $\partial_i\hat{\mathbf e}_i$ has no $\hat{\mathbf e}_i$
+component. For $j\ne i$ differentiate $\hat{\mathbf e}_i\cdot\hat{\mathbf e}_j=0$
+with respect to $q_i$ and use the boxed formula with $i$ and $j$
+interchanged, $\partial_i\hat{\mathbf e}_j=\hat{\mathbf e}_i(\partial_jh_i)/h_j$:
 $\hat{\mathbf e}_j\cdot\partial_i\hat{\mathbf e}_i
 =-\hat{\mathbf e}_i\cdot\partial_i\hat{\mathbf e}_j
 =-(\partial_jh_i)/h_j$.
@@ -3508,15 +3549,21 @@ Its coordinate derivatives are
 \partial_\varphi\mathbf r=\rho(-\sin\varphi,\cos\varphi,0),\quad
 \partial_z\mathbf r=(0,0,1).
 \]
-Their lengths are $1,\rho,1$ for $\rho>0$.
+Their lengths are
+$(\cos^2\varphi+\sin^2\varphi)^{1/2}=1$,
+$\rho(\sin^2\varphi+\cos^2\varphi)^{1/2}=\rho$, and $1$, for $\rho>0$.
 Dividing by these lengths gives
 \[
 \boxed{\hat{\mathbf e}_\rho=(\cos\varphi,\sin\varphi,0),\quad
 \hat{\mathbf e}_\varphi=(-\sin\varphi,\cos\varphi,0),\quad
 \hat{\mathbf e}_z=(0,0,1)}.
 \]
-Their dot products are $\delta_{ij}$ and
-$\hat{\mathbf e}_\rho\times\hat{\mathbf e}_\varphi=\hat{\mathbf e}_z$.
+Their dot products are $\delta_{ij}$ (for instance
+$\hat{\mathbf e}_\rho\cdot\hat{\mathbf e}_\varphi
+=-\cos\varphi\sin\varphi+\sin\varphi\cos\varphi=0$), and
+$\hat{\mathbf e}_\rho\times\hat{\mathbf e}_\varphi
+=(0,0,\cos^2\varphi+\sin^2\varphi)=\hat{\mathbf e}_z$, so the
+ordering $(\rho,\varphi,z)$ is right-handed.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3531,18 +3578,25 @@ $\begin{aligned}
 \hat{\mathbf{e}}_{z}&=\hat{\mathbf{e}}_{z}.
 \end{aligned}$
 \solution
-Take the combinations of the vectors in 3.10.6:
+Exercise 3.10.6 gives $\hat{\mathbf e}_\rho,\hat{\mathbf e}_\varphi,
+\hat{\mathbf e}_z$ as the rows of an orthogonal matrix acting on
+$(\hat{\mathbf e}_x,\hat{\mathbf e}_y,\hat{\mathbf e}_z)$; its inverse is
+its transpose, whose first two rows are the first two columns
+$(\cos\varphi,-\sin\varphi,0)$ and $(\sin\varphi,\cos\varphi,0)$ of
+the original matrix. These rows give the coefficients of the
+combinations, which check directly:
 \[
 \begin{aligned}
 \cos\varphi\,\hat{\mathbf e}_\rho-\sin\varphi\,\hat{\mathbf e}_\varphi
-&=(\cos^2\varphi+\sin^2\varphi,0,0)=\hat{\mathbf e}_x,\\
+&=(\cos^2\varphi+\sin^2\varphi,\ \cos\varphi\sin\varphi
+-\sin\varphi\cos\varphi,\ 0)=\hat{\mathbf e}_x,\\
 \sin\varphi\,\hat{\mathbf e}_\rho+\cos\varphi\,\hat{\mathbf e}_\varphi
-&=(0,\sin^2\varphi+\cos^2\varphi,0)=\hat{\mathbf e}_y.
+&=(\sin\varphi\cos\varphi-\cos\varphi\sin\varphi,\
+\sin^2\varphi+\cos^2\varphi,\ 0)=\hat{\mathbf e}_y.
 \end{aligned}
 \]
 Together with unchanged $\hat{\mathbf e}_z$, these are the requested
-inverse formulas. The inverse matrix is the transpose of the orthogonal
-matrix in 3.10.6.
+inverse formulas.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3587,24 +3641,35 @@ V_\varphi\hat{\mathbf e}_\varphi+V_z\hat{\mathbf e}_z$.
 The basis has no $\rho$ or $z$ dependence, giving
 $\hat{\mathbf e}_\rho\cdot\partial_\rho\mathbf V=\partial_\rho V_\rho$
 and $\hat{\mathbf e}_z\cdot\partial_z\mathbf V=\partial_zV_z$.
-For the azimuthal derivative, differentiate coefficients and basis:
+For the azimuthal derivative, differentiate coefficients and basis,
+using $\partial_\varphi\hat{\mathbf e}_\rho=\hat{\mathbf e}_\varphi$ and
+$\partial_\varphi\hat{\mathbf e}_\varphi=-\hat{\mathbf e}_\rho$
+(Exercise 3.10.8):
 \[
 \partial_\varphi\mathbf V
 =(\partial_\varphi V_\rho-V_\varphi)\hat{\mathbf e}_\rho
 +(\partial_\varphi V_\varphi+V_\rho)\hat{\mathbf e}_\varphi
 +(\partial_\varphi V_z)\hat{\mathbf e}_z.
 \]
-Taking the specified dot product yields
+The operator gives
+$\nabla\cdot\mathbf V=\hat{\mathbf e}_\rho\cdot\partial_\rho\mathbf V
++\rho^{-1}\hat{\mathbf e}_\varphi\cdot\partial_\varphi\mathbf V
++\hat{\mathbf e}_z\cdot\partial_z\mathbf V$, and with
+$\hat{\mathbf e}_\varphi\cdot\partial_\varphi\mathbf V
+=\partial_\varphi V_\varphi+V_\rho$ from the last display, the three
+dot products yield
 \[
 \boxed{\nabla\cdot\mathbf V
 =\partial_\rho V_\rho+\frac{V_\rho}{\rho}
 +\frac1\rho\partial_\varphi V_\varphi+\partial_zV_z
 =\frac1\rho\partial_\rho(\rho V_\rho)
-+\frac1\rho\partial_\varphi V_\varphi+\partial_zV_z}.
++\frac1\rho\partial_\varphi V_\varphi+\partial_zV_z},
 \]
+where $\rho^{-1}\partial_\rho(\rho V_\rho)=\partial_\rho V_\rho+V_\rho/\rho$.
+This agrees with Eq.~(3.148).
 The $V_\rho/\rho$ term is exactly the contribution of the varying basis.
 
-\erratum{The manual, p.~51, calls the exercise's operator incorrect. The textbook explicitly says that it acts on the unit vectors as well as the components, so the operator as stated is correct: the basis derivative supplies exactly the $V_\rho/\rho$ term computed above.}
+\erratum{The Instructor's Manual, p.~51, calls the exercise's operator incorrect. The textbook explicitly says that it acts on the unit vectors as well as the components, so the operator as stated is correct: the basis derivative supplies exactly the $V_\rho/\rho$ term computed above.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3618,16 +3683,27 @@ The $V_\rho/\rho$ term is exactly the contribution of the varying basis.
   \]
 \end{enumerate}
 \solution
-Since $x=\rho\cos\varphi,y=\rho\sin\varphi$,
-$x\hat{\mathbf e}_x+y\hat{\mathbf e}_y=\rho\hat{\mathbf e}_\rho$,
+\textbf{(a)} Since $x=\rho\cos\varphi,y=\rho\sin\varphi$,
+$x\hat{\mathbf e}_x+y\hat{\mathbf e}_y
+=\rho(\cos\varphi\,\hat{\mathbf e}_x+\sin\varphi\,\hat{\mathbf e}_y)
+=\rho\hat{\mathbf e}_\rho$ by Exercise 3.10.6,
 so $\mathbf r=\rho\hat{\mathbf e}_\rho+z\hat{\mathbf e}_z$.
-Its physical cylindrical components are $(\rho,0,z)$.
-Therefore
+
+\textbf{(b)} The physical cylindrical components of $\mathbf r$ are
+$(V_\rho,V_\varphi,V_z)=(\rho,0,z)$.
+Therefore Eq.~(3.148) gives
 \[
 \nabla\cdot\mathbf r=\frac1\rho\partial_\rho(\rho^2)
 +\frac1\rho\partial_\varphi0+\partial_zz=2+0+1=3.
 \]
-For the curl,
+For the curl, expanding the determinant form of the curl with
+$h_\rho=1$, $h_\varphi=\rho$, $h_z=1$ gives the components
+\[
+(\nabla\times\mathbf V)_\rho=\frac1\rho\partial_\varphi V_z-\partial_zV_\varphi,\quad
+(\nabla\times\mathbf V)_\varphi=\partial_zV_\rho-\partial_\rho V_z,\quad
+(\nabla\times\mathbf V)_z=\frac1\rho[\partial_\rho(\rho V_\varphi)-\partial_\varphi V_\rho].
+\]
+For $\mathbf V=\mathbf r$,
 \[
 (\nabla\times\mathbf r)_\rho=\rho^{-1}\partial_\varphi z-\partial_z0=0,
 \quad
@@ -3654,15 +3730,24 @@ Thus $\boxed{\nabla\times\mathbf r=0}$.
 \emph{Note.}~The Cartesian unit vectors $\hat{\mathbf{e}}_{x}$,
 $\hat{\mathbf{e}}_{y}$, and $\hat{\mathbf{e}}_{z}$ remain constant.
 \solution
-Under $(x,y,z)\mapsto(-x,-y,-z)$,
+\textbf{(a)} Under $(x,y,z)\mapsto(-x,-y,-z)$,
 $\rho=\sqrt{x^2+y^2}$ is unchanged. Both $\cos\varphi=x/\rho$
-and $\sin\varphi=y/\rho$ change sign, so
-$\varphi\mapsto\varphi+\pi$ modulo $2\pi$ and $z\mapsto-z$.
-Substituting this angle into the unit-vector functions gives
+and $\sin\varphi=y/\rho$ change sign. Since
+$\cos(\varphi\pm\pi)=-\cos\varphi$, $\sin(\varphi\pm\pi)=-\sin\varphi$,
+and the pair $(\cos\varphi,\sin\varphi)$ fixes the angle modulo $2\pi$,
+$\varphi\mapsto\varphi\pm\pi$ (the two signs give the same point);
+and $z\mapsto-z$.
+
+\textbf{(b)} Substituting this angle into the unit-vector functions of
+Exercise 3.10.6 gives
 \[
-\hat{\mathbf e}_\rho(\varphi+\pi)=-\hat{\mathbf e}_\rho(\varphi),\quad
-\hat{\mathbf e}_\varphi(\varphi+\pi)=-\hat{\mathbf e}_\varphi(\varphi),\quad
-\hat{\mathbf e}_z(\varphi+\pi)=\hat{\mathbf e}_z.
+\begin{aligned}
+\hat{\mathbf e}_\rho(\varphi+\pi)&=(-\cos\varphi,-\sin\varphi,0)
+=-\hat{\mathbf e}_\rho(\varphi),\\
+\hat{\mathbf e}_\varphi(\varphi+\pi)&=(\sin\varphi,-\cos\varphi,0)
+=-\hat{\mathbf e}_\varphi(\varphi),\\
+\hat{\mathbf e}_z(\varphi+\pi)&=(0,0,1)=\hat{\mathbf e}_z.
+\end{aligned}
 \]
 This is evaluation of the curvilinear basis at the reflected point
 relative to fixed Cartesian unit vectors, as specified in the note.
@@ -3682,21 +3767,28 @@ cylindrical coordinates,
 (a)\enspace$\mathbf{v}=\hat{\mathbf{e}}_{\varphi}\omega\rho$\quad
 (b)\enspace$\nabla\times\mathbf{v}=2\boldsymbol{\omega}$.
 \solution
-With $\boldsymbol\omega=\omega\hat{\mathbf e}_z$ and
-$\mathbf r=\rho\hat{\mathbf e}_\rho+z\hat{\mathbf e}_z$,
+\textbf{(a)} With $\boldsymbol\omega=\omega\hat{\mathbf e}_z$ and
+$\mathbf r=\rho\hat{\mathbf e}_\rho+z\hat{\mathbf e}_z$
+(Exercise 3.10.10), and the right-handed products
+$\hat{\mathbf e}_z\times\hat{\mathbf e}_\rho=\hat{\mathbf e}_\varphi$,
+$\hat{\mathbf e}_z\times\hat{\mathbf e}_z=0$,
 \[
 \mathbf v=\omega\hat{\mathbf e}_z\times
 (\rho\hat{\mathbf e}_\rho+z\hat{\mathbf e}_z)
+=\omega\rho\,\hat{\mathbf e}_z\times\hat{\mathbf e}_\rho
 =\boxed{\omega\rho\hat{\mathbf e}_\varphi}.
 \]
-Its components are $(0,\omega\rho,0)$ and are independent of
-$z,\varphi$. Hence both transverse curl components vanish, while
+\textbf{(b)} Its components are $(v_\rho,v_\varphi,v_z)=(0,\omega\rho,0)$
+and are independent of $z,\varphi$. Hence, with the cylindrical curl
+components of Exercise 3.10.10,
+$(\nabla\times\mathbf v)_\rho=\rho^{-1}\partial_\varphi0-\partial_z(\omega\rho)=0$
+and $(\nabla\times\mathbf v)_\varphi=\partial_z0-\partial_\rho0=0$, while
 \[
 (\nabla\times\mathbf v)_z
-=\frac1\rho\partial_\rho(\rho\,\omega\rho)
-=2\omega.
+=\frac1\rho[\partial_\rho(\rho\,\omega\rho)-\partial_\varphi0]
+=\frac{2\omega\rho}{\rho}=2\omega.
 \]
-Thus $\boxed{\nabla\times\mathbf v=2\boldsymbol\omega}$.
+Thus $\boxed{\nabla\times\mathbf v=2\omega\hat{\mathbf e}_z=2\boldsymbol\omega}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3719,22 +3811,32 @@ $\begin{aligned}[t]
 
 \emph{Note.}~$\dot{\rho}=d\rho/dt$, $\ddot{\rho}=d^{2}\rho/dt^{2}$, and so on.
 \solution
-Along the trajectory, the basis derivatives are
-$\dot{\hat{\mathbf e}}_\rho=\dot\varphi\hat{\mathbf e}_\varphi$,
-$\dot{\hat{\mathbf e}}_\varphi=-\dot\varphi\hat{\mathbf e}_\rho$,
+Along the trajectory the unit vectors depend on $t$ only through
+$\varphi(t)$, so by the chain rule and Exercise 3.10.8 the basis
+derivatives are
+$\dot{\hat{\mathbf e}}_\rho=\dot\varphi\,\partial_\varphi\hat{\mathbf e}_\rho
+=\dot\varphi\hat{\mathbf e}_\varphi$,
+$\dot{\hat{\mathbf e}}_\varphi=\dot\varphi\,\partial_\varphi\hat{\mathbf e}_\varphi
+=-\dot\varphi\hat{\mathbf e}_\rho$,
 and $\dot{\hat{\mathbf e}}_z=0$.
-Differentiate $\mathbf r=\rho\hat{\mathbf e}_\rho+z\hat{\mathbf e}_z$:
+(Differentiating the hint's Cartesian form directly gives the same:
+$\frac d{dt}(\cos\varphi,\sin\varphi,0)=\dot\varphi(-\sin\varphi,\cos\varphi,0)$.)
+Differentiate $\mathbf r=\rho\hat{\mathbf e}_\rho+z\hat{\mathbf e}_z$
+by the product rule:
 \[
 \mathbf v=\dot\rho\hat{\mathbf e}_\rho+
 \rho\dot\varphi\hat{\mathbf e}_\varphi+\dot z\hat{\mathbf e}_z.
 \]
-Differentiate each term once more:
+Differentiate each term once more, again with
+$\dot{\hat{\mathbf e}}_\rho=\dot\varphi\hat{\mathbf e}_\varphi$ and
+$\dot{\hat{\mathbf e}}_\varphi=-\dot\varphi\hat{\mathbf e}_\rho$:
 \[
 \begin{aligned}
-\mathbf a={}&\ddot\rho\hat{\mathbf e}_\rho+
-\dot\rho\dot\varphi\hat{\mathbf e}_\varphi
-+(\dot\rho\dot\varphi+\rho\ddot\varphi)\hat{\mathbf e}_\varphi\\
-&-\rho\dot\varphi^2\hat{\mathbf e}_\rho+\ddot z\hat{\mathbf e}_z.
+\mathbf a={}&\underbrace{\ddot\rho\hat{\mathbf e}_\rho+
+\dot\rho\dot\varphi\hat{\mathbf e}_\varphi}_{d(\dot\rho\hat{\mathbf e}_\rho)/dt}
++\underbrace{(\dot\rho\dot\varphi+\rho\ddot\varphi)\hat{\mathbf e}_\varphi
+-\rho\dot\varphi^2\hat{\mathbf e}_\rho}_{d(\rho\dot\varphi\hat{\mathbf e}_\varphi)/dt}
++\ddot z\hat{\mathbf e}_z.
 \end{aligned}
 \]
 Collecting coefficients gives
@@ -3759,7 +3861,8 @@ result will hold for any vector confined to a surface $q_{3}=\text{constant}$
 as long as the products $h_{1}V_{1}$ and $h_{2}V_{2}$ are each independent of
 $q_{3}$.
 \solution
-Use $V_z=0$ and the absence of $z$ dependence:
+Use the cylindrical curl components of Exercise 3.10.10 with $V_z=0$
+and the absence of $z$ dependence:
 \[
 (\nabla\times\mathbf V)_\rho=\rho^{-1}\partial_\varphi V_z-\partial_zV_\varphi=0,
 \qquad
@@ -3771,16 +3874,25 @@ The remaining component need not vanish:
 \frac{\hat{\mathbf e}_z}{\rho}
 [\partial_\rho(\rho V_\varphi)-\partial_\varphi V_\rho]}.
 \]
-More generally, when $V_3=0$ the first two orthogonal-coordinate
-curl components are
+More generally, expanding the determinant form of the curl in
+orthogonal coordinates gives the first two components
+\[
+(\nabla\times\mathbf V)_1=\frac{\partial_2(h_3V_3)-\partial_3(h_2V_2)}{h_2h_3},
+\qquad
+(\nabla\times\mathbf V)_2=\frac{\partial_3(h_1V_1)-\partial_1(h_3V_3)}{h_3h_1},
+\]
+with $\partial_i=\partial/\partial q_i$. For a vector confined to the
+surfaces $q_3=\text{constant}$, $V_3=0$, and these reduce to
 \[
 -(h_2h_3)^{-1}\partial_3(h_2V_2),\qquad
 (h_3h_1)^{-1}\partial_3(h_1V_1).
 \]
-Both vanish under the conditions
-stated in the problem, leaving only component 3.
+Both vanish when $h_1V_1$ and $h_2V_2$ are independent of $q_3$, as
+stated in the problem, leaving only component 3. (Cylindrical
+coordinates with $q_3=z$, $h_1V_1=V_\rho$, $h_2V_2=\rho V_\varphi$ are
+the case above.)
 
-\erratum{For this $V_z=0$ field, the transverse curl components are $-\partial_zV_\varphi$ and $\partial_zV_\rho$. The manual, p.~52, gives the first with the wrong sign and the second with an extra factor $1/\rho$. Both are zero here because the components are independent of $z$, so the conclusion survives those errors.}
+\erratum{For this $V_z=0$ field, the transverse curl components are $-\partial_zV_\varphi$ and $\partial_zV_\rho$. The Instructor's Manual, p.~52, gives the first with the wrong sign and the second with an extra factor $1/\rho$. Both are zero here because the components are independent of $z$, so the conclusion survives those errors.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3794,8 +3906,12 @@ Show that the magnetic induction $\mathbf{B}$ is given by
 \mathbf{B}=\hat{\mathbf{e}}_{\varphi}\frac{\mu I}{2\pi\rho}.
 \]
 \solution
-Let $K=\mu I/(2\pi)$, so $A_z=-K\ln\rho$, $A_\rho=A_\varphi=0$.
-The $\rho$ and $z$ curl components vanish. The remaining one is
+Let $K=\mu I/(2\pi)$, so $A_z=K\ln(1/\rho)=-K\ln\rho$, $A_\rho=A_\varphi=0$.
+With the cylindrical curl components of Exercise 3.10.10,
+$B_\rho=\rho^{-1}\partial_\varphi A_z-\partial_zA_\varphi=0$ because
+$A_z$ does not depend on $\varphi$, and
+$B_z=\rho^{-1}[\partial_\rho(\rho A_\varphi)-\partial_\varphi A_\rho]=0$.
+The remaining one is
 \[
 B_\varphi=\partial_zA_\rho-\partial_\rho A_z
 =0-(-K/\rho)=K/\rho.
@@ -3822,23 +3938,39 @@ dimensionless and adds only a constant to $A_z$, leaving $\mathbf B$ unchanged.
 \item[(d)] How do you reconcile the results of (b) and (c)?
 \end{enumerate}
 \solution
-\textbf{(a)} Substitute $x=\rho\cos\varphi,y=\rho\sin\varphi$:
+\textbf{(a)} Substitute $x=\rho\cos\varphi,y=\rho\sin\varphi$, so
+$x^2+y^2=\rho^2$:
 \[
-\mathbf F=\frac1\rho(-\sin\varphi,\cos\varphi,0)
+\mathbf F=\frac{(-\rho\sin\varphi,\rho\cos\varphi,0)}{\rho^2}
+=\frac1\rho(-\sin\varphi,\cos\varphi,0)
 =\boxed{\hat{\mathbf e}_\varphi/\rho}.
 \]
-\textbf{(b)} For $\rho>0$, the transverse curl components vanish,
-and $(\nabla\times\mathbf F)_z=\rho^{-1}\partial_\rho(\rho/\rho)=0$.
-\textbf{(c)} On the unit circle,
-$d\mathbf r=\hat{\mathbf e}_\varphi d\varphi$, so
-$\boxed{W=\int_0^{2\pi}d\varphi=2\pi}$.
+\textbf{(b)} For $\rho>0$, $F_\rho=F_z=0$ and $F_\varphi=1/\rho$ depends
+on $\rho$ only. With the cylindrical curl components of
+Exercise 3.10.10, the transverse components
+$\rho^{-1}\partial_\varphi F_z-\partial_zF_\varphi$ and
+$\partial_zF_\rho-\partial_\rho F_z$ vanish,
+and $(\nabla\times\mathbf F)_z=\rho^{-1}[\partial_\rho(\rho\cdot\rho^{-1})
+-\partial_\varphi F_\rho]=\rho^{-1}\partial_\rho1=0$.
+So $\boxed{\nabla\times\mathbf F=0}$ for $\rho>0$.
+\textbf{(c)} In cylindrical coordinates
+$d\mathbf r=\hat{\mathbf e}_\rho d\rho+\hat{\mathbf e}_\varphi\rho\,d\varphi
++\hat{\mathbf e}_z dz$; on the unit circle ($\rho=1$, $z=0$)
+$d\mathbf r=\hat{\mathbf e}_\varphi d\varphi$ and
+$\mathbf F\cdot d\mathbf r=d\varphi$, so
+$\boxed{W=\oint\mathbf F\cdot d\mathbf r=\int_0^{2\pi}d\varphi=2\pi}$.
 \textbf{(d)} The field is undefined on the axis. A disk spanning
 the circle crosses that singularity, so Stokes' theorem cannot
 use the ordinary zero curl over that disk. On an annulus excluding
 the axis, the outer counterclockwise circulation $2\pi$ and the
 inner clockwise circulation $-2\pi$ cancel, in full agreement with
-zero curl. Locally $\mathbf F=\nabla\varphi$, but $\varphi$ is not
-a global single-valued potential around the axis.
+zero curl. (The calculation in (c) gives $2\pi$ on a circle of any
+radius $a$, since $\mathbf F\cdot d\mathbf r=a^{-1}\,a\,d\varphi$.)
+Locally $\mathbf F=\nabla\varphi$, since
+$\nabla\varphi=\hat{\mathbf e}_\varphi\rho^{-1}\partial_\varphi\varphi
+=\hat{\mathbf e}_\varphi/\rho$, but $\varphi$ is not
+a global single-valued potential around the axis: it increases by
+$2\pi$ once around, which is the circulation found in (c).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3851,7 +3983,10 @@ $\mathbf{B}=\hat{\mathbf{e}}_{\varphi}B_{\varphi}(\rho)$, show that
 =-\hat{\mathbf{e}}_{\rho}B_{\varphi}^{2}/\rho.
 \]
 \solution
-For $\mathbf B=B_\varphi(\rho)\hat{\mathbf e}_\varphi$,
+For $\mathbf B=B_\varphi(\rho)\hat{\mathbf e}_\varphi$, dotting into
+$\nabla=\hat{\mathbf e}_\rho\partial_\rho
++\hat{\mathbf e}_\varphi\rho^{-1}\partial_\varphi+\hat{\mathbf e}_z\partial_z$
+keeps only the middle term, so
 the directional derivative operator is
 $\mathbf B\cdot\nabla=(B_\varphi/\rho)\partial_\varphi$.
 It must differentiate the basis as well as the scalar component:
@@ -3863,7 +3998,8 @@ B_\varphi\partial_\varphi\hat{\mathbf e}_\varphi\right]
 =\boxed{-\frac{B_\varphi^2}{\rho}\hat{\mathbf e}_\rho}.
 \]
 Here $\partial_\varphi B_\varphi=0$ and
-$\partial_\varphi\hat{\mathbf e}_\varphi=-\hat{\mathbf e}_\rho$.
+$\partial_\varphi\hat{\mathbf e}_\varphi=-\hat{\mathbf e}_\rho$
+(Exercise 3.10.8).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3881,8 +4017,17 @@ $\begin{aligned}
 \solution
 The position map is
 $\mathbf r=r(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$.
-Its $r,\theta,\varphi$ derivatives have lengths $1,r,r\sin\theta$
-on a regular patch $r>0$, $0<\theta<\pi$.
+Its $r,\theta,\varphi$ derivatives are
+\[
+\begin{aligned}
+\partial_r\mathbf r&=(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta),\\
+\partial_\theta\mathbf r&=r(\cos\theta\cos\varphi,\cos\theta\sin\varphi,-\sin\theta),\\
+\partial_\varphi\mathbf r&=r\sin\theta(-\sin\varphi,\cos\varphi,0),
+\end{aligned}
+\]
+with lengths $1,r,r\sin\theta$ on a regular patch $r>0$, $0<\theta<\pi$
+(for the first two, the squared components sum to
+$\sin^2\theta+\cos^2\theta=1$ after $\cos^2\varphi+\sin^2\varphi=1$).
 Normalize each derivative to obtain
 \[
 \boxed{\begin{aligned}
@@ -3891,8 +4036,17 @@ Normalize each derivative to obtain
 \hat{\mathbf e}_\varphi&=(-\sin\varphi,\cos\varphi,0).
 \end{aligned}}
 \]
-Their norms are one, their pairwise dot products vanish, and
-$\hat{\mathbf e}_r\times\hat{\mathbf e}_\theta=\hat{\mathbf e}_\varphi$.
+Their norms are one, their pairwise dot products vanish (for instance
+$\hat{\mathbf e}_r\cdot\hat{\mathbf e}_\theta
+=\sin\theta\cos\theta(\cos^2\varphi+\sin^2\varphi)-\cos\theta\sin\theta=0$),
+and
+\[
+\hat{\mathbf e}_r\times\hat{\mathbf e}_\theta
+=\bigl(-\sin\varphi(\sin^2\theta+\cos^2\theta),\
+\cos\varphi(\cos^2\theta+\sin^2\theta),\ 0\bigr)
+=\hat{\mathbf e}_\varphi,
+\]
+so $(r,\theta,\varphi)$ is right-handed.
 At the polar axis, the angular basis requires a choice of azimuthal
 limit and is not a unique coordinate basis.
 
@@ -3917,8 +4071,12 @@ Any vector is the sum of its projections on an orthonormal basis.
 For example,
 $\hat{\mathbf e}_x=\sum_{j=r,\theta,\varphi}
 (\hat{\mathbf e}_x\cdot\hat{\mathbf e}_j)\hat{\mathbf e}_j$.
-The projection coefficients are precisely the $x$ entries in 3.10.18.
-Repeating for $y,z$ gives
+The projection coefficients
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_r=\sin\theta\cos\varphi$,
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_\theta=\cos\theta\cos\varphi$,
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_\varphi=-\sin\varphi$
+are precisely the $x$ components of the vectors in Exercise 3.10.18.
+Repeating with their $y$ and $z$ components gives
 \[
 \boxed{\begin{aligned}
 \hat{\mathbf e}_x&=\sin\theta\cos\varphi\,\hat{\mathbf e}_r
@@ -3928,7 +4086,9 @@ Repeating for $y,z$ gives
 \hat{\mathbf e}_z&=\cos\theta\,\hat{\mathbf e}_r-\sin\theta\,\hat{\mathbf e}_\theta.
 \end{aligned}}
 \]
-Thus the inverse change-of-basis matrix is the transpose.
+Thus the inverse change-of-basis matrix is the transpose of the matrix
+whose rows are the vectors of Exercise 3.10.18 (the matrix $T$ of
+Exercise 3.10.20).
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -3943,15 +4103,27 @@ Thus the inverse change-of-basis matrix is the transpose.
   transformation matrix and determine whether it is orthogonal.
 \end{enumerate}
 \solution
-\textbf{(a)} \erratum{The impossible mapping is by one constant
-matrix valid for all positions.}
-The radius $r=\sqrt{x^2+y^2+z^2}$ is not a linear function:
-$r(-\mathbf x)=r(\mathbf x)$, whereas a linear first component
-would satisfy $(B(-\mathbf x))_1=-(B\mathbf x)_1$.
-For $\mathbf x\ne0$ these cannot both equal its positive radius.
-The angular coordinates are nonlinear as well.
+\textbf{(a)} \erratum{The qualification ``one constant matrix'' is
+needed: at any one point $\mathbf r\ne0$ the position-dependent matrix
+$\mathsf B=\mathbf r'\mathbf r^T/r^2$ does give
+$\mathsf B\mathbf r=\mathbf r'(\mathbf r^T\mathbf r)/r^2=\mathbf r'$.}
+Write $\mathbf x=(x,y,z)^T$ for the column $\mathbf r$, to keep it
+apart from the radius $r$. The radius $r=\sqrt{x^2+y^2+z^2}$ is not
+a linear function: $r(-\mathbf x)=r(\mathbf x)$, whereas the first
+component of a constant matrix map is linear,
+$(\mathsf B(-\mathbf x))_1=-(\mathsf B\mathbf x)_1$.
+If $(\mathsf B\mathbf x)_1=r(\mathbf x)$ held for all $\mathbf x$, then
+$r(\mathbf x)=r(-\mathbf x)=(\mathsf B(-\mathbf x))_1
+=-(\mathsf B\mathbf x)_1=-r(\mathbf x)$, so $r(\mathbf x)=0$, which is
+false for $\mathbf x\ne0$.
+The angular coordinates are nonlinear as well; for example
+$\theta(2\mathbf x)=\theta(\mathbf x)$, while a linear function doubles.
 
-\textbf{(b)} Physical components of a vector at a fixed point obey
+\textbf{(b)} Physical components of a vector at a fixed point are its
+projections on the unit vectors, $V_r=\hat{\mathbf e}_r\cdot\mathbf V
+=\sum_a(\hat{\mathbf e}_r)_aV_a$ and similarly for $V_\theta,V_\varphi$,
+with the Cartesian components $(\hat{\mathbf e}_r)_a$ etc.\ of
+Exercise 3.10.18. Hence they obey
 \[
 \boxed{\begin{pmatrix}V_r\\V_\theta\\V_\varphi\end{pmatrix}
 =T\begin{pmatrix}V_x\\V_y\\V_z\end{pmatrix},\quad
@@ -3961,8 +4133,12 @@ T=\begin{pmatrix}
 -\sin\varphi&\cos\varphi&0
 \end{pmatrix}}.
 \]
-The rows are the three unit vectors from 3.10.18, so their inner
-products give $TT^T=I$ and $\det T=1$.
+The rows are the three unit vectors from Exercise 3.10.18, so the
+entries of $TT^T$ are their inner products,
+$\hat{\mathbf e}_i\cdot\hat{\mathbf e}_j=\delta_{ij}$; thus $TT^T=I$,
+and $T$ is orthogonal. Its determinant is the triple product
+$\hat{\mathbf e}_r\cdot(\hat{\mathbf e}_\theta\times\hat{\mathbf e}_\varphi)
+=\hat{\mathbf e}_r\cdot\hat{\mathbf e}_r=1$ (a rotation).
 Thus $T^{-1}=T^T$, but $T$ depends on the observation point.
 In particular $T(x,y,z)^T=(r,0,0)^T$, the components of the
 position vector, rather than the coordinate labels $(r,\theta,\varphi)^T$.
@@ -3981,7 +4157,19 @@ The common azimuthal vector is unchanged, while
 \hat{\mathbf e}_z=\cos\theta\,\hat{\mathbf e}_r-
 \sin\theta\,\hat{\mathbf e}_\theta.
 \]
-Project $\mathbf V$ onto these directions. In the specified component
+These follow from the Cartesian forms in Exercises 3.10.6 and 3.10.18.
+For instance, the $x$ component of
+$\sin\theta\,\hat{\mathbf e}_r+\cos\theta\,\hat{\mathbf e}_\theta$ is
+$\sin^2\theta\cos\varphi+\cos^2\theta\cos\varphi=\cos\varphi$, its
+$y$ component is likewise $\sin\varphi$, and its $z$ component is
+$\sin\theta\cos\theta-\cos\theta\sin\theta=0$; similarly
+$\cos\theta\,\hat{\mathbf e}_r-\sin\theta\,\hat{\mathbf e}_\theta$ has
+components $(0,0,\cos^2\theta+\sin^2\theta)=(0,0,1)$.
+Project $\mathbf V=V_r\hat{\mathbf e}_r+V_\theta\hat{\mathbf e}_\theta
++V_\varphi\hat{\mathbf e}_\varphi$ onto these directions:
+$V_\rho=\hat{\mathbf e}_\rho\cdot\mathbf V=\sin\theta\,V_r+\cos\theta\,V_\theta$,
+$V_z=\hat{\mathbf e}_z\cdot\mathbf V=\cos\theta\,V_r-\sin\theta\,V_\theta$,
+and $V_\varphi$ is shared. In the specified component
 orders,
 \[
 \boxed{\begin{pmatrix}V_\rho\\V_\varphi\\V_z\end{pmatrix}
@@ -3989,7 +4177,8 @@ orders,
 C=\begin{pmatrix}\sin\theta&\cos\theta&0\\0&0&1\\
 \cos\theta&-\sin\theta&0\end{pmatrix}}.
 \]
-The rows are orthonormal, so
+The rows are orthonormal (e.g.\ the first and third give
+$\sin\theta\cos\theta-\cos\theta\sin\theta=0$), so $C$ is orthogonal and
 \[
 \boxed{C^{-1}=C^T=
 \begin{pmatrix}\sin\theta&0&\cos\theta\\
@@ -4017,7 +4206,19 @@ Multiplication of these matrices gives $I$ using $\sin^2\theta+\cos^2\theta=1$.
 \emph{Note.}~The derivatives of the left-hand $\nabla$ operate on the unit
 vectors of the right-hand $\nabla$ before the dot product is evaluated.
 \solution
-\textbf{(a)} Differentiating the Cartesian expressions in 3.10.18 gives
+\textbf{(a)} None of the unit vectors in Exercise 3.10.18 depends on $r$.
+Differentiating their Cartesian expressions with respect to the angles,
+\[
+\begin{aligned}
+\partial_\theta\hat{\mathbf e}_r&=(\cos\theta\cos\varphi,\cos\theta\sin\varphi,-\sin\theta),&
+\partial_\varphi\hat{\mathbf e}_r&=\sin\theta(-\sin\varphi,\cos\varphi,0),\\
+\partial_\theta\hat{\mathbf e}_\theta&=-(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta),&
+\partial_\varphi\hat{\mathbf e}_\theta&=\cos\theta(-\sin\varphi,\cos\varphi,0),
+\end{aligned}
+\]
+$\partial_\theta\hat{\mathbf e}_\varphi=0$, and
+$\partial_\varphi\hat{\mathbf e}_\varphi=(-\cos\varphi,-\sin\varphi,0)$.
+Comparing with the unit vectors themselves gives
 \[
 \begin{array}{c|ccc}
 &\partial_r&\partial_\theta&\partial_\varphi\\\hline
@@ -4026,14 +4227,30 @@ vectors of the right-hand $\nabla$ before the dot product is evaluated.
 \hat{\mathbf e}_\varphi&0&0&-\sin\theta\,\hat{\mathbf e}_r-\cos\theta\,\hat{\mathbf e}_\theta
 \end{array}
 \]
-For the last entry, the Cartesian derivative is
-$(-\cos\varphi,-\sin\varphi,0)$; its projections on $r,\theta,\varphi$
-are $-\sin\theta,-\cos\theta,0$, respectively.
+For the last entry, the projections of
+$(-\cos\varphi,-\sin\varphi,0)$ on $\hat{\mathbf e}_r,\hat{\mathbf e}_\theta,
+\hat{\mathbf e}_\varphi$ are
+$-\sin\theta(\cos^2\varphi+\sin^2\varphi)=-\sin\theta$,
+$-\cos\theta(\cos^2\varphi+\sin^2\varphi)=-\cos\theta$, and
+$\sin\varphi\cos\varphi-\cos\varphi\sin\varphi=0$, respectively.
 
 \textbf{(b)} First apply the given $\nabla$ to any vector
 $\mathbf W=W_r\hat{\mathbf e}_r+W_\theta\hat{\mathbf e}_\theta+
 W_\varphi\hat{\mathbf e}_\varphi$.
-The derivative table gives
+By the product rule and the derivative table,
+\[
+\begin{aligned}
+\partial_\theta\mathbf W&=(\partial_\theta W_r-W_\theta)\hat{\mathbf e}_r
++(W_r+\partial_\theta W_\theta)\hat{\mathbf e}_\theta
++\partial_\theta W_\varphi\,\hat{\mathbf e}_\varphi,\\
+\partial_\varphi\mathbf W&=(\partial_\varphi W_r-\sin\theta W_\varphi)\hat{\mathbf e}_r
++(\partial_\varphi W_\theta-\cos\theta W_\varphi)\hat{\mathbf e}_\theta\\
+&\quad+(\sin\theta W_r+\cos\theta W_\theta+\partial_\varphi W_\varphi)
+\hat{\mathbf e}_\varphi,
+\end{aligned}
+\]
+while $\partial_r\mathbf W$ has components $\partial_rW_r,\partial_rW_\theta,
+\partial_rW_\varphi$. Hence
 \[
 \hat{\mathbf e}_r\cdot\partial_r\mathbf W=\partial_rW_r,\quad
 \hat{\mathbf e}_\theta\cdot\partial_\theta\mathbf W=W_r+\partial_\theta W_\theta,
@@ -4042,15 +4259,23 @@ The derivative table gives
 \hat{\mathbf e}_\varphi\cdot\partial_\varphi\mathbf W
 =\sin\theta W_r+\cos\theta W_\theta+\partial_\varphi W_\varphi.
 \]
-Including the scale factors,
+The given operator dotted into $\mathbf W$ is
+$\nabla\cdot\mathbf W=\hat{\mathbf e}_r\cdot\partial_r\mathbf W
++r^{-1}\hat{\mathbf e}_\theta\cdot\partial_\theta\mathbf W
++(r\sin\theta)^{-1}\hat{\mathbf e}_\varphi\cdot\partial_\varphi\mathbf W$;
+inserting the three dot products and collecting the $W_r$ terms
+($W_r/r+\sin\theta\,W_r/(r\sin\theta)=2W_r/r$),
 \[
 \nabla\cdot\mathbf W=\partial_rW_r+\frac{2W_r}{r}
 +\frac{\partial_\theta W_\theta+\cot\theta W_\theta}{r}
 +\frac{\partial_\varphi W_\varphi}{r\sin\theta}.
 \]
 Now put $\mathbf W=\nabla\psi$, whose physical components are
-$\psi_r,\psi_\theta/r,\psi_\varphi/(r\sin\theta)$.
-Substitution yields
+$W_r=\psi_r$, $W_\theta=\psi_\theta/r$, $W_\varphi=\psi_\varphi/(r\sin\theta)$
+(subscripts on $\psi$ denote partial derivatives).
+Then $\partial_\theta W_\theta=\psi_{\theta\theta}/r$ and
+$\partial_\varphi W_\varphi=\psi_{\varphi\varphi}/(r\sin\theta)$, and
+substitution yields
 \[
 \begin{aligned}
 \nabla^2\psi
@@ -4062,8 +4287,12 @@ Substitution yields
 +\frac1{r^2\sin^2\theta}\partial_\varphi^2\psi}.
 \end{aligned}
 \]
+The last step uses
+$r^{-2}\partial_r(r^2\psi_r)=\psi_{rr}+2\psi_r/r$ and
+$(\sin\theta)^{-1}\partial_\theta(\sin\theta\,\psi_\theta)
+=\psi_{\theta\theta}+\cot\theta\,\psi_\theta$.
 
-\erratum{The manual, p.~54, prints $\tan\theta/r^2$ instead of $\cot\theta/r^2$ as the coefficient of $\partial_\theta$. Its following divergence-form identity must have $1/(r^2\sin\theta)$, not $1/(r^2\sin^2\theta)$, before $\partial_\theta(\sin\theta\,\partial_\theta)$. For a quick independent check, $\psi=r\cos\theta=z$ has zero Cartesian Laplacian. The correct formula gives $2\cos\theta/r-\cos\theta/r-\cos\theta/r=0$; the printed $\tan\theta$ version instead gives $\cos(2\theta)/(r\cos\theta)$.}
+\erratum{The Instructor's Manual, p.~54, prints $\tan\theta/r^2$ instead of $\cot\theta/r^2$ as the coefficient of $\partial_\theta$. Its following divergence-form identity must have $1/(r^2\sin\theta)$, not $1/(r^2\sin^2\theta)$, before $\partial_\theta(\sin\theta\,\partial_\theta)$. For a quick independent check, $\psi=r\cos\theta=z$ has zero Cartesian Laplacian. The correct formula gives $2\cos\theta/r-\cos\theta/r-\cos\theta/r=0$; the printed $\tan\theta$ version instead gives $\cos(2\theta)/(r\cos\theta)$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4079,20 +4308,40 @@ coordinates,
 (a)\enspace$\mathbf{v}=\hat{\mathbf{e}}_{\varphi}\omega r\sin\theta$.\quad
 (b)\enspace$\nabla\times\mathbf{v}=2\boldsymbol{\omega}$.
 \solution
-In spherical components,
-$\boldsymbol\omega=\omega(\cos\theta\,\hat{\mathbf e}_r-
-\sin\theta\,\hat{\mathbf e}_\theta)$ and $\mathbf r=r\hat{\mathbf e}_r$.
-The cross product is therefore
-$\boxed{\mathbf v=\omega r\sin\theta\,\hat{\mathbf e}_\varphi}$.
-The spherical curl gives
+\textbf{(a)} In spherical components,
+$\boldsymbol\omega=\omega\hat{\mathbf e}_z=\omega(\cos\theta\,\hat{\mathbf e}_r-
+\sin\theta\,\hat{\mathbf e}_\theta)$ (Exercise 3.10.19) and
+$\mathbf r=r\hat{\mathbf e}_r$.
+With $\hat{\mathbf e}_r\times\hat{\mathbf e}_r=0$ and
+$\hat{\mathbf e}_\theta\times\hat{\mathbf e}_r=-\hat{\mathbf e}_\varphi$,
+the cross product is
+\[
+\mathbf v=\omega r(\cos\theta\,\hat{\mathbf e}_r\times\hat{\mathbf e}_r
+-\sin\theta\,\hat{\mathbf e}_\theta\times\hat{\mathbf e}_r)
+=\boxed{\omega r\sin\theta\,\hat{\mathbf e}_\varphi}.
+\]
+\textbf{(b)} Expanding the determinant form of the curl with
+$h_r=1$, $h_\theta=r$, $h_\varphi=r\sin\theta$ gives the spherical
+components
+\[
+\begin{aligned}
+(\nabla\times\mathbf V)_r&=\frac1{r\sin\theta}
+[\partial_\theta(\sin\theta\,V_\varphi)-\partial_\varphi V_\theta],\qquad
+(\nabla\times\mathbf V)_\varphi=\frac1r[\partial_r(rV_\theta)-\partial_\theta V_r],\\
+(\nabla\times\mathbf V)_\theta&=\frac1r\Bigl[\frac1{\sin\theta}\partial_\varphi V_r
+-\partial_r(rV_\varphi)\Bigr].
+\end{aligned}
+\]
+For $v_r=v_\theta=0$, $v_\varphi=\omega r\sin\theta$ these give
 \[
 (\nabla\times\mathbf v)_r
 =\frac1{r\sin\theta}\partial_\theta(\omega r\sin^2\theta)
-=2\omega\cos\theta,
+=\frac{2\omega r\sin\theta\cos\theta}{r\sin\theta}=2\omega\cos\theta,
 \]
 \[
 (\nabla\times\mathbf v)_\theta
-=-\frac1r\partial_r(\omega r^2\sin\theta)=-2\omega\sin\theta,
+=-\frac1r\partial_r(\omega r^2\sin\theta)=-\frac{2\omega r\sin\theta}{r}
+=-2\omega\sin\theta,
 \qquad(\nabla\times\mathbf v)_\varphi=0.
 \]
 Thus the result is
@@ -4105,14 +4354,20 @@ $2\omega(\cos\theta\,\hat{\mathbf e}_r-\sin\theta\,\hat{\mathbf e}_\theta)
 component. Its curl has no tangential components. What does this imply about
 the radial dependence of the tangential components of $\mathbf{V}$?
 \solution
-Since $V_r=0$, the tangential curl components reduce to
+Since $V_r=0$, the tangential curl components of Exercise 3.10.23,
+$(\nabla\times\mathbf V)_\theta=r^{-1}[(\sin\theta)^{-1}\partial_\varphi V_r
+-\partial_r(rV_\varphi)]$ and
+$(\nabla\times\mathbf V)_\varphi=r^{-1}[\partial_r(rV_\theta)-\partial_\theta V_r]$,
+reduce to
 \[
 (\nabla\times\mathbf V)_\theta=-\frac1r\partial_r(rV_\varphi),
 \qquad
 (\nabla\times\mathbf V)_\varphi=\frac1r\partial_r(rV_\theta).
 \]
-Setting both to zero means $rV_\theta$ and $rV_\varphi$ are
-independent of $r$. Hence, on $r>0$,
+Setting both to zero means $\partial_r(rV_\theta)=\partial_r(rV_\varphi)=0$,
+so $rV_\theta$ and $rV_\varphi$ are independent of $r$,
+say $rV_\theta=f(\theta,\varphi)$ and
+$rV_\varphi=g(\theta,\varphi)$. Hence, on $r>0$,
 \[
 \boxed{V_\theta=\frac{f(\theta,\varphi)}r,\qquad
 V_\varphi=\frac{g(\theta,\varphi)}r}.
@@ -4139,20 +4394,30 @@ $x\to-x$, $y\to-y$, and $z\to-z$.
   has even parity.
 \end{enumerate}
 \solution
-Inversion leaves $r=\sqrt{x^2+y^2+z^2}$ unchanged.
-Since $\cos\theta=z/r$ changes sign, $\theta\mapsto\pi-\theta$.
-Both $x,y$ change sign, so $\varphi\mapsto\varphi+\pi$ modulo $2\pi$.
-Under these substitutions,
+\textbf{(a)} Inversion leaves $r=\sqrt{x^2+y^2+z^2}$ unchanged.
+Since $\cos\theta=z/r$ changes sign and $0\le\theta\le\pi$,
+the new angle is the one in $[0,\pi]$ with cosine $-\cos\theta$,
+namely $\theta\mapsto\pi-\theta$; then $\sin\theta$ is unchanged.
+Both $x=r\sin\theta\cos\varphi$ and $y=r\sin\theta\sin\varphi$ change
+sign with $r\sin\theta$ fixed, so $\cos\varphi$ and $\sin\varphi$ both
+change sign, i.e.\ $\varphi\mapsto\varphi\pm\pi$ (modulo $2\pi$, as in
+Exercise 3.10.11).
+
+\textbf{(b)} Under these substitutions,
 $\sin\theta$ is unchanged, $\cos\theta$ changes sign, and
 $\sin\varphi,\cos\varphi$ both change sign.
-The component formulas in 3.10.18 then give
+The component formulas in Exercise 3.10.18 then give
 \[
-\hat{\mathbf e}_r(\pi-\theta,\varphi+\pi)=-\hat{\mathbf e}_r(\theta,\varphi),
-\]
-\[
-\hat{\mathbf e}_\theta(\pi-\theta,\varphi+\pi)=
-\hat{\mathbf e}_\theta(\theta,\varphi),\qquad
-\hat{\mathbf e}_\varphi(\varphi+\pi)=-\hat{\mathbf e}_\varphi(\varphi).
+\begin{aligned}
+\hat{\mathbf e}_r(\pi-\theta,\varphi+\pi)
+&=(-\sin\theta\cos\varphi,-\sin\theta\sin\varphi,-\cos\theta)
+=-\hat{\mathbf e}_r(\theta,\varphi),\\
+\hat{\mathbf e}_\theta(\pi-\theta,\varphi+\pi)
+&=\bigl((-\cos\theta)(-\cos\varphi),(-\cos\theta)(-\sin\varphi),-\sin\theta\bigr)
+=\hat{\mathbf e}_\theta(\theta,\varphi),\\
+\hat{\mathbf e}_\varphi(\varphi+\pi)
+&=(\sin\varphi,-\cos\varphi,0)=-\hat{\mathbf e}_\varphi(\varphi).
+\end{aligned}
 \]
 Thus the stated basis-field parities follow relative to fixed Cartesian axes.
 
@@ -4172,17 +4437,25 @@ Thus the stated basis-field parities follow relative to fixed Cartesian axes.
 $[(\mathbf A\cdot\nabla)\mathbf r]_j
 =\sum_i A_i\partial_i x_j=\sum_iA_i\delta_{ij}=A_j$.
 \textbf{(b)} In spherical coordinates $\mathbf r=r\hat{\mathbf e}_r$,
-so
+so, with $\partial_\theta\hat{\mathbf e}_r=\hat{\mathbf e}_\theta$ and
+$\partial_\varphi\hat{\mathbf e}_r=\sin\theta\,\hat{\mathbf e}_\varphi$
+(Exercise 3.10.22),
 \[
 \partial_r\mathbf r=\hat{\mathbf e}_r,\quad
 \partial_\theta\mathbf r=r\hat{\mathbf e}_\theta,\quad
 \partial_\varphi\mathbf r=r\sin\theta\,\hat{\mathbf e}_\varphi.
 \]
-Therefore
+Dotting $\mathbf A=A_r\hat{\mathbf e}_r+A_\theta\hat{\mathbf e}_\theta
++A_\varphi\hat{\mathbf e}_\varphi$ into the gradient operator of
+Eq.~(3.156) gives
+$\mathbf A\cdot\nabla=A_r\partial_r+(A_\theta/r)\partial_\theta
++(A_\varphi/(r\sin\theta))\partial_\varphi$. Therefore
 \[
 (\mathbf A\cdot\nabla)\mathbf r
 =A_r\partial_r\mathbf r+\frac{A_\theta}{r}\partial_\theta\mathbf r
 +\frac{A_\varphi}{r\sin\theta}\partial_\varphi\mathbf r
+=A_r\hat{\mathbf e}_r+A_\theta\hat{\mathbf e}_\theta
++A_\varphi\hat{\mathbf e}_\varphi
 =\boxed{\mathbf A}.
 \]
 The derivatives act on $\mathbf r$, not on the coefficients of $\mathbf A$.
@@ -4214,7 +4487,11 @@ $\begin{aligned}[t]
 derivative: $\dot{r}=dr/dt$, $\dot{\theta}=d\theta/dt$,
 $\dot{\varphi}=d\varphi/dt$.
 \solution
-From the basis derivatives in 3.10.22,
+The unit vectors depend on $t$ through $\theta(t)$ and $\varphi(t)$,
+so by the chain rule
+$\dot{\hat{\mathbf e}}=\dot\theta\,\partial_\theta\hat{\mathbf e}
++\dot\varphi\,\partial_\varphi\hat{\mathbf e}$ for each of them. With
+the basis derivatives in Exercise 3.10.22,
 \[
 \begin{aligned}
 \dot{\hat{\mathbf e}}_r&=\dot\theta\hat{\mathbf e}_\theta+
@@ -4225,11 +4502,17 @@ From the basis derivatives in 3.10.22,
 -\cos\theta\dot\varphi\hat{\mathbf e}_\theta.
 \end{aligned}
 \]
-Differentiate $\mathbf r=r\hat{\mathbf e}_r$:
-$\mathbf v=\dot r\hat{\mathbf e}_r+r\dot\theta\hat{\mathbf e}_\theta+
-r\sin\theta\dot\varphi\hat{\mathbf e}_\varphi$.
-For clarity, the three differentiated terms contributing to acceleration
-are
+Differentiate $\mathbf r=r\hat{\mathbf e}_r$ by the product rule:
+\[
+\mathbf v=\dot r\hat{\mathbf e}_r+r\dot{\hat{\mathbf e}}_r
+=\dot r\hat{\mathbf e}_r+r\dot\theta\hat{\mathbf e}_\theta+
+r\sin\theta\dot\varphi\hat{\mathbf e}_\varphi,
+\]
+so $\boxed{v_r=\dot r,\ v_\theta=r\dot\theta,\
+v_\varphi=r\sin\theta\,\dot\varphi}$.
+Differentiating the three terms of $\mathbf v$ by the product rule
+(with $\frac d{dt}\sin\theta=\cos\theta\,\dot\theta$) and inserting the
+basis derivatives above gives
 \[
 \begin{aligned}
 \frac d{dt}(\dot r\hat{\mathbf e}_r)
@@ -4246,7 +4529,9 @@ r\sin\theta\ddot\varphi)\hat{\mathbf e}_\varphi\\
 -r\sin\theta\cos\theta\dot\varphi^2\hat{\mathbf e}_\theta.
 \end{aligned}
 \]
-Collecting each basis vector yields
+Collecting each basis vector (for example, the $\hat{\mathbf e}_\theta$
+terms are $\dot r\dot\theta$, $\dot r\dot\theta+r\ddot\theta$, and
+$-r\sin\theta\cos\theta\dot\varphi^2$) yields
 \[
 \boxed{\begin{aligned}
 a_r&=\ddot r-r\dot\theta^2-r\sin^2\theta\dot\varphi^2,\\
@@ -4255,7 +4540,6 @@ a_\varphi&=r\sin\theta\ddot\varphi+2\dot r\sin\theta\dot\varphi
 +2r\cos\theta\dot\theta\dot\varphi.
 \end{aligned}}
 \]
-The velocity components are the three coefficients of $\mathbf v$ above.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4276,13 +4560,27 @@ $\begin{aligned}
 \emph{Hint.}~Equate $\nabla_{xyz}$ and $\nabla_{r\theta\varphi}$.
 \solution
 The chain rule is $\partial_x=r_x\partial_r+\theta_x\partial_\theta+
-\varphi_x\partial_\varphi$, and similarly for $y,z$.
-From $r^2=x^2+y^2+z^2$, $r_x=x/r=\sin\theta\cos\varphi$.
+\varphi_x\partial_\varphi$, and similarly for $y,z$; subscripts on
+$r,\theta,\varphi$ denote partial derivatives with respect to $x,y,z$.
+From $r^2=x^2+y^2+z^2$, $2rr_x=2x$, so $r_x=x/r=\sin\theta\cos\varphi$;
+likewise $r_y=y/r=\sin\theta\sin\varphi$ and $r_z=z/r=\cos\theta$.
 Differentiating $\cos\theta=z/r$ with respect to $x$ gives
-$-\sin\theta\,\theta_x=-zx/r^3$, hence
-$\theta_x=\cos\theta\cos\varphi/r$.
-Finally differentiating $\varphi=\operatorname{atan2}(y,x)$ on a
-regular local branch gives $\varphi_x=-y/(x^2+y^2)$.
+$-\sin\theta\,\theta_x=-zr_x/r^2=-zx/r^3$, hence
+\[
+\theta_x=\frac{zx}{r^3\sin\theta}
+=\frac{(r\cos\theta)(r\sin\theta\cos\varphi)}{r^3\sin\theta}
+=\frac{\cos\theta\cos\varphi}r,
+\]
+and in the same way $\theta_y=zy/(r^3\sin\theta)=\cos\theta\sin\varphi/r$.
+With respect to $z$,
+$-\sin\theta\,\theta_z=1/r-z^2/r^3=(x^2+y^2)/r^3=\sin^2\theta/r$, so
+$\theta_z=-\sin\theta/r$.
+Finally differentiating $\varphi=\operatorname{atan2}(y,x)$ (locally
+$\tan\varphi=y/x$) on a
+regular local branch gives $\varphi_x=-y/(x^2+y^2)$,
+$\varphi_y=x/(x^2+y^2)$, $\varphi_z=0$; with
+$x^2+y^2=r^2\sin^2\theta$ these are
+$-\sin\varphi/(r\sin\theta)$, $\cos\varphi/(r\sin\theta)$, $0$.
 The full Jacobian obtained this way is
 \[
 \begin{array}{c|ccc}
@@ -4292,9 +4590,20 @@ r&\sin\theta\cos\varphi&\sin\theta\sin\varphi&\cos\theta\\
 \varphi&-\sin\varphi/(r\sin\theta)&\cos\varphi/(r\sin\theta)&0
 \end{array}
 \]
-Substitution into the chain rule gives all three displayed operator
+Substitution of each column into the chain rule gives all three displayed operator
 formulas in the question. They hold on $r>0,\sin\theta\ne0$,
 where these coordinates are nonsingular.
+Following the hint gives the same result faster: dotting
+$\hat{\mathbf e}_x$ into
+$\hat{\mathbf e}_x\partial_x+\hat{\mathbf e}_y\partial_y+\hat{\mathbf e}_z\partial_z
+=\hat{\mathbf e}_r\partial_r+\hat{\mathbf e}_\theta r^{-1}\partial_\theta
++\hat{\mathbf e}_\varphi(r\sin\theta)^{-1}\partial_\varphi$
+and using the projections
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_r=\sin\theta\cos\varphi$,
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_\theta=\cos\theta\cos\varphi$,
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_\varphi=-\sin\varphi$ of
+Exercise 3.10.19 reproduces the $\partial_x$ formula; $\hat{\mathbf e}_y$
+and $\hat{\mathbf e}_z$ give the other two.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4306,14 +4615,17 @@ where these coordinates are nonsingular.
 This is the quantum mechanical operator corresponding to the $z$-component of
 orbital angular momentum.
 \solution
-Insert the derivatives from 3.10.28 and
+Insert the derivatives from Exercise 3.10.28 and
 $x=r\sin\theta\cos\varphi,y=r\sin\theta\sin\varphi$.
 In $x\partial_y-y\partial_x$, the coefficient of $\partial_r$ is
-$r\sin^2\theta(\cos\varphi\sin\varphi-\sin\varphi\cos\varphi)=0$.
+$x\sin\theta\sin\varphi-y\sin\theta\cos\varphi
+=r\sin^2\theta(\cos\varphi\sin\varphi-\sin\varphi\cos\varphi)=0$.
 The coefficient of $\partial_\theta$ is
-$\sin\theta\cos\theta(\cos\varphi\sin\varphi-\sin\varphi\cos\varphi)=0$.
+$(x\cos\theta\sin\varphi-y\cos\theta\cos\varphi)/r
+=\sin\theta\cos\theta(\cos\varphi\sin\varphi-\sin\varphi\cos\varphi)=0$.
 The coefficient of $\partial_\varphi$ is
-$\cos^2\varphi+\sin^2\varphi=1$. Thus
+$x\cos\varphi/(r\sin\theta)+y\sin\varphi/(r\sin\theta)
+=\cos^2\varphi+\sin^2\varphi=1$. Thus
 $x\partial_y-y\partial_x=\partial_\varphi$ and
 $\boxed{L_z=-i\partial_\varphi}$.
 
@@ -4329,16 +4641,28 @@ that
   {\partial\theta}-i\cot\theta\frac{\partial}{\partial\varphi}\right)$.
 \end{enumerate}
 \solution
-Using $\mathbf r=r\hat{\mathbf e}_r$ in the spherical gradient,
+Using $\mathbf r=r\hat{\mathbf e}_r$ in the spherical gradient of
+Eq.~(3.156), the radial term drops out
+($\hat{\mathbf e}_r\times\hat{\mathbf e}_r=0$), and
+$\hat{\mathbf e}_r\times\hat{\mathbf e}_\theta=\hat{\mathbf e}_\varphi$,
+$\hat{\mathbf e}_r\times\hat{\mathbf e}_\varphi=-\hat{\mathbf e}_\theta$
+give
+$\mathbf r\times\nabla=\hat{\mathbf e}_\varphi\partial_\theta
+-\hat{\mathbf e}_\theta\csc\theta\,\partial_\varphi$, so
 \[
-\mathbf L=i\left(\hat{\mathbf e}_\theta\csc\theta\,\partial_\varphi
+\mathbf L=-i(\mathbf r\times\nabla)
+=i\left(\hat{\mathbf e}_\theta\csc\theta\,\partial_\varphi
 -\hat{\mathbf e}_\varphi\partial_\theta\right).
 \]
-Projection on $x,y$ gives
+Projection on $x,y$, with the Cartesian components
+$\hat{\mathbf e}_\theta=(\cos\theta\cos\varphi,\cos\theta\sin\varphi,-\sin\theta)$
+and $\hat{\mathbf e}_\varphi=(-\sin\varphi,\cos\varphi,0)$ of
+Exercise 3.10.18, gives
 $L_x=i(\sin\varphi\,\partial_\theta+\cot\theta\cos\varphi\,\partial_\varphi)$
 and
-$L_y=i(-\cos\varphi\,\partial_\theta+\cot\theta\sin\varphi\,\partial_\varphi)$.
-Therefore
+$L_y=i(-\cos\varphi\,\partial_\theta+\cot\theta\sin\varphi\,\partial_\varphi)$
+(this is Exercise 3.10.32(a),(b)).
+Therefore, using $i\cdot i=-1$,
 \[
 \begin{aligned}
 L_x+iL_y
@@ -4348,9 +4672,13 @@ L_x+iL_y
 L_x-iL_y
 &=(-\cos\varphi+i\sin\varphi)\partial_\theta
 +(i\cos\varphi+\sin\varphi)\cot\theta\,\partial_\varphi\\
-&=\boxed{-e^{-i\varphi}(\partial_\theta-i\cot\theta\,\partial_\varphi)}.
+&=\boxed{-e^{-i\varphi}(\partial_\theta-i\cot\theta\,\partial_\varphi)},
 \end{aligned}
 \]
+by Euler's formula: $\cos\varphi+i\sin\varphi=e^{i\varphi}$,
+$i\cos\varphi-\sin\varphi=i(\cos\varphi+i\sin\varphi)=ie^{i\varphi}$,
+$-\cos\varphi+i\sin\varphi=-e^{-i\varphi}$, and
+$i\cos\varphi+\sin\varphi=i(\cos\varphi-i\sin\varphi)=ie^{-i\varphi}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4374,35 +4702,52 @@ where $i,j,k$ are $x,y,z$ in any order.
 \emph{Hint.}~Use spherical polar coordinates for $\mathbf{L}$ but Cartesian
 components for the cross product.
 \solution
-\erratum{The second printed component relation must be
-$[L_z,L_x]=iL_y$, not $-L_y$; the same error appears on textbook p.~201.}
-Use the Cartesian components expressed in spherical coordinates:
+\erratum{As printed on textbook p.~201, the second component relation
+has $-L_y$ on the right; it must be $[L_z,L_x]=iL_y$, the cyclic
+permutation $x\to z\to y\to x$ of $[L_x,L_y]=iL_z$, as the calculation
+below confirms.}
+Use the Cartesian components expressed in spherical coordinates
+(Exercise 3.10.32(b)):
 $L_x=iX$, $L_y=iY$, $L_z=-i\partial_\varphi$, where
 \[
 X=\sin\varphi\,\partial_\theta+\cot\theta\cos\varphi\,\partial_\varphi,\quad
 Y=-\cos\varphi\,\partial_\theta+\cot\theta\sin\varphi\,\partial_\varphi.
 \]
-For first-order operators, second-derivative terms in a commutator
-cancel. Put $t=\cot\theta$ and $s=\csc^2\theta$, so $\partial_\theta t=-s$.
+For first-order operators $X=a^\theta\partial_\theta+a^\varphi\partial_\varphi$
+and $Y=b^\theta\partial_\theta+b^\varphi\partial_\varphi$, applying both
+orders to a smooth $f$ and subtracting, the second-derivative terms
+$a^\mu b^\nu\partial_\mu\partial_\nu f$ cancel because mixed partials
+commute, leaving
+\[
+[X,Y]=(Xb^\theta-Ya^\theta)\partial_\theta+(Xb^\varphi-Ya^\varphi)\partial_\varphi .
+\]
+Put $t=\cot\theta$ and $s=\csc^2\theta$, so $\partial_\theta t=-s$.
+Here $a^\theta=\sin\varphi$, $a^\varphi=t\cos\varphi$,
+$b^\theta=-\cos\varphi$, $b^\varphi=t\sin\varphi$.
 The coefficient of $\partial_\theta$ in $[X,Y]$ is
-$t\cos\varphi\sin\varphi-t\sin\varphi\cos\varphi=0$.
+$Xb^\theta-Ya^\theta=t\cos\varphi\sin\varphi-t\sin\varphi\cos\varphi=0$.
 The coefficient of $\partial_\varphi$ is
 \[
-[-s\sin^2\varphi+t^2\cos^2\varphi]
+Xb^\varphi-Ya^\varphi=[-s\sin^2\varphi+t^2\cos^2\varphi]
 -[s\cos^2\varphi-t^2\sin^2\varphi]
-=t^2-s=-1.
+=t^2-s=-1,
 \]
-Thus $[L_x,L_y]=-[X,Y]=\partial_\varphi=iL_z$.
-For the other two commutators, simply differentiate the coefficients:
+since $\cot^2\theta-\csc^2\theta=-1$.
+Thus $[L_x,L_y]=i^2[X,Y]=-[X,Y]=\partial_\varphi=iL_z$.
+For the other two commutators, $(-i)(i)=1$ and $(i)(-i)=1$ give
+$[L_z,L_x]=[\partial_\varphi,X]$ and $[L_y,L_z]=[Y,\partial_\varphi]$;
+since $\partial_\varphi$ has constant coefficients, these commutators
+simply differentiate the coefficients of $X$ and $Y$ with respect to $\varphi$:
 \[
 \begin{aligned}
 {}[L_z,L_x]&=[\partial_\varphi,X]
-=\cos\varphi\,\partial_\theta-\cot\theta\sin\varphi\,\partial_\varphi=iL_y,\\
+=\cos\varphi\,\partial_\theta-\cot\theta\sin\varphi\,\partial_\varphi=-Y=iL_y,\\
 [L_y,L_z]&=[Y,\partial_\varphi]
-=-\sin\varphi\,\partial_\theta-\cot\theta\cos\varphi\,\partial_\varphi=iL_x.
+=-\sin\varphi\,\partial_\theta-\cot\theta\cos\varphi\,\partial_\varphi=-X=iL_x.
 \end{aligned}
 \]
-The cross product of the Cartesian operator components therefore equals
+The components of the cross product of the operator vector with itself
+are $(\mathbf L\times\mathbf L)_x=L_yL_z-L_zL_y$ and cyclically, so
 \[
 \bigl([L_y,L_z],[L_z,L_x],[L_x,L_y]\bigr)=\boxed{i\mathbf L}.
 \]
@@ -4431,15 +4776,31 @@ The cross product of the Cartesian operator components therefore equals
   \]
 \end{enumerate}
 \solution
-\textbf{(a)} In $\mathbf r\times\nabla$ the radial derivative term
-vanishes. Since
+\textbf{(a)} With $\mathbf r=r\hat{\mathbf e}_r$ and Eq.~(3.156),
+\[
+\mathbf r\times\nabla=r\hat{\mathbf e}_r\times\Bigl(\hat{\mathbf e}_r\partial_r
++\hat{\mathbf e}_\theta\frac1r\partial_\theta
++\hat{\mathbf e}_\varphi\frac1{r\sin\theta}\partial_\varphi\Bigr).
+\]
+The radial derivative term vanishes because
+$\hat{\mathbf e}_r\times\hat{\mathbf e}_r=0$. Since
 $\hat{\mathbf e}_r\times\hat{\mathbf e}_\theta=\hat{\mathbf e}_\varphi$
 and $\hat{\mathbf e}_r\times\hat{\mathbf e}_\varphi=-\hat{\mathbf e}_\theta$,
+$\mathbf r\times\nabla=\hat{\mathbf e}_\varphi\partial_\theta
+-\hat{\mathbf e}_\theta\csc\theta\,\partial_\varphi$, and multiplying by $-i$,
 \[
 \boxed{\mathbf L=i(\hat{\mathbf e}_\theta\csc\theta\,\partial_\varphi
 -\hat{\mathbf e}_\varphi\partial_\theta)}.
 \]
-\textbf{(b)} Insert the Cartesian basis components:
+The unit vectors stand to the left of the derivatives, so they are
+not differentiated.
+\textbf{(b)} Insert the Cartesian basis components of Exercise 3.10.18:
+$L_x=\hat{\mathbf e}_x\cdot\mathbf L$ uses
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_\theta=\cos\theta\cos\varphi$ and
+$\hat{\mathbf e}_x\cdot\hat{\mathbf e}_\varphi=-\sin\varphi$;
+$L_y$ uses $\cos\theta\sin\varphi$ and $\cos\varphi$; $L_z$ uses
+$-\sin\theta$ and $0$. With $\cos\theta\csc\theta=\cot\theta$ and
+$\sin\theta\csc\theta=1$,
 \[
 \boxed{\begin{aligned}
 L_x&=i(\sin\varphi\,\partial_\theta+\cot\theta\cos\varphi\,\partial_\varphi),\\
@@ -4449,15 +4810,31 @@ L_z&=-i\partial_\varphi.
 \]
 \textbf{(c)} Apply the squared operators to an arbitrary smooth $f$,
 including derivatives of their coefficients. Write $s=\sin\varphi$,
-$c=\cos\varphi$, $t=\cot\theta$, $q=\csc^2\theta$. Direct product
-differentiation gives
+$c=\cos\varphi$, $t=\cot\theta$, $q=\csc^2\theta$, so that
+$\partial_\varphi s=c$, $\partial_\varphi c=-s$, $\partial_\theta t=-q$,
+and subscripts on $f$ denote partial derivatives. Since
+$L_x=i(s\partial_\theta+tc\partial_\varphi)$,
+$L_x^2f=-(s\partial_\theta+tc\partial_\varphi)(sf_\theta+tcf_\varphi)$, where
+\[
+\begin{aligned}
+(s\partial_\theta+tc\partial_\varphi)(sf_\theta+tcf_\varphi)
+&=s(sf_{\theta\theta}-qcf_\varphi+tcf_{\theta\varphi})
++tc(cf_\theta+sf_{\theta\varphi}-tsf_\varphi+tcf_{\varphi\varphi})\\
+&=s^2f_{\theta\theta}+2tscf_{\theta\varphi}+t^2c^2f_{\varphi\varphi}
++tc^2f_\theta-sc(q+t^2)f_\varphi.
+\end{aligned}
+\]
+$L_y=i(-c\partial_\theta+ts\partial_\varphi)$ is $L_x$ with $s\to-c$,
+$c\to s$ (that is, $\varphi\to\varphi-\pi/2$, which preserves
+$\partial_\varphi s=c$, $\partial_\varphi c=-s$), so the same
+substitution gives $L_y^2f$. Altogether
 \[
 \begin{aligned}
 L_x^2f&=-s^2f_{\theta\theta}-2tsc f_{\theta\varphi}
 -t^2c^2f_{\varphi\varphi}-tc^2f_\theta+sc(q+t^2)f_\varphi,\\
 L_y^2f&=-c^2f_{\theta\theta}+2tsc f_{\theta\varphi}
 -t^2s^2f_{\varphi\varphi}-ts^2f_\theta-sc(q+t^2)f_\varphi,\\
-L_z^2f&=-f_{\varphi\varphi}.
+L_z^2f&=(-i)^2f_{\varphi\varphi}=-f_{\varphi\varphi}.
 \end{aligned}
 \]
 Mixed terms and the terms proportional to $f_\varphi$ cancel.
@@ -4465,14 +4842,23 @@ Using $s^2+c^2=1$ and $1+t^2=q$,
 \[
 L^2f=-f_{\theta\theta}-\cot\theta f_\theta-\csc^2\theta f_{\varphi\varphi}
 =-\frac1{\sin\theta}\partial_\theta(\sin\theta f_\theta)
--\frac1{\sin^2\theta}f_{\varphi\varphi}.
+-\frac1{\sin^2\theta}f_{\varphi\varphi},
 \]
-Comparison with the Laplacian from 3.10.22 gives
+since $(\sin\theta)^{-1}\partial_\theta(\sin\theta f_\theta)
+=f_{\theta\theta}+\cot\theta f_\theta$.
+Multiplying the Laplacian of Exercise 3.10.22 by $r^2$ gives
+\[
+r^2\nabla^2f=\partial_r(r^2\partial_rf)
++\frac1{\sin\theta}\partial_\theta(\sin\theta f_\theta)
++\frac1{\sin^2\theta}f_{\varphi\varphi}
+=\partial_r(r^2\partial_rf)-L^2f,
+\]
+so
 \[
 \boxed{L^2=-r^2\nabla^2+\partial_r(r^2\partial_r)}.
 \]
 
-\erratum{In the manual's part (a), p.~56, the coefficient of $\hat{\mathbf e}_\theta\csc\theta\,\partial_\varphi$ is printed as $-1$. It must be $+i$, as follows directly from $-i\hat{\mathbf e}_r\times\hat{\mathbf e}_\varphi=+i\hat{\mathbf e}_\theta$.}
+\erratum{In the Instructor's Manual's part (a), p.~56, the coefficient of $\hat{\mathbf e}_\theta\csc\theta\,\partial_\varphi$ is printed as $-1$. It must be $+i$, as follows directly from $-i\hat{\mathbf e}_r\times\hat{\mathbf e}_\varphi=+i\hat{\mathbf e}_\theta$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4489,36 +4875,55 @@ verify the operator identities
 as printed in bold on textbook p.~202; a scalar $r\nabla^2$
 cannot equal the other vector operators.}
 All identities below act on an arbitrary smooth scalar $f$.
-\textbf{(a)} The ordinary triple-product identity applies after
-$\nabla$ has acted:
+\textbf{(a)} The ordinary triple-product identity
+$\mathbf a\times(\mathbf b\times\mathbf c)
+=\mathbf b(\mathbf a\cdot\mathbf c)-\mathbf c(\mathbf a\cdot\mathbf b)$
+applies after $\nabla$ has acted, with
+$\mathbf a=\mathbf b=\mathbf r$, $\mathbf c=\nabla f$:
 \[
 \mathbf r\times\mathbf L f
 =-i\,\mathbf r\times(\mathbf r\times\nabla f)
 =-i[\mathbf r(\mathbf r\cdot\nabla f)-r^2\nabla f].
 \]
-Since $\mathbf r\cdot\nabla f=r\partial_r f$,
-$-i(\mathbf r\times\mathbf L f)/r^2
-=\nabla f-\hat{\mathbf e}_r\partial_r f$.
-Rearranging proves (a).
+Since $\mathbf r\cdot\nabla f=r\hat{\mathbf e}_r\cdot\nabla f=r\partial_r f$
+(the radial component of the gradient, Eq.~(3.156)) and $(-i)(-i)=-1$,
+\[
+-\frac{i}{r^2}\,\mathbf r\times\mathbf L f
+=-\frac1{r^2}[\mathbf r\,r\partial_rf-r^2\nabla f]
+=\nabla f-\hat{\mathbf e}_r\partial_r f.
+\]
+Rearranging, $\nabla f=\hat{\mathbf e}_r\partial_rf-i\,\mathbf r\times\mathbf Lf/r^2$
+for every $f$, which is (a).
 
 \textbf{(b)} Set $D=\mathbf r\cdot\nabla=r\partial_r$.
-Using the curl-product rule on the ordinary vector field $\nabla f$,
+Since $i\mathbf Lf=i(-i)\mathbf r\times\nabla f=\mathbf r\times\nabla f$,
+the curl-product rule of Exercise 3.6.5, with $\mathbf A=\mathbf r$ and
+$\mathbf B=\nabla f$, gives
 \[
 \begin{aligned}
 i\nabla\times(\mathbf Lf)
 &=\nabla\times(\mathbf r\times\nabla f)\\
 &=(\nabla f\cdot\nabla)\mathbf r
 -(\mathbf r\cdot\nabla)\nabla f
--3\nabla f+\mathbf r\,\nabla^2f\\
-&=\mathbf r\,\nabla^2f-2\nabla f-D(\nabla f).
+-\nabla f\,(\nabla\cdot\mathbf r)+\mathbf r\,\nabla^2f\\
+&=\mathbf r\,\nabla^2f-2\nabla f-D(\nabla f),
 \end{aligned}
 \]
-Componentwise $\partial_i(Df)=\partial_i(x_j\partial_jf)
+because $(\nabla f\cdot\nabla)\mathbf r=\nabla f$ (Exercise 3.10.26 with
+$\mathbf A=\nabla f$) and $\nabla\cdot\mathbf r=3$.
+Componentwise, with $x_j$ summed over $j$,
+$\partial_i(Df)=\partial_i(x_j\partial_jf)
+=\delta_{ij}\partial_jf+x_j\partial_j\partial_i f
 =\partial_i f+x_j\partial_j\partial_i f$, so
-$\nabla(Df)=\nabla f+D(\nabla f)$.
+$\nabla(Df)=\nabla f+D(\nabla f)$, i.e.\
+$D(\nabla f)=\nabla(Df)-\nabla f$.
 Substitution yields
-$i\nabla\times(\mathbf Lf)=\mathbf r\nabla^2f-\nabla(f+Df)$,
-which is precisely the corrected operator identity.
+\[
+i\nabla\times(\mathbf Lf)=\mathbf r\nabla^2f-2\nabla f-\nabla(Df)+\nabla f
+=\mathbf r\nabla^2f-\nabla(f+r\partial_rf),
+\]
+which is precisely the corrected operator identity
+$\mathbf r\nabla^2-\nabla(1+r\partial_r)=i\nabla\times\mathbf L$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4566,7 +4971,11 @@ polar coordinates by
 \end{enumerate}
 \erratum{Take $P$ constant and $r>0$. In (b), the unit circle belongs to the stated region only if $P/2\le1$ in the chosen units.}
 \solution
-For constant $P$ the only possibly nonzero curl component is
+\textbf{(a)} Use the spherical curl components of Exercise 3.10.23 with
+$F_r=2P\cos\theta/r^3$, $F_\theta=P\sin\theta/r^3$, $F_\varphi=0$.
+For constant $P$, $\partial_r(rF_\theta)=\partial_r(P\sin\theta/r^2)
+=-2P\sin\theta/r^3$ and $\partial_\theta F_r=-2P\sin\theta/r^3$, so
+the only possibly nonzero curl component is
 \[
 \begin{aligned}
 (\nabla\times\mathbf F)_\varphi
@@ -4575,19 +4984,33 @@ For constant $P$ the only possibly nonzero curl component is
 -\left(-\frac{2P\sin\theta}{r^3}\right)\right]=0.
 \end{aligned}
 \]
-The other components vanish because $F_\varphi=0$ and no component
-depends on $\varphi$.
-On the equatorial unit circle, $d\mathbf r=\hat{\mathbf e}_\varphi d\varphi$,
-so the integrand is zero and
+The other components,
+$(r\sin\theta)^{-1}[\partial_\theta(\sin\theta F_\varphi)-\partial_\varphi F_\theta]$
+and $r^{-1}[(\sin\theta)^{-1}\partial_\varphi F_r-\partial_r(rF_\varphi)]$,
+vanish because $F_\varphi=0$ and no component
+depends on $\varphi$. Thus $\nabla\times\mathbf F=0$, so a potential
+may exist; (c) finds it.
+
+\textbf{(b)} On the equatorial unit circle ($r=1$, $\theta=\pi/2$),
+$d\mathbf r=\hat{\mathbf e}_\varphi\,r\sin\theta\,d\varphi
+=\hat{\mathbf e}_\varphi d\varphi$,
+so the integrand $F_\varphi\,d\varphi$ is zero and
 $\boxed{\oint\mathbf F\cdot d\mathbf r=0}$.
-\erratum{This circle lies in the stated region only if $1\ge P/2$
-in the chosen units. The field formulas are evaluated at $r>0$.}
-A zero integral on one loop alone would not prove conservativeness;
+(The circle has $r=1$, so it lies in the stated region $r\ge P/2$
+when $P\le2$; the field formulas themselves hold at every $r>0$.)
+This is consistent with a conservative force, but a zero integral on
+one loop alone would not prove conservativeness;
 here an explicit potential settles it.
-Integrate $-\partial_r\psi=2P\cos\theta/r^3$:
+
+\textbf{(c)} With the gradient of Eq.~(3.156), $\mathbf F=-\nabla\psi$
+requires $-\partial_r\psi=F_r$, $-r^{-1}\partial_\theta\psi=F_\theta$,
+and $-(r\sin\theta)^{-1}\partial_\varphi\psi=F_\varphi=0$.
+Integrate $-\partial_r\psi=2P\cos\theta/r^3$ in $r$
+(using $\int r^{-3}dr=-r^{-2}/2$):
 $\psi=P\cos\theta/r^2+f(\theta,\varphi)$.
 The equation $-r^{-1}\partial_\theta\psi=P\sin\theta/r^3$
-gives $\partial_\theta f=0$, and $F_\varphi=0$ gives
+becomes $P\sin\theta/r^3-r^{-1}\partial_\theta f=P\sin\theta/r^3$, so
+$\partial_\theta f=0$, and $F_\varphi=0$ gives
 $\partial_\varphi f=0$. Hence
 \[
 \boxed{\psi=P\cos\theta/r^2+C}.
@@ -4616,35 +5039,48 @@ from the origin, so the force is conservative there.
 \end{enumerate}
 \erratum{Use a regular local spherical chart with a chosen azimuth branch; the potentials are not globally regular single-valued potentials on all of $r>0$.}
 \solution
-\textbf{(a)} For $A_\varphi=-\cot\theta/r$, $A_r=A_\theta=0$,
+\textbf{(a)} For $A_\varphi=-\cot\theta/r$, $A_r=A_\theta=0$, the
+spherical curl components of Exercise 3.10.23 give
 \[
 (\nabla\times\mathbf A)_r
 =\frac1{r\sin\theta}\partial_\theta(\sin\theta A_\varphi)
-=\frac1{r\sin\theta}\partial_\theta(-\cos\theta/r)=\frac1{r^2}.
+=\frac1{r\sin\theta}\partial_\theta(-\cos\theta/r)
+=\frac1{r\sin\theta}\cdot\frac{\sin\theta}r=\frac1{r^2}.
 \]
 The other nontrivial candidate is
-$(\nabla\times\mathbf A)_\theta=-r^{-1}\partial_r(rA_\varphi)=0$,
-and the $\varphi$ component is zero.
-\textbf{(b)} Use
+$(\nabla\times\mathbf A)_\theta=-r^{-1}\partial_r(rA_\varphi)
+=-r^{-1}\partial_r(-\cot\theta)=0$,
+and the $\varphi$ component
+$r^{-1}[\partial_r(rA_\theta)-\partial_\theta A_r]$ is zero.
+Hence $\nabla\times\mathbf A=\hat{\mathbf e}_r/r^2$.
+\textbf{(b)} With $\rho=r\sin\theta$ and $z=r\cos\theta$, use
 $\cot\theta=z/\rho$, $\rho^2=x^2+y^2$, and
-$\hat{\mathbf e}_\varphi=(-y/\rho,x/\rho,0)$:
+$\hat{\mathbf e}_\varphi=(-\sin\varphi,\cos\varphi,0)=(-y/\rho,x/\rho,0)$:
 \[
 \mathbf A=-\frac{z}{r\rho}(-y/\rho,x/\rho,0)
 =\left(\frac{yz}{r(x^2+y^2)},-\frac{xz}{r(x^2+y^2)},0\right).
 \]
+This is the vector potential of Exercise 3.9.5.
 \textbf{(c)} For $A_\theta=-\varphi\sin\theta/r$,
 $A_r=A_\varphi=0$,
 \[
 (\nabla\times\mathbf A)_r
-=-\frac1{r\sin\theta}\partial_\varphi A_\theta=\frac1{r^2},
+=-\frac1{r\sin\theta}\partial_\varphi A_\theta
+=\frac1{r\sin\theta}\cdot\frac{\sin\theta}r=\frac1{r^2},
 \qquad
 (\nabla\times\mathbf A)_\varphi
-=\frac1r\partial_r(rA_\theta)=0.
+=\frac1r\partial_r(rA_\theta)=\frac1r\partial_r(-\varphi\sin\theta)=0.
 \]
-The $\theta$ component is also zero.
+The $\theta$ component
+$r^{-1}[(\sin\theta)^{-1}\partial_\varphi A_r-\partial_r(rA_\varphi)]$
+is also zero.
 \erratum{Both are local potentials: (a) excludes the polar axis,
 and (c) requires an azimuthal branch. Neither is a globally regular
-single-valued potential for the monopole field.}
+single-valued potential for the monopole field, and none can be: for
+such an $\mathbf A$ on $r>0$, Stokes' theorem on the upper and lower
+hemispheres of the unit sphere (both bounded by the equator, traversed
+in opposite senses) would make the total flux of $\nabla\times\mathbf A$
+through the sphere zero, whereas the flux of $\hat{\mathbf e}_r/r^2$ is $4\pi$.}
 Indeed increasing $\varphi$ by $2\pi$ changes the latter potential by
 $-2\pi\sin\theta\,\hat{\mathbf e}_\theta/r=\nabla(2\pi\cos\theta)$.
 The curl is unchanged within overlapping regular patches, while the
@@ -4666,15 +5102,26 @@ The dipole moment is constant and $r>0$. Apply the scalar product rule:
 \left[r^{-3}\nabla(\mathbf p\cdot\mathbf r)
 +(\mathbf p\cdot\mathbf r)\nabla(r^{-3})\right].
 \]
-Here $\nabla(\mathbf p\cdot\mathbf r)=\mathbf p$ and
-$\nabla r^{-3}=-3r^{-4}\hat{\mathbf e}_r=-3\mathbf r/r^5$.
+Here $\nabla(\mathbf p\cdot\mathbf r)=\mathbf p$, since
+$\partial_i(p_jx_j)=p_i$ for constant $p_j$, and
+$\nabla r^{-3}=-3r^{-4}\nabla r=-3r^{-4}\hat{\mathbf e}_r=-3\mathbf r/r^5$.
 Thus
+\[
+\mathbf E=-\nabla\psi=\frac1{4\pi\epsilon_0}
+\left[\frac{3(\mathbf p\cdot\mathbf r)\mathbf r}{r^5}-\frac{\mathbf p}{r^3}\right],
+\]
+and writing $\mathbf r=r\hat{\mathbf e}_r$,
 \[
 \boxed{\mathbf E(\mathbf r)=\frac1{4\pi\epsilon_0r^3}
 \left[3(\mathbf p\cdot\hat{\mathbf e}_r)\hat{\mathbf e}_r-\mathbf p\right]}.
 \]
 For $\mathbf p=p\hat{\mathbf e}_z
 =p(\cos\theta\,\hat{\mathbf e}_r-\sin\theta\,\hat{\mathbf e}_\theta)$,
+$\mathbf p\cdot\hat{\mathbf e}_r=p\cos\theta$ and the bracket is
+$3p\cos\theta\,\hat{\mathbf e}_r-p\cos\theta\,\hat{\mathbf e}_r
++p\sin\theta\,\hat{\mathbf e}_\theta$, so
 this becomes
 $\mathbf E=p(2\cos\theta\,\hat{\mathbf e}_r+\sin\theta\,\hat{\mathbf e}_\theta)/
-(4\pi\epsilon_0r^3)$, providing the component check against 3.10.35.
+(4\pi\epsilon_0r^3)$. This is the field of Exercise 3.10.35 with
+$P=p/(4\pi\epsilon_0)$, and correspondingly
+$\psi=p\cos\theta/(4\pi\epsilon_0r^2)$ is the potential found there.
