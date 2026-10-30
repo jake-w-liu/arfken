@@ -1655,36 +1655,39 @@ $i(\mathsf{C}-\mathsf{C}^{\dagger})$ are Hermitian. This means that a
 non-Hermitian matrix may be resolved into two Hermitian parts,
 \[
 \mathsf{C}=\frac{1}{2}(\mathsf{C}+\mathsf{C}^{\dagger})
-+\frac{1}{2i}\erratum{i}(\mathsf{C}-\mathsf{C}^{\dagger}).
++\frac{1}{2i}\,i(\mathsf{C}-\mathsf{C}^{\dagger}).
 \]
 This decomposition of a matrix into two Hermitian matrix parts parallels the
 decomposition of a complex number $z$ into $x+iy$, where $x=(z+z^{*})/2$ and
 $y=(z-z^{*})/2i$.
 \solution
-\erratum{The transcription omitted the extra factor $i$ in the
-second term of the displayed decomposition on textbook p.~119.
-The corrected expression above equals $H+iK$, with $H,K$
-Hermitian; the whole second summand $iK$ need not be Hermitian.}
 For any square $C$, whether or not it is Hermitian, set
 \[
 H=\frac{C+C^\dagger}{2},\qquad K=\frac{C-C^\dagger}{2i}.
 \]
-Taking adjoints,
+Taking adjoints with $(C^\dagger)^\dagger=C$ and
+$(\lambda X)^\dagger=\lambda^*X^\dagger$, where $(1/2i)^*=1/(-2i)$,
 \[
 H^\dagger=\frac{C^\dagger+C}{2}=H,\qquad
 K^\dagger=\frac{C^\dagger-C}{-2i}
 =\frac{C-C^\dagger}{2i}=K.
 \]
-Also $C+C^\dagger=2H$ and $i(C-C^\dagger)=-2K$, so both
-matrices requested in the first sentence are Hermitian.
-Recombining,
+Also $C+C^\dagger=2H$ and $i(C-C^\dagger)=i\cdot2iK=-2K$. Real
+multiples of Hermitian matrices are Hermitian, so both matrices
+requested in the first sentence are Hermitian.
+Recombining, with $iK=i(C-C^\dagger)/(2i)=(C-C^\dagger)/2$,
 \[
 H+iK=\frac{C+C^\dagger}{2}+\frac{C-C^\dagger}{2}=C.
 \]
-This is the matrix analogue of $z=\operatorname{Re}z+i\operatorname{Im}z$.
-It is unique: if $C=H_1+iK_1$ with Hermitian $H_1,K_1$, then
-$C^\dagger=H_1-iK_1$; addition and subtraction recover the displayed
-formulas for $H,K$.
+This is the displayed decomposition: its second summand is the
+Hermitian matrix $i(C-C^\dagger)=-2K$ times the scalar $1/(2i)$, that
+is, $iK$. The summand $iK=(C-C^\dagger)/2$ itself is anti-Hermitian,
+just as $iy$ is imaginary; the two Hermitian parts are $H$ and $K$,
+the matrix analogues of $x=\operatorname{Re}z$ and
+$y=\operatorname{Im}z$.
+The decomposition is unique: if $C=H_1+iK_1$ with Hermitian
+$H_1,K_1$, then $C^\dagger=H_1-iK_1$; adding and subtracting give
+$C+C^\dagger=2H_1$ and $C-C^\dagger=2iK_1$, so $H_1=H$ and $K_1=K$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1695,12 +1698,14 @@ noncommuting Hermitian matrices:
 \]
 Prove that $\mathsf{C}$ is Hermitian.
 \solution
-Taking adjoints of $AB-BA=iC$ gives
+Take adjoints of both sides of $AB-BA=iC$. By the reversed product
+rule $(XY)^\dagger=Y^\dagger X^\dagger$ (Exercise 2.2.32) and
+$A^\dagger=A$, $B^\dagger=B$, the left side gives
 \[
 (AB-BA)^\dagger=B^\dagger A^\dagger-A^\dagger B^\dagger
-=BA-AB=-iC,
+=BA-AB=-(AB-BA)=-iC,
 \]
-whereas $(iC)^\dagger=-iC^\dagger$.
+whereas the right side gives $(iC)^\dagger=i^*C^\dagger=-iC^\dagger$.
 Therefore $-iC^\dagger=-iC$, and division by $-i$ proves
 $\boxed{C^\dagger=C}$.
 
@@ -1711,9 +1716,12 @@ each Hermitian. Find a necessary and sufficient condition for their product
 $\mathsf{AB}$ to be Hermitian.
 \par\nobreak\hfill\emph{ANS.}\enspace $[\mathsf{A},\mathsf{B}]=0$.
 \solution
-Hermiticity of $A,B$ gives $(AB)^\dagger=B^\dagger A^\dagger=BA$.
-Thus $AB$ is Hermitian precisely when $AB=(AB)^\dagger=BA$,
-or $\boxed{[A,B]=0}$. This proves necessity and sufficiency.
+By the reversed product rule (Exercise 2.2.32) and Hermiticity of
+$A,B$, $(AB)^\dagger=B^\dagger A^\dagger=BA$.
+If $AB$ is Hermitian, then $AB=(AB)^\dagger=BA$; conversely, if
+$AB=BA$, then $(AB)^\dagger=BA=AB$. Thus $AB$ is Hermitian precisely
+when $AB=BA$, or $\boxed{[A,B]=0}$. This proves necessity and
+sufficiency.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1733,25 +1741,39 @@ Hence $V$ is unitary.
 matrices is unitary.
 \solution
 \erratum{``Direct product'' here means the tensor product defined
-in the text. The manual instead displays the proof for the ordinary
-product $UV$; the double-index proof below supplies the requested result.}
+in the text. The Instructor's Manual instead displays the proof for
+the ordinary product $UV$; the double-index proof below supplies the
+requested result.}
 Let unitary $U,V$ have orders $m,n$. Their direct (Kronecker)
-product has entries $W_{(i,a),(j,b)}=U_{ij}V_{ab}$. Thus
+product $W=U\otimes V$ has rows and columns labeled by index pairs,
+with entries $W_{(i,a),(j,b)}=U_{ij}V_{ab}$. Its adjoint has entries
+$(W^\dagger)_{(j,b),(i,a)}=W^*_{(i,a),(j,b)}=U_{ij}^*V_{ab}^*$, and a
+matrix product sums over the intermediate pair $(i,a)$. Thus
 \[
 \begin{aligned}
 (W^\dagger W)_{(j,b),(k,c)}
-&=\sum_{i=1}^m\sum_{a=1}^n U_{ij}^*V_{ab}^*U_{ik}V_{ac}\\
-&=\left(\sum_iU_{ij}^*U_{ik}\right)
-\left(\sum_aV_{ab}^*V_{ac}\right)=\delta_{jk}\delta_{bc}.
+&=\sum_{i=1}^m\sum_{a=1}^n U_{ij}^*V_{ab}^*U_{ik}V_{ac}
+=\left(\sum_iU_{ij}^*U_{ik}\right)
+\left(\sum_aV_{ab}^*V_{ac}\right)\\
+&=(U^\dagger U)_{jk}(V^\dagger V)_{bc}=\delta_{jk}\delta_{bc}.
 \end{aligned}
 \]
-Therefore $W^\dagger W=I_{mn}$. Equivalently,
+Therefore $W^\dagger W=I_{mn}$. In the reverse order the sum runs
+over the pair $(j,b)$:
+\[
+(WW^\dagger)_{(i,a),(k,c)}
+=\sum_{j,b}U_{ij}V_{ab}U_{kj}^*V_{cb}^*
+=(UU^\dagger)_{ik}(VV^\dagger)_{ac}=\delta_{ik}\delta_{ac},
+\]
+so $WW^\dagger=I_{mn}$ as well, proving unitarity of the direct
+product. In matrix notation, the entry formula for $W^\dagger$ says
+$(U\otimes V)^\dagger=U^\dagger\otimes V^\dagger$, and with the
+direct-product rule $(A\otimes B)(C\otimes D)=AC\otimes BD$ the same
+calculation reads
 \[
 (U\otimes V)^\dagger(U\otimes V)
 =(U^\dagger U)\otimes(V^\dagger V)=I_m\otimes I_n=I_{mn}.
 \]
-The reverse product is the identity by the same calculation, proving
-unitarity of the direct product.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1763,11 +1785,19 @@ vector, show that
 \]
 where $\mathbf{1}_{2}$ is a $2\times2$ unit matrix.
 \solution
-\erratum{In the manual's expansion, the term multiplying $p_yp_z$
-must contain $\sigma_2\sigma_3+\sigma_3\sigma_2$, not the repeated
-$\sigma_1\sigma_2+\sigma_2\sigma_1$. Both vanish, so the printed
-final result is unaffected.}
-The scalar components $p_i$ commute. Group the cross terms:
+\erratum{In the Instructor's Manual's expansion, the term multiplying
+$p_yp_z$ must contain $\sigma_2\sigma_3+\sigma_3\sigma_2$, not the
+repeated $\sigma_1\sigma_2+\sigma_2\sigma_1$. Both vanish, so the
+printed final result is unaffected.}
+The scalar components $p_i$ commute with each other and with the
+matrices, so
+\[
+(\boldsymbol{\sigma}\cdot\mathbf p)^2
+=\Bigl(\sum_ip_i\sigma_i\Bigr)\Bigl(\sum_jp_j\sigma_j\Bigr)
+=\sum_{i,j}p_ip_j\,\sigma_i\sigma_j.
+\]
+Collect the three terms with $i=j$ and, for each pair $i<j$, the
+two terms $(i,j)$ and $(j,i)$:
 \[
 \begin{aligned}
 (\boldsymbol{\sigma}\cdot\mathbf p)^2
@@ -1777,7 +1807,8 @@ The scalar components $p_i$ commute. Group the cross terms:
 &+p_2p_3(\sigma_2\sigma_3+\sigma_3\sigma_2).
 \end{aligned}
 \]
-Each square is $I_2$ and each mixed anticommutator is zero:
+By Exercise 2.2.11, each square is $\sigma_i^2=I_2$ and each mixed
+anticommutator $\sigma_i\sigma_j+\sigma_j\sigma_i$ ($i\ne j$) is zero:
 \[
 \boxed{(\boldsymbol{\sigma}\cdot\mathbf p)^2
 =(p_1^2+p_2^2+p_3^2)I_2}.
@@ -1793,29 +1824,43 @@ products, Eqs.~(2.57) and (2.58), to show that the four matrices
 $\boldsymbol{\gamma}^{\mu}$, $\mu=0,1,2,3$, satisfy the conditions listed in
 Eqs.~(2.74) and (2.75).
 \solution
-Explicitly, the referenced definitions are
+Explicitly, the Dirac matrices of Eqs.~(2.70) and (2.72) are
 \[
-J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}=i\sigma_2,\qquad
 \gamma^0=\sigma_3\otimes I_2,\qquad
-\gamma^i=J\otimes\sigma_i\quad(i=1,2,3).
+\gamma^i=J\otimes\sigma_i\quad(i=1,2,3),\qquad
+J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}=i\sigma_2.
 \]
 The direct-product rule is $(A\otimes B)(C\otimes D)=AC\otimes BD$.
-Since $J^2=-I_2$ and $\sigma_i^2=I_2$,
+Since $J^2=(i\sigma_2)^2=-\sigma_2^2=-I_2$ and $\sigma_i^2=I_2$
+(Exercise 2.2.11),
 \[
-(\gamma^0)^2=I_2\otimes I_2=I_4,\qquad
-(\gamma^i)^2=-I_2\otimes I_2=-I_4.
+(\gamma^0)^2=\sigma_3^2\otimes I_2^2=I_2\otimes I_2=I_4,\qquad
+(\gamma^i)^2=J^2\otimes\sigma_i^2=-I_2\otimes I_2=-I_4.
 \]
-Also $\sigma_3J=\sigma_1$ and $J\sigma_3=-\sigma_1$, giving
+For the mixed products the rule gives
+$\gamma^0\gamma^i=(\sigma_3\otimes I_2)(J\otimes\sigma_i)
+=\sigma_3J\otimes\sigma_i$ and
+$\gamma^i\gamma^0=J\sigma_3\otimes\sigma_i$, where
+\[
+\sigma_3J=\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+\begin{pmatrix}0&1\\-1&0\end{pmatrix}
+=\begin{pmatrix}0&1\\1&0\end{pmatrix}=\sigma_1,\qquad
+J\sigma_3=\begin{pmatrix}0&-1\\-1&0\end{pmatrix}=-\sigma_1.
+\]
+Hence
 \[
 \gamma^0\gamma^i+\gamma^i\gamma^0
 =(\sigma_3J+J\sigma_3)\otimes\sigma_i=0.
 \]
-For spatial indices,
+For spatial indices $\gamma^i\gamma^j=J^2\otimes\sigma_i\sigma_j
+=-I_2\otimes\sigma_i\sigma_j$, so by Exercise 2.2.11(c)
 \[
 \gamma^i\gamma^j+\gamma^j\gamma^i
-=J^2\otimes(\sigma_i\sigma_j+\sigma_j\sigma_i)
-=-2\delta_{ij}I_4.
+=-I_2\otimes(\sigma_i\sigma_j+\sigma_j\sigma_i)
+=-I_2\otimes2\delta_{ij}I_2=-2\delta_{ij}I_4.
 \]
+For $i=j$ this repeats $(\gamma^i)^2=-I_4$; for $i\ne j$ it is the
+anticommutation of two spatial matrices.
 These are the conditions (2.74)--(2.75), compactly
 \[
 \boxed{\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}I_4,\quad
@@ -1828,19 +1873,23 @@ g=\operatorname{diag}(1,-1,-1,-1)}.
 anticommutes with all four $\boldsymbol{\gamma}^{\mu}$.
 \solution
 By definition, $\gamma^5=i\gamma^0\gamma^1\gamma^2\gamma^3$.
-From 2.2.41 and $\sigma_1\sigma_2\sigma_3=iI_2$,
+Use the tensor forms of 2.2.41 and the direct-product rule twice,
+with $J^3=J^2J=-J$ and $\sigma_1\sigma_2\sigma_3=(i\sigma_3)\sigma_3=iI_2$
+(Exercise 2.2.11):
 \[
 \gamma^1\gamma^2\gamma^3
 =J^3\otimes(\sigma_1\sigma_2\sigma_3)
 =(-J)\otimes(iI_2)=-iJ\otimes I_2.
 \]
-Hence
+Hence, since $i(-i)=1$ and $\sigma_3J=\sigma_1$ (2.2.41),
 \[
-\gamma^5=(\sigma_3J)\otimes I_2=\sigma_1\otimes I_2
+\gamma^5=i(\sigma_3\otimes I_2)(-iJ\otimes I_2)
+=(\sigma_3J)\otimes I_2=\sigma_1\otimes I_2
 =\begin{pmatrix}0&I_2\\I_2&0\end{pmatrix}.
 \]
-Since $\sigma_1\sigma_3=-\sigma_3\sigma_1$ and
-$\sigma_1J=-J\sigma_1$,
+Now $\sigma_1\sigma_3=-\sigma_3\sigma_1$ (Exercise 2.2.11) and, with
+$J=i\sigma_2$, $\sigma_1J=i\sigma_1\sigma_2=-i\sigma_2\sigma_1=-J\sigma_1$.
+By the direct-product rule, therefore,
 \[
 \{\gamma^5,\gamma^0\}
 =(\sigma_1\sigma_3+\sigma_3\sigma_1)\otimes I_2=0,
@@ -1870,42 +1919,56 @@ definitions, show that
   \gamma^{\nu}\gamma^{\mu}=-2\gamma^{\nu}\gamma^{\beta}\gamma^{\alpha}$.
 \end{enumerate}
 \solution
-\erratum{The lowering definition uses the dummy index $\nu$ while
-$\mu$ is free. The textbook prints $\gamma^\mu$ inside an unindexed
-sum; the explicit contraction above removes that ambiguity.
-For this diagonal metric it also equals $g_{\mu\mu}\gamma^\mu$
-with no sum on $\mu$. In (b), a scalar denotes that scalar times
-$I_4$, made explicit in the statement.}
+\erratum{The textbook prints the lowering sum without a summation
+index and with $\gamma^\mu$ in the summand, although $\mu$ is the
+free index. The intended definition is the contraction over the
+dummy index $\nu$ shown above; for this diagonal metric it gives
+$\gamma_\mu=g_{\mu\mu}\gamma^\mu$ with no sum on $\mu$. In (b), a
+scalar denotes that scalar times $I_4$, made explicit in the
+statement.}
 The sums in (a)--(c) run over $\mu=0,1,2,3$.
 Lowering an index gives $\gamma_0=\gamma^0$, $\gamma_i=-\gamma^i$.
-The Clifford relation implies
+The Clifford relation $\{\gamma^\mu,\gamma^\alpha\}=2g^{\mu\alpha}I_4$
+of 2.2.41 implies
 \[
-\{\gamma_\mu,\gamma^\alpha\}=2\delta_\mu^\alpha I_4,\qquad
-\sum_\mu\gamma_\mu\gamma^\mu=4I_4.
+\{\gamma_\mu,\gamma^\alpha\}=g_{\mu\mu}\{\gamma^\mu,\gamma^\alpha\}
+=2g_{\mu\mu}g^{\mu\alpha}I_4=2\delta_\mu^\alpha I_4,\qquad
+\sum_\mu\gamma_\mu\gamma^\mu=4I_4,
 \]
-For the second identity, the time term is $I_4$ and each spatial
-term is $-(\gamma^i)^2=I_4$.
+because $g^{\mu\alpha}=0$ for $\alpha\ne\mu$ and
+$g_{\mu\mu}g^{\mu\mu}=(\pm1)^2=1$.
+For the second identity, the time term is $(\gamma^0)^2=I_4$ and each
+spatial term is $-(\gamma^i)^2=I_4$.
 
-\textbf{(a)} Move $\gamma_\mu$ past the first factor:
+\textbf{(a)} Move $\gamma_\mu$ past the first factor with
+$\gamma_\mu\gamma^\alpha=2\delta_\mu^\alpha I_4-\gamma^\alpha\gamma_\mu$;
+in the first term the Kronecker delta keeps only $\mu=\alpha$:
 \[
 \begin{aligned}
 \sum_\mu\gamma_\mu\gamma^\alpha\gamma^\mu
-&=\sum_\mu(2\delta_\mu^\alpha I_4-\gamma^\alpha\gamma_\mu)\gamma^\mu\\
+&=\sum_\mu(2\delta_\mu^\alpha I_4-\gamma^\alpha\gamma_\mu)\gamma^\mu
+=2\gamma^\alpha-\gamma^\alpha\sum_\mu\gamma_\mu\gamma^\mu\\
 &=2\gamma^\alpha-\gamma^\alpha(4I_4)
 =\boxed{-2\gamma^\alpha}.
 \end{aligned}
 \]
-\textbf{(b)} Use the same step and then (a):
+\textbf{(b)} Use the same step and then (a) with $\alpha$ replaced
+by $\beta$:
 \[
 \begin{aligned}
 \sum_\mu\gamma_\mu\gamma^\alpha\gamma^\beta\gamma^\mu
+&=\sum_\mu(2\delta_\mu^\alpha I_4-\gamma^\alpha\gamma_\mu)
+\gamma^\beta\gamma^\mu\\
 &=2\gamma^\beta\gamma^\alpha
 -\gamma^\alpha\sum_\mu\gamma_\mu\gamma^\beta\gamma^\mu\\
 &=2\gamma^\beta\gamma^\alpha+2\gamma^\alpha\gamma^\beta
+=2\{\gamma^\alpha,\gamma^\beta\}
 =\boxed{4g^{\alpha\beta}I_4}.
 \end{aligned}
 \]
-\textbf{(c)} Use (b) on the contracted part:
+\textbf{(c)} Use the same step, then (b) with $(\alpha,\beta)$
+replaced by $(\beta,\nu)$, and finally the Clifford relation in the
+form $\gamma^\beta\gamma^\nu-2g^{\beta\nu}I_4=-\gamma^\nu\gamma^\beta$:
 \[
 \begin{aligned}
 \sum_\mu\gamma_\mu\gamma^\alpha\gamma^\beta\gamma^\nu\gamma^\mu
@@ -1927,21 +1990,28 @@ $\boldsymbol{\gamma}^{5}$ is given in Eq.~(2.76), show that
 \[
 \mathsf{M}^{2}=\mathsf{M}.
 \]
-\erratum{This equation remains valid for a replacement matrix $\Gamma$ precisely when $\Gamma^2=\mathbf1_4$; it does not hold for every Dirac matrix listed in Eq.~(2.76).}
+\erratum{The textbook adds that this equation still holds when
+$\boldsymbol{\gamma}^5$ is replaced by any other Dirac matrix listed in
+Eq.~(2.76). That is true precisely for the replacements $\Gamma$ with
+$\Gamma^2=\mathbf1_4$, not for every Dirac matrix (see the solution).}
 \solution
-Since $\gamma^5=\sigma_1\otimes I_2$, $(\gamma^5)^2=I_4$. Therefore
+Since $\gamma^5=\sigma_1\otimes I_2$ (Exercise 2.2.42),
+$(\gamma^5)^2=\sigma_1^2\otimes I_2=I_4$. Expanding the square, in
+which $I_4$ commutes with $\gamma^5$,
 \[
 M^2=\tfrac14(I_4+2\gamma^5+(\gamma^5)^2)
 =\tfrac14(2I_4+2\gamma^5)=\tfrac12(I_4+\gamma^5)=M.
 \]
-\erratum{The printed note is too broad: the conclusion does not hold
-for every matrix of Eq.~(2.76). For $M_\Gamma=(I_4+\Gamma)/2$, the necessary and
-sufficient condition is $\Gamma^2=I_4$.}
-Indeed,
+For the note in the statement, let $\Gamma$ be any $4\times4$ matrix
+and $M_\Gamma=(I_4+\Gamma)/2$. The same expansion gives
+$M_\Gamma^2=\tfrac14(I_4+2\Gamma+\Gamma^2)$, so
 \[
-M_\Gamma^2-M_\Gamma=\frac{\Gamma^2-I_4}{4}.
+M_\Gamma^2-M_\Gamma
+=\frac{I_4+2\Gamma+\Gamma^2}{4}-\frac{2I_4+2\Gamma}{4}
+=\frac{\Gamma^2-I_4}{4},
 \]
-The squares of the full basis are
+and $M_\Gamma^2=M_\Gamma$ exactly when $\Gamma^2=I_4$.
+Each of the 16 Dirac matrices squares to $\pm I_4$:
 \[
 \begin{array}{c|c}
 \Gamma&\Gamma^2\\\hline
@@ -1951,9 +2021,17 @@ I_4,\ \gamma^5,\ \gamma^0,\ \gamma^5\gamma^i,\
 \end{array}
 \]
 where $\sigma^{\mu\nu}=i\gamma^\mu\gamma^\nu$ for $\mu<\nu$.
-For example $(\gamma^5\gamma^\mu)^2=-(\gamma^\mu)^2$, and
-$(i\gamma^\mu\gamma^\nu)^2=(\gamma^\mu)^2(\gamma^\nu)^2$.
-For $\Gamma^2=-I_4$, the error is $M_\Gamma^2-M_\Gamma=-I_4/2$.
+The entries follow from $(\gamma^0)^2=(\gamma^5)^2=I_4$,
+$(\gamma^i)^2=-I_4$, and the anticommutation relations of
+Exercises 2.2.41 and 2.2.42. For example, moving the second
+$\gamma^5$ to the left past $\gamma^\mu$,
+$(\gamma^5\gamma^\mu)^2=\gamma^5\gamma^\mu\gamma^5\gamma^\mu
+=-(\gamma^5)^2(\gamma^\mu)^2=-(\gamma^\mu)^2$, and, for $\mu\ne\nu$,
+$(i\gamma^\mu\gamma^\nu)^2=-\gamma^\mu\gamma^\nu\gamma^\mu\gamma^\nu
+=\gamma^\mu\gamma^\mu\gamma^\nu\gamma^\nu=(\gamma^\mu)^2(\gamma^\nu)^2$.
+Thus the replacement works for the matrices in the first row of the
+table and fails for the seven in the second row, for which
+$M_\Gamma^2-M_\Gamma=-I_4/2$.
 Multiplying such a $\Gamma$ by $i$ makes its square $+I_4$ and
 restores the projector construction.
 
@@ -1962,20 +2040,30 @@ restores the projector construction.
 \noindent\textbf{2.2.45}\quad Prove that the 16 Dirac matrices form a linearly
 independent set.
 \solution
-Let $\sigma_0=I_2$. From the Pauli products,
+Let $\sigma_0=I_2$. All four $\sigma_a$ are Hermitian, so
+$\sigma_a^\dagger\sigma_b=\sigma_a\sigma_b$, and the Pauli products of
+Exercise 2.2.11 give
 \[
 \operatorname{tr}(\sigma_a^\dagger\sigma_b)=2\delta_{ab},
 \qquad a,b=0,1,2,3.
 \]
-For $a=b$ the product is $I_2$; for distinct indices the product
-is a traceless Pauli matrix or $i$ times one. Also
+For $a=b$ the product is $\sigma_a^2=I_2$, of trace $2$; for distinct
+indices the product is a traceless Pauli matrix or $\pm i$ times one.
+Also, the diagonal entries of $X\otimes Y$ are the products
+$X_{rr}Y_{ss}$, so
 \[
 \operatorname{tr}(X\otimes Y)=\sum_{r,s}X_{rr}Y_{ss}
 =\operatorname{tr}X\,\operatorname{tr}Y.
 \]
-Therefore the 16 tensor products $T_{ab}=\sigma_a\otimes\sigma_b$ obey
+Therefore the 16 tensor products $T_{ab}=\sigma_a\otimes\sigma_b$ obey,
+by $(X\otimes Y)^\dagger=X^\dagger\otimes Y^\dagger$ (Exercise 2.2.39)
+and the direct-product rule,
 \[
-\operatorname{tr}(T_{ab}^\dagger T_{cd})=4\delta_{ac}\delta_{bd}.
+\operatorname{tr}(T_{ab}^\dagger T_{cd})
+=\operatorname{tr}(\sigma_a^\dagger\sigma_c\otimes\sigma_b^\dagger\sigma_d)
+=\operatorname{tr}(\sigma_a^\dagger\sigma_c)\,
+\operatorname{tr}(\sigma_b^\dagger\sigma_d)
+=4\delta_{ac}\delta_{bd}.
 \]
 The explicit correspondence with Eq.~(2.76) is
 \[
@@ -1993,15 +2081,39 @@ I_4&\sigma_0\otimes\sigma_0\\
 \sigma_0\otimes\sigma_1
 \end{array}
 \]
-For example $\gamma^5\gamma^i=\sigma_1(i\sigma_2)\otimes\sigma_i
-=-\sigma_3\otimes\sigma_i$, and
-$\sigma^{ij}=-iI_2\otimes\sigma_i\sigma_j
-=\varepsilon_{ijk}I_2\otimes\sigma_k$.
-The table uses each pair $(a,b)$ once with a phase of magnitude $1$,
-so $\operatorname{tr}(\Gamma_r^\dagger\Gamma_s)=4\delta_{rs}$.
+The first three rows are $I_4$ and the forms of $\gamma^5$ and
+$\gamma^0$ found in Exercises 2.2.41 and 2.2.42, and the row of
+$\gamma^i$ is $\gamma^i=J\otimes\sigma_i$ with $J=i\sigma_2$. The
+others follow from the direct-product rule and the Pauli products of
+Exercise 2.2.11:
+\[
+\begin{aligned}
+\gamma^5\gamma^0&=\sigma_1\sigma_3\otimes\sigma_0
+=-i\sigma_2\otimes\sigma_0,\qquad
+\gamma^5\gamma^i=\sigma_1(i\sigma_2)\otimes\sigma_i
+=-\sigma_3\otimes\sigma_i,\\
+\sigma^{0i}&=i\gamma^0\gamma^i=i\,\sigma_3(i\sigma_2)\otimes\sigma_i
+=-\sigma_3\sigma_2\otimes\sigma_i=i\sigma_1\otimes\sigma_i,\\
+\sigma^{ij}&=i\gamma^i\gamma^j=i(i\sigma_2)^2\otimes\sigma_i\sigma_j
+=-iI_2\otimes\sigma_i\sigma_j=\varepsilon_{ijk}I_2\otimes\sigma_k,
+\end{aligned}
+\]
+where in the last line $i<j$, $k$ is the remaining index, and
+$\sigma_i\sigma_j=i\varepsilon_{ijk}\sigma_k$.
+The table uses each pair $(a,b)$ exactly once, so each Dirac matrix
+is $\Gamma_r=\eta_rT_{a_rb_r}$ with a different pair $(a_r,b_r)$ and
+a coefficient $\eta_r\in\{\pm1,\pm i\}$ of modulus $1$. Hence
+\[
+\operatorname{tr}(\Gamma_r^\dagger\Gamma_s)
+=\eta_r^*\eta_s\operatorname{tr}(T_{a_rb_r}^\dagger T_{a_sb_s})
+=4|\eta_r|^2\delta_{rs}=4\delta_{rs}.
+\]
 If $\sum_sc_s\Gamma_s=0$, multiply by $\Gamma_r^\dagger$ and
 take the trace: $4c_r=0$ for every $r$. This proves linear
 independence over $\mathbb C$, and hence over $\mathbb R$.
+Other sign or phase conventions (for example $\gamma^0\gamma^5
+=-\gamma^5\gamma^0$ in place of $\gamma^5\gamma^0$) only change some
+$\eta_r$ and do not affect the argument.
 The complex $4\times4$ matrix space has dimension $16$, so these
 matrices also span it.
 
@@ -2018,13 +2130,27 @@ show that
 c_{i}\sim\mathrm{trace}(\mathsf{A}\Gamma_{i}).
 \]
 \solution
-Write $\Gamma_r^2=s_rI_4$, where $s_r=\pm1$ as in 2.2.44.
-The tensor forms in 2.2.45 give $\Gamma_r^\dagger=s_r\Gamma_r$
-and
+To avoid confusion with the imaginary unit, label the Dirac matrices
+$\Gamma_r$, $r=1,\ldots,16$, and the coefficients $c_r$.
+Write $\Gamma_r^2=s_rI_4$, where $s_r=\pm1$ as in the table of 2.2.44.
+In 2.2.45 each $\Gamma_r=\eta_rT_r$, where $T_r$ is one of the
+products $\sigma_a\otimes\sigma_b$ and $\eta_r\in\{\pm1,\pm i\}$.
+Each $T_r$ is Hermitian, and $T_r^2=\sigma_a^2\otimes\sigma_b^2=I_4$;
+hence $\Gamma_r^2=\eta_r^2I_4$, so $s_r=\eta_r^2$, and
 \[
-\operatorname{tr}(\Gamma_r\Gamma_j)=4s_r\delta_{rj}.
+\Gamma_r^\dagger=\eta_r^*T_r=\frac{\eta_r^*}{\eta_r}\Gamma_r
+=(\eta_r^*)^2\Gamma_r=s_r\Gamma_r,
+\]
+because $\eta_r^*/\eta_r=(\eta_r^*)^2/|\eta_r|^2$, $|\eta_r|=1$, and
+$(\eta_r^*)^2=(\eta_r^2)^*=s_r$ is real. Since $s_r^2=1$, also
+$\Gamma_r=s_r\Gamma_r^\dagger$, and the trace relation of 2.2.45 gives
+\[
+\operatorname{tr}(\Gamma_r\Gamma_j)
+=s_r\operatorname{tr}(\Gamma_r^\dagger\Gamma_j)=4s_r\delta_{rj}.
 \]
 Multiplying $A=\sum_jc_j\Gamma_j$ by $\Gamma_r$ and taking the trace,
+which is linear and satisfies
+$\operatorname{tr}(\Gamma_j\Gamma_r)=\operatorname{tr}(\Gamma_r\Gamma_j)$,
 \[
 \operatorname{tr}(A\Gamma_r)=
 \sum_jc_j\operatorname{tr}(\Gamma_j\Gamma_r)=4s_rc_r.
@@ -2035,7 +2161,9 @@ Thus the full proportionality, with its normalization and sign, is
 =\frac{s_r}{4}\operatorname{tr}(A\Gamma_r)
 =\frac14\operatorname{tr}(\Gamma_r^\dagger A)}.
 \]
-The sign matters for basis matrices squaring to $-I_4$.
+The last form follows from $s_r\Gamma_r=\Gamma_r^\dagger$ and
+$\operatorname{tr}(A\Gamma_r^\dagger)=\operatorname{tr}(\Gamma_r^\dagger A)$.
+The sign $s_r$ matters for the basis matrices squaring to $-I_4$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2046,24 +2174,43 @@ $\mathsf{C}\boldsymbol{\gamma}^{\mu}\mathsf{C}^{-1}
 =-(\boldsymbol{\gamma}^{\mu})^{T}$.
 \solution
 Use the specified Dirac representation
-$\gamma^0=\sigma_3\otimes I_2$, $\gamma^i=i\sigma_2\otimes\sigma_i$.
-Then
+$\gamma^0=\sigma_3\otimes I_2$, $\gamma^i=i\sigma_2\otimes\sigma_i$
+(Exercise 2.2.41). By the direct-product rule and
+$\sigma_2\sigma_3=i\sigma_1$,
 \[
-C=i\gamma^2\gamma^0=-\sigma_2\sigma_3\otimes\sigma_2
-=-i\sigma_1\otimes\sigma_2,\qquad
-C^2=-I_4,\quad C^{-1}=-C.
+C=i\gamma^2\gamma^0=i\,(i\sigma_2\sigma_3\otimes\sigma_2)
+=-\sigma_2\sigma_3\otimes\sigma_2
+=-i\sigma_1\otimes\sigma_2,
 \]
-The Pauli transposes are $\sigma_1^T=\sigma_1$,
-$\sigma_2^T=-\sigma_2$, $\sigma_3^T=\sigma_3$, giving
+so $C^2=(-i)^2\sigma_1^2\otimes\sigma_2^2=-I_4$ and $C^{-1}=-C$.
+The transpose of a direct product is $(A\otimes B)^T=A^T\otimes B^T$,
+since in the notation of 2.2.39
+$((A\otimes B)^T)_{(k,a),(l,b)}=A_{lk}B_{ba}=(A^T)_{kl}(B^T)_{ab}$.
+The Pauli transposes are
+$\sigma_1^T=\sigma_1$, $\sigma_2^T=-\sigma_2$, $\sigma_3^T=\sigma_3$,
+so $(\gamma^0)^T=\sigma_3\otimes I_2=\gamma^0$ and
+$(\gamma^i)^T=(i\sigma_2)^T\otimes\sigma_i^T=-i\sigma_2\otimes\sigma_i^T$,
+giving
 \[
 (\gamma^0)^T=\gamma^0,\quad(\gamma^2)^T=\gamma^2,\quad
 (\gamma^1)^T=-\gamma^1,\quad(\gamma^3)^T=-\gamma^3.
 \]
-The product $\gamma^2\gamma^0$ anticommutes with $\gamma^0$
-and $\gamma^2$; for example $C\gamma^0=i\gamma^2$ but
-$\gamma^0C=-i\gamma^2$.
-It commutes with $\gamma^1,\gamma^3$, since moving either past its
-two factors gives two minus signs. Therefore
+On the other side, the product $\gamma^2\gamma^0$ anticommutes with
+$\gamma^0$ and $\gamma^2$: by $(\gamma^0)^2=I_4$, $(\gamma^2)^2=-I_4$,
+and $\gamma^0\gamma^2=-\gamma^2\gamma^0$ (Exercise 2.2.41),
+\[
+\begin{aligned}
+C\gamma^0&=i\gamma^2(\gamma^0)^2=i\gamma^2,&
+\gamma^0C&=i\gamma^0\gamma^2\gamma^0=-i\gamma^2(\gamma^0)^2=-i\gamma^2,\\
+C\gamma^2&=i\gamma^2\gamma^0\gamma^2=-i(\gamma^2)^2\gamma^0=i\gamma^0,&
+\gamma^2C&=i(\gamma^2)^2\gamma^0=-i\gamma^0.
+\end{aligned}
+\]
+It commutes with $\gamma^1,\gamma^3$, since moving either to the left
+past the two factors $\gamma^0$ and $\gamma^2$ gives two minus signs:
+$C\gamma^\mu=i\gamma^2\gamma^0\gamma^\mu=i\gamma^\mu\gamma^2\gamma^0
+=\gamma^\mu C$ for $\mu=1,3$. Multiplying $C\gamma^\mu=\mp\gamma^\mu C$
+on the right by $C^{-1}$ gives
 \[
 C\gamma^\mu C^{-1}=
 \begin{cases}-\gamma^\mu,&\mu=0,2,\\+\gamma^\mu,&\mu=1,3.\end{cases}
@@ -2111,19 +2258,28 @@ $\psi_S\simeq-P\psi_L/(2mc)$, and its first would then give
 $\varepsilon\psi_L=-\mathbf p^2\psi_L/(2m)$, where
 $P=\boldsymbol{\sigma}\cdot\mathbf p$.}
 
-\erratum{The manual's block Hamiltonian also omits $c$ from its
-momentum terms. Equation (2.73) has $c\alpha_i p_i$;
+\erratum{In the Instructor's Manual, the block Hamiltonian also omits
+$c$ from its momentum terms. Equation (2.73) has $c\alpha_i p_i$;
 all factors of $c$ are retained below.}
 
-\textbf{(a)} Put $P=\boldsymbol{\sigma}\cdot\mathbf p$. The definitions
+\textbf{(a)} Put $P=\boldsymbol{\sigma}\cdot\mathbf p
+=\sigma_1p_1+\sigma_2p_2+\sigma_3p_3$. The definitions
 in Eqs.~(2.70)--(2.73) give
 \[
 \gamma^0=\begin{pmatrix}I_2&0\\0&-I_2\end{pmatrix},\quad
 \gamma^i=\begin{pmatrix}0&\sigma_i\\-\sigma_i&0\end{pmatrix},\quad
 \alpha_i=\gamma^0\gamma^i=
-\begin{pmatrix}0&\sigma_i\\\sigma_i&0\end{pmatrix}.
+\begin{pmatrix}0&\sigma_i\\\sigma_i&0\end{pmatrix};
 \]
-Thus $(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$ is
+in the block product $\gamma^0\gamma^i$ the upper-right block is
+$I_2\sigma_i=\sigma_i$, the lower-left block is
+$(-I_2)(-\sigma_i)=\sigma_i$, and the diagonal blocks vanish. Hence
+\[
+mc^2\gamma^0+c\sum_i\alpha_ip_i-EI_4
+=\begin{pmatrix}(mc^2-E)I_2&cP\\cP&(-mc^2-E)I_2\end{pmatrix},
+\]
+and with $\Psi=(\psi_L,\psi_S)^T$ the Dirac equation
+$(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$ is
 \[
 \boxed{\begin{pmatrix}
 (mc^2-E)I_2&cP\\cP&(-mc^2-E)I_2
@@ -2132,31 +2288,43 @@ Thus $(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$ is
 Both off-diagonal blocks are the same.
 
 \textbf{(b)} On the positive-energy branch set $E=mc^2+\varepsilon$
-with $|\varepsilon|\ll mc^2$. The two equations become
+with $|\varepsilon|\ll mc^2$. Then $mc^2-E=-\varepsilon$ and
+$-mc^2-E=-(2mc^2+\varepsilon)$, so the two block rows of (a) are the
+two-component equations
 \[
 -\varepsilon\psi_L+cP\psi_S=0,\qquad
 cP\psi_L-(2mc^2+\varepsilon)\psi_S=0.
 \]
 The second gives $\psi_S=cP\psi_L/(2mc^2+\varepsilon)$.
-Substitution into the first yields
+Substitution into the first yields, since $P^2=\mathbf p^2I_2$ with
+$\mathbf p^2=p_1^2+p_2^2+p_3^2$ (Exercise 2.2.40),
 \[
 \varepsilon\psi_L=\frac{c^2P^2}{2mc^2+\varepsilon}\psi_L
 =\frac{c^2\mathbf p^2}{2mc^2+\varepsilon}\psi_L.
 \]
-At leading nonrelativistic order,
-$(2mc^2+\varepsilon)^{-1}\simeq(2mc^2)^{-1}$, giving
+Approximating $-2mc^2-\varepsilon$ by $-2mc^2$, as the problem
+directs, replaces $(2mc^2+\varepsilon)^{-1}$ by $(2mc^2)^{-1}$; since
+$c^2/(2mc^2)=1/(2m)$, this gives
 \[
 \boxed{\frac{\mathbf p^2}{2m}\psi_L=\varepsilon\psi_L}.
 \]
 With $p_i=-i\hbar\partial_i$, this is
 $-\hbar^2\nabla^2\psi_L/(2m)=\varepsilon\psi_L$.
-As an exact check before approximation, for a nonzero momentum
-eigenstate multiply by $2mc^2+\varepsilon$ to obtain
-$\varepsilon(2mc^2+\varepsilon)=c^2\mathbf p^2$, or
+As an exact check before approximation, take a plane wave of
+momentum $\mathbf p$ (so that $\mathbf p$ is a numerical vector)
+with $\psi_L\ne0$. Multiplying by $2mc^2+\varepsilon$ gives
+$\varepsilon(2mc^2+\varepsilon)=c^2\mathbf p^2$; since
+$\varepsilon(2mc^2+\varepsilon)=(E-mc^2)(E+mc^2)=E^2-m^2c^4$, this is
 $E^2=m^2c^4+c^2\mathbf p^2$.
 
-\textbf{(c)} Since $P^\dagger P=\mathbf p^2I_2$, the exact
-eliminated expression gives, for such a state,
+\textbf{(c)} For such a state $2mc^2+\varepsilon=E+mc^2>0$, and the
+exact relation of (b) is $\psi_S=cP\psi_L/(E+mc^2)$. For real
+$\mathbf p$, $P$ is Hermitian, so $P^\dagger P=P^2=\mathbf p^2I_2$ and
+\[
+\|\psi_S\|^2=\frac{c^2\,\psi_L^\dagger P^\dagger P\psi_L}{(E+mc^2)^2}
+=\frac{c^2\mathbf p^2}{(E+mc^2)^2}\,\|\psi_L\|^2.
+\]
+Hence, with $E\simeq mc^2$ in the nonrelativistic regime,
 \[
 \frac{\|\psi_S\|}{\|\psi_L\|}
 =\frac{c|\mathbf p|}{E+mc^2}
@@ -2165,7 +2333,8 @@ eliminated expression gives, for such a state,
 \]
 This explains the names on the positive-energy, nonrelativistic
 branch. At rest the small component vanishes; the ratio need not be
-small in the relativistic regime.
+small in the relativistic regime, and it tends to $1$ as
+$|\mathbf p|\to\infty$, where $E\simeq c|\mathbf p|$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2183,21 +2352,38 @@ This choice for the gamma matrices is called the Weyl representation.
 Write the proposed Weyl matrices as
 \[
 \gamma^0=\sigma_1\otimes I_2,\qquad
-\gamma^i=J\otimes\sigma_i,\quad J=i\sigma_2.
+\gamma^i=J\otimes\sigma_i,\quad
+J=i\sigma_2=\begin{pmatrix}0&1\\-1&0\end{pmatrix};
 \]
-Then $(\gamma^0)^2=I_4$ and
-$(\gamma^i)^2=J^2\otimes I_2=-I_4$.
-Since $\sigma_1J=-\sigma_3$ and $J\sigma_1=\sigma_3$,
+the $\gamma^i$ are the same as in the Dirac representation of 2.2.41.
+Then $(\gamma^0)^2=\sigma_1^2\otimes I_2=I_4$ and
+$(\gamma^i)^2=J^2\otimes\sigma_i^2=-I_4$.
+By the direct-product rule $\gamma^0\gamma^i=\sigma_1J\otimes\sigma_i$
+and $\gamma^i\gamma^0=J\sigma_1\otimes\sigma_i$, where
+\[
+\sigma_1J=\begin{pmatrix}0&1\\1&0\end{pmatrix}
+\begin{pmatrix}0&1\\-1&0\end{pmatrix}
+=\begin{pmatrix}-1&0\\0&1\end{pmatrix}=-\sigma_3,\qquad
+J\sigma_1=\begin{pmatrix}1&0\\0&-1\end{pmatrix}=\sigma_3.
+\]
+Hence
 \[
 \{\gamma^0,\gamma^i\}=(\sigma_1J+J\sigma_1)\otimes\sigma_i=0.
 \]
-For spatial indices,
+For spatial indices, as in 2.2.41,
 $\{\gamma^i,\gamma^j\}=J^2\otimes\{\sigma_i,\sigma_j\}
-=-2\delta_{ij}I_4$. All the required Clifford relations hold.
-Also $(\gamma^0)^\dagger=\gamma^0$ and
-$(\gamma^i)^\dagger=-\gamma^i$, so
-$\alpha_i^\dagger=-\gamma^i\gamma^0=\gamma^0\gamma^i=\alpha_i$.
-The free Dirac Hamiltonian has the required Hermiticity as well.
+=-2\delta_{ij}I_4$. All the required relations (2.74)--(2.75) hold.
+Also $(\gamma^0)^\dagger=\sigma_1^\dagger\otimes I_2=\gamma^0$ and,
+since $J^\dagger=J^T=-J$ and $\sigma_i^\dagger=\sigma_i$,
+$(\gamma^i)^\dagger=J^\dagger\otimes\sigma_i^\dagger=-\gamma^i$. With
+the anticommutation just proved,
+\[
+\alpha_i^\dagger=(\gamma^0\gamma^i)^\dagger
+=(\gamma^i)^\dagger(\gamma^0)^\dagger
+=-\gamma^i\gamma^0=\gamma^0\gamma^i=\alpha_i.
+\]
+The free Dirac Hamiltonian $mc^2\gamma^0+c\sum_i\alpha_ip_i$
+therefore has the required Hermiticity as well.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2207,17 +2393,23 @@ in the limit that the mass $m$ approaches zero. This observation is important
 in the ultra relativistic regime where the rest mass is inconsequential, or
 for particles of negligible mass (e.g., neutrinos).
 \solution
-\erratum{The manual's momentum blocks again lack their factors of $c$.
-With the units of Eq.~(2.73), the decoupled equations contain
-$\pm c\boldsymbol{\sigma}\cdot\mathbf p$.}
-In the Weyl representation,
+\erratum{The Instructor's Manual's momentum blocks again lack their
+factors of $c$. With the units of Eq.~(2.73), the decoupled equations
+contain $\pm c\boldsymbol{\sigma}\cdot\mathbf p$.}
+In the Weyl representation, block multiplication gives
 \[
 \alpha_i=\gamma^0\gamma^i=
 \begin{pmatrix}0&I_2\\I_2&0\end{pmatrix}
 \begin{pmatrix}0&\sigma_i\\-\sigma_i&0\end{pmatrix}
-=\begin{pmatrix}-\sigma_i&0\\0&\sigma_i\end{pmatrix}.
+=\begin{pmatrix}-\sigma_i&0\\0&\sigma_i\end{pmatrix},
+\qquad
+mc^2\gamma^0=\begin{pmatrix}0&mc^2I_2\\mc^2I_2&0\end{pmatrix},
 \]
-With $\Psi=(\psi_1,\psi_2)^T$, Eq.~(2.73) is
+so $c\sum_i\alpha_ip_i$ is block diagonal with diagonal blocks
+$-c\boldsymbol{\sigma}\cdot\mathbf p$ and
+$c\boldsymbol{\sigma}\cdot\mathbf p$.
+With $\Psi=(\psi_1,\psi_2)^T$, Eq.~(2.73),
+$(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$, is
 \[
 \begin{pmatrix}
 -c\boldsymbol{\sigma}\cdot\mathbf p&mc^2I_2\\
@@ -2237,8 +2429,16 @@ At $m=0$ the coupling terms disappear:
 c\boldsymbol{\sigma}\cdot\mathbf p\,\psi_2=E\psi_2}.
 \]
 Each two-component equation can be solved independently. Squaring
-either and using $(\boldsymbol{\sigma}\cdot\mathbf p)^2=\mathbf p^2I_2$
-gives the massless relation $E^2=c^2\mathbf p^2$.
+either gives the massless relation: applying
+$-c\boldsymbol{\sigma}\cdot\mathbf p$ to both sides of the first and
+using $(\boldsymbol{\sigma}\cdot\mathbf p)^2=\mathbf p^2I_2$
+(Exercise 2.2.40),
+\[
+c^2\mathbf p^2\psi_1=E(-c\boldsymbol{\sigma}\cdot\mathbf p\,\psi_1)
+=E^2\psi_1,
+\]
+and likewise $c^2\mathbf p^2\psi_2=E^2\psi_2$. For a plane wave with a
+nonzero component this is $E^2=c^2\mathbf p^2$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2255,7 +2455,8 @@ gives the massless relation $E^2=c^2\mathbf p^2$.
 \solution
 \textbf{(a)} For a complex vector,
 $\|\mathbf r\|^2=\mathbf r^\dagger\mathbf r$.
-If $\mathbf r'=U\mathbf r$ with $U^\dagger U=I$, then
+If $\mathbf r'=U\mathbf r$ with $U^\dagger U=I$, then, since
+$(U\mathbf r)^\dagger=\mathbf r^\dagger U^\dagger$ (Exercise 2.2.32),
 \[
 \|\mathbf r'\|^2=(U\mathbf r)^\dagger U\mathbf r
 =\mathbf r^\dagger U^\dagger U\mathbf r
@@ -2263,27 +2464,35 @@ If $\mathbf r'=U\mathbf r$ with $U^\dagger U=I$, then
 \]
 Taking nonnegative square roots proves invariance of the magnitude.
 
-\textbf{(b)} \erratum{The manual's $\mathbf r'^{\dagger}\mathbf r$
-must be $\mathbf r'^{\dagger}\mathbf r'$.
+\textbf{(b)} \erratum{In the Instructor's Manual,
+$\mathbf r'^{\dagger}\mathbf r$ must be $\mathbf r'^{\dagger}\mathbf r'$.
 Here $U$ is square and acts on vectors of the
 same dimension. For rectangular $U$, norm preservation implies only
 $U^\dagger U=I$, not two-sided unitarity.}
-Set $H=U^\dagger U-I$. The hypothesis is
+Set $H=U^\dagger U-I$. Since
+$\mathbf r'^\dagger\mathbf r'=\mathbf r^\dagger U^\dagger U\mathbf r$
+as in (a), the hypothesis is
 $\mathbf r^\dagger H\mathbf r=0$ for every complex $\mathbf r$;
-also $H^\dagger=H$.
+also $H^\dagger=(U^\dagger U)^\dagger-I=H$, so $H_{ji}=H_{ij}^*$.
+Let $e_i$ be the $i$th unit column vector, so that
+$e_i^\dagger He_j=H_{ij}$.
 Choose $\mathbf r=e_i$ to get $H_{ii}=0$.
 For $i\ne j$, choose $\mathbf r=e_i+e_j$:
 \[
-0=H_{ii}+H_{ij}+H_{ji}+H_{jj}
-=H_{ij}+H_{ji}=2\operatorname{Re}H_{ij}.
+0=(e_i+e_j)^\dagger H(e_i+e_j)=H_{ii}+H_{ij}+H_{ji}+H_{jj}
+=H_{ij}+H_{ij}^*=2\operatorname{Re}H_{ij}.
 \]
-Next choose $\mathbf r=e_i+ie_j$:
+Next choose $\mathbf r=e_i+ie_j$, for which
+$\mathbf r^\dagger=e_i^\dagger-ie_j^\dagger$ and $(-i)(i)=1$:
 \[
 0=H_{ii}+iH_{ij}-iH_{ji}+H_{jj}
-=i(H_{ij}-H_{ji})=-2\operatorname{Im}H_{ij}.
+=i(H_{ij}-H_{ij}^*)=i\cdot2i\operatorname{Im}H_{ij}
+=-2\operatorname{Im}H_{ij}.
 \]
 Every entry vanishes, so $H=0$ and $U^\dagger U=I$.
-Since $U$ is square, taking determinants yields $|\det U|^2=1$.
-It is invertible, and multiplication by $U^{-1}$ gives
-$U^\dagger=U^{-1}$ and also $UU^\dagger=I$.
+Since $U$ is square, taking determinants yields
+$\det U^\dagger\det U=(\det U)^*\det U=|\det U|^2=1$.
+Hence $\det U\ne0$ and $U$ is invertible; multiplying $U^\dagger U=I$
+on the right by $U^{-1}$ gives $U^\dagger=U^{-1}$, and then
+$UU^\dagger=UU^{-1}=I$.
 Thus $U$ is unitary.
