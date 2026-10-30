@@ -21,19 +21,26 @@ $|J_{n}(x)|\le1/\sqrt{2}$, $n=1,2,3,\ldots$.
 \solution
 \erratum{The inequalities require real $x$. The identity of squares
 also holds for complex $x$, but those squares are then not nonnegative.}
-First obtain the negative-order relation from the generating function:
+First obtain the negative-order relation from the generating function
+$g(x,t)=e^{(x/2)(t-1/t)}=\sum_mJ_m(x)t^m$. Both $g(x,1/t)$ and
+$g(x,-t)$ equal $e^{(x/2)(1/t-t)}$; expanding the first in powers of
+$1/t$ (and renaming $m\to-m$) and the second in powers of $-t$ gives
 \[
 g(x,1/t)=g(x,-t),\qquad
 \sum_{m=-\infty}^{\infty}J_{-m}(x)t^m
 =\sum_{m=-\infty}^{\infty}(-1)^mJ_m(x)t^m.
 \]
 Uniqueness of Laurent coefficients gives $J_{-m}=(-1)^mJ_m$.
-Now multiply the two absolutely convergent Laurent expansions:
+Next, the exponents $\frac x2(t-t^{-1})$ of $g(x,t)$ and
+$\frac x2(-t+t^{-1})$ of $g(x,-t)$ cancel, so $g(x,t)g(x,-t)=1$.
+Multiply the two absolutely convergent Laurent expansions:
 \[
 1=g(x,t)g(x,-t)
 =\sum_{m,n\in\mathbb Z}J_m(x)J_n(x)(-1)^n t^{m+n}.
 \]
-The coefficient of $t^0$ comes from $n=-m$. Thus
+The left side is the constant $1$, so by uniqueness of Laurent
+coefficients the coefficient of $t^0$ on the right is $1$. It comes
+from $n=-m$, and $(-1)^{-m}J_{-m}=(-1)^{-m}(-1)^mJ_m=J_m$. Thus
 \begin{align*}
 1&=\sum_{m\in\mathbb Z}(-1)^{-m}J_mJ_{-m}
 =\sum_{m\in\mathbb Z}J_m^2\\
@@ -75,8 +82,8 @@ gives
 J_0(u+v)=J_0(u)J_0(v)+\sum_{s=1}^{\infty}
 \bigl[J_s(u)J_{-s}(v)+J_{-s}(u)J_s(v)\bigr].
 \]
-Because $J_{-s}(z)=(-1)^sJ_s(z)$, the two terms inside each bracket
-are equal. Hence
+Because $J_{-s}(z)=(-1)^sJ_s(z)$ (Exercise~14.1.1), the two terms
+inside each bracket are equal, both being $(-1)^sJ_s(u)J_s(v)$. Hence
 \[
 \boxed{J_0(u+v)=J_0(u)J_0(v)+2\sum_{s=1}^{\infty}J_s(u)J_{-s}(v).}
 \]
@@ -130,7 +137,8 @@ The two given recurrences are
 J_{n-1}+J_{n+1}=\frac{2n}{x}J_n,
 \qquad J_{n-1}-J_{n+1}=2J_n'.
 \]
-Adding and subtracting them, respectively, gives
+Adding them gives $2J_{n-1}=2nJ_n/x+2J_n'$; subtracting the second
+from the first gives $2J_{n+1}=2nJ_n/x-2J_n'$. After division by 2,
 \[
 J_n'+\frac n{x}J_n=J_{n-1},\qquad
 J_n'-\frac n{x}J_n=-J_{n+1}.
@@ -138,12 +146,14 @@ J_n'-\frac n{x}J_n=-J_{n+1}.
 (a) The product rule and the first identity yield
 \[
 \frac d{dx}(x^nJ_n)
+=nx^{n-1}J_n+x^nJ_n'
 =x^n\left(J_n'+\frac n{x}J_n\right)
 =\boxed{x^nJ_{n-1}}.
 \]
 (b) Using the second identity instead,
 \[
 \frac d{dx}(x^{-n}J_n)
+=-nx^{-n-1}J_n+x^{-n}J_n'
 =x^{-n}\left(J_n'-\frac n{x}J_n\right)
 =\boxed{-x^{-n}J_{n+1}}.
 \]
@@ -163,11 +173,12 @@ e^{i\rho\cos\varphi}=\sum_{m=-\infty}^{\infty}i^{m}J_{m}(\rho)e^{im\varphi}.
 This is an expansion of a plane wave in a series of cylindrical waves.
 \solution
 In the generating function, put $x=\rho$ and $t=i e^{i\varphi}$.
-Since $t^{-1}=-i e^{-i\varphi}$,
+Since $t^{-1}=-i e^{-i\varphi}$ (because $1/i=-i$),
 \[
-t-t^{-1}=i(e^{i\varphi}+e^{-i\varphi})=2i\cos\varphi.
+t-t^{-1}=i(e^{i\varphi}+e^{-i\varphi})=2i\cos\varphi,
 \]
-Therefore
+so the exponent of the generating function is
+$(\rho/2)(t-t^{-1})=i\rho\cos\varphi$. Therefore
 \begin{align*}
 e^{i\rho\cos\varphi}
 &=\sum_{m=-\infty}^{\infty}J_m(\rho)(i e^{i\varphi})^m\\
@@ -190,13 +201,17 @@ Set $\varphi=0$, $\rho=x$ in Exercise 14.1.5:
 e^{ix}=\sum_{m\in\mathbb Z}i^mJ_m(x).
 \]
 Pair the terms of orders $m$ and $-m$. Since
-$i^{-m}J_{-m}=i^{-m}(-1)^mJ_m=i^mJ_m$,
+$i^{-m}J_{-m}=i^{-m}(-1)^mJ_m=(-i)^m(-1)^mJ_m=i^mJ_m$,
+the terms of orders $\pm m$ are equal. Then split the sum into even
+orders $m=2n$, where $i^{2n}=(-1)^n$, and odd orders $m=2n+1$, where
+$i^{2n+1}=i(-1)^n$:
 \[
 e^{ix}=J_0+2\sum_{m=1}^{\infty}i^mJ_m
 =J_0+2\sum_{n=1}^{\infty}(-1)^nJ_{2n}
 +2i\sum_{n=0}^{\infty}(-1)^nJ_{2n+1}.
 \]
-For real $x$, comparison of real and imaginary parts gives
+For real $x$ every $J_m(x)$ is real, so comparison of the real and
+imaginary parts with $e^{ix}=\cos x+i\sin x$ gives
 \[
 \boxed{\cos x=J_0(x)+2\sum_{n=1}^{\infty}(-1)^nJ_{2n}(x)},
 \qquad
@@ -228,25 +243,36 @@ is $J_{0}(x)$ as given by Eq.~(14.6).
 \solution
 Start with the proposed Laurent series $g=\sum_mJ_m(x)t^m$.
 Multiply $J_{n-1}+J_{n+1}=2nJ_n/x$ by $t^n$ and sum. Shifting the
-indices on the left gives
+indices on the left ($m=n-1$ and $m=n+1$, respectively) gives
 \[
-\sum_nJ_{n-1}t^n=tg,\qquad
-\sum_nJ_{n+1}t^n=t^{-1}g,
+\sum_nJ_{n-1}t^n=t\sum_mJ_mt^m=tg,\qquad
+\sum_nJ_{n+1}t^n=t^{-1}\sum_mJ_mt^m=t^{-1}g,
 \]
-while the right side is $(2t/x)\partial_tg$. Thus, for fixed $x\ne0$,
+while on the right
+$\sum_n(2n/x)J_nt^n=(2t/x)\sum_nnJ_nt^{n-1}=(2t/x)\partial_tg$.
+This is the form of hint~(c):
+\[
+\left(t+\frac1t\right)g=\frac{2t}{x}\frac{\partial g}{\partial t}.
+\]
+Thus, multiplying by $x/(2t)$ for fixed $x\ne0$,
 \[
 \partial_tg=\frac x2(1+t^{-2})g.
 \]
-Solving this first-order equation gives
+Since $\partial_t[\frac x2(t-t^{-1})]=\frac x2(1+t^{-2})$, this says
+$\partial_t\{g\,e^{-(x/2)(t-t^{-1})}\}=0$, so the bracket is
+independent of $t$:
 \[
 g(x,t)=C(x)\exp\left[\frac x2(t-t^{-1})\right].
 \]
-To find $C$, multiply the two elementary exponential series:
+To find $C$, multiply the two elementary exponential series
+$e^{xt/2}=\sum_r(x/2)^rt^r/r!$ and
+$e^{-x/(2t)}=\sum_s(-1)^s(x/2)^st^{-s}/s!$:
 \[
 e^{xt/2}e^{-x/(2t)}
 =\sum_{r,s\ge0}\frac{(-1)^s(x/2)^{r+s}}{r!s!}t^{r-s}.
 \]
-Only $r=s$ contributes to $t^0$. Its coefficient is
+Only $r=s$ contributes to $t^0$. Its coefficient is the series for
+$J_0(x)$ given by Eq.~(14.6):
 \[
 \sum_{s=0}^{\infty}\frac{(-1)^s(x/2)^{2s}}{(s!)^2}=J_0(x).
 \]
@@ -285,7 +311,10 @@ J_\nu(x)=\sum_{s=0}^{\infty}a_s x^{\nu+2s},\qquad
 a_s=\frac{(-1)^s}{2^{\nu+2s}s!\Gamma(s+\nu+1)}.
 \]
 The convergent series may be differentiated term by term on compact
-sets away from a branch point. First,
+sets away from a branch point, so
+$J_\nu'=\sum_s(\nu+2s)a_sx^{\nu+2s-1}$ and
+$(\nu/x)J_\nu=\sum_s\nu a_sx^{\nu+2s-1}$. First, since
+$(\nu+2s)+\nu=2(\nu+s)$,
 \begin{align*}
 J_\nu'+\frac\nu{x}J_\nu
 &=\sum_{s=0}^{\infty}2(\nu+s)a_sx^{\nu+2s-1}\\
@@ -293,9 +322,12 @@ J_\nu'+\frac\nu{x}J_\nu
 \frac{(-1)^s x^{\nu-1+2s}}{2^{\nu-1+2s}s!\Gamma(s+\nu)}
 =J_{\nu-1},
 \end{align*}
-where $\Gamma(s+\nu+1)=(s+\nu)\Gamma(s+\nu)$ was used.
-On subtracting rather than adding the $\nu/x$ term, the $s=0$ term
-vanishes. Put $s=r+1$ in the remaining sum:
+where $(s+\nu)/\Gamma(s+\nu+1)=1/\Gamma(s+\nu)$ (from
+$\Gamma(z+1)=z\Gamma(z)$) and $2/2^{\nu+2s}=1/2^{\nu-1+2s}$ were used.
+On subtracting rather than adding the $\nu/x$ term, the coefficient
+becomes $(\nu+2s)-\nu=2s$, so the $s=0$ term vanishes. Put $s=r+1$ in
+the remaining sum and use $2(r+1)/(r+1)!=2/r!$,
+$2/2^{\nu+2r+2}=1/2^{\nu+1+2r}$, and $(-1)^{r+1}=-(-1)^r$:
 \begin{align*}
 J_\nu'-\frac\nu{x}J_\nu
 &=\sum_{s=1}^{\infty}2s a_sx^{\nu+2s-1}\\
@@ -313,19 +345,23 @@ $x^2J_\nu''+xJ_\nu'-\nu^2J_\nu$ at $x^{\nu+2s}$ is
 \bigl[(\nu+2s)(\nu+2s-1)+(\nu+2s)-\nu^2\bigr]a_s
 =4s(s+\nu)a_s.
 \]
-The term $x^2J_\nu$ contributes $a_{s-1}$ for $s\ge1$. The coefficient
-ratio is
+The term $x^2J_\nu=\sum_sa_sx^{\nu+2s+2}$ contributes $a_{s-1}$ at
+$x^{\nu+2s}$ for $s\ge1$. Using $s/s!=1/(s-1)!$,
+$(s+\nu)/\Gamma(s+\nu+1)=1/\Gamma(s+\nu)$, and
+$4/2^{\nu+2s}=1/2^{\nu+2s-2}$,
 \[
-\frac{a_s}{a_{s-1}}=-\frac1{4s(s+\nu)},
+4s(s+\nu)a_s=\frac{(-1)^s}{2^{\nu+2s-2}(s-1)!\,\Gamma(s+\nu)}
+=-a_{s-1},
 \]
 so $4s(s+\nu)a_s+a_{s-1}=0$. The initial coefficient ($s=0$)
 already vanishes. Every power therefore cancels, proving
 \[
 \boxed{x^2J_\nu''+xJ_\nu'+(x^2-\nu^2)J_\nu=0.}
 \]
-If a reciprocal gamma factor vanishes at an exceptional integer order,
-the identities are interpreted by continuation in $\nu$, avoiding
-spurious division by a zero factor.
+The identity $z/\Gamma(z+1)=1/\Gamma(z)$ used above holds for every
+complex $z$, both sides being zero at the poles $z=0,-1,-2,\ldots$
+of $\Gamma$. Hence no order is exceptional: for a negative integer
+$\nu$ the vanishing leading coefficients simply drop out.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -342,20 +378,28 @@ spurious division by a zero factor.
 \]
 may be useful.
 \solution
-The supplied cosine integral can be written in factorial form:
+The cosine integral of the hint can be written in factorial form.
+Since $(2s)!!=2\cdot4\cdots(2s)=2^ss!$ and
+$(2s+1)!!=(2s+1)!/(2s)!!=(2s+1)!/(2^ss!)$,
 \[
 I_s=\int_0^{\pi/2}\cos^{2s+1}\theta\,d\theta
 =\frac{(2s)!!}{(2s+1)!!}
 =\frac{2^{2s}(s!)^2}{(2s+1)!}.
 \]
-Expand $J_0$, multiply by $\cos\theta$, and integrate each term:
+Expand $J_0(x\cos\theta)=\sum_s(-1)^s(x\cos\theta)^{2s}/[2^{2s}(s!)^2]$,
+multiply by $\cos\theta$, and integrate each term:
 \begin{align*}
 \int_0^{\pi/2}J_0(x\cos\theta)\cos\theta\,d\theta
 &=\sum_{s=0}^{\infty}\frac{(-1)^sx^{2s}}{2^{2s}(s!)^2}I_s\\
 &=\sum_{s=0}^{\infty}\frac{(-1)^sx^{2s}}{(2s+1)!}
-=\boxed{\frac{\sin x}{x}}.
+=\boxed{\frac{\sin x}{x}},
 \end{align*}
-For $J_1$, the power of $\cos\theta$ is again $2s+1$:
+the last step being the Maclaurin series
+$\sin x=\sum_s(-1)^sx^{2s+1}/(2s+1)!$ divided by $x$.
+For $J_1(x\cos\theta)=\sum_s(-1)^s(x\cos\theta)^{2s+1}/[2^{2s+1}s!(s+1)!]$,
+the power of $\cos\theta$ is again $2s+1$. The factor
+$I_s/[2^{2s+1}s!(s+1)!]=s!/[2(s+1)!(2s+1)!]=1/[2(s+1)(2s+1)!]$, and
+$2(s+1)(2s+1)!=(2s+2)!$, so
 \begin{align*}
 \int_0^{\pi/2}J_1(x\cos\theta)\,d\theta
 &=\sum_{s=0}^{\infty}\frac{(-1)^sx^{2s+1}}{2^{2s+1}s!(s+1)!}I_s\\
@@ -363,6 +407,9 @@ For $J_1$, the power of $\cos\theta$ is again $2s+1$:
 &=\sum_{s=0}^{\infty}\frac{(-1)^sx^{2s+1}}{(2s+2)!}
 =\boxed{\frac{1-\cos x}{x}}.
 \end{align*}
+For the last step, put $k=s+1$ in
+$1-\cos x=-\sum_{k\ge1}(-1)^kx^{2k}/(2k)!
+=\sum_{s\ge0}(-1)^sx^{2s+2}/(2s+2)!$ and divide by $x$.
 For fixed $x$, the Bessel series converge uniformly on this finite
 integration interval, justifying the termwise integrations.
 At $x=0$, the two apparent quotients have their continuous values
@@ -383,10 +430,11 @@ Assume that $J_n=(-1)^nx^nD^nJ_0$. Then
 \[
 x^{-n}J_n=(-1)^nD^nJ_0.
 \]
-Differentiate this equation and use Exercise 14.1.4(b):
+Differentiate this equation and use Exercise 14.1.4(b) on the left
+and $d/dx=xD$ on the right:
 \[
 -x^{-n}J_{n+1}=(-1)^n\frac d{dx}(D^nJ_0)
-=(-1)^nxD^{n+1}J_0.
+=(-1)^nxD(D^nJ_0)=(-1)^nxD^{n+1}J_0.
 \]
 Multiplying by $-x^n$ gives
 \[
@@ -449,7 +497,9 @@ For $u\ne0$, put $x=ur$, so $r\,dr=x\,dx/u^2$:
 \[
 g(u)=\frac1{u^2}\int_0^u\left(1-\frac{x^2}{u^2}\right)xJ_0(x)\,dx.
 \]
-The derivative identity $(xJ_1)'=xJ_0$ allows integration by parts:
+The derivative identity $(xJ_1)'=xJ_0$ (Exercise~14.1.4(a) with
+$n=1$) allows integration by parts, with
+$d(1-x^2/u^2)/dx=-2x/u^2$:
 \begin{align*}
 g(u)&=\frac1{u^2}
 \left[\left(1-\frac{x^2}{u^2}\right)xJ_1(x)\right]_0^u
@@ -459,7 +509,8 @@ g(u)&=\frac1{u^2}
 \end{align*}
 The first endpoint expression vanishes at $x=u$ because of its
 prefactor and at $x=0$ because $xJ_1(x)=O(x^2)$.
-The second identity uses $(x^2J_2)'=x^2J_1$ and $x^2J_2(x)=O(x^4)$.
+The second line uses $(x^2J_2)'=x^2J_1$ (Exercise~14.1.4(a) with
+$n=2$) and $x^2J_2(x)=O(x^4)$.
 At $u=0$, direct integration gives
 $g(0)=\int_0^1(r-r^3)dr=1/4$; the answer has the same continuous
 limit because $J_2(u)=u^2/8+O(u^4)$.
@@ -484,20 +535,27 @@ Put $b=k\sin\theta$. The order-zero angular representation is
 \[
 \frac1{2\pi}\int_0^{2\pi}e^{ib\rho\sin\varphi}\,d\varphi=J_0(b\rho).
 \]
-Performing that integral first therefore gives
+It follows from the generating function with $t=e^{i\varphi}$, for
+which $t-t^{-1}=2i\sin\varphi$:
+$e^{iz\sin\varphi}=\sum_mJ_m(z)e^{im\varphi}$, and integrating over
+$0\le\varphi\le2\pi$ leaves only the $m=0$ term, $2\pi J_0(z)$.
+The integrand is continuous on the rectangle of integration, so the
+$\varphi$ integral may be performed first. This gives
 \[
 f(\theta)=-ik\int_0^R\rho J_0(b\rho)\,d\rho.
 \]
-For $b\ne0$, change variable to $x=b\rho$ and integrate
+For $b\ne0$, change variable to $x=b\rho$ (so
+$\rho\,d\rho=x\,dx/b^2$, with new upper limit $bR$) and integrate
 $xJ_0(x)=(xJ_1(x))'$:
 \[
 \int_0^R\rho J_0(b\rho)\,d\rho
 =\frac1{b^2}\left[xJ_1(x)\right]_0^{bR}
 =\frac{R}{b}J_1(bR).
 \]
-Consequently
+Consequently, since $k/b=1/\sin\theta$,
 \[
-f(\theta)=-iR\frac{J_1(kR\sin\theta)}{\sin\theta}.
+f(\theta)=-ik\frac Rb\,J_1(bR)
+=-iR\frac{J_1(kR\sin\theta)}{\sin\theta}.
 \]
 For real $k,R,\theta$, the quotient is real, and $|-i|^2=1$. Thus
 \[
@@ -526,7 +584,9 @@ equation. This suggests that $C_{n}(x)$ may be expressed in terms of
 Bessel functions of transformed argument.
 \end{enumerate}
 \solution
-(a) Adding and subtracting the supplied recurrences gives
+(a) Adding the given recurrences gives
+$2C_{n-1}=2nC_n/x+2C_n'$; subtracting the first from the second gives
+$2C_{n+1}=2C_n'-2nC_n/x$. After division by 2,
 \[
 C_{n-1}=C_n'+\frac n{x}C_n,\qquad
 C_{n+1}=C_n'-\frac n{x}C_n.
@@ -541,7 +601,8 @@ C_{n+1}'=C_n-\frac{n+1}{x}C_{n+1}
 =C_n-\frac{n+1}{x}\left(C_n'-\frac n{x}C_n\right).
 \]
 Equate these two expressions, move everything to the left, and collect
-coefficients:
+coefficients: the $C_n'$ terms give $(-n+n+1)/x=1/x$, and the $C_n$
+terms give $n/x^2-1-n(n+1)/x^2=-1-n^2/x^2$. Hence
 \[
 C_n''+\frac1xC_n'-\left(1+\frac{n^2}{x^2}\right)C_n=0.
 \]
@@ -549,20 +610,31 @@ Multiplication by $x^2$ gives the modified Bessel equation
 \[
 \boxed{x^2C_n''+xC_n'-(x^2+n^2)C_n=0.}
 \]
+\erratum{The ODE displayed in the Instructor's Manual, p.~197, has
+$x^2C_n'$; the correct first-derivative term is $xC_n'$, as the
+derivation above shows.}
+
 (b) Put $z=ix$ and $C_n(x)=Y(z)$. Then $C_n'=iY'$,
-$C_n''=-Y''$, and $x^2=-z^2$. Substituting these into the boxed
-ODE gives
+$C_n''=-Y''$, $x=-iz$, and $x^2=-z^2$. Substituting these into the
+boxed ODE gives
 \[
-\boxed{z^2Y''+zY'+(z^2-n^2)Y=0},
+(-z^2)(-Y'')+(-iz)(iY')-(-z^2+n^2)Y=0,\quad\text{i.e.,}\quad
+\boxed{z^2Y''+zY'+(z^2-n^2)Y=0}.
 \]
-\erratum{The manual's displayed ODE on p.~197 has $x^2C_n'$;
-the correct first-derivative term is $xC_n'$, as the derivation above
-shows.}
 This is Bessel's equation of order $n$. Its solutions can consequently
 be expressed using Bessel functions with imaginary argument.
 For example $I_n(x)=i^{-n}J_n(ix)$ is the regular modified Bessel
-function; the phase depending on $n$ makes it satisfy the supplied
-recurrences.
+function; the phase depending on $n$ makes it satisfy the given
+recurrences. Indeed, with $C_n=i^{-n}J_n(ix)$ and
+$i^{-(n+1)}=-i^{1-n}$, the recurrences (14.7) and (14.8) at the
+argument $ix$ give
+\begin{align*}
+C_{n-1}-C_{n+1}&=i^{1-n}[J_{n-1}(ix)+J_{n+1}(ix)]
+=i^{1-n}\frac{2n}{ix}J_n(ix)=\frac{2n}{x}C_n,\\
+C_{n-1}+C_{n+1}&=i^{1-n}[J_{n-1}(ix)-J_{n+1}(ix)]
+=2i^{1-n}J_n'(ix)=2C_n',
+\end{align*}
+since $C_n'(x)=i^{-n}\cdot iJ_n'(ix)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -593,8 +665,12 @@ J_{n}(x)=\frac{1}{2\pi}\int_{0}^{2\pi}e^{i(x\sin\theta-n\theta)}\,d\theta
 \solution
 \erratum{For noninteger $\nu$, the contour in Fig.~14.5 is an open
 Hankel contour: it starts at $-\infty$ below the cut, circles zero
-counterclockwise, and returns to $-\infty$ above the cut. The earlier transcription used $\oint$; the open $\int_C$ has now been restored, as in the textbook. Take $x>0$ and $-\pi<\arg t<\pi$ initially.}
-The two unbounded ends then decay exponentially. Write
+counterclockwise, and returns to $-\infty$ above the cut. Take $x>0$
+and $-\pi<\arg t<\pi$ initially.}
+The two unbounded ends then decay exponentially: on either bank
+$t=-r$ with $r\to\infty$, and the exponent of the integrand has real
+part $-\frac x2(r-r^{-1})\to-\infty$, while $|t^{-\nu-1}|$ grows at
+most like a power of $r$. Write
 \[
 f(t,x)=e^{x(t-t^{-1})/2}t^{-\nu-1},\quad
 S=t-t^{-1},\quad T=t+t^{-1}.
@@ -602,12 +678,15 @@ S=t-t^{-1},\quad T=t+t^{-1}.
 (a) Differentiation with respect to $x$ gives $f_x=Sf/2$ and
 $f_{xx}=S^2f/4$. Consequently the Bessel operator applied under the
 integral has integrand
-\[
+\begin{align*}
 x^2f_{xx}+xf_x+(x^2-\nu^2)f
-=f\left(\frac{x^2T^2}{4}+\frac{xS}{2}-\nu^2\right),
-\]
-where $S^2+4=T^2$. This is a total derivative. Indeed, since
-$tT'=S$,
+&=f\left(\frac{x^2(S^2+4)}{4}+\frac{xS}{2}-\nu^2\right)\\
+&=f\left(\frac{x^2T^2}{4}+\frac{xS}{2}-\nu^2\right),
+\end{align*}
+since $S^2+4=t^2-2+t^{-2}+4=T^2$. This is a total derivative.
+Indeed, $tS'=t(1+t^{-2})=T$ and $tT'=t(1-t^{-2})=S$, so the three
+factors below have derivatives $(xT/2t)e^{xS/2}$, $-\nu t^{-\nu}/t$,
+and $xS/(2t)$, and the product rule gives
 \begin{align*}
 \frac d{dt}\left[e^{xS/2}t^{-\nu}
  \left(\nu+\frac{xT}{2}\right)\right]
@@ -616,13 +695,17 @@ $tT'=S$,
 &=f\left(\frac{x^2T^2}{4}+\frac{xS}{2}-\nu^2\right).
 \end{align*}
 Its integral is zero because the bracketed primitive tends to zero at
-both ends of the contour. Therefore $F(x)=(2\pi i)^{-1}\int_C f\,dt$
-satisfies $x^2F''+xF'+(x^2-\nu^2)F=0$.
+both ends of the contour (it contains the same decaying exponential
+times a power of $r$). Therefore $F(x)=(2\pi i)^{-1}\int_C f\,dt$,
+differentiated under the integral sign, satisfies
+$x^2F''+xF'+(x^2-\nu^2)F=0$.
 
-In the same integral put $s=xt/2$. Then
+In the same integral put $s=xt/2$, i.e., $t=2s/x$ and
+$dt=(2/x)\,ds$. Then
 \[
 \frac x2(t-t^{-1})=s-\frac{x^2}{4s},\qquad
-t^{-\nu-1}dt=(x/2)^\nu s^{-\nu-1}ds,
+t^{-\nu-1}dt=\left(\frac{2s}x\right)^{-\nu-1}\frac2x\,ds
+=(x/2)^\nu s^{-\nu-1}ds,
 \]
 which gives the second representation. Positive dilation changes
 neither the cut nor the contour's winding around zero; it may be
@@ -631,8 +714,10 @@ This proves its equivalence and hence its differential equation.
 
 For completeness the normalization is also fixed, rather than merely
 identifying an unspecified solution of the ODE. Expand the second
-exponential and use the Hankel formula for the reciprocal gamma
-function:
+exponential, $e^{-x^2/(4s)}=\sum_r(-x^2/4)^rs^{-r}/r!$, and use the
+Hankel formula for the reciprocal gamma function,
+$(2\pi i)^{-1}\int_Ce^ss^{-z}ds=1/\Gamma(z)$, with $z=\nu+r+1$ and
+$(-x^2/4)^r=(-1)^r(x/2)^{2r}$:
 \begin{align*}
 F(x)&=(x/2)^\nu\sum_{r=0}^{\infty}
  \frac{(-x^2/4)^r}{r!}
@@ -647,16 +732,24 @@ negative-real tails decay exponentially. These facts justify the
 termwise integration and differentiation. Other admissible $x$ follow
 by analytic continuation on a fixed branch.
 
-(b) For integer $n$ the two banks of the cut cancel, leaving a
-counterclockwise circle. Set $t=e^{i\theta}$, so
-$t-t^{-1}=2i\sin\theta$ and $t^{-n-1}dt=i e^{-in\theta}d\theta$:
+(b) For integer $n$ the factor $t^{-n-1}$ is single valued, so the
+integrand takes the same values on the two banks of the cut, which
+are traversed in opposite directions; their contributions cancel,
+leaving a counterclockwise circle, which may be taken as $|t|=1$.
+Set $t=e^{i\theta}$, so $t-t^{-1}=2i\sin\theta$ and
+$t^{-n-1}dt=e^{-i(n+1)\theta}\,ie^{i\theta}d\theta
+=i e^{-in\theta}d\theta$; the factor $i$ cancels that of $2\pi i$:
 \[
 J_n(x)=\boxed{\frac1{2\pi}\int_0^{2\pi}
  e^{i(x\sin\theta-n\theta)}\,d\theta}.
 \]
-Now set $\theta=\pi/2-\phi$. The phase becomes
-$x\cos\phi+n\phi-n\pi/2$. Reversing the integration limits and
-using the $2\pi$ periodicity for integer $n$ yields
+Now set $\theta=\pi/2-\phi$. Then $\sin\theta=\cos\phi$, and the
+phase becomes $x\cos\phi+n\phi-n\pi/2$, with
+$e^{-in\pi/2}=i^{-n}$. Also $d\theta=-d\phi$, and $\theta:0\to2\pi$
+becomes $\phi:\pi/2\to-3\pi/2$. Reversing the integration limits
+removes the minus sign, and the $2\pi$ periodicity of the integrand
+in $\phi$ (for integer $n$) allows the interval $[-3\pi/2,\pi/2]$ to
+be replaced by $[0,2\pi]$. This yields
 \[
 \boxed{J_n(x)=\frac{i^{-n}}{2\pi}\int_0^{2\pi}
 e^{i(x\cos\phi+n\phi)}\,d\phi}.
@@ -684,28 +777,36 @@ $x>0$ initially.}
 Split its integral into a lower ray, the unit circle, and an upper
 ray. On the lower ray put $t=e^{u-i\pi}$ with $u:\infty\to0$.
 On the upper ray use $t=e^{u+i\pi}$ with $u:0\to\infty$. In both
-cases $t-t^{-1}=-2\sinh u$, whereas
+cases $t=-e^u$, so $t-t^{-1}=-e^u+e^{-u}=-2\sinh u$ and the
+exponential becomes $e^{-x\sinh u}$, whereas
+$t^{-\nu-1}dt=t^{-\nu}(dt/t)=t^{-\nu}du$ gives
 \[
 t^{-\nu-1}dt=e^{-\nu u}e^{+i\pi\nu}du
 \quad\hbox{(lower)},\qquad
 t^{-\nu-1}dt=e^{-\nu u}e^{-i\pi\nu}du
 \quad\hbox{(upper)}.
 \]
-Thus their combined contribution is
+Reversing the limits of the lower ray changes its sign, and
+$-e^{i\pi\nu}+e^{-i\pi\nu}=-2i\sin\pi\nu$. Thus their combined
+contribution is
 \begin{align*}
 \frac1{2\pi i}\left[-e^{i\pi\nu}+e^{-i\pi\nu}\right]
  \int_0^\infty e^{-\nu u-x\sinh u}\,du
 &=-\frac{\sin\pi\nu}{\pi}
  \int_0^\infty e^{-\nu u-x\sinh u}\,du.
 \end{align*}
-On the circle $t=e^{i\theta}$, $-\pi\le\theta\le\pi$, and the
-contribution is
+On the circle $t=e^{i\theta}$, $-\pi\le\theta\le\pi$, so
+$t-t^{-1}=2i\sin\theta$ and $t^{-\nu-1}dt=ie^{-i\nu\theta}d\theta$;
+the contribution is
 \[
 \frac1{2\pi}\int_{-\pi}^{\pi}e^{i(x\sin\theta-\nu\theta)}d\theta
 =\frac1\pi\int_0^\pi\cos(\nu\theta-x\sin\theta)d\theta.
 \]
-Here the sine of the phase is odd and its cosine is even. Adding the
-three parts gives exactly the stated formula. For integer $\nu=n$,
+Here the phase $x\sin\theta-\nu\theta$ is an odd function of
+$\theta$, so the sine of the phase is odd and integrates to zero over
+$[-\pi,\pi]$, while its cosine is even and integrates to twice its
+integral over $[0,\pi]$. Adding the three parts gives exactly the
+stated formula. For integer $\nu=n$,
 the ray contribution vanishes because $\sin\pi n=0$.
 
 \Needspace{5\baselineskip}
@@ -737,45 +838,63 @@ J_{\nu}(x)&=\frac{1}{\pi^{1/2}\Gamma(\nu+\frac{1}{2})}
 These are alternate integral representations of $J_{\nu}(x)$.
 \end{enumerate}
 \solution
-(a) Expand the cosine and integrate each term. For real
-$\nu>-1/2$, the endpoint weight is integrable; uniform convergence
-of the cosine series on the finite interval justifies the operation.
-The beta integral gives
+(a) Expand the cosine,
+$\cos(x\sin\theta)=\sum_r(-1)^rx^{2r}\sin^{2r}\theta/(2r)!$, and
+integrate each term. For real $\nu>-1/2$, the endpoint weight is
+integrable; uniform convergence of the cosine series on the finite
+interval justifies the operation. The beta integral of Section~13.3,
+$\int_0^{\pi/2}\sin^{2a-1}\theta\cos^{2b-1}\theta\,d\theta=\frac12B(a,b)
+=\Gamma(a)\Gamma(b)/[2\Gamma(a+b)]$, with $a=r+\frac12$,
+$b=\nu+\frac12$, gives
 \begin{align*}
 \int_0^{\pi/2}\sin^{2r}\theta\cos^{2\nu}\theta\,d\theta
 &=\frac12B(r+\tfrac12,\nu+\tfrac12)\\
 &=\frac{\Gamma(r+\tfrac12)\Gamma(\nu+\tfrac12)}
  {2\Gamma(r+\nu+1)}.
 \end{align*}
-Since $\Gamma(r+1/2)=\sqrt\pi(2r)!/(4^r r!)$, the proposed
-right-hand side becomes
+Since $\Gamma(r+1/2)=\frac{(2r-1)!!}{2^r}\sqrt\pi$ and
+$(2r-1)!!=(2r)!/(2^rr!)$, we have $\Gamma(r+1/2)=\sqrt\pi(2r)!/(4^r r!)$,
+and the proposed right-hand side becomes
 \begin{align*}
-\frac{2(x/2)^\nu}{\sqrt\pi\Gamma(\nu+1/2)}
+&\frac{2(x/2)^\nu}{\sqrt\pi\Gamma(\nu+1/2)}
 \sum_{r=0}^\infty\frac{(-1)^rx^{2r}}{(2r)!}
- \frac{\Gamma(r+1/2)\Gamma(\nu+1/2)}{2\Gamma(r+\nu+1)}
-&=\sum_{r=0}^\infty
- \frac{(-1)^r(x/2)^{\nu+2r}}{r!\Gamma(r+\nu+1)}\\
-&=J_\nu(x).
+ \frac{\Gamma(r+1/2)\Gamma(\nu+1/2)}{2\Gamma(r+\nu+1)}\\
+&\qquad=(x/2)^\nu\sum_{r=0}^\infty
+ \frac{(-1)^rx^{2r}}{4^rr!\,\Gamma(r+\nu+1)}
+=\sum_{r=0}^\infty
+ \frac{(-1)^r(x/2)^{\nu+2r}}{r!\Gamma(r+\nu+1)}
+=J_\nu(x),
 \end{align*}
+where $\Gamma(\nu+1/2)$, $\sqrt\pi$, $2$ and $(2r)!$ cancel, and
+$x^{2r}/4^r=(x/2)^{2r}$.
 The factor $x^\nu$ is taken on the same branch as $J_\nu$.
 
 (b) Replacing $\theta$ by $\pi/2-\theta$ first changes the integrand
-to $\cos(x\cos\theta)\sin^{2\nu}\theta$. Reflection about
-$\pi/2$ leaves this integrand unchanged, so
+to $\cos(x\cos\theta)\sin^{2\nu}\theta$; the limits $0,\pi/2$ are
+interchanged and $d\theta\to-d\theta$, so the interval is again
+$[0,\pi/2]$. Reflection about $\pi/2$ ($\theta\to\pi-\theta$, with
+$\cos(\pi-\theta)=-\cos\theta$, $\sin(\pi-\theta)=\sin\theta$, and
+the cosine even) leaves this integrand unchanged, so
 \[
 2\int_0^{\pi/2}\cos(x\cos\theta)\sin^{2\nu}\theta\,d\theta
 =\int_0^\pi\cos(x\cos\theta)\sin^{2\nu}\theta\,d\theta.
 \]
-This gives the first requested form. The integral of
-$\sin(x\cos\theta)\sin^{2\nu}\theta$ is zero: the substitution
-$\theta\mapsto\pi-\theta$ reverses its sign. We may consequently
-replace the cosine by either $e^{ix\cos\theta}$ or
-$e^{-ix\cos\theta}$. Finally $p=\cos\theta$ gives
+Inserting this into (a), the factor $2$ of the prefactor there and the
+factor $\frac12$ from this relation combine to $1$, which gives the
+first requested form. The integral of
+$\sin(x\cos\theta)\sin^{2\nu}\theta$ over $[0,\pi]$ is zero: the
+substitution $\theta\mapsto\pi-\theta$ reverses its sign. Since
+$e^{\pm ix\cos\theta}=\cos(x\cos\theta)\pm i\sin(x\cos\theta)$, we may
+consequently replace the cosine by either $e^{ix\cos\theta}$ or
+$e^{-ix\cos\theta}$. Finally $p=\cos\theta$ gives, with
+$\sin\theta=(1-p^2)^{1/2}\ge0$ on $[0,\pi]$,
 \[
 dp=-\sin\theta\,d\theta,\qquad
-\sin^{2\nu}\theta\,d\theta=-(1-p^2)^{\nu-1/2}dp.
+\sin^{2\nu}\theta\,d\theta=\sin^{2\nu-1}\theta\,\sin\theta\,d\theta
+=-(1-p^2)^{\nu-1/2}dp.
 \]
-Reversing the limits $1,-1$ yields the final integral in the question.
+The limits $\theta=0,\pi$ become $p=1,-1$; reversing them absorbs the
+minus sign and yields the final integral in the question.
 The same proof works for complex $\nu$ with $\Re\nu>-1/2$.
 
 \Needspace{5\baselineskip}
@@ -808,6 +927,11 @@ Exercise~14.1.15, and initially $x>0$. Its exponentially decaying
 tails justify differentiating under the integral.
 
 (a) Both the prefactor and the exponential depend on $x$:
+$d(x/2)^\nu/dx=(\nu/x)(x/2)^\nu$ and
+$\partial_x[-x^2/(4t)]=-x/(2t)$. In the second line
+$(x/2)^\nu(x/2)=(x/2)^{\nu+1}$ and $t^{-\nu-1}t^{-1}=t^{-(\nu+1)-1}$,
+so the remaining term is the same representation with $\nu$ replaced
+by $\nu+1$:
 \begin{align*}
 J_\nu'(x)
 &=\frac\nu xJ_\nu(x)
@@ -819,7 +943,11 @@ J_\nu'(x)
  \int_C t^{-(\nu+1)-1}e^{t-x^2/(4t)}dt\\
 &=\boxed{\frac\nu xJ_\nu(x)-J_{\nu+1}(x)}.
 \end{align*}
-(b) Differentiating the other representation gives
+(b) Differentiating the other representation brings down
+$\partial_x[\frac x2(t-t^{-1})]=\frac12(t-t^{-1})$, and
+$t^{-\nu-1}(t-t^{-1})=t^{-\nu}-t^{-\nu-2}$. Writing
+$t^{-\nu}=t^{-(\nu-1)-1}$ and $t^{-\nu-2}=t^{-(\nu+1)-1}$ identifies
+the two integrals as the representations of orders $\nu\mp1$:
 \begin{align*}
 J_\nu'(x)
 &=\frac1{4\pi i}\int_C
@@ -843,7 +971,10 @@ J_{n}(x)=\frac{1}{\pi}\int_{0}^{\pi}\cos(n\theta-x\sin\theta)\,d\theta.
 \]
 \par\erratum{The order $n$ in this trigonometric integral is an integer.}
 \solution
-For integer $n$, differentiating the finite-interval integral gives
+For integer $n$, differentiating the finite-interval integral under
+the integral sign (the integrand is smooth in $x$ and $\theta$), with
+$\partial_x\cos(n\theta-x\sin\theta)=\sin(n\theta-x\sin\theta)\sin\theta$,
+gives
 \[
 J_n'(x)=\frac1\pi\int_0^\pi
 \sin(n\theta-x\sin\theta)\sin\theta\,d\theta.
@@ -873,7 +1004,9 @@ Laplace transform of $J_{0}$.
 series expansion will be helpful.
 \par\erratum{For real $a\ge0$ and $b$, exclude $(a,b)=(0,0)$; the $a=0$, $b\ne0$ integral is conditionally convergent.}
 \solution
-For $a>0$ and real $b$, use the integer-order integral representation:
+For $a>0$ and real $b$, use the integer-order integral representation
+$J_0(z)=\pi^{-1}\int_0^\pi\cos(z\sin\theta)\,d\theta$ (Bessel's
+integral, Exercise~14.1.16 with $\nu=0$) at $z=bx$:
 \begin{align*}
 L(a,b)&=\frac1\pi\int_0^\pi\int_0^\infty
 e^{-ax}\cos(bx\sin\theta)\,dx\,d\theta\\
@@ -881,8 +1014,16 @@ e^{-ax}\cos(bx\sin\theta)\,dx\,d\theta\\
 \end{align*}
 The interchange is justified by the integrable bound $e^{-ax}$.
 The inner Laplace integral is the real part of
-$\int_0^\infty e^{-(a-ib\sin\theta)x}dx=(a-ib\sin\theta)^{-1}$.
-Reflect the remaining integrand about $\pi/2$ and put $u=\tan\theta$:
+\[
+\int_0^\infty e^{-(a-ib\sin\theta)x}dx=\frac1{a-ib\sin\theta}
+=\frac{a+ib\sin\theta}{a^2+b^2\sin^2\theta}.
+\]
+The integrand $a/(a^2+b^2\sin^2\theta)$ is symmetric about $\pi/2$
+($\sin(\pi-\theta)=\sin\theta$), so the integral over $[0,\pi]$ is
+twice that over $[0,\pi/2]$. There put $u=\tan\theta$, with
+$d\theta=du/(1+u^2)$, $\sin^2\theta=u^2/(1+u^2)$, and limits
+$u:0\to\infty$; then
+$d\theta/(a^2+b^2\sin^2\theta)=du/[a^2(1+u^2)+b^2u^2]$, and
 \begin{align*}
 L(a,b)&=\frac{2a}{\pi}\int_0^{\pi/2}
 \frac{d\theta}{a^2+b^2\sin^2\theta}
@@ -892,12 +1033,15 @@ L(a,b)&=\frac{2a}{\pi}\int_0^{\pi/2}
 \left[\arctan\frac{u\sqrt{a^2+b^2}}a\right]_0^\infty
 =\boxed{\frac1{\sqrt{a^2+b^2}}}.
 \end{align*}
+Here, with $c=\sqrt{a^2+b^2}$, an antiderivative of
+$1/(a^2+c^2u^2)$ is $\arctan(cu/a)/(ac)$, and the arctangent increases
+by $\pi/2$ from $u=0$ to $u=\infty$.
 \erratum{The claimed extension to $a\ge0$ excludes $(a,b)=(0,0)$,
 where the integrand is $1$ and the integral diverges. At $a=0$,
 $b\ne0$, the integral converges conditionally and equals $1/|b|$.}
 To justify that boundary value, $J_0(bx)=J_0(|b|x)$ and its large-$x$
-expansion is an oscillating cosine times $x^{-1/2}$ plus an
-$O(x^{-3/2})$ remainder. The first term converges by integration by
+expansion (Section~14.6) is an oscillating cosine times $x^{-1/2}$
+plus an $O(x^{-3/2})$ remainder. The first term converges by integration by
 parts and the remainder absolutely. Abel's theorem for this
 convergent improper integral then gives its value as
 $\lim_{a\downarrow0}L(a,b)=1/|b|$.
@@ -911,7 +1055,9 @@ functions, confirm that for integer $n$,
 =\frac{1}{\pi}\int_{0}^{\pi}\cos(x\sin\theta-n\theta)\,d\theta.
 \]
 \solution
-Let $F(\theta)=\cos(x\sin\theta-n\theta)$. For integer $n$,
+Let $F(\theta)=\cos(x\sin\theta-n\theta)$. For integer $n$, using
+$\sin(2\pi-\theta)=-\sin\theta$, then the $2\pi$ periodicity of the
+cosine (to drop $-2\pi n$), and finally its evenness,
 \begin{align*}
 F(2\pi-\theta)
 &=\cos[-x\sin\theta-2\pi n+n\theta]\\
@@ -940,11 +1086,14 @@ falls within the central maximum.
 the area integral of the intensity integrated by inspection.
 \par\erratum{For the total-intensity estimate use the paraxial diffraction plane and an aperture large compared with the wavelength.}
 \solution
-(a) Write $q=\sin\alpha/\lambda$ and $u=aq$. Equation (14.25),
-normalized by its central intensity, is
+(a) Write $q=\sin\alpha/\lambda$ and $u=aq$. Equation (14.25) gives
+$\Phi\propto(\lambda a/\sin\alpha)J_1(2\pi a\sin\alpha/\lambda)
+=(a/q)J_1(2\pi aq)$. Since $J_1(z)=z/2+O(z^3)$,
+$(a/q)J_1(2\pi aq)\to\pi a^2$ as $q\to0$, so the intensity normalized
+by its central value is
 \[
 \boxed{\frac{I(q)}{I(0)}=
-\left[\frac{2J_1(2\pi aq)}{2\pi aq}\right]^2},\qquad I(0)/I(0)=1.
+\left[\frac{2J_1(2\pi aq)}{2\pi aq}\right]^2}.
 \]
 The function is even, so the diameter profile is symmetric:
 \begin{center}
@@ -997,12 +1146,15 @@ The function is even, so the diameter profile is symmetric:
 \node[font=\small] at (0,-.23) {$u=a\sin\alpha/\lambda$};
 \end{tikzpicture}
 \end{center}
-The noncentral minima occur at the nonzero zeros of $J_1$. The first
-two positive zeros, found from $J_1(j)=0$, are
+The noncentral minima occur at the nonzero zeros of $J_1$, where the
+intensity vanishes. The first two positive zeros, found from
+$J_1(j)=0$ (e.g., by Newton's method from the starting values $3.8$
+and $7.0$, with $J_1'=J_0-J_1/x$), are
 \[
 j_{11}=3.8317059702,\qquad j_{12}=7.0155866698.
 \]
-Hence their positions on either side of the center are
+Setting $2\pi aq=j_{1k}$, i.e., $q=j_{1k}/(2\pi a)$, gives their
+positions on either side of the center:
 \[
 \boxed{\frac{\sin\alpha}{\lambda}
 =\pm\frac{0.6098349456}{a},\qquad
@@ -1015,26 +1167,32 @@ given minimum is accessible only if its displayed value satisfies
 that bound.
 
 (b) In the small-angle diffraction plane the annular area element is
-proportional to $q\,dq$. Put $x=2\pi aq$; the enclosed energy is
-therefore proportional to $\int_0^X J_1(x)^2\,dx/x$. Using
-$J_0'=-J_1$ and $J_1'=J_0-J_1/x$,
+$2\pi q\,dq$. Put $x=2\pi aq$; then $q\,dq\propto x\,dx$ and
+$I\propto[J_1(x)/x]^2$, so the energy within $x\le X$ is
+proportional to $\int_0^X[J_1(x)/x]^2x\,dx=\int_0^X J_1(x)^2\,dx/x$.
+Using $J_0'=-J_1$ and $J_1'=J_0-J_1/x$ (Exercise~14.1.4(b) with
+$n=0$, and the identity $J_n'=J_{n-1}-nJ_n/x$ derived there, with
+$n=1$),
 \begin{align*}
 \frac d{dx}(J_0^2+J_1^2)
 &=2J_0(-J_1)+2J_1(J_0-J_1/x)
 =-\frac{2J_1^2}{x},\\
 \int_0^X\frac{J_1(x)^2}{x}dx
-&=\frac12[1-J_0(X)^2-J_1(X)^2].
+&=\frac12[1-J_0(X)^2-J_1(X)^2],
 \end{align*}
-Both squared Bessel functions tend to zero as $X\to\infty$, so
-the total radial integral is $1/2$. At the first dark ring,
-$X=j_{11}$ and $J_1(X)=0$. The central fraction is consequently
+the second line by integrating the first from $0$ to $X$ with
+$J_0(0)=1$, $J_1(0)=0$. Both squared Bessel functions tend to zero as
+$X\to\infty$, so the total radial integral is $1/2$. At the first dark
+ring, $X=j_{11}$ and $J_1(X)=0$. The central fraction is the ratio
+$\frac12[1-J_0(j_{11})^2]/\frac12$; with
+$J_0(j_{11})=-0.4027593957$ it is consequently
 \[
 \boxed{1-J_0(j_{11})^2=0.8377848692\ldots\ \simeq83.8\%}.
 \]
 \erratum{This is the usual paraxial, large-aperture estimate
-($a/\lambda\gg1$). The manual, p.~201, says $a/\lambda$ is small
-when extending the pattern to infinity; the regime is reversed.
-Likewise the text on p.~650 calls $2\pi a/\lambda$ small while
+($a/\lambda\gg1$). The Instructor's Manual, p.~201, says $a/\lambda$
+is small when extending the pattern to infinity; the regime is
+reversed. Likewise the textbook, p.~650, calls $2\pi a/\lambda$ small while
 giving its value as $57120$, which is large. For a subwavelength
 aperture, the first dark ring may not exist at any physical angle,
 and the $83.8\%$ plane-area estimate is not applicable.}
@@ -1055,31 +1213,42 @@ J_{2n+1}(2ka)$,
 \item[(b)] $T=1-\dfrac{1}{2ka}\displaystyle\int_{0}^{2ka}J_{0}(x)\,dx$.
 \end{enumerate}
 \solution
-Put $A=2ka>0$. The recurrence from Exercise~14.1.4 gives
+Put $A=2ka>0$. The recurrence from Exercise~14.1.4(b) with $n=1$ gives
 $[J_1(x)/x]'=-J_2(x)/x$, while $J_1(x)/x\to1/2$ at zero. Thus
 \[
 2\int_0^A\frac{J_2(x)}x\,dx
 =-2\left[\frac{J_1(x)}x\right]_0^A
+=-2\left(\frac{J_1(A)}A-\frac12\right)
 =1-\frac{2J_1(A)}A.
 \]
-Also $2J_1'=J_0-J_2$, so
+Also $2J_1'=J_0-J_2$ (Eq.~(14.8) with $n=1$), so
+$J_2=J_0-2J_1'$ and
 \[
 \int_0^A J_2(x)dx=\int_0^A J_0(x)dx-2J_1(A),
 \]
 because $J_1(0)=0$. Substitution into the defining formula for $T$
 cancels the two terms containing $J_1(A)$ and proves part (b):
 \[
-\boxed{T=1-\frac1A\int_0^A J_0(x)dx}.
+T=1-\frac{2J_1(A)}A-\frac1A\left[\int_0^AJ_0(x)dx-2J_1(A)\right]
+=\boxed{1-\frac1A\int_0^A J_0(x)dx}.
 \]
-For part (a), successively use $J_{2r}=2J_{2r+1}'+J_{2r+2}$.
-After $N$ substitutions and integration,
+For part (a), successively use $J_{2r}=2J_{2r+1}'+J_{2r+2}$, which is
+Eq.~(14.8) with $n=2r+1$. Integrating it from $0$ to $A$ gives
+$\int_0^AJ_{2r}dx=2J_{2r+1}(A)+\int_0^AJ_{2r+2}dx$, because
+$J_{2r+1}(0)=0$. Applying this for $r=0,1,\ldots,N-1$ in turn,
 \[
 \int_0^A J_0(x)dx
 =2\sum_{r=0}^{N-1}J_{2r+1}(A)+\int_0^A J_{2N}(x)dx.
 \]
-The series definition bounds $|J_m(x)|$ for $0\le x\le A$ by
-$(A/2)^m e^{A^2/4}/m!$. Thus the last integral tends to zero as
-$N\to\infty$, and
+The series definition bounds $|J_m(x)|$ for $0\le x\le A$: since
+$\Gamma(m+s+1)=(m+s)!\ge m!\,$,
+\[
+|J_m(x)|\le\sum_{s=0}^\infty\frac{(x/2)^{m+2s}}{s!\,(m+s)!}
+\le\frac{(A/2)^m}{m!}\sum_{s=0}^\infty\frac{(A/2)^{2s}}{s!}
+=\frac{(A/2)^m e^{A^2/4}}{m!}.
+\]
+Thus $|\int_0^AJ_{2N}dx|\le A(A/2)^{2N}e^{A^2/4}/(2N)!\to0$ as
+$N\to\infty$. With $2/A=1/(ka)$, part (b) then gives
 \[
 \boxed{T=1-\frac1{ka}\sum_{r=0}^\infty J_{2r+1}(2ka)}.
 \]
@@ -1115,16 +1284,23 @@ equation by $P\Phi T$. The result is
 \frac{P''}P+\frac{P'}{\rho P}
 +\frac{\Phi''}{\rho^2\Phi}=\frac{T''}{v^2T}=-k^2.
 \]
+Here the left side depends only on $\rho,\varphi$ and $T''/(v^2T)$
+only on $t$, so both equal a constant, written $-k^2$.
 Therefore $T''+v^2k^2T=0$. Defining $\omega=vk$ gives
 $T=b_1e^{i\omega t}+b_2e^{-i\omega t}$. Multiplication of the
-remaining equation by $\rho^2$ separates the angle:
+remaining equation by $\rho^2$ gives
+$\rho^2P''/P+\rho P'/P+k^2\rho^2=-\Phi''/\Phi$; the left side depends
+only on $\rho$ and the right only on $\varphi$, so both equal a
+constant $m^2$:
 \[
 \frac{\Phi''}\Phi=-m^2,\qquad
 \rho^2P''+\rho P'+(k^2\rho^2-m^2)P=0.
 \]
 Single-valuedness under $\varphi\mapsto\varphi+2\pi$ requires integer
 $m$, so $\Phi=c_1e^{im\varphi}+c_2e^{-im\varphi}$. With $z=k\rho$
-the radial equation is Bessel's equation. Finiteness at the center
+and $P(\rho)=y(z)$, so that $\rho P'=zy'$ and $\rho^2P''=z^2y''$,
+the radial equation becomes Bessel's equation
+$z^2y''+zy'+(z^2-m^2)y=0$. Finiteness at the center
 excludes $Y_m$, leaving $P=J_m(k\rho)$ up to a constant. Multiplying
 the three factors proves the displayed solution.
 \erratum{Its parameters must satisfy $\omega=vk$; they are not
@@ -1170,7 +1346,10 @@ angular frequency; the height of the cavity is $l$.)}
 \par\erratum{The TE fields must also obey $\nabla\cdot B=0$ and the perfectly conducting side condition $B_\rho=0$; these exclude a spurious constant transverse scalar mode.}
 \solution
 Write $B_z=P(\rho)\Phi(\varphi)Z(z)$ with harmonic time factor
-$e^{-i\omega t}$. Separation gives
+$e^{-i\omega t}$. Dividing
+$\nabla^2B_z+(\omega^2/c^2)B_z=0$ by $P\Phi Z$, the $z$ dependence
+separates as $Z''/Z=-g^2$, and multiplying the rest by $\rho^2$
+separates $\Phi''/\Phi=-m^2$ exactly as in Exercise~14.1.24. This gives
 \[
 \Phi''+m^2\Phi=0,\quad Z''+g^2Z=0,\quad
 \rho^2P''+\rho P'+(q^2\rho^2-m^2)P=0,
@@ -1179,18 +1358,19 @@ $e^{-i\omega t}$. Separation gives
 Periodicity makes $m$ an integer. The end conditions $Z(0)=Z(l)=0$
 give $Z=\sin(p\pi z/l)$ and $g=p\pi/l$, $p=1,2,\ldots$.
 Regularity at the axis gives $P=J_m(q\rho)$ for $q>0$. The side
-condition is
+condition $\partial B_z/\partial\rho=P'(\rho)\Phi Z=0$ at $\rho=a$ is
 \[
 P'(a)=qJ_m'(qa)=0.
 \]
 Thus, with $\beta_{mn}$ the $n$th \emph{positive zero of $J_m'$},
+$qa=\beta_{mn}$, and $\omega^2/c^2=q^2+g^2$ gives
 \[
 q=\frac{\beta_{mn}}a,\qquad
 \boxed{\omega_{mnp}=c\sqrt{\frac{\beta_{mn}^2}{a^2}
 +\frac{p^2\pi^2}{l^2}}},\quad m\ge0,\ n\ge1,\ p\ge1.
 \]
-\erratum{The manual, p.~202, mistakenly identifies $\beta_{mn}$ as
-a zero of $J_m$; it must be a zero of $J_m'$. Its separated sine
+\erratum{The Instructor's Manual, p.~202, mistakenly identifies
+$\beta_{mn}$ as a zero of $J_m$; it must be a zero of $J_m'$. Its separated sine
 also needs the factor $z$, and its oscillatory time factor needs
 $i$: $\sin(p\pi z/l)$ and $e^{\pm i\omega t}$.}
 
@@ -1198,7 +1378,10 @@ $i$: $\sin(p\pi z/l)$ and $e^{\pm i\omega t}$.}
 boundary conditions alone also admit a constant transverse profile
 at $q=0$. Excluding it for a TE electromagnetic mode requires
 Maxwell's equations, not merely the scalar equation.}
-For a Neumann transverse eigenfunction, integration by parts gives
+For a Neumann transverse eigenfunction $\psi=P\Phi$, which satisfies
+$\nabla_\perp^2\psi=-q^2\psi$ on the disk $D$, integration by parts
+(Green's first identity, whose boundary term contains
+$\partial_\rho\psi=0$ at $\rho=a$) gives
 \[
 q^2\int_D |P\Phi|^2\,dA
 =\int_D|\nabla_\perp(P\Phi)|^2\,dA\ge0.
@@ -1222,15 +1405,25 @@ minimum frequency that can be transmitted through a wave guide of
 radius $a$. Explain why this is so, and give a formula for the cutoff
 frequencies.
 \solution
-Take a separated traveling mode with axial wave number $k_z$:
+As in Example~14.1.2, $E_z$ satisfies
+$\nabla^2E_z+(\omega^2/c^2)E_z=0$, is regular on the axis, and, being
+tangential to the conducting wall, vanishes at $\rho=a$. The radial
+factor is therefore $J_m(\alpha_{mj}\rho/a)$ with $\alpha_{mj}$ a
+positive zero of $J_m$, exactly as in the cavity; only the $z$
+dependence changes. Take a separated traveling mode with axial wave
+number $k_z$:
 \[
 E_z=J_m(\alpha_{mj}\rho/a)e^{im\varphi}
  e^{ik_z z-i\omega t},
 \qquad J_m(\alpha_{mj})=0,\quad\alpha_{mj}>0.
 \]
-The radial and angular factors have transverse Laplacian eigenvalue
-$-\alpha_{mj}^2/a^2$, and the axial derivative supplies $-k_z^2$.
-Thus the Helmholtz equation becomes
+By Bessel's equation for $J_m(k\rho)$ with $k=\alpha_{mj}/a$, the
+radial and angular factors satisfy
+$(\partial_\rho^2+\rho^{-1}\partial_\rho+\rho^{-2}\partial_\varphi^2)
+[J_m(k\rho)e^{im\varphi}]=-k^2J_m(k\rho)e^{im\varphi}$, i.e., they
+have transverse Laplacian eigenvalue $-\alpha_{mj}^2/a^2$, and the
+axial derivative supplies $-k_z^2$. Thus the Helmholtz equation
+becomes
 \[
 -\frac{\alpha_{mj}^2}{a^2}-k_z^2+\frac{\omega^2}{c^2}=0,
 \qquad k_z^2=\frac{\omega^2}{c^2}-\frac{\alpha_{mj}^2}{a^2}.
@@ -1242,12 +1435,17 @@ waves exist. The cutoff is therefore
 \boxed{\omega_{c,mj}=\frac{c\alpha_{mj}}a,
 \qquad f_{c,mj}=\frac{c\alpha_{mj}}{2\pi a}}.
 \]
+This is why each TM mode has a minimum frequency: the wall fixes the
+transverse wave number at $\alpha_{mj}/a$, and only the excess of
+$\omega^2/c^2$ over $\alpha_{mj}^2/a^2$ is available for propagation
+along the guide.
 At equality $k_z=0$; this is the onset of propagation, with axial
-group velocity $d\omega/dk_z=c^2k_z/\omega=0$. Strictly propagating
+group velocity $d\omega/dk_z=c^2k_z/\omega=0$ (differentiate
+$\omega^2=c^2k_z^2+c^2\alpha_{mj}^2/a^2$). Strictly propagating
 modes require $\omega>\omega_c$.
-\erratum{The manual's ordinary-frequency formula on p.~203 omits
-the factor $c$. The dispersion relation above also shows the
-dimensionally necessary factor explicitly.}
+\erratum{The ordinary-frequency formula in the Instructor's Manual,
+p.~203, omits the factor $c$. The dispersion relation above also shows
+the dimensionally necessary factor explicitly.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1262,12 +1460,19 @@ Use the dimensionless coordinates suggested in the hint:
 \[
 r=a/l,\qquad X=r^2,\qquad Y=(a\omega/c)^2.
 \]
-Each individual mode is a straight line,
+Multiplying the TM frequencies
+$\omega_{mnp}^2=c^2(\alpha_{mn}^2/a^2+p^2\pi^2/l^2)$ of
+Example~14.1.2 and the TE frequencies of Exercise~14.1.25 by
+$a^2/c^2$ shows that each individual mode is a straight line,
 \[
 Y_{mnp}^{\rm TM}=\alpha_{mn}^2+p^2\pi^2X,\quad p\ge0;
 \qquad
 Y_{mnp}^{\rm TE}=\beta_{mn}^2+p^2\pi^2X,\quad p\ge1.
 \]
+This is the reason for the hint's choice: in the $(X,Y)$ plane every
+mode is a line with intercept $\alpha_{mn}^2$ or $\beta_{mn}^2$ and
+slope $p^2\pi^2$, so the curves are trivial to draw and their
+crossings follow from linear equations.
 The requested angular frequencies follow from
 $\omega=(c/a)\sqrt{Y}$ and $r=\sqrt X$; $0\le r\le1.5$
 means $0\le X\le2.25$.
@@ -1285,14 +1490,20 @@ B=\alpha_{11}^2=14.68197064,\quad
 C=\alpha_{21}^2=26.37461643.
 \]
 To find the first three modes, it suffices to sort
-$A$, $A+\pi^2X$, $A+4\pi^2X$, $B$, and $C$. Higher $p$ on
-the first transverse branch cannot precede its first three members;
-higher $p$ on either of the other branches exceeds the first branch
-with that same $p$. Higher transverse eigenvalues cannot improve
-the first three. The crossover equations and results are
+$A$, $A+\pi^2X$, $A+4\pi^2X$, $B$, and $C$: a mode lying above three
+other modes cannot be among the lowest three. For $X>0$,
+$A+p^2\pi^2X$ with $p\ge3$ lies above $A$, $A+\pi^2X$, $A+4\pi^2X$;
+$B+p^2\pi^2X$ with $p\ge1$ lies above $A$, $A+\pi^2X$, $B$; and
+$C+p^2\pi^2X$ with $p\ge1$ lies above $A$, $A+\pi^2X$, $C$. Higher
+transverse eigenvalues cannot improve the first three (see the end of
+this solution). The crossover equations and their solutions are
 \[
 A+4\pi^2r_1^2=B,\quad A+\pi^2r_2^2=B,\quad
 A+\pi^2r_3^2=C,
+\]
+\[
+r_1=\frac{\sqrt{B-A}}{2\pi},\quad r_2=\frac{\sqrt{B-A}}{\pi},\quad
+r_3=\frac{\sqrt{C-A}}{\pi},
 \]
 \[
 (r_1,r_2,r_3)=(0.4747724183,\ 0.9495448366,\ 1.444419644).
@@ -1315,15 +1526,24 @@ E=\beta_{21}^2=9.328363213,\quad
 F=\beta_{01}^2=14.68197064.
 \]
 Here the candidates are $D+\pi^2X$, $D+4\pi^2X$,
-$D+9\pi^2X$, $E+\pi^2X$, and $F+\pi^2X$.
+$D+9\pi^2X$, $E+\pi^2X$, and $F+\pi^2X$. As for TM, for $X>0$,
+$D+p^2\pi^2X$ with $p\ge4$ lies above the first three members of its
+branch, while $E+p^2\pi^2X$ and $F+p^2\pi^2X$ with $p\ge2$ lie above
+$D+\pi^2X$, $D+4\pi^2X$, and their own $p=1$ member.
 The crossovers satisfy
 \[
 D+9\pi^2s_1^2=E+\pi^2s_1^2,\quad
-D+4\pi^2s_2^2=E+\pi^2s_2^2,
+D+4\pi^2s_2^2=E+\pi^2s_2^2,\quad
+D+4\pi^2s_3^2=F+\pi^2s_3^2,
+\]
+so that
+\[
+s_1=\sqrt{\frac{E-D}{8\pi^2}},\quad
+s_2=\sqrt{\frac{E-D}{3\pi^2}},\quad
+s_3=\sqrt{\frac{F-D}{3\pi^2}},
 \]
 \[
-D+4\pi^2s_3^2=F+\pi^2s_3^2,
-\qquad (s_1,s_2,s_3)=(0.2742458463,\ 0.4478415918,\ 0.6175543472).
+(s_1,s_2,s_3)=(0.2742458463,\ 0.4478415918,\ 0.6175543472).
 \]
 This gives
 \begin{center}
@@ -1359,15 +1579,24 @@ dashed the second, and black dotted the third:
 \end{tikzpicture}
 \end{center}
 The transverse ordering used above can also be checked without
-surveying indefinitely many roots. In the radial Rayleigh quotient,
-increasing $m^2$ increases the nonnegative term
+surveying indefinitely many roots. The radial eigenvalues for given
+$m$ are the min--max values of the Rayleigh quotient
+$\int_0^a(|P'|^2+m^2|P|^2/\rho^2)\rho\,d\rho\big/\int_0^a|P|^2\rho\,d\rho$.
+Increasing $m^2$ increases the nonnegative term
 $m^2\int |P|^2d\rho/\rho$, so each radial eigenvalue increases with
-$m$. For TM, $\alpha_{02}=5.520078>\alpha_{21}$ and
-$\alpha_{31}=6.380162>\alpha_{21}$ exclude the remaining branches.
+$m$; each fixed-$m$ sequence increases with its radial index.
+For TM, the third-lowest value is at most $C$, since $A$, $B$, $C$
+are all modes. Every other branch has either $n\ge2$, so
+$\alpha_{mn}\ge\alpha_{02}=5.520078$, or $n=1$ and $m\ge3$, so
+$\alpha_{m1}\ge\alpha_{31}=6.380162$. Both exceed
+$\alpha_{21}=5.135622$, so these branches lie above $C$.
 For TE, the zero Neumann eigenvalue is excluded as in
-Exercise~14.1.25; $\beta_{31}=4.201189>\beta_{01}$ and
-$\beta_{12}=5.331443>\beta_{01}$ exclude higher positive branches.
-Each fixed-$m$ sequence increases with its radial index. In all
+Exercise~14.1.25, and the third-lowest value is at most $F+\pi^2X$.
+Every other branch has $n=1$ and $m\ge3$, so
+$\beta_{m1}\ge\beta_{31}=4.201189$, or $n\ge2$, so
+$\beta_{0n}\ge\beta_{02}>\beta_{01}$ and, for $m\ge1$,
+$\beta_{mn}\ge\beta_{12}=5.331443$. All exceed $\beta_{01}$, so with
+$p\ge1$ these branches lie above $F+\pi^2X$. In all
 these labels $n=1$ means the first \emph{positive} root; in
 particular $\beta_{01}=3.831706$, not zero.
 
@@ -1395,27 +1624,42 @@ I_{m,n}
 &=a^mJ_{n+1}(a)-(m-n-1)I_{m-1,n+1}(a).
 \tag{*}
 \end{align*}
+Explicitly, for $x>0$ the product rule gives
+\[
+\frac d{dx}\bigl[x^mJ_{n+1}\bigr]
+=\frac d{dx}\bigl[x^{m-n-1}\cdot x^{n+1}J_{n+1}\bigr]
+=(m-n-1)x^{m-1}J_{n+1}+x^mJ_n,
+\]
+and integrating from $0$ to $a$ gives (*) for every $m\ge1$, $n\ge0$,
+including $m-n-1<0$, which occurs in (b).
 The lower boundary term is zero because
 $x^mJ_{n+1}(x)=O(x^{m+n+1})$. Every repetition decreases the
 power by one, increases the order by one, and leaves their sum
 $N=m+n$ unchanged.
 
-(a) If $N$ is odd, then $m-n$ is odd. After
-$r=(m-n-1)/2$ repetitions the remaining indices satisfy
-$m-r=(n+r)+1$. At that stage the coefficient of the remaining
-integral in (*) is zero. Thus the procedure ends with the
-antiderivative $I_{j+1,j}=a^{j+1}J_{j+1}(a)$, and all earlier terms
-are constants times $a^{m-r}J_{n+r+1}(a)$. For example,
+(a) If $N$ is odd, then $m-n$ is odd. After $r$ repetitions the
+indices are $(m-r,n+r)$, and the next coefficient in (*) is
+$(m-r)-(n+r)-1=m-n-1-2r$. After $r=(m-n-1)/2$ repetitions the
+remaining indices therefore satisfy $m-r=(n+r)+1$, and at that stage
+the coefficient of the remaining integral in (*) is zero. Thus the
+procedure ends with the antiderivative $I_{j+1,j}=a^{j+1}J_{j+1}(a)$,
+$j=n+r$, and all earlier terms are constants times
+$a^{m-r}J_{n+r+1}(a)$. For example, $m-n-1=2$ for $I_{n+3,n}$, so
 \[
-I_{n+3,n}=a^{n+3}J_{n+1}(a)-2a^{n+2}J_{n+2}(a).
+I_{n+3,n}=a^{n+3}J_{n+1}(a)-2I_{n+2,n+1}
+=a^{n+3}J_{n+1}(a)-2a^{n+2}J_{n+2}(a).
 \]
 This supplies a finite constructive expression of the required type.
 
 (b) If $N$ is even, each coefficient $m-n-1-2r$ in (*) is odd
-and cannot vanish. Continue until the power becomes zero. All the
+and cannot vanish. Continue until the power becomes zero, i.e.,
+$m$ repetitions, after which the order is $n+m=N$. All the
 terms already integrated have the desired form, and only a constant
 multiple of $I_{0,N}$ remains. For even $N=2h$, the recurrence
-$J_{2j}=J_{2j-2}-2J_{2j-1}'$ gives
+$J_{2j}=J_{2j-2}-2J_{2j-1}'$ (Eq.~(14.8) with $n=2j-1$), integrated
+from $0$ to $a$ with $J_{2j-1}(0)=0$, gives
+$I_{0,2j}=I_{0,2j-2}-2J_{2j-1}(a)$; applying this for
+$j=h,h-1,\ldots,1$,
 \begin{align*}
 I_{0,2h}(a)
 &=I_{0,2h-2}(a)-2J_{2h-1}(a)\\
