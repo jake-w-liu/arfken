@@ -41,7 +41,7 @@ Schwarz's inequality, for every $N\ge k$,
 The left side does not depend on $N$, so it is zero. Each coefficient is
 therefore determined by $f$ alone:
 \[
-\boxed{a_k=\langle\varphi_k|f\rangle.}
+\boxed{a_k=\langle\varphi_k|f\rangle}.
 \]
 Any other convergent expansion in the same orthonormal set has the same
 scalar products and hence the same coefficients. Equality of functions in
@@ -173,15 +173,27 @@ any well-conditioned matrix can make its determinant small). For this
 particular matrix the condition number
 $\kappa_2(A)=\sigma_{\max}/\sigma_{\min}\simeq4.7661\times10^5$, the ratio of
 the extreme singular values, confirms sensitivity of the equations.}
-Because $A$ is symmetric and positive definite, its singular values are its
-eigenvalues. Computing them numerically (with any symmetric eigenvalue
+The real symmetric matrix $A$ has orthonormal eigenvectors
+$u_1,\ldots,u_5$, $Au_k=\lambda_ku_k$ (Chapter 6), and positive
+definiteness makes every $\lambda_k=u_k^TAu_k$ positive. Since
+$A^TAu_k=A^2u_k=\lambda_k^2u_k$, the singular values of $A$, the square
+roots of the eigenvalues of $A^TA$, are its eigenvalues $\lambda_k$.
+Computing them numerically (with any symmetric eigenvalue
 routine, e.g., the Jacobi method) gives $\lambda_{\max}\simeq1.56705$ and
 $\lambda_{\min}\simeq3.28793\times10^{-6}$, whose ratio is the quoted
 $\kappa_2$. To see what this ratio measures, let $b$ change by $\delta b$,
-so that $c$ changes by $\delta c=A^{-1}\delta b$. Expanding in orthonormal
-eigenvectors of $A$ shows that, for Euclidean lengths,
-$|\delta c|\le|\delta b|/\lambda_{\min}$ and
-$|b|=|Ac|\le\lambda_{\max}|c|$. Hence
+so that $c$ changes by $\delta c=A^{-1}\delta b$. Write
+$\delta b=\sum_k\beta_ku_k$ and $c=\sum_k\gamma_ku_k$; then
+$\delta c=\sum_k(\beta_k/\lambda_k)u_k$ and $Ac=\sum_k\lambda_k\gamma_ku_k$,
+and Pythagoras gives, for Euclidean lengths,
+\begin{align*}
+|\delta c|^2&=\sum_k\frac{|\beta_k|^2}{\lambda_k^2}
+\le\frac1{\lambda_{\min}^2}\sum_k|\beta_k|^2
+=\frac{|\delta b|^2}{\lambda_{\min}^2},\\
+|b|^2=|Ac|^2&=\sum_k\lambda_k^2|\gamma_k|^2
+\le\lambda_{\max}^2\sum_k|\gamma_k|^2=\lambda_{\max}^2|c|^2.
+\end{align*}
+Taking square roots and dividing,
 \[
 \frac{|\delta c|}{|c|}\le\frac{|\delta b|/\lambda_{\min}}{|b|/\lambda_{\max}}
 =\kappa_2(A)\,\frac{|\delta b|}{|b|},
@@ -216,9 +228,15 @@ is minimized by taking $c_{n}=a_{n}$.
 terms in the finite series. This independence is a consequence of
 orthogonality and would not hold for a least-squares fit using powers of $x$.
 \solution
-Use the real orthonormal functions and nonnegative weight implicit in the
-stated coefficient formula:
-$\int_a^b\varphi_j\varphi_k w\,dx=\delta_{jk}$. Expanding the finite error,
+\erratum{The added hypotheses are implicit in the textbook: its coefficient
+formula (no complex conjugate) and its error (an ordinary square) are those
+for real functions, a nonnegative weight makes the error a weighted mean
+square, and square integrability of $F$ keeps the error finite (otherwise,
+since $F^2\le2(F-p)^2+2p^2$ and $\int_a^bp^2w\,dx=\sum_nc_n^2$ for
+$p=\sum_nc_n\varphi_n$, it would be infinite for every choice of the
+$c_n$).}
+Orthonormality means $\int_a^b\varphi_j\varphi_k w\,dx=\delta_{jk}$.
+Expanding the finite error,
 \begin{align*}
 E(c)&=\int_a^bF^2w\,dx
  -2\sum_{n=0}^m c_n\int_a^bF\varphi_nw\,dx
@@ -236,7 +254,8 @@ E_{\min}=\|F\|^2-\sum_{n=0}^m a_n^2.
 \]
 Adding another orthonormal function only adds its own square to this
 calculation; it does not alter the earlier coefficients. If the full
-expansion converges in norm, Parseval's identity
+expansion converges to $F$ in norm (as it does when the $\varphi_n$ form a
+complete set), Parseval's identity
 $\|F\|^2=\sum_{n=0}^\infty a_n^2$ gives $E_{\min}=\sum_{n>m}a_n^2$.
 For complex functions the corresponding formula uses
 $a_n=\int\varphi_n^*Fw\,dx$ and $E=\int|F-\sum c_n\varphi_n|^2w\,dx$;
@@ -308,7 +327,10 @@ The functions $1,\cos kx,\sin kx$ ($k\ge1$) form a complete orthogonal set
 on $[-\pi,\pi]$, so the Fourier series of every square-integrable function
 converges to it in the mean-square norm. Here all cosine coefficients
 vanish ($f$ is odd), and so do the even-order sine coefficients, since
-$\int_0^\pi\sin2mx\,dx=0$; the partial sums of the Fourier series of $f$
+$\int_0^\pi\sin2mx\,dx=0$. The odd-order sine coefficients are the
+integrals $2h/(2n+1)$ computed above divided by
+$\int_{-\pi}^{\pi}\sin^2(2n+1)x\,dx=\pi$, i.e., $2h/[\pi(2n+1)]$, exactly
+the coefficients of $f_N$. The partial sums of the Fourier series of $f$
 are therefore the $f_N$, and $\|f-f_N\|\to0$. Letting $N\to\infty$ in the
 Pythagoras identity proves the stated Parseval equality.
 
@@ -365,7 +387,7 @@ nonnegative square roots proves
 \[
 \boxed{\left|\int_a^bfg\,dx\right|
 \le\left(\int_a^bf^2dx\right)^{1/2}
-   \left(\int_a^bg^2dx\right)^{1/2}.}
+   \left(\int_a^bg^2dx\right)^{1/2}}.
 \]
 If $\int g^2dx>0$, set $\lambda=(\int fg)/(\int g^2)$. Then
 \begin{align*}
@@ -419,7 +441,7 @@ $\langle f|\varphi_j\rangle=\langle\varphi_j|f\rangle^*=a_j^*$.
 The partial sums of the nonnegative series $\sum|a_i|^2$ increase and
 are bounded by $\|f\|^2$. Taking their limit gives
 \[
-\boxed{\sum_{i=0}^\infty|a_i|^2\le\langle f|f\rangle.}
+\boxed{\sum_{i=0}^\infty|a_i|^2\le\langle f|f\rangle}.
 \]
 No completeness assumption on the orthonormal set is needed for this
 inequality. To check the equality case, let $S_N=\sum_{i=0}^Na_i\varphi_i$.
@@ -518,7 +540,7 @@ c_2=5\Bigl(\frac2\pi-\frac{24}{\pi^3}\Bigr)=\frac{10(\pi^2-12)}{\pi^3}
 while $c_1=c_3=0$. The requested four-term projection is therefore
 \[
 \boxed{\sin\pi x\ \approx\ \frac2\pi\varphi_0
- +0\varphi_1+\frac{10(\pi^2-12)}{\pi^3}\varphi_2+0\varphi_3.}
+ +0\varphi_1+\frac{10(\pi^2-12)}{\pi^3}\varphi_2+0\varphi_3}.
 \]
 The two zero coefficients can also be checked by reflection:
 \[
@@ -571,7 +593,7 @@ a_3&=J_0-3J_1+\frac32J_2-\frac16J_3
 Consequently
 \[
 \boxed{e^{-x}\approx\frac12L_0+\frac14L_1+\frac18L_2+\frac1{16}L_3
-=\frac{15}{16}-\frac{11x}{16}+\frac{5x^2}{32}-\frac{x^3}{96}.}
+=\frac{15}{16}-\frac{11x}{16}+\frac{5x^2}{32}-\frac{x^3}{96}}.
 \]
 Collecting powers of $x$: the constant is
 $\frac12+\frac14+\frac18+\frac1{16}=\frac{15}{16}$, the coefficient of $x$ is
@@ -612,7 +634,7 @@ Write $|f\rangle=\sum_n a_n|\varphi_n\rangle$. Taking the scalar product
 with the $m$th new basis vector gives
 \[
 \boxed{b_m=\langle\chi_m|f\rangle
-=\sum_n\langle\chi_m|\varphi_n\rangle a_n.}
+=\sum_n\langle\chi_m|\varphi_n\rangle a_n}.
 \]
 Thus only overlaps between known basis functions are required. In matrix
 notation $b=Ua$, where $U_{mn}=\langle\chi_m|\varphi_n\rangle$.
@@ -654,9 +676,9 @@ $\langle\hat{\mathbf e}_j|\mathbf a\rangle
 \boxed{\sum_j|\hat{\mathbf e}_j\rangle
  \langle\hat{\mathbf e}_j|\mathbf a\rangle
 =\sum_j\hat{\mathbf e}_j(\hat{\mathbf e}_j\cdot\mathbf a)
-=\sum_j a_j\hat{\mathbf e}_j=\mathbf a.}
+=\sum_j a_j\hat{\mathbf e}_j=\mathbf a}.
 \]
-In ordinary dyadic notation this is
+In matrix notation, with each $\hat{\mathbf e}_j$ a column, this is
 $(\sum_j\hat{\mathbf e}_j\hat{\mathbf e}_j^{\mathsf T})\mathbf a=I\mathbf a$.
 \erratum{Orthonormality is needed here; unit length and spanning alone are
 insufficient.} For example, the unit vectors $(1,0)$ and
@@ -696,7 +718,7 @@ $a_2=0$ and then $a_1=0$. If $k=1$, the nonzero vector $(1,1)$ has
 zero norm. If $k<1$, this same vector has squared norm $k-1<0$.
 Thus all scalar-product axioms hold exactly for
 \[
-\boxed{k>1.}
+\boxed{k>1}.
 \]
 The determinant check $\det G=k-1>0$, together with $G_{11}=1>0$
 (Sylvester's criterion for positive definiteness), agrees with the direct
@@ -776,13 +798,13 @@ The endpoint values are $q_0(1)=1$, $q_1(1)=1/2$,
 $q_2(1)=1/6$, and $q_3(1)=(20-30+12-1)/20=1/20$. Hence
 \[
 \boxed{P_0^*=1,\quad P_1^*=2x-1,\quad
-P_2^*=6x^2-6x+1,\quad P_3^*=20x^3-30x^2+12x-1.}
+P_2^*=6x^2-6x+1,\quad P_3^*=20x^3-30x^2+12x-1}.
 \]
 The construction extends to the complete set. A formula with the same
 orthogonality and endpoint normalization is
 \[
 \boxed{P_n^*(x)=\frac1{n!}\frac{d^n}{dx^n}[x^n(x-1)^n]
-=\sum_{k=0}^n(-1)^{n-k}\binom nk\binom{n+k}k x^k.}
+=\sum_{k=0}^n(-1)^{n-k}\binom nk\binom{n+k}k x^k}.
 \]
 The finite sum follows by first expanding and then differentiating:
 \[
@@ -820,7 +842,7 @@ $\binom{2n}n$ and lower powers are orthogonal to $P_n^*$, so
 =\frac{(2n)!}{(n!)^2}\frac{(n!)^2}{(2n+1)!}
 =\frac1{2n+1}.
 \end{align*}
-The middle equality again uses $n$ integrations by parts with vanishing
+The second equality again uses $n$ integrations by parts with vanishing
 boundary terms, now moving all derivatives onto $x^n$:
 \[
 \int_0^1x^nP_n^*dx
@@ -888,7 +910,7 @@ Since $q_2^2=x^4-8x^3+20x^2-16x+4$,
 Choose the conventional signs $L_n(0)>0$. Dividing by the norms gives
 \[
 \boxed{L_0=1,\qquad L_1=-q_1=1-x,\qquad
-L_2=q_2/2=1-2x+\frac{x^2}{2}.}
+L_2=q_2/2=1-2x+\frac{x^2}{2}}.
 \]
 Gram--Schmidt makes the cross integrals zero, and the displayed norm
 calculations make all three diagonal integrals one. Normalization alone
@@ -938,7 +960,7 @@ Its square is $x^4-12x^3+48x^2-72x+36$, so
 Thus
 \[
 \boxed{\varphi_0=1,\qquad\varphi_1=\frac{x-2}{\sqrt2},\qquad
-\varphi_2=\frac{x^2-6x+6}{2\sqrt3}.}
+\varphi_2=\frac{x^2-6x+6}{2\sqrt3}}.
 \]
 \erratum{The printed slash notation for $\varphi_2$ means division by the
 entire quantity $2\sqrt3$; writing a fraction removes the ambiguity.}
@@ -963,7 +985,8 @@ For this set of polynomials the usual normalization is
 \par\nobreak\hfill\emph{ANS.}\enspace
 $H_{0}=1$,\quad$H_{1}=2x$,\quad$H_{2}=4x^{2}-2$.
 \solution
-Odd moments vanish by parity. For $j\ge1$, use
+Let $M_k=\int_{-\infty}^{\infty}x^ke^{-x^2}dx$; the odd moments vanish by
+parity. For $j\ge1$, write $x^{2j}=x^{2j-1}\cdot x$ and use
 $x e^{-x^2}dx=-\tfrac12d(e^{-x^2})$ in integration by parts:
 \[
 M_{2j}=-\frac12[x^{2j-1}e^{-x^2}]_{-\infty}^{\infty}
@@ -993,7 +1016,7 @@ The needed positive scale factors $s_n$, with $s_n^2\|q_n\|^2$ equal to
 these, are therefore
 $1$, $\sqrt{2/(1/2)}=2$, and $\sqrt{8/(1/2)}=4$. Hence
 \[
-\boxed{H_0=1,\qquad H_1=2x,\qquad H_2=4x^2-2.}
+\boxed{H_0=1,\qquad H_1=2x,\qquad H_2=4x^2-2}.
 \]
 Parity verifies the odd cross integrals, while
 $\langle H_0|H_2\rangle=4M_2-2M_0=0$ checks the remaining pair.
@@ -1051,7 +1074,7 @@ Their squared norms are
 Thus $q_0$ and $q_1$ already have the requested normalization, and $q_2$
 needs multiplication by $2$:
 \[
-\boxed{T_0=1,\qquad T_1=x,\qquad T_2=2x^2-1.}
+\boxed{T_0=1,\qquad T_1=x,\qquad T_2=2x^2-1}.
 \]
 To check the additional answer $T_3$, only the projection of $x^3$ onto
 $x$ survives parity; its coefficient is
@@ -1114,7 +1137,7 @@ $q_2^2=x^4-\frac12x^2+\frac1{16}$,
 \]
 Scale these by $1$, $2$, and $4$ so that every squared norm is $\pi/2$:
 \[
-\boxed{U_0=1,\qquad U_1=2x,\qquad U_2=4x^2-1.}
+\boxed{U_0=1,\qquad U_1=2x,\qquad U_2=4x^2-1}.
 \]
 The remaining even cross integral is
 $\langle U_0|U_2\rangle=4M_2-M_0=0$; the other cross integrals are odd.
@@ -1148,7 +1171,7 @@ The monic constant is $\varphi_0=1$, and subtraction of its projection
 from $x$ gives
 \[
 \boxed{\varphi_1=x-\frac{\langle1|x\rangle}{\langle1|1\rangle}
-=x-\frac1{\sqrt\pi}.}
+=x-\frac1{\sqrt\pi}}.
 \]
 Indeed, $\langle\varphi_0|\varphi_1\rangle
 =1/2-(1/\sqrt\pi)(\sqrt\pi/2)=0$.
@@ -1205,7 +1228,7 @@ so the requested set is
 \[
 \boxed{\mathbf e_1=\frac{(1,1,1)^T}{\sqrt3},\quad
 \mathbf e_2=\frac{(-1,-1,2)^T}{\sqrt6},\quad
-\mathbf e_3=\frac{(1,-1,0)^T}{\sqrt2}.}
+\mathbf e_3=\frac{(1,-1,0)^T}{\sqrt2}}.
 \]
 The three cross-dot-product numerators are $-1-1+2=0$, $1-1=0$,
 and $-1+1=0$; their squared lengths are respectively $3/3$, $6/6$,
@@ -1243,7 +1266,7 @@ Hence $\langle f|[A-(A^\dagger)^\dagger]g\rangle=0$ for every $f$.
 For fixed $g$, choose $f=[A-(A^\dagger)^\dagger]g$. Its squared norm is
 zero, so it is the zero vector. Since $g$ was arbitrary,
 \[
-\boxed{(A^\dagger)^\dagger=A.}
+\boxed{(A^\dagger)^\dagger=A}.
 \]
 
 \Needspace{5\baselineskip}
@@ -1274,7 +1297,7 @@ Subtracting, $\langle[(UV)^\dagger-V^\dagger U^\dagger]f|g\rangle=0$ for
 every $g$; the choice $g=[(UV)^\dagger-V^\dagger U^\dagger]f$ shows, as in
 the previous exercise, that this vector is zero. Since $f$ is arbitrary,
 \[
-\boxed{(UV)^\dagger=V^\dagger U^\dagger.}
+\boxed{(UV)^\dagger=V^\dagger U^\dagger}.
 \]
 The order reverses because $U$, the operator applied last, is the first
 to be moved across the scalar product.
@@ -1314,7 +1337,7 @@ A_2x_1=-x_2,\qquad A_2x_2=x_1,\qquad A_2x_3=0.
 Reading off the columns gives
 \[
 \boxed{A_1=\begin{pmatrix}1&0&0\\0&1&0\\0&0&1\end{pmatrix},\qquad
-A_2=\begin{pmatrix}0&1&0\\-1&0&0\\0&0&0\end{pmatrix}.}
+A_2=\begin{pmatrix}0&1&0\\-1&0&0\\0&0&0\end{pmatrix}}.
 \]
 (b) The coefficient column of $\psi$ is $c=(1,-2,3)^T$.
 
@@ -1382,7 +1405,7 @@ order $0,1,2,3$, the matrix is
 \[
 \boxed{A=\begin{pmatrix}
 0&0&\sqrt5&0\\0&1&0&\sqrt{21}\\0&0&2&0\\0&0&0&3
-\end{pmatrix}.}
+\end{pmatrix}}.
 \]
 (b) The coefficients of the even polynomials vanish by parity. The two
 odd coefficients are
