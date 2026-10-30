@@ -1423,7 +1423,9 @@ regular decaying transforms, and then by the $L^2$ pairing
 limit where appropriate; odd/even extensions are essential for
 arguments that become negative.
 \erratum{The Instructor's Manual's intermediate two-delta
-kernels on p.~339 omit reflected sources. For example, the sine kernel
+kernels on p.~339, which arise when both transforms on the
+right-hand side are written as integrals and the $s$ integral is
+done first, omit reflected sources. For example, the sine kernel
 on the full range of its arguments is}
 \[
 \erratum{\begin{aligned}
@@ -1448,6 +1450,24 @@ $\int_0^\infty\cos(su)\,ds=\pi\delta(u)$ (Exercise~20.2.7).
 kernel has the same four delta arguments with all plus signs.
 The reflected terms cannot all be discarded on $t,y>0$ when
 $x$ is arbitrary; the odd/even extensions above include them.}
+Since $F_s(s)G_s(s)$ is $2/\pi$ times the integral of
+$f(t)g(y)\sin(st)\sin(sy)$ over $t,y>0$, inserting the sine
+kernel and doing the $t$ integral, in which each delta
+contributes only where its root $t$ is positive ($\theta$ is the
+unit step function), gives
+\[
+\begin{aligned}
+\int_0^\infty F_sG_s\cos(sx)\,ds
+=\frac12\int_0^\infty g(y)\big[&f(y+x)\theta(y+x)+f(y-x)\theta(y-x)\\
+&-f(-y-x)\theta(-y-x)-f(x-y)\theta(x-y)\big]dy.
+\end{aligned}
+\]
+For odd $f$, $-f(-y-x)=f(y+x)$ and $-f(x-y)=f(y-x)$, so, since
+$\theta(u)+\theta(-u)=1$, the bracket is $f(y+x)+f(y-x)$, which
+gives (a); without the two
+reflected terms the contributions from $y+x<0$ and from $y<x$
+would be lost. The cosine kernel, with all plus signs and even
+$f$, gives $f(y+x)+f(x-y)$ in the same way.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1581,9 +1601,12 @@ convolution theorem reads
 =(2\pi)^{-3/2}\int a(\mathbf u)b(\mathbf r-\mathbf u)d^3u.
 \]
 Indeed, transforming the right-hand side and substituting
-$\mathbf r=\mathbf u+\mathbf v$ factorizes it into
-$(2\pi)^{-3}\int a(\mathbf u)e^{i\mathbf k\cdot\mathbf u}d^3u
-\int b(\mathbf v)e^{i\mathbf k\cdot\mathbf v}d^3v=AB$.
+$\mathbf r=\mathbf u+\mathbf v$ at fixed $\mathbf u$ factorizes it:
+\[
+\frac1{(2\pi)^3}\int a(\mathbf u)e^{i\mathbf k\cdot\mathbf u}d^3u
+\int b(\mathbf v)e^{i\mathbf k\cdot\mathbf v}d^3v
+=\frac{(2\pi)^{3/2}A\,(2\pi)^{3/2}B}{(2\pi)^3}=AB.
+\]
 Use $a=\rho$ and $b=\sqrt{\pi/2}/r$, so that $B=k^{-2}$:
 \[
 \psi(\mathbf r)=\frac1{\varepsilon_0}\,
@@ -1643,8 +1666,10 @@ F(t)=\frac12\sqrt{2\pi}\,Q(t)^2
 =\frac12\sqrt{2\pi}\,\frac2\pi\left(\frac{\sin t}{t}\right)^2
 =\boxed{\sqrt{\frac2\pi}\left(\frac{\sin t}{t}\right)^2}.
 \]
-(b) The direct-space squared norm is, since $f$ is even and with
-$u=1-x/2$, $dx=-2\,du$,
+(b) Since $f$ is even, its direct-space squared norm is twice the
+integral over $0\le x\le2$; there put $u=1-x/2$, $dx=-2\,du$, so
+$u$ runs from $1$ to $0$, and reversing the limits absorbs the minus
+sign:
 \[
 \int|f(x)|^2dx=2\int_0^2(1-x/2)^2dx
 =4\int_0^1u^2du=\frac43.
@@ -1659,7 +1684,7 @@ $\boxed{(\pi/2)(4/3)=2\pi/3}$.
 \erratum{The Instructor's Manual's Parseval line on p.~341 prints
 $(\sin t/t)^2$ where it must print $(\sin t/t)^4$:
 the already squared amplitude $F(t)$ is squared again to
-form $|F(t)|^2$. The integration differential there is $dt$.}
+form $|F(t)|^2$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1717,7 +1742,8 @@ to $f(x)=e^{-ax}$. Its direct squared norm is
 \]
 (a) The cosine transform of Exercise~20.2.3 is
 $g_c(\omega)=\sqrt{2/\pi}\,a/(\omega^2+a^2)$, so Parseval's
-relation of Exercise~20.4.2 with $g=f$ gives
+relation of Exercise~20.4.2, applied with both functions equal to
+$f$ (so that both transforms are $g_c$), gives
 \[
 \frac1{2a}=\int_0^\infty g_c(\omega)^2d\omega
 =\frac2\pi\int_0^\infty
@@ -1939,7 +1965,12 @@ $i\hbar\nabla_{p}$ that $V(\mathbf{r})$ is of the variable
 $\mathbf{r}$.
 \solution
 Transform with the negative-exponent momentum
-convention of Exercise~20.4.10. The time derivative commutes
+convention of Exercise~20.4.10; for any function $\chi$ write
+\[
+\mathcal F_p[\chi](\mathbf p)=\frac1{(2\pi\hbar)^{3/2}}\int\chi(\mathbf r)
+e^{-i\mathbf r\cdot\mathbf p/\hbar}d^3r,
+\]
+so that $\varphi=\mathcal F_p[\psi]$. The time derivative commutes
 with the spatial transform, producing $i\hbar\partial_t\varphi$.
 For the Laplacian, integrate by parts in $x$; the boundary terms
 vanish because $\psi\to0$ at infinity, and
@@ -2134,8 +2165,10 @@ Exercise~20.5.3 correspond to the successive transfer functions
 shown in Fig.~20.12. Explain why the transfer function for this
 exercise \erratum{is uniformly approximated by the product of the
 individual unloaded transfer functions when $R_2\gg R_1$}.
-\erratum{Explain the loading correction; the textbook's word
-``only'' does not give a necessary condition at each frequency.}
+\erratum{Explain the loading correction. The condition
+$R_2\gg R_1$ is sufficient for a uniformly accurate product
+approximation but, contrary to the textbook's word ``only'', it is
+not necessary.}
 \solution
 Taken separately with unloaded outputs, the high-pass
 and low-pass stages have transfer functions
@@ -2185,11 +2218,30 @@ the product is nonzero, therefore satisfies
 by the reverse triangle inequality $|1+\eta|\ge1-|\eta|$ and
 because $x/(1-x)$ increases on $0\le x<1$.
 \erratum{The quoted limit is a sufficient condition for a
-uniformly accurate product approximation, not a necessary
-condition at each frequency. At low frequency the loading may
-also be small; an ideal buffer between stages makes the product
+uniformly accurate product approximation, not a necessary one.
+At sufficiently low and high frequencies the loading is small in
+any case; an ideal buffer between stages makes the product
 exact. For finite positive elements in the unbuffered circuit,
 the product is not an identity in frequency.}
+The exact size of the correction shows that $R_2\gg R_1$ is not
+necessary. With $a=R_1C_1$ and
+$b=R_2C_2$, dividing the numerator and denominator of $|\eta|^2$
+by $\omega^2$ and expanding $(1+\omega^2a^2)(1+\omega^2b^2)$ gives
+\[
+|\eta|^2=\frac{R_1^2C_2^2}{\omega^{-2}+a^2+b^2+a^2b^2\omega^2}
+\le\frac{R_1^2C_2^2}{(a+b)^2},
+\]
+since $\omega^{-2}+a^2b^2\omega^2\ge2ab$ (the inequality of
+Exercise~20.5.3, where $B=ab$), with equality at the passband
+center $\omega=1/\sqrt{ab}$. Thus
+$|\eta|\to0$ as $\omega\to0$ or $\omega\to\infty$, and
+\[
+\max_\omega|\eta|=\frac{R_1C_2}{R_1C_1+R_2C_2}
+<\frac{R_1C_2}{R_2C_2}=\frac{R_1}{R_2}.
+\]
+The product is therefore uniformly accurate whenever
+$R_1C_2\ll R_1C_1+R_2C_2$, for example also when $C_2\ll C_1$
+with comparable resistances.
 
 \Needspace{20\baselineskip}
 \subsection*{20.6 Discrete Fourier Transform}
@@ -2203,7 +2255,7 @@ discrete orthogonality corresponding to Eq.~(20.120):
 \sum_{k=0}^{N-1}\cos(2\pi pk/N)\cos(2\pi qk/N)&=
 \erratum{\begin{cases}
 N, & p=q=(0\text{ or }N/2);\\[3pt]
-N/2, & (p+q=N)\text{ or }p=q\text{ but not both};\\[3pt]
+N/2, & (p+q=0\text{ or }N)\text{ or }p=q\text{ but not both};\\[3pt]
 0, & \text{otherwise}.
 \end{cases}}\\
 \sum_{k=0}^{N-1}\sin(2\pi pk/N)\sin(2\pi qk/N)&=
@@ -2229,9 +2281,9 @@ For integers $m$ define the discrete selector
 \]
 With $r=e^{2\pi im/N}$ the finite geometric series gives
 \[
-\sum_{k=0}^{N-1}e^{2\pi imk/N}=\sum_{k=0}^{N-1}r^k=N\Delta_N(m):
+\sum_{k=0}^{N-1}e^{2\pi imk/N}=\sum_{k=0}^{N-1}r^k=N\Delta_N(m).
 \]
-if $m\equiv0\pmod N$, every term is $r^k=1$; otherwise $r\ne1$
+Indeed, if $m\equiv0\pmod N$, every term is $r^k=1$; otherwise $r\ne1$
 and the sum is $(1-r^N)/(1-r)=0$, because
 $r^N=e^{2\pi im}=1$. Its imaginary part
 $\sum_k\sin(2\pi mk/N)$ is therefore zero and its real part
@@ -2264,6 +2316,13 @@ $1$, the cosine sum is $N/2$; the sine sum is $N/2$ for
 $p=q$ and $-N/2$ for $p+q=N$ with $p\ne q$.
 When neither selector is $1$, both sums vanish. These cases
 prove the corrected formulas, including $N=1$ and $N=2$.
+\erratum{The red cases in the statement include the pairs with
+$p+q=N$, $p\ne q$, for which $\Delta_N(p+q)=1$: for example,
+$N=4$, $p=1$, $q=3$ gives the cosine sum $2=N/2$ and the sine sum
+$-2=-N/2$, although $p\ne q$. The middle cosine case is written
+with $p+q=0$ or $N$, so that $p=q=0$, where both of its
+conditions hold, falls under the first case only; with $p+q=N$
+alone the first two cases would overlap at $p=q=0$.}
 \erratum{The final product-to-sum line in the Instructor's
 Manual's proof on p.~344 has a cosine--cosine product on its left. It must
 be a sine--sine product to agree with the difference of cosines
@@ -2389,15 +2448,18 @@ limit proof above remains valid and identifies $a_0=F(0+)$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{20.7.2}\quad \erratum{Prove the following precise replacement for the
-withdrawn exercise:}
+\noindent\textbf{20.7.2}\quad Show that
+\[
+\frac1\pi\lim_{s\to0}L\{\cos(xt)\}=\delta(x).
+\]
+\par\erratum{This formula leaves the transform variable, the
+approach to zero, and the meaning of convergence unspecified; the
+published errata therefore say to disregard it. Prove instead the
+following precise replacement:}
 \[
 \erratum{\frac1\pi\lim_{s\downarrow0}L_t\{\cos xt\}(s)=\delta(x)
 \quad\text{as distributions in }x.}
 \]
-\par\erratum{The textbook's formula left the transform variable,
-approach to zero, and meaning of convergence unspecified; the
-published errata therefore say to disregard it.}
 \solution
 \erratum{The published errata withdraw the statement as
 ill-defined. It has a useful, precise replacement: let $s$
@@ -2739,7 +2801,10 @@ absolute terms is
 \]
 which converges by the ratio test (or terminates): the ratio
 of consecutive terms is $|(a+n)/(c+n)|/\Re s\to1/\Re s<1$.
-Hence termwise integration is allowed and
+Hence, by dominated convergence (every partial sum is bounded in
+modulus by the sum of the absolute terms, whose integral, by
+monotone convergence, is the finite sum above), termwise
+integration is allowed and
 \begin{align*}
 L\{M(a,c,t)\}(s)
 &=\sum_{n=0}^\infty\frac{(a)_n}{(c)_n n!}
