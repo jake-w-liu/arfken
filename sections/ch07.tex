@@ -1814,12 +1814,15 @@ Therefore ($j=0$ and $j=1$)
 \boxed{b_1=\frac{1/4}{2}=\frac18},\qquad
 \boxed{b_2=\frac{9/4}{4}\frac18=\frac9{128}}.
 \]
-These are asymptotic coefficients for large positive $x$ (hence the
-qualification $x\to+\infty$ in the statement), not a
+These are asymptotic coefficients for large positive $x$, not a
 convergent series at fixed $x$: the ratio of successive inverse-power
 terms, $b_{j+1}x^{-j-1}/(b_jx^{-j})=(j+\frac12)^2/[2(j+1)x]$, behaves as
 $j/(2x)$ for large $j$ and grows beyond one. Truncation
-must be understood in the asymptotic sense.
+must be understood in the asymptotic sense. The qualification
+$x\to+\infty$ in the statement is needed because
+$I_0(x)=\sum_k(x/2)^{2k}/(k!)^2$ is an even function: as $x\to-\infty$,
+$I_0(x)=I_0(|x|)\sim e^{|x|}/\sqrt{2\pi|x|}$ grows, whereas
+$e^x/\sqrt{2\pi x}$ is imaginary there and tends to zero.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1900,6 +1903,17 @@ $N$&$x=0.95$&$0.96$&$0.97$&$0.98$&$0.99$&$1.00$\\\midrule
 2000&$-8.264934\times10^{-49}$&$-1.029188\times10^{-39}$&$-1.031567\times10^{-30}$&$-8.359498\times10^{-22}$&$-5.500701\times10^{-13}$&$-0.0002951405$\\
 \bottomrule\end{tabular}\end{center}
 
+The tables show the difference the Note refers to. At $x=0.99$ every
+further 200 powers reduce the last term by a factor between about 8 and
+15, and the partial sum is fixed to all seven digits, $-0.2695047$, from
+$N=1400$ on. At $x=1.00$ the last term only halves from $N=1000$ to
+$N=2000$, and the partial sums keep falling: by $0.204$ from $N=200$ to
+$400$, and still by $0.031$ from $N=1800$ to $2000$. Their total fall
+from $N=200$ to $2000$, $0.679$, matches
+$\sum_{j=101}^{1000}0.295/j\approx0.295\ln(1000/100)=0.679$ (recall
+$N=2j$), as expected from the asymptotic form $a_{2j}\approx-0.295/j$
+derived below.
+
 The convergence distinction can also be proved rather than inferred
 from these tables. Since $2j(2j+1)-\frac34=4(j-\frac14)(j+\frac34)$ and
 $(2j+2)(2j+1)=4(j+\frac12)(j+1)$, the recursion reads
@@ -1975,10 +1989,23 @@ The iteration uses
 \frac{t_{k+1}}{t_k}=\frac{x^2(2k+1)}{(k+1)(2k+3)},\qquad
 S_K=\sum_{k=0}^Kt_k.
 \]
-The ratio decreases with $k$, and it exceeds one while
-$(k+1)(2k+3)<x^2(2k+1)$; so the largest term is $t_0=1$ for $x=1$,
-$t_2=3.2$ for $x=2$, and $t_7=3^{15}/(7!\cdot15)=189.80$ for $x=3$.
+The ratio decreases with $k$, since apart from the constant factor $x^2$
+\[
+\frac{2k+1}{(k+1)(2k+3)}-\frac{2k+3}{(k+2)(2k+5)}
+=\frac{4k^2+8k+1}{(k+1)(k+2)(2k+3)(2k+5)}>0,
+\]
+so the terms rise while the ratio exceeds one and fall afterwards. For
+$x=1$ the ratio is $\frac13$ already at $k=0$; for $x=2$ it is
+$\frac43,\frac65,\frac{20}{21}$ at $k=0,1,2$; for $x=3$ it is
+$\frac{39}{35}>1$ at $k=6$ but $\frac{135}{136}<1$ at $k=7$. So the
+largest term is $t_0=1$ for $x=1$, $t_2=3.2$ for $x=2$, and
+$t_7=3^{15}/(7!\cdot15)=189.80$ for $x=3$.
 Stop at the first $K$ for which $t_K\le10^{-6}\max_{j\le K}t_j$.
+The thresholds are therefore $10^{-6}$, $3.2\times10^{-6}$ and
+$1.898\times10^{-4}$; the terms $t_8=1.459\times10^{-6}$,
+$t_{16}=1.244\times10^{-5}$ and $t_{27}=2.913\times10^{-4}$ still exceed
+them, while $t_9$, $t_{17}$ and $t_{28}$ (tabulated below) do not, so
+$K=9,17,28$.
 For every subsequent ratio,
 $t_{j+1}/t_j<x^2/(j+1)\le q:=x^2/(K+2)$ when $j\ge K+1$, the first
 inequality because $(2j+1)/(2j+3)<1$. Hence $t_{K+1+i}\le q^it_{K+1}$,
@@ -2013,8 +2040,9 @@ on every finite integration interval, termwise integration is valid:
 Alternatively $y'=e^{x^2}$ directly gives $y''=2xe^{x^2}=2xy'$ and the
 correct initial data $y(0)=0$, $y'(0)=1$.
 
-(c) Numerical quadrature of $e^{t^2}$, checked against the closed form
-$(\sqrt\pi/2)\operatorname{erfi}(x)$, gives
+(c) Numerical quadrature evaluates the integral independently of the
+series: a 25-point Gauss--Legendre rule on $[0,x]$, carried out in
+30-digit arithmetic, gives
 \[
 \begin{aligned}
 \int_0^1e^{t^2}dt&=1.462651745907181608\ldots,\\
@@ -2022,6 +2050,12 @@ $(\sqrt\pi/2)\operatorname{erfi}(x)$, gives
 \int_0^3e^{t^2}dt&=1444.5451228927141547\ldots.
 \end{aligned}
 \]
+Every printed digit agrees with library values of
+$(\sqrt\pi/2)\operatorname{erfi}(x)$, where
+$\operatorname{erfi}(x)=-i\operatorname{erf}(ix)=(2/\sqrt\pi)\int_0^xe^{t^2}dt$
+is the imaginary error function (put $u=it$ in
+$\operatorname{erf}(z)=(2/\sqrt\pi)\int_0^ze^{-u^2}du$); the relative
+error of the quadrature is below $10^{-26}$.
 The differences from the finite sums in (a), $1.430\times10^{-8}$,
 $7.229\times10^{-7}$ and $3.797\times10^{-5}$, are positive and smaller
 than the bounds $B_K$, as an independent numerical check.
@@ -2147,12 +2181,13 @@ y_{1}=cy_{2},
 \]
 that is, that $y_{1}$ and $y_{2}$ are linearly dependent. Assume the functions
 have continuous derivatives and that at least one of the functions does not
-vanish in the \erratum{connected} interval under consideration.
+vanish in the interval under consideration.
 \erratum{Interchange the labels first, if necessary, so that $y_2$ is
-nowhere zero; without this convention only the dependence conclusion
-is unconditional.}
+nowhere zero; without this convention $y_1=cy_2$ can fail (for example
+when $y_2\equiv0$ and $y_1\ne0$), although $y_1$ and $y_2$ are still
+linearly dependent.}
 \solution
-Suppose first that $y_2$ is nowhere zero on the connected interval.
+Suppose first that $y_2$ is nowhere zero on the interval.
 The quotient rule gives
 \[
 \left(\frac{y_1}{y_2}\right)'
@@ -2280,13 +2315,14 @@ derivative $1$ at zero, so
 This is the flaw the question asks us to find; the printed argument is
 an intentional trap. The continuous-derivative hypothesis needed for the
 usual theorem fails.
-Furthermore, neither function is nowhere zero on $[-1,1]$, so the
-quotient argument cannot connect the constants on the two sides.
+Furthermore, both functions vanish at $x=0$, so the quotient argument of
+Exercise 7.6.4, which needs one function that is nowhere zero, cannot
+connect the constants on the two sides.
 
 They are independent on that full interval: if $ax+b|x|=0$, positive
 $x$ gives $a+b=0$ and negative $x$ gives $a-b=0$. Therefore
-$a=b=0$. On either open half-interval separately they are dependent,
-with proportionality constants $+1$ and $-1$, respectively.
+$a=b=0$. On $0<x\le1$ alone they are dependent, since $|x|=x$ there,
+and on $-1\le x<0$ alone, since $|x|=-x$ there.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2296,7 +2332,8 @@ $e^{x}$.
 \solution
 Linear dependence requires a relation with constant coefficients,
 $a\cosh x+be^x=0$, valid throughout an interval. Since
-$\cosh x=(e^x+e^{-x})/2$, it would imply
+$\cosh x=(e^x+e^{-x})/2$, it would read
+$(\frac a2+b)e^x+\frac a2e^{-x}=0$, and multiplication by $e^x$ gives
 \[
 \left(\frac a2+b\right)e^{2x}+\frac a2=0.
 \]
@@ -2371,9 +2408,12 @@ W_3=\det\begin{pmatrix}y_1&y_2&y_3\\y_1'&y_2'&y_3'\\y_1''&y_2''&y_3''\end{pmatri
 the third row equals $-Q(x)$ times the first row minus $P(x)$ times
 the second. Hence $W_3(x)=0$ for every $x$.
 
-To complete the argument without an invalid converse for arbitrary
-smooth functions, choose an ordinary point $x_0$. The two homogeneous
-equations
+A vanishing Wronskian alone does not prove dependence of arbitrary
+differentiable functions: $x^2$ and $x|x|$, whose derivatives are $2x$
+and $2|x|$, have $W=x^2\cdot2|x|-2x\cdot x|x|=0$ everywhere, yet they are
+independent on $[-1,1]$ by the argument of Exercise 7.6.7. So complete
+the argument with the ODE: choose any point $x_0$ of the interval. The
+two homogeneous equations
 \[
 \sum_{j=1}^3c_jy_j(x_0)=0,\qquad
 \sum_{j=1}^3c_jy_j'(x_0)=0
@@ -2513,8 +2553,9 @@ $\nabla^2=r^{-2}\partial_r(r^2\partial_r)+r^{-2}\Delta_\Omega$, where
 $\Delta_\Omega$ is the angular operator in $\theta$ and the azimuth
 (it does not act on $r$),
 $\nabla^2(u/r)=u_{rr}/r+\Delta_\Omega u/r^3$.
-The eliminated derivative is the first \emph{radial} derivative; the
-origin requires its separate regularity condition.
+The eliminated derivative is the first \emph{radial} derivative. At the
+origin a separate condition is needed: for $\varphi=u/r$ to stay finite
+there, $u=r\varphi$ must vanish at $r=0$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2614,7 +2655,7 @@ well defined.
 R''+\frac{1}{r}R'-\frac{m^{2}}{r^{2}}R=0
 \]
 is $R=r^{m}$, show that Eq.~(7.67) predicts a second solution,
-\erratum{$R=r^{-m}$ for $m\ne0$, and $R=\ln r$ for $m=0$, on $r>0$.}
+$R=r^{-m}$ \erratum{for $m\ne0$, and $R=\ln r$ for $m=0$, on $r>0$}.
 \solution
 On $r>0$, $P=1/r$ and $e^{-\int Pdr}=1/r$, up to a constant.
 With $R_1=r^m$, reduction of order gives
@@ -2925,7 +2966,8 @@ derive a second solution, $y_{2}(x)$.
 \par\nobreak\hfill\emph{ANS.}\enspace $y_{2}=-(1-x^{2})^{1/2}$.
 \solution
 On $-1<x<1$, use $P=-x/(1-x^2)$ and $y_1=x$. As in Exercise 7.6.22,
-the inner integral is $\exp[-\int^sP(t)dt]=(1-s^2)^{-1/2}$, so the
+the inner integral is $\int^sP(t)dt=\frac12\ln(1-s^2)$, so
+$\exp[-\int^sP(t)dt]=(1-s^2)^{-1/2}$, and the
 Wronskian double integral gives, initially on either side of zero,
 \[
 y_2=x\int^x\frac{\exp[-\int^s(-t/(1-t^2))dt]}{s^2}ds
@@ -2944,7 +2986,7 @@ Thus $y_2=x\cdot(-\sqrt{1-x^2}/x)$, that is,
 \boxed{y_2=-\sqrt{1-x^2}},
 \]
 up to a multiple of $x$ from the integration constant. Its derivatives
-are, by the quotient rule,
+are, by the chain rule and then the quotient rule,
 \[
 y_2'=\frac x{\sqrt{1-x^2}},\qquad
 y_2''=\frac{\sqrt{1-x^2}+x^2/\sqrt{1-x^2}}{1-x^2}=(1-x^2)^{-3/2},
@@ -3081,7 +3123,7 @@ $y_1(y_1'f+y_1f')-y_1'y_1f=y_1^2f'=e^{-\int Pdx}\ne0$.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{7.6.26}\quad
-\erratum{Use $x>0$ and $a_0\ne0$; the primed labels in parts (b),(c)
+\erratum{Use $x>0$ and $a_0\ne0$; the primed labels in parts (b) and (c)
 name limiting solutions, not derivatives.}
 \begin{enumerate}
 \item[(a)] Show that
@@ -3224,8 +3266,9 @@ Integrate and substitute:
 -y_1(x)\int^x\frac{y_2(s)F(s)}{W(s)}ds}.
 \]
 Constants in the integrals contribute only multiples of $y_1,y_2$.
-The calculation of $L[y_p]$ above gives
-$u_1'y_1'+u_2'y_2'=F$, checking the formula directly.
+As a direct check, these $u_1',u_2'$ satisfy both conditions:
+$u_1'y_1+u_2'y_2=(-y_2y_1+y_1y_2)F/W=0$ and
+$L[y_p]=u_1'y_1'+u_2'y_2'=(y_1y_2'-y_1'y_2)F/W=F$.
 Finally any other solution minus this particular solution satisfies the
 homogeneous equation, and every homogeneous solution $y_h$ is a
 combination $C_1y_1+C_2y_2$: by Exercise 7.6.10, $y_h,y_1,y_2$ satisfy
@@ -3371,8 +3414,11 @@ Use the given solution by setting $y=2+u$. Then
 \[
 u'=(2+u)^2-(2+u)-2=u^2+3u.
 \]
-The branch $u=0$ gives the original solution $y=2$. For $u\ne0$,
-put $v=1/u$; then
+The branch $u=0$ gives the original solution $y=2$. Since $u^2+3u$ is
+smooth, initial-value problems for $u$ have unique solutions, so a
+solution with $u=0$ at one point is this zero solution; any other
+solution has $u\ne0$ throughout its interval. For such $u$ put
+$v=1/u$; then
 \[
 v'=-\frac{u'}{u^2}=-\frac{u^2+3u}{u^2}=-1-3v,\qquad
 (e^{3x}v)'=e^{3x}(v'+3v)=-e^{3x},
@@ -3404,8 +3450,11 @@ Work on $x\ne0$ and set $y=x^2+u$. Expanding every term gives
           -\frac{x^2+u}{x}+2x
 =2x+\frac ux+\frac{u^2}{x^3}.
 \]
-Thus $u'=u/x+u^2/x^3$. The branch $u=0$ is $y=x^2$.
-For $u\ne0$, let $v=1/u$; then $v'=-u'/u^2=-1/(xu)-1/x^3$, that is,
+Thus $u'=u/x+u^2/x^3$. The branch $u=0$ is $y=x^2$. Since the right
+side is smooth in $u$ for $x\ne0$, uniqueness of initial-value problems
+(as in Exercise 7.8.1) means that any other solution has $u\ne0$
+throughout its interval. For such $u$ let $v=1/u$; then
+$v'=-u'/u^2=-1/(xu)-1/x^3$, that is,
 \[
 v'=-\frac vx-\frac1{x^3},\qquad
 v'+\frac vx=-\frac1{x^3},\qquad (xv)'=-\frac1{x^2},
@@ -3434,7 +3483,11 @@ agrees with the corrected equation derived here.}
 \noindent\textbf{7.8.3}\quad Solve the Bernoulli equation $y'+xy=xy^{3}$.
 \solution
 The solution $y=0$ must be recorded before dividing by a power of $y$.
-For a nonzero solution set $u=y^{-2}$. Then
+Since $xy^3-xy$ is smooth in $y$, initial-value problems for this
+equation have unique solutions, so a solution that vanishes at one
+point is the zero solution. Every other solution is nowhere zero and,
+being continuous, keeps one sign on its interval. For such a solution
+set $u=y^{-2}$. Then
 \[
 u'=-2y^{-3}y'=-2y^{-3}(xy^3-xy)=-2x+2xu.
 \]
