@@ -1673,8 +1673,8 @@ K^\dagger=\frac{C^\dagger-C}{-2i}
 =\frac{C-C^\dagger}{2i}=K.
 \]
 Also $C+C^\dagger=2H$ and $i(C-C^\dagger)=i\cdot2iK=-2K$. Real
-multiples of Hermitian matrices are Hermitian, so both matrices
-requested in the first sentence are Hermitian.
+multiples of Hermitian matrices are Hermitian, so the two matrices
+$C+C^\dagger$ and $i(C-C^\dagger)$ named in the statement are Hermitian.
 Recombining, with $iK=i(C-C^\dagger)/(2i)=(C-C^\dagger)/2$,
 \[
 H+iK=\frac{C+C^\dagger}{2}+\frac{C-C^\dagger}{2}=C.
@@ -1786,9 +1786,10 @@ vector, show that
 where $\mathbf{1}_{2}$ is a $2\times2$ unit matrix.
 \solution
 \erratum{In the Instructor's Manual's expansion, the term multiplying
-$p_yp_z$ must contain $\sigma_2\sigma_3+\sigma_3\sigma_2$, not the
-repeated $\sigma_1\sigma_2+\sigma_2\sigma_1$. Both vanish, so the
-printed final result is unaffected.}
+$p_yp_z$ (that is, $p_2p_3$) must contain
+$\sigma_2\sigma_3+\sigma_3\sigma_2$, not the repeated
+$\sigma_1\sigma_2+\sigma_2\sigma_1$. Both vanish, so the printed final
+result is unaffected.}
 The scalar components $p_i$ commute with each other and with the
 matrices, so
 \[
@@ -1830,7 +1831,17 @@ Explicitly, the Dirac matrices of Eqs.~(2.70) and (2.72) are
 \gamma^i=J\otimes\sigma_i\quad(i=1,2,3),\qquad
 J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}=i\sigma_2.
 \]
-The direct-product rule is $(A\otimes B)(C\otimes D)=AC\otimes BD$.
+The properties of direct products in Eqs.~(2.57) and (2.58) are the
+direct-product rule and the distributive laws,
+\[
+(A\otimes B)(C\otimes D)=AC\otimes BD,\qquad
+(A+B)\otimes C=A\otimes C+B\otimes C,\qquad
+C\otimes(A+B)=C\otimes A+C\otimes B.
+\]
+By the entry formula $(A\otimes B)_{(i,a),(j,b)}=A_{ij}B_{ab}$ of
+Exercise 2.2.39, scalar factors also move freely,
+$(\lambda A)\otimes B=A\otimes(\lambda B)=\lambda(A\otimes B)$, and
+$I_2\otimes I_2=I_4$.
 Since $J^2=(i\sigma_2)^2=-\sigma_2^2=-I_2$ and $\sigma_i^2=I_2$
 (Exercise 2.2.11),
 \[
@@ -1847,13 +1858,15 @@ $\gamma^i\gamma^0=J\sigma_3\otimes\sigma_i$, where
 =\begin{pmatrix}0&1\\1&0\end{pmatrix}=\sigma_1,\qquad
 J\sigma_3=\begin{pmatrix}0&-1\\-1&0\end{pmatrix}=-\sigma_1.
 \]
-Hence
+Hence, by the distributive law,
 \[
 \gamma^0\gamma^i+\gamma^i\gamma^0
-=(\sigma_3J+J\sigma_3)\otimes\sigma_i=0.
+=\sigma_3J\otimes\sigma_i+J\sigma_3\otimes\sigma_i
+=(\sigma_3J+J\sigma_3)\otimes\sigma_i=(\sigma_1-\sigma_1)\otimes\sigma_i=0.
 \]
 For spatial indices $\gamma^i\gamma^j=J^2\otimes\sigma_i\sigma_j
-=-I_2\otimes\sigma_i\sigma_j$, so by Exercise 2.2.11(c)
+=-I_2\otimes\sigma_i\sigma_j$, so by the distributive law and
+Exercise 2.2.11(c)
 \[
 \gamma^i\gamma^j+\gamma^j\gamma^i
 =-I_2\otimes(\sigma_i\sigma_j+\sigma_j\sigma_i)
@@ -1861,7 +1874,8 @@ For spatial indices $\gamma^i\gamma^j=J^2\otimes\sigma_i\sigma_j
 \]
 For $i=j$ this repeats $(\gamma^i)^2=-I_4$; for $i\ne j$ it is the
 anticommutation of two spatial matrices.
-These are the conditions (2.74)--(2.75), compactly
+These are the conditions (2.74)--(2.75). With the anticommutator
+$\{A,B\}=AB+BA$ they combine into the single (Clifford) relation
 \[
 \boxed{\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}I_4,\quad
 g=\operatorname{diag}(1,-1,-1,-1)}.
@@ -1889,7 +1903,7 @@ Hence, since $i(-i)=1$ and $\sigma_3J=\sigma_1$ (2.2.41),
 \]
 Now $\sigma_1\sigma_3=-\sigma_3\sigma_1$ (Exercise 2.2.11) and, with
 $J=i\sigma_2$, $\sigma_1J=i\sigma_1\sigma_2=-i\sigma_2\sigma_1=-J\sigma_1$.
-By the direct-product rule, therefore,
+By the direct-product rule and the distributive law, therefore,
 \[
 \{\gamma^5,\gamma^0\}
 =(\sigma_1\sigma_3+\sigma_3\sigma_1)\otimes I_2=0,
@@ -2032,8 +2046,9 @@ $(i\gamma^\mu\gamma^\nu)^2=-\gamma^\mu\gamma^\nu\gamma^\mu\gamma^\nu
 Thus the replacement works for the matrices in the first row of the
 table and fails for the seven in the second row, for which
 $M_\Gamma^2-M_\Gamma=-I_4/2$.
-Multiplying such a $\Gamma$ by $i$ makes its square $+I_4$ and
-restores the projector construction.
+Multiplying such a $\Gamma$ by $i$ makes its square
+$(i\Gamma)^2=-\Gamma^2=+I_4$, so that $M_{i\Gamma}=(I_4+i\Gamma)/2$
+again satisfies $M_{i\Gamma}^2=M_{i\Gamma}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2173,7 +2188,7 @@ called the charge conjugation matrix. Show that
 $\mathsf{C}\boldsymbol{\gamma}^{\mu}\mathsf{C}^{-1}
 =-(\boldsymbol{\gamma}^{\mu})^{T}$.
 \solution
-Use the specified Dirac representation
+Use the Dirac representation of Eqs.~(2.70) and (2.72),
 $\gamma^0=\sigma_3\otimes I_2$, $\gamma^i=i\sigma_2\otimes\sigma_i$
 (Exercise 2.2.41). By the direct-product rule and
 $\sigma_2\sigma_3=i\sigma_1$,
@@ -2206,17 +2221,26 @@ C\gamma^2&=i\gamma^2\gamma^0\gamma^2=-i(\gamma^2)^2\gamma^0=i\gamma^0,&
 \gamma^2C&=i(\gamma^2)^2\gamma^0=-i\gamma^0.
 \end{aligned}
 \]
-It commutes with $\gamma^1,\gamma^3$, since moving either to the left
+Hence $C\gamma^\mu=-\gamma^\mu C$ for $\mu=0,2$; for instance,
+$C\gamma^0=i\gamma^2=-\gamma^0C$. On the other hand, $C$ commutes with
+$\gamma^1,\gamma^3$, since moving either to the left
 past the two factors $\gamma^0$ and $\gamma^2$ gives two minus signs:
 $C\gamma^\mu=i\gamma^2\gamma^0\gamma^\mu=i\gamma^\mu\gamma^2\gamma^0
-=\gamma^\mu C$ for $\mu=1,3$. Multiplying $C\gamma^\mu=\mp\gamma^\mu C$
-on the right by $C^{-1}$ gives
+=\gamma^\mu C$ for $\mu=1,3$. Multiplying these two relations on the
+right by $C^{-1}$ gives
 \[
 C\gamma^\mu C^{-1}=
 \begin{cases}-\gamma^\mu,&\mu=0,2,\\+\gamma^\mu,&\mu=1,3.\end{cases}
 \]
 Comparison with the transposes proves
 $\boxed{C\gamma^\mu C^{-1}=-(\gamma^\mu)^T}$ for every $\mu$.
+The cases display used only the relations (2.74)--(2.75), so the
+representation enters through the transposes alone: the identity holds
+exactly when $\gamma^0,\gamma^2$ are symmetric and $\gamma^1,\gamma^3$
+antisymmetric, as also in the Weyl representation of
+Exercise 2.2.49. It fails, for example, for the matrices
+$S\gamma^\mu S^{-1}$ with $S=\operatorname{diag}(1,2,1,1)$, which
+also obey (2.74)--(2.75) but have $S\gamma^1S^{-1}$ not antisymmetric.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2227,7 +2251,7 @@ $\boxed{C\gamma^\mu C^{-1}=-(\gamma^\mu)^T}$ for every $\mu$.
   Dirac equation, Eq.~(2.73), takes the following form when written as
   $2\times2$ blocks (with $\psi_{L}$ and $\psi_{S}$ column vectors of
   dimension 2). Here $L$ and $S$ stand, respectively, for ``large'' and
-  ``small'' because of their relative size in the nonrelativistic limit):
+  ``small'' because of their relative size in the nonrelativistic limit:
   \[
   \begin{pmatrix}
   mc^{2}-E&c(\sigma_{1}p_{1}+\sigma_{2}p_{2}+\sigma_{3}p_{3})\\
@@ -2287,7 +2311,12 @@ $(mc^2\gamma^0+c\sum_i\alpha_ip_i)\Psi=E\Psi$ is
 \]
 Both off-diagonal blocks are the same.
 
-\textbf{(b)} On the positive-energy branch set $E=mc^2+\varepsilon$
+\textbf{(b)} \erratum{The qualification added to (b) is needed
+because the approximation $-2mc^2-\varepsilon\simeq-2mc^2$ requires
+$|\varepsilon|\ll mc^2$, that is, $E\simeq+mc^2$ with $m>0$; on the
+negative-energy branch $E\le-mc^2$, so $\varepsilon\le-2mc^2$, and
+there $\psi_L$, not $\psi_S$, is the small component.}
+On the positive-energy branch set $E=mc^2+\varepsilon$
 with $|\varepsilon|\ll mc^2$. Then $mc^2-E=-\varepsilon$ and
 $-mc^2-E=-(2mc^2+\varepsilon)$, so the two block rows of (a) are the
 two-component equations
@@ -2319,9 +2348,13 @@ $E^2=m^2c^4+c^2\mathbf p^2$.
 
 \textbf{(c)} For such a state $2mc^2+\varepsilon=E+mc^2>0$, and the
 exact relation of (b) is $\psi_S=cP\psi_L/(E+mc^2)$. For real
-$\mathbf p$, $P$ is Hermitian, so $P^\dagger P=P^2=\mathbf p^2I_2$ and
+$\mathbf p$, $P$ is Hermitian, so $P^\dagger P=P^2=\mathbf p^2I_2$.
+Measure a two-component column by its magnitude
+$\|\psi\|=(\psi^\dagger\psi)^{1/2}$. Since $E+mc^2$ is real,
+$\psi_S^\dagger=c\,\psi_L^\dagger P^\dagger/(E+mc^2)$, and
 \[
-\|\psi_S\|^2=\frac{c^2\,\psi_L^\dagger P^\dagger P\psi_L}{(E+mc^2)^2}
+\|\psi_S\|^2=\psi_S^\dagger\psi_S
+=\frac{c^2\,\psi_L^\dagger P^\dagger P\psi_L}{(E+mc^2)^2}
 =\frac{c^2\mathbf p^2}{(E+mc^2)^2}\,\|\psi_L\|^2.
 \]
 Hence, with $E\simeq mc^2$ in the nonrelativistic regime,
