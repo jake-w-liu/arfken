@@ -1338,7 +1338,9 @@ $(f_u,f_v)\ne(0,0)$}, is that
 \erratum{The usual equivalence is local and needs regularity.
 A meaningful relation is a $C^1$ function $f$ with
 $(f_u,f_v)\ne(0,0)$ on the image near the point in question; otherwise
-$f\equiv0$ would make the claim vacuous. For the converse, work where at
+$f\equiv0$ would relate every pair $u,v$, and necessity would fail:
+$u=x$, $v=y$ satisfy $f(u,v)=0$, yet
+$\nabla u\times\nabla v=\hat{\mathbf e}_z\ne0$. For the converse, work where at
 least one of $\nabla u,\nabla v$ is nonzero. Mere differentiability,
 without these qualifications, does not establish the printed global
 ``necessary and sufficient'' statement.}
@@ -1383,12 +1385,15 @@ d\widetilde v
 \]
 The differentials $ds,d\eta,d\zeta$ of a coordinate system are linearly
 independent, so the coefficients agree: $\widetilde v_s=\lambda$ and
-$\widetilde v_\eta=\widetilde v_\zeta=0$. On a sufficiently small
+$\widetilde v_\eta=\widetilde v_\zeta=0$. Let $(s_0,\eta_0,\zeta_0)$ be
+the image of the point under consideration. On a sufficiently small
 coordinate box $|s-s_0|<\delta$, $|\eta-\eta_0|<\delta$,
 $|\zeta-\zeta_0|<\delta$, the mean value theorem applied in $\eta$ and
 then in $\zeta$ gives
 $\widetilde v(s,\eta,\zeta)=\widetilde v(s,\eta_0,\zeta_0)\equiv F(s)$,
-a $C^1$ function of $s$ alone. Therefore
+a $C^1$ function of $s$ alone, because $\widetilde v$ is $v$ composed
+with the inverse coordinate map, and both are $C^1$ (the inverse
+function theorem supplies a $C^1$ inverse). Therefore
 \[
 v=F(u),\qquad f(u,v)=v-F(u)=0,
 \]
@@ -1431,14 +1436,13 @@ J\equiv\frac{\partial(x,y)}{\partial(q_{1},q_{2})}
 \equiv\frac{\partial x}{\partial q_{1}}\frac{\partial y}{\partial q_{2}}
 -\frac{\partial x}{\partial q_{2}}\frac{\partial y}{\partial q_{1}}=\erratum{\pm h_{1}h_{2}}.
 \]
-\erratum{Equivalently, $|J|=h_1h_2$; the positive sign requires positive
-orientation.}
 \emph{Hint.}~It's easier to work with the square of each side of this
 equation.
 \solution
 \erratum{The orientation-independent statement is
 $|J|=h_1h_2$. The printed positive sign assumes an orientation-preserving
-coordinate chart.}
+coordinate chart; the orthogonal chart $x=q_1$, $y=-q_2$ checked below
+has $J=-h_1h_2$.}
 
 At a given point set
 \[
@@ -1512,7 +1516,9 @@ J^{-1}=\frac{\partial(u,v)}{\partial(x,y)}
 =-\frac{x+y}{y^2}=-\frac{u}{y^2}.
 \]
 It is nonzero on the admissible domain. The chain rule makes the
-Jacobian matrices of a map and its inverse mutually inverse, so
+Jacobian matrices of a map and its inverse mutually inverse, and the
+determinant of a product of matrices is the product of their
+determinants, so
 $\dfrac{\partial(x,y)}{\partial(u,v)}\,\dfrac{\partial(u,v)}{\partial(x,y)}=1$,
 and with $y=u/(v+1)$,
 \[
@@ -1541,23 +1547,33 @@ e^0=dt,\quad e^1=dx_1,\quad e^2=dx_2,\quad e^3=dx_3,
 \]
 and write $e^{a_1\cdots a_p}=e^{a_1}\wedge\cdots\wedge e^{a_p}$,
 with $\mathrm{vol}=e^{0123}$. For an increasing index set $I$, let $J$
-be its increasing complement, $N$ the number of inversions in the
-concatenation $(I,J)$, and $m$ the number of spatial indices in $I$.
-Then
+be its increasing complement, $m$ the number of spatial indices in $I$,
+and $N$ the number of inversions in the concatenation $(I,J)$, that is,
+of pairs of entries standing in decreasing order; for example, for
+$I=\{1,3\}$ the concatenation $(1,3,0,2)$ has the three inversions
+$(1,0)$, $(3,0)$, $(3,2)$, so $N=3$. Then
 \[
 e^I\wedge e^J=(-1)^N\mathrm{vol},\qquad
-\langle e^I,e^I\rangle=(-1)^m:
+\langle e^I,e^I\rangle=(-1)^m{:}
 \]
 the first because sorting $(I,J)$ into the order $0123$ takes $N$
-interchanges of adjacent factors, each of which changes the sign; the
-second because $\langle e^I,e^I\rangle$ is the product of the diagonal
-metric entries $\eta^{aa}$, $a\in I$, and $m$ of them equal $-1$.
-The Hodge star of a $p$-form $\beta$ is fixed by
+interchanges of adjacent factors, each of which changes the sign (each
+interchange of an adjacent pair standing in decreasing order removes
+exactly one inversion); the second because the metric induces on
+$p$-forms the inner product
+$\langle e^K,e^I\rangle=\det\bigl[\eta^{ab}\bigr]_{a\in K,\,b\in I}$,
+which for $K=I$ is the product of the diagonal metric entries
+$\eta^{aa}$, $a\in I$, $m$ of which equal $-1$. For $K\ne I$ this
+determinant vanishes: since $\eta$ is diagonal, the row of an index
+$a\in K$ not in $I$ is zero.
+The Hodge star of a $p$-form $\beta$ is fixed by the standard defining
+relation
 $\alpha\wedge *\beta=\langle\alpha,\beta\rangle\mathrm{vol}$ for every
 $p$-form $\alpha$. Take $\beta=e^I$. For $\alpha=e^K$ with $K\ne I$ the
-right side is zero, and $e^K$ has a nonzero wedge product only with the
-basis form of its own complement; hence $*e^I$ has no component along
-the complement of any $K\ne I$, and $*e^I=s\,e^J$ for some number $s$.
+right side is zero by this orthogonality, and $e^K$ has a nonzero wedge
+product only with the basis form of its own complement; hence $*e^I$
+has no component along the complement of any $K\ne I$, and
+$*e^I=s\,e^J$ for some number $s$.
 Then $\alpha=e^I$ gives $s(-1)^N=(-1)^m$, so
 \[
 \boxed{*e^I=(-1)^{N+m}e^J}.
@@ -1572,7 +1588,10 @@ That is a typographical error: count them in the form $\omega$ being
 starred. The worked example and Eq.~(4.82) use this corrected rule:
 for $\omega=1$ the complement $\omega'=\mathrm{vol}$ has three negative
 metric factors, so the printed rule would give $*1=-\mathrm{vol}$,
-whereas Eq.~(4.82) has $*1=+\mathrm{vol}$.}
+whereas Eq.~(4.82) has $*1=+\mathrm{vol}$. Since $\omega$ and $\omega'$
+together contain all three spatial differentials, the two counts always
+differ in parity, so the printed rule would reverse the sign of every
+result in Eq.~(4.82).}
 For instance, $*1=\mathrm{vol}$ has $m=0$, while
 $*\mathrm{vol}=-1$ has $m=3$.
 
@@ -1698,7 +1717,7 @@ d\omega_2
 again, and using the minus sign appropriate to a first-degree factor,
 \[
 d(d\omega_2)
-=2d(dx\wedge dy)
+=2\,d(dx\wedge dy)
 =2\{d(dx)\wedge dy-dx\wedge d(dy)\}=0.
 \]
 The already-zero result for $\omega_1$ also has zero exterior derivative.
@@ -1790,7 +1809,7 @@ d\omega_2\wedge\omega_3
 \end{align*}
 All terms not displayed in the simplified lines contain a repeated
 $dx$ or $dy$ and are zero. Subtracting the second result from the first
-gives $(2xy-(-2xy))dx\wedge dy\wedge dz=4xy\,dx\wedge dy\wedge dz$,
+gives $(2xy-(-2xy))\,dx\wedge dy\wedge dz=4xy\,dx\wedge dy\wedge dz$,
 exactly as in (a).
 
 \Needspace{9\baselineskip}
@@ -1814,9 +1833,9 @@ the linear transformation must be invertible.} Write its inverse as
 \]
 The coefficients are constant, so
 \[
-dx=a_1du+a_2dv+a_3dw,\quad
-dy=b_1du+b_2dv+b_3dw,\quad
-dz=c_1du+c_2dv+c_3dw.
+dx=a_1\,du+a_2\,dv+a_3\,dw,\quad
+dy=b_1\,du+b_2\,dv+b_3\,dw,\quad
+dz=c_1\,du+c_2\,dv+c_3\,dw.
 \]
 Expand their exterior product. Any term containing two copies of a
 differential vanishes; precisely six terms remain, one for each
@@ -1893,9 +1912,22 @@ dh={}&(\partial_yH_z-\partial_zH_y)\,dy\wedge dz\\
 &+(\partial_xH_y-\partial_yH_x)\,dx\wedge dy.
 \end{align*}
 These three coefficients are the components of $\nabla\times\mathbf H$.
-On an oriented surface, $dy\wedge dz$, $dz\wedge dx$, and
-$dx\wedge dy$ pull back to the three components of its vector area
-form. Stokes' theorem thus gives the requested notation:
+To integrate over $S$, parametrize it as $\mathbf r(s,t)$, with $(s,t)$
+ordered so that $\mathbf r_s\times\mathbf r_t$ points along the chosen
+normal; then $d\mathbf a=\mathbf r_s\times\mathbf r_t\,ds\,dt$. On $S$,
+\[
+dy\wedge dz=(y_s\,ds+y_t\,dt)\wedge(z_s\,ds+z_t\,dt)
+=(y_sz_t-y_tz_s)\,ds\wedge dt,
+\]
+and $y_sz_t-y_tz_s$ is the $x$-component of
+$\mathbf r_s\times\mathbf r_t$; cyclically ($x\to y\to z\to x$),
+$dz\wedge dx$ and $dx\wedge dy$ give its $y$- and $z$-components.
+Hence a 2-form $P\,dy\wedge dz+Q\,dz\wedge dx+R\,dx\wedge dy$
+integrates over $S$ to the flux $\int_S(P,Q,R)\cdot d\mathbf a$; in
+particular $\int_Sdh=\int_S\nabla\times\mathbf H\cdot d\mathbf a$.
+Along $\partial S$ the 1-form $h$ is $\mathbf H\cdot d\mathbf r$, so
+$\int_{\partial S}h=\int_{\partial S}\mathbf H\cdot d\mathbf r$.
+Stokes' theorem thus gives the requested notation:
 \[
 \boxed{\int_{\partial S}h=\int_Sdh\ \sim\ I}.
 \]
@@ -1906,7 +1938,9 @@ j=J_x\,dy\wedge dz+J_y\,dz\wedge dx+J_z\,dx\wedge dy,
 \qquad I=\int_S j.
 \]
 With the proportionality constant $\kappa$ appropriate to the chosen
-units, the magnetostatic field equation is $dh=\kappa j$, and the
+units ($\kappa=1$ in SI units, where $\nabla\times\mathbf H=\mathbf J$;
+$\kappa=4\pi/c$ in Gaussian units), the magnetostatic field equation is
+$dh=\kappa j$, and the
 integral relation reads $\int_{\partial S}h=\kappa\int_Sj=\kappa I$.
 This preserves the unspecified proportionality convention in the
 question.
@@ -2064,7 +2098,8 @@ $if_x=f_y$ and the fundamental theorem in $t$:
 =f(x,y_0)+\int_{y_0}^{y}f_y(x,t)\,dt=f(x,y).
 \]
 Hence $d\Phi=\Phi_x\,dx+\Phi_y\,dy=f\,(dx+i\,dy)=f\,dz$. On a simply
-connected complex domain, every closed curve is contractible, and
+connected complex domain, every closed curve is contractible (it can be
+shrunk continuously to a point without leaving the domain), and
 Stokes' theorem for the closed form gives zero integral around it (this
 is Cauchy's integral theorem, Section 11.3). Two paths with the same
 endpoints together form a closed curve, so they have equal integrals.
@@ -2072,11 +2107,19 @@ The local primitives thus give a global primitive
 \[
 \boxed{F(z)=\int_{z_0}^{z}f(\zeta)\,d\zeta+C,\qquad dF=f(z)\,dz},
 \]
-where the integral is path independent; near each point $F$ differs
-from a local primitive $\Phi$ by a constant, so $dF=d\Phi=f\,dz$.
-More generally, this formula
-defines a global primitive precisely when every closed-curve period
-of $f(z)\,dz$ vanishes. The domain condition cannot be omitted:
+where the integral is path independent. To see that $dF=f\,dz$, fix a
+point $z_1$ and let $\Phi$ be a local primitive, constructed as above,
+on a small rectangle about $z_1$ inside the domain. For $z$ in that
+rectangle, path independence lets us integrate from $z_0$ to $z_1$ and
+then from $z_1$ to $z$ inside the rectangle, where $f\,d\zeta=d\Phi$;
+hence
+\[
+F(z)=F(z_1)+\int_{z_1}^{z}d\Phi=F(z_1)+\Phi(z)-\Phi(z_1).
+\]
+So near $z_1$, $F$ differs from $\Phi$ by a constant, and
+$dF=d\Phi=f\,dz$. More generally, this formula defines a global
+primitive precisely when $\oint_Cf(z)\,dz=0$ for every closed curve $C$
+in the domain. The domain condition cannot be omitted:
 $f(z)=1/z$ is holomorphic on $\mathbb C\setminus\{0\}$, but on
 $z=Re^{it}$, $0\le t\le2\pi$, where $dz=iRe^{it}\,dt$,
 \[
