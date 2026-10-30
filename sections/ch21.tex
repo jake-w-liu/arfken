@@ -1546,7 +1546,7 @@ evaluated explicitly in Exercise~21.2.3.
 \par\bigskip
 \noindent\textbf{21.3.2}\quad Solve
 \[
-\psi(x)=x+\int_{0}^{1}(1+xt)\psi(t)\,dt
+\psi(x)=x+\int_{0}^{1}(1+xt)\psi(t)\,dt.
 \]
 \erratum{Investigate the following methods:}
 \begin{enumerate}
@@ -1610,8 +1610,12 @@ $(I-zM)^{-1}=\sum_nz^nM^n$ shows that the Taylor series of $\psi_z$ in
 $z$ is the Neumann series $\sum_nz^nK^nx$. The zeros of $D$ are the
 roots $z=8\mp2\sqrt{13}$ of $z^2-16z+12=0$ (the characteristic values
 of Exercise~21.2.14), and the numerator $z/2$ of $A$ does not vanish
-there. So the radius of convergence is $8-2\sqrt{13}\approx0.789<1$,
-and the series diverges at $z=1$. Evaluating the rational
+there, so $A$ has a pole at each. The Taylor series of a function about
+$z=0$ converges in the largest open disk about $0$ in which the function
+is analytic and diverges outside it (it cannot converge beyond a pole,
+where the function is unbounded). So the radius of convergence is the
+distance $8-2\sqrt{13}\approx0.789<1$ to the nearer pole, and the
+series diverges at $z=1$. Evaluating the rational
 continuation at $z=1$, where $D(1)=1-\frac43+\frac1{12}=-\frac14$,
 gives $\psi_1=\frac12/(-\frac14)=-2$, but that continuation is not
 the sum of the divergent series at $z=1$.
@@ -1754,7 +1758,16 @@ C_0=I,\qquad (n+1)C_{n+1}
 Induction yields
 $C_n=(-iV_0/\hbar)^n/n!$. This series converges for every $\tau$
 (its terms are bounded in norm by $(\|V_0\|\,|\tau|/\hbar)^n/n!$) and
-solves the initial-value problem, whose solution is unique, so
+solves the initial-value problem. It is the only solution: for any
+solution $U$, the product $W=e^{i\tau V_0/\hbar}U$ satisfies, since
+$\partial_te^{i\tau V_0/\hbar}=e^{i\tau V_0/\hbar}\,\frac{i}{\hbar}V_0$
+(differentiate the exponential series termwise),
+\[
+\partial_tW=e^{i\tau V_0/\hbar}\Bigl(\frac{i}{\hbar}V_0U+\partial_tU\Bigr)=0,
+\]
+so $W=W(t_0)=I$. Multiplying on the left by $e^{-i\tau V_0/\hbar}$, the
+inverse of $e^{i\tau V_0/\hbar}$ (the exponents commute), gives
+$U=e^{-i\tau V_0/\hbar}=\sum_nC_n\tau^n$. Thus
 \[
 \boxed{U(t,t_0)=
 \exp[-i(t-t_0)V_0/\hbar]}.
@@ -2030,24 +2043,27 @@ No nonzero constant multiple is normalizable on $(0,\infty)$.
 \erratum{This is a pointwise improper-integral solution for $x>0$,
 not an $L^2$ eigenfunction to which the chapter's compact
 Hilbert--Schmidt conclusions automatically apply.}
-The obstruction to that particular hypothesis can be checked directly:
-since $\int_0^\infty e^{-2xt}dx=1/(2t)$ for $t>0$,
+As the Note states, the kernel also fails the Hilbert--Schmidt
+condition: since $\int_0^\infty e^{-2xt}dx=1/(2t)$ for $t>0$,
 \[
 \int_0^\infty\!\!\int_0^\infty|e^{-xt}|^2dx\,dt
 =\int_0^\infty\frac{dt}{2t}=\infty,
 \]
 the last integral diverging logarithmically at both ends.
-Thus the kernel is not Hilbert--Schmidt; this calculation identifies
-the failed hypothesis more precisely than the infinite interval alone.
-Nor can its Taylor series be integrated term by term against $t^{-1/2}$:
-the coefficient of $(-x)^m/m!$ would contain
+Thus the kernel is not Hilbert--Schmidt. The infinite interval alone
+does not cause this: the kernel $e^{-x-t}$ on the same quarter plane
+has $\int_0^\infty\!\int_0^\infty e^{-2x-2t}dx\,dt
+=\frac12\cdot\frac12=\frac14<\infty$, so it is Hilbert--Schmidt.
+Finally, the Taylor series of $e^{-xt}$ cannot be integrated term by
+term against $t^{-1/2}$: the coefficient of $(-x)^m/m!$ would contain
 $\int_0^\infty t^{m-1/2}dt$, which diverges for every integer $m\ge0$.
 
 The statement about infinitely many improper-integral solutions can also
 be verified explicitly. The same substitution $u=xt$ gives, for $s>0$
 and $x>0$, the gamma integral
 $\int_0^\infty e^{-xt}t^{s-1}dt=\Gamma(s)x^{-s}$. For $0<a<1$, the
-choices $s=1-a$ and $s=a$ give
+choices $s=1-a$ and $s=a$ give, for the integral operator
+$(Kg)(x)=\int_0^\infty e^{-xt}g(t)\,dt$ of this equation,
 \[
 K(t^{-a})(x)=\Gamma(1-a)x^{a-1},\qquad
 K(t^{a-1})(x)=\Gamma(a)x^{-a}.
@@ -2071,7 +2087,15 @@ gives $\mu^2=\pi/\sin\pi a$.
 The minus combination at $a=1/2$ is zero and must be excluded;
 the plus combination there is a nonzero multiple of the requested
 $x^{-1/2}$. These power combinations belong to the improper-integral
-solution class, not to the normalizable $L^2$ eigenfunctions.
+solution class, not to the normalizable $L^2$ eigenfunctions. For
+$a=\frac12$ this is the computation above. For $a\ne\frac12$ the two
+terms are nonzero multiples of the distinct powers $x^{-a}$ and
+$x^{-(1-a)}$; near $x=0$ the one with the larger power
+$p=\max(a,1-a)>\frac12$ of $1/x$ dominates, so $|\varphi_{a,\pm}|^2$ is
+asymptotic to a positive multiple of $x^{-2p}$, and
+$\int_0^1x^{-2p}dx$ diverges because $2p>1$. (Similarly, near $\infty$
+the smaller power $\min(a,1-a)<\frac12$ dominates, and the integral
+diverges there as well.)
 
 
 \Needspace{5\baselineskip}
@@ -2229,7 +2253,7 @@ K(x,t)=\frac{\varphi_{1}(x)\varphi_{1}(t)}{\lambda_{1}}
 \end{enumerate}
 \par\nobreak\hfill\emph{ANS.}\enspace
 (b) $\varphi_{1}(x)=0.7831+0.4191x$,\par\nobreak\hfill
-$\varphi_{2}(x)=1.8403-3.4386x$.
+$\varphi_{2}(x)=1.8403-\erratum{3.4387}x$.
 \solution
 Use the exact values behind the displayed decimals:
 \[
@@ -2241,7 +2265,8 @@ v_\pm(x)=1+b_\pm x.
 exact orthogonality and exact kernel reconstruction use these radical
 values. In part (c) the eigenfunctions must be the unit-norm ones of
 part (b): with the unnormalized $v_\pm$ the same sum is
-$\frac43+\frac59(x+t)+\frac{16}{27}xt$, not $K(x,t)$.}
+$\frac43+\frac59(x+t)+\frac{16}{27}xt$ (see the end of the solution),
+not $K(x,t)$.}
 
 (a) As in Exercise~21.4.2(b), since $b_++b_-=-4/3$ and $b_+b_-=-1$,
 \[
@@ -2275,8 +2300,10 @@ and $\varphi_2$) are
 u_+(x)=0.7831024897+0.4191037337x,\qquad
 u_-(x)=1.8403126068-3.4386555600x.
 \]
-\erratum{The printed coefficient $3.4386$ in the answer is not
-correctly rounded: $3.43865556\ldots$ rounds to $3.4387$.}
+\erratum{In $\varphi_2$ the textbook prints $3.4386$, which is what
+normalizing its rounded eigenfunction $1-1.8685x$ gives
+($1.840326-3.438649x$); the exact $3.43865556\ldots$ rounds to
+$3.4387$.}
 
 (c) Put $A_\pm=1/(\lambda_\pm N_\pm^2)$. Multiplying out,
 \[
@@ -2317,6 +2344,20 @@ Consequently
 +\frac{u_-(x)u_-(t)}{\lambda_-}
 =1+xt}.
 \]
+With the unnormalized $v_\pm$ in place of $u_\pm$, the three
+coefficients would instead be $\sum1/\lambda_\pm$,
+$\sum b_\pm/\lambda_\pm$, and $\sum b_\pm^2/\lambda_\pm$. Since
+$1/\lambda_\pm=(8\pm2\sqrt{13})/(64-52)=(4\pm\sqrt{13})/6$,
+\[
+\sum\frac1{\lambda_\pm}=\frac86=\frac43,\qquad
+\sum\frac{b_\pm}{\lambda_\pm}
+=\sum\frac{(-2\pm\sqrt{13})(4\pm\sqrt{13})}{18}
+=\sum\frac{5\pm2\sqrt{13}}{18}=\frac59,
+\]
+and $\sum b_\pm^2/\lambda_\pm=\frac43-\frac43\cdot\frac59=\frac{16}{27}$
+by $b_\pm^2=1-\frac43b_\pm$. This gives the sum
+$\frac43+\frac59(x+t)+\frac{16}{27}xt$ quoted at the beginning of the
+solution.
 
 
 \Needspace{5\baselineskip}
@@ -2324,7 +2365,7 @@ Consequently
 \noindent\textbf{21.4.8}\quad An alternate form of the solution to
 the inhomogeneous integral equation, Eq.~(21.81), is
 \[
-\varphi(x)=\erratum{f_0(x)+}\sum_{i=1}^{\infty}\frac{b_{i}\lambda_{i}}
+\varphi(x)=\erratum{f_0(x)}\mathbin{\erratum{+}}\sum_{i=1}^{\infty}\frac{b_{i}\lambda_{i}}
 {\lambda_{i}-\lambda}\,\varphi_{i}(x).
 \]
 \erratum{Here $\varphi_i$ are orthonormal eigenfunctions for the
