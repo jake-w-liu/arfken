@@ -1525,9 +1525,9 @@ and $\mathcal{C}$ is given by the formula
 \mathcal{A}\mathcal{B}-\mathcal{B}\mathcal{A}=i\mathcal{C}.
 \]
 Show that $\mathcal{C}$ is Hermitian.
-\erratum{For an unbounded realization, equality of all adjoint domains used
-in the argument must also be established; a formal boundary-condition
-assertion alone is insufficient.}
+\erratum{For unbounded operators the domains of $\mathcal{A}\mathcal{B}$,
+$\mathcal{B}\mathcal{A}$ and of their adjoints would also have to be
+checked; the solution treats the bounded case.}
 \solution
 \erratum{The conclusion requires $A$ and $B$ themselves to be Hermitian,
 as when they represent quantum observables. Being merely ``quantum
@@ -1550,17 +1550,23 @@ anti-Hermitian. Noncommutation only ensures $C\ne0$; it is not needed
 for Hermiticity. To check why the added hypothesis matters, take
 \[
 A=\begin{pmatrix}0&1\\0&0\end{pmatrix},\quad
-B=\begin{pmatrix}1&0\\0&0\end{pmatrix}.
+B=\begin{pmatrix}1&0\\0&0\end{pmatrix},
 \]
-Then $[A,B]=-A$, and $C=iA$ is not Hermitian. This counterexample
-rules out the unqualified statement.
+where $B$ is Hermitian but $A$ is not. Multiplying out gives $AB=0$ and
+$BA=A$, so $[A,B]=-A$, and then $iC=-A$ gives
+\[
+C=-\frac Ai=iA=\begin{pmatrix}0&i\\0&0\end{pmatrix}\ne
+C^\dagger=\begin{pmatrix}0&0\\-i&0\end{pmatrix}.
+\]
+Thus $C$ is not Hermitian, and this counterexample rules out the
+unqualified statement.
 
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{5.4.4}\quad The operator $\mathcal{L}$ is Hermitian. Show
-that $\langle L^{2}\rangle\ge0$, meaning that for all
-\erratum{$\psi\in D(L^2)$},
-$\langle\psi|L^{2}|\psi\rangle\ge0$.
+that $\langle\mathcal{L}^{2}\rangle\ge0$, meaning that for all
+\erratum{$\psi\in D(\mathcal{L}^2)$},
+$\langle\psi|\mathcal{L}^{2}|\psi\rangle\ge0$.
 \solution
 \erratum{For an unbounded $L$, the expression in the question requires
 $\psi\in D(L^2)=\{\psi\in D(L):L\psi\in D(L)\}$, not merely
@@ -1627,7 +1633,8 @@ $\int_0^{2\pi}\cos2\phi\,d\phi=0$),
 The mixed $xy$ integral contains
 $\int_0^{2\pi}\sin\phi\cos\phi\,d\phi=0$; the $xz$ and $yz$
 integrals contain respectively the zero integrals of $\cos\phi$ and
-$\sin\phi$. Normalization requires $C^2(4\pi/3)=1$ for each
+$\sin\phi$. Normalization requires
+$\langle\varphi_i|\varphi_i\rangle=C^*C\,(4\pi/3)=|C|^2(4\pi/3)=1$ for each
 $\varphi_i$, and choosing the common constant real and positive gives
 \[
 \boxed{C=\sqrt{\frac3{4\pi}}},\qquad
@@ -1715,9 +1722,14 @@ on the displayed matrix. Euler's identities give
 \chi'_4&=\frac{\chi_4-i\chi_3}{\sqrt2},&
 \chi'_5&=\chi_5.
 \end{align*}
-For example, $e^{\pm i\phi}=\cos\phi\pm i\sin\phi$ yields the first two
-identities, and $e^{2i\phi}=\cos2\phi+i\sin2\phi$ together with
-$\sin2\phi=2\sin\phi\cos\phi$ yields the third, with exactly
+On p.~289, $\chi'_1,\dots,\chi'_4$ depend on $\varphi$ through
+$e^{i\varphi}$, $e^{-i\varphi}$, $e^{2i\varphi}$, $e^{-2i\varphi}$, where
+the real $\chi_1,\dots,\chi_4$ contain instead $\cos\varphi$,
+$\sin\varphi$, $\sin\varphi\cos\varphi$, $\cos2\varphi$, and
+$\chi'_5=\chi_5$. Thus $e^{\pm i\varphi}=\cos\varphi\pm i\sin\varphi$
+yields the first two identities, and
+$e^{\pm2i\varphi}=\cos2\varphi\pm i\sin2\varphi$ together with
+$\sin2\varphi=2\sin\varphi\cos\varphi$ yields the next two, with exactly
 the normalizing constants in the example. Since
 $U_{ij}=\langle\chi'_i|\chi_j\rangle$, the coefficients in these
 identities must be conjugated to obtain the rows of $U$: if
@@ -1750,9 +1762,17 @@ Substituting the basis relations back into the expansion checks it:
 since the coefficients of $\chi_1$, $\chi_2$, $\chi_3$ collect to
 $\frac52+\frac12$, $\frac{5i-i}2$, and $\frac{i^2}2+\frac{i^2}2$, while
 the two $\chi_4$ terms cancel.
-For comparison, using the matrix as printed gives
-$\widetilde c'=(-1,5,-i,i,\sqrt2)^T/\sqrt2$ and reconstructs
-$3\chi_1-2i\chi_2+\chi_3+\chi_5$, which is not the requested $f$.
+For comparison, the matrix as printed differs from $U$ only in the signs
+of its four imaginary entries, so it is the complex conjugate $U^*$. It
+gives $\widetilde c'=U^*c=(-1,5,-i,i,\sqrt2)^T/\sqrt2$, and the same
+basis relations then reconstruct
+\begin{align*}
+\sum_j\widetilde c'_j\chi'_j
+&=\frac12(\chi_1+i\chi_2)+\frac52(\chi_1-i\chi_2)\\
+&\quad-\frac i2(\chi_4+i\chi_3)+\frac i2(\chi_4-i\chi_3)+\chi_5\\
+&=3\chi_1-2i\chi_2+\chi_3+\chi_5,
+\end{align*}
+which is not the requested $f$.
 This explicitly verifies the need for the correction.
 
 (b) The corrected $U$ has two $2\times2$ blocks and a final $1$.
@@ -1770,8 +1790,9 @@ Their products with their adjoints are
 The blocks have disjoint support and $(\sqrt2/\sqrt2)^2=1$ for the last
 entry, so $UU^\dagger=I_5$; for a square matrix a right inverse is also
 a left inverse, hence $U^\dagger U=I_5$ as well.
-The printed matrix is also unitary; that test by itself cannot detect a
-matrix that represents the wrong basis transformation.
+The printed matrix $U^*$ is also unitary, since
+$U^*(U^*)^\dagger=(UU^\dagger)^*=I_5$; that test by itself therefore
+cannot detect a matrix that represents the wrong basis transformation.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1842,10 +1863,14 @@ which verifies the coefficient column without scalar products.
 
 If instead the arrows are used to \emph{define} the new ordered basis
 as $(z,y,-x)$ in the old coordinates, the coefficient transformation for
-the same fixed $f$ is $U^{-1}$ and gives $(1,-3,-2)^T$.
-Likewise, active substitution $x\mapsto z$, $z\mapsto-x$ in $f$ produces
-$-x-3y+2z$ in the old labels. Keeping the primes explicit distinguishes
-these interpretations and their opposite rotation senses.
+the same fixed $f$ is $U^{-1}$ and gives $(1,-3,-2)^T$. Its new axes
+$\hat e'_x=\hat e_z$, $\hat e'_y=\hat e_y$, $\hat e'_z=-\hat e_x$ come
+from the formulas of (b) with $\beta=-\pi/2$, a rotation in the opposite
+sense. An active substitution
+$x\mapsto z$, $z\mapsto-x$ in $f$ gives yet another reading: it produces
+a different function, $-x-3y+2z$, whose coefficients in the old basis
+are the entries of $c'$. Keeping the primes explicit distinguishes these
+readings.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -1933,8 +1958,8 @@ f=(-c+3is)\chi_1+[-3c^2-is(c+2)]\chi_2
 multiplication: the second entry of the initial vector is $-1$, so the
 first two entries of $Ua$ are $3is-c$ and $-3c-is$.}
 
-(b) Form both matrix products before acting on $a$; each entry has at
-most two nonzero terms, e.g.\ $(UV)_{12}=c\cdot c$,
+(b) Form both matrix products before acting on $a$; each entry contains
+at most one nonzero product, e.g.\ $(UV)_{12}=c\cdot c$,
 $(UV)_{23}=(is)(is)=-s^2$, $(VU)_{21}=c\,(-c)$,
 $(VU)_{32}=c\,(is)$:
 \[
@@ -2021,11 +2046,15 @@ With these repaired data, the full calculation becomes
 \end{pmatrix}.
 \]
 The coefficients of the repaired expansion in its final basis are the
-entries of $\widehat V\widehat Ua$. These repaired matrices fail to
-commute in general; for example $c=0$, $s=1$ makes the second entries
-of the two results $-2i$ and $2$. At special angles they may commute
-(e.g. $\theta=0$), so an assertion of different products for every angle
-would require its own qualification.
+entries of $\widehat V\widehat Ua$. The repaired matrices commute only
+for $\theta\equiv0\pmod{2\pi}$, where $\widehat V=I$: up to sign, the
+entries of $\widehat U\widehat V-\widehat V\widehat U$ are $c(c-1)$,
+$isc$ and $s(s+i)$, and for real $\theta$ the last vanishes only if
+$s=0$, after which the first vanishes only if $c=1$. At every other
+angle the two columns differ as well, by the argument used above for
+$U$ and $V$: $\widehat U\widehat Va$ and $\widehat V\widehat Ua$ have
+the same first entries as $(UV)a$ and $(VU)a$, and for $c=0$ the same
+second entries $2$ and $-2is$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -2231,8 +2260,8 @@ this fixes the imaginary signs without an appeal to a memorized matrix.
 \[
 \|\alpha\pm\beta\|^2=1\pm0\pm0+1=2.
 \]
-Hence $\|\varphi'_{1,2}\|^2=2C^2=1$, and $C=1/\sqrt2$ is a real
-positive normalizing choice. The overlap
+Hence $\|\varphi'_{1,2}\|^2=C^*C\,\|\alpha\pm\beta\|^2=2|C|^2=1$, and
+$C=1/\sqrt2$ is a real positive normalizing choice. The overlap
 matrix $U_{ij}=\langle\varphi'_i|\varphi_j\rangle$ has, for example,
 $U_{21}=\langle(\alpha-\beta)/\sqrt2|\alpha\rangle=1/\sqrt2$ and
 $U_{22}=\langle(\alpha-\beta)/\sqrt2|\beta\rangle=-1/\sqrt2$; altogether
@@ -2521,8 +2550,10 @@ $U^\dagger U=UU^\dagger=I$. Multiply before simplifying:
 =iUU^\dagger=\boxed{iI}.
 \end{align*}
 \erratum{The canonical relation $[x,p]=iI$ cannot hold for finite square
-matrices: $\operatorname{tr}(xp-px)=0$, whereas
-$\operatorname{tr}(iI_N)=iN\ne0$. It is an operator relation in an
+matrices:
+$\operatorname{tr}(xp-px)=\operatorname{tr}(xp)-\operatorname{tr}(px)=0$
+by the cyclic property $\operatorname{tr}(AB)=\operatorname{tr}(BA)$,
+whereas $\operatorname{tr}(iI_N)=iN\ne0$. It is an operator relation in an
 infinite-dimensional space. For unbounded position and momentum the
 calculation holds on a common domain of the products, carried to the
 new domain by $U$; it is not a claim that those products are defined on
