@@ -4588,7 +4588,7 @@ $\Phi(r,1-s)=\Phi(r,s)$ determines the other half of the cylinder.
 \noindent\textbf{14.6.1}\quad Determine the asymptotic dependence of
 the modified Bessel functions $I_{\nu}(x)$, given
 \[
-I_{\nu}(x)=\frac{1}{2\pi i}\erratum{\int}_{C}e^{(x/2)(t+1/t)}
+I_{\nu}(x)=\frac{1}{2\pi i}\mathop{\erratum{\int_{C}}}e^{(x/2)(t+1/t)}
 \frac{dt}{t^{\nu+1}}.
 \]
 The contour starts and ends at $t=-\infty$, encircling the origin in a
@@ -4632,7 +4632,10 @@ I_\nu(x)&\sim\frac1{2\pi i}e^x i
 \end{align*}
 The next relative terms are powers of $1/x$ for fixed order;
 this leading approximation is not uniform when $\nu$ grows with
-$x$. The branch-cut contour is understood as in Exercise~14.5.3.
+$x$. The branch-cut contour is understood as in Exercise~14.5.3:
+$C$ begins and ends at $-\infty$ and is not closed, so the
+integral sign is the open $\int_C$ marked in the statement; the
+saddle called $z=+1$ there is $t=+1$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4706,8 +4709,10 @@ therefore gives
 \end{align*}
 At both endpoints $f'=-z\sin t\,f=0$, and $c'=-n\sin nt=0$
 because $n$ is an integer. This explains the published integer
-qualification; it is not needed merely for convergence, but for
-the boundary terms.
+qualification. The integral converges for every real $n$; the
+qualification is needed only for the boundary terms, since for
+noninteger $n$ the term at $\pi$ survives:
+$\pi^{-1}f(\pi)c'(\pi)=-(n/\pi)e^{-z}\sin n\pi\ne0$.
 
 For the $K$ integral use $f(t)=e^{-z\cosh t}$,
 $c(t)=\cosh\nu t$. Now
@@ -4839,8 +4844,14 @@ The coefficient of $(2z)^{-r}/r!$ in Eq.~(14.132) is
 \[
 \frac{\Gamma(\nu+r+1/2)}{\Gamma(\nu-r+1/2)}.
 \]
+In the derivation of Eq.~(14.132) it arises as $r!$ times the
+binomial coefficient $\Gamma(\nu+\frac12)/[r!\,\Gamma(\nu-r+\frac12)]$
+of $(t/2z)^r$ in $(1+t/2z)^{\nu-1/2}$, times the termwise integral
+$\int_0^\infty e^{-t}t^{\nu+r-1/2}dt=\Gamma(\nu+r+\frac12)$,
+divided by the $\Gamma(\nu+\frac12)$ of the prefactor, which
+cancels the numerator of the binomial coefficient.
 For $r\ge1$, apply the gamma recurrence $\Gamma(a+1)=a\Gamma(a)$
-$2r$ times, starting from $a=\nu-r+\frac12$:
+a total of $2r$ times, starting from $a=\nu-r+\frac12$:
 \[
 \Gamma(\nu+r+\tfrac12)
 =(\nu+r-\tfrac12)(\nu+r-\tfrac32)\cdots(\nu-r+\tfrac12)\,
@@ -4925,9 +4936,8 @@ below; a formal endpoint condition alone does not ensure the
 integral exists.
 
 (b) In Fig.~14.14, contour (1) joins $t=1$ and positive-real
-infinity, and contour (2) joins $t=-1$ and $t=1$ on a fixed
-bank of the cut. Their orientations change the solution's sign
-but not the ODE test.
+infinity, and contour (2) joins $t=-1$ and $t=1$. Their
+orientations change the solution's sign but not the ODE test.
 \erratum{For these endpoint contours take $\Re\nu>-1/2$.
 The unbounded contour (1) also requires $\Re z>0$ as drawn;
 without these conditions the stated suitability is not automatic.}
@@ -4936,8 +4946,9 @@ $(t\mp1)^{\nu+1/2}$, and the integrand is locally integrable
 like $(t\mp1)^{\nu-1/2}$. On contour (1), exponential decay
 makes the bracket and the differentiated integrands vanish at
 infinity. On contour (2), both endpoint bracket values are zero,
-with a consistent branch of $(t^2-1)^{\nu-1/2}$ along the
-upper arc. Hence both contours satisfy the required conditions.
+with one branch of $(t^2-1)^{\nu-1/2}$ continued continuously
+along the whole contour. Hence both contours satisfy the
+required conditions.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5033,8 +5044,18 @@ I_\nu K_\nu'-I_\nu'K_\nu\sim-2I_\nu K_\nu
 factors, giving $I_\nu K_{\nu+1}+I_{\nu+1}K_\nu\sim1/x$.
 To confirm its exact Wronskian status, substitute
 $K_{\nu+1}=-K_\nu'+\nu K_\nu/x$ and
-$I_{\nu+1}=I_\nu'-\nu I_\nu/x$. The order terms cancel,
-leaving $-W[I_\nu,K_\nu]$. Thus it is exactly $\boxed{1/x}$.
+$I_{\nu+1}=I_\nu'-\nu I_\nu/x$; these follow, after halving, by
+subtracting $I_{\nu-1}-I_{\nu+1}=(2\nu/x)I_\nu$ from
+$I_{\nu-1}+I_{\nu+1}=2I_\nu'$ and
+$K_{\nu-1}-K_{\nu+1}=-(2\nu/x)K_\nu$ from
+$K_{\nu-1}+K_{\nu+1}=-2K_\nu'$ (the modified-Bessel recurrences).
+The order terms cancel,
+\[
+I_\nu\Bigl(-K_\nu'+\frac\nu xK_\nu\Bigr)
++\Bigl(I_\nu'-\frac\nu xI_\nu\Bigr)K_\nu
+=-(I_\nu K_\nu'-I_\nu'K_\nu),
+\]
+leaving $-W[I_\nu,K_\nu]$. Thus, by (d), it is exactly $\boxed{1/x}$.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5125,9 +5146,10 @@ e^{i[z-(\nu+1/2)\pi/2]}[P_\nu(z)+iQ_\nu(z)]}.
 The additional $\pi/4$ is the phase of the rotated square root;
 omitting it would give an incorrect outgoing-wave phase. Extension
 to complex $z$ uses this same continuation: the sector
-$-3\pi/2<\arg(-iz)<3\pi/2$ becomes
-$-\pi<\arg z<2\pi$. The asymptotic estimates hold on closed
-subsectors away from their boundary rays, with order fixed.
+$-3\pi/2<\arg(-iz)<3\pi/2$, in which the $K_\nu$ expansion of
+Eq.~(14.134) holds, becomes $-\pi<\arg z<2\pi$. The asymptotic
+estimates hold on closed subsectors away from their boundary rays,
+with order fixed.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -5143,7 +5165,7 @@ y''(x)+\left(1-\frac{\nu^{2}-\frac{1}{4}}{x^{2}}\right)y(x)=0.
 \item[(b)] Develop a power-series solution with negative powers of $x$
 starting with the assumed form
 \[
-y(x)\erratum{\sim}e^{ix}\sum_{n=0}^{\infty}a_{n}x^{-n}.
+y(x)\mathrel{\erratum{\sim}}e^{ix}\sum_{n=0}^{\infty}a_{n}x^{-n}.
 \]
 Obtain the recurrence relation giving $a_{n+1}$ in terms of $a_{n}$.
 Check your result against the asymptotic series, Eq.~(14.138).
@@ -5199,7 +5221,7 @@ odd $n=2r+1$ have $i^{2r+1}=i(-1)^r$ and build $iQ_\nu$.
 Hence $y\sim a_0e^{ix}[P_\nu(x)+iQ_\nu(x)]$, and $x^{-1/2}y$
 reproduces Eq.~(14.138) term by term once $a_0$ is fixed in (c).
 
-(c) The leading Hankel form is
+(c) The leading Hankel form, Eq.~(14.125), is
 $H_\nu^{(1)}(x)\sim\sqrt{2/(\pi x)}
 e^{i(x-\nu\pi/2-\pi/4)}$. Since $H=x^{-1/2}y$, the leading term
 $a_0e^{ix}$ of $y$ must equal
@@ -5281,7 +5303,7 @@ $z=z_{0}=i$.
 \]
 and
 \[
-\Re[w(z,t)]\erratum{>}0\quad\text{for }r>1,\quad-\frac{\pi}{2}<\theta<\frac{\pi}{2}.
+\Re[w(z,t)]\mathrel{\erratum{>}}0\quad\text{for }r>1,\quad-\frac{\pi}{2}<\theta<\frac{\pi}{2}.
 \]
 Your demonstration verifies that the distribution of the sign of $w$
 is as shown schematically in Fig.~14.15.
@@ -5375,6 +5397,9 @@ The $N$-term partial sums requested are
 P_N(x)=\sum_{r=0}^{N-1}\frac{(-1)^ra_{2r}}{x^{2r}},\qquad
 Q_N(x)=\sum_{r=0}^{N-1}\frac{(-1)^ra_{2r+1}}{x^{2r+1}}.
 \]
+Here the subscript $N$ counts the retained terms; the order is
+zero throughout, so $P_N$ and $Q_N$ are not the amplitude
+functions of order $N$.
 For example $P_2=1-9/(128x^2)$ and
 $Q_2=-1/(8x)+225/(3072x^3)$. The first fifteen $P_N$ are:
 \begin{center}\begingroup\scriptsize\setlength{\tabcolsep}{1.5pt}
@@ -5470,8 +5495,9 @@ table the smallest term therefore has index $j=2x$: the optimal
 $P_{x+1}$ stops at that term ($j=2r\le2x$), and $Q_x$ stops just
 before it ($j=2r+1\le2x-1$).
 
-\erratum{The textbook's answer $x_{\min}=6$ uses absolute errors
-in both $P$ and $Q$, and the integer grid specified in the question.
+\erratum{The textbook's answer $x_{\min}=6$ is reproduced by
+absolute errors in both $P$ and $Q$ on the integer grid specified
+in the question.
 If ``error'' means relative error in both amplitude functions,
 the corresponding minimum on this grid is $8$, because $Q$ is
 small. No threshold for all real $x$ between grid points is
@@ -6121,7 +6147,9 @@ $\sqrt{\pi/2}\,t$; the correct arguments are
 $\sqrt{2/\pi}\,t$. Also the functions in the subsequent
 $s$-integrals are $X(\sqrt{s})$ and $Y(\sqrt{s})$, not the
 same functions evaluated at $s$. The printed second integral
-has a stray $x$ after $u^{1/2}$, which must be deleted.}
+has a stray $x$ after $u^{1/2}$, which must be deleted. In the
+definition of $y(t)$ the Fresnel function is the sine integral
+$S$, as marked, because the right side is $\int_0^t\sin(v^2)\,dv$.}
 
 To prove the series, form finite sums
 \[
@@ -6150,7 +6178,10 @@ With $J_{-1/2}(s)=\sqrt{2/(\pi s)}\cos s$ and
 $J_{1/2}(s)=\sqrt{2/(\pi s)}\sin s$, the first terms are
 $\frac12\sqrt{\pi/2}\,J_{-1/2}(s)=\cos s/(2\sqrt s)=F'(s)$ and
 $\frac12\sqrt{\pi/2}\,J_{1/2}(s)=\sin s/(2\sqrt s)=H'(s)$.
-For $\alpha\ge0$ we have $\Gamma(k+\alpha+1)\ge\Gamma(\alpha+1)$, so the series
+For $\alpha\ge0$ we have
+$\Gamma(k+\alpha+1)=(\alpha+k)(\alpha+k-1)\cdots(\alpha+1)\,
+\Gamma(\alpha+1)\ge\Gamma(\alpha+1)$, since each factor is at
+least one, so the series
 $J_\alpha(s)=\sum_k(-1)^k(s/2)^{2k+\alpha}/[k!\,\Gamma(k+\alpha+1)]$
 bounds the terminal term on $0\le s\le R$
 by $(R/2)^\alpha e^{R^2/4}/\Gamma(\alpha+1)$, which tends to zero
@@ -6244,7 +6275,7 @@ frequency. The $l=1$ root is consequently the required one.
 Converting angular frequency to cycles per unit time,
 \[
 \boxed{\nu_{\min}=\frac{x_1}{2\pi}\frac va
-=0.3312931063\ldots\frac va,\qquad
+=0.3312931062\ldots\frac va,\qquad
 \lambda_{\max}=\frac{2\pi a}{x_1}
 =3.0184751237\ldots a.}
 \]
@@ -6283,7 +6314,10 @@ k_n(x)=\sqrt{\frac2{\pi x}}\,\frac\pi2\,i^{n+3/2}
 =i^{n+3/2}e^{i\pi/4}h_n^{(1)}(ix)=-i^nh_n^{(1)}(ix),
 \]
 since $i^{3/2}e^{i\pi/4}=e^{3i\pi/4}e^{i\pi/4}=-1$.
-In the finite sum of Exercise~14.7.1 at argument $ix$,
+In the finite sum of Exercise~14.7.1 at argument $ix$ (valid
+there: both sides are analytic in the plane cut along the negative
+real axis and agree for positive argument, as noted in
+Exercise~14.7.3),
 $e^{i(ix)}=e^{-x}$, $i^s/(2ix)^s=1/(2x)^s$, and the constant
 factors combine to $-i^n(-i)^{n+1}/i=1$. Hence the finite
 half-integer $K$ formula, with the book's normalization, is
