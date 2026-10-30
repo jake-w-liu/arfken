@@ -3412,9 +3412,13 @@ so the tail $\int_y^\infty x^5e^x(e^x-1)^{-2}dx$ is at most
 \frac{e^{-y}}{(1-e^{-y})^2}
 \left(y^5+5y^4+20y^3+60y^2+120y+120\right).
 \]
-The polynomial is $e^y\int_y^\infty x^5e^{-x}dx$: five integrations
-by parts, each lowering the power by one and leaving the boundary
-term $y^je^{-y}$ times $5!/j!$, give $e^{-y}\sum_{j=0}^5(5!/j!)y^j$.
+The polynomial is $e^y\int_y^\infty x^5e^{-x}dx$: the integration
+by parts
+$\int_y^\infty x^je^{-x}dx=y^je^{-y}+j\int_y^\infty x^{j-1}e^{-x}dx$,
+applied for $j=5,4,3,2,1$, leaves the boundary terms
+$(5!/j!)\,y^je^{-y}$, and the remaining integral
+$5!\int_y^\infty e^{-x}dx=5!\,e^{-y}$ is the term $j=0$; in all,
+$\int_y^\infty x^5e^{-x}dx=e^{-y}\sum_{j=0}^5(5!/j!)\,y^j$.
 Relative to $5!\zeta(5)$ the bound is $O(y^5e^{-y})\to0$, which
 proves the limiting replacement.
 
@@ -3432,7 +3436,7 @@ function for $n\ge1$:
 The complete integral $(0,\infty)$ equals $n!\,\zeta(n+1)$
 (Exercise 13.5.6).
 \par\smallskip
-\erratum{For complex $x$, take integer $n\ge1$. For real $n\ge1$, the real-power version uses $0<x<2\pi$; complex continuation needs a specified power branch.}
+\erratum{For complex $x$, take integer $n\ge1$. For noninteger real $n\ge1$, the real-power version uses $0<x<2\pi$; complex continuation needs a specified power branch.}
 \solution
 The Bernoulli generating function is analytic for $|t|<2\pi$:
 \[
@@ -3592,9 +3596,10 @@ $2\cdot2^{-s-1}=2^{-s}$.
 The original Fermi integral actually converges for $\Re s>-1$,
 because its denominator tends to two at zero.  Both sides are
 analytic in that half-plane: the integral converges uniformly on
-compact subsets, and on the right the only pole of $\zeta(s+1)$,
-at $s=0$ (Exercise 13.5.10), is canceled by the zero of
-$1-2^{-s}$.  They agree for $\Re s>0$, so the identity theorem
+compact subsets; on the right $\Gamma(s+1)$ is analytic for
+$\Re s>-1$ (its poles are at $s=-1,-2,\ldots$), and the only pole
+of $\zeta(s+1)$, at $s=0$ (Exercise 13.5.10), is canceled by the
+zero of $1-2^{-s}$.  They agree for $\Re s>0$, so the identity theorem
 extends the answer to $\Re s>-1$.  At $s=0$, where
 $1-2^{-s}=1-e^{-s\ln2}=s\ln2+O(s^2)$ and
 $\zeta(1+s)=1/s+O(1)$, the product is removable and $\Gamma(1)=1$;
@@ -3645,7 +3650,8 @@ Multiplying by the prefactor, $4\pi\cdot7\pi^4/120=7\pi^5/30$, yields
 \erratum{As an energy density with $x$ an energy, the printed
 formula uses $c=1$.  Restoring conventional length/time units
 requires a factor $c^{-3}$ on both the stated integral and its
-answer.}  Indeed a massless momentum satisfies $x=pc$, so the
+answer.}  Indeed for a massless particle the energy $x$ and the
+momentum $p$ satisfy $x=pc$, so the
 radial phase-space factor $p^2dp$ becomes $x^2dx/c^3$; one
 additional factor $x$ supplies the energy.
 
@@ -3689,7 +3695,8 @@ $d^n[-(z+p)^{-1}]/dz^n=(-1)^{n+1}n!\,(z+p)^{-n-1}$,
 \qquad n\ge1.
 \]
 Near $t=0$, $1-e^{-t}=t+O(t^2)$, so the integrand behaves as
-$t^{n-1}$; this directly verifies the required condition $n\ge1$.
+$t^{n-1}$, which for integer $n$ is integrable at zero exactly
+when $n\ge1$; this is why the condition $n\ge1$ is required.
 
 
 \Needspace{5\baselineskip}
@@ -3724,8 +3731,9 @@ For $\Re s>1$ the circle can therefore shrink to zero.  On it
 $|t^{s-1}|=\varepsilon^{\Re s-1}e^{-\theta\Im s}
 \le\varepsilon^{\Re s-1}e^{2\pi|\Im s|}$ with $\theta=\arg t$,
 and $|e^t-1|^{-1}\le M/\varepsilon$ for $\varepsilon\le1$, where
-$M$ is the maximum of the analytic function $|t/(e^t-1)|$ on
-$|t|\le1$.  Its length being $2\pi\varepsilon$, the circle
+$M$ is the maximum of $|t/(e^t-1)|$ on $|t|\le1$, finite because
+$t/(e^t-1)$ (equal to $1$ at $t=0$) is analytic there, its nearest
+poles being $\pm2\pi i$.  Its length being $2\pi\varepsilon$, the circle
 contributes $O(\varepsilon^{\Re s-1})\to0$.  On the upper lip
 $t=x$ and $t^{s-1}=x^{s-1}$; on the lower lip $\arg t=2\pi$ and
 $t^{s-1}=e^{2\pi i(s-1)}x^{s-1}=e^{2\pi is}x^{s-1}$.  By
@@ -3788,13 +3796,19 @@ For example, at $s=0$ the lips again cancel and
 so the residue $-1/2$ gives $H(0)=-\pi i$ and
 $\zeta(0)=e^0\Gamma(1)(-\pi i)/(2\pi i)=-1/2$.
 
-\erratum{The quotient
-$\zeta(s)=(1-2^{1-s})^{-1}\sum_{n=1}^{\infty}(-1)^{n-1}n^{-s}$,
-whose alternating series converges for $\Re s>0$, does not by
-itself prove regularity throughout $\Re s>0$ apart from $s=1$:
-its denominator $1-2^{1-s}$ vanishes also at
-$s=1+2\pi i k/\ln2$ for nonzero integers $k$, where
-$2^{1-s}=e^{-2\pi ik}=1$.  Cancellation at those points must be justified.}
+An alternative argument continues $\zeta$ to $\Re s>0$ through
+the quotient
+\[
+\zeta(s)=\frac1{1-2^{1-s}}\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n^s},
+\]
+which holds for $\Re s>1$ because the alternating sum equals
+$\zeta(s)-2\sum_{n\ge1}(2n)^{-s}=(1-2^{1-s})\zeta(s)$, and whose
+alternating series converges for $\Re s>0$.
+\erratum{That argument does not by itself prove regularity
+throughout $\Re s>0$ apart from $s=1$: the denominator
+$1-2^{1-s}$ vanishes also at $s=1+2\pi i k/\ln2$ for nonzero
+integers $k$, where $2^{1-s}=e^{-2\pi ik}=1$.  Cancellation at
+those points must be justified.}
 The entire-contour argument above establishes that all such
 points are regular and leaves only the pole at one.
 
@@ -3960,8 +3974,9 @@ this finite value: by the series of Eq.~(13.76),
 \frac{(-x)^n}{n!\,(a-1+n)}\right]\longrightarrow1
 \qquad(a\to1),
 \]
-so the right side tends to $e^x$.  At $m=0$ both identities
-reduce to themselves.
+so the right side tends to $e^x$.  At $m=0$ both identities are
+trivial: each side of (a) is $x^{-a}\gamma(a,x)$, and each side
+of (b) is $e^x\gamma(a,x)$ because $\Gamma(a)/\Gamma(a)=1$.
 
 
 \Needspace{5\baselineskip}
@@ -4053,8 +4068,10 @@ $\int_0^\infty e^{-u}(1+u)^{\max(\Re a-N-1,0)}du<\infty$.
 Thus the remainder is $O(e^{-x}x^{\Re a-N-1})$, the order of the
 first omitted term $c_Nx^{a-1-N}e^{-x}$; relative to the prefactor
 $x^{a-1}e^{-x}$ it is $O(x^{-N})$ for every $N$.  This establishes
-an asymptotic expansion rather than an unjustified integration
-of an infinite binomial series:
+the asymptotic expansion without integrating term by term the
+binomial series of $(1+u/x)^{a-1}$ in the case $N=0$ above, which
+would not be justified because, unless $a$ is a positive integer,
+that series converges only for $u<x$:
 \[
 \boxed{\Gamma(a,x)\sim x^{a-1}e^{-x}
 \sum_{n=0}^{\infty}\frac{c_n(a)}{x^n}}.
@@ -4127,9 +4144,15 @@ endpoint, regardless of the finite initial pattern of signs.
 In fact $\sum|a_n|<\infty$, and $|a_nx^n|\le|a_n|$ on
 $0\le x\le1$, so by the Weierstrass $M$-test the series is
 uniformly convergent there; its sum, times $x^p$, is continuous
-on $0\le x\le1$.  The integral defining $B_x(p,q)$ is also
-continuous as $x\uparrow1$ for $p,q>0$, and the two agree for
-$0\le x<1$; hence
+on $0\le x\le1$.  The integral
+$B_x(p,q)=\int_0^xt^{p-1}(1-t)^{q-1}dt$ is also continuous as
+$x\uparrow1$ for $p,q>0$, and the two agree for $0\le x<1$.
+Indeed, the binomial series
+$(1-t)^{q-1}=\sum_{n\ge0}\binom{q-1}{n}(-t)^n$, with
+$(-1)^n\binom{q-1}{n}=(1-q)_n/n!$, converges uniformly on
+$0\le t\le x<1$; multiplied by $t^{p-1}$ and integrated term by
+term with $\int_0^xt^{p+n-1}dt=x^{p+n}/(p+n)$, it gives exactly
+the given series.  Hence
 \[
 \boxed{B_1(p,q)=\sum_{n=0}^{\infty}\frac{(1-q)_n}{n!(p+n)}
 =B(p,q)=\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}}.
@@ -4152,7 +4175,8 @@ show that
 \solution
 \erratum{Take $x>0$ and the principal branch of $E_1$.
 The real sine integral here is $\mathrm{si}(x)=\mathrm{Si}(x)-\pi/2$,
-because $\mathrm{si}(x)=-\int_x^\infty\sin t\,dt/t$ and
+where $\mathrm{Si}(x)=\int_0^x\sin t\,dt/t$, because
+$\mathrm{si}(x)=-\int_x^\infty\sin t\,dt/t$ and
 $\int_0^\infty\sin t\,dt/t=\pi/2$ (Exercise 13.6.13).}
 For $\Re z>0$ the substitution $t=zu$ turns the defining integral
 into $E_1(z)=\int_1^\infty e^{-zu}du/u$ (for $z>0$ directly, then
@@ -4201,8 +4225,11 @@ This proves (c).  Subtracting the two identities gives
 $E_1(ix)-E_1(-ix)=2i\,\mathrm{si}(x)$, and dividing by $2i$ proves
 (a); adding gives $E_1(ix)+E_1(-ix)=-2\,\mathrm{Ci}(x)$, and
 multiplying by $-1/2$ proves (b).
-The limiting procedure also specifies the contour at infinity,
-which cannot be changed silently in a complex exponential integral.
+The integrals for $E_1(\pm ix)$ converge only conditionally, and
+it is this limit from $\Re z>0$ that identifies them with the
+principal $E_1$; their path to infinity (the real $t$-axis beyond
+$x$) may not be moved without checking the contribution of the
+arcs at infinity.
 
 
 \Needspace{5\baselineskip}
@@ -4221,7 +4248,7 @@ V(r)=\frac{q}{4\pi\epsilon_{0}a_{0}}
   \]
 \item[(b)] For $r\gg1$, show that
   \[
-  V(r)\erratum{\sim}\frac{q}{4\pi\epsilon_{0}a_{0}}\cdot\frac{1}{r}.
+  V(r)\mathrel{\erratum{\sim}}\frac{q}{4\pi\epsilon_{0}a_{0}}\cdot\frac{1}{r}.
   \]
 \end{enumerate}
 Here $r$ is expressed in units of $a_{0}$, the Bohr radius.
@@ -4234,9 +4261,17 @@ are elementary,
 \[
 \gamma(n,y)=(n-1)!\Bigl[1-e^{-y}\sum_{s=0}^{n-1}\frac{y^s}{s!}\Bigr],
 \qquad
-\Gamma(n,y)=(n-1)!\,e^{-y}\sum_{s=0}^{n-1}\frac{y^s}{s!},
+\Gamma(n,y)=(n-1)!\,e^{-y}\sum_{s=0}^{n-1}\frac{y^s}{s!}.
 \]
-and with $n=3$, $n=2$ and $y=2r$ they give
+The second follows by induction on $n$ from
+$\Gamma(1,y)=\int_y^\infty e^{-t}dt=e^{-y}$ and the recurrence of
+Exercise 13.6.3(b):
+\[
+\Gamma(n+1,y)=n\Gamma(n,y)+y^ne^{-y}
+=n!\,e^{-y}\Bigl[\sum_{s=0}^{n-1}\frac{y^s}{s!}+\frac{y^n}{n!}\Bigr];
+\]
+the first then follows from $\gamma(n,y)=\Gamma(n)-\Gamma(n,y)$
+with $\Gamma(n)=(n-1)!$.  With $n=3$, $n=2$ and $y=2r$ they give
 \[
 \gamma(3,2r)=2\left[1-e^{-2r}(1+2r+2r^2)\right],
 \qquad\Gamma(2,2r)=e^{-2r}(1+2r).
@@ -4345,7 +4380,7 @@ Substituting in $V=C[A_0-A_2P_2(\cos\theta)]$ gives
 This includes the requested leading terms and identifies the
 first omitted orders.
 
-\textbf{(b)} At integer $j$,
+\textbf{(b)} At integer $j$, as in Exercise 13.6.7,
 $\Gamma(j,r)=(j-1)!e^{-r}\sum_{k=0}^{j-1}r^k/k!$.
 Write $S_j(r)=\sum_{k=0}^j r^k/k!$, so
 $\Gamma(j,r)=(j-1)!e^{-r}S_{j-1}(r)$.  Substituting these finite
@@ -4489,15 +4524,20 @@ At $z=0$ the integral is $\int_0^\infty dt/(1+t)
 singularity of $E_1$ there.
 
 If $\Re z<0$, even conditional convergence fails.  Fix $L>0$;
-then $|e^{-zL}|=e^{L|\Re z|}>1$, so $1-e^{-zL}\ne0$.  On
-$[R,R+L]$, $1/(1+t)=R^{-1}[1+O(R^{-1})]$ uniformly, and
-$\int_R^{R+L}e^{-zt}dt=e^{-zR}(1-e^{-zL})/z$; hence the integral over
-$[R,R+L]$ satisfies
+then $|e^{-zL}|=e^{L|\Re z|}>1$, so $1-e^{-zL}\ne0$.  For $t$ in
+$[R,R+L]$,
+$|1/(1+t)-1/R|=|R-1-t|/[R(1+t)]\le(L+1)/R^2$ and
+$|e^{-zt}|=e^{t|\Re z|}\le e^{L|\Re z|}|e^{-zR}|$, so replacing
+$1/(1+t)$ by $1/R$ changes the integral over $[R,R+L]$ by at most
+$L(L+1)e^{L|\Re z|}|e^{-zR}|/R^2$, that is, by $|e^{-zR}/R|$ times
+$O(R^{-1})$.  With $\int_R^{R+L}e^{-zt}dt=e^{-zR}(1-e^{-zL})/z$,
+the integral over $[R,R+L]$ therefore satisfies
 \[
 \int_R^{R+L}\frac{e^{-zt}}{1+t}dt
 =\frac{e^{-zR}}R\left[\frac{1-e^{-zL}}z+O(R^{-1})\right].
 \]
-Since $|e^{-zR}|=e^{R|\Re z|}$, its magnitude grows exponentially,
+Since $|e^{-zR}|=e^{R|\Re z|}$ and the bracket tends to
+$(1-e^{-zL})/z\ne0$, its magnitude grows exponentially,
 contradicting the Cauchy
 criterion for convergence of an improper integral.  Therefore
 \[
@@ -4610,7 +4650,9 @@ $\int_0^xt^{2n}dt=x^{2n+1}/(2n+1)$, gives
 \boxed{\mathrm{si}(x)=-\frac\pi2+
 \sum_{n=0}^{\infty}\frac{(-1)^nx^{2n+1}}{(2n+1)(2n+1)!}}.
 \]
-The apparent value at zero is the finite limit $-\pi/2$.
+At $x=0$ the series gives
+$\mathrm{si}(0)=-\pi/2=-\int_0^\infty\sin t\,dt/t$, so (a) holds
+there too.
 
 \textbf{(b)} Exercise 13.6.6 gives
 $\mathrm{Ci}(x)=-[E_1(ix)+E_1(-ix)]/2$.
@@ -4656,9 +4698,10 @@ Show that this is equal to $\gamma+\ln x-\mathrm{Ci}(x)$.
 \solution
 For $x>0$, Exercise 13.6.13(b) gives
 $\mathrm{Ci}(x)=\gamma+\ln x+\sum_{n\ge1}(-1)^nx^{2n}/[2n(2n)!]$.
-The series is the termwise integral of
-$(\cos t-1)/t=\sum_{n\ge1}(-1)^nt^{2n-1}/(2n)!$, uniformly
-convergent on $[0,x]$, because $\int_0^xt^{2n-1}dt=x^{2n}/(2n)$.  Hence
+Since $\int_0^xt^{2n-1}dt=x^{2n}/(2n)$, the series is the termwise
+integral of $(\cos t-1)/t=\sum_{n\ge1}(-1)^nt^{2n-1}/(2n)!$;
+termwise integration is allowed because this power series
+converges uniformly on $[0,x]$.  Hence
 \[
 \mathrm{Ci}(x)=\gamma+\ln x+
 \int_0^x\frac{\cos t-1}{t}dt.
@@ -4672,7 +4715,8 @@ side proves
 \]
 One can also check the identity by differentiation:
 $\mathrm{Ci}'(x)=\cos x/x$, so the derivative of the right
-side is exactly $(1-\cos x)/x$; its limit at zero is zero
+side is exactly $(1-\cos x)/x$, the derivative of the left side,
+and both sides tend to zero as $x\downarrow0$, the right side
 because $\mathrm{Ci}(x)-\gamma-\ln x\to0$.  For negative
 real $x$, the substitution $t=-s$ gives
 $\int_0^{x}(1-\cos t)dt/t=\int_0^{|x|}(1-\cos s)ds/s$, so the
