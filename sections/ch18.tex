@@ -4812,11 +4812,16 @@ coefficients.
 \end{enumerate}
 \erratum{In (a), $n\ge L+1$ with integer $n,L\ge0$ and $\alpha>0$.  In (b), take $Z>0$ and real $E>0$; the continuum Coulomb parameter is not a discrete principal quantum number.}\par\nobreak
 \solution
-(a) Put $N=n-L-1\ge0$, $q=2L+1$ in
+(a) Exercise~18.6.7 gives, for integers $N,q\ge0$,
 \[
-L_N^q(x)=\frac{(N+q)!}{N!q!}M(-N,q+1,x).
+L_N^q(x)=\frac{(N+q)!}{N!\,q!}M(-N,q+1,x).
 \]
-Then $N+q=n+L$, $-N=L+1-n$, $q+1=2L+2$.
+Put $N=n-L-1\ge0$ and $q=2L+1$.  Then $N+q=n+L$, $-N=L+1-n$ and
+$q+1=2L+2$, so at $x=\alpha r$
+\[
+L_{n-L-1}^{2L+1}(\alpha r)=\frac{(n+L)!}{(n-L-1)!\,(2L+1)!}
+ M(L+1-n,2L+2,\alpha r).
+\]
 Multiplication by $e^{-\alpha r/2}(\alpha r)^L$ yields exactly
 \[
 \boxed{e^{-\alpha r/2}(\alpha r)^LL_{n-L-1}^{2L+1}(\alpha r)
@@ -4827,7 +4832,10 @@ All factorials have nonnegative integer arguments in the bound-state
 range $n\ge L+1$.
 
 (b) Derive the positive-energy parameters directly to fix their
-signs.  With $u=rR$, the physical radial equation is
+signs.  For $\psi=R(r)Y_L^M$ in the Schr\"odinger equation with
+potential $-Ze^2/(4\pi\varepsilon_0r)$, the function $u=rR$
+satisfies, with the Bohr radius
+$a_0=4\pi\varepsilon_0\hbar^2/(m_ee^2)$,
 \[
 u''+\left[\frac{2m_eE}{\hbar^2}+
  \frac{2Z}{a_0r}-\frac{L(L+1)}{r^2}\right]u=0.
@@ -4838,35 +4846,51 @@ k=\frac{\sqrt{2m_eE}}\hbar>0,\quad \alpha=2k,\quad
 \rho=kr,\quad n=\frac{Z}{ka_0}>0.
 \]
 Here $n$ is a continuous Coulomb parameter, not a bound-state
-principal quantum number.  Dividing the equation by $k^2$ gives
+principal quantum number.  Since $d^2u/dr^2=k^2\,d^2u/d\rho^2$,
+$2Z/(a_0r)=k^2\cdot2n/\rho$ and $L(L+1)/r^2=k^2L(L+1)/\rho^2$,
+dividing the equation by $k^2$ gives
 \[
 \frac{d^2u}{d\rho^2}
  +\left[1+\frac{2n}{\rho}-\frac{L(L+1)}{\rho^2}\right]u=0.
 \]
-This is Exercise~18.6.15 with $\eta=-n$.  On dividing its regular
-solution by $r$ and absorbing constants into the arbitrary scale,
+This is the Coulomb wave equation of Exercise~18.6.15 in the
+variable $\rho$, with $\eta=-n$.  Its regular solution is
+\[
+u=F_L(-n,\rho)=C_L\,\rho^{L+1}e^{-i\rho}
+ M(L+1+in,2L+2,2i\rho).
+\]
+With $\rho=kr=\alpha r/2$ we have $2i\rho=i\alpha r$ and
+$\rho^{L+1}/r=k\,2^{-L}(\alpha r)^L$.  Dividing by $r$ and
+absorbing the constants into the arbitrary scale,
 \[
 R_{\rm reg}(r)\ \propto\
  e^{-i\alpha r/2}(\alpha r)^L
  M(L+1+in,2L+2,i\alpha r).
 \]
-Kummer's transformation $M(a,c,z)=e^zM(c-a,c,-z)$ gives the
+Kummer's transformation $M(a,c,z)=e^zM(c-a,c,-z)$
+(Exercise~18.6.8(a)) with $a=L+1+in$, $c=2L+2$, $z=i\alpha r$
+has $c-a=L+1-in$; the factor $e^{z}=e^{i\alpha r}$ turns
+$e^{-i\alpha r/2}$ into $e^{i\alpha r/2}$.  This gives the
 form printed in the question:
 \[
 \boxed{R_{\rm reg}(r)\ \propto\
  e^{i\alpha r/2}(\alpha r)^L
  M(L+1-in,2L+2,-i\alpha r)}.
 \]
-It is regular, $R_{\rm reg}=O(r^L)$, at the origin.
+It is regular, $R_{\rm reg}=O(r^L)$, at the origin, because
+$M(a,c,0)=1$.
 
 \erratum{The label ``outgoing wave'' is incorrect for this $M$
 solution.  It is the regular continuum wave, containing incoming
 and outgoing components.}  For real $n,r$, complex conjugation
-of the last expression produces the preceding expression, and
-Kummer's transformation proves they are equal.  Thus it can be
-chosen real and has zero radial current
-$\operatorname{Im}(R^*R')$, whereas a nonzero purely outgoing
-wave carries positive outward current.
+of the boxed expression produces the preceding (unboxed) one, and
+Kummer's transformation proves they are equal.  Thus the boxed
+function is real, and its radial current, proportional to
+$\operatorname{Im}(R^*R')$, vanishes.  A purely outgoing wave
+$R\simeq Ce^{i\phi(r)}/r$ with $\phi'(r)\to k>0$ instead has
+$R^*R'=|C|^2(i\phi'/r^2-1/r^3)$, so
+$\operatorname{Im}(R^*R')=|C|^2\phi'/r^2>0$: it carries positive
+outward current.
 
 For comparison, a purely outgoing radial solution, with time
 factor $e^{-iEt/\hbar}$, is
@@ -4876,11 +4900,17 @@ R_{\rm out}(r)\ \propto\
  U(L+1-in,2L+2,-i\alpha r).
 \]
 The asymptotic $U(a,c,z)\sim z^{-a}$ holds for
-$|\arg z|\le3\pi/2-\delta$, including this ray; see
-\href{https://dlmf.nist.gov/13.7.E3}{DLMF 13.7.3}.  Thus
-its leading radial form is a nonzero constant times
-$r^{-1}\exp\{i[kr+n\ln(2kr)]\}$, displaying the outward
-Coulomb phase.  This $U$ solution is generally irregular at the
+$|\arg z|\le3\pi/2-\delta$, including this ray $\arg z=-\pi/2$; see
+\href{https://dlmf.nist.gov/13.7.E3}{DLMF 13.7.3}.  Here
+$z=-i\alpha r=-2ikr$ and $a=L+1-in$, so
+\[
+z^{-a}=(-i)^{-a}(2kr)^{-L-1}e^{in\ln(2kr)},\qquad
+R_{\rm out}\sim\frac{(-i)^{-a}}{2k}\,
+ \frac{\exp\{i[kr+n\ln(2kr)]\}}r,
+\]
+using $e^{i\alpha r/2}=e^{ikr}$ and $(\alpha r)^L=(2kr)^L$.
+The constant $(-i)^{-a}=e^{i\pi a/2}$ is nonzero, and the phase
+$kr+n\ln(2kr)$ is the outward Coulomb phase.  This $U$ solution is generally irregular at the
 origin; regularity and a purely outgoing condition are different
 boundary conditions.
 
@@ -4898,18 +4928,22 @@ boundary conditions.
 where $2\mu=0,1,2,\ldots$,\quad $k-\mu-\tfrac{1}{2}=0,1,2,\ldots$,
 \quad $a>-2\mu-1$.
 \par\nobreak\hfill\emph{ANS.}\enspace
-\erratum{The printed norm and general-moment answers are inconsistent
+(a) $(2\mu)!\,2k$,\quad (b) $(2\mu)!$,\quad (c) $(2\mu)!\,(2k)^{a}$.
+\par\erratum{These printed answers are inconsistent
 with the definition in Eq.~(18.152); the corrected evaluations are
 shown below.}
 \solution
-Use the definition in Eq.~(18.152), without changing its scale.
+Use the definition in Eq.~(18.152), without changing its scale:
+$M_{k\mu}(x)=e^{-x/2}x^{\mu+1/2}M(\mu-k+\tfrac12,2\mu+1,x)$.
 Put
 \[
 q=2\mu\in\{0,1,2,\ldots\},\qquad
 N=k-\mu-\tfrac12\in\{0,1,2,\ldots\},\qquad
 2k=2N+q+1.
 \]
-The terminating Kummer--Laguerre relation gives
+Then $\mu-k+\tfrac12=-N$, $2\mu+1=q+1$ and $\mu+\tfrac12=(q+1)/2$.
+The terminating Kummer--Laguerre relation of Exercise~18.6.7,
+$M(-N,q+1,x)=A\,L_N^q(x)$, therefore gives
 \[
 M_{k\mu}(x)=A e^{-x/2}x^{(q+1)/2}L_N^q(x),\qquad
  A=\frac{N!q!}{(N+q)!}.
@@ -4919,13 +4953,17 @@ Define the common norm factor
 B=A^2\frac{(N+q)!}{N!}
  =\boxed{\frac{N!(q!)^2}{(N+q)!}}.
 \]
-(b) Orthogonality immediately yields, with its normalization shown,
+(b) Here $M_{k\mu}(x)^2/x=A^2e^{-x}x^q[L_N^q(x)]^2$, and the
+Laguerre norm (18.71),
+$\int_0^\infty e^{-x}x^q[L_N^q(x)]^2dx=(N+q)!/N!$, yields
 \[
 \int_0^\infty M_{k\mu}(x)^2\frac{dx}x
  =A^2\int_0^\infty e^{-x}x^q[L_N^q(x)]^2dx
  =\boxed{B}.
 \]
-(a) The first-moment recurrence in Exercise~18.3.6 gives
+(a) Now $M_{k\mu}(x)^2=A^2e^{-x}x^{q+1}[L_N^q(x)]^2$, and the
+first-moment integral of Exercise~18.3.6 (its $n,k$ replaced by
+$N,q$) gives
 \[
 \int_0^\infty M_{k\mu}(x)^2dx
  =A^2(2N+q+1)\frac{(N+q)!}{N!}
@@ -4933,9 +4971,15 @@ B=A^2\frac{(N+q)!}{N!}
 \]
 \erratum{The printed answers omit the factor
 $N!q!/(N+q)!=1/\binom{N+q}{N}$ in both (a) and (b).}
-For example, $N=q=1$ gives $k=2$, $\mu=1/2$ and
-$M_{2,1/2}=xe^{-x/2}(1-x/2)$.
-Its two integrals are $2$ and $1/2$, rather than $4$ and $1$.
+For example, $N=q=1$ gives $k=2$, $\mu=1/2$, $M(-1,2,x)=1-x/2$ and
+$M_{2,1/2}=xe^{-x/2}(1-x/2)$.  With
+$\int_0^\infty x^je^{-x}dx=j!$, its two integrals are
+\[
+\int_0^\infty\Big(x^2-x^3+\frac{x^4}4\Big)e^{-x}dx=2-6+6=2,
+\qquad
+\int_0^\infty\Big(x-x^2+\frac{x^3}4\Big)e^{-x}dx=1-2+\frac32=\frac12,
+\]
+rather than the printed $(2\mu)!\,2k=4$ and $(2\mu)!=1$.
 
 (c) For real $a>-q-1$, the integral is
 \[
@@ -4945,7 +4989,7 @@ The given condition is exact at zero: the Kummer polynomial has
 constant term one, so the original integrand has leading power
 $x^{q+a}$.  Infinity is harmless because of $e^{-x}$.
 A useful exact single sum follows by changing the Laguerre parameter.
-Their generators satisfy
+Their generating functions satisfy
 \begin{align*}
 \sum_{N=0}^\infty L_N^q(x)t^N
  &=(1-t)^{-q-1}e^{-xt/(1-t)}\\
@@ -4953,39 +4997,54 @@ Their generators satisfy
  &=\left[\sum_{r=0}^\infty\frac{(-a)_r}{r!}t^r\right]
    \left[\sum_{j=0}^\infty L_j^{q+a}(x)t^j\right].
 \end{align*}
-Coefficient comparison gives the finite connection formula
+The second line uses the same generating function with parameter
+$q+a$, $\sum_jL_j^{q+a}(x)t^j=(1-t)^{-q-a-1}e^{-xt/(1-t)}$; the
+third is the binomial series $(1-t)^a=\sum_r\binom ar(-t)^r$ with
+$(-1)^r\binom ar=(-a)_r/r!$.  The coefficient of $t^N$ on the
+right collects the products with $r+j=N$, giving the finite
+connection formula
 \[
 L_N^q(x)=\sum_{j=0}^N
  \frac{(-a)_{N-j}}{(N-j)!}L_j^{q+a}(x).
 \]
 Square it and integrate with weight $e^{-x}x^{q+a}$.
 Since $q+a>-1$, orthogonality applies and all unequal-index
-terms vanish.  Thus the complete answer is
+terms vanish; each diagonal term contributes the norm
+$\int_0^\infty e^{-x}x^{q+a}[L_j^{q+a}(x)]^2dx=\Gamma(j+q+a+1)/j!$
+(Eq.~(18.71), with $(j+q+a)!$ written as $\Gamma(j+q+a+1)$).  Thus the complete answer is
 \[
 \boxed{I_a=\left[\frac{N!q!}{(N+q)!}\right]^2
  \sum_{j=0}^N\frac{[(-a)_{N-j}]^2}{[(N-j)!]^2}
                     \frac{\Gamma(j+q+a+1)}{j!}}.
 \]
 Every term is finite and nonnegative for the stated real parameters.
-At $a=0$ only $j=N$ survives, giving $I_0=B$.
-At $a=1$ only $j=N,N-1$ survive, giving
-\[
-I_1=A^2\left[\frac{\Gamma(N+q+2)}{N!}
- +\frac{\Gamma(N+q+1)}{(N-1)!}\right]
- =(2N+q+1)B,
-\]
+At $a=0$, $(0)_r=0$ for $r\ge1$, so only $j=N$ survives, giving
+$I_0=B$.  At $a=1$, $(-1)_0=1$, $(-1)_1=-1$ and $(-1)_r=0$ for
+$r\ge2$, so only $j=N,N-1$ survive, giving
+\begin{align*}
+I_1&=A^2\left[\frac{\Gamma(N+q+2)}{N!}
+ +\frac{\Gamma(N+q+1)}{(N-1)!}\right]\\
+ &=A^2\frac{(N+q)!}{N!}\,[(N+q+1)+N]=(2N+q+1)B,
+\end{align*}
 with the second term omitted for $N=0$.  This recovers (a).
 
-\erratum{The printed general formula $(2k)^a q!$ is also
+\erratum{The printed general formula $(2\mu)!\,(2k)^a$ is also
 incorrect even when the normalization factor happens to be one.}
 At $N=q=0$, $k=1/2$ and $M_{1/2,0}=x^{1/2}e^{-x/2}$,
-so $I_a=\Gamma(a+1)$; at $a=2$ this is $2$, while the printed
-answer is $1$.  More generally the next integer moment is
-\[
-I_2=B\,[6N(N+q+1)+(q+1)(q+2)],
-\]
-obtained from the three nonzero connection coefficients $1,-2,1$.
-It exceeds $(2k)^2B$ by
+so $I_a=\int_0^\infty x^ae^{-x}dx=\Gamma(a+1)$; at $a=2$ this is
+$2$, while the printed answer is $1$.  More generally, for $a=2$ the
+connection coefficients $(-2)_r/r!$ are $1,-2,1$ for $r=0,1,2$
+and zero beyond, so the next integer moment is
+\begin{align*}
+I_2&=A^2\left[\frac{\Gamma(N+q+3)}{N!}
+ +\frac{4\,\Gamma(N+q+2)}{(N-1)!}
+ +\frac{\Gamma(N+q+1)}{(N-2)!}\right]\\
+ &=B\,[(N+q+2)(N+q+1)+4N(N+q+1)+N(N-1)]\\
+ &=B\,[6N(N+q+1)+(q+1)(q+2)],
+\end{align*}
+with the terms having a negative factorial argument omitted.
+Since $(2k)^2=(2N+q+1)^2=4N(N+q+1)+(q+1)^2$, it exceeds
+$(2k)^2B$ by
 $B[2N(N+q+1)+q+1]>0$, so even restoring the missing normalization
 cannot turn all moments into powers of the first moment.
 
