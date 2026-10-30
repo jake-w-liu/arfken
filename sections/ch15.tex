@@ -3762,9 +3762,9 @@ $dI=(\omega/2\pi)dq=\sigma\omega a^2\sin\alpha\,d\alpha$.
 It is a circular loop of radius $a\sin\alpha$ centered on the axis at
 $z=a\cos\alpha$.
 
-(a) A circular loop of radius $R$ carrying current $I$ produces on its
-axis, at distance $d$ from its center, the field
-$B_z=\mu_0IR^2/[2(R^2+d^2)^{3/2}]$. For the strip, $R=a\sin\alpha$,
+(a) By the Biot--Savart law, a circular loop of radius $R$ carrying
+current $I$ produces on its axis, at distance $d$ from its center, the
+field $B_z=\mu_0IR^2/[2(R^2+d^2)^{3/2}]$. For the strip, $R=a\sin\alpha$,
 $d=z-a\cos\alpha$, and
 $R^2+d^2=z^2+a^2-2az\cos\alpha$. Adding the strips and putting
 $u=\cos\alpha$, $du=-\sin\alpha\,d\alpha$, $\sin^2\alpha=1-u^2$
@@ -3809,8 +3809,9 @@ For $z<-a$ the integral representation of $B_z$ still holds, and
 replacing $z$ by $-z$ and $u$ by $-u$ leaves it unchanged; so $B_z$
 depends only on $|z|$.
 
-(b) Use the same decaying vector-potential expansion as for the
-current loop of Example 15.4.2:
+(b) Outside the shell, $r>a$, there is no current, so use the same
+decaying vector-potential expansion as for the current loop of
+Example 15.4.2:
 \[
 A_\varphi=\sum_{l\ge1}c_lr^{-l-1}P_l^1(\cos\theta).
 \]
@@ -3833,7 +3834,7 @@ $-\sum_ll(l+1)c_lz^{-l-2}=2\mu_0\sigma\omega a^4/(3z^3)$ for all $z>a$.
 Uniqueness of the power series in $1/z$ therefore gives
 $-2c_1=2\mu_0\sigma\omega a^4/3$ and $l(l+1)c_l=0$ for $l>1$, that is,
 $c_1=-\mu_0\sigma\omega a^4/3$ and $c_l=0$ for $l>1$. Consequently,
-with $P_1^1(\cos\theta)=-\sin\theta$,
+for $r>a$ and with $P_1^1(\cos\theta)=-\sin\theta$,
 \[
 \boxed{A_\varphi=-\frac{\mu_0\sigma\omega a^4}{3r^2}P_1^1
 =\frac{\mu_0\sigma\omega a^4}{3r^2}\sin\theta}.
@@ -3844,8 +3845,8 @@ B_\theta=-\frac1r\partial_r(rA_\varphi)
 =-\frac{\mu_0\sigma\omega a^4\sin\theta}{3r}\,\partial_r\frac1r
 =\frac{\mu_0\sigma\omega a^4}{3r^3}\sin\theta,
 \]
-while $B_\varphi=0$ because $A_\varphi$ is the only component and does
-not depend on $\varphi$. Thus
+while $B_\varphi=r^{-1}[\partial_r(rA_\theta)-\partial_\theta A_r]=0$
+because $A_r=A_\theta=0$. Thus, for $r>a$,
 \[
 \boxed{B_r=\frac{2\mu_0\sigma\omega a^4}{3r^3}\cos\theta,\qquad
 B_\theta=\frac{\mu_0\sigma\omega a^4}{3r^3}\sin\theta,\qquad B_\varphi=0}.
@@ -3855,9 +3856,9 @@ $B_r=\mu_0m\cos\theta/(2\pi r^3)$,
 $B_\theta=\mu_0m\sin\theta/(4\pi r^3)$, shows that this is exactly a
 dipole field with
 $m=4\pi\sigma\omega a^4/3=Q\omega a^2/3$, $Q=4\pi a^2\sigma$.
-\erratum{Part (a) of the Instructor's Manual, p.~252, has an extra factor $3$
-in its denominator: its displayed coefficient is $2/9$ instead
-of $2/3$. This also conflicts with its own radial field on the
+\erratum{In the Instructor's Manual, p.~252, the solution of part (a)
+has an extra factor $3$ in its denominator: its displayed coefficient
+is $2/9$ instead of $2/3$. This also conflicts with its own radial field on the
 positive axis. In its expressions in terms of $P_1^1$, both
 $A_\varphi$ and $B_\theta$ require a minus sign. The printed positive
 signs conflict with $P_1^1=-\sin\theta$ and with the printed positive
@@ -3891,7 +3892,7 @@ ds=(r^{2}d\theta^{2}+dr^{2})^{1/2}
 \solution
 Put $\alpha=\alpha_2$, $P=P_2(\cos\theta)$ and
 $\dot P=dP_2(\cos\theta)/d\theta$. Then
-$r=r_0(1+\alpha P)$ and $r_\theta=r_0\alpha\dot P$.
+$r=r_0(1+\alpha P)$ and $r_\theta\equiv dr/d\theta=r_0\alpha\dot P$.
 For small $\alpha$ the radius is positive and $r_\theta/r=O(\alpha)$.
 The binomial series $\sqrt{1+\varepsilon}=1+\varepsilon/2+O(\varepsilon^2)$
 with $\varepsilon=(r_\theta/r)^2=O(\alpha^2)$, together with
@@ -3972,7 +3973,8 @@ At $\theta=0$, $x=\cos\theta=1$, so the definition, Eq. (15.137)
 Y_l^m(0,\varphi)=\sqrt{\frac{2l+1}{4\pi}\frac{(l-m)!}{(l+m)!}}\,
 P_l^m(1)e^{im\varphi}.
 \]
-For $m>0$, $P_l^m(x)=(-1)^m(1-x^2)^{m/2}P_l^{(m)}(x)$.
+For $m>0$, $P_l^m(x)=(-1)^m(1-x^2)^{m/2}P_l^{(m)}(x)$, where
+$P_l^{(m)}=d^mP_l/dx^m$.
 The derivative is a finite polynomial, so at $x=1$ the factor
 $(1-x^2)^{m/2}$ forces $P_l^m(1)=0$.
 For $m<0$, Exercise 15.4.3 makes $P_l^m$ a constant multiple of
@@ -4092,19 +4094,28 @@ K_\rho(u)\equiv\frac1{2\pi}\sum_m\rho^{|m|}e^{imu}
 It is nonnegative, since $1-2\rho\cos u+\rho^2\ge(1-\rho)^2>0$. Its
 integral over a period is one, since the series converges uniformly
 in $u$ and integrating term by term leaves only $m=0$. It tends
-uniformly to zero away from $u=0$ modulo $2\pi$: for
-$\delta\le|u|\le\pi$,
-$1-2\rho\cos u+\rho^2=(1-\rho)^2+2\rho(1-\cos u)\ge2\rho(1-\cos\delta)$,
-so $K_\rho(u)\le(1-\rho^2)/[4\pi\rho(1-\cos\delta)]\to0$.
-Consequently, for continuous periodic $f$,
+uniformly to zero away from $u=0$ modulo $2\pi$: for fixed
+$0<\eta<\pi$ and $\eta\le|u|\le\pi$,
+$1-2\rho\cos u+\rho^2=(1-\rho)^2+2\rho(1-\cos u)\ge2\rho(1-\cos\eta)$,
+so $K_\rho(u)\le(1-\rho^2)/[4\pi\rho(1-\cos\eta)]\to0$.
+Consequently, for continuous periodic $f$, substitute
+$u=\varphi_1-\varphi_2$, which turns $\int_0^{2\pi}d\varphi_2$ into
+$\int_{\varphi_1-2\pi}^{\varphi_1}du$; the integrand is $2\pi$-periodic
+in $u$, so this interval may be shifted to $[-\pi,\pi]$. Writing
+$f(\varphi_1)=\int_{-\pi}^{\pi}K_\rho(u)f(\varphi_1)\,du$ (unit
+integral) then gives
 \[
 \int_0^{2\pi}K_\rho(\varphi_1-\varphi_2)f(\varphi_2)d\varphi_2
 -f(\varphi_1)
-=\int_{-\pi}^{\pi}K_\rho(u)[f(\varphi_1-u)-f(\varphi_1)]du,
+=\int_{-\pi}^{\pi}K_\rho(u)[f(\varphi_1-u)-f(\varphi_1)]du.
 \]
-where the part $|u|<\delta$ is small for small $\delta$ by continuity
-and the part $|u|\ge\delta$ tends to zero by the uniform bound. Hence
-$K_\rho$ tends to the periodic delta as $\rho\uparrow1$.
+Since $K_\rho\ge0$ has unit integral, the part $|u|<\eta$ is at most
+$\max_{|u|<\eta}|f(\varphi_1-u)-f(\varphi_1)|$, which is small for
+small $\eta$ by continuity, and the part $|u|\ge\eta$ is at most
+$4\pi\max|f|$ times the bound on $K_\rho$, which tends to zero.
+Choosing first $\eta$ and then $\rho$ close to $1$ makes both parts
+arbitrarily small; hence $K_\rho$ tends to the periodic delta as
+$\rho\uparrow1$.
 On the real line the same distribution is
 $\delta_{2\pi}(u)\equiv\sum_{k\in\mathbb Z}\delta(u-2\pi k)$, one delta
 in each period, in agreement with the note.
@@ -4223,7 +4234,14 @@ harmonics for $0<m<n$. For $\overset{e}{Y}_{mn}$, $n=4$, $m=0,2,4$,
 indicate on a diagram of a hemisphere (one diagram for each spherical
 harmonic) the regions in which the spherical harmonic is positive.
 \solution
-First separate the two normalization integrals. With $x=\cos\theta$,
+In the two definitions the degree is written $l$; it is the $n$ of the
+normalization integrals and of the rest of the statement, and we write
+$n$ throughout. We also write $Y^e_{mn}$ and $Y^o_{mn}$ for
+$\overset{e}{Y}_{mn}$ and $\overset{o}{Y}_{mn}$, and
+$\|Y\|^2=\int_0^{2\pi}\!\int_0^\pi Y^2\sin\theta\,d\theta\,d\varphi$
+for a normalization integral. Since each $Y$ is a function of $\theta$
+times a function of $\varphi$, this integral is the product of a polar
+and an azimuthal integral. With $x=\cos\theta$,
 the polar one is the associated Legendre normalization
 $\int_{-1}^1[P_n^m(x)]^2dx=2(n+m)!/[(2n+1)(n-m)!]$. For $m>0$, both
 $\int_0^{2\pi}\cos^2m\varphi\,d\varphi$ and its sine counterpart
@@ -4259,8 +4277,9 @@ $35\cos^4\theta$, as in $P_4$ above; the squared power would
 incorrectly reduce this degree-four polynomial to degree two.}
 On the north hemisphere, viewed from above, put $\rho=\sin\theta$,
 so its orthographic projection is the unit disk. In the diagrams
-blue regions are positive; white regions are negative, and boundary
-curves are zeros.
+blue regions are positive and white regions negative; the dashed
+curves are the zeros, the solid circle is the equator, and the
+meridian $\varphi=0$ points to the right.
 \begin{center}
 \begin{tikzpicture}
 \begin{scope}
@@ -4363,7 +4382,7 @@ for example, $f=r^2$ has sphere average $r^2$ but $f(0)=0$.}
 
 \Needspace{5\baselineskip}
 \par\bigskip
-\noindent\textbf{15.6.1}\quad \erratum{Use the real branches specified below, with
+\noindent\textbf{15.6.1}\quad \erratum{Use the real branches specified in the solution, with
 $x\in\mathbb R\setminus\{-1,1\}$ and integer $l\ge0$.}
 Show that if $l$ is even,
 $Q_{l}(-x)=-Q_{l}(x)$, and that if $l$ is odd, $Q_{l}(-x)=Q_{l}(x)$.
@@ -4373,8 +4392,8 @@ Use the real Legendre functions with
 Q_0(x)=\frac12\ln\left|\frac{1+x}{1-x}\right|,\qquad
 Q_1(x)=xQ_0(x)-1,\qquad x\ne\pm1.
 \]
-Replacing $x$ by $-x$ inverts the logarithm's positive absolute
-argument,
+Replacing $x$ by $-x$ replaces the argument $|(1+x)/(1-x)|$ of the
+logarithm by its reciprocal:
 $Q_0(-x)=\frac12\ln|(1-x)/(1+x)|=-Q_0(x)$, so $Q_0$ is odd, and then
 $Q_1(-x)=(-x)(-Q_0(x))-1=Q_1(x)$, so $Q_1$ is even. Thus
 $Q_l(-x)=(-1)^{l+1}Q_l(x)$ holds for $l=0,1$.
@@ -4394,9 +4413,10 @@ Induction proves
 \boxed{Q_l(-x)=(-1)^{l+1}Q_l(x)}.
 \]
 In particular even degree gives an odd function and odd degree an
-even function. The assertion refers to these consistent real/Ferrers
-branches; arbitrary independently chosen logarithm branches would
-introduce additional multiples of $P_l$.
+even function. The assertion refers to these real functions (the
+usual real $Q_l$ both for $|x|<1$ and for $|x|>1$); another choice of
+branch of the logarithm would add a multiple of $P_l$, whose parity
+$(-1)^l$ is the opposite one.
 
 \Needspace{5\baselineskip}
 \par\bigskip
@@ -4419,7 +4439,12 @@ Q_{2p+1}(x)=(-1)^{p+1}2^{2p}&\sum_{s=0}^{p}(-1)^{s}
 \end{aligned}$
 \end{enumerate}
 \solution
-Use the real analytic branch at $x=0$. Substituting
+Use the real analytic branch at $x=0$. As in Exercise 15.6.1, another
+branch of the logarithm would add a multiple of $P_l$ (for example,
+the exterior $Q_l$ continued onto $-1<x<1$ from above or below the
+real axis equals this real function $\mp\frac{i\pi}2P_l(x)$), and
+$P_l$ has only powers of the parity that is absent from the stated
+series. Substituting
 $y=\sum_ja_jx^j$ into $(1-x^2)y''-2xy'+l(l+1)y=0$, the coefficient of
 $x^j$ is $(j+2)(j+1)a_{j+2}-j(j-1)a_j-2ja_j+l(l+1)a_j$, so the Legendre
 equation gives the coefficient recurrence for any Taylor solution:
@@ -4523,9 +4548,9 @@ which reproduces $D_{p+1}=2^{2p+1}/(2p+2)$ at $s=p+1$. Its adjacent
 ratio is
 $(p+s+1)(2s-2p)(2s-2p-1)/[(2s+2)(2s+1)(s-p)]$, and canceling
 $2s-2p=2(s-p)$ against $s-p$ again gives the same recurrence.
-The initial value, all within-range ratios and both transition values
-therefore establish the two requested sums without leaving a missing
-index case. Their term ratios tend to $x^2$, proving convergence
+The initial values, the ratios within each range and the transition
+values therefore establish both requested sums for every $s\ge0$.
+Their term ratios tend to $x^2$, proving convergence
 for $|x|<1$; uniqueness of the Taylor solution identifies them with $Q_l$.
 
 \Needspace{5\baselineskip}
@@ -4586,7 +4611,7 @@ At power $x^{-l-1-2s}$ ($j=2s$) the equation gives
 Hence
 \[
 \frac{c_s}{c_0}
-=\prod_{j=1}^s\frac{(l+2j)(l+2j-1)}{2j(2l+2j+1)}
+=\prod_{q=1}^s\frac{(l+2q)(l+2q-1)}{2q(2l+2q+1)}
 =\frac{(l+s)!(l+2s)!(2l+1)!}
 {s!(l!)^2(2l+2s+1)!}.
 \]
@@ -4594,7 +4619,7 @@ For the last equality, the numerator product is
 $(l+1)(l+2)\cdots(l+2s)=(l+2s)!/l!$,
 while the denominator product is
 $2^ss!\,(2l+3)(2l+5)\cdots(2l+2s+1)=2^ss!\,(2l+2s+1)!!/(2l+1)!!$;
-with $(2k+1)!!=(2k+1)!/(2^kk!)$ for $k=l+s$ and $k=l$, this is
+with $(2N+1)!!=(2N+1)!/(2^NN!)$ for $N=l+s$ and $N=l$, this is
 $s!\,l!(2l+2s+1)!/[(l+s)!(2l+1)!]$.
 This proves the requested series. Since
 $c_s/c_{s-1}=(l+2s)(l+2s-1)/[2s(2l+2s+1)]\to1$, the ratio of
@@ -4638,7 +4663,11 @@ b_{l0}=\frac12\int_{-1}^1t^lP_l(t)dt
 =\frac{2^l(l!)^2}{(2l)!}\,\frac1{2l+1}
 =\boxed{\frac{2^l(l!)^2}{(2l+1)!}}.
 \]
-Multiplying the part (a) coefficient by this value gives
+Because $R_l=Q_l$ satisfies Legendre's equation and, for $|z|>1$,
+equals this convergent series in descending powers beginning with
+$z^{-l-1}$ (the form assumed in part (a), with $k=-l-1$), the
+recurrence of part (a) applies to its coefficients; they are therefore
+$b_{l0}$ times the coefficients found there:
 \[
 b_{l0}\frac{(l+s)!(l+2s)!(2l+1)!}{s!(l!)^2(2l+2s+1)!}
 =\frac{2^l(l+s)!(l+2s)!}{s!(2l+2s+1)!},
@@ -4653,7 +4682,9 @@ For example, for $l=0$ the coefficients are
 $(2s)!/[(2s)!!(2s+1)!!]=(2s)!/(2s+1)!=1/(2s+1)$, and
 $\sum_sz^{-2s-1}/(2s+1)=\frac12\ln[(z+1)/(z-1)]$ is the familiar
 expansion of $Q_0$.
-The integral and series specify a consistent exterior logarithm branch.
+For complex $z$ with $|z|>1$ the integral $R_l$ and the series define
+the same branch of $Q_l$, the one that is analytic outside $[-1,1]$ and
+vanishes at infinity.
 
 \Needspace{5\baselineskip}
 \par\bigskip
