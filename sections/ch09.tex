@@ -29,7 +29,7 @@ $u=y-2x$,
 \boxed{\psi(x,y)=e^{x(y-2x)}F(y-2x)},
 \]
 where $F$ is an arbitrary differentiable function; this includes the zero
-solution and does not require taking $\log\psi$.
+solution and does not require taking $\ln\psi$.
 Indeed $D=\partial_x+2\partial_y$ annihilates $u$ and satisfies
 $D(xu)=u$, hence $D\psi=u\psi=-(2x-y)\psi$.
 The coordinate map has determinant one, so it loses no local solutions.
@@ -56,8 +56,9 @@ Integration with $u$ held fixed gives
 Since
 $\tfrac12(x+y)^2-(-\tfrac32x^2-xy)=2x^2+2xy+\tfrac12y^2
 =\tfrac12(y+2x)^2$,
-the difference is an arbitrary function of $u$ and can be absorbed into
-$F$.  An equivalent convenient form is
+the difference is $\tfrac12u^2$, a function of $u$ alone, and can be
+absorbed into the arbitrary function $F$.  An equivalent convenient
+form is
 \[
 \boxed{\psi(x,y)=\tfrac12(x+y)^2+F(y+2x)}.
 \]
@@ -142,6 +143,8 @@ y\psi_x+x\psi_y
 =y(y\psi_u+2x\psi_v)+x(x\psi_u-2y\psi_v)
 =(x^2+y^2)\psi_u.
 \]
+Since $(x^2+y^2)^2=(x^2-y^2)^2+4x^2y^2=v^2+4u^2$, in the new variables
+alone the PDE reads $\sqrt{v^2+4u^2}\,\psi_u=0$.
 Away from $(0,0)$ the coefficient is nonzero, so $\psi_u=0$ and
 \[
 \boxed{\psi=F(v)=F(x^2-y^2)\quad\text{locally}}.
@@ -193,7 +196,21 @@ in $1/v$: differentiating preserves this form because
 $(e^{-1/v^2})'=2v^{-3}e^{-1/v^2}$.  Every resulting term tends to zero:
 with $w=1/v$, $w^m e^{-w^2}\to0$ for every fixed $m$.
 Thus all four branch functions have zero derivatives of every order at
-zero, so this is smooth and satisfies the PDE everywhere.  Its values at
+zero; equivalently, $G(v)=e^{-1/v^2}$ for $v>0$, $G(v)=0$ for $v\le0$,
+is smooth on $\mathbb R$ with $G^{(j)}(0)=0$ for all $j$.
+Now $\psi=G(v)$ on the half-plane $x>0$, $\psi=-G(v)$ on $x<0$, and
+$\psi=0$ on the open set $v<0$, which contains the $y$-axis minus the
+origin.  These three open sets cover the plane minus the origin, and on
+each of them $\psi$ is a smooth function of $v$ alone, so there it is
+smooth and satisfies the PDE.  Off the origin each partial derivative
+of $\psi$ of order $j$ is a sum of terms $\pm G^{(i)}(v)$, $i\le j$,
+times polynomials in $x,y$, so it tends to zero as $(x,y)\to(0,0)$:
+then $v\to0$ and $G^{(i)}(v)\to0$, while the polynomials stay bounded.
+A function continuous at the origin whose gradient tends to zero there
+is differentiable at the origin with zero gradient, by the mean value
+theorem on the segment from the origin.  Applying this to $\psi$ and
+then to each of its partial derivatives in turn shows that $\psi$ is
+smooth at the origin too, with all derivatives zero.  Its values at
 $(x,y)$ and $(-x,-y)$ with $v>0$ differ, proving that it cannot be
 represented by one global $F(v)$.  At the origin the PDE itself is
 $0=0$; continuity and differentiability govern the matching there.
@@ -202,10 +219,11 @@ $0=0$; continuity and differentiability govern the matching there.
 \Needspace{5\baselineskip}
 \par\bigskip
 \noindent\textbf{9.2.6}\quad Find the \erratum{general local solution away
-from the origin, and account for characteristic branches globally,} to the PDE
+from the origin} to the PDE
 \[
-x\frac{\partial\psi}{\partial x}-y\frac{\partial\psi}{\partial y}=0.
+x\frac{\partial\psi}{\partial x}-y\frac{\partial\psi}{\partial y}=0,
 \]
+\erratum{and account for characteristic branches globally.}
 \emph{Hint.}~The solution to Exercise 9.2.5 may provide a suggestion as to how
 to proceed.
 \solution
@@ -247,7 +265,12 @@ tend to zero at the origin.  Smooth solutions require matching derivatives
 of every order, exactly as in Exercise~9.2.5.
 For a concrete example let $u=xy$ and take
 $\psi=\operatorname{sgn}(x)e^{-1/u^2}$ when $u>0$, and $\psi=0$
-when $u\le0$.  It is smooth because the exponential is flat at $u=0$.
+when $u\le0$.  It is smooth: with the flat function $G$ of
+Exercise~9.2.5, $\psi=G(u)$ on each of the half-planes $x>0$ and $y>0$,
+and $\psi=-G(u)$ on each of $x<0$ and $y<0$, because $G(xy)\ne0$ only
+where $x$ and $y$ have the same sign.  These four open half-planes cover
+the plane minus the origin, and at the origin the argument of
+Exercise~9.2.5 applies with $u$ in place of $v$.
 Both $u$ and the sign of $x$ are constant along each of its nonzero
 characteristics, so it solves the PDE, but its values in the first and
 third quadrants differ at the same positive $u$.
@@ -468,8 +491,12 @@ The desired ODEs are
 \end{aligned}}
 \]
 Every coefficient in each equation depends on its own independent
-variable alone.  Adding the three equations after multiplication by
-the corresponding factors reproduces the PDE.  For general $g,h$,
+variable alone.  Conversely, multiplying the three equations by
+$\Theta\Phi/r^2$, $R\Phi/r^2$ and $R\Theta/(r^2\sin^2\theta)$,
+respectively, and adding gives the PDE: the separation constants enter
+as $-\lambda\psi/r^2+\lambda\psi/r^2$ and
+$-\mu\psi/(r^2\sin^2\theta)+\mu\psi/(r^2\sin^2\theta)$, which cancel.
+For general $g,h$,
 the separation constants need not be the unperturbed values $l(l+1)$
 and $m^2$.
 
@@ -528,8 +555,10 @@ A normalized state attaining it is
 \]
 since each sine-squared integral is half the corresponding side length.
 To see that a nonseparable state cannot have lower energy, put
-$s(x)=\sin(\pi x/a)$ and write $X=sV$.  This allows complex $V$.
-Since $s''=-(\pi/a)^2s$,
+$s(x)=\sin(\pi x/a)$ and let $X$ now denote any continuously
+differentiable, possibly complex, function on $[0,a]$ with
+$X(0)=X(a)=0$ (not necessarily a solution of $X''=-k_x^2X$); write
+$X=sV$ on $0<x<a$.  Since $s''=-(\pi/a)^2s$,
 \begin{align*}
 |X'|^2&=(s')^2|V|^2+s^2|V'|^2
        +ss'\bigl(V'^*V+V^*V'\bigr),\\
@@ -544,11 +573,10 @@ $|X'|^2-(\pi/a)^2|X|^2=s^2|V'|^2+(ss'|V|^2)'$; integrating,
 \int_0^a\left(|X'|^2-\frac{\pi^2}{a^2}|X|^2\right)dx
 =\int_0^a\sin^2(\pi x/a)|V'|^2dx\ge0.
 \]
-The boundary term $[ss'|V|^2]_0^a=[s'|X|^2/s]_0^a$ vanishes for regular
-Dirichlet functions: if $X$ is continuously differentiable with
-$X(0)=0$, then $|X|^2=O(x^2)$ while $s\sim\pi x/a$ as $x\to0$, and
-similarly at $x=a$.  Apply this inequality to each slice
-$x\mapsto\psi(x,y,z)$ at fixed $(y,z)$ and integrate over $y$ and $z$:
+The boundary term $[ss'|V|^2]_0^a=[s'|X|^2/s]_0^a$ vanishes: since
+$X$ is continuously differentiable with $X(0)=0$, $|X|^2=O(x^2)$ while
+$s\sim\pi x/a$ as $x\to0$, and similarly at $x=a$.  Apply this
+inequality to each slice $x\mapsto\psi(x,y,z)$ at fixed $(y,z)$ and integrate over $y$ and $z$:
 $\int|\partial_x\psi|^2dV\ge(\pi/a)^2\int|\psi|^2dV$, and likewise
 with $(\pi/b)^2$ and $(\pi/c)^2$ for $\partial_y\psi$ and
 $\partial_z\psi$.  Multiplying the Schr\"odinger equation by $\psi^*$
@@ -615,8 +643,8 @@ The eigenvalue equation is consequently
 \]
 Separate an angular mode as $\Theta(\theta)\Phi(\varphi)$ and
 multiply by $\sin^2\theta/(\Theta\Phi)$, as in Exercise~9.4.3 with
-$\lambda=l(l+1)$.  Setting $\Phi''=-m^2\Phi$ and dividing by
-$\sin^2\theta$ leaves
+$\lambda=l(l+1)$.  Setting $\Phi''/\Phi=-m^2$ and multiplying by
+$\Theta/\sin^2\theta$ leaves
 \[
 \frac1{\sin\theta}(\sin\theta\,\Theta')'
 +\left[l(l+1)-\frac{m^2}{\sin^2\theta}\right]\Theta=0.
@@ -731,8 +759,8 @@ where the logarithm is singular; $r\ne0$ alone would not suffice.}
 With $z=r\cos\theta$ and $0<\theta<\pi$,
 \[
 \psi_2=\frac{g(\theta)}r,\qquad
-g(\theta)=\frac12\log\frac{1+\cos\theta}{1-\cos\theta}
-=\log\cot\frac\theta2.
+g(\theta)=\frac12\ln\frac{1+\cos\theta}{1-\cos\theta}
+=\ln\cot\frac\theta2.
 \]
 Here $(1+\cos\theta)/(1-\cos\theta)
 =2\cos^2(\theta/2)/[2\sin^2(\theta/2)]=\cot^2(\theta/2)$, and
@@ -1072,7 +1100,7 @@ Its solution is $R=A J_0(\alpha\rho)+B Y_0(\alpha\rho)$.
 If the axis is included, finiteness there selects $J_0$ since $Y_0$
 has a logarithmic singularity.  For $\alpha=0$, integrate
 $(\rho R')'=0$ directly: $\rho R'=B$ and
-$R=A+B\log\rho$, again leaving only a constant on the axis.
+$R=A+B\ln\rho$, again leaving only a constant on the axis.
 A radial boundary condition would determine the allowed $\alpha$;
 none is supplied here.
 
@@ -1120,8 +1148,9 @@ since $(2\pi)^{-1}\sqrt{\pi/(Dt)}=1/\sqrt{4\pi Dt}$,
  e^{-x^2/(4Dt)}\quad(t>0)}.
 \]
 In terms of $a$, the denominator is $2|a|\sqrt{\pi t}$.
-\erratum{Writing $2a\sqrt{\pi t}$ presumes $a>0$; the diffusivity
-itself is $a^2$.}
+\erratum{The form $\psi=A\,e^{-x^2/(4a^2t)}/(2a\sqrt{\pi t})$ presumes
+$a>0$: the PDE contains only the diffusivity $a^2$, and for $a<0$ that
+expression would make the pulse negative.}
 Direct differentiation, with $\psi_x=-x\psi/(2Dt)$ and hence
 $\psi_{xx}=[-1/(2Dt)+x^2/(4D^2t^2)]\psi$, gives
 \[
@@ -1153,8 +1182,12 @@ two ends of the rod at $x=0$ and $x=L$ kept (at all times $t$) at the
 respective temperatures $T=1$ and $T=0$, and with the rod initially at
 $T(x)=0$, for $0<x\le L$.
 \solution
-Take $D=a^2>0$ and $L>0$.  The steady solution satisfying the two
-endpoint temperatures is
+Take $D=a^2>0$ and $L>0$.
+\erratum{Here $L>0$ is the rod's length, and $a^2>0$ excludes the
+degenerate case $a=0$, in which the PDE is $T_t=0$: the interior then
+keeps its initial temperature $0$ for all $t$ and never relaxes to the
+steady profile $S$ found below.}
+The steady solution satisfying the two endpoint temperatures is
 $S(x)=1-x/L$, since $S''=0$, $S(0)=1$, $S(L)=0$.
 Write $T=S+u$.  Then
 \[
@@ -1192,10 +1225,15 @@ Therefore
 \sum_{n=1}^{\infty}\frac1n\sin\frac{n\pi x}L
  e^{-D(n\pi/L)^2t}}.
 \]
-For every $t>0$ the Gaussian decay in $n$ makes the series and all
-needed differentiated series converge uniformly, so termwise
-verification of the heat equation is valid.  At $x=0,L$ all sine
-terms vanish, giving the required endpoint values.
+Fix $t_0>0$ and put $\eta_0=D\pi^2t_0/L^2$.  For $t\ge t_0$ the $n$th
+terms of the series and of its termwise derivatives $\partial_t$,
+$\partial_x$ and $\partial_x^2$ are bounded in modulus by constant
+multiples (depending only on $D$ and $L$) of $n\,e^{-\eta_0n^2}$, and
+$\sum_nn\,e^{-\eta_0n^2}<\infty$.  By the Weierstrass M-test these
+series converge uniformly for $0\le x\le L$, $t\ge t_0$, so termwise
+differentiation is valid; each term satisfies $u_t=Du_{xx}$, hence so
+does the sum, and $T=S+u$ solves the PDE because $S''=0$.
+At $x=0,L$ all sine terms vanish, giving the required endpoint values.
 For $0<x<L$, its initial limit is zero because
 \[
 \sum_{n=1}^{\infty}\frac{\sin(n\theta)}n
@@ -1205,32 +1243,42 @@ For $0<x<L$, its initial limit is zero because
 so at $t=0$ the series term is $(2/\pi)(\pi-\pi x/L)/2=1-x/L$, which
 cancels $S(x)$.
 This identity follows by taking the imaginary part of
-$\sum_{n\ge1}r^ne^{in\theta}/n=-\log(1-re^{i\theta})$ ($0\le r<1$,
+$\sum_{n\ge1}r^ne^{in\theta}/n=-\ln(1-re^{i\theta})$ ($0\le r<1$,
 principal logarithm) and letting $r\uparrow1$.  By Abel's theorem the
-limit equals the series at $r=1$, which converges by Dirichlet's test
-because the partial sums of $\sin(n\theta)$ are bounded (see below).
+limit of the left side equals the series at $r=1$, which converges by
+Dirichlet's test because the partial sums of $\sin(n\theta)$ are
+bounded (see below).  The right side tends to $-\ln(1-e^{i\theta})$,
+because $1-re^{i\theta}$ has positive real part $1-r\cos\theta$ for
+$0\le r\le1$ and the principal logarithm is continuous off the negative
+real axis.
 Since $1-e^{i\theta}=-2i\sin(\theta/2)e^{i\theta/2}
 =2\sin(\theta/2)e^{i(\theta-\pi)/2}$ with $\sin(\theta/2)>0$, we have
 $\arg(1-e^{i\theta})=(\theta-\pi)/2$, and the imaginary part of
-$-\log(1-e^{i\theta})$ is $(\pi-\theta)/2$.
+$-\ln(1-e^{i\theta})$ is $(\pi-\theta)/2$.
 
 The initial limit is justified without assuming uniform convergence at
 $x=0$.  Write $\eta=D\pi^2t/L^2$, so the $n$th term carries
 $e^{-\eta n^2}$, and fix $0<\theta<\pi$.  Summing
 $2\sin(\theta/2)\sin(n\theta)=\cos((n-\tfrac12)\theta)
--\cos((n+\tfrac12)\theta)$ telescopically gives, for $M>N\ge0$,
+-\cos((n+\tfrac12)\theta)$ telescopically gives, for $m\ge N\ge0$,
 \[
-B_M=\sum_{n=N+1}^{M}\sin(n\theta)
-=\frac{\cos((N+\frac12)\theta)-\cos((M+\frac12)\theta)}{2\sin(\theta/2)},
-\qquad |B_M|\le\frac1{\sin(\theta/2)}.
+B_m=\sum_{n=N+1}^{m}\sin(n\theta)
+=\frac{\cos((N+\frac12)\theta)-\cos((m+\frac12)\theta)}{2\sin(\theta/2)},
+\qquad |B_m|\le\frac1{\sin(\theta/2)},
 \]
-Summation by parts with $B_N=0$ and the decreasing coefficients
-$c_n=e^{-\eta n^2}/n$ gives
-\[
+with $B_N=0$ (empty sum), so that $\sin(n\theta)=B_n-B_{n-1}$ for
+$n>N$.  Let $M>N$ and $c_n=e^{-\eta n^2}/n$, which decreases in $n$.
+Substituting $\sin(n\theta)=B_n-B_{n-1}$ and shifting the index in the
+sum containing $B_{n-1}$ (summation by parts) gives
+\begin{align*}
 \sum_{n=N+1}^{M}c_n\sin(n\theta)
-=c_MB_M+\sum_{n=N+1}^{M-1}(c_n-c_{n+1})B_n,
-\]
-of modulus at most $[c_M+(c_{N+1}-c_M)]/\sin(\theta/2)
+&=\sum_{n=N+1}^{M}c_nB_n-\sum_{n=N}^{M-1}c_{n+1}B_n\\
+&=c_MB_M+\sum_{n=N+1}^{M-1}(c_n-c_{n+1})B_n,
+\end{align*}
+since the $n=N$ term of the second sum is $c_{N+1}B_N=0$.
+As $c_n-c_{n+1}\ge0$ and these differences add up to $c_{N+1}-c_M$,
+the modulus is at most
+$[c_M+(c_{N+1}-c_M)]/\sin(\theta/2)
 =c_{N+1}/\sin(\theta/2)$.  Letting $M\to\infty$ bounds the tail
 starting at $N+1$ by $1/[(N+1)\sin(\theta/2)]$, uniformly for
 $\eta\ge0$.  Hence the series at time $t$ and at $t=0$ differ by at most
